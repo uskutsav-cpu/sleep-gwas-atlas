@@ -18,10 +18,13 @@ Read `README.md` and `methods_map.md` at the start of every session.
 ## Current state
 
 The empirical Phase 0/1 analysis is not complete: no real summary statistics
-or EUR reference panel are in this repository, and all 86 registry rows remain
-`status=TODO`. The end-to-end pipeline is smoke-tested with deliberately fake
-input only. `scripts/10_phase0_audit.py` reports the explicit source-metadata
-gaps; do not describe a smoke-test artifact as a result.
+or real LDSC results are in this repository, and all 86 registry rows remain
+`status=TODO`. The verified EUR 1000 Genomes/HapMap3 reference panel is an
+ignored, reproducible local dependency installed by `scripts/00_setup.sh`; see
+`docs/reference_panel_provenance.md`. The end-to-end pipeline is smoke-tested
+with deliberately fake input only. `scripts/10_phase0_audit.py` reports the
+explicit source-metadata gaps; do not describe a smoke-test artifact as a
+result.
 
 The runnable path uses the maintained Python 3 `ldsc39` branch from
 CBIIT/ldsc. `scripts/03_h2_qc.sh` requires a cited population prevalence for
@@ -66,9 +69,9 @@ implications and should never be reported as the same kind of failure.
 
 ## Known traps
 
-- LDSC is Python 2.7 and its conda env file is stale. If setup fights you
-  for more than ~20 minutes, switch to a maintained Python 3 fork and say
-  which one.
+- Use CBIIT/ldsc's maintained Python 3 `ldsc39` branch in its local Python 3.9
+  conda-forge/bioconda environment. Do not install the repository's stale
+  Python 2-era `requirements.txt` into a current Python runtime.
 - The Jansen 2019 insomnia GWAS includes a 23andMe component that is
   access-restricted. Use a public release that excludes it.
 - `shortsleep` and especially `longsleep` are dichotomised tails of a

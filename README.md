@@ -9,7 +9,7 @@ The registry currently contains **86 candidate traits** (20 sleep/circadian and 
 
 ## Current scientific status
 
-The code path has a synthetic end-to-end smoke test. **No real GWAS summary statistics, EUR LD reference panel, or real LDSC results are stored in this repository.** Every registry row is currently `TODO`, so the empirical Phase 0/1 analysis is not yet complete.
+The code path has a synthetic end-to-end smoke test. A verified EUR 1000 Genomes/HapMap3 LD reference panel can be installed locally by the setup script, but it is ignored by Git because it is a reproducible external dependency. **No real GWAS summary statistics or real LDSC results are stored in this repository.** Every registry row is currently `TODO`, so the empirical Phase 0/1 analysis is not yet complete.
 
 That distinction is deliberate. The pipeline will not:
 
@@ -24,8 +24,8 @@ This downloads the maintained Python 3 LDSC implementation, Python dependencies,
 
 ```bash
 bash scripts/00_setup.sh
-export PYTHON_BIN=.venv/bin/python
-export LDSC_PYTHON=.venv/bin/python
+export PYTHON_BIN=.ldsc-env/bin/python
+export LDSC_PYTHON=.ldsc-env/bin/python
 export LDSC_DIR=ldsc
 ```
 
@@ -65,7 +65,7 @@ bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv
 After installing the Python requirements (or with any environment that already has NumPy, Pandas, and Matplotlib):
 
 ```bash
-PYTHON_BIN=.venv/bin/python bash scripts/run_smoke_test.sh
+PYTHON_BIN=.ldsc-env/bin/python bash scripts/run_smoke_test.sh
 ```
 
 The test accepts tabular and whitespace-delimited raw inputs, BETA and OR effect formats, runs h2 and rg parsing across the complete registry, exports the proposal metadata table, generates the report and heatmap, and watermarks all fake output under `results/_smoketest/`.
