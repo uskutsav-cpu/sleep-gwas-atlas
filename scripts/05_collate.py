@@ -191,6 +191,15 @@ def parse_rg(logdir):
             body.append(fields)
         if body:
             frame = pd.DataFrame(body, columns=header)
+            # Some LDSC versions round the fixed-width summary-table p column
+            # to 0.0000 for small values even though the preceding scalar
+            # ``P:`` line retains scientific notation. Controlled ``--pair``
+            # runs have exactly one result row, so preserve that authoritative
+            # scalar rather than turning a finite p-value into zero/FDR zero.
+            scalar_p = [line.split(":", 1)[1].strip() for line in lines[:i]
+                        if line.startswith("P:")]
+            if len(frame) == 1 and scalar_p:
+                frame.loc[frame.index[0], "p"] = scalar_p[-1]
             frame["input_log"] = path
             frames.append(frame)
     if not frames:
