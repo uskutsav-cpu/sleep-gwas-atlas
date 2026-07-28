@@ -190,3 +190,62 @@ the better route for those two, and for `scz` and `adhd` it is the only route.
 Nothing here has been swapped in `config/traits.tsv`. Changing the source paper
 for four traits is a decision for the project owner and mentor, exactly as the
 MDD and T2D source questions were.
+
+---
+
+## 9. Second pass — open-access swaps executed
+
+Owner authorised swapping the gated traits to the open-access alternatives.
+
+**CURATED rose from 6 to 9**: added `asthma`, `mdd`, `bipolar`.
+
+| trait | source now used | build evidence |
+|---|---|---|
+| mdd | GCST005839 `MDD2018_ex23andMe.gz`, Wray 2018, PMID 29700475 | GRCh37, 3/3 anchors on chr+pos |
+| bipolar | GCST003724 `Hou_27329760.tar.gz`, member `BP_GWAS_Hou_et_al._2016_results.txt`, PMID 27329760 | GRCh37, 3/3 anchors on chr+pos |
+| asthma | GCST010042, Han 2020, PMID 32296059 | GRCh37, 4/4 anchors on chr+pos |
+
+The MDD file is literally named `MDD2018_ex23andMe.gz` — the no-23andMe
+release `CLAUDE.md`'s known-traps list asks for, obtained without any access
+gate.
+
+### t2d — alternative downloaded, then REJECTED
+
+Xue 2018 (GCST007515) downloaded and build-verified GRCh37, but the file holds
+**194,633 variants**. That is a coding-variant/exome subset, not a genome-wide
+scan; LDSC needs roughly 1.2M HapMap3 SNPs. The 14 MB file size was the tell.
+It cannot support h2 or rg and is rejected as a T2D replacement — the route
+back is Mahajan 2022 through the DIAGRAM access request.
+
+This is worth generalising: **"has full summary statistics" in the GWAS
+Catalog does not mean "genome-wide."** Check the variant count before
+trusting any substitute.
+
+### ms — download failed
+
+Two attempts, both read-timeout at 61% of 225.7 MB. The URL is verified and
+correct. The truncated file was discarded rather than promoted (see below).
+Retry with `09_fetch_public_sources.py --trait ms`.
+
+### A real bug this pass exposed
+
+The first large batch died mid-run and left `cad.tsv` at 1267 MB of an
+expected 3250 MB — **renamed to its final filename as though complete.** A
+truncated sumstats file bearing the real name is indistinguishable from a good
+one downstream, and would have produced a quietly wrong h2.
+
+`09_fetch_public_sources.py` now verifies the received byte count against
+`Content-Length` *before* promoting `.part` to the final name, and deletes the
+partial on mismatch. It caught the MS truncation on its first outing. The
+registry also now stores true on-disk byte counts rather than HEAD estimates.
+
+### Build checker — two more source formats
+
+- **tar.gz archives** must be detected before plain `.gz`; gzip-opening a
+  tarball yields a 512-byte header as the first "line".
+- **chr+position matching** added for releases whose marker is a coordinate
+  (`6:28571110:T`) so rsID matching can never fire. Allele agreement is
+  required here too — without it `ra` regressed to a false CONFLICT, the same
+  density artefact seen earlier with the IIBDGC files.
+
+All nine curated files were re-verified after these changes: no regressions.

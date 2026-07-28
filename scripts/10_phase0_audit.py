@@ -71,6 +71,16 @@ def load_anchors():
 
 
 def open_any(path):
+    # .tar.gz must be tested before .gz: gzip.open on a tarball yields the tar
+    # container, whose first "line" is a 512-byte header, not data.
+    if path.endswith((".tar.gz", ".tgz")):
+        import tarfile
+        t = tarfile.open(path)
+        members = [m for m in t.getmembers()
+                   if m.isfile() and not m.name.upper().endswith("README")]
+        members.sort(key=lambda m: m.size, reverse=True)
+        f = t.extractfile(members[0])
+        return f, members[0].name
     if path.endswith(".gz"):
         return gzip.open(path, "rt", errors="replace")
     if path.endswith(".zip"):
@@ -154,6 +164,55 @@ def check_build(path, max_lines=4_000_000):
                     f"parsed from chr:pos markers)", h19, h38), member
         return (f"CONFLICT: {h19} hg19 and {h38} hg38 coordinate matches",
                 h19, h38), member
+    # Preferred when the file carries explicit CHR and BP columns: match the
+    # anchor on chromosome+position regardless of how the marker is named.
+    # Needed for releases whose "MarkerName" is itself a coordinate
+    # (e.g. "6:28571110:T"), where rsID matching can never fire.
+    if i_chr is not None and i_bp is not None:
+        # Alleles are required here for the same reason as in coordinate mode:
+        # a dense file has a variant at both builds' positions, so position
+        # alone produces a false CONFLICT.
+        i_a1 = find({"a1", "allele1", "effect_allele", "ea", "alt",
+                     "tested_allele", "effectallele"})
+        i_a2 = find({"a2", "allele2", "other_allele", "nea", "ref",
+                     "non_effect_allele", "otherallele"})
+        p19 = {(c, p): set(al.split("/")) for _, c, p, _, al in anchors}
+        p38 = {(c, p): set(al.split("/")) for _, c, _, p, al in anchors}
+        h19 = h38 = seen = 0
+        for n, line in enumerate(fh):
+            if n > max_lines:
+                break
+            f = line.split(sep) if sep else line.split()
+            if len(f) <= max(i_chr, i_bp):
+                continue
+            try:
+                key = (str(f[i_chr]).strip().replace("chr", ""),
+                       int(float(f[i_bp])))
+            except ValueError:
+                continue
+            if key not in p19 and key not in p38:
+                continue
+            ok = True
+            if i_a1 is not None and i_a2 is not None and len(f) > max(i_a1, i_a2):
+                obs = {f[i_a1].strip().upper(), f[i_a2].strip().upper()}
+                exp = p19.get(key) or p38.get(key)
+                ok = obs <= exp
+            if not ok:
+                continue
+            if key in p19:
+                h19 += 1; seen += 1
+            elif key in p38:
+                h38 += 1; seen += 1
+        if seen:
+            if h19 and not h38:
+                return (f"GRCh37 ({h19}/{seen} anchors matched hg19 on chr+pos)",
+                        h19, h38), member
+            if h38 and not h19:
+                return (f"GRCh38 ({h38}/{seen} anchors matched hg38 on chr+pos)",
+                        h19, h38), member
+            return (f"CONFLICT: {h19} hg19 vs {h38} hg38 on chr+pos",
+                    h19, h38), member
+
     h19 = h38 = seen = 0
     for n, line in enumerate(fh):
         if n > max_lines:

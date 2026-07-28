@@ -63,6 +63,14 @@ def fetch(row):
         print(f"  {row['trait_id']}: no usable download_url ({url}) -- skipped")
         return False
     os.makedirs(RAW, exist_ok=True)
+    # Already have it at the expected size? Don't spend the window re-fetching.
+    want = int(row["bytes"]) if str(row["bytes"]).isdigit() else 0
+    if os.path.exists(dest) and want and os.path.getsize(dest) == want:
+        if row["sha256"] in ("", "NA", "PENDING"):
+            row["sha256"] = sha256_of(dest)
+        print(f"  {row['trait_id']}: already present and complete "
+              f"({want/1e6:.1f} MB) -- skipped")
+        return True
     tmp = dest + ".part"
     print(f"  {row['trait_id']}: GET {url}")
     t0 = time.time()
@@ -82,14 +90,21 @@ def fetch(row):
         if os.path.exists(tmp):
             os.remove(tmp)
         return False
+    # Verify completeness BEFORE promoting .part to the real filename. A
+    # truncated file that carries the final name is indistinguishable from a
+    # good one downstream, and this pass already produced one (cad.tsv stopped
+    # at 1267 MB of 3250 MB and was promoted anyway). Refuse to finalise.
+    if total and got != total:
+        print(f"    !! TRUNCATED: expected {total} bytes, got {got} "
+              f"({100*got/total:.1f}%). Discarding partial file.")
+        os.remove(tmp)
+        return False
     os.replace(tmp, dest)
     dt = time.time() - t0
     digest = sha256_of(dest)
     row["sha256"] = digest
     row["bytes"] = str(got)
     print(f"    {got/1e6:.1f} MB in {dt:.0f}s  sha256:{digest[:16]}...")
-    if total and got != total:
-        print(f"    !! WARNING: expected {total} bytes, got {got}")
     return True
 
 
