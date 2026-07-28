@@ -24,3 +24,13 @@ This provenance does not validate a GWAS. Before any LDSC run, the GWAS source
 must independently be confirmed as EUR and hg19 (or have a separately
 documented build decision); the panel must never be used to excuse an ancestry
 or build mismatch.
+
+## LDSC Python 3 compatibility
+
+The reproducible installer clones CBIIT/ldsc's `ldsc39` branch and applies the
+version-checked patch at `patches/ldsc39-python3-compressed-header.patch`. At
+the reviewed revision, `munge_sumstats.py` opens a `.gz` or `.bz2` header in
+binary mode but strips a text newline, which fails under Python 3 before any
+summary statistic is parsed. The patch changes only that header stream to text
+mode; it is not a statistical-method modification. Setup stops if the patch
+does not match the checked-out LDSC source, preventing an unreviewed upgrade.

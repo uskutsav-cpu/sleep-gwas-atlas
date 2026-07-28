@@ -17,10 +17,12 @@ Read `README.md` and `methods_map.md` at the start of every session.
 
 ## Current state
 
-The empirical Phase 0/1 analysis is not complete: no real summary statistics
-or real LDSC results are in this repository, and all 86 registry rows remain
-`status=TODO`. The verified EUR 1000 Genomes/HapMap3 reference panel is an
-ignored, reproducible local dependency installed by `scripts/00_setup.sh`; see
+The empirical Phase 0/1 analysis is not complete: no real LDSC results are
+versioned in Git. `sleepdur`, `sleepiness`, and `napping` are the only `CURATED`
+registry rows, backed by public raw sources and build-discriminating hg19
+validation; the other 83 rows remain `status=TODO`. Real raw data remain ignored local dependencies;
+their source registry is `config/public_gwas_sources.tsv`. The verified EUR
+1000 Genomes/HapMap3 reference panel is installed by `scripts/00_setup.sh`; see
 `docs/reference_panel_provenance.md`. The end-to-end pipeline is smoke-tested
 with deliberately fake input only. `scripts/10_phase0_audit.py` reports the
 explicit source-metadata gaps; do not describe a smoke-test artifact as a

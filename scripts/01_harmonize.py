@@ -51,12 +51,23 @@ ALIASES = {
     "CHR": ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
     "BP": ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
     "A1": ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
-    "A2": ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref"],
+    "A2": ["a2", "other_allele", "nea", "allele0", "allele2", "non_effect_allele", "ref"],
     "FRQ": ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
-    "BETA": ["beta", "effect", "b", "log_odds", "logor", "effect_size"],
+    "BETA": [
+        "beta", "effect", "b", "log_odds", "logor", "effect_size",
+        # Documented headers in the public UKB sleep releases registered in
+        # config/public_gwas_sources.tsv (Dashti et al. 2019).
+        "beta_sleepduration", "beta_shortsleep", "beta_longsleep",
+    ],
     "OR": ["or", "odds_ratio", "oddsratio"],
-    "SE": ["se", "standard_error", "stderr", "sebeta", "log_odds_se"],
-    "P": ["p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value"],
+    "SE": [
+        "se", "standard_error", "stderr", "sebeta", "log_odds_se",
+        "se_sleepduration", "se_shortsleep", "se_longsleep",
+    ],
+    "P": [
+        "p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value",
+        "p_sleepduration", "p_shortsleep", "p_longsleep",
+    ],
     "N": ["n", "n_total", "samplesize", "n_complete_samples"],
     "N_EFF": ["neff", "n_eff", "effective_n", "effective_sample_size"],
     "NCASE": ["ncase", "n_cas", "n_cases", "cases"],
@@ -160,28 +171,38 @@ def main():
         fail(f"--source-build {args.source_build!r} is not hg19/GRCh37; refusing silent liftover")
 
     separator, separator_name = sniff_separator(args.infile)
-    read_kwargs = {"dtype": str, "low_memory": False, "comment": None}
+    # Let pandas retain native numeric columns. Coercing every one of ~10M
+    # rows to Python strings creates a multi-gigabyte working set before the
+    # explicit validation below; SNP and allele fields are still converted to
+    # normalized strings, and every numerical field is still passed through
+    # pd.to_numeric before any QC decision.
+    read_kwargs = {"low_memory": False, "comment": None}
     if separator == r"\s+":
         read_kwargs.pop("low_memory")
         read_kwargs.update({"sep": separator, "engine": "python"})
     else:
         read_kwargs["sep"] = separator
+    # Validate the source schema before parsing millions of records. This is
+    # deliberately separate from the full read so a missing documented alias
+    # fails in seconds rather than after allocating the complete table.
+    header = pd.read_csv(args.infile, nrows=0, **read_kwargs)
+    columns = map_columns(header.columns)
+    required = ["SNP", "CHR", "BP", "A1", "A2", "SE", "P"]
+    missing = [column for column in required if column not in columns]
+    if missing:
+        fail(
+            f"could not map required columns {missing}. File columns: {list(header.columns)}. "
+            "Add a documented alias to ALIASES rather than renaming by position."
+        )
+    if "BETA" not in columns and "OR" not in columns:
+        fail("neither BETA nor OR is present; an effect size is required")
+
     raw = pd.read_csv(args.infile, **read_kwargs)
     n_input = len(raw)
     if n_input == 0:
         fail("input file has a header but no data rows")
     log(f"delimiter detected: {separator_name}; read {n_input:,} rows and {len(raw.columns)} columns")
 
-    columns = map_columns(raw.columns)
-    required = ["SNP", "CHR", "BP", "A1", "A2", "SE", "P"]
-    missing = [column for column in required if column not in columns]
-    if missing:
-        fail(
-            f"could not map required columns {missing}. File columns: {list(raw.columns)}. "
-            "Add a documented alias to ALIASES rather than renaming by position."
-        )
-    if "BETA" not in columns and "OR" not in columns:
-        fail("neither BETA nor OR is present; an effect size is required")
     log(f"column map: {columns}")
 
     if "BUILD" in columns:

@@ -1,0 +1,8 @@
+diff --git a/munge_sumstats.py b/munge_sumstats.py
+index 3605dec..0000000 100755
+--- a/munge_sumstats.py
++++ b/munge_sumstats.py
+@@ -125 +125,2 @@ def read_header(fh):
+-    return [x.rstrip('\n') for x in openfunc(fh).readline().split()]
++    with openfunc(fh, mode='rt') as handle:
++        return [x.rstrip('\n') for x in handle.readline().split()]

@@ -26,9 +26,42 @@ def numeric(value):
     return number if np.isfinite(number) else None
 
 
+def load_public_sources(path, trait_ids):
+    """Return source rows by trait, failing closed on malformed mappings.
+
+    This registry only records sources whose public URL has been independently
+    checked. Traits absent from it are intentionally *not* treated as having a
+    downloadable source merely because a prose source_note exists.
+    """
+    if not path or not os.path.exists(path):
+        return {}
+    sources = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    required = {
+        "source_id", "trait_ids", "access", "raw_files", "build_status",
+        "acquisition_status",
+    }
+    missing = required.difference(sources.columns)
+    if missing:
+        raise SystemExit(f"ERROR: source registry is missing columns: {sorted(missing)}")
+    by_trait = {}
+    for _, source in sources.iterrows():
+        for trait_id in (item.strip() for item in source["trait_ids"].split(",") if item.strip()):
+            if trait_id not in trait_ids:
+                raise SystemExit(
+                    f"ERROR: source {source['source_id']} references unknown trait_id {trait_id}"
+                )
+            if trait_id in by_trait:
+                raise SystemExit(
+                    f"ERROR: multiple source-registry rows claim trait_id {trait_id}"
+                )
+            by_trait[trait_id] = source
+    return by_trait
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="config/traits.tsv")
+    parser.add_argument("--sources", default="config/public_gwas_sources.tsv")
     parser.add_argument("--out", default="results/tables/phase0_curation_audit.tsv")
     parser.add_argument("--strict", action="store_true")
     args = parser.parse_args()
@@ -39,6 +72,7 @@ def main():
         raise SystemExit(f"ERROR: config is missing required columns: {sorted(missing)}")
     if config["trait_id"].duplicated().any():
         raise SystemExit("ERROR: duplicate trait_id values in config")
+    sources_by_trait = load_public_sources(args.sources, set(config["trait_id"]))
 
     rows = []
     for _, trait in config.iterrows():
@@ -65,10 +99,26 @@ def main():
         if "ancestry" not in config.columns or str(trait.get("ancestry", "")).upper() != "EUR":
             issues.append("eur_subset_not_linked_in_pipeline_config")
 
+        source = sources_by_trait.get(trait["trait_id"])
+        if source is None:
+            issues.append("source_download_not_independently_registered")
+        else:
+            if source["access"].upper() != "PUBLIC":
+                issues.append("source_is_not_publicly_acquirable")
+            if source["build_status"].upper() != "HEADER_VALIDATED_HG19":
+                issues.append("source_build_not_header_validated_hg19")
+            source_files = {item.strip() for item in source["raw_files"].split(",")}
+            if trait["raw_file"] not in source_files:
+                issues.append("source_registry_raw_file_mismatch")
+            if not os.path.isfile(os.path.join("data", "raw", trait["raw_file"])):
+                issues.append("registered_raw_file_not_materialized")
+
         status = str(trait["status"]).upper()
         rows.append({
             "trait_id": trait["trait_id"], "label": trait["label"], "domain": trait["domain"],
             "declared_status": status, "curation_ready": not issues,
+            "source_id": source["source_id"] if source is not None else "UNREGISTERED",
+            "acquisition_status": source["acquisition_status"] if source is not None else "UNREGISTERED",
             "issues": ";".join(issues) if issues else "none",
         })
 

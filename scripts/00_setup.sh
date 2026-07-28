@@ -46,6 +46,22 @@ if [ ! -d "$LDSC_DIR/.git" ]; then
 else
   echo "    $LDSC_DIR already exists, leaving its checked-out revision unchanged"
 fi
+# CBIIT/ldsc's ldsc39 revision opens compressed summary statistics in binary
+# mode while parsing their header. Python 3 therefore raises TypeError before
+# analysis. Apply this narrowly scoped, version-checked compatibility patch;
+# setup deliberately aborts rather than silently applying it to another LDSC
+# revision. The patch only changes the header stream to text mode.
+LDSC_COMPAT_PATCH="$ROOT/patches/ldsc39-python3-compressed-header.patch"
+if git -C "$LDSC_DIR" apply --unidiff-zero --reverse --check "$LDSC_COMPAT_PATCH"; then
+  echo "    Python 3 compressed-header compatibility patch already applied"
+elif git -C "$LDSC_DIR" apply --unidiff-zero --check "$LDSC_COMPAT_PATCH"; then
+  git -C "$LDSC_DIR" apply --unidiff-zero "$LDSC_COMPAT_PATCH"
+  echo "    applied Python 3 compressed-header compatibility patch"
+else
+  echo "ERROR: the checked-out LDSC revision does not match the reviewed compressed-header patch." >&2
+  echo "       Refusing to run with an unreviewed LDSC source revision." >&2
+  exit 1
+fi
 "$LDSC_PYTHON" "$LDSC_DIR/ldsc.py" -h > /dev/null
 "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" -h > /dev/null
 echo "    LDSC OK"
