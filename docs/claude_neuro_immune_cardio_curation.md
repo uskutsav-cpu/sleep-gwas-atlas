@@ -162,3 +162,31 @@ Nothing was deleted. The recommendation within this block is to drop `crohn`
 and `uc` as contained within `ibd`, giving 19 owned traits. That is a
 recommendation, not an action: executing a reduction while three authorities
 disagree would bury the conflict instead of surfacing it.
+
+---
+
+## 8. Open-access alternatives for the gated traits
+
+Searched the GWAS Catalog for studies publishing a **full p-value set** (openly
+downloadable, no terms gate) for each access-blocked trait. Every PMID below
+was verified against NCBI before being recorded.
+
+| trait | open alternative | PMID | EUR cases / controls | vs. the gated first choice |
+|---|---|---|---|---|
+| **mdd** | GCST005839, Wray 2018 *Nat Genet* | 29700475 | 135,458 / 344,901 | Strong. Close in power to Howard 2019 and no 23andMe gate. **Recommended swap.** |
+| **t2d** | GCST007515, Xue 2018 *Nat Genet* | 29632382 | 48,286 / 250,671 | Usable. Smaller than Mahajan 2022 (80,154 cases) but needs no access request. |
+| **ms** | GCST003566, Andlauer 2016 *Sci Adv* | 27386562 | 4,888 / 10,395 | **Weak.** ~10x smaller than IMSGC 2019 (47,429 cases). Real power-gate risk. |
+| **bipolar** | GCST003724, *Hum Mol Genet* 2016 | 27329760 | 7,647 / 27,303 | **Weak.** ~5x smaller than Mullins 2021 (41,917 cases). Real power-gate risk. |
+| **scz** | none found | — | — | Tested 29483656, 25056061, 31740837, 21926972, 23974872 — study records exist, no full p-value set. |
+| **adhd** | none found | — | — | Tested 30478444, 28545751, 20732625 — none carry a full p-value set. |
+
+**Reading this honestly.** Only `mdd` is a clean win. `t2d` is an acceptable
+trade. `ms` and `bipolar` have open data but at a fraction of the sample size,
+and the QC gate is Z = h2/SE >= 4 — these are exactly the traits that gate
+exists to catch. Swapping them to stay open-access may buy a trait that then
+fails and has to be dropped anyway. Accepting the PGC/IMSGC terms is likely
+the better route for those two, and for `scz` and `adhd` it is the only route.
+
+Nothing here has been swapped in `config/traits.tsv`. Changing the source paper
+for four traits is a decision for the project owner and mentor, exactly as the
+MDD and T2D source questions were.
