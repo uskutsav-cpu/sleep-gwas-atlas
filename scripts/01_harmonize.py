@@ -51,13 +51,16 @@ ALIASES = {
     "CHR": ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
     "BP": ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
     "A1": ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
-    "A2": ["a2", "other_allele", "nea", "allele0", "allele2", "non_effect_allele", "ref"],
+    "A2": ["a2", "a0", "other_allele", "nea", "allele0", "allele2", "non_effect_allele", "ref"],
     "FRQ": ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
     "BETA": [
         "beta", "effect", "b", "log_odds", "logor", "effect_size",
         # Documented headers in the public UKB sleep releases registered in
         # config/public_gwas_sources.tsv (Dashti et al. 2019).
         "beta_sleepduration", "beta_shortsleep", "beta_longsleep",
+        # Timmers et al. 2019 parental-survival release: a1 effect allele,
+        # a0 reference allele, beta1 log-hazard protection ratio.
+        "beta1",
     ],
     "OR": ["or", "odds_ratio", "oddsratio"],
     "SE": [

@@ -31,7 +31,9 @@ registry intentionally names the same exact phenotype twice. A source marked
 ``GZIP_WRAPPED_ZIP_COLUMNS`` is a reviewed multi-phenotype nested archive; it
 is handled only by its named, source-specific materializer. A source marked
 ``DIRECT_TSV`` is a single, uncompressed tabular release and is losslessly
-gzip-wrapped after its registered integrity check.
+gzip-wrapped after its registered integrity check. A source marked
+``DIRECT_GZIP`` is already a single gzipped tabular release and is hard-linked
+into the raw directory after its registered integrity check.
 EOF
 }
 
@@ -98,6 +100,8 @@ if [ "$MODE" = --download ]; then
     "$PYTHON_BIN" scripts/12_materialize_accelerometer_sleep.py --source "$ARCHIVE" --verify-only
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
+  elif [ "$archive_member" = "DIRECT_GZIP" ]; then
+    gzip -t "$ARCHIVE"
   else
     unzip -t "$ARCHIVE" > /dev/null
   fi
@@ -161,6 +165,25 @@ if [ "$archive_member" = "DIRECT_TSV" ]; then
     mv "$TEMP" "$PRIMARY"
     TEMP=""
   fi
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
+if [ "$archive_member" = "DIRECT_GZIP" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: DIRECT_GZIP must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -e "$PRIMARY" ]; then
+    ln "$ARCHIVE" "$PRIMARY"
+  elif ! cmp -s "$ARCHIVE" "$PRIMARY"; then
+    echo "ERROR: existing raw file differs from registered direct gzip: $PRIMARY" >&2
+    exit 1
+  fi
+  gzip -t "$PRIMARY"
   echo "Materialized $source_id"
   printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
   printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
