@@ -30,3 +30,27 @@ study-level count. The supplied MD5 (`9209bf29b5cf281bba35934dcf708538`) and
 local SHA-256 are in the registry. Raw `rs113345124` is at `8:145793211`,
 agreeing with the [Ensembl GRCh37 record](https://grch37.rest.ensembl.org/variation/human/rs113345124?content-type=application/json);
 the GRCh38 position is `8:144567827`.
+
+For frailty index, the public GRCh37 TSV records `variant_id`, chromosome,
+base-pair position, effect and other alleles, effect-allele frequency, beta,
+standard error and p-value. The Catalog-supplied MD5
+(`b8956f360155cea10d8f42b31826762e`) and local archive SHA-256 are recorded
+in the registry. Raw `rs10875231` is at `1:100000012`, agreeing with the
+[Ensembl GRCh37 record](https://grch37.rest.ensembl.org/variation/human/rs10875231?content-type=application/json);
+the GRCh38 position is `1:99534456`.
+
+## Verified but not eligible for the EUR panel
+
+The public [Codd et al. Figshare release](https://figshare.com/articles/dataset/UKB_telomere_gwas_summarystats_tsv_gz/14786055)
+for leukocyte telomere length was downloaded successfully (459,840,128 bytes;
+supplied MD5 `f38d5d40296c8e3c8ba72357c89dc2d5`; local SHA-256
+`95d5b3845c9805fcf4000ced4971040e05be5a200c77e31388c64ef33830c5a8`). Its
+published header documents variant identifiers, effect and other alleles,
+effect-allele frequency, beta, standard error and p-value. Raw `rs10875231`
+at `1:100000012` is consistent with GRCh37.
+
+However, the source paper's 472,174-person full-UKB analysis includes
+non-European participants. The archive is registered for provenance and can
+be materialized reproducibly, but `telomere_length` remains `TODO` and must
+not be analysed with the EUR LDSC reference until a source-specific EUR subset
+is independently identified and checked.
