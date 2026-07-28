@@ -29,7 +29,9 @@ Usage:
 registered archive member to gzip and creates hard-linked alias files when the
 registry intentionally names the same exact phenotype twice. A source marked
 ``GZIP_WRAPPED_ZIP_COLUMNS`` is a reviewed multi-phenotype nested archive; it
-is handled only by its named, source-specific materializer.
+is handled only by its named, source-specific materializer. A source marked
+``DIRECT_TSV`` is a single, uncompressed tabular release and is losslessly
+gzip-wrapped after its registered integrity check.
 EOF
 }
 
@@ -94,6 +96,8 @@ if [ "$MODE" = --download ]; then
   # streamed into a raw input; retain a failed archive for inspection/re-download.
   if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
     "$PYTHON_BIN" scripts/12_materialize_accelerometer_sleep.py --source "$ARCHIVE" --verify-only
+  elif [ "$archive_member" = "DIRECT_TSV" ]; then
+    test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   else
     unzip -t "$ARCHIVE" > /dev/null
   fi
@@ -141,6 +145,25 @@ if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
   done
   echo "Materialized $source_id"
   printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
+if [ "$archive_member" = "DIRECT_TSV" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: DIRECT_TSV must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -s "$PRIMARY" ]; then
+    TEMP="$RAW_DIR/.${outputs[0]}.partial.$$"
+    gzip -c "$ARCHIVE" > "$TEMP"
+    gzip -t "$TEMP"
+    mv "$TEMP" "$PRIMARY"
+    TEMP=""
+  fi
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
   printf '  files: %s\n' "$raw_files"
   exit 0
 fi
