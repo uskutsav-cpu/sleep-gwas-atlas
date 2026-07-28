@@ -14,6 +14,7 @@ cd "$(dirname "$0")/.."
 SOURCES=${SOURCES:-config/public_gwas_sources.tsv}
 RAW_DIR=${RAW_DIR:-data/raw}
 ARCHIVE_DIR=${ARCHIVE_DIR:-$RAW_DIR/.archives}
+PYTHON_BIN=${PYTHON_BIN:-python3}
 MODE=${1:---verify}
 SOURCE_ID=${2:-}
 
@@ -26,7 +27,9 @@ Usage:
 
 `--download` only permits rows marked PUBLIC. `--materialize` streams the
 registered archive member to gzip and creates hard-linked alias files when the
-registry intentionally names the same exact phenotype twice.
+registry intentionally names the same exact phenotype twice. A source marked
+``GZIP_WRAPPED_ZIP_COLUMNS`` is a reviewed multi-phenotype nested archive; it
+is handled only by its named, source-specific materializer.
 EOF
 }
 
@@ -87,9 +90,13 @@ require_archive_integrity() {
 if [ "$MODE" = --download ]; then
   curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
   # A byte-range resume can leave a superficially plausible archive after a
-  # proxy interruption. Validate every member CRC before it can be streamed
-  # into a raw input; retain a failed archive for inspection/re-download.
-  unzip -t "$ARCHIVE" > /dev/null
+  # proxy interruption. Validate the registered container before it can be
+  # streamed into a raw input; retain a failed archive for inspection/re-download.
+  if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
+    "$PYTHON_BIN" scripts/12_materialize_accelerometer_sleep.py --source "$ARCHIVE" --verify-only
+  else
+    unzip -t "$ARCHIVE" > /dev/null
+  fi
   require_archive_integrity
   echo "Downloaded $source_id -> $ARCHIVE"
   exit 0
@@ -109,6 +116,34 @@ cleanup_materialization() {
 }
 trap cleanup_materialization EXIT
 IFS=',' read -r -a outputs <<< "$raw_files"
+if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
+  existing_outputs=0
+  for output in "${outputs[@]}"; do
+    if [ -e "$RAW_DIR/$output" ]; then
+      test -s "$RAW_DIR/$output" || {
+        echo "ERROR: existing materialized output is empty: $RAW_DIR/$output" >&2
+        exit 1
+      }
+      existing_outputs=$((existing_outputs + 1))
+    fi
+  done
+  if [ "$existing_outputs" -eq 0 ]; then
+    "$PYTHON_BIN" scripts/12_materialize_accelerometer_sleep.py --source "$ARCHIVE" --out-dir "$RAW_DIR"
+  elif [ "$existing_outputs" -ne "${#outputs[@]}" ]; then
+    echo "ERROR: only some outputs already exist for $source_id; inspect before re-materializing" >&2
+    exit 1
+  fi
+  for output in "${outputs[@]}"; do
+    test -s "$RAW_DIR/$output" || {
+      echo "ERROR: source-specific materializer did not produce $output" >&2
+      exit 1
+    }
+  done
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
 PRIMARY="$RAW_DIR/${outputs[0]}"
 if [ ! -s "$PRIMARY" ]; then
   TEMP="$RAW_DIR/.${outputs[0]}.partial.$$"
