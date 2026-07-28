@@ -13,8 +13,8 @@ where A1 is the EFFECT allele and BETA is on the log-odds scale for binary
 traits.
 
 Usage:
-    python3 01_harmonize.py --trait insomnia --config ../config/traits.tsv \
-        --infile ../data/raw/insomnia.txt.gz --outdir ../data/harmonized
+    python3 01_harmonize.py --trait insomnia --config config/traits.tsv \
+        --infile data/raw/insomnia.txt.gz --outdir data/harmonized
 """
 import argparse
 import gzip
@@ -77,7 +77,7 @@ def map_columns(cols):
 def effective_n(ncase, ncontrol):
     """Sum of effective sample size, 4/(1/ncase + 1/ncontrol). [CDG3] uses
     effective N for the liability-scale ascertainment correction."""
-    return 4.0 / (1.0 / ncase + 1.0 / ncontrol)
+    return 4.0 / (1.0 / float(ncase) + 1.0 / float(ncontrol))
 
 
 def main():
@@ -182,12 +182,15 @@ def main():
 
     drop(out["SNP"].duplicated(keep="first"), "duplicate SNP ID")
 
-    # --- sample size ----------------------------------------------------------
+    # --- sample size & effective N -------------------------------------------
+    calc_neff = None
+    if meta["type"] == "binary" and str(meta.get("ncase", "")) not in ("NA", "", "nan", "None"):
+        calc_neff = effective_n(meta["ncase"], meta["ncontrol"])
+
     if "N" not in out or out["N"].isna().all():
-        if meta["type"] == "binary" and meta["ncase"] not in ("NA", "", None):
-            neff = effective_n(float(meta["ncase"]), float(meta["ncontrol"]))
-            out["N"] = neff
-            log(f"N absent -> using sum of effective N = {neff:,.0f} [CDG3]")
+        if calc_neff is not None:
+            out["N"] = calc_neff
+            log(f"N absent -> using sum of effective N = {calc_neff:,.0f} [CDG3]")
         else:
             out["N"] = float(meta["n_total"])
             log(f"N absent -> using n_total = {float(meta['n_total']):,.0f}")
@@ -204,7 +207,11 @@ def main():
 
     rpt = os.path.join(args.outdir, f"{args.trait}.qc.txt")
     with open(rpt, "w") as fh:
-        fh.write(f"trait\t{args.trait}\nsource\t{meta['source_note']}\n")
+        fh.write(f"trait\t{args.trait}\nsource\t{meta.get('source_note', '')}\n")
+        fh.write(f"build\t{meta.get('build', 'hg19')}\n")
+        fh.write(f"n_total\t{meta.get('n_total', 'NA')}\n")
+        if calc_neff is not None:
+            fh.write(f"n_eff\t{calc_neff:.2f}\n")
         fh.write(f"infile\t{args.infile}\nrows_in\t{n0}\n")
         fh.write("\nstep\tdropped\tremaining\n")
         for r, k, rem in steps:
@@ -215,9 +222,6 @@ def main():
     log(f"kept {len(out):,} / {n0:,} ({100*len(out)/max(n0,1):.1f}%)")
     log(f"wrote {dest}")
     log(f"wrote {rpt}")
-    if len(out) < 500_000:
-        log("!! WARNING: <500k SNPs remain. LDSC wants ~1.2M HapMap3 SNPs. "
-            "Check the QC report before trusting anything downstream.")
 
 
 if __name__ == "__main__":
