@@ -1,80 +1,86 @@
 # sleep-gwas-atlas
 
-Phase 0–1 pipeline for the Sleep/Circadian Genetic Atlas: harmonize GWAS
-summary statistics across a **90-trait catalog**, estimate SNP heritability ($h^2$),
-apply a power QC gate, evaluate a **dual-strategy ("use both") comparison framework**,
-run pairwise genetic correlations ($r_g$), and produce the Figure 2 heatmap.
+An auditable Phase 0/1 pipeline for the Sleep/Circadian Genetic Atlas:
 
-Built to mirror the Methods of Grotzinger/Werme et al., *Nature* 649:406–415
-(2026). See `methods_map.md`.
+- **Phase 0:** source-GWAS curation, hg19/EUR validation, harmonization, and HapMap3 munging;
+- **Phase 1:** LDSC SNP heritability, power/confounding QC, sleep-by-disease genetic correlations, FDR correction, and a provenance-stamped heatmap.
 
-## Dual-Strategy Framework ("Use Both")
+The registry currently contains **86 candidate traits** (20 sleep/circadian and 66 disease/trait). It is intentionally not described as 90: no extra traits have been invented simply to meet an earlier documentation claim.
 
-Rather than arbitrarily picking one definition or dataset release, the pipeline
-evaluates both side-by-side:
+## Current scientific status
 
-1. **Short/Long Sleep Phenotype Definitions**:
-   - Dashti 2019 (<7h / >=9h, Ncase=106k/34k) **vs** Austin-Zimmerman 2023 (<=5h / >=10h, extreme tail).
-2. **Insomnia Summary Statistics**:
-   - Jansen 2019 UKB-only (Public, N=386k) **vs** Jansen 2019 UKB+23andMe (Full, N=1.33M).
-3. **Liability Scale & Ascertainment**:
-   - Standard sample size $N_{total}$ **vs** CDG3 effective sample size $N_{eff}$ ($N_{eff} \times h^2 > 12,000$ MiXeR threshold).
+The code path has a synthetic end-to-end smoke test. **No real GWAS summary statistics, EUR LD reference panel, or real LDSC results are stored in this repository.** Every registry row is currently `TODO`, so the empirical Phase 0/1 analysis is not yet complete.
 
-`05_collate.py` automatically generates a dedicated comparative summary table:
-`results/tables/problem_comparison_summary.tsv` (or `results/_smoketest/problem_comparison_summary.tsv` during smoke testing).
+That distinction is deliberate. The pipeline will not:
 
-## Status
+- treat an unsourced population prevalence as a liability-scale assumption;
+- silently lift hg38 sources to hg19;
+- convert a curation status into an h2 QC result; or
+- turn synthetic logs into a presentable figure or report.
 
-| Component | State |
-|---|---|
-| `01_harmonize.py` | tested on synthetic sumstats (tab + space delimited, BETA + OR formats, build & $N_{eff}$ logging) |
-| `05_collate.py` | tested on synthetic LDSC logs; BH-FDR verified monotone; generates dual-strategy comparison table |
-| `06_heatmap.py` | tested via the reproducible smoke test below; dynamic layout scaling for 90 traits; provenance footer + synthetic-input guard |
-| `00_setup.sh`, `02_munge.sh`, `03_h2_qc.sh`, `04_rg.sh` | **written but NOT executed** — they need conda + LDSC + real reference panels |
+## Set up the real analysis environment
 
-## Run order
+This downloads the maintained Python 3 LDSC implementation, Python dependencies, and EUR reference data. It requires network access, several GB of storage, and should be started only after reviewing the source/data-access plan.
 
 ```bash
-bash scripts/00_setup.sh                     # once: LDSC + conda env + ref panels
-# put raw sumstats in data/raw/, named as in config/traits.tsv
-bash scripts/02_munge.sh insomnia mdd        # harmonize + munge
-bash scripts/03_h2_qc.sh insomnia mdd        # h2 + QC gate  <- the decision point
-# edit config/traits.tsv: set status=PASS for survivors
-bash scripts/04_rg.sh                        # all PASS sleep x all PASS disease
+bash scripts/00_setup.sh
+export PYTHON_BIN=.venv/bin/python
+export LDSC_PYTHON=.venv/bin/python
+export LDSC_DIR=ldsc
 ```
 
-To see the 90-trait pipeline move without any real data:
+The setup follows the Python 3 `ldsc39` branch from CBIIT; the legacy upstream LDSC repository itself now points users to that maintained implementation.
+
+## Phase 0: curate before downloading
+
+`config/traits.tsv` is the pipeline registry. A trait should be changed to `CURATED` only after its source file and metadata are verified. For each binary trait, record a citation for `pop_prev` in a `pop_prev_citation` column before requesting liability-scale h2. Keep the source's exact ancestry subset and genome build in the registry as well.
 
 ```bash
-python3 scripts/make_test_data.py --logs
-python3 scripts/05_collate.py --mode h2 --logdir results/_smoketest --out results/_smoketest/h2_summary.tsv
-python3 scripts/05_collate.py --mode rg --logdir results/_smoketest --out results/_smoketest/rg_matrix.tsv
-python3 scripts/06_heatmap.py --rg results/_smoketest/rg_matrix.tsv --config config/traits.tsv \
-    --out results/_smoketest/fig2_smoketest.png --provenance-label "SYNTHETIC — NOT REAL DATA"
+$PYTHON_BIN scripts/10_phase0_audit.py \
+  --out results/tables/phase0_curation_audit.tsv
+
+# After a curated hg19/EUR raw file is placed in data/raw/:
+bash scripts/02_munge.sh insomnia mdd
 ```
 
-## The QC gate & Dual-Strategy Table
+The harmonizer writes one `data/harmonized/<trait>.qc.txt` ledger per trait. It requires rsIDs, autosomal hg19 coordinates, effect alleles, effect size, SE, P, and an auditable sample-size rule; it removes strand-ambiguous SNPs, MHC, low INFO/MAF variants when present, duplicates, and low effective-N variants.
 
-`05_collate.py --mode h2` classifies each trait PASS/DROP on:
+## Phase 1: h2 gate, rg, and Figure 2
 
-- **Z = h²/SE ≥ 4** — below this, rg estimates are not interpretable
-- **LDSC intercept ≤ 1.2** — above this suggests confounding, not polygenicity
+```bash
+# Final h2 for binary traits requires a cited pop_prev_citation.
+bash scripts/03_h2_qc.sh insomnia mdd
 
-Additionally, it outputs `problem_comparison_summary.tsv` comparing competing traits side-by-side:
-- `shortsleep_dashti` vs `shortsleep_az`
-- `longsleep_dashti` vs `longsleep_az`
-- `insomnia_ukb` vs `insomnia_full`
+# An observed-scale binary h2 is allowed only for interim QC / rg preparation.
+bash scripts/03_h2_qc.sh --observed-scale insomnia mdd
 
-## Layout
-
+# Uses only traits that are both CURATED and h2 PASS; writes the inclusion table.
+bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv
 ```
-config/traits.tsv                       90-trait catalog & metadata table
-scripts/01_harmonize.py                 QC with an auditable ledger per trait
-scripts/05_collate.py                   LDSC logs -> tidy tables + QC gate + BH-FDR + comparison summary
-scripts/06_heatmap.py                   Figure 2 Heatmap (dynamic layout)
-data/harmonized/*.qc.txt                every SNP dropped, and why
-results/tables/h2_summary.tsv           h2 estimates, Z-scores, intercepts
-results/tables/problem_comparison_summary.tsv  dual-strategy comparison table
-results/tables/rg_matrix.tsv            pairwise genetic correlation matrix
-results/figures/fig2_rg_heatmap.png     Figure 2 heatmap
+
+`05_collate.py` keeps low h2 Z and high LDSC intercept as separate QC failures. The gate is h2 Z >= 4 and intercept <= 1.20. `04_rg.sh` creates `results/tables/phase1_inclusion.tsv` rather than asking anyone to overwrite curation state with `PASS`.
+
+## Reproducible smoke test
+
+After installing the Python requirements (or with any environment that already has NumPy, Pandas, and Matplotlib):
+
+```bash
+PYTHON_BIN=.venv/bin/python bash scripts/run_smoke_test.sh
 ```
+
+The test accepts tabular and whitespace-delimited raw inputs, BETA and OR effect formats, runs h2 and rg parsing across the complete registry, exports the proposal metadata table, generates the report and heatmap, and watermarks all fake output under `results/_smoketest/`.
+
+## Outputs
+
+```text
+config/traits.tsv                         registry and curation state
+scripts/10_phase0_audit.py                source-metadata readiness audit
+data/harmonized/<trait>.qc.txt            filter-by-filter QC ledger
+data/munged/<trait>.sumstats.gz           HapMap3 LDSC input (not committed)
+results/tables/h2_summary.tsv             h2, Z, intercept, QC reason
+results/tables/phase1_inclusion.tsv       CURATED + h2-PASS selection record
+results/tables/rg_matrix.tsv              rg, SE, P, Benjamini-Hochberg FDR
+results/figures/fig2_rg_heatmap.png       provenance-stamped Phase 1 heatmap
+```
+
+Generated raw data, intermediate files, logs, tables, figures, and smoke-test artifacts are ignored by Git so an orphan result cannot accidentally become versioned evidence.

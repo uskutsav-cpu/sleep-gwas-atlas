@@ -17,10 +17,17 @@ Read `README.md` and `methods_map.md` at the start of every session.
 
 ## Current state
 
-Phase 0, not complete. No summary statistics downloaded yet. All rows in
-`config/traits.tsv` are `status=TODO`. The Python scripts are tested on
-synthetic data; the four shell scripts have never been executed against
-real files and should be treated as first drafts.
+The empirical Phase 0/1 analysis is not complete: no real summary statistics
+or EUR reference panel are in this repository, and all 86 registry rows remain
+`status=TODO`. The end-to-end pipeline is smoke-tested with deliberately fake
+input only. `scripts/10_phase0_audit.py` reports the explicit source-metadata
+gaps; do not describe a smoke-test artifact as a result.
+
+The runnable path uses the maintained Python 3 `ldsc39` branch from
+CBIIT/ldsc. `scripts/03_h2_qc.sh` requires a cited population prevalence for
+final liability-scale binary h2; `--observed-scale` is an interim QC/rg option,
+not a replacement. `scripts/04_rg.sh` includes only traits that are both
+`CURATED` and h2 `PASS`, recorded in `phase1_inclusion.tsv`.
 
 ## Non-negotiable rules
 

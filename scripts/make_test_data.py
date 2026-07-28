@@ -21,6 +21,7 @@ with invented rg values that looked entirely publishable; a rigid, obviously
 artificial gradient cannot be mistaken for a result.
 """
 import argparse
+import math
 import os
 
 import numpy as np
@@ -47,8 +48,9 @@ def make(n=60000, style="beta"):
     se = rng.uniform(0.01, 0.05, n)
     beta = rng.normal(0, 0.02, n)
     z = beta / se
-    from scipy.stats import norm
-    p = 2 * norm.sf(np.abs(z))
+    # Keep the smoke test lightweight: this is exactly 2 * Phi(-|z|), but
+    # does not require SciPy just to manufacture deliberately fake p-values.
+    p = np.array([math.erfc(abs(value) / math.sqrt(2.0)) for value in z])
 
     df = pd.DataFrame({
         "SNP": [f"rs{i}" for i in range(n)],
@@ -116,7 +118,7 @@ def write_h2_logs(outdir, config_path="config/traits.tsv"):
             scale, h2, se, icept, icept_se, lam, chi2, ratio = PROBLEM_H2[trait]
         else:
             scale = "Liability" if "continuous" not in str(df_config.loc[df_config["trait_id"]==trait, "type"].values[0]) else "Observed"
-            # Deterministic, plausible synthetic values across 90 traits
+            # Deterministic, plausible synthetic values across the catalog.
             h2 = 0.05 + 0.001 * (idx % 25)
             se = 0.004 + 0.0001 * (idx % 10)
             icept = 1.01 + 0.002 * (idx % 15)
@@ -143,8 +145,6 @@ def write_h2_logs(outdir, config_path="config/traits.tsv"):
 
 def write_rg_logs(outdir, config_path="config/traits.tsv"):
     """One rg_<sleeptrait>.log per sleep trait, running against all disease traits."""
-    from scipy.stats import norm
-
     df_config = load_traits_config(config_path)
     if df_config is not None:
         sleep_traits = df_config[df_config["domain"] == "sleep"]["trait_id"].tolist()
@@ -167,7 +167,7 @@ def write_rg_logs(outdir, config_path="config/traits.tsv"):
             z_val = rg_val * 12.0
             if abs(z_val) < 0.1: z_val = 0.2
             se = abs(rg_val / z_val) if z_val != 0 else 0.05
-            p = 2 * norm.sf(abs(z_val))
+            p = math.erfc(abs(z_val) / math.sqrt(2.0))
             rows.append(
                 f"SYNTHETIC/{s}.sumstats.gz SYNTHETIC/{d}.sumstats.gz "
                 f"{rg_val:.4f} {se:.4f} {z_val:.4f} {p:.4g} "
@@ -213,7 +213,7 @@ if __name__ == "__main__":
         h2_written = write_h2_logs(a.logdir, a.config)
         rg_written = write_rg_logs(a.logdir, a.config)
         print(f"Wrote {len(h2_written)} h2 logs + {len(rg_written)} rg logs in {a.logdir}")
-        print("Every value in them is fabricated to test the 90-trait pipeline.")
+        print("Every value in them is fabricated to test the full registered catalog.")
 
     if a.raw or not a.logs:
         os.makedirs(a.out, exist_ok=True)

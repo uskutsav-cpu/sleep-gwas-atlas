@@ -1,31 +1,56 @@
 #!/usr/bin/env bash
-# SNP heritability + the QC gate that decides which traits survive.
-# Usage: bash scripts/03_h2_qc.sh insomnia mdd chronotype ...
+# Run LDSC h2 and collate the QC gate for selected munged traits.
+#
+# By default binary traits run on the liability scale only when the config
+# contains a cited population prevalence. Use --observed-scale only for the
+# interim h2 power gate / Phase 1 rg work; it is not a substitute for a final
+# liability-scale h2 table.
+#
+# Usage:
+#   bash scripts/03_h2_qc.sh insomnia mdd
+#   bash scripts/03_h2_qc.sh --observed-scale insomnia mdd
 set -euo pipefail
 cd "$(dirname "$0")/.."
-CFG=config/traits.tsv
-mkdir -p results/logs
-for T in "$@"; do
-  TYPE=$(awk -F'\t' -v t="$T" 'NR>1 && $1==t {print $4}' $CFG)
-  PREV=$(awk -F'\t' -v t="$T" 'NR>1 && $1==t {print $10}' $CFG)
-  NCASE=$(awk -F'\t' -v t="$T" 'NR>1 && $1==t {print $7}' $CFG)
-  NCON=$(awk -F'\t' -v t="$T" 'NR>1 && $1==t {print $8}' $CFG)
-  echo "==> h2 $T ($TYPE)"
-  if [ "$TYPE" = "binary" ]; then
-    # Liability scale: sample prevalence from the effective-N case fraction,
-    # population prevalence from config. Both are YOUR assumptions - be able
-    # to defend the population prevalence number in your meeting.
-    SAMPPREV=$(python3 -c "print(round($NCASE/($NCASE+$NCON),6))")
-    conda run -n ldsc python ldsc/ldsc.py \
-        --h2 data/munged/$T.sumstats.gz \
-        --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/ \
-        --samp-prev $SAMPPREV --pop-prev $PREV \
-        --out results/logs/h2_$T
-  else
-    conda run -n ldsc python ldsc/ldsc.py \
-        --h2 data/munged/$T.sumstats.gz \
-        --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/ \
-        --out results/logs/h2_$T
+source scripts/_common.sh
+
+observed_scale=0
+if [ "${1:-}" = "--observed-scale" ]; then
+  observed_scale=1
+  shift
+fi
+[ "$#" -gt 0 ] || die "usage: bash scripts/03_h2_qc.sh [--observed-scale] TRAIT [TRAIT ...]"
+require_file "$CONFIG"
+require_ldsc
+
+LOGDIR=${LDSC_LOGDIR:-results/logs}
+H2_OUT=${H2_OUT:-results/tables/h2_summary.tsv}
+mkdir -p "$LOGDIR" "$(dirname "$H2_OUT")"
+
+for trait in "$@"; do
+  trait_type=$(trait_field "$trait" type) || die "trait '$trait' is not in $CONFIG"
+  curation_status=$(trait_field "$trait" status) || die "trait '$trait' has no curation status in $CONFIG"
+  [ "$curation_status" = "CURATED" ] || die "$trait has status=$curation_status; complete and audit Phase 0 curation before h2"
+  require_file "data/munged/$trait.sumstats.gz"
+  echo "==> h2 $trait ($trait_type)"
+
+  command=("$LDSC_PYTHON" "$LDSC_DIR/ldsc.py"
+    --h2 "data/munged/$trait.sumstats.gz"
+    --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/
+    --out "$LOGDIR/h2_$trait")
+
+  if [ "$trait_type" = "binary" ] && [ "$observed_scale" -eq 0 ]; then
+    population_prevalence=$(trait_field "$trait" pop_prev)
+    ncase=$(trait_field "$trait" ncase)
+    ncontrol=$(trait_field "$trait" ncontrol)
+    prevalence_citation=$(trait_field "$trait" pop_prev_citation 2>/dev/null || true)
+    [ -n "$prevalence_citation" ] && [ "$prevalence_citation" != "UNRESOLVED" ] || die \
+      "$trait has no cited pop_prev_citation. Refusing an unsourced liability-scale h2; rerun with --observed-scale only for interim Phase 1 QC."
+    sample_prevalence=$("$PYTHON_BIN" -c "print(round(float('$ncase') / (float('$ncase') + float('$ncontrol')), 6))")
+    command+=(--samp-prev "$sample_prevalence" --pop-prev "$population_prevalence")
+  elif [ "$trait_type" = "binary" ]; then
+    echo "  NOTE: observed-scale h2 selected; do not report it as liability-scale h2." >&2
   fi
+  "${command[@]}"
 done
-python3 scripts/05_collate.py --mode h2 --logdir results/logs --out results/tables/h2_summary.tsv
+
+"$PYTHON_BIN" scripts/05_collate.py --mode h2 --config "$CONFIG" --logdir "$LOGDIR" --out "$H2_OUT"

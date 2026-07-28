@@ -66,6 +66,21 @@ def main():
 
     df = pd.read_csv(a.rg, sep="\t")
     cfg = pd.read_csv(a.config, sep="\t", dtype=str).set_index("trait_id")
+    required = {"sleep_trait", "disease_trait", "rg", "fdr"}
+    missing = required.difference(df.columns)
+    if missing:
+        sys.exit(f"ERROR: rg table is missing required columns: {sorted(missing)}")
+    if df.duplicated(["sleep_trait", "disease_trait"]).any():
+        duplicates = df.loc[df.duplicated(["sleep_trait", "disease_trait"], keep=False),
+                            ["sleep_trait", "disease_trait"]].head().to_dict("records")
+        sys.exit(f"ERROR: rg table has duplicate trait pairs (likely mixed runs): {duplicates}")
+    unknown = (set(df["sleep_trait"]) | set(df["disease_trait"])).difference(cfg.index)
+    if unknown:
+        sys.exit(f"ERROR: rg table has trait IDs absent from config: {sorted(unknown)}")
+    if not (cfg.loc[df["sleep_trait"], "domain"] == "sleep").all():
+        sys.exit("ERROR: every sleep_trait in the rg table must have domain=sleep in config")
+    if (cfg.loc[df["disease_trait"], "domain"] == "sleep").any():
+        sys.exit("ERROR: disease_trait includes a sleep-domain trait")
     lab = cfg["label"].to_dict()
     dom = cfg["domain"].to_dict()
 
@@ -74,7 +89,12 @@ def main():
     fdr = df.pivot_table(index="sleep_trait", columns="disease_trait",
                          values="fdr", aggfunc="first").reindex_like(mat)
 
-    # Order columns by domain
+    if mat.empty or mat.shape[1] == 0:
+        sys.exit("ERROR: rg table did not yield any sleep x disease cells")
+
+    # Preserve the catalog order for rows and group disease columns by domain.
+    sleep_order = [trait for trait in cfg.index if trait in mat.index and dom[trait] == "sleep"]
+    mat, fdr = mat.reindex(sleep_order), fdr.reindex(sleep_order)
     cols = sorted(mat.columns,
                   key=lambda c: (DOMAIN_ORDER.index(dom.get(c, "cancer"))
                                  if dom.get(c) in DOMAIN_ORDER else 99, c))
@@ -86,7 +106,7 @@ def main():
     n_cols = len(mat.columns)
     n_rows = len(mat.index)
 
-    # Dynamic sizing for large ~90 trait matrices
+    # Dynamic sizing for the complete catalog, whatever its current size.
     fig_w = max(10.0, 0.45 * n_cols + 3.5)
     fig_h = max(6.0, 0.40 * n_rows + 2.5)
 
@@ -162,6 +182,7 @@ def main():
              color="crimson" if a.provenance_label else "0.4",
              ha="left", va="bottom")
 
+    Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(a.out, dpi=200, bbox_inches="tight")
     print(f"wrote {a.out}  ({mat.shape[0]} sleep × {mat.shape[1]} disease traits)")
     print(f"  {prov}")

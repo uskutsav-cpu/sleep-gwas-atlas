@@ -1,22 +1,37 @@
 #!/usr/bin/env bash
-# Harmonize + munge one or more traits.  Usage: bash scripts/02_munge.sh insomnia mdd
+# Harmonize and munge one or more curated, EUR hg19 traits.
+# Usage: bash scripts/02_munge.sh insomnia mdd
 set -euo pipefail
 cd "$(dirname "$0")/.."
-CFG=config/traits.tsv
-for T in "$@"; do
-  echo "==> $T : harmonize"
-  RAW=$(awk -F'\t' -v t="$T" 'NR>1 && $1==t {print $6}' $CFG)
-  [ -n "$RAW" ] || { echo "  !! $T not in $CFG"; exit 1; }
-  [ -f "data/raw/$RAW" ] || { echo "  !! missing data/raw/$RAW"; exit 1; }
-  python3 scripts/01_harmonize.py --trait "$T" --config $CFG \
-      --infile "data/raw/$RAW" --outdir data/harmonized
+source scripts/_common.sh
 
-  echo "==> $T : munge"
-  # --merge-alleles restricts to HapMap3 and fixes allele orientation. [LDSC]
-  conda run -n ldsc python ldsc/munge_sumstats.py \
-      --sumstats data/harmonized/$T.harmonized.tsv.gz \
-      --merge-alleles ref/w_hm3.snplist \
-      --chunksize 500000 \
-      --out data/munged/$T
+[ "$#" -gt 0 ] || die "usage: bash scripts/02_munge.sh TRAIT [TRAIT ...]"
+require_file "$CONFIG"
+require_ldsc
+mkdir -p data/harmonized data/munged
+
+for trait in "$@"; do
+  raw_file=$(trait_field "$trait" raw_file) || die "trait '$trait' is not in $CONFIG"
+  source_build=$(trait_field "$trait" build) || die "trait '$trait' has no build in $CONFIG"
+  curation_status=$(trait_field "$trait" status) || die "trait '$trait' has no curation status in $CONFIG"
+  [ "$curation_status" = "CURATED" ] || die "$trait has status=$curation_status; complete and audit Phase 0 curation before munging"
+  require_file "data/raw/$raw_file"
+
+  echo "==> $trait: Phase 0 harmonization"
+  "$PYTHON_BIN" scripts/01_harmonize.py \
+    --trait "$trait" --config "$CONFIG" --source-build "$source_build" \
+    --infile "data/raw/$raw_file" --outdir data/harmonized
+
+  echo "==> $trait: HapMap3 munging"
+  "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" \
+    --sumstats "data/harmonized/$trait.harmonized.tsv.gz" \
+    --merge-alleles ref/w_hm3.snplist --chunksize 500000 \
+    --out "data/munged/$trait"
+  require_file "data/munged/$trait.sumstats.gz"
+  require_file "data/munged/$trait.log"
+  if grep -q 'WARNING' "data/munged/$trait.log"; then
+    echo "  WARNING: LDSC reported warnings for $trait; inspect data/munged/$trait.log before h2." >&2
+  fi
 done
-echo "Munged files in data/munged/. Check each .log for 'Writing summary statistics'."
+
+echo "Munging complete. Review each data/harmonized/*.qc.txt and data/munged/*.log before h2."

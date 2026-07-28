@@ -31,6 +31,7 @@ INT_PAT = re.compile(r"^Intercept:\s*(-?[\d.eE+-]+)\s*\(([\d.eE+-]+)\)", re.M)
 CHI_PAT = re.compile(r"Mean Chi\^2:\s*(-?[\d.eE+-]+)")
 LAM_PAT = re.compile(r"Lambda GC:\s*(-?[\d.eE+-]+)")
 RAT_PAT = re.compile(r"^Ratio:\s*(-?[\d.eE+-]+)", re.M)
+SYNTHETIC_MARKER = "SYNTHETIC SMOKE-TEST OUTPUT - NOT REAL LDSC RESULTS"
 
 
 def f(x):
@@ -42,19 +43,38 @@ def f(x):
 
 def load_traits_meta(config_path="config/traits.tsv"):
     if os.path.exists(config_path):
-        return pd.read_csv(config_path, sep="\t").set_index("trait_id")
+        metadata = pd.read_csv(config_path, sep="\t")
+        if metadata["trait_id"].duplicated().any():
+            dupes = metadata.loc[metadata["trait_id"].duplicated(), "trait_id"].tolist()
+            raise ValueError(f"duplicate trait_id values in config: {dupes}")
+        return metadata.set_index("trait_id")
     return None
 
 
+def refuse_synthetic_in_real_directory(logdir):
+    """Never let a copied smoke-test log turn into a plausible result table."""
+    log_paths = glob.glob(os.path.join(logdir, "*.log"))
+    contains_synthetic = any(SYNTHETIC_MARKER in open(path, encoding="utf-8").read()
+                             for path in log_paths)
+    if contains_synthetic and "_smoketest" not in os.path.normpath(logdir).split(os.sep):
+        raise SystemExit(
+            "ERROR: synthetic LDSC logs were found outside results/_smoketest/. "
+            "Refusing to collate fabricated values as real analysis output."
+        )
+
+
 def parse_h2(logdir, config_path="config/traits.tsv"):
+    refuse_synthetic_in_real_directory(logdir)
     meta_df = load_traits_meta(config_path)
     rows = []
     for path in sorted(glob.glob(os.path.join(logdir, "h2_*.log"))):
         trait = os.path.basename(path)[3:-4]
-        txt = open(path).read()
+        with open(path, encoding="utf-8") as handle:
+            txt = handle.read()
         m = H2_PAT.search(txt)
         if not m:
-            rows.append({"trait": trait, "note": "NO h2 IN LOG - check for errors"})
+            rows.append({"trait": trait, "input_log": path,
+                         "note": "NO h2 IN LOG - check for errors"})
             continue
         h2, se = f(m.group(2)), f(m.group(3))
         i = INT_PAT.search(txt)
@@ -74,7 +94,7 @@ def parse_h2(logdir, config_path="config/traits.tsv"):
                 n_eff_h2 = neff * h2
 
         rows.append({
-            "trait": trait,
+            "trait": trait, "input_log": path,
             "scale": m.group(1).lower(),
             "h2": h2, "se": se, "z": round(z, 2),
             "intercept": f(i.group(1)) if i else float("nan"),
@@ -93,6 +113,11 @@ def parse_h2(logdir, config_path="config/traits.tsv"):
     df["verdict"] = ["PASS" if (a and b) else "DROP"
                      for a, b in zip(df["pass_z"].fillna(False),
                                      df["pass_intercept"].fillna(False))]
+    df["qc_reason"] = np.select(
+        [df["z"].isna(), ~df["pass_z"], df["intercept"].isna(), ~df["pass_intercept"]],
+        ["h2_or_se_missing", f"h2_z_below_{Z_MIN:g}", "intercept_missing", f"intercept_above_{INTERCEPT_MAX:g}"],
+        default="pass",
+    )
     return df.sort_values("z", ascending=False)
 
 
@@ -140,9 +165,11 @@ def generate_problem_comparison_table(df_h2, out_path):
 
 def parse_rg(logdir):
     """LDSC prints a fixed-width table after 'Summary of Genetic Correlation'."""
+    refuse_synthetic_in_real_directory(logdir)
     frames = []
     for path in sorted(glob.glob(os.path.join(logdir, "rg_*.log"))):
-        lines = open(path).read().splitlines()
+        with open(path, encoding="utf-8") as handle:
+            lines = handle.read().splitlines()
         try:
             i = next(k for k, l in enumerate(lines)
                      if "Summary of Genetic Correlation Results" in l)
@@ -150,13 +177,22 @@ def parse_rg(logdir):
             print(f"  !! no results table in {path}")
             continue
         header = lines[i + 1].split()
+        if not {"p1", "p2", "rg", "se", "p"}.issubset(header):
+            print(f"  !! unexpected rg header in {path}: {header}")
+            continue
         body = []
         for l in lines[i + 2:]:
             if not l.strip():
                 break
-            body.append(l.split())
+            fields = l.split()
+            if len(fields) != len(header):
+                # LDSC writes a prose footer after the table in some versions.
+                break
+            body.append(fields)
         if body:
-            frames.append(pd.DataFrame(body, columns=header))
+            frame = pd.DataFrame(body, columns=header)
+            frame["input_log"] = path
+            frames.append(frame)
     if not frames:
         return pd.DataFrame()
     df = pd.concat(frames, ignore_index=True)
@@ -170,9 +206,12 @@ def parse_rg(logdir):
 
     d = df.dropna(subset=["p"]).sort_values("p").copy()
     m = len(d)
+    if m == 0:
+        return pd.DataFrame()
     raw = d["p"].values * m / np.arange(1, m + 1)
     d["fdr"] = np.minimum.accumulate(raw[::-1])[::-1].clip(max=1.0)
-    df = df.merge(d[["fdr"]], left_index=True, right_index=True, how="left")
+    df["fdr"] = np.nan
+    df.loc[d.index, "fdr"] = d["fdr"]
     return df.sort_values("p")
 
 
@@ -190,8 +229,8 @@ if __name__ == "__main__":
         print("!! nothing parsed - check that LDSC actually ran")
         raise SystemExit(1)
     df.to_csv(a.out, sep="\t", index=False, float_format="%.4g")
-    print(df.to_string(index=False))
-    print(f"\nwrote {a.out}")
+    print(f"Parsed {len(df)} {a.mode} result rows")
+    print(f"wrote {a.out}")
 
     if a.mode == "h2":
         comp_out = os.path.join(os.path.dirname(a.out), "problem_comparison_summary.tsv")

@@ -1,227 +1,320 @@
 #!/usr/bin/env python3
-"""
-Phase 0: harmonize one GWAS summary statistics file into a standard schema.
+"""Harmonize one EUR GRCh37/hg19 GWAS summary-statistics file for LDSC.
 
-Every QC decision below is a CHOICE, and each one is tagged [CDG3] where it
-matches the Methods of Grotzinger/Werme et al. Nature 649:406-415 (2026), or
-[LDSC] where it is required by munge_sumstats.py. You will be asked in your
-meeting why you did each of these. Read them, don't just run them.
+This is the Phase 0 gatekeeper. It deliberately stops when it cannot verify a
+non-negotiable assumption rather than producing a plausible-looking output.
+It does *not* lift over coordinates, infer an ancestry, or try to resolve
+non-rsID variants. Those are curation decisions and must be recorded before
+the analysis is run.
 
-Output schema (tab-separated, gzipped):
+Output schema (tab-separated, gzipped)::
+
     SNP  CHR  BP  A1  A2  FRQ  BETA  SE  P  N
-where A1 is the EFFECT allele and BETA is on the log-odds scale for binary
-traits.
 
-Usage:
-    python3 01_harmonize.py --trait insomnia --config config/traits.tsv \
-        --infile data/raw/insomnia.txt.gz --outdir data/harmonized
+``A1`` is the source effect allele and ``BETA`` is on the source effect scale
+(log-odds for OR inputs). ``munge_sumstats.py --merge-alleles`` performs the
+final HapMap3 allele compatibility check.
+
+Usage::
+
+    python3 scripts/01_harmonize.py --trait insomnia \
+      --infile data/raw/insomnia.txt.gz --outdir data/harmonized
 """
 import argparse
 import gzip
+import hashlib
 import os
+import re
 import sys
 
 import numpy as np
 import pandas as pd
 
-# --- QC thresholds (edit here, they are logged to the report) ------------------
-INFO_MIN = 0.6      # [CDG3] restrict to imputation INFO > 0.6 when available
-MAF_MIN = 0.01      # [CDG3] minor allele frequency > 1%
-MHC = ("6", 25_000_000, 34_000_000)   # [CDG3] MHC excluded from all sumstats
-AMBIG = {("A", "T"), ("T", "A"), ("C", "G"), ("G", "C")}
-VALID = {"A", "C", "G", "T"}
 
-# Column aliases seen in the wild. Extend as you meet new files.
+# Every threshold is either taken from CDG3 or required to make LDSC input
+# auditable. Do not relax one to make a file pass.
+INFO_MIN = 0.6  # [CDG3]
+MAF_MIN = 0.01  # [CDG3]
+N_EFF_MIN_FRACTION = 0.50  # [CDG3]
+MHC_CHR = 6
+MHC_START = 25_000_000
+MHC_END = 34_000_000
+TARGET_BUILD = "hg19"
+AMBIGUOUS_ALLELES = {("A", "T"), ("T", "A"), ("C", "G"), ("G", "C")}
+VALID_ALLELES = {"A", "C", "G", "T"}
+RSID = re.compile(r"rs[0-9]+$", re.IGNORECASE)
+
+# Extend this table when a source has a documented alternate header. Do not
+# silently guess a column based on its position.
 ALIASES = {
-    "SNP":  ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id", "marker"],
-    "CHR":  ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
-    "BP":   ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
-    "A1":   ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
-    "A2":   ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref"],
-    "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
+    "SNP": ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id", "marker"],
+    "CHR": ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
+    "BP": ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
+    "A1": ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
+    "A2": ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref"],
+    "FRQ": ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
     "BETA": ["beta", "effect", "b", "log_odds", "logor", "effect_size"],
-    "OR":   ["or", "odds_ratio", "oddsratio"],
-    "SE":   ["se", "standard_error", "stderr", "sebeta", "log_odds_se"],
-    "P":    ["p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value"],
-    "N":    ["n", "n_total", "samplesize", "n_complete_samples", "neff", "n_eff"],
+    "OR": ["or", "odds_ratio", "oddsratio"],
+    "SE": ["se", "standard_error", "stderr", "sebeta", "log_odds_se"],
+    "P": ["p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value"],
+    "N": ["n", "n_total", "samplesize", "n_complete_samples"],
+    "N_EFF": ["neff", "n_eff", "effective_n", "effective_sample_size"],
+    "NCASE": ["ncase", "n_cas", "n_cases", "cases"],
+    "NCONTROL": ["ncontrol", "n_con", "n_controls", "controls"],
     "INFO": ["info", "imputation_info", "rsq", "r2", "imp_quality"],
+    "BUILD": ["build", "genome_build", "assembly"],
 }
 
 
-def log(msg):
-    print(f"  {msg}", flush=True)
+def log(message):
+    print(f"  {message}", flush=True)
 
 
-def sniff_sep(path):
-    op = gzip.open if path.endswith(".gz") else open
-    with op(path, "rt") as fh:
-        head = fh.readline()
-    for sep, name in ((",", "comma"), ("\t", "tab"), (" ", "space")):
-        if head.count(sep) >= 4:
-            return (sep, name)
-    return ("\t", "tab")
+def fail(message):
+    raise SystemExit(f"ERROR: {message}")
 
 
-def map_columns(cols):
-    """Return {standard_name: original_name} using the alias table."""
-    lower = {c.lower().strip(): c for c in cols}
-    found = {}
-    for std, opts in ALIASES.items():
-        for o in opts:
-            if o in lower:
-                found[std] = lower[o]
-                break
-    return found
+def normalise_build(value):
+    value = str(value).strip().lower()
+    aliases = {
+        "hg19": "hg19", "grch37": "hg19", "grch37/hg19": "hg19",
+        "b37": "hg19", "hg38": "hg38", "grch38": "hg38",
+        "grch38/hg38": "hg38", "b38": "hg38",
+    }
+    return aliases.get(value, value)
+
+
+def finite_number(value):
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if np.isfinite(number) else None
 
 
 def effective_n(ncase, ncontrol):
-    """Sum of effective sample size, 4/(1/ncase + 1/ncontrol). [CDG3] uses
-    effective N for the liability-scale ascertainment correction."""
+    """Effective N, 4 / (1/ncase + 1/ncontrol), used by CDG3."""
     return 4.0 / (1.0 / float(ncase) + 1.0 / float(ncontrol))
 
 
+def sha256(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def sniff_separator(path):
+    opener = gzip.open if path.endswith(".gz") else open
+    with opener(path, "rt") as handle:
+        header = handle.readline()
+    if header.count("\t") >= 2:
+        return "\t", "tab"
+    if header.count(",") >= 2:
+        return ",", "comma"
+    if len(header.split()) >= 3:
+        return r"\s+", "whitespace"
+    fail("could not determine a delimiter from the header")
+
+
+def map_columns(columns):
+    lower = {str(column).lower().strip(): column for column in columns}
+    mapped = {}
+    for standard, aliases in ALIASES.items():
+        for alias in aliases:
+            if alias in lower:
+                mapped[standard] = lower[alias]
+                break
+    return mapped
+
+
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--trait", required=True)
-    ap.add_argument("--config", default="config/traits.tsv")
-    ap.add_argument("--infile", required=True)
-    ap.add_argument("--outdir", default="data/harmonized")
-    ap.add_argument("--keep-ambiguous", action="store_true",
-                    help="skip strand-ambiguous SNP removal (NOT recommended)")
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--trait", required=True)
+    parser.add_argument("--config", default="config/traits.tsv")
+    parser.add_argument("--infile", required=True)
+    parser.add_argument("--outdir", default="data/harmonized")
+    parser.add_argument(
+        "--source-build",
+        help="Build declared by the downloaded file. Must agree with config; use this when the file header has no build column.",
+    )
+    args = parser.parse_args()
 
-    cfg = pd.read_csv(args.config, sep="\t", dtype=str).set_index("trait_id")
-    if args.trait not in cfg.index:
-        sys.exit(f"ERROR: trait '{args.trait}' not in {args.config}")
-    meta = cfg.loc[args.trait]
+    if not os.path.isfile(args.infile):
+        fail(f"input file not found: {args.infile}")
 
-    sep, sepname = sniff_sep(args.infile)
-    log(f"delimiter detected: {sepname}")
-    df = pd.read_csv(args.infile, sep=sep, dtype=str, low_memory=False,
-                     comment=None, engine="c")
-    n0 = len(df)
-    log(f"read {n0:,} rows, {len(df.columns)} columns")
+    config = pd.read_csv(args.config, sep="\t", dtype=str)
+    trait_rows = config.loc[config["trait_id"] == args.trait]
+    if len(trait_rows) != 1:
+        fail(f"expected exactly one config row for trait '{args.trait}', found {len(trait_rows)}")
+    metadata = trait_rows.iloc[0]
 
-    cmap = map_columns(df.columns)
-    need = ["SNP", "A1", "A2", "P"]
-    missing = [c for c in need if c not in cmap]
+    configured_build = normalise_build(metadata.get("build", ""))
+    if configured_build != TARGET_BUILD:
+        fail(
+            f"trait '{args.trait}' is configured as {metadata.get('build')!r}, not hg19. "
+            "No liftover is implemented; acquire an hg19/GRCh37 source or record and perform a separate liftover decision."
+        )
+    if args.source_build and normalise_build(args.source_build) != TARGET_BUILD:
+        fail(f"--source-build {args.source_build!r} is not hg19/GRCh37; refusing silent liftover")
+
+    separator, separator_name = sniff_separator(args.infile)
+    read_kwargs = {"dtype": str, "low_memory": False, "comment": None}
+    if separator == r"\s+":
+        read_kwargs.pop("low_memory")
+        read_kwargs.update({"sep": separator, "engine": "python"})
+    else:
+        read_kwargs["sep"] = separator
+    raw = pd.read_csv(args.infile, **read_kwargs)
+    n_input = len(raw)
+    if n_input == 0:
+        fail("input file has a header but no data rows")
+    log(f"delimiter detected: {separator_name}; read {n_input:,} rows and {len(raw.columns)} columns")
+
+    columns = map_columns(raw.columns)
+    required = ["SNP", "CHR", "BP", "A1", "A2", "SE", "P"]
+    missing = [column for column in required if column not in columns]
     if missing:
-        sys.exit(f"ERROR: could not map required columns {missing}.\n"
-                 f"       file has: {list(df.columns)}\n"
-                 f"       -> add the right alias to ALIASES in this script.")
-    if "BETA" not in cmap and "OR" not in cmap:
-        sys.exit("ERROR: neither BETA nor OR present; cannot get effect size.")
-    log(f"column map: { {k: v for k, v in cmap.items()} }")
+        fail(
+            f"could not map required columns {missing}. File columns: {list(raw.columns)}. "
+            "Add a documented alias to ALIASES rather than renaming by position."
+        )
+    if "BETA" not in columns and "OR" not in columns:
+        fail("neither BETA nor OR is present; an effect size is required")
+    log(f"column map: {columns}")
 
-    out = pd.DataFrame(index=df.index)
-    for std, orig in cmap.items():
-        out[std] = df[orig]
+    if "BUILD" in columns:
+        file_builds = {
+            normalise_build(value) for value in raw[columns["BUILD"]].dropna().unique()
+            if str(value).strip()
+        }
+        if file_builds and file_builds != {TARGET_BUILD}:
+            fail(f"file build values {sorted(file_builds)} do not all equal hg19; inspect the source before proceeding")
 
-    # --- effect size to log-odds / beta --------------------------------------
+    out = pd.DataFrame(index=raw.index)
+    for standard, original in columns.items():
+        out[standard] = raw[original]
+
     if "BETA" in out:
         out["BETA"] = pd.to_numeric(out["BETA"], errors="coerce")
     else:
-        orv = pd.to_numeric(out["OR"], errors="coerce")
-        out["BETA"] = np.log(orv.where(orv > 0))
-        log("converted OR -> log(OR)")
-    out = out.drop(columns=[c for c in ["OR"] if c in out])
+        odds_ratio = pd.to_numeric(out["OR"], errors="coerce")
+        out["BETA"] = np.log(odds_ratio.where(odds_ratio > 0))
+        log("converted OR to log(OR)")
 
-    for c in ["BP", "FRQ", "SE", "P", "N", "INFO"]:
-        if c in out:
-            out[c] = pd.to_numeric(out[c], errors="coerce")
-
-    # --- alleles --------------------------------------------------------------
-    out["A1"] = out["A1"].str.upper().str.strip()
-    out["A2"] = out["A2"].str.upper().str.strip()
+    for column in ["CHR", "BP", "FRQ", "SE", "P", "N", "N_EFF", "NCASE", "NCONTROL", "INFO"]:
+        if column in out:
+            out[column] = pd.to_numeric(out[column], errors="coerce")
+    for column in ["SNP", "A1", "A2"]:
+        out[column] = out[column].astype("string").str.strip()
+    out["SNP"] = out["SNP"].str.lower()
+    out["A1"] = out["A1"].str.upper()
+    out["A2"] = out["A2"].str.upper()
+    out["CHR"] = out["CHR"].astype("string").str.replace("chr", "", case=False, regex=False)
+    out["CHR"] = pd.to_numeric(out["CHR"], errors="coerce")
 
     steps = []
 
     def drop(mask, reason):
         nonlocal out
-        k = int(mask.sum())
-        if k:
-            out = out[~mask]
-        steps.append((reason, k, len(out)))
-        return k
+        mask = mask.fillna(True) if isinstance(mask, pd.Series) else mask
+        removed = int(mask.sum())
+        if removed:
+            out = out.loc[~mask].copy()
+        steps.append((reason, removed, len(out)))
 
-    drop(~out["A1"].isin(VALID) | ~out["A2"].isin(VALID),
-         "non-SNP / indel / multi-char allele")
-    drop(out["A1"] == out["A2"], "A1 == A2")
-
-    if not args.keep_ambiguous:
-        amb = [(a, b) in AMBIG for a, b in zip(out["A1"], out["A2"])]
-        drop(pd.Series(amb, index=out.index), "strand-ambiguous (A/T, C/G) [CDG3]")
-    else:
-        steps.append(("strand-ambiguous KEPT (--keep-ambiguous)", 0, len(out)))
-
-    drop(out["P"].isna() | (out["P"] <= 0) | (out["P"] > 1), "P missing or out of (0,1]")
-    drop(out["BETA"].isna() | ~np.isfinite(out["BETA"]), "BETA missing / non-finite")
-    if "SE" in out:
-        drop(out["SE"].isna() | (out["SE"] <= 0), "SE missing or <= 0")
+    drop(out["SNP"].isna() | ~out["SNP"].map(lambda value: bool(RSID.fullmatch(str(value)))), "missing or non-rsID SNP (dbSNP resolution required)")
+    drop(out["A1"].isna() | out["A2"].isna() | ~out["A1"].isin(VALID_ALLELES) | ~out["A2"].isin(VALID_ALLELES), "non-SNP / indel / multi-base allele")
+    drop(out["A1"] == out["A2"], "A1 equals A2")
+    ambiguous = pd.Series([(a1, a2) in AMBIGUOUS_ALLELES for a1, a2 in zip(out["A1"], out["A2"])], index=out.index)
+    drop(ambiguous, "strand-ambiguous A/T or C/G [CDG3]")
+    drop(out["P"].isna() | (out["P"] <= 0) | (out["P"] > 1), "P missing or outside (0, 1]")
+    drop(out["BETA"].isna() | ~np.isfinite(out["BETA"]), "BETA missing or non-finite")
+    drop(out["SE"].isna() | (out["SE"] <= 0) | ~np.isfinite(out["SE"]), "SE missing, non-positive, or non-finite")
+    drop(out["CHR"].isna() | (out["CHR"] % 1 != 0) | ~out["CHR"].between(1, 22), "missing or non-autosomal CHR (EUR LDSC panel is autosomal)")
+    drop(out["BP"].isna() | (out["BP"] <= 0) | (out["BP"] % 1 != 0), "missing or invalid BP")
 
     if "INFO" in out:
-        drop(out["INFO"].notna() & (out["INFO"] <= INFO_MIN),
-             f"INFO <= {INFO_MIN} [CDG3]")
+        drop(out["INFO"].notna() & ((out["INFO"] <= INFO_MIN) | (out["INFO"] > 1)), f"INFO outside ({INFO_MIN}, 1] [CDG3]")
     else:
-        steps.append(("INFO column absent — filter skipped", 0, len(out)))
-
+        steps.append(("INFO column absent - source-level INFO QC must be documented", 0, len(out)))
     if "FRQ" in out:
         maf = out["FRQ"].where(out["FRQ"] <= 0.5, 1 - out["FRQ"])
-        drop(out["FRQ"].notna() & (maf <= MAF_MIN), f"MAF <= {MAF_MIN} [CDG3]")
+        drop(out["FRQ"].notna() & ((out["FRQ"] < 0) | (out["FRQ"] > 1) | (maf <= MAF_MIN)), f"invalid FRQ or MAF <= {MAF_MIN} [CDG3]")
     else:
-        steps.append(("FRQ column absent — MAF filter skipped", 0, len(out)))
+        steps.append(("FRQ column absent - source-level MAF QC must be documented", 0, len(out)))
 
-    # --- MHC ------------------------------------------------------------------
-    if "CHR" in out and "BP" in out:
-        chrs = out["CHR"].astype(str).str.replace("chr", "", case=False, regex=False)
-        out["CHR"] = chrs
-        inmhc = (chrs == MHC[0]) & out["BP"].between(MHC[1], MHC[2])
-        drop(inmhc, f"in MHC chr{MHC[0]}:{MHC[1]}-{MHC[2]} [CDG3]")
-    else:
-        steps.append(("CHR/BP absent — MHC not excluded (FIX THIS)", 0, len(out)))
-
+    drop((out["CHR"] == MHC_CHR) & out["BP"].between(MHC_START, MHC_END), f"MHC chr6:{MHC_START}-{MHC_END} [CDG3]")
     drop(out["SNP"].duplicated(keep="first"), "duplicate SNP ID")
 
-    # --- sample size & effective N -------------------------------------------
-    calc_neff = None
-    if meta["type"] == "binary" and str(meta.get("ncase", "")) not in ("NA", "", "nan", "None"):
-        calc_neff = effective_n(meta["ncase"], meta["ncontrol"])
+    binary = metadata["type"] == "binary"
+    metadata_ncase = finite_number(metadata.get("ncase"))
+    metadata_ncontrol = finite_number(metadata.get("ncontrol"))
+    metadata_total = finite_number(metadata.get("n_total"))
+    n_mode = ""
+    total_effective_n = None
+    if binary and "N_EFF" in out:
+        out["N"] = out["N_EFF"]
+        n_mode = "per-SNP N_eff from source"
+        if metadata_ncase and metadata_ncontrol:
+            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+    elif binary and "NCASE" in out and "NCONTROL" in out:
+        valid_counts = (out["NCASE"] > 0) & (out["NCONTROL"] > 0)
+        out["N"] = np.where(valid_counts, 4.0 / (1.0 / out["NCASE"] + 1.0 / out["NCONTROL"]), np.nan)
+        n_mode = "per-SNP N_eff derived from NCASE/NCONTROL"
+        if metadata_ncase and metadata_ncontrol:
+            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+    elif binary and metadata_ncase and metadata_ncontrol:
+        total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+        out["N"] = total_effective_n
+        n_mode = "constant N_eff derived from config ncase/ncontrol"
+    elif not binary and "N" in out and out["N"].notna().any():
+        total_effective_n = metadata_total
+        n_mode = "per-SNP N from source"
+    elif not binary and metadata_total:
+        out["N"] = metadata_total
+        total_effective_n = metadata_total
+        n_mode = "constant N from config n_total"
+    else:
+        fail(
+            "could not establish an LDSC sample size. Binary traits need N_EFF, NCASE/NCONTROL, "
+            "or cited config ncase/ncontrol; continuous traits need N or cited config n_total."
+        )
+    if total_effective_n is None:
+        total_effective_n = float(out["N"].median())
+    drop(out["N"].isna() | (out["N"] <= 0) | (out["N"] < N_EFF_MIN_FRACTION * total_effective_n), f"N_eff below {N_EFF_MIN_FRACTION:.0%} of total ({total_effective_n:,.1f}) [CDG3]")
+    steps.append((f"sample-size mode: {n_mode}", 0, len(out)))
 
-    if "N" not in out or out["N"].isna().all():
-        if calc_neff is not None:
-            out["N"] = calc_neff
-            log(f"N absent -> using sum of effective N = {calc_neff:,.0f} [CDG3]")
-        else:
-            out["N"] = float(meta["n_total"])
-            log(f"N absent -> using n_total = {float(meta['n_total']):,.0f}")
-
-    for c in ["CHR", "BP", "FRQ", "INFO"]:
-        if c not in out:
-            out[c] = np.nan
-
+    for column in ["FRQ"]:
+        if column not in out:
+            out[column] = np.nan
+    out["CHR"] = out["CHR"].astype(int)
+    out["BP"] = out["BP"].astype(int)
     out = out[["SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"]]
 
     os.makedirs(args.outdir, exist_ok=True)
-    dest = os.path.join(args.outdir, f"{args.trait}.harmonized.tsv.gz")
-    out.to_csv(dest, sep="\t", index=False, na_rep="NA", compression="gzip")
+    output_path = os.path.join(args.outdir, f"{args.trait}.harmonized.tsv.gz")
+    report_path = os.path.join(args.outdir, f"{args.trait}.qc.txt")
+    out.to_csv(output_path, sep="\t", index=False, na_rep="NA", compression="gzip")
 
-    rpt = os.path.join(args.outdir, f"{args.trait}.qc.txt")
-    with open(rpt, "w") as fh:
-        fh.write(f"trait\t{args.trait}\nsource\t{meta.get('source_note', '')}\n")
-        fh.write(f"build\t{meta.get('build', 'hg19')}\n")
-        fh.write(f"n_total\t{meta.get('n_total', 'NA')}\n")
-        if calc_neff is not None:
-            fh.write(f"n_eff\t{calc_neff:.2f}\n")
-        fh.write(f"infile\t{args.infile}\nrows_in\t{n0}\n")
-        fh.write("\nstep\tdropped\tremaining\n")
-        for r, k, rem in steps:
-            fh.write(f"{r}\t{k}\t{rem}\n")
-        fh.write(f"\nrows_out\t{len(out)}\n")
-        fh.write(f"pct_retained\t{100*len(out)/max(n0,1):.2f}\n")
+    with open(report_path, "w", encoding="utf-8") as report:
+        report.write(f"trait\t{args.trait}\n")
+        report.write(f"source\t{metadata.get('source_note', '')}\n")
+        report.write(f"configured_build\t{metadata.get('build', '')}\n")
+        report.write(f"source_build_argument\t{args.source_build or 'not supplied'}\n")
+        report.write(f"infile\t{os.path.abspath(args.infile)}\n")
+        report.write(f"infile_sha256\t{sha256(args.infile)}\n")
+        report.write(f"rows_in\t{n_input}\n")
+        report.write("\nstep\tdropped\tremaining\n")
+        for reason, removed, remaining in steps:
+            report.write(f"{reason}\t{removed}\t{remaining}\n")
+        report.write(f"\nrows_out\t{len(out)}\n")
+        report.write(f"pct_retained\t{100 * len(out) / n_input:.2f}\n")
 
-    log(f"kept {len(out):,} / {n0:,} ({100*len(out)/max(n0,1):.1f}%)")
-    log(f"wrote {dest}")
-    log(f"wrote {rpt}")
+    log(f"kept {len(out):,} / {n_input:,} ({100 * len(out) / n_input:.1f}%)")
+    log(f"wrote {output_path}")
+    log(f"wrote {report_path}")
 
 
 if __name__ == "__main__":
