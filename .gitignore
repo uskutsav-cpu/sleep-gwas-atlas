@@ -1,0 +1,33 @@
+# Generated output. NEVER committed.
+#
+# The rule that motivates this file: a figure that outlives the logs and
+# tables that produced it is an orphan, and an orphan figure with plausible
+# numbers on it is indistinguishable from a real result. Figures are
+# regenerated from logs; if the logs are gone, the figure must be gone too.
+
+results/figures/*.png
+results/figures/*.pdf
+results/logs/*
+results/tables/*
+
+# Synthetic smoke-test output. This directory exists so that fake LDSC logs
+# and real ones can never sit in the same folder. Nothing in it is ever a
+# result, and nothing in it is ever committed.
+results/_smoketest/
+
+# Summary statistics: large, redistribution-restricted, and reproducible
+# from the download step. (Remove these three lines if you decide raw
+# sumstats should be tracked — nothing else here depends on them.)
+data/raw/*
+data/harmonized/*
+data/munged/*
+
+# Keep the directory skeleton so the pipeline's mkdir assumptions hold.
+!.gitkeep
+
+# Tooling
+ldsc/
+ref/
+__pycache__/
+*.pyc
+.DS_Store
