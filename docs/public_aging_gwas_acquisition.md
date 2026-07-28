@@ -9,6 +9,7 @@ matched, and passed through LDSC QC locally.
 | --- | --- | --- | --- |
 | `zenin_2019_healthspan` | `healthspan` | Zenin et al. 2019, PMID 30729179 | [`GCST007406_buildGRCh37.tsv`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST007001-GCST008000/GCST007406/GCST007406_buildGRCh37.tsv) |
 | `timmers_2019_parental_lifespan` | `parental_lifespan` | Timmers et al. 2019, PMID 30642433 | [`lifegen_phase2_bothpl_alldr_2017_09_18.tsv.gz`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST009001-GCST010000/GCST009890/lifegen_phase2_bothpl_alldr_2017_09_18.tsv.gz) |
+| `atkins_2021_frailty_index` | `frailty` | Atkins et al. 2021, PMID 34431594 | [`GCST90020053_buildGRCh37.tsv`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90020001-GCST90021000/GCST90020053/GCST90020053_buildGRCh37.tsv) |
 
 The official GWAS Catalog metadata specifies 300,447 genetically Caucasian
 British UK Biobank participants and names the genome assembly as GRCh37. The
