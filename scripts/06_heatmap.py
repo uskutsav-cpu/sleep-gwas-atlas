@@ -11,15 +11,7 @@ than triangular, because our two axes are different sets of traits.
 
 Every figure carries a provenance footer: the source rg table, its mtime, and
 a hash of its contents. A figure that gets separated from the table that made
-it can then still be traced back — or exposed as untraceable. This exists
-because a previous render of this script survived deletion of its inputs and
-sat in results/figures/ with invented rg values on it, visually
-indistinguishable from a real Figure 2.
-
-Synthetic input additionally requires --provenance-label, which stamps a
-diagonal watermark across the plot area. The footer is for auditing; the
-watermark is because footers get cropped and screenshots get pasted into
-slide decks.
+it can then still be traced back — or exposed as untraceable.
 """
 import argparse
 import hashlib
@@ -33,11 +25,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-DOMAIN_ORDER = ["psychiatric", "neuro", "metabolic", "cardio", "immune",
+DOMAIN_ORDER = ["psychiatric", "neuro", "immune", "metabolic", "cardio",
                 "aging", "cancer"]
 
-# Any rg table living under a directory with this name is synthetic by
-# construction (see make_test_data.py --logs).
 SMOKETEST_DIR = "_smoketest"
 
 
@@ -60,11 +50,9 @@ def main():
     ap.add_argument("--rg", required=True)
     ap.add_argument("--config", default="config/traits.tsv")
     ap.add_argument("--out", required=True)
-    ap.add_argument("--annot", choices=["rg", "none"], default="rg")
+    ap.add_argument("--annot", choices=["rg", "stars", "none"], default="rg")
     ap.add_argument("--provenance-label", default=None,
-                    help="text stamped diagonally across the plot, e.g. "
-                         "'SYNTHETIC — NOT REAL DATA'. Required for any rg "
-                         "table under results/_smoketest/.")
+                    help="text stamped diagonally across the plot area.")
     a = ap.parse_args()
 
     src = Path(a.rg).resolve()
@@ -86,7 +74,7 @@ def main():
     fdr = df.pivot_table(index="sleep_trait", columns="disease_trait",
                          values="fdr", aggfunc="first").reindex_like(mat)
 
-    # order columns by domain so the block structure is visible
+    # Order columns by domain
     cols = sorted(mat.columns,
                   key=lambda c: (DOMAIN_ORDER.index(dom.get(c, "cancer"))
                                  if dom.get(c) in DOMAIN_ORDER else 99, c))
@@ -95,65 +83,78 @@ def main():
     vmax = float(np.nanmax(np.abs(mat.values))) if mat.size else 1.0
     vmax = max(vmax, 0.1)
 
-    fig, ax = plt.subplots(figsize=(1.05 * len(mat.columns) + 3.2,
-                                    0.72 * len(mat.index) + 2.6))
+    n_cols = len(mat.columns)
+    n_rows = len(mat.index)
+
+    # Dynamic sizing for large ~90 trait matrices
+    fig_w = max(10.0, 0.45 * n_cols + 3.5)
+    fig_h = max(6.0, 0.40 * n_rows + 2.5)
+
+    fig, ax = plt.subplots(figsize=(fig_w, fig_h))
     im = ax.imshow(mat.values, cmap="RdBu_r", vmin=-vmax, vmax=vmax,
                    aspect="auto")
 
-    ax.set_xticks(range(len(mat.columns)))
-    ax.set_xticklabels([lab.get(c, c) for c in mat.columns],
-                       rotation=40, ha="right", fontsize=9)
-    ax.set_yticks(range(len(mat.index)))
-    ax.set_yticklabels([lab.get(r, r) for r in mat.index], fontsize=9)
+    lbl_fs = 7 if n_cols > 30 else 9
+    cell_fs = 6 if n_cols > 30 else 8
 
+    ax.set_xticks(range(n_cols))
+    ax.set_xticklabels([lab.get(c, c) for c in mat.columns],
+                       rotation=55, ha="right", fontsize=lbl_fs)
+    ax.set_yticks(range(n_rows))
+    ax.set_yticklabels([lab.get(r, r) for r in mat.index], fontsize=lbl_fs)
+
+    # Annotate cells
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
             v = mat.values[i, j]
             if pd.isna(v):
-                ax.text(j, i, "·", ha="center", va="center", color="0.6")
+                ax.text(j, i, "·", ha="center", va="center", color="0.6", fontsize=cell_fs)
                 continue
-            txt = (f"{v:.2f}\n{stars(fdr.values[i, j])}"
-                   if a.annot == "rg" else stars(fdr.values[i, j]))
-            ax.text(j, i, txt, ha="center", va="center", fontsize=8,
-                    color="white" if abs(v) > 0.6 * vmax else "black")
+            st = stars(fdr.values[i, j])
+            if a.annot == "rg":
+                txt = f"{v:.2f}\n{st}" if n_cols <= 40 else st
+            elif a.annot == "stars":
+                txt = st
+            else:
+                txt = ""
 
-    # domain separators
+            if txt:
+                ax.text(j, i, txt, ha="center", va="center", fontsize=cell_fs,
+                        color="white" if abs(v) > 0.6 * vmax else "black")
+
+    # Domain separators
     prev = None
     for j, c in enumerate(mat.columns):
         d = dom.get(c)
         if prev is not None and d != prev:
-            ax.axvline(j - 0.5, color="black", lw=1.4)
+            ax.axvline(j - 0.5, color="black", lw=1.2)
         prev = d
 
     ax.set_xticks(np.arange(-0.5, len(mat.columns), 1), minor=True)
     ax.set_yticks(np.arange(-0.5, len(mat.index), 1), minor=True)
-    ax.grid(which="minor", color="white", lw=1.2)
+    ax.grid(which="minor", color="white", lw=0.8)
     ax.tick_params(which="minor", length=0)
 
-    cb = fig.colorbar(im, ax=ax, shrink=0.8, pad=0.02)
+    cb = fig.colorbar(im, ax=ax, shrink=0.8, pad=0.015)
     cb.set_label("genetic correlation ($r_g$)", fontsize=9)
     ax.set_title("Sleep/circadian × disease genetic correlation (LDSC)\n"
                  "* FDR<0.05  ** FDR<0.01  *** FDR<0.001",
-                 fontsize=11, pad=12)
+                 fontsize=10, pad=10)
 
     fig.tight_layout()
 
-    # Watermark, tiled so that cropping to any single row still catches it.
-    # Drawn after tight_layout so the axes has its final size, then measured
-    # and shrunk to fit: a fixed point size is either clipped mid-word on a
-    # narrow matrix or lost on a wide one.
     if a.provenance_label:
         wm = [ax.text(0.5, yf, a.provenance_label, transform=ax.transAxes,
-                      rotation=22, ha="center", va="center", fontsize=26,
+                      rotation=20, ha="center", va="center", fontsize=24,
                       fontweight="bold", color="crimson", alpha=0.28,
                       zorder=5, clip_on=True)
-              for yf in (0.16, 0.50, 0.84)]
+              for yf in (0.20, 0.50, 0.80)]
         fig.canvas.draw()
         avail = ax.get_window_extent().width * 0.94
         got = wm[0].get_window_extent().width
         if got > avail:
             for t in wm:
-                t.set_fontsize(max(8.0, 26.0 * avail / got))
+                t.set_fontsize(max(8.0, 24.0 * avail / got))
 
     prov = provenance(a.rg)
     footer = f"{a.provenance_label}  |  {prov}" if a.provenance_label else prov
