@@ -287,3 +287,37 @@ Nalls 2019's full meta-analysis includes a 23andMe component. GCST009324 is
 the PD-only European stratum and is openly hosted, which implies it is the
 public release — but that was **not** independently confirmed this pass.
 Recorded as a flag, not a resolved fact.
+
+---
+
+## 11. Fourth pass — hdl, sbp; the sbp blocker is resolved
+
+**CURATED 12 -> 14.**
+
+### sbp — blocker cleared by replacing the source
+
+`sbp` was `UNAVAILABLE` because no primary PMID for Evangelou 2018 could be
+verified (search reached only a Publisher Correction). Rather than keep
+hunting for an unverifiable citation, the trait was moved to a **better and
+citable** source:
+
+**Keaton 2024 (PMID 38689001, NCBI-verified), GCST90310294** — systolic blood
+pressure, European, N ~1,028,980, full summary statistics openly downloadable.
+Larger than the Evangelou release and requires no access gate. Build verified
+GRCh37, 9/9 anchors.
+
+The lesson generalises: when a citation cannot be verified, replacing the
+source is often cleaner than trying to rescue it. An unverifiable PMID is a
+permanent liability in a methods section.
+
+### hdl — an alias gap, not a data problem
+
+The GLGC file first returned INDETERMINATE. Cause: its position column is
+`POS_b37`, which was not in the parser's alias list, so the checker fell
+through to coordinate-marker mode and found nothing to match. Adding
+`POS_b37`-style aliases resolved it — GRCh37, 9/9 anchors.
+
+Worth stating explicitly: **`POS_b37` names a build in the column header, and
+that is a hint, never the verdict.** The check still decides from coordinate
+values. A file could carry that column name and hold hg38 positions; this
+project's rule 4 exists precisely for that case.

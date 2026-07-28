@@ -114,8 +114,13 @@ def check_build(path, max_lines=60_000_000):
         return None
     i_rs = find({"snp", "rsid", "rs_id", "variant_id", "markername", "snpid",
                  "marker", "id", "rs"})
+    # NOTE: some releases name the build in the column (GLGC uses POS_b37).
+    # That is a hint, never the verdict -- the coordinate check below still
+    # decides the build from the values themselves.
     i_bp = find({"bp", "pos", "position", "base_pair_location", "bp_hg19",
-                 "pos_hg19", "bpos", "chrompos", "genpos"})
+                 "pos_hg19", "bpos", "chrompos", "genpos", "pos_b37",
+                 "pos_b38", "bp_b37", "bp_b38", "pos_grch37", "pos_grch38",
+                 "position_b37", "physical_position"})
     i_chr = find({"chr", "chrom", "chromosome", "#chrom", "chr_id", "#chr"})
 
     # Some releases carry no rsID and no separate position column: the marker
