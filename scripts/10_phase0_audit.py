@@ -90,7 +90,7 @@ def open_any(path):
     return open(path, errors="replace")
 
 
-def check_build(path, max_lines=4_000_000):
+def check_build(path, max_lines=60_000_000):
     """Decide GRCh37 vs GRCh38 from coordinates in the file itself.
 
     Not from the filename. Scans for anchor rsIDs and compares the recorded
@@ -204,8 +204,9 @@ def check_build(path, max_lines=4_000_000):
             elif key in p38:
                 h38 += 1; seen += 1
         if seen:
+            conf = "" if seen >= 3 else "  [LOW CONFIDENCE: <3 anchors seen]"
             if h19 and not h38:
-                return (f"GRCh37 ({h19}/{seen} anchors matched hg19 on chr+pos)",
+                return (f"GRCh37 ({h19}/{seen} anchors matched hg19 on chr+pos){conf}",
                         h19, h38), member
             if h38 and not h19:
                 return (f"GRCh38 ({h38}/{seen} anchors matched hg38 on chr+pos)",

@@ -249,3 +249,41 @@ registry also now stores true on-disk byte counts rather than HEAD estimates.
   density artefact seen earlier with the IIBDGC files.
 
 All nine curated files were re-verified after these changes: no regressions.
+
+---
+
+## 10. Third pass — stroke, parkinson, ms
+
+**CURATED 9 -> 12.** All three downloaded, build-verified GRCh37 from file
+contents, SHA-256 recorded.
+
+| trait | accession | build evidence |
+|---|---|---|
+| stroke | GCST90104539, Mishra 2022 GIGASTROKE, PMID 36180795 | GRCh37, 7/7 anchors |
+| parkinson | GCST009324, Nalls 2019, PMID 31701892 | GRCh37, 9/9 anchors (deep scan) |
+| ms | GCST003566, Andlauer 2016, PMID 27386562 | GRCh37, 4/4 anchors |
+
+`ms` succeeded on the third attempt after two truncations at 61%. The
+truncation guard discarded both partials rather than promoting them, so no
+bad file ever reached the registry.
+
+### A sampling weakness the parkinson file exposed
+
+At the previous 4M-line scan depth, `parkinson` matched only **one** anchor.
+A single match is not proof of build — it is one coincidence away from being
+wrong. A deep scan found 9/9. Two changes followed:
+
+- default scan depth raised from 4M to 60M lines, so anchors late in a
+  coordinate-sorted file are actually reached;
+- any verdict resting on fewer than 3 anchors is now labelled
+  **LOW CONFIDENCE** in the output rather than reported as settled.
+
+The general point: this check can fail *quietly* by sampling too little, which
+is the same class of error as a truncated download that keeps its final name.
+
+### Open flag on parkinson
+
+Nalls 2019's full meta-analysis includes a 23andMe component. GCST009324 is
+the PD-only European stratum and is openly hosted, which implies it is the
+public release — but that was **not** independently confirmed this pass.
+Recorded as a flag, not a resolved fact.
