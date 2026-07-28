@@ -1,0 +1,16 @@
+# Discriminating build anchors: SNPs whose GRCh37 and GRCh38 positions differ by >=1kb.
+# Alleles are included because position alone does NOT discriminate in a densely
+# imputed file - a variant exists at both builds' coordinates. A match must agree
+# on position AND alleles.
+# Source: Ensembl REST /variation/human/<rsid>, grch37.rest.ensembl.org and
+# rest.ensembl.org, fetched 2026-07-28. Not hand-entered.
+rsid	chr	pos_hg19	pos_hg38	alleles
+rs7412	19	45412079	44908822	C/T
+rs429358	19	45411941	44908684	C/T
+rs1801133	1	11856378	11796321	A/C/G
+rs9939609	16	53820527	53786615	A/T
+rs4988235	2	136608646	135851076	A/C/G/T
+rs6025	1	169519049	169549811	A/C/T
+rs1051730	15	78894339	78601997	A/G
+rs2476601	1	114377568	113834946	A/G/T
+rs3184504	12	111884608	111446804	A/C/G/T
