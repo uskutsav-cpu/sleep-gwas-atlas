@@ -66,7 +66,6 @@ def make(n=60000, style="beta"):
         df["BETA"] = beta
 
     # --- inject dirt ---------------------------------------------------------
-    snpcol = "MarkerName" if "MarkerName" in df else "SNP"
     a1col = "Effect_allele" if "Effect_allele" in df else "A1"
     a2col = "Other_allele" if "Other_allele" in df else "A2"
     pcol = "P-value" if "P-value" in df else "P"
@@ -81,54 +80,51 @@ def make(n=60000, style="beta"):
 
 
 # --- synthetic LDSC logs ------------------------------------------------------
-#
-# h2 logs. Two of these are engineered to FAIL the QC gate, by the two
-# different mechanisms that CLAUDE.md insists must never be conflated:
-#   longsleep  -> Z = 0.012/0.006 = 2.0, intercept fine  -> underpowered
-#   shortsleep -> Z = 0.040/0.008 = 5.0, intercept 1.35  -> confounded
-# A gate that only ever sees passing traits has not been tested.
-#
-# (trait, scale, h2, se, intercept, int_se, lambda_gc, mean_chi2, ratio)
-H2_ROWS = [
-    ("insomnia",   "Liability", 0.0800, 0.0050, 1.0150, 0.0090, 1.0940, 1.1520, 0.0987),
-    ("sleepdur",   "Observed",  0.0900, 0.0060, 1.0200, 0.0085, 1.1010, 1.1740, 0.1149),
-    ("chronotype", "Liability", 0.1200, 0.0070, 1.0100, 0.0092, 1.1330, 1.2210, 0.0452),
-    ("sleepiness", "Observed",  0.0600, 0.0045, 1.0300, 0.0088, 1.0720, 1.1080, 0.2778),
-    ("mdd",        "Liability", 0.0900, 0.0055, 1.0250, 0.0095, 1.1120, 1.1900, 0.1316),
-    ("t2d",        "Liability", 0.1100, 0.0065, 1.0400, 0.0101, 1.1560, 1.2650, 0.1509),
-    ("cad",        "Liability", 0.0700, 0.0050, 1.0350, 0.0098, 1.0980, 1.1620, 0.2160),
-    ("longsleep",  "Liability", 0.0120, 0.0060, 1.0080, 0.0087, 1.0110, 1.0190, 0.4211),
-    ("shortsleep", "Liability", 0.0400, 0.0080, 1.3500, 0.0140, 1.4020, 1.4800, 0.7292),
-]
 
-# rg grid, 4 sleep x 3 disease. rg sweeps a straight arithmetic ramp from
-# -0.45 to +0.43 in steps of 0.08 (row-major). This is a gradient, not a
-# result: it is instantly recognisable as artificial, while still driving
-# both halves of the diverging colorbar.
-#
-# The z values are chosen so that after BH-FDR across all 12 pairs the star
-# annotations come out 4x'***', 2x'**', 2x'*' and 4x blank -- every branch of
-# stars() in 06_heatmap.py, including the blank path that a matrix of
-# uniformly-significant fake numbers never reaches.
-RG_SLEEP = ["chronotype", "insomnia", "sleepdur", "sleepiness"]
-RG_DISEASE = ["mdd", "t2d", "cad"]
-RG_VALUES = [-0.45, -0.37, -0.29,
-             -0.21, -0.13, -0.05,
-              0.03,  0.11,  0.19,
-              0.27,  0.35,  0.43]
-RG_Z = [-6.0, -4.5, -3.1,
-        -2.4, -1.2, -0.4,
-         0.3,  1.1,  2.2,
-         3.4,  5.0,  7.0]
-
-RG_HEADER = ("p1 p2 rg se z p h2_obs h2_obs_se h2_int h2_int_se "
-             "gcov_int gcov_int_se")
+# Baseline h2 values for problem comparison and standard traits
+PROBLEM_H2 = {
+    "insomnia":          ("Liability", 0.0800, 0.0050, 1.0150, 0.0090, 1.0940, 1.1520, 0.0987),
+    "insomnia_ukb":      ("Liability", 0.0800, 0.0050, 1.0150, 0.0090, 1.0940, 1.1520, 0.0987),
+    "insomnia_full":     ("Liability", 0.0750, 0.0027, 1.0250, 0.0095, 1.1820, 1.3400, 0.0735),
+    "sleepdur":          ("Observed",  0.0900, 0.0060, 1.0200, 0.0085, 1.1010, 1.1740, 0.1149),
+    "shortsleep":        ("Liability", 0.0400, 0.0080, 1.3500, 0.0140, 1.4020, 1.4800, 0.7292),
+    "shortsleep_dashti": ("Liability", 0.0400, 0.0080, 1.3500, 0.0140, 1.4020, 1.4800, 0.7292),
+    "shortsleep_az":     ("Liability", 0.0250, 0.0060, 1.0500, 0.0110, 1.1200, 1.1900, 0.2500),
+    "longsleep":         ("Liability", 0.0120, 0.0060, 1.0080, 0.0087, 1.0110, 1.0190, 0.4211),
+    "longsleep_dashti":  ("Liability", 0.0120, 0.0060, 1.0080, 0.0087, 1.0110, 1.0190, 0.4211),
+    "longsleep_az":      ("Liability", 0.0080, 0.0053, 1.0050, 0.0085, 1.0080, 1.0120, 0.4167),
+}
 
 
-def write_h2_logs(outdir):
-    """One h2_<trait>.log per trait, in the shape 05_collate.py parses."""
+def load_traits_config(config_path="config/traits.tsv"):
+    if os.path.exists(config_path):
+        return pd.read_csv(config_path, sep="\t")
+    return None
+
+
+def write_h2_logs(outdir, config_path="config/traits.tsv"):
+    """One h2_<trait>.log per trait in config/traits.tsv."""
+    df_config = load_traits_config(config_path)
+    if df_config is not None:
+        traits = df_config["trait_id"].tolist()
+    else:
+        traits = list(PROBLEM_H2.keys())
+
     written = []
-    for trait, scale, h2, se, icept, icept_se, lam, chi2, ratio in H2_ROWS:
+    for idx, trait in enumerate(traits):
+        if trait in PROBLEM_H2:
+            scale, h2, se, icept, icept_se, lam, chi2, ratio = PROBLEM_H2[trait]
+        else:
+            scale = "Liability" if "continuous" not in str(df_config.loc[df_config["trait_id"]==trait, "type"].values[0]) else "Observed"
+            # Deterministic, plausible synthetic values across 90 traits
+            h2 = 0.05 + 0.001 * (idx % 25)
+            se = 0.004 + 0.0001 * (idx % 10)
+            icept = 1.01 + 0.002 * (idx % 15)
+            icept_se = 0.008
+            lam = 1.08 + 0.005 * (idx % 20)
+            chi2 = 1.12 + 0.01 * (idx % 20)
+            ratio = 0.10 + 0.01 * (idx % 15)
+
         body = (
             f"{SMOKE_BANNER}\n"
             f"Call: ldsc.py --h2 SYNTHETIC/{trait}.sumstats.gz\n\n"
@@ -145,29 +141,43 @@ def write_h2_logs(outdir):
     return written
 
 
-def write_rg_logs(outdir):
-    """One rg_<sleeptrait>.log per sleep trait, mirroring 04_rg.sh, which
-    calls LDSC once per sleep trait against a comma-separated disease list."""
+def write_rg_logs(outdir, config_path="config/traits.tsv"):
+    """One rg_<sleeptrait>.log per sleep trait, running against all disease traits."""
     from scipy.stats import norm
 
+    df_config = load_traits_config(config_path)
+    if df_config is not None:
+        sleep_traits = df_config[df_config["domain"] == "sleep"]["trait_id"].tolist()
+        disease_traits = df_config[df_config["domain"] != "sleep"]["trait_id"].tolist()
+    else:
+        sleep_traits = ["insomnia", "sleepdur", "chronotype", "sleepiness"]
+        disease_traits = ["mdd", "scz", "alz", "t2d", "bmi", "cad"]
+
     written = []
-    for i, s in enumerate(RG_SLEEP):
+    rg_header = ("p1 p2 rg se z p h2_obs h2_obs_se h2_int h2_int_se "
+                 "gcov_int gcov_int_se")
+
+    for i, s in enumerate(sleep_traits):
         rows = []
-        for j, d in enumerate(RG_DISEASE):
-            k = i * len(RG_DISEASE) + j
-            rg, z = RG_VALUES[k], RG_Z[k]
-            se = abs(rg / z)
-            p = 2 * norm.sf(abs(z))
+        for j, d in enumerate(disease_traits):
+            k = (i * len(disease_traits) + j)
+            # Deterministic calculation spanning -0.45 to +0.45
+            rg_val = -0.45 + (k % 40) * 0.023
+            if rg_val > 0.45: rg_val = 0.45
+            z_val = rg_val * 12.0
+            if abs(z_val) < 0.1: z_val = 0.2
+            se = abs(rg_val / z_val) if z_val != 0 else 0.05
+            p = 2 * norm.sf(abs(z_val))
             rows.append(
                 f"SYNTHETIC/{s}.sumstats.gz SYNTHETIC/{d}.sumstats.gz "
-                f"{rg:.4f} {se:.4f} {z:.4f} {p:.4g} "
+                f"{rg_val:.4f} {se:.4f} {z_val:.4f} {p:.4g} "
                 f"0.0900 0.0055 1.0250 0.0095 0.0041 0.0060"
             )
         body = (
             f"{SMOKE_BANNER}\n"
             f"Call: ldsc.py --rg SYNTHETIC/{s}.sumstats.gz,...\n\n"
             "Summary of Genetic Correlation Results\n"
-            f"{RG_HEADER}\n" + "\n".join(rows) + "\n\n"
+            f"{rg_header}\n" + "\n".join(rows) + "\n\n"
             "Analysis finished.\n"
         )
         path = os.path.join(outdir, f"rg_{s}.log")
@@ -181,6 +191,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/raw",
                     help="destination for raw sumstats")
+    ap.add_argument("--config", default="config/traits.tsv",
+                    help="path to traits.tsv configuration")
     ap.add_argument("--logs", action="store_true",
                     help="write synthetic LDSC h2/rg logs to --logdir")
     ap.add_argument("--logdir", default="results/_smoketest",
@@ -198,18 +210,10 @@ if __name__ == "__main__":
 
     if a.logs:
         os.makedirs(a.logdir, exist_ok=True)
-        for p in write_h2_logs(a.logdir) + write_rg_logs(a.logdir):
-            print(f"wrote {p}")
-        print(f"\n{len(H2_ROWS)} h2 logs + {len(RG_SLEEP)} rg logs in {a.logdir}")
-        print("Every value in them is fabricated. Next:")
-        print(f"  python3 scripts/05_collate.py --mode h2 --logdir {a.logdir} "
-              f"--out {a.logdir}/h2_summary.tsv")
-        print(f"  python3 scripts/05_collate.py --mode rg --logdir {a.logdir} "
-              f"--out {a.logdir}/rg_matrix.tsv")
-        print(f"  python3 scripts/06_heatmap.py --rg {a.logdir}/rg_matrix.tsv \\")
-        print('      --config config/traits.tsv \\')
-        print(f'      --out {a.logdir}/fig2_smoketest.png \\')
-        print('      --provenance-label "SYNTHETIC — NOT REAL DATA"')
+        h2_written = write_h2_logs(a.logdir, a.config)
+        rg_written = write_rg_logs(a.logdir, a.config)
+        print(f"Wrote {len(h2_written)} h2 logs + {len(rg_written)} rg logs in {a.logdir}")
+        print("Every value in them is fabricated to test the 90-trait pipeline.")
 
     if a.raw or not a.logs:
         os.makedirs(a.out, exist_ok=True)
