@@ -115,6 +115,9 @@ if [ "$MODE" = --download ]; then
       --results "$ARCHIVE" --variants "$NEALE_VARIANTS" --verify-only
   elif [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
     "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --verify-only
+  elif [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
+    "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
+      --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --verify-only
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   elif [ "$archive_member" = "DIRECT_GZIP" ]; then
@@ -150,6 +153,25 @@ if [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
   "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --verify-only
   if [ ! -s "$PRIMARY" ]; then
     "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
+if [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: PHELAN_2017_OVARIAN_OVERALL_RSID must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
+    --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --verify-only
+  if [ ! -s "$PRIMARY" ]; then
+    "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
+      --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --out "$PRIMARY"
   fi
   gzip -t "$PRIMARY"
   echo "Materialized $source_id"
