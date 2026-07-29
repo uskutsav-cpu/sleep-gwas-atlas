@@ -40,7 +40,7 @@ OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          # expansion
          "als", "lupus", "atopic_dermatitis", "allergy", "heart_failure",
          "dbp", "pulse_pressure", "fasting_glucose", "fasting_insulin",
-         "hba1c", "whr"]
+         "hba1c", "whr", "cognitive_performance", "psoriasis"]
 
 VALID_ACCESS = {"PUBLIC", "REGISTRATION", "CONTROLLED", "UNAVAILABLE"}
 MIN_DELTA = 1000        # anchors closer than this do not discriminate builds
@@ -340,6 +340,14 @@ def audit_traits(traits, sources, block_only):
                                   f"proven from the file)")
                 if s["sha256"] in ("", "NA", "PENDING", "NOT_DOWNLOADED"):
                     issue("GATE", f"{tid}: CURATED but no SHA-256 recorded")
+                # A file can be public, EUR, hg19 and hashed and still be
+                # useless: an Immunochip or coding-variant release has far too
+                # few SNPs for LDSC. Two traits (t2d, psoriasis) passed every
+                # other check and failed only here.
+                nv = (s.get("n_variants") or "").strip()
+                if nv.isdigit() and int(nv) < 1_000_000:
+                    issue("GATE", f"{tid}: CURATED but only {int(nv):,} variants "
+                                  f"-- not genome-wide (LDSC needs ~1.2M HapMap3 SNPs)")
                 local = os.path.join("data/raw", s["local_file"])
                 if s["local_file"] in ("NA", "") or not os.path.exists(local):
                     issue("GATE", f"{tid}: CURATED but local file missing "
