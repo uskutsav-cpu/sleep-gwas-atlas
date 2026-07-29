@@ -127,7 +127,8 @@ def check_build(path, max_lines=60_000_000):
                 return i
         return None
     i_rs = find({"snp", "rsid", "rs_id", "variant_id", "markername", "snpid",
-                 "marker", "id", "rs"})
+                 "marker", "id", "rs", "chr:position", "chr:pos", "chrpos",
+                 "chr_pos", "chrposition"})
     # NOTE: some releases name the build in the column (GLGC uses POS_b37).
     # That is a hint, never the verdict -- the coordinate check below still
     # decides the build from the values themselves.
@@ -156,18 +157,35 @@ def check_build(path, max_lines=60_000_000):
         pos19 = {f"{c}:{p19}": set(al.split("/")) for _, c, p19, _, al in anchors}
         pos38 = {f"{c}:{p38}": set(al.split("/")) for _, c, _, p38, al in anchors}
         h19 = h38 = seen = 0
+        # Two marker shapes occur. Either the alleles are appended to the
+        # coordinate ("1:100000012_G_T"), or the marker is a bare coordinate
+        # ("10:100012345") with the alleles in their own columns. Both need the
+        # allele check, so support both rather than only the first.
         rxc = re.compile(r"^(?:chr)?(\d{1,2}|X|Y):(\d+)[_:]([ACGTacgt]+)[_:]([ACGTacgt]+)")
+        rxb = re.compile(r"^(?:chr)?(\d{1,2}|X|Y):(\d+)$")
+        j_a1 = find({"a1", "allele1", "effect_allele", "ea", "alt",
+                     "tested_allele", "effectallele", "coded_allele"})
+        j_a2 = find({"a2", "allele2", "other_allele", "nea", "ref", "oa",
+                     "non_effect_allele", "otherallele", "non_coded_allele"})
         for n, line in enumerate(fh):
             if n > max_lines:
                 break
             f = line.split(sep) if sep else line.split()
             if len(f) <= i_rs:
                 continue
-            m = rxc.match(clean(f[i_rs]))
-            if not m:
-                continue
-            key = f"{m.group(1)}:{m.group(2)}"
-            obs = {m.group(3).upper(), m.group(4).upper()}
+            tok = clean(f[i_rs])
+            m = rxc.match(tok)
+            if m:
+                key = f"{m.group(1)}:{m.group(2)}"
+                obs = {m.group(3).upper(), m.group(4).upper()}
+            else:
+                m = rxb.match(tok)
+                if not m or j_a1 is None or j_a2 is None:
+                    continue
+                if len(f) <= max(j_a1, j_a2):
+                    continue
+                key = f"{m.group(1)}:{m.group(2)}"
+                obs = {clean(f[j_a1]).upper(), clean(f[j_a2]).upper()}
             if key in pos19 and obs <= pos19[key]:
                 h19 += 1; seen += 1
             elif key in pos38 and obs <= pos38[key]:
