@@ -98,10 +98,14 @@ def main():
     i = {c: n for n, c in enumerate(h)}
 
     if a.reconcile:
+        # Build + variant count are not sufficient evidence on their own: a
+        # run killed between verifying and hashing leaves both set with no
+        # sha256, and promoting on that would claim more than was proven.
         good = [r[i["trait_id"]] for r in rows[1:]
                 if r[i["build_verified"]] == "GRCh37"
                 and str(r[i["n_variants"]]).isdigit()
-                and int(r[i["n_variants"]]) >= MIN_VARIANTS]
+                and int(r[i["n_variants"]]) >= MIN_VARIANTS
+                and r[i["sha256"]] not in ("", "NA", "PENDING")]
         _promote(good)
         print(f"reconciled: {len(good)} traits promoted from registry evidence")
         return
