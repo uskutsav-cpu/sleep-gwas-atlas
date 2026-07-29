@@ -113,7 +113,13 @@ def check_build(path, max_lines=60_000_000):
     header = next(fh).rstrip("\n")
     sep = "\t" if header.count("\t") >= 2 else (
         "," if header.count(",") >= 2 else None)
-    cols = [c.strip().lower() for c in (header.split(sep) if sep else header.split())]
+    # Some releases quote their header fields ("rsid", "chromosome"). Strip
+    # quotes and whitespace, or every alias lookup silently misses.
+    cols = [c.strip().strip('"').strip("'").lower()
+            for c in (header.split(sep) if sep else header.split())]
+    def clean(v):
+        return v.strip().strip('"').strip("'")
+
     def find(names):
         for i, c in enumerate(cols):
             if c in names:
@@ -156,7 +162,7 @@ def check_build(path, max_lines=60_000_000):
             f = line.split(sep) if sep else line.split()
             if len(f) <= i_rs:
                 continue
-            m = rxc.match(f[i_rs].strip())
+            m = rxc.match(clean(f[i_rs]))
             if not m:
                 continue
             key = f"{m.group(1)}:{m.group(2)}"
@@ -185,9 +191,11 @@ def check_build(path, max_lines=60_000_000):
         # a dense file has a variant at both builds' positions, so position
         # alone produces a false CONFLICT.
         i_a1 = find({"a1", "allele1", "effect_allele", "ea", "alt",
-                     "tested_allele", "effectallele"})
+                     "tested_allele", "effectallele", "coded_allele",
+                     "risk_allele"})
         i_a2 = find({"a2", "allele2", "other_allele", "nea", "ref",
-                     "non_effect_allele", "otherallele"})
+                     "non_effect_allele", "otherallele", "oa",
+                     "baseline_allele", "non_coded_allele"})
         p19 = {(c, p): set(al.split("/")) for _, c, p, _, al in anchors}
         p38 = {(c, p): set(al.split("/")) for _, c, _, p, al in anchors}
         h19 = h38 = seen = 0
@@ -198,15 +206,15 @@ def check_build(path, max_lines=60_000_000):
             if len(f) <= max(i_chr, i_bp):
                 continue
             try:
-                key = (str(f[i_chr]).strip().replace("chr", ""),
-                       int(float(f[i_bp])))
+                key = (clean(str(f[i_chr])).replace("chr", ""),
+                       int(float(clean(f[i_bp]))))
             except ValueError:
                 continue
             if key not in p19 and key not in p38:
                 continue
             ok = True
             if i_a1 is not None and i_a2 is not None and len(f) > max(i_a1, i_a2):
-                obs = {f[i_a1].strip().upper(), f[i_a2].strip().upper()}
+                obs = {clean(f[i_a1]).upper(), clean(f[i_a2]).upper()}
                 exp = p19.get(key) or p38.get(key)
                 ok = obs <= exp
             if not ok:
@@ -233,11 +241,11 @@ def check_build(path, max_lines=60_000_000):
         f = line.split(sep) if sep else line.split()
         if len(f) <= max(i_rs, i_bp):
             continue
-        rs = f[i_rs].strip()
+        rs = clean(f[i_rs])
         if rs not in by_rs:
             continue
         try:
-            bp = int(float(f[i_bp]))
+            bp = int(float(clean(f[i_bp])))
         except ValueError:
             continue
         seen += 1
