@@ -321,3 +321,47 @@ Worth stating explicitly: **`POS_b37` names a build in the column header, and
 that is a hint, never the verdict.** The check still decides from coordinate
 values. A file could carry that column name and hold hg38 positions; this
 project's rule 4 exists precisely for that case.
+
+---
+
+## 12. Final state of this block — 17 of 21 curated
+
+Every publicly obtainable trait in the neuro / immune / cardiometabolic block
+is now downloaded, build-verified from file contents, hashed and curated.
+13 GB of raw summary statistics in `data/raw/`, none of it committed.
+
+**CURATED (17):** ibd, crohn, uc, ra, asthma, ms, mdd, bipolar, parkinson,
+bmi, hdl, ldl, triglycerides, cad, stroke, atrial_fibrillation, sbp
+
+All 17 verified **GRCh37 from coordinate values**, never from filenames.
+
+### The 4 that remain, and why none is a matter of more effort
+
+| trait | blocker | route |
+|---|---|---|
+| **alz** | Source is GRCh38-only (Bellenguez 2022). Rule 4 forbids silent liftover. Also contains proxy cases. | Owner decision on liftover, or find a GRCh37 AD release |
+| **t2d** | Open substitute (Xue 2018) downloaded and build-verified, then **rejected**: 194,633 variants is a coding-variant subset, not genome-wide. LDSC needs ~1.2M HapMap3 SNPs. | DIAGRAM access request for Mahajan 2022 |
+| **scz** | No open full p-value set. Tested 5 candidate PMIDs. | PGC terms gate |
+| **adhd** | No open full p-value set. Tested 3 candidate PMIDs. | PGC/iPSYCH terms gate |
+
+Two of these need a human to accept terms; one needs a scientific decision;
+one is a dead end that was correctly identified as such **after** downloading
+and inspecting the file rather than assumed from metadata.
+
+### What this block contributes to the 45-trait panel
+
+17 curated, but `crohn` and `uc` are contained within `ibd` and should not all
+three enter the final panel. Recommended contribution: **15 independent
+traits**, with the lipid trio flagged as sample-overlapping (one cohort of
+1,320,016) rather than independent.
+
+### Verification record
+
+Nothing here rests on a filename, a metadata field, or another agent's claim:
+
+- 20 of 21 PMIDs verified against NCBI (`sbp` replaced rather than guessed)
+- every source located through the GWAS Catalog REST API, EUR stratum chosen
+  deliberately where a publication maps to several accessions
+- every build proven from coordinates plus allele agreement
+- every downloaded file SHA-256'd, with true on-disk byte counts
+- every population prevalence set to `UNKNOWN`, because not one had a citation
