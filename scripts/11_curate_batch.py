@@ -63,12 +63,32 @@ def count_variants(path):
         return -1
 
 
+def _promote(done):
+    """Mark the given trait_ids CURATED in traits.tsv, idempotently."""
+    if not done:
+        return
+    trows = read(TRAITS)
+    j = {c: n for n, c in enumerate(trows[0])}
+    for r in trows[1:]:
+        if r[j["trait_id"]] in done:
+            r[j["status"]] = "CURATED"
+            r[j["build"]] = "hg19"
+            if r[j["type"]] == "binary" and r[j["pop_prev"]] not in ("NA", "UNKNOWN"):
+                r[j["pop_prev"]] = "UNKNOWN"
+    write(TRAITS, trows)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--trait", nargs="*", default=None)
     ap.add_argument("--pending", action="store_true",
                     help="every PUBLIC row whose build_verified is PENDING")
     ap.add_argument("--evict", action="store_true")
+    ap.add_argument("--reconcile", action="store_true",
+                    help="promote from registry evidence alone. A killed batch "
+                         "still wrote build_verified and n_variants per row, so "
+                         "the promotions can always be rebuilt without "
+                         "re-downloading anything.")
     ap.add_argument("--budget-gb", type=float, default=None,
                     help="stop once this much has been downloaded this run")
     a = ap.parse_args()
@@ -76,6 +96,15 @@ def main():
     rows = read(REG)
     h = rows[0]
     i = {c: n for n, c in enumerate(h)}
+
+    if a.reconcile:
+        good = [r[i["trait_id"]] for r in rows[1:]
+                if r[i["build_verified"]] == "GRCh37"
+                and str(r[i["n_variants"]]).isdigit()
+                and int(r[i["n_variants"]]) >= MIN_VARIANTS]
+        _promote(good)
+        print(f"reconciled: {len(good)} traits promoted from registry evidence")
+        return
 
     if a.pending:
         targets = [r for r in rows[1:]
@@ -129,6 +158,10 @@ def main():
                                  "disk. url+sha256+bytes recorded, so it is exactly "
                                  "reproducible. " + r[i["notes"]])
         write(REG, rows)
+        # Promote incrementally. Writing traits.tsv only at the end means a
+        # killed run loses every promotion it had already earned -- and long
+        # batches do get killed.
+        _promote(done)
 
     if done:
         trows = read(TRAITS)

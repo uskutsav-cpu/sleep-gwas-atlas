@@ -41,7 +41,7 @@ OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          "als", "lupus", "atopic_dermatitis", "allergy", "heart_failure",
          "dbp", "pulse_pressure", "fasting_glucose", "fasting_insulin",
          "hba1c", "whr", "cognitive_performance", "psoriasis", "nafld",
-         "educational_attainment", "leptin", "obesity", "vte", "hypertension"]
+         "educational_attainment", "leptin", "obesity", "vte", "hypertension"] + ['alt', 'ankylosing_spondylitis', 'bilirubin', 'birth_weight', 'celiac', 'chronic_pain', 'ckd', 'copd', 'diverticular', 'egfr', 'endometriosis', 'epilepsy', 'fev1', 'ggt', 'glaucoma', 'gout', 'heart_rate', 'hemoglobin', 'hypothyroidism', 'ibs', 'igf1', 'intelligence', 'macular_degeneration', 'migraine', 'monocyte_count', 'neuroticism', 'neutrophil_count', 'osteoarthritis', 'osteoporosis', 'platelet_count', 'qt_interval', 'rbc_count', 'risk_tolerance', 'sarcoidosis', 'shbg', 't1d', 'testosterone', 'tsh', 'urate', 'vitamin_d', 'vitiligo', 'wbc_count']
 
 VALID_ACCESS = {"PUBLIC", "REGISTRATION", "CONTROLLED", "UNAVAILABLE"}
 MIN_DELTA = 1000        # anchors closer than this do not discriminate builds
