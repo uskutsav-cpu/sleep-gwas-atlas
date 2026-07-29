@@ -103,11 +103,16 @@ def materialize(source: Path, output: Path) -> None:
                 with archive.open(member, "r") as binary_handle, io.TextIOWrapper(
                     binary_handle, encoding="utf-8", newline=""
                 ) as source_handle:
-                    reader = csv.DictReader(source_handle, delimiter="\t")
-                    if reader.fieldnames is None or any(
-                        column not in reader.fieldnames for column in REQUIRED_COLUMNS
+                    header = source_handle.readline()
+                    delimiter = "\t" if header.count("\t") >= header.count(",") else ","
+                    fieldnames = next(csv.reader([header], delimiter=delimiter), None)
+                    if fieldnames is None or any(
+                        column not in fieldnames for column in REQUIRED_COLUMNS
                     ):
-                        fail(f"unexpected header in {member}: {reader.fieldnames}")
+                        fail(f"unexpected header in {member}: {fieldnames}")
+                    reader = csv.DictReader(
+                        source_handle, fieldnames=fieldnames, delimiter=delimiter
+                    )
                     for line_number, row in enumerate(reader, start=2):
                         total += 1
                         if total % 1_000_000 == 0:
