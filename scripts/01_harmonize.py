@@ -67,9 +67,9 @@ ALIASES = {
              "a2_other", "noneffect_allele", "noncoded_allele", "otherallele",
              "baseline_allele", "non_coded_allele"],
     "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf",
-             "a1freq", "freq1", "freq_a1", "af_alt", "af_coded",
-             "eaf_hapmap", "allelefreq", "af", "coded_af", "alt_af",
-             "effect_allele_freq", "frq_a1", "a1_freq"],
+             "a1freq", "freq1", "effect_allele_freq", "eaf_ukb",
+             "freq_tested_allele", "freq_tested_allele_in_hrs",
+             "pooled_alt_af", "af_allele2", "all_meta_af"],
     "BETA": ["beta", "effect", "b", "log_odds", "logor", "effect_size",
              "est", "all_inv_var_meta_beta", "frequentist_add_beta_1",
              "meta_beta", "gwas_beta", "effect_weight"],
@@ -280,7 +280,16 @@ def main():
         if c not in out:
             out[c] = np.nan
 
-    out = out[["SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"]]
+    # An all-missing FRQ column is worse than no column at all: LDSC's
+    # munge_sumstats applies --maf-min to it, every value is NA, and the merge
+    # silently drops EVERY SNP ("No objects to concatenate"). Emit the column
+    # only when it carries data, and record the decision in the ledger.
+    cols = ["SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"]
+    if "FRQ" not in out or out["FRQ"].notna().sum() == 0:
+        cols.remove("FRQ")
+        steps.append(("FRQ entirely missing — column omitted so that munge "
+                      "does not MAF-filter every SNP away", 0, len(out)))
+    out = out[cols]
 
     os.makedirs(args.outdir, exist_ok=True)
     dest = os.path.join(args.outdir, f"{args.trait}.harmonized.tsv.gz")
