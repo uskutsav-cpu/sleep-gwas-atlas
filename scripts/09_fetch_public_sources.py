@@ -113,6 +113,10 @@ def main():
     ap.add_argument("--trait", nargs="*", default=None)
     ap.add_argument("--all-public", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--evict", action="store_true",
+                    help="after hashing, delete the local file. The registry "
+                         "keeps url+sha256+bytes, so it is reproducible on "
+                         "demand. Use when disk cannot hold the whole panel.")
     ap.add_argument("--verify", action="store_true",
                     help="re-hash local files and compare against the registry")
     a = ap.parse_args()

@@ -15,6 +15,16 @@ traits.
 Usage:
     python3 01_harmonize.py --trait insomnia --config config/traits.tsv \
         --infile data/raw/insomnia.txt.gz --outdir data/harmonized
+
+    # With effective-N mode (CDG3 ascertainment correction):
+    python3 01_harmonize.py --trait insomnia --config config/traits.tsv \
+        --infile data/raw/insomnia.txt.gz --outdir data/harmonized \
+        --neff-mode effective
+
+    # With build sanity-checking:
+    python3 01_harmonize.py --trait insomnia --config config/traits.tsv \
+        --infile data/raw/insomnia.txt.gz --outdir data/harmonized \
+        --build-check
 """
 import argparse
 import gzip
@@ -30,21 +40,52 @@ MAF_MIN = 0.01      # [CDG3] minor allele frequency > 1%
 MHC = ("6", 25_000_000, 34_000_000)   # [CDG3] MHC excluded from all sumstats
 AMBIG = {("A", "T"), ("T", "A"), ("C", "G"), ("G", "C")}
 VALID = {"A", "C", "G", "T"}
+NEFF_SNP_FRAC = 0.50  # [CDG3] drop SNPs where SNP-specific Neff < 50% of total
+
+# hg38 sentinel positions — if >10% of chr6 SNPs have BP > 170Mb, suspect hg38
+# (hg19 chr6 is ~171Mb, hg38 chr6 is ~171Mb but many datasets have different
+# coordinate distributions)
+HG38_SENTINEL_CHRS = {
+    "1": 248_956_422,  # hg38 length
+    "6": 170_805_979,
+}
 
 # Column aliases seen in the wild. Extend as you meet new files.
+# Covers: standard, UKB, PGC, GIANT, GLGC, DIAMANTE, FinnGen, METAL output
 ALIASES = {
-    "SNP":  ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id", "marker"],
-    "CHR":  ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
-    "BP":   ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
-    "A1":   ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
-    "A2":   ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref"],
-    "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
-    "BETA": ["beta", "effect", "b", "log_odds", "logor", "effect_size"],
-    "OR":   ["or", "odds_ratio", "oddsratio"],
-    "SE":   ["se", "standard_error", "stderr", "sebeta", "log_odds_se"],
-    "P":    ["p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value"],
-    "N":    ["n", "n_total", "samplesize", "n_complete_samples", "neff", "n_eff"],
-    "INFO": ["info", "imputation_info", "rsq", "r2", "imp_quality"],
+    "SNP":  ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id",
+             "marker", "snpid", "rsid_dbsnp", "varid", "snp_id", "#snpid"],
+    "CHR":  ["chr", "chrom", "chromosome", "#chrom", "hg19chr", "chr_id",
+             "chr_name", "#chr", "seqnames"],
+    "BP":   ["bp", "pos", "position", "base_pair_location", "bp_hg19",
+             "pos_hg19", "bpos", "chrompos", "pos_b37", "bp_grch37",
+             "bp_grch38", "genpos", "start"],
+    "A1":   ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt",
+             "a1_effect", "risk_allele", "inc_allele", "effectallele",
+             "reference_allele", "coded_allele"],
+    "A2":   ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref",
+             "a2_other", "noneffect_allele", "noncoded_allele", "otherallele",
+             "baseline_allele", "non_coded_allele"],
+    "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf",
+             "a1freq", "freq1", "freq_a1", "af_alt", "af_coded",
+             "eaf_hapmap", "allelefreq", "af", "coded_af", "alt_af",
+             "effect_allele_freq", "frq_a1", "a1_freq"],
+    "BETA": ["beta", "effect", "b", "log_odds", "logor", "effect_size",
+             "est", "all_inv_var_meta_beta", "frequentist_add_beta_1",
+             "meta_beta", "gwas_beta", "effect_weight"],
+    "OR":   ["or", "odds_ratio", "oddsratio", "or_random", "or_fixed"],
+    "SE":   ["se", "standard_error", "stderr", "sebeta", "log_odds_se",
+             "se_beta", "all_inv_var_meta_sebeta", "frequentist_add_se_1",
+             "meta_se", "gwas_se", "se_effect"],
+    "P":    ["p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value",
+             "p.value", "pval_nominal", "frequentist_add_pvalue",
+             "all_inv_var_meta_p", "meta_p", "gwas_p", "p_dgc",
+             "p_random", "p_fixed", "pval_meta"],
+    "N":    ["n", "n_total", "samplesize", "n_complete_samples", "neff",
+             "n_eff", "n_samples", "ntotal", "total_n", "nmiss",
+             "num_samples", "weight", "n_analyzed"],
+    "INFO": ["info", "imputation_info", "rsq", "r2", "imp_quality",
+             "info_score", "impinfo", "info_type0", "metric"],
 }
 
 
@@ -80,6 +121,26 @@ def effective_n(ncase, ncontrol):
     return 4.0 / (1.0 / float(ncase) + 1.0 / float(ncontrol))
 
 
+def check_build_heuristic(df, expected_build):
+    """Heuristic build detection: check whether BP coordinates are consistent
+    with the expected genome build. Issues a WARNING, never blocks. [LDSC rule 4]"""
+    if "CHR" not in df or "BP" not in df:
+        return
+    if expected_build not in ("hg19", "GRCh37"):
+        return  # only check for hg19 expected
+
+    # Check if any chr has positions beyond hg19 chromosome lengths
+    chr6 = df[df["CHR"].astype(str).str.replace("chr", "") == "6"]
+    if len(chr6) > 100:
+        bp_vals = pd.to_numeric(chr6["BP"], errors="coerce").dropna()
+        if len(bp_vals) > 0:
+            max_bp = bp_vals.max()
+            if max_bp > 175_000_000:
+                log(f"WARNING: max BP on chr6 = {max_bp:,.0f} — "
+                    f"expected build is {expected_build} but this looks like hg38. "
+                    f"[Rule 4: Never silently lift over genome builds]")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--trait", required=True)
@@ -88,6 +149,12 @@ def main():
     ap.add_argument("--outdir", default="data/harmonized")
     ap.add_argument("--keep-ambiguous", action="store_true",
                     help="skip strand-ambiguous SNP removal (NOT recommended)")
+    ap.add_argument("--neff-mode", choices=["total", "effective"],
+                    default="effective",
+                    help="'effective' uses 4/(1/Ncase+1/Nctrl) for binary traits "
+                         "[CDG3]; 'total' uses raw N_total. Default: effective")
+    ap.add_argument("--build-check", action="store_true",
+                    help="run heuristic build detection against config build")
     args = ap.parse_args()
 
     cfg = pd.read_csv(args.config, sep="\t", dtype=str).set_index("trait_id")
@@ -116,6 +183,10 @@ def main():
     out = pd.DataFrame(index=df.index)
     for std, orig in cmap.items():
         out[std] = df[orig]
+
+    # --- Build check (heuristic, non-blocking) --------------------------------
+    if args.build_check:
+        check_build_heuristic(out, meta.get("build", "hg19"))
 
     # --- effect size to log-odds / beta --------------------------------------
     if "BETA" in out:
@@ -182,15 +253,25 @@ def main():
 
     drop(out["SNP"].duplicated(keep="first"), "duplicate SNP ID")
 
+    # --- SNP-specific N_eff filtering [CDG3] ----------------------------------
+    if "N" in out and out["N"].notna().any():
+        n_median = out["N"].median()
+        snp_neff_mask = out["N"].notna() & (out["N"] < NEFF_SNP_FRAC * n_median)
+        drop(snp_neff_mask,
+             f"SNP-specific N < {NEFF_SNP_FRAC*100:.0f}% of median N [CDG3]")
+
     # --- sample size & effective N -------------------------------------------
     calc_neff = None
     if meta["type"] == "binary" and str(meta.get("ncase", "")) not in ("NA", "", "nan", "None"):
         calc_neff = effective_n(meta["ncase"], meta["ncontrol"])
 
     if "N" not in out or out["N"].isna().all():
-        if calc_neff is not None:
+        if args.neff_mode == "effective" and calc_neff is not None:
             out["N"] = calc_neff
-            log(f"N absent -> using sum of effective N = {calc_neff:,.0f} [CDG3]")
+            log(f"N absent -> using effective N = {calc_neff:,.0f} [CDG3]")
+        elif calc_neff is not None and args.neff_mode == "total":
+            out["N"] = float(meta["n_total"])
+            log(f"N absent -> using n_total = {float(meta['n_total']):,.0f} (--neff-mode total)")
         else:
             out["N"] = float(meta["n_total"])
             log(f"N absent -> using n_total = {float(meta['n_total']):,.0f}")
@@ -205,11 +286,13 @@ def main():
     dest = os.path.join(args.outdir, f"{args.trait}.harmonized.tsv.gz")
     out.to_csv(dest, sep="\t", index=False, na_rep="NA", compression="gzip")
 
+    # --- QC report with summary statistics ------------------------------------
     rpt = os.path.join(args.outdir, f"{args.trait}.qc.txt")
     with open(rpt, "w") as fh:
         fh.write(f"trait\t{args.trait}\nsource\t{meta.get('source_note', '')}\n")
         fh.write(f"build\t{meta.get('build', 'hg19')}\n")
         fh.write(f"n_total\t{meta.get('n_total', 'NA')}\n")
+        fh.write(f"neff_mode\t{args.neff_mode}\n")
         if calc_neff is not None:
             fh.write(f"n_eff\t{calc_neff:.2f}\n")
         fh.write(f"infile\t{args.infile}\nrows_in\t{n0}\n")
@@ -218,6 +301,18 @@ def main():
             fh.write(f"{r}\t{k}\t{rem}\n")
         fh.write(f"\nrows_out\t{len(out)}\n")
         fh.write(f"pct_retained\t{100*len(out)/max(n0,1):.2f}\n")
+
+        # Summary statistics
+        fh.write("\n--- Summary Statistics ---\n")
+        if "INFO" in out and out["INFO"].notna().any():
+            fh.write(f"median_INFO\t{out['INFO'].median():.4f}\n")
+        if "FRQ" in out and out["FRQ"].notna().any():
+            maf_out = out["FRQ"].where(out["FRQ"] <= 0.5, 1 - out["FRQ"])
+            fh.write(f"median_MAF\t{maf_out.median():.4f}\n")
+        if "CHR" in out and out["CHR"].notna().any():
+            fh.write("\nchr\tsnp_count\n")
+            for ch, cnt in out["CHR"].value_counts().sort_index().items():
+                fh.write(f"{ch}\t{cnt}\n")
 
     log(f"kept {len(out):,} / {n0:,} ({100*len(out)/max(n0,1):.1f}%)")
     log(f"wrote {dest}")

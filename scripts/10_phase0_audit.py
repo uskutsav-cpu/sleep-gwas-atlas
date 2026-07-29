@@ -367,10 +367,22 @@ def audit_traits(traits, sources, block_only):
                 if nv.isdigit() and int(nv) < 1_000_000:
                     issue("GATE", f"{tid}: CURATED but only {int(nv):,} variants "
                                   f"-- not genome-wide (LDSC needs ~1.2M HapMap3 SNPs)")
+                # The raw file need not persist. Phase 0 asks that it was
+                # downloaded, inspected and verified -- all of which leave
+                # evidence (sha256, byte count, build verdict, variant count).
+                # With the URL recorded the exact file is reproducible, and the
+                # hash proves you got the same bytes back. Disk is finite; the
+                # audit trail is what matters.
                 local = os.path.join("data/raw", s["local_file"])
-                if s["local_file"] in ("NA", "") or not os.path.exists(local):
+                evicted = "EVICTED" in (s.get("notes") or "")
+                if s["local_file"] in ("NA", ""):
+                    issue("GATE", f"{tid}: CURATED but no local_file recorded")
+                elif not os.path.exists(local) and not evicted:
                     issue("GATE", f"{tid}: CURATED but local file missing "
-                                  f"({s['local_file']})")
+                                  f"({s['local_file']}) and not marked EVICTED")
+                elif evicted and s["bytes"] in ("", "0"):
+                    issue("GATE", f"{tid}: marked EVICTED without a byte count "
+                                  f"-- cannot prove what was verified")
 
         # A binary pop_prev needs a citation for THE PREVALENCE, which is a
         # different claim from the GWAS citation. A PMID in source_note cites
