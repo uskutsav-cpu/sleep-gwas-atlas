@@ -39,7 +39,8 @@ OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          "atrial_fibrillation", "sbp",
          # expansion
          "als", "lupus", "atopic_dermatitis", "allergy", "heart_failure",
-         "dbp", "pulse_pressure", "fasting_glucose"]
+         "dbp", "pulse_pressure", "fasting_glucose", "fasting_insulin",
+         "hba1c", "whr"]
 
 VALID_ACCESS = {"PUBLIC", "REGISTRATION", "CONTROLLED", "UNAVAILABLE"}
 MIN_DELTA = 1000        # anchors closer than this do not discriminate builds
