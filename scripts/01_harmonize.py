@@ -75,7 +75,11 @@ ALIASES = {
     "N_EFF": ["neff", "n_eff", "effective_n", "effective_sample_size"],
     "NCASE": ["ncase", "n_cas", "n_cases", "cases"],
     "NCONTROL": ["ncontrol", "n_con", "n_controls", "controls"],
-    "INFO": ["info", "imputation_info", "rsq", "r2", "imp_quality"],
+    "INFO": [
+        "info", "imputation_info", "rsq", "r2", "imp_quality",
+        # Schumacher et al. 2018 PRACTICAL EUR meta-analysis (GCST006085).
+        "oncoarray_imputation_r2",
+    ],
     "BUILD": ["build", "genome_build", "assembly"],
 }
 
