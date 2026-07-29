@@ -41,7 +41,7 @@ OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          "als", "lupus", "atopic_dermatitis", "allergy", "heart_failure",
          "dbp", "pulse_pressure", "fasting_glucose", "fasting_insulin",
          "hba1c", "whr", "cognitive_performance", "psoriasis", "nafld",
-         "educational_attainment", "leptin"]
+         "educational_attainment", "leptin", "obesity", "vte", "hypertension"]
 
 VALID_ACCESS = {"PUBLIC", "REGISTRATION", "CONTROLLED", "UNAVAILABLE"}
 MIN_DELTA = 1000        # anchors closer than this do not discriminate builds
