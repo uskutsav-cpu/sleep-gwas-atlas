@@ -54,3 +54,20 @@ non-European participants. The archive is registered for provenance and can
 be materialized reproducibly, but `telomere_length` remains `TODO` and must
 not be analysed with the EUR LDSC reference until a source-specific EUR subset
 is independently identified and checked.
+
+## Verified EUR source awaiting a citation-policy decision
+
+The public Neale Lab round-2 left-hand grip-strength release is a GRCh37,
+inverse-rank-normalized field-46 GWAS in 359,704 phenotype-complete
+white-British participants. Its results archive and the associated variant
+annotation passed their official manifest MD5s, and
+`scripts/13_materialize_neale_grip.py` streams the two releases in exact
+variant order to retain documented rsIDs, alternate effect alleles, alternate
+allele frequency, beta, standard error, P, per-variant N, and INFO. The local
+materialization retained 12,323,863 rsID SNVs after excluding non-rsID,
+non-SNP, and source low-confidence rows.
+
+This release is publicly citable by stable URL but was not accompanied by a
+peer-reviewed article or PMID. The atlas therefore records it reproducibly
+but keeps `grip_strength` as `TODO` until the project adopts an explicit policy
+for public, unpublished data releases.

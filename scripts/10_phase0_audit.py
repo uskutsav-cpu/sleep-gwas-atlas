@@ -16,6 +16,18 @@ REQUIRED_COLUMNS = {
     "trait_id", "label", "domain", "type", "source_note", "raw_file",
     "ncase", "ncontrol", "n_total", "pop_prev", "build", "status",
 }
+MISSING_TEXT = {"", "na", "nan", "none", "null", "unresolved"}
+
+
+def populated(value):
+    """Return whether a config field contains a non-placeholder value.
+
+    ``pandas.read_csv`` represents blank trailing TSV fields as ``NaN`` even
+    when the file is read with ``dtype=str``.  Treating ``str(NaN)`` as a
+    citation or source value would silently make an incomplete trait appear
+    curation-ready, so placeholders must fail closed here.
+    """
+    return value is not None and str(value).strip().lower() not in MISSING_TEXT
 
 
 def numeric(value):
@@ -77,9 +89,9 @@ def main():
     rows = []
     for _, trait in config.iterrows():
         issues = []
-        if not str(trait["source_note"]).strip():
+        if not populated(trait["source_note"]):
             issues.append("source_note_missing")
-        if not str(trait["raw_file"]).strip():
+        if not populated(trait["raw_file"]):
             issues.append("raw_file_missing")
         if trait["build"] not in {"hg19", "GRCh37"}:
             issues.append("not_hg19_requires_separate_liftover_decision")
@@ -90,13 +102,13 @@ def main():
             prevalence = numeric(trait["pop_prev"])
             if prevalence is None or not 0 < prevalence < 1:
                 issues.append("population_prevalence_unresolved")
-            if "pop_prev_citation" not in config.columns or not str(trait.get("pop_prev_citation", "")).strip() or str(trait.get("pop_prev_citation", "")).upper() == "UNRESOLVED":
+            if "pop_prev_citation" not in config.columns or not populated(trait.get("pop_prev_citation", "")):
                 issues.append("population_prevalence_citation_missing")
         elif not numeric(trait["n_total"]):
             issues.append("continuous_n_total_unresolved")
-        if "pmid" not in config.columns or not str(trait.get("pmid", "")).strip():
+        if "pmid" not in config.columns or not populated(trait.get("pmid", "")):
             issues.append("pmid_not_linked_in_pipeline_config")
-        if "ancestry" not in config.columns or str(trait.get("ancestry", "")).upper() != "EUR":
+        if "ancestry" not in config.columns or not populated(trait.get("ancestry", "")) or str(trait.get("ancestry", "")).upper() != "EUR":
             issues.append("eur_subset_not_linked_in_pipeline_config")
 
         source = sources_by_trait.get(trait["trait_id"])

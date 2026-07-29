@@ -98,6 +98,12 @@ if [ "$MODE" = --download ]; then
   # streamed into a raw input; retain a failed archive for inspection/re-download.
   if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
     "$PYTHON_BIN" scripts/12_materialize_accelerometer_sleep.py --source "$ARCHIVE" --verify-only
+  elif [ "$archive_member" = "NEALE_GRIP_RSID_JOIN" ]; then
+    NEALE_VARIANTS="$ARCHIVE_DIR/neale_ukbb_round2_variants.tsv.bgz"
+    curl --fail --location --retry 3 --continue-at - --output "$NEALE_VARIANTS" \
+      "https://broad-ukb-sumstats-us-east-1.s3.amazonaws.com/round2/annotations/variants.tsv.bgz"
+    "$PYTHON_BIN" scripts/13_materialize_neale_grip.py \
+      --results "$ARCHIVE" --variants "$NEALE_VARIANTS" --verify-only
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   elif [ "$archive_member" = "DIRECT_GZIP" ]; then
@@ -124,6 +130,26 @@ cleanup_materialization() {
 }
 trap cleanup_materialization EXIT
 IFS=',' read -r -a outputs <<< "$raw_files"
+if [ "$archive_member" = "NEALE_GRIP_RSID_JOIN" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: NEALE_GRIP_RSID_JOIN must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  "$PYTHON_BIN" scripts/13_materialize_neale_grip.py \
+    --results "$ARCHIVE" --variants "$ARCHIVE_DIR/neale_ukbb_round2_variants.tsv.bgz" --verify-only
+  if [ ! -s "$PRIMARY" ]; then
+    "$PYTHON_BIN" scripts/13_materialize_neale_grip.py \
+      --results "$ARCHIVE" --variants "$ARCHIVE_DIR/neale_ukbb_round2_variants.tsv.bgz" \
+      --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
 if [ "$archive_member" = "GZIP_WRAPPED_ZIP_COLUMNS" ]; then
   existing_outputs=0
   for output in "${outputs[@]}"; do
