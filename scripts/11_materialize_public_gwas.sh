@@ -33,7 +33,9 @@ is handled only by its named, source-specific materializer. A source marked
 ``DIRECT_TSV`` is a single, uncompressed tabular release and is losslessly
 gzip-wrapped after its registered integrity check. A source marked
 ``DIRECT_GZIP`` is already a single gzipped tabular release and is hard-linked
-into the raw directory after its registered integrity check.
+into the raw directory after its registered integrity check. Large public
+Google Drive releases with a reviewed source-specific materializer are fetched
+by validated byte ranges rather than a blind resume.
 EOF
 }
 
@@ -92,7 +94,14 @@ require_archive_integrity() {
 }
 
 if [ "$MODE" = --download ]; then
-  curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
+  if [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
+    "$PYTHON_BIN" scripts/14_ranged_download.py \
+      --url "$download_url" --out "$ARCHIVE" \
+      --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256" \
+      --max-chunks 4
+  else
+    curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
+  fi
   # A byte-range resume can leave a superficially plausible archive after a
   # proxy interruption. Validate the registered container before it can be
   # streamed into a raw input; retain a failed archive for inspection/re-download.
@@ -104,6 +113,8 @@ if [ "$MODE" = --download ]; then
       "https://broad-ukb-sumstats-us-east-1.s3.amazonaws.com/round2/annotations/variants.tsv.bgz"
     "$PYTHON_BIN" scripts/13_materialize_neale_grip.py \
       --results "$ARCHIVE" --variants "$NEALE_VARIANTS" --verify-only
+  elif [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
+    "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --verify-only
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   elif [ "$archive_member" = "DIRECT_GZIP" ]; then
@@ -130,6 +141,23 @@ cleanup_materialization() {
 }
 trap cleanup_materialization EXIT
 IFS=',' read -r -a outputs <<< "$raw_files"
+if [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: BCAC_2020_META_RSID must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --verify-only
+  if [ ! -s "$PRIMARY" ]; then
+    "$PYTHON_BIN" scripts/15_materialize_bcac_breast.py --source "$ARCHIVE" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
 if [ "$archive_member" = "NEALE_GRIP_RSID_JOIN" ]; then
   [ "${#outputs[@]}" -eq 1 ] || {
     echo "ERROR: NEALE_GRIP_RSID_JOIN must register exactly one raw output" >&2
