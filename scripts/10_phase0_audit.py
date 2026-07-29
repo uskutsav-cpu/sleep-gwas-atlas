@@ -30,10 +30,16 @@ SOURCES = "config/public_gwas_sources.tsv"
 ANCHORS = "config/build_anchors.tsv"
 
 # The 21 trait IDs owned by this workstream.
+# The original 21, plus unclaimed traits in the same domains taken up in the
+# expansion pass. Deliberately excludes every sleep/circadian, cancer and aging
+# trait -- those belong to the other workstream and are never touched here.
 OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          "ibd", "crohn", "uc", "ra", "ms", "asthma",
          "bmi", "t2d", "ldl", "hdl", "triglycerides", "cad", "stroke",
-         "atrial_fibrillation", "sbp"]
+         "atrial_fibrillation", "sbp",
+         # expansion
+         "als", "lupus", "atopic_dermatitis", "allergy", "heart_failure",
+         "dbp", "pulse_pressure", "fasting_glucose"]
 
 VALID_ACCESS = {"PUBLIC", "REGISTRATION", "CONTROLLED", "UNAVAILABLE"}
 MIN_DELTA = 1000        # anchors closer than this do not discriminate builds
