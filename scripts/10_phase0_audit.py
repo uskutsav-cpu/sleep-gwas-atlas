@@ -33,7 +33,7 @@ ANCHORS = "config/build_anchors.tsv"
 # The original 21, plus unclaimed traits in the same domains taken up in the
 # expansion pass. Deliberately excludes every sleep/circadian, cancer and aging
 # trait -- those belong to the other workstream and are never touched here.
-OWNED = ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
+OWNED = ['albumin', 'alcohol_consumption', 'alkaline_phosphatase', 'apob', 'ast', 'basophil_count', 'calcium', 'coffee_consumption', 'creatinine', 'crp', 'cystatin_c', 'glucose', 'heel_bmd', 'hematocrit', 'mch', 'mcv', 'phosphate', 'rdw', 'reticulocyte_count', 'total_cholesterol', 'urea'] + ["alz", "parkinson", "mdd", "scz", "bipolar", "adhd",
          "ibd", "crohn", "uc", "ra", "ms", "asthma",
          "bmi", "t2d", "ldl", "hdl", "triglycerides", "cad", "stroke",
          "atrial_fibrillation", "sbp",
