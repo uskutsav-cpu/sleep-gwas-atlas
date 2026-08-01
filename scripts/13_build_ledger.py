@@ -46,7 +46,7 @@ LAM_PAT = re.compile(r"Lambda GC:\s*(-?[\d.eE+-]+)")
 
 Z_MIN, INTERCEPT_MAX, MIXER_MIN = 4.0, 1.20, 12000.0
 
-FIELDS = ["trait_id", "display_name", "domain", "role", "source_name",
+FIELDS = ["trait_id", "terminal_state", "display_name", "domain", "role", "source_name",
           "source_url_or_accession", "publication_or_PMID", "ancestry",
           "genome_build", "phenotype_type", "sample_size", "n_cases",
           "n_controls", "population_prevalence", "effect_type",
@@ -203,7 +203,32 @@ def main():
             r["phase2_eligible"] = "PENDING"
             r["phase3_eligible"] = "PENDING"
 
+        # Terminal state: exactly one defined outcome per trait, derived from
+        # evidence on disk. No generic TODO/FAILED/UNKNOWN is permitted.
         note = s.get("notes", "") or ""
+        acc = s.get("access", "")
+        nv = s.get("n_variants", "")
+        if r.get("h2_status") == "DONE":
+            r["terminal_state"] = ("COMPLETE_PASS" if r["phase1_eligible"] == "YES"
+                                   else "COMPLETE_FAIL_H2")
+        elif not s:
+            r["terminal_state"] = "BLOCKED_SOURCE_MISSING"
+        elif acc in ("REGISTRATION", "CONTROLLED"):
+            r["terminal_state"] = "BLOCKED_SOURCE_RESTRICTED"
+        elif "PHASE1_BLOCKED" in note and "no rsID" in note.lower():
+            r["terminal_state"] = "BLOCKED_REFERENCE_MAPPING"
+        elif "PHASE1_BLOCKED" in note:
+            r["terminal_state"] = "BLOCKED_SCHEMA"
+        elif "GRCh38" in str(s.get("build_verified", "")) or "BLOCKED_GRCh38" in note:
+            r["terminal_state"] = "BLOCKED_BUILD"
+        elif str(nv).isdigit() and 0 < int(nv) < 1_000_000:
+            r["terminal_state"] = "BLOCKED_INSUFFICIENT_VARIANTS"
+        elif acc == "UNAVAILABLE":
+            r["terminal_state"] = "BLOCKED_SOURCE_MISSING"
+        elif "REJECTED" in note or "NOT CURATED" in note:
+            r["terminal_state"] = "EXCLUDED_QC"
+        else:
+            r["terminal_state"] = ""      # genuinely runnable, not yet run
         for key in ("PHASE 1 BLOCKER", "BLOCKER", "NOT CURATED", "REJECTED"):
             if key in note:
                 r["blocker"] = note.split(key, 1)[1][:150].strip(": ")
