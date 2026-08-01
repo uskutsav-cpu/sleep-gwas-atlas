@@ -141,12 +141,147 @@ def check_build_heuristic(df, expected_build):
                     f"[Rule 4: Never silently lift over genome builds]")
 
 
+
+def _apply_filters(out, args, counts):
+    """Apply every QC filter to one frame, accumulating counts by reason.
+
+    Identical logic to the single-pass path; factored out so a chunked run
+    produces the same ledger.
+    """
+    def drop(mask, reason):
+        k = int(mask.sum())
+        counts[reason] = counts.get(reason, 0) + k
+        return out[~mask] if k else out
+
+    out = drop(~out["A1"].isin(VALID) | ~out["A2"].isin(VALID),
+               "non-SNP / indel / multi-char allele")
+    out = drop(out["A1"] == out["A2"], "A1 == A2")
+    if not args.keep_ambiguous:
+        amb = pd.Series([(a, b) in AMBIG for a, b in zip(out["A1"], out["A2"])],
+                        index=out.index)
+        out = drop(amb, "strand-ambiguous (A/T, C/G) [CDG3]")
+    out = drop(out["P"].isna() | (out["P"] <= 0) | (out["P"] > 1),
+               "P missing or out of (0,1]")
+    out = drop(out["BETA"].isna() | ~np.isfinite(out["BETA"]),
+               "BETA missing / non-finite")
+    if "SE" in out:
+        out = drop(out["SE"].isna() | (out["SE"] <= 0), "SE missing or <= 0")
+    if "INFO" in out:
+        out = drop(out["INFO"].notna() & (out["INFO"] <= INFO_MIN),
+                   f"INFO <= {INFO_MIN} [CDG3]")
+    if "FRQ" in out:
+        maf = out["FRQ"].where(out["FRQ"] <= 0.5, 1 - out["FRQ"])
+        out = drop(out["FRQ"].notna() & (maf <= MAF_MIN), f"MAF <= {MAF_MIN} [CDG3]")
+    if "CHR" in out and "BP" in out:
+        out["CHR"] = out["CHR"].astype(str).str.replace("chr", "", case=False,
+                                                        regex=False)
+        out = drop((out["CHR"] == MHC[0]) & out["BP"].between(MHC[1], MHC[2]),
+                   f"in MHC chr{MHC[0]}:{MHC[1]}-{MHC[2]} [CDG3]")
+    out = drop(out["SNP"].duplicated(keep="first"), "duplicate SNP ID (within chunk)")
+    return out
+
+
+def run_chunked(args, meta, sep, cmap, strcols):
+    """Stream the file in chunks, filtering each and appending to the output.
+
+    Two documented differences from the single-pass path, both forced by not
+    holding the file in memory:
+      * duplicate rsIDs are removed WITHIN each chunk, not across the file.
+        LDSC's munge_sumstats removes duplicate rs numbers itself, so this is
+        covered downstream rather than skipped.
+      * the SNP-specific effective-N filter uses the median N of the FIRST
+        chunk as the reference, not the whole-file median.
+    Both are recorded in the QC ledger so the run stays auditable.
+    """
+    import gzip as _gzip
+    counts, n_in, n_out = {}, 0, 0
+    dest = os.path.join(args.outdir, f"{args.trait}.harmonized.tsv.gz")
+    os.makedirs(args.outdir, exist_ok=True)
+    cols_final, n_median, wrote_header = None, None, False
+    any_frq = False
+
+    reader = pd.read_csv(args.infile, sep=sep, usecols=list(cmap.values()),
+                         dtype={c: str for c in strcols}, chunksize=args.chunksize,
+                         low_memory=False, engine="c")
+    fh = _gzip.open(dest, "wt")
+    for chunk in reader:
+        n_in += len(chunk)
+        out = pd.DataFrame(index=chunk.index)
+        for std, orig in cmap.items():
+            out[std] = chunk[orig]
+        if "BETA" in out:
+            out["BETA"] = pd.to_numeric(out["BETA"], errors="coerce")
+        else:
+            orv = pd.to_numeric(out["OR"], errors="coerce")
+            out["BETA"] = np.log(orv.where(orv > 0))
+        out = out.drop(columns=[c for c in ["OR"] if c in out])
+        for c in ["BP", "FRQ", "SE", "P", "N", "INFO"]:
+            if c in out:
+                out[c] = pd.to_numeric(out[c], errors="coerce")
+        out["A1"] = out["A1"].str.upper().str.strip()
+        out["A2"] = out["A2"].str.upper().str.strip()
+
+        out = _apply_filters(out, args, counts)
+
+        if "N" in out and out["N"].notna().any():
+            if n_median is None:
+                n_median = out["N"].median()
+            m = out["N"].notna() & (out["N"] < NEFF_SNP_FRAC * n_median)
+            k = int(m.sum())
+            counts[f"SNP-specific N < {NEFF_SNP_FRAC*100:.0f}% of first-chunk median N [CDG3]"] = \
+                counts.get(f"SNP-specific N < {NEFF_SNP_FRAC*100:.0f}% of first-chunk median N [CDG3]", 0) + k
+            if k:
+                out = out[~m]
+        if "N" not in out or out["N"].isna().all():
+            out["N"] = float(meta["n_total"])
+        for c in ["CHR", "BP", "FRQ", "INFO"]:
+            if c not in out:
+                out[c] = np.nan
+        if cols_final is None:
+            cols_final = ["SNP", "CHR", "BP", "A1", "A2", "FRQ", "BETA", "SE", "P", "N"]
+            if "FRQ" not in out or out["FRQ"].notna().sum() == 0:
+                cols_final.remove("FRQ")
+                counts["FRQ empty in first chunk — column omitted so munge does "
+                       "not MAF-filter every SNP away"] = 0
+        if "FRQ" in cols_final:
+            any_frq = any_frq or bool(out["FRQ"].notna().any())
+        out = out[cols_final]
+        out.to_csv(fh, sep="\t", index=False, na_rep="NA", header=not wrote_header)
+        wrote_header = True
+        n_out += len(out)
+        log(f"  chunk done: {n_in:,} read, {n_out:,} kept")
+    fh.close()
+
+    rpt = os.path.join(args.outdir, f"{args.trait}.qc.txt")
+    with open(rpt, "w") as r:
+        r.write(f"trait\t{args.trait}\nsource\t{meta['source_note']}\n")
+        r.write(f"build\t{meta.get('build','hg19')}\nn_total\t{meta['n_total']}\n")
+        r.write(f"mode\tCHUNKED (chunksize={args.chunksize})\n")
+        r.write(f"infile\t{args.infile}\nrows_in\t{n_in}\n")
+        r.write("\nstep\tdropped\n")
+        for k, v in counts.items():
+            r.write(f"{k}\t{v}\n")
+        r.write(f"\nrows_out\t{n_out}\n")
+        r.write(f"pct_retained\t{100*n_out/max(n_in,1):.2f}\n")
+        r.write("\nNOTE\tduplicate rsIDs removed within chunks only; LDSC munge "
+                "removes cross-file duplicates\n")
+    log(f"kept {n_out:,} / {n_in:,} ({100*n_out/max(n_in,1):.1f}%)")
+    log(f"wrote {dest}")
+    log(f"wrote {rpt}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--trait", required=True)
     ap.add_argument("--config", default="config/traits.tsv")
     ap.add_argument("--infile", required=True)
     ap.add_argument("--outdir", default="data/harmonized")
+    ap.add_argument("--chunksize", type=int, default=0,
+                    help="process the file in chunks of this many rows. "
+                         "Needed for large releases: the in-memory path holds "
+                         "the whole frame plus filtering copies, which on an "
+                         "8 GB machine is killed outright for a 13M-row file. "
+                         "0 (default) keeps the original single-pass path.")
     ap.add_argument("--keep-ambiguous", action="store_true",
                     help="skip strand-ambiguous SNP removal (NOT recommended)")
     ap.add_argument("--neff-mode", choices=["total", "effective"],
@@ -164,8 +299,31 @@ def main():
 
     sep, sepname = sniff_sep(args.infile)
     log(f"delimiter detected: {sepname}")
-    df = pd.read_csv(args.infile, sep=sep, dtype=str, low_memory=False,
-                     comment=None, engine="c")
+    # Read the header alone first, map the columns we actually need, then read
+    # only those. The previous approach pulled every column in as Python
+    # strings, which for a 13M-row file is roughly 10 GB of RAM -- large
+    # releases (mdd, t2d) simply died. Strings are kept only where the value is
+    # categorical (IDs, alleles, chromosome); the rest are parsed as numbers.
+    hdr = pd.read_csv(args.infile, sep=sep, nrows=0, engine="c")
+    pre = map_columns(hdr.columns)
+    want = {v: k for k, v in pre.items()}
+    strcols = {v for k, v in pre.items() if k in ("SNP", "A1", "A2", "CHR")}
+    if args.chunksize:
+        # Dispatch BEFORE the full read -- reading first and then chunking
+        # would already have blown the memory we are trying to avoid.
+        need0 = [c for c in ("SNP", "A1", "A2", "P") if c not in pre]
+        if need0:
+            sys.exit(f"ERROR: could not map required columns {need0} from header")
+        if "BETA" not in pre and "OR" not in pre:
+            sys.exit("ERROR: neither BETA nor OR present; cannot get effect size.")
+        log(f"column map: { {k: v for k, v in pre.items()} }")
+        log(f"chunked mode, {args.chunksize:,} rows per chunk")
+        run_chunked(args, meta, sep, pre, strcols)
+        return
+
+    df = pd.read_csv(args.infile, sep=sep, usecols=list(want),
+                     dtype={c: str for c in strcols},
+                     low_memory=False, comment=None, engine="c")
     n0 = len(df)
     log(f"read {n0:,} rows, {len(df.columns)} columns")
 

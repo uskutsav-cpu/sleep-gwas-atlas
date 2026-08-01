@@ -51,6 +51,12 @@ def main():
     ap.add_argument("--config", default="config/traits.tsv")
     ap.add_argument("--out", required=True)
     ap.add_argument("--annot", choices=["rg", "stars", "none"], default="rg")
+    ap.add_argument("--flip", action="store_true",
+                    help="swap axes. 05_collate names p1 'sleep_trait' and p2 "
+                         "'disease_trait' because 04_rg.sh puts the sleep trait "
+                         "first. If rg was run with the disease trait as p1, the "
+                         "figure comes out transposed against its own title -- "
+                         "this corrects it rather than mislabelling the plot.")
     ap.add_argument("--provenance-label", default=None,
                     help="text stamped diagonally across the plot area.")
     a = ap.parse_args()
@@ -65,6 +71,9 @@ def main():
         )
 
     df = pd.read_csv(a.rg, sep="\t")
+    if a.flip:
+        df = df.rename(columns={"sleep_trait": "disease_trait",
+                                "disease_trait": "sleep_trait"})
     cfg = pd.read_csv(a.config, sep="\t", dtype=str).set_index("trait_id")
     lab = cfg["label"].to_dict()
     dom = cfg["domain"].to_dict()
