@@ -63,7 +63,7 @@ ALIASES = {
     "A1":   ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt",
              "a1_effect", "risk_allele", "inc_allele", "effectallele",
              "reference_allele", "coded_allele"],
-    "A2":   ["a2", "other_allele", "nea", "allele2", "non_effect_allele", "ref",
+    "A2":   ["a2", "other_allele", "nea", "allele2", "allele0", "non_effect_allele", "ref",
              "a2_other", "noneffect_allele", "noncoded_allele", "otherallele",
              "baseline_allele", "non_coded_allele"],
     "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf",
@@ -93,14 +93,52 @@ def log(msg):
     print(f"  {msg}", flush=True)
 
 
+def _open_text(path):
+    """Open .gz, .zip or plain text uniformly.
+
+    Several core sleep releases (Dashti 2019, Wang 2019) ship a single .txt
+    inside a .zip. Reading them required no other change, so support the
+    container rather than making the caller pre-extract 380 MB.
+    """
+    if path.endswith(".zip"):
+        import zipfile, io
+        z = zipfile.ZipFile(path)
+        members = [n for n in z.namelist()
+                   if not n.endswith("/") and not n.startswith("__MACOSX")]
+        members.sort(key=lambda n: z.getinfo(n).file_size, reverse=True)
+        return io.TextIOWrapper(z.open(members[0]), errors="replace")
+    if path.endswith(".gz"):
+        return gzip.open(path, "rt", errors="replace")
+    return open(path, errors="replace")
+
+
+def zip_member(path):
+    """Name of the member _open_text would pick, for the provenance ledger."""
+    if not path.endswith(".zip"):
+        return ""
+    import zipfile
+    z = zipfile.ZipFile(path)
+    m = [n for n in z.namelist()
+         if not n.endswith("/") and not n.startswith("__MACOSX")]
+    m.sort(key=lambda n: z.getinfo(n).file_size, reverse=True)
+    return m[0] if m else ""
+
+
 def sniff_sep(path):
-    op = gzip.open if path.endswith(".gz") else open
-    with op(path, "rt") as fh:
+    with _open_text(path) as fh:
         head = fh.readline()
     for sep, name in ((",", "comma"), ("\t", "tab"), (" ", "space")):
         if head.count(sep) >= 4:
             return (sep, name)
     return ("\t", "tab")
+
+
+# Effect/SE/P columns are often suffixed with the phenotype name
+# (BETA_SLEEPDURATION, SE_SHORTSLEEP, P_LONGSLEEP). Exact aliases cannot
+# enumerate those, so these standard names also accept a prefix match --
+# but only these, because a prefix rule on e.g. "N" would match anything.
+PREFIX_OK = {"BETA": ("beta_", "b_"), "SE": ("se_", "stderr_"),
+             "P": ("p_", "pval_", "pvalue_"), "OR": ("or_",)}
 
 
 def map_columns(cols):
@@ -111,6 +149,13 @@ def map_columns(cols):
         for o in opts:
             if o in lower:
                 found[std] = lower[o]
+                break
+    for std, prefixes in PREFIX_OK.items():
+        if std in found:
+            continue
+        for lc, orig in lower.items():
+            if lc.startswith(prefixes):
+                found[std] = orig
                 break
     return found
 
@@ -200,7 +245,7 @@ def run_chunked(args, meta, sep, cmap, strcols):
     cols_final, n_median, wrote_header = None, None, False
     any_frq = False
 
-    reader = pd.read_csv(args.infile, sep=sep, usecols=list(cmap.values()),
+    reader = pd.read_csv(_open_text(args.infile), sep=sep, usecols=list(cmap.values()),
                          dtype={c: str for c in strcols}, chunksize=args.chunksize,
                          low_memory=False, engine="c")
     fh = _gzip.open(dest, "wt")
@@ -304,7 +349,7 @@ def main():
     # strings, which for a 13M-row file is roughly 10 GB of RAM -- large
     # releases (mdd, t2d) simply died. Strings are kept only where the value is
     # categorical (IDs, alleles, chromosome); the rest are parsed as numbers.
-    hdr = pd.read_csv(args.infile, sep=sep, nrows=0, engine="c")
+    hdr = pd.read_csv(_open_text(args.infile), sep=sep, nrows=0, engine="c")
     pre = map_columns(hdr.columns)
     want = {v: k for k, v in pre.items()}
     strcols = {v for k, v in pre.items() if k in ("SNP", "A1", "A2", "CHR")}
@@ -321,7 +366,7 @@ def main():
         run_chunked(args, meta, sep, pre, strcols)
         return
 
-    df = pd.read_csv(args.infile, sep=sep, usecols=list(want),
+    df = pd.read_csv(_open_text(args.infile), sep=sep, usecols=list(want),
                      dtype={c: str for c in strcols},
                      low_memory=False, comment=None, engine="c")
     n0 = len(df)
