@@ -54,19 +54,19 @@ synthetic. Figures carry a provenance footer tying them to their source table.
 
 ## What the matrix shows
 
-**The U-shape is recovered from genetics alone.** Short sleep (rg = +0.34) and
+**The pattern is consistent with opposing genetic correlations for continuous versus categorical sleep-duration phenotypes.** Short sleep (rg = +0.34) and
 long sleep (rg = +0.40) both correlate positively with major depression, while
 *continuous* sleep duration correlates negatively (rg = −0.10). That is the
 classic epidemiological U-shape between sleep duration and depression,
-reproduced here without any phenotypic data. The same pattern appears against
+a pattern consistent with, but not establishing, the reported phenotypic relationship. The same pattern appears against
 BMI: short +0.21, long +0.13, continuous −0.08.
 
-**Morningness is protective.** Chronotype × depression is **negative**
-(rg = −0.077, FDR 8.0e-3). Worth stating explicitly because the fabricated
+**Chronotype shows a negative genetic correlation with depression.** Chronotype × depression is **negative**
+(rg = −0.077, FDR 8.0e-3). Direction matters here because the fabricated
 figure this repository originally shipped showed this correlation as *positive*
 (+0.14). The direction in that figure was wrong.
 
-**Long sleep carries a cardiovascular signature.** Long sleep correlates with
+**Long sleep shows shared genetic architecture with cardiovascular traits.** Long sleep correlates with
 diastolic BP (+0.104), systolic BP (+0.096) and resting heart rate (+0.098),
 none of which appear for continuous sleep duration. Note that SBP, DBP and
 pulse pressure come from one cohort of 1,028,980 and are **not independent**.
@@ -100,3 +100,7 @@ This is Phase 1 for **13 of ~90 traits**, not the frozen atlas. The ledger
 explicit state each. Remaining work and exact commands: `.handoff/RUNBOOK.md`.
 The single most valuable missing item is **insomnia**, the one core sleep
 anchor without an obtainable source.
+
+## Interpretation limits
+
+Every quantity here is a genome-wide genetic correlation. None of it establishes causality, an individual-level phenotypic relationship, or a shared causal variant. Local genetic correlation (Phase 2) and pleiotropic locus analysis (Phase 3) would be required before any mechanistic reading, and even those do not demonstrate causation. Phenotype coding direction must be confirmed from source documentation before any sign is interpreted -- in particular, that higher chronotype values denote greater morningness.

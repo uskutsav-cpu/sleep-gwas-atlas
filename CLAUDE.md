@@ -64,9 +64,11 @@ implications and should never be reported as the same kind of failure.
   which one.
 - The Jansen 2019 insomnia GWAS includes a 23andMe component that is
   access-restricted. Use a public release that excludes it.
-- `shortsleep` and especially `longsleep` are dichotomised tails of a
-  continuous phenotype and are expected to fail the power gate. That is a
-  finding, not a bug — report it as one.
+- `shortsleep` and `longsleep` are dichotomised tails of a continuous
+  phenotype. They were EXPECTED to fail the power gate; measured, both PASS
+  (Z = 23.6 and 13.8). `longsleep` does fail the separate MiXeR threshold
+  (N_eff x h2 = 3,567 < 12,000), which is a different question. Corrected
+  2026-08-01 from real LDSC output.
 - CDG3 used `N_eff × h² > 12,000` as the inclusion threshold for MiXeR.
   Worth computing for each sleep trait.
 

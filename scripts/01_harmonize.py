@@ -53,8 +53,12 @@ HG38_SENTINEL_CHRS = {
 # Column aliases seen in the wild. Extend as you meet new files.
 # Covers: standard, UKB, PGC, GIANT, GLGC, DIAMANTE, FinnGen, METAL output
 ALIASES = {
-    "SNP":  ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id",
-             "marker", "snpid", "rsid_dbsnp", "varid", "snp_id", "#snpid"],
+    # Explicit rsID names FIRST: a file may carry a coordinate-style "SNP"
+    # column AND a real rsID column (Watanabe 2022 insomnia does). LDSC
+    # merges against HapMap3 by rsID, so the rsID column must win.
+    "SNP":  ["rsid", "rs_id", "rsid_ukb", "rsid_dbsnp", "rsids", "snp",
+             "markername", "variant_id", "id", "marker", "snpid",
+             "varid", "snp_id", "#snpid", "rs"],
     "CHR":  ["chr", "chrom", "chromosome", "#chrom", "hg19chr", "chr_id",
              "chr_name", "#chr", "seqnames"],
     "BP":   ["bp", "pos", "position", "base_pair_location", "bp_hg19",
@@ -84,7 +88,7 @@ ALIASES = {
     "N":    ["n", "n_total", "samplesize", "n_complete_samples", "neff",
              "n_eff", "n_samples", "ntotal", "total_n", "nmiss",
              "num_samples", "weight", "n_analyzed"],
-    "INFO": ["info", "imputation_info", "rsq", "r2", "imp_quality",
+    "INFO": ["info", "info_ukb", "imputation_info", "rsq", "r2", "imp_quality",
              "info_score", "impinfo", "info_type0", "metric"],
 }
 
