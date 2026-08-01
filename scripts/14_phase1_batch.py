@@ -131,6 +131,11 @@ def main():
             print(f"  {tid:22} SKIP no source row"); fail_n += 1; continue
         if s["access"] != "PUBLIC":
             print(f"  {tid:22} SKIP access={s['access']}"); continue
+        # A trait with a documented terminal Phase 1 blocker must not be
+        # retried every pass -- the loop above burned three whole rounds
+        # re-failing the same three traits.
+        if "PHASE1_BLOCKED" in (s.get("notes") or ""):
+            print(f"  {tid:22} SKIP phase1-blocked (see registry notes)"); continue
 
         t0 = time.time()
         lf = s["local_file"]
