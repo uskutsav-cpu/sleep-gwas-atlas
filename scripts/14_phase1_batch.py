@@ -109,7 +109,11 @@ def main():
                    if r["role"] in roles
                    and src.get(t, {}).get("access") == "PUBLIC"
                    and str(src.get(t, {}).get("bytes") or "0").isdigit()
-                   and int(src[t]["bytes"]) > 0]
+                   and int(src[t]["bytes"]) > 0
+                   # exclude documented blockers HERE, not in the loop: they
+                   # are still access=PUBLIC, so filtering later let them
+                   # consume --limit on skips
+                   and "PHASE1_BLOCKED" not in (src[t].get("notes") or "")]
         targets.sort(key=lambda t: int(src[t]["bytes"]))
 
     todo = [t for t in targets if not done(t)]
@@ -160,6 +164,13 @@ def main():
 
         ok, note = run(["bash", "scripts/12_phase1_run.sh", tid],
                        f"{LOGS}/phase1_{tid}.log", 3000)
+        # LDSC finishes writing its .log slightly after the process returns, so
+        # an immediate done() check can report a false failure (it did for dbp,
+        # which had in fact succeeded). Give it a moment before deciding.
+        for _ in range(10):
+            if done(tid):
+                break
+            time.sleep(1)
         if not done(tid):
             print(f"  {tid:22} FAIL munge/h2 ({note})"); fail_n += 1; continue
 

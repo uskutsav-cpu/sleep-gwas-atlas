@@ -63,7 +63,7 @@ ALIASES = {
     "A1":   ["a1", "effect_allele", "effect_all", "ea", "allele1", "tested_allele", "alt",
              "a1_effect", "risk_allele", "inc_allele", "effectallele",
              "reference_allele", "coded_allele"],
-    "A2":   ["a2", "other_allele", "other_all", "nea", "allele2", "allele0", "non_effect_allele", "ref",
+    "A2":   ["a2", "a0", "other_allele", "other_all", "nea", "allele2", "allele0", "non_effect_allele", "ref",
              "a2_other", "noneffect_allele", "noncoded_allele", "otherallele",
              "baseline_allele", "non_coded_allele"],
     "FRQ":  ["frq", "freq", "eaf", "effect_allele_frequency", "maf",
