@@ -58,6 +58,14 @@ European participants, but the Catalog explicitly labels the source European
 plus ancestry not reported. The manifest preserves that label, so CAD remains
 blocked from the strictly EUR harmonization path. Its coordinate-only
 `markername` also requires an audited rsID mapping.
+The exact Han 2020 main-UKB asthma file then brings the total to 38/45. Its
+complete prior download, current EBI byte/header checks, upstream MD5, primary
+paper, and archive README agree on a 64,538-case/329,321-control hg19 GWAS with
+OR, confidence interval, P, EAF, INFO, and N fields. Source verification is not
+an ancestry waiver: the paper says the main analysis included participants
+regardless of ancestry and gives different 53,924/276,523 counts for its
+European sensitivity analysis. The manifest therefore remains `MIXED`, and the
+schema records the required log-OR-SE derivation from the confidence interval.
 These counts also do not claim that every source is on GRCh37, binary
 prevalence is resolved, or LDSC is ready. Shared samples are retained as
 explicit analysis concerns: IBD/CD/UC overlap, the three lipid traits share
@@ -74,7 +82,6 @@ These records were not promoted:
 | bipolar disorder | Branch substituted a roughly five-fold smaller 2016 GWAS for Mullins 2021. |
 | ADHD | Branch substituted a later accession whose phenotype and relationship to the locked Demontis 2023 source require review. |
 | multiple sclerosis | Branch substituted a roughly ten-fold smaller 2016 German GWAS for IMSGC 2019. |
-| asthma | The exact `GCST010042` file is the non-ancestry-restricted 64,538-case/329,321-control main UKB GWAS. The paper's separate European sensitivity analysis has 53,924 cases and 276,523 controls. The Catalog API's 239,321-control European label conflicts with the file and primary paper, so the candidate was revoked rather than mislabelled EUR. |
 | type 2 diabetes | Branch substituted Scott 2017; although genome-wide, its bare coordinate marker lacks the rsID mapping needed by the current LDSC path. |
 
 No branch candidate record existed for snoring, sleep apnea, colorectal cancer,
