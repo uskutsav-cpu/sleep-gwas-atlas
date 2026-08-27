@@ -41,6 +41,9 @@ Google Drive releases with a reviewed source-specific materializer are fetched
 by validated byte ranges rather than a blind resume. ``OPENGWAS_VCF`` uses the
 registered stable link-generation endpoint and dataset ID, verifies the exact
 short-lived download, and converts GWAS-VCF fields with an explicit schema.
+Set ``RANGE_WORKERS`` above 1 to use concurrent, exact Content-Range-validated
+chunks for other public servers that support HTTP ranges; the final registered
+byte count and SHA-256 remain mandatory.
 EOF
 }
 
@@ -117,6 +120,15 @@ if [ "$MODE" = --download ]; then
       --download --dataset-id "${archive_name%.vcf.gz}" \
       --endpoint "$download_url" --out "$ARCHIVE" \
       --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256"
+  elif [ "${RANGE_WORKERS:-1}" -gt 1 ]; then
+    if [ -s "$ARCHIVE" ] && [ ! -e "$ARCHIVE.partial" ]; then
+      mv "$ARCHIVE" "$ARCHIVE.partial"
+    fi
+    "$PYTHON_BIN" scripts/14_ranged_download.py \
+      --url "$download_url" --out "$ARCHIVE" \
+      --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256" \
+      --chunk-bytes "${RANGE_CHUNK_BYTES:-16777216}" --max-chunks 1000000 \
+      --workers "$RANGE_WORKERS"
   else
     curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
   fi
