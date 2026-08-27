@@ -83,39 +83,33 @@ def make(n=60000, style="beta"):
 
 # --- synthetic LDSC logs ------------------------------------------------------
 
-# Baseline h2 values for problem comparison and standard traits
-PROBLEM_H2 = {
+# Baseline h2 values for selected panel traits with deliberately distinct gates.
+SYNTHETIC_H2 = {
     "insomnia":          ("Liability", 0.0800, 0.0050, 1.0150, 0.0090, 1.0940, 1.1520, 0.0987),
-    "insomnia_ukb":      ("Liability", 0.0800, 0.0050, 1.0150, 0.0090, 1.0940, 1.1520, 0.0987),
-    "insomnia_full":     ("Liability", 0.0750, 0.0027, 1.0250, 0.0095, 1.1820, 1.3400, 0.0735),
     "sleepdur":          ("Observed",  0.0900, 0.0060, 1.0200, 0.0085, 1.1010, 1.1740, 0.1149),
     "shortsleep":        ("Liability", 0.0400, 0.0080, 1.3500, 0.0140, 1.4020, 1.4800, 0.7292),
-    "shortsleep_dashti": ("Liability", 0.0400, 0.0080, 1.3500, 0.0140, 1.4020, 1.4800, 0.7292),
-    "shortsleep_az":     ("Liability", 0.0250, 0.0060, 1.0500, 0.0110, 1.1200, 1.1900, 0.2500),
     "longsleep":         ("Liability", 0.0120, 0.0060, 1.0080, 0.0087, 1.0110, 1.0190, 0.4211),
-    "longsleep_dashti":  ("Liability", 0.0120, 0.0060, 1.0080, 0.0087, 1.0110, 1.0190, 0.4211),
-    "longsleep_az":      ("Liability", 0.0080, 0.0053, 1.0050, 0.0085, 1.0080, 1.0120, 0.4167),
 }
 
 
-def load_traits_config(config_path="config/traits.tsv"):
+def load_traits_config(config_path="config/analysis_panel.tsv"):
     if os.path.exists(config_path):
         return pd.read_csv(config_path, sep="\t")
     return None
 
 
-def write_h2_logs(outdir, config_path="config/traits.tsv"):
-    """One h2_<trait>.log per trait in config/traits.tsv."""
+def write_h2_logs(outdir, config_path="config/analysis_panel.tsv"):
+    """One h2_<trait>.log per trait in the locked analysis panel."""
     df_config = load_traits_config(config_path)
     if df_config is not None:
         traits = df_config["trait_id"].tolist()
     else:
-        traits = list(PROBLEM_H2.keys())
+        traits = list(SYNTHETIC_H2.keys())
 
     written = []
     for idx, trait in enumerate(traits):
-        if trait in PROBLEM_H2:
-            scale, h2, se, icept, icept_se, lam, chi2, ratio = PROBLEM_H2[trait]
+        if trait in SYNTHETIC_H2:
+            scale, h2, se, icept, icept_se, lam, chi2, ratio = SYNTHETIC_H2[trait]
         else:
             scale = "Liability" if "continuous" not in str(df_config.loc[df_config["trait_id"]==trait, "type"].values[0]) else "Observed"
             # Deterministic, plausible synthetic values across the catalog.
@@ -143,7 +137,7 @@ def write_h2_logs(outdir, config_path="config/traits.tsv"):
     return written
 
 
-def write_rg_logs(outdir, config_path="config/traits.tsv"):
+def write_rg_logs(outdir, config_path="config/analysis_panel.tsv"):
     """One rg_<sleeptrait>.log per sleep trait, running against all disease traits."""
     df_config = load_traits_config(config_path)
     if df_config is not None:
@@ -191,8 +185,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/raw",
                     help="destination for raw sumstats")
-    ap.add_argument("--config", default="config/traits.tsv",
-                    help="path to traits.tsv configuration")
+    ap.add_argument("--config", default="config/analysis_panel.tsv",
+                    help="path to the locked analysis-panel manifest")
     ap.add_argument("--logs", action="store_true",
                     help="write synthetic LDSC h2/rg logs to --logdir")
     ap.add_argument("--logdir", default="results/_smoketest",
@@ -213,7 +207,7 @@ if __name__ == "__main__":
         h2_written = write_h2_logs(a.logdir, a.config)
         rg_written = write_rg_logs(a.logdir, a.config)
         print(f"Wrote {len(h2_written)} h2 logs + {len(rg_written)} rg logs in {a.logdir}")
-        print("Every value in them is fabricated to test the full registered catalog.")
+        print("Every value in them is fabricated to test the locked 45-trait panel.")
 
     if a.raw or not a.logs:
         os.makedirs(a.out, exist_ok=True)

@@ -17,6 +17,8 @@ import hashlib
 import itertools
 import os
 from pathlib import Path
+
+from panel_guard import require_locked_traits
 import re
 import sys
 import tempfile
@@ -157,6 +159,7 @@ def materialize(results: Path, variants: Path, output: Path) -> None:
 
 
 def main() -> None:
+    require_locked_traits({"grip_strength": "neale_2018_left_grip_strength"})
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", type=Path, required=True)
     parser.add_argument("--variants", type=Path, required=True)

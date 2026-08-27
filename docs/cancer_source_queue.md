@@ -2,8 +2,8 @@
 
 This discovery log keeps public cancer GWAS sources and their remaining
 analysis blockers explicit. A verified download is not a licence to invent a
-population prevalence, mix ancestries, infer rsIDs, or mark a trait
-`CURATED` before the Phase 0 audit passes.
+population prevalence, mix ancestries, infer rsIDs, or advance a downstream
+readiness gate before the Phase 0 audit passes.
 
 | Trait | Official release | Verified facts | Still required before curation |
 | --- | --- | --- | --- |

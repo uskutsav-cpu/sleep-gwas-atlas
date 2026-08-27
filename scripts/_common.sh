@@ -6,7 +6,11 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 PYTHON_BIN=${PYTHON_BIN:-python3}
 LDSC_PYTHON=${LDSC_PYTHON:-$PYTHON_BIN}
 LDSC_DIR=${LDSC_DIR:-ldsc}
-CONFIG=${CONFIG:-config/traits.tsv}
+# Production entry points always use the locked atlas-v1.0 manifest. Keeping
+# this path non-overridable prevents an environment variable from silently
+# changing the analysed phenotype set.
+CONFIG=config/analysis_panel.tsv
+PANEL_LOCK=config/analysis_panel.lock.json
 
 die() {
   echo "ERROR: $*" >&2
@@ -36,4 +40,8 @@ require_ldsc() {
   require_file "$LDSC_DIR/munge_sumstats.py"
   require_file "ref/w_hm3.snplist"
   require_file "ref/eur_w_ld_chr/1.l2.ldscore.gz"
+}
+
+validate_panel() {
+  "$PYTHON_BIN" scripts/00_validate_panel.py --manifest "$CONFIG" --lock "$PANEL_LOCK"
 }

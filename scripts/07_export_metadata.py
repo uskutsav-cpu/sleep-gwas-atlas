@@ -2,7 +2,7 @@
 """Export the Phase 0 metadata table without inventing provenance fields.
 
 The proposal requires Trait, Domain, Source, PMID, Sample Size, Ancestry,
-Build, h2 SNP, and File. ``config/traits.tsv`` is the pipeline registry, not
+Build, h2 SNP, and File. ``config/analysis_panel.tsv`` is the locked panel, not
 proof that a PMID, ancestry subset, or population prevalence has been checked.
 Consequently missing curation values are emitted as ``UNRESOLVED`` rather than
 the previous, incorrect blanket statement that every PMID was verified.
@@ -41,7 +41,7 @@ def format_h2(row):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="config/traits.tsv")
+    parser.add_argument("--config", default="config/analysis_panel.tsv")
     parser.add_argument("--h2", default="results/tables/h2_summary.tsv")
     parser.add_argument("--out", default="results/tables/gwas_metadata_table.tsv")
     args = parser.parse_args()
@@ -97,7 +97,7 @@ def main():
             "h2 SNP": h2_display,
             "File": f"data/raw/{metadata.get('raw_file', trait_id + '.txt.gz')}",
             "Trait_ID": trait_id,
-            "QC_Status": metadata.get("status", "TODO"),
+            "Source_Status": metadata.get("source_status", "SOURCE_PENDING"),
         })
 
     output = pd.DataFrame(rows)

@@ -54,8 +54,8 @@ independent, discriminating hg19/GRCh37 sentinel, so the three continuous
 accelerometer traits now pass the source/build Phase 0 curation gate.
 
 The source pages do not replace header-level build verification. New entries
-must begin as `UNVERIFIED_HEADER_REQUIRED` and stay `TODO` in
-`config/traits.tsv` until their actual files pass Phase 0. For the downloaded
+must begin with `source_status=SOURCE_PENDING` in
+`config/analysis_panel.tsv` until source-registry evidence passes Phase 0. For the downloaded
 Dashti 2019 sleep-duration and short-sleep files, `rs3094315` has raw
 coordinate `chr1:752566`. The [Ensembl GRCh37 variation endpoint](https://grch37.rest.ensembl.org/variation/human/rs3094315?content-type=application/json)
 returns `1:752566`, whereas the [GRCh38 endpoint](https://rest.ensembl.org/variation/human/rs3094315?content-type=application/json)
@@ -63,6 +63,7 @@ returns `1:817186`; this discriminating sentinel validates hg19/GRCh37 for
 those two source files. The same sentinel validates the selected napping
 member. The same sentinel also validates the daytime-sleepiness and long-sleep
 files.
-`sleepdur`, `sleepiness`, and `napping` are therefore the currently `CURATED`
-registry rows. The short-sleep aliases remain `TODO` because their
-population-prevalence citations are still missing.
+These registered files therefore reach `SOURCE_VERIFIED`. The selected
+short-sleep and long-sleep rows remain blocked at `LIABILITY_H2_READY` until
+their phenotype-matched population-prevalence citations are resolved; that
+does not erase their source verification.

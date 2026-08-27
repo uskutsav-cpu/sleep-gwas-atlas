@@ -7,11 +7,12 @@
 #   bash scripts/11_materialize_public_gwas.sh --verify
 #
 # This intentionally does not infer a source, accept a form, perform a
-# liftover, or set any trait to CURATED. The Phase 0 audit remains the gate.
+# liftover, or advance any readiness stage. The Phase 0 audit remains the gate.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/_common.sh
 
-SOURCES=${SOURCES:-config/public_gwas_sources.tsv}
+SOURCES=config/public_gwas_sources.tsv
 RAW_DIR=${RAW_DIR:-data/raw}
 ARCHIVE_DIR=${ARCHIVE_DIR:-$RAW_DIR/.archives}
 PYTHON_BIN=${PYTHON_BIN:-python3}
@@ -46,6 +47,7 @@ case "$MODE" in
 esac
 
 [ -f "$SOURCES" ] || { echo "ERROR: source registry not found: $SOURCES" >&2; exit 1; }
+validate_panel
 mkdir -p "$RAW_DIR" "$ARCHIVE_DIR"
 
 read_source() {
@@ -77,6 +79,13 @@ fi
 SOURCE_ROW=$(read_source) || { echo "ERROR: unknown source_id: $SOURCE_ID" >&2; exit 1; }
 IFS=$'\t' read -r source_id trait_ids source_page download_url access archive_name archive_bytes archive_sha256 archive_member raw_files pmid ancestry build_status acquisition_status notes <<< "$SOURCE_ROW"
 [ "$access" = PUBLIC ] || { echo "ERROR: $source_id is not approved as PUBLIC" >&2; exit 1; }
+IFS=',' read -r -a mapped_traits <<< "$trait_ids"
+for trait_id in "${mapped_traits[@]}"; do
+  manifest_source=$(trait_field "$trait_id" source_id) || die \
+    "$source_id maps a trait outside the locked panel: $trait_id"
+  [ "$manifest_source" = "$source_id" ] || die \
+    "$trait_id selects source_id=$manifest_source in the locked panel, not $source_id"
+done
 ARCHIVE="$ARCHIVE_DIR/$archive_name"
 
 require_archive_integrity() {

@@ -7,7 +7,7 @@ correction. Ours is rectangular (sleep on rows, disease on columns) rather
 than triangular, because our two axes are different sets of traits.
 
     python3 06_heatmap.py --rg results/tables/rg_matrix.tsv \
-        --config config/traits.tsv --out results/figures/fig2_rg_heatmap.png
+        --config config/analysis_panel.tsv --out results/figures/fig2_rg_heatmap.png
 
 Every figure carries a provenance footer: the source rg table, its mtime, and
 a hash of its contents. A figure that gets separated from the table that made
@@ -48,7 +48,7 @@ def stars(fdr):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--rg", required=True)
-    ap.add_argument("--config", default="config/traits.tsv")
+    ap.add_argument("--config", default="config/analysis_panel.tsv")
     ap.add_argument("--out", required=True)
     ap.add_argument("--annot", choices=["rg", "stars", "none"], default="rg")
     ap.add_argument("--provenance-label", default=None,

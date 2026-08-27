@@ -46,6 +46,7 @@ Cite these when asked why. They are in `01_harmonize.py` and `03_h2_qc.sh`.
    directions. Sleep traits plausibly have exactly that structure with
    metabolic disease. Worth asking whether to add it.
 
-2. **Their MiXeR inclusion threshold was N_eff × h² > 12,000.** Apply that
-   arithmetic to the sleep traits before promising a two-factor sleep model.
-   Several will not clear it.
+2. **Their pre-MiXeR screen was N_eff × h² > 12,000.** Record that LDSC
+   arithmetic as a screen, not as `mixer_pass`. Actual eligibility for
+   bivariate MiXeR must be decided from MiXeR's own univariate fit and
+   diagnostics. Several sleep traits may not clear either gate.

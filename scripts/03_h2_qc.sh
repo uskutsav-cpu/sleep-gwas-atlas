@@ -20,6 +20,7 @@ if [ "${1:-}" = "--observed-scale" ]; then
 fi
 [ "$#" -gt 0 ] || die "usage: bash scripts/03_h2_qc.sh [--observed-scale] TRAIT [TRAIT ...]"
 require_file "$CONFIG"
+validate_panel
 require_ldsc
 
 LOGDIR=${LDSC_LOGDIR:-results/logs}
@@ -28,8 +29,9 @@ mkdir -p "$LOGDIR" "$(dirname "$H2_OUT")"
 
 for trait in "$@"; do
   trait_type=$(trait_field "$trait" type) || die "trait '$trait' is not in $CONFIG"
-  curation_status=$(trait_field "$trait" status) || die "trait '$trait' has no curation status in $CONFIG"
-  [ "$curation_status" = "CURATED" ] || die "$trait has status=$curation_status; complete and audit Phase 0 curation before h2"
+  source_status=$(trait_field "$trait" source_status) || die "trait '$trait' has no source status in $CONFIG"
+  [ "$source_status" = "SOURCE_VERIFIED" ] || die \
+    "$trait has source_status=$source_status; complete source verification before h2"
   require_file "data/munged/$trait.sumstats.gz"
   echo "==> h2 $trait ($trait_type)"
 
@@ -53,4 +55,5 @@ for trait in "$@"; do
   "${command[@]}"
 done
 
-"$PYTHON_BIN" scripts/05_collate.py --mode h2 --config "$CONFIG" --logdir "$LOGDIR" --out "$H2_OUT"
+"$PYTHON_BIN" scripts/05_collate.py --mode h2 --config "$CONFIG" \
+  --logdir "$LOGDIR" --traits "$@" --out "$H2_OUT"

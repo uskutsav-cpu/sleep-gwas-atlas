@@ -24,6 +24,8 @@ import zipfile
 from pathlib import Path
 from typing import TextIO
 
+from panel_guard import require_locked_traits
+
 
 OUTPUTS = {
     "sleep_efficiency.txt.gz": ("ACC_SLEEP_EFF_RAW_SIN", 84_810),
@@ -101,6 +103,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    require_locked_traits({
+        "sleep_efficiency": "jones_2019_accelerometer_sleep",
+        "accel_sleep_duration": "jones_2019_accelerometer_sleep",
+        "sleep_timing": "jones_2019_accelerometer_sleep",
+    })
     args = build_parser().parse_args()
     source = args.source
     out_dir = args.out_dir

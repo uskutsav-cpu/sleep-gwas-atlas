@@ -150,7 +150,7 @@ def map_columns(columns):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--trait", required=True)
-    parser.add_argument("--config", default="config/traits.tsv")
+    parser.add_argument("--config", default="config/analysis_panel.tsv")
     parser.add_argument("--infile", required=True)
     parser.add_argument("--outdir", default="data/harmonized")
     parser.add_argument(

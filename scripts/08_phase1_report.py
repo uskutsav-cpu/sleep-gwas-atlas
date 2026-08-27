@@ -38,14 +38,13 @@ def smoke_test_input(paths):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="config/traits.tsv")
+    parser.add_argument("--config", default="config/analysis_panel.tsv")
     parser.add_argument("--h2", default="results/tables/h2_summary.tsv")
-    parser.add_argument("--comp", default="results/tables/problem_comparison_summary.tsv")
     parser.add_argument("--rg", default="results/tables/rg_matrix.tsv")
     parser.add_argument("--out", default="results/tables/phase1_summary_report.md")
     args = parser.parse_args()
 
-    paths = [args.h2, args.comp, args.rg]
+    paths = [args.h2, args.rg]
     synthetic = smoke_test_input(paths)
     lines = ["# Phase 0/1 report: Sleep/Circadian Genetic Atlas", ""]
     if synthetic:
@@ -68,28 +67,15 @@ def main():
         lines.append("- Traits by domain:")
         for domain, count in config["domain"].value_counts().sort_index().items():
             lines.append(f"  - `{domain}`: {count}")
-        if "status" in config:
-            lines.append("- Curation status by declared value:")
-            for status, count in config["status"].fillna("MISSING").value_counts().sort_index().items():
+        if "source_status" in config:
+            lines.append("- Source-verification status by declared value:")
+            for status, count in config["source_status"].fillna("MISSING").value_counts().sort_index().items():
                 lines.append(f"  - `{status}`: {count}")
     else:
         lines.append(f"_Configuration file not found: `{args.config}`._")
     lines.append("")
 
-    lines.extend(["## 2. Competing phenotype/source definitions", ""])
-    if os.path.exists(args.comp):
-        comparison = pd.read_csv(args.comp, sep="\t")
-        lines.append(dataframe_to_markdown(comparison))
-        lines.extend([
-            "",
-            "QC values are shown side by side; this report does not automatically select one definition. "
-            "The selected source must remain consistent with the documented phenotype definition and access constraints.",
-        ])
-    else:
-        lines.append(f"_Comparison table not found: `{args.comp}`._")
-    lines.append("")
-
-    lines.extend(["## 3. SNP heritability and QC gate", ""])
+    lines.extend(["## 2. SNP heritability and QC gate", ""])
     if os.path.exists(args.h2):
         heritability = pd.read_csv(args.h2, sep="\t")
         lines.append(f"- Traits with parsed LDSC h2: **{len(heritability)}**")
@@ -98,7 +84,11 @@ def main():
             lines.append(f"- PASS: **{counts.get('PASS', 0)}**; DROP: **{counts.get('DROP', 0)}**")
         lines.extend(["", "Highest h2 Z-scores (descriptive only):", ""])
         top = heritability.sort_values("z", ascending=False, na_position="last").head(10)
-        lines.append(dataframe_to_markdown(table_subset(top, ["trait", "scale", "h2", "se", "z", "intercept", "verdict", "qc_reason", "n_eff_h2", "mixer_pass"])))
+        lines.append(dataframe_to_markdown(table_subset(top, [
+            "trait", "scale", "h2", "se", "z", "intercept", "verdict",
+            "qc_reason", "ldsc_n_eff_h2", "ldsc_n_eff_h2_gt_12000",
+            "mixer_univariate_status",
+        ])))
         lines.extend([
             "",
             "Gate definition: h2 Z >= 4 and LDSC intercept <= 1.20. A low h2 Z and an inflated intercept are reported as distinct failure modes.",
@@ -107,7 +97,7 @@ def main():
         lines.append(f"_Heritability table not found: `{args.h2}`._")
     lines.append("")
 
-    lines.extend(["## 4. Genome-wide genetic correlation", ""])
+    lines.extend(["## 3. Genome-wide genetic correlation", ""])
     if os.path.exists(args.rg):
         correlation = pd.read_csv(args.rg, sep="\t")
         lines.append(f"- Parsed sleep-disease pairs: **{len(correlation)}**")
@@ -123,10 +113,10 @@ def main():
     lines.append("")
 
     lines.extend([
-        "## 5. Downstream handoff",
+        "## 4. Downstream handoff",
         "",
         "1. Use only FDR-significant, well-powered pairs with source provenance retained for Phase 2 local genetic correlation.",
-        "2. Confirm binary-trait prevalence citations before reporting liability-scale h2 or applying the MiXeR N_eff x h2 criterion.",
+        "2. Confirm binary-trait prevalence citations before reporting liability-scale h2. Treat LDSC N_eff x h2 only as a screening statistic; actual MiXeR eligibility requires univariate MiXeR diagnostics.",
         "3. Preserve each QC ledger, munging log, LDSC log, and table hash with the figure so Phase 1 results remain auditable.",
         "",
     ])

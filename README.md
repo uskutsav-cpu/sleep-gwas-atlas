@@ -1,26 +1,91 @@
 # sleep-gwas-atlas
 
-An auditable Phase 0/1 pipeline for the Sleep/Circadian Genetic Atlas:
+An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
-- **Phase 0:** source-GWAS curation, hg19/EUR validation, harmonization, and HapMap3 munging;
-- **Phase 1:** LDSC SNP heritability, power/confounding QC, sleep-by-disease genetic correlations, FDR correction, and a provenance-stamped heatmap.
+- **Scope:** 12 sleep/circadian traits and 33 non-sleep traits.
+- **Phase 0:** source verification, ancestry/build checks, harmonization, QC ledgers, and HapMap3 munging.
+- **Phase 1:** LDSC SNP heritability, predefined QC, 396 sleep-by-disease genetic correlations, FDR, and a provenance-stamped heatmap.
+- **Later phases:** MiXeR, LAVA, pleiotropic-locus discovery, Genomic SEM, fine-mapping, colocalization, molecular/cell-type/pathway integration, and cautious causal inference.
 
-The registry currently contains **86 candidate traits** (20 sleep/circadian and 66 disease/trait). It is intentionally not described as 90: no extra traits have been invented simply to meet an earlier documentation claim.
+## Scientific status
 
-## Current scientific status
+The analysis scope is now frozen in `config/analysis_panel.tsv` at exactly 45 traits. `config/analysis_panel.lock.json` locks the ordered trait identities and domain counts, while every generated readiness or Phase 1 inclusion table records the full manifest SHA-256. A trait therefore cannot be silently swapped while preserving a 45-row count.
 
-The code path has a synthetic end-to-end smoke test. A verified EUR 1000 Genomes/HapMap3 LD reference panel can be installed locally by the setup script, but it is ignored by Git because it is a reproducible external dependency. Public raw GWAS archives and materialized inputs are likewise ignored: their URLs, selected members, and local materialization procedure are recorded in `config/public_gwas_sources.tsv`, `docs/public_sleep_gwas_acquisition.md`, `docs/public_aging_gwas_acquisition.md`, and `docs/cancer_source_queue.md`. **No real LDSC results are versioned in Git.** `sleepdur`, `sleepiness`, `napping`, `sleep_efficiency`, `accel_sleep_duration`, `sleep_timing`, `parental_lifespan`, `healthspan`, `frailty`, `breast_cancer`, `prostate_cancer`, and `ovarian_cancer` are the only `CURATED` registry rows; the other 74 traits remain `TODO`, so the empirical Phase 0/1 analysis is not yet complete. Breast-, prostate-, and ovarian-cancer liability-scale work uses cited US lifetime-risk approximations and must report those population limitations.
+The source registry currently provides evidence-backed public-source records for **17/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
 
-That distinction is deliberate. The pipeline will not:
+```text
+source_verified: 17 / 45
+harmonization_ready: 0 / 45
+ldsc_ready: 0 / 45
+liability_h2_ready: 0 / 45
+phase1_pass: 0 / 45
+```
 
-- treat an unsourced population prevalence as a liability-scale assumption;
-- silently lift hg38 sources to hg19;
-- convert a curation status into an h2 QC result; or
-- turn synthetic logs into a presentable figure or report.
+The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. No real LDSC results are versioned on this branch; synthetic smoke-test artifacts are not scientific results.
 
-## Set up the real analysis environment
+## Locked panel contract
 
-This downloads the maintained Python 3 LDSC implementation, Python dependencies, and EUR reference data. It requires network access, several GB of storage, and should be started only after reviewing the source/data-access plan.
+All production entry points read `config/analysis_panel.tsv`. The manifest records, per trait:
+
+- phenotype definition;
+- selected source GWAS and dataset version;
+- registered source ID and raw filename;
+- phenotype type and sample counts;
+- ancestry and genome build;
+- PMID/DOI when verified;
+- population prevalence and citation when required; and
+- source-verification declaration.
+
+Unknown facts are written as `UNRESOLVED`, never guessed. Validate the contract with:
+
+```bash
+python3 scripts/00_validate_panel.py
+```
+
+Changing a trait identity or order requires an explicit, reviewed update to the lock file. Metadata can be curated without changing scope, but downstream artifacts retain the manifest hash used to produce them.
+
+## Readiness model
+
+`scripts/10_phase0_audit.py` derives one evidence-backed ledger instead of overloading a `TODO/CURATED` flag:
+
+```text
+SOURCE_VERIFIED
+  -> HARMONIZATION_READY
+  -> LDSC_READY
+  -> LIABILITY_H2_READY
+  -> PHASE1_PASS
+```
+
+The stages mean:
+
+- `SOURCE_VERIFIED`: the selected public source, URLs, checksum, file mapping, and registry declaration agree.
+- `HARMONIZATION_READY`: source verification plus resolved phenotype/publication, EUR ancestry, validated GRCh37/hg19 build, required sample metadata, and materialized raw input.
+- `LDSC_READY`: harmonization QC ledger and HapMap3 munged summary statistics exist.
+- `LIABILITY_H2_READY`: LDSC-ready, with a cited matching population prevalence for binary phenotypes. For continuous traits this is the final-h² readiness gate.
+- `PHASE1_PASS`: final-h² readiness plus the predefined LDSC h² QC verdict `PASS`.
+
+Generate the ledger:
+
+```bash
+python3 scripts/10_phase0_audit.py \
+  --out results/tables/trait_readiness.tsv \
+  --strict
+```
+
+`--strict` fails when a manifest row claims `SOURCE_VERIFIED` without matching registry evidence. Later-stage blockers remain explicit rows rather than being silently dropped.
+
+## Pinned environments
+
+Exact top-level versions are recorded in `environment/tool_versions.tsv`.
+
+The workflow/CI runtime uses Python 3.11.11, Snakemake 8.30.0, NumPy 1.26.4, pandas 2.2.3, and Matplotlib 3.9.4. PLINK 1.90b7.7 and R 4.3.3 are pinned for stages that introduce them. Create that environment with:
+
+```bash
+conda env create -f environment/workflow.yml
+conda activate sleep-gwas-atlas-workflow
+```
+
+LDSC runs separately under Python 3.9.23 at the pinned CBIIT commit `6c673952cee74bd5c57aef1555a03b1c015399a0`. The setup downloads several GB of reference data, so inspect the source plan before running it:
 
 ```bash
 bash scripts/00_setup.sh
@@ -29,60 +94,80 @@ export LDSC_PYTHON=.ldsc-env/bin/python
 export LDSC_DIR=ldsc
 ```
 
-The setup follows the Python 3 `ldsc39` branch from CBIIT; the legacy upstream LDSC repository itself now points users to that maintained implementation.
+## Snakemake workflow
 
-## Phase 0: curate before downloading
-
-`config/traits.tsv` is the pipeline registry. A trait should be changed to `CURATED` only after its source file and metadata are verified. For each binary trait, record a citation for `pop_prev` in a `pop_prev_citation` column before requesting liability-scale h2. Keep the source's exact ancestry subset and genome build in the registry as well.
+The default workflow validates the locked panel and produces a source/readiness ledger without downloading raw GWAS data:
 
 ```bash
-$PYTHON_BIN scripts/10_phase0_audit.py \
-  --out results/tables/phase0_curation_audit.tsv
-
-# After a curated hg19/EUR raw file is placed in data/raw/:
-bash scripts/02_munge.sh insomnia mdd
+snakemake --cores 1
 ```
 
-The harmonizer writes one `data/harmonized/<trait>.qc.txt` ledger per trait. It requires rsIDs, autosomal hg19 coordinates, effect alleles, effect size, SE, P, and an auditable sample-size rule; it removes strand-ambiguous SNPs, MHC, low INFO/MAF variants when present, duplicates, and low effective-N variants.
-
-## Phase 1: h2 gate, rg, and Figure 2
+Real-data work is opt-in. Add only already reviewed traits to `phase0_traits` in `config/workflow.yaml`, materialize their registered raw files, and invoke:
 
 ```bash
-# Final h2 for binary traits requires a cited pop_prev_citation.
-bash scripts/03_h2_qc.sh insomnia mdd
+snakemake --cores 1 phase0
+snakemake --cores 1 h2
+snakemake --cores 1 phase1_rg
+```
 
-# An observed-scale binary h2 is allowed only for interim QC / rg preparation.
-bash scripts/03_h2_qc.sh --observed-scale insomnia mdd
+The existing shell entry points remain available and are called by Snakemake:
 
-# Uses only traits that are both CURATED and h2 PASS; writes the inclusion table.
+```bash
+bash scripts/02_munge.sh sleepdur breast_cancer
+bash scripts/03_h2_qc.sh sleepdur breast_cancer
 bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv
 ```
 
-`05_collate.py` keeps low h2 Z and high LDSC intercept as separate QC failures. The gate is h2 Z >= 4 and intercept <= 1.20. `04_rg.sh` creates `results/tables/phase1_inclusion.tsv` rather than asking anyone to overwrite curation state with `PASS`.
+Binary traits require a cited, phenotype-matched population prevalence for final liability-scale h². `--observed-scale` remains an interim QC option, not a substitute for the final table.
 
-## Reproducible smoke test
+## MiXeR terminology
 
-After installing the Python requirements (or with any environment that already has NumPy, Pandas, and Matplotlib):
+`scripts/05_collate.py` reports `ldsc_n_eff_h2` and `ldsc_n_eff_h2_gt_12000` only as the CDG3 LDSC screening arithmetic. It never labels that calculation `mixer_pass`. Actual MiXeR eligibility must come from a successful univariate MiXeR model and its diagnostics before bivariate MiXeR is attempted.
+
+## Reproducible smoke test and CI
+
+The smoke test uses deliberately fake data and exercises:
+
+- the exact 45-row panel contract;
+- tabular and whitespace-delimited raw inputs;
+- BETA and OR effect formats;
+- harmonization/QC ledgers;
+- all 45 synthetic h² logs;
+- readiness-backed Phase 1 selection;
+- the full synthetic 12 × 33 = 396 correlation family;
+- report, metadata, and heatmap generation; and
+- prominent synthetic-output watermarks.
 
 ```bash
-PYTHON_BIN=.ldsc-env/bin/python bash scripts/run_smoke_test.sh
+PYTHON_BIN=python3 bash scripts/run_smoke_test.sh
 ```
 
-The test accepts tabular and whitespace-delimited raw inputs, BETA and OR effect formats, runs h2 and rg parsing across the complete registry, exports the proposal metadata table, generates the report and heatmap, and watermarks all fake output under `results/_smoketest/`.
+GitHub Actions runs panel/source validation, Python and shell syntax checks, a Snakemake dry run, and the full synthetic smoke test on every push and pull request.
 
-## Outputs
+## Canonical Phase 0/1 outputs
 
 ```text
-config/traits.tsv                         registry and curation state
-config/public_gwas_sources.tsv            verified public-source acquisition registry
-scripts/11_materialize_public_gwas.sh     safe download/materialization helper
-scripts/10_phase0_audit.py                source-metadata readiness audit
-data/harmonized/<trait>.qc.txt            filter-by-filter QC ledger
-data/munged/<trait>.sumstats.gz           HapMap3 LDSC input (not committed)
-results/tables/h2_summary.tsv             h2, Z, intercept, QC reason
-results/tables/phase1_inclusion.tsv       CURATED + h2-PASS selection record
-results/tables/rg_matrix.tsv              rg, SE, P, Benjamini-Hochberg FDR
-results/figures/fig2_rg_heatmap.png       provenance-stamped Phase 1 heatmap
+config/analysis_panel.tsv                    locked 45-trait analysis manifest
+config/analysis_panel.lock.json              ordered trait/domain identity lock
+config/public_gwas_sources.tsv               source URLs, versions, access, hashes
+results/tables/analysis_panel_provenance.tsv manifest and trait-set fingerprints
+results/tables/trait_readiness.tsv            per-trait readiness stages/blockers
+data/harmonized/<trait>.qc.txt                filter-by-filter QC ledger
+data/munged/<trait>.sumstats.gz               canonical HapMap3 LDSC input
+results/tables/h2_summary.tsv                 h², SE, Z, intercept, ratio, QC
+results/tables/phase1_inclusion.tsv           locked-panel Phase 1 eligibility
+results/tables/rg_matrix.tsv                  rg, SE, P, and Benjamini-Hochberg FDR
+results/figures/fig2_rg_heatmap.png           provenance-stamped Phase 1 heatmap
 ```
 
-Generated raw data, intermediate files, logs, tables, figures, and smoke-test artifacts are ignored by Git so an orphan result cannot accidentally become versioned evidence.
+Generated raw data, intermediate files, logs, tables, figures, caches, and smoke-test artifacts are ignored by Git. A release must freeze selected outputs separately with checksums, configs, provenance, tool versions, and the producing commit hash.
+
+The complete scientific finish line is tracked separately from infrastructure
+progress in `docs/atlas_v1_finish_line.md`. Audit it at any time with:
+
+```bash
+python3 scripts/99_atlas_acceptance.py --report-only
+```
+
+Without `--report-only`, the command fails until every atlas-v1.0 scientific and
+release gate is supported by real, non-synthetic artifacts.

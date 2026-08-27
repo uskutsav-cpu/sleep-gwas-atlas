@@ -10,6 +10,8 @@ ROOT=$(pwd)
 CONDA_BIN=${CONDA_BIN:-conda}
 LDSC_ENV_DIR=${LDSC_ENV_DIR:-.ldsc-env}
 LDSC_DIR=${LDSC_DIR:-ldsc}
+LDSC_REPOSITORY=https://github.com/CBIIT/ldsc.git
+LDSC_COMMIT=6c673952cee74bd5c57aef1555a03b1c015399a0
 REFERENCE_URL=${REFERENCE_URL:-https://zenodo.org/records/8182036/files/eur_w_ld_chr.tar.gz?download=1}
 REFERENCE_MD5=${REFERENCE_MD5:-e2f16343c4cfaa76caa7d0c03d26b489}
 
@@ -20,8 +22,9 @@ if ! command -v "$CONDA_BIN" > /dev/null 2>&1; then
   exit 1
 fi
 PACKAGES=(
-  python=3.9 numpy=1.23 pandas=1.5 scipy=1.9 python-dateutil=2.8 pytz=2022
-  bitarray=2 nose=1.3 pybedtools=0.10 flask requests matplotlib=3.7
+  python=3.9.23 numpy=1.21.5 pandas=1.3.3 scipy=1.7.3
+  python-dateutil=2.8.2 pytz=2022.7.1 bitarray=2.8.3 nose=1.3.7
+  pybedtools=0.10.0 flask=2.3.3 requests=2.31.0 matplotlib=3.7.5
 )
 if [ ! -x "$LDSC_ENV_DIR/bin/python" ]; then
   # Direct community channels avoid implicitly accepting Anaconda's commercial
@@ -42,10 +45,16 @@ LDSC_PYTHON="$LDSC_ENV_DIR/bin/python"
 
 echo "==> [2/4] LDSC (maintained Python 3 implementation)"
 if [ ! -d "$LDSC_DIR/.git" ]; then
-  git clone --branch ldsc39 --depth 1 https://github.com/CBIIT/ldsc.git "$LDSC_DIR"
-else
-  echo "    $LDSC_DIR already exists, leaving its checked-out revision unchanged"
+  git clone "$LDSC_REPOSITORY" "$LDSC_DIR"
+  git -C "$LDSC_DIR" checkout --detach "$LDSC_COMMIT"
 fi
+ACTUAL_LDSC_COMMIT=$(git -C "$LDSC_DIR" rev-parse HEAD)
+if [ "$ACTUAL_LDSC_COMMIT" != "$LDSC_COMMIT" ]; then
+  echo "ERROR: LDSC must be pinned at $LDSC_COMMIT, found $ACTUAL_LDSC_COMMIT" >&2
+  echo "       Move the existing LDSC checkout aside and rerun setup." >&2
+  exit 1
+fi
+echo "    pinned LDSC commit: $ACTUAL_LDSC_COMMIT"
 # CBIIT/ldsc's ldsc39 revision opens compressed summary statistics in binary
 # mode while parsing their header. Python 3 therefore raises TypeError before
 # analysis. Apply this narrowly scoped, version-checked compatibility patch;
@@ -103,7 +112,7 @@ NOTE ON DOWNLOAD MIRRORS
 
 NEXT
   1. Put only verified hg19, EUR raw sumstats in data/raw/, named as in
-     config/traits.tsv. Do not use an hg38 file without an explicit,
+     config/analysis_panel.tsv. Do not use an hg38 file without an explicit,
      documented liftover decision.
   2. export PYTHON_BIN=.ldsc-env/bin/python LDSC_PYTHON=.ldsc-env/bin/python
      LDSC_DIR=ldsc
