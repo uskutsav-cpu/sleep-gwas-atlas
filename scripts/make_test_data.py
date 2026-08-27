@@ -61,6 +61,10 @@ def make(n=60000, style="beta"):
     })
     if style == "or":
         df["OR"] = np.exp(beta)
+        # Exercise the registered PGC bipolar convention: the released
+        # NEFFDIV2 field is half of the conventional total effective N used by
+        # LDSC.  The production harmonizer must derive N=400,000 here.
+        df["NEFFDIV2"] = df.pop("N") / 2.0
         df = df.rename(columns={"SNP": "MarkerName", "A1": "Effect_allele",
                                 "A2": "Other_allele", "FRQ": "EAF",
                                 "SE": "StdErr", "P": "P-value"})

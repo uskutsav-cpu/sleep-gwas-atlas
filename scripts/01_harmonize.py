@@ -175,6 +175,36 @@ def map_columns(columns):
     return mapped
 
 
+def apply_schema_sample_size_mapping(config_path, trait, header_columns, mapped):
+    """Apply an explicit source-schema effective-N conversion, if registered."""
+    schema_path = os.path.join(os.path.dirname(os.path.abspath(config_path)), "gwas_schemas.tsv")
+    if not os.path.isfile(schema_path):
+        return mapped, "not supplied"
+    schema = pd.read_csv(schema_path, sep="\t", dtype=str)
+    rows = schema.loc[schema["trait_id"] == trait]
+    if len(rows) > 1:
+        fail(f"expected at most one source-schema row for trait '{trait}', found {len(rows)}")
+    if len(rows) == 0:
+        return mapped, "not supplied"
+    raw_mapping = rows.iloc[0].get("sample_size", "")
+    mapping = "" if pd.isna(raw_mapping) else str(raw_mapping).strip()
+    match = re.fullmatch(r"DERIVED_N_EFF=2\*([A-Za-z0-9_.-]+)", mapping)
+    if not match:
+        return mapped, mapping or "not supplied"
+
+    literal = match.group(1)
+    matches = [column for column in header_columns if str(column).strip().casefold() == literal.casefold()]
+    if len(matches) != 1:
+        fail(
+            f"schema requires {mapping}, but the source header contains "
+            f"{len(matches)} columns named {literal!r}"
+        )
+    actual = matches[0]
+    mapped = {standard: original for standard, original in mapped.items() if original != actual}
+    mapped["N_EFF_HALF"] = actual
+    return mapped, mapping
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--trait", required=True)
@@ -277,6 +307,9 @@ def main():
     # fails in seconds rather than after allocating the complete table.
     header = pd.read_csv(args.infile, nrows=0, **read_kwargs)
     columns = map_columns(header.columns)
+    columns, sample_size_schema_mapping = apply_schema_sample_size_mapping(
+        args.config, args.trait, header.columns, columns
+    )
     required = ["A1", "A2", "SE", "P"]
     if args.variant_map_strategy == "BY_COORD_ALLELES":
         if "CHR" in columns and "BP" in columns:
@@ -595,6 +628,7 @@ def main():
         report.write(f"configured_build\t{metadata.get('build', '')}\n")
         report.write(f"output_build\t{TARGET_BUILD}\n")
         report.write(f"source_build_argument\t{args.source_build or 'not supplied'}\n")
+        report.write(f"sample_size_schema_mapping\t{sample_size_schema_mapping}\n")
         report.write(f"variant_map\t{os.path.abspath(args.variant_map) if args.variant_map else 'not supplied'}\n")
         report.write(f"variant_map_strategy\t{args.variant_map_strategy or 'not supplied'}\n")
         report.write(

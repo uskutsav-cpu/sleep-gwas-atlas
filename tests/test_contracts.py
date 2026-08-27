@@ -595,6 +595,42 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(rows[0]["FRQ"], "0.2")
         self.assertEqual(float(rows[0]["N"]), 101962.0)
 
+    def test_scz_release_neff_is_doubled_by_registered_schema(self):
+        payload = (
+            '##fileFormat=PGCsumstatsVCFv1.0\n'
+            '##genomeReference="GRCh37"\n'
+            'CHROM\tID\tPOS\tA1\tA2\tFCON\tIMPINFO\tBETA\tSE\tPVAL\tNCAS\tNCON\tNEFF\n'
+            '1\trs123\t1000000\tA\tC\t0.2\t0.99\t0.2\t0.1\t0.01\t53386\t77258\t58749.13\n'
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "scz.tsv.gz"
+            outdir = directory / "out"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(payload)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "scz",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--source-build", "hg19",
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(outdir / "scz.harmonized.tsv.gz", "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            qc = (outdir / "scz.qc.txt").read_text(encoding="utf-8")
+        self.assertEqual(len(rows), 1)
+        self.assertAlmostEqual(float(rows[0]["N"]), 117498.26)
+        self.assertIn("sample_size_schema_mapping\tDERIVED_N_EFF=2*NEFF", qc)
+        self.assertIn("sample-size mode: per-SNP N_eff derived as 2 * source NEFF", qc)
+
     def test_opengwas_sbp_vcf_materializes_by_named_format_fields(self):
         materializer = load_sbp_materializer()
         vcf_url = "https://example.org/public/ieu-b-38/ieu-b-38.vcf.gz?token=short-lived"
