@@ -99,7 +99,11 @@ def load_source_schemas(path, selected_sources):
             })
     if invalid_pairs:
         raise SystemExit(f"ERROR: source schemas do not match selected trait sources: {invalid_pairs}")
-    allowed = {"SCHEMA_PENDING", "SCHEMA_VERIFIED"}
+    allowed = {
+        "SCHEMA_PENDING",
+        "SCHEMA_VERIFIED",
+        "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING",
+    }
     invalid = schemas.loc[~schemas["schema_status"].isin(allowed), ["source_id", "schema_status"]]
     if len(invalid):
         raise SystemExit(f"ERROR: invalid source schema status: {invalid.to_dict('records')}")
@@ -195,7 +199,9 @@ def main():
             schema_status = "UNREGISTERED"
         else:
             schema_status = schema["schema_status"]
-            if schema_status != "SCHEMA_VERIFIED":
+            if schema_status == "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING":
+                harmonization_issues.append("source_variant_mapping_required")
+            elif schema_status != "SCHEMA_VERIFIED":
                 harmonization_issues.append("source_schema_not_verified")
         if trait["type"] == "binary":
             if not numeric(trait["ncase"]) or not numeric(trait["ncontrol"]):

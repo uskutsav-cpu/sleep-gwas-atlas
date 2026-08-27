@@ -87,6 +87,11 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(len(pairs), len(set(pairs)))
         for source_id, trait_id in pairs:
             self.assertEqual(selected.get(trait_id), source_id)
+        allowed_statuses = {
+            "SCHEMA_PENDING", "SCHEMA_VERIFIED",
+            "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING",
+        }
+        self.assertFalse({row["schema_status"] for row in schemas} - allowed_statuses)
         jones = [row for row in schemas if row["source_id"] == "jones_2019_accelerometer_sleep"]
         self.assertEqual({row["trait_id"] for row in jones}, {
             "sleep_efficiency", "accel_sleep_duration", "sleep_timing",

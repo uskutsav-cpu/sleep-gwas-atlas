@@ -47,7 +47,10 @@ effect, SE, P, frequency, INFO, and sample-size fields for each selected
 source-and-trait pair. This distinction is required when one archive contains
 multiple phenotypes with different effect columns.
 A source can be identity/checksum verified while its schema remains pending;
-that state cannot advance to `HARMONIZATION_READY`.
+that state cannot advance to `HARMONIZATION_READY`. A verified schema that
+lacks usable rsIDs is recorded as `SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING`:
+the columns are understood, but harmonization remains blocked until an audited
+mapping step exists.
 
 Unknown facts are written as `UNRESOLVED`, never guessed. Validate the contract with:
 

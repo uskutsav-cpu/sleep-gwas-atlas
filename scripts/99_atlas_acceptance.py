@@ -108,7 +108,11 @@ def source_schema_gate(root: Path, rows: list[dict[str, str]]) -> Gate:
     blocked = []
     for row in rows:
         schema = schemas.get((row.get("source_id", ""), row.get("trait_id", "")))
-        if row.get("source_status") == "SOURCE_VERIFIED" and schema and schema.get("schema_status") == "SCHEMA_VERIFIED":
+        if (
+            row.get("source_status") == "SOURCE_VERIFIED"
+            and schema
+            and schema.get("schema_status", "").startswith("SCHEMA_VERIFIED")
+        ):
             verified.append(row["trait_id"])
         else:
             blocked.append(row["trait_id"])

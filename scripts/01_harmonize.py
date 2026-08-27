@@ -50,9 +50,15 @@ ALIASES = {
     "SNP": ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id", "marker"],
     "CHR": ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
     "BP": ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
-    "A1": ["a1", "effect_allele", "ea", "allele1", "tested_allele", "alt"],
+    "A1": [
+        "a1", "effect_allele", "effec_allele", "ea", "allele1",
+        "tested_allele", "alt",
+    ],
     "A2": ["a2", "a0", "other_allele", "nea", "allele0", "allele2", "non_effect_allele", "ref"],
-    "FRQ": ["frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq", "freq1"],
+    "FRQ": [
+        "frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq",
+        "freq1", "freq_tested_allele_in_hrs", "pooled_alt_af",
+    ],
     "BETA": [
         "beta", "effect", "b", "log_odds", "logor", "effect_size",
         # Documented headers in the public UKB sleep releases registered in
