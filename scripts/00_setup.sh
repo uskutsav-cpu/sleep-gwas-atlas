@@ -116,7 +116,7 @@ NEXT
      documented liftover decision.
   2. export PYTHON_BIN=.ldsc-env/bin/python LDSC_PYTHON=.ldsc-env/bin/python
      LDSC_DIR=ldsc
-  3. bash scripts/02_munge.sh insomnia mdd
-  4. bash scripts/03_h2_qc.sh insomnia mdd
+  3. bash scripts/02_munge.sh insomnia bipolar
+  4. bash scripts/03_h2_qc.sh insomnia bipolar
   5. bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv
 EOF

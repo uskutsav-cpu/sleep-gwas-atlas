@@ -57,7 +57,8 @@ ALIASES = {
     "A2": ["a2", "a0", "other_allele", "nea", "allele0", "allele2", "non_effect_allele", "ref"],
     "FRQ": [
         "frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq",
-        "freq1", "freq_tested_allele_in_hrs", "pooled_alt_af",
+        "freq1", "freq_tested_allele_in_hrs", "pooled_alt_af", "fcon",
+        "frq_u_186843",
     ],
     "BETA": [
         "beta", "effect", "b", "log_odds", "logor", "effect_size",
@@ -79,10 +80,11 @@ ALIASES = {
     ],
     "N": ["n", "n_total", "samplesize", "n_complete_samples"],
     "N_EFF": ["neff", "n_eff", "effective_n", "effective_sample_size"],
-    "NCASE": ["ncase", "n_cas", "n_cases", "cases"],
-    "NCONTROL": ["ncontrol", "n_con", "n_controls", "controls"],
+    "N_EFF_HALF": ["neffdiv2"],
+    "NCASE": ["ncase", "n_cas", "n_cases", "cases", "ncas", "nca"],
+    "NCONTROL": ["ncontrol", "n_con", "n_controls", "controls", "ncon", "nco"],
     "INFO": [
-        "info", "imputation_info", "rsq", "r2", "imp_quality",
+        "info", "imputation_info", "rsq", "r2", "imp_quality", "impinfo",
         # Schumacher et al. 2018 PRACTICAL EUR meta-analysis (GCST006085).
         "oncoarray_imputation_r2",
     ],
@@ -132,13 +134,20 @@ def sha256(path):
 def sniff_separator(path):
     opener = gzip.open if path.endswith(".gz") else open
     with opener(path, "rt") as handle:
-        header = handle.readline()
+        metadata_lines = 0
+        for header in handle:
+            if header.startswith("##"):
+                metadata_lines += 1
+                continue
+            break
+        else:
+            fail("source contains metadata but no tabular header")
     if header.count("\t") >= 2:
-        return "\t", "tab"
+        return "\t", "tab", metadata_lines
     if header.count(",") >= 2:
-        return ",", "comma"
+        return ",", "comma", metadata_lines
     if len(header.split()) >= 3:
-        return r"\s+", "whitespace"
+        return r"\s+", "whitespace", metadata_lines
     fail("could not determine a delimiter from the header")
 
 
@@ -183,13 +192,13 @@ def main():
     if args.source_build and normalise_build(args.source_build) != TARGET_BUILD:
         fail(f"--source-build {args.source_build!r} is not hg19/GRCh37; refusing silent liftover")
 
-    separator, separator_name = sniff_separator(args.infile)
+    separator, separator_name, metadata_lines = sniff_separator(args.infile)
     # Let pandas retain native numeric columns. Coercing every one of ~10M
     # rows to Python strings creates a multi-gigabyte working set before the
     # explicit validation below; SNP and allele fields are still converted to
     # normalized strings, and every numerical field is still passed through
     # pd.to_numeric before any QC decision.
-    read_kwargs = {"low_memory": False, "comment": None}
+    read_kwargs = {"low_memory": False, "comment": None, "skiprows": metadata_lines}
     if separator == r"\s+":
         read_kwargs.pop("low_memory")
         read_kwargs.update({"sep": separator, "engine": "python"})
@@ -237,7 +246,7 @@ def main():
         out["BETA"] = np.log(odds_ratio.where(odds_ratio > 0))
         log("converted OR to log(OR)")
 
-    for column in ["CHR", "BP", "FRQ", "SE", "P", "N", "N_EFF", "NCASE", "NCONTROL", "INFO"]:
+    for column in ["CHR", "BP", "FRQ", "SE", "P", "N", "N_EFF", "N_EFF_HALF", "NCASE", "NCONTROL", "INFO"]:
         if column in out:
             out[column] = pd.to_numeric(out[column], errors="coerce")
     for column in ["SNP", "A1", "A2"]:
@@ -291,6 +300,11 @@ def main():
     if binary and "N_EFF" in out:
         out["N"] = out["N_EFF"]
         n_mode = "per-SNP N_eff from source"
+        if metadata_ncase and metadata_ncontrol:
+            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+    elif binary and "N_EFF_HALF" in out:
+        out["N"] = 2.0 * out["N_EFF_HALF"]
+        n_mode = "per-SNP N_eff derived as 2 * source NEFFDIV2"
         if metadata_ncase and metadata_ncontrol:
             total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
     elif binary and "NCASE" in out and "NCONTROL" in out:

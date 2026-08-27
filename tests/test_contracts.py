@@ -156,6 +156,41 @@ class PanelContractTests(unittest.TestCase):
                     self.assertEqual(len(rows), 1)
                     self.assertAlmostEqual(float(rows[0]["BETA"]), expected_beta)
 
+    def test_pgc_metadata_and_neffdiv2_harmonize_by_named_fields(self):
+        payload = (
+            '##fileFormat=PGCsumstatsVCFv1.0\n'
+            '##genomeReference="GRCh37"\n'
+            '#CHROM\tPOS\tID\tA1\tA2\tBETA\tSE\tPVAL\tFCON\tIMPINFO\tNEFFDIV2\tNCAS\tNCON\n'
+            '1\t1000000\trs123\tA\tC\t0.2\t0.1\t0.01\t0.2\t0.99\t50981\t41917\t371549\n'
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "bipolar.tsv.gz"
+            outdir = directory / "out"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(payload)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "bipolar",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--source-build", "hg19",
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(outdir / "bipolar.harmonized.tsv.gz", "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["SNP"], "rs123")
+        self.assertEqual(rows[0]["FRQ"], "0.2")
+        self.assertEqual(float(rows[0]["N"]), 101962.0)
+
     def test_opengwas_sbp_vcf_materializes_by_named_format_fields(self):
         materializer = load_sbp_materializer()
         vcf_url = "https://example.org/public/ieu-b-38/ieu-b-38.vcf.gz?token=short-lived"

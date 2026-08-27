@@ -7,8 +7,8 @@
 # liability-scale h2 table.
 #
 # Usage:
-#   bash scripts/03_h2_qc.sh insomnia mdd
-#   bash scripts/03_h2_qc.sh --observed-scale insomnia mdd
+#   bash scripts/03_h2_qc.sh insomnia bipolar
+#   bash scripts/03_h2_qc.sh --observed-scale insomnia bipolar
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/_common.sh

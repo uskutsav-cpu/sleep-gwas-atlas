@@ -19,7 +19,7 @@ esac
 
 "$PYTHON_BIN" scripts/make_test_data.py --logs --raw --out data/_test_raw --logdir "$SMOKE_DIR"
 "$PYTHON_BIN" scripts/01_harmonize.py --trait insomnia --infile data/_test_raw/insomnia.txt.gz --outdir data/_test_harmonized
-"$PYTHON_BIN" scripts/01_harmonize.py --trait mdd --infile data/_test_raw/mdd.txt.gz --outdir data/_test_harmonized
+"$PYTHON_BIN" scripts/01_harmonize.py --trait bipolar --infile data/_test_raw/bipolar.txt.gz --outdir data/_test_harmonized
 "$PYTHON_BIN" scripts/05_collate.py --mode h2 --logdir "$SMOKE_DIR" --out "$SMOKE_DIR/h2_summary.tsv"
 "$PYTHON_BIN" scripts/make_smoke_readiness.py --h2 "$SMOKE_DIR/h2_summary.tsv" \
   --out "$SMOKE_DIR/trait_readiness.tsv"

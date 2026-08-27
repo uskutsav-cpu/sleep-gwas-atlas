@@ -66,6 +66,18 @@ an ancestry waiver: the paper says the main analysis included participants
 regardless of ancestry and gives different 53,924/276,523 counts for its
 European sensitivity analysis. The manifest therefore remains `MIXED`, and the
 schema records the required log-OR-SE derivation from the confidence interval.
+The current official PGC download index then resolves three psychiatric
+sources that older branch notes had treated as restricted. The Demontis 2023
+ADHD, Mullins 2021 all-case bipolar-disorder, and Trubetskoy 2022 European
+schizophrenia files are public Figshare releases with exact file IDs, upstream
+MD5 values, complete SHA-256 checks, literal schemas, and primary-paper sample
+definitions. They bring the total to 41/45. The schizophrenia manifest now
+uses the 53,386-case/77,258-control European autosomal stratum; the paper's
+76,755/243,649 headline includes a second-stage deCODE follow-up at only 1,249
+variants and is not a genome-wide EUR file. The official Edinburgh DataShare
+Howard 2019 file then brings the total to 42/45. It is the exact 170,756-case,
+329,443-control genome-wide UKB+PGC release without 23andMe, but it has rsIDs
+without coordinates and therefore remains blocked on an audited GRCh37 mapping.
 These counts also do not claim that every source is on GRCh37, binary
 prevalence is resolved, or LDSC is ready. Shared samples are retained as
 explicit analysis concerns: IBD/CD/UC overlap, the three lipid traits share
@@ -77,10 +89,6 @@ These records were not promoted:
 
 | Trait | Reason |
 |---|---|
-| major depression | Branch substituted Wray 2018 for the selected, larger Howard 2019 release because the latter is controlled. Ease of access is not the selection criterion. |
-| schizophrenia | Accession/publication/phenotype notes conflict and require primary-source reconciliation. |
-| bipolar disorder | Branch substituted a roughly five-fold smaller 2016 GWAS for Mullins 2021. |
-| ADHD | Branch substituted a later accession whose phenotype and relationship to the locked Demontis 2023 source require review. |
 | multiple sclerosis | Branch substituted a roughly ten-fold smaller 2016 German GWAS for IMSGC 2019. |
 | type 2 diabetes | Branch substituted Scott 2017; although genome-wide, its bare coordinate marker lacks the rsID mapping needed by the current LDSC path. |
 

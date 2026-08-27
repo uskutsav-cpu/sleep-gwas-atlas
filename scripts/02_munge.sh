@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Harmonize and munge one or more source-verified, EUR hg19 traits.
-# Usage: bash scripts/02_munge.sh insomnia mdd
+# Usage: bash scripts/02_munge.sh insomnia bipolar
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/_common.sh

@@ -211,7 +211,7 @@ if __name__ == "__main__":
 
     if a.raw or not a.logs:
         os.makedirs(a.out, exist_ok=True)
-        for trait, style, sepc in [("insomnia", "beta", "\t"), ("mdd", "or", " ")]:
+        for trait, style, sepc in [("insomnia", "beta", "\t"), ("bipolar", "or", " ")]:
             d = make(style=style)
             f = os.path.join(a.out, f"{trait}.txt.gz")
             d.to_csv(f, sep=sepc, index=False, compression="gzip")
