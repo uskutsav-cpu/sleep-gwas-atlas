@@ -2,7 +2,7 @@
 
 This log records the locally exercised immune release selected for
 `atlas-v1.0`. Raw and derived data remain ignored and are not redistributed.
-The nine-trait, eight-pair checkpoint is explicitly partial and does not
+The ten-trait, 16-pair checkpoint is explicitly partial and does not
 replace the locked 45-trait, 396-pair analysis.
 
 | Trait | Selected release | Verified file evidence | Local checkpoint |
@@ -29,9 +29,10 @@ This is anchored to the population-based South Limburg estimate of 331 per
 study](https://doi.org/10.1093/ecco-jcc/jjx055); it is not represented as a
 global prevalence.
 
-The 1,144,234-SNP input passed the predefined h² gate. In the eight-pair
+The 1,144,234-SNP input passed the predefined h² gate. In the 16-pair
 partial checkpoint, snoring×Crohn disease has r_g -0.0322 (SE 0.0295,
-P 0.2751, partial-family FDR 0.3668). This is not significant in the partial
-family and is not a substitute for the final 396-pair FDR. The Crohn, combined
+P 0.2751, partial-family FDR 0.3144) and does not pass. Insomnia×Crohn disease
+has r_g -0.0708 (SE 0.0312, P 0.0231, FDR 0.03984) and passes this partial
+family, but is not a substitute for the final 396-pair FDR. The Crohn, combined
 IBD, and ulcerative-colitis strata from this study are not independent, so
 future cross-trait interpretation must account for their sample overlap.

@@ -1,7 +1,8 @@
 # Public sleep-GWAS acquisition
 
 This document records **source-verified public** releases selected
-for Phase 0. It is an acquisition log, not an LDSC result. A downloaded file
+for Phase 0 and explicitly named local checkpoints. Source verification is not
+an LDSC result. A downloaded file
 does not become `HARMONIZATION_READY` until its real header, build,
 effect-allele convention, sample-size treatment, and Phase 0 filters have been
 checked.
@@ -38,6 +39,34 @@ Historical short-/long-sleep aliases are not part of atlas-v1.0. The source
 registry maps each selected release to exactly one locked phenotype, preventing
 duplicate files from entering the Phase 1 multiple-testing family as if they
 were independent traits.
+
+## Jansen 2019 UK Biobank insomnia checkpoint
+
+The exact UK Biobank-only public release is a 314,778,585-byte direct gzip with
+SHA-256 `32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b`.
+It is hard-linked to `data/raw/insomnia.txt.gz`, avoiding a duplicate local
+copy. Its 10,862,567 rows use the verified `SNP CHR BP A1 A2 MAF OR SE P N
+INFO` fields; the production path treats A1 as the effect allele and converts
+positive odds ratios to log-odds.
+
+The locked filters retained 6,077,635 rows (55.95%). HapMap3 munging retained
+1,133,335 nonmissing effects after 120 allele mismatches. The primary
+[Jansen et al. study](https://doi.org/10.1038/s41588-018-0333-3) reports
+frequent-insomnia prevalence of 28.3% in this exact UK Biobank stratum and
+29.9% in the full study. The manifest therefore uses `K=0.30` as a rounded,
+phenotype-matched frequent-complaint convention, not as the prevalence of
+clinically diagnosed insomnia disorder.
+
+Liability h² is 0.1008 (SE 0.0045, Z 22.40), with intercept 1.0148, and passes
+the predefined gate. In the 16-pair partial family, insomnia has FDR-significant
+correlations with ADHD (r_g 0.4033, FDR 4.669e-36), BMI (0.1723, 4.034e-13),
+stroke (0.1382, 0.002133), SBP (0.0572, 0.01349), longevity (-0.1291, 0.03984),
+Crohn disease (-0.0708, 0.03984), and atrial fibrillation (0.0646, 0.03984).
+Its schizophrenia estimate (0.0379, FDR 0.1596) does not pass. These partial
+results are not a substitute for the locked 396-pair correction family.
+Several contributing GWAS include UK Biobank participants; bivariate LDSC
+estimates a cross-trait intercept for that overlap, but the correlations remain
+non-causal and still require the final sample-overlap and robustness audits.
 
 ## Header and effect-column verification
 

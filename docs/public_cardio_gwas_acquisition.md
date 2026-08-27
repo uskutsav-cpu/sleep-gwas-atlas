@@ -2,7 +2,7 @@
 
 This log records the locally exercised cardiovascular releases selected for
 `atlas-v1.0`. Raw and derived data remain ignored and are not redistributed.
-The nine-trait checkpoint is explicitly partial and does not replace the
+The ten-trait checkpoint is explicitly partial and does not replace the
 locked 45-trait, 396-pair analysis.
 
 | Trait | Selected release | Verified file evidence | Local checkpoint |
@@ -22,6 +22,10 @@ does not present that value as age-specific European or global lifetime risk.
 The source carries no rsID, so the production path assigns identities only
 when GRCh37 coordinate and unordered allele pair agree with the
 checksum-pinned EUR HapMap3 map. The resulting 1,176,288 effects passed the h²
-gate (Z 12.09). In the eight-pair partial checkpoint, snoring×stroke has r_g
-0.0598 (SE 0.0358, P 0.0953, partial-family FDR 0.1906). This is not significant
-in the partial family and is not a substitute for the final 396-pair FDR.
+gate (Z 12.09). In the 16-pair partial checkpoint, snoring×stroke has r_g
+0.0598 (SE 0.0358, P 0.0953, partial-family FDR 0.1386) and does not pass.
+Insomnia×stroke has r_g 0.1382 (SE 0.0414, P 0.0008, FDR 0.002133),
+insomnia×SBP has r_g 0.0572 (SE 0.0208, P 0.0059, FDR 0.01349), and
+insomnia×atrial-fibrillation has r_g 0.0646 (SE 0.0288, P 0.0249, FDR
+0.03984); all three pass the partial-family threshold. None substitutes for
+the final 396-pair FDR.
