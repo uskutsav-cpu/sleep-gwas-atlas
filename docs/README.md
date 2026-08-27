@@ -16,5 +16,7 @@ Current curation records:
 - `panel_45_selection.md` — provenance for the final-45 selection decision.
 - `public_sleep_gwas_acquisition.md` — verified public sleep source releases.
 - `public_aging_gwas_acquisition.md` — verified public aging source releases.
+- `public_cardio_gwas_acquisition.md` — verified public cardiovascular source
+  releases and local checkpoints.
 - `aging_source_queue.md` — primary-source discoveries awaiting their own
   download and file-level Phase 0 checks.
