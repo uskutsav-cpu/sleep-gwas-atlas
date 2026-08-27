@@ -100,11 +100,14 @@ def source_schema_gate(root: Path, rows: list[dict[str, str]]) -> Gate:
     path = root / relative
     if not path.is_file():
         return Gate("source_schemas", "BLOCKED", "", f"missing schema registry: {relative}")
-    schemas = {row.get("source_id", ""): row for row in read_tsv(path)}
+    schemas = {
+        (row.get("source_id", ""), row.get("trait_id", "")): row
+        for row in read_tsv(path)
+    }
     verified = []
     blocked = []
     for row in rows:
-        schema = schemas.get(row.get("source_id", ""))
+        schema = schemas.get((row.get("source_id", ""), row.get("trait_id", "")))
         if row.get("source_status") == "SOURCE_VERIFIED" and schema and schema.get("schema_status") == "SCHEMA_VERIFIED":
             verified.append(row["trait_id"])
         else:

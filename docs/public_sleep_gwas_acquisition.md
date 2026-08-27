@@ -95,7 +95,10 @@ SPT-window-midpoint phenotype. The materialized files contain `rs6680723` at
 [Ensembl GRCh37 mapping](https://grch37.rest.ensembl.org/variation/human/rs6680723?content-type=application/json),
 whereas Ensembl maps GRCh37 `1:534192` to GRCh38 `1:598812`. This provides an
 independent, discriminating hg19/GRCh37 sentinel, so the three continuous
-accelerometer traits now pass the source/build Phase 0 curation gate.
+accelerometer traits now pass the source/build Phase 0 curation gate. Their
+three separate rows in `gwas_schemas.tsv` lock the exact sleep-efficiency,
+SPT-duration, and SPT-midpoint `RAW_SIN` effect families; the shared archive
+cannot satisfy one trait with another trait's columns.
 
 The source pages do not replace header-level build verification. New entries
 must begin with `source_status=SOURCE_PENDING` in

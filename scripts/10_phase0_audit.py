@@ -27,7 +27,7 @@ SOURCE_COLUMNS = {
     "build_status", "acquisition_status",
 }
 SCHEMA_COLUMNS = {
-    "source_id", "schema_status", "file_format", "variant_id", "chromosome",
+    "source_id", "trait_id", "schema_status", "file_format", "variant_id", "chromosome",
     "position", "effect_allele", "other_allele", "effect",
     "effect_convention", "standard_error", "p_value", "eaf", "info",
     "sample_size", "notes",
@@ -77,21 +77,33 @@ def load_public_sources(path, trait_ids):
     return by_trait
 
 
-def load_source_schemas(path):
+def load_source_schemas(path, selected_sources):
     if not os.path.exists(path):
         raise SystemExit(f"ERROR: GWAS schema registry not found: {path}")
     schemas = pd.read_csv(path, sep="\t", dtype=str).fillna("")
     missing = SCHEMA_COLUMNS.difference(schemas.columns)
     if missing:
         raise SystemExit(f"ERROR: GWAS schema registry missing columns: {sorted(missing)}")
-    if schemas["source_id"].duplicated().any():
-        duplicates = schemas.loc[schemas["source_id"].duplicated(), "source_id"].tolist()
-        raise SystemExit(f"ERROR: duplicate source schema rows: {duplicates}")
+    duplicate_pairs = schemas.duplicated(subset=["source_id", "trait_id"], keep=False)
+    if duplicate_pairs.any():
+        duplicates = schemas.loc[duplicate_pairs, ["source_id", "trait_id"]].to_dict("records")
+        raise SystemExit(f"ERROR: duplicate source/trait schema rows: {duplicates}")
+    invalid_pairs = []
+    for _, schema in schemas.iterrows():
+        selected_source = selected_sources.get(schema["trait_id"])
+        if selected_source != schema["source_id"]:
+            invalid_pairs.append({
+                "source_id": schema["source_id"],
+                "trait_id": schema["trait_id"],
+                "selected_source_id": selected_source or "UNSELECTED_TRAIT",
+            })
+    if invalid_pairs:
+        raise SystemExit(f"ERROR: source schemas do not match selected trait sources: {invalid_pairs}")
     allowed = {"SCHEMA_PENDING", "SCHEMA_VERIFIED"}
     invalid = schemas.loc[~schemas["schema_status"].isin(allowed), ["source_id", "schema_status"]]
     if len(invalid):
         raise SystemExit(f"ERROR: invalid source schema status: {invalid.to_dict('records')}")
-    return {row["source_id"]: row for _, row in schemas.iterrows()}
+    return {(row["source_id"], row["trait_id"]): row for _, row in schemas.iterrows()}
 
 
 def load_h2(path):
@@ -131,7 +143,8 @@ def main():
     if missing:
         raise SystemExit(f"ERROR: analysis panel missing columns: {sorted(missing)}")
     sources_by_trait = load_public_sources(args.sources, set(config["trait_id"]))
-    schemas_by_source = load_source_schemas(args.schemas)
+    selected_sources = dict(zip(config["trait_id"], config["source_id"]))
+    schemas_by_source_trait = load_source_schemas(args.schemas, selected_sources)
     h2_by_trait = load_h2(args.h2)
     panel_hash = manifest_sha256(args.config)
 
@@ -139,7 +152,7 @@ def main():
     for _, trait in config.iterrows():
         trait_id = trait["trait_id"]
         source = sources_by_trait.get(trait_id)
-        schema = schemas_by_source.get(trait["source_id"])
+        schema = schemas_by_source_trait.get((trait["source_id"], trait_id))
 
         source_issues = []
         if trait["source_status"] != "SOURCE_VERIFIED":

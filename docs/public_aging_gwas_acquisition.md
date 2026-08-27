@@ -65,9 +65,12 @@ annotation passed their official manifest MD5s, and
 variant order to retain documented rsIDs, alternate effect alleles, alternate
 allele frequency, beta, standard error, P, per-variant N, and INFO. The local
 materialization retained 12,323,863 rsID SNVs after excluding non-rsID,
-non-SNP, and source low-confidence rows.
+non-SNP, and source low-confidence rows. The trait-specific schema row records
+the lockstep join explicitly: beta/SE/P/N come from the results file, while
+rsID/position/ref/alt/frequency/INFO come from the matched annotation row.
 
 This release is publicly citable by stable URL but was not accompanied by a
-peer-reviewed article or PMID. The atlas therefore records it reproducibly
-but keeps `grip_strength` as `TODO` until the project adopts an explicit policy
-for public, unpublished data releases.
+peer-reviewed article or PMID. The atlas therefore verifies its source and
+schema reproducibly while keeping it blocked from `HARMONIZATION_READY` until
+the project adopts an explicit citation policy for public, unpublished data
+releases.

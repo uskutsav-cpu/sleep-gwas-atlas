@@ -43,7 +43,9 @@ All production entry points read `config/analysis_panel.tsv`. The manifest recor
 - source-verification declaration.
 
 The separate `config/gwas_schemas.tsv` records the literal variant, allele,
-effect, SE, P, frequency, INFO, and sample-size fields for each selected file.
+effect, SE, P, frequency, INFO, and sample-size fields for each selected
+source-and-trait pair. This distinction is required when one archive contains
+multiple phenotypes with different effect columns.
 A source can be identity/checksum verified while its schema remains pending;
 that state cannot advance to `HARMONIZATION_READY`.
 

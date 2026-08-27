@@ -75,6 +75,24 @@ class PanelContractTests(unittest.TestCase):
         self.assertTrue(mapped)
         self.assertFalse(mapped.difference(panel_ids))
 
+    def test_source_schemas_match_selected_source_trait_pairs(self):
+        with (ROOT / "config" / "analysis_panel.tsv").open(newline="") as handle:
+            selected = {
+                row["trait_id"]: row["source_id"]
+                for row in csv.DictReader(handle, delimiter="\t")
+            }
+        with (ROOT / "config" / "gwas_schemas.tsv").open(newline="") as handle:
+            schemas = list(csv.DictReader(handle, delimiter="\t"))
+        pairs = [(row["source_id"], row["trait_id"]) for row in schemas]
+        self.assertEqual(len(pairs), len(set(pairs)))
+        for source_id, trait_id in pairs:
+            self.assertEqual(selected.get(trait_id), source_id)
+        jones = [row for row in schemas if row["source_id"] == "jones_2019_accelerometer_sleep"]
+        self.assertEqual({row["trait_id"] for row in jones}, {
+            "sleep_efficiency", "accel_sleep_duration", "sleep_timing",
+        })
+        self.assertEqual(len({row["effect"] for row in jones}), 3)
+
     def test_shell_trait_lookup_is_header_aware(self):
         result = subprocess.run(
             [
