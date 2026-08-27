@@ -28,9 +28,11 @@ separate direct verification of Campos 2020 snoring brings the current total to
 lung-cancer releases brings the current total to 30/45. These counts do not
 claim that the archives are currently materialized. Direct verification of the
 FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 31/45; its
-GRCh38 build remains a separate harmonization blocker. These counts also do not
-claim that every header is supported by the harmonizer, binary prevalence is
-resolved, or LDSC is ready. Shared samples are
+GRCh38 build remains a separate harmonization blocker. Official file-level
+verification of the Jansen 2019 UK Biobank-only insomnia release and Jones 2019
+UK Biobank morning-person release brings the current total to 33/45. These
+counts also do not claim that every header is supported by the harmonizer,
+binary prevalence is resolved, or LDSC is ready. Shared samples are
 retained as explicit analysis concerns: IBD/CD/UC overlap, the three lipid
 traits share cohorts, and BMI overlaps UKB-derived sleep phenotypes.
 
@@ -40,8 +42,6 @@ These records were not promoted:
 
 | Trait | Reason |
 |---|---|
-| insomnia | Branch candidate is Watanabe 2022 rather than the locked Jansen 2019 UKB-only release; the selected source/phenotype decision must be reviewed explicitly. |
-| chronotype | Branch candidate is a continuous BOLT chronotype measure, while the locked trait is binary morningness with different sample counts. |
 | Alzheimer disease | Branch substituted smaller Kunkle 2019 GRCh37 data for Bellenguez 2022 because the latter is GRCh38. Build standardization alone is not grounds to discard the selected larger GWAS. |
 | Parkinson disease | The branch could not independently establish whether the accession is the appropriate non-23andMe/proxy-case release. |
 | major depression | Branch substituted Wray 2018 for the selected, larger Howard 2019 release because the latter is controlled. Ease of access is not the selection criterion. |

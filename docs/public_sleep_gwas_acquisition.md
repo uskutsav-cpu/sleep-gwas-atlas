@@ -7,14 +7,18 @@ effect-allele convention, sample-size treatment, and Phase 0 filters have been
 checked.
 
 The [Knowledge Portal Network's UK Biobank self-report page](https://www.kp4cd.org/node/235)
-links directly to the five archives registered in
-`config/public_gwas_sources.tsv`. The page identifies the associated papers
-and states that the participants are of European ancestry. The archive member
-used for napping is specified explicitly because the archive includes a
-README and unrelated workspace history in addition to the summary statistics.
+links directly to five archives registered in `config/public_gwas_sources.tsv`.
+The page identifies the associated papers and states that the participants are
+of European ancestry. The UK Biobank-only insomnia and binary morning-person
+releases come from the authors' CNCR share and GWAS Catalog, respectively. The
+archive member used for napping is specified explicitly because the archive
+includes a README and unrelated workspace history in addition to the summary
+statistics.
 
 | Source ID | Registry traits | Publication | Public file |
 | --- | --- | --- | --- |
+| `jansen_2019_insomnia_ukb` | `insomnia` | Jansen et al. 2019, PMID 30804565 | `Insomnia_sumstats_Jansenetal.txt.gz` |
+| `jones_2019_morning_person_ukb` | `chronotype` | Jones et al. 2019, PMID 30696823 | `morning_person_BOLT.output_HRC.only_plus.metrics_maf0.001_hwep1em12_info0.3_logORs.txt.gz` |
 | `dashti_2019_sleep_duration` | `sleepdur` | Dashti et al. 2019, PMID 30846698 | `sleepdurationsumstats.txt.zip` |
 | `dashti_2019_short_sleep` | `shortsleep` | Dashti et al. 2019, PMID 30846698 | `shortsumstats.txt.zip` |
 | `dashti_2019_long_sleep` | `longsleep` | Dashti et al. 2019, PMID 30846698 | `longsumstats.txt.zip` |

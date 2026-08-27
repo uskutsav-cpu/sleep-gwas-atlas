@@ -70,7 +70,7 @@ ALIASES = {
     ],
     "OR": ["or", "odds_ratio", "oddsratio"],
     "SE": [
-        "se", "standard_error", "stderr", "sebeta", "log_odds_se",
+        "se", "standard_error", "stderr", "sebeta", "log_odds_se", "logor_se",
         "se_sleepduration", "se_shortsleep", "se_longsleep",
     ],
     "P": [

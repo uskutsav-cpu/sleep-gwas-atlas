@@ -1,5 +1,7 @@
 import csv
+import gzip
 import importlib.util
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -97,6 +99,48 @@ class PanelContractTests(unittest.TestCase):
             "sleep_efficiency", "accel_sleep_duration", "sleep_timing",
         })
         self.assertEqual(len({row["effect"] for row in jones}), 3)
+
+    def test_new_sleep_source_headers_harmonize_with_documented_effects(self):
+        cases = {
+            "insomnia": (
+                "SNP\tUNIQUE_ID\tCHR\tBP\tA1\tA2\tMAF\tOR\tSE\tP\tN\tINFO\n"
+                "rs123\t1:1000000:A_C\t1\t1000000\tA\tC\t0.2\t1.2\t0.1\t0.01\t380000\t0.99\n",
+                math.log(1.2),
+            ),
+            "chronotype": (
+                "SNP\tCHR\tBP\tALLELE1\tALLELE0\tA1FREQ\tINFO\tLOGOR\tLOGOR_SE\tP_BOLT_LMM\tHWE_P\n"
+                "rs123\t1\t1000000\tA\tC\t0.2\t0.99\t0.2\t0.1\t0.01\t0.9\n",
+                0.2,
+            ),
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            for trait, (payload, expected_beta) in cases.items():
+                with self.subTest(trait=trait):
+                    source = directory / f"{trait}.tsv"
+                    outdir = directory / f"{trait}-out"
+                    source.write_text(payload, encoding="utf-8")
+                    result = subprocess.run(
+                        [
+                            sys.executable,
+                            str(ROOT / "scripts" / "01_harmonize.py"),
+                            "--trait", trait,
+                            "--config", str(MANIFEST),
+                            "--infile", str(source),
+                            "--outdir", str(outdir),
+                            "--source-build", "hg19",
+                        ],
+                        cwd=ROOT,
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+                    with gzip.open(
+                        outdir / f"{trait}.harmonized.tsv.gz", "rt", newline=""
+                    ) as handle:
+                        rows = list(csv.DictReader(handle, delimiter="\t"))
+                    self.assertEqual(len(rows), 1)
+                    self.assertAlmostEqual(float(rows[0]["BETA"]), expected_beta)
 
     def test_shell_trait_lookup_is_header_aware(self):
         result = subprocess.run(
