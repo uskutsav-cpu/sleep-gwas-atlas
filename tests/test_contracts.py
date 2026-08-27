@@ -877,6 +877,11 @@ class PanelContractTests(unittest.TestCase):
             self.assertTrue((root / "data/munged/fixture.sumstats.gz").is_file())
             self.assertTrue((root / "data/munged/mapped_fixture.sumstats.gz").is_file())
 
+    def test_harmonizer_does_not_load_unmapped_annotation_columns(self):
+        script = (ROOT / "scripts" / "01_harmonize.py").read_text(encoding="utf-8")
+        self.assertIn('read_kwargs["usecols"] = selected_source_columns', script)
+        self.assertIn('raw.rename(columns=source_to_standard, inplace=True)', script)
+
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))
         paths += list((ROOT / "scripts").glob("*.sh"))

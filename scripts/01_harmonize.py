@@ -297,8 +297,11 @@ def main():
     # rows to Python strings creates a multi-gigabyte working set before the
     # explicit validation below; SNP and allele fields are still converted to
     # normalized strings, and every numerical field is still passed through
-    # pd.to_numeric before any QC decision.
-    read_kwargs = {"low_memory": False, "comment": None, "skiprows": metadata_lines}
+    # pd.to_numeric before any QC decision. Chunked dtype inference also keeps
+    # peak memory bounded for the largest public releases; explicit coercion
+    # below, rather than inferred dtype, remains authoritative for every QC
+    # decision.
+    read_kwargs = {"low_memory": True, "comment": None, "skiprows": metadata_lines}
     if separator == r"\s+":
         read_kwargs.pop("low_memory")
         read_kwargs.update({"sep": separator, "engine": "python"})
@@ -333,6 +336,14 @@ def main():
     if "BETA" not in columns and "OR" not in columns:
         fail("neither BETA nor OR is present; an effect size is required")
 
+    # A source can expose both a beta and a redundant odds ratio. BETA is the
+    # documented preferred effect below, so do not allocate the unused OR
+    # column. More generally, loading only registered mapped columns prevents
+    # wide source-specific annotation fields from exhausting memory.
+    if "BETA" in columns:
+        columns.pop("OR", None)
+    selected_source_columns = list(dict.fromkeys(columns.values()))
+    read_kwargs["usecols"] = selected_source_columns
     raw = pd.read_csv(args.infile, **read_kwargs)
     n_input = len(raw)
     if n_input == 0:
@@ -353,9 +364,13 @@ def main():
                 f"{expected_file_build}; inspect the source before proceeding"
             )
 
-    out = pd.DataFrame(index=raw.index)
-    for standard, original in columns.items():
-        out[standard] = raw[original]
+    # All selected source columns map one-to-one to canonical fields. Renaming
+    # in place avoids holding a second full dataframe during harmonization.
+    source_to_standard = {original: standard for standard, original in columns.items()}
+    if len(source_to_standard) != len(columns):
+        fail("multiple canonical fields map to one source column; inspect the registered aliases")
+    raw.rename(columns=source_to_standard, inplace=True)
+    out = raw
 
     coordinate_label_parsed = False
     if args.variant_map_strategy == "BY_COORD_ALLELES" and (
