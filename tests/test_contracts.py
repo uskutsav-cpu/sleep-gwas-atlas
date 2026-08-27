@@ -663,7 +663,7 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(result.stdout.strip(), "campos_2020_snoring")
 
     def test_munge_accepts_trait_without_optional_mapping_or_liftover(self):
-        """Empty optional arrays must work under macOS Bash 3.2 with nounset."""
+        """Empty arrays work on Bash 3.2 and an absent source FRQ is ignored."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             for name in ["scripts", "config", "data/raw", "ref/eur_w_ld_chr", "ldsc"]:
@@ -704,15 +704,17 @@ class PanelContractTests(unittest.TestCase):
                 "    done\n"
                 "    mkdir -p \"$outdir\"\n"
                 "    : > \"$outdir/$trait.harmonized.tsv.gz\"\n"
-                "    : > \"$outdir/$trait.qc.txt\" ;;\n"
+                "    printf '%s\\n' 'FRQ column absent - source-level MAF QC must be documented' > \"$outdir/$trait.qc.txt\" ;;\n"
                 "  ldsc/munge_sumstats.py)\n"
-                "    out=\n"
+                "    out=; ignored=\n"
                 "    while [ $# -gt 0 ]; do\n"
                 "      case \"$1\" in\n"
                 "        --out) out=$2; shift 2 ;;\n"
+                "        --ignore) ignored=$2; shift 2 ;;\n"
                 "        *) shift ;;\n"
                 "      esac\n"
                 "    done\n"
+                "    [ \"$ignored\" = FRQ ] || exit 3\n"
                 "    mkdir -p \"$(dirname \"$out\")\"\n"
                 "    : > \"$out.sumstats.gz\"\n"
                 "    : > \"$out.log\" ;;\n"

@@ -80,9 +80,21 @@ for trait in "$@"; do
     --infile "data/raw/$raw_file" --outdir data/harmonized
 
   echo "==> $trait: HapMap3 munging"
+  ldsc_ignore_args=()
+  if grep -Fq 'FRQ column absent - source-level MAF QC must be documented' \
+      "data/harmonized/$trait.qc.txt"; then
+    # The harmonized contract carries an explicit FRQ=NA placeholder when the
+    # source has no allele-frequency field.  LDSC otherwise recognizes FRQ as
+    # a required numeric column and drops every row before HapMap3 matching.
+    # Ignore it only when the harmonization ledger proves the source lacked it;
+    # a present-but-invalid frequency column must still fail visibly.
+    ldsc_ignore_args=(--ignore FRQ)
+    echo "  source has no FRQ; ignoring the all-missing FRQ placeholder in LDSC"
+  fi
   "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" \
     --sumstats "data/harmonized/$trait.harmonized.tsv.gz" \
     --merge-alleles ref/w_hm3.snplist --chunksize 500000 \
+    ${ldsc_ignore_args[@]+"${ldsc_ignore_args[@]}"} \
     --out "data/munged/$trait"
   require_file "data/munged/$trait.sumstats.gz"
   require_file "data/munged/$trait.log"

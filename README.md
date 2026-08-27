@@ -28,17 +28,20 @@ records are documented in `docs/remaining_source_access_blockers.md`. The
 pipeline never submits a request, signs a data-use agreement, or affirms a
 download checkbox on the user's behalf.
 
-Four registered sources have also been exercised locally end to end. The
-ignored Campos 2020 snoring, Yengo 2018 BMI, Deelen 2019 longevity, and
-Evangelou 2018 SBP inputs produced 7,168,629/11,010,158,
-1,973,592/2,336,269, 1,175,095/8,856,352, and 5,964,514/7,088,067 retained
-harmonized variants, respectively. All four were HapMap3-munged and passed the
-predefined LDSC h² gate in an explicitly named checkpoint; the gated Phase 1
-checkpoint contains only snoring×BMI, snoring×longevity, and snoring×SBP. The
-longevity liability conversion uses the study's
-phenotype-defined 10% survival-tail prevalence. These ignored local artifacts
-are not counted as present in the fresh-clone summary, are not the canonical
-full-panel result tables, and do not satisfy any finish-line acceptance gate.
+Five registered sources have also been exercised locally end to end. The
+ignored Campos 2020 snoring, Yengo 2018 BMI, Deelen 2019 longevity, Evangelou
+2018 SBP, and Nielsen 2018 atrial-fibrillation inputs produced
+7,168,629/11,010,158, 1,973,592/2,336,269, 1,175,095/8,856,352,
+5,964,514/7,088,067, and 10,246,131/12,149,979 retained harmonized variants,
+respectively. All five were HapMap3-munged and passed the predefined LDSC h²
+gate in an explicitly named checkpoint; the gated Phase 1 checkpoint contains
+only snoring×BMI, snoring×longevity, snoring×SBP, and
+snoring×atrial-fibrillation. The longevity liability conversion uses the
+study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
+adult-population 3% approximation documented in the manifest. These ignored
+local artifacts are not counted as present in the fresh-clone summary, are not
+the canonical full-panel result tables, and do not satisfy any finish-line
+acceptance gate.
 
 ## Locked panel contract
 

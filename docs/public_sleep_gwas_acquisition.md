@@ -70,6 +70,29 @@ hg19/build37. The paper combines logistic- and Cox-model estimates and reports
 relative risk as `exp(effect)`, so the schema records a generic signed log-scale
 effect rather than incorrectly labeling every row as a log odds ratio.
 
+## Nielsen 2018 atrial-fibrillation release
+
+The exact 190,312,717-byte `AF_HRC_GWAS_ALLv11.zip` archive has SHA-256
+`3ef0f55a29ba0c065df14e55cfb4fb4351ac4da90e0da28e3438426e63e4879f`.
+Streaming its registered `AF_HRC_GWAS_ALLv11.txt` member into the canonical
+gzip produced SHA-256
+`35316d406c3188194b4efbd90de7a7bf8017fe95236f3ed7e302a8540d713649`.
+The real harmonization run read 12,149,979 variants and retained 10,246,131
+(84.33%). The source provides neither INFO nor allele frequency, so the QC
+ledger explicitly records those unavailable filters. The harmonized contract
+keeps an `FRQ=NA` placeholder; `scripts/02_munge.sh` instructs LDSC to ignore
+that placeholder only when the same QC ledger proves the source field was
+absent. The final HapMap3 input has 1,211,889 nonmissing signed effects after
+541 allele mismatches.
+
+The liability conversion uses `K=0.03`. The
+[2016 ESC/EACTS guideline](https://academic.oup.com/eurheartj/article/37/38/2893/2334964)
+estimates approximately 3% AF prevalence among adults aged 20 years or older;
+the manifest labels this as an adult-population approximation rather than a
+cohort-specific prevalence. The isolated five-trait checkpoint gives
+liability-scale h² 0.316 (SE 0.035, Z 9.03) with intercept 1.0123, passing the
+predefined gate.
+
 ## Campos 2020 snoring release
 
 The official [GWAS Catalog record GCST009760](https://www.ebi.ac.uk/gwas/studies/GCST009760)
@@ -90,8 +113,9 @@ locally materialized hard link reaches `HARMONIZATION_READY`.
 The real harmonization run read 11,010,158 rows and retained 7,168,629 (65.11%)
 after the locked filters. Its ignored output is 156 MiB with SHA-256
 `9b38e2576fdc73c1e7fbfbf8e50fd9b9ded589511e257b0b8c07ac2260f86d88`;
-`data/harmonized/snoring.qc.txt` records every filter count. Snoring still
-requires HapMap3 munging before `LDSC_READY`.
+`data/harmonized/snoring.qc.txt` records every filter count. HapMap3 munging
+retained 1,179,075 nonmissing signed effects, and the liability-scale h² gate
+passed in the isolated real-data checkpoint.
 
 ## FinnGen R9 sleep-apnoea release
 
