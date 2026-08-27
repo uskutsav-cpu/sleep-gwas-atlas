@@ -19,8 +19,8 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 |---|---|---|
 | Locked scope | Complete | Exactly 12 sleep/circadian plus 33 non-sleep traits are locked by ordered-ID hash in `analysis_panel.tsv` and its lock file. |
 | Reproducible Phase 0/1 architecture | Complete | Granular readiness, pinned runtimes, Snakemake entry points, CI, negative contract tests, and a full synthetic 396-pair smoke test are implemented. |
-| Source curation | Blocked | 36/45 selected sources are registry-verified; 9 require a defensible selected release and file-level source record. |
-| Source schemas | Blocked | `gwas_schemas.tsv` makes literal, trait-specific allele/effect/statistic mapping an explicit gate; 36/45 mappings are verified and 9 remain unresolved. Parkinson disease, IBD, Crohn, UC, and stroke are understood but explicitly require variant-to-rsID mapping before harmonization. |
+| Source curation | Blocked | 37/45 selected sources are registry-verified; 8 require a defensible selected release and file-level source record. |
+| Source schemas | Blocked | `gwas_schemas.tsv` makes literal, trait-specific allele/effect/statistic mapping an explicit gate; 37/45 mappings are verified and 8 remain unresolved. Parkinson disease, CAD, IBD, Crohn, UC, and stroke are understood but explicitly require variant-to-rsID mapping before harmonization. |
 | Harmonization | Blocked | Snoring has been locally materialized and harmonized (7,168,629/11,010,158 rows retained), but the ignored data artifact is absent from a fresh clone and the other 44 traits remain unresolved. |
 | LDSC h2 and Phase 1 | Blocked | No real munged files or LDSC results are versioned. The synthetic outputs are tests only. |
 | Full covariance and downstream science | Blocked | MiXeR, LAVA, shared-locus discovery, Genomic SEM, factor GWAS, fine-mapping, colocalization, molecular/regulatory/cell/pathway work, and MR await real Phase 0/1 inputs. |
