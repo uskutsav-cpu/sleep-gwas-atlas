@@ -8,10 +8,14 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/_common.sh
 
+export MPLCONFIGDIR=${MPLCONFIGDIR:-"${TMPDIR:-/tmp}/sleep-gwas-atlas-matplotlib"}
+mkdir -p "$MPLCONFIGDIR"
+
 require_file "$CONFIG"
 require_ldsc
 LOGDIR=${LDSC_LOGDIR:-results/logs}
 RG_OUT=${RG_OUT:-results/tables/rg_matrix.tsv}
+RG_FIGURE_OUT=${RG_FIGURE_OUT:-results/figures/fig2_rg_heatmap.png}
 INCLUSION_OUT=${INCLUSION_OUT:-results/tables/phase1_inclusion.tsv}
 READINESS_OUT=${READINESS_OUT:-results/tables/trait_readiness.tsv}
 mkdir -p "$LOGDIR" "$(dirname "$RG_OUT")"
@@ -80,5 +84,5 @@ else
   "$PYTHON_BIN" scripts/05_collate.py --mode rg --config "$CONFIG" \
     --inclusion "$INCLUSION_OUT" --logdir "$LOGDIR" --out "$RG_OUT"
   "$PYTHON_BIN" scripts/06_heatmap.py --rg "$RG_OUT" --config "$CONFIG" \
-    --out results/figures/fig2_rg_heatmap.png
+    --out "$RG_FIGURE_OUT"
 fi

@@ -283,6 +283,54 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
         self.assertIn("variant_map_strategy\tBY_COORD_ALLELES", qc)
 
+    def test_per_snp_effective_n_gate_uses_authoritative_source_maximum(self):
+        payload = (
+            "SNP\tChr\tPosition\tEA\tNEA\tEAF\tBeta\tSE\tP-value\tEffective_N\n"
+            "1:1000000\t1\t1000000\tG\tA\t0.2\t0.2\t0.1\t0.01\t5808\n"
+            "1:2000000\t1\t2000000\tC\tT\t0.3\t-0.3\t0.1\t0.02\t11615\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            source = directory / "longevity.tsv.gz"
+            outdir = directory / "out"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(payload)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "longevity",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--source-build", "hg19",
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_COORD_ALLELES",
+                    "--expected-variant-map-bytes", str(variant_map.stat().st_size),
+                    "--expected-variant-map-sha256",
+                    hashlib.sha256(variant_map.read_bytes()).hexdigest(),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(
+                outdir / "longevity.harmonized.tsv.gz", "rt", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            qc = (outdir / "longevity.qc.txt").read_text(encoding="utf-8")
+        self.assertEqual([float(row["N"]) for row in rows], [11616.0, 23230.0])
+        self.assertIn(
+            "sample size below 50% of source maximum (23,230.0) [CDG3]\t0\t2",
+            qc,
+        )
+        self.assertIn(
+            "sample-size mode: per-SNP N_eff derived as 2 * source Effective_N",
+            qc,
+        )
+
     def test_hm3_map_bytes_are_deterministic_across_output_paths(self):
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
@@ -734,6 +782,27 @@ class PanelContractTests(unittest.TestCase):
             )
             with self.assertRaises(SystemExit):
                 collator.parse_rg(directory, str(MANIFEST))
+
+    def test_rg_collator_preserves_scalar_p_values_for_multi_pair_log(self):
+        collator = load_collator()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "rg_snoring.log"
+            path.write_text(
+                "P: 1.0292e-90\n"
+                "P: 0.4283\n"
+                "Summary of Genetic Correlation Results\n"
+                "p1 p2 rg se z p\n"
+                "data/munged/snoring.sumstats.gz data/munged/bmi.sumstats.gz "
+                "0.3779 0.0187 20.1975 0.0000\n"
+                "data/munged/snoring.sumstats.gz data/munged/longevity.sumstats.gz "
+                "-0.0444 0.0561 -0.7922 0.4283\n\n",
+                encoding="utf-8",
+            )
+            rows = collator.parse_rg(directory, str(MANIFEST))
+        by_trait = rows.set_index("disease_trait")
+        self.assertEqual(by_trait.loc["bmi", "p"], 1.0292e-90)
+        self.assertEqual(by_trait.loc["longevity", "p"], 0.4283)
+        self.assertGreater(by_trait.loc["bmi", "fdr"], 0)
 
     def test_acceptance_audit_distinguishes_contract_from_science(self):
         result = subprocess.run(

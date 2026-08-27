@@ -89,8 +89,11 @@ ALIASES = {
         "p_sleepduration", "p_shortsleep", "p_longsleep",
     ],
     "N": ["n", "n_total", "samplesize", "n_complete_samples"],
-    "N_EFF": ["neff", "n_eff", "effective_n", "effective_sample_size"],
-    "N_EFF_HALF": ["neffdiv2"],
+    "N_EFF": ["neff", "n_eff", "effective_sample_size"],
+    # Deelen 2019 defines its literal Effective_N as
+    # 2/(1/N_cases + 1/N_controls), i.e. half the conventional LDSC N_eff.
+    # PGC bipolar uses the semantically identical literal NEFFDIV2.
+    "N_EFF_HALF": ["neffdiv2", "effective_n"],
     "NCASE": ["ncase", "n_cas", "n_cases", "cases", "ncas", "nca"],
     "NCONTROL": ["ncontrol", "n_con", "n_controls", "controls", "ncon", "nco"],
     "INFO": [
@@ -526,42 +529,52 @@ def main():
     metadata_ncontrol = finite_number(metadata.get("ncontrol"))
     metadata_total = finite_number(metadata.get("n_total"))
     n_mode = ""
-    total_effective_n = None
+    n_reference = None
+    n_reference_label = ""
     if binary and "N_EFF" in out:
         out["N"] = out["N_EFF"]
         n_mode = "per-SNP N_eff from source"
-        if metadata_ncase and metadata_ncontrol:
-            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+        n_reference = finite_number(out["N"].max())
+        n_reference_label = "source maximum"
     elif binary and "N_EFF_HALF" in out:
         out["N"] = 2.0 * out["N_EFF_HALF"]
-        n_mode = "per-SNP N_eff derived as 2 * source NEFFDIV2"
-        if metadata_ncase and metadata_ncontrol:
-            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+        n_mode = f"per-SNP N_eff derived as 2 * source {columns['N_EFF_HALF']}"
+        n_reference = finite_number(out["N"].max())
+        n_reference_label = "source maximum"
     elif binary and "NCASE" in out and "NCONTROL" in out:
         valid_counts = (out["NCASE"] > 0) & (out["NCONTROL"] > 0)
         out["N"] = np.where(valid_counts, 4.0 / (1.0 / out["NCASE"] + 1.0 / out["NCONTROL"]), np.nan)
         n_mode = "per-SNP N_eff derived from NCASE/NCONTROL"
-        if metadata_ncase and metadata_ncontrol:
-            total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
+        n_reference = finite_number(out["N"].max())
+        n_reference_label = "source maximum"
     elif binary and metadata_ncase and metadata_ncontrol:
-        total_effective_n = effective_n(metadata_ncase, metadata_ncontrol)
-        out["N"] = total_effective_n
+        n_reference = effective_n(metadata_ncase, metadata_ncontrol)
+        n_reference_label = "configured effective N"
+        out["N"] = n_reference
         n_mode = "constant N_eff derived from config ncase/ncontrol"
     elif not binary and "N" in out and out["N"].notna().any():
-        total_effective_n = metadata_total
+        n_reference = finite_number(out["N"].max())
+        n_reference_label = "source maximum"
         n_mode = "per-SNP N from source"
     elif not binary and metadata_total:
         out["N"] = metadata_total
-        total_effective_n = metadata_total
+        n_reference = metadata_total
+        n_reference_label = "configured total N"
         n_mode = "constant N from config n_total"
     else:
         fail(
             "could not establish an LDSC sample size. Binary traits need N_EFF, NCASE/NCONTROL, "
             "or cited config ncase/ncontrol; continuous traits need N or cited config n_total."
         )
-    if total_effective_n is None:
-        total_effective_n = float(out["N"].median())
-    drop(out["N"].isna() | (out["N"] <= 0) | (out["N"] < N_EFF_MIN_FRACTION * total_effective_n), f"N_eff below {N_EFF_MIN_FRACTION:.0%} of total ({total_effective_n:,.1f}) [CDG3]")
+    if n_reference is None or n_reference <= 0:
+        fail("could not establish a positive sample-size reference for per-SNP QC")
+    drop(
+        out["N"].isna()
+        | (out["N"] <= 0)
+        | (out["N"] < N_EFF_MIN_FRACTION * n_reference),
+        f"sample size below {N_EFF_MIN_FRACTION:.0%} of {n_reference_label} "
+        f"({n_reference:,.1f}) [CDG3]",
+    )
     steps.append((f"sample-size mode: {n_mode}", 0, len(out)))
 
     for column in ["FRQ"]:

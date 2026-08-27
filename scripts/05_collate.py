@@ -169,13 +169,13 @@ def parse_rg(logdir, config_path="config/analysis_panel.tsv", inclusion_path=Non
             frame = pd.DataFrame(body, columns=header)
             # Some LDSC versions round the fixed-width summary-table p column
             # to 0.0000 for small values even though the preceding scalar
-            # ``P:`` line retains scientific notation. Controlled ``--pair``
-            # runs have exactly one result row, so preserve that authoritative
-            # scalar rather than turning a finite p-value into zero/FDR zero.
+            # ``P:`` lines retain scientific notation. LDSC emits one scalar
+            # for every result row in the same order, so preserve the complete
+            # sequence rather than turning finite p-values into zero/FDR zero.
             scalar_p = [line.split(":", 1)[1].strip() for line in lines[:i]
                         if line.startswith("P:")]
-            if len(frame) == 1 and scalar_p:
-                frame.loc[frame.index[0], "p"] = scalar_p[-1]
+            if len(scalar_p) == len(frame):
+                frame.loc[:, "p"] = scalar_p
             frame["input_log"] = path
             frames.append(frame)
     if not frames:

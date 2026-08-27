@@ -28,11 +28,16 @@ records are documented in `docs/remaining_source_access_blockers.md`. The
 pipeline never submits a request, signs a data-use agreement, or affirms a
 download checkbox on the user's behalf.
 
-One real source has also been exercised locally end to end through the
-harmonizer. The ignored Campos 2020 snoring input produced 7,168,629 retained
-variants from 11,010,158 input rows (65.11%) and a filter-by-filter QC ledger.
-This local artifact is not counted as present in the fresh-clone summary above
-and has not yet been HapMap3-munged for LDSC.
+Three registered sources have also been exercised locally end to end. The
+ignored Campos 2020 snoring, Yengo 2018 BMI, and Deelen 2019 longevity inputs
+produced 7,168,629/11,010,158, 1,973,592/2,336,269, and
+1,175,095/8,856,352 retained harmonized variants, respectively. All three were
+HapMap3-munged and passed the predefined LDSC h² gate in an explicitly named
+checkpoint; the gated Phase 1 checkpoint contains only snoring×BMI and
+snoring×longevity. The longevity liability conversion uses the study's
+phenotype-defined 10% survival-tail prevalence. These ignored local artifacts
+are not counted as present in the fresh-clone summary, are not the canonical
+full-panel result tables, and do not satisfy any finish-line acceptance gate.
 
 ## Locked panel contract
 
