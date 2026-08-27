@@ -511,6 +511,42 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
         self.assertIn("output_build\thg19", qc)
 
+    def test_mdd_literal_stderrlogor_header_harmonizes(self):
+        payload = (
+            "MarkerName A1 A2 Freq LogOR StdErrLogOR P\n"
+            "rs123 g a 0.2 0.2 0.1 0.01\n"
+            "rs456 a g 0.3 -0.3 0.1 0.02\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            source = directory / "mdd.txt"
+            source.write_text(payload, encoding="utf-8")
+            outdir = directory / "out"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "mdd",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_RSID_ALLELES",
+                    "--expected-variant-map-bytes", str(variant_map.stat().st_size),
+                    "--expected-variant-map-sha256",
+                    hashlib.sha256(variant_map.read_bytes()).hexdigest(),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(outdir / "mdd.harmonized.tsv.gz", "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual([row["SNP"] for row in rows], ["rs123", "rs456"])
+        self.assertEqual([float(row["SE"]) for row in rows], [0.1, 0.1])
+
     def test_hg38_liftover_maps_points_and_orients_reverse_strand_alleles(self):
         payload = (
             "rsids\t#chrom\tpos\talt\tref\tbeta\tsebeta\tpval\taf_alt\n"
@@ -755,7 +791,7 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stdout.strip(), "campos_2020_snoring")
 
-    def test_munge_accepts_trait_without_optional_mapping_or_liftover(self):
+    def test_munge_accepts_empty_optional_argument_arrays(self):
         """Empty arrays work on Bash 3.2 and an absent source FRQ is ignored."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -765,14 +801,23 @@ class PanelContractTests(unittest.TestCase):
                 shutil.copy2(ROOT / "scripts" / name, root / "scripts" / name)
             (root / "config" / "analysis_panel.tsv").write_text(
                 "atlas_version\ttrait_id\traw_file\tbuild\tsource_status\tancestry\n"
-                "atlas-v1.0\tfixture\tfixture.txt.gz\thg19\tSOURCE_VERIFIED\tEUR\n",
+                "atlas-v1.0\tfixture\tfixture.txt.gz\thg19\tSOURCE_VERIFIED\tEUR\n"
+                "atlas-v1.0\tmapped_fixture\tmapped.txt.gz\tUNRESOLVED\tSOURCE_VERIFIED\tEUR\n",
+                encoding="utf-8",
+            )
+            (root / "config" / "variant_mapping_plans.tsv").write_text(
+                "trait_id\tstrategy\tmap_path\tmap_bytes\tmap_sha256\n"
+                "mapped_fixture\tBY_RSID_ALLELES\tref/map.tsv.gz\t1\tabc\n",
                 encoding="utf-8",
             )
             for path in [
                 root / "config" / "analysis_panel.lock.json",
                 root / "data" / "raw" / "fixture.txt.gz",
+                root / "data" / "raw" / "mapped.txt.gz",
                 root / "ref" / "w_hm3.snplist",
                 root / "ref" / "eur_w_ld_chr" / "1.l2.ldscore.gz",
+                root / "ref" / "map.tsv.gz",
+                root / "ref" / "map.tsv.gz.provenance.json",
                 root / "ldsc" / "ldsc.py",
                 root / "ldsc" / "munge_sumstats.py",
                 root / "scripts" / "00_validate_panel.py",
@@ -817,7 +862,7 @@ class PanelContractTests(unittest.TestCase):
             )
             runner.chmod(0o755)
             result = subprocess.run(
-                ["/bin/bash", "scripts/02_munge.sh", "fixture"],
+                ["/bin/bash", "scripts/02_munge.sh", "fixture", "mapped_fixture"],
                 cwd=root,
                 env={
                     **os.environ,
@@ -830,6 +875,7 @@ class PanelContractTests(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
             self.assertTrue((root / "data/munged/fixture.sumstats.gz").is_file())
+            self.assertTrue((root / "data/munged/mapped_fixture.sumstats.gz").is_file())
 
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))

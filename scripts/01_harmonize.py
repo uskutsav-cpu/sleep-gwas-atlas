@@ -82,6 +82,8 @@ ALIASES = {
     "OR": ["or", "odds_ratio", "oddsratio"],
     "SE": [
         "se", "standard_error", "stderr", "sebeta", "log_odds_se", "logor_se",
+        # Howard et al. 2019 public MDD release: SE of LogOR for A1.
+        "stderrlogor",
         "se_sleepduration", "se_shortsleep", "se_longsleep",
     ],
     "P": [
