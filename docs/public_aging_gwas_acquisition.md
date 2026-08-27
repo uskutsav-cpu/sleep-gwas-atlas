@@ -43,10 +43,10 @@ per-SNP `n`, `freq1`, and INFO. The locked filters retained 6,663,125 rows
 allele mismatches.
 
 Observed-scale h² is 0.0236 (SE 0.0012, Z 19.67), with intercept 1.0473, and
-passes the predefined gate. In the 20-pair partial checkpoint, insomnia has
+passes the predefined gate. In the 22-pair partial checkpoint, insomnia has
 r_g -0.2740 with the lifespan-protection effect (SE 0.0367, P 8.869e-14,
-partial-family FDR 4.434e-13), while snoring has r_g -0.1647 (SE 0.0282,
-P 4.912e-09, FDR 1.637e-08). The negative signs follow the source's protection
+partial-family FDR 4.878e-13), while snoring has r_g -0.1647 (SE 0.0282,
+P 4.912e-09, FDR 1.801e-08). The negative signs follow the source's protection
 direction; they are not causal estimates. Their cross-trait LDSC intercepts
 (-0.0267 and -0.0207) remain in the checkpoint table for the final
 sample-overlap audit, and these partial-family findings do not replace the

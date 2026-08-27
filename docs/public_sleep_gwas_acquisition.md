@@ -58,13 +58,14 @@ phenotype-matched frequent-complaint convention, not as the prevalence of
 clinically diagnosed insomnia disorder.
 
 Liability h² is 0.1008 (SE 0.0045, Z 22.40), with intercept 1.0148, and passes
-the predefined gate. In the 20-pair partial family, insomnia has FDR-significant
-correlations with ADHD (r_g 0.4033, FDR 5.836e-36), BMI (0.1723, 4.434e-13),
-parental lifespan (-0.2740, 4.434e-13), stroke (0.1382, 0.002000), rheumatoid
-arthritis (0.1138, 0.002222), SBP (0.0572, 0.01180), longevity (-0.1291,
-0.03782), Crohn disease (-0.0708, 0.03831), and atrial fibrillation (0.0646,
-0.03831). Its schizophrenia estimate (0.0379, FDR 0.1496) does not pass. These
-partial results are not a substitute for the locked 396-pair correction family.
+the predefined gate. In the 22-pair partial family, insomnia has FDR-significant
+correlations with ADHD (r_g 0.4033, FDR 6.420e-36), BMI (0.1723, 4.878e-13),
+parental lifespan (-0.2740, 4.878e-13), stroke (0.1382, 0.002200), rheumatoid
+arthritis (0.1138, 0.002444), SBP (0.0572, 0.01298), longevity (-0.1291,
+0.04160), Crohn disease (-0.0708, 0.04214), and atrial fibrillation (0.0646,
+0.04214). Its UC estimate (-0.0637, FDR 0.1400) and schizophrenia estimate
+(0.0379, FDR 0.1549) do not pass. These partial results are not a substitute
+for the locked 396-pair correction family.
 Several contributing GWAS include UK Biobank participants; bivariate LDSC
 estimates a cross-trait intercept for that overlap, but the correlations remain
 non-causal and still require the final sample-overlap and robustness audits.
