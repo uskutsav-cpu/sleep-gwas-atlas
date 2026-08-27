@@ -30,11 +30,16 @@ claim that the archives are currently materialized. Direct verification of the
 FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 31/45; its
 GRCh38 build remains a separate harmonization blocker. Official file-level
 verification of the Jansen 2019 UK Biobank-only insomnia release and Jones 2019
-UK Biobank morning-person release brings the current total to 33/45. These
-counts also do not claim that every header is supported by the harmonizer,
-binary prevalence is resolved, or LDSC is ready. Shared samples are
-retained as explicit analysis concerns: IBD/CD/UC overlap, the three lipid
-traits share cohorts, and BMI overlaps UKB-derived sleep phenotypes.
+UK Biobank morning-person release brings the current total to 33/45. Complete
+verification of the Bellenguez 2022 Alzheimer disease Stage I file then brings
+the current total to 34/45. The public
+genome-wide file has 85,934 clinically diagnosed or proxy cases and 401,577
+controls; the paper's larger headline total includes Stage II follow-up and
+must not be attached to every genome-wide row. These counts also do not claim
+that every source is on GRCh37, binary prevalence is resolved, or LDSC is
+ready. Shared samples are retained as explicit analysis concerns: IBD/CD/UC
+overlap, the three lipid traits share cohorts, and BMI overlaps UKB-derived
+sleep phenotypes.
 
 ## Deferred branch candidates
 
@@ -42,7 +47,6 @@ These records were not promoted:
 
 | Trait | Reason |
 |---|---|
-| Alzheimer disease | Branch substituted smaller Kunkle 2019 GRCh37 data for Bellenguez 2022 because the latter is GRCh38. Build standardization alone is not grounds to discard the selected larger GWAS. |
 | Parkinson disease | The branch could not independently establish whether the accession is the appropriate non-23andMe/proxy-case release. |
 | major depression | Branch substituted Wray 2018 for the selected, larger Howard 2019 release because the latter is controlled. Ease of access is not the selection criterion. |
 | schizophrenia | Accession/publication/phenotype notes conflict and require primary-source reconciliation. |
