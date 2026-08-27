@@ -9,7 +9,7 @@ disk. This review considered only the 28 source-pending traits in the locked
 
 ## Promoted exact matches
 
-Eleven selected releases matched the locked publication, phenotype stratum,
+Ten selected releases matched the locked publication, phenotype stratum,
 sample-size intent, European ancestry, and GRCh37 requirement. Their official
 GWAS Catalog landing/download URLs, exact byte counts, SHA-256 checksums, and
 branch-recorded build-anchor validation are now in
@@ -17,18 +17,17 @@ branch-recorded build-anchor validation are now in
 
 - de Lange 2017 combined IBD, Crohn's disease, and ulcerative colitis;
 - Ishigaki 2022 European-only rheumatoid arthritis;
-- Han 2020 European-only asthma;
 - Yengo 2018 GIANT+UKB BMI;
 - Graham 2021 European HDL, LDL, and log-triglycerides strata;
 - Mishra 2022 GIGASTROKE European any stroke; and
 - Nielsen 2018 atrial fibrillation.
 
-This branch harvest advances source verification from 17/45 to 28/45. A
+This branch harvest advances source verification from 17/45 to 27/45. A
 separate direct verification of Campos 2020 snoring brings the current total to
-29/45. Subsequent direct verification of the selected colorectal- and
-lung-cancer releases brings the current total to 31/45. These counts do not
+28/45. Subsequent direct verification of the selected colorectal- and
+lung-cancer releases brings the current total to 30/45. These counts do not
 claim that the archives are currently materialized. Direct verification of the
-FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 32/45; its
+FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 31/45; its
 GRCh38 build remains a separate harmonization blocker. These counts also do not
 claim that every header is supported by the harmonizer, binary prevalence is
 resolved, or LDSC is ready. Shared samples are
@@ -50,6 +49,7 @@ These records were not promoted:
 | bipolar disorder | Branch substituted a roughly five-fold smaller 2016 GWAS for Mullins 2021. |
 | ADHD | Branch substituted a later accession whose phenotype and relationship to the locked Demontis 2023 source require review. |
 | multiple sclerosis | Branch substituted a roughly ten-fold smaller 2016 German GWAS for IMSGC 2019. |
+| asthma | The exact `GCST010042` file is the non-ancestry-restricted 64,538-case/329,321-control main UKB GWAS. The paper's separate European sensitivity analysis has 53,924 cases and 276,523 controls. The Catalog API's 239,321-control European label conflicts with the file and primary paper, so the candidate was revoked rather than mislabelled EUR. |
 | type 2 diabetes | Branch substituted Scott 2017; although genome-wide, its bare coordinate marker lacks the rsID mapping needed by the current LDSC path. |
 | coronary artery disease | The branch describes the selected file as EUR plus ancestry-not-reported, so it does not yet satisfy the EUR-only contract. |
 | systolic blood pressure | Branch substituted Keaton 2024 for Evangelou 2018; overlap, phenotype transformation, and selection implications require review first. |
