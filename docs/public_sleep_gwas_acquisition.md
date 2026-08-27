@@ -35,6 +35,37 @@ registry maps each selected release to exactly one locked phenotype, preventing
 duplicate files from entering the Phase 1 multiple-testing family as if they
 were independent traits.
 
+## Header and effect-column verification
+
+`scripts/17_inspect_remote_zip_header.py` retrieves the classic ZIP central
+directory and only the compressed prefix of a named member. Every request must
+return HTTP 206 with the exact registered total byte count and requested
+`Content-Range`; this makes header inspection reproducible without treating a
+partial archive as a downloaded source artifact.
+
+The three Dashti 2019 Catalog READMEs define `ALLELE1` as effect allele,
+`ALLELE0` as reference, `A1FREQ` as effect-allele frequency, and their
+trait-specific beta/SE/P columns. The selected napping archive contains its own
+README defining `A1` as effect, `A2` as reference, `EAF` as A1 frequency, and
+`N` as sample size. Exact registered-member headers agree with those
+definitions. The binary short- and long-sleep releases are primary BOLT-LMM
+betas, not the separate logistic-regression sensitivity estimates described in
+the paper.
+
+The daytime-sleepiness ZIP has no README. Its exact one-member header is
+`SNP CHR BP ALLELE1 ALLELE0 A1FREQ INFO BETA SE P`. As an independent sign
+check, the archive's `rs2787120` row is A/G with beta `0.00778398` and SE
+`0.00137756`; those values exactly match the paper's Supplementary Data 2,
+which states that effects were aligned with increasing excessive daytime
+sleepiness. This verifies A (`ALLELE1`) as the beta allele for the selected
+release.
+
+The Nielsen 2018 atrial-fibrillation archive supplies a README defining
+`Allele1` as effect, `Allele2` as non-effect, `Effect` as beta, and `pos` as
+hg19/build37. The paper combines logistic- and Cox-model estimates and reports
+relative risk as `exp(effect)`, so the schema records a generic signed log-scale
+effect rather than incorrectly labeling every row as a log odds ratio.
+
 ## Campos 2020 snoring release
 
 The official [GWAS Catalog record GCST009760](https://www.ebi.ac.uk/gwas/studies/GCST009760)
