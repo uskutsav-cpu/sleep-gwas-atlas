@@ -32,14 +32,17 @@ GRCh38 build remains a separate harmonization blocker. Official file-level
 verification of the Jansen 2019 UK Biobank-only insomnia release and Jones 2019
 UK Biobank morning-person release brings the current total to 33/45. Complete
 verification of the Bellenguez 2022 Alzheimer disease Stage I file then brings
-the current total to 34/45. The public
-genome-wide file has 85,934 clinically diagnosed or proxy cases and 401,577
-controls; the paper's larger headline total includes Stage II follow-up and
-must not be attached to every genome-wide row. These counts also do not claim
-that every source is on GRCh37, binary prevalence is resolved, or LDSC is
-ready. Shared samples are retained as explicit analysis concerns: IBD/CD/UC
-overlap, the three lipid traits share cohorts, and BMI overlaps UKB-derived
-sleep phenotypes.
+the current total to 34/45. The public genome-wide file has 85,934 clinically
+diagnosed or proxy cases and 401,577 controls; the paper's larger headline
+total includes Stage II follow-up and must not be attached to every genome-wide
+row. Direct verification of the Nalls 2019 public European Parkinson disease
+and UKB proxy-case release brings the total to 35/45. Its exact N is 482,730,
+not the inconsistent 1,474,097 previously carried in the manifest, and its
+literal raw schema requires a GRCh37 coordinate-and-allele-to-rsID mapping.
+These counts also do not claim that every source is on GRCh37, binary
+prevalence is resolved, or LDSC is ready. Shared samples are retained as
+explicit analysis concerns: IBD/CD/UC overlap, the three lipid traits share
+cohorts, and BMI overlaps UKB-derived sleep phenotypes.
 
 ## Deferred branch candidates
 
@@ -47,7 +50,6 @@ These records were not promoted:
 
 | Trait | Reason |
 |---|---|
-| Parkinson disease | The branch could not independently establish whether the accession is the appropriate non-23andMe/proxy-case release. |
 | major depression | Branch substituted Wray 2018 for the selected, larger Howard 2019 release because the latter is controlled. Ease of access is not the selection criterion. |
 | schizophrenia | Accession/publication/phenotype notes conflict and require primary-source reconciliation. |
 | bipolar disorder | Branch substituted a roughly five-fold smaller 2016 GWAS for Mullins 2021. |
