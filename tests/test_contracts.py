@@ -99,6 +99,20 @@ def load_liftover_module():
     return module
 
 
+def load_prostate_materializer():
+    scripts_dir = str(ROOT / "scripts")
+    spec = importlib.util.spec_from_file_location(
+        "prostate_materializer", ROOT / "scripts" / "20_materialize_practical_prostate.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, scripts_dir)
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.path.remove(scripts_dir)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -151,6 +165,49 @@ class PanelContractTests(unittest.TestCase):
                 if trait.strip()
             }
         self.assertEqual(mapped, panel_ids)
+
+    def test_prostate_materializer_filters_only_wrong_width_rows(self):
+        materializer = load_prostate_materializer()
+        header = materializer.HEADER.decode("ascii")
+        fields = [
+            "marker", "tag", "rs123", "1", "100", "a", "g", "0.2",
+            "0.01", "0.1", "0.3", "0.05", "0.01", "1e-6", "+", "0.99",
+        ]
+        valid = "\t".join(fields)
+        malformed = "\t".join(fields[:-1])
+        projected = "\t".join(fields[index] for index in materializer.OUTPUT_COLUMN_INDEXES)
+        projected_header = materializer.OUTPUT_HEADER.decode("ascii")
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "source.tsv"
+            output = directory / "prostate.tsv.gz"
+            source.write_text(
+                f"{header}\n{valid}\n{malformed}\n{valid}\n", encoding="ascii"
+            )
+            counts = materializer.scan_or_materialize(
+                source,
+                output,
+                expected_data_rows=3,
+                expected_malformed_rows=1,
+                expected_field_count=16,
+                expected_non_rsid_rows=0,
+                expected_non_snp_rows=0,
+                expected_nonautosomal_rows=0,
+                expected_retained_rows=2,
+            )
+            with gzip.open(output, "rt", encoding="ascii") as handle:
+                materialized = handle.read().splitlines()
+            provenance = Path(f"{output}.provenance.json").read_text(encoding="utf-8")
+        self.assertEqual(counts, {
+            "source_rows": 3,
+            "retained_rows": 2,
+            "malformed_rows": 1,
+            "non_rsid_rows": 0,
+            "non_snp_rows": 0,
+            "nonautosomal_rows": 0,
+        })
+        self.assertEqual(materialized, [projected_header, projected, projected])
+        self.assertIn('"malformed_rows": 1', provenance)
 
     def test_source_schemas_match_selected_source_trait_pairs(self):
         with (ROOT / "config" / "analysis_panel.tsv").open(newline="") as handle:

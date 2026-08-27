@@ -32,7 +32,9 @@ registry intentionally names the same exact phenotype twice. A source marked
 ``GZIP_WRAPPED_ZIP_COLUMNS`` is a reviewed multi-phenotype nested archive; it
 is handled only by its named, source-specific materializer. A source marked
 ``DIRECT_TSV`` is a single, uncompressed tabular release and is losslessly
-gzip-wrapped after its registered integrity check. A source marked
+gzip-wrapped after its registered integrity check. The named PRACTICAL
+prostate-cancer mode fail-closes on the exact reviewed malformed-row count and
+writes a provenance sidecar for its explicit exclusions. A source marked
 ``DIRECT_GZIP`` is already a single gzipped tabular release and is hard-linked
 into the raw directory after its registered integrity check. Large public
 Google Drive releases with a reviewed source-specific materializer are fetched
@@ -134,6 +136,9 @@ if [ "$MODE" = --download ]; then
   elif [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
     "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
       --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --verify-only
+  elif [ "$archive_member" = "PRACTICAL_2018_FILTER_MALFORMED" ]; then
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --verify-only
   elif [ "$archive_member" = "OPENGWAS_VCF" ]; then
     gzip -t "$ARCHIVE"
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
@@ -208,6 +213,26 @@ if [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
   if [ ! -s "$PRIMARY" ]; then
     "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
       --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
+if [ "$archive_member" = "PRACTICAL_2018_FILTER_MALFORMED" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: PRACTICAL_2018_FILTER_MALFORMED must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -s "$PRIMARY" ] || [ ! -s "$PRIMARY.provenance.json" ]; then
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --out "$PRIMARY"
+  else
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --verify-only
   fi
   gzip -t "$PRIMARY"
   echo "Materialized $source_id"
