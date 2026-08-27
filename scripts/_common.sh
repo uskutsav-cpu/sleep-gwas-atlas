@@ -27,10 +27,11 @@ trait_field() {
   awk -F'\t' -v trait_id="$trait" -v wanted="$column" '
     NR == 1 {
       for (i = 1; i <= NF; ++i) if ($i == wanted) column = i
-      if (!column) exit 2
+      for (i = 1; i <= NF; ++i) if ($i == "trait_id") trait_column = i
+      if (!column || !trait_column) exit 2
       next
     }
-    $1 == trait_id { print $column; found = 1; exit }
+    $trait_column == trait_id { print $column; found = 1; exit }
     END { if (!found) exit 1 }
   ' "$CONFIG"
 }

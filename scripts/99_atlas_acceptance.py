@@ -95,6 +95,30 @@ def source_gate(rows: list[dict[str, str]]) -> Gate:
     )
 
 
+def source_schema_gate(root: Path, rows: list[dict[str, str]]) -> Gate:
+    relative = "config/gwas_schemas.tsv"
+    path = root / relative
+    if not path.is_file():
+        return Gate("source_schemas", "BLOCKED", "", f"missing schema registry: {relative}")
+    schemas = {row.get("source_id", ""): row for row in read_tsv(path)}
+    verified = []
+    blocked = []
+    for row in rows:
+        schema = schemas.get(row.get("source_id", ""))
+        if row.get("source_status") == "SOURCE_VERIFIED" and schema and schema.get("schema_status") == "SCHEMA_VERIFIED":
+            verified.append(row["trait_id"])
+        else:
+            blocked.append(row["trait_id"])
+    if len(verified) == 45:
+        return Gate("source_schemas", "PASS", "45/45 selected source schemas verified", "")
+    return Gate(
+        "source_schemas",
+        "BLOCKED",
+        f"{len(verified)}/45 selected source schemas verified",
+        f"effect/allele/statistic schemas remain unresolved for {len(blocked)} traits: {', '.join(blocked)}",
+    )
+
+
 def per_trait_files_gate(
     root: Path,
     rows: list[dict[str, str]],
@@ -196,6 +220,7 @@ def build_gates(root: Path) -> list[Gate]:
     gates.extend(
         [
             source_gate(rows),
+            source_schema_gate(root, rows),
             per_trait_files_gate(
                 root, rows, "harmonization", "data/harmonized/{trait}.qc.txt", "complete harmonization QC ledgers"
             ),

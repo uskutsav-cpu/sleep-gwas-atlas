@@ -26,6 +26,12 @@ SOURCE_COLUMNS = {
     "archive_sha256", "raw_files", "pmid", "ancestry_reported",
     "build_status", "acquisition_status",
 }
+SCHEMA_COLUMNS = {
+    "source_id", "schema_status", "file_format", "variant_id", "chromosome",
+    "position", "effect_allele", "other_allele", "effect",
+    "effect_convention", "standard_error", "p_value", "eaf", "info",
+    "sample_size", "notes",
+}
 MISSING_TEXT = {"", "na", "nan", "none", "null", "unresolved", "unregistered"}
 
 
@@ -71,6 +77,23 @@ def load_public_sources(path, trait_ids):
     return by_trait
 
 
+def load_source_schemas(path):
+    if not os.path.exists(path):
+        raise SystemExit(f"ERROR: GWAS schema registry not found: {path}")
+    schemas = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    missing = SCHEMA_COLUMNS.difference(schemas.columns)
+    if missing:
+        raise SystemExit(f"ERROR: GWAS schema registry missing columns: {sorted(missing)}")
+    if schemas["source_id"].duplicated().any():
+        duplicates = schemas.loc[schemas["source_id"].duplicated(), "source_id"].tolist()
+        raise SystemExit(f"ERROR: duplicate source schema rows: {duplicates}")
+    allowed = {"SCHEMA_PENDING", "SCHEMA_VERIFIED"}
+    invalid = schemas.loc[~schemas["schema_status"].isin(allowed), ["source_id", "schema_status"]]
+    if len(invalid):
+        raise SystemExit(f"ERROR: invalid source schema status: {invalid.to_dict('records')}")
+    return {row["source_id"]: row for _, row in schemas.iterrows()}
+
+
 def load_h2(path):
     if not path:
         return {}
@@ -89,6 +112,7 @@ def main():
     parser.add_argument("--config", default="config/analysis_panel.tsv")
     parser.add_argument("--lock", default="config/analysis_panel.lock.json")
     parser.add_argument("--sources", default="config/public_gwas_sources.tsv")
+    parser.add_argument("--schemas", default="config/gwas_schemas.tsv")
     parser.add_argument("--h2")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--harmonized-dir", default="data/harmonized")
@@ -107,6 +131,7 @@ def main():
     if missing:
         raise SystemExit(f"ERROR: analysis panel missing columns: {sorted(missing)}")
     sources_by_trait = load_public_sources(args.sources, set(config["trait_id"]))
+    schemas_by_source = load_source_schemas(args.schemas)
     h2_by_trait = load_h2(args.h2)
     panel_hash = manifest_sha256(args.config)
 
@@ -114,6 +139,7 @@ def main():
     for _, trait in config.iterrows():
         trait_id = trait["trait_id"]
         source = sources_by_trait.get(trait_id)
+        schema = schemas_by_source.get(trait["source_id"])
 
         source_issues = []
         if trait["source_status"] != "SOURCE_VERIFIED":
@@ -151,6 +177,13 @@ def main():
             harmonization_issues.append("not_hg19_requires_explicit_build_decision")
         if source is not None and source["build_status"].upper() != "HEADER_VALIDATED_HG19":
             harmonization_issues.append("source_build_not_header_validated_hg19")
+        if schema is None:
+            harmonization_issues.append("source_schema_not_registered")
+            schema_status = "UNREGISTERED"
+        else:
+            schema_status = schema["schema_status"]
+            if schema_status != "SCHEMA_VERIFIED":
+                harmonization_issues.append("source_schema_not_verified")
         if trait["type"] == "binary":
             if not numeric(trait["ncase"]) or not numeric(trait["ncontrol"]):
                 harmonization_issues.append("binary_ncase_or_ncontrol_unresolved")
@@ -219,6 +252,7 @@ def main():
             "domain": trait["domain"],
             "type": trait["type"],
             "declared_source_status": trait["source_status"],
+            "schema_status": schema_status,
             "source_verified": source_verified,
             "harmonization_ready": harmonization_ready,
             "ldsc_ready": ldsc_ready,

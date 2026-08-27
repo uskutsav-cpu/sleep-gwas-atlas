@@ -7,6 +7,7 @@ configfile: "config/workflow.yaml"
 PANEL = config["panel"]
 PANEL_LOCK = config["panel_lock"]
 SOURCES = config["sources"]
+SCHEMAS = config["schemas"]
 PYTHON = config["python"]
 LDSC_PYTHON = config["ldsc_python"]
 LDSC_DIR = config["ldsc_dir"]
@@ -45,11 +46,13 @@ rule source_readiness:
         manifest=PANEL,
         lock=PANEL_LOCK,
         sources=SOURCES,
+        schemas=SCHEMAS,
     output:
         "results/tables/source_readiness.tsv",
     shell:
         "{PYTHON} scripts/10_phase0_audit.py --config {input.manifest} "
         "--lock {input.lock} --sources {input.sources} --out {output} --strict"
+        " --schemas {input.schemas}"
 
 
 rule smoke_test:

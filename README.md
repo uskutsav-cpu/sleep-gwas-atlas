@@ -11,10 +11,10 @@ An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
 The analysis scope is now frozen in `config/analysis_panel.tsv` at exactly 45 traits. `config/analysis_panel.lock.json` locks the ordered trait identities and domain counts, while every generated readiness or Phase 1 inclusion table records the full manifest SHA-256. A trait therefore cannot be silently swapped while preserving a 45-row count.
 
-The source registry currently provides evidence-backed public-source records for **17/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
+The source registry currently provides evidence-backed public-source records for **29/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
 
 ```text
-source_verified: 17 / 45
+source_verified: 29 / 45
 harmonization_ready: 0 / 45
 ldsc_ready: 0 / 45
 liability_h2_ready: 0 / 45
@@ -22,6 +22,12 @@ phase1_pass: 0 / 45
 ```
 
 The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. No real LDSC results are versioned on this branch; synthetic smoke-test artifacts are not scientific results.
+
+One real source has also been exercised locally end to end through the
+harmonizer. The ignored Campos 2020 snoring input produced 7,168,629 retained
+variants from 11,010,158 input rows (65.11%) and a filter-by-filter QC ledger.
+This local artifact is not counted as present in the fresh-clone summary above
+and has not yet been HapMap3-munged for LDSC.
 
 ## Locked panel contract
 
@@ -35,6 +41,11 @@ All production entry points read `config/analysis_panel.tsv`. The manifest recor
 - PMID/DOI when verified;
 - population prevalence and citation when required; and
 - source-verification declaration.
+
+The separate `config/gwas_schemas.tsv` records the literal variant, allele,
+effect, SE, P, frequency, INFO, and sample-size fields for each selected file.
+A source can be identity/checksum verified while its schema remains pending;
+that state cannot advance to `HARMONIZATION_READY`.
 
 Unknown facts are written as `UNRESOLVED`, never guessed. Validate the contract with:
 

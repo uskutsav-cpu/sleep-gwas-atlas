@@ -9,7 +9,10 @@ Current curation records:
 
 - `../config/analysis_panel.tsv` — authoritative locked 45-trait production manifest.
 - `../config/analysis_panel.lock.json` — ordered trait/domain identity lock.
+- `../config/gwas_schemas.tsv` — literal source-column and effect-convention gate.
 - `atlas_v1_finish_line.md` — acceptance gates and the current scientific blockers.
+- `source_curation_harvest_2026-08-26.md` — selective provenance imported from
+  the out-of-scope experimental branch, plus explicit deferral reasons.
 - `panel_45_selection.md` — provenance for the final-45 selection decision.
 - `public_sleep_gwas_acquisition.md` — verified public sleep source releases.
 - `public_aging_gwas_acquisition.md` — verified public aging source releases.

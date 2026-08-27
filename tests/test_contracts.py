@@ -75,6 +75,20 @@ class PanelContractTests(unittest.TestCase):
         self.assertTrue(mapped)
         self.assertFalse(mapped.difference(panel_ids))
 
+    def test_shell_trait_lookup_is_header_aware(self):
+        result = subprocess.run(
+            [
+                "bash",
+                "-c",
+                "source scripts/_common.sh && trait_field snoring source_id",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.strip(), "campos_2020_snoring")
+
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))
         paths += list((ROOT / "scripts").glob("*.sh"))
@@ -140,7 +154,8 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("PASS    locked_panel", result.stdout)
         self.assertIn("BLOCKED source_curation", result.stdout)
-        self.assertIn("Acceptance: 1/22 gates passed", result.stdout)
+        self.assertIn("BLOCKED source_schemas", result.stdout)
+        self.assertIn("Acceptance: 1/23 gates passed", result.stdout)
 
 
 if __name__ == "__main__":

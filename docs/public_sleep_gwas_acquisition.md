@@ -1,9 +1,10 @@
 # Public sleep-GWAS acquisition
 
-This document records the first **source-verified public** releases selected
+This document records **source-verified public** releases selected
 for Phase 0. It is an acquisition log, not an LDSC result. A downloaded file
-remains `TODO` until its real header, build, effect-allele convention, sample
-size treatment, and Phase 0 filters have been checked.
+does not become `HARMONIZATION_READY` until its real header, build,
+effect-allele convention, sample-size treatment, and Phase 0 filters have been
+checked.
 
 The [Knowledge Portal Network's UK Biobank self-report page](https://www.kp4cd.org/node/235)
 links directly to the five archives registered in
@@ -15,11 +16,12 @@ README and unrelated workspace history in addition to the summary statistics.
 | Source ID | Registry traits | Publication | Public file |
 | --- | --- | --- | --- |
 | `dashti_2019_sleep_duration` | `sleepdur` | Dashti et al. 2019, PMID 30846698 | `sleepdurationsumstats.txt.zip` |
-| `dashti_2019_short_sleep` | `shortsleep`, `shortsleep_dashti` | Dashti et al. 2019, PMID 30846698 | `shortsumstats.txt.zip` |
-| `dashti_2019_long_sleep` | `longsleep`, `longsleep_dashti` | Dashti et al. 2019, PMID 30846698 | `longsumstats.txt.zip` |
+| `dashti_2019_short_sleep` | `shortsleep` | Dashti et al. 2019, PMID 30846698 | `shortsumstats.txt.zip` |
+| `dashti_2019_long_sleep` | `longsleep` | Dashti et al. 2019, PMID 30846698 | `longsumstats.txt.zip` |
 | `wang_2019_daytime_sleepiness` | `sleepiness` | Wang et al. 2019, PMID 31409809 | `Saxena.fullUKBB.DaytimeSleepiness.sumstats.zip` |
 | `dashti_2021_daytime_napping` | `napping` | Dashti et al. 2021, PMID 33568662 | `Saxena_fullUKBB_Daytimenapping_summary_stats.zip` |
 | `jones_2019_accelerometer_sleep` | `sleep_efficiency`, `accel_sleep_duration`, `sleep_timing` | Jones et al. 2019, PMID 30952852 | `accel_GWAS_all_BOLT.output_HRC.only_plus.metrics_maf0.001_hwep1em12_info0.3.txt.zip.gz` |
+| `campos_2020_snoring` | `snoring` | Campos et al. 2020, PMID 32060260 | `Campos_prePMID_Snoring-mainAnalysis.gz` |
 
 `scripts/11_materialize_public_gwas.sh` retains each downloaded archive under
 the ignored `data/raw/.archives/` directory, then streams its registered
@@ -27,11 +29,33 @@ member into `data/raw/*.txt.gz`. It prints SHA-256 values after materializing,
 so the local acquisition can be entered into a lab notebook without tracking
 large or redistribution-restricted files in Git.
 
-`shortsleep`/`shortsleep_dashti` and `longsleep`/`longsleep_dashti` are
-intentional aliases of the same files. The materializer uses hard links to
-avoid storing duplicate data. They must be deduplicated before any Phase 1
-multiple-testing family is defined; treating aliases as independent traits
-would be a statistical error.
+Historical short-/long-sleep aliases are not part of atlas-v1.0. The source
+registry maps each selected release to exactly one locked phenotype, preventing
+duplicate files from entering the Phase 1 multiple-testing family as if they
+were independent traits.
+
+## Campos 2020 snoring release
+
+The official [GWAS Catalog record GCST009760](https://www.ebi.ac.uk/gwas/studies/GCST009760)
+reports 152,302 European-ancestry cases and 256,015 controls. The primary paper
+defines the binary phenotype as yes versus no to UK Biobank field 1210: whether
+a partner, close relative, or friend complains about the participant's
+snoring. “Don't know” and “prefer not to answer” responses were excluded.
+
+The 258,829,716-byte original release reproduces the Catalog-supplied MD5
+`c9af2918be5945ec8d8d955fdc004e14`; its project SHA-256 is
+`82eeb068648959afbbccf477745820a2118f88abdff8ff0076ebb47df21f2417`.
+Its literal header is `CHR BP SNP A1 A2 FREQ BETA SE P`, and `rs3094315` at
+`1:752566` confirms GRCh37. Cross-checking original rows against the Catalog's
+standardized file confirms that original A1 is its `effect_allele` and original
+BETA is its beta on that allele. The file is therefore `SCHEMA_VERIFIED` and the
+locally materialized hard link reaches `HARMONIZATION_READY`.
+
+The real harmonization run read 11,010,158 rows and retained 7,168,629 (65.11%)
+after the locked filters. Its ignored output is 156 MiB with SHA-256
+`9b38e2576fdc73c1e7fbfbf8e50fd9b9ded589511e257b0b8c07ac2260f86d88`;
+`data/harmonized/snoring.qc.txt` records every filter count. Snoring still
+requires HapMap3 munging before `LDSC_READY`.
 
 ## Jones 2019 accelerometer release
 
