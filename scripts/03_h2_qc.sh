@@ -55,5 +55,9 @@ for trait in "$@"; do
   "${command[@]}"
 done
 
+# The canonical table is cumulative.  Restricting this collation to "$@"
+# would silently replace earlier valid rows whenever h2 is run incrementally.
+# The loop above already fails if any newly requested LDSC run fails, so now
+# rebuild the table from every locked-panel h2 log present in LOGDIR.
 "$PYTHON_BIN" scripts/05_collate.py --mode h2 --config "$CONFIG" \
-  --logdir "$LOGDIR" --traits "$@" --out "$H2_OUT"
+  --logdir "$LOGDIR" --out "$H2_OUT"

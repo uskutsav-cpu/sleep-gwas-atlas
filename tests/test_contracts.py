@@ -908,6 +908,11 @@ class PanelContractTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 collator.parse_h2(directory, str(MANIFEST))
 
+    def test_h2_wrapper_rebuilds_the_cumulative_table(self):
+        script = (ROOT / "scripts" / "03_h2_qc.sh").read_text(encoding="utf-8")
+        collate_call = script.split('scripts/05_collate.py --mode h2', 1)[1]
+        self.assertNotIn('--traits "$@"', collate_call)
+
     def test_collator_fails_closed_without_manifest(self):
         collator = load_collator()
         with tempfile.TemporaryDirectory() as directory:
