@@ -27,9 +27,11 @@ This branch harvest advances source verification from 17/45 to 28/45. A
 separate direct verification of Campos 2020 snoring brings the current total to
 29/45. Subsequent direct verification of the selected colorectal- and
 lung-cancer releases brings the current total to 31/45. These counts do not
-claim that the archives are currently materialized,
-their headers are supported by the
-harmonizer, binary prevalence is resolved, or LDSC is ready. Shared samples are
+claim that the archives are currently materialized. Direct verification of the
+FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 32/45; its
+GRCh38 build remains a separate harmonization blocker. These counts also do not
+claim that every header is supported by the harmonizer, binary prevalence is
+resolved, or LDSC is ready. Shared samples are
 retained as explicit analysis concerns: IBD/CD/UC overlap, the three lipid
 traits share cohorts, and BMI overlaps UKB-derived sleep phenotypes.
 
@@ -54,11 +56,13 @@ These records were not promoted:
 
 No branch candidate record existed for snoring, sleep apnea, colorectal cancer,
 lung cancer, or melanoma. Snoring, colorectal cancer, and lung cancer were
-resolved independently from official GWAS Catalog sources. The selected Landi
-melanoma accession `GCST010304` has `fullPvalueSet=false` in the official API
+resolved independently from official GWAS Catalog sources, and sleep apnea was
+resolved from FinnGen's R9 manifest, endpoint definition, and data dictionary.
+The selected Landi melanoma accession `GCST010304` has `fullPvalueSet=false` in the official API
 and no directory in the Catalog summary-statistics FTP tree, so it remains
-pending rather than being represented by an invented download. Sleep apnea and
-melanoma still require new file-level primary-source work.
+pending rather than being represented by an invented download. Sleep apnea
+requires a validated build-conversion path; melanoma still requires new
+file-level primary-source work.
 
 The rule for the next pass is unchanged: prefer the largest appropriate and
 scientifically compatible release, even when it requires controlled access,

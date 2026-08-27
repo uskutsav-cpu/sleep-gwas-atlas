@@ -22,6 +22,7 @@ README and unrelated workspace history in addition to the summary statistics.
 | `dashti_2021_daytime_napping` | `napping` | Dashti et al. 2021, PMID 33568662 | `Saxena_fullUKBB_Daytimenapping_summary_stats.zip` |
 | `jones_2019_accelerometer_sleep` | `sleep_efficiency`, `accel_sleep_duration`, `sleep_timing` | Jones et al. 2019, PMID 30952852 | `accel_GWAS_all_BOLT.output_HRC.only_plus.metrics_maf0.001_hwep1em12_info0.3.txt.zip.gz` |
 | `campos_2020_snoring` | `snoring` | Campos et al. 2020, PMID 32060260 | `Campos_prePMID_Snoring-mainAnalysis.gz` |
+| `finngen_r9_sleep_apnoea` | `sleep_apnea` | FinnGen R9 / Kurki et al. 2023, PMID 36653562 | `finngen_R9_G6_SLEEPAPNO.gz` |
 
 `scripts/11_materialize_public_gwas.sh` retains each downloaded archive under
 the ignored `data/raw/.archives/` directory, then streams its registered
@@ -56,6 +57,25 @@ after the locked filters. Its ignored output is 156 MiB with SHA-256
 `9b38e2576fdc73c1e7fbfbf8e50fd9b9ded589511e257b0b8c07ac2260f86d88`;
 `data/harmonized/snoring.qc.txt` records every filter count. Snoring still
 requires HapMap3 munging before `LDSC_READY`.
+
+## FinnGen R9 sleep-apnoea release
+
+The official R9 manifest identifies `G6_SLEEPAPNO` as 38,998 cases and 336,659
+controls. Those figures replace the previous unsupported 43,901/174,054 values.
+Risteys defines cases from hospital-discharge or cause-of-death ICD-10 G47.3
+and ICD-9 3472 codes and excludes `G6_NARCOCATA` and `G6_SLEEPDISOTH` from
+controls.
+
+The 763,490,490-byte public archive reproduces its Google Storage MD5
+`7a8e564bbab3a6e8cc3bd365874d7d60`, has SHA-256
+`eb8cfc33febc044c3f608406f5f50c9be7f6973aba5effd89a0f94d1f58c1d4b`,
+and passes full gzip validation. Its 20,170,208 rows use the documented header
+`#chrom pos ref alt rsids nearest_genes pval mlogp beta sebeta af_alt
+af_alt_cases af_alt_controls`; FinnGen defines `alt` as the effect allele and
+`beta` as its log-odds effect. The `rs2977608` coordinate is 1:832873, matching
+GRCh38 and differing from GRCh37 1:768253. Source and schema are therefore
+verified, but the trait remains blocked from harmonization until an explicit,
+audited hg38-to-hg19 liftover is implemented.
 
 ## Jones 2019 accelerometer release
 
