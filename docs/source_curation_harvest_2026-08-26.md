@@ -25,7 +25,9 @@ branch-recorded build-anchor validation are now in
 
 This branch harvest advances source verification from 17/45 to 28/45. A
 separate direct verification of Campos 2020 snoring brings the current total to
-29/45. These counts do not claim that the archives are currently materialized,
+29/45. Subsequent direct verification of the selected colorectal- and
+lung-cancer releases brings the current total to 31/45. These counts do not
+claim that the archives are currently materialized,
 their headers are supported by the
 harmonizer, binary prevalence is resolved, or LDSC is ready. Shared samples are
 retained as explicit analysis concerns: IBD/CD/UC overlap, the three lipid
@@ -51,9 +53,12 @@ These records were not promoted:
 | systolic blood pressure | Branch substituted Keaton 2024 for Evangelou 2018; overlap, phenotype transformation, and selection implications require review first. |
 
 No branch candidate record existed for snoring, sleep apnea, colorectal cancer,
-lung cancer, or melanoma. Snoring was resolved independently from the official
-GWAS Catalog source. Sleep apnea and the three remaining cancers still require
-new file-level primary-source work.
+lung cancer, or melanoma. Snoring, colorectal cancer, and lung cancer were
+resolved independently from official GWAS Catalog sources. The selected Landi
+melanoma accession `GCST010304` has `fullPvalueSet=false` in the official API
+and no directory in the Catalog summary-statistics FTP tree, so it remains
+pending rather than being represented by an invented download. Sleep apnea and
+melanoma still require new file-level primary-source work.
 
 The rule for the next pass is unchanged: prefer the largest appropriate and
 scientifically compatible release, even when it requires controlled access,
