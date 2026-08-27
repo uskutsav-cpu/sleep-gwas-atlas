@@ -14,8 +14,10 @@ LDSC_REPOSITORY=https://github.com/CBIIT/ldsc.git
 LDSC_COMMIT=6c673952cee74bd5c57aef1555a03b1c015399a0
 REFERENCE_URL=${REFERENCE_URL:-https://zenodo.org/records/8182036/files/eur_w_ld_chr.tar.gz?download=1}
 REFERENCE_MD5=${REFERENCE_MD5:-e2f16343c4cfaa76caa7d0c03d26b489}
+REFERENCE_SHA256=${REFERENCE_SHA256:-9537f00eb0d163a935aaa2cf04b358b7cf21852279b9c7925802526f6060b069}
+VARIANT_MAP_SHA256=${VARIANT_MAP_SHA256:-6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4}
 
-echo "==> [1/4] Python 3.9 LDSC environment"
+echo "==> [1/5] Python 3.9 LDSC environment"
 if ! command -v "$CONDA_BIN" > /dev/null 2>&1; then
   echo "ERROR: conda is required to create the reproducible Python 3.9 LDSC environment." >&2
   echo "Install Miniforge/conda, or set CONDA_BIN to its executable path." >&2
@@ -43,7 +45,7 @@ fi
 LDSC_PYTHON="$LDSC_ENV_DIR/bin/python"
 "$LDSC_PYTHON" -c 'import numpy, pandas, scipy, matplotlib, pybedtools'
 
-echo "==> [2/4] LDSC (maintained Python 3 implementation)"
+echo "==> [2/5] LDSC (maintained Python 3 implementation)"
 if [ ! -d "$LDSC_DIR/.git" ]; then
   git clone "$LDSC_REPOSITORY" "$LDSC_DIR"
   git -C "$LDSC_DIR" checkout --detach "$LDSC_COMMIT"
@@ -75,7 +77,7 @@ fi
 "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" -h > /dev/null
 echo "    LDSC OK"
 
-echo "==> [3/4] Reference files -> ref/"
+echo "==> [3/5] Reference files -> ref/"
 mkdir -p ref && cd ref
 # European LD scores computed on 1000G Phase 3, HapMap3 SNPs. Zenodo record
 # 8182036 explicitly documents this archive as a gzip copy of the original
@@ -86,6 +88,11 @@ if [ ! -d eur_w_ld_chr ]; then
   ACTUAL_MD5=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.md5(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$ARCHIVE")
   if [ "$ACTUAL_MD5" != "$REFERENCE_MD5" ]; then
     echo "ERROR: EUR LD archive MD5 mismatch: expected $REFERENCE_MD5, got $ACTUAL_MD5" >&2
+    exit 1
+  fi
+  ACTUAL_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$ARCHIVE")
+  if [ "$ACTUAL_SHA256" != "$REFERENCE_SHA256" ]; then
+    echo "ERROR: EUR LD archive SHA-256 mismatch: expected $REFERENCE_SHA256, got $ACTUAL_SHA256" >&2
     exit 1
   fi
   tar -xzf "$ARCHIVE"
@@ -101,7 +108,17 @@ ln -sfn eur_w_ld_chr/w_hm3.snplist w_hm3.snplist
 cd "$ROOT"
 echo "    ref/ contains:"; ls ref | sed 's/^/      /'
 
-echo "==> [4/4] Done."
+echo "==> [4/5] Audited HapMap3 GRCh37 identity map"
+"$LDSC_PYTHON" scripts/19_build_hm3_variant_map.py \
+  --reference-dir ref/eur_w_ld_chr \
+  --out ref/hm3_grch37_variant_map.tsv.gz
+ACTUAL_MAP_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' ref/hm3_grch37_variant_map.tsv.gz)
+if [ "$ACTUAL_MAP_SHA256" != "$VARIANT_MAP_SHA256" ]; then
+  echo "ERROR: derived variant-map SHA-256 mismatch: expected $VARIANT_MAP_SHA256, got $ACTUAL_MAP_SHA256" >&2
+  exit 1
+fi
+
+echo "==> [5/5] Done."
 cat <<'EOF'
 
 NOTE ON DOWNLOAD MIRRORS

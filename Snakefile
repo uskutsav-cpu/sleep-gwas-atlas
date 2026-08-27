@@ -8,6 +8,7 @@ PANEL = config["panel"]
 PANEL_LOCK = config["panel_lock"]
 SOURCES = config["sources"]
 SCHEMAS = config["schemas"]
+VARIANT_MAPPINGS = config["variant_mappings"]
 PYTHON = config["python"]
 LDSC_PYTHON = config["ldsc_python"]
 LDSC_DIR = config["ldsc_dir"]
@@ -47,12 +48,14 @@ rule source_readiness:
         lock=PANEL_LOCK,
         sources=SOURCES,
         schemas=SCHEMAS,
+        variant_mappings=VARIANT_MAPPINGS,
     output:
         "results/tables/source_readiness.tsv",
     shell:
         "{PYTHON} scripts/10_phase0_audit.py --config {input.manifest} "
         "--lock {input.lock} --sources {input.sources} --out {output} --strict"
         " --schemas {input.schemas}"
+        " --variant-mappings {input.variant_mappings}"
 
 
 rule smoke_test:

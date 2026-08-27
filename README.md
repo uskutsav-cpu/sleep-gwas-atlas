@@ -54,8 +54,11 @@ multiple phenotypes with different effect columns.
 A source can be identity/checksum verified while its schema remains pending;
 that state cannot advance to `HARMONIZATION_READY`. A verified schema that
 lacks usable rsIDs is recorded as `SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING`:
-the columns are understood, but harmonization remains blocked until an audited
-mapping step exists.
+the columns are understood, but harmonization requires the audited strategy in
+`config/variant_mapping_plans.tsv` and the provenance-checked map reproduced by
+`scripts/00_setup.sh`. The current mapper is intentionally restricted to the
+1,184,461-variant intersection of the pinned EUR LDSC coordinates and HapMap3
+allele list; it is not a genome-wide resolver.
 
 Unknown facts are written as `UNRESOLVED`, never guessed. Validate the contract with:
 
@@ -171,6 +174,8 @@ GitHub Actions runs panel/source validation, Python and shell syntax checks, a S
 config/analysis_panel.tsv                    locked 45-trait analysis manifest
 config/analysis_panel.lock.json              ordered trait/domain identity lock
 config/public_gwas_sources.tsv               source URLs, versions, access, hashes
+config/variant_mapping_plans.tsv             audited mapping strategy for seven sources
+ref/hm3_grch37_variant_map.tsv.gz             reproducible ignored GRCh37 HapMap3 identity map
 results/tables/analysis_panel_provenance.tsv manifest and trait-set fingerprints
 results/tables/trait_readiness.tsv            per-trait readiness stages/blockers
 data/harmonized/<trait>.qc.txt                filter-by-filter QC ledger

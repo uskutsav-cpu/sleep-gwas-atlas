@@ -3,9 +3,10 @@
 
 This is the Phase 0 gatekeeper. It deliberately stops when it cannot verify a
 non-negotiable assumption rather than producing a plausible-looking output.
-It does *not* lift over coordinates, infer an ancestry, or try to resolve
-non-rsID variants. Those are curation decisions and must be recorded before
-the analysis is run.
+It does *not* lift over coordinates or infer ancestry. A source registered with
+``SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING`` may opt into the pinned,
+provenance-checked GRCh37 HapMap3 mapper. That path maps only variants present
+in the exact EUR LDSC reference and fails closed on allele/coordinate conflict.
 
 Output schema (tab-separated, gzipped)::
 
@@ -29,6 +30,14 @@ import sys
 
 import numpy as np
 import pandas as pd
+
+from variant_map import (
+    STRATEGIES as VARIANT_MAP_STRATEGIES,
+    VariantMapError,
+    coordinate_match,
+    load_variant_map,
+    rsid_match,
+)
 
 
 # Every threshold is either taken from CDG3 or required to make LDSC input
@@ -75,7 +84,7 @@ ALIASES = {
         "se_sleepduration", "se_shortsleep", "se_longsleep",
     ],
     "P": [
-        "p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value",
+        "p", "pval", "pvalue", "p_value", "p_bolt_lmm", "p-value", "p.value",
         "p_sleepduration", "p_shortsleep", "p_longsleep",
     ],
     "N": ["n", "n_total", "samplesize", "n_complete_samples"],
@@ -172,7 +181,30 @@ def main():
         "--source-build",
         help="Build declared by the downloaded file. Must agree with config; use this when the file header has no build column.",
     )
+    parser.add_argument(
+        "--variant-map",
+        help="Pinned GRCh37 HapMap3 map; requires its .provenance.json companion.",
+    )
+    parser.add_argument(
+        "--variant-map-strategy",
+        choices=sorted(VARIANT_MAP_STRATEGIES),
+        help="BY_COORD_ALLELES assigns rsIDs; BY_RSID_ALLELES assigns GRCh37 coordinates.",
+    )
+    parser.add_argument(
+        "--expected-variant-map-sha256",
+        help="Registered SHA-256 for the variant map (required by production entry points).",
+    )
+    parser.add_argument(
+        "--expected-variant-map-bytes",
+        type=int,
+        help="Registered byte count for the variant map (required by production entry points).",
+    )
     args = parser.parse_args()
+
+    if bool(args.variant_map) != bool(args.variant_map_strategy):
+        fail("--variant-map and --variant-map-strategy must be supplied together")
+    if (args.expected_variant_map_sha256 or args.expected_variant_map_bytes is not None) and not args.variant_map:
+        fail("registered variant-map hash/bytes require --variant-map")
 
     if not os.path.isfile(args.infile):
         fail(f"input file not found: {args.infile}")
@@ -184,10 +216,14 @@ def main():
     metadata = trait_rows.iloc[0]
 
     configured_build = normalise_build(metadata.get("build", ""))
-    if configured_build != TARGET_BUILD:
+    rsid_mapping_sets_build = args.variant_map_strategy == "BY_RSID_ALLELES"
+    if configured_build != TARGET_BUILD and not (
+        rsid_mapping_sets_build and configured_build in {"", "unresolved"}
+    ):
         fail(
             f"trait '{args.trait}' is configured as {metadata.get('build')!r}, not hg19. "
-            "No liftover is implemented; acquire an hg19/GRCh37 source or record and perform a separate liftover decision."
+            "No liftover is implemented; only an rsID-and-allele mapping plan may assign "
+            "GRCh37 coordinates to a coordinate-free source."
         )
     if args.source_build and normalise_build(args.source_build) != TARGET_BUILD:
         fail(f"--source-build {args.source_build!r} is not hg19/GRCh37; refusing silent liftover")
@@ -209,7 +245,16 @@ def main():
     # fails in seconds rather than after allocating the complete table.
     header = pd.read_csv(args.infile, nrows=0, **read_kwargs)
     columns = map_columns(header.columns)
-    required = ["SNP", "CHR", "BP", "A1", "A2", "SE", "P"]
+    required = ["A1", "A2", "SE", "P"]
+    if args.variant_map_strategy == "BY_COORD_ALLELES":
+        if "CHR" in columns and "BP" in columns:
+            required += ["CHR", "BP"]
+        else:
+            required += ["SNP"]
+    elif args.variant_map_strategy == "BY_RSID_ALLELES":
+        required += ["SNP"]
+    else:
+        required += ["SNP", "CHR", "BP"]
     missing = [column for column in required if column not in columns]
     if missing:
         fail(
@@ -239,6 +284,19 @@ def main():
     for standard, original in columns.items():
         out[standard] = raw[original]
 
+    coordinate_label_parsed = False
+    if args.variant_map_strategy == "BY_COORD_ALLELES" and (
+        "CHR" not in out or "BP" not in out
+    ):
+        if "CHR" in out or "BP" in out:
+            fail("coordinate mapping found only one of CHR/BP; inspect the source schema")
+        labels = out["SNP"].astype("string").str.strip()
+        parsed = labels.str.extract(r"^(?:chr)?([0-9]+)[:_]([0-9]+)(?:[:_]|$)")
+        out["CHR"] = parsed[0]
+        out["BP"] = parsed[1]
+        coordinate_label_parsed = True
+        log("parsed CHR/BP from the documented coordinate-based variant label")
+
     if "BETA" in out:
         out["BETA"] = pd.to_numeric(out["BETA"], errors="coerce")
     else:
@@ -249,15 +307,25 @@ def main():
     for column in ["CHR", "BP", "FRQ", "SE", "P", "N", "N_EFF", "N_EFF_HALF", "NCASE", "NCONTROL", "INFO"]:
         if column in out:
             out[column] = pd.to_numeric(out[column], errors="coerce")
-    for column in ["SNP", "A1", "A2"]:
+    for column in ["A1", "A2"]:
         out[column] = out[column].astype("string").str.strip()
+    if "SNP" in out:
+        out["SNP"] = out["SNP"].astype("string").str.strip()
+    else:
+        out["SNP"] = pd.Series(pd.NA, index=out.index, dtype="string")
     out["SNP"] = out["SNP"].str.lower()
     out["A1"] = out["A1"].str.upper()
     out["A2"] = out["A2"].str.upper()
+    if "CHR" not in out:
+        out["CHR"] = np.nan
+    if "BP" not in out:
+        out["BP"] = np.nan
     out["CHR"] = out["CHR"].astype("string").str.replace("chr", "", case=False, regex=False)
     out["CHR"] = pd.to_numeric(out["CHR"], errors="coerce")
 
     steps = []
+    if coordinate_label_parsed:
+        steps.append(("parsed CHR/BP from coordinate-based variant label", 0, len(out)))
 
     def drop(mask, reason):
         nonlocal out
@@ -266,6 +334,67 @@ def main():
         if removed:
             out = out.loc[~mask].copy()
         steps.append((reason, removed, len(out)))
+
+    variant_map_provenance = None
+    if args.variant_map:
+        try:
+            variant_index, variant_map_provenance = load_variant_map(
+                args.variant_map,
+                args.variant_map_strategy,
+                args.expected_variant_map_sha256,
+                args.expected_variant_map_bytes,
+            )
+        except VariantMapError as error:
+            fail(str(error))
+        statuses = []
+        mapped_snps = []
+        mapped_chromosomes = []
+        mapped_positions = []
+        if args.variant_map_strategy == "BY_COORD_ALLELES":
+            for chromosome, position, a1, a2 in zip(
+                out["CHR"], out["BP"], out["A1"], out["A2"]
+            ):
+                status, snp = coordinate_match(
+                    variant_index, chromosome, position, a1, a2
+                )
+                statuses.append(status)
+                mapped_snps.append(snp)
+            out["SNP"] = pd.Series(mapped_snps, index=out.index, dtype="string")
+        else:
+            for snp, chromosome, position, a1, a2 in zip(
+                out["SNP"], out["CHR"], out["BP"], out["A1"], out["A2"]
+            ):
+                status, mapped = rsid_match(
+                    variant_index, snp, chromosome, position, a1, a2
+                )
+                statuses.append(status)
+                if mapped is None:
+                    mapped_snps.append(None)
+                    mapped_chromosomes.append(None)
+                    mapped_positions.append(None)
+                else:
+                    mapped_snps.append(mapped[0])
+                    mapped_chromosomes.append(mapped[1])
+                    mapped_positions.append(mapped[2])
+            out["SNP"] = pd.Series(mapped_snps, index=out.index, dtype="string")
+            out["CHR"] = pd.Series(mapped_chromosomes, index=out.index, dtype="float64")
+            out["BP"] = pd.Series(mapped_positions, index=out.index, dtype="float64")
+        status_series = pd.Series(statuses, index=out.index, dtype="string")
+        for status, reason in [
+            ("unmatched_reference", "not present in pinned GRCh37 EUR HapMap3 map"),
+            ("allele_conflict", "alleles conflict with pinned GRCh37 HapMap3 map"),
+            ("coordinate_conflict", "source coordinate conflicts with pinned GRCh37 HapMap3 map"),
+            ("ambiguous_reference", "coordinate/alleles map ambiguously to multiple rsIDs"),
+        ]:
+            drop(status_series.loc[out.index] == status, reason)
+        steps.append(
+            (
+                f"variant identity assigned by {args.variant_map_strategy}; "
+                f"map_sha256={variant_map_provenance['map_sha256']}",
+                0,
+                len(out),
+            )
+        )
 
     drop(out["SNP"].isna() | ~out["SNP"].map(lambda value: bool(RSID.fullmatch(str(value)))), "missing or non-rsID SNP (dbSNP resolution required)")
     drop(out["A1"].isna() | out["A2"].isna() | ~out["A1"].isin(VALID_ALLELES) | ~out["A2"].isin(VALID_ALLELES), "non-SNP / indel / multi-base allele")
@@ -350,7 +479,14 @@ def main():
         report.write(f"trait\t{args.trait}\n")
         report.write(f"source\t{metadata.get('source_note', '')}\n")
         report.write(f"configured_build\t{metadata.get('build', '')}\n")
+        report.write(f"output_build\t{TARGET_BUILD}\n")
         report.write(f"source_build_argument\t{args.source_build or 'not supplied'}\n")
+        report.write(f"variant_map\t{os.path.abspath(args.variant_map) if args.variant_map else 'not supplied'}\n")
+        report.write(f"variant_map_strategy\t{args.variant_map_strategy or 'not supplied'}\n")
+        report.write(
+            f"variant_map_sha256\t"
+            f"{variant_map_provenance['map_sha256'] if variant_map_provenance else 'not supplied'}\n"
+        )
         report.write(f"infile\t{os.path.abspath(args.infile)}\n")
         report.write(f"infile_sha256\t{sha256(args.infile)}\n")
         report.write(f"rows_in\t{n_input}\n")

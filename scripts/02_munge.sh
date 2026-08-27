@@ -16,17 +16,46 @@ for trait in "$@"; do
   source_build=$(trait_field "$trait" build) || die "trait '$trait' has no build in $CONFIG"
   source_status=$(trait_field "$trait" source_status) || die "trait '$trait' has no source status in $CONFIG"
   ancestry=$(trait_field "$trait" ancestry) || die "trait '$trait' has no ancestry in $CONFIG"
+  mapping_strategy=$(variant_mapping_field "$trait" strategy 2>/dev/null || true)
+  mapping_path=$(variant_mapping_field "$trait" map_path 2>/dev/null || true)
+  mapping_bytes=$(variant_mapping_field "$trait" map_bytes 2>/dev/null || true)
+  mapping_sha256=$(variant_mapping_field "$trait" map_sha256 2>/dev/null || true)
   [ "$source_status" = "SOURCE_VERIFIED" ] || die \
     "$trait has source_status=$source_status; verify and register the selected GWAS before munging"
   [ "$ancestry" = "EUR" ] || die \
     "$trait has ancestry=$ancestry; this EUR workflow refuses a different or unresolved ancestry"
-  [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || die \
-    "$trait has build=$source_build; make an explicit build decision before munging"
+  if [ "$mapping_strategy" = "BY_RSID_ALLELES" ]; then
+    [ "$source_build" = "UNRESOLVED" ] || [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || die \
+      "$trait has build=$source_build; an rsID map cannot excuse a conflicting source build"
+  else
+    [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || die \
+      "$trait has build=$source_build; make an explicit build decision before munging"
+  fi
   require_file "data/raw/$raw_file"
+
+  source_build_args=()
+  if [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ]; then
+    source_build_args=(--source-build "$source_build")
+  fi
+  variant_map_args=()
+  if [ -n "$mapping_strategy" ] || [ -n "$mapping_path" ]; then
+    [ -n "$mapping_strategy" ] && [ -n "$mapping_path" ] && \
+      [ -n "$mapping_bytes" ] && [ -n "$mapping_sha256" ] || die \
+      "$trait has an incomplete variant-mapping plan"
+    require_file "$mapping_path"
+    require_file "$mapping_path.provenance.json"
+    variant_map_args=(
+      --variant-map "$mapping_path"
+      --variant-map-strategy "$mapping_strategy"
+      --expected-variant-map-bytes "$mapping_bytes"
+      --expected-variant-map-sha256 "$mapping_sha256"
+    )
+  fi
 
   echo "==> $trait: Phase 0 harmonization"
   "$PYTHON_BIN" scripts/01_harmonize.py \
-    --trait "$trait" --config "$CONFIG" --source-build "$source_build" \
+    --trait "$trait" --config "$CONFIG" "${source_build_args[@]}" \
+    "${variant_map_args[@]}" \
     --infile "data/raw/$raw_file" --outdir data/harmonized
 
   echo "==> $trait: HapMap3 munging"

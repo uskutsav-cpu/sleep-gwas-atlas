@@ -7,7 +7,9 @@ QC table. A missing artifact is a visible blocker, never an implicit status.
 """
 import argparse
 import hashlib
+import json
 import os
+import re
 import subprocess
 import sys
 
@@ -32,6 +34,12 @@ SCHEMA_COLUMNS = {
     "effect_convention", "standard_error", "p_value", "eaf", "info",
     "sample_size", "notes",
 }
+VARIANT_MAPPING_COLUMNS = {
+    "source_id", "trait_id", "strategy", "map_path", "map_bytes",
+    "map_sha256", "input_identity", "output_build", "notes",
+}
+VARIANT_MAPPING_STRATEGIES = {"BY_COORD_ALLELES", "BY_RSID_ALLELES"}
+VARIANT_MAP_SCHEMA = "atlas.hm3-grch37-variant-map.v1"
 MISSING_TEXT = {"", "na", "nan", "none", "null", "unresolved", "unregistered"}
 
 
@@ -110,6 +118,86 @@ def load_source_schemas(path, selected_sources):
     return {(row["source_id"], row["trait_id"]): row for _, row in schemas.iterrows()}
 
 
+def load_variant_mappings(path, selected_sources):
+    if not os.path.exists(path):
+        raise SystemExit(f"ERROR: variant-mapping registry not found: {path}")
+    mappings = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    missing = VARIANT_MAPPING_COLUMNS.difference(mappings.columns)
+    if missing:
+        raise SystemExit(f"ERROR: variant-mapping registry missing columns: {sorted(missing)}")
+    duplicate_traits = mappings.duplicated(subset=["trait_id"], keep=False)
+    if duplicate_traits.any():
+        duplicates = mappings.loc[duplicate_traits, ["source_id", "trait_id"]].to_dict("records")
+        raise SystemExit(f"ERROR: duplicate variant-mapping trait rows: {duplicates}")
+    invalid = []
+    for _, mapping in mappings.iterrows():
+        selected_source = selected_sources.get(mapping["trait_id"])
+        if selected_source != mapping["source_id"]:
+            invalid.append({
+                "source_id": mapping["source_id"],
+                "trait_id": mapping["trait_id"],
+                "selected_source_id": selected_source or "UNSELECTED_TRAIT",
+            })
+        if mapping["strategy"] not in VARIANT_MAPPING_STRATEGIES:
+            invalid.append({
+                "trait_id": mapping["trait_id"],
+                "invalid_strategy": mapping["strategy"],
+            })
+        if mapping["output_build"] != "GRCh37/hg19":
+            invalid.append({
+                "trait_id": mapping["trait_id"],
+                "invalid_output_build": mapping["output_build"],
+            })
+        if not mapping["map_bytes"].isdigit() or int(mapping["map_bytes"]) <= 0:
+            invalid.append({
+                "trait_id": mapping["trait_id"],
+                "invalid_map_bytes": mapping["map_bytes"],
+            })
+        if not re.fullmatch(r"[0-9a-f]{64}", mapping["map_sha256"]):
+            invalid.append({
+                "trait_id": mapping["trait_id"],
+                "invalid_map_sha256": mapping["map_sha256"],
+            })
+    if invalid:
+        raise SystemExit(f"ERROR: invalid variant-mapping plans: {invalid}")
+    return {row["trait_id"]: row for _, row in mappings.iterrows()}
+
+
+def variant_map_issues(mapping):
+    path = mapping["map_path"]
+    provenance_path = f"{path}.provenance.json"
+    issues = []
+    if not os.path.isfile(path):
+        issues.append("variant_mapping_reference_missing")
+        return issues
+    if not os.path.isfile(provenance_path):
+        issues.append("variant_mapping_provenance_missing")
+        return issues
+    try:
+        with open(provenance_path, encoding="utf-8") as handle:
+            provenance = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        issues.append("variant_mapping_provenance_invalid")
+        return issues
+    if provenance.get("schema_version") != VARIANT_MAP_SCHEMA:
+        issues.append("variant_mapping_schema_invalid")
+    if provenance.get("genome_build") != "GRCh37/hg19":
+        issues.append("variant_mapping_build_invalid")
+    actual_sha256 = manifest_sha256(path)
+    actual_bytes = os.path.getsize(path)
+    if actual_sha256 != mapping["map_sha256"]:
+        issues.append("variant_mapping_registered_checksum_mismatch")
+    if actual_bytes != int(mapping["map_bytes"]):
+        issues.append("variant_mapping_registered_byte_count_mismatch")
+    if provenance.get("map_sha256") != actual_sha256:
+        issues.append("variant_mapping_checksum_mismatch")
+    if provenance.get("map_bytes") != actual_bytes:
+        issues.append("variant_mapping_byte_count_mismatch")
+    if not numeric(provenance.get("mapped_rows")):
+        issues.append("variant_mapping_row_count_missing")
+    return issues
+
+
 def load_h2(path):
     if not path:
         return {}
@@ -129,6 +217,7 @@ def main():
     parser.add_argument("--lock", default="config/analysis_panel.lock.json")
     parser.add_argument("--sources", default="config/public_gwas_sources.tsv")
     parser.add_argument("--schemas", default="config/gwas_schemas.tsv")
+    parser.add_argument("--variant-mappings", default="config/variant_mapping_plans.tsv")
     parser.add_argument("--h2")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--harmonized-dir", default="data/harmonized")
@@ -149,6 +238,17 @@ def main():
     sources_by_trait = load_public_sources(args.sources, set(config["trait_id"]))
     selected_sources = dict(zip(config["trait_id"], config["source_id"]))
     schemas_by_source_trait = load_source_schemas(args.schemas, selected_sources)
+    mappings_by_trait = load_variant_mappings(args.variant_mappings, selected_sources)
+    required_mapping_traits = {
+        trait_id
+        for (_, trait_id), schema in schemas_by_source_trait.items()
+        if schema["schema_status"] == "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING"
+    }
+    if set(mappings_by_trait) != required_mapping_traits:
+        raise SystemExit(
+            "ERROR: variant-mapping plans must exactly cover mapping-required schemas: "
+            f"expected {sorted(required_mapping_traits)}, got {sorted(mappings_by_trait)}"
+        )
     h2_by_trait = load_h2(args.h2)
     panel_hash = manifest_sha256(args.config)
 
@@ -157,6 +257,8 @@ def main():
         trait_id = trait["trait_id"]
         source = sources_by_trait.get(trait_id)
         schema = schemas_by_source_trait.get((trait["source_id"], trait_id))
+        mapping = mappings_by_trait.get(trait_id)
+        mapping_issues = variant_map_issues(mapping) if mapping is not None else []
 
         source_issues = []
         if trait["source_status"] != "SOURCE_VERIFIED":
@@ -190,9 +292,16 @@ def main():
             harmonization_issues.append("primary_publication_unresolved")
         if trait["ancestry"].upper() != "EUR":
             harmonization_issues.append("eur_subset_unresolved")
-        if trait["build"] not in {"hg19", "GRCh37"}:
+        rsid_mapping_sets_build = (
+            mapping is not None and mapping["strategy"] == "BY_RSID_ALLELES"
+        )
+        if trait["build"] not in {"hg19", "GRCh37"} and not rsid_mapping_sets_build:
             harmonization_issues.append("not_hg19_requires_explicit_build_decision")
-        if source is not None and source["build_status"].upper() != "HEADER_VALIDATED_HG19":
+        if (
+            source is not None
+            and source["build_status"].upper() != "HEADER_VALIDATED_HG19"
+            and not rsid_mapping_sets_build
+        ):
             harmonization_issues.append("source_build_not_header_validated_hg19")
         if schema is None:
             harmonization_issues.append("source_schema_not_registered")
@@ -200,7 +309,7 @@ def main():
         else:
             schema_status = schema["schema_status"]
             if schema_status == "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING":
-                harmonization_issues.append("source_variant_mapping_required")
+                harmonization_issues.extend(mapping_issues)
             elif schema_status != "SCHEMA_VERIFIED":
                 harmonization_issues.append("source_schema_not_verified")
         if trait["type"] == "binary":

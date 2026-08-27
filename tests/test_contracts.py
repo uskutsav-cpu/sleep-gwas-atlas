@@ -1,5 +1,6 @@
 import csv
 import gzip
+import hashlib
 import importlib.util
 import math
 from pathlib import Path
@@ -12,6 +13,44 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config" / "analysis_panel.tsv"
 LOCK = ROOT / "config" / "analysis_panel.lock.json"
+
+
+def build_fixture_variant_map(directory):
+    directory = Path(directory)
+    reference = directory / "eur_w_ld_chr"
+    reference.mkdir()
+    (reference / "w_hm3.snplist").write_text(
+        "SNP\tA1\tA2\n"
+        "rs123\tA\tG\n"
+        "rs456\tC\tT\n"
+        "rs789\tG\tC\n",
+        encoding="utf-8",
+    )
+    with gzip.open(reference / "1.l2.ldscore.gz", "wt", encoding="utf-8", newline="") as handle:
+        handle.write(
+            "CHR\tSNP\tBP\tCM\tMAF\tL2\n"
+            "1\trs123\t1000000\t0\t0.2\t1.0\n"
+            "1\trs456\t2000000\t0\t0.3\t1.0\n"
+            "1\trs999\t3000000\t0\t0.2\t1.0\n"
+        )
+    output = directory / "hm3_grch37_variant_map.tsv.gz"
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "19_build_hm3_variant_map.py"),
+            "--reference-dir", str(reference),
+            "--out", str(output),
+            "--chromosomes", "1",
+            "--expected-hm3-count", "3",
+            "--min-coverage", "0.6",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        raise AssertionError(result.stderr + result.stdout)
+    return output
 
 
 def load_collator():
@@ -114,6 +153,30 @@ class PanelContractTests(unittest.TestCase):
         })
         self.assertEqual(len({row["effect"] for row in jones}), 3)
 
+    def test_variant_mapping_plans_exactly_cover_mapping_required_schemas(self):
+        with (ROOT / "config" / "gwas_schemas.tsv").open(newline="") as handle:
+            schemas = list(csv.DictReader(handle, delimiter="\t"))
+        with (ROOT / "config" / "variant_mapping_plans.tsv").open(newline="") as handle:
+            mappings = list(csv.DictReader(handle, delimiter="\t"))
+        required = {
+            row["trait_id"]
+            for row in schemas
+            if row["schema_status"] == "SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING"
+        }
+        self.assertEqual({row["trait_id"] for row in mappings}, required)
+        self.assertEqual(len(mappings), len({row["trait_id"] for row in mappings}))
+        self.assertEqual(
+            {row["strategy"] for row in mappings},
+            {"BY_COORD_ALLELES", "BY_RSID_ALLELES"},
+        )
+        self.assertEqual({row["map_path"] for row in mappings}, {
+            "ref/hm3_grch37_variant_map.tsv.gz"
+        })
+        self.assertEqual({row["map_bytes"] for row in mappings}, {"9948937"})
+        self.assertEqual({row["map_sha256"] for row in mappings}, {
+            "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
+        })
+
     def test_pending_sources_do_not_reuse_stage_or_headline_sample_counts(self):
         panel = {row["trait_id"]: row for row in self.panel}
         self.assertEqual(
@@ -132,6 +195,174 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertEqual(panel["melanoma"]["source_status"], "SOURCE_PENDING")
         self.assertEqual(panel["t2d"]["source_status"], "SOURCE_PENDING")
+
+    def test_hm3_map_assigns_rsid_from_coordinate_and_alleles(self):
+        payload = (
+            "MarkerName\tAllele1\tAllele2\tEffect\tStdErr\tP.value\n"
+            "1:1000000_G_A\tG\tA\t0.2\t0.1\t0.01\n"
+            "1:2000000_A_G\tA\tG\t-0.3\t0.1\t0.02\n"
+            "1:3000001_A_C\tA\tC\t0.1\t0.1\t0.03\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            variant_map_sha256 = hashlib.sha256(variant_map.read_bytes()).hexdigest()
+            source = directory / "ibd.tsv.gz"
+            outdir = directory / "out"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(payload)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "ibd",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--source-build", "hg19",
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_COORD_ALLELES",
+                    "--expected-variant-map-bytes", str(variant_map.stat().st_size),
+                    "--expected-variant-map-sha256", variant_map_sha256,
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(outdir / "ibd.harmonized.tsv.gz", "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            qc = (outdir / "ibd.qc.txt").read_text(encoding="utf-8")
+        self.assertEqual([row["SNP"] for row in rows], ["rs123", "rs456"])
+        self.assertEqual(
+            [(row["CHR"], row["BP"], row["A1"], row["A2"]) for row in rows],
+            [("1", "1000000", "G", "A"), ("1", "2000000", "A", "G")],
+        )
+        self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
+        self.assertIn("variant_map_strategy\tBY_COORD_ALLELES", qc)
+
+    def test_hm3_map_bytes_are_deterministic_across_output_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            first = build_fixture_variant_map(directory)
+            second = directory / "map-with-a-different-name.tsv.gz"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "19_build_hm3_variant_map.py"),
+                    "--reference-dir", str(directory / "eur_w_ld_chr"),
+                    "--out", str(second),
+                    "--chromosomes", "1",
+                    "--expected-hm3-count", "3",
+                    "--min-coverage", "0.6",
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+
+    def test_hm3_map_checksum_mismatch_fails_closed(self):
+        payload = (
+            "SNP\tA1\tA2\tBETA\tSE\tP\tN\n"
+            "rs123\tG\tA\t0.2\t0.1\t0.01\t380000\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            with variant_map.open("ab") as handle:
+                handle.write(b"corrupt")
+            source = directory / "rsid-only.tsv"
+            source.write_text(payload, encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "insomnia",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(directory / "out"),
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_RSID_ALLELES",
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("variant-map SHA-256 mismatch", result.stderr + result.stdout)
+
+    def test_hm3_map_registered_hash_mismatch_fails_closed(self):
+        payload = (
+            "SNP\tA1\tA2\tBETA\tSE\tP\tN\n"
+            "rs123\tG\tA\t0.2\t0.1\t0.01\t380000\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            source = directory / "rsid-only.tsv"
+            source.write_text(payload, encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "insomnia",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(directory / "out"),
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_RSID_ALLELES",
+                    "--expected-variant-map-sha256", "0" * 64,
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(
+            "variant-map SHA-256 differs from the registered map",
+            result.stderr + result.stdout,
+        )
+
+    def test_hm3_map_assigns_grch37_coordinate_from_rsid_and_alleles(self):
+        payload = (
+            "SNP\tA1\tA2\tBETA\tSE\tP\tN\n"
+            "rs123\tG\tA\t0.2\t0.1\t0.01\t380000\n"
+            "rs456\tA\tG\t-0.3\t0.1\t0.02\t380000\n"
+            "rs789\tA\tC\t0.1\t0.1\t0.03\t380000\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_variant_map(directory)
+            source = directory / "rsid-only.tsv"
+            outdir = directory / "out"
+            source.write_text(payload, encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "insomnia",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_RSID_ALLELES",
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(outdir / "insomnia.harmonized.tsv.gz", "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            qc = (outdir / "insomnia.qc.txt").read_text(encoding="utf-8")
+        self.assertEqual(
+            [(row["SNP"], row["CHR"], row["BP"]) for row in rows],
+            [("rs123", "1", "1000000"), ("rs456", "1", "2000000")],
+        )
+        self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
+        self.assertIn("output_build\thg19", qc)
 
     def test_new_sleep_source_headers_harmonize_with_documented_effects(self):
         cases = {

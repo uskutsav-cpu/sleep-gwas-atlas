@@ -10,15 +10,50 @@ reference permitted by the repository's present EUR-only analysis plan.
 | Distribution | [Zenodo record 8182036](https://zenodo.org/records/8182036) |
 | Archive | `eur_w_ld_chr.tar.gz` |
 | Published archive MD5 | `e2f16343c4cfaa76caa7d0c03d26b489` |
+| Verified archive SHA-256 | `9537f00eb0d163a935aaa2cf04b358b7cf21852279b9c7925802526f6060b069` |
 | Archive description | Gzipped copy of the original Alkes-group `eur_w_ld_chr` distribution |
 | Genome build | hg19 (GRCh37), as required by LDSC's 1000 Genomes Phase 3 EUR files |
 | Installation date | 2026-07-28 |
 
 `scripts/00_setup.sh` downloads this exact archive over HTTPS, checks the
-published MD5 before extraction, verifies all 22 autosomal LD-score files, and
-creates `ref/w_hm3.snplist` as a symlink to the list inside the same archive.
+published MD5 and repository-pinned SHA-256 before extraction, verifies all 22
+autosomal LD-score files, and creates `ref/w_hm3.snplist` as a symlink to the
+list inside the same archive.
 The downloaded files are ignored by Git; this document, the source URL, and
 the checksum are versioned instead.
+
+## Derived GRCh37 variant-identity map
+
+Setup also runs `scripts/19_build_hm3_variant_map.py` against the same pinned
+archive. The builder joins the rsID and allele pair in `w_hm3.snplist` to the
+GRCh37 chromosome and position in the 22 EUR LD-score files. It never queries
+an unpinned dbSNP service and emits only the exact intersection:
+
+| Field | Value |
+| --- | ---: |
+| Unique `w_hm3.snplist` rsIDs | 1,217,311 |
+| Unique EUR LD-score rsIDs | 1,290,028 |
+| Mapped intersection | 1,184,461 (97.3014%) |
+| HapMap3 rsIDs without a bundled EUR coordinate | 32,850 |
+| Output | `ref/hm3_grch37_variant_map.tsv.gz` |
+| Output bytes | 9,948,937 |
+| Output SHA-256 | `6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4` |
+| Validation date | 2026-08-27 |
+
+The gzip header has a fixed timestamp and no embedded output filename, making
+the map byte-reproducible across paths and repeated setup runs. Its companion
+`.provenance.json` records input hashes, row counts, coverage, build, output
+bytes, and output SHA-256. `scripts/01_harmonize.py` validates that sidecar and
+recounts all rows before accepting the map.
+
+`config/variant_mapping_plans.tsv` pins the output byte count and SHA-256 and
+limits use to the seven selected sources whose verified schemas need identity
+completion. Coordinate-based sources are
+matched by GRCh37 chromosome, position, and unordered allele pair; the
+coordinate-free MDD source is matched by rsID and unordered allele pair. Strand
+complements are allowed, but missing, conflicting, or multiply matching rows
+are dropped with explicit QC reasons. This map is deliberately an LDSC
+HapMap3 gate, not a genome-wide dbSNP map and not a reference for fine-mapping.
 
 This provenance does not validate a GWAS. Before any LDSC run, the GWAS source
 must independently be confirmed as EUR and hg19 (or have a separately
