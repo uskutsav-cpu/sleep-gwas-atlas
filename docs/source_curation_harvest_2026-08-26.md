@@ -46,7 +46,11 @@ Its 216,210,855-byte GWAS-VCF passed complete SHA-256 and multi-member gzip
 checks and declares 7,088,083 harmonized GRCh37 variants. A source-specific
 downloader resolves the public endpoint's short-lived URL from the stable
 dataset ID, and a strict materializer maps ALT-relative ES/SE/LP/AF/SS fields
-to the atlas TSV contract. The primary phenotype is untransformed SBP in mmHg;
+to the atlas TSV contract. Full traversal found 16 literal `ID=.` rows, which
+were counted and excluded without inventing rsIDs; the 7,088,067 retained rows
+have deterministic raw SHA-256
+`83c44ba8982f7d00991b882ea7926c53be5b1820170832e74f59f2abd6fcc962`.
+The primary phenotype is untransformed SBP in mmHg;
 UK Biobank averaged available readings and added 15 mmHg for participants
 taking antihypertensive medication.
 Verification of Aragam 2022 `GCST90132314`, the exact primary CAD discovery

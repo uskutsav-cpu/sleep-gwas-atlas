@@ -607,8 +607,8 @@ class PanelContractTests(unittest.TestCase):
         )
         metadata = [
             "##fileformat=VCFv4.2",
-            "##contig=<ID=1,length=249250621,assembly=GRCh37>",
-            "##SAMPLE=<ID=ieu-b-38,TotalVariants=2,VariantsNotRead=0,HarmonisedVariants=2,VariantsNotHarmonised=0,SwitchedAlleles=1,NormalisedVariants=0,StudyType=Continuous>",
+            "##contig=<ID=1,length=249250621,assembly=HG19/GRCh37>",
+            "##SAMPLE=<ID=ieu-b-38,TotalVariants=3,VariantsNotRead=0,HarmonisedVariants=3,VariantsNotHarmonised=0,SwitchedAlleles=1,NormalisedVariants=0,StudyType=Continuous>",
         ]
         for format_id in ["ES", "SE", "LP", "AF", "SS", "ID"]:
             metadata.append(
@@ -620,6 +620,8 @@ class PanelContractTests(unittest.TestCase):
             "ES:SE:LP:AF:SS:ID\t0.0687:0.0447:0.906578:0.8363:639410:rs3094315\n"
             "1\t1000000\trs123\tC\tT\t.\tPASS\tAF=0.25\t"
             "ID:SS:AF:LP:SE:ES\trs123:757601:0.25:350.5:0.02:-0.1\n"
+            "1\t1000100\t.\tG\tA\t.\tPASS\tAF=0.2\t"
+            "ES:SE:LP:AF:SS:ID\t0.1:0.02:2:0.2:757601:.\n"
         )
         with tempfile.TemporaryDirectory() as directory:
             directory = Path(directory)
@@ -629,14 +631,16 @@ class PanelContractTests(unittest.TestCase):
             with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
                 handle.write(payload)
             counts = materializer.materialize_vcf(
-                source, first, expected_variants=2
+                source, first, expected_variants=3
             )
-            materializer.materialize_vcf(source, second, expected_variants=2)
+            materializer.materialize_vcf(source, second, expected_variants=3)
             with gzip.open(first, "rt", newline="") as handle:
                 rows = list(csv.DictReader(handle, delimiter="\t"))
             self.assertEqual(first.read_bytes(), second.read_bytes())
         self.assertEqual(counts, {
-            "source_rows": 2,
+            "source_rows": 3,
+            "materialized_rows": 2,
+            "non_rsid_rows": 1,
             "p_values_floored_at_1e-300": 1,
         })
         self.assertEqual(rows[0]["SNP"], "rs3094315")

@@ -239,7 +239,12 @@ def materialize_vcf(
     )
     os.close(fd)
     temporary = Path(temporary_name)
-    counts = {"source_rows": 0, "p_values_floored_at_1e-300": 0}
+    counts = {
+        "source_rows": 0,
+        "materialized_rows": 0,
+        "non_rsid_rows": 0,
+        "p_values_floored_at_1e-300": 0,
+    }
     sample_metadata: dict[str, str] | None = None
     format_ids: set[str] = set()
     build_declarations = 0
@@ -270,7 +275,7 @@ def materialize_vcf(
                     if line.startswith("##contig=<"):
                         contig = angle_metadata(line, "##contig=<")
                         assembly = contig.get("assembly", "").lower()
-                        if assembly not in {"hg19", "grch37"}:
+                        if assembly not in {"hg19", "grch37", "hg19/grch37"}:
                             fail(f"contig metadata does not declare HG19/GRCh37: {line[:160]!r}")
                         build_declarations += 1
                         continue
@@ -303,16 +308,18 @@ def materialize_vcf(
                     if len(fields) != 10:
                         fail(f"expected 10 VCF fields at line {line_number}, got {len(fields)}")
                     chrom, position, variant_id, ref, alt, _qual, row_filter, info, format_text, sample_text = fields
+                    counts["source_rows"] += 1
                     if chrom not in AUTOSOMES or not position.isdigit() or int(position) <= 0:
                         fail(f"invalid autosomal coordinate at VCF line {line_number}")
-                    if not RSID.fullmatch(variant_id):
-                        fail(f"non-rsID VCF ID at line {line_number}: {variant_id!r}")
                     ref = ref.upper()
                     alt = alt.upper()
                     if ref not in ALLELES or alt not in ALLELES or ref == alt:
                         fail(f"non-biallelic-SNP alleles at VCF line {line_number}: {ref}/{alt}")
                     if row_filter != "PASS":
                         fail(f"non-PASS variant at VCF line {line_number}: {row_filter!r}")
+                    if not RSID.fullmatch(variant_id):
+                        counts["non_rsid_rows"] += 1
+                        continue
                     keys = format_text.split(":")
                     values = sample_text.split(":")
                     if len(keys) != len(values) or len(keys) != len(set(keys)):
@@ -336,7 +343,7 @@ def materialize_vcf(
                     if info_frequency != frequency:
                         fail(f"INFO/AF and FORMAT/AF disagree at VCF line {line_number}")
                     p_value, floored = p_from_lp(sample["LP"], line_number)
-                    counts["source_rows"] += 1
+                    counts["materialized_rows"] += 1
                     counts["p_values_floored_at_1e-300"] += int(floored)
                     writer.writerow([
                         variant_id.lower(), chrom, position, alt, ref, sample["AF"],
@@ -348,7 +355,7 @@ def materialize_vcf(
             fail("VCF header was not found")
         if counts["source_rows"] != expected_variants:
             fail(
-                f"materialized {counts['source_rows']:,} variants, "
+                f"read {counts['source_rows']:,} variants, "
                 f"expected {expected_variants:,}"
             )
         with gzip.open(temporary, "rb") as handle:
@@ -359,7 +366,9 @@ def materialize_vcf(
         temporary.unlink(missing_ok=True)
         raise
     print(
-        f"Materialized {counts['source_rows']:,} variants; "
+        f"Materialized {counts['materialized_rows']:,} of "
+        f"{counts['source_rows']:,} variants; excluded "
+        f"{counts['non_rsid_rows']:,} non-rsID rows; "
         f"floored {counts['p_values_floored_at_1e-300']:,} P values at 1e-300"
     )
     return counts
