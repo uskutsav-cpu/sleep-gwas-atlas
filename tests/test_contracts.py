@@ -23,6 +23,20 @@ def load_collator():
     return module
 
 
+def load_sbp_materializer():
+    scripts_dir = str(ROOT / "scripts")
+    spec = importlib.util.spec_from_file_location(
+        "sbp_materializer", ROOT / "scripts" / "18_materialize_opengwas_vcf.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, scripts_dir)
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.path.remove(scripts_dir)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -141,6 +155,55 @@ class PanelContractTests(unittest.TestCase):
                         rows = list(csv.DictReader(handle, delimiter="\t"))
                     self.assertEqual(len(rows), 1)
                     self.assertAlmostEqual(float(rows[0]["BETA"]), expected_beta)
+
+    def test_opengwas_sbp_vcf_materializes_by_named_format_fields(self):
+        materializer = load_sbp_materializer()
+        vcf_url = "https://example.org/public/ieu-b-38/ieu-b-38.vcf.gz?token=short-lived"
+        self.assertEqual(
+            materializer.select_vcf_url(
+                {"files": [vcf_url, vcf_url.replace(".vcf.gz?", ".vcf.gz.tbi?")]},
+                "ieu-b-38",
+            ),
+            vcf_url,
+        )
+        metadata = [
+            "##fileformat=VCFv4.2",
+            "##contig=<ID=1,length=249250621,assembly=GRCh37>",
+            "##SAMPLE=<ID=ieu-b-38,TotalVariants=2,VariantsNotRead=0,HarmonisedVariants=2,VariantsNotHarmonised=0,SwitchedAlleles=1,NormalisedVariants=0,StudyType=Continuous>",
+        ]
+        for format_id in ["ES", "SE", "LP", "AF", "SS", "ID"]:
+            metadata.append(
+                f'##FORMAT=<ID={format_id},Number=1,Type=String,Description="fixture, {format_id}">'
+            )
+        payload = "\n".join(metadata) + "\n" + (
+            "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tieu-b-38\n"
+            "1\t752566\trs3094315\tG\tA\t.\tPASS\tAF=0.8363\t"
+            "ES:SE:LP:AF:SS:ID\t0.0687:0.0447:0.906578:0.8363:639410:rs3094315\n"
+            "1\t1000000\trs123\tC\tT\t.\tPASS\tAF=0.25\t"
+            "ID:SS:AF:LP:SE:ES\trs123:757601:0.25:350.5:0.02:-0.1\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "ieu-b-38.vcf.gz"
+            first = directory / "sbp-first.txt.gz"
+            second = directory / "sbp-second.txt.gz"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(payload)
+            counts = materializer.materialize_vcf(
+                source, first, expected_variants=2
+            )
+            materializer.materialize_vcf(source, second, expected_variants=2)
+            with gzip.open(first, "rt", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+        self.assertEqual(counts, {
+            "source_rows": 2,
+            "p_values_floored_at_1e-300": 1,
+        })
+        self.assertEqual(rows[0]["SNP"], "rs3094315")
+        self.assertEqual((rows[0]["A1"], rows[0]["A2"]), ("A", "G"))
+        self.assertAlmostEqual(float(rows[0]["P"]), 10 ** -0.906578)
+        self.assertEqual(rows[1]["P"], "1.000000000000000E-300")
 
     def test_shell_trait_lookup_is_header_aware(self):
         result = subprocess.run(

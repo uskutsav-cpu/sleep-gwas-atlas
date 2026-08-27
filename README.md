@@ -11,10 +11,10 @@ An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
 The analysis scope is now frozen in `config/analysis_panel.tsv` at exactly 45 traits. `config/analysis_panel.lock.json` locks the ordered trait identities and domain counts, while every generated readiness or Phase 1 inclusion table records the full manifest SHA-256. A trait therefore cannot be silently swapped while preserving a 45-row count.
 
-The source registry currently provides evidence-backed public-source records for **35/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
+The source registry currently provides evidence-backed public-source records for **36/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
 
 ```text
-source_verified: 35 / 45
+source_verified: 36 / 45
 harmonization_ready: 0 / 45
 ldsc_ready: 0 / 45
 liability_h2_ready: 0 / 45

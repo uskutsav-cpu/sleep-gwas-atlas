@@ -39,6 +39,15 @@ row. Direct verification of the Nalls 2019 public European Parkinson disease
 and UKB proxy-case release brings the total to 35/45. Its exact N is 482,730,
 not the inconsistent 1,474,097 previously carried in the manifest, and its
 literal raw schema requires a GRCh37 coordinate-and-allele-to-rsID mapping.
+Direct verification of OpenGWAS `ieu-b-38`, the exact Evangelou 2018 European
+UKB+ICBP systolic-blood-pressure meta-analysis, then brings the total to 36/45.
+Its 216,210,855-byte GWAS-VCF passed complete SHA-256 and multi-member gzip
+checks and declares 7,088,083 harmonized GRCh37 variants. A source-specific
+downloader resolves the public endpoint's short-lived URL from the stable
+dataset ID, and a strict materializer maps ALT-relative ES/SE/LP/AF/SS fields
+to the atlas TSV contract. The primary phenotype is untransformed SBP in mmHg;
+UK Biobank averaged available readings and added 15 mmHg for participants
+taking antihypertensive medication.
 These counts also do not claim that every source is on GRCh37, binary
 prevalence is resolved, or LDSC is ready. Shared samples are retained as
 explicit analysis concerns: IBD/CD/UC overlap, the three lipid traits share
@@ -58,7 +67,6 @@ These records were not promoted:
 | asthma | The exact `GCST010042` file is the non-ancestry-restricted 64,538-case/329,321-control main UKB GWAS. The paper's separate European sensitivity analysis has 53,924 cases and 276,523 controls. The Catalog API's 239,321-control European label conflicts with the file and primary paper, so the candidate was revoked rather than mislabelled EUR. |
 | type 2 diabetes | Branch substituted Scott 2017; although genome-wide, its bare coordinate marker lacks the rsID mapping needed by the current LDSC path. |
 | coronary artery disease | The branch describes the selected file as EUR plus ancestry-not-reported, so it does not yet satisfy the EUR-only contract. |
-| systolic blood pressure | Branch substituted Keaton 2024 for Evangelou 2018; overlap, phenotype transformation, and selection implications require review first. |
 
 No branch candidate record existed for snoring, sleep apnea, colorectal cancer,
 lung cancer, or melanoma. Snoring, colorectal cancer, and lung cancer were

@@ -36,7 +36,9 @@ gzip-wrapped after its registered integrity check. A source marked
 ``DIRECT_GZIP`` is already a single gzipped tabular release and is hard-linked
 into the raw directory after its registered integrity check. Large public
 Google Drive releases with a reviewed source-specific materializer are fetched
-by validated byte ranges rather than a blind resume.
+by validated byte ranges rather than a blind resume. ``OPENGWAS_VCF`` uses the
+registered stable link-generation endpoint and dataset ID, verifies the exact
+short-lived download, and converts GWAS-VCF fields with an explicit schema.
 EOF
 }
 
@@ -108,6 +110,11 @@ if [ "$MODE" = --download ]; then
       --url "$download_url" --out "$ARCHIVE" \
       --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256" \
       --max-chunks 4
+  elif [ "$archive_member" = "OPENGWAS_VCF" ]; then
+    "$PYTHON_BIN" scripts/18_materialize_opengwas_vcf.py \
+      --download --dataset-id "${archive_name%.vcf.gz}" \
+      --endpoint "$download_url" --out "$ARCHIVE" \
+      --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256"
   else
     curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
   fi
@@ -127,6 +134,8 @@ if [ "$MODE" = --download ]; then
   elif [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
     "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
       --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --verify-only
+  elif [ "$archive_member" = "OPENGWAS_VCF" ]; then
+    gzip -t "$ARCHIVE"
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   elif [ "$archive_member" = "DIRECT_GZIP" ]; then
@@ -153,6 +162,24 @@ cleanup_materialization() {
 }
 trap cleanup_materialization EXIT
 IFS=',' read -r -a outputs <<< "$raw_files"
+if [ "$archive_member" = "OPENGWAS_VCF" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: OPENGWAS_VCF must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -s "$PRIMARY" ]; then
+    "$PYTHON_BIN" scripts/18_materialize_opengwas_vcf.py \
+      --materialize --dataset-id "${archive_name%.vcf.gz}" \
+      --source "$ARCHIVE" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
 if [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
   [ "${#outputs[@]}" -eq 1 ] || {
     echo "ERROR: BCAC_2020_META_RSID must register exactly one raw output" >&2
