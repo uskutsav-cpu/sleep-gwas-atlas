@@ -16,8 +16,12 @@ REFERENCE_URL=${REFERENCE_URL:-https://zenodo.org/records/8182036/files/eur_w_ld
 REFERENCE_MD5=${REFERENCE_MD5:-e2f16343c4cfaa76caa7d0c03d26b489}
 REFERENCE_SHA256=${REFERENCE_SHA256:-9537f00eb0d163a935aaa2cf04b358b7cf21852279b9c7925802526f6060b069}
 VARIANT_MAP_SHA256=${VARIANT_MAP_SHA256:-6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4}
+LIFTOVER_URL=${LIFTOVER_URL:-https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz}
+LIFTOVER_BYTES=${LIFTOVER_BYTES:-1246411}
+LIFTOVER_MD5=${LIFTOVER_MD5:-ff3031d93792f4cbb86af44055efd903}
+LIFTOVER_SHA256=${LIFTOVER_SHA256:-14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1}
 
-echo "==> [1/5] Python 3.9 LDSC environment"
+echo "==> [1/6] Python 3.9 LDSC environment"
 if ! command -v "$CONDA_BIN" > /dev/null 2>&1; then
   echo "ERROR: conda is required to create the reproducible Python 3.9 LDSC environment." >&2
   echo "Install Miniforge/conda, or set CONDA_BIN to its executable path." >&2
@@ -45,7 +49,7 @@ fi
 LDSC_PYTHON="$LDSC_ENV_DIR/bin/python"
 "$LDSC_PYTHON" -c 'import numpy, pandas, scipy, matplotlib, pybedtools'
 
-echo "==> [2/5] LDSC (maintained Python 3 implementation)"
+echo "==> [2/6] LDSC (maintained Python 3 implementation)"
 if [ ! -d "$LDSC_DIR/.git" ]; then
   git clone "$LDSC_REPOSITORY" "$LDSC_DIR"
   git -C "$LDSC_DIR" checkout --detach "$LDSC_COMMIT"
@@ -77,7 +81,7 @@ fi
 "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" -h > /dev/null
 echo "    LDSC OK"
 
-echo "==> [3/5] Reference files -> ref/"
+echo "==> [3/6] Reference files -> ref/"
 mkdir -p ref && cd ref
 # European LD scores computed on 1000G Phase 3, HapMap3 SNPs. Zenodo record
 # 8182036 explicitly documents this archive as a gzip copy of the original
@@ -108,7 +112,7 @@ ln -sfn eur_w_ld_chr/w_hm3.snplist w_hm3.snplist
 cd "$ROOT"
 echo "    ref/ contains:"; ls ref | sed 's/^/      /'
 
-echo "==> [4/5] Audited HapMap3 GRCh37 identity map"
+echo "==> [4/6] Audited HapMap3 GRCh37 identity map"
 "$LDSC_PYTHON" scripts/19_build_hm3_variant_map.py \
   --reference-dir ref/eur_w_ld_chr \
   --out ref/hm3_grch37_variant_map.tsv.gz
@@ -118,7 +122,23 @@ if [ "$ACTUAL_MAP_SHA256" != "$VARIANT_MAP_SHA256" ]; then
   exit 1
 fi
 
-echo "==> [5/5] Done."
+echo "==> [5/6] UCSC hg38-to-hg19 liftover chain"
+LIFTOVER_PATH=ref/hg38ToHg19.over.chain.gz
+if [ ! -s "$LIFTOVER_PATH" ]; then
+  curl --fail --location --retry 3 --output "$LIFTOVER_PATH" "$LIFTOVER_URL"
+fi
+ACTUAL_LIFTOVER_BYTES=$(wc -c < "$LIFTOVER_PATH" | tr -d ' ')
+ACTUAL_LIFTOVER_MD5=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.md5(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$LIFTOVER_PATH")
+ACTUAL_LIFTOVER_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$LIFTOVER_PATH")
+if [ "$ACTUAL_LIFTOVER_BYTES" != "$LIFTOVER_BYTES" ] || \
+   [ "$ACTUAL_LIFTOVER_MD5" != "$LIFTOVER_MD5" ] || \
+   [ "$ACTUAL_LIFTOVER_SHA256" != "$LIFTOVER_SHA256" ]; then
+  echo "ERROR: UCSC liftover chain does not match the registered bytes/hashes" >&2
+  exit 1
+fi
+gzip -t "$LIFTOVER_PATH"
+
+echo "==> [6/6] Done."
 cat <<'EOF'
 
 NOTE ON DOWNLOAD MIRRORS

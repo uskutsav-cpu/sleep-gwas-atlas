@@ -28,7 +28,8 @@ separate direct verification of Campos 2020 snoring brings the current total to
 lung-cancer releases brings the current total to 30/45. These counts do not
 claim that the archives are currently materialized. Direct verification of the
 FinnGen R9 sleep-apnoea endpoint subsequently brings the total to 31/45; its
-GRCh38 build remains a separate harmonization blocker. Official file-level
+GRCh38 build is now covered by the checksum-pinned UCSC-chain plan, while raw
+materialization remains outstanding. Official file-level
 verification of the Jansen 2019 UK Biobank-only insomnia release and Jones 2019
 UK Biobank morning-person release brings the current total to 33/45. Complete
 verification of the Bellenguez 2022 Alzheimer disease Stage I file then brings
@@ -77,7 +78,9 @@ uses the 53,386-case/77,258-control European autosomal stratum; the paper's
 variants and is not a genome-wide EUR file. The official Edinburgh DataShare
 Howard 2019 file then brings the total to 42/45. It is the exact 170,756-case,
 329,443-control genome-wide UKB+PGC release without 23andMe, but it has rsIDs
-without coordinates and therefore remains blocked on an audited GRCh37 mapping.
+without coordinates. The checksum-pinned HapMap3 mapper now supplies GRCh37
+coordinates only after rsID and allele-pair agreement; local raw materialization
+remains outstanding.
 These counts also do not claim that every source is on GRCh37, binary
 prevalence is resolved, or LDSC is ready. Shared samples are retained as
 explicit analysis concerns: IBD/CD/UC overlap, the three lipid traits share
@@ -101,8 +104,9 @@ official API and no Catalog summary-statistics directory. Primary-source review
 instead identifies dbGaP `phs001868`/`pha004971` as the confirmed-only
 genome-wide release (30,134/81,415). Its public FTP result is truncated to
 16,898 top-hit rows and its full GRCh38 archive is controlled-access, so it
-remains pending. Sleep apnea and melanoma require validated build conversion;
-melanoma additionally requires authorized file-level inspection.
+remains pending. Sleep apnea now has a validated, checksum-pinned build
+conversion plan. Melanoma still requires authorized file-level inspection,
+ancestry resolution, and a plan row after its full GRCh38 schema is known.
 
 The rule for the next pass is unchanged: prefer the largest appropriate and
 scientifically compatible release, even when it requires controlled access,

@@ -9,6 +9,7 @@ PANEL_LOCK = config["panel_lock"]
 SOURCES = config["sources"]
 SCHEMAS = config["schemas"]
 VARIANT_MAPPINGS = config["variant_mappings"]
+LIFTOVER_PLANS = config["liftover_plans"]
 PYTHON = config["python"]
 LDSC_PYTHON = config["ldsc_python"]
 LDSC_DIR = config["ldsc_dir"]
@@ -49,6 +50,7 @@ rule source_readiness:
         sources=SOURCES,
         schemas=SCHEMAS,
         variant_mappings=VARIANT_MAPPINGS,
+        liftover_plans=LIFTOVER_PLANS,
     output:
         "results/tables/source_readiness.tsv",
     shell:
@@ -56,6 +58,7 @@ rule source_readiness:
         "--lock {input.lock} --sources {input.sources} --out {output} --strict"
         " --schemas {input.schemas}"
         " --variant-mappings {input.variant_mappings}"
+        " --liftover-plans {input.liftover_plans}"
 
 
 rule smoke_test:

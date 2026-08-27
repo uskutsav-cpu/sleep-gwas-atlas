@@ -60,6 +60,13 @@ the columns are understood, but harmonization requires the audited strategy in
 1,184,461-variant intersection of the pinned EUR LDSC coordinates and HapMap3
 allele list; it is not a genome-wide resolver.
 
+Verified GRCh38 sources likewise require an exact row in
+`config/liftover_plans.tsv`. Setup pins UCSC's hg38-to-hg19 chain by byte count,
+MD5, and SHA-256. The harmonizer rejects unmapped or ambiguous points,
+reverse-complements alleles on reverse-strand mappings, and records the chain
+hash and losses in the QC ledger; build conversion is never inferred from an
+rsID alone.
+
 Unknown facts are written as `UNRESOLVED`, never guessed. Validate the contract with:
 
 ```bash
@@ -83,7 +90,7 @@ SOURCE_VERIFIED
 The stages mean:
 
 - `SOURCE_VERIFIED`: the selected public source, URLs, checksum, file mapping, and registry declaration agree.
-- `HARMONIZATION_READY`: source verification plus resolved phenotype/publication, EUR ancestry, validated GRCh37/hg19 build, required sample metadata, and materialized raw input.
+- `HARMONIZATION_READY`: source verification plus resolved phenotype/publication, EUR ancestry, validated GRCh37/hg19 input or a checksum-valid registered liftover, required sample metadata, and materialized raw input.
 - `LDSC_READY`: harmonization QC ledger and HapMap3 munged summary statistics exist.
 - `LIABILITY_H2_READY`: LDSC-ready, with a cited matching population prevalence for binary phenotypes. For continuous traits this is the final-h² readiness gate.
 - `PHASE1_PASS`: final-h² readiness plus the predefined LDSC h² QC verdict `PASS`.
@@ -174,8 +181,10 @@ GitHub Actions runs panel/source validation, Python and shell syntax checks, a S
 config/analysis_panel.tsv                    locked 45-trait analysis manifest
 config/analysis_panel.lock.json              ordered trait/domain identity lock
 config/public_gwas_sources.tsv               source URLs, versions, access, hashes
-config/variant_mapping_plans.tsv             audited mapping strategy for seven sources
+config/variant_mapping_plans.tsv             audited mapping strategy for eight sources
+config/liftover_plans.tsv                    pinned hg38-to-hg19 plans for two sources
 ref/hm3_grch37_variant_map.tsv.gz             reproducible ignored GRCh37 HapMap3 identity map
+ref/hg38ToHg19.over.chain.gz                  checksum-pinned ignored UCSC chain
 results/tables/analysis_panel_provenance.tsv manifest and trait-set fingerprints
 results/tables/trait_readiness.tsv            per-trait readiness stages/blockers
 data/harmonized/<trait>.qc.txt                filter-by-filter QC ledger

@@ -53,6 +53,18 @@ def build_fixture_variant_map(directory):
     return output
 
 
+def build_fixture_liftover_chain(directory):
+    path = Path(directory) / "hg38ToHg19.over.chain.gz"
+    payload = (
+        "chain 1000 chr1 1000 + 100 200 chr1 1000 + 50 150 1\n"
+        "100\n\n"
+        "chain 900 chr2 1000 + 100 200 chr2 1000 - 700 800 2\n"
+        "100\n"
+    )
+    path.write_bytes(gzip.compress(payload.encode("ascii"), mtime=0))
+    return path
+
+
 def load_collator():
     spec = importlib.util.spec_from_file_location(
         "atlas_collator", ROOT / "scripts" / "05_collate.py"
@@ -73,6 +85,15 @@ def load_sbp_materializer():
         spec.loader.exec_module(module)
     finally:
         sys.path.remove(scripts_dir)
+    return module
+
+
+def load_liftover_module():
+    spec = importlib.util.spec_from_file_location(
+        "atlas_liftover", ROOT / "scripts" / "liftover_chain.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
     return module
 
 
@@ -175,6 +196,25 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual({row["map_bytes"] for row in mappings}, {"9948937"})
         self.assertEqual({row["map_sha256"] for row in mappings}, {
             "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
+        })
+
+    def test_liftover_plans_exactly_cover_verified_hg38_sources(self):
+        verified_hg38 = {
+            row["trait_id"]
+            for row in self.panel
+            if row["source_status"] == "SOURCE_VERIFIED"
+            and row["build"] in {"hg38", "GRCh38"}
+        }
+        with (ROOT / "config" / "liftover_plans.tsv").open(newline="") as handle:
+            plans = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual({row["trait_id"] for row in plans}, verified_hg38)
+        self.assertEqual({row["strategy"] for row in plans}, {"UCSC_CHAIN_POINT"})
+        self.assertEqual({row["chain_bytes"] for row in plans}, {"1246411"})
+        self.assertEqual({row["chain_md5"] for row in plans}, {
+            "ff3031d93792f4cbb86af44055efd903"
+        })
+        self.assertEqual({row["chain_sha256"] for row in plans}, {
+            "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1"
         })
 
     def test_pending_sources_do_not_reuse_stage_or_headline_sample_counts(self):
@@ -363,6 +403,70 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
         self.assertIn("output_build\thg19", qc)
+
+    def test_hg38_liftover_maps_points_and_orients_reverse_strand_alleles(self):
+        payload = (
+            "rsids\t#chrom\tpos\talt\tref\tbeta\tsebeta\tpval\taf_alt\n"
+            "rs123\t1\t101\tA\tC\t0.2\t0.1\t0.01\t0.2\n"
+            "rs124\t2\t101\tA\tC\t-0.3\t0.1\t0.02\t0.3\n"
+            "rs125\t1\t500\tA\tC\t0.1\t0.1\t0.03\t0.4\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            chain = build_fixture_liftover_chain(directory)
+            chain_sha256 = hashlib.sha256(chain.read_bytes()).hexdigest()
+            source = directory / "sleep-apnea.tsv"
+            source.write_text(payload, encoding="utf-8")
+            outdir = directory / "out"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "01_harmonize.py"),
+                    "--trait", "sleep_apnea",
+                    "--config", str(MANIFEST),
+                    "--infile", str(source),
+                    "--outdir", str(outdir),
+                    "--source-build", "hg38",
+                    "--liftover-chain", str(chain),
+                    "--expected-liftover-chain-bytes", str(chain.stat().st_size),
+                    "--expected-liftover-chain-sha256", chain_sha256,
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with gzip.open(
+                outdir / "sleep_apnea.harmonized.tsv.gz", "rt", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            qc = (outdir / "sleep_apnea.qc.txt").read_text(encoding="utf-8")
+        self.assertEqual(
+            [(row["SNP"], row["CHR"], row["BP"], row["A1"], row["A2"]) for row in rows],
+            [
+                ("rs123", "1", "51", "A", "C"),
+                ("rs124", "2", "300", "T", "G"),
+            ],
+        )
+        self.assertIn("not mapped by pinned UCSC hg38-to-hg19 chain\t1\t2", qc)
+        self.assertIn("reverse-strand liftover mappings with allele complements: 1", qc)
+        self.assertIn(f"liftover_chain_sha256\t{chain_sha256}", qc)
+
+    def test_hg38_liftover_rejects_multiple_target_points(self):
+        liftover = load_liftover_module()
+        payload = (
+            "chain 1000 chr1 1000 + 0 100 chr1 1000 + 0 100 1\n"
+            "100\n\n"
+            "chain 900 chr1 1000 + 0 100 chr1 1000 + 100 200 2\n"
+            "100\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            chain = Path(directory) / "ambiguous.chain.gz"
+            chain.write_bytes(gzip.compress(payload.encode("ascii"), mtime=0))
+            index, _ = liftover.load_chain(chain)
+            status, mapped = index.map_point(1, 1)
+        self.assertEqual(status, "ambiguous")
+        self.assertIsNone(mapped)
 
     def test_new_sleep_source_headers_harmonize_with_documented_effects(self):
         cases = {

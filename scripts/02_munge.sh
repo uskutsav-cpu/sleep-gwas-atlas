@@ -20,11 +20,18 @@ for trait in "$@"; do
   mapping_path=$(variant_mapping_field "$trait" map_path 2>/dev/null || true)
   mapping_bytes=$(variant_mapping_field "$trait" map_bytes 2>/dev/null || true)
   mapping_sha256=$(variant_mapping_field "$trait" map_sha256 2>/dev/null || true)
+  liftover_strategy=$(liftover_field "$trait" strategy 2>/dev/null || true)
+  liftover_path=$(liftover_field "$trait" chain_path 2>/dev/null || true)
+  liftover_bytes=$(liftover_field "$trait" chain_bytes 2>/dev/null || true)
+  liftover_sha256=$(liftover_field "$trait" chain_sha256 2>/dev/null || true)
   [ "$source_status" = "SOURCE_VERIFIED" ] || die \
     "$trait has source_status=$source_status; verify and register the selected GWAS before munging"
   [ "$ancestry" = "EUR" ] || die \
     "$trait has ancestry=$ancestry; this EUR workflow refuses a different or unresolved ancestry"
-  if [ "$mapping_strategy" = "BY_RSID_ALLELES" ]; then
+  if [ "$liftover_strategy" = "UCSC_CHAIN_POINT" ]; then
+    [ "$source_build" = "hg38" ] || [ "$source_build" = "GRCh38" ] || die \
+      "$trait has build=$source_build; its registered liftover plan requires hg38/GRCh38"
+  elif [ "$mapping_strategy" = "BY_RSID_ALLELES" ]; then
     [ "$source_build" = "UNRESOLVED" ] || [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || die \
       "$trait has build=$source_build; an rsID map cannot excuse a conflicting source build"
   else
@@ -34,7 +41,8 @@ for trait in "$@"; do
   require_file "data/raw/$raw_file"
 
   source_build_args=()
-  if [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ]; then
+  if [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || \
+     [ "$source_build" = "hg38" ] || [ "$source_build" = "GRCh38" ]; then
     source_build_args=(--source-build "$source_build")
   fi
   variant_map_args=()
@@ -51,11 +59,23 @@ for trait in "$@"; do
       --expected-variant-map-sha256 "$mapping_sha256"
     )
   fi
+  liftover_args=()
+  if [ -n "$liftover_strategy" ] || [ -n "$liftover_path" ]; then
+    [ "$liftover_strategy" = "UCSC_CHAIN_POINT" ] && [ -n "$liftover_path" ] && \
+      [ -n "$liftover_bytes" ] && [ -n "$liftover_sha256" ] || die \
+      "$trait has an incomplete or unsupported liftover plan"
+    require_file "$liftover_path"
+    liftover_args=(
+      --liftover-chain "$liftover_path"
+      --expected-liftover-chain-bytes "$liftover_bytes"
+      --expected-liftover-chain-sha256 "$liftover_sha256"
+    )
+  fi
 
   echo "==> $trait: Phase 0 harmonization"
   "$PYTHON_BIN" scripts/01_harmonize.py \
     --trait "$trait" --config "$CONFIG" "${source_build_args[@]}" \
-    "${variant_map_args[@]}" \
+    "${variant_map_args[@]}" "${liftover_args[@]}" \
     --infile "data/raw/$raw_file" --outdir data/harmonized
 
   echo "==> $trait: HapMap3 munging"

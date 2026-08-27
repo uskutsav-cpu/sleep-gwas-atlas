@@ -3,10 +3,10 @@
 
 This is the Phase 0 gatekeeper. It deliberately stops when it cannot verify a
 non-negotiable assumption rather than producing a plausible-looking output.
-It does *not* lift over coordinates or infer ancestry. A source registered with
-``SCHEMA_VERIFIED_REQUIRES_VARIANT_MAPPING`` may opt into the pinned,
-provenance-checked GRCh37 HapMap3 mapper. That path maps only variants present
-in the exact EUR LDSC reference and fails closed on allele/coordinate conflict.
+It never infers ancestry or silently changes genome build. A registered hg38
+source may opt into the checksum-pinned UCSC hg38-to-hg19 chain; other sources
+requiring identity completion may opt into the pinned, provenance-checked
+GRCh37 HapMap3 mapper. Both paths fail closed on missing or ambiguous matches.
 
 Output schema (tab-separated, gzipped)::
 
@@ -38,6 +38,7 @@ from variant_map import (
     load_variant_map,
     rsid_match,
 )
+from liftover_chain import LiftoverError, load_chain, reverse_complement
 
 
 # Every threshold is either taken from CDG3 or required to make LDSC input
@@ -67,7 +68,7 @@ ALIASES = {
     "FRQ": [
         "frq", "freq", "eaf", "effect_allele_frequency", "maf", "a1freq",
         "freq1", "freq_tested_allele_in_hrs", "pooled_alt_af", "fcon",
-        "frq_u_186843",
+        "frq_u_186843", "af_alt",
     ],
     "BETA": [
         "beta", "effect", "b", "log_odds", "logor", "effect_size",
@@ -199,12 +200,30 @@ def main():
         type=int,
         help="Registered byte count for the variant map (required by production entry points).",
     )
+    parser.add_argument(
+        "--liftover-chain",
+        help="Pinned UCSC hg38-to-hg19 chain for explicit point liftover.",
+    )
+    parser.add_argument(
+        "--expected-liftover-chain-sha256",
+        help="Registered SHA-256 for the liftover chain.",
+    )
+    parser.add_argument(
+        "--expected-liftover-chain-bytes",
+        type=int,
+        help="Registered byte count for the liftover chain.",
+    )
     args = parser.parse_args()
 
     if bool(args.variant_map) != bool(args.variant_map_strategy):
         fail("--variant-map and --variant-map-strategy must be supplied together")
     if (args.expected_variant_map_sha256 or args.expected_variant_map_bytes is not None) and not args.variant_map:
         fail("registered variant-map hash/bytes require --variant-map")
+    if (
+        args.expected_liftover_chain_sha256
+        or args.expected_liftover_chain_bytes is not None
+    ) and not args.liftover_chain:
+        fail("registered liftover-chain hash/bytes require --liftover-chain")
 
     if not os.path.isfile(args.infile):
         fail(f"input file not found: {args.infile}")
@@ -217,15 +236,25 @@ def main():
 
     configured_build = normalise_build(metadata.get("build", ""))
     rsid_mapping_sets_build = args.variant_map_strategy == "BY_RSID_ALLELES"
-    if configured_build != TARGET_BUILD and not (
-        rsid_mapping_sets_build and configured_build in {"", "unresolved"}
-    ):
-        fail(
-            f"trait '{args.trait}' is configured as {metadata.get('build')!r}, not hg19. "
-            "No liftover is implemented; only an rsID-and-allele mapping plan may assign "
-            "GRCh37 coordinates to a coordinate-free source."
+    liftover_sets_build = bool(args.liftover_chain)
+    valid_build_decision = (
+        (liftover_sets_build and configured_build == "hg38")
+        or (not liftover_sets_build and configured_build == TARGET_BUILD)
+        or (
+            not liftover_sets_build
+            and rsid_mapping_sets_build
+            and configured_build in {"", "unresolved"}
         )
-    if args.source_build and normalise_build(args.source_build) != TARGET_BUILD:
+    )
+    if not valid_build_decision:
+        fail(
+            f"trait '{args.trait}' has build {metadata.get('build')!r}, which does not "
+            "match the explicit hg19, coordinate-free-rsID, or hg38-liftover path."
+        )
+    if liftover_sets_build:
+        if not args.source_build or normalise_build(args.source_build) != "hg38":
+            fail("--liftover-chain requires an explicit --source-build hg38/GRCh38")
+    elif args.source_build and normalise_build(args.source_build) != TARGET_BUILD:
         fail(f"--source-build {args.source_build!r} is not hg19/GRCh37; refusing silent liftover")
 
     separator, separator_name, metadata_lines = sniff_separator(args.infile)
@@ -255,6 +284,8 @@ def main():
         required += ["SNP"]
     else:
         required += ["SNP", "CHR", "BP"]
+    if args.liftover_chain:
+        required = list(dict.fromkeys(required + ["SNP", "CHR", "BP"]))
     missing = [column for column in required if column not in columns]
     if missing:
         fail(
@@ -277,8 +308,12 @@ def main():
             normalise_build(value) for value in raw[columns["BUILD"]].dropna().unique()
             if str(value).strip()
         }
-        if file_builds and file_builds != {TARGET_BUILD}:
-            fail(f"file build values {sorted(file_builds)} do not all equal hg19; inspect the source before proceeding")
+        expected_file_build = "hg38" if liftover_sets_build else TARGET_BUILD
+        if file_builds and file_builds != {expected_file_build}:
+            fail(
+                f"file build values {sorted(file_builds)} do not all equal "
+                f"{expected_file_build}; inspect the source before proceeding"
+            )
 
     out = pd.DataFrame(index=raw.index)
     for standard, original in columns.items():
@@ -336,6 +371,72 @@ def main():
         steps.append((reason, removed, len(out)))
 
     variant_map_provenance = None
+    liftover_provenance = None
+    if args.liftover_chain:
+        try:
+            chain_index, liftover_provenance = load_chain(
+                args.liftover_chain,
+                args.expected_liftover_chain_sha256,
+                args.expected_liftover_chain_bytes,
+            )
+        except LiftoverError as error:
+            fail(str(error))
+        statuses = []
+        target_chromosomes = []
+        target_positions = []
+        target_a1 = []
+        target_a2 = []
+        reverse_strand_count = 0
+        for chromosome, position, a1, a2 in zip(
+            out["CHR"], out["BP"], out["A1"], out["A2"]
+        ):
+            status, mapped = chain_index.map_point(chromosome, position)
+            statuses.append(status)
+            if mapped is None:
+                target_chromosomes.append(None)
+                target_positions.append(None)
+                target_a1.append(a1)
+                target_a2.append(a2)
+                continue
+            target_chromosome, target_position, strand = mapped
+            target_chromosomes.append(target_chromosome)
+            target_positions.append(target_position)
+            if strand == "-":
+                target_a1.append(reverse_complement(a1))
+                target_a2.append(reverse_complement(a2))
+                reverse_strand_count += 1
+            else:
+                target_a1.append(a1)
+                target_a2.append(a2)
+        out["CHR"] = pd.Series(target_chromosomes, index=out.index, dtype="float64")
+        out["BP"] = pd.Series(target_positions, index=out.index, dtype="float64")
+        out["A1"] = pd.Series(target_a1, index=out.index, dtype="string")
+        out["A2"] = pd.Series(target_a2, index=out.index, dtype="string")
+        status_series = pd.Series(statuses, index=out.index, dtype="string")
+        for status, reason in [
+            ("invalid_source_coordinate", "invalid source coordinate before hg38-to-hg19 liftover"),
+            ("unmapped", "not mapped by pinned UCSC hg38-to-hg19 chain"),
+            ("ambiguous", "multiple target points in pinned UCSC hg38-to-hg19 chain"),
+            ("non_autosomal_target", "liftover target is not an autosome"),
+        ]:
+            drop(status_series.loc[out.index] == status, reason)
+        steps.append(
+            (
+                f"reverse-strand liftover mappings with allele complements: "
+                f"{reverse_strand_count}",
+                0,
+                len(out),
+            )
+        )
+        steps.append(
+            (
+                f"coordinates lifted hg38 to hg19; "
+                f"chain_sha256={liftover_provenance['chain_sha256']}",
+                0,
+                len(out),
+            )
+        )
+
     if args.variant_map:
         try:
             variant_index, variant_map_provenance = load_variant_map(
@@ -486,6 +587,14 @@ def main():
         report.write(
             f"variant_map_sha256\t"
             f"{variant_map_provenance['map_sha256'] if variant_map_provenance else 'not supplied'}\n"
+        )
+        report.write(
+            f"liftover_chain\t"
+            f"{os.path.abspath(args.liftover_chain) if args.liftover_chain else 'not supplied'}\n"
+        )
+        report.write(
+            f"liftover_chain_sha256\t"
+            f"{liftover_provenance['chain_sha256'] if liftover_provenance else 'not supplied'}\n"
         )
         report.write(f"infile\t{os.path.abspath(args.infile)}\n")
         report.write(f"infile_sha256\t{sha256(args.infile)}\n")

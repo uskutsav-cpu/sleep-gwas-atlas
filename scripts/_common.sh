@@ -12,6 +12,7 @@ LDSC_DIR=${LDSC_DIR:-ldsc}
 CONFIG=config/analysis_panel.tsv
 PANEL_LOCK=config/analysis_panel.lock.json
 VARIANT_MAPPINGS=config/variant_mapping_plans.tsv
+LIFTOVER_PLANS=config/liftover_plans.tsv
 
 die() {
   echo "ERROR: $*" >&2
@@ -51,6 +52,22 @@ variant_mapping_field() {
     $trait_column == trait_id { print $column; found = 1; exit }
     END { if (!found) exit 1 }
   ' "$VARIANT_MAPPINGS"
+}
+
+liftover_field() {
+  local trait=$1
+  local column=$2
+  [ -f "$LIFTOVER_PLANS" ] || return 1
+  awk -F'\t' -v trait_id="$trait" -v wanted="$column" '
+    NR == 1 {
+      for (i = 1; i <= NF; ++i) if ($i == wanted) column = i
+      for (i = 1; i <= NF; ++i) if ($i == "trait_id") trait_column = i
+      if (!column || !trait_column) exit 2
+      next
+    }
+    $trait_column == trait_id { print $column; found = 1; exit }
+    END { if (!found) exit 1 }
+  ' "$LIFTOVER_PLANS"
 }
 
 require_ldsc() {

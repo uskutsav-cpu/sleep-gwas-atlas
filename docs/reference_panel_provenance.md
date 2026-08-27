@@ -47,13 +47,44 @@ bytes, and output SHA-256. `scripts/01_harmonize.py` validates that sidecar and
 recounts all rows before accepting the map.
 
 `config/variant_mapping_plans.tsv` pins the output byte count and SHA-256 and
-limits use to the seven selected sources whose verified schemas need identity
+limits use to the eight selected sources whose verified schemas need identity
 completion. Coordinate-based sources are
 matched by GRCh37 chromosome, position, and unordered allele pair; the
 coordinate-free MDD source is matched by rsID and unordered allele pair. Strand
 complements are allowed, but missing, conflicting, or multiply matching rows
 are dropped with explicit QC reasons. This map is deliberately an LDSC
 HapMap3 gate, not a genome-wide dbSNP map and not a reference for fine-mapping.
+
+## Pinned hg38-to-hg19 point liftover
+
+The two source-verified GRCh38 releases are standardized with UCSC's official
+[`hg38ToHg19.over.chain.gz`](https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz).
+UCSC documents chain filenames as `<source>To<target>` and publishes the
+official MD5 in the same download directory.
+
+| Field | Value |
+| --- | ---: |
+| Registered source build | GRCh38/hg38 |
+| Registered target build | GRCh37/hg19 |
+| Archive bytes | 1,246,411 |
+| UCSC MD5 | `ff3031d93792f4cbb86af44055efd903` |
+| Verified SHA-256 | `14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1` |
+| Parsed chains | 25,374 |
+| Parsed alignment blocks | 185,795 |
+| Validation date | 2026-08-27 |
+
+`config/liftover_plans.tsv` limits this operation to the verified FinnGen R9
+sleep-apnoea and Bellenguez 2022 Stage I Alzheimer releases. The harmonizer
+converts the source's 1-based point to chain coordinates, rejects unmapped,
+non-autosomal, or multiply mapped points, and reverse-complements both alleles
+when the target block is on the reverse strand. It retains the signed effect
+for the correspondingly re-expressed effect allele and records the exact chain
+hash and every exclusion in the trait QC ledger. This is point liftover for
+summary-statistic variants, not interval or indel normalization.
+
+The setup script downloads the chain from UCSC, checks bytes, MD5, SHA-256,
+and gzip integrity, and never substitutes a newer chain silently. Users remain
+responsible for UCSC's linked conditions of use and acknowledgment guidance.
 
 This provenance does not validate a GWAS. Before any LDSC run, the GWAS source
 must independently be confirmed as EUR and hg19 (or have a separately

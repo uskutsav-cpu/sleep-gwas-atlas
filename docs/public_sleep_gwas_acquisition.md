@@ -109,8 +109,9 @@ and passes full gzip validation. Its 20,170,208 rows use the documented header
 af_alt_cases af_alt_controls`; FinnGen defines `alt` as the effect allele and
 `beta` as its log-odds effect. The `rs2977608` coordinate is 1:832873, matching
 GRCh38 and differing from GRCh37 1:768253. Source and schema are therefore
-verified, but the trait remains blocked from harmonization until an explicit,
-audited hg38-to-hg19 liftover is implemented.
+verified. The registered UCSC-chain plan now maps hg38 points to hg19, rejects
+losses or ambiguous mappings, and records the chain hash in the QC ledger; the
+raw source still must be locally materialized before harmonization.
 
 ## Jones 2019 accelerometer release
 

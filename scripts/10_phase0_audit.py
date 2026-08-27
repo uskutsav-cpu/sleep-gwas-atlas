@@ -40,6 +40,11 @@ VARIANT_MAPPING_COLUMNS = {
 }
 VARIANT_MAPPING_STRATEGIES = {"BY_COORD_ALLELES", "BY_RSID_ALLELES"}
 VARIANT_MAP_SCHEMA = "atlas.hm3-grch37-variant-map.v1"
+LIFTOVER_COLUMNS = {
+    "source_id", "trait_id", "strategy", "chain_path", "chain_bytes",
+    "chain_md5", "chain_sha256", "source_build", "output_build", "notes",
+}
+LIFTOVER_STRATEGY = "UCSC_CHAIN_POINT"
 MISSING_TEXT = {"", "na", "nan", "none", "null", "unresolved", "unregistered"}
 
 
@@ -60,6 +65,14 @@ def numeric(value):
 
 def manifest_sha256(path):
     digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def file_md5(path):
+    digest = hashlib.md5()
     with open(path, "rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
@@ -198,6 +211,58 @@ def variant_map_issues(mapping):
     return issues
 
 
+def load_liftover_plans(path, selected_sources):
+    if not os.path.exists(path):
+        raise SystemExit(f"ERROR: liftover-plan registry not found: {path}")
+    plans = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    missing = LIFTOVER_COLUMNS.difference(plans.columns)
+    if missing:
+        raise SystemExit(f"ERROR: liftover-plan registry missing columns: {sorted(missing)}")
+    duplicate_traits = plans.duplicated(subset=["trait_id"], keep=False)
+    if duplicate_traits.any():
+        duplicates = plans.loc[duplicate_traits, ["source_id", "trait_id"]].to_dict("records")
+        raise SystemExit(f"ERROR: duplicate liftover trait rows: {duplicates}")
+    invalid = []
+    for _, plan in plans.iterrows():
+        selected_source = selected_sources.get(plan["trait_id"])
+        if selected_source != plan["source_id"]:
+            invalid.append({
+                "source_id": plan["source_id"],
+                "trait_id": plan["trait_id"],
+                "selected_source_id": selected_source or "UNSELECTED_TRAIT",
+            })
+        if plan["strategy"] != LIFTOVER_STRATEGY:
+            invalid.append({"trait_id": plan["trait_id"], "invalid_strategy": plan["strategy"]})
+        if plan["source_build"] != "GRCh38/hg38" or plan["output_build"] != "GRCh37/hg19":
+            invalid.append({
+                "trait_id": plan["trait_id"],
+                "invalid_build_pair": f"{plan['source_build']}->{plan['output_build']}",
+            })
+        if not plan["chain_bytes"].isdigit() or int(plan["chain_bytes"]) <= 0:
+            invalid.append({"trait_id": plan["trait_id"], "invalid_chain_bytes": plan["chain_bytes"]})
+        if not re.fullmatch(r"[0-9a-f]{32}", plan["chain_md5"]):
+            invalid.append({"trait_id": plan["trait_id"], "invalid_chain_md5": plan["chain_md5"]})
+        if not re.fullmatch(r"[0-9a-f]{64}", plan["chain_sha256"]):
+            invalid.append({"trait_id": plan["trait_id"], "invalid_chain_sha256": plan["chain_sha256"]})
+    if invalid:
+        raise SystemExit(f"ERROR: invalid liftover plans: {invalid}")
+    return {row["trait_id"]: row for _, row in plans.iterrows()}
+
+
+def liftover_chain_issues(plan):
+    path = plan["chain_path"]
+    if not os.path.isfile(path):
+        return ["liftover_chain_missing"]
+    issues = []
+    if os.path.getsize(path) != int(plan["chain_bytes"]):
+        issues.append("liftover_chain_byte_count_mismatch")
+    if file_md5(path) != plan["chain_md5"]:
+        issues.append("liftover_chain_md5_mismatch")
+    if manifest_sha256(path) != plan["chain_sha256"]:
+        issues.append("liftover_chain_sha256_mismatch")
+    return issues
+
+
 def load_h2(path):
     if not path:
         return {}
@@ -218,6 +283,7 @@ def main():
     parser.add_argument("--sources", default="config/public_gwas_sources.tsv")
     parser.add_argument("--schemas", default="config/gwas_schemas.tsv")
     parser.add_argument("--variant-mappings", default="config/variant_mapping_plans.tsv")
+    parser.add_argument("--liftover-plans", default="config/liftover_plans.tsv")
     parser.add_argument("--h2")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--harmonized-dir", default="data/harmonized")
@@ -239,6 +305,7 @@ def main():
     selected_sources = dict(zip(config["trait_id"], config["source_id"]))
     schemas_by_source_trait = load_source_schemas(args.schemas, selected_sources)
     mappings_by_trait = load_variant_mappings(args.variant_mappings, selected_sources)
+    liftover_by_trait = load_liftover_plans(args.liftover_plans, selected_sources)
     required_mapping_traits = {
         trait_id
         for (_, trait_id), schema in schemas_by_source_trait.items()
@@ -248,6 +315,16 @@ def main():
         raise SystemExit(
             "ERROR: variant-mapping plans must exactly cover mapping-required schemas: "
             f"expected {sorted(required_mapping_traits)}, got {sorted(mappings_by_trait)}"
+        )
+    required_liftover_traits = {
+        row["trait_id"]
+        for _, row in config.iterrows()
+        if row["source_status"] == "SOURCE_VERIFIED" and row["build"] in {"hg38", "GRCh38"}
+    }
+    if set(liftover_by_trait) != required_liftover_traits:
+        raise SystemExit(
+            "ERROR: liftover plans must exactly cover verified hg38 sources: "
+            f"expected {sorted(required_liftover_traits)}, got {sorted(liftover_by_trait)}"
         )
     h2_by_trait = load_h2(args.h2)
     panel_hash = manifest_sha256(args.config)
@@ -259,6 +336,8 @@ def main():
         schema = schemas_by_source_trait.get((trait["source_id"], trait_id))
         mapping = mappings_by_trait.get(trait_id)
         mapping_issues = variant_map_issues(mapping) if mapping is not None else []
+        liftover = liftover_by_trait.get(trait_id)
+        liftover_issues = liftover_chain_issues(liftover) if liftover is not None else []
 
         source_issues = []
         if trait["source_status"] != "SOURCE_VERIFIED":
@@ -295,14 +374,36 @@ def main():
         rsid_mapping_sets_build = (
             mapping is not None and mapping["strategy"] == "BY_RSID_ALLELES"
         )
-        if trait["build"] not in {"hg19", "GRCh37"} and not rsid_mapping_sets_build:
+        liftover_sets_build = liftover is not None
+        if (
+            liftover_sets_build
+            and (
+                source is None
+                or source["build_status"].upper()
+                != "HEADER_VALIDATED_HG38_REQUIRES_LIFTOVER"
+            )
+        ):
+            harmonization_issues.append("liftover_source_build_not_validated_hg38")
+        if (
+            trait["build"] not in {"hg19", "GRCh37"}
+            and not rsid_mapping_sets_build
+            and not liftover_sets_build
+        ):
             harmonization_issues.append("not_hg19_requires_explicit_build_decision")
+        mapping_validates_grch37_coordinate = (
+            mapping is not None
+            and mapping["strategy"] == "BY_COORD_ALLELES"
+            and trait["build"] in {"hg19", "GRCh37"}
+        )
         if (
             source is not None
             and source["build_status"].upper() != "HEADER_VALIDATED_HG19"
             and not rsid_mapping_sets_build
+            and not mapping_validates_grch37_coordinate
+            and not liftover_sets_build
         ):
             harmonization_issues.append("source_build_not_header_validated_hg19")
+        harmonization_issues.extend(liftover_issues)
         if schema is None:
             harmonization_issues.append("source_schema_not_registered")
             schema_status = "UNREGISTERED"
