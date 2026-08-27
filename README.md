@@ -28,18 +28,19 @@ records are documented in `docs/remaining_source_access_blockers.md`. The
 pipeline never submits a request, signs a data-use agreement, or affirms a
 download checkbox on the user's behalf.
 
-Eleven registered sources have also been exercised locally end to end. The
+Twelve registered sources have also been exercised locally end to end. The
 ignored Jansen 2019 insomnia, Campos 2020 snoring, Yengo 2018 BMI, Deelen 2019
-longevity, Evangelou 2018 SBP, Nielsen 2018 atrial-fibrillation, Demontis 2023
-ADHD, Trubetskoy 2022 schizophrenia, Mishra 2022 stroke, and de Lange 2017
-Crohn-disease, and Ishigaki 2022 rheumatoid-arthritis inputs produced 6,077,635/10,862,567,
+longevity, Timmers 2019 parental-lifespan, Evangelou 2018 SBP, Nielsen 2018
+atrial-fibrillation, Demontis 2023 ADHD, Trubetskoy 2022 schizophrenia, Mishra
+2022 stroke, de Lange 2017 Crohn-disease, and Ishigaki 2022
+rheumatoid-arthritis inputs produced 6,077,635/10,862,567,
 7,168,629/11,010,158, 1,973,592/2,336,269, 1,175,095/8,856,352,
-5,964,514/7,088,067, 10,246,131/12,149,979, 5,692,669/6,774,224,
-6,341,702/7,659,767, 1,176,288/7,511,476, 1,144,234/9,570,787, and
-9,659,407/13,297,690 retained harmonized variants, respectively. All eleven
-were HapMap3-munged and passed the predefined LDSC h²
+6,663,125/9,085,648, 5,964,514/7,088,067, 10,246,131/12,149,979,
+5,692,669/6,774,224, 6,341,702/7,659,767, 1,176,288/7,511,476,
+1,144,234/9,570,787, and 9,659,407/13,297,690 retained harmonized variants,
+respectively. All twelve were HapMap3-munged and passed the predefined LDSC h²
 gate in an explicitly named checkpoint; the gated Phase 1 checkpoint contains
-the 2 locally ready sleep traits × 9 locally ready non-sleep traits = 18 pairs.
+the 2 locally ready sleep traits × 10 locally ready non-sleep traits = 20 pairs.
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

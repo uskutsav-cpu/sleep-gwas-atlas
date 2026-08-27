@@ -1,9 +1,9 @@
 # Public aging-GWAS acquisition
 
 This log records source-verified public releases that have completed the
-source/build portion of Phase 0. It does not make a result reproducible by
-itself: the archived file still has to be materialized, harmonized, HapMap3
-matched, and passed through LDSC QC locally.
+source/build portion of Phase 0 and identifies the one release exercised
+locally. Source verification by itself does not imply materialization,
+harmonization, HapMap3 matching, or LDSC QC.
 
 | Source ID | Trait | Publication | Public file |
 | --- | --- | --- | --- |
@@ -30,6 +30,27 @@ study-level count. The supplied MD5 (`9209bf29b5cf281bba35934dcf708538`) and
 local SHA-256 are in the registry. Raw `rs113345124` is at `8:145793211`,
 agreeing with the [Ensembl GRCh37 record](https://grch37.rest.ensembl.org/variation/human/rs113345124?content-type=application/json);
 the GRCh38 position is `8:144567827`.
+
+## Timmers 2019 parental-lifespan checkpoint
+
+The exact 483,395,501-byte direct gzip has SHA-256
+`a3d6ef25139352bae34c8effbce1fa6c49144f9c7d65cae368b98d45419bc38d`
+and is hard-linked to `data/raw/parental_lifespan.txt.gz`. It contains
+9,085,648 literal rows. Harmonization uses source `a1` as the effect allele and
+preserves `beta1` as the log-hazard protection effect, along with the source
+per-SNP `n`, `freq1`, and INFO. The locked filters retained 6,663,125 rows
+(73.34%); HapMap3 munging retained 1,160,203 nonmissing effects after two
+allele mismatches.
+
+Observed-scale h² is 0.0236 (SE 0.0012, Z 19.67), with intercept 1.0473, and
+passes the predefined gate. In the 20-pair partial checkpoint, insomnia has
+r_g -0.2740 with the lifespan-protection effect (SE 0.0367, P 8.869e-14,
+partial-family FDR 4.434e-13), while snoring has r_g -0.1647 (SE 0.0282,
+P 4.912e-09, FDR 1.637e-08). The negative signs follow the source's protection
+direction; they are not causal estimates. Their cross-trait LDSC intercepts
+(-0.0267 and -0.0207) remain in the checkpoint table for the final
+sample-overlap audit, and these partial-family findings do not replace the
+locked 396-pair correction.
 
 For frailty index, the public GRCh37 TSV records `variant_id`, chromosome,
 base-pair position, effect and other alleles, effect-allele frequency, beta,
