@@ -120,7 +120,7 @@ LDSC runs separately under Python 3.9.23 at the pinned CBIIT commit `6c673952cee
 
 ```bash
 bash scripts/00_setup.sh
-export PYTHON_BIN=.ldsc-env/bin/python
+export PYTHON_BIN=python3
 export LDSC_PYTHON=.ldsc-env/bin/python
 export LDSC_DIR=ldsc
 ```

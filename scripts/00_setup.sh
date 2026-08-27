@@ -30,12 +30,12 @@ fi
 PACKAGES=(
   python=3.9.23 numpy=1.21.5 pandas=1.3.3 scipy=1.7.3
   python-dateutil=2.8.2 pytz=2022.7.1 bitarray=2.8.3 nose=1.3.7
-  pybedtools=0.10.0 flask=2.3.3 requests=2.31.0 matplotlib=3.7.5
+  pybedtools=0.10.0 flask=2.3.3 requests=2.31.0
 )
 if [ ! -x "$LDSC_ENV_DIR/bin/python" ]; then
   # Direct community channels avoid implicitly accepting Anaconda's commercial
-  # channel Terms of Service. Versions follow CBIIT/ldsc's environment3.yml;
-  # matplotlib is added for this repository's reporting scripts.
+  # channel Terms of Service. Versions follow CBIIT/ldsc's environment3.yml.
+  # Reporting dependencies stay in the separate workflow environment.
   "$CONDA_BIN" create --yes --override-channels \
     --channel conda-forge --channel bioconda --prefix "$LDSC_ENV_DIR" \
     "${PACKAGES[@]}"
@@ -47,7 +47,7 @@ else
     "${PACKAGES[@]}"
 fi
 LDSC_PYTHON="$LDSC_ENV_DIR/bin/python"
-"$LDSC_PYTHON" -c 'import numpy, pandas, scipy, matplotlib, pybedtools'
+"$LDSC_PYTHON" -c 'import numpy, pandas, scipy, pybedtools'
 
 echo "==> [2/6] LDSC (maintained Python 3 implementation)"
 if [ ! -d "$LDSC_DIR/.git" ]; then
@@ -67,9 +67,9 @@ echo "    pinned LDSC commit: $ACTUAL_LDSC_COMMIT"
 # setup deliberately aborts rather than silently applying it to another LDSC
 # revision. The patch only changes the header stream to text mode.
 LDSC_COMPAT_PATCH="$ROOT/patches/ldsc39-python3-compressed-header.patch"
-if git -C "$LDSC_DIR" apply --unidiff-zero --reverse --check "$LDSC_COMPAT_PATCH"; then
+if git -C "$LDSC_DIR" apply --unidiff-zero --reverse --check "$LDSC_COMPAT_PATCH" 2>/dev/null; then
   echo "    Python 3 compressed-header compatibility patch already applied"
-elif git -C "$LDSC_DIR" apply --unidiff-zero --check "$LDSC_COMPAT_PATCH"; then
+elif git -C "$LDSC_DIR" apply --unidiff-zero --check "$LDSC_COMPAT_PATCH" 2>/dev/null; then
   git -C "$LDSC_DIR" apply --unidiff-zero "$LDSC_COMPAT_PATCH"
   echo "    applied Python 3 compressed-header compatibility patch"
 else
@@ -151,8 +151,8 @@ NEXT
   1. Put only verified hg19, EUR raw sumstats in data/raw/, named as in
      config/analysis_panel.tsv. Do not use an hg38 file without an explicit,
      documented liftover decision.
-  2. export PYTHON_BIN=.ldsc-env/bin/python LDSC_PYTHON=.ldsc-env/bin/python
-     LDSC_DIR=ldsc
+  2. Keep PYTHON_BIN on the workflow environment and export only
+     LDSC_PYTHON=.ldsc-env/bin/python LDSC_DIR=ldsc
   3. bash scripts/02_munge.sh insomnia bipolar
   4. bash scripts/03_h2_qc.sh insomnia bipolar
   5. bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv

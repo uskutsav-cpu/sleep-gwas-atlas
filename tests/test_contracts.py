@@ -3,7 +3,9 @@ import gzip
 import hashlib
 import importlib.util
 import math
+import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -607,6 +609,80 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stdout.strip(), "campos_2020_snoring")
+
+    def test_munge_accepts_trait_without_optional_mapping_or_liftover(self):
+        """Empty optional arrays must work under macOS Bash 3.2 with nounset."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ["scripts", "config", "data/raw", "ref/eur_w_ld_chr", "ldsc"]:
+                (root / name).mkdir(parents=True, exist_ok=True)
+            for name in ["02_munge.sh", "_common.sh"]:
+                shutil.copy2(ROOT / "scripts" / name, root / "scripts" / name)
+            (root / "config" / "analysis_panel.tsv").write_text(
+                "atlas_version\ttrait_id\traw_file\tbuild\tsource_status\tancestry\n"
+                "atlas-v1.0\tfixture\tfixture.txt.gz\thg19\tSOURCE_VERIFIED\tEUR\n",
+                encoding="utf-8",
+            )
+            for path in [
+                root / "config" / "analysis_panel.lock.json",
+                root / "data" / "raw" / "fixture.txt.gz",
+                root / "ref" / "w_hm3.snplist",
+                root / "ref" / "eur_w_ld_chr" / "1.l2.ldscore.gz",
+                root / "ldsc" / "ldsc.py",
+                root / "ldsc" / "munge_sumstats.py",
+                root / "scripts" / "00_validate_panel.py",
+                root / "scripts" / "01_harmonize.py",
+            ]:
+                path.touch()
+            runner = root / "fake-python"
+            runner.write_text(
+                "#!/usr/bin/env bash\n"
+                "set -euo pipefail\n"
+                "target=$1; shift\n"
+                "case \"$target\" in\n"
+                "  scripts/00_validate_panel.py) exit 0 ;;\n"
+                "  scripts/01_harmonize.py)\n"
+                "    trait=; outdir=\n"
+                "    while [ $# -gt 0 ]; do\n"
+                "      case \"$1\" in\n"
+                "        --trait) trait=$2; shift 2 ;;\n"
+                "        --outdir) outdir=$2; shift 2 ;;\n"
+                "        *) shift ;;\n"
+                "      esac\n"
+                "    done\n"
+                "    mkdir -p \"$outdir\"\n"
+                "    : > \"$outdir/$trait.harmonized.tsv.gz\"\n"
+                "    : > \"$outdir/$trait.qc.txt\" ;;\n"
+                "  ldsc/munge_sumstats.py)\n"
+                "    out=\n"
+                "    while [ $# -gt 0 ]; do\n"
+                "      case \"$1\" in\n"
+                "        --out) out=$2; shift 2 ;;\n"
+                "        *) shift ;;\n"
+                "      esac\n"
+                "    done\n"
+                "    mkdir -p \"$(dirname \"$out\")\"\n"
+                "    : > \"$out.sumstats.gz\"\n"
+                "    : > \"$out.log\" ;;\n"
+                "  *) exit 2 ;;\n"
+                "esac\n",
+                encoding="utf-8",
+            )
+            runner.chmod(0o755)
+            result = subprocess.run(
+                ["/bin/bash", "scripts/02_munge.sh", "fixture"],
+                cwd=root,
+                env={
+                    **os.environ,
+                    "PYTHON_BIN": str(runner),
+                    "LDSC_PYTHON": str(runner),
+                    "LDSC_DIR": "ldsc",
+                },
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            self.assertTrue((root / "data/munged/fixture.sumstats.gz").is_file())
 
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))

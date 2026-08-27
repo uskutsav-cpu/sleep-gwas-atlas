@@ -75,7 +75,8 @@ for trait in "$@"; do
   echo "==> $trait: Phase 0 harmonization"
   "$PYTHON_BIN" scripts/01_harmonize.py \
     --trait "$trait" --config "$CONFIG" "${source_build_args[@]}" \
-    "${variant_map_args[@]}" "${liftover_args[@]}" \
+    ${variant_map_args[@]+"${variant_map_args[@]}"} \
+    ${liftover_args[@]+"${liftover_args[@]}"} \
     --infile "data/raw/$raw_file" --outdir data/harmonized
 
   echo "==> $trait: HapMap3 munging"
