@@ -88,8 +88,7 @@ class PanelContractTests(unittest.TestCase):
                 for trait in source["trait_ids"].split(",")
                 if trait.strip()
             }
-        self.assertTrue(mapped)
-        self.assertFalse(mapped.difference(panel_ids))
+        self.assertEqual(mapped, panel_ids)
 
     def test_source_schemas_match_selected_source_trait_pairs(self):
         with (ROOT / "config" / "analysis_panel.tsv").open(newline="") as handle:
@@ -101,6 +100,7 @@ class PanelContractTests(unittest.TestCase):
             schemas = list(csv.DictReader(handle, delimiter="\t"))
         pairs = [(row["source_id"], row["trait_id"]) for row in schemas]
         self.assertEqual(len(pairs), len(set(pairs)))
+        self.assertEqual({row["trait_id"] for row in schemas}, set(selected))
         for source_id, trait_id in pairs:
             self.assertEqual(selected.get(trait_id), source_id)
         allowed_statuses = {
@@ -113,6 +113,25 @@ class PanelContractTests(unittest.TestCase):
             "sleep_efficiency", "accel_sleep_duration", "sleep_timing",
         })
         self.assertEqual(len({row["effect"] for row in jones}), 3)
+
+    def test_pending_sources_do_not_reuse_stage_or_headline_sample_counts(self):
+        panel = {row["trait_id"]: row for row in self.panel}
+        self.assertEqual(
+            (panel["ms"]["ncase"], panel["ms"]["ncontrol"], panel["ms"]["n_total"]),
+            ("14802", "26703", "41505"),
+        )
+        self.assertEqual(panel["ms"]["source_status"], "SOURCE_PENDING")
+        self.assertEqual(
+            (
+                panel["melanoma"]["ncase"],
+                panel["melanoma"]["ncontrol"],
+                panel["melanoma"]["n_total"],
+                panel["melanoma"]["build"],
+            ),
+            ("30134", "81415", "111549", "hg38"),
+        )
+        self.assertEqual(panel["melanoma"]["source_status"], "SOURCE_PENDING")
+        self.assertEqual(panel["t2d"]["source_status"], "SOURCE_PENDING")
 
     def test_new_sleep_source_headers_harmonize_with_documented_effects(self):
         cases = {

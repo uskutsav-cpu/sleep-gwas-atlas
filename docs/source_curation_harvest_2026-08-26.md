@@ -89,18 +89,20 @@ These records were not promoted:
 
 | Trait | Reason |
 |---|---|
-| multiple sclerosis | Branch substituted a roughly ten-fold smaller 2016 German GWAS for IMSGC 2019. |
-| type 2 diabetes | Branch substituted Scott 2017; although genome-wide, its bare coordinate marker lacks the rsID mapping needed by the current LDSC path. |
+| multiple sclerosis | Branch substituted a roughly ten-fold smaller 2016 German GWAS for IMSGC 2019. The exact 2019 discovery GWAS is now registered as pending: 14,802 cases/26,703 controls, with no complete release located. The 47,429/68,374 paper headline includes targeted replication. |
+| type 2 diabetes | Branch substituted Scott 2017. The exact Mahajan 2018b BMI-unadjusted European route is now registered, but the official form requires affirmative acceptance of anti-reidentification/no-reposting terms, so it remains pending user authorization. |
 
 No branch candidate record existed for snoring, sleep apnea, colorectal cancer,
 lung cancer, or melanoma. Snoring, colorectal cancer, and lung cancer were
 resolved independently from official GWAS Catalog sources, and sleep apnea was
 resolved from FinnGen's R9 manifest, endpoint definition, and data dictionary.
-The selected Landi melanoma accession `GCST010304` has `fullPvalueSet=false` in the official API
-and no directory in the Catalog summary-statistics FTP tree, so it remains
-pending rather than being represented by an invented download. Sleep apnea
-requires a validated build-conversion path; melanoma still requires new
-file-level primary-source work.
+The Landi total-analysis accession `GCST010304` has `fullPvalueSet=false` in the
+official API and no Catalog summary-statistics directory. Primary-source review
+instead identifies dbGaP `phs001868`/`pha004971` as the confirmed-only
+genome-wide release (30,134/81,415). Its public FTP result is truncated to
+16,898 top-hit rows and its full GRCh38 archive is controlled-access, so it
+remains pending. Sleep apnea and melanoma require validated build conversion;
+melanoma additionally requires authorized file-level inspection.
 
 The rule for the next pass is unchanged: prefer the largest appropriate and
 scientifically compatible release, even when it requires controlled access,

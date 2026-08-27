@@ -11,7 +11,7 @@ An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
 The analysis scope is now frozen in `config/analysis_panel.tsv` at exactly 45 traits. `config/analysis_panel.lock.json` locks the ordered trait identities and domain counts, while every generated readiness or Phase 1 inclusion table records the full manifest SHA-256. A trait therefore cannot be silently swapped while preserving a 45-row count.
 
-The source registry currently provides evidence-backed public-source records for **42/45** selected traits. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
+The source registry currently provides evidence-backed public-source records for **42/45** selected traits. All 45 selections now have registry and schema rows, but the final three deliberately remain pending: the selected IMSGC multiple-sclerosis discovery meta-analysis has no located full-statistics release, the exact DIAGRAM type-2-diabetes route requires affirmative terms acceptance, and the selected dbGaP melanoma archive requires Authorized Access. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
 
 ```text
 source_verified: 42 / 45
@@ -22,6 +22,11 @@ phase1_pass: 0 / 45
 ```
 
 The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. No real LDSC results are versioned on this branch; synthetic smoke-test artifacts are not scientific results.
+
+The exact evidence and user/institution actions needed for the last three source
+records are documented in `docs/remaining_source_access_blockers.md`. The
+pipeline never submits a request, signs a data-use agreement, or affirms a
+download checkbox on the user's behalf.
 
 One real source has also been exercised locally end to end through the
 harmonizer. The ignored Campos 2020 snoring input produced 7,168,629 retained
