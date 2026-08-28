@@ -44,6 +44,11 @@ LIFTOVER_COLUMNS = {
     "source_id", "trait_id", "strategy", "chain_path", "chain_bytes",
     "chain_md5", "chain_sha256", "source_build", "output_build", "notes",
 }
+HM3_PREFILTER_COLUMNS = {
+    "source_id", "trait_id", "strategy", "snp_column", "allowlist_path",
+    "rationale",
+}
+HM3_PREFILTER_STRATEGY = "HAPMAP3_RSID_ALLOWLIST"
 NONJOURNAL_CITATION_COLUMNS = {
     "source_id", "trait_id", "citation_type", "title", "publisher",
     "release_date", "source_url", "notes",
@@ -319,6 +324,112 @@ def liftover_chain_issues(plan):
     return issues
 
 
+def load_hm3_prefilter_plans(path, selected_sources):
+    if not os.path.exists(path):
+        raise SystemExit(f"ERROR: HapMap3 prefilter-plan registry not found: {path}")
+    plans = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    missing = HM3_PREFILTER_COLUMNS.difference(plans.columns)
+    if missing:
+        raise SystemExit(
+            f"ERROR: HapMap3 prefilter-plan registry missing columns: {sorted(missing)}"
+        )
+    duplicate_traits = plans.duplicated(subset=["trait_id"], keep=False)
+    if duplicate_traits.any():
+        duplicates = plans.loc[
+            duplicate_traits, ["source_id", "trait_id"]
+        ].to_dict("records")
+        raise SystemExit(f"ERROR: duplicate HapMap3 prefilter trait rows: {duplicates}")
+    invalid = []
+    for _, plan in plans.iterrows():
+        selected_source = selected_sources.get(plan["trait_id"])
+        if selected_source != plan["source_id"]:
+            invalid.append({
+                "source_id": plan["source_id"],
+                "trait_id": plan["trait_id"],
+                "selected_source_id": selected_source or "UNSELECTED_TRAIT",
+            })
+        if plan["strategy"] != HM3_PREFILTER_STRATEGY:
+            invalid.append({
+                "trait_id": plan["trait_id"],
+                "invalid_strategy": plan["strategy"],
+            })
+        if not populated(plan["snp_column"]) or not populated(plan["allowlist_path"]):
+            invalid.append({
+                "trait_id": plan["trait_id"],
+                "missing_prefilter_contract": True,
+            })
+    if invalid:
+        raise SystemExit(f"ERROR: invalid HapMap3 prefilter plans: {invalid}")
+    return {row["trait_id"]: row for _, row in plans.iterrows()}
+
+
+def retained_prefilter_issues(plan, source, trait, harmonized_dir):
+    """Validate a retained prefilter after its registered large raw is removed."""
+    trait_id = trait["trait_id"]
+    output = os.path.join(harmonized_dir, ".prefilter", f"{trait_id}.hm3.tsv.gz")
+    provenance_path = os.path.join(
+        harmonized_dir, f"{trait_id}.prefilter.provenance.json"
+    )
+    issues = []
+    if source is None or source.get("archive_member", "") != "DIRECT_GZIP":
+        issues.append("prefilter_source_not_registered_direct_gzip")
+        return issues
+    if source.get("raw_files", "") != trait["raw_file"]:
+        issues.append("prefilter_source_raw_file_mismatch")
+    if not os.path.isfile(output):
+        issues.append("retained_prefilter_missing")
+        return issues
+    if not os.path.isfile(provenance_path):
+        issues.append("retained_prefilter_provenance_missing")
+        return issues
+    try:
+        with open(provenance_path, encoding="utf-8") as handle:
+            provenance = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        issues.append("retained_prefilter_provenance_invalid")
+        return issues
+    required = {
+        "strategy", "input_bytes", "input_sha256", "snp_column",
+        "allowlist_path", "allowlist_sha256", "source_rows", "retained_rows",
+        "output_bytes", "output_sha256",
+    }
+    if required.difference(provenance):
+        issues.append("retained_prefilter_provenance_incomplete")
+        return issues
+    if provenance["strategy"] != plan["strategy"]:
+        issues.append("retained_prefilter_strategy_mismatch")
+    if provenance["snp_column"] != plan["snp_column"]:
+        issues.append("retained_prefilter_snp_column_mismatch")
+    try:
+        if int(provenance["input_bytes"]) != int(source["archive_bytes"]):
+            issues.append("retained_prefilter_source_byte_count_mismatch")
+    except (TypeError, ValueError):
+        issues.append("retained_prefilter_source_byte_count_invalid")
+    if str(provenance["input_sha256"]).lower() != str(source["archive_sha256"]).lower():
+        issues.append("retained_prefilter_source_checksum_mismatch")
+    allowlist = plan["allowlist_path"]
+    if os.path.realpath(str(provenance["allowlist_path"])) != os.path.realpath(allowlist):
+        issues.append("retained_prefilter_allowlist_path_mismatch")
+    if not os.path.isfile(allowlist):
+        issues.append("retained_prefilter_allowlist_missing")
+    elif manifest_sha256(allowlist) != str(provenance["allowlist_sha256"]).lower():
+        issues.append("retained_prefilter_allowlist_checksum_mismatch")
+    actual_bytes = os.path.getsize(output)
+    actual_sha256 = manifest_sha256(output)
+    try:
+        if actual_bytes != int(provenance["output_bytes"]):
+            issues.append("retained_prefilter_output_byte_count_mismatch")
+        source_rows = int(provenance["source_rows"])
+        retained_rows = int(provenance["retained_rows"])
+        if source_rows <= 0 or retained_rows <= 0 or retained_rows > source_rows:
+            issues.append("retained_prefilter_row_counts_invalid")
+    except (TypeError, ValueError):
+        issues.append("retained_prefilter_numeric_provenance_invalid")
+    if actual_sha256 != str(provenance["output_sha256"]).lower():
+        issues.append("retained_prefilter_output_checksum_mismatch")
+    return issues
+
+
 def load_h2(path):
     if not path:
         return {}
@@ -340,6 +451,9 @@ def main():
     parser.add_argument("--schemas", default="config/gwas_schemas.tsv")
     parser.add_argument("--variant-mappings", default="config/variant_mapping_plans.tsv")
     parser.add_argument("--liftover-plans", default="config/liftover_plans.tsv")
+    parser.add_argument(
+        "--hm3-prefilter-plans", default="config/hm3_prefilter_plans.tsv"
+    )
     parser.add_argument(
         "--nonjournal-citations", default="config/nonjournal_source_citations.tsv"
     )
@@ -378,6 +492,9 @@ def main():
     schemas_by_source_trait = load_source_schemas(args.schemas, selected_sources)
     mappings_by_trait = load_variant_mappings(args.variant_mappings, selected_sources)
     liftover_by_trait = load_liftover_plans(args.liftover_plans, selected_sources)
+    hm3_prefilter_by_trait = load_hm3_prefilter_plans(
+        args.hm3_prefilter_plans, selected_sources
+    )
     required_mapping_traits = {
         trait_id
         for (_, trait_id), schema in schemas_by_source_trait.items()
@@ -492,7 +609,15 @@ def main():
             harmonization_issues.append("continuous_n_total_unresolved")
         raw_path = os.path.join(args.raw_dir, trait["raw_file"])
         if not os.path.isfile(raw_path):
-            harmonization_issues.append("registered_raw_file_not_materialized")
+            prefilter = hm3_prefilter_by_trait.get(trait_id)
+            if prefilter is None:
+                harmonization_issues.append("registered_raw_file_not_materialized")
+            else:
+                harmonization_issues.extend(
+                    retained_prefilter_issues(
+                        prefilter, source, trait, args.harmonized_dir
+                    )
+                )
         harmonization_ready = not harmonization_issues
 
         ldsc_issues = []

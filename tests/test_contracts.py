@@ -1031,6 +1031,58 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual({row["trait_id"] for row in rows}, {"ldl", "hdl", "triglycerides"})
         self.assertTrue(all(row["strategy"] == "HAPMAP3_RSID_ALLOWLIST" for row in rows))
 
+    def test_retained_prefilter_binds_removed_raw_to_registry(self):
+        audit = load_phase0_audit()
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            harmonized = directory / "harmonized"
+            (harmonized / ".prefilter").mkdir(parents=True)
+            allowlist = directory / "w_hm3.snplist"
+            allowlist.write_text("SNP\nrs123\n", encoding="ascii")
+            output = harmonized / ".prefilter" / "hdl.hm3.tsv.gz"
+            output.write_bytes(gzip.compress(b"rsID\tBETA\nrs123\t0.1\n", mtime=0))
+            source_sha = "a" * 64
+            provenance = {
+                "strategy": "HAPMAP3_RSID_ALLOWLIST",
+                "input_bytes": 123456,
+                "input_sha256": source_sha,
+                "snp_column": "rsID",
+                "allowlist_path": str(allowlist),
+                "allowlist_sha256": hashlib.sha256(allowlist.read_bytes()).hexdigest(),
+                "source_rows": 10,
+                "retained_rows": 1,
+                "output_bytes": output.stat().st_size,
+                "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+            }
+            (harmonized / "hdl.prefilter.provenance.json").write_text(
+                json.dumps(provenance), encoding="utf-8"
+            )
+            plan = {
+                "strategy": "HAPMAP3_RSID_ALLOWLIST",
+                "snp_column": "rsID",
+                "allowlist_path": str(allowlist),
+            }
+            source = {
+                "archive_member": "DIRECT_GZIP",
+                "raw_files": "hdl.txt.gz",
+                "archive_bytes": "123456",
+                "archive_sha256": source_sha,
+            }
+            trait = {"trait_id": "hdl", "raw_file": "hdl.txt.gz"}
+            self.assertEqual(
+                audit.retained_prefilter_issues(
+                    plan, source, trait, str(harmonized)
+                ),
+                [],
+            )
+            source["archive_sha256"] = "b" * 64
+            self.assertIn(
+                "retained_prefilter_source_checksum_mismatch",
+                audit.retained_prefilter_issues(
+                    plan, source, trait, str(harmonized)
+                ),
+            )
+
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))
         paths += list((ROOT / "scripts").glob("*.sh"))
