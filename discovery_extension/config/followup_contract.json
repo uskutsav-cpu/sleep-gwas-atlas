@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "prioritized discovery pair with completed pair-level novelty audit; Tier B claims additionally require independent replication or prespecified strong local support",
+  "order": [
+    "local_genetic_correlation",
+    "pleiotropy_and_shared_factor_alternatives",
+    "locus_definition_and_fine_mapping",
+    "colocalization_with_explicit_hypotheses_priors_and_sensitivity",
+    "functional_and_mechanistic_annotation"
+  ],
+  "local_analysis": {
+    "required_outputs": ["locus boundaries", "method and LD reference", "local rg", "SE", "p", "tested-locus multiplicity correction", "convergence/QC"],
+    "warning": "global rg does not establish local sharing"
+  },
+  "pleiotropy": {
+    "required_alternatives": ["horizontal pleiotropy", "vertical mediation", "shared latent factor", "sample overlap or residual confounding"],
+    "warning": "directional genetic evidence is not automatically causal"
+  },
+  "fine_mapping_colocalization": {
+    "required_outputs": ["locus and variant universe", "LD reference", "credible sets", "prior specification", "hypothesis posteriors", "prior sensitivity", "allele alignment QC"],
+    "warning": "colocalization supports a shared signal model but does not prove a causal gene or pathway"
+  },
+  "mechanistic_annotation": {
+    "evidence_order": ["replicated human genetics", "colocalized molecular QTL", "fine-mapped regulatory evidence", "tissue/cell enrichment", "pathway annotation", "model-system evidence"],
+    "required_language": "rank evidence and preserve uncertainty; do not promote annotation into causal proof"
+  }
+}

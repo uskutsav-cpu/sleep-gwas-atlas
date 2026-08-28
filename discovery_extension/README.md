@@ -83,6 +83,13 @@ adversarial-risk checklist, and a plain-language execution-status report. It
 records checkpoint drift and missing downstream artifacts as blocking or
 pending states instead of aborting before the failure is documented.
 
+For result-dependent follow-up, `17_prepare_pair_novelty_audit.py` creates a
+PENDING-only row for every extension-FDR-significant pair and
+`18_validate_pair_novelty_audit.py` refuses incomplete reviews or a STRONG
+novelty label without successful independent replication. The replication and
+local/pleiotropic/fine-mapping/colocalization/mechanistic rules are frozen in
+`config/replication_contract.json` and `config/followup_contract.json`.
+
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total
 about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety

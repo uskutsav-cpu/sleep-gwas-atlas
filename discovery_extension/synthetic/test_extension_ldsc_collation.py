@@ -104,7 +104,49 @@ def main() -> None:
         )
         if not figure.is_file() or figure.stat().st_size < 10000 or not figure.with_suffix(".pdf").is_file():
             raise SystemExit("ERROR: synthetic discovery figure was not created")
-    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 figure=true isolated=true")
+        audit = work / "novelty.tsv"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/17_prepare_pair_novelty_audit.py"),
+                "--rg", str(rg_out), "--out", str(audit),
+                "--panel", str(ROOT / "discovery_extension/config/candidate_traits.tsv"),
+                "--provenance-out", str(work / "novelty.json"),
+            ], check=True,
+        )
+        audit_rows = read_tsv(audit)
+        if len(audit_rows) != 1 or audit_rows[0]["novelty_decision"] != "PENDING":
+            raise SystemExit(f"ERROR: unexpected synthetic novelty template: {audit_rows}")
+        incomplete = subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
+                "--rg", str(rg_out), "--audit", str(audit),
+            ], check=False, capture_output=True, text=True,
+        )
+        if incomplete.returncode == 0:
+            raise SystemExit("ERROR: incomplete novelty audit incorrectly passed")
+        completed = audit_rows[0]
+        completed.update({
+            "audit_status": "COMPLETE", "direct_prior_same_pair": "NO",
+            "same_sleep_trait_context": "NO", "same_or_equivalent_phenotype": "NO",
+            "same_direction": "NOT_APPLICABLE", "broad_phenome_screen_overlap": "NO",
+            "near_neighbor_evidence": "NO", "discovery_vs_replication_in_prior_work": "NONE",
+            "search_databases": "PubMed;GWAS Catalog", "search_queries": "synthetic test query",
+            "search_date": "2099-01-01", "evidence_PMIDs_DOIs_URLs": "PMID:00000000",
+            "independent_replication_status": "INDEPENDENT_REPLICATION_PASS",
+            "novelty_decision": "STRONG", "decision_rationale": "synthetic validator exercise",
+            "reviewer": "synthetic_test",
+        })
+        with audit.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, delimiter="\t", fieldnames=list(completed), lineterminator="\n")
+            writer.writeheader()
+            writer.writerow(completed)
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
+                "--rg", str(rg_out), "--audit", str(audit),
+            ], check=True,
+        )
+    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 figure=true novelty_gate=true isolated=true")
 
 
 if __name__ == "__main__":

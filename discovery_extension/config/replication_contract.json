@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "lock_timing": "replication source identities and candidate pair family must be frozen before replication results are inspected",
+  "eligible_pairs": "extension-FDR-significant pairs with abs(rg)>=0.15, passing both h2 gates and the pair-level novelty audit",
+  "independence": {
+    "required": true,
+    "participant_overlap_with_discovery": "none or quantitatively demonstrated negligible",
+    "same_cohort_internal_split": "not_independent_replication",
+    "same_summary_statistics_reanalysis": "not_replication"
+  },
+  "source_requirements": [
+    "same or explicitly harmonized phenotype definition",
+    "same effect direction convention",
+    "ancestry documented and analyzed consistently",
+    "exact file identity, build, schema, sample size, and checksum retained",
+    "replication trait passes h2 Z>=4 and LDSC intercept<=1.2 before pair testing"
+  ],
+  "success_rule": {
+    "direction_concordant": true,
+    "two_sided_p_threshold": "0.05 divided by the number of replication pairs frozen in the replication family",
+    "effect_consistency": "report discovery and replication rg with SE and heterogeneity; significance alone is insufficient",
+    "strong_novelty_requires_success": true
+  },
+  "failure_reporting": "retain null, discordant, underpowered, QC-failed, and unavailable replication attempts; never replace a failed source after results are known"
+}

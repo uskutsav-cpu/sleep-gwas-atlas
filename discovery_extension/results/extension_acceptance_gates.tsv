@@ -11,12 +11,12 @@ CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e81351072
 6	Acquire full-resolution summary statistics	BLOCKED_INSUFFICIENT_STORAGE	present:sha256=315239e73eb1a9ff98bad8832688a9bbddc6ccd08436623667af25a2c0ce25ae	Need 246.91 GiB; measured 8.157 GiB; no bulk download started.
 7	Rerun extension LDSC h2 QC	BLOCKED_UPSTREAM	absent	Source h2 precheck is not accepted as the required extension rerun.
 8	Run global genetic correlations	BLOCKED_UPSTREAM	absent	BH FDR must remain confined to the primary extension family.
-9	Audit pair-level novelty	BLOCKED_UPSTREAM	absent	Required for every extension-FDR-significant pair; no panel-level label substitutes.
+9	Audit pair-level novelty	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=17_prepare_pair_novelty_audit.py+18_validate_pair_novelty_audit.py	Required for every extension-FDR-significant pair; no panel-level label substitutes.
 10	Prioritize findings	BLOCKED_UPSTREAM	absent	Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support.
-11	Independent replication	BLOCKED_UPSTREAM	absent	Same-cohort internal splits cannot satisfy the independent-replication gate.
-12	Local genetic correlation	BLOCKED_UPSTREAM	absent	Global rg is not local sharing.
-13	Pleiotropy analysis	BLOCKED_UPSTREAM	absent	Pleiotropy is evaluated as an alternative explanation, not an inconvenience.
-14	Fine-mapping and colocalization	BLOCKED_UPSTREAM	absent	Colocalization requires explicit hypotheses, priors, and sensitivity analyses.
-15	Mechanistic annotation	BLOCKED_UPSTREAM	absent	Mechanistic interpretation is ranked and cannot convert correlation into causation.
+11	Independent replication	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/replication_contract.json	Same-cohort internal splits cannot satisfy the independent-replication gate.
+12	Local genetic correlation	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Global rg is not local sharing.
+13	Pleiotropy analysis	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Pleiotropy is evaluated as an alternative explanation, not an inconvenience.
+14	Fine-mapping and colocalization	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Colocalization requires explicit hypotheses, priors, and sensitivity analyses.
+15	Mechanistic annotation	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Mechanistic interpretation is ranked and cannot convert correlation into causation.
 16	Adversarial review	CHECKLIST_READY_FINAL_REVIEW_BLOCKED	discovery_extension/results/adversarial_review_checklist.tsv	Current checklist records design risks; final findings-level review awaits actual results.
 17	Publication-grade reporting	STATUS_REPORT_ONLY_FINAL_REPORT_BLOCKED	discovery_extension/results/extension_status.md	No discovery, novelty, replication, local, or mechanistic result is claimed while upstream gates are blocked.
