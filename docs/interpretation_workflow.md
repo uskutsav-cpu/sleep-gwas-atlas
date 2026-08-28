@@ -86,6 +86,22 @@ wording additionally needs corrected multi-estimator agreement, clear
 pleiotropy diagnostics, correct Steiger direction, characterized or adjusted
 sample overlap, and compatible signal-level colocalization.
 
+The causal runtime is frozen in
+`config/interpretation_causal_runtime.json`. It uses R 4.3.3 aarch64 with an
+isolated `.mr-env/library`, exact source archives for TwoSampleMR 0.7.9,
+MR-PRESSO 1.0, cause 1.2.0, and lhcMR, 63 checksum-pinned dependency sources,
+and an exact 153-package installed dependency closure. Stable PLINK
+1.9.0-b.7.11 performs local-only LD operations against the same
+checksum-pinned 504-sample 1000 Genomes Phase 3 EUR GRCh37 archive used by the
+MAGMA workflow. The reference is materialized as a streamed SNP-major subset,
+so the 3.60-GB archive never needs to be fully extracted. Palindromic variants
+are always dropped (`harmonise_data` action 3), proxies and remote API clumping
+are forbidden, and task seeds are deterministic. CAUSE is the primary
+correlated-pleiotropy estimator when at least 100,000 pruned null-parameter
+variants are available. lhcMR is sensitivity-only for material known overlap
+and must receive real LDSC intercepts and real bidirectional MR starting
+estimates; its random fallback paths are forbidden.
+
 The public pathway adapters use the official Reactome v97 human GMT and the
 archived GO 2026-08-05 release (go-basic ontology plus human UniProt GAF).
 Source symbols map only when they resolve exactly and uniquely in GENCODE v26.
@@ -120,15 +136,17 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, 10 of 20 interpretation source families are ready: GENCODE
+repository state, 15 of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
 2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
 FUMA single-cell/MAGMA bundle, the Reactome v97 and GO 2026-08-05 pathway
-families, and the within-workflow regulatory cell-type layer. The compressed
+families, the within-workflow regulatory cell-type layer, and all five causal
+estimator families. The compressed
 official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
-not materialized until at least 4,674,439,651 bytes are free; the workflow also
-requires an explicit large-extraction acknowledgement.
+not materialized wholesale. Causal LD work uses a disk-bounded streamed subset;
+full MAGMA materialization remains guarded until at least 4,674,439,651 bytes
+are free and requires an explicit large-extraction acknowledgement.
 Four of six upstream canonical inputs do not yet exist, and the remaining
 external releases or runtimes still require exact pre-result curation. No
 downstream task result has been generated or claimed.

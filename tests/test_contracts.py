@@ -2271,6 +2271,56 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertAlmostEqual(module.hypergeometric_right_tail(2, 10, 3, 4), expected)
 
+    def test_causal_runtime_and_estimator_family_are_exactly_pre_result_locked(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        spec = policy["causal_inference"]
+        manifest_path = ROOT / spec["component_manifest"]
+        self.assertEqual(hashlib.sha256(manifest_path.read_bytes()).hexdigest(), spec["component_manifest_sha256"])
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(manifest["runtime"]["r_version"], "4.3.3")
+        self.assertEqual(manifest["runtime"]["architecture"], "aarch64")
+        self.assertEqual(manifest["runtime"]["dependency_source_count"], 63)
+        self.assertEqual(manifest["runtime"]["installed_dependency_closure_count"], 153)
+        self.assertEqual({row["component_id"] for row in manifest["components"]}, {
+            "TWOSAMPLEMR_SOURCE", "MRPRESSO_SOURCE", "CAUSE_SOURCE", "LHCMR_SOURCE",
+            "PLINK_1_9_STABLE_MAC_ARCHIVE", "PLINK_1_9_STABLE_UNIVERSAL_BINARY",
+        })
+        self.assertEqual(manifest["ld_reference"]["sample_count"], 504)
+        self.assertEqual(manifest["ld_reference"]["bed_record_bytes"], 126)
+        self.assertTrue(manifest["determinism"]["local_ld_only"])
+        self.assertEqual(manifest["determinism"]["harmonise_action"], 3)
+        self.assertEqual(manifest["estimators"]["MR_PRESSO"]["minimum_instruments"], 4)
+        self.assertEqual(manifest["estimators"]["MR_PRESSO"]["nb_distribution"], 100000)
+        robust = manifest["estimators"]["CAUSE_or_LHC_MR_where_appropriate"]
+        self.assertEqual(robust["primary"], "CAUSE")
+        self.assertEqual(robust["forbidden_lhc_mr_fallbacks"], ["run_ldsc=FALSE", "run_MR=FALSE"])
+
+        dependency_path = ROOT / manifest["runtime"]["dependency_source_manifest"]
+        installed_path = ROOT / manifest["runtime"]["installed_package_manifest"]
+        self.assertEqual(hashlib.sha256(dependency_path.read_bytes()).hexdigest(), manifest["runtime"]["dependency_source_manifest_sha256"])
+        self.assertEqual(hashlib.sha256(installed_path.read_bytes()).hexdigest(), manifest["runtime"]["installed_package_manifest_sha256"])
+        with dependency_path.open(encoding="utf-8", newline="") as handle:
+            dependencies = list(csv.DictReader(handle, delimiter="\t"))
+        with installed_path.open(encoding="utf-8", newline="") as handle:
+            installed = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(dependencies), 63)
+        self.assertEqual(len(installed), 153)
+        self.assertEqual({row["package"] for row in installed if row["library"] == "causal"}, {
+            row["package"] for row in dependencies
+        } | {"TwoSampleMR", "MRPRESSO", "cause", "lhcMR"})
+
+        with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
+            sources = [row for row in csv.DictReader(handle, delimiter="\t") if row["analysis_family"] == "causal"]
+        self.assertEqual({row["method"] for row in sources}, set(spec["methods"]))
+        self.assertTrue(all(row["source_status"] == "SOURCE_VERIFIED" for row in sources))
+        setup = (ROOT / "scripts/93_setup_causal_runtime.sh").read_text(encoding="utf-8")
+        self.assertIn("CAUSAL_RUNTIME_READY", setup)
+        self.assertIn("plink_mac_20250819.zip", setup)
+        self.assertNotIn("install_github", setup)
+        preflight = (ROOT / "scripts/74_interpretation_preflight.py").read_text(encoding="utf-8")
+        self.assertIn("validate_causal_runtime_bundle", preflight)
+        self.assertIn("causal installed dependency closure differs", preflight)
+
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
         families = policy["robustness"]["required_families"]

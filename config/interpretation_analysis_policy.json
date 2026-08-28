@@ -269,13 +269,41 @@
     "claim_limit": "Pathway overrepresentation is a competitive annotation of a prespecified convergent-gene list; it does not establish pathway activity, direction, mediation, or causality"
   },
   "causal_inference": {
+    "component_manifest": "config/interpretation_causal_runtime.json",
+    "component_manifest_sha256": "73356106a740b2fba2fbf7db78c6656b0549fe87240a9b468562d64279bee842",
     "directions": ["sleep_to_non_sleep", "non_sleep_to_sleep"],
     "methods": ["IVW", "weighted_median", "MR_Egger", "MR_PRESSO", "CAUSE_or_LHC_MR_where_appropriate"],
     "instrument_p_threshold": 5e-8,
     "clump_r2": 0.001,
     "clump_window_kb": 10000,
+    "clump_reference": "Checksum-pinned 1000 Genomes Phase 3 EUR 504-sample GRCh37 panel streamed to a preregistered SNP-major subset",
+    "clump_engine": "PLINK 1.9.0-b.7.11 64-bit stable 2025-08-19",
+    "instrument_selection_order": ["exposure_P_le_5e-8", "exact_reference_variant", "PLINK_clump_r2_0.001_10000kb", "outcome_merge", "harmonise_action_3", "minimum_F_ge_10"],
     "minimum_instruments": 3,
     "minimum_F_statistic": 10,
+    "instrument_F_formula": "BETA_exposure^2 / SE_exposure^2 for every retained instrument; report the minimum",
+    "palindromic_rule": "Drop all palindromic variants before estimation; do not infer strand from frequency",
+    "proxy_rule": "No proxy variants and no remote/API clumping",
+    "steiger_rule": "Use TwoSampleMR directionality on the exact retained instruments when exposure and outcome sample sizes and outcome type inputs are available; otherwise record UNCHARACTERIZED, which forbids robust causal wording",
+    "sample_overlap_rule": "Classify overlap from checksum-locked source/cohort metadata before estimation as NONE_KNOWN, KNOWN_ADJUSTED, KNOWN_UNADJUSTED, or UNCHARACTERIZED; only the first two are compatible with robust causal wording",
+    "colocalization_rule": "Compatibility must be derived from the same signal and alleles in the canonical molecular colocalization table; absent, discordant, or locus-ambiguous evidence cannot support robust causal wording",
+    "deterministic_base_seed": 451337,
+    "task_seed_rule": "base seed plus unsigned first 8 hexadecimal digits of SHA256(task_id), modulo 2147483646, plus 1",
+    "method_specific": {
+      "IVW": {"minimum_instruments": 3, "implementation": "TwoSampleMR::mr_ivw"},
+      "weighted_median": {"minimum_instruments": 3, "implementation": "TwoSampleMR::mr_weighted_median"},
+      "MR_Egger": {"minimum_instruments": 3, "implementation": "TwoSampleMR::mr_egger_regression", "intercept_test_required": true},
+      "MR_PRESSO": {"minimum_instruments": 4, "implementation": "MRPRESSO::mr_presso", "nb_distribution": 100000, "global_test_required": true, "outlier_test_when_estimable": true},
+      "CAUSE_or_LHC_MR_where_appropriate": {
+        "primary_implementation": "cause 1.2.0",
+        "exposure_p_threshold": 0.001,
+        "minimum_null_parameter_variants": 100000,
+        "ld_pruning_r2": 0.1,
+        "lhc_mr_role": "Sensitivity only for material known overlap with real LDSC intercepts and real bidirectional MR starting estimates",
+        "forbidden_lhc_mr_fallbacks": ["run_ldsc=FALSE", "run_MR=FALSE"],
+        "ineligible_terminal_status": "NOT_APPLICABLE"
+      }
+    },
     "multiple_testing": "BH FDR within each direction and estimator family across the locked 396 pairs",
     "canonical_fields": [
       "causal_test_id",

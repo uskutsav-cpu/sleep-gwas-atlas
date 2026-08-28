@@ -609,6 +609,170 @@ def validate_public_pathway_bundle(
     return True, "", observed
 
 
+def validate_causal_runtime_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["causal_inference"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "causal runtime manifest is absent or differs from the policy pin", {}
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return False, f"causal runtime manifest is invalid: {exc}", {}
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    if manifest.get("schema_version") != "sleep-atlas-causal-runtime.1":
+        return False, "causal runtime manifest has an unexpected schema version", observed
+
+    expected_components = {
+        "TWOSAMPLEMR_SOURCE", "MRPRESSO_SOURCE", "CAUSE_SOURCE", "LHCMR_SOURCE",
+        "PLINK_1_9_STABLE_MAC_ARCHIVE", "PLINK_1_9_STABLE_UNIVERSAL_BINARY",
+    }
+    components: dict[str, Path] = {}
+    rows = manifest.get("components", [])
+    if not isinstance(rows, list) or {row.get("component_id") for row in rows} != expected_components:
+        return False, "causal runtime component family differs from the exact six-component pin", observed
+    for component in rows:
+        identity = str(component["component_id"])
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe causal runtime component path: {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"causal runtime component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"causal runtime component differs from its exact pin: {identity}", observed
+        components[identity] = path
+
+    runtime = manifest.get("runtime", {})
+    manifest_specs = (
+        ("genomicsem_environment_manifest", "genomicsem_environment_manifest_sha256"),
+        ("dependency_source_manifest", "dependency_source_manifest_sha256"),
+        ("installed_package_manifest", "installed_package_manifest_sha256"),
+    )
+    pinned_manifests: dict[str, Path] = {}
+    for path_key, hash_key in manifest_specs:
+        relative = Path(str(runtime.get(path_key, "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe causal runtime manifest path: {path_key}", observed
+        path = root / relative
+        if not path.is_file() or sha256(path) != runtime.get(hash_key):
+            return False, f"causal runtime dependency manifest is absent or differs: {path_key}", observed
+        pinned_manifests[path_key] = path
+
+    try:
+        with pinned_manifests["dependency_source_manifest"].open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            dependency_rows = list(reader)
+            dependency_fields = reader.fieldnames
+        if dependency_fields != ["package", "version", "archive", "bytes", "sha256", "source_url"]:
+            raise ValueError("dependency source table has an unexpected schema")
+        if len(dependency_rows) != runtime.get("dependency_source_count"):
+            raise ValueError("dependency source count differs from the runtime pin")
+        if len({row["package"] for row in dependency_rows}) != len(dependency_rows):
+            raise ValueError("dependency source table contains duplicate packages")
+        for row in dependency_rows:
+            relative = Path(row["archive"])
+            if relative.is_absolute() or ".." in relative.parts:
+                raise ValueError(f"unsafe dependency archive path: {row['package']}")
+            archive = root / relative
+            if (
+                not row["bytes"].isdigit() or not SHA256.fullmatch(row["sha256"])
+                or not archive.is_file() or archive.stat().st_size != int(row["bytes"])
+                or sha256(archive) != row["sha256"]
+            ):
+                raise ValueError(f"dependency archive differs from its exact pin: {row['package']}")
+
+        with pinned_manifests["installed_package_manifest"].open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            installed_rows = list(reader)
+            installed_fields = reader.fieldnames
+        if installed_fields != ["package", "version", "library"]:
+            raise ValueError("installed-package table has an unexpected schema")
+        if len(installed_rows) != runtime.get("installed_dependency_closure_count"):
+            raise ValueError("installed dependency closure count differs from the runtime pin")
+        if (
+            len({row["package"] for row in installed_rows}) != len(installed_rows)
+            or any(row["library"] not in {"causal", "genomicsem"} for row in installed_rows)
+        ):
+            raise ValueError("installed-package table has duplicate packages or unknown libraries")
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"causal dependency lock is invalid: {exc}", observed
+
+    ld_reference = manifest.get("ld_reference", {})
+    reference_manifest = root / str(ld_reference.get("source_manifest", ""))
+    reference_archive = root / str(ld_reference.get("archive_path", ""))
+    if (
+        not reference_manifest.is_file()
+        or sha256(reference_manifest) != ld_reference.get("source_manifest_sha256")
+        or not reference_archive.is_file()
+        or reference_archive.stat().st_size != ld_reference.get("archive_bytes")
+        or sha256(reference_archive) != ld_reference.get("archive_sha256")
+        or ld_reference.get("sample_count") != 504
+        or ld_reference.get("bed_record_bytes") != 126
+        or not ld_reference.get("bed_variant_major")
+    ):
+        return False, "causal LD reference differs from its checksum-pinned EUR GRCh37 source", observed
+
+    plink = subprocess.run(
+        [components["PLINK_1_9_STABLE_UNIVERSAL_BINARY"], "--version"],
+        capture_output=True, text=True, check=False,
+    )
+    plink_version = (plink.stdout + plink.stderr).strip()
+    if plink.returncode or plink_version != "PLINK v1.9.0-b.7.11 64-bit (19 Aug 2025)":
+        return False, "causal PLINK binary reports an unexpected version", observed
+
+    rscript = root / str(runtime.get("rscript_path", ""))
+    causal_library = root / str(runtime.get("causal_library", ""))
+    if not rscript.is_file() or not causal_library.is_dir():
+        return False, "causal R executable or isolated library is absent", observed
+    r_code = r'''
+args <- commandArgs(trailingOnly = TRUE)
+root <- normalizePath(args[[1L]])
+.libPaths(c(normalizePath(file.path(root, ".mr-env/library")), .libPaths()))
+targets <- c("TwoSampleMR", "MRPRESSO", "cause", "lhcMR")
+db <- installed.packages()
+if (any(!targets %in% rownames(db))) quit(status = 2L)
+deps <- tools::package_dependencies(targets, db = db, recursive = TRUE)
+packages <- sort(unique(c(names(deps), unlist(deps))))
+cat(paste(R.version$major, R.version$minor, R.version$arch, sep = "\t"), "\n", sep = "")
+for (package in packages) {
+  library_name <- if (endsWith(normalizePath(db[package, "LibPath"]), "/.mr-env/library")) "causal" else "genomicsem"
+  cat(paste(package, db[package, "Version"], library_name, sep = "\t"), "\n", sep = "")
+}
+stopifnot(
+  is.function(getExportedValue("TwoSampleMR", "harmonise_data")),
+  is.function(getExportedValue("MRPRESSO", "mr_presso")),
+  is.function(getExportedValue("cause", "cause")),
+  is.function(getExportedValue("lhcMR", "calculate_SP"))
+)
+'''
+    runtime_check = subprocess.run(
+        [rscript, "--vanilla", "-e", r_code, str(root)],
+        capture_output=True, text=True, check=False, timeout=60,
+    )
+    if runtime_check.returncode:
+        return False, "causal R dependency closure failed to load or expose required functions", observed
+    lines = runtime_check.stdout.splitlines()
+    if not lines or lines[0].split("\t") != ["4", "3.3", "aarch64"]:
+        return False, "causal R version or architecture differs from its pin", observed
+    installed_expected = [(row["package"], row["version"], row["library"]) for row in installed_rows]
+    installed_observed = [tuple(line.split("\t")) for line in lines[1:] if line]
+    if installed_observed != installed_expected:
+        return False, "causal installed dependency closure differs from its exact package/version/library pin", observed
+
+    observed.update({
+        "dependency_source_count": len(dependency_rows),
+        "installed_dependency_closure_count": len(installed_observed),
+        "r_version": "4.3.3", "r_architecture": "aarch64",
+        "plink_version": plink_version,
+        "ld_reference_archive_sha256": sha256(reference_archive),
+    })
+    return True, "", observed
+
+
 def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
     pairs = (
         (policy["regulatory_mapping"]["required_layers"], downstream["regulatory_mapping"]["required_layers"]),
@@ -699,6 +863,8 @@ def main() -> int:
     fuma_source_id = policy["fuma_scrna"]["source_id"]
     pathway_ready, pathway_blocker, pathway_validation = validate_public_pathway_bundle(root, policy)
     public_pathway_source_ids = set(policy["public_pathway_sources"]["source_ids"])
+    causal_ready, causal_blocker, causal_validation = validate_causal_runtime_bundle(root, policy)
+    causal_source_ids = {row["source_id"] for row in causal}
     allowed_source_status = {
         "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
         "DERIVED_WITHIN_WORKFLOW",
@@ -742,6 +908,9 @@ def main() -> int:
             elif identity in public_pathway_source_ids and not pathway_ready:
                 ready = False
                 blocker = pathway_blocker
+            elif identity in causal_source_ids and not causal_ready:
+                ready = False
+                blocker = causal_blocker
         elif row["source_status"] == "DERIVED_UPSTREAM":
             ready = path.is_file() and observed_bytes > 0
             if not ready:
@@ -784,6 +953,7 @@ def main() -> int:
         "pchic_source_bundle": pchic_validation,
         "fuma_scrna_source_bundle": fuma_validation,
         "public_pathway_source_bundle": pathway_validation,
+        "causal_runtime_bundle": causal_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),
