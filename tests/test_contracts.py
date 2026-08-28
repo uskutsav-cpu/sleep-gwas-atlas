@@ -1624,6 +1624,22 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("rule conjfdr_pair:", workflow)
         self.assertIn("rule pleiotropy:", workflow)
 
+    def test_downstream_policy_and_atlas_core_are_locked_without_placeholders(self):
+        policy = json.loads(
+            (ROOT / "config/downstream_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(policy["expected_traits"], 45)
+        self.assertEqual(policy["expected_sleep_non_sleep_pairs"], 396)
+        self.assertEqual(policy["fine_mapping"]["susieR_version"], "0.14.2")
+        self.assertFalse(policy["fine_mapping"]["estimate_residual_variance"])
+        self.assertEqual(policy["colocalization"]["coloc_version"], "5.2.3")
+        self.assertEqual(len(policy["robustness"]["required_families"]), 9)
+        self.assertEqual(len(policy["integrated_atlas"]["tables"]), 10)
+        builder = (ROOT / "scripts/51_build_atlas_core.py").read_text(encoding="utf-8")
+        self.assertIn('len(rg_rows) != 396 or observed_pairs != expected_pairs', builder)
+        self.assertIn('"CORE_ATLAS_COMPLETE_DOWNSTREAM_LAYERS_PENDING"', builder)
+        self.assertNotIn("PLACEHOLDER", builder)
+
 
 if __name__ == "__main__":
     unittest.main()

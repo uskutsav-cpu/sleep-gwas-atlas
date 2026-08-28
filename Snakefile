@@ -19,6 +19,7 @@ LAVA_REFERENCE_PREFIX = config["lava_reference_prefix"]
 LAVA_LOCUS_FILE = config["lava_locus_file"]
 MIXER_POLICY = config["mixer_policy"]
 PLEIOTROPY_POLICY = config["pleiotropy_policy"]
+DOWNSTREAM_POLICY = config["downstream_policy"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -378,3 +379,18 @@ rule pleiotropy:
         provenance="results/atlas/shared_loci.provenance.json",
     shell:
         "{PYTHON} scripts/50_collate_pleiotropy.py"
+
+
+rule atlas_core:
+    input:
+        panel=PANEL,
+        lock=PANEL_LOCK,
+        h2="results/tables/h2_summary.tsv",
+        rg="results/tables/rg_matrix.tsv",
+        policy=DOWNSTREAM_POLICY,
+    output:
+        traits="results/atlas/traits.tsv",
+        pairs="results/atlas/trait_pairs.tsv",
+        provenance="results/atlas/core.provenance.json",
+    shell:
+        "{PYTHON} scripts/51_build_atlas_core.py"

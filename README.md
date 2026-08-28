@@ -87,6 +87,12 @@ traits. The official 2.22 GiB pleioFDR reference, MATLAB, 16 GB RAM, and adequat
 working storage are also absent. Nothing is downloaded implicitly. See
 `docs/pleiotropic_loci_workflow.md`.
 
+The remaining fine-mapping, colocalization, molecular/regulatory/cell/pathway,
+causal, robustness, integration, and release requirements are frozen in
+`config/downstream_analysis_policy.json`; see
+`docs/downstream_analysis_contract.md`. The completed trait and pair core can
+be built independently without creating placeholder downstream evidence.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
