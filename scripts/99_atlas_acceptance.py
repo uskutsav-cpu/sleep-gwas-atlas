@@ -221,6 +221,28 @@ def covariance_gate(root: Path) -> Gate:
     )
 
 
+def genomic_sem_gate(root: Path) -> Gate:
+    paths = [
+        "results/tables/genomic_sem_model_fit.tsv",
+        "results/tables/genomic_sem_factor_loadings.tsv",
+    ]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
+        return Gate(
+            "genomic_sem", "BLOCKED", "",
+            "complete EFA, validation, CFA, and model comparison; missing real non-empty artifact(s): "
+            + ", ".join(missing),
+        )
+    fits = read_tsv(root / paths[0])
+    validated = [row for row in fits if row.get("validation_status") == "VALIDATED"]
+    if not validated:
+        return Gate(
+            "genomic_sem", "BLOCKED", ", ".join(paths),
+            "real chromosome-split models exist, but no candidate passed held-out validation",
+        )
+    return Gate("genomic_sem", "PASS", f"{len(validated)} held-out validated model(s)", "")
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -272,7 +294,6 @@ def build_gates(root: Path) -> list[Gate]:
         ("mixer", ["results/tables/mixer_univariate.tsv", "results/tables/mixer_bivariate.tsv"], "run real univariate then eligible bivariate MiXeR"),
         ("lava", ["results/tables/lava_univariate.tsv", "results/tables/lava_bivariate.tsv"], "run local univariate h2 and corrected bivariate LAVA"),
         ("pleiotropic_loci", ["results/atlas/shared_loci.tsv"], "combine PLACO and conjunction-FDR evidence"),
-        ("genomic_sem", ["results/tables/genomic_sem_model_fit.tsv", "results/tables/genomic_sem_factor_loadings.tsv"], "complete EFA, validation, CFA, and model comparison"),
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
         ("fine_mapping", ["results/atlas/variants.tsv"], "fine-map priority loci with signal-specific credible sets and PIPs"),
         ("colocalization", ["results/tables/colocalization.tsv"], "complete trait-trait and molecular-QTL signal-level colocalization"),
@@ -301,6 +322,7 @@ def build_gates(root: Path) -> list[Gate]:
     ]
     gates.append(covariance_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
+    gates.append(genomic_sem_gate(root))
     gates.append(release_gate(root))
     return gates
 

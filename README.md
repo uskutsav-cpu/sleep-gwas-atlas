@@ -56,6 +56,12 @@ two-step h2 estimator narrowly passed it; the original Phase-1 result remains
 unchanged and HDL is excluded from confirmatory SEM. See
 `docs/full_covariance_results.md` for the audited diagnostics.
 
+An odd-chromosome discovery/even-chromosome confirmation analysis was then run
+for the 42 traits passing the multivariable LDSC input gate. None of ten
+discovery-derived candidate models passed held-out fit and residual
+admissibility together, so no factor model was promoted and factor GWAS/Q_SNP
+remain intentionally unrun. See `docs/genomic_sem_validation_results.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

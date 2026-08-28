@@ -138,3 +138,68 @@ rule full_covariance:
         "R_BIN={RSCRIPT} bash scripts/25_genomicsem_covariance.sh "
         "--panel {input.panel} --munged-dir data/munged --ld-dir {EUR_LD_DIR} "
         "--out-dir results/tables --log-prefix results/logs/genomicsem/ldsc_45_trait"
+
+
+rule genomic_sem_trait_qc:
+    input:
+        panel=PANEL,
+        h2="results/tables/h2_summary.tsv",
+        pairs="results/tables/ldsc_covariance_pairs.tsv",
+    output:
+        "results/tables/genomicsem_trait_inclusion.tsv",
+    shell:
+        "{PYTHON} scripts/27_genomicsem_trait_qc.py --panel {input.panel} "
+        "--phase1-h2 {input.h2} --covariance-pairs {input.pairs} --out {output}"
+
+
+rule chromosome_split_inputs:
+    input:
+        panel=PANEL,
+        inclusion="results/tables/genomicsem_trait_inclusion.tsv",
+        munged=expand("data/munged/{trait}.sumstats.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    output:
+        provenance="results/tables/chromosome_split_provenance.json",
+        odd=expand("data/munged_chromosome_split/odd/{trait}.sumstats.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        even=expand("data/munged_chromosome_split/even/{trait}.sumstats.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    shell:
+        "{PYTHON} scripts/28_prepare_chromosome_split.py"
+
+
+rule genomic_sem_discovery_odd:
+    input:
+        inclusion="results/tables/genomicsem_trait_inclusion.tsv",
+        split="results/tables/chromosome_split_provenance.json",
+    output:
+        structure="results/tables/genomicsem_discovery_odd.rds",
+        metadata="results/tables/genomicsem_discovery_odd_metadata.tsv",
+    shell:
+        "{RSCRIPT} scripts/28_chromosome_split_covariance.R --split odd"
+
+
+rule genomic_sem_validation_even:
+    input:
+        inclusion="results/tables/genomicsem_trait_inclusion.tsv",
+        split="results/tables/chromosome_split_provenance.json",
+    output:
+        structure="results/tables/genomicsem_validation_even.rds",
+        metadata="results/tables/genomicsem_validation_even_metadata.tsv",
+    shell:
+        "{RSCRIPT} scripts/28_chromosome_split_covariance.R --split even "
+        "--munged-dir data/munged_chromosome_split/even --ld-dir ref/eur_w_ld_chr_even "
+        "--out {output.structure} --metadata {output.metadata} "
+        "--log-prefix results/logs/genomicsem/validation_even"
+
+
+rule genomic_sem_model:
+    input:
+        discovery="results/tables/genomicsem_discovery_odd.rds",
+        validation="results/tables/genomicsem_validation_even.rds",
+        inclusion="results/tables/genomicsem_trait_inclusion.tsv",
+    output:
+        efa="results/tables/genomic_sem_efa_models.tsv",
+        fits="results/tables/genomic_sem_model_fit.tsv",
+        loadings="results/tables/genomic_sem_factor_loadings.tsv",
+        syntax="results/tables/genomic_sem_model_syntax.tsv",
+        diagnostics="results/tables/genomic_sem_split_diagnostics.tsv",
+    shell:
+        "{RSCRIPT} scripts/29_genomicsem_model.R"
