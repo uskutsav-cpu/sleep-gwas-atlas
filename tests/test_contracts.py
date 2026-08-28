@@ -3480,5 +3480,89 @@ class PanelContractTests(unittest.TestCase):
             self.assertIn(f"rule {rule}:", workflow)
 
 
+class Phase1DeepAnalysisContractTests(unittest.TestCase):
+    def read_tsv(self, relative):
+        with (ROOT / relative).open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle, delimiter="\t"))
+
+    def test_sleep_measurement_mapping_is_reviewed_and_exhaustive(self):
+        rows = self.read_tsv("config/sleep_measurement_modes.tsv")
+        sleep_traits = {
+            row["trait_id"]
+            for row in self.read_tsv("config/analysis_panel.tsv")
+            if row["domain"] == "sleep"
+        }
+        self.assertEqual(len(rows), 12)
+        self.assertEqual({row["trait_id"] for row in rows}, sleep_traits)
+        self.assertEqual(len({row["trait_id"] for row in rows}), 12)
+        self.assertEqual({row["review_status"] for row in rows}, {"REVIEWED_PRE_ANALYSIS"})
+        self.assertEqual(
+            {row["measurement_category"] for row in rows},
+            {
+                "SUBJECTIVE_SELF_REPORT",
+                "OBJECTIVE_ACTIGRAPHY",
+                "DISEASE_LIKE_CLINICAL",
+                "CIRCADIAN_TIMING",
+            },
+        )
+        self.assertTrue(all(row["source_id"] and row["rationale"] for row in rows))
+
+    def test_phase1_master_preserves_locked_primary_and_sensitivity_counts(self):
+        rows = self.read_tsv("results/analysis/phase1_master_analysis.tsv")
+        required = {
+            "sleep_trait", "sleep_trait_label", "external_trait",
+            "external_trait_label", "external_domain", "rg", "se", "z", "p",
+            "fdr", "abs_rg", "direction", "gcov_intercept",
+            "gcov_intercept_se", "SNP_overlap", "sleep_h2", "sleep_h2_se",
+            "external_h2", "external_h2_se", "sleep_h2_intercept",
+            "external_h2_intercept", "primary_or_sensitivity", "QC_notes",
+            "phenotype_source", "ancestry", "sample_size",
+        }
+        self.assertEqual(len(rows), 396)
+        self.assertTrue(required.issubset(rows[0]))
+        self.assertEqual(len({(row["sleep_trait"], row["external_trait"]) for row in rows}), 396)
+        primary = [row for row in rows if row["primary_or_sensitivity"] == "PRIMARY_PHASE1"]
+        sensitivity = [row for row in rows if row["primary_or_sensitivity"] == "QC_FAILED_SENSITIVITY"]
+        self.assertEqual((len(primary), len(sensitivity)), (372, 24))
+        self.assertEqual(sum(row["locked_primary_significant"] == "True" for row in rows), 153)
+        self.assertEqual(
+            {row["external_trait"] for row in sensitivity}, {"t2d", "melanoma"}
+        )
+        self.assertLessEqual(
+            max(abs(float(row["z"]) - float(row["reported_z"])) for row in rows),
+            0.05,
+        )
+
+    def test_deep_analysis_provenance_documents_metadata_discrepancies(self):
+        report = json.loads(
+            (ROOT / "results/analysis/input_verification.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(report["verification_status"], "PASS_WITH_DOCUMENTED_METADATA_DISCREPANCIES")
+        self.assertEqual(report["pair_count"], 396)
+        self.assertEqual(report["locked_396_primary_fdr_le_0_05"], 153)
+        self.assertEqual(report["primary_372_sensitivity_fdr_le_0_05"], 155)
+        self.assertEqual(report["requested_phase1_completion"]["status"], "ABSENT")
+        self.assertEqual(report["legacy_phase1_summary"]["status"], "STALE_NOT_USED_FOR_ANALYSIS")
+        self.assertRegex(report["input_hash_manifest_sha256"], r"^[0-9a-f]{64}$")
+        hashes = self.read_tsv("results/analysis/input_hashes.tsv")
+        self.assertEqual(len(hashes), report["analyzed_input_file_count"])
+        self.assertTrue(all(Path(row["path"]).is_absolute() is False for row in hashes))
+        self.assertTrue(all(len(row["sha256"]) == 64 for row in hashes))
+
+    def test_quantitative_figure_manifest_excludes_unreviewed_novelty_placeholder(self):
+        manifest = json.loads(
+            (ROOT / "results/figures/phase1_deep_analysis/figure_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertFalse(manifest["literature_figure_included"])
+        self.assertEqual(len(manifest["figures"]), 11)
+        self.assertFalse(any("phase1_12" in row["path"] for row in manifest["figures"]))
+        for row in manifest["figures"]:
+            path = ROOT / row["path"]
+            self.assertEqual(path.stat().st_size, row["bytes"])
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), row["sha256"])
+
+
 if __name__ == "__main__":
     unittest.main()
