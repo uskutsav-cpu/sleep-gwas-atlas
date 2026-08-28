@@ -1063,6 +1063,30 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(by_trait.loc["longevity", "p"], 0.4283)
         self.assertGreater(by_trait.loc["bmi", "fdr"], 0)
 
+    def test_rg_matrix_collation_ignores_controlled_pair_logs(self):
+        collator = load_collator()
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            inclusion = directory / "inclusion.tsv"
+            inclusion.write_text(
+                "trait_id\tdomain\tinclude_phase1\n"
+                "snoring\tsleep\tTrue\n"
+                "bmi\tmetabolic\tTrue\n",
+                encoding="utf-8",
+            )
+            body = (
+                "Summary of Genetic Correlation Results\n"
+                "p1 p2 rg se z p\n"
+                "data/munged/snoring.sumstats.gz data/munged/bmi.sumstats.gz "
+                "0.3 0.02 15 1e-8\n\n"
+            )
+            (directory / "rg_snoring.log").write_text(body, encoding="utf-8")
+            (directory / "rg_snoring__bmi.log").write_text(body, encoding="utf-8")
+            rows = collator.parse_rg(directory, str(MANIFEST), str(inclusion))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows.iloc[0]["sleep_trait"], "snoring")
+        self.assertEqual(rows.iloc[0]["disease_trait"], "bmi")
+
     def test_acceptance_audit_distinguishes_contract_from_science(self):
         result = subprocess.run(
             [

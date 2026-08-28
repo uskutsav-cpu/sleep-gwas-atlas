@@ -142,8 +142,28 @@ def parse_h2(logdir, config_path="config/analysis_panel.tsv", expected_traits=No
 def parse_rg(logdir, config_path="config/analysis_panel.tsv", inclusion_path=None):
     """LDSC prints a fixed-width table after 'Summary of Genetic Correlation'."""
     refuse_synthetic_in_real_directory(logdir)
+    expected = None
+    if inclusion_path:
+        inclusion = pd.read_csv(inclusion_path, sep="\t", dtype=str).fillna("")
+        required = {"trait_id", "domain", "include_phase1"}
+        missing = required.difference(inclusion.columns)
+        if missing:
+            raise SystemExit(f"ERROR: inclusion table missing columns: {sorted(missing)}")
+        included = inclusion[inclusion["include_phase1"].str.lower().eq("true")]
+        sleeps = included.loc[included["domain"].eq("sleep"), "trait_id"].tolist()
+        diseases = included.loc[~included["domain"].eq("sleep"), "trait_id"].tolist()
+        expected = set(itertools.product(sleeps, diseases))
+        # Matrix logs contain all selected non-sleep traits for one sleep
+        # trait. Controlled one-pair reruns use rg_SLEEP__DISEASE.log; never
+        # mix those diagnostics into the readiness-selected matrix family.
+        log_paths = [os.path.join(logdir, f"rg_{trait}.log") for trait in sleeps]
+        missing_logs = [path for path in log_paths if not os.path.isfile(path)]
+        if missing_logs:
+            raise SystemExit(f"ERROR: readiness-selected rg logs are missing: {missing_logs}")
+    else:
+        log_paths = sorted(glob.glob(os.path.join(logdir, "rg_*.log")))
     frames = []
-    for path in sorted(glob.glob(os.path.join(logdir, "rg_*.log"))):
+    for path in log_paths:
         with open(path, encoding="utf-8") as handle:
             lines = handle.read().splitlines()
         try:
@@ -217,16 +237,7 @@ def parse_rg(logdir, config_path="config/analysis_panel.tsv", inclusion_path=Non
             + ", ".join(f"{a}__{b}" for a, b in duplicates.drop_duplicates().itertuples(index=False))
         )
 
-    if inclusion_path:
-        inclusion = pd.read_csv(inclusion_path, sep="\t", dtype=str).fillna("")
-        required = {"trait_id", "domain", "include_phase1"}
-        missing = required.difference(inclusion.columns)
-        if missing:
-            raise SystemExit(f"ERROR: inclusion table missing columns: {sorted(missing)}")
-        included = inclusion[inclusion["include_phase1"].str.lower().eq("true")]
-        sleeps = included.loc[included["domain"].eq("sleep"), "trait_id"].tolist()
-        diseases = included.loc[~included["domain"].eq("sleep"), "trait_id"].tolist()
-        expected = set(itertools.product(sleeps, diseases))
+    if expected is not None:
         actual = set(df[pair_columns].itertuples(index=False, name=None))
         if actual != expected:
             missing_pairs = sorted(expected.difference(actual))
