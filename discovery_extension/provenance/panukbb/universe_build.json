@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "source_urls": [
+    "https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_release/phenotype_manifest.tsv.bgz",
+    "https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_release/h2_manifest.tsv.bgz"
+  ],
+  "phenotype_manifest_sha256": "58343c50b06be5cee7a56a1d1a38c30065aa4321a8d8e6b3471d971e0a5b812c",
+  "h2_manifest_sha256": "4fd86b9a9462e0b0d2b59892d74fcf04efaccecee116ec2286d29d5cf9b57376",
+  "source_phenotype_rows": 7223,
+  "source_eur_h2_rows": 7160,
+  "eligible_rows": 452,
+  "criteria": {
+    "ancestry": "EUR",
+    "pheno_sex": "both_sexes",
+    "PanUKBB_phenotype_qc_EUR": "PASS",
+    "PanUKBB_final_h2_z_minimum": 4.0,
+    "minimum_binary_cases": 1000,
+    "minimum_binary_controls": 1000,
+    "minimum_quantitative_n": 10000,
+    "note": "The Pan-UKB final h2 Z/QC fields are pre-analysis screening evidence. Every locked trait must still pass the extension's own standard LDSC h2 gate."
+  },
+  "exclusion_counts": {
+    "PanUKBB_EUR_QC_fail_ratio": 62,
+    "PanUKBB_EUR_QC_h2_not_defined": 50,
+    "PanUKBB_EUR_QC_h2_z_insignificant": 5951,
+    "PanUKBB_EUR_QC_not_EUR_plus_1": 465,
+    "PanUKBB_EUR_QC_out_of_bounds_h2": 43,
+    "PanUKBB_EUR_QC_out_of_bounds_lambda": 5,
+    "missing_EUR_h2_row": 63,
+    "not_both_sexes": 132
+  },
+  "output": "discovery_extension/results/panukbb_eur_eligible_universe.tsv",
+  "output_sha256": "40fdcf2928c037b6f0d2e26c33c301aba131d5318ddc6eefb7d713f9878da300"
+}
