@@ -1,0 +1,22 @@
+stage	gate	status	evidence	interpretation
+1	Freeze and protect core atlas	FAIL_CORE_CHECKPOINT_DRIFT	CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0	A checkpointed core artifact differs in the current working tree; extension execution must remain stopped.
+2	Broaden phenotype expansion strategy	ARTIFACT_PRESENT_CORE_REVALIDATION_BLOCKED	"ERROR: immutable core verification failed:
+CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0"	452-trait eligible Pan-UKB EUR universe plus a separately researched imaging queue.
+3	Map prior sleep-trait correlation literature	PASS_WITH_SCOPE_LIMITATION	present:sha256=63348732d0a32a7373955b40fa0fdb6ae41c2d165ce60cc43c6a96a7c13e090d	8,896 extracted prior-screen rows; exact no-match is not proof of novelty.
+4	Build and lock candidate universe	LOCK_PRESENT_CORE_REVALIDATION_BLOCKED	"ERROR: immutable core verification failed:
+CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0"	242-trait candidate pool; 100 traits locked before extension rg; 1200 planned pairs.
+5	Verify sources, schemas, and harmonization	CONTRACT_PRESENT_CORE_REVALIDATION_BLOCKED	"ERROR: panel validation failed:
+ERROR: immutable core verification failed:
+CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0"	Continuous, binary, variant-map, QC, and synthetic smoke-test contracts pass; real traversal awaits acquisition.
+6	Acquire full-resolution summary statistics	BLOCKED_INSUFFICIENT_STORAGE	present:sha256=315239e73eb1a9ff98bad8832688a9bbddc6ccd08436623667af25a2c0ce25ae	Need 246.91 GiB; measured 8.157 GiB; no bulk download started.
+7	Rerun extension LDSC h2 QC	BLOCKED_UPSTREAM	absent	Source h2 precheck is not accepted as the required extension rerun.
+8	Run global genetic correlations	BLOCKED_UPSTREAM	absent	BH FDR must remain confined to the primary extension family.
+9	Audit pair-level novelty	BLOCKED_UPSTREAM	absent	Required for every extension-FDR-significant pair; no panel-level label substitutes.
+10	Prioritize findings	BLOCKED_UPSTREAM	absent	Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support.
+11	Independent replication	BLOCKED_UPSTREAM	absent	Same-cohort internal splits cannot satisfy the independent-replication gate.
+12	Local genetic correlation	BLOCKED_UPSTREAM	absent	Global rg is not local sharing.
+13	Pleiotropy analysis	BLOCKED_UPSTREAM	absent	Pleiotropy is evaluated as an alternative explanation, not an inconvenience.
+14	Fine-mapping and colocalization	BLOCKED_UPSTREAM	absent	Colocalization requires explicit hypotheses, priors, and sensitivity analyses.
+15	Mechanistic annotation	BLOCKED_UPSTREAM	absent	Mechanistic interpretation is ranked and cannot convert correlation into causation.
+16	Adversarial review	CHECKLIST_READY_FINAL_REVIEW_BLOCKED	discovery_extension/results/adversarial_review_checklist.tsv	Current checklist records design risks; final findings-level review awaits actual results.
+17	Publication-grade reporting	STATUS_REPORT_ONLY_FINAL_REPORT_BLOCKED	discovery_extension/results/extension_status.md	No discovery, novelty, replication, local, or mechanistic result is claimed while upstream gates are blocked.

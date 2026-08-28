@@ -78,6 +78,11 @@ pre-screen novelty categories distinct from pair-level novelty claims. The
 entire 100-trait h2, variable-size rg, FDR, exclusion-ledger, and figure path is
 exercised under `synthetic/test_extension_ldsc_collation.py` only.
 
+`16_extension_acceptance.py` emits a machine-readable 17-stage gate table, an
+adversarial-risk checklist, and a plain-language execution-status report. It
+records checkpoint drift and missing downstream artifacts as blocking or
+pending states instead of aborting before the failure is documented.
+
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total
 about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety

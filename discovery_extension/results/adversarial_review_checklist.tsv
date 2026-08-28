@@ -1,0 +1,15 @@
+risk_id	risk	required_control	current_status	current_evidence
+R01	Core drift	Re-run byte-level core checkpoint before and after every extension stage.	FAIL_BLOCKING	CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0
+R02	Post-result panel selection	Panel membership/order/hash must predate extension rg.	PASS	2026-08-28T04:13:05Z
+R03	Multiple-testing leakage	Never combine the extension BH family with the immutable 396 core tests.	PASS_CONTRACT	extension_harmonization_policy.json
+R04	Weak h2	Exclude rerun h2 Z<4 from primary rg without replacement.	PENDING_REAL_H2	absent
+R05	LDSC intercept inflation	Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.	PENDING_REAL_H2	absent
+R06	UK Biobank sample overlap	Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.	PENDING_REAL_RG	absent
+R07	Sparse or proxy phenotypes	Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.	PASS_METADATA	candidate_traits.tsv
+R08	Panel-level novelty inflation	Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.	PENDING_PAIR_AUDIT	absent
+R09	Replication non-independence	Require non-overlapping participants and separately sourced summary statistics.	PENDING_REPLICATION	absent
+R10	Global-to-local overreach	Do not call global rg evidence of a shared locus.	PENDING_LOCAL_ANALYSIS	absent
+R11	Pleiotropy or mediated effects	Evaluate shared-factor and directionally pleiotropic alternatives.	PENDING_PLEIOTROPY	absent
+R12	Colocalization overclaim	Report hypotheses/priors/sensitivity; colocalization is not causality.	PENDING_COLOCALIZATION	absent
+R13	Synthetic/real result contamination	Synthetic tests stay under synthetic or temporary paths and carry explicit markers.	PASS	two isolated smoke tests
+R14	Storage-driven partial acquisition	Do not silently analyze a result-selected subset of the locked panel.	PASS_BLOCKED	BLOCKED_INSUFFICIENT_STORAGE
