@@ -12,6 +12,8 @@ from pathlib import Path
 
 import numpy as np
 
+import lava_contract
+
 
 REQUIRED_SUMSTATS_COLUMNS = {"SNP", "A1", "A2", "Z", "N"}
 
@@ -174,11 +176,29 @@ def main() -> int:
     parser.add_argument("--provenance", default="results/tables/lava_input_provenance.tsv")
     parser.add_argument("--runtime-policy", default="results/tables/lava_runtime_policy.tsv")
     parser.add_argument("--diagnostics", default="results/tables/lava_input_diagnostics.json")
+    parser.add_argument("--lock", default="results/tables/lava_input.lock.json")
     args = parser.parse_args()
 
-    policy = json.loads(Path(args.policy).read_text(encoding="utf-8"))
+    root = Path(".").resolve()
+    policy_path = Path(args.policy).resolve()
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
     if policy.get("expected_traits") != 45 or policy.get("expected_sleep_non_sleep_pairs") != 396:
         raise SystemExit("ERROR: LAVA policy differs from the locked atlas scope")
+    requested_artifacts = [
+        args.input_info, args.sample_overlap, args.pairs, args.provenance,
+        args.runtime_policy, args.diagnostics,
+    ]
+    if (
+        [str(Path(path)) for path in requested_artifacts] != policy["input_artifacts"]
+        or str(Path(args.lock)) != policy["input_lock"]
+        or policy_path != root / "config/lava_analysis_policy.json"
+    ):
+        raise SystemExit("ERROR: LAVA preparation paths differ from the immutable policy")
+    lock_path = root / str(policy["input_lock"])
+    if lock_path.exists():
+        lava_contract.validate_inputs(root, policy_path, policy)
+        print("Validated existing immutable LAVA input family; no artifacts were replaced")
+        return 0
     expected_threshold = policy["univariate_alpha"] / policy["planned_univariate_tests"]
     if not math.isclose(expected_threshold, policy["univariate_p_threshold"], rel_tol=1e-12):
         raise SystemExit("ERROR: inconsistent LAVA univariate threshold")
@@ -228,6 +248,7 @@ def main() -> int:
     temporary = diagnostics_path.with_suffix(diagnostics_path.suffix + ".tmp")
     temporary.write_text(json.dumps(diagnostics, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temporary.replace(diagnostics_path)
+    lava_contract.write_input_lock(root)
     print("Prepared validated LAVA inputs for 45 traits, 2,495 loci, and 396 locked pairs")
     print(f"Sample-overlap minimum eigenvalue: {overlap_diagnostics['minimum_eigenvalue']:.6g}")
     return 0

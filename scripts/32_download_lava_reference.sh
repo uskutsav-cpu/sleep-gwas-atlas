@@ -40,8 +40,21 @@ if [ "$DOWNLOAD" != true ]; then
   echo "No download requested; reference storage was not changed."
   exit 0
 fi
+if [ "$TARGET" != "ref/lava/ukb_v1.1" ]; then
+  echo "ERROR: production acquisition must use the policy-locked target ref/lava/ukb_v1.1" >&2
+  exit 1
+fi
 if [ "$FREE_BYTES" -lt "$MIN_FREE_BYTES" ]; then
   echo "ERROR: insufficient free space for the checksum-ledgered download and extraction" >&2
+  exit 1
+fi
+if [ -f "$TARGET/reference.provenance.json" ]; then
+  python3 scripts/lava_contract.py --verify-reference
+  echo "The immutable LAVA reference is already complete; no files were replaced."
+  exit 0
+fi
+if [ -f "$TARGET/download_manifest.tsv" ] || [ -f "$TARGET/extracted_manifest.tsv" ]; then
+  echo "ERROR: partial unsealed LAVA manifest exists; inspect it before any replacement" >&2
   exit 1
 fi
 if ! command -v unzip >/dev/null 2>&1; then
@@ -69,7 +82,6 @@ tail -n +2 "$SOURCE_TABLE" | while IFS=$'\t' read -r archive_id chromosomes url 
   printf '%s\t%s\t%s\t%s\t%s\t%s\n' "$archive_id" "$chromosomes" "$url" "$expected_bytes" "$filename" "$archive_sha" >> "$MANIFEST_TMP"
   unzip -oq "$destination" -d "$TARGET"
 done
-mv "$MANIFEST_TMP" "$TARGET/download_manifest.tsv"
 
 EXTRACTED_TMP="$TARGET/extracted_manifest.tsv.tmp"
 printf 'chromosome\tfile_type\tpath\tbytes\tsha256\n' > "$EXTRACTED_TMP"
@@ -84,8 +96,10 @@ for chromosome in $(seq 1 22); do
     extracted_bytes=$(wc -c < "$extracted" | tr -d ' ')
     extracted_sha=$(shasum -a 256 "$extracted" | awk '{print $1}')
     printf '%s\t%s\t%s\t%s\t%s\n' \
-      "$chromosome" "$suffix" "$extracted" "$extracted_bytes" "$extracted_sha" >> "$EXTRACTED_TMP"
+      "$chromosome" "$suffix" "lava-ukb-v1.1_chr${chromosome}.${suffix}" "$extracted_bytes" "$extracted_sha" >> "$EXTRACTED_TMP"
   done
 done
+mv "$MANIFEST_TMP" "$TARGET/download_manifest.tsv"
 mv "$EXTRACTED_TMP" "$TARGET/extracted_manifest.tsv"
+python3 scripts/lava_contract.py --seal-reference
 echo "Downloaded and extracted the complete registered LAVA UKB v1.1 reference."

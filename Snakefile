@@ -291,6 +291,7 @@ rule lava_inputs:
         provenance="results/tables/lava_input_provenance.tsv",
         runtime="results/tables/lava_runtime_policy.tsv",
         diagnostics="results/tables/lava_input_diagnostics.json",
+        lock="results/tables/lava_input.lock.json",
     shell:
         "{PYTHON} scripts/31_prepare_lava.py"
 
@@ -302,6 +303,9 @@ rule lava:
         pairs="results/tables/lava_pair_manifest.tsv",
         provenance="results/tables/lava_input_provenance.tsv",
         runtime="results/tables/lava_runtime_policy.tsv",
+        diagnostics="results/tables/lava_input_diagnostics.json",
+        lock="results/tables/lava_input.lock.json",
+        reference_provenance="ref/lava/ukb_v1.1/reference.provenance.json",
         locus=LAVA_LOCUS_FILE,
         reference=expand(
             LAVA_REFERENCE_PREFIX + "_chr{chromosome}.{suffix}",
@@ -311,9 +315,10 @@ rule lava:
         status="results/tables/lava_locus_status.tsv",
         univariate="results/tables/lava_univariate.tsv",
         bivariate="results/tables/lava_bivariate.tsv",
+        provenance="results/tables/lava_results.provenance.json",
     shell:
         "{RSCRIPT} scripts/33_run_lava.R && "
-        "{PYTHON} scripts/34_validate_lava.py --quiet"
+        "{PYTHON} scripts/34_validate_lava.py --seal-results --quiet"
 
 
 rule mixer_preflight:

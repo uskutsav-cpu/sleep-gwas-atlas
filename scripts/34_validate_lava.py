@@ -9,6 +9,8 @@ import json
 import math
 from pathlib import Path
 
+import lava_contract
+
 
 def read_tsv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8", newline="") as handle:
@@ -47,6 +49,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=".")
     parser.add_argument("--quiet", action="store_true")
+    parser.add_argument("--seal-results", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
     policy = json.loads((root / "config/lava_analysis_policy.json").read_text(encoding="utf-8"))
@@ -90,8 +93,9 @@ def main() -> int:
     if {row["reference_prefix"] for row in status} != {policy["reference_prefix"]}:
         fail("locus status has the wrong reference prefix")
     fingerprints = {row["analysis_fingerprint"] for row in status}
-    if len(fingerprints) != 1 or not next(iter(fingerprints)):
-        fail("locus checkpoints do not share one non-empty analysis fingerprint")
+    expected_fingerprint = lava_contract.run_fingerprint(root)
+    if fingerprints != {expected_fingerprint}:
+        fail("locus checkpoints do not share the current immutable run fingerprint")
     failed_loci = sum(row["status"] != "PROCESSED" for row in status)
     if failed_loci / len(status) > policy["max_locus_failure_fraction"]:
         fail(f"locus failure fraction exceeds policy: {failed_loci}/{len(status)}")
@@ -141,6 +145,11 @@ def main() -> int:
     for row, adjusted in zip(tested_bivar, expected_fdr):
         if not math.isclose(float(row["p_fdr"]), adjusted, rel_tol=1e-8, abs_tol=1e-12):
             fail(f"incorrect bivariate FDR at locus {row['LOC']}")
+
+    if args.seal_results:
+        lava_contract.seal_results(root, policy)
+    else:
+        lava_contract.validate_results(root, policy)
 
     if not args.quiet:
         print(f"Validated LAVA: {len(status)} loci, {len(tested_univ)}/{len(univ)} univariate tests, {len(tested_bivar)}/{len(bivar)} eligible bivariate tests")

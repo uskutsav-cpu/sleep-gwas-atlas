@@ -70,6 +70,18 @@ if (nrow(pairs) != integer_policy("expected_sleep_non_sleep_pairs")) {
   stop("Pair manifest is not the exact 396-pair family")
 }
 
+contract_output <- suppressWarnings(system2(
+  "python3", c("scripts/lava_contract.py", "--run-fingerprint"),
+  stdout = TRUE, stderr = TRUE
+))
+contract_status <- attr(contract_output, "status")
+if (!is.null(contract_status) && contract_status != 0L) {
+  stop(paste("LAVA immutable execution contract failed:", paste(contract_output, collapse = " | ")))
+}
+fingerprint_lines <- contract_output[grepl("^[0-9a-f]{64}$", contract_output)]
+if (length(fingerprint_lines) != 1L) stop("LAVA contract did not return one run fingerprint")
+fingerprint <- fingerprint_lines[[1L]]
+
 reference_prefix <- policy$reference_prefix
 reference_files <- unlist(lapply(1:22, function(chromosome) {
   paste0(reference_prefix, "_chr", chromosome, c(".info", ".bcor"))
@@ -92,9 +104,6 @@ if (values$locus_start < 1L || values$locus_end > expected_loci || values$locus_
   stop("Invalid locus range")
 }
 
-fingerprint_files <- c(required_files, locus_file, reference_files)
-fingerprint_hashes <- tools::md5sum(fingerprint_files)
-fingerprint <- paste(names(fingerprint_hashes), fingerprint_hashes, sep = "=", collapse = ";")
 dir.create(values$checkpoint_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(values$out_dir, recursive = TRUE, showWarnings = FALSE)
 

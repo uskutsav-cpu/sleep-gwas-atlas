@@ -39,7 +39,11 @@ but deliberately does not download an LD reference.
 `31_prepare_lava.py` verifies all munged files contain `SNP`, `A1`, `A2`, `Z`,
 and `N`; checks binary case, control, and prevalence metadata; constructs the
 LAVA input-info table; validates and writes the overlap matrix; emits the exact
-396-pair manifest; and fingerprints every summary-statistics file.
+396-pair manifest; and fingerprints every summary-statistics file. It then
+creates `lava_input.lock.json`, binding the ordered panel, policy, six prepared
+artifacts, all 45 source identities, and the exact preparation, runtime,
+validation, and contract scripts. A valid existing lock is revalidated rather
+than overwritten.
 
 ## Reference storage blocker
 
@@ -63,7 +67,13 @@ The actual download is separately opt-in:
 bash scripts/32_download_lava_reference.sh --download
 ```
 
-As of 28 August 2026, the local volume has only roughly 4–6 GiB free, so the
+The opt-in acquisition is resumable until publication, but a completed
+reference is immutable. It records SHA-256 for the seven official archives and
+all 44 extracted chromosome files, rehashes the whole family, and writes
+`reference.provenance.json`. Later locus jobs verify that seal and the live file
+sizes without repeatedly hashing the full reference.
+
+As of 28 August 2026, the local volume has only roughly 2.2 GiB free, so the
 production reference has not been downloaded. No 1,000 Genomes substitution is
 permitted merely to fit the current disk.
 
@@ -77,12 +87,17 @@ python3 scripts/34_validate_lava.py
 ```
 
 The production runner checkpoints each locus under
-`results/checkpoints/lava/`. It writes the canonical tables only after all
-2,495 checkpoints exist with the same input/reference fingerprint. Every
+`results/checkpoints/lava/`. Every checkpoint carries one SHA-256 run
+fingerprint derived from the policy, input lock, reference seal, and exact
+runtime/validation/contract scripts. It writes the canonical tables only after
+all 2,495 checkpoints exist with that same fingerprint. Every
 locus-trait receives a row, including explicit processing or phenotype-drop
 statuses, and every locally eligible locked pair is either tested or records a
 failure. The validator enforces coverage, family sizes, Bonferroni values,
 eligible-pair identity, FDR, version, reference, and predefined failure limits.
+The Snakemake production target then seals all 2,495 checkpoint identities and
+the three canonical tables in `lava_results.provenance.json`; ordinary
+validation is read-only and requires that immutable result provenance.
 
 Official sources:
 

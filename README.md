@@ -64,7 +64,8 @@ remain intentionally unrun. See `docs/genomic_sem_validation_results.md`.
 
 The production LAVA workflow is now pinned and contract-complete, including
 all 112,275 local-univariate tests, overlap correction, all 396 eligible pair
-definitions, per-locus checkpoints, and a strict result validator. The real
+definitions, SHA-256-bound per-locus checkpoints, immutable input/reference
+locks, and a strict result/provenance validator. The real
 analysis has not started because the official recommended UK Biobank LD v1.1
 reference requires 15 GiB uncompressed while the current volume has only about
 2.2 GiB free. The older 1,000 Genomes reference is not substituted because LAVA

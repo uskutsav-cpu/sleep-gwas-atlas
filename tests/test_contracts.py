@@ -1387,6 +1387,9 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(policy["expected_traits"], 45)
         self.assertEqual(policy["expected_sleep_non_sleep_pairs"], 396)
         self.assertEqual(policy["planned_univariate_tests"], 112275)
+        self.assertEqual(policy["reference_expected_archives"], 7)
+        self.assertEqual(policy["reference_expected_archive_bytes"], 14110596095)
+        self.assertEqual(policy["reference_expected_extracted_files"], 44)
         self.assertAlmostEqual(
             policy["univariate_p_threshold"],
             policy["univariate_alpha"] / policy["planned_univariate_tests"],
@@ -1395,6 +1398,10 @@ class PanelContractTests(unittest.TestCase):
             sources = list(csv.DictReader(handle, delimiter="\t"))
         self.assertEqual(len(sources), 7)
         self.assertEqual(sum(int(row["archive_bytes"]) for row in sources), 14110596095)
+        self.assertEqual(
+            hashlib.sha256((ROOT / policy["reference_source_registry"]).read_bytes()).hexdigest(),
+            policy["reference_source_registry_sha256"],
+        )
 
     def test_lava_runtime_fails_closed_and_does_not_filter_on_global_rg(self):
         setup = (ROOT / "scripts" / "30_setup_lava.sh").read_text(encoding="utf-8")
@@ -1407,12 +1414,71 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("The 15 GiB UK Biobank LD reference is deliberately not downloaded", setup)
         self.assertIn("DOWNLOAD=false", downloader)
         self.assertIn('if [ "$DOWNLOAD" != true ]', downloader)
+        self.assertIn("scripts/lava_contract.py --seal-reference", downloader)
         self.assertIn('len(rg) != 396 or observed != expected', prepare)
         self.assertNotIn('global_rg_p <=', runtime)
+        self.assertNotIn("tools::md5sum", runtime)
+        self.assertIn('c("scripts/lava_contract.py", "--run-fingerprint")', runtime)
         self.assertIn('univ$p <= numeric_policy("univariate_p_threshold")', runtime)
         self.assertIn('run.bivar(locus', runtime)
         self.assertIn('expected_bivar', validator)
+        self.assertIn("lava_contract.validate_results", validator)
+        self.assertIn("lava_results.provenance.json", acceptance)
         self.assertIn('scripts/34_validate_lava.py', acceptance)
+
+    def test_lava_reference_seal_verifies_every_archive_and_chromosome_file(self):
+        module = load_numbered_script("lava_contract.py", "lava_reference_contract")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            payload_root = root / "ref/lava/ukb_v1.1"
+            archive_root = payload_root / "archives"
+            archive_root.mkdir(parents=True)
+            archive = archive_root / "reference.zip"
+            archive.write_bytes(b"archive\n")
+            source = root / "config/lava_reference_sources.tsv"
+            source.parent.mkdir()
+            source.write_text(
+                "archive_id\tchromosomes\turl\tarchive_bytes\tarchive_filename\n"
+                f"fixture\t1-22\thttps://example.invalid/reference\t{archive.stat().st_size}\treference.zip\n",
+                encoding="utf-8",
+            )
+            download = payload_root / "download_manifest.tsv"
+            download.write_text(
+                "archive_id\tchromosomes\turl\tarchive_bytes\tarchive_filename\tsha256\n"
+                f"fixture\t1-22\thttps://example.invalid/reference\t{archive.stat().st_size}\t"
+                f"reference.zip\t{hashlib.sha256(archive.read_bytes()).hexdigest()}\n",
+                encoding="utf-8",
+            )
+            extracted_lines = ["chromosome\tfile_type\tpath\tbytes\tsha256"]
+            extracted_paths = []
+            for chromosome in range(1, 23):
+                for suffix in ("info", "bcor"):
+                    path = payload_root / f"lava-ukb-v1.1_chr{chromosome}.{suffix}"
+                    path.write_bytes(f"{chromosome}:{suffix}\n".encode())
+                    extracted_paths.append(path)
+                    extracted_lines.append(
+                        f"{chromosome}\t{suffix}\t{path.name}\t{path.stat().st_size}\t"
+                        f"{hashlib.sha256(path.read_bytes()).hexdigest()}"
+                    )
+            extracted = payload_root / "extracted_manifest.tsv"
+            extracted.write_text("\n".join(extracted_lines) + "\n", encoding="utf-8")
+            policy = {
+                "analysis_id": "TEST-LAVA", "reference": "fixture",
+                "reference_population": "fixture", "reference_source_registry": "config/lava_reference_sources.tsv",
+                "reference_source_registry_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                "reference_payload_root": "ref/lava/ukb_v1.1",
+                "reference_download_manifest": "ref/lava/ukb_v1.1/download_manifest.tsv",
+                "reference_extracted_manifest": "ref/lava/ukb_v1.1/extracted_manifest.tsv",
+                "reference_provenance": "ref/lava/ukb_v1.1/reference.provenance.json",
+                "reference_expected_archives": 1,
+                "reference_expected_archive_bytes": archive.stat().st_size,
+                "reference_expected_extracted_files": 44,
+            }
+            module.seal_reference(root, policy)
+            module.validate_reference(root, policy, rehash=True)
+            extracted_paths[-1].write_bytes(b"changed size\n")
+            with self.assertRaisesRegex(SystemExit, "wrong size"):
+                module.validate_reference(root, policy)
 
     def test_mixer_policy_is_version_and_scope_locked(self):
         policy = json.loads(

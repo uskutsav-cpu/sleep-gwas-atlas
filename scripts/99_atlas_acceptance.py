@@ -248,6 +248,7 @@ def lava_gate(root: Path) -> Gate:
         "results/tables/lava_locus_status.tsv",
         "results/tables/lava_univariate.tsv",
         "results/tables/lava_bivariate.tsv",
+        "results/tables/lava_results.provenance.json",
     ]
     missing = [path for path in paths if not real_nonempty(root / path)]
     if missing:

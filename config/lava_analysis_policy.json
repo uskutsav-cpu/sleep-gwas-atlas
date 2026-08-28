@@ -4,6 +4,15 @@
   "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
   "lava_version": "0.1.5",
   "reference": "LAVA UK Biobank LD v1.1",
+  "reference_source_registry": "config/lava_reference_sources.tsv",
+  "reference_source_registry_sha256": "986959f8b46ce258e54ecd98947cb185458ad2936f74dc84b86742dcd0287b61",
+  "reference_payload_root": "ref/lava/ukb_v1.1",
+  "reference_download_manifest": "ref/lava/ukb_v1.1/download_manifest.tsv",
+  "reference_extracted_manifest": "ref/lava/ukb_v1.1/extracted_manifest.tsv",
+  "reference_provenance": "ref/lava/ukb_v1.1/reference.provenance.json",
+  "reference_expected_archives": 7,
+  "reference_expected_archive_bytes": 14110596095,
+  "reference_expected_extracted_files": 44,
   "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
   "reference_population": "100000 unrelated UK Biobank participants of European ancestry",
   "genome_build": "GRCh37_hg19",
@@ -30,5 +39,21 @@
   "prune_threshold": 99,
   "max_proportion_K": 0.75,
   "max_block_size": 3000,
-  "cap_estimates": true
+  "cap_estimates": true,
+  "input_artifacts": [
+    "results/tables/lava_input_info.tsv",
+    "results/tables/lava_sample_overlap.txt",
+    "results/tables/lava_pair_manifest.tsv",
+    "results/tables/lava_input_provenance.tsv",
+    "results/tables/lava_runtime_policy.tsv",
+    "results/tables/lava_input_diagnostics.json"
+  ],
+  "input_lock": "results/tables/lava_input.lock.json",
+  "checkpoint_directory": "results/checkpoints/lava",
+  "result_artifacts": [
+    "results/tables/lava_locus_status.tsv",
+    "results/tables/lava_univariate.tsv",
+    "results/tables/lava_bivariate.tsv"
+  ],
+  "result_provenance": "results/tables/lava_results.provenance.json"
 }
