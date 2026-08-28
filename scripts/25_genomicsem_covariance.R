@@ -10,7 +10,8 @@ parse_args <- function(args) {
     munged_dir = "data/munged",
     ld_dir = "ref/eur_w_ld_chr",
     out_dir = "results/tables",
-    log_prefix = "results/logs/genomicsem/ldsc_45_trait"
+    log_prefix = "results/logs/genomicsem/ldsc_45_trait",
+    reuse_rds = ""
   )
   if (length(args) == 0L) return(defaults)
   if (length(args) %% 2 != 0) {
@@ -90,17 +91,32 @@ if (as.character(packageVersion("GenomicSEM")) != "0.0.5") {
 }
 
 started_at <- format(Sys.time(), tz = "UTC", usetz = TRUE)
-covstruc <- GenomicSEM::ldsc(
-  traits = trait_files,
-  sample.prev = sample_prev,
-  population.prev = population_prev,
-  ld = paste0(sub("/+$", "", args$ld_dir), "/"),
-  wld = paste0(sub("/+$", "", args$ld_dir), "/"),
-  trait.names = trait_ids,
-  ldsc.log = args$log_prefix,
-  stand = TRUE
-)
-finished_at <- format(Sys.time(), tz = "UTC", usetz = TRUE)
+finished_at <- started_at
+if (nzchar(args$reuse_rds)) {
+  if (!file.exists(args$reuse_rds) || file.info(args$reuse_rds)$size <= 0) {
+    fail("Reusable covariance RDS is missing or empty: ", args$reuse_rds)
+  }
+  old_metadata_path <- file.path(args$out_dir, "ldsc_covariance_metadata.tsv")
+  if (file.exists(old_metadata_path)) {
+    old_metadata <- read.delim(old_metadata_path, check.names = FALSE)
+    old_values <- setNames(old_metadata$value, old_metadata$field)
+    if (!is.na(old_values[["started_at_utc"]])) started_at <- old_values[["started_at_utc"]]
+    if (!is.na(old_values[["finished_at_utc"]])) finished_at <- old_values[["finished_at_utc"]]
+  }
+  covstruc <- readRDS(args$reuse_rds)
+} else {
+  covstruc <- GenomicSEM::ldsc(
+    traits = trait_files,
+    sample.prev = sample_prev,
+    population.prev = population_prev,
+    ld = paste0(sub("/+$", "", args$ld_dir), "/"),
+    wld = paste0(sub("/+$", "", args$ld_dir), "/"),
+    trait.names = trait_ids,
+    ldsc.log = args$log_prefix,
+    stand = TRUE
+  )
+  finished_at <- format(Sys.time(), tz = "UTC", usetz = TRUE)
+}
 
 expected_elements <- as.integer(length(trait_ids) * (length(trait_ids) + 1L) / 2L)
 if (!identical(dim(covstruc$S), c(45L, 45L))) fail("Genetic covariance matrix is not 45x45")
@@ -108,7 +124,11 @@ if (!identical(dim(covstruc$I), c(45L, 45L))) fail("Intercept matrix is not 45x4
 if (!identical(dim(covstruc$V), c(expected_elements, expected_elements))) {
   fail("Sampling covariance matrix is not ", expected_elements, "x", expected_elements)
 }
-if (any(!is.finite(covstruc$S)) || any(!is.finite(covstruc$V)) || any(!is.finite(covstruc$I))) {
+if (!identical(dim(covstruc$V_Stand), c(expected_elements, expected_elements))) {
+  fail("Standardized sampling covariance matrix is not ", expected_elements, "x", expected_elements)
+}
+if (any(!is.finite(covstruc$S)) || any(!is.finite(covstruc$V)) ||
+    any(!is.finite(covstruc$V_Stand)) || any(!is.finite(covstruc$I))) {
   fail("Covariance structure contains non-finite values")
 }
 
@@ -128,26 +148,39 @@ for (j in seq_along(trait_ids)) {
 }
 element_ids <- paste(trait_ids[pair_i], trait_ids[pair_j], sep = "__")
 rownames(covstruc$V) <- colnames(covstruc$V) <- element_ids
+rownames(covstruc$V_Stand) <- colnames(covstruc$V_Stand) <- element_ids
 names(covstruc$N) <- element_ids
 
-se_elements <- sqrt(diag(covstruc$V))
+se_covariance <- sqrt(diag(covstruc$V))
+z_covariance <- covstruc$S[cbind(pair_i, pair_j)] / se_covariance
+se_correlation <- sqrt(diag(covstruc$V_Stand))
+z_correlation <- covstruc$S_Stand[cbind(pair_i, pair_j)] / se_correlation
 pair_table <- data.frame(
   element_id = element_ids,
   trait_1 = trait_ids[pair_i],
   trait_2 = trait_ids[pair_j],
   genetic_covariance = covstruc$S[cbind(pair_i, pair_j)],
-  se = se_elements,
-  z = covstruc$S[cbind(pair_i, pair_j)] / se_elements,
-  p = 2 * pnorm(abs(covstruc$S[cbind(pair_i, pair_j)] / se_elements), lower.tail = FALSE),
+  genetic_covariance_se = se_covariance,
+  genetic_covariance_z = z_covariance,
+  genetic_covariance_p = 2 * pnorm(abs(z_covariance), lower.tail = FALSE),
   genetic_correlation = covstruc$S_Stand[cbind(pair_i, pair_j)],
+  genetic_correlation_se = se_correlation,
+  genetic_correlation_z = z_correlation,
+  genetic_correlation_p = 2 * pnorm(abs(z_correlation), lower.tail = FALSE),
   cross_trait_intercept = covstruc$I[cbind(pair_i, pair_j)],
   effective_n = as.numeric(covstruc$N),
   scale_1 = ifelse(is_binary[pair_i], "liability", "observed"),
   scale_2 = ifelse(is_binary[pair_j], "liability", "observed")
 )
-pair_table$fdr_off_diagonal <- NA_real_
+pair_table$genetic_covariance_fdr_off_diagonal <- NA_real_
+pair_table$genetic_correlation_fdr_off_diagonal <- NA_real_
 off_diagonal <- pair_table$trait_1 != pair_table$trait_2
-pair_table$fdr_off_diagonal[off_diagonal] <- p.adjust(pair_table$p[off_diagonal], method = "BH")
+pair_table$genetic_covariance_fdr_off_diagonal[off_diagonal] <- p.adjust(
+  pair_table$genetic_covariance_p[off_diagonal], method = "BH"
+)
+pair_table$genetic_correlation_fdr_off_diagonal[off_diagonal] <- p.adjust(
+  pair_table$genetic_correlation_p[off_diagonal], method = "BH"
+)
 
 trait_scales <- data.frame(
   order = seq_along(trait_ids),
@@ -180,12 +213,39 @@ metadata <- data.frame(
   field = c("panel_version", "trait_count", "covariance_elements", "jackknife_blocks",
             "ld_reference", "r_version", "genomicsem_version", "genomicsem_commit",
             "started_at_utc", "finished_at_utc", "m_total"),
-  value = c("atlas-v1.0", "45", as.character(expected_elements), as.character(expected_elements + 1L),
+  value = c("atlas-v1.0", "45", as.character(expected_elements),
+            as.character(((length(trait_ids) + 1L) * (length(trait_ids) + 2L) / 2L) + 1L),
             args$ld_dir, as.character(getRversion()), as.character(packageVersion("GenomicSEM")),
             "6b65ca5db39fdade08b0d811477be1cdd57b5039", started_at, finished_at,
             as.character(covstruc$m))
 )
 write.table(metadata, file.path(args$out_dir, "ldsc_covariance_metadata.tsv"),
+            sep = "\t", row.names = FALSE, quote = FALSE)
+
+matrix_diagnostic <- function(name, value) {
+  symmetric_value <- (value + t(value)) / 2
+  eigenvalues <- eigen(symmetric_value, symmetric = TRUE, only.values = TRUE)$values
+  nonzero <- abs(eigenvalues) > .Machine$double.eps
+  data.frame(
+    matrix = name,
+    rows = nrow(value),
+    columns = ncol(value),
+    all_finite = all(is.finite(value)),
+    max_symmetry_error = max(abs(value - t(value))),
+    min_eigenvalue = min(eigenvalues),
+    max_eigenvalue = max(eigenvalues),
+    negative_eigenvalues_below_minus_1e_10 = sum(eigenvalues < -1e-10),
+    near_zero_eigenvalues_abs_below_1e_10 = sum(abs(eigenvalues) < 1e-10),
+    absolute_condition_number = max(abs(eigenvalues)) / min(abs(eigenvalues[nonzero]))
+  )
+}
+diagnostics <- do.call(rbind, list(
+  matrix_diagnostic("S_genetic_covariance", covstruc$S),
+  matrix_diagnostic("S_Stand_genetic_correlation", covstruc$S_Stand),
+  matrix_diagnostic("V_sampling_covariance", covstruc$V),
+  matrix_diagnostic("V_Stand_sampling_covariance", covstruc$V_Stand)
+))
+write.table(diagnostics, file.path(args$out_dir, "ldsc_covariance_diagnostics.tsv"),
             sep = "\t", row.names = FALSE, quote = FALSE)
 
 cat("Published complete 45-trait GenomicSEM covariance structure\n")

@@ -11,6 +11,8 @@ import argparse
 import csv
 import hashlib
 import json
+import subprocess
+import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -198,6 +200,27 @@ def rg_gate(root: Path, rows: list[dict[str, str]]) -> Gate:
     return Gate("sleep_disease_rg", "PASS", relative, "")
 
 
+def covariance_gate(root: Path) -> Gate:
+    relative = "results/tables/ldsc_covariance_45x45.tsv"
+    if not real_nonempty(root / relative):
+        return Gate(
+            "full_covariance", "BLOCKED", "",
+            f"estimate the complete 45-trait covariance structure; missing real non-empty artifact: {relative}",
+        )
+    validator = root / "scripts/26_validate_covariance.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("full_covariance", "BLOCKED", relative, f"covariance validation failed: {detail}")
+    return Gate(
+        "full_covariance", "PASS",
+        "45x45 S/Rg/I + 1035x1035 V + pair estimates + pinned metadata/diagnostics", "",
+    )
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -246,7 +269,6 @@ def build_gates(root: Path) -> list[Gate]:
         ]
     )
     artifact_specs = [
-        ("full_covariance", ["results/tables/ldsc_covariance_45x45.tsv"], "estimate the complete 45-trait covariance structure"),
         ("mixer", ["results/tables/mixer_univariate.tsv", "results/tables/mixer_bivariate.tsv"], "run real univariate then eligible bivariate MiXeR"),
         ("lava", ["results/tables/lava_univariate.tsv", "results/tables/lava_bivariate.tsv"], "run local univariate h2 and corrected bivariate LAVA"),
         ("pleiotropic_loci", ["results/atlas/shared_loci.tsv"], "combine PLACO and conjunction-FDR evidence"),
@@ -277,6 +299,7 @@ def build_gates(root: Path) -> list[Gate]:
         ),
         ("robustness", ["results/tables/robustness_summary.tsv"], "complete the predefined major robustness pass"),
     ]
+    gates.append(covariance_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(release_gate(root))
     return gates

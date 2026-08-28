@@ -23,13 +23,15 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 | Source schemas | Complete | All 45 literal, trait-specific allele/effect/statistic mappings are verified. The six replacement archives passed exact bytes/checksum, gzip CRC, literal-header, and complete audits totaling 115,865,922 rows; all six have pinned hg38-to-hg19 plans. |
 | Harmonization | Complete | All 45 traits have real filter-by-filter harmonization ledgers and canonical HapMap3 LDSC inputs. The six large GRCh38 replacements use checksum-bound streaming HapMap3 prefilters before the registered point liftover, while their complete raw sources remain retained for locus-level work. |
 | LDSC h2 and Phase 1 | Complete with exclusions | All 45 h² runs are present. Forty-three traits pass the predefined Z/intercept gate; T2D is dropped for intercept 1.315 (>1.20) and melanoma for h² Z 3.57 (<4). The exact 396 sleep×non-sleep pairs are present as 372 primary plus 24 clearly labelled QC-failed sensitivity rows. The locked-family correction yields 153 primary FDR<0.05 pairs. MS and melanoma liability h² exceed one and remain explicit interpretation/robustness warnings rather than being hidden. |
-| Full covariance and downstream science | Blocked | MiXeR, LAVA, shared-locus discovery, Genomic SEM, factor GWAS, fine-mapping, colocalization, molecular/regulatory/cell/pathway work, and MR await real Phase 0/1 inputs. |
+| Full covariance | Complete with warnings | The real 45-by-45 S/Rg/I matrices, 1,035-by-1,035 V matrix, and all 1,035 lower-triangle estimates pass structural validation. S has three negative eigenvalues and V is ill-conditioned; the required 1,082 jackknife blocks and HDL implementation sensitivity remain explicit downstream warnings. |
+| Downstream science | Blocked | MiXeR, LAVA, shared-locus discovery, Genomic SEM, factor GWAS, fine-mapping, colocalization, molecular/regulatory/cell/pathway work, and MR remain to be run. |
 | Integrated atlas and robustness | Blocked | Canonical evidence tables and robustness outputs do not yet exist. |
 | Immutable release | Blocked | `releases/atlas-v1.0` must be produced only after every scientific gate passes. |
 
-The immediate critical path is the complete 45-trait genetic/sampling
-covariance structure required by Genomic SEM, followed by the prespecified
-downstream modules. The repository's larger remote experimental branch contains a
+The immediate critical path is univariate MiXeR and local-univariate LAVA,
+followed by eligible bivariate runs and the remaining prespecified downstream
+modules. The complete covariance structure required by Genomic SEM is now
+available and structurally validated. The repository's larger remote experimental branch contains a
 broader 149-trait scope, so it must not be merged wholesale. Evidence may be
 harvested from it only when it matches one of the locked 45 selected phenotype
 definitions and survives primary-source verification.

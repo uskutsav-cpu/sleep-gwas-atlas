@@ -132,6 +132,7 @@ rule full_covariance:
         pairs="results/tables/ldsc_covariance_pairs.tsv",
         scales="results/tables/ldsc_covariance_trait_scales.tsv",
         metadata="results/tables/ldsc_covariance_metadata.tsv",
+        diagnostics="results/tables/ldsc_covariance_diagnostics.tsv",
         structure="results/tables/ldsc_covariance_structure.rds",
     shell:
         "R_BIN={RSCRIPT} bash scripts/25_genomicsem_covariance.sh "

@@ -45,6 +45,17 @@ complete as 372 primary Phase 1 pairs plus 24 explicitly labelled
 when correction is applied over all 396 tests (155 under the primary-only
 372-test correction). Sensitivity rows are retained for completeness but are
 excluded from primary inference.
+
+The complete multivariable LDSC covariance gate is also finished locally: all
+45 traits have S/Rg/I matrices, all 1,035 lower-triangle estimates, and a
+1,035-by-1,035 sampling-covariance matrix. The raw estimated S matrix is not
+positive semidefinite and the required 1,082-block jackknife is numerically
+ill-conditioned, so those warnings are carried into model selection. HDL also
+fails the intercept threshold in GenomicSEM even though the standalone Python
+two-step h2 estimator narrowly passed it; the original Phase-1 result remains
+unchanged and HDL is excluded from confirmatory SEM. See
+`docs/full_covariance_results.md` for the audited diagnostics.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
@@ -186,6 +197,14 @@ produces the 45×45 genetic covariance/correlation/intercept matrices plus the
 For 45 traits GenomicSEM requires 1,082 jackknife blocks; this is a long-running
 production target and the resulting high-block-count diagnostic must remain an
 explicit robustness warning.
+
+After the run, validate the complete export and derive the downstream SEM input
+ledger:
+
+```bash
+python3 scripts/26_validate_covariance.py
+python3 scripts/27_genomicsem_trait_qc.py
+```
 
 The existing shell entry points remain available and are called by Snakemake:
 
