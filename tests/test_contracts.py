@@ -1313,6 +1313,21 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("Acceptance:", result.stdout)
         self.assertIn("/23 gates passed", result.stdout)
 
+    def test_full_covariance_runtime_is_locked_to_real_45_trait_inputs(self):
+        script = (ROOT / "scripts" / "25_genomicsem_covariance.R").read_text(encoding="utf-8")
+        setup = (ROOT / "scripts" / "25_setup_genomicsem.sh").read_text(encoding="utf-8")
+        env = (ROOT / "environment" / "genomicsem.yml").read_text(encoding="utf-8")
+        self.assertIn('nrow(panel) != 45L', script)
+        self.assertIn('sum(panel$domain == "sleep") != 12L', script)
+        self.assertIn('unique(panel$panel_version) != "atlas-v1.0"', script)
+        self.assertIn('getRversion() != "4.3.3"', script)
+        self.assertIn('GenomicSEM::ldsc(', script)
+        self.assertIn('stand = TRUE', script)
+        self.assertIn('ldsc_sampling_covariance_1035x1035.tsv.gz', script)
+        self.assertIn('6b65ca5db39fdade08b0d811477be1cdd57b5039', setup)
+        self.assertIn('simsalapar_1.0-13.tar.gz', setup)
+        self.assertIn('r-base=4.3.3', env)
+
 
 if __name__ == "__main__":
     unittest.main()

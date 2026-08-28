@@ -13,6 +13,8 @@ LIFTOVER_PLANS = config["liftover_plans"]
 PYTHON = config["python"]
 LDSC_PYTHON = config["ldsc_python"]
 LDSC_DIR = config["ldsc_dir"]
+RSCRIPT = config["rscript"]
+EUR_LD_DIR = config["eur_ld_dir"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -113,3 +115,25 @@ rule phase1_rg:
         "PYTHON_BIN={PYTHON} LDSC_PYTHON={LDSC_PYTHON} LDSC_DIR={LDSC_DIR} "
         "RG_OUT={output.rg} INCLUSION_OUT={output.inclusion} "
         "bash scripts/04_rg.sh --h2 {input.h2}"
+
+
+rule full_covariance:
+    input:
+        panel=PANEL,
+        lock=PANEL_LOCK,
+        munged=expand("data/munged/{trait}.sumstats.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        ld_scores=expand(EUR_LD_DIR + "/{chromosome}.l2.ldscore.gz", chromosome=range(1, 23)),
+        ld_m=expand(EUR_LD_DIR + "/{chromosome}.l2.M_5_50", chromosome=range(1, 23)),
+    output:
+        covariance="results/tables/ldsc_covariance_45x45.tsv",
+        correlations="results/tables/ldsc_genetic_correlation_45x45.tsv",
+        intercepts="results/tables/ldsc_intercept_45x45.tsv",
+        sampling="results/tables/ldsc_sampling_covariance_1035x1035.tsv.gz",
+        pairs="results/tables/ldsc_covariance_pairs.tsv",
+        scales="results/tables/ldsc_covariance_trait_scales.tsv",
+        metadata="results/tables/ldsc_covariance_metadata.tsv",
+        structure="results/tables/ldsc_covariance_structure.rds",
+    shell:
+        "R_BIN={RSCRIPT} bash scripts/25_genomicsem_covariance.sh "
+        "--panel {input.panel} --munged-dir data/munged --ld-dir {EUR_LD_DIR} "
+        "--out-dir results/tables --log-prefix results/logs/genomicsem/ldsc_45_trait"

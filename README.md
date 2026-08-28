@@ -152,6 +152,15 @@ export LDSC_PYTHON=.ldsc-env/bin/python
 export LDSC_DIR=ldsc
 ```
 
+Complete multivariable LDSC and Genomic SEM use a separate R 4.3.3
+environment. `environment/genomicsem.yml` pins the conda-packaged R
+dependencies; the setup script additionally pins `simsalapar` 1.0-13 and the
+official GenomicSEM commit recorded in `environment/tool_versions.tsv`:
+
+```bash
+bash scripts/25_setup_genomicsem.sh
+```
+
 ## Snakemake workflow
 
 The default workflow validates the locked panel and produces a source/readiness ledger without downloading raw GWAS data:
@@ -166,7 +175,17 @@ Real-data work is opt-in. Add only already reviewed traits to `phase0_traits` in
 snakemake --cores 1 phase0
 snakemake --cores 1 h2
 snakemake --cores 1 phase1_rg
+snakemake --cores 1 full_covariance
 ```
+
+`full_covariance` always reads all 45 ordered manifest traits, not the optional
+`phase0_traits` subset. It runs GenomicSEM's multivariable LDSC with the pinned
+EUR LD scores, applies documented liability conversions to binary traits, and
+produces the 45×45 genetic covariance/correlation/intercept matrices plus the
+1,035×1,035 sampling-covariance matrix required for overlap-aware Genomic SEM.
+For 45 traits GenomicSEM requires 1,082 jackknife blocks; this is a long-running
+production target and the resulting high-block-count diagnostic must remain an
+explicit robustness warning.
 
 The existing shell entry points remain available and are called by Snakemake:
 
