@@ -12,11 +12,13 @@ oriented to the reference A1 allele, ambiguous strand SNPs are excluded, and
 the GWAS/LD rows and columns must be identical. HapMap3-prefiltered GWAS are
 rejected because they are not dense fine-mapping inputs.
 
-The reference downloader records both archive checksums and hashes for all 44
-extracted `.info`/`.bcor` files. The preflight verifies those hashes, all 45
-full-resolution inputs, the exact R package entrypoints, memory, disk, and the
-presence of real cross-method loci. It currently reports blockers without
-starting analysis:
+The LAVA acquisition contract seals both archive checksums and hashes for all
+44 extracted `.info`/`.bcor` files. For a nonempty locus family, the preflight
+rehashes every extracted payload once, verifies all 45 truly full-resolution
+inputs, the exact R package entrypoints, memory, disk, and the complete
+396-pair shared-locus provenance. An input is not called full resolution when
+its QC records either a HapMap3 prefilter or a pinned-HapMap3 variant-map
+strategy. The preflight reports blockers without starting analysis:
 
 ```bash
 python3 scripts/56_finemapping_preflight.py --report-only
@@ -31,6 +33,12 @@ python3 scripts/59_run_finemapping_locus.py SHARED_LOCUS_ID --execute
 python3 scripts/60_collate_finemapping.py
 python3 scripts/60_collate_finemapping.py --validate-only
 ```
+
+If the completed upstream PLACO+/conjunction-FDR family contains no
+`PRIMARY_PHASE1` cross-method loci, the locked family has zero rows. In that
+scientifically valid case no SuSiE, LD, memory, or disk work is applicable;
+the collator publishes immutable header-bearing zero-row tables plus explicit
+provenance instead of turning a null result into a pipeline failure.
 
 Materialization estimates quantitative-trait phenotype SD from MAF, SE, and N
 using the coloc model when no authoritative SD is available. Binary traits use
@@ -47,3 +55,6 @@ and signal-level results or evidence-backed unavailable outcomes.
 
 Fine-mapping PIPs and colocalization posteriors are model-based evidence, not
 proof of a causal variant, gene, mechanism, mediation path, or direction.
+The manifest, every task, every run, and the canonical publication bind the
+current planner/materializer/LD-extractor/runner/collator hashes and refuse
+overwrite after publication.

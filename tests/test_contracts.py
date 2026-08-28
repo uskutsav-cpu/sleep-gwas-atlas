@@ -14,6 +14,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 
@@ -155,12 +156,9 @@ def load_pleiotropy_materializer():
 
 
 def load_finemapping_materializer():
-    spec = importlib.util.spec_from_file_location(
-        "finemapping_materializer", ROOT / "scripts" / "58_materialize_finemapping_locus.py"
+    return load_numbered_script(
+        "58_materialize_finemapping_locus.py", "finemapping_materializer"
     )
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
 
 
 def load_numbered_script(filename, module_name):
@@ -2016,6 +2014,91 @@ class PanelContractTests(unittest.TestCase):
         self.assertIsNone(module.aligned_sign("A", "T", "A", "T"))
         self.assertIsNone(module.aligned_sign("A", "G", "A", "C"))
 
+    def test_dense_input_detection_rejects_hapmap3_variant_map_without_prefilter_label(self):
+        mixer = load_numbered_script("35_mixer_preflight.py", "mixer_dense_input_test")
+        fine = load_numbered_script("56_finemapping_preflight.py", "fine_dense_input_test")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            directory = root / "data/harmonized"
+            directory.mkdir(parents=True)
+            data = directory / "trait.harmonized.tsv.gz"
+            qc = directory / "trait.qc.txt"
+            data.write_bytes(b"real\n")
+            qc.write_text("variant_map_strategy\tBY_COORD_ALLELES\n", encoding="utf-8")
+            _, _, strategy = mixer.choose_harmonized(root, "trait")
+            self.assertEqual(strategy, "HAPMAP3_VARIANT_MAP_BY_COORD_ALLELES")
+            self.assertFalse(fine.qc_is_full_resolution(qc))
+
+    def test_finemapping_contract_supports_immutable_zero_locus_publication(self):
+        policy = json.loads(
+            (ROOT / "config/fine_mapping_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("zero", policy["zero_family_rule"].lower())
+        collator = (ROOT / "scripts/60_collate_finemapping.py").read_text(encoding="utf-8")
+        self.assertNotIn("manifest[0]", collator)
+        self.assertIn("immutable canonical fine-mapping publication already exists", collator)
+        self.assertIn('"zero_family_not_applicable": len(manifest) == 0', collator)
+
+    def test_finemapping_zero_locus_collation_is_header_bearing_and_validatable(self):
+        module = load_numbered_script("60_collate_finemapping.py", "fine_zero_collator")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "config").mkdir()
+            (root / "results/tables").mkdir(parents=True)
+            manifest_path = root / "results/tables/fine_mapping_locus_manifest.tsv"
+            lock_path = root / "results/tables/fine_mapping_locus_manifest.lock.json"
+            policy_path = root / "config/fine_mapping_analysis_policy.json"
+            preflight_path = root / "results/tables/fine_mapping_preflight.json"
+            manifest_path.write_text(
+                "\t".join(module.fine_mapping_contract.MANIFEST_FIELDS) + "\n", encoding="utf-8"
+            )
+            lock_path.write_text("{}\n", encoding="utf-8")
+            preflight_path.write_text("{}\n", encoding="utf-8")
+            policy = {
+                "analysis_id": "atlas-v1.0-fine-mapping-colocalization",
+                "claim_limit": "fixture claim limit",
+                "reference": {"id": "LAVA_UKB_v1.1_EUR_GRCh37"},
+                "colocalization": {
+                    "p12_primary": 1e-5, "shared_signal_min_pp_h4": 0.8,
+                    "shared_signal_min_pp_h4_over_pp_h3": 5,
+                },
+                "shared_engine": {"path": "unused", "sha256": "unused"},
+            }
+            policy_path.write_text(json.dumps(policy) + "\n", encoding="utf-8")
+            lock = {"shared_loci_sha256": "a" * 64, "shared_loci_provenance_sha256": "b" * 64}
+            patches = (
+                mock.patch.object(module.fine_mapping_contract, "load_policy", return_value=(policy_path, policy)),
+                mock.patch.object(module.fine_mapping_contract, "validate_preflight", return_value={"ready": True}),
+                mock.patch.object(module.fine_mapping_contract, "validate_manifest", return_value=([], lock)),
+                mock.patch.object(module.fine_mapping_contract, "script_hashes", return_value={"fixture": "c" * 64}),
+            )
+            previous = sys.argv
+            try:
+                for patcher in patches:
+                    patcher.start()
+                sys.argv = ["60_collate_finemapping.py", "--root", str(root), "--quiet"]
+                self.assertEqual(module.main(), 0)
+                for relative in (
+                    "results/atlas/loci.tsv", "results/atlas/variants.tsv",
+                    "results/tables/fine_mapping_credible_sets.tsv",
+                    "results/tables/fine_mapping_diagnostics.tsv",
+                    "results/tables/trait_trait_colocalization.tsv",
+                ):
+                    self.assertEqual((root / relative).read_text(encoding="utf-8").count("\n"), 1)
+                provenance = json.loads(
+                    (root / "results/atlas/fine_mapping.provenance.json").read_text(encoding="utf-8")
+                )
+                self.assertTrue(provenance["zero_family_not_applicable"])
+                sys.argv.append("--validate-only")
+                self.assertEqual(module.main(), 0)
+                sys.argv = ["60_collate_finemapping.py", "--root", str(root), "--quiet"]
+                with self.assertRaises(SystemExit):
+                    module.main()
+            finally:
+                sys.argv = previous
+                for patcher in reversed(patches):
+                    patcher.stop()
+
     def test_finemapping_workflow_fails_closed_and_does_not_claim_molecular_coloc(self):
         preflight = subprocess.run(
             [sys.executable, str(ROOT / "scripts/56_finemapping_preflight.py"), "--report-only"],
@@ -2025,7 +2108,7 @@ class PanelContractTests(unittest.TestCase):
         report = json.loads((ROOT / "results/tables/fine_mapping_preflight.json").read_text(encoding="utf-8"))
         self.assertTrue(all(check["archive_present_and_pinned"] for check in report["code_checks"]))
         self.assertTrue(report["runtime"]["pass"])
-        self.assertEqual(report["full_input_traits"], 36)
+        self.assertEqual(report["full_input_traits"], 29)
         self.assertEqual(report["lava_reference_files"], 0)
         self.assertFalse(report["ready"])
         prepare = (ROOT / "scripts/57_prepare_finemapping_loci.py").read_text(encoding="utf-8")

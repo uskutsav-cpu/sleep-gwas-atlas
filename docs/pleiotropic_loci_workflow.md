@@ -37,11 +37,13 @@ is not a causal-direction estimate.
 The official pleioFDR reference is exactly 2,383,912,974 bytes (2.22 GiB) and
 the upstream workflow requires MATLAB and at least 16 GB RAM. It is not
 downloaded implicitly. This Apple M1 laptop has 8 GB RAM, no MATLAB, about
-2.2 GiB free, and only 36/45 full post-QC inputs. The nine inputs that were
-source-prefiltered to HapMap3 for LDSC block 108 of 396 pair scans:
+2.2 GiB free, and only 29/45 full post-QC inputs. The 16 inputs that were
+source-prefiltered or variant-identity-mapped to HapMap3 for LDSC block 192 of
+396 pair scans:
 
 ```text
-ms, asthma, t2d, ldl, hdl, triglycerides, cad, telomere_length, melanoma
+ms, asthma, t2d, ldl, hdl, triglycerides, cad, telomere_length, melanoma,
+crohn, ibd, uc, mdd, longevity, parkinson, stroke
 ```
 
 Run the read-only audits with:

@@ -6,17 +6,13 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
+import fine_mapping_contract
 
-FIELDS = [
-    "comparison_id", "shared_locus_id", "pair_id", "sleep_trait", "non_sleep_trait",
-    "analysis_tier", "lava_block_id", "chromosome", "start_bp", "end_bp",
-    "placo_lead_snp", "placo_lead_p", "conjfdr_lead_snp", "conjfdr_lead_fdr", "effect_direction",
-    "sleep_full_input", "non_sleep_full_input", "reference_prefix",
-    "summary1_path", "summary2_path", "variant_order_path", "ld_path", "task_path",
-]
+FIELDS = fine_mapping_contract.MANIFEST_FIELDS
 
 
 def fail(message: str) -> None:
@@ -40,21 +36,9 @@ def read_tsv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def full_input(root: Path, trait: str) -> str:
-    candidates = [
-        (
-            root / "data/harmonized_mixer_full" / f"{trait}.harmonized.tsv.gz",
-            root / "data/harmonized_mixer_full" / f"{trait}.qc.txt",
-        ),
-        (
-            root / "data/harmonized" / f"{trait}.harmonized.tsv.gz",
-            root / "data/harmonized" / f"{trait}.qc.txt",
-        ),
-    ]
-    for harmonized, qc in candidates:
-        if harmonized.is_file() and qc.is_file() and not any(
-            line.startswith("prefilter_strategy\t") for line in qc.read_text(encoding="utf-8").splitlines()
-        ):
-            return str(harmonized.relative_to(root))
+    harmonized, _, ready = fine_mapping_contract.choose_full_input(root, trait)
+    if ready:
+        return str(harmonized.relative_to(root))
     fail(f"full non-HapMap3 harmonized input is absent for {trait}")
     raise AssertionError
 
@@ -70,24 +54,15 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.root).resolve()
     shared_path = root / args.shared
-    policy_path = root / args.policy
+    policy_path, policy = fine_mapping_contract.load_policy(root, args.policy)
     preflight_path = root / args.preflight
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if not preflight.get("ready") or preflight.get("policy_sha256") != sha256(policy_path):
-        fail("fine-mapping preflight is absent, blocked, or policy-drifted")
-    fields, shared = read_tsv(shared_path)
-    required = {
-        "shared_locus_id", "pair_id", "sleep_trait", "non_sleep_trait", "analysis_tier",
-        "locus_id", "CHR", "START", "STOP", "placo_lead_snp", "placo_lead_p",
-        "conjfdr_lead_snp", "conjfdr_lead_fdr", "evidence_status",
-        "effect_direction",
-    }
-    if not required.issubset(fields):
-        fail("shared-locus table lacks required cross-method fields")
+    fine_mapping_contract.validate_preflight(root, policy_path, policy, preflight_path)
+    upstream_shared_path, shared_provenance_path, shared, _ = (
+        fine_mapping_contract.validate_shared_upstream(root, policy)
+    )
+    if upstream_shared_path != shared_path:
+        fail("command-line shared-locus path differs from the frozen policy")
     primary = [row for row in shared if row["analysis_tier"] == "PRIMARY_PHASE1"]
-    if not primary:
-        fail("no primary cross-method shared locus is available")
     if any(row["evidence_status"] != "PLACO_PLUS_AND_CONJFDR_SAME_LOCKED_LD_BLOCK" for row in primary):
         fail("primary fine-mapping family contains a non-consensus locus")
     if len({row["shared_locus_id"] for row in primary}) != len(primary):
@@ -125,28 +100,41 @@ def main() -> int:
             "task_path": f"results/fine_mapping/tasks/{identity}.tsv",
         })
     out = root / args.out
+    lock_path = root / args.lock
+    if out.exists() or lock_path.exists():
+        fail("immutable fine-mapping locus family already exists")
     out.parent.mkdir(parents=True, exist_ok=True)
-    temporary = out.with_suffix(out.suffix + ".tmp")
+    temporary = out.with_name(out.name + ".tmp")
     with temporary.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDS, delimiter="\t", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-    temporary.replace(out)
+    os.replace(temporary, out)
     lock = {
-        "schema_version": "atlas-v1.0-finemapping-locus-manifest.1",
+        "schema_version": "atlas-v1.0-finemapping-locus-manifest.2",
         "locked_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "results_accessed_before_lock": False,
         "selection_rule": policy["entry_rule"],
+        "zero_family_rule": policy["zero_family_rule"],
         "locus_count": len(rows),
         "comparison_ids_in_locked_order": [row["comparison_id"] for row in rows],
         "manifest_sha256": sha256(out),
         "shared_loci_sha256": sha256(shared_path),
+        "shared_loci_provenance_sha256": sha256(shared_provenance_path),
         "policy_sha256": sha256(policy_path),
         "preflight_sha256": sha256(preflight_path),
+        "contract_input_sha256": {
+            relative: sha256(root / relative) for relative in (
+                "config/analysis_panel.tsv", "config/downstream_analysis_policy.json",
+                "config/fine_mapping_sources.tsv",
+            )
+        },
+        "script_sha256": fine_mapping_contract.script_hashes(root),
         "claim_limit": policy["claim_limit"],
     }
-    lock_path = root / args.lock
-    lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    lock_temporary = lock_path.with_name(lock_path.name + ".tmp")
+    lock_temporary.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    os.replace(lock_temporary, lock_path)
     print(f"FINEMAPPING_LOCUS_FAMILY_LOCKED loci={len(rows)} result_free=true")
     return 0
 

@@ -2,7 +2,9 @@
   "analysis_id": "atlas-v1.0-fine-mapping-colocalization",
   "analysis_panel": "atlas-v1.0",
   "entry_source": "results/atlas/shared_loci.tsv",
+  "entry_provenance": "results/atlas/shared_loci.provenance.json",
   "entry_rule": "Every cross-method shared locus with analysis_tier PRIMARY_PHASE1; no result-ranked maximum and no global-rg filter",
+  "zero_family_rule": "A complete upstream result with zero PRIMARY_PHASE1 cross-method loci produces immutable schema-bearing empty fine-mapping outputs and is scientifically NOT_APPLICABLE, not failed",
   "expected_build": "GRCh37",
   "expected_ancestry": "EUR",
   "minimum_maf": 0.01,
@@ -11,6 +13,7 @@
   "minimum_memory_bytes": 8589934592,
   "minimum_free_storage_bytes": 21474836480,
   "summary_input_scope": "Full autosomal post-QC summary statistics; HapMap3-prefiltered inputs are forbidden",
+  "lava_policy": "config/lava_analysis_policy.json",
   "reference": {
     "id": "LAVA_UKB_v1.1_EUR_GRCh37",
     "prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",

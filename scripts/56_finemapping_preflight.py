@@ -12,6 +12,8 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+import fine_mapping_contract
+
 
 EXPECTED_METHODS = {"SUSIE_RSS_PRIMARY", "COLOC_SUSIE_PRIMARY"}
 
@@ -29,26 +31,8 @@ def read_tsv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle, delimiter="\t"))
 
 
-def qc_prefiltered(path: Path) -> bool:
-    return any(line.startswith("prefilter_strategy\t") for line in path.read_text(encoding="utf-8").splitlines())
-
-
-def choose_full_input(root: Path, trait: str) -> tuple[Path, Path, bool]:
-    candidates = [
-        (
-            root / "data/harmonized_mixer_full" / f"{trait}.harmonized.tsv.gz",
-            root / "data/harmonized_mixer_full" / f"{trait}.qc.txt",
-        ),
-        (
-            root / "data/harmonized" / f"{trait}.harmonized.tsv.gz",
-            root / "data/harmonized" / f"{trait}.qc.txt",
-        ),
-    ]
-    for harmonized, qc in candidates:
-        if harmonized.is_file() and qc.is_file() and not qc_prefiltered(qc):
-            return harmonized, qc, True
-    harmonized, qc = candidates[-1]
-    return harmonized, qc, False
+qc_is_full_resolution = fine_mapping_contract.qc_is_full_resolution
+choose_full_input = fine_mapping_contract.choose_full_input
 
 
 def memory_bytes() -> int:
@@ -78,9 +62,8 @@ def main() -> int:
     parser.add_argument("--report-only", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy_path = root / args.policy
+    policy_path, policy = fine_mapping_contract.load_policy(root, args.policy)
     source_path = root / args.sources
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
     downstream = json.loads((root / "config/downstream_analysis_policy.json").read_text(encoding="utf-8"))
     if (
         policy["analysis_panel"] != "atlas-v1.0"
@@ -132,57 +115,77 @@ def main() -> int:
             "trait_id": trait,
             "harmonized_path": str(harmonized.relative_to(root)),
             "harmonized_present": str(harmonized.is_file()).upper(),
+            "harmonized_bytes": harmonized.stat().st_size if harmonized.is_file() else 0,
+            "harmonized_sha256": sha256(harmonized) if harmonized.is_file() else "ABSENT",
             "qc_present": str(qc.is_file()).upper(),
-            "input_scope": "FULL_AUTOSOMAL_POST_QC" if full else "HAPMAP3_PREFILTERED_BLOCKED",
+            "qc_sha256": sha256(qc) if qc.is_file() else "ABSENT",
+            "input_scope": "FULL_AUTOSOMAL_POST_QC" if full else "HAPMAP3_CONSTRAINED_BLOCKED",
             "ready": str(full).upper(),
         })
     full_count = sum(row["ready"] == "TRUE" for row in trait_rows)
     if len(trait_rows) != 45:
         raise SystemExit("ERROR: fine-mapping preflight does not cover the exact panel")
 
-    prefix = root / policy["reference"]["prefix"]
-    reference_paths = [
-        Path(f"{prefix}_chr{chromosome}.{suffix}")
-        for chromosome in range(1, 23) for suffix in ("info", "bcor")
-    ]
-    extracted_manifest = prefix.parent / "extracted_manifest.tsv"
-    reference_count = 0
-    if extracted_manifest.is_file():
-        extracted_rows = read_tsv(extracted_manifest)
-        expected_keys = {(str(chromosome), suffix) for chromosome in range(1, 23) for suffix in ("info", "bcor")}
-        observed_keys = {(row.get("chromosome", ""), row.get("file_type", "")) for row in extracted_rows}
-        if len(extracted_rows) == 44 and observed_keys == expected_keys:
-            for row in extracted_rows:
-                path = root / row["path"]
-                if (
-                    path.is_file() and row["bytes"].isdigit()
-                    and path.stat().st_size == int(row["bytes"])
-                    and sha256(path) == row["sha256"]
-                ):
-                    reference_count += 1
     shared = root / policy["entry_source"]
+    shared_provenance = root / policy["entry_provenance"]
+    upstream_ready = False
+    upstream_detail = "cross-method shared-locus publication is absent"
+    shared_rows: list[dict[str, str]] = []
+    try:
+        _, _, shared_rows, _ = fine_mapping_contract.validate_shared_upstream(root, policy)
+        upstream_ready = True
+        upstream_detail = "complete 396-pair shared-locus publication verified"
+    except SystemExit as exc:
+        upstream_detail = str(exc).removeprefix("ERROR: ")
+    primary_count = sum(row.get("analysis_tier") == "PRIMARY_PHASE1" for row in shared_rows)
+    # Until the upstream family is known, inventory the production resources conservatively.
+    analysis_required = not upstream_ready or primary_count > 0
+
+    lava_policy = json.loads((root / policy["lava_policy"]).read_text(encoding="utf-8"))
+    extracted_manifest = root / lava_policy["reference_extracted_manifest"]
+    reference_provenance = root / lava_policy["reference_provenance"]
+    reference_count = 0
+    reference_content_verified = False
+    reference_detail = "LAVA reference provenance is absent"
+    if analysis_required:
+        try:
+            _, reference = fine_mapping_contract.validate_lava_reference(
+                root, policy, rehash_payloads=True,
+            )
+            reference_count = int(reference["extracted_file_count"])
+            reference_content_verified = reference_count == 44
+            reference_detail = "all 44 sealed signed-LD payloads rehashed"
+        except SystemExit as exc:
+            reference_detail = str(exc).removeprefix("ERROR: ")
     disk = os.statvfs(root)
     free_bytes = disk.f_bavail * disk.f_frsize
     observed_memory = memory_bytes()
-    code_ready = all(all(check.values()) for check in code_checks) and engine_ok and runtime_ok
-    ready = (
-        code_ready and full_count == 45 and reference_count == 44 and shared.is_file()
-        and shared.stat().st_size > 0 and free_bytes >= policy["minimum_free_storage_bytes"]
+    method_code_ready = all(all(check.values()) for check in code_checks) and engine_ok
+    code_ready = method_code_ready and runtime_ok
+    production_resources_ready = (
+        runtime_ok and full_count == 45 and reference_count == 44
+        and reference_content_verified and free_bytes >= policy["minimum_free_storage_bytes"]
         and observed_memory >= policy["minimum_memory_bytes"]
     )
+    ready = upstream_ready and method_code_ready and (
+        not analysis_required or production_resources_ready
+    )
     blockers = []
-    if not code_ready:
-        blockers.append("pinned SuSiE/coloc code or runtime absent")
-    if full_count != 45:
-        blockers.append(f"full-resolution inputs {full_count}/45")
-    if reference_count != 44:
-        blockers.append(f"LAVA signed-LD files {reference_count}/44")
-    if not shared.is_file() or shared.stat().st_size == 0:
-        blockers.append("cross-method shared_loci.tsv absent")
-    if free_bytes < policy["minimum_free_storage_bytes"]:
-        blockers.append(f"free storage {free_bytes} < {policy['minimum_free_storage_bytes']}")
-    if observed_memory < policy["minimum_memory_bytes"]:
-        blockers.append(f"memory {observed_memory} < {policy['minimum_memory_bytes']}")
+    if not upstream_ready:
+        blockers.append(upstream_detail)
+    if not method_code_ready:
+        blockers.append("pinned SuSiE/coloc source archives or shared engine absent")
+    if analysis_required:
+        if not runtime_ok:
+            blockers.append("pinned SuSiE/coloc R runtime absent")
+        if full_count != 45:
+            blockers.append(f"full-resolution inputs {full_count}/45")
+        if reference_count != 44 or not reference_content_verified:
+            blockers.append(f"LAVA signed-LD files {reference_count}/44: {reference_detail}")
+        if free_bytes < policy["minimum_free_storage_bytes"]:
+            blockers.append(f"free storage {free_bytes} < {policy['minimum_free_storage_bytes']}")
+        if observed_memory < policy["minimum_memory_bytes"]:
+            blockers.append(f"memory {observed_memory} < {policy['minimum_memory_bytes']}")
 
     traits_out = root / args.traits_out
     traits_out.parent.mkdir(parents=True, exist_ok=True)
@@ -199,13 +202,25 @@ def main() -> int:
         "code_checks": code_checks,
         "shared_engine": {"path": policy["shared_engine"]["path"], "checksum_pass": engine_ok},
         "runtime": {"pass": runtime_ok, "detail": runtime_detail},
+        "method_code_ready": method_code_ready,
+        "analysis_required": analysis_required,
         "full_input_traits": full_count,
         "lava_reference_files": reference_count,
+        "lava_reference_content_verified": reference_content_verified,
+        "lava_reference_detail": reference_detail,
         "lava_extracted_manifest": str(extracted_manifest.relative_to(root)),
         "lava_extracted_manifest_sha256": sha256(extracted_manifest) if extracted_manifest.is_file() else "ABSENT",
-        "shared_loci_present": shared.is_file() and shared.stat().st_size > 0 if shared.exists() else False,
+        "lava_reference_provenance": str(reference_provenance.relative_to(root)),
+        "lava_reference_provenance_sha256": sha256(reference_provenance) if reference_provenance.is_file() else "ABSENT",
+        "shared_loci_present": shared.is_file() and shared.stat().st_size > 0,
+        "shared_loci_sha256": sha256(shared) if shared.is_file() and shared.stat().st_size > 0 else "ABSENT",
+        "shared_loci_provenance_sha256": sha256(shared_provenance) if shared_provenance.is_file() and shared_provenance.stat().st_size > 0 else "ABSENT",
+        "shared_loci_upstream_verified": upstream_ready,
+        "shared_loci_upstream_detail": upstream_detail,
+        "primary_shared_locus_count": primary_count,
         "policy_sha256": sha256(policy_path),
         "sources_sha256": sha256(source_path),
+        "trait_readiness_path": str(traits_out.relative_to(root)),
         "trait_readiness_sha256": sha256(traits_out),
         "analysis_started": False,
     }
@@ -214,6 +229,7 @@ def main() -> int:
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(
         f"FINEMAPPING_PREFLIGHT_{'PASS' if ready else 'BLOCKED'} "
+        f"required={str(analysis_required).lower()} loci={primary_count} "
         f"code={str(code_ready).lower()} full_inputs={full_count}/45 ld={reference_count}/44"
     )
     if blockers:

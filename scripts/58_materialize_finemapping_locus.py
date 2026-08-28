@@ -14,6 +14,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import fine_mapping_contract
+
 
 SUMMARY_FIELDS = ["SNP", "CHR", "BP", "A1", "A2", "BETA", "SE", "MAF", "INFO", "PRIOR_WEIGHT"]
 TASK_FIELDS = [
@@ -204,19 +206,13 @@ def main() -> int:
     root = Path(args.root).resolve()
     manifest_path = root / args.manifest
     manifest_lock_path = root / args.manifest_lock
-    policy_path = root / args.policy
+    policy_path, policy = fine_mapping_contract.load_policy(root, args.policy)
     preflight_path = root / args.preflight
-    lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if lock["manifest_sha256"] != sha256(manifest_path) or lock["policy_sha256"] != sha256(policy_path):
-        fail("fine-mapping locus manifest differs from its lock")
-    if (
-        not preflight.get("ready") or preflight.get("policy_sha256") != sha256(policy_path)
-        or lock.get("preflight_sha256") != sha256(preflight_path)
-    ):
-        fail("fine-mapping preflight differs from the locked ready state")
-    selected = [row for row in read_tsv(manifest_path) if row["shared_locus_id"] == args.shared_locus_id]
+    preflight = fine_mapping_contract.validate_preflight(root, policy_path, policy, preflight_path)
+    manifest, lock = fine_mapping_contract.validate_manifest(
+        root, manifest_path, manifest_lock_path, policy_path, policy, preflight_path,
+    )
+    selected = [row for row in manifest if row["shared_locus_id"] == args.shared_locus_id]
     if len(selected) != 1:
         fail("shared_locus_id does not identify exactly one locked locus")
     row = selected[0]
@@ -242,18 +238,23 @@ def main() -> int:
     chromosome, start, end = int(row["chromosome"]), int(row["start_bp"]), int(row["end_bp"])
     info_path = root / f"{row['reference_prefix']}_chr{chromosome}.info"
     bcor_path = root / f"{row['reference_prefix']}_chr{chromosome}.bcor"
-    extracted_manifest = root / preflight["lava_extracted_manifest"]
-    extracted = {
-        (entry["chromosome"], entry["file_type"]): entry for entry in read_tsv(extracted_manifest)
+    reference_provenance_path, reference_provenance = fine_mapping_contract.validate_lava_reference(
+        root, policy, rehash_payloads=False,
+    )
+    reference_records = {
+        entry["path"]: entry for entry in reference_provenance["extracted_files"]
     }
-    info_record = extracted.get((str(chromosome), "info"))
-    bcor_record = extracted.get((str(chromosome), "bcor"))
+    info_relative = str(info_path.relative_to(root))
+    bcor_relative = str(bcor_path.relative_to(root))
+    info_record = reference_records.get(info_relative)
+    bcor_record = reference_records.get(bcor_relative)
     if (
-        info_record is None or bcor_record is None or not bcor_path.is_file()
+        info_record is None or bcor_record is None or not info_path.is_file() or not bcor_path.is_file()
+        or info_path.stat().st_size != int(info_record["bytes"])
         or bcor_path.stat().st_size != int(bcor_record["bytes"])
         or sha256(info_path) != info_record["sha256"]
     ):
-        fail("chromosome-specific LAVA reference differs from the verified extracted manifest")
+        fail("chromosome-specific LAVA reference differs from its sealed provenance")
     reference_list = reference_rows(info_path, chromosome, start, end, float(policy["minimum_maf"]))
     reference = {entry["SNP"]: entry for entry in reference_list}
     sleep = extract_summary(root / row["sleep_full_input"], reference, chromosome)
@@ -311,17 +312,28 @@ def main() -> int:
         str(order_path.relative_to(root)): sha256(staged_order),
         str(ld_path.relative_to(root)): sha256(staged_ld),
     }
+    source_inputs = {}
+    for role, field in (("sleep", "sleep_full_input"), ("non_sleep", "non_sleep_full_input")):
+        source_path = root / fine_mapping_contract.safe_relative(row[field], field)
+        source_inputs[role] = {
+            "path": str(source_path.relative_to(root)), "bytes": source_path.stat().st_size,
+            "sha256": sha256(source_path),
+        }
     staged_task_lock.write_text(json.dumps({
-        "schema_version": "atlas-v1.0-finemapping-task.1",
+        "schema_version": "atlas-v1.0-finemapping-task.2",
         "comparison_id": row["comparison_id"], "shared_locus_id": row["shared_locus_id"],
         "variant_count": len(common), "task_sha256": sha256(staged_task),
         "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(manifest_lock_path),
         "policy_sha256": sha256(policy_path), "preflight_sha256": sha256(preflight_path),
-        "extracted_manifest_sha256": sha256(extracted_manifest),
+        "reference_provenance_sha256": sha256(reference_provenance_path),
+        "reference_content_verified_by_preflight": preflight["lava_reference_content_verified"],
         "reference_info_sha256": info_record["sha256"],
         "reference_bcor_path": str(bcor_path.relative_to(root)),
+        "reference_bcor_bytes": bcor_record["bytes"],
         "reference_bcor_sha256": bcor_record["sha256"],
+        "source_inputs": source_inputs,
         "outputs": staged_hashes,
+        "script_sha256": fine_mapping_contract.script_hashes(root),
         "results_accessed_before_lock": False, "claim_limit": policy["claim_limit"],
     }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     summary1.parent.parent.mkdir(parents=True, exist_ok=True)

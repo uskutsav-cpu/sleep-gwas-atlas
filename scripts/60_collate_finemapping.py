@@ -10,19 +10,10 @@ import json
 import math
 from pathlib import Path
 
+import fine_mapping_contract
 
-LOCUS_FIELDS = [
-    "locus_id", "chromosome", "start_bp", "end_bp", "lead_snp", "sleep_trait",
-    "non_sleep_trait", "analysis_tier", "placo_lead_p", "conjfdr_min_q",
-    "effect_direction", "lava_block_id", "method_support", "evidence_level", "provenance_id",
-]
-VARIANT_FIELDS = [
-    "variant_id", "locus_id", "rsid", "chromosome", "position_bp", "effect_allele",
-    "other_allele", "minor_allele_frequency", "sleep_beta", "sleep_se", "non_sleep_beta",
-    "non_sleep_se", "pip_sleep", "pip_non_sleep", "credible_set_sleep",
-    "credible_set_non_sleep", "shared_signal_posterior", "fine_mapping_method",
-    "ld_reference", "qc_status", "provenance_id",
-]
+LOCUS_FIELDS = fine_mapping_contract.CANONICAL_LOCUS_FIELDS
+VARIANT_FIELDS = fine_mapping_contract.CANONICAL_VARIANT_FIELDS
 
 
 def fail(message: str) -> None:
@@ -77,6 +68,7 @@ def main() -> int:
     parser.add_argument("--manifest", default="results/tables/fine_mapping_locus_manifest.tsv")
     parser.add_argument("--manifest-lock", default="results/tables/fine_mapping_locus_manifest.lock.json")
     parser.add_argument("--policy", default="config/fine_mapping_analysis_policy.json")
+    parser.add_argument("--preflight", default="results/tables/fine_mapping_preflight.json")
     parser.add_argument("--run-dir", default="results/fine_mapping/runs")
     parser.add_argument("--loci-out", default="results/atlas/loci.tsv")
     parser.add_argument("--variants-out", default="results/atlas/variants.tsv")
@@ -90,14 +82,12 @@ def main() -> int:
     root = Path(args.root).resolve()
     manifest_path = root / args.manifest
     manifest_lock_path = root / args.manifest_lock
-    policy_path = root / args.policy
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
-    if lock["manifest_sha256"] != sha256(manifest_path) or lock["policy_sha256"] != sha256(policy_path):
-        fail("fine-mapping locus manifest differs from its lock")
-    _, manifest = read_tsv(manifest_path)
-    if [row["comparison_id"] for row in manifest] != lock["comparison_ids_in_locked_order"]:
-        fail("fine-mapping locus family/order differs from its lock")
+    policy_path, policy = fine_mapping_contract.load_policy(root, args.policy)
+    preflight_path = root / args.preflight
+    fine_mapping_contract.validate_preflight(root, policy_path, policy, preflight_path)
+    manifest, lock = fine_mapping_contract.validate_manifest(
+        root, manifest_path, manifest_lock_path, policy_path, policy, preflight_path,
+    )
 
     loci = []
     variants = []
@@ -114,14 +104,50 @@ def main() -> int:
         )}
         if any(not path.is_file() or path.stat().st_size == 0 for path in paths.values()):
             fail(f"fine-mapping run is incomplete for {identity}")
+        task_path = root / fine_mapping_contract.safe_relative(locus["task_path"], "fine-mapping task")
+        task_lock_path = task_path.with_suffix(".lock.json")
+        if not task_path.is_file() or not task_lock_path.is_file():
+            fail(f"fine-mapping task/lock is absent for {identity}")
+        task_lock = json.loads(task_lock_path.read_text(encoding="utf-8"))
+        task_fields, task_rows = read_tsv(task_path)
+        del task_fields
+        if (
+            len(task_rows) != 1 or task_rows[0].get("queue_row_id") != locus["comparison_id"]
+            or task_lock.get("schema_version") != "atlas-v1.0-finemapping-task.2"
+            or task_lock.get("task_sha256") != sha256(task_path)
+            or task_lock.get("manifest_sha256") != sha256(manifest_path)
+            or task_lock.get("manifest_lock_sha256") != sha256(manifest_lock_path)
+            or task_lock.get("policy_sha256") != sha256(policy_path)
+            or task_lock.get("preflight_sha256") != sha256(preflight_path)
+            or task_lock.get("script_sha256") != fine_mapping_contract.script_hashes(root)
+            or task_lock.get("results_accessed_before_lock") is not False
+        ):
+            fail(f"fine-mapping task/lock provenance drifted for {identity}")
         provenance = json.loads(paths["provenance.json"].read_text(encoding="utf-8"))
-        if provenance.get("comparison_id") != locus["comparison_id"]:
+        engine = root / policy["shared_engine"]["path"]
+        if (
+            provenance.get("schema_version") != "atlas-v1.0-finemapping-run.2"
+            or provenance.get("comparison_id") != locus["comparison_id"]
+            or provenance.get("task_sha256") != sha256(task_path)
+            or provenance.get("task_lock_sha256") != sha256(task_lock_path)
+            or provenance.get("manifest_sha256") != sha256(manifest_path)
+            or provenance.get("manifest_lock_sha256") != sha256(manifest_lock_path)
+            or provenance.get("policy_sha256") != sha256(policy_path)
+            or provenance.get("preflight_sha256") != sha256(preflight_path)
+            or provenance.get("engine_sha256") != sha256(engine)
+            or provenance.get("script_sha256") != fine_mapping_contract.script_hashes(root)
+        ):
             fail(f"fine-mapping provenance identity differs for {identity}")
         for name in paths:
             if name == "provenance.json":
                 continue
             expected = provenance.get("outputs", {}).get(name, {}).get("sha256")
-            if expected != sha256(paths[name]):
+            expected_rows = provenance.get("outputs", {}).get(name, {}).get("rows")
+            observed_fields, observed_rows = read_tsv(paths[name])
+            if (
+                expected != sha256(paths[name]) or expected_rows != len(observed_rows)
+                or observed_fields != fine_mapping_contract.ENGINE_OUTPUT_FIELDS[name]
+            ):
                 fail(f"fine-mapping output differs from provenance for {identity}/{name}")
         _, variant_rows = read_tsv(paths["variants.tsv"])
         _, credible_rows = read_tsv(paths["credible_sets.tsv"])
@@ -199,9 +225,9 @@ def main() -> int:
         coloc.extend(coloc_rows)
         input_hashes[identity] = {name: sha256(path) for name, path in paths.items()}
 
-    credible_fields = read_tsv(root / args.run_dir / manifest[0]["shared_locus_id"] / "credible_sets.tsv")[0]
-    diagnostic_fields = read_tsv(root / args.run_dir / manifest[0]["shared_locus_id"] / "diagnostics.tsv")[0]
-    coloc_fields = read_tsv(root / args.run_dir / manifest[0]["shared_locus_id"] / "colocalization.tsv")[0]
+    credible_fields = fine_mapping_contract.ENGINE_OUTPUT_FIELDS["credible_sets.tsv"]
+    diagnostic_fields = fine_mapping_contract.ENGINE_OUTPUT_FIELDS["diagnostics.tsv"]
+    coloc_fields = fine_mapping_contract.ENGINE_OUTPUT_FIELDS["colocalization.tsv"]
     payloads = {
         root / args.loci_out: table_text(LOCUS_FIELDS, loci),
         root / args.variants_out: table_text(VARIANT_FIELDS, variants),
@@ -210,11 +236,17 @@ def main() -> int:
         root / args.coloc_out: table_text(coloc_fields, coloc),
     }
     provenance = {
+        "schema_version": "atlas-v1.0-finemapping-canonical.2",
         "analysis_id": policy["analysis_id"], "locus_count": len(loci),
         "variant_count": len(variants), "credible_set_count": len(credible_sets),
         "colocalization_row_count": len(coloc), "manifest_sha256": sha256(manifest_path),
         "manifest_lock_sha256": sha256(manifest_lock_path), "policy_sha256": sha256(policy_path),
+        "preflight_sha256": sha256(preflight_path),
+        "shared_loci_sha256": lock["shared_loci_sha256"],
+        "shared_loci_provenance_sha256": lock["shared_loci_provenance_sha256"],
+        "zero_family_not_applicable": len(manifest) == 0,
         "run_input_hashes": input_hashes,
+        "script_sha256": fine_mapping_contract.script_hashes(root),
         "outputs": {str(path.relative_to(root)): hashlib.sha256(text.encode()).hexdigest() for path, text in payloads.items()},
         "claim_limit": policy["claim_limit"],
     }
@@ -227,6 +259,8 @@ def main() -> int:
         if not provenance_path.is_file() or provenance_path.read_text(encoding="utf-8") != provenance_text:
             fail("fine-mapping provenance drifted")
     else:
+        if provenance_path.exists() or any(path.exists() for path in payloads):
+            fail("immutable canonical fine-mapping publication already exists")
         for path, text in payloads.items():
             atomic_text(path, text)
         atomic_text(provenance_path, provenance_text)

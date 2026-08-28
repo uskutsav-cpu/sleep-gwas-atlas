@@ -521,6 +521,8 @@ rule fine_mapping_preflight:
         downstream=DOWNSTREAM_POLICY,
         sources="config/fine_mapping_sources.tsv",
         references="config/fine_mapping_method_references.tsv",
+        shared="results/atlas/shared_loci.tsv",
+        shared_provenance="results/atlas/shared_loci.provenance.json",
     output:
         report="results/tables/fine_mapping_preflight.json",
         traits="results/tables/fine_mapping_input_readiness.tsv",
@@ -532,6 +534,7 @@ checkpoint fine_mapping_loci:
     input:
         preflight="results/tables/fine_mapping_preflight.json",
         shared="results/atlas/shared_loci.tsv",
+        shared_provenance="results/atlas/shared_loci.provenance.json",
         policy=FINE_MAPPING_POLICY,
     output:
         manifest="results/tables/fine_mapping_locus_manifest.tsv",
@@ -550,6 +553,7 @@ rule fine_mapping_input:
             chromosome=range(1, 23), suffix=["info", "bcor"],
         ),
         extracted="ref/lava/ukb_v1.1/extracted_manifest.tsv",
+        reference_provenance="ref/lava/ukb_v1.1/reference.provenance.json",
     output:
         summary1="data/fine_mapping/{shared_locus_id}/sleep.tsv.gz",
         summary2="data/fine_mapping/{shared_locus_id}/non_sleep.tsv.gz",
@@ -591,6 +595,7 @@ rule fine_mapping:
         runs=fine_mapping_run_provenance,
         manifest="results/tables/fine_mapping_locus_manifest.tsv",
         lock="results/tables/fine_mapping_locus_manifest.lock.json",
+        preflight="results/tables/fine_mapping_preflight.json",
     output:
         loci="results/atlas/loci.tsv",
         variants="results/atlas/variants.tsv",

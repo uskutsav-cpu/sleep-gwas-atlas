@@ -24,18 +24,23 @@ does not filter MiXeR pairs.
 
 MiXeR 2.2.1 accepts LDSC-like `SNP, CHR, BP, A1, A2, N, Z` summary statistics,
 but its current guidance explicitly advises against HapMap3-filtering and says
-older HapMap3-constrained inputs should be regenerated. Consequently, the nine
-traits that used a memory-saving HapMap3 source prefilter for LDSC cannot be
-promoted to primary MiXeR inputs:
+older HapMap3-constrained inputs should be regenerated. Consequently, 16
+traits whose LDSC artifacts used either a memory-saving HapMap3 source
+prefilter or a HapMap3-only variant-identity map cannot be promoted to primary
+MiXeR inputs:
 
 ```text
-ms, asthma, t2d, ldl, hdl, triglycerides, cad, telomere_length, melanoma
+ms, asthma, t2d, ldl, hdl, triglycerides, cad, telomere_length, melanoma,
+crohn, ibd, uc, mdd, longevity, parkinson, stroke
 ```
 
-Six still have their full registered raw archives locally; the three lipid
-traits require their full source archive to be rematerialized. Full MiXeR
+Several still have their full registered raw archives locally; the three lipid
+traits require their full source archive to be rematerialized, while the seven
+variant-map cases require a genome-wide GRCh37 rsID resolution strategy rather
+than the pinned HapMap3 map. Full MiXeR
 harmonizations belong under `data/harmonized_mixer_full/` with matching QC
-ledgers and no `HAPMAP3_RSID_ALLOWLIST` provenance.
+ledgers and neither `HAPMAP3_RSID_ALLOWLIST` nor a HapMap3-only
+`variant_map_strategy` provenance.
 
 Audit the exact input and host status without creating large files:
 

@@ -76,8 +76,8 @@ The production MiXeR workflow is also fully specified, version-pinned, and
 fail-closed. Real MiXeR cannot run on this laptop: the official container is
 Linux/amd64-only, the real-data tutorial requires at least 32 GB RAM and
 recommends 16 physical cores, the exact 6,579,093,199-byte runtime reference is
-absent, and nine LDSC inputs must be regenerated without their HapMap3 source
-prefilter. All 64 consumed reference files, converted inputs, pre-result task
+absent, and 16 LDSC inputs must be regenerated without either a HapMap3 source
+prefilter or HapMap3-only variant-identity map. All 64 consumed reference files, converted inputs, pre-result task
 families, and returned results now have checksum locks suitable for an external
 x86_64 execution host. No container or reference is downloaded implicitly. See
 `docs/mixer_workflow.md`.
@@ -85,7 +85,7 @@ x86_64 execution host. No container or reference is downloaded implicitly. See
 Shared-locus discovery is now locked to complementary PLACO+ and official
 conjunctional-FDR scans over all 396 pairs, with a common 2,495-block locus
 definition and strict full-summary-statistics requirement. The local preflight
-finds 288/396 scans input-ready; 108 remain blocked by the nine HapMap3-only
+finds 204/396 scans input-ready; 192 remain blocked by the 16 HapMap3-only
 traits. The official 2.22 GiB pleioFDR reference, MATLAB, 16 GB RAM, and adequate
 working storage are also absent. The runtime, 396-pair task family, returned
 artifacts, and canonical same-block consensus now have immutable checksum

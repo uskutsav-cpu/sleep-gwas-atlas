@@ -342,6 +342,12 @@ def fine_mapping_gate(root: Path) -> Gate:
     if result.returncode:
         detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
         return Gate("fine_mapping", "BLOCKED", ", ".join(paths), f"fine-mapping validation failed: {detail}")
+    provenance = json.loads((root / "results/atlas/fine_mapping.provenance.json").read_text(encoding="utf-8"))
+    if provenance.get("zero_family_not_applicable") is True and provenance.get("locus_count") == 0:
+        return Gate(
+            "fine_mapping", "PASS", "complete primary locus family contained zero eligible loci",
+            "SuSiE-RSS and trait-trait colocalization were scientifically not applicable",
+        )
     return Gate("fine_mapping", "PASS", "all locked primary loci have converged SuSiE-RSS outputs", "")
 
 

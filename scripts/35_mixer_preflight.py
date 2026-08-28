@@ -294,7 +294,11 @@ def choose_harmonized(root: Path, trait: str) -> tuple[Path, Path, str]:
     ]
     for data, qc in candidates:
         if data.is_file() and data.stat().st_size and qc.is_file():
-            return data, qc, qc_value(qc, "prefilter_strategy")
+            prefilter = qc_value(qc, "prefilter_strategy")
+            variant_map = qc_value(qc, "variant_map_strategy")
+            if variant_map not in {"not supplied"}:
+                prefilter = f"HAPMAP3_VARIANT_MAP_{variant_map or 'UNKNOWN'}"
+            return data, qc, prefilter
     return candidates[0][0], candidates[0][1], ""
 
 
@@ -357,9 +361,9 @@ def main() -> int:
         if full:
             status = "READY_FULL_SUMSTATS"
             blocker = ""
-        elif data.is_file() and prefilter == "HAPMAP3_RSID_ALLOWLIST":
-            status = "BLOCKED_HAPMAP3_PREFILTERED"
-            blocker = "regenerate full post-QC summary statistics without a HapMap3 allowlist"
+        elif data.is_file() and prefilter.startswith("HAPMAP3_"):
+            status = "BLOCKED_HAPMAP3_CONSTRAINED"
+            blocker = "regenerate full post-QC summary statistics without a HapMap3 allowlist or HapMap3-only variant map"
         else:
             status = "BLOCKED_FULL_HARMONIZED_MISSING"
             blocker = "materialize full post-QC harmonized summary statistics"

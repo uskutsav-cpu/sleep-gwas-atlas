@@ -12,15 +12,10 @@ import re
 import subprocess
 from pathlib import Path
 
+import fine_mapping_contract
 
 SAFE_ID = re.compile(r"^[A-Za-z0-9_.-]+$")
-OUTPUTS = {
-    "variants.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "dataset_type", "SNP", "CHR", "BP", "A1", "A2", "BETA", "SE", "MAF", "INFO", "prior_method", "normalized_prior_weight", "PIP", "credible_set_ids", "max_alpha_component", "model_converged", "rss_ld_s", "kriging_allele_switch_outlier"],
-    "credible_sets.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "signal_id", "component_index", "lead_snp", "lead_pip", "credible_set_size", "credible_set_snps", "requested_coverage", "achieved_coverage", "min_abs_corr", "mean_abs_corr", "median_abs_corr", "cs_log10bf", "model_converged"],
-    "colocalization.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset1_id", "dataset2_id", "molecular_feature_id", "tissue_cell_context", "coloc_method", "p1", "p2", "p12", "prior_role", "signal1", "signal2", "hit1", "hit2", "nsnps", "PP_H0", "PP_H1", "PP_H2", "PP_H3", "PP_H4", "PP_H4_over_PP_H3", "top_shared_variant", "top_shared_variant_PP_H4", "fine_mapping_qc", "analysis_status", "single_signal_fallback_justification", "claim_limit"],
-    "shared_variant_posteriors.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "coloc_method", "p12", "signal1", "signal2", "SNP", "SNP_PP_H4"],
-    "diagnostics.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "variant_count", "model_converged", "niter", "credible_set_count", "max_pip", "rss_ld_s", "kriging_allele_switch_outlier_count", "kriging_allele_switch_outliers", "diagnostic_status"],
-}
+OUTPUTS = fine_mapping_contract.ENGINE_OUTPUT_FIELDS
 
 
 def fail(message: str) -> None:
@@ -82,13 +77,13 @@ def main() -> int:
     root = Path(args.root).resolve()
     manifest_path = root / args.manifest
     manifest_lock_path = root / args.manifest_lock
-    policy_path = root / args.policy
+    policy_path, policy = fine_mapping_contract.load_policy(root, args.policy)
     preflight_path = root / args.preflight
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    manifest_lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
-    if manifest_lock["manifest_sha256"] != sha256(manifest_path) or manifest_lock["policy_sha256"] != sha256(policy_path):
-        fail("fine-mapping manifest differs from its lock")
-    selected = [row for row in read_tsv(manifest_path)[1] if row["shared_locus_id"] == args.shared_locus_id]
+    fine_mapping_contract.validate_preflight(root, policy_path, policy, preflight_path)
+    manifest, manifest_lock = fine_mapping_contract.validate_manifest(
+        root, manifest_path, manifest_lock_path, policy_path, policy, preflight_path,
+    )
+    selected = [row for row in manifest if row["shared_locus_id"] == args.shared_locus_id]
     if len(selected) != 1:
         fail("shared_locus_id does not identify exactly one locked locus")
     locus = selected[0]
@@ -98,11 +93,15 @@ def main() -> int:
         fail("checksum-locked fine-mapping task is absent")
     task_lock = json.loads(task_lock_path.read_text(encoding="utf-8"))
     if (
-        task_lock.get("task_sha256") != sha256(task_path)
+        task_lock.get("schema_version") != "atlas-v1.0-finemapping-task.2"
+        or task_lock.get("comparison_id") != locus["comparison_id"]
+        or task_lock.get("shared_locus_id") != locus["shared_locus_id"]
+        or task_lock.get("task_sha256") != sha256(task_path)
         or task_lock.get("manifest_sha256") != sha256(manifest_path)
         or task_lock.get("manifest_lock_sha256") != sha256(manifest_lock_path)
         or task_lock.get("policy_sha256") != sha256(policy_path)
         or task_lock.get("preflight_sha256") != sha256(preflight_path)
+        or task_lock.get("script_sha256") != fine_mapping_contract.script_hashes(root)
         or task_lock.get("results_accessed_before_lock") is not False
     ):
         fail("fine-mapping task differs from its pre-result lock")
@@ -115,9 +114,38 @@ def main() -> int:
         ("summary1_path", "summary1_sha256"), ("summary2_path", "summary2_sha256"),
         ("ld_path", "ld_sha256"), ("ld_variant_order_path", "ld_variant_order_sha256"),
     ):
-        path = Path(task[path_field])
-        if not path.is_file() or sha256(path) != task[hash_field]:
+        relative = fine_mapping_contract.safe_relative(task[path_field], path_field)
+        path = root / relative
+        if (
+            not path.is_file() or sha256(path) != task[hash_field]
+            or task_lock.get("outputs", {}).get(str(relative)) != task[hash_field]
+        ):
             fail(f"locked task input differs: {path_field}")
+    source_records = task_lock.get("source_inputs", {})
+    if set(source_records) != {"sleep", "non_sleep"}:
+        fail("fine-mapping task omits dense source-input provenance")
+    for role, record in source_records.items():
+        source_path = root / fine_mapping_contract.safe_relative(
+            str(record.get("path", "")), f"{role} dense source",
+        )
+        if (
+            not source_path.is_file() or source_path.stat().st_size != int(record.get("bytes", 0))
+            or sha256(source_path) != record.get("sha256")
+        ):
+            fail(f"fine-mapping dense source input drifted: {role}")
+    reference_provenance_path, _ = fine_mapping_contract.validate_lava_reference(
+        root, policy, rehash_payloads=False,
+    )
+    bcor_path = root / fine_mapping_contract.safe_relative(
+        str(task_lock.get("reference_bcor_path", "")), "reference bcor",
+    )
+    if (
+        task_lock.get("reference_provenance_sha256") != sha256(reference_provenance_path)
+        or task_lock.get("reference_content_verified_by_preflight") is not True
+        or not bcor_path.is_file()
+        or bcor_path.stat().st_size != int(task_lock.get("reference_bcor_bytes", 0))
+    ):
+        fail("fine-mapping task no longer binds the sealed signed-LD reference")
     engine = root / policy["shared_engine"]["path"]
     if not engine.is_file() or sha256(engine) != policy["shared_engine"]["sha256"]:
         fail("shared SuSiE/coloc engine differs from its exact pin")
@@ -159,9 +187,13 @@ def main() -> int:
         for field in ("PP_H0", "PP_H1", "PP_H2", "PP_H3", "PP_H4", "top_shared_variant_PP_H4"):
             probability(row[field], field, task["queue_row_id"])
     provenance = {
-        "schema_version": "atlas-v1.0-finemapping-run.1", "comparison_id": task["queue_row_id"],
+        "schema_version": "atlas-v1.0-finemapping-run.2", "comparison_id": task["queue_row_id"],
         "task_sha256": sha256(task_path), "task_lock_sha256": sha256(task_lock_path),
+        "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(manifest_lock_path),
         "policy_sha256": sha256(policy_path), "engine_sha256": sha256(engine),
+        "preflight_sha256": sha256(preflight_path),
+        "reference_provenance_sha256": sha256(reference_provenance_path),
+        "script_sha256": fine_mapping_contract.script_hashes(root),
         "stdout": result.stdout.strip(), "stderr": result.stderr.strip(),
         "outputs": {name: {"rows": len(outputs[name]), "sha256": sha256(path)} for name, path in output_paths.items()},
         "claim_limit": policy["claim_limit"],
