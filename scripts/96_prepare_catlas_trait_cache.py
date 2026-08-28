@@ -11,6 +11,8 @@ import json
 import math
 from pathlib import Path
 
+from catlas_policy import reference_policy_sha256, trait_policy_sha256
+
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -135,7 +137,7 @@ def main() -> int:
         fail("CATlas fixed-universe cache and provenance are incomplete")
     universe_provenance = json.loads(universe_provenance_path.read_text(encoding="utf-8"))
     if (
-        universe_provenance.get("policy_sha256") != sha256(policy_path)
+        universe_provenance.get("reference_policy_sha256") != reference_policy_sha256(policy)
         or universe_provenance.get("component_manifest_sha256") != spec["component_manifest_sha256"]
         or universe_provenance.get("cache_sha256") != sha256(universe_path)
     ):
@@ -166,9 +168,9 @@ def main() -> int:
         )
     atomic_gzip_tsv(out_path, spec["trait_cache_fields"], rows)
     provenance = {
-        "schema_version": "sleep-atlas-catlas-trait.1",
+        "schema_version": "sleep-atlas-catlas-trait.2",
         "trait_id": args.trait_id,
-        "policy_sha256": sha256(policy_path),
+        "trait_policy_sha256": trait_policy_sha256(policy),
         "fixed_universe_provenance_sha256": sha256(universe_provenance_path),
         "fixed_universe_sha256": sha256(universe_path),
         "harmonized_gwas_path": str(gwas_path.relative_to(root)),

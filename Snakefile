@@ -59,6 +59,19 @@ FUMA_SOURCE_PATHS = [component["path"] for component in FUMA_SOURCE_BUNDLE["comp
 with open(INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"], encoding="utf-8") as handle:
     CATLAS_SOURCE_BUNDLE = json.load(handle)
 CATLAS_SOURCE_PATHS = [component["path"] for component in CATLAS_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"], encoding="utf-8") as handle:
+    LDSC_SEG_SELECTION = json.load(handle)
+LDSC_SEG_SOURCE_PATHS = [
+    f"{LDSC_SEG_SELECTION['local_root']}/{LDSC_SEG_SELECTION['source_ldcts']}",
+    *[
+        f"{LDSC_SEG_SELECTION['local_root']}/{LDSC_SEG_SELECTION['source_prefix']}/GTEx.control.{chromosome}.annot.gz"
+        for chromosome in range(1, 23)
+    ],
+    *[
+        f"{LDSC_SEG_SELECTION['local_root']}/{LDSC_SEG_SELECTION['source_prefix']}/GTEx.{tissue['source_index']}.{chromosome}.annot.gz"
+        for tissue in LDSC_SEG_SELECTION["selected_tissues"] for chromosome in range(1, 23)
+    ],
+]
 FUMA_MATRIX_PATHS = [
     f"{INTERPRETATION_SPEC['fuma_scrna']['matrix_cache_dir']}/{dataset['dataset_id']}.txt"
     for dataset in FUMA_SOURCE_BUNDLE["datasets"]
@@ -816,6 +829,17 @@ rule molecular_integration:
         "{PYTHON} scripts/73_collate_molecular.py"
 
 
+rule ldsc_seg_gtex_source:
+    input:
+        policy=INTERPRETATION_POLICY,
+        config=INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+    output:
+        files=LDSC_SEG_SOURCE_PATHS,
+        manifest=INTERPRETATION_SPEC["ldsc_seg_gtex"]["source_manifest"],
+    shell:
+        "{PYTHON} scripts/98_prepare_ldsc_seg_gtex_source.py"
+
+
 rule interpretation_preflight:
     input:
         policy=INTERPRETATION_POLICY,
@@ -829,12 +853,14 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
             INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
             INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"],
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["source_manifest"],
             INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"],
         ],
         source_files=(
             SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS
             + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS + CATLAS_SOURCE_PATHS
-            + PATHWAY_SOURCE_PATHS
+            + LDSC_SEG_SOURCE_PATHS + PATHWAY_SOURCE_PATHS
         ),
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",

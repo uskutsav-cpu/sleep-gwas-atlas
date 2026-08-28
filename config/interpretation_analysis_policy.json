@@ -231,6 +231,26 @@
     "multiple_testing_family": "All 43 prespecified adult CATlas cell types across four domains for one trait",
     "claim_limit": "Enrichment of independent genome-wide-significant variants in cell-type-restricted accessible chromatin is a coarse annotation, not evidence that the cell type, regulatory element, variant, or nearby gene is causal"
   },
+  "ldsc_seg_gtex": {
+    "source_id": "LDSC_SEG",
+    "selection_config": "config/interpretation_ldsc_seg_gtex.json",
+    "selection_config_sha256": "cf08a10f8b518f6ee07f8a33201b43de1fa8025a36815361f1563928c12d5d5c",
+    "source_manifest": "ref/interpretation/cell_type/ldsc_seg_gtex_0921fed7/source_manifest.json",
+    "source_manifest_bytes": 203926,
+    "source_manifest_sha256": "b1a0686ee32f27154fa9e285a80da530975f9aa5326e44f8a88323c39d504d08",
+    "expected_source_files": 375,
+    "expected_selected_tissues": 16,
+    "selected_tissues_by_domain": {
+      "brain": 4,
+      "immune": 3,
+      "metabolic": 4,
+      "vascular": 5
+    },
+    "ldscore_cache_dir": "work/interpretation_automatic/ldsc_seg_gtex/ldscores",
+    "ldscore_cache_provenance_path": "work/interpretation_automatic/ldsc_seg_gtex/ldscores.provenance.json",
+    "multiple_testing_family": "All 16 prespecified GTEx tissues across four domains for one trait",
+    "claim_limit": "S-LDSC enrichment prioritizes tissue-specific expression-linked genomic annotations; it does not prove a causal cell type, gene, or regulatory mechanism"
+  },
   "cell_types": {
     "required_strategies": [
       "stratified_LDSC",

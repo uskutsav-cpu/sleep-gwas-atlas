@@ -658,6 +658,103 @@ def validate_catlas_bundle(root: Path, policy: dict[str, object]) -> tuple[bool,
     return True, "", observed
 
 
+def validate_ldsc_seg_gtex_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["ldsc_seg_gtex"]
+    config_path = root / spec["selection_config"]
+    if not config_path.is_file() or sha256(config_path) != spec["selection_config_sha256"]:
+        return False, "LDSC-SEG GTEx selection config is absent or differs from policy", {}
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    manifest_path = root / spec["source_manifest"]
+    if (
+        not manifest_path.is_file()
+        or manifest_path.stat().st_size != spec["source_manifest_bytes"]
+        or sha256(manifest_path) != spec["source_manifest_sha256"]
+    ):
+        return False, "LDSC-SEG GTEx source manifest is absent or differs from policy", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {
+        "selection_config_sha256": sha256(config_path),
+        "source_manifest_sha256": sha256(manifest_path),
+    }
+    selected = config.get("selected_tissues", [])
+    domains = {
+        domain: sum(row.get("domain") == domain for row in selected)
+        for domain in policy["cell_types"]["required_domains"]
+    }
+    if (
+        config.get("source_id") != spec["source_id"]
+        or len(selected) != spec["expected_selected_tissues"]
+        or domains != spec["selected_tissues_by_domain"]
+        or manifest.get("config_sha256") != sha256(config_path)
+        or manifest.get("mirror_commit") != config.get("mirror_commit")
+        or manifest.get("selected_tissues") != selected
+        or manifest.get("selected_tissues_by_domain") != domains
+        or manifest.get("source_file_count") != spec["expected_source_files"]
+        or manifest.get("source_file_count") != config.get("expected_source_files")
+    ):
+        return False, "LDSC-SEG GTEx release, selection, or source family differs from policy", observed
+    files = manifest.get("files", [])
+    if len(files) != spec["expected_source_files"]:
+        return False, "LDSC-SEG GTEx source manifest has an incomplete file family", observed
+    paths: set[str] = set()
+    source_bytes = 0
+    for record in files:
+        relative = Path(str(record.get("local_path", "")))
+        repository_path = str(record.get("repository_path", ""))
+        if relative.is_absolute() or ".." in relative.parts or not repository_path or repository_path in paths:
+            return False, "LDSC-SEG GTEx source manifest contains an unsafe or duplicate path", observed
+        path = root / relative
+        if (
+            not path.is_file() or path.stat().st_size != record.get("bytes")
+            or sha256(path) != record.get("sha256")
+            or config["mirror_commit"] not in str(record.get("url", ""))
+        ):
+            return False, f"LDSC-SEG GTEx source file differs from its pin: {repository_path}", observed
+        paths.add(repository_path)
+        source_bytes += path.stat().st_size
+    expected_paths = {str(config["source_ldcts"])}
+    indices = {int(row["source_index"]) for row in selected}
+    for chromosome in range(1, 23):
+        expected_paths.add(f"{config['source_prefix']}/GTEx.control.{chromosome}.annot.gz")
+        expected_paths.update(
+            f"{config['source_prefix']}/GTEx.{index}.{chromosome}.annot.gz"
+            for index in indices
+        )
+    row_counts = manifest.get("variant_rows_by_chromosome", {})
+    if (
+        paths != expected_paths or source_bytes != manifest.get("source_bytes")
+        or set(row_counts) != {str(value) for value in range(1, 23)}
+        or any(not isinstance(value, int) or value <= 0 for value in row_counts.values())
+    ):
+        return False, "LDSC-SEG GTEx paths, bytes, or chromosome row counts differ from the frozen family", observed
+    ldcts_path = root / config["local_root"] / config["source_ldcts"]
+    try:
+        with ldcts_path.open(encoding="utf-8", newline="") as handle:
+            source_ldcts = {
+                row[0]: row[1] for row in csv.reader(handle, delimiter="\t") if len(row) == 2
+            }
+    except (OSError, UnicodeError) as exc:
+        return False, f"LDSC-SEG GTEx ldcts is unreadable: {exc}", observed
+    if len(source_ldcts) != manifest.get("source_ldcts_entries") or len(source_ldcts) != 205:
+        return False, "LDSC-SEG GTEx ldcts entry count differs from the source release", observed
+    for tissue in selected:
+        expected = (
+            f"Multi_tissue_gene_expr_1000Gv3_ldscores/GTEx.{tissue['source_index']}.,"
+            "Multi_tissue_gene_expr_1000Gv3_ldscores/GTEx.control."
+        )
+        if source_ldcts.get(tissue["source_label"]) != expected:
+            return False, f"LDSC-SEG selected tissue differs from ldcts: {tissue['source_label']}", observed
+    observed.update({
+        "mirror_commit": config["mirror_commit"], "source_files": len(files),
+        "source_bytes": source_bytes, "selected_tissues": len(selected),
+        "selected_tissues_by_domain": domains, "source_ldcts_entries": len(source_ldcts),
+        "variant_rows_by_chromosome": row_counts,
+    })
+    return True, "", observed
+
+
 def validate_public_pathway_bundle(
     root: Path, policy: dict[str, object],
 ) -> tuple[bool, str, dict[str, object]]:
@@ -1059,6 +1156,8 @@ def main() -> int:
     fuma_source_id = policy["fuma_scrna"]["source_id"]
     catlas_ready, catlas_blocker, catlas_validation = validate_catlas_bundle(root, policy)
     catlas_source_id = policy["catlas_adult_v4"]["source_id"]
+    ldsc_seg_ready, ldsc_seg_blocker, ldsc_seg_validation = validate_ldsc_seg_gtex_bundle(root, policy)
+    ldsc_seg_source_id = policy["ldsc_seg_gtex"]["source_id"]
     pathway_ready, pathway_blocker, pathway_validation = validate_public_pathway_bundle(root, policy)
     public_pathway_source_ids = set(policy["public_pathway_sources"]["source_ids"])
     causal_ready, causal_blocker, causal_validation = validate_causal_runtime_bundle(root, policy)
@@ -1106,6 +1205,9 @@ def main() -> int:
             elif identity == catlas_source_id and not catlas_ready:
                 ready = False
                 blocker = catlas_blocker
+            elif identity == ldsc_seg_source_id and not ldsc_seg_ready:
+                ready = False
+                blocker = ldsc_seg_blocker
             elif identity in public_pathway_source_ids and not pathway_ready:
                 ready = False
                 blocker = pathway_blocker
@@ -1154,6 +1256,7 @@ def main() -> int:
         "pchic_source_bundle": pchic_validation,
         "fuma_scrna_source_bundle": fuma_validation,
         "catlas_adult_source_bundle": catlas_validation,
+        "ldsc_seg_gtex_source_bundle": ldsc_seg_validation,
         "public_pathway_source_bundle": pathway_validation,
         "causal_runtime_bundle": causal_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,

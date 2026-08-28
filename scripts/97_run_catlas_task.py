@@ -12,6 +12,7 @@ import math
 from pathlib import Path
 
 from pathway_sources import hypergeometric_right_tail
+from catlas_policy import reference_policy_sha256, trait_policy_sha256
 
 
 def fail(message: str) -> None:
@@ -171,7 +172,7 @@ def main() -> int:
         fail("CATlas fixed-universe cache and provenance are incomplete")
     universe_provenance = json.loads(universe_provenance_path.read_text(encoding="utf-8"))
     if (
-        universe_provenance.get("policy_sha256") != sha256(policy_path)
+        universe_provenance.get("reference_policy_sha256") != reference_policy_sha256(policy)
         or universe_provenance.get("component_manifest_sha256") != sha256(source_manifest_path)
         or universe_provenance.get("cache_sha256") != sha256(universe_path)
     ):
@@ -184,7 +185,7 @@ def main() -> int:
     trait_provenance = json.loads(trait_provenance_path.read_text(encoding="utf-8"))
     if (
         trait_provenance.get("trait_id") != task["trait_id"]
-        or trait_provenance.get("policy_sha256") != sha256(policy_path)
+        or trait_provenance.get("trait_policy_sha256") != trait_policy_sha256(policy)
         or trait_provenance.get("fixed_universe_provenance_sha256") != sha256(universe_provenance_path)
         or trait_provenance.get("cache_sha256") != sha256(trait_path)
     ):

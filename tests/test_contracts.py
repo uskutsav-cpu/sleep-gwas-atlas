@@ -2286,6 +2286,68 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(membership["rs2"], set())
         self.assertEqual(counts, {"CATLAS_TEST::Cell A": 1})
 
+    def test_catlas_cache_policy_fingerprints_are_component_scoped(self):
+        module = load_numbered_script("catlas_policy.py", "catlas_policy_fingerprints")
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        reference = module.reference_policy_sha256(policy)
+        trait = module.trait_policy_sha256(policy)
+        unrelated = json.loads(json.dumps(policy))
+        unrelated["unrelated_future_source"] = {"release": "TEST"}
+        self.assertEqual(module.reference_policy_sha256(unrelated), reference)
+        self.assertEqual(module.trait_policy_sha256(unrelated), trait)
+        trait_change = json.loads(json.dumps(policy))
+        trait_change["catlas_adult_v4"]["minimum_trait_variant_coverage"] = 0.6
+        self.assertEqual(module.reference_policy_sha256(trait_change), reference)
+        self.assertNotEqual(module.trait_policy_sha256(trait_change), trait)
+        reference_change = json.loads(json.dumps(policy))
+        reference_change["catlas_adult_v4"]["ld_pruning_r2"] = 0.2
+        self.assertNotEqual(module.reference_policy_sha256(reference_change), reference)
+        self.assertNotEqual(module.trait_policy_sha256(reference_change), trait)
+
+    def test_ldsc_seg_gtex_subset_is_pre_result_locked(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        spec = policy["ldsc_seg_gtex"]
+        config_path = ROOT / spec["selection_config"]
+        self.assertEqual(hashlib.sha256(config_path.read_bytes()).hexdigest(), spec["selection_config_sha256"])
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        self.assertEqual(config["mirror_commit"], "0921fed7f6b9aee4c37b0162a41557579ec5fbc4")
+        self.assertEqual(config["expected_source_files"], 375)
+        self.assertEqual(len(config["selected_tissues"]), 16)
+        domains = {
+            domain: sum(row["domain"] == domain for row in config["selected_tissues"])
+            for domain in policy["cell_types"]["required_domains"]
+        }
+        self.assertEqual(domains, {"brain": 4, "immune": 3, "metabolic": 4, "vascular": 5})
+        self.assertEqual(domains, spec["selected_tissues_by_domain"])
+        self.assertEqual(len({row["source_label"] for row in config["selected_tissues"]}), 16)
+        self.assertEqual(len({row["source_index"] for row in config["selected_tissues"]}), 16)
+        self.assertEqual(spec["source_manifest_bytes"], 203926)
+        self.assertEqual(spec["source_manifest_sha256"], "b1a0686ee32f27154fa9e285a80da530975f9aa5326e44f8a88323c39d504d08")
+        with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
+            source = next(
+                row for row in csv.DictReader(handle, delimiter="\t")
+                if row["source_id"] == spec["source_id"]
+            )
+        self.assertEqual(source["source_status"], "SOURCE_VERIFIED")
+        self.assertEqual(source["exact_release"], config["source_release"])
+        self.assertEqual(int(source["expected_bytes"]), spec["source_manifest_bytes"])
+        self.assertEqual(source["expected_sha256"], spec["source_manifest_sha256"])
+        preflight = (ROOT / "scripts/74_interpretation_preflight.py").read_text(encoding="utf-8")
+        self.assertIn("def validate_ldsc_seg_gtex_bundle", preflight)
+        self.assertIn("ldsc_seg_ready, ldsc_seg_blocker, ldsc_seg_validation", preflight)
+
+    def test_ldsc_seg_annotation_validator_accepts_target_and_control_headers(self):
+        module = load_numbered_script("98_prepare_ldsc_seg_gtex_source.py", "ldsc_seg_source")
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "target.annot.gz"
+            control = Path(temporary) / "control.annot.gz"
+            with gzip.open(target, "wt", encoding="ascii", newline="") as handle:
+                handle.write("ANNOT\n0\n1\n0\n")
+            with gzip.open(control, "wt", encoding="ascii", newline="") as handle:
+                handle.write("All_Genes\n1\n1\n0\n")
+            self.assertEqual(module.annotation_rows(target, "ANNOT"), 3)
+            self.assertEqual(module.annotation_rows(control, "All_Genes"), 3)
+
     def test_catlas_trait_cache_and_enrichment_retain_complete_null_cells(self):
         trait_module = load_numbered_script("96_prepare_catlas_trait_cache.py", "catlas_trait")
         task_module = load_numbered_script("97_run_catlas_task.py", "catlas_task")

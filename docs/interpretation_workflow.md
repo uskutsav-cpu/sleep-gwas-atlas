@@ -98,6 +98,17 @@ coordinate-discordant telomere-length rsIDs were conservatively excluded and
 recorded. Enrichment results remain intentionally uncomputed until the complete
 interpretation task family can receive its pre-result lock.
 
+The stratified-LDSC strategy is narrowed transparently to 16 GTEx expression
+annotations from the Finucane multi-tissue family: 4 brain, 3 immune, 4
+metabolic, and 5 vascular tissues. The official archive endpoints are now
+requester-pays or unavailable, so the annotations and shared controls are
+pinned from immutable `songlab/ldsc` commit
+`0921fed7f6b9aee4c37b0162a41557579ec5fbc4`. The 375-file bundle preserves the
+original 205-entry `.ldcts` for identity checks; absent Franke and chromatin
+families are not substituted. Source curation is complete, while recomputing
+the selected LD scores from matching 1000 Genomes Phase 3 EUR genotypes and
+running `h2-cts` remain production work.
+
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
 The complete null family remains auditable through coverage. Promoter,
@@ -162,15 +173,15 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, 18 of 20 interpretation source families are ready: GENCODE
+repository state, 19 of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
 2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
 FUMA single-cell/MAGMA bundle, the immutable CATlas adult scATAC bundle, the
-Reactome v97 and GO 2026-08-05 pathway families, the official MSigDB v2026.1
-human collection, the FUMA-prepared MSigDB v2023.1Hs MAGMA gene-set file, the
-within-workflow regulatory cell-type layer, and all five causal estimator
-families. LDSC-SEG remains blocked on its requester-pays official source, and
-the molecular-QTL-derived cell strategy remains correctly blocked on upstream
+immutable 16-tissue GTEx LDSC-SEG subset, the Reactome v97 and GO 2026-08-05
+pathway families, the official MSigDB v2026.1 human collection, the
+FUMA-prepared MSigDB v2023.1Hs MAGMA gene-set file, the within-workflow
+regulatory cell-type layer, and all five causal estimator families. Only the
+molecular-QTL-derived cell strategy remains correctly blocked on upstream
 molecular artifacts. The compressed
 official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately

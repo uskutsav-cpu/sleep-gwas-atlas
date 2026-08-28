@@ -17,6 +17,7 @@ import tempfile
 import zipfile
 
 from liftover_chain import load_chain
+from catlas_policy import reference_policy_sha256
 
 
 def fail(message: str) -> None:
@@ -312,8 +313,8 @@ def main() -> int:
             })
         atomic_gzip_tsv(cache_path, spec["variant_cache_fields"], rows)
         provenance = {
-            "schema_version": "sleep-atlas-catlas-reference.1",
-            "policy_sha256": sha256(policy_path),
+            "schema_version": "sleep-atlas-catlas-reference.2",
+            "reference_policy_sha256": reference_policy_sha256(policy),
             "component_manifest_sha256": sha256(manifest_path),
             "component_sha256": {
                 identity: sha256(path) for identity, path in sorted(components.items())
