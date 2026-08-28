@@ -31,20 +31,54 @@ def main() -> int:
         fail(f"unknown or duplicate interpretation task: {args.task_id}")
     task = selected[0]
     import_path = root / args.import_dir / f"{args.task_id}.json"
-    if not import_path.is_file():
-        fail(
-            f"interpretation task requires an explicit curator record: {import_path.relative_to(root)}; "
-            "record terminal status/reason and a real normalized input path for COMPLETED"
-        )
-    record = json.loads(import_path.read_text(encoding="utf-8"))
-    if set(record) - {"status", "reason", "input"} or not record.get("status") or not record.get("reason"):
-        fail("interpretation curator record has unexpected or missing fields")
+    adapter_provenance = None
+    if import_path.is_file():
+        record = json.loads(import_path.read_text(encoding="utf-8"))
+        if set(record) - {"status", "reason", "input"} or not record.get("status") or not record.get("reason"):
+            fail("interpretation curator record has unexpected or missing fields")
+    else:
+        policy = json.loads((root / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        automatic_sources = {
+            policy["promoter_mapping"]["source_id"], policy["hocomoco_v14"]["source_id"],
+            policy["abc_2021"]["source_id"],
+            *policy["screen_registry_v4"]["source_ids"],
+        }
+        if task["analysis_family"] != "regulatory" or task["source_id"] not in automatic_sources:
+            fail(
+                f"interpretation task requires an explicit curator record: {import_path.relative_to(root)}; "
+                "record terminal status/reason and a real normalized input path for COMPLETED"
+            )
+        automatic_dir = root / "work/interpretation_automatic" / args.task_id
+        automatic_result = automatic_dir / "normalized.tsv"
+        adapter_provenance = automatic_dir / "adapter.provenance.json"
+        adapter_script = {
+            policy["hocomoco_v14"]["source_id"]: "83_run_motif_task.py",
+            policy["abc_2021"]["source_id"]: "85_run_abc_task.py",
+        }.get(task["source_id"], "82_run_regulatory_task.py")
+        adapter_command = [
+            sys.executable, str(root / "scripts" / adapter_script), args.task_id,
+            "--root", str(root), "--out", str(automatic_result),
+            "--provenance-out", str(adapter_provenance),
+        ]
+        if not args.execute:
+            print("INTERPRETATION_AUTOMATIC_TASK_READY " + " ".join(adapter_command))
+            return 0
+        adapter_result = subprocess.run(adapter_command, cwd=root, check=False)
+        if adapter_result.returncode:
+            fail(f"automatic regulatory adapter failed: {args.task_id}")
+        adapter = json.loads(adapter_provenance.read_text(encoding="utf-8"))
+        record = {
+            "status": adapter["terminal_status"], "reason": adapter["terminal_reason"],
+            "input": str(automatic_result) if adapter["terminal_status"] == "COMPLETED" else None,
+        }
     command = [
         sys.executable, str(root / "scripts/76_record_interpretation_task.py"), args.task_id,
         "--root", str(root), "--status", str(record["status"]), "--reason", str(record["reason"]),
     ]
     if record.get("input"):
         command.extend(["--input", str(record["input"])])
+    if adapter_provenance is not None:
+        command.extend(["--adapter-provenance", str(adapter_provenance)])
     if not args.execute:
         print("INTERPRETATION_TASK_READY " + " ".join(command))
         return 0

@@ -29,9 +29,9 @@
       "fields": ["gene_id", "gene_symbol", "locus_id", "evidence_stream_count", "eqtl_status", "sqtl_status", "pqtl_pwas_status", "twas_status", "colocalization_status", "context", "evidence_level", "claim_limit", "provenance_id"]
     },
     "regulatory_elements.tsv": {
-      "primary_key": ["regulatory_element_id", "variant_id", "target_gene_id"],
+      "primary_key": ["regulatory_evidence_id"],
       "minimum_rows": 0,
-      "fields": ["regulatory_element_id", "variant_id", "locus_id", "element_type", "biosample", "tissue", "cell_type", "context_domain", "target_gene_id", "link_method", "source_dataset", "source_version", "evidence_level", "provenance_id"]
+      "fields": ["regulatory_evidence_id", "regulatory_element_id", "variant_id", "locus_id", "element_type", "annotation", "effect", "p_value", "biosample", "tissue", "cell_type", "context_domain", "target_gene_id", "link_method", "source_dataset", "source_version", "evidence_level", "provenance_id"]
     },
     "cell_types.tsv": {
       "primary_key": ["cell_type_id"],

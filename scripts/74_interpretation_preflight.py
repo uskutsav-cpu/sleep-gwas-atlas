@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import re
+import tarfile
 from pathlib import Path
 
 
@@ -22,6 +24,12 @@ READINESS_FIELDS = [
 ]
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 FAMILIES = {"regulatory", "cell_type", "pathway", "causal"}
+SCREEN_METADATA = re.compile(
+    r'\{"name":"([^"]*)","collection":"Core","ontology":"([^"]*)",'
+    r'"lifeStage":"([^"]*)","sampleType":"([^"]*)","displayName":"([^"]*)",'
+    r'"assays":\[\{"id":"dnase-[^"]*","assay":"dnase","url":"[^"]*",'
+    r'"experimentAccession":"(ENCSR[^"]*)"'
+)
 
 
 def fail(message: str) -> None:
@@ -63,6 +71,189 @@ def atomic_json(path: Path, value: object) -> None:
 
 def split_domains(value: str) -> set[str]:
     return {item for item in value.split(";") if item and item != "NA"}
+
+
+def validate_screen_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["screen_registry_v4"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file():
+        return False, "SCREEN component manifest is absent", {}
+    if sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "SCREEN component manifest differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe SCREEN component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"SCREEN component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"SCREEN component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {
+        "GRCH38_CCRE_COORDINATES", "CORE_COLLECTION_CLASS_MATRIX",
+        "DOWNLOADS_BIOSAMPLE_METADATA_SNAPSHOT",
+    }
+    if set(components) != required:
+        return False, "SCREEN component manifest is not the exact required three-file bundle", observed
+    bed_rows = sum(1 for _ in components["GRCH38_CCRE_COORDINATES"].open("rb"))
+    if bed_rows != manifest.get("ccre_count"):
+        return False, "SCREEN coordinate row count differs from the release manifest", observed
+    with gzip.open(components["CORE_COLLECTION_CLASS_MATRIX"], "rb") as handle:
+        header = handle.readline()
+        header_fields = header.rstrip(b"\n").decode("ascii").split("\t")
+        matrix_lines = 1 + sum(1 for _ in handle)
+    if (
+        len(header_fields) != manifest.get("matrix_column_count")
+        or matrix_lines != manifest.get("matrix_line_count_including_header")
+        or hashlib.sha256(header).hexdigest() != manifest.get("matrix_header_sha256")
+        or len(header_fields[1:]) != manifest.get("core_biosample_count")
+    ):
+        return False, "SCREEN Core Collection matrix shape/header differs from its release pin", observed
+    metadata_text = components["DOWNLOADS_BIOSAMPLE_METADATA_SNAPSHOT"].read_text(encoding="utf-8")
+    metadata_rows = SCREEN_METADATA.findall(metadata_text)
+    metadata_accessions = [row[5] for row in metadata_rows]
+    if (
+        len(metadata_rows) != manifest.get("core_biosample_count")
+        or len(metadata_accessions) != len(set(metadata_accessions))
+        or set(metadata_accessions) != set(header_fields[1:])
+    ):
+        return False, "SCREEN Core Collection metadata does not exactly match the matrix header", observed
+    observed.update({"coordinate_rows": bed_rows, "matrix_lines": matrix_lines, "core_biosamples": len(metadata_rows)})
+    return True, "", observed
+
+
+def validate_hocomoco_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["hocomoco_v14"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "HOCOMOCO component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    components: dict[str, Path] = {}
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe HOCOMOCO component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"HOCOMOCO component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"HOCOMOCO component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"H14CORE_MEME", "H14CORE_ANNOTATION", "H14CORE_PWM", "H14CORE_THRESHOLDS"}
+    if set(components) != required:
+        return False, "HOCOMOCO manifest is not the exact required four-file bundle", observed
+    motif_count = sum(
+        line.startswith("MOTIF ")
+        for line in components["H14CORE_MEME"].read_text(encoding="utf-8").splitlines()
+    )
+    annotation = [
+        json.loads(line) for line in components["H14CORE_ANNOTATION"].read_text(encoding="utf-8").splitlines()
+        if line
+    ]
+    annotation_names = [row.get("name") for row in annotation]
+    with tarfile.open(components["H14CORE_PWM"], "r:gz") as archive:
+        pwm_names = [Path(member.name).stem for member in archive.getmembers() if member.isfile() and member.name.endswith(".pwm")]
+    with tarfile.open(components["H14CORE_THRESHOLDS"], "r:gz") as archive:
+        threshold_names = [Path(member.name).stem for member in archive.getmembers() if member.isfile() and member.name.endswith(".thr")]
+    expected = int(spec["expected_motifs"])
+    if (
+        motif_count != expected or len(annotation_names) != expected
+        or len(set(annotation_names)) != expected or set(annotation_names) != set(pwm_names)
+        or set(annotation_names) != set(threshold_names)
+    ):
+        return False, "HOCOMOCO motif, annotation, PWM, and threshold identities are not the exact H14CORE family", observed
+    observed["motif_count"] = motif_count
+    return True, "", observed
+
+
+def validate_abc_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["abc_2021"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "ABC component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    components = manifest.get("components", [])
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    if len(components) != 1 or components[0].get("component_id") != "ABC_ALL_PREDICTIONS":
+        return False, "ABC manifest is not the exact required one-file bundle", observed
+    component = components[0]
+    relative = Path(str(component.get("path", "")))
+    if relative.is_absolute() or ".." in relative.parts:
+        return False, "unsafe ABC component path", observed
+    path = root / relative
+    if not path.is_file():
+        return False, "ABC all-predictions source is absent", observed
+    actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+    observed["components"]["ABC_ALL_PREDICTIONS"] = {
+        "bytes": actual_bytes, "sha256": actual_hash,
+    }
+    if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+        return False, "ABC all-predictions source differs from its exact pin", observed
+    expected_header = [
+        "chr", "start", "end", "name", "class", "activity_base", "TargetGene",
+        "TargetGeneTSS", "TargetGeneExpression", "TargetGenePromoterActivityQuantile",
+        "TargetGeneIsExpressed", "distance", "isSelfPromoter", "hic_contact",
+        "powerlaw_contact", "powerlaw_contact_reference", "hic_contact_pl_scaled",
+        "hic_pseudocount", "hic_contact_pl_scaled_adj", "ABC.Score.Numerator",
+        "ABC.Score", "powerlaw.Score.Numerator", "powerlaw.Score", "CellType",
+    ]
+    rows = 0
+    biosamples: set[str] = set()
+    genes: set[str] = set()
+    minimum_score, maximum_score = float("inf"), float("-inf")
+    try:
+        with gzip.open(path, "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != expected_header:
+                return False, "ABC header differs from the frozen 24-column schema", observed
+            raw_header = ("\t".join(reader.fieldnames) + "\n").encode()
+            if hashlib.sha256(raw_header).hexdigest() != manifest.get("header_sha256"):
+                return False, "ABC header differs from its release pin", observed
+            for row in reader:
+                if len(row) != len(expected_header) or None in row:
+                    return False, "ABC source contains a malformed row", observed
+                score = float(row["ABC.Score"])
+                if not 0 <= score <= 1:
+                    return False, "ABC source contains an invalid score", observed
+                rows += 1
+                biosamples.add(row["CellType"])
+                genes.add(row["TargetGene"])
+                minimum_score = min(minimum_score, score)
+                maximum_score = max(maximum_score, score)
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"ABC source is not a valid compressed prediction table: {exc}", observed
+    biosample_hash = hashlib.sha256(("\n".join(sorted(biosamples)) + "\n").encode()).hexdigest()
+    domain_map = manifest.get("domain_biosamples", {})
+    mapped = [value for domain in policy["regulatory_mapping"]["required_context_domains"] for value in domain_map.get(domain, [])]
+    if (
+        rows != manifest.get("row_count") or rows != spec["expected_rows"]
+        or len(biosamples) != manifest.get("biosample_count")
+        or len(biosamples) != spec["expected_biosamples"]
+        or len(genes) != manifest.get("gene_symbol_count")
+        or biosample_hash != manifest.get("sorted_biosample_list_sha256")
+        or minimum_score != manifest.get("minimum_released_abc_score")
+        or maximum_score != manifest.get("maximum_observed_abc_score")
+        or set(domain_map) != set(policy["regulatory_mapping"]["required_context_domains"])
+        or not mapped or len(mapped) != len(set(mapped)) or not set(mapped).issubset(biosamples)
+    ):
+        return False, "ABC rows, scores, genes, biosamples, or domain map differ from the frozen release", observed
+    observed.update({
+        "rows": rows, "biosamples": len(biosamples), "mapped_biosamples": len(mapped),
+        "gene_symbols": len(genes), "minimum_score": minimum_score,
+        "maximum_score": maximum_score, "sorted_biosample_list_sha256": biosample_hash,
+    })
+    return True, "", observed
 
 
 def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
@@ -143,6 +334,12 @@ def main() -> int:
         fail("source registry does not cover each locked causal estimator family exactly")
 
     readiness: list[dict[str, object]] = []
+    screen_ready, screen_blocker, screen_validation = validate_screen_bundle(root, policy)
+    screen_source_ids = set(policy["screen_registry_v4"]["source_ids"])
+    hocomoco_ready, hocomoco_blocker, hocomoco_validation = validate_hocomoco_bundle(root, policy)
+    hocomoco_source_id = policy["hocomoco_v14"]["source_id"]
+    abc_ready, abc_blocker, abc_validation = validate_abc_bundle(root, policy)
+    abc_source_id = policy["abc_2021"]["source_id"]
     allowed_source_status = {
         "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
         "DERIVED_WITHIN_WORKFLOW",
@@ -168,6 +365,15 @@ def main() -> int:
             )
             if not ready:
                 blocker = "local source is absent or differs from exact bytes/SHA256"
+            elif identity in screen_source_ids and not screen_ready:
+                ready = False
+                blocker = screen_blocker
+            elif identity == hocomoco_source_id and not hocomoco_ready:
+                ready = False
+                blocker = hocomoco_blocker
+            elif identity == abc_source_id and not abc_ready:
+                ready = False
+                blocker = abc_blocker
         elif row["source_status"] == "DERIVED_UPSTREAM":
             ready = path.is_file() and observed_bytes > 0
             if not ready:
@@ -204,6 +410,9 @@ def main() -> int:
         "policy_sha256": sha256(policy_path), "downstream_policy_sha256": sha256(downstream_path),
         "source_registry_sha256": sha256(registry_path),
         "method_references_sha256": sha256(references_path), "code_ready": True,
+        "screen_source_bundle": screen_validation,
+        "hocomoco_source_bundle": hocomoco_validation,
+        "abc_source_bundle": abc_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),

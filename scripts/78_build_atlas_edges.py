@@ -153,16 +153,18 @@ def main() -> int:
             ))
 
     for regulatory in rows["regulatory_elements"]:
-        first = edge_id("REGOVERLAP", regulatory["variant_id"], regulatory["regulatory_element_id"], regulatory["target_gene_id"])
-        second = edge_id("REGLINK", regulatory["regulatory_element_id"], regulatory["target_gene_id"], regulatory["variant_id"])
+        first = edge_id("REGOVERLAP", regulatory["regulatory_evidence_id"])
         common = {
+            "effect": regulatory["effect"], "p_value": regulatory["p_value"],
             "tissue": regulatory["tissue"], "cell_type": regulatory["cell_type"],
             "method": regulatory["link_method"], "evidence_level": regulatory["evidence_level"],
             "dataset": regulatory["source_dataset"], "version": regulatory["source_version"],
             "provenance_id": regulatory["provenance_id"],
         }
         edges.append(edge(first, regulatory["variant_id"], regulatory["regulatory_element_id"], "overlaps_regulatory_element", **common))
-        edges.append(edge(second, regulatory["regulatory_element_id"], regulatory["target_gene_id"], "links_to_gene", **common))
+        if regulatory["target_gene_id"] not in {"", "NA"}:
+            second = edge_id("REGLINK", regulatory["regulatory_evidence_id"], regulatory["target_gene_id"])
+            edges.append(edge(second, regulatory["regulatory_element_id"], regulatory["target_gene_id"], "links_to_gene", **common))
 
     for cell in rows["cell_types"]:
         identity = edge_id("CELL", cell["trait_or_locus_id"], cell["cell_type_id"])

@@ -30,7 +30,9 @@ each unit. Existing task results cause locking to fail.
 ## Result recording and canonical evidence
 
 Each external or derived analysis is imported through an explicit curator JSON
-record and `scripts/76_record_interpretation_task.py`. A task ends as
+record and `scripts/76_record_interpretation_task.py`, except for the locked
+GENCODE, SCREEN, HOCOMOCO, and ABC adapters, which produce the same
+checksum-bound normalized record automatically. A task ends as
 `COMPLETED`, `NO_EVIDENCE_FOUND`, `ACCESS_BLOCKED`, or `NOT_APPLICABLE` with a
 reason. `COMPLETED` requires a real exact-schema table; the other states cannot
 smuggle in rows. Output and provenance are immutable rather than overwritten.
@@ -43,11 +45,23 @@ smuggle in rows. Output and provenance are immutable rather than overwritten.
 - `results/atlas/causal_tests.tsv`; and
 - `results/tables/interpretation_coverage.tsv`.
 
+The regulatory adapters uniquely lift GRCh37 variants for GRCh38 GENCODE,
+SCREEN, and HOCOMOCO queries. Promoters may name only a supported same-locus
+gene; SCREEN interval and HOCOMOCO motif rows remain unlinked
+(`target_gene_id=NA`). The native-GRCh37 Nasser et al. ABC atlas is streamed
+once into a checksum-bound overlap cache, excludes self-promoter links, uses
+only 52 explicitly frozen non-transformed biosample labels across the four
+domains, and retains a target only when its exact symbol maps to one supported
+same-locus atlas gene. Its released score floor is 0.015 and the prespecified
+primary tier is 0.02. Neither tier is experimental proof of regulation.
+
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
-The complete null family remains auditable through coverage. Regulatory rows
-must link a fine-mapped same-locus variant to an already supported gene; a
-nearest-gene-only assignment is forbidden. MR rows need at least three
+The complete null family remains auditable through coverage. Promoter,
+enhancer-promoter-link, and 3D-contact rows must link a fine-mapped same-locus
+variant to an already supported gene; interval-only enhancer, open-chromatin,
+and motif evidence may remain unlinked. Nearest-gene-only assignment is
+forbidden. MR rows need at least three
 instruments, minimum F ≥ 10, and all required diagnostics. Robust causal
 wording additionally needs corrected multi-estimator agreement, clear
 pleiotropy diagnostics, correct Steiger direction, characterized or adjusted
@@ -76,7 +90,9 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, only the already pinned GENCODE promoter resource is ready;
-the other external releases still need exact pre-result curation, and four of
-six upstream canonical inputs do not yet exist. No downstream task result has
-been generated or claimed.
+repository state, six of 20 interpretation source families are ready: GENCODE
+promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
+2021 enhancer-gene atlas, and the within-workflow regulatory cell-type layer.
+Four of six upstream canonical inputs do not yet exist, and the remaining
+external releases or runtimes still require exact pre-result curation. No
+downstream task result has been generated or claimed.

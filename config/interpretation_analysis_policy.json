@@ -61,12 +61,16 @@
     ],
     "required_context_domains": ["brain", "immune", "metabolic", "vascular"],
     "variant_entry_rule": "PASS fine-mapping QC and membership in at least one credible set or a non-missing shared-signal posterior",
-    "target_gene_rule": "A target must already be a molecularly supported gene in the same locus; nearest-gene-only assignment is forbidden",
+    "target_gene_rule": "A non-missing target must already be a molecularly supported gene in the same locus; interval-only enhancer, open-chromatin, and motif overlaps retain target_gene_id=NA until a source-declared link exists; nearest-gene-only assignment is forbidden",
     "canonical_fields": [
+      "regulatory_evidence_id",
       "regulatory_element_id",
       "variant_id",
       "locus_id",
       "element_type",
+      "annotation",
+      "effect",
+      "p_value",
       "biosample",
       "tissue",
       "cell_type",
@@ -79,6 +83,74 @@
       "provenance_id"
     ],
     "claim_limit": "Regulatory overlap is annotation unless supported by signal-level and context-matched gene-linking evidence"
+  },
+  "screen_registry_v4": {
+    "source_ids": ["ENCODE_CCRE_V4_ENHANCER", "ENCODE_CCRE_V4_OPEN"],
+    "component_manifest": "config/interpretation_screen_registry_v4.json",
+    "component_manifest_sha256": "47fdd559358ed85e0314f01abfcc9d68933ef22f921fea063046f68b87cbf4a2",
+    "enhancer_classes": ["pELS", "dELS"],
+    "open_chromatin_classes": ["PLS", "pELS", "dELS", "CA-CTCF", "CA-H3K4me3", "CA-TF", "CA-only"],
+    "inactive_class": "Low-DNase",
+    "domain_ontologies": {
+      "brain": ["brain", "nerve"],
+      "immune": ["blood", "bone marrow", "spleen"],
+      "metabolic": ["liver", "pancreas"],
+      "vascular": ["blood vessel", "heart"]
+    },
+    "biosample_mapping_rule": "Use the exact Core Collection DNase experiment accession in the matrix header and the checksum-pinned SCREEN metadata snapshot; domain membership is the frozen ontology lookup above, without post-result relabeling",
+    "element_rule": "A variant must uniquely lift from GRCh37 to GRCh38 and overlap the half-open Registry V4 cCRE interval; enhancer tasks require a biosample-specific pELS/dELS class and open-chromatin tasks require any frozen accessible class",
+    "target_rule": "SCREEN interval overlap alone does not identify a target gene and therefore records target_gene_id=NA"
+  },
+  "hocomoco_v14": {
+    "source_id": "HOCOMOCO_V14",
+    "component_manifest": "config/interpretation_hocomoco_v14.json",
+    "component_manifest_sha256": "40450abb7c8f7a2382a88502175195683d93be4a48524197084bd91dbc5b6b3a",
+    "collection": "H14CORE",
+    "expected_motifs": 1595,
+    "maximum_motif_width": 31,
+    "primary_motif_p_threshold": 0.0001,
+    "sequence_source": "UCSC_hg38_sequence_API",
+    "sequence_api_template": "https://api.genome.ucsc.edu/getData/sequence?genome=hg38;chrom=chr{chromosome};start={start0};end={end0}",
+    "sequence_snapshot_rule": "Fetch only the checksum-locked GRCh38 window required for an eligible, SCREEN-accessible fine-mapped variant; retain the exact JSON response and SHA256 in results/sources before motif scoring",
+    "scoring_rule": "Use the official H14CORE PWM and its matching threshold-to-P-value map on both strands for both allele sequences; report only hits in which at least one allele has P<=1e-4 and the alternate allele changes the score",
+    "context_rule": "A motif result is eligible only when the same variant has a completed SCREEN enhancer or open-chromatin overlap in the same locked domain",
+    "target_rule": "A predicted motif effect does not identify a target gene and records target_gene_id=NA",
+    "claim_limit": "An allele-dependent motif score is a sequence-level prediction, not evidence that the TF binds or regulates a gene in vivo"
+  },
+  "abc_2021": {
+    "source_id": "ABC_ENHANCER_GENE",
+    "component_manifest": "config/interpretation_abc_2021.json",
+    "component_manifest_sha256": "d858327720b7b6000ded9b3d4ca5b7fc017f490d6ea243bb576368af6fb7b1fa",
+    "expected_rows": 7717392,
+    "expected_biosamples": 131,
+    "released_score_threshold": 0.015,
+    "primary_score_threshold": 0.02,
+    "exclude_self_promoters": true,
+    "domain_rule": "Use only the 52 exact non-transformed, biologically interpretable source labels frozen by domain in the checksum-pinned component manifest; all other source biosamples are excluded from domain-specific atlas evidence",
+    "element_rule": "Use the source half-open GRCh37 element interval and retain a fine-mapped atlas variant when start < one-based_position <= end; do not lift a native-GRCh37 ABC record",
+    "target_rule": "Retain only a source-declared TargetGene whose exact symbol maps to exactly one molecularly supported gene in the same atlas locus; unmatched or ambiguous symbols are excluded and nearest-gene substitution is forbidden",
+    "score_rule": "The frozen source contains ABC.Score>=0.015; retain all qualified source links and label ABC.Score>=0.02 as the prespecified primary tier without changing the released link set",
+    "cache_path": "work/interpretation_automatic/abc_2021_overlaps.tsv",
+    "cache_provenance_path": "work/interpretation_automatic/abc_2021_overlaps.provenance.json",
+    "claim_limit": "An ABC link is a context-specific enhancer-gene prediction; it is not experimental proof of regulation and becomes convergent gene evidence only when supported by an independent signal-level molecular modality"
+  },
+  "regulatory_build_harmonization": {
+    "analysis_build": "GRCh37",
+    "annotation_builds": ["GRCh37", "GRCh38"],
+    "native_grch37_source_ids": ["ABC_ENHANCER_GENE"],
+    "lifted_grch38_source_ids": ["GENCODE_V26_PROMOTERS", "ENCODE_CCRE_V4_ENHANCER", "ENCODE_CCRE_V4_OPEN", "HOCOMOCO_V14"],
+    "chain_path": "ref/hg19ToHg38.over.chain.gz",
+    "chain_bytes": 227698,
+    "chain_sha256": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+    "mapping_rule": "For a GRCh38 annotation, each one-based fine-mapped variant position must map uniquely to one forward or reverse GRCh38 autosomal point; ambiguous or unmapped variants are excluded with terminal provenance",
+    "native_build_rule": "A checksum-pinned GRCh37 annotation is queried directly against the one-based GRCh37 atlas variant after applying the source's documented interval convention"
+  },
+  "promoter_mapping": {
+    "source_id": "GENCODE_V26_PROMOTERS",
+    "upstream_bp": 2000,
+    "downstream_bp": 500,
+    "strand_aware": true,
+    "target_rule": "Only the version-stripped GENCODE gene matching a molecularly supported same-locus gene can be assigned as the promoter target"
   },
   "cell_types": {
     "required_strategies": [

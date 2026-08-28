@@ -88,7 +88,7 @@ def validate_rows(
     if fields != expected_fields:
         fail(f"{family} normalized input header differs from the locked schema")
     keys = {
-        "regulatory": ["regulatory_element_id", "variant_id", "target_gene_id"],
+        "regulatory": ["regulatory_evidence_id"],
         "cell_type": ["cell_type_id"], "pathway": ["pathway_id", "trait_or_locus_id"],
         "causal": ["causal_test_id"],
     }[family]
@@ -114,6 +114,8 @@ def validate_rows(
         if row.get("provenance_id", "") in MISSING:
             fail(f"missing source provenance for {identity}")
         if family == "regulatory":
+            if row["regulatory_element_id"] in MISSING or row["variant_id"] in MISSING:
+                fail(f"regulatory overlap lacks an element or variant for {identity}")
             if (
                 row["locus_id"] != task["locus_id"]
                 or row["element_type"] != task_source_layer(task, root, policy)
@@ -121,8 +123,16 @@ def validate_rows(
                 fail(f"regulatory task identity differs for {identity}")
             if row["context_domain"] != task["domain"]:
                 fail(f"regulatory result is outside the task domain for {identity}")
-            if (row["locus_id"], row["variant_id"]) not in variants or (row["locus_id"], row["target_gene_id"]) not in genes:
-                fail(f"regulatory result references an absent variant/gene for {identity}")
+            if (row["locus_id"], row["variant_id"]) not in variants:
+                fail(f"regulatory result references an absent variant for {identity}")
+            target = row["target_gene_id"]
+            if target not in MISSING and (row["locus_id"], target) not in genes:
+                fail(f"regulatory result references an absent gene for {identity}")
+            linked_layers = {"promoter", "enhancer_promoter_link", "3D_contact_where_available"}
+            if row["element_type"] in linked_layers and target in MISSING:
+                fail(f"linked regulatory layer lacks a supported target gene for {identity}")
+            finite(row["effect"], "effect", identity)
+            probability(row["p_value"], "p_value", identity)
             if row["source_dataset"] != task["source_id"] or row["source_version"] != task["source_release"]:
                 fail(f"regulatory source identity differs for {identity}")
         elif family == "cell_type":
@@ -198,6 +208,7 @@ def main() -> int:
     parser.add_argument("--status", required=True)
     parser.add_argument("--reason", required=True)
     parser.add_argument("--input")
+    parser.add_argument("--adapter-provenance")
     args = parser.parse_args()
     root = Path(args.root).resolve()
     policy_path = root / args.policy
@@ -231,10 +242,31 @@ def main() -> int:
     fields = policy[section]["canonical_fields"]
     rows: list[dict[str, str]] = []
     external: dict[str, object] | None = None
+    adapter_provenance: dict[str, object] | None = None
+    adapter_result_path: Path | None = None
+    if args.adapter_provenance:
+        adapter_path = Path(args.adapter_provenance).resolve()
+        if not adapter_path.is_file() or adapter_path.stat().st_size == 0:
+            fail("automatic adapter provenance is absent")
+        adapter = json.loads(adapter_path.read_text(encoding="utf-8"))
+        if adapter.get("task_id") != args.task_id or adapter.get("terminal_status") != status:
+            fail("automatic adapter provenance differs from the recorded task/status")
+        adapter_result_path = Path(str(adapter.get("normalized_result_path", ""))).resolve()
+        if (
+            not adapter_result_path.is_file()
+            or sha256(adapter_result_path) != adapter.get("normalized_result_sha256")
+        ):
+            fail("automatic adapter normalized result differs from its provenance")
+        adapter_provenance = {
+            "path": str(adapter_path), "bytes": adapter_path.stat().st_size,
+            "sha256": sha256(adapter_path),
+        }
     if status == "COMPLETED":
         if not args.input:
             fail("COMPLETED requires a normalized real result input")
         input_path = Path(args.input).resolve()
+        if adapter_result_path is not None and input_path != adapter_result_path:
+            fail("automatic adapter input is not the provenance-bound normalized result")
         input_fields, rows = read_tsv(input_path)
         if not rows:
             fail("COMPLETED result contains no rows; use NO_EVIDENCE_FOUND")
@@ -242,6 +274,10 @@ def main() -> int:
         external = {"path": str(input_path), "bytes": input_path.stat().st_size, "sha256": sha256(input_path)}
     elif args.input:
         fail(f"{status} must not include a result file")
+    elif adapter_result_path is not None:
+        adapter_fields, adapter_rows = read_tsv(adapter_result_path)
+        if adapter_fields != fields or adapter_rows:
+            fail("non-completed automatic adapter result must be a locked-schema header-only table")
     payload = table_text(fields, rows)
     result_path, provenance_path = root / task["normalized_result_path"], root / task["provenance_path"]
     if result_path.exists() or provenance_path.exists():
@@ -253,7 +289,8 @@ def main() -> int:
         "terminal_reason": reason, "policy_sha256": sha256(policy_path),
         "task_manifest_sha256": sha256(manifest_path), "task_input_scope_sha256": task["input_scope_sha256"],
         "source_id": task["source_id"], "source_release": task["source_release"],
-        "external_input": external, "result_path": task["normalized_result_path"],
+        "external_input": external, "adapter_provenance": adapter_provenance,
+        "result_path": task["normalized_result_path"],
         "result_rows": len(rows), "result_sha256": hashlib.sha256(payload.encode()).hexdigest(),
     }
     atomic_text(provenance_path, json.dumps(provenance, indent=2, sort_keys=True) + "\n")

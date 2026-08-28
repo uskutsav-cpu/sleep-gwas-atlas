@@ -1,5 +1,6 @@
 """Manifest-driven orchestration for the locked atlas-v1.0 panel."""
 import csv
+import json
 
 
 configfile: "config/workflow.yaml"
@@ -37,6 +38,18 @@ PLEIOTROPY_PAIRS = [f"{sleep}__{other}" for sleep in SLEEP_TRAITS for other in N
 unknown = set(SELECTED).difference(PANEL_IDS)
 if unknown:
     raise ValueError(f"phase0_traits contains IDs outside the locked panel: {sorted(unknown)}")
+
+with open(INTERPRETATION_POLICY, encoding="utf-8") as handle:
+    INTERPRETATION_SPEC = json.load(handle)
+with open(INTERPRETATION_SPEC["screen_registry_v4"]["component_manifest"], encoding="utf-8") as handle:
+    SCREEN_SOURCE_BUNDLE = json.load(handle)
+SCREEN_SOURCE_PATHS = [component["path"] for component in SCREEN_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["hocomoco_v14"]["component_manifest"], encoding="utf-8") as handle:
+    HOCOMOCO_SOURCE_BUNDLE = json.load(handle)
+HOCOMOCO_SOURCE_PATHS = [component["path"] for component in HOCOMOCO_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["abc_2021"]["component_manifest"], encoding="utf-8") as handle:
+    ABC_SOURCE_BUNDLE = json.load(handle)
+ABC_SOURCE_PATHS = [component["path"] for component in ABC_SOURCE_BUNDLE["components"]]
 
 
 rule all:
@@ -784,6 +797,12 @@ rule interpretation_preflight:
         downstream=DOWNSTREAM_POLICY,
         sources="config/interpretation_source_registry.tsv",
         references="config/interpretation_method_references.tsv",
+        source_manifests=[
+            INTERPRETATION_SPEC["screen_registry_v4"]["component_manifest"],
+            INTERPRETATION_SPEC["hocomoco_v14"]["component_manifest"],
+            INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
+        ],
+        source_files=SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS,
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",
         pairs="results/atlas/trait_pairs.tsv",
@@ -795,6 +814,21 @@ rule interpretation_preflight:
         report="results/tables/interpretation_preflight.json",
     shell:
         "{PYTHON} scripts/74_interpretation_preflight.py --report-only"
+
+
+rule abc_overlap_cache:
+    input:
+        policy=INTERPRETATION_POLICY,
+        sources="config/interpretation_source_registry.tsv",
+        manifest=INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
+        source=ABC_SOURCE_PATHS,
+        variants="results/atlas/variants.tsv",
+        genes="results/atlas/genes.tsv",
+    output:
+        cache=INTERPRETATION_SPEC["abc_2021"]["cache_path"],
+        provenance=INTERPRETATION_SPEC["abc_2021"]["cache_provenance_path"],
+    shell:
+        "{PYTHON} scripts/84_prepare_abc_overlap_cache.py"
 
 
 checkpoint interpretation_tasks:
@@ -826,6 +860,38 @@ def interpretation_task_dependencies(wildcards):
     if len(selected) != 1:
         raise ValueError(f"unknown interpretation task ID: {wildcards.task_id}")
     task = selected[0]
+    if task["source_id"] == INTERPRETATION_SPEC["abc_2021"]["source_id"]:
+        return [
+            rules.abc_overlap_cache.output.cache,
+            rules.abc_overlap_cache.output.provenance,
+        ]
+    if task["source_id"] == INTERPRETATION_SPEC["hocomoco_v14"]["source_id"]:
+        screen_ids = set(INTERPRETATION_SPEC["screen_registry_v4"]["source_ids"])
+        screen_tasks = [
+            row for row in rows
+            if row["analysis_family"] == "regulatory" and row["locus_id"] == task["locus_id"]
+            and row["domain"] == task["domain"] and row["source_id"] in screen_ids
+        ]
+        if len(screen_tasks) != len(screen_ids):
+            raise ValueError(f"motif task lacks exact SCREEN dependencies: {task['task_id']}")
+        return [
+            INTERPRETATION_SPEC["hocomoco_v14"]["component_manifest"],
+            INTERPRETATION_SPEC["regulatory_build_harmonization"]["chain_path"],
+            *HOCOMOCO_SOURCE_PATHS,
+            *[row["normalized_result_path"] for row in screen_tasks],
+            *[row["provenance_path"] for row in screen_tasks],
+        ]
+    if task["source_id"] in set(INTERPRETATION_SPEC["screen_registry_v4"]["source_ids"]):
+        return [
+            INTERPRETATION_SPEC["screen_registry_v4"]["component_manifest"],
+            INTERPRETATION_SPEC["regulatory_build_harmonization"]["chain_path"],
+            *SCREEN_SOURCE_PATHS,
+        ]
+    if task["source_id"] == INTERPRETATION_SPEC["promoter_mapping"]["source_id"]:
+        return [
+            INTERPRETATION_SPEC["regulatory_build_harmonization"]["chain_path"],
+            "ref/molecular/gtex_v8/gencode.v26.GRCh38.genes.gtf",
+        ]
     if task["method"] == "regulatory_overlap":
         return [row["provenance_path"] for row in rows if row["analysis_family"] == "regulatory"]
     if task["method"] == "QTL_colocalization":

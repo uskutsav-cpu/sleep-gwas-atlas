@@ -348,10 +348,10 @@ def main() -> int:
     regulatory = tables["regulatory_elements.tsv"]
     regulatory_ids = {row["regulatory_element_id"] for row in regulatory}
     for row in regulatory:
-        identity = row["regulatory_element_id"]
+        identity = row["regulatory_evidence_id"]
         if (row["locus_id"], row["variant_id"]) not in variant_locus:
             fail(f"regulatory element {identity} references an absent locus/variant")
-        if (row["locus_id"], row["target_gene_id"]) not in gene_locus:
+        if populated(row["target_gene_id"]) and (row["locus_id"], row["target_gene_id"]) not in gene_locus:
             fail(f"regulatory element {identity} references an absent locus/gene")
     required_layers = set(policy["regulatory_mapping"]["required_layers"])
     required_contexts = set(policy["regulatory_mapping"]["required_context_domains"])

@@ -85,12 +85,13 @@ def canonicalize_identities(family: str, row: dict[str, str], task: dict[str, st
     if family == "regulatory":
         native = row["regulatory_element_id"]
         context = "\x1f".join((
-            task["source_id"], native, row["biosample"], row["tissue"],
-            row["cell_type"], row["context_domain"],
+            task["source_id"], native, row["variant_id"], row["locus_id"],
+            row["biosample"], row["tissue"], row["cell_type"],
+            row["context_domain"], row["target_gene_id"], row["link_method"],
+            row["annotation"], row["effect"], row["p_value"],
         ))
-        row["regulatory_element_id"] = (
-            f"REG::{task['source_id']}::{native}::{hashlib.sha256(context.encode()).hexdigest()[:12]}"
-        )
+        row["regulatory_element_id"] = f"REG::{task['source_id']}::{native}"
+        row["regulatory_evidence_id"] = f"REGEV::{hashlib.sha256(context.encode()).hexdigest()[:24]}"
     elif family == "cell_type":
         native = row["cell_type_id"]
         context = "\x1f".join((
@@ -271,7 +272,7 @@ def main() -> int:
     causal = [dict(row) for row in by_family["causal"]]
     causal_fdr = classify_causal(causal)
     regulatory = [dict(row) for row in by_family["regulatory"]]
-    require_unique(regulatory, ("regulatory_element_id", "variant_id", "target_gene_id"), "regulatory")
+    require_unique(regulatory, ("regulatory_evidence_id",), "regulatory")
     require_unique(cells, ("cell_type_id",), "cell-type")
     require_unique(pathways, ("pathway_id", "trait_or_locus_id"), "pathway")
     require_unique(causal, ("causal_test_id",), "causal")

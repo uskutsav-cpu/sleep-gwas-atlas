@@ -1969,6 +1969,125 @@ class PanelContractTests(unittest.TestCase):
         for component in ("MAGMA", "TwoSampleMR", "MR-PRESSO", "CAUSE_or_LHC_MR"):
             self.assertIn(f'"{component}"', release_validator)
 
+    def test_regulatory_adapters_preserve_unlinked_screen_and_supported_promoters(self):
+        module = load_numbered_script("82_run_regulatory_task.py", "regulatory_adapter")
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        variant = {"variant_id": "rs1"}
+        screen_task = {
+            "task_id": "REG__L1__ENCODE_CCRE_V4_ENHANCER__brain",
+            "source_id": "ENCODE_CCRE_V4_ENHANCER", "source_release": "SCREEN_TEST",
+            "locus_id": "L1", "domain": "brain",
+        }
+        promoter_task = {
+            "task_id": "REG__L1__GENCODE_V26_PROMOTERS__brain",
+            "source_id": "GENCODE_V26_PROMOTERS", "source_release": "GENCODE_TEST",
+            "locus_id": "L1", "domain": "brain",
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            coordinates = directory / "ccres.bed"
+            coordinates.write_text("chr1\t100\t110\tEH38D1\tEH38E1\tpELS\n", encoding="ascii")
+            matrix = directory / "matrix.tsv.gz"
+            with gzip.open(matrix, "wt", encoding="ascii", newline="") as handle:
+                handle.write("cCRE\tENCSR1\nEH38E1\tpELS\n")
+            metadata = directory / "metadata.js"
+            metadata.write_text(
+                '{"name":"astrocyte","collection":"Core","ontology":"brain",'
+                '"lifeStage":"adult","sampleType":"primary cell","displayName":"astrocyte",'
+                '"assays":[{"id":"dnase-ENCFF1","assay":"dnase","url":"x",'
+                '"experimentAccession":"ENCSR1","fileAccession":"ENCFF1"}]}',
+                encoding="utf-8",
+            )
+            mapped = [{"variant": variant, "chromosome_grch38": 1, "position_grch38": 101, "target_strand": "+"}]
+            screen = module.screen_rows(screen_task, policy, mapped, coordinates, matrix, metadata)
+            self.assertEqual(len(screen), 1)
+            self.assertEqual(screen[0]["target_gene_id"], "NA")
+            self.assertEqual(screen[0]["cell_type"], "astrocyte")
+            self.assertEqual(list(screen[0]), policy["regulatory_mapping"]["canonical_fields"])
+
+            gtf = directory / "genes.gtf"
+            gtf.write_text(
+                'chr1\tGENCODE\tgene\t1000\t2000\t.\t+\t.\tgene_id "ENSG1.5"; gene_name "G1";\n',
+                encoding="utf-8",
+            )
+            promoter_mapped = [{"variant": variant, "chromosome_grch38": 1, "position_grch38": 900, "target_strand": "+"}]
+            promoters = module.promoter_rows(
+                promoter_task, policy, promoter_mapped, [{"locus_id": "L1", "gene_id": "ENSG1"}], gtf,
+            )
+            self.assertEqual(len(promoters), 1)
+            self.assertEqual(promoters[0]["target_gene_id"], "ENSG1")
+            self.assertEqual(promoters[0]["element_type"], "promoter")
+
+        schema = json.loads((ROOT / "config/atlas_table_schema.json").read_text(encoding="utf-8"))
+        self.assertEqual(schema["tables"]["regulatory_elements.tsv"]["primary_key"], ["regulatory_evidence_id"])
+        edge_builder = (ROOT / "scripts/78_build_atlas_edges.py").read_text(encoding="utf-8")
+        self.assertIn('if regulatory["target_gene_id"] not in {"", "NA"}', edge_builder)
+
+    def test_hocomoco_allele_scanner_uses_pinned_score_thresholds(self):
+        module = load_numbered_script("83_run_motif_task.py", "motif_adapter")
+        motif = {
+            "pwm": [[1.0, 0.0, 0.0, 0.0]],
+            "threshold_scores": [0.0, 1.0],
+            "threshold_p": [0.5, 0.01],
+        }
+        hit = module.best_allele_hit("A", "C", 0, motif, 0.05)
+        self.assertIsNotNone(hit)
+        self.assertEqual(hit["ref_p"], 0.01)
+        self.assertEqual(hit["alt_p"], 0.5)
+        self.assertEqual(hit["delta"], -1.0)
+        self.assertIsNone(module.best_allele_hit("A", "C", 0, motif, 0.001))
+
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        bundle_path = ROOT / policy["hocomoco_v14"]["component_manifest"]
+        self.assertEqual(hashlib.sha256(bundle_path.read_bytes()).hexdigest(), policy["hocomoco_v14"]["component_manifest_sha256"])
+        bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+        self.assertEqual({row["component_id"] for row in bundle["components"]}, {
+            "H14CORE_MEME", "H14CORE_ANNOTATION", "H14CORE_PWM", "H14CORE_THRESHOLDS",
+        })
+
+    def test_abc_adapter_requires_nonself_source_link_and_supported_gene(self):
+        module = load_numbered_script("84_prepare_abc_overlap_cache.py", "abc_adapter")
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        manifest_path = ROOT / policy["abc_2021"]["component_manifest"]
+        self.assertEqual(
+            hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+            policy["abc_2021"]["component_manifest_sha256"],
+        )
+        manifest = {
+            "release": "ABC_TEST", "row_count": 2, "biosample_count": 1,
+            "domain_biosamples": {"brain": ["astrocyte"], "immune": [], "metabolic": [], "vascular": []},
+        }
+        variants = [{
+            "locus_id": "L1", "variant_id": "rs1", "chromosome": "1", "position_bp": "101",
+            "qc_status": "PASS", "credible_set_sleep": "CS1", "credible_set_non_sleep": "NA",
+            "shared_signal_posterior": "NA",
+        }]
+        genes = [{"locus_id": "L1", "gene_id": "ENSG1", "gene_symbol": "G1"}]
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "abc.tsv.gz"
+            base = {field: "NA" for field in module.ABC_FIELDS}
+            base.update({
+                "chr": "chr1", "start": "100", "end": "110", "name": "element1",
+                "class": "genic", "activity_base": "1", "TargetGene": "G1",
+                "TargetGeneTSS": "1000", "TargetGeneExpression": "1",
+                "TargetGenePromoterActivityQuantile": "1", "TargetGeneIsExpressed": "True",
+                "distance": "899", "isSelfPromoter": "False", "ABC.Score": "0.025",
+                "CellType": "astrocyte",
+            })
+            self_promoter = dict(base, name="promoter", isSelfPromoter="True")
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=module.ABC_FIELDS, delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerows([base, self_promoter])
+            rows, counters = module.prepare_rows(policy, manifest, source, variants, genes)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["target_gene_id"], "ENSG1")
+        self.assertEqual(rows[0]["context_domain"], "brain")
+        self.assertEqual(rows[0]["effect"], "0.025")
+        self.assertEqual(rows[0]["evidence_level"], "ABC_PRIMARY_GE_0.02")
+        self.assertEqual(counters["self_promoter_rows_excluded"], 1)
+        self.assertEqual(list(rows[0]), policy["regulatory_mapping"]["canonical_fields"])
+
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
         families = policy["robustness"]["required_families"]
