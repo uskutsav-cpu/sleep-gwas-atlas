@@ -6,9 +6,13 @@ import argparse
 import csv
 import gzip
 import hashlib
+import io
 import json
+import math
 import re
+import subprocess
 import tarfile
+import zipfile
 from pathlib import Path
 
 
@@ -336,6 +340,177 @@ def validate_pchic_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, 
     return True, "", observed
 
 
+def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["fuma_scrna"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "FUMA scRNA component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe FUMA scRNA component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"FUMA scRNA component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"FUMA scRNA component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {
+        "FUMA_SCRNA_COMMIT_ARCHIVE", "FUMA_ENSEMBL_V92_GENE_BOUNDARIES",
+        "MAGMA_V1_10_SOURCE_ARCHIVE", "MAGMA_V1_10_ARM64_BINARY",
+        "MAGMA_1000G_PHASE3_EUR_ARCHIVE",
+    }
+    if set(components) != required:
+        return False, "FUMA scRNA manifest is not the exact required five-component bundle", observed
+
+    gene_ids: set[str] = set()
+    try:
+        with components["FUMA_ENSEMBL_V92_GENE_BOUNDARIES"].open(encoding="utf-8") as handle:
+            for line_number, line in enumerate(handle, start=1):
+                values = line.rstrip("\n").split()
+                if (
+                    len(values) != 6 or not re.fullmatch(r"ENSG[0-9]{11}", values[0])
+                    or values[0] in gene_ids
+                ):
+                    return False, f"invalid or duplicate Ensembl-v92 gene boundary at line {line_number}", observed
+                chromosome = 23 if values[1] == "X" else 24 if values[1] == "Y" else int(values[1])
+                start, end = int(values[2]), int(values[3])
+                if not 1 <= chromosome <= 24 or start < 1 or end < start or values[4] not in {"+", "-"}:
+                    return False, f"invalid Ensembl-v92 gene coordinate at line {line_number}", observed
+                gene_ids.add(values[0])
+    except (OSError, UnicodeError, ValueError) as exc:
+        return False, f"FUMA Ensembl-v92 gene boundary file is invalid: {exc}", observed
+    if len(gene_ids) != manifest.get("gene_count"):
+        return False, "FUMA Ensembl-v92 gene count differs from its release pin", observed
+
+    try:
+        with zipfile.ZipFile(components["MAGMA_V1_10_SOURCE_ARCHIVE"]) as archive:
+            names = {info.filename for info in archive.infolist()}
+            if any(Path(name).is_absolute() or ".." in Path(name).parts for name in names):
+                return False, "MAGMA source archive contains an unsafe path", observed
+            if "makefile" not in names or "src/magma.cpp" not in names:
+                return False, "MAGMA source archive lacks its makefile or primary source", observed
+        reference_expected = {row["name"]: row for row in manifest.get("reference_members", [])}
+        with zipfile.ZipFile(components["MAGMA_1000G_PHASE3_EUR_ARCHIVE"]) as archive:
+            infos = {info.filename: info for info in archive.infolist() if not info.is_dir()}
+            if set(infos) != set(reference_expected):
+                return False, "MAGMA EUR reference archive member family differs from its pin", observed
+            reference_observed: dict[str, object] = {}
+            for name, info in infos.items():
+                expected = reference_expected[name]
+                digest = hashlib.sha256()
+                with archive.open(info) as handle:
+                    for block in iter(lambda: handle.read(1024 * 1024), b""):
+                        digest.update(block)
+                actual_hash = digest.hexdigest()
+                reference_observed[name] = {"bytes": info.file_size, "sha256": actual_hash}
+                if info.file_size != expected["bytes"] or actual_hash != expected["sha256"]:
+                    return False, f"MAGMA EUR reference member differs from its exact pin: {name}", observed
+    except (OSError, zipfile.BadZipFile, RuntimeError) as exc:
+        return False, f"MAGMA source or EUR reference archive is invalid: {exc}", observed
+
+    binary = components["MAGMA_V1_10_ARM64_BINARY"]
+    version = subprocess.run([binary, "--version"], capture_output=True, text=True, check=False)
+    version_text = (version.stdout + version.stderr).strip()
+    if version.returncode or version_text != "MAGMA version: v1.10 (custom)":
+        return False, "checksum-pinned MAGMA binary does not report v1.10", observed
+
+    archive_path = components["FUMA_SCRNA_COMMIT_ARCHIVE"]
+    prefix = spec["archive_member_prefix"]
+    domains = {domain: 0 for domain in policy["cell_types"]["required_domains"]}
+    selected_observed: dict[str, object] = {}
+    try:
+        with tarfile.open(archive_path, "r:gz") as archive:
+            files = [member for member in archive.getmembers() if member.isfile()]
+            if any(Path(member.name).is_absolute() or ".." in Path(member.name).parts for member in files):
+                return False, "FUMA scRNA commit archive contains an unsafe path", observed
+            matrices = [
+                member for member in files
+                if member.name.startswith(prefix + "processed_data/") and member.name.endswith(".txt.gz")
+            ]
+            if (
+                len(matrices) != manifest.get("processed_matrix_count")
+                or sum(member.size for member in matrices) != manifest.get("processed_matrix_total_bytes")
+            ):
+                return False, "FUMA processed-matrix tree count or bytes differ from the frozen commit", observed
+            members = {member.name: member for member in files}
+            for dataset in manifest.get("datasets", []):
+                identity = dataset["dataset_id"]
+                member_name = prefix + dataset["member"]
+                member = members.get(member_name)
+                if member is None:
+                    return False, f"selected FUMA matrix is absent: {identity}", observed
+                handle = archive.extractfile(member)
+                if handle is None:
+                    return False, f"selected FUMA matrix cannot be read: {identity}", observed
+                raw = handle.read()
+                if (
+                    len(raw) != dataset["compressed_bytes"]
+                    or hashlib.sha256(raw).hexdigest() != dataset["compressed_sha256"]
+                ):
+                    return False, f"selected FUMA matrix differs from its compressed pin: {identity}", observed
+                text_bytes = gzip.decompress(raw)
+                if (
+                    len(text_bytes) != dataset["text_bytes"]
+                    or hashlib.sha256(text_bytes).hexdigest() != dataset["text_sha256"]
+                ):
+                    return False, f"selected FUMA matrix differs from its text pin: {identity}", observed
+                stream = io.BytesIO(text_bytes)
+                raw_header = stream.readline()
+                header = raw_header.decode("utf-8").split()
+                if (
+                    hashlib.sha256(raw_header).hexdigest() != dataset["header_sha256"]
+                    or len(header) != dataset["cell_type_count"] + 2
+                    or header[0] != "GENE" or header[-1] != "Average"
+                    or len(header) != len(set(header))
+                ):
+                    return False, f"selected FUMA matrix header differs from its pin: {identity}", observed
+                rows, seen = 0, set()
+                maximum_average_difference = 0.0
+                for line in stream:
+                    values = line.decode("utf-8").split()
+                    if len(values) != len(header) or values[0] in seen:
+                        return False, f"selected FUMA matrix has malformed or duplicate rows: {identity}", observed
+                    seen.add(values[0])
+                    numbers = [float(value) for value in values[1:]]
+                    if (
+                        not re.fullmatch(r"ENSG[0-9]{11}", values[0])
+                        or any(not math.isfinite(value) or value < 0 for value in numbers)
+                    ):
+                        return False, f"selected FUMA matrix has invalid genes or values: {identity}", observed
+                    maximum_average_difference = max(
+                        maximum_average_difference,
+                        abs(numbers[-1] - sum(numbers[:-1]) / len(numbers[:-1])),
+                    )
+                    rows += 1
+                if rows != dataset["gene_rows"] or maximum_average_difference > 1e-10:
+                    return False, f"selected FUMA matrix rows or Average column differ from its pin: {identity}", observed
+                domain = dataset["domain"]
+                if domain not in domains:
+                    return False, f"selected FUMA matrix has an unknown domain: {identity}", observed
+                domains[domain] += 1
+                selected_observed[identity] = {
+                    "gene_rows": rows, "cell_type_count": len(header) - 2,
+                    "maximum_average_difference": maximum_average_difference,
+                }
+    except (OSError, tarfile.TarError, gzip.BadGzipFile, UnicodeError, ValueError) as exc:
+        return False, f"FUMA scRNA commit archive or selected matrix is invalid: {exc}", observed
+    if domains != {domain: 2 for domain in domains}:
+        return False, "FUMA matrix selection is not exactly two prespecified matrices per domain", observed
+    observed.update({
+        "gene_count": len(gene_ids), "magma_version": version_text,
+        "reference_members": reference_observed, "selected_datasets": selected_observed,
+        "selected_datasets_by_domain": domains,
+    })
+    return True, "", observed
+
+
 def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
     pairs = (
         (policy["regulatory_mapping"]["required_layers"], downstream["regulatory_mapping"]["required_layers"]),
@@ -422,6 +597,8 @@ def main() -> int:
     abc_source_id = policy["abc_2021"]["source_id"]
     pchic_ready, pchic_blocker, pchic_validation = validate_pchic_bundle(root, policy)
     pchic_source_id = policy["pchic_2016"]["source_id"]
+    fuma_ready, fuma_blocker, fuma_validation = validate_fuma_bundle(root, policy)
+    fuma_source_id = policy["fuma_scrna"]["source_id"]
     allowed_source_status = {
         "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
         "DERIVED_WITHIN_WORKFLOW",
@@ -459,6 +636,9 @@ def main() -> int:
             elif identity == pchic_source_id and not pchic_ready:
                 ready = False
                 blocker = pchic_blocker
+            elif identity == fuma_source_id and not fuma_ready:
+                ready = False
+                blocker = fuma_blocker
         elif row["source_status"] == "DERIVED_UPSTREAM":
             ready = path.is_file() and observed_bytes > 0
             if not ready:
@@ -499,6 +679,7 @@ def main() -> int:
         "hocomoco_source_bundle": hocomoco_validation,
         "abc_source_bundle": abc_validation,
         "pchic_source_bundle": pchic_validation,
+        "fuma_scrna_source_bundle": fuma_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),

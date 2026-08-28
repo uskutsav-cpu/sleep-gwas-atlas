@@ -53,6 +53,17 @@ ABC_SOURCE_PATHS = [component["path"] for component in ABC_SOURCE_BUNDLE["compon
 with open(INTERPRETATION_SPEC["pchic_2016"]["component_manifest"], encoding="utf-8") as handle:
     PCHIC_SOURCE_BUNDLE = json.load(handle)
 PCHIC_SOURCE_PATHS = [component["path"] for component in PCHIC_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"], encoding="utf-8") as handle:
+    FUMA_SOURCE_BUNDLE = json.load(handle)
+FUMA_SOURCE_PATHS = [component["path"] for component in FUMA_SOURCE_BUNDLE["components"]]
+FUMA_MATRIX_PATHS = [
+    f"{INTERPRETATION_SPEC['fuma_scrna']['matrix_cache_dir']}/{dataset['dataset_id']}.txt"
+    for dataset in FUMA_SOURCE_BUNDLE["datasets"]
+]
+MAGMA_REFERENCE_PATHS = [
+    f"{INTERPRETATION_SPEC['fuma_scrna']['reference_dir']}/{member['name']}"
+    for member in FUMA_SOURCE_BUNDLE["reference_members"]
+]
 
 
 rule all:
@@ -805,10 +816,11 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["hocomoco_v14"]["component_manifest"],
             INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
             INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
+            INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
         ],
         source_files=(
             SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS
-            + PCHIC_SOURCE_PATHS
+            + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS
         ),
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",
@@ -853,6 +865,67 @@ rule pchic_overlap_cache:
         "{PYTHON} scripts/86_prepare_pchic_overlap_cache.py"
 
 
+rule fuma_scrna_matrices:
+    input:
+        policy=INTERPRETATION_POLICY,
+        manifest=INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+        source=FUMA_SOURCE_PATHS,
+    output:
+        matrices=FUMA_MATRIX_PATHS,
+        provenance=INTERPRETATION_SPEC["fuma_scrna"]["matrix_cache_provenance_path"],
+    shell:
+        "{PYTHON} scripts/88_materialize_fuma_resources.py --matrices"
+
+
+rule magma_eur_reference:
+    input:
+        policy=INTERPRETATION_POLICY,
+        manifest=INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+        archive=INTERPRETATION_SPEC["fuma_scrna"]["reference_archive_path"],
+    output:
+        members=MAGMA_REFERENCE_PATHS,
+        provenance=INTERPRETATION_SPEC["fuma_scrna"]["reference_extract_provenance_path"],
+    params:
+        acknowledgement=(
+            "--acknowledge-large-extract"
+            if config.get("acknowledge_large_extracts", False) else ""
+        ),
+    shell:
+        "{PYTHON} scripts/88_materialize_fuma_resources.py --reference {params.acknowledgement}"
+
+
+rule magma_gene_annotation:
+    input:
+        policy=INTERPRETATION_POLICY,
+        manifest=INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+        reference=rules.magma_eur_reference.output,
+        binary=INTERPRETATION_SPEC["fuma_scrna"]["magma_binary_path"],
+        genes=INTERPRETATION_SPEC["fuma_scrna"]["gene_location_path"],
+    output:
+        annotation=INTERPRETATION_SPEC["fuma_scrna"]["gene_annotation_prefix"] + ".genes.annot",
+        log=INTERPRETATION_SPEC["fuma_scrna"]["gene_annotation_prefix"] + ".log",
+        provenance=INTERPRETATION_SPEC["fuma_scrna"]["gene_annotation_provenance_path"],
+    shell:
+        "{PYTHON} scripts/89_prepare_magma_annotation.py"
+
+
+rule magma_gene_results:
+    input:
+        policy=INTERPRETATION_POLICY,
+        manifest=INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+        annotation=rules.magma_gene_annotation.output,
+        reference=rules.magma_eur_reference.output,
+        binary=INTERPRETATION_SPEC["fuma_scrna"]["magma_binary_path"],
+        gwas=INTERPRETATION_SPEC["fuma_scrna"]["gwas_path_template"],
+    output:
+        raw=INTERPRETATION_SPEC["fuma_scrna"]["gene_results_dir"] + "/{trait_id}/{trait_id}.genes.raw",
+        result=INTERPRETATION_SPEC["fuma_scrna"]["gene_results_dir"] + "/{trait_id}/{trait_id}.genes.out",
+        log=INTERPRETATION_SPEC["fuma_scrna"]["gene_results_dir"] + "/{trait_id}/{trait_id}.log",
+        provenance=INTERPRETATION_SPEC["fuma_scrna"]["gene_results_dir"] + "/{trait_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/90_prepare_magma_gene_results.py {wildcards.trait_id}"
+
+
 checkpoint interpretation_tasks:
     input:
         preflight="results/tables/interpretation_preflight.json",
@@ -882,6 +955,17 @@ def interpretation_task_dependencies(wildcards):
     if len(selected) != 1:
         raise ValueError(f"unknown interpretation task ID: {wildcards.task_id}")
     task = selected[0]
+    if task["source_id"] == INTERPRETATION_SPEC["fuma_scrna"]["source_id"]:
+        gene_prefix = (
+            f"{INTERPRETATION_SPEC['fuma_scrna']['gene_results_dir']}/"
+            f"{task['trait_id']}/{task['trait_id']}"
+        )
+        return [
+            *FUMA_MATRIX_PATHS,
+            INTERPRETATION_SPEC["fuma_scrna"]["matrix_cache_provenance_path"],
+            gene_prefix + ".genes.raw", gene_prefix + ".genes.out", gene_prefix + ".log",
+            f"{INTERPRETATION_SPEC['fuma_scrna']['gene_results_dir']}/{task['trait_id']}/provenance.json",
+        ]
     if task["source_id"] == INTERPRETATION_SPEC["pchic_2016"]["source_id"]:
         if task["domain"] in set(INTERPRETATION_SPEC["pchic_2016"]["available_domains"]):
             return [

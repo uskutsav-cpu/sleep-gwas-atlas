@@ -2,6 +2,7 @@ import csv
 import gzip
 import hashlib
 import importlib.util
+import io
 import math
 import json
 import os
@@ -10,6 +11,7 @@ import shutil
 import sqlite3
 import subprocess
 import sys
+import tarfile
 import tempfile
 import unittest
 
@@ -2136,6 +2138,88 @@ class PanelContractTests(unittest.TestCase):
         self.assertTrue(all(row["effect"] == "6" for row in rows))
         self.assertEqual(counters["source_rows"], 1)
         self.assertTrue(all(list(row) == policy["regulatory_mapping"]["canonical_fields"] for row in rows))
+
+    def test_fuma_scrna_source_and_magma_method_are_pre_result_locked(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        spec = policy["fuma_scrna"]
+        manifest_path = ROOT / spec["component_manifest"]
+        self.assertEqual(hashlib.sha256(manifest_path.read_bytes()).hexdigest(), spec["component_manifest_sha256"])
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(manifest["commit"], "dd526163ea80af1a80a6cdc80db167144500694b")
+        self.assertEqual(manifest["processed_matrix_count"], 179)
+        self.assertEqual(manifest["gene_count"], 20260)
+        self.assertEqual(manifest["magma_version"], "1.10")
+        self.assertEqual(manifest["gene_window_kb"], [1, 1])
+        self.assertEqual(manifest["reference_archive_uncompressed_bytes"], 3600697827)
+        domains = {domain: 0 for domain in policy["cell_types"]["required_domains"]}
+        for dataset in manifest["datasets"]:
+            domains[dataset["domain"]] += 1
+            self.assertEqual(len(dataset["compressed_sha256"]), 64)
+            self.assertEqual(len(dataset["text_sha256"]), 64)
+            self.assertGreaterEqual(dataset["cell_type_count"], 4)
+        self.assertEqual(domains, {domain: 2 for domain in domains})
+        self.assertEqual(spec["gene_property_model"], "condition-hide=Average direction=greater")
+        self.assertEqual(spec["gene_model"], "snp-wise=mean")
+        self.assertEqual(spec["p_value_floor"], 1e-300)
+        with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
+            source = next(row for row in csv.DictReader(handle, delimiter="\t") if row["source_id"] == "FUMA_SCRNA")
+        self.assertEqual(source["source_status"], "SOURCE_VERIFIED")
+        self.assertEqual(source["exact_release"], manifest["release"])
+        self.assertEqual(int(source["expected_bytes"]), 438582802)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        for rule in ("fuma_scrna_matrices", "magma_eur_reference", "magma_gene_annotation", "magma_gene_results"):
+            self.assertIn(f"rule {rule}:", workflow)
+        self.assertIn("91_run_fuma_scrna_task.py", (ROOT / "scripts/76_run_interpretation_task.py").read_text())
+
+    def test_fuma_matrix_materializer_preserves_exact_text(self):
+        module = load_numbered_script("88_materialize_fuma_resources.py", "fuma_resources")
+        text = b"GENE\tA\tB\tAverage\nENSG00000000001\t1\t3\t2\n"
+        compressed = gzip.compress(text, mtime=0)
+        dataset = {
+            "dataset_id": "TEST", "member": "processed_data/TEST.txt.gz",
+            "domain": "brain", "species": "human", "tissue": "brain",
+            "compressed_bytes": len(compressed),
+            "compressed_sha256": hashlib.sha256(compressed).hexdigest(),
+            "text_bytes": len(text), "text_sha256": hashlib.sha256(text).hexdigest(),
+            "gene_rows": 1, "cell_type_count": 2,
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            archive = temporary_path / "source.tar.gz"
+            member_name = "commit/processed_data/TEST.txt.gz"
+            with tarfile.open(archive, "w:gz") as handle:
+                info = tarfile.TarInfo(member_name)
+                info.size = len(compressed)
+                handle.addfile(info, io.BytesIO(compressed))
+            records = module.materialize_matrices(archive, "commit/", [dataset], temporary_path / "out")
+            output = temporary_path / "out/TEST.txt"
+            self.assertEqual(output.read_bytes(), text)
+            self.assertEqual(records[0]["sha256"], hashlib.sha256(text).hexdigest())
+
+    def test_magma_pvalue_materializer_and_gsa_parser_are_fail_closed(self):
+        gene_module = load_numbered_script("90_prepare_magma_gene_results.py", "magma_genes")
+        task_module = load_numbered_script("91_run_fuma_scrna_task.py", "magma_cell_task")
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            source = temporary_path / "trait.tsv.gz"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write("SNP\tP\tN\nrs1\t0\t1000\nrs2\t0.5\t900\n")
+            pvalues = temporary_path / "trait.pval.tsv"
+            details = gene_module.materialize_pvalues(
+                source, pvalues,
+                {"gwas_snp_field": "SNP", "gwas_p_field": "P", "gwas_n_field": "N", "p_value_floor": 1e-300},
+            )
+            self.assertEqual(details["rows"], 2)
+            self.assertEqual(details["p_values_floored"], 1)
+            self.assertIn("rs1\t1e-300\t1000", pvalues.read_text(encoding="utf-8"))
+            gsa = temporary_path / "test.gsa.out"
+            gsa.write_text(
+                "# TOTAL_GENES = 12000\nVARIABLE TYPE NGENES BETA BETA_STD SE P\n"
+                "A COVAR 12000 0.1 0.2 0.03 0.001\nB COVAR 12000 -0.2 -0.3 0.04 0.9\n",
+                encoding="utf-8",
+            )
+            rows = task_module.parse_gsa(gsa, ["A", "B"])
+            self.assertEqual([row["VARIABLE"] for row in rows], ["A", "B"])
 
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))

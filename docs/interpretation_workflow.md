@@ -62,6 +62,18 @@ serve the immune domain; brain, metabolic, and vascular tasks are recorded as
 `NOT_APPLICABLE`, not as negative evidence. A qualifying contact is evidence
 of physical proximity, not proof of enhancer activity or causal regulation.
 
+The FUMA single-cell strategy is frozen to the public
+`vufuma/FUMA_scRNA_data` repository at commit
+`dd526163ea80af1a80a6cdc80db167144500694b`. Exactly two matrices per domain
+were selected before results were viewed. MAGMA v1.10 uses the FUMA Ensembl
+v92 GRCh37 coding-gene boundaries (20,260 genes), a 1 kb upstream/downstream
+window, the SNP-wise mean gene model, and one-sided positive gene-property
+tests conditioned on each matrix's `Average` expression column. The bundled
+MAGMA source was compiled natively for ARM64 with Eigen vectorization disabled;
+the compiler identity and executable checksum are pinned. Vascular matrices
+originate from mouse vascular studies already mapped by FUMA to human Ensembl
+identifiers, so cross-species interpretation remains an explicit limitation.
+
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
 The complete null family remains auditable through coverage. Promoter,
@@ -97,10 +109,14 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, seven of 20 interpretation source families are ready: GENCODE
+repository state, eight of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
-2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, and the
-within-workflow regulatory cell-type layer.
+2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
+FUMA single-cell/MAGMA bundle, and the within-workflow regulatory cell-type
+layer. The compressed official 1000 Genomes Phase 3 GRCh37 European MAGMA
+reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
+not materialized until at least 4,674,439,651 bytes are free; the workflow also
+requires an explicit large-extraction acknowledgement.
 Four of six upstream canonical inputs do not yet exist, and the remaining
 external releases or runtimes still require exact pre-result curation. No
 downstream task result has been generated or claimed.
