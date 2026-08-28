@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from liftover_chain import load_chain, reverse_complement
+import molecular_contract
 
 
 SUPPORTED_FAMILIES = {
@@ -106,11 +107,10 @@ def main() -> int:
     root = Path(args.root).resolve()
     plan_path, lock_path = root / args.plan, root / args.plan_lock
     policy_path, variants_path = root / args.policy, root / args.variants
-    plan_fields, plan = read_tsv(plan_path)
-    del plan_fields
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if lock.get("plan_sha256") != sha256(plan_path) or lock.get("results_accessed_before_lock") is not False:
-        fail("molecular search plan differs from its result-free lock")
+    plan, lock = molecular_contract.validate_search_plan(
+        root, plan_path, lock_path, policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
     selected = [row for row in plan if row["search_task_id"] == args.search_task_id]
     if len(selected) != 1:
         fail("search_task_id must identify exactly one locked query")
@@ -238,7 +238,7 @@ def main() -> int:
         headers_path = staging / "remote_headers.json"
         headers_path.write_text(json.dumps(remote, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         provenance = {
-            "schema_version": "atlas-v1.0-molecular-query.1",
+            "schema_version": "atlas-v1.0-molecular-query.2",
             "queried_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "search_task_id": args.search_task_id, "search_plan_sha256": sha256(plan_path),
             "search_plan_lock_sha256": sha256(lock_path), "policy_sha256": sha256(policy_path),
@@ -254,6 +254,7 @@ def main() -> int:
                 "normalized_qtl.tsv.gz": {"bytes": normalized_path.stat().st_size, "sha256": sha256(normalized_path)},
                 "remote_headers.json": {"bytes": headers_path.stat().st_size, "sha256": sha256(headers_path)},
             },
+            "script_sha256": molecular_contract.script_hashes(root, "qtl"),
             "results_accessed_before_lock": False, "claim_limit": policy["claim_limit"],
         }
         provenance_path = staging / "provenance.json"

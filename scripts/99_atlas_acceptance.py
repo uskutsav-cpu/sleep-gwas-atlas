@@ -480,7 +480,7 @@ def molecular_gates(root: Path) -> list[Gate]:
         ]
     return [
         Gate("colocalization", "PASS", "checksum-validated trait-trait plus molecular-QTL colocalization", ""),
-        Gate("molecular_integration", "PASS", "complete four-modality locus coverage and supported-gene integration", ""),
+        Gate("molecular_integration", "PASS", "complete panel-wide TWAS plus exact QTL locus coverage (including a locked zero-locus not-applicable family) and supported-gene integration", ""),
     ]
 
 

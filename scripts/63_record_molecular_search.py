@@ -15,6 +15,8 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+import molecular_contract
+
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -71,10 +73,10 @@ def main() -> int:
     root = Path(args.root).resolve()
     plan_path, lock_path = root / args.plan, root / args.plan_lock
     policy_path, variants_path = root / args.policy, root / args.variants
-    _, plan = read_tsv(plan_path)
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if lock.get("plan_sha256") != sha256(plan_path) or lock.get("results_accessed_before_lock") is not False:
-        fail("molecular search plan differs from its result-free lock")
+    plan, lock = molecular_contract.validate_search_plan(
+        root, plan_path, lock_path, policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
     selected = [row for row in plan if row["search_task_id"] == args.search_task_id]
     if len(selected) != 1:
         fail("search_task_id must identify exactly one locked source search")
@@ -138,7 +140,7 @@ def main() -> int:
         evidence_out = staging / "search_evidence.json"
         evidence_out.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         provenance = {
-            "schema_version": "atlas-v1.0-molecular-query.1",
+            "schema_version": "atlas-v1.0-molecular-query.2",
             "queried_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "search_task_id": args.search_task_id, "search_plan_sha256": sha256(plan_path),
             "search_plan_lock_sha256": sha256(lock_path), "policy_sha256": sha256(policy_path),
@@ -152,6 +154,7 @@ def main() -> int:
                 "normalized_qtl.tsv.gz": {"bytes": normalized_out.stat().st_size, "sha256": sha256(normalized_out)},
                 "search_evidence.json": {"bytes": evidence_out.stat().st_size, "sha256": sha256(evidence_out)},
             },
+            "script_sha256": molecular_contract.script_hashes(root, "qtl"),
             "results_accessed_before_lock": False, "curator": args.curator,
             "claim_limit": policy["claim_limit"],
         }

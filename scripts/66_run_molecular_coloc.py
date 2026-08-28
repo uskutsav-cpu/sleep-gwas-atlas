@@ -13,14 +13,10 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+import fine_mapping_contract
+import molecular_contract
 
-OUTPUTS = {
-    "variants.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "dataset_type", "SNP", "CHR", "BP", "A1", "A2", "BETA", "SE", "MAF", "INFO", "prior_method", "normalized_prior_weight", "PIP", "credible_set_ids", "max_alpha_component", "model_converged", "rss_ld_s", "kriging_allele_switch_outlier"],
-    "credible_sets.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "signal_id", "component_index", "lead_snp", "lead_pip", "credible_set_size", "credible_set_snps", "requested_coverage", "achieved_coverage", "min_abs_corr", "mean_abs_corr", "median_abs_corr", "cs_log10bf", "model_converged"],
-    "colocalization.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset1_id", "dataset2_id", "molecular_feature_id", "tissue_cell_context", "coloc_method", "p1", "p2", "p12", "prior_role", "signal1", "signal2", "hit1", "hit2", "nsnps", "PP_H0", "PP_H1", "PP_H2", "PP_H3", "PP_H4", "PP_H4_over_PP_H3", "top_shared_variant", "top_shared_variant_PP_H4", "fine_mapping_qc", "analysis_status", "single_signal_fallback_justification", "claim_limit"],
-    "shared_variant_posteriors.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "coloc_method", "p12", "signal1", "signal2", "SNP", "SNP_PP_H4"],
-    "diagnostics.tsv": ["comparison_id", "pair_id", "locus_id", "comparison_type", "dataset_id", "dataset_role", "variant_count", "model_converged", "niter", "credible_set_count", "max_pip", "rss_ld_s", "kriging_allele_switch_outlier_count", "kriging_allele_switch_outliers", "diagnostic_status"],
-}
+OUTPUTS = fine_mapping_contract.ENGINE_OUTPUT_FIELDS
 
 
 def fail(message: str) -> None:
@@ -71,6 +67,8 @@ def main() -> int:
     parser.add_argument("--root", default=".")
     parser.add_argument("--task-dir", default="results/molecular/tasks")
     parser.add_argument("--run-dir", default="results/molecular/coloc_runs")
+    parser.add_argument("--manifest", default="results/tables/molecular_feature_manifest.tsv")
+    parser.add_argument("--manifest-lock", default="results/tables/molecular_feature_manifest.lock.json")
     parser.add_argument("--policy", default="config/molecular_analysis_policy.json")
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
@@ -78,14 +76,25 @@ def main() -> int:
     task_path = root / args.task_dir / f"{args.comparison_id}.tsv"
     task_lock_path = root / args.task_dir / f"{args.comparison_id}.lock.json"
     policy_path = root / args.policy
+    manifest_path, manifest_lock_path = root / args.manifest, root / args.manifest_lock
+    manifest, _ = molecular_contract.validate_feature_family(
+        root, manifest_path, manifest_lock_path, policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
+    if len([row for row in manifest if row["comparison_id"] == args.comparison_id]) != 1:
+        fail("molecular comparison is outside the locked feature family")
     if not task_path.is_file() or not task_lock_path.is_file():
         fail("checksum-locked molecular task is absent")
     task_lock = json.loads(task_lock_path.read_text(encoding="utf-8"))
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     if (
-        task_lock.get("comparison_id") != args.comparison_id
+        task_lock.get("schema_version") != "atlas-v1.0-molecular-coloc-task.2"
+        or task_lock.get("comparison_id") != args.comparison_id
         or task_lock.get("task_sha256") != sha256(task_path)
+        or task_lock.get("manifest_sha256") != sha256(manifest_path)
+        or task_lock.get("manifest_lock_sha256") != sha256(manifest_lock_path)
         or task_lock.get("policy_sha256") != sha256(policy_path)
+        or task_lock.get("script_sha256") != molecular_contract.script_hashes(root, "qtl")
         or task_lock.get("trait_molecular_results_accessed_before_lock") is not False
     ):
         fail("molecular task differs from its pre-result lock")
@@ -97,9 +106,12 @@ def main() -> int:
         ("summary1_path", "summary1_sha256"), ("summary2_path", "summary2_sha256"),
         ("ld_path", "ld_sha256"), ("ld_variant_order_path", "ld_variant_order_sha256"),
     ):
-        path = Path(task[path_field])
-        if not path.is_absolute(): path = root / path
-        if not path.is_file() or sha256(path) != task[hash_field]:
+        relative = molecular_contract.safe_relative(task[path_field], path_field)
+        path = root / relative
+        if (
+            not path.is_file() or sha256(path) != task[hash_field]
+            or task_lock.get("outputs", {}).get(path.name) != task[hash_field]
+        ):
             fail(f"locked molecular task input differs: {path_field}")
     engine = root / policy["generic_engine"]["path"]
     if not engine.is_file() or sha256(engine) != policy["generic_engine"]["sha256"]:
@@ -142,9 +154,11 @@ def main() -> int:
             for field in ("PP_H0", "PP_H1", "PP_H2", "PP_H3", "PP_H4", "top_shared_variant_PP_H4"):
                 probability(row[field], field, args.comparison_id)
         provenance = {
-            "schema_version": "atlas-v1.0-molecular-coloc-run.1", "comparison_id": args.comparison_id,
+            "schema_version": "atlas-v1.0-molecular-coloc-run.2", "comparison_id": args.comparison_id,
             "task_sha256": sha256(task_path), "task_lock_sha256": sha256(task_lock_path),
+            "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(manifest_lock_path),
             "policy_sha256": sha256(policy_path), "engine_sha256": sha256(engine),
+            "script_sha256": molecular_contract.script_hashes(root, "qtl"),
             "stdout": result.stdout.strip(), "stderr": result.stderr.strip(),
             "outputs": {name: {"rows": len(outputs[name]), "sha256": sha256(path)} for name, path in output_paths.items()},
             "claim_limit": policy["claim_limit"],

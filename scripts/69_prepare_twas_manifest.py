@@ -11,23 +11,11 @@ import math
 from datetime import datetime, timezone
 from pathlib import Path
 
+import molecular_contract
 
-MAPPING_FIELDS = [
-    "mapping_id", "trait_id", "model_family", "modality", "full_gwas_path", "full_gwas_sha256",
-    "model_variant_path", "model_variant_sha256", "mapped_gwas_path", "mapped_gwas_lock_path",
-    "results_accessed_before_lock",
-]
-ELIGIBILITY_FIELDS = [
-    "trait_id", "trait_domain", "trait_type", "gwas_N", "gwas_h2", "gwas_h2_scale",
-    "analysis_status", "reason", "results_accessed_before_lock",
-]
-RUN_FIELDS = [
-    "run_id", "trait_id", "trait_domain", "model_id", "model_family", "modality", "context",
-    "mapping_id", "mapped_gwas_path", "mapped_gwas_lock_path", "model_db_path", "model_db_sha256",
-    "covariance_path", "covariance_sha256", "model_snp_key", "gwas_N", "gwas_h2",
-    "gwas_h2_scale", "variance_control_status", "output_path",
-    "results_accessed_before_lock",
-]
+MAPPING_FIELDS = molecular_contract.TWAS_MAPPING_FIELDS
+ELIGIBILITY_FIELDS = molecular_contract.TWAS_ELIGIBILITY_FIELDS
+RUN_FIELDS = molecular_contract.TWAS_RUN_FIELDS
 
 
 def fail(message: str) -> None:
@@ -55,17 +43,9 @@ def table_text(fields: list[str], rows: list[dict[str, object]]) -> str:
     return output.getvalue()
 
 
-def qc_prefiltered(path: Path) -> bool:
-    return any(line.startswith("prefilter_strategy\t") for line in path.read_text(encoding="utf-8").splitlines())
-
-
 def full_input(root: Path, trait: str) -> Path | None:
-    for directory in ("data/harmonized_mixer_full", "data/harmonized"):
-        data = root / directory / f"{trait}.harmonized.tsv.gz"
-        qc = root / directory / f"{trait}.qc.txt"
-        if data.is_file() and qc.is_file() and not qc_prefiltered(qc):
-            return data
-    return None
+    data, _, ready = molecular_contract.fine_mapping_contract.choose_full_input(root, trait)
+    return data if ready else None
 
 
 def trait_eligibility(trait: dict[str, str], evidence: dict[str, str]) -> dict[str, object]:
@@ -101,19 +81,14 @@ def main() -> int:
     parser.add_argument("--lock-out", default="results/tables/twas_run_manifest.lock.json")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy_path, preflight_path = root / args.policy, root / args.preflight
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
+    preflight_path = root / args.preflight
     model_path, model_lock_path = root / args.models, root / args.models_lock
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if preflight.get("policy_sha256") != sha256(policy_path) or not preflight.get("metaxcan_runtime_ready"):
-        fail("pinned molecular preflight does not have a ready MetaXcan runtime")
-    if not preflight.get("upstream_fine_mapping_ready"):
-        fail("TWAS manifest remains downstream of locked fine-mapping outputs")
-    model_lock = json.loads(model_lock_path.read_text(encoding="utf-8"))
-    model_fields, models = read_tsv(model_path)
-    del model_fields
-    if model_lock.get("registry_sha256") != sha256(model_path) or model_lock.get("model_ids_in_locked_order") != [row["model_id"] for row in models]:
-        fail("TWAS model registry differs from lock")
+    molecular_contract.validate_preflight(root, policy_path, preflight_path, purpose="twas")
+    models, model_lock = molecular_contract.validate_model_registry(
+        root, model_path, model_lock_path, policy_path,
+        root / "results/tables/twas_model_phi_exclusions.tsv",
+    )
     panel_fields, panel = read_tsv(root / "config/analysis_panel.tsv")
     del panel_fields
     if len(panel) != 45 or len({row["trait_id"] for row in panel}) != 45:
@@ -200,7 +175,7 @@ def main() -> int:
     eligibility_out.write_text(table_text(ELIGIBILITY_FIELDS, eligibility_rows), encoding="utf-8")
     run_out.write_text(table_text(RUN_FIELDS, run_rows), encoding="utf-8")
     lock_payload = {
-        "schema_version": "atlas-v1.0-twas-runs.1", "locked_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "schema_version": "atlas-v1.0-twas-runs.2", "locked_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "results_accessed_before_lock": False, "trait_count": 45, "eligible_trait_count": len(eligible),
         "not_applicable_trait_count": 45 - len(eligible), "model_count": len(models),
         "mapping_count": len(mapping_rows), "run_count": len(run_rows), "run_ids_in_locked_order": run_ids,
@@ -208,6 +183,9 @@ def main() -> int:
         "eligibility_sha256": sha256(eligibility_out), "atlas_traits_sha256": sha256(atlas_traits_path),
         "model_registry_sha256": sha256(model_path), "model_registry_lock_sha256": sha256(model_lock_path),
         "policy_sha256": sha256(policy_path), "preflight_sha256": sha256(preflight_path),
+        "fine_mapping_provenance_sha256": sha256(root / "results/atlas/fine_mapping.provenance.json"),
+        "full_gwas_sha256_by_trait": {trait: sha256(path) for trait, path in full.items() if path is not None},
+        "script_sha256": molecular_contract.script_hashes(root, "twas"),
         "claim_limit": policy["claim_limit"],
     }
     lock_out.write_text(json.dumps(lock_payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")

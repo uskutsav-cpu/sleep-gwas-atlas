@@ -15,6 +15,9 @@ import statistics
 import tempfile
 from pathlib import Path
 
+import fine_mapping_contract
+import molecular_contract
+
 
 SUMMARY_FIELDS = ["SNP", "CHR", "BP", "A1", "A2", "BETA", "SE", "MAF", "INFO", "PRIOR_WEIGHT"]
 TASK_FIELDS = [
@@ -103,14 +106,11 @@ def main() -> int:
         fail("materialization requires explicit --materialize after feature-family lock review")
     root = Path(args.root).resolve()
     manifest_path, lock_path, policy_path = root / args.manifest, root / args.manifest_lock, root / args.policy
-    fields, manifest = read_tsv(manifest_path)
-    del fields
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if lock.get("manifest_sha256") != sha256(manifest_path) or lock.get("policy_sha256") != sha256(policy_path):
-        fail("molecular feature manifest differs from its lock")
-    if lock.get("comparison_ids_in_locked_order") != [row["comparison_id"] for row in manifest]:
-        fail("molecular comparison family/order differs from lock")
+    manifest, lock = molecular_contract.validate_feature_family(
+        root, manifest_path, lock_path, policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
     selected = [row for row in manifest if row["comparison_id"] == args.comparison_id]
     if len(selected) != 1:
         fail("comparison_id must identify exactly one molecular feature comparison")
@@ -128,7 +128,12 @@ def main() -> int:
         fail("fine-mapping trait task is not one row")
     trait_task = trait_tasks[0]
     trait_lock = json.loads(trait_task_lock_path.read_text(encoding="utf-8"))
-    if trait_lock.get("task_sha256") != sha256(trait_task_path) or trait_lock.get("results_accessed_before_lock") is not False:
+    if (
+        trait_lock.get("schema_version") != "atlas-v1.0-finemapping-task.2"
+        or trait_lock.get("task_sha256") != sha256(trait_task_path)
+        or trait_lock.get("script_sha256") != fine_mapping_contract.script_hashes(root)
+        or trait_lock.get("results_accessed_before_lock") is not False
+    ):
         fail("fine-mapping trait task differs from its pre-result lock")
     if row["trait_id"] == trait_task["dataset1_id"]:
         prefix = "dataset1"; trait_summary_path = Path(trait_task["summary1_path"]); trait_summary_hash = trait_task["summary1_sha256"]
@@ -228,10 +233,10 @@ def main() -> int:
         task_record = {
             "queue_row_id": args.comparison_id, "pair_id": row["pair_id"], "locus_id": row["locus_id"],
             "comparison_type": f"TRAIT_{row['modality'].upper()}", "source_search_status": "VERIFIED_ANALYSIS",
-            "results_accessed_before_lock": "NO", "summary1_path": str(final_trait),
-            "summary1_sha256": sha256(trait_out), "summary2_path": str(final_molecular),
-            "summary2_sha256": sha256(molecular_out), "ld_path": str(final_ld), "ld_sha256": sha256(ld_out),
-            "ld_variant_order_path": str(final_order), "ld_variant_order_sha256": sha256(order_out),
+            "results_accessed_before_lock": "NO", "summary1_path": str(final_trait.relative_to(root)),
+            "summary1_sha256": sha256(trait_out), "summary2_path": str(final_molecular.relative_to(root)),
+            "summary2_sha256": sha256(molecular_out), "ld_path": str(final_ld.relative_to(root)), "ld_sha256": sha256(ld_out),
+            "ld_variant_order_path": str(final_order.relative_to(root)), "ld_variant_order_sha256": sha256(order_out),
             "dataset1_id": row["trait_id"], "dataset1_role": row["trait_role"],
             "dataset1_type": trait_task[f"{prefix}_type"], "dataset1_N": trait_task[f"{prefix}_N"],
             "dataset1_case_fraction": trait_task[f"{prefix}_case_fraction"], "dataset1_sdY": trait_task[f"{prefix}_sdY"],
@@ -245,13 +250,14 @@ def main() -> int:
         staged_task, staged_lock = staging / "task.tsv", staging / "task.lock.json"
         staged_task.write_text(table_text(TASK_FIELDS, [task_record]), encoding="utf-8")
         staged_lock.write_text(json.dumps({
-            "schema_version": "atlas-v1.0-molecular-coloc-task.1", "comparison_id": args.comparison_id,
+            "schema_version": "atlas-v1.0-molecular-coloc-task.2", "comparison_id": args.comparison_id,
             "variant_count": len(retained), "molecular_sdY": molecular_sd,
             "molecular_sdY_method": "MEDIAN_COLOC_SUMMARY_STATISTIC_ESTIMATE",
             "task_sha256": sha256(staged_task), "manifest_sha256": sha256(manifest_path),
             "manifest_lock_sha256": sha256(lock_path), "policy_sha256": sha256(policy_path),
             "source_normalized_qtl_sha256": row["normalized_qtl_sha256"],
             "trait_task_sha256": row["trait_task_sha256"], "trait_task_lock_sha256": row["trait_task_lock_sha256"],
+            "script_sha256": molecular_contract.script_hashes(root, "qtl"),
             "outputs": {
                 "trait.tsv.gz": sha256(trait_out), "molecular.tsv.gz": sha256(molecular_out),
                 "variants.tsv": sha256(order_out), "ld.tsv.gz": sha256(ld_out),

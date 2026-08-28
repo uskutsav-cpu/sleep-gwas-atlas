@@ -12,16 +12,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from liftover_chain import load_chain
+import molecular_contract
 
 
-FIELDS = [
-    "search_task_id", "locus_id", "pair_id", "sleep_trait", "non_sleep_trait",
-    "chromosome_grch37", "start_grch37", "end_grch37", "chromosome_grch38",
-    "start_grch38", "end_grch38", "source_family_id", "study_id", "dataset_id",
-    "modality", "quant_method", "context", "sample_size", "source_build", "query_mode",
-    "source_url", "source_index_url", "exact_release", "planned_outcome",
-    "results_accessed_before_lock",
-]
+FIELDS = molecular_contract.SEARCH_FIELDS
 SAFE_ID = re.compile(r"[^A-Za-z0-9_.-]+")
 
 
@@ -163,30 +157,38 @@ def main() -> int:
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy_path, sources_path = root / args.policy, root / args.sources
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
+    sources_path = root / args.sources
     preflight_path, loci_path, variants_path = root / args.preflight, root / args.loci, root / args.variants
     provenance_path = root / args.fine_mapping_provenance
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if not preflight.get("code_ready") or preflight.get("policy_sha256") != sha256(policy_path) or preflight.get("sources_sha256") != sha256(sources_path):
-        fail("molecular preflight is not code-ready or differs from current contracts")
-    _, loci = read_tsv(loci_path)
-    _, variants = read_tsv(variants_path)
-    fm = json.loads(provenance_path.read_text(encoding="utf-8"))
-    if fm.get("outputs", {}).get("results/atlas/loci.tsv") != sha256(loci_path) or fm.get("outputs", {}).get("results/atlas/variants.tsv") != sha256(variants_path):
-        fail("canonical loci or variants differ from fine-mapping provenance")
-    if not loci or any(row["analysis_tier"] != "PRIMARY_PHASE1" for row in loci):
-        fail("molecular search entry family is not the nonempty primary fine-mapped locus family")
+    molecular_contract.validate_preflight(
+        root, policy_path, preflight_path, purpose="qtl_plan",
+    )
+    loci, variants, _, fm = molecular_contract.validate_fine_mapping(root)
+    if (
+        loci_path != root / "results/atlas/loci.tsv"
+        or variants_path != root / "results/atlas/variants.tsv"
+        or provenance_path != root / "results/atlas/fine_mapping.provenance.json"
+        or fm.get("outputs", {}).get("results/atlas/loci.tsv") != sha256(loci_path)
+        or fm.get("outputs", {}).get("results/atlas/variants.tsv") != sha256(variants_path)
+    ):
+        fail("command-line fine-mapping family differs from the canonical contract")
     variants_by_locus = {row["locus_id"] for row in variants}
     if not {row["locus_id"] for row in loci}.issubset(variants_by_locus):
         fail("not every molecular-search locus has fine-mapped variants")
-    chain_spec = policy["reference_build"]
-    chain, chain_provenance = load_chain(
-        root / chain_spec["chain_path"], chain_spec["chain_sha256"], chain_spec["chain_bytes"],
-    )
-    datasets = dataset_family(root, policy)
+    chain_provenance: dict[str, object] = {"status": "NOT_APPLICABLE_ZERO_LOCUS_FAMILY"}
+    datasets: list[dict[str, str]] = []
+    chain = None
+    if loci:
+        chain_spec = policy["reference_build"]
+        chain, chain_provenance = load_chain(
+            root / chain_spec["chain_path"], chain_spec["chain_sha256"], chain_spec["chain_bytes"],
+        )
+        datasets = dataset_family(root, policy)
     rows: list[dict[str, object]] = []
     for locus in loci:
+        if chain is None:
+            fail("nonempty locus family lacks the locked liftover chain")
         chromosome = int(locus["chromosome"])
         start, end = int(locus["start_bp"]), int(locus["end_bp"])
         start_status, mapped_start = chain.map_point(chromosome, start)
@@ -220,14 +222,18 @@ def main() -> int:
     if lock_out.is_file():
         locked_at = json.loads(lock_out.read_text(encoding="utf-8")).get("locked_utc", locked_at)
     lock = {
-        "schema_version": "atlas-v1.0-molecular-search.1", "locked_utc": locked_at,
+        "schema_version": "atlas-v1.0-molecular-search.2", "locked_utc": locked_at,
         "results_accessed_before_lock": False, "locus_count": len(loci), "dataset_count_per_locus": len(datasets),
         "search_task_count": len(rows), "search_task_ids_in_locked_order": task_ids,
         "plan_sha256": plan_sha, "policy_sha256": sha256(policy_path), "sources_sha256": sha256(sources_path),
         "preflight_sha256": sha256(preflight_path), "loci_sha256": sha256(loci_path),
         "variants_sha256": sha256(variants_path), "fine_mapping_provenance_sha256": sha256(provenance_path),
         "chain": chain_provenance,
-        "metadata_sha256": {asset["id"]: sha256(root / asset["path"]) for asset in policy["metadata_assets"]},
+        "metadata_sha256": {
+            asset["id"]: sha256(root / asset["path"]) for asset in policy["metadata_assets"]
+        } if loci else {},
+        "zero_locus_qtl_not_applicable": len(loci) == 0,
+        "script_sha256": molecular_contract.script_hashes(root, "qtl"),
         "claim_limit": policy["claim_limit"],
     }
     if not args.validate_only:

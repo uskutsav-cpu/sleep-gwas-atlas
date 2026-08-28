@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import molecular_contract
+
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -35,15 +37,11 @@ def main() -> int:
         fail("source search requires explicit --execute after reviewing the locked plan")
     root = Path(args.root).resolve()
     plan_path, lock_path = root / args.plan, root / args.plan_lock
-    with plan_path.open(encoding="utf-8", newline="") as handle:
-        plan = list(csv.DictReader(handle, delimiter="\t"))
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if (
-        lock.get("plan_sha256") != sha256(plan_path)
-        or lock.get("search_task_ids_in_locked_order") != [row["search_task_id"] for row in plan]
-        or lock.get("results_accessed_before_lock") is not False
-    ):
-        fail("molecular search plan differs from its result-free lock")
+    policy_path = root / "config/molecular_analysis_policy.json"
+    preflight_path = root / "results/tables/molecular_preflight.json"
+    plan, lock = molecular_contract.validate_search_plan(
+        root, plan_path, lock_path, policy_path, preflight_path,
+    )
     selected = [row for row in plan if row["search_task_id"] == args.search_task_id]
     if len(selected) != 1:
         fail("search_task_id must identify exactly one locked task")

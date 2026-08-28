@@ -12,6 +12,8 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+import molecular_contract
+
 
 SOURCE_FIELDS = [
     "source_family_id", "modality", "study_or_model", "release_or_record",
@@ -106,25 +108,9 @@ print(json.dumps(observed, sort_keys=True))
     return matches, json.dumps(observed, sort_keys=True, separators=(",", ":"))
 
 
-def qc_prefiltered(path: Path) -> bool:
-    return any(line.startswith("prefilter_strategy\t") for line in path.read_text(encoding="utf-8").splitlines())
-
-
 def choose_full_input(root: Path, trait: str) -> Path | None:
-    candidates = [
-        (
-            root / f"data/harmonized_mixer_full/{trait}.harmonized.tsv.gz",
-            root / f"data/harmonized_mixer_full/{trait}.qc.txt",
-        ),
-        (
-            root / f"data/harmonized/{trait}.harmonized.tsv.gz",
-            root / f"data/harmonized/{trait}.qc.txt",
-        ),
-    ]
-    for harmonized, qc in candidates:
-        if harmonized.is_file() and qc.is_file() and not qc_prefiltered(qc):
-            return harmonized
-    return None
+    harmonized, _, ready = molecular_contract.fine_mapping_contract.choose_full_input(root, trait)
+    return harmonized if ready else None
 
 
 def main() -> int:
@@ -137,8 +123,8 @@ def main() -> int:
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy_path, sources_path = root / args.policy, root / args.sources
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
+    sources_path = root / args.sources
     source_fields, sources = read_tsv(sources_path)
     if source_fields != SOURCE_FIELDS:
         fail("molecular source registry header differs from the locked schema")
@@ -155,14 +141,36 @@ def main() -> int:
         if not row["primary_citation"].startswith("10.") or not row["availability_policy"].strip():
             fail(f"molecular source lacks citation or availability policy: {row['source_family_id']}")
 
+    upstream_ok = False
+    upstream_detail = "fine-mapping canonical family is absent"
+    fine_mapping_locus_count = 0
+    try:
+        fine_loci, _, _, _ = molecular_contract.validate_fine_mapping(root)
+        fine_mapping_locus_count = len(fine_loci)
+        upstream_ok = True
+        upstream_detail = "fine-mapping canonical family and provenance verified"
+    except SystemExit as exc:
+        upstream_detail = str(exc).removeprefix("ERROR: ")
+    # Until the upstream family is known, audit QTL resources conservatively.
+    qtl_required = not upstream_ok or fine_mapping_locus_count > 0
+
     rows: list[dict[str, str]] = []
     metadata_ready = True
+    qtl_metadata_ready = True
+    annotation_ready = False
     for asset in policy["metadata_assets"]:
         path = root / asset["path"]
         ok = path.is_file() and path.stat().st_size == asset["bytes"] and sha256(path) == asset["sha256"]
         metadata_ready &= ok
+        is_annotation = asset["id"] == policy["twas"]["gene_annotation_asset_id"]
+        if is_annotation:
+            annotation_ready = ok
+        else:
+            qtl_metadata_ready &= ok
+        required = is_annotation or qtl_required
         rows.append({
-            "component": asset["id"], "required": "YES", "status": "READY" if ok else "MISSING_OR_HASH_MISMATCH",
+            "component": asset["id"], "required": "YES" if required else "NO",
+            "status": "READY" if ok else "MISSING_OR_HASH_MISMATCH" if required else "NOT_APPLICABLE",
             "observed": str(path.relative_to(root)) if path.is_file() else "ABSENT",
             "requirement": f"bytes={asset['bytes']};sha256={asset['sha256']}",
         })
@@ -186,8 +194,8 @@ def main() -> int:
         and sha256(reverse_chain_path) == reverse_chain["sha256"]
     )
     rows.append({
-        "component": "GRCH38_TO_GRCH37_CHAIN", "required": "YES",
-        "status": "READY" if reverse_chain_ok else "MISSING_OR_HASH_MISMATCH",
+        "component": "GRCH38_TO_GRCH37_CHAIN", "required": "YES" if qtl_required else "NO",
+        "status": "READY" if reverse_chain_ok else "MISSING_OR_HASH_MISMATCH" if qtl_required else "NOT_APPLICABLE",
         "observed": str(reverse_chain_path.relative_to(root)) if reverse_chain_path.is_file() else "ABSENT",
         "requirement": f"bytes={reverse_chain['bytes']};sha256={reverse_chain['sha256']}",
     })
@@ -195,21 +203,23 @@ def main() -> int:
     engine_path = root / engine["path"]
     engine_ok = engine_path.is_file() and sha256(engine_path) == engine["sha256"]
     rows.append({
-        "component": "SUSIE_COLOC_ENGINE", "required": "YES",
-        "status": "READY" if engine_ok else "MISSING_OR_HASH_MISMATCH",
+        "component": "SUSIE_COLOC_ENGINE", "required": "YES" if qtl_required else "NO",
+        "status": "READY" if engine_ok else "MISSING_OR_HASH_MISMATCH" if qtl_required else "NOT_APPLICABLE",
         "observed": str(engine_path.relative_to(root)) if engine_path.is_file() else "ABSENT",
         "requirement": engine["sha256"],
     })
     susie, coloc = r_package_version(root, "susieR"), r_package_version(root, "coloc")
     r_ok = susie == policy["fine_mapping"]["susieR_version"] and coloc == policy["colocalization"]["coloc_version"]
     rows.append({
-        "component": "R_PACKAGES", "required": "YES", "status": "READY" if r_ok else "MISSING_OR_VERSION_MISMATCH",
+        "component": "R_PACKAGES", "required": "YES" if qtl_required else "NO",
+        "status": "READY" if r_ok else "MISSING_OR_VERSION_MISMATCH" if qtl_required else "NOT_APPLICABLE",
         "observed": f"susieR={susie};coloc={coloc}",
         "requirement": f"susieR={policy['fine_mapping']['susieR_version']};coloc={policy['colocalization']['coloc_version']}",
     })
     tabix = shutil.which("tabix")
     rows.append({
-        "component": "TABIX", "required": "YES", "status": "READY" if tabix else "MISSING",
+        "component": "TABIX", "required": "YES" if qtl_required else "NO",
+        "status": "READY" if tabix else "MISSING" if qtl_required else "NOT_APPLICABLE",
         "observed": tabix or "ABSENT", "requirement": "tabix executable",
     })
     twas = policy["twas"]
@@ -307,11 +317,10 @@ def main() -> int:
         root / "results/atlas/loci.tsv", root / "results/atlas/variants.tsv",
         root / "results/tables/trait_trait_colocalization.tsv", root / "results/atlas/fine_mapping.provenance.json",
     ]
-    upstream_ok = all(path.is_file() and path.stat().st_size > 0 for path in upstream)
     rows.append({
         "component": "UPSTREAM_FINE_MAPPING", "required": "YES", "status": "READY" if upstream_ok else "BLOCKED_UPSTREAM",
         "observed": ";".join(str(path.relative_to(root)) for path in upstream if path.is_file()) or "ABSENT",
-        "requirement": "locked loci variants trait-trait colocalization and provenance",
+        "requirement": "locked loci variants trait-trait colocalization and provenance; " + upstream_detail,
     })
     ram, free = memory_gib(), shutil.disk_usage(root).free / 1024**3
     resources_ok = ram >= policy["runtime"]["minimum_memory_gib"] and free >= policy["runtime"]["minimum_free_disk_gib_for_production"]
@@ -322,8 +331,24 @@ def main() -> int:
     })
 
     required_ready = all(row["status"] == "READY" for row in rows if row["required"] == "YES")
-    code_ready = metadata_ready and chain_ok and reverse_chain_ok and engine_ok and r_ok
-    status = "READY_FOR_PRODUCTION" if required_ready else "PROTOCOL_READY_INPUTS_OR_RUNTIME_BLOCKED" if code_ready else "PROTOCOL_DEPENDENCIES_BLOCKED"
+    qtl_code_ready = (not qtl_required) or (
+        qtl_metadata_ready and chain_ok and reverse_chain_ok and engine_ok and r_ok
+    )
+    twas_code_ready = annotation_ready and chain_ok and metaxcan_ok
+    code_ready = qtl_code_ready and twas_code_ready
+    qtl_planning_ready = upstream_ok and ((not qtl_required) or (qtl_metadata_ready and chain_ok))
+    qtl_production_ready = upstream_ok and (
+        (not qtl_required) or (
+            qtl_metadata_ready and chain_ok and reverse_chain_ok and engine_ok and r_ok
+            and bool(tabix) and resources_ok
+        )
+    )
+    twas_production_ready = (
+        upstream_ok and annotation_ready and chain_ok and metaxcan_ok and runtime_ok
+        and inventory_ok and model_ready and full_count == 45 and resources_ok
+    )
+    production_ready = qtl_production_ready and twas_production_ready
+    status = "READY_FOR_PRODUCTION" if production_ready else "PROTOCOL_READY_INPUTS_OR_RUNTIME_BLOCKED" if code_ready else "PROTOCOL_DEPENDENCIES_BLOCKED"
     readiness_out = root / args.readiness_out
     readiness_out.parent.mkdir(parents=True, exist_ok=True)
     with readiness_out.open("w", encoding="utf-8", newline="") as handle:
@@ -331,14 +356,23 @@ def main() -> int:
         writer.writeheader(); writer.writerows(rows)
     provenance = {
         "analysis_id": policy["analysis_id"], "checked_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "overall_status": status, "code_ready": code_ready, "production_ready": required_ready,
+        "overall_status": status, "code_ready": code_ready, "production_ready": production_ready,
         "policy_sha256": sha256(policy_path), "sources_sha256": sha256(sources_path),
+        "readiness_path": str(readiness_out.relative_to(root)),
         "readiness_sha256": sha256(readiness_out), "full_dense_gwas_count": full_count,
         "metadata_ready": metadata_ready, "chain_ready": chain_ok and reverse_chain_ok, "engine_ready": engine_ok,
         "tabix_ready": bool(tabix), "metaxcan_source_ready": metaxcan_ok,
         "metaxcan_runtime_ready": runtime_ok, "metaxcan_runtime_detail": runtime_detail,
-        "predictdb_models_ready": model_ready,
+        "predictdb_models_ready": model_ready, "qtl_analysis_required": qtl_required,
+        "fine_mapping_locus_count": fine_mapping_locus_count,
+        "fine_mapping_provenance_sha256": sha256(root / "results/atlas/fine_mapping.provenance.json") if upstream_ok else "ABSENT",
+        "qtl_planning_ready": qtl_planning_ready, "qtl_production_ready": qtl_production_ready,
+        "twas_production_ready": twas_production_ready,
         "upstream_fine_mapping_ready": upstream_ok, "memory_gib": round(ram, 3), "free_disk_gib": round(free, 3),
+        "script_sha256": {
+            "qtl": molecular_contract.script_hashes(root, "qtl"),
+            "twas": molecular_contract.script_hashes(root, "twas"),
+        },
         "results_accessed": False, "claim_limit": policy["claim_limit"],
     }
     out = root / args.out

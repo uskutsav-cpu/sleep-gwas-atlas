@@ -17,15 +17,11 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+import molecular_contract
 
-REGISTRY_FIELDS = [
-    "model_id", "model_family", "modality", "context", "model_db_path", "model_db_sha256",
-    "covariance_path", "covariance_sha256", "model_snp_key", "gene_count", "weight_count",
-    "phi_gene_count", "phi_missing_gene_count", "phi_min", "phi_max", "source_release",
-    "model_file_id", "covariance_file_id",
-]
-PHI_EXCLUSION_FIELDS = ["model_id", "model_family", "context", "gene_id", "exclusion_reason"]
-VARIANT_FIELDS = ["model_variant_id", "chromosome_grch38", "position_grch38", "ref", "alt"]
+REGISTRY_FIELDS = molecular_contract.MODEL_REGISTRY_FIELDS
+PHI_EXCLUSION_FIELDS = molecular_contract.PHI_EXCLUSION_FIELDS
+VARIANT_FIELDS = molecular_contract.MODEL_VARIANT_FIELDS
 VARIANT_ID = re.compile(r"^(?:chr)?([1-9]|1[0-9]|2[0-2])[_:]([0-9]+)[_:]([ACGT])[_:]([ACGT])(?:[_:]b38)?$", re.I)
 
 
@@ -231,6 +227,9 @@ def main() -> int:
             "phi_exclusion_count": len(phi_exclusions), "phi_exclusions_sha256": sha256(phi_exclusions_out),
             "inventory_sha256": sha256(inventory_path), "inventory_lock_sha256": sha256(inventory_lock_path),
             "download_lock_sha256": sha256(download_lock_path), "policy_sha256": sha256(policy_path),
+            "script_sha256": molecular_contract.script_hashes(
+                Path(__file__).resolve().parent.parent, "twas",
+            ),
             "claim_limit": policy["claim_limit"],
         }
         lock_out.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")

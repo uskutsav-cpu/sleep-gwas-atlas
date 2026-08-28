@@ -13,6 +13,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from liftover_chain import load_chain
+import molecular_contract
 
 
 COLOC_FIELDS = [
@@ -52,17 +53,8 @@ GENE_FIELDS = [
     "sqtl_status", "pqtl_pwas_status", "twas_status", "colocalization_status",
     "context", "evidence_level", "claim_limit", "provenance_id",
 ]
-TWAS_FIELDS = [
-    "twas_id", "trait_id", "model_family", "modality", "context", "gene_id",
-    "gene_symbol", "zscore", "uncalibrated_zscore", "effect_size", "p_value",
-    "uncalibrated_p_value", "fdr", "n_snps_used", "n_snps_in_model", "gwas_N",
-    "gwas_h2", "gwas_h2_scale", "coverage_fraction", "status", "model_id",
-    "provenance_id",
-]
-TWAS_COVERAGE_FIELDS = [
-    "run_id", "trait_id", "model_id", "model_family", "context", "analysis_status",
-    "reason", "result_rows", "provenance_path", "provenance_sha256",
-]
+TWAS_FIELDS = molecular_contract.TWAS_RESULT_FIELDS
+TWAS_COVERAGE_FIELDS = molecular_contract.TWAS_COVERAGE_FIELDS
 GENE_ATTRIBUTE = re.compile(r'(?:^|;\s*)([A-Za-z_]+) "([^"]*)"')
 MISSING = {"", "NA"}
 
@@ -303,8 +295,7 @@ def main() -> int:
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy_path = root / args.policy
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
     claim_limit = policy["claim_limit"]
     required_modalities = policy["required_modalities"]
     if required_modalities != ["eQTL", "sQTL", "pQTL_or_PWAS", "TWAS"]:
@@ -316,9 +307,9 @@ def main() -> int:
         "twas_coverage", "twas_provenance", "twas_models", "twas_models_lock",
         "twas_phi_exclusions", "loci", "traits",
     )}
-    _, loci = read_tsv(paths["loci"])
+    loci, _, _, fine_mapping_provenance = molecular_contract.validate_fine_mapping(root)
     _, traits = read_tsv(paths["traits"])
-    if not loci or any(row["analysis_tier"] != "PRIMARY_PHASE1" for row in loci):
+    if any(row["analysis_tier"] != "PRIMARY_PHASE1" for row in loci):
         fail("molecular integration locus family is not the primary fine-mapped family")
     locus_by_id = {row["locus_id"]: row for row in loci}
     trait_by_id = {row["trait_id"]: row for row in traits}
@@ -353,27 +344,17 @@ def main() -> int:
             loci_by_gene_trait[(gene, locus["non_sleep_trait"])].append(locus["locus_id"])
 
     # Validate the exact molecular search/feature family before reading a result.
-    _, plan = read_tsv(paths["search_plan"])
-    plan_lock = json.loads(paths["search_plan_lock"].read_text(encoding="utf-8"))
-    if (
-        plan_lock.get("plan_sha256") != sha256(paths["search_plan"])
-        or plan_lock.get("search_task_ids_in_locked_order") != [row["search_task_id"] for row in plan]
-        or plan_lock.get("policy_sha256") != sha256(policy_path)
-    ):
-        fail("molecular search plan differs from its pre-result lock")
-    _, search_coverage = read_tsv(paths["search_coverage"])
-    _, feature_manifest = read_tsv(paths["feature_manifest"])
-    feature_lock = json.loads(paths["feature_lock"].read_text(encoding="utf-8"))
-    if (
-        feature_lock.get("manifest_sha256") != sha256(paths["feature_manifest"])
-        or feature_lock.get("coverage_sha256") != sha256(paths["search_coverage"])
-        or feature_lock.get("policy_sha256") != sha256(policy_path)
-        or feature_lock.get("comparison_ids_in_locked_order") != [row["comparison_id"] for row in feature_manifest]
-        or feature_lock.get("trait_molecular_results_accessed_before_feature_lock") is not False
-    ):
-        fail("molecular feature family differs from its pre-result lock")
-    if [row["search_task_id"] for row in search_coverage] != [row["search_task_id"] for row in plan]:
-        fail("molecular source coverage is not the exact locked search family")
+    plan, _ = molecular_contract.validate_search_plan(
+        root, paths["search_plan"], paths["search_plan_lock"], policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
+    feature_manifest, feature_lock = molecular_contract.validate_feature_family(
+        root, paths["feature_manifest"], paths["feature_lock"], policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
+    _, search_coverage = molecular_contract.read_tsv(
+        paths["search_coverage"], molecular_contract.SEARCH_COVERAGE_FIELDS,
+    )
     plan_by_task = {row["search_task_id"]: row for row in plan}
 
     primary_p12 = float(policy["colocalization"]["p12_primary"])
@@ -393,18 +374,41 @@ def main() -> int:
         if not provenance_path.is_file():
             fail(f"molecular colocalization run is absent: {comparison}")
         provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
-        if provenance.get("comparison_id") != comparison or provenance.get("policy_sha256") != sha256(policy_path):
+        task_path = root / "results/molecular/tasks" / f"{comparison}.tsv"
+        task_lock_path = root / "results/molecular/tasks" / f"{comparison}.lock.json"
+        task_lock = json.loads(task_lock_path.read_text(encoding="utf-8"))
+        if (
+            provenance.get("schema_version") != "atlas-v1.0-molecular-coloc-run.2"
+            or provenance.get("comparison_id") != comparison
+            or provenance.get("policy_sha256") != sha256(policy_path)
+            or provenance.get("task_sha256") != sha256(task_path)
+            or provenance.get("task_lock_sha256") != sha256(task_lock_path)
+            or provenance.get("manifest_sha256") != sha256(paths["feature_manifest"])
+            or provenance.get("manifest_lock_sha256") != sha256(paths["feature_lock"])
+            or provenance.get("script_sha256") != molecular_contract.script_hashes(root, "qtl")
+            or task_lock.get("schema_version") != "atlas-v1.0-molecular-coloc-task.2"
+            or task_lock.get("task_sha256") != sha256(task_path)
+            or task_lock.get("script_sha256") != molecular_contract.script_hashes(root, "qtl")
+        ):
             fail(f"molecular colocalization provenance differs: {comparison}")
         for filename, record in provenance.get("outputs", {}).items():
             output_path = run / filename
             if not output_path.is_file() or sha256(output_path) != record.get("sha256"):
                 fail(f"molecular run output differs from provenance: {comparison}/{filename}")
+        if set(provenance.get("outputs", {})) != set(molecular_contract.fine_mapping_contract.ENGINE_OUTPUT_FIELDS):
+            fail(f"molecular colocalization output family is incomplete: {comparison}")
         diagnostics_fields, diagnostics = read_tsv(run / "diagnostics.tsv")
         if len(diagnostics) != 2 or any(row["model_converged"] != "TRUE" for row in diagnostics):
             fail(f"molecular SuSiE models are incomplete or nonconverged: {comparison}")
         coloc_fields, coloc_rows = read_tsv(run / "colocalization.tsv")
         if coloc_fields != ENGINE_COLOC_FIELDS or any(row["comparison_id"] != comparison for row in coloc_rows):
             fail(f"molecular colocalization schema or identity drifted: {comparison}")
+        if any(
+            provenance["outputs"][filename].get("rows")
+            != len(read_tsv(run / filename)[1])
+            for filename in molecular_contract.fine_mapping_contract.ENGINE_OUTPUT_FIELDS
+        ):
+            fail(f"molecular colocalization row counts differ from provenance: {comparison}")
         robust = robust_signal_pairs(coloc_rows, p12_grid, minimum_h4, minimum_h4_h3)
         selected = select_primary_row(coloc_rows, primary_p12, robust)
         gene_id = versionless_gene(feature["gene_id"])
@@ -477,7 +481,6 @@ def main() -> int:
         })
 
     # Validate and normalize trait-trait colocalization into the same schema.
-    fine_mapping_provenance = json.loads(paths["fine_mapping_provenance"].read_text(encoding="utf-8"))
     checked_output_hash(fine_mapping_provenance, args.trait_coloc, paths["trait_coloc"])
     trait_fields, trait_coloc = read_tsv(paths["trait_coloc"])
     if trait_fields != ENGINE_COLOC_FIELDS:
@@ -499,15 +502,10 @@ def main() -> int:
             trait_coloc_normalized.append({field: normalized[field] for field in COLOC_FIELDS})
 
     # Validate model and TWAS provenance, then stream the potentially large result table.
-    model_fields, models = read_tsv(paths["twas_models"])
-    del model_fields
-    model_lock = json.loads(paths["twas_models_lock"].read_text(encoding="utf-8"))
-    if (
-        model_lock.get("registry_sha256") != sha256(paths["twas_models"])
-        or model_lock.get("model_ids_in_locked_order") != [row["model_id"] for row in models]
-        or model_lock.get("policy_sha256") != sha256(policy_path)
-    ):
-        fail("TWAS model registry differs from its pre-result lock")
+    models, model_lock = molecular_contract.validate_model_registry(
+        root, paths["twas_models"], paths["twas_models_lock"], policy_path,
+        paths["twas_phi_exclusions"],
+    )
     model_by_id = {row["model_id"]: row for row in models}
     contexts_by_family: dict[str, set[str]] = defaultdict(set)
     for model in models:
@@ -521,6 +519,12 @@ def main() -> int:
         fail("TWAS phi exclusions differ from the model lock")
 
     twas_provenance = json.loads(paths["twas_provenance"].read_text(encoding="utf-8"))
+    if (
+        twas_provenance.get("schema_version") != "atlas-v1.0-twas-canonical.2"
+        or twas_provenance.get("policy_sha256") != sha256(policy_path)
+        or twas_provenance.get("script_sha256") != molecular_contract.script_hashes(root, "twas")
+    ):
+        fail("TWAS canonical provenance differs from the sealed production contract")
     checked_output_hash(twas_provenance, args.twas, paths["twas"])
     checked_output_hash(twas_provenance, args.twas_coverage, paths["twas_coverage"])
     twas_coverage_fields, twas_coverage = read_tsv(paths["twas_coverage"])
@@ -747,7 +751,7 @@ def main() -> int:
         root / args.genes_out: table_text(GENE_FIELDS, gene_rows),
     }
     provenance = {
-        "schema_version": "atlas-v1.0-molecular-integration.1", "analysis_id": policy["analysis_id"],
+        "schema_version": "atlas-v1.0-molecular-integration.2", "analysis_id": policy["analysis_id"],
         "policy_sha256": sha256(policy_path), "feature_manifest_sha256": sha256(paths["feature_manifest"]),
         "feature_lock_sha256": sha256(paths["feature_lock"]), "search_plan_sha256": sha256(paths["search_plan"]),
         "search_plan_lock_sha256": sha256(paths["search_plan_lock"]), "qtl_run_provenance_sha256": qtl_run_hashes,
@@ -762,6 +766,11 @@ def main() -> int:
         "molecular_qtl_colocalization_rows": len(molecular_coloc), "all_colocalization_rows": len(all_coloc),
         "molecular_evidence_rows": len(evidence), "molecular_locus_coverage_rows": len(coverage),
         "supported_gene_rows": len(gene_rows), "molecular_provenance_id": molecular_provenance_id,
+        "zero_locus_qtl_not_applicable": len(loci) == 0,
+        "script_sha256": {
+            "qtl": molecular_contract.script_hashes(root, "qtl"),
+            "twas": molecular_contract.script_hashes(root, "twas"),
+        },
         "outputs": {str(path.relative_to(root)): hashlib.sha256(text.encode()).hexdigest() for path, text in payloads.items()},
         "claim_limit": claim_limit,
     }

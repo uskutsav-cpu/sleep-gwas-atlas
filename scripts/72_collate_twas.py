@@ -11,17 +11,10 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
+import molecular_contract
 
-FIELDS = [
-    "twas_id", "trait_id", "model_family", "modality", "context", "gene_id", "gene_symbol",
-    "zscore", "uncalibrated_zscore", "effect_size", "p_value", "uncalibrated_p_value", "fdr",
-    "n_snps_used", "n_snps_in_model", "gwas_N", "gwas_h2", "gwas_h2_scale",
-    "coverage_fraction", "status", "model_id", "provenance_id",
-]
-COVERAGE_FIELDS = [
-    "run_id", "trait_id", "model_id", "model_family", "context", "analysis_status", "reason",
-    "result_rows", "provenance_path", "provenance_sha256",
-]
+FIELDS = molecular_contract.TWAS_RESULT_FIELDS
+COVERAGE_FIELDS = molecular_contract.TWAS_COVERAGE_FIELDS
 
 
 def fail(message: str) -> None:
@@ -74,18 +67,13 @@ def main() -> int:
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    manifest_path, lock_path, policy_path = root / args.manifest, root / args.manifest_lock, root / args.policy
+    manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
     eligibility_path = root / args.eligibility
-    manifest = read_tsv(manifest_path)
-    eligibility = read_tsv(eligibility_path)
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if lock.get("run_manifest_sha256") != sha256(manifest_path) or lock.get("policy_sha256") != sha256(policy_path):
-        fail("TWAS manifest differs from lock")
-    if lock.get("run_ids_in_locked_order") != [row["run_id"] for row in manifest]:
-        fail("TWAS run family/order differs from lock")
-    if lock.get("eligibility_sha256") != sha256(eligibility_path) or len(eligibility) != 45:
-        fail("TWAS trait eligibility family differs from lock")
+    _, eligibility, manifest, lock = molecular_contract.validate_twas_manifest(
+        root, root / "results/tables/twas_gwas_mapping_manifest.tsv", eligibility_path,
+        manifest_path, lock_path, policy_path,
+    )
     output: list[dict[str, object]] = []
     coverage: list[dict[str, object]] = []
     for run in manifest:
@@ -94,7 +82,19 @@ def main() -> int:
         if not result_path.is_file() or not provenance_path.is_file():
             fail(f"TWAS run is incomplete: {run['run_id']}")
         provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
-        if provenance.get("run_id") != run["run_id"] or provenance.get("output_sha256") != sha256(result_path) or provenance.get("manifest_sha256") != sha256(manifest_path):
+        if (
+            provenance.get("schema_version") != "atlas-v1.0-twas-run.2"
+            or provenance.get("run_id") != run["run_id"]
+            or provenance.get("output_sha256") != sha256(result_path)
+            or provenance.get("manifest_sha256") != sha256(manifest_path)
+            or provenance.get("manifest_lock_sha256") != sha256(lock_path)
+            or provenance.get("policy_sha256") != sha256(policy_path)
+            or provenance.get("mapped_gwas_sha256") != sha256(root / run["mapped_gwas_path"])
+            or provenance.get("mapped_gwas_lock_sha256") != sha256(root / run["mapped_gwas_lock_path"])
+            or provenance.get("model_db_sha256") != sha256(root / run["model_db_path"])
+            or provenance.get("covariance_sha256") != sha256(root / run["covariance_path"])
+            or provenance.get("script_sha256") != molecular_contract.script_hashes(root, "twas")
+        ):
             fail(f"TWAS run differs from provenance: {run['run_id']}")
         calibration = provenance.get("variance_control", {})
         if (
@@ -150,12 +150,15 @@ def main() -> int:
     out_text, coverage_text = table_text(FIELDS, output), table_text(COVERAGE_FIELDS, coverage)
     out, coverage_out, provenance_out = root / args.out, root / args.coverage_out, root / args.provenance_out
     provenance = {
+        "schema_version": "atlas-v1.0-twas-canonical.2",
         "analysis_id": policy["analysis_id"], "run_count": len(manifest), "result_row_count": len(output),
         "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(lock_path),
         "eligibility_sha256": sha256(eligibility_path),
         "policy_sha256": sha256(policy_path), "outputs": {
             args.out: hashlib.sha256(out_text.encode()).hexdigest(), args.coverage_out: hashlib.sha256(coverage_text.encode()).hexdigest(),
-        }, "multiple_testing": policy["twas"]["multiple_testing"], "claim_limit": policy["claim_limit"],
+        }, "multiple_testing": policy["twas"]["multiple_testing"],
+        "script_sha256": molecular_contract.script_hashes(root, "twas"),
+        "claim_limit": policy["claim_limit"],
     }
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"
     if args.validate_only:

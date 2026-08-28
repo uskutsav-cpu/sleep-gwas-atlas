@@ -13,6 +13,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+import molecular_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -41,14 +42,12 @@ def main() -> int:
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    manifest_path, lock_path, policy_path = root / args.manifest, root / args.manifest_lock, root / args.policy
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if lock.get("run_manifest_sha256") != sha256(manifest_path) or lock.get("policy_sha256") != sha256(policy_path):
-        fail("TWAS run manifest differs from lock")
-    manifest = read_tsv(manifest_path)
-    if lock.get("run_ids_in_locked_order") != [row["run_id"] for row in manifest]:
-        fail("TWAS run family/order differs from lock")
+    manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
+    _, _, manifest, lock = molecular_contract.validate_twas_manifest(
+        root, root / "results/tables/twas_gwas_mapping_manifest.tsv",
+        root / "results/tables/twas_trait_eligibility.tsv", manifest_path, lock_path, policy_path,
+    )
     selected = [row for row in manifest if row["run_id"] == args.run_id]
     if len(selected) != 1:
         fail("run_id must identify exactly one locked TWAS run")
@@ -64,7 +63,14 @@ def main() -> int:
     if not mapped.is_file() or not mapped_lock.is_file():
         fail("mapped TWAS GWAS and lock are absent")
     mapping_lock = json.loads(mapped_lock.read_text(encoding="utf-8"))
-    if mapping_lock.get("output_sha256") != sha256(mapped) or mapping_lock.get("run_manifest_lock_sha256") != sha256(lock_path):
+    if (
+        mapping_lock.get("schema_version") != "atlas-v1.0-twas-gwas-map.2"
+        or mapping_lock.get("mapping_id") != row["mapping_id"]
+        or mapping_lock.get("output_sha256") != sha256(mapped)
+        or mapping_lock.get("run_manifest_lock_sha256") != sha256(lock_path)
+        or mapping_lock.get("policy_sha256") != sha256(policy_path)
+        or mapping_lock.get("script_sha256") != molecular_contract.script_hashes(root, "twas")
+    ):
         fail("mapped TWAS GWAS differs from lock")
     model, covariance = root / row["model_db_path"], root / row["covariance_path"]
     if not model.is_file() or sha256(model) != row["model_db_sha256"] or not covariance.is_file() or sha256(covariance) != row["covariance_sha256"]:
@@ -131,7 +137,7 @@ def main() -> int:
             ):
                 fail(f"S-PrediXcan result fails numeric QC for {gene}")
         provenance = {
-            "schema_version": "atlas-v1.0-twas-run.1", "run_id": args.run_id,
+            "schema_version": "atlas-v1.0-twas-run.2", "run_id": args.run_id,
             "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(lock_path),
             "policy_sha256": sha256(policy_path), "mapped_gwas_sha256": sha256(mapped),
             "mapped_gwas_lock_sha256": sha256(mapped_lock), "model_db_sha256": sha256(model),
@@ -140,6 +146,7 @@ def main() -> int:
                                  "gwas_h2_scale": row["gwas_h2_scale"], "phi_required": True},
             "command": command, "stdout": result.stdout.strip(), "stderr": result.stderr.strip(),
             "row_count": len(rows), "output_sha256": sha256(output), "claim_limit": policy["claim_limit"],
+            "script_sha256": molecular_contract.script_hashes(root, "twas"),
         }
         (staging / "provenance.json").write_text(json.dumps(provenance, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         final_dir.parent.mkdir(parents=True, exist_ok=True); os.replace(staging, final_dir)

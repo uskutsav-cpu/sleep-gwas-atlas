@@ -2017,6 +2017,8 @@ class PanelContractTests(unittest.TestCase):
     def test_dense_input_detection_rejects_hapmap3_variant_map_without_prefilter_label(self):
         mixer = load_numbered_script("35_mixer_preflight.py", "mixer_dense_input_test")
         fine = load_numbered_script("56_finemapping_preflight.py", "fine_dense_input_test")
+        molecular = load_numbered_script("61_molecular_preflight.py", "molecular_dense_input_test")
+        twas = load_numbered_script("69_prepare_twas_manifest.py", "twas_dense_input_test")
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             directory = root / "data/harmonized"
@@ -2028,6 +2030,19 @@ class PanelContractTests(unittest.TestCase):
             _, _, strategy = mixer.choose_harmonized(root, "trait")
             self.assertEqual(strategy, "HAPMAP3_VARIANT_MAP_BY_COORD_ALLELES")
             self.assertFalse(fine.qc_is_full_resolution(qc))
+            self.assertIsNone(molecular.choose_full_input(root, "trait"))
+            self.assertIsNone(twas.full_input(root, "trait"))
+
+    def test_molecular_contract_preserves_zero_locus_qtl_but_requires_panel_wide_twas(self):
+        planner = (ROOT / "scripts/62_prepare_molecular_search_plan.py").read_text(encoding="utf-8")
+        feature_lock = (ROOT / "scripts/64_lock_molecular_features.py").read_text(encoding="utf-8")
+        integration = (ROOT / "scripts/73_collate_molecular.py").read_text(encoding="utf-8")
+        preflight = (ROOT / "scripts/61_molecular_preflight.py").read_text(encoding="utf-8")
+        self.assertIn('"zero_locus_qtl_not_applicable": len(loci) == 0', planner)
+        self.assertIn('"zero_locus_qtl_not_applicable": len(plan) == 0', feature_lock)
+        self.assertNotIn("if not loci or any", integration)
+        self.assertIn('full_count == 45', preflight)
+        self.assertIn('"twas_production_ready": twas_production_ready', preflight)
 
     def test_finemapping_contract_supports_immutable_zero_locus_publication(self):
         policy = json.loads(

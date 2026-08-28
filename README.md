@@ -114,7 +114,10 @@ source contract. It freezes every QTL query before access, locks all analyzable
 features before trait-molecular results, uses the 49-context phi-enabled
 PredictDB model family for variance-controlled S-PrediXcan, and represents a
 fully searched locus with no supported gene as explicit coverage rather than a
-fabricated gene. See `docs/molecular_workflow.md`.
+fabricated gene. A locked zero-locus family makes the QTL branch explicitly
+not applicable but does not waive the all-trait TWAS branch. The corrected
+dense-input audit currently finds 29/45 TWAS-ready traits; 16 HapMap3-only
+inputs remain blocked. See `docs/molecular_workflow.md`.
 
 The regulatory, cell-type, pathway, bidirectional-MR, graph-integration, and
 nine-family robustness layers now use a second pre-result task lock. Complete

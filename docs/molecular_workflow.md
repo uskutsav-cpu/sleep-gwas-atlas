@@ -6,6 +6,14 @@ rules are frozen in `config/molecular_analysis_policy.json`. A molecular
 association is evidence for a model-dependent gene hypothesis, not proof of
 mediation, a causal gene, or a mechanism.
 
+An exactly locked zero-locus primary family is a valid scientific result. In
+that case scripts 62 and 64 produce schema-bearing, header-only QTL search,
+coverage, feature, and exclusion artifacts whose locks explicitly record
+`zero_locus_qtl_not_applicable=true`; no QTL source access, liftover, tabix, or
+SuSiE/coloc run is required. This does not waive panel-wide TWAS: all eligible
+traits still require every one of the 49 frozen model contexts before molecular
+integration can complete.
+
 ## Exact source family
 
 - eQTL Catalogue release 7: every dataset using the locked `ge`, `leafcutter`,
@@ -60,6 +68,11 @@ Traits with h2 outside `0 < h2 <= 1` are `NOT_APPLICABLE`; estimates are never
 capped or substituted. Scripts 70–72 map the dense GWAS, run all eligible
 trait-by-context tests, retain raw and corrected statistics, and apply BH FDR
 within each trait/model family.
+
+The dense-input detector rejects both explicitly prefiltered files and inputs
+whose QC records a HapMap3-only variant-map strategy. The present local audit
+therefore finds 29/45 valid full inputs; the other 16 traits must be
+reharmonized from true full summary statistics before TWAS production.
 
 ## Integration and absence handling
 

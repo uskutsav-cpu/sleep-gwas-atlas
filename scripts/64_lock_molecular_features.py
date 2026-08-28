@@ -13,24 +13,11 @@ import statistics
 from datetime import datetime, timezone
 from pathlib import Path
 
+import molecular_contract
 
-COVERAGE_FIELDS = [
-    "search_task_id", "locus_id", "source_family_id", "study_id", "dataset_id",
-    "modality", "context", "search_outcome", "normalized_row_count", "feature_count",
-    "analyzable_feature_count", "query_provenance_path", "query_provenance_sha256",
-]
-MANIFEST_FIELDS = [
-    "comparison_id", "search_task_id", "locus_id", "pair_id", "trait_id", "trait_role",
-    "source_family_id", "study_id", "dataset_id", "exact_release", "modality",
-    "feature_id", "feature_name", "gene_id", "gene_symbol", "context", "molecular_N",
-    "shared_variant_count", "normalized_qtl_path", "normalized_qtl_sha256",
-    "trait_task_path", "trait_task_sha256", "trait_task_lock_path", "trait_task_lock_sha256",
-    "trait_molecular_results_accessed_before_feature_lock",
-]
-EXCLUSION_FIELDS = [
-    "search_task_id", "locus_id", "source_family_id", "dataset_id", "modality",
-    "feature_id", "shared_variant_count", "exclusion_reason", "query_provenance_path",
-]
+COVERAGE_FIELDS = molecular_contract.SEARCH_COVERAGE_FIELDS
+MANIFEST_FIELDS = molecular_contract.FEATURE_FIELDS
+EXCLUSION_FIELDS = molecular_contract.FEATURE_EXCLUSION_FIELDS
 
 
 def fail(message: str) -> None:
@@ -89,17 +76,18 @@ def main() -> int:
     parser.add_argument("--manifest-out", default="results/tables/molecular_feature_manifest.tsv")
     parser.add_argument("--exclusions-out", default="results/tables/molecular_feature_exclusions.tsv")
     parser.add_argument("--lock-out", default="results/tables/molecular_feature_manifest.lock.json")
+    parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
     plan_path, plan_lock_path, policy_path = root / args.plan, root / args.plan_lock, root / args.policy
-    _, plan = read_tsv(plan_path)
-    plan_lock = json.loads(plan_lock_path.read_text(encoding="utf-8"))
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if plan_lock.get("plan_sha256") != sha256(plan_path) or plan_lock.get("search_task_ids_in_locked_order") != [row["search_task_id"] for row in plan]:
-        fail("molecular search plan family/order differs from its lock")
+    plan, plan_lock = molecular_contract.validate_search_plan(
+        root, plan_path, plan_lock_path, policy_path,
+        root / "results/tables/molecular_preflight.json",
+    )
     run_dir = root / args.run_dir
-    if run_dir.exists() and any(run_dir.iterdir()):
+    if not args.validate_only and run_dir.exists() and any(run_dir.iterdir()):
         fail("trait-molecular result directory is nonempty before feature-family lock")
     schema = policy["normalized_qtl_schema"]
     terminal = set(policy["search_family"]["terminal_outcomes"])
@@ -119,11 +107,14 @@ def main() -> int:
             fail(f"molecular source search is incomplete: {task_id}")
         provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
         if (
-            provenance.get("search_task_id") != task_id
+            provenance.get("schema_version") != "atlas-v1.0-molecular-query.2"
+            or provenance.get("search_task_id") != task_id
             or provenance.get("search_plan_sha256") != sha256(plan_path)
             or provenance.get("search_plan_lock_sha256") != sha256(plan_lock_path)
             or provenance.get("policy_sha256") != sha256(policy_path)
             or provenance.get("results_accessed_before_lock") is not False
+            or provenance.get("script_sha256") != molecular_contract.script_hashes(root, "qtl")
+            or "normalized_qtl.tsv.gz" not in provenance.get("outputs", {})
         ):
             fail(f"molecular query provenance differs from locks: {task_id}")
         for name, record in provenance.get("outputs", {}).items():
@@ -234,23 +225,41 @@ def main() -> int:
     exclusion_text = table_text(EXCLUSION_FIELDS, exclusions)
     coverage_out, manifest_out = root / args.coverage_out, root / args.manifest_out
     exclusions_out, lock_out = root / args.exclusions_out, root / args.lock_out
-    if any(path.exists() for path in (coverage_out, manifest_out, exclusions_out, lock_out)):
-        fail("molecular feature-family outputs already exist; refusing overwrite")
-    write_atomic(coverage_out, coverage_text)
-    write_atomic(manifest_out, manifest_text)
-    write_atomic(exclusions_out, exclusion_text)
+    locked_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if args.validate_only and lock_out.is_file():
+        locked_utc = json.loads(lock_out.read_text(encoding="utf-8")).get("locked_utc", locked_utc)
     lock_payload = {
-        "schema_version": "atlas-v1.0-molecular-features.1",
-        "locked_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "schema_version": "atlas-v1.0-molecular-features.2",
+        "locked_utc": locked_utc,
         "trait_molecular_results_accessed_before_feature_lock": False,
         "search_task_count": len(coverage), "analyzable_feature_comparison_count": len(manifest),
         "comparison_ids_in_locked_order": [row["comparison_id"] for row in manifest],
-        "coverage_sha256": sha256(coverage_out), "manifest_sha256": sha256(manifest_out),
-        "exclusions_sha256": sha256(exclusions_out), "search_plan_sha256": sha256(plan_path),
+        "coverage_sha256": hashlib.sha256(coverage_text.encode()).hexdigest(),
+        "manifest_sha256": hashlib.sha256(manifest_text.encode()).hexdigest(),
+        "exclusions_sha256": hashlib.sha256(exclusion_text.encode()).hexdigest(),
+        "search_plan_sha256": sha256(plan_path),
         "search_plan_lock_sha256": sha256(plan_lock_path), "policy_sha256": sha256(policy_path),
-        "search_input_hashes": input_hashes, "claim_limit": policy["claim_limit"],
+        "search_input_hashes": input_hashes,
+        "zero_locus_qtl_not_applicable": len(plan) == 0,
+        "script_sha256": molecular_contract.script_hashes(root, "qtl"),
+        "claim_limit": policy["claim_limit"],
     }
-    write_atomic(lock_out, json.dumps(lock_payload, indent=2, sort_keys=True) + "\n")
+    lock_text = json.dumps(lock_payload, indent=2, sort_keys=True) + "\n"
+    if args.validate_only:
+        expected = (
+            (coverage_out, coverage_text), (manifest_out, manifest_text),
+            (exclusions_out, exclusion_text), (lock_out, lock_text),
+        )
+        for path, text in expected:
+            if not path.is_file() or path.read_text(encoding="utf-8") != text:
+                fail(f"molecular feature-family artifact drifted: {path}")
+    else:
+        if any(path.exists() for path in (coverage_out, manifest_out, exclusions_out, lock_out)):
+            fail("molecular feature-family outputs already exist; refusing overwrite")
+        write_atomic(coverage_out, coverage_text)
+        write_atomic(manifest_out, manifest_text)
+        write_atomic(exclusions_out, exclusion_text)
+        write_atomic(lock_out, lock_text)
     if not args.quiet:
         print(f"MOLECULAR_FEATURE_LOCK_OK searches={len(coverage)} comparisons={len(manifest)} exclusions={len(exclusions)}")
     return 0

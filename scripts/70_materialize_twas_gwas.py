@@ -15,6 +15,7 @@ from collections import Counter
 from pathlib import Path
 
 from liftover_chain import load_chain, reverse_complement
+import molecular_contract
 
 
 OUTPUT_FIELDS = ["SNP", "A1", "A2", "BETA", "SE"]
@@ -66,12 +67,12 @@ def main() -> int:
     if not args.materialize:
         fail("TWAS GWAS mapping requires explicit --materialize")
     root = Path(args.root).resolve()
-    mapping_path, run_lock_path, policy_path = root / args.mapping_manifest, root / args.run_lock, root / args.policy
-    _, mappings = read_tsv(mapping_path)
-    run_lock = json.loads(run_lock_path.read_text(encoding="utf-8"))
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if run_lock.get("mapping_sha256") != sha256(mapping_path) or run_lock.get("policy_sha256") != sha256(policy_path):
-        fail("TWAS mapping manifest differs from its lock")
+    mapping_path, run_lock_path = root / args.mapping_manifest, root / args.run_lock
+    policy_path, policy = molecular_contract.load_policy(root, args.policy)
+    mappings, _, _, run_lock = molecular_contract.validate_twas_manifest(
+        root, mapping_path, root / "results/tables/twas_trait_eligibility.tsv",
+        root / "results/tables/twas_run_manifest.tsv", run_lock_path, policy_path,
+    )
     selected = [row for row in mappings if row["trait_id"] == args.trait_id and row["model_family"] == args.model_family]
     if len(selected) != 1:
         fail("trait/model family must identify exactly one mapping task")
@@ -132,11 +133,12 @@ def main() -> int:
     finally:
         temporary.unlink(missing_ok=True)
     lock_payload = {
-        "schema_version": "atlas-v1.0-twas-gwas-map.1", "mapping_id": task["mapping_id"],
+        "schema_version": "atlas-v1.0-twas-gwas-map.2", "mapping_id": task["mapping_id"],
         "mapped_variant_count": len(ordered), "output_sha256": sha256(final),
         "source_gwas_sha256": task["full_gwas_sha256"], "model_variant_sha256": task["model_variant_sha256"],
         "mapping_manifest_sha256": sha256(mapping_path), "run_manifest_lock_sha256": sha256(run_lock_path),
         "policy_sha256": sha256(policy_path), "chain": chain_provenance,
+        "script_sha256": molecular_contract.script_hashes(root, "twas"),
         "exclusion_counts": dict(sorted(excluded.items())), "results_accessed": False,
         "claim_limit": policy["claim_limit"],
     }
