@@ -86,6 +86,17 @@ wording additionally needs corrected multi-estimator agreement, clear
 pleiotropy diagnostics, correct Steiger direction, characterized or adjusted
 sample overlap, and compatible signal-level colocalization.
 
+The public pathway adapters use the official Reactome v97 human GMT and the
+archived GO 2026-08-05 release (go-basic ontology plus human UniProt GAF).
+Source symbols map only when they resolve exactly and uniquely in GENCODE v26.
+GO `NOT` annotations are excluded and remaining annotations are propagated only
+through `is_a` and `part_of`. For each resource and locus, a one-sided
+hypergeometric overrepresentation test compares high-confidence convergent
+genes with the full eligible resource background. Every 10–1000-gene set is
+retained in the unadjusted result, including zero-overlap null rows, so the BH
+family is complete. This is pathway annotation, not evidence of pathway
+activity, direction, mediation, or causality.
+
 Access-blocked tasks can be recorded for audit, but they cannot pass the final
 interpretation or integrated-atlas gates.
 
@@ -109,11 +120,12 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, eight of 20 interpretation source families are ready: GENCODE
+repository state, 10 of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
 2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
-FUMA single-cell/MAGMA bundle, and the within-workflow regulatory cell-type
-layer. The compressed official 1000 Genomes Phase 3 GRCh37 European MAGMA
+FUMA single-cell/MAGMA bundle, the Reactome v97 and GO 2026-08-05 pathway
+families, and the within-workflow regulatory cell-type layer. The compressed
+official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
 not materialized until at least 4,674,439,651 bytes are free; the workflow also
 requires an explicit large-extraction acknowledgement.

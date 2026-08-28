@@ -38,16 +38,19 @@ def main() -> int:
             fail("interpretation curator record has unexpected or missing fields")
     else:
         policy = json.loads((root / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        public_pathway_sources = set(policy["public_pathway_sources"]["source_ids"])
         automatic_sources = {
             policy["promoter_mapping"]["source_id"], policy["hocomoco_v14"]["source_id"],
             policy["abc_2021"]["source_id"], policy["pchic_2016"]["source_id"],
             policy["fuma_scrna"]["source_id"],
-            *policy["screen_registry_v4"]["source_ids"],
+            *policy["screen_registry_v4"]["source_ids"], *public_pathway_sources,
         }
         automatic_family = (
             task["analysis_family"] == "regulatory"
             or task["analysis_family"] == "cell_type"
             and task["source_id"] == policy["fuma_scrna"]["source_id"]
+            or task["analysis_family"] == "pathway"
+            and task["source_id"] in public_pathway_sources
         )
         if not automatic_family or task["source_id"] not in automatic_sources:
             fail(
@@ -62,6 +65,7 @@ def main() -> int:
             policy["abc_2021"]["source_id"]: "85_run_abc_task.py",
             policy["pchic_2016"]["source_id"]: "87_run_pchic_task.py",
             policy["fuma_scrna"]["source_id"]: "91_run_fuma_scrna_task.py",
+            **{source_id: "92_run_pathway_task.py" for source_id in public_pathway_sources},
         }.get(task["source_id"], "82_run_regulatory_task.py")
         adapter_command = [
             sys.executable, str(root / "scripts" / adapter_script), args.task_id,
@@ -73,7 +77,7 @@ def main() -> int:
             return 0
         adapter_result = subprocess.run(adapter_command, cwd=root, check=False)
         if adapter_result.returncode:
-            fail(f"automatic regulatory adapter failed: {args.task_id}")
+            fail(f"automatic interpretation adapter failed: {args.task_id}")
         adapter = json.loads(adapter_provenance.read_text(encoding="utf-8"))
         record = {
             "status": adapter["terminal_status"], "reason": adapter["terminal_reason"],

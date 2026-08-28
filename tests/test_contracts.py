@@ -14,6 +14,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -2220,6 +2221,55 @@ class PanelContractTests(unittest.TestCase):
             )
             rows = task_module.parse_gsa(gsa, ["A", "B"])
             self.assertEqual([row["VARIABLE"] for row in rows], ["A", "B"])
+
+    def test_reactome_and_go_sources_are_exactly_locked_before_results(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        spec = policy["public_pathway_sources"]
+        manifest_path = ROOT / spec["component_manifest"]
+        self.assertEqual(hashlib.sha256(manifest_path.read_bytes()).hexdigest(), spec["component_manifest_sha256"])
+        bundle = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(bundle["set_size_range"], [10, 1000])
+        self.assertEqual(bundle["resources"]["REACTOME"]["release"], "Reactome_v97_2026-06-30")
+        self.assertEqual(bundle["resources"]["REACTOME"]["eligible_sets"], 1744)
+        self.assertEqual(bundle["resources"]["GO"]["release"], "GO_pipeline_2026-08-05_ontology_2026-07-26")
+        self.assertEqual(bundle["resources"]["GO"]["eligible_sets"], 7719)
+        self.assertEqual(bundle["resources"]["GO"]["propagation_relations"], ["is_a", "part_of"])
+        with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
+            sources = {row["source_id"]: row for row in csv.DictReader(handle, delimiter="\t")}
+        for source_id in spec["source_ids"]:
+            self.assertEqual(sources[source_id]["source_status"], "SOURCE_VERIFIED")
+            self.assertEqual(sources[source_id]["exact_release"], bundle["resources"][source_id]["release"])
+        dispatcher = (ROOT / "scripts/76_run_interpretation_task.py").read_text(encoding="utf-8")
+        self.assertIn("92_run_pathway_task.py", dispatcher)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        self.assertIn("PATHWAY_SOURCE_PATHS", workflow)
+
+    def test_pathway_parsers_and_hypergeometric_tail_are_fail_closed(self):
+        module = load_numbered_script("92_run_pathway_task.py", "pathway_task")
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            gtf = directory / "genes.gtf"
+            gtf.write_text(
+                "chr1\tX\tgene\t1\t2\t.\t+\t.\tgene_id \"ENSG00000000001.1\"; gene_name \"A\";\n"
+                "chr1\tX\tgene\t3\t4\t.\t+\t.\tgene_id \"ENSG00000000002.1\"; gene_name \"B\";\n"
+                "chr1\tX\tgene\t5\t6\t.\t+\t.\tgene_id \"ENSG00000000003.1\"; gene_name \"DUP\";\n"
+                "chr1\tX\tgene\t7\t8\t.\t+\t.\tgene_id \"ENSG00000000004.1\"; gene_name \"DUP\";\n",
+                encoding="utf-8",
+            )
+            symbols, stats = module.load_unique_gencode_symbols(gtf)
+            self.assertEqual(symbols, {"A": "ENSG00000000001", "B": "ENSG00000000002"})
+            self.assertEqual(stats["ambiguous_symbols"], 1)
+            archive = directory / "reactome.zip"
+            with zipfile.ZipFile(archive, "w") as handle:
+                handle.writestr("ReactomePathways.gmt", "Path\tR-HSA-1\tA\tB\tDUP\n")
+            sets, observed = module.load_reactome_sets(archive, symbols, 1, 10)
+            self.assertEqual(sets["R-HSA-1"][1], {"ENSG00000000001", "ENSG00000000002"})
+            self.assertEqual(observed["eligible_sets"], 1)
+        expected = sum(
+            math.comb(3, value) * math.comb(7, 4 - value) / math.comb(10, 4)
+            for value in range(2, 4)
+        )
+        self.assertAlmostEqual(module.hypergeometric_right_tail(2, 10, 3, 4), expected)
 
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))

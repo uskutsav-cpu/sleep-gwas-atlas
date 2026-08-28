@@ -15,6 +15,8 @@ import tarfile
 import zipfile
 from pathlib import Path
 
+from pathway_sources import load_go_sets, load_reactome_sets, load_unique_gencode_symbols
+
 
 REGISTRY_FIELDS = [
     "source_id", "analysis_family", "method", "layer_or_resource",
@@ -511,6 +513,102 @@ def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, s
     return True, "", observed
 
 
+def validate_public_pathway_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["public_pathway_sources"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "public pathway component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path)}
+    if (
+        set(spec["source_ids"]) != set(manifest.get("resources", {}))
+        or manifest.get("set_size_range") != [
+            policy["pathways"]["minimum_gene_set_size"],
+            policy["pathways"]["maximum_gene_set_size"],
+        ]
+    ):
+        return False, "public pathway source IDs or set-size family differs from policy", observed
+
+    def pinned_path(row: dict[str, object], label: str) -> Path:
+        relative = Path(str(row.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"unsafe {label} path")
+        path = root / relative
+        if (
+            not path.is_file() or path.stat().st_size != row.get("bytes")
+            or sha256(path) != row.get("sha256")
+        ):
+            raise ValueError(f"{label} differs from its exact pin")
+        return path
+
+    try:
+        mapping = manifest["identifier_mapping"]
+        gencode = pinned_path(mapping, "GENCODE pathway identifier reference")
+        symbol_map, mapping_observed = load_unique_gencode_symbols(gencode)
+        mapping_expected = {
+            key: mapping[key] for key in (
+                "gene_rows", "distinct_symbols", "unique_symbols", "ambiguous_symbols",
+            )
+        }
+        if mapping_observed != mapping_expected:
+            raise ValueError("GENCODE exact-symbol family differs from its release pin")
+        minimum_size, maximum_size = map(int, manifest["set_size_range"])
+
+        reactome = manifest["resources"]["REACTOME"]
+        reactome_path = pinned_path(reactome, "Reactome v97 archive")
+        reactome_sets, reactome_observed = load_reactome_sets(
+            reactome_path, symbol_map, minimum_size, maximum_size,
+        )
+        reactome_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in reactome_sets.values()))
+        )
+        reactome_expected = {
+            key: reactome[key] for key in (
+                "archive_member", "archive_member_bytes", "archive_member_sha256",
+                "source_pathways", "source_symbols", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if reactome_observed != reactome_expected:
+            raise ValueError("Reactome v97 pathway family differs from its release pin")
+
+        go = manifest["resources"]["GO"]
+        ontology = pinned_path(go["ontology"], "GO ontology")
+        annotation = pinned_path(go["annotation"], "GO human annotation")
+        go_sets, go_observed = load_go_sets(
+            ontology, annotation, symbol_map, minimum_size, maximum_size,
+        )
+        go_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in go_sets.values()))
+        )
+        go_expected = {
+            "ontology_data_version": go["ontology"]["data_version"],
+            "active_ontology_terms": go["ontology"]["active_terms"],
+            "gaf_rows": go["annotation"]["rows"],
+            "gaf_date_generated": go["annotation"]["date_generated"],
+            "gaf_go_version": go["annotation"]["go_version"],
+            **{
+                key: go[key] for key in (
+                    "excluded_not_rows", "excluded_unmapped_rows", "direct_annotated_terms",
+                    "propagated_terms", "mapped_genes", "eligible_sets",
+                    "eligible_gene_memberships", "eligible_gene_union",
+                )
+            },
+        }
+        if go_observed != go_expected:
+            raise ValueError("GO pathway family differs from its release pin")
+    except (OSError, UnicodeError, ValueError, KeyError, gzip.BadGzipFile, zipfile.BadZipFile) as exc:
+        return False, f"public pathway source bundle is invalid: {exc}", observed
+    observed.update({
+        "identifier_mapping": mapping_observed,
+        "REACTOME": reactome_observed,
+        "GO": go_observed,
+    })
+    return True, "", observed
+
+
 def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
     pairs = (
         (policy["regulatory_mapping"]["required_layers"], downstream["regulatory_mapping"]["required_layers"]),
@@ -599,6 +697,8 @@ def main() -> int:
     pchic_source_id = policy["pchic_2016"]["source_id"]
     fuma_ready, fuma_blocker, fuma_validation = validate_fuma_bundle(root, policy)
     fuma_source_id = policy["fuma_scrna"]["source_id"]
+    pathway_ready, pathway_blocker, pathway_validation = validate_public_pathway_bundle(root, policy)
+    public_pathway_source_ids = set(policy["public_pathway_sources"]["source_ids"])
     allowed_source_status = {
         "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
         "DERIVED_WITHIN_WORKFLOW",
@@ -639,6 +739,9 @@ def main() -> int:
             elif identity == fuma_source_id and not fuma_ready:
                 ready = False
                 blocker = fuma_blocker
+            elif identity in public_pathway_source_ids and not pathway_ready:
+                ready = False
+                blocker = pathway_blocker
         elif row["source_status"] == "DERIVED_UPSTREAM":
             ready = path.is_file() and observed_bytes > 0
             if not ready:
@@ -680,6 +783,7 @@ def main() -> int:
         "abc_source_bundle": abc_validation,
         "pchic_source_bundle": pchic_validation,
         "fuma_scrna_source_bundle": fuma_validation,
+        "public_pathway_source_bundle": pathway_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),

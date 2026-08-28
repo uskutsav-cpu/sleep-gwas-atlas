@@ -64,6 +64,14 @@ MAGMA_REFERENCE_PATHS = [
     f"{INTERPRETATION_SPEC['fuma_scrna']['reference_dir']}/{member['name']}"
     for member in FUMA_SOURCE_BUNDLE["reference_members"]
 ]
+with open(INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"], encoding="utf-8") as handle:
+    PATHWAY_SOURCE_BUNDLE = json.load(handle)
+PATHWAY_SOURCE_PATHS = [
+    PATHWAY_SOURCE_BUNDLE["identifier_mapping"]["path"],
+    PATHWAY_SOURCE_BUNDLE["resources"]["REACTOME"]["path"],
+    PATHWAY_SOURCE_BUNDLE["resources"]["GO"]["ontology"]["path"],
+    PATHWAY_SOURCE_BUNDLE["resources"]["GO"]["annotation"]["path"],
+]
 
 
 rule all:
@@ -817,10 +825,11 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
             INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
             INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+            INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"],
         ],
         source_files=(
             SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS
-            + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS
+            + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS + PATHWAY_SOURCE_PATHS
         ),
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",
@@ -955,6 +964,12 @@ def interpretation_task_dependencies(wildcards):
     if len(selected) != 1:
         raise ValueError(f"unknown interpretation task ID: {wildcards.task_id}")
     task = selected[0]
+    if task["source_id"] in set(INTERPRETATION_SPEC["public_pathway_sources"]["source_ids"]):
+        return [
+            INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"],
+            *PATHWAY_SOURCE_PATHS,
+            "results/atlas/genes.tsv", "results/atlas/loci.tsv",
+        ]
     if task["source_id"] == INTERPRETATION_SPEC["fuma_scrna"]["source_id"]:
         gene_prefix = (
             f"{INTERPRETATION_SPEC['fuma_scrna']['gene_results_dir']}/"
