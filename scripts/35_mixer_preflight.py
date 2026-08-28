@@ -13,6 +13,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import fine_mapping_contract
+
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
@@ -296,7 +298,11 @@ def choose_harmonized(root: Path, trait: str) -> tuple[Path, Path, str]:
         if data.is_file() and data.stat().st_size and qc.is_file():
             prefilter = qc_value(qc, "prefilter_strategy")
             variant_map = qc_value(qc, "variant_map_strategy")
-            if variant_map not in {"not supplied"}:
+            variant_map_scope = qc_value(qc, "variant_map_scope")
+            if variant_map not in {"not supplied"} and not (
+                variant_map_scope == "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"
+                and fine_mapping_contract.qc_is_full_resolution(qc)
+            ):
                 prefilter = f"HAPMAP3_VARIANT_MAP_{variant_map or 'UNKNOWN'}"
             return data, qc, prefilter
     return candidates[0][0], candidates[0][1], ""

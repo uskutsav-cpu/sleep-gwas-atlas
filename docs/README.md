@@ -24,6 +24,8 @@ Current curation records:
   correlation-family results for the six public EUR substitutions.
 - `molecular_workflow.md` — complete molecular-QTL, variance-controlled TWAS,
   locus-coverage, and supported-gene integration contract.
+- `dense_harmonization_workflow.md` — exact genome-wide identity-map and
+  16-trait full-resolution harmonization handoff for downstream production.
 - `interpretation_workflow.md` — locked regulatory, cell-type, pathway,
   bidirectional-MR, atlas-edge, and robustness task/coverage contract.
 - `aging_source_queue.md` — primary-source discoveries awaiting their own

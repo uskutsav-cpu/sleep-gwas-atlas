@@ -34,18 +34,21 @@ ms, asthma, t2d, ldl, hdl, triglycerides, cad, telomere_length, melanoma,
 crohn, ibd, uc, mdd, longevity, parkinson, stroke
 ```
 
-Several still have their full registered raw archives locally; the three lipid
-traits require their full source archive to be rematerialized, while the seven
-variant-map cases require a genome-wide GRCh37 rsID resolution strategy rather
-than the pinned HapMap3 map. Full MiXeR
-harmonizations belong under `data/harmonized_mixer_full/` with matching QC
-ledgers and neither `HAPMAP3_RSID_ALLOWLIST` nor a HapMap3-only
-`variant_map_strategy` provenance.
+Thirteen still have their full registered raw archives locally; the three lipid
+traits require their full source archives to be rematerialized. The seven
+variant-map cases now have a result-free genome-wide GRCh37 identity contract
+based on the exact Pan-UKBB variant manifest. Its guarded builder and the exact
+16-trait routing are documented in `docs/dense_harmonization_workflow.md`.
+Full MiXeR harmonizations belong under `data/harmonized_mixer_full/` with
+matching QC ledgers and neither `HAPMAP3_RSID_ALLOWLIST` nor HapMap3-only map
+scope provenance.
 
 Audit the exact input and host status without creating large files:
 
 ```bash
 python3 scripts/35_mixer_preflight.py --report-only
+python3 scripts/100_build_dense_variant_map.py --report-only
+python3 scripts/101_prepare_dense_harmonization.py --report-only
 python3 scripts/36_prepare_mixer_inputs.py
 ```
 

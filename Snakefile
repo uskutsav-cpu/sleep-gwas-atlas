@@ -30,12 +30,17 @@ ATLAS_SCHEMA = config["atlas_schema"]
 FINE_MAPPING_POLICY = config["fine_mapping_policy"]
 MOLECULAR_POLICY = config.get("molecular_policy", "config/molecular_analysis_policy.json")
 INTERPRETATION_POLICY = config.get("interpretation_policy", "config/interpretation_analysis_policy.json")
+DENSE_MAP_POLICY = config.get("dense_map_policy", "config/dense_variant_map_policy.json")
+DENSE_HARMONIZATION_POLICY = config.get(
+    "dense_harmonization_policy", "config/dense_harmonization_policy.json"
+)
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
 with open(PANEL, newline="", encoding="utf-8") as handle:
     PANEL_ROWS = list(csv.DictReader(handle, delimiter="\t"))
 RAW_BY_TRAIT = {row["trait_id"]: f"data/raw/{row['raw_file']}" for row in PANEL_ROWS}
+SOURCE_ID_BY_TRAIT = {row["trait_id"]: row["source_id"] for row in PANEL_ROWS}
 PANEL_IDS = set(RAW_BY_TRAIT)
 SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] == "sleep"]
 NON_SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] != "sleep"]
@@ -43,6 +48,40 @@ PLEIOTROPY_PAIRS = [f"{sleep}__{other}" for sleep in SLEEP_TRAITS for other in N
 unknown = set(SELECTED).difference(PANEL_IDS)
 if unknown:
     raise ValueError(f"phase0_traits contains IDs outside the locked panel: {sorted(unknown)}")
+
+with open(DENSE_MAP_POLICY, encoding="utf-8") as handle:
+    DENSE_MAP_SPEC = json.load(handle)
+with open(DENSE_HARMONIZATION_POLICY, encoding="utf-8") as handle:
+    DENSE_HARMONIZATION_SPEC = json.load(handle)
+DENSE_TRAITS = [
+    *DENSE_HARMONIZATION_SPEC["dense_map_traits"],
+    *DENSE_HARMONIZATION_SPEC["liftover_traits"],
+    *DENSE_HARMONIZATION_SPEC["direct_hg19_traits"],
+]
+if len(DENSE_TRAITS) != 16 or len(set(DENSE_TRAITS)) != 16 or not set(DENSE_TRAITS).issubset(PANEL_IDS):
+    raise ValueError("dense harmonization policy differs from the exact locked 16-trait family")
+
+
+def full_harmonized_path(trait):
+    directory = "data/harmonized_mixer_full" if trait in DENSE_TRAITS else "data/harmonized"
+    return f"{directory}/{trait}.harmonized.tsv.gz"
+
+
+def full_harmonized_qc_path(trait):
+    directory = "data/harmonized_mixer_full" if trait in DENSE_TRAITS else "data/harmonized"
+    return f"{directory}/{trait}.qc.txt"
+
+
+def dense_route_dependencies(wildcards):
+    trait = wildcards.trait
+    if trait not in DENSE_TRAITS:
+        raise ValueError(f"trait is outside the locked dense harmonization family: {trait}")
+    dependencies = [RAW_BY_TRAIT[trait]]
+    if trait in DENSE_HARMONIZATION_SPEC["dense_map_traits"]:
+        dependencies.extend([DENSE_MAP_SPEC["map_path"], DENSE_MAP_SPEC["map_provenance_path"]])
+    elif trait in DENSE_HARMONIZATION_SPEC["liftover_traits"]:
+        dependencies.append("ref/hg38ToHg19.over.chain.gz")
+    return dependencies
 
 with open(INTERPRETATION_POLICY, encoding="utf-8") as handle:
     INTERPRETATION_SPEC = json.load(handle)
@@ -340,6 +379,77 @@ rule lava:
         "{PYTHON} scripts/34_validate_lava.py --seal-results --quiet"
 
 
+rule dense_variant_map_source:
+    input:
+        policy=DENSE_MAP_POLICY,
+    output:
+        DENSE_MAP_SPEC["source_path"],
+    params:
+        acknowledgement=(
+            "--acknowledge-large-download"
+            if config.get("acknowledge_dense_variant_map_download", False) else ""
+        ),
+    shell:
+        "{PYTHON} scripts/100_build_dense_variant_map.py --download {params.acknowledgement}"
+
+
+rule dense_variant_map:
+    input:
+        source=rules.dense_variant_map_source.output,
+        policy=DENSE_MAP_POLICY,
+        plans="config/dense_variant_mapping_plans.tsv",
+    output:
+        data=DENSE_MAP_SPEC["map_path"],
+        provenance=DENSE_MAP_SPEC["map_provenance_path"],
+    shell:
+        "{PYTHON} scripts/100_build_dense_variant_map.py --build && "
+        "{PYTHON} scripts/100_build_dense_variant_map.py --validate-only"
+
+
+rule dense_glgc_raw:
+    input:
+        panel=PANEL,
+        sources=SOURCES,
+    output:
+        "data/raw/{trait}.txt.gz",
+    params:
+        source=lambda wildcards: SOURCE_ID_BY_TRAIT[wildcards.trait],
+        approved="true" if config.get("acknowledge_dense_gwas_download", False) else "false",
+    wildcard_constraints:
+        trait="ldl|hdl|triglycerides",
+    shell:
+        "test '{params.approved}' = true || "
+        "(echo 'ERROR: the exact 6,844,892,917-byte GLGC transfer requires acknowledgement' >&2; exit 1); "
+        "bash scripts/11_materialize_public_gwas.sh --download {params.source}; "
+        "bash scripts/11_materialize_public_gwas.sh --materialize {params.source}"
+
+
+rule dense_harmonized_trait:
+    input:
+        dependencies=dense_route_dependencies,
+        policy=DENSE_HARMONIZATION_POLICY,
+    output:
+        data="data/harmonized_mixer_full/{trait}.harmonized.tsv.gz",
+        qc="data/harmonized_mixer_full/{trait}.qc.txt",
+    wildcard_constraints:
+        trait="|".join(DENSE_TRAITS),
+    shell:
+        "{PYTHON} scripts/101_prepare_dense_harmonization.py --materialize "
+        "--trait {wildcards.trait} --no-write-readiness"
+
+
+rule dense_harmonization:
+    input:
+        data=expand("data/harmonized_mixer_full/{trait}.harmonized.tsv.gz", trait=DENSE_TRAITS),
+        qc=expand("data/harmonized_mixer_full/{trait}.qc.txt", trait=DENSE_TRAITS),
+    output:
+        readiness=DENSE_HARMONIZATION_SPEC["readiness_path"],
+        provenance=DENSE_HARMONIZATION_SPEC["provenance_path"],
+        ok=touch("results/tables/DENSE_HARMONIZATION_OK"),
+    shell:
+        "{PYTHON} scripts/101_prepare_dense_harmonization.py"
+
+
 rule mixer_preflight:
     input:
         panel=PANEL,
@@ -348,6 +458,7 @@ rule mixer_preflight:
         prefilters="config/hm3_prefilter_plans.tsv",
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        dense=rules.dense_harmonization.output,
     output:
         report="results/tables/mixer_preflight.json",
         traits="results/tables/mixer_input_readiness.tsv",
@@ -393,6 +504,7 @@ rule pleiotropy_preflight:
         prefilters="config/hm3_prefilter_plans.tsv",
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        dense=rules.dense_harmonization.output,
     output:
         report="results/tables/pleiotropy_preflight.json",
         traits="results/tables/pleiotropy_input_readiness.tsv",
@@ -408,6 +520,7 @@ rule pleiotropy_pairs:
         rg="results/tables/rg_matrix.tsv",
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        dense=rules.dense_harmonization.output,
     output:
         manifest="results/tables/pleiotropy_pair_manifest.tsv",
         lock="results/tables/pleiotropy_pair_manifest.lock.json",
@@ -420,8 +533,8 @@ rule pleiotropy_pair_input:
         policy=PLEIOTROPY_POLICY,
         manifest="results/tables/pleiotropy_pair_manifest.tsv",
         lock="results/tables/pleiotropy_pair_manifest.lock.json",
-        sleep=lambda wildcards: "data/harmonized/" + wildcards.pair_id.split("__", 1)[0] + ".harmonized.tsv.gz",
-        non_sleep=lambda wildcards: "data/harmonized/" + wildcards.pair_id.split("__", 1)[1] + ".harmonized.tsv.gz",
+        sleep=lambda wildcards: full_harmonized_path(wildcards.pair_id.split("__", 1)[0]),
+        non_sleep=lambda wildcards: full_harmonized_path(wildcards.pair_id.split("__", 1)[1]),
     output:
         pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
         provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
@@ -456,8 +569,8 @@ rule placo_pair:
 
 rule pleiofdr_trait:
     input:
-        source="data/harmonized/{trait}.harmonized.tsv.gz",
-        qc="data/harmonized/{trait}.qc.txt",
+        source=lambda wildcards: full_harmonized_path(wildcards.trait),
+        qc=lambda wildcards: full_harmonized_qc_path(wildcards.trait),
         template="ref/pleiofdr/9545380.ref",
         policy=PLEIOTROPY_POLICY,
     output:
@@ -802,6 +915,7 @@ rule twas_preflight:
         models=rules.twas_model_index.output,
         runtime=rules.metaxcan_runtime.output,
         fine_mapping="results/atlas/fine_mapping.provenance.json",
+        dense=rules.dense_harmonization.output,
     output:
         readiness="results/tables/twas_input_readiness.tsv",
         report="results/tables/twas_preflight.json",

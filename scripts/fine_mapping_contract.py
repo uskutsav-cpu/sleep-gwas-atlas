@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import csv
+from functools import lru_cache
 import hashlib
 import json
 import re
 from pathlib import Path
 
 import lava_contract
+import variant_map
 
 
 SHARED_FIELDS = [
@@ -104,9 +106,57 @@ def qc_value(path: Path, key: str) -> str:
 
 
 def qc_is_full_resolution(path: Path) -> bool:
+    variant_map_strategy = qc_value(path, "variant_map_strategy")
+    variant_map_scope = qc_value(path, "variant_map_scope")
+    if qc_value(path, "prefilter_strategy") not in {"", "not supplied"}:
+        return False
+    if variant_map_strategy == "not supplied":
+        return True
+    if (
+        variant_map_strategy not in {"BY_COORD_ALLELES", "BY_RSID_ALLELES"}
+        or variant_map_scope != "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"
+    ):
+        return False
+    map_path = qc_value(path, "variant_map")
+    map_bytes = qc_value(path, "variant_map_bytes")
+    map_sha256 = qc_value(path, "variant_map_sha256")
+    provenance_sha256 = qc_value(path, "variant_map_provenance_sha256")
+    schema_version = qc_value(path, "variant_map_schema_version")
+    if (
+        not map_bytes.isdigit() or not HEX64.fullmatch(map_sha256)
+        or not HEX64.fullmatch(provenance_sha256)
+    ):
+        return False
+    return sealed_genome_wide_map(
+        map_path, int(map_bytes), map_sha256, provenance_sha256, schema_version,
+    )
+
+
+@lru_cache(maxsize=4)
+def sealed_genome_wide_map(
+    map_path_value: str,
+    map_bytes: int,
+    map_sha256: str,
+    provenance_sha256: str,
+    schema_version: str,
+) -> bool:
+    map_path = Path(map_path_value)
+    provenance_path = Path(f"{map_path}.provenance.json")
+    try:
+        if (
+            not map_path.is_absolute() or not map_path.is_file()
+            or map_path.stat().st_size != map_bytes or not provenance_path.is_file()
+            or sha256(provenance_path) != provenance_sha256
+        ):
+            return False
+        provenance = variant_map.validate_provenance(
+            map_path, expected_sha256=map_sha256, expected_bytes=map_bytes,
+        )
+    except (OSError, UnicodeError, ValueError, SystemExit):
+        return False
     return (
-        qc_value(path, "prefilter_strategy") in {"", "not supplied"}
-        and qc_value(path, "variant_map_strategy") == "not supplied"
+        provenance.get("schema_version") == schema_version
+        and provenance.get("map_scope") == "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"
     )
 
 

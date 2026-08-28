@@ -37,6 +37,7 @@ from variant_map import (
     VariantMapError,
     coordinate_match,
     load_variant_map,
+    required_coordinate_keys,
     rsid_match,
 )
 from liftover_chain import LiftoverError, load_chain, reverse_complement
@@ -225,7 +226,7 @@ def main():
     )
     parser.add_argument(
         "--variant-map",
-        help="Pinned GRCh37 HapMap3 map; requires its .provenance.json companion.",
+        help="Checksum-sealed GRCh37 identity map; requires its .provenance.json companion.",
     )
     parser.add_argument(
         "--variant-map-strategy",
@@ -532,12 +533,26 @@ def main():
         )
 
     if args.variant_map:
+        if args.variant_map_strategy == "BY_RSID_ALLELES":
+            required_map_keys = {
+                str(value).strip().lower() for value in out["SNP"].dropna()
+                if RSID.fullmatch(str(value).strip().lower())
+            }
+        else:
+            required_map_keys = set()
+            for chromosome, position, a1, a2 in zip(
+                out["CHR"], out["BP"], out["A1"], out["A2"]
+            ):
+                required_map_keys.update(
+                    required_coordinate_keys(chromosome, position, a1, a2)
+                )
         try:
             variant_index, variant_map_provenance = load_variant_map(
                 args.variant_map,
                 args.variant_map_strategy,
                 args.expected_variant_map_sha256,
                 args.expected_variant_map_bytes,
+                required_keys=required_map_keys,
             )
         except VariantMapError as error:
             fail(str(error))
@@ -575,10 +590,15 @@ def main():
             out["CHR"] = pd.Series(mapped_chromosomes, index=out.index, dtype="float64")
             out["BP"] = pd.Series(mapped_positions, index=out.index, dtype="float64")
         status_series = pd.Series(statuses, index=out.index, dtype="string")
+        map_label = (
+            "pinned GRCh37 EUR HapMap3 map"
+            if variant_map_provenance["map_scope"] == "HAPMAP3_ONLY"
+            else "pinned GRCh37 genome-wide variant-identity map"
+        )
         for status, reason in [
-            ("unmatched_reference", "not present in pinned GRCh37 EUR HapMap3 map"),
-            ("allele_conflict", "alleles conflict with pinned GRCh37 HapMap3 map"),
-            ("coordinate_conflict", "source coordinate conflicts with pinned GRCh37 HapMap3 map"),
+            ("unmatched_reference", f"not present in {map_label}"),
+            ("allele_conflict", f"alleles conflict with {map_label}"),
+            ("coordinate_conflict", f"source coordinate conflicts with {map_label}"),
             ("ambiguous_reference", "coordinate/alleles map ambiguously to multiple rsIDs"),
         ]:
             drop(status_series.loc[out.index] == status, reason)
@@ -692,6 +712,22 @@ def main():
         report.write(
             f"variant_map_sha256\t"
             f"{variant_map_provenance['map_sha256'] if variant_map_provenance else 'not supplied'}\n"
+        )
+        report.write(
+            f"variant_map_scope\t"
+            f"{variant_map_provenance['map_scope'] if variant_map_provenance else 'not supplied'}\n"
+        )
+        report.write(
+            f"variant_map_schema_version\t"
+            f"{variant_map_provenance['schema_version'] if variant_map_provenance else 'not supplied'}\n"
+        )
+        report.write(
+            f"variant_map_bytes\t"
+            f"{os.path.getsize(args.variant_map) if args.variant_map else 'not supplied'}\n"
+        )
+        report.write(
+            f"variant_map_provenance_sha256\t"
+            f"{sha256(f'{args.variant_map}.provenance.json') if args.variant_map else 'not supplied'}\n"
         )
         report.write(
             f"liftover_chain\t"

@@ -61,6 +61,68 @@ def build_fixture_variant_map(directory):
     return output
 
 
+def build_fixture_dense_variant_map(directory):
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    source = directory / "source.bgz"
+    payload = (
+        "chrom\tpos\tref\talt\trsid\n"
+        "1\t1000000\tA\tG\trs123\n"
+        "1\t2000000\tC\tT\trs456\n"
+        "1\t2000001\tC\tA\trs456\n"
+        "1\t3000000\tA\tC\t.\n"
+        "23\t4000000\tA\tG\trs789\n"
+    )
+    source.write_bytes(gzip.compress(payload.encode("ascii"), mtime=0))
+    source_md5 = hashlib.md5(source.read_bytes(), usedforsecurity=False).hexdigest()
+    builder = directory / "builder.py"
+    shutil.copyfile(ROOT / "scripts/100_build_dense_variant_map.py", builder)
+    policy = {
+        "schema_version": "sleep-atlas-dense-variant-map.1",
+        "analysis_panel": "atlas-v1.0",
+        "resource": "fixture",
+        "source_url": "https://example.org/source.bgz",
+        "source_path": "source.bgz",
+        "source_bytes": source.stat().st_size,
+        "source_md5": source_md5,
+        "source_s3_version_id": "fixture-v1",
+        "source_last_modified": "2020-01-01T00:00:00Z",
+        "source_header_sha256": hashlib.sha256(
+            b"chrom\tpos\tref\talt\trsid\n"
+        ).hexdigest(),
+        "required_columns": ["chrom", "pos", "ref", "alt", "rsid"],
+        "source_build": "GRCh37",
+        "map_path": "dense.tsv.gz",
+        "map_provenance_path": "dense.tsv.gz.provenance.json",
+        "map_schema_version": "atlas.grch37-variant-map.v2",
+        "map_scope": "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY",
+        "minimum_source_rows": 5,
+        "minimum_mapped_rows": 1,
+        "minimum_free_bytes_before_download": 0,
+        "minimum_free_bytes_before_build": 0,
+        "requires_large_download_acknowledgement": True,
+        "identity_rule": "fixture exact identity",
+        "role_limit": "identity only",
+        "builder_path": "builder.py",
+        "builder_sha256": hashlib.sha256(builder.read_bytes()).hexdigest(),
+    }
+    policy_path = directory / "policy.json"
+    policy_path.write_text(json.dumps(policy), encoding="utf-8")
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "100_build_dense_variant_map.py"),
+            "--root", str(directory), "--policy", "policy.json", "--build",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        raise AssertionError(result.stderr + result.stdout)
+    return directory / "dense.tsv.gz"
+
+
 def build_fixture_liftover_chain(directory):
     path = Path(directory) / "hg38ToHg19.over.chain.gz"
     payload = (
@@ -412,6 +474,119 @@ class PanelContractTests(unittest.TestCase):
             "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
         })
 
+    def test_dense_variant_map_and_harmonization_routes_are_pre_result_locked(self):
+        map_policy = json.loads(
+            (ROOT / "config/dense_variant_map_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(map_policy["source_bytes"], 2701503051)
+        self.assertEqual(map_policy["source_md5"], "e70ebc8289f762dd8d5086f54e766654")
+        self.assertEqual(
+            map_policy["source_s3_version_id"], "aHImXX38fFenvR2s2WKBloyhPWfsGkk7"
+        )
+        self.assertEqual(
+            map_policy["source_header_sha256"],
+            "8b64d8a69a940f1931ee4eb739847b62986c7e93f6a5eb6796e6d70c8e3d4db1",
+        )
+        self.assertEqual(map_policy["source_build"], "GRCh37")
+        self.assertEqual(
+            map_policy["map_scope"], "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"
+        )
+        self.assertTrue(map_policy["requires_large_download_acknowledgement"])
+        self.assertEqual(map_policy["builder_path"], "scripts/100_build_dense_variant_map.py")
+        self.assertEqual(
+            map_policy["builder_sha256"],
+            hashlib.sha256((ROOT / map_policy["builder_path"]).read_bytes()).hexdigest(),
+        )
+        with (ROOT / "config/dense_variant_mapping_plans.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            mapping = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(
+            {row["trait_id"] for row in mapping},
+            {"parkinson", "mdd", "ibd", "crohn", "uc", "stroke", "longevity"},
+        )
+        self.assertEqual(
+            {row["map_scope"] for row in mapping},
+            {"GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"},
+        )
+        harmonization = json.loads(
+            (ROOT / "config/dense_harmonization_policy.json").read_text(encoding="utf-8")
+        )
+        routed = (
+            harmonization["dense_map_traits"]
+            + harmonization["liftover_traits"]
+            + harmonization["direct_hg19_traits"]
+        )
+        self.assertEqual(len(routed), 16)
+        self.assertEqual(len(set(routed)), 16)
+        self.assertEqual(
+            set(harmonization["liftover_traits"]),
+            {"ms", "asthma", "t2d", "cad", "telomere_length", "melanoma"},
+        )
+        self.assertEqual(
+            set(harmonization["direct_hg19_traits"]),
+            {"ldl", "hdl", "triglycerides"},
+        )
+        self.assertEqual(
+            harmonization["dense_map_policy_sha256"],
+            hashlib.sha256((ROOT / harmonization["dense_map_policy_path"]).read_bytes()).hexdigest(),
+        )
+        self.assertEqual(
+            set(harmonization["script_sha256"]),
+            {
+                "scripts/101_prepare_dense_harmonization.py", "scripts/01_harmonize.py",
+                "scripts/variant_map.py", "scripts/liftover_chain.py",
+                "scripts/fine_mapping_contract.py",
+            },
+        )
+        for relative, expected in harmonization["script_sha256"].items():
+            self.assertEqual(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest(), expected)
+        self.assertEqual(
+            harmonization["provenance_path"],
+            "results/tables/dense_harmonization.provenance.json",
+        )
+        builder = (ROOT / "scripts/100_build_dense_variant_map.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("--acknowledge-large-download", builder)
+        self.assertIn("--report-only cannot be combined", builder)
+        dispatcher = (ROOT / "scripts/101_prepare_dense_harmonization.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("--report-only cannot be combined", dispatcher)
+        self.assertIn("association results", map_policy["role_limit"].lower())
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        for rule in (
+            "dense_variant_map_source", "dense_variant_map", "dense_glgc_raw",
+            "dense_harmonized_trait", "dense_harmonization",
+        ):
+            self.assertIn(f"rule {rule}:", workflow)
+        self.assertIn("full_harmonized_path(wildcards.trait)", workflow)
+        self.assertIn("acknowledge_dense_variant_map_download", workflow)
+        self.assertIn("acknowledge_dense_gwas_download", workflow)
+        self.assertIn('touch("results/tables/DENSE_HARMONIZATION_OK")', workflow)
+        self.assertIn('provenance=DENSE_HARMONIZATION_SPEC["provenance_path"]', workflow)
+
+    def test_dense_variant_map_builder_is_deterministic_and_excludes_ambiguous_rsids(self):
+        with tempfile.TemporaryDirectory() as first_directory, tempfile.TemporaryDirectory() as second_directory:
+            first = build_fixture_dense_variant_map(first_directory)
+            second = build_fixture_dense_variant_map(second_directory)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            with gzip.open(first, "rt", encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            provenance = json.loads(
+                Path(f"{first}.provenance.json").read_text(encoding="utf-8")
+            )
+        self.assertEqual(rows, [{
+            "SNP": "rs123", "CHR": "1", "BP": "1000000", "A1": "A", "A2": "G",
+        }])
+        self.assertEqual(
+            provenance["map_scope"], "GENOME_WIDE_IMPUTED_VARIANT_IDENTITY"
+        )
+        self.assertEqual(provenance["ambiguous_rsid_count"], 1)
+        self.assertEqual(provenance["ambiguous_rsid_rows_excluded"], 2)
+        self.assertEqual(provenance["mapped_rows"], 1)
+
     def test_liftover_plans_exactly_cover_verified_hg38_sources(self):
         verified_hg38 = {
             row["trait_id"]
@@ -665,6 +840,47 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertIn("not present in pinned GRCh37 EUR HapMap3 map\t1\t2", qc)
         self.assertIn("output_build\thg19", qc)
+
+    def test_dense_map_scope_is_emitted_by_real_harmonization(self):
+        payload = (
+            "SNP\tA1\tA2\tBETA\tSE\tP\tN\n"
+            "rs123\tG\tA\t0.2\t0.1\t0.01\t380000\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            variant_map = build_fixture_dense_variant_map(directory / "map")
+            source = directory / "source.tsv"
+            source.write_text(payload, encoding="utf-8")
+            outdir = directory / "out"
+            result = subprocess.run(
+                [
+                    sys.executable, str(ROOT / "scripts/01_harmonize.py"),
+                    "--trait", "insomnia", "--config", str(MANIFEST),
+                    "--infile", str(source), "--outdir", str(outdir),
+                    "--source-build", "hg19", "--variant-map", str(variant_map),
+                    "--variant-map-strategy", "BY_RSID_ALLELES",
+                    "--expected-variant-map-bytes", str(variant_map.stat().st_size),
+                    "--expected-variant-map-sha256",
+                    hashlib.sha256(variant_map.read_bytes()).hexdigest(),
+                ],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            qc_path = outdir / "insomnia.qc.txt"
+            qc = qc_path.read_text(encoding="utf-8")
+            with gzip.open(
+                outdir / "insomnia.harmonized.tsv.gz", "rt", encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            fine = load_numbered_script(
+                "56_finemapping_preflight.py", "fine_real_dense_scope"
+            )
+            full_resolution = fine.qc_is_full_resolution(qc_path)
+        self.assertEqual((rows[0]["SNP"], rows[0]["CHR"], rows[0]["BP"]), ("rs123", "1", "1000000"))
+        self.assertIn(
+            "variant_map_scope\tGENOME_WIDE_IMPUTED_VARIANT_IDENTITY", qc
+        )
+        self.assertTrue(full_resolution)
 
     def test_mdd_literal_stderrlogor_header_harmonizes(self):
         payload = (
@@ -2044,6 +2260,75 @@ class PanelContractTests(unittest.TestCase):
             self.assertFalse(fine.qc_is_full_resolution(qc))
             self.assertIsNone(molecular.choose_full_input(root, "trait"))
             self.assertIsNone(twas.full_input(root, "trait"))
+
+    def test_dense_input_detection_accepts_only_sealed_genome_wide_map_scope(self):
+        mixer = load_numbered_script("35_mixer_preflight.py", "mixer_dense_scope_test")
+        fine = load_numbered_script("56_finemapping_preflight.py", "fine_dense_scope_test")
+        molecular = load_numbered_script("61_molecular_preflight.py", "molecular_dense_scope_test")
+        twas = load_numbered_script("69_prepare_twas_manifest.py", "twas_dense_scope_test")
+        dense = load_numbered_script(
+            "101_prepare_dense_harmonization.py", "dense_route_scope_test"
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            variant_map = build_fixture_dense_variant_map(root / "map")
+            provenance_path = Path(f"{variant_map}.provenance.json")
+            directory = root / "data/harmonized_mixer_full"
+            directory.mkdir(parents=True)
+            data = directory / "trait.harmonized.tsv.gz"
+            qc = directory / "trait.qc.txt"
+            data.write_bytes(b"real\n")
+            raw = root / "data/raw/trait.txt.gz"
+            raw.parent.mkdir(parents=True)
+            raw.write_bytes(b"selected source\n")
+            qc.write_text(
+                "prefilter_strategy\tnot supplied\n"
+                "variant_map_strategy\tBY_COORD_ALLELES\n"
+                "variant_map_scope\tGENOME_WIDE_IMPUTED_VARIANT_IDENTITY\n",
+                encoding="utf-8",
+            )
+            self.assertFalse(fine.qc_is_full_resolution(qc))
+            _, _, unsealed_strategy = mixer.choose_harmonized(root, "trait")
+            self.assertEqual(
+                unsealed_strategy, "HAPMAP3_VARIANT_MAP_BY_COORD_ALLELES"
+            )
+            qc.write_text(
+                "prefilter_strategy\tnot supplied\n"
+                "variant_map_strategy\tBY_COORD_ALLELES\n"
+                "variant_map_scope\tGENOME_WIDE_IMPUTED_VARIANT_IDENTITY\n"
+                "variant_map_schema_version\tatlas.grch37-variant-map.v2\n"
+                f"variant_map\t{variant_map.resolve()}\n"
+                f"variant_map_bytes\t{variant_map.stat().st_size}\n"
+                f"variant_map_sha256\t{hashlib.sha256(variant_map.read_bytes()).hexdigest()}\n"
+                f"variant_map_provenance_sha256\t{hashlib.sha256(provenance_path.read_bytes()).hexdigest()}\n"
+                "trait\ttrait\n"
+                f"infile\t{raw.resolve()}\n"
+                f"infile_sha256\t{hashlib.sha256(raw.read_bytes()).hexdigest()}\n"
+                "liftover_chain\tnot supplied\n",
+                encoding="utf-8",
+            )
+            selected, _, strategy = mixer.choose_harmonized(root, "trait")
+            self.assertEqual(selected, data)
+            self.assertEqual(strategy, "not supplied")
+            self.assertTrue(fine.qc_is_full_resolution(qc))
+            self.assertEqual(molecular.choose_full_input(root, "trait"), data)
+            self.assertEqual(twas.full_input(root, "trait"), data)
+            map_relative = str(variant_map.relative_to(root))
+            self.assertTrue(dense.qc_route_matches(
+                root, "trait", raw, qc,
+                {"dense_map_traits": ["trait"], "liftover_traits": []},
+                {"trait": {"map_path": map_relative, "strategy": "BY_COORD_ALLELES"}},
+                {},
+            ))
+            qc.write_text(qc.read_text(encoding="utf-8").replace(
+                "trait\ttrait\n", "trait\twrong\n"
+            ), encoding="utf-8")
+            self.assertFalse(dense.qc_route_matches(
+                root, "trait", raw, qc,
+                {"dense_map_traits": ["trait"], "liftover_traits": []},
+                {"trait": {"map_path": map_relative, "strategy": "BY_COORD_ALLELES"}},
+                {},
+            ))
 
     def test_molecular_contract_preserves_zero_locus_qtl_but_requires_panel_wide_twas(self):
         planner = (ROOT / "scripts/62_prepare_molecular_search_plan.py").read_text(encoding="utf-8")

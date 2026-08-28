@@ -262,6 +262,8 @@ bash scripts/32_download_lava_reference.sh  # storage preflight only
 python3 scripts/35_mixer_preflight.py --report-only
 python3 scripts/42_pleiotropy_preflight.py --report-only
 python3 scripts/43_prepare_pleiotropy_pairs.py --report-only
+python3 scripts/100_build_dense_variant_map.py --report-only
+python3 scripts/101_prepare_dense_harmonization.py --report-only
 ```
 
 ## Snakemake workflow

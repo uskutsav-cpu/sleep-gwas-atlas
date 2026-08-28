@@ -15,7 +15,7 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 
 ## Current state (2026-08-28)
 
-The executable acceptance audit currently passes **10/23** gates. All 103
+The executable acceptance audit currently passes **10/23** gates. All 107
 contract tests pass, every Python file compiles, every shell script parses, and
 all eight R scripts parse. The repository contains no tracked working-tree
 changes at this checkpoint.
@@ -47,17 +47,19 @@ contracts require:
 | PLACO+/conjunction FDR | 2,383,912,974-byte LD reference plus 274,423,819-byte variant template | MATLAB, SciPy, 16 GiB RAM, 20 GiB free |
 | TWAS | 3,135,665,776-byte, 98-file PredictDB model family plus the pinned MetaXcan runtime | 8 GiB RAM and 20 GiB free; all 45 full-resolution GWAS |
 | LDSC-SEG | 1,876,474,664 streamed bytes, of which 1,593,837,597 are temporary | 4 GiB free and explicit large-transfer/temporary-cleanup acknowledgement |
+| Genome-wide GRCh37 identity map | 2,701,503,051-byte Pan-UKBB variant manifest | 10 GiB free for guarded download; 15 GiB free for the deterministic disk-backed build |
 | Three missing GLGC dense GWAS | 6,844,892,917 bytes across HDL, LDL, and triglycerides | enough additional working space to harmonize and retain all 16 dense replacements |
 
-The byte-pinned entries above total **37,312,044,073 bytes (34.750 GiB)** before
+The byte-pinned entries above total **40,013,547,124 bytes (37.266 GiB)** before
 MetaXcan package payloads, dynamic QTL queries, harmonized dense outputs,
 intermediate matrices, and final result artifacts. Because LAVA archives and extracted reference files coexist,
 the 35 GiB single-job floor is not a safe whole-project allocation; an x86_64
 host with at least 32 GiB RAM, MATLAB, and at least 100 GiB free is the
 conservative production handoff target.
 
-The immediate critical path is to create the 16 full-resolution canonical GWAS
-on that host, then run local-univariate LAVA and univariate MiXeR, followed by
+The immediate critical path is to build the sealed genome-wide identity map and
+create the 16 full-resolution canonical GWAS on that host, then run
+local-univariate LAVA and univariate MiXeR, followed by
 eligible bivariate runs and the remaining prespecified modules. Fine-mapping
 must wait for the complete 396-pair PLACO+/conjunction-FDR family because a
 missing `shared_loci.tsv` is unknown, not a valid zero-locus result. The

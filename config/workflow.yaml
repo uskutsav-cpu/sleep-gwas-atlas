@@ -18,10 +18,18 @@ atlas_schema: config/atlas_table_schema.json
 fine_mapping_policy: config/fine_mapping_analysis_policy.json
 molecular_policy: config/molecular_analysis_policy.json
 interpretation_policy: config/interpretation_analysis_policy.json
+dense_map_policy: config/dense_variant_map_policy.json
+dense_harmonization_policy: config/dense_harmonization_policy.json
 
 # Keep false until the user has been warned that the exact phi-model family is
 # a 2.920 GiB download and has explicitly approved starting it.
 acknowledge_large_downloads: false
+# Keep false until the exact 2,701,503,051-byte Pan-UKBB identity-manifest
+# transfer has been shown and explicitly approved.
+acknowledge_dense_variant_map_download: false
+# Keep false until the exact 6,844,892,917-byte three-file GLGC transfer has
+# been shown and explicitly approved.
+acknowledge_dense_gwas_download: false
 acknowledge_large_extracts: false
 # Keep false until the exact 1,876,474,664-byte LDSC-SEG reference transfer
 # plan has been shown and explicitly approved.

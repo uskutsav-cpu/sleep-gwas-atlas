@@ -1,0 +1,33 @@
+{
+  "schema_version": "sleep-atlas-dense-harmonization.1",
+  "analysis_panel": "atlas-v1.0",
+  "analysis_panel_path": "config/analysis_panel.tsv",
+  "analysis_panel_sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+  "source_registry_path": "config/public_gwas_sources.tsv",
+  "source_registry_sha256": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+  "schema_registry_path": "config/gwas_schemas.tsv",
+  "schema_registry_sha256": "df2e56799a8cb07be849c96940d553710210725563e29e63baf62cc5a59dd51c",
+  "dense_map_policy_path": "config/dense_variant_map_policy.json",
+  "dense_map_policy_sha256": "833dc54d5b1a3a39d65e9ce5382fdc728c4db664714a9808242165776cfbf9a1",
+  "dense_mapping_plans_path": "config/dense_variant_mapping_plans.tsv",
+  "dense_mapping_plans_sha256": "0ab89e93a6b29b4d25da00059c8bef8d2e163fee4dc2c8422205201f526ee5e2",
+  "liftover_plans_path": "config/liftover_plans.tsv",
+  "liftover_plans_sha256": "dda87cffebe55fc3792ab75d08abbc61b5ff49d138a7410ad0480d36682b90e3",
+  "output_directory": "data/harmonized_mixer_full",
+  "readiness_path": "results/tables/dense_harmonization_readiness.tsv",
+  "provenance_path": "results/tables/dense_harmonization.provenance.json",
+  "minimum_free_bytes_before_materialization": 21474836480,
+  "dense_map_traits": ["parkinson", "mdd", "ibd", "crohn", "uc", "stroke", "longevity"],
+  "liftover_traits": ["ms", "asthma", "t2d", "cad", "telomere_length", "melanoma"],
+  "direct_hg19_traits": ["ldl", "hdl", "triglycerides"],
+  "expected_trait_count": 16,
+  "script_sha256": {
+    "scripts/101_prepare_dense_harmonization.py": "c8d2033b7d46e0b5ade9cfa9f569fe3fbc5999260b54a44e6d39fc759488169d",
+    "scripts/01_harmonize.py": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a",
+    "scripts/variant_map.py": "06973c6ba582e155d30105d1f7f09d052948d5f1579f013fdb334937d9054470",
+    "scripts/liftover_chain.py": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+    "scripts/fine_mapping_contract.py": "d00c2ba8407abc1204af3ac239b596837bcca909bba1af905013b65f8c15131e"
+  },
+  "output_rule": "Write each trait to an isolated temporary directory, validate its genome-wide mapping/liftover QC, then publish the data and QC ledger without overwriting an existing artifact.",
+  "claim_limit": "Full-resolution denotes the complete selected-source autosomal SNP family after prespecified QC and identity/build normalization; it does not imply complete ascertainment of every polymorphism or validate a downstream association."
+}
