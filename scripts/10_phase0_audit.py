@@ -44,6 +44,11 @@ LIFTOVER_COLUMNS = {
     "source_id", "trait_id", "strategy", "chain_path", "chain_bytes",
     "chain_md5", "chain_sha256", "source_build", "output_build", "notes",
 }
+NONJOURNAL_CITATION_COLUMNS = {
+    "source_id", "trait_id", "citation_type", "title", "publisher",
+    "release_date", "source_url", "notes",
+}
+NONJOURNAL_CITATION_TYPE = "PUBLIC_DATA_RELEASE"
 LIFTOVER_STRATEGY = "UCSC_CHAIN_POINT"
 MISSING_TEXT = {"", "na", "nan", "none", "null", "unresolved", "unregistered"}
 
@@ -96,6 +101,57 @@ def load_public_sources(path, trait_ids):
                 raise SystemExit(f"ERROR: multiple source rows claim trait_id {trait_id}")
             by_trait[trait_id] = source
     return by_trait
+
+
+def load_nonjournal_citations(path, selected_sources):
+    """Load explicit primary-source citations for releases without a paper.
+
+    This is intentionally narrow: a citation must name the exact selected
+    source/trait pair and describe an official public data release.  It never
+    supplies a surrogate PMID or relaxes any other source-readiness check.
+    """
+    if not os.path.exists(path):
+        raise SystemExit(f"ERROR: non-journal citation registry not found: {path}")
+    citations = pd.read_csv(path, sep="\t", dtype=str).fillna("")
+    missing = NONJOURNAL_CITATION_COLUMNS.difference(citations.columns)
+    if missing:
+        raise SystemExit(
+            f"ERROR: non-journal citation registry missing columns: {sorted(missing)}"
+        )
+    duplicate_traits = citations.duplicated(subset=["trait_id"], keep=False)
+    if duplicate_traits.any():
+        duplicates = citations.loc[
+            duplicate_traits, ["source_id", "trait_id"]
+        ].to_dict("records")
+        raise SystemExit(f"ERROR: duplicate non-journal citation rows: {duplicates}")
+    invalid = []
+    for _, citation in citations.iterrows():
+        selected_source = selected_sources.get(citation["trait_id"])
+        if selected_source != citation["source_id"]:
+            invalid.append({
+                "source_id": citation["source_id"],
+                "trait_id": citation["trait_id"],
+                "selected_source_id": selected_source or "UNSELECTED_TRAIT",
+            })
+        if citation["citation_type"] != NONJOURNAL_CITATION_TYPE:
+            invalid.append({
+                "trait_id": citation["trait_id"],
+                "invalid_citation_type": citation["citation_type"],
+            })
+        for field in ["title", "publisher", "release_date", "source_url"]:
+            if not populated(citation[field]):
+                invalid.append({
+                    "trait_id": citation["trait_id"],
+                    "missing_field": field,
+                })
+        if populated(citation["source_url"]) and not citation["source_url"].startswith("https://"):
+            invalid.append({
+                "trait_id": citation["trait_id"],
+                "invalid_source_url": citation["source_url"],
+            })
+    if invalid:
+        raise SystemExit(f"ERROR: invalid non-journal citations: {invalid}")
+    return {row["trait_id"]: row for _, row in citations.iterrows()}
 
 
 def load_source_schemas(path, selected_sources):
@@ -284,6 +340,9 @@ def main():
     parser.add_argument("--schemas", default="config/gwas_schemas.tsv")
     parser.add_argument("--variant-mappings", default="config/variant_mapping_plans.tsv")
     parser.add_argument("--liftover-plans", default="config/liftover_plans.tsv")
+    parser.add_argument(
+        "--nonjournal-citations", default="config/nonjournal_source_citations.tsv"
+    )
     parser.add_argument("--h2")
     parser.add_argument("--raw-dir", default="data/raw")
     parser.add_argument("--harmonized-dir", default="data/harmonized")
@@ -303,6 +362,19 @@ def main():
         raise SystemExit(f"ERROR: analysis panel missing columns: {sorted(missing)}")
     sources_by_trait = load_public_sources(args.sources, set(config["trait_id"]))
     selected_sources = dict(zip(config["trait_id"], config["source_id"]))
+    nonjournal_by_trait = load_nonjournal_citations(
+        args.nonjournal_citations, selected_sources
+    )
+    required_nonjournal_traits = {
+        row["trait_id"]
+        for _, row in config.iterrows()
+        if row["source_status"] == "SOURCE_VERIFIED" and not populated(row["pmid"])
+    }
+    if set(nonjournal_by_trait) != required_nonjournal_traits:
+        raise SystemExit(
+            "ERROR: non-journal citations must exactly cover verified sources without a PMID: "
+            f"expected {sorted(required_nonjournal_traits)}, got {sorted(nonjournal_by_trait)}"
+        )
     schemas_by_source_trait = load_source_schemas(args.schemas, selected_sources)
     mappings_by_trait = load_variant_mappings(args.variant_mappings, selected_sources)
     liftover_by_trait = load_liftover_plans(args.liftover_plans, selected_sources)
@@ -367,7 +439,7 @@ def main():
             harmonization_issues.append("phenotype_definition_unresolved")
         if not populated(trait["dataset_version"]):
             harmonization_issues.append("dataset_version_unresolved")
-        if not populated(trait["pmid"]):
+        if not populated(trait["pmid"]) and trait_id not in nonjournal_by_trait:
             harmonization_issues.append("primary_publication_unresolved")
         if trait["ancestry"].upper() != "EUR":
             harmonization_issues.append("eur_subset_unresolved")

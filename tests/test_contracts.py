@@ -114,6 +114,15 @@ def load_prostate_materializer():
     return module
 
 
+def load_phase0_audit():
+    spec = importlib.util.spec_from_file_location(
+        "phase0_audit", ROOT / "scripts" / "10_phase0_audit.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -166,6 +175,35 @@ class PanelContractTests(unittest.TestCase):
                 if trait.strip()
             }
         self.assertEqual(mapped, panel_ids)
+
+    def test_nonjournal_citation_is_exactly_the_neale_grip_release(self):
+        audit = load_phase0_audit()
+        selected = {row["trait_id"]: row["source_id"] for row in self.panel}
+        citations = audit.load_nonjournal_citations(
+            ROOT / "config" / "nonjournal_source_citations.tsv", selected
+        )
+        self.assertEqual(set(citations), {"grip_strength"})
+        citation = citations["grip_strength"]
+        self.assertEqual(citation["source_id"], "neale_2018_left_grip_strength")
+        self.assertEqual(citation["citation_type"], "PUBLIC_DATA_RELEASE")
+
+    def test_nonjournal_citation_rejects_wrong_selected_source(self):
+        audit = load_phase0_audit()
+        with tempfile.TemporaryDirectory() as directory:
+            citation_path = Path(directory) / "citations.tsv"
+            citation_path.write_text(
+                "source_id\ttrait_id\tcitation_type\ttitle\tpublisher\t"
+                "release_date\tsource_url\tnotes\n"
+                "wrong_source\tgrip_strength\tPUBLIC_DATA_RELEASE\tRelease\t"
+                "Neale Lab\t2018-08-01\thttps://example.org/release\tExact release\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(SystemExit) as error:
+                audit.load_nonjournal_citations(
+                    citation_path,
+                    {"grip_strength": "neale_2018_left_grip_strength"},
+                )
+        self.assertIn("selected_source_id", str(error.exception))
 
     def test_prostate_materializer_filters_only_wrong_width_rows(self):
         materializer = load_prostate_materializer()
