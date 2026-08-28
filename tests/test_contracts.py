@@ -160,6 +160,18 @@ def load_finemapping_materializer():
     return module
 
 
+def load_numbered_script(filename, module_name):
+    scripts_dir = str(ROOT / "scripts")
+    spec = importlib.util.spec_from_file_location(module_name, ROOT / "scripts" / filename)
+    module = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, scripts_dir)
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.path.remove(scripts_dir)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1761,6 +1773,167 @@ class PanelContractTests(unittest.TestCase):
         workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
         self.assertIn("checkpoint fine_mapping_loci:", workflow)
         for rule in ("fine_mapping_preflight", "fine_mapping_input", "fine_mapping_locus", "fine_mapping"):
+            self.assertIn(f"rule {rule}:", workflow)
+
+    def test_molecular_source_alignment_is_oriented_to_locked_ld_alleles(self):
+        module = load_numbered_script("63_query_eqtl_catalogue.py", "molecular_query")
+        self.assertEqual(module.orient_to_locked_alleles("A", "G", 0.2, "A", "G"), ("A", "G", 0.2))
+        self.assertEqual(module.orient_to_locked_alleles("G", "A", 0.2, "A", "G"), ("A", "G", -0.2))
+        with self.assertRaises(ValueError):
+            module.orient_to_locked_alleles("A", "C", 0.2, "A", "G")
+
+    def test_twas_eligibility_rejects_invalid_h2_without_capping(self):
+        module = load_numbered_script("69_prepare_twas_manifest.py", "twas_manifest")
+        trait = {"trait_id": "trait", "domain": "disease", "type": "binary"}
+        eligible = module.trait_eligibility(trait, {"n_total": "1000", "h2": "0.2", "h2_scale": "liability"})
+        self.assertEqual(eligible["analysis_status"], "ELIGIBLE")
+        invalid = module.trait_eligibility(trait, {"n_total": "1000", "h2": "1.2", "h2_scale": "liability"})
+        self.assertEqual(invalid["analysis_status"], "NOT_APPLICABLE")
+        self.assertEqual(invalid["reason"], "H2_OUTSIDE_OPEN_CLOSED_0_1")
+        self.assertEqual(invalid["gwas_h2"], "1.2")
+
+    def test_phi_model_inventory_snapshot_has_exact_49_context_family(self):
+        module = load_numbered_script("67_lock_twas_model_inventory.py", "phi_inventory")
+        files = []
+        for page in sorted((ROOT / "results/sources/twas_phi_model_inventory").glob("page_*.html")):
+            parser = module.BoxListingParser(); parser.feed(page.read_text(encoding="utf-8"))
+            files.extend(parser.files)
+        self.assertEqual(len(files), 98)
+        contexts = {}
+        for row in files:
+            name = row["filename"]
+            context = name[3:-3] if name.endswith(".db") else name[3:-7]
+            role = "db" if name.endswith(".db") else "cov"
+            contexts.setdefault(context, set()).add(role)
+        self.assertEqual(len(contexts), 49)
+        self.assertTrue(all(roles == {"db", "cov"} for roles in contexts.values()))
+        self.assertEqual(sum(int(row["bytes"]) for row in files), 3135665776)
+
+    def test_phi_model_index_locks_missing_phi_as_pre_result_exclusion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "config").mkdir(); (root / "results/tables").mkdir(parents=True)
+            model_dir = root / "ref/models"; model_dir.mkdir(parents=True)
+            model = model_dir / "en_Whole_Blood.db"
+            connection = sqlite3.connect(model)
+            connection.execute("CREATE TABLE weights (gene TEXT, rsid TEXT, varID TEXT, ref_allele TEXT, eff_allele TEXT, weight REAL)")
+            connection.execute("CREATE TABLE extra (gene TEXT, phi REAL)")
+            connection.executemany(
+                "INSERT INTO weights VALUES (?,?,?,?,?,?)",
+                [
+                    ("ENSG1.1", "rs1", "chr1_100_A_G_b38", "A", "G", 0.1),
+                    ("ENSG2.1", "rs2", "chr1_200_C_T_b38", "C", "T", 0.2),
+                ],
+            )
+            connection.execute("INSERT INTO extra VALUES (?,?)", ("ENSG1.1", 0.0001))
+            connection.commit(); connection.close()
+            covariance = model_dir / "en_Whole_Blood.txt.gz"
+            with gzip.open(covariance, "wt", encoding="utf-8") as handle:
+                handle.write("GENE RSID1 RSID2 VALUE\n")
+            policy = {
+                "twas": {
+                    "model_families": ["GTEx_v8_ELASTIC_NET_PHI_eQTL"],
+                    "phi_model_source": {
+                        "inventory_path": "results/tables/inventory.tsv",
+                        "inventory_lock_path": "results/tables/inventory.lock.json",
+                        "download_lock_path": "results/tables/download.lock.json",
+                        "install_dir": "ref/models", "expected_context_count": 1,
+                        "release_name": "fixture",
+                    },
+                },
+                "claim_limit": "fixture claim limit",
+            }
+            policy_path = root / "config/policy.json"
+            policy_path.write_text(json.dumps(policy) + "\n", encoding="utf-8")
+            fields = ["file_id", "filename", "context", "file_role", "bytes", "download_url", "results_accessed_before_lock"]
+            inventory = root / "results/tables/inventory.tsv"
+            rows = [
+                ["f_1", covariance.name, "Whole_Blood", "COVARIANCE", covariance.stat().st_size, "https://example.test/cov", "NO"],
+                ["f_2", model.name, "Whole_Blood", "MODEL_DB", model.stat().st_size, "https://example.test/db", "NO"],
+            ]
+            with inventory.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.writer(handle, delimiter="\t", lineterminator="\n"); writer.writerow(fields); writer.writerows(rows)
+            inventory_lock = root / "results/tables/inventory.lock.json"
+            inventory_lock.write_text(json.dumps({
+                "inventory_sha256": hashlib.sha256(inventory.read_bytes()).hexdigest(),
+                "policy_sha256": hashlib.sha256(policy_path.read_bytes()).hexdigest(),
+                "file_ids_in_locked_order": ["f_1", "f_2"],
+            }) + "\n", encoding="utf-8")
+            download_lock = root / "results/tables/download.lock.json"
+            download_lock.write_text(json.dumps({
+                "inventory_sha256": hashlib.sha256(inventory.read_bytes()).hexdigest(),
+                "inventory_lock_sha256": hashlib.sha256(inventory_lock.read_bytes()).hexdigest(),
+                "policy_sha256": hashlib.sha256(policy_path.read_bytes()).hexdigest(),
+                "files": {
+                    covariance.name: {"file_id": "f_1", "bytes": covariance.stat().st_size, "sha256": hashlib.sha256(covariance.read_bytes()).hexdigest()},
+                    model.name: {"file_id": "f_2", "bytes": model.stat().st_size, "sha256": hashlib.sha256(model.read_bytes()).hexdigest()},
+                },
+            }) + "\n", encoding="utf-8")
+            result = subprocess.run([
+                sys.executable, str(ROOT / "scripts/68_index_twas_models.py"), "--root", str(root),
+                "--policy", "config/policy.json", "--materialize",
+            ], cwd=ROOT, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            with (root / "results/tables/twas_model_registry.tsv").open(encoding="utf-8", newline="") as handle:
+                registry = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(registry[0]["phi_gene_count"], "1")
+            self.assertEqual(registry[0]["phi_missing_gene_count"], "1")
+            with (root / "results/tables/twas_model_phi_exclusions.tsv").open(encoding="utf-8", newline="") as handle:
+                exclusions = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(exclusions[0]["gene_id"], "ENSG2.1")
+            self.assertEqual(exclusions[0]["exclusion_reason"], "MODEL_FEATURE_MISSING_PHI")
+
+    def test_molecular_coloc_prior_robustness_never_pools_signal_pairs(self):
+        module = load_numbered_script("73_collate_molecular.py", "molecular_collator")
+        grid = [1e-6, 5e-6, 1e-5, 5e-5]
+        rows = [{
+            "comparison_id": "MQC", "p12": str(value), "signal1": "s1", "signal2": "q1",
+            "PP_H4": "0.9", "PP_H4_over_PP_H3": "6", "coloc_method": "COLOC_SUSIE",
+            "fine_mapping_qc": "PASS",
+        } for value in grid]
+        self.assertEqual(module.robust_signal_pairs(rows, grid, 0.8, 5), {("s1", "q1")})
+        rows[-1]["signal2"] = "q2"
+        self.assertEqual(module.robust_signal_pairs(rows, grid, 0.8, 5), set())
+
+    def test_twas_gene_to_locus_mapping_uses_exact_grch38_overlap(self):
+        module = load_numbered_script("73_collate_molecular.py", "molecular_gene_mapping")
+
+        class IdentityChain:
+            def map_point(self, chromosome, position):
+                return "mapped", (int(chromosome), int(position) + 100, "+")
+
+        genes = {
+            "ENSG1": {"gene_id": "ENSG1", "gene_symbol": "G1", "chromosome": 1, "start": 1090, "end": 1200},
+            "ENSG2": {"gene_id": "ENSG2", "gene_symbol": "G2", "chromosome": 1, "start": 1301, "end": 1400},
+            "ENSG3": {"gene_id": "ENSG3", "gene_symbol": "G3", "chromosome": 2, "start": 1090, "end": 1200},
+        }
+        loci = [{"locus_id": "L1", "chromosome": "1", "start_bp": "1000", "end_bp": "1200"}]
+        overlap, mapped = module.overlap_gene_loci(genes, loci, IdentityChain())
+        self.assertEqual(overlap, {"L1": ["ENSG1"]})
+        self.assertEqual(mapped, {"L1": (1, 1100, 1300)})
+
+    def test_molecular_workflow_pins_annotation_and_guards_large_download(self):
+        policy = json.loads((ROOT / "config/molecular_analysis_policy.json").read_text(encoding="utf-8"))
+        annotation = next(asset for asset in policy["metadata_assets"] if asset["id"] == "GTEX_V8_GENCODE_V26_COLLAPSED_GENES")
+        self.assertEqual(annotation["bytes"], 134502408)
+        self.assertEqual(annotation["sha256"], "2a7ae0883b35e7ff66a8f71a1779198acc6609d648ff55d7b670d010a9f243f6")
+        self.assertEqual(policy["twas"]["gene_annotation_asset_id"], annotation["id"])
+        fetcher = (ROOT / "scripts/67_fetch_twas_resources.sh").read_text(encoding="utf-8")
+        self.assertIn("--acknowledge-large-download", fetcher)
+        self.assertIn("warn the user first", fetcher)
+        collator = (ROOT / "scripts/73_collate_molecular.py").read_text(encoding="utf-8")
+        self.assertIn("rather than a fabricated gene", policy["twas"]["locus_integration_rule"])
+        self.assertIn('"molecular_locus_coverage.tsv"', (ROOT / "scripts/52_validate_integrated_atlas.py").read_text(encoding="utf-8"))
+        self.assertIn("supported_gene_keys", collator)
+        tool_versions = (ROOT / "environment/tool_versions.tsv").read_text(encoding="utf-8")
+        self.assertIn("MetaXcan\t0.8.1\tPINNED", tool_versions)
+        release_validator = (ROOT / "scripts/55_validate_release.py").read_text(encoding="utf-8")
+        self.assertIn('"susieR", "coloc", "MetaXcan"', release_validator)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        for rule in (
+            "molecular_metadata", "molecular_preflight", "molecular_source_search",
+            "molecular_coloc_run", "twas_model_index", "twas_run", "molecular_integration",
+        ):
             self.assertIn(f"rule {rule}:", workflow)
 
 

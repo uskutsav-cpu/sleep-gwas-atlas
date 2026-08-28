@@ -22,5 +22,7 @@ Current curation records:
   and local checkpoints.
 - `public_substitution_phase1_results.md` — harmonization, h² QC, and locked
   correlation-family results for the six public EUR substitutions.
+- `molecular_workflow.md` — complete molecular-QTL, variance-controlled TWAS,
+  locus-coverage, and supported-gene integration contract.
 - `aging_source_queue.md` — primary-source discoveries awaiting their own
   download and file-level Phase 0 checks.

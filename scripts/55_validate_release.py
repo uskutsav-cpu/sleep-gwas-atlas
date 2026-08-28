@@ -21,7 +21,7 @@ REQUIRED_TOP_LEVEL = {
 REQUIRED_TOOLS = {
     "analysis_panel", "python_workflow", "snakemake", "python_ldsc", "ldsc_CBIIT",
     "plink", "R", "GenomicSEM", "LAVA", "MiXeR", "PLACO+", "pleioFDR",
-    "susieR", "coloc",
+    "susieR", "coloc", "MetaXcan",
 }
 
 

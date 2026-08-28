@@ -103,6 +103,13 @@ that reuses signed LAVA UKB LD and rejects HapMap3-only inputs. Trait-trait
 colocalization remains distinct from the later molecular-QTL completion gate.
 See `docs/fine_mapping_workflow.md`.
 
+The downstream molecular layer now has its own fail-closed implementation and
+source contract. It freezes every QTL query before access, locks all analyzable
+features before trait-molecular results, uses the 49-context phi-enabled
+PredictDB model family for variance-controlled S-PrediXcan, and represents a
+fully searched locus with no supported gene as explicit coverage rather than a
+fabricated gene. See `docs/molecular_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

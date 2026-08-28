@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import re
@@ -12,10 +13,25 @@ from pathlib import Path
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 MISSING = {"", "NA"}
+MOLECULAR_COVERAGE_FIELDS = [
+    "coverage_id", "locus_id", "pair_id", "trait_id", "modality",
+    "source_family_id", "required_unit_count", "completed_unit_count",
+    "analyzed_unit_count", "no_evidence_unit_count", "access_blocked_unit_count",
+    "not_applicable_unit_count", "coverage_status", "evidence_path",
+    "evidence_sha256", "provenance_id",
+]
 
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def read_tsv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
@@ -88,6 +104,9 @@ def main() -> int:
     parser.add_argument("--atlas-dir", default="results/atlas")
     parser.add_argument("--schema", default="config/atlas_table_schema.json")
     parser.add_argument("--policy", default="config/downstream_analysis_policy.json")
+    parser.add_argument(
+        "--molecular-coverage", default="results/tables/molecular_locus_coverage.tsv",
+    )
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
@@ -219,14 +238,49 @@ def main() -> int:
         identity = f"{row['locus_id']}/{row['gene_id']}"
         if row["locus_id"] not in locus_ids:
             fail(f"orphan gene {identity}")
-        integer(row["evidence_stream_count"], "evidence_stream_count", identity, 1)
+        stream_count = integer(row["evidence_stream_count"], "evidence_stream_count", identity, 1)
         required(row["claim_limit"], "claim_limit", identity)
         for field in ("eqtl_status", "sqtl_status", "pqtl_pwas_status", "twas_status"):
             if row[field] not in policy["molecular_integration"]["allowed_outcomes"]:
                 fail(f"invalid {field} for {identity}")
+        statuses = [row[field] for field in ("eqtl_status", "sqtl_status", "pqtl_pwas_status", "twas_status")]
+        if stream_count != statuses.count("SUPPORTED"):
+            fail(f"evidence_stream_count differs from supported modalities for {identity}")
+        if row["colocalization_status"] not in policy["molecular_integration"]["allowed_outcomes"]:
+            fail(f"invalid colocalization_status for {identity}")
         loci_with_genes.add(row["locus_id"])
-    if not primary_loci.issubset(loci_with_genes):
-        fail("not every primary cross-method shared locus has gene-level interpretation")
+
+    coverage_path = root / args.molecular_coverage
+    coverage_fields, molecular_coverage = read_tsv(coverage_path)
+    if coverage_fields != MOLECULAR_COVERAGE_FIELDS:
+        fail("molecular_locus_coverage.tsv header differs from the frozen schema")
+    unique_keys("molecular_locus_coverage.tsv", molecular_coverage, ["coverage_id"])
+    required_modalities = set(policy["molecular_integration"]["required_modalities"])
+    observed_coverage: set[tuple[str, str]] = set()
+    for row in molecular_coverage:
+        identity = row["coverage_id"]
+        if row["locus_id"] not in locus_ids:
+            fail(f"orphan molecular coverage row {identity}")
+        if row["modality"] not in required_modalities:
+            fail(f"unknown molecular coverage modality for {identity}")
+        required_units = integer(row["required_unit_count"], "required_unit_count", identity, 1)
+        completed_units = integer(row["completed_unit_count"], "completed_unit_count", identity, 0)
+        component_counts = [integer(row[field], field, identity, 0) for field in (
+            "analyzed_unit_count", "no_evidence_unit_count", "access_blocked_unit_count",
+            "not_applicable_unit_count",
+        )]
+        if (
+            row["coverage_status"] != "COMPLETE" or completed_units != required_units
+            or any(value > completed_units for value in component_counts)
+        ):
+            fail(f"incomplete molecular coverage accounting for {identity}")
+        evidence_path = root / row["evidence_path"]
+        if not evidence_path.is_file() or not SHA256.fullmatch(row["evidence_sha256"]) or sha256(evidence_path) != row["evidence_sha256"]:
+            fail(f"molecular coverage evidence differs for {identity}")
+        observed_coverage.add((row["locus_id"], row["modality"]))
+    expected_coverage = {(locus_id, modality) for locus_id in primary_loci for modality in required_modalities}
+    if observed_coverage != expected_coverage:
+        fail("molecular coverage does not span every primary locus and required modality")
 
     regulatory = tables["regulatory_elements.tsv"]
     regulatory_ids = {row["regulatory_element_id"] for row in regulatory}

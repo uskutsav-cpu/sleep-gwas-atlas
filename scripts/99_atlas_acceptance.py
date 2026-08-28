@@ -418,6 +418,40 @@ def release_gate(root: Path) -> Gate:
     return Gate("atlas_v1_release", "PASS", "checksum-validated releases/atlas-v1.0", "")
 
 
+def molecular_gates(root: Path) -> list[Gate]:
+    required = [
+        "results/tables/molecular_qtl_colocalization.tsv",
+        "results/tables/colocalization.tsv",
+        "results/tables/twas.tsv",
+        "results/tables/molecular_locus_coverage.tsv",
+        "results/tables/molecular_evidence.tsv",
+        "results/atlas/genes.tsv",
+        "results/atlas/molecular.provenance.json",
+    ]
+    missing = [path for path in required if not real_nonempty(root / path)]
+    if missing:
+        detail = "missing real non-empty artifact(s): " + ", ".join(missing)
+        return [
+            Gate("colocalization", "BLOCKED", "", "complete trait-trait and molecular-QTL signal-level colocalization; " + detail),
+            Gate("molecular_integration", "BLOCKED", "", "integrate corrected TWAS, sQTL, pQTL/PWAS, and convergent gene evidence; " + detail),
+        ]
+    validator = root / "scripts/73_collate_molecular.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return [
+            Gate("colocalization", "BLOCKED", "results/tables/colocalization.tsv", f"molecular validation failed: {detail}"),
+            Gate("molecular_integration", "BLOCKED", "results/tables/molecular_evidence.tsv", f"molecular validation failed: {detail}"),
+        ]
+    return [
+        Gate("colocalization", "PASS", "checksum-validated trait-trait plus molecular-QTL colocalization", ""),
+        Gate("molecular_integration", "PASS", "complete four-modality locus coverage and supported-gene integration", ""),
+    ]
+
+
 def build_gates(root: Path) -> list[Gate]:
     panel, rows = panel_gate(root)
     gates = [panel]
@@ -446,8 +480,6 @@ def build_gates(root: Path) -> list[Gate]:
     )
     artifact_specs = [
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
-        ("colocalization", ["results/tables/colocalization.tsv"], "complete trait-trait and molecular-QTL signal-level colocalization"),
-        ("molecular_integration", ["results/tables/molecular_evidence.tsv", "results/atlas/genes.tsv"], "integrate TWAS, sQTL, pQTL/PWAS, and convergent gene evidence"),
         ("regulatory_mapping", ["results/atlas/regulatory_elements.tsv"], "map fine-mapped variants through regulatory elements to genes"),
         ("cell_types", ["results/atlas/cell_types.tsv"], "complete multi-method cell-type analyses"),
         ("pathways", ["results/atlas/pathways.tsv"], "complete high-confidence pathway and network analyses"),
@@ -458,6 +490,7 @@ def build_gates(root: Path) -> list[Gate]:
     gates.append(mixer_gate(root))
     gates.append(pleiotropy_gate(root))
     gates.append(fine_mapping_gate(root))
+    gates.extend(molecular_gates(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(integrated_atlas_gate(root))
     gates.append(robustness_gate(root))

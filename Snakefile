@@ -22,6 +22,7 @@ PLEIOTROPY_POLICY = config["pleiotropy_policy"]
 DOWNSTREAM_POLICY = config["downstream_policy"]
 ATLAS_SCHEMA = config["atlas_schema"]
 FINE_MAPPING_POLICY = config["fine_mapping_policy"]
+MOLECULAR_POLICY = config.get("molecular_policy", "config/molecular_analysis_policy.json")
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -486,10 +487,301 @@ rule fine_mapping:
         "{PYTHON} scripts/60_collate_finemapping.py"
 
 
+rule molecular_metadata:
+    input:
+        policy=MOLECULAR_POLICY,
+    output:
+        eqtl_metadata="ref/molecular/eqtl_catalogue_r7/dataset_metadata_r7.tsv",
+        eqtl_paths="ref/molecular/eqtl_catalogue_r7/tabix_ftp_paths.tsv",
+        gtex_paths="ref/molecular/eqtl_catalogue_r7/tabix_ftp_paths_imported.tsv",
+        genes="ref/molecular/gtex_v8/gencode.v26.GRCh38.genes.gtf",
+    shell:
+        "bash scripts/61_fetch_molecular_metadata.sh"
+
+
+rule molecular_preflight:
+    input:
+        policy=MOLECULAR_POLICY,
+        sources="config/molecular_source_registry.tsv",
+        metadata=rules.molecular_metadata.output,
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        trait_coloc="results/tables/trait_trait_colocalization.tsv",
+        fine_mapping_provenance="results/atlas/fine_mapping.provenance.json",
+    output:
+        readiness="results/tables/molecular_input_readiness.tsv",
+        report="results/tables/molecular_preflight.json",
+    shell:
+        "{PYTHON} scripts/61_molecular_preflight.py"
+
+
+checkpoint molecular_search_plan:
+    input:
+        preflight="results/tables/molecular_preflight.json",
+        policy=MOLECULAR_POLICY,
+        sources="config/molecular_source_registry.tsv",
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        fine_mapping_provenance="results/atlas/fine_mapping.provenance.json",
+    output:
+        plan="results/tables/molecular_search_plan.tsv",
+        lock="results/tables/molecular_search_plan.lock.json",
+    shell:
+        "{PYTHON} scripts/62_prepare_molecular_search_plan.py"
+
+
+rule molecular_source_search:
+    input:
+        plan="results/tables/molecular_search_plan.tsv",
+        lock="results/tables/molecular_search_plan.lock.json",
+        variants="results/atlas/variants.tsv",
+    output:
+        normalized="results/molecular/search/{search_task_id}/normalized_qtl.tsv.gz",
+        provenance="results/molecular/search/{search_task_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/63_run_molecular_search.py {wildcards.search_task_id} --execute"
+
+
+def molecular_search_provenance(wildcards):
+    plan = checkpoints.molecular_search_plan.get(**wildcards).output.plan
+    with open(plan, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return expand(
+        "results/molecular/search/{search_task_id}/provenance.json",
+        search_task_id=[row["search_task_id"] for row in rows],
+    )
+
+
+checkpoint molecular_features:
+    input:
+        searches=molecular_search_provenance,
+        plan="results/tables/molecular_search_plan.tsv",
+        lock="results/tables/molecular_search_plan.lock.json",
+    output:
+        coverage="results/tables/molecular_search_coverage.tsv",
+        manifest="results/tables/molecular_feature_manifest.tsv",
+        exclusions="results/tables/molecular_feature_exclusions.tsv",
+        lock="results/tables/molecular_feature_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/64_lock_molecular_features.py"
+
+
+rule molecular_coloc_input:
+    input:
+        manifest="results/tables/molecular_feature_manifest.tsv",
+        lock="results/tables/molecular_feature_manifest.lock.json",
+    output:
+        task="results/molecular/tasks/{comparison_id}.tsv",
+        task_lock="results/molecular/tasks/{comparison_id}.lock.json",
+        trait="data/molecular_coloc/{comparison_id}/trait.tsv.gz",
+        molecular="data/molecular_coloc/{comparison_id}/molecular.tsv.gz",
+        variants="data/molecular_coloc/{comparison_id}/variants.tsv",
+        ld="data/molecular_coloc/{comparison_id}/ld.tsv.gz",
+    shell:
+        "{PYTHON} scripts/65_materialize_molecular_coloc.py {wildcards.comparison_id} --materialize"
+
+
+rule molecular_coloc_run:
+    input:
+        task="results/molecular/tasks/{comparison_id}.tsv",
+        task_lock="results/molecular/tasks/{comparison_id}.lock.json",
+        trait="data/molecular_coloc/{comparison_id}/trait.tsv.gz",
+        molecular="data/molecular_coloc/{comparison_id}/molecular.tsv.gz",
+        variants="data/molecular_coloc/{comparison_id}/variants.tsv",
+        ld="data/molecular_coloc/{comparison_id}/ld.tsv.gz",
+    output:
+        variants="results/molecular/coloc_runs/{comparison_id}/variants.tsv",
+        credible="results/molecular/coloc_runs/{comparison_id}/credible_sets.tsv",
+        coloc="results/molecular/coloc_runs/{comparison_id}/colocalization.tsv",
+        shared="results/molecular/coloc_runs/{comparison_id}/shared_variant_posteriors.tsv",
+        diagnostics="results/molecular/coloc_runs/{comparison_id}/diagnostics.tsv",
+        provenance="results/molecular/coloc_runs/{comparison_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/66_run_molecular_coloc.py {wildcards.comparison_id} --execute"
+
+
+def molecular_coloc_provenance(wildcards):
+    manifest = checkpoints.molecular_features.get(**wildcards).output.manifest
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return expand(
+        "results/molecular/coloc_runs/{comparison_id}/provenance.json",
+        comparison_id=[row["comparison_id"] for row in rows],
+    )
+
+
+checkpoint twas_phi_inventory:
+    input:
+        policy=MOLECULAR_POLICY,
+    output:
+        inventory="results/tables/twas_phi_model_inventory.tsv",
+        lock="results/tables/twas_phi_model_inventory.lock.json",
+        snapshots=expand("results/sources/twas_phi_model_inventory/page_{page:02d}.html", page=range(1, 6)),
+    shell:
+        "{PYTHON} scripts/67_lock_twas_model_inventory.py --execute"
+
+
+rule twas_model_download:
+    input:
+        inventory="results/tables/twas_phi_model_inventory.tsv",
+        lock="results/tables/twas_phi_model_inventory.lock.json",
+    output:
+        "results/tables/twas_phi_model_downloads.lock.json",
+    params:
+        acknowledgement="--acknowledge-large-download" if config.get("acknowledge_large_downloads", False) else "",
+    shell:
+        "bash scripts/67_fetch_twas_resources.sh --models {params.acknowledgement}"
+
+
+rule metaxcan_runtime:
+    input:
+        policy=MOLECULAR_POLICY,
+    output:
+        archive=".molecular-env/source_archives/MetaXcan_v0.8.1.tar.gz",
+        entrypoint=".molecular-env/MetaXcan/software/SPrediXcan.py",
+        python=".molecular-env/python/bin/python",
+    shell:
+        "bash scripts/67_fetch_twas_resources.sh --runtime"
+
+
+rule twas_model_index:
+    input:
+        inventory="results/tables/twas_phi_model_inventory.tsv",
+        inventory_lock="results/tables/twas_phi_model_inventory.lock.json",
+        downloads="results/tables/twas_phi_model_downloads.lock.json",
+    output:
+        registry="results/tables/twas_model_registry.tsv",
+        variants="results/tables/twas_model_variants/GTEx_v8_ELASTIC_NET_PHI_eQTL.tsv.gz",
+        phi_exclusions="results/tables/twas_model_phi_exclusions.tsv",
+        lock="results/tables/twas_model_registry.lock.json",
+    shell:
+        "{PYTHON} scripts/68_index_twas_models.py --materialize"
+
+
+rule twas_preflight:
+    input:
+        models=rules.twas_model_index.output,
+        runtime=rules.metaxcan_runtime.output,
+        fine_mapping="results/atlas/fine_mapping.provenance.json",
+    output:
+        readiness="results/tables/twas_input_readiness.tsv",
+        report="results/tables/twas_preflight.json",
+    shell:
+        "{PYTHON} scripts/61_molecular_preflight.py --readiness-out {output.readiness} --out {output.report}"
+
+
+checkpoint twas_manifest:
+    input:
+        preflight="results/tables/twas_preflight.json",
+        models="results/tables/twas_model_registry.tsv",
+        models_lock="results/tables/twas_model_registry.lock.json",
+        traits="results/atlas/traits.tsv",
+    output:
+        mapping="results/tables/twas_gwas_mapping_manifest.tsv",
+        eligibility="results/tables/twas_trait_eligibility.tsv",
+        runs="results/tables/twas_run_manifest.tsv",
+        lock="results/tables/twas_run_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/69_prepare_twas_manifest.py --preflight {input.preflight}"
+
+
+rule twas_gwas_mapping:
+    input:
+        manifest="results/tables/twas_gwas_mapping_manifest.tsv",
+        lock="results/tables/twas_run_manifest.lock.json",
+    output:
+        data="data/twas/{model_family}/{trait_id}.tsv.gz",
+        lock="data/twas/{model_family}/{trait_id}.tsv.lock.json",
+    shell:
+        "{PYTHON} scripts/70_materialize_twas_gwas.py {wildcards.trait_id} {wildcards.model_family} --materialize"
+
+
+def twas_mapping_locks(wildcards):
+    manifest = checkpoints.twas_manifest.get(**wildcards).output.mapping
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return [row["mapped_gwas_lock_path"] for row in rows]
+
+
+def twas_run_dependencies(wildcards):
+    manifest = checkpoints.twas_manifest.get().output.runs
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    selected = [row for row in rows if row["run_id"] == wildcards.run_id]
+    if len(selected) != 1:
+        raise ValueError(f"unknown TWAS run ID: {wildcards.run_id}")
+    row = selected[0]
+    return [row["mapped_gwas_path"], row["mapped_gwas_lock_path"]]
+
+
+rule twas_run:
+    input:
+        dependencies=twas_run_dependencies,
+        manifest="results/tables/twas_run_manifest.tsv",
+        lock="results/tables/twas_run_manifest.lock.json",
+        runtime=".molecular-env/python/bin/python",
+    output:
+        result="results/twas/runs/{run_id}/spredixcan.csv",
+        provenance="results/twas/runs/{run_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/71_run_twas.py {wildcards.run_id} --execute"
+
+
+def twas_run_provenance(wildcards):
+    manifest = checkpoints.twas_manifest.get(**wildcards).output.runs
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return expand(
+        "results/twas/runs/{run_id}/provenance.json",
+        run_id=[row["run_id"] for row in rows],
+    )
+
+
+rule twas:
+    input:
+        mappings=twas_mapping_locks,
+        runs=twas_run_provenance,
+        manifest="results/tables/twas_run_manifest.tsv",
+        lock="results/tables/twas_run_manifest.lock.json",
+        eligibility="results/tables/twas_trait_eligibility.tsv",
+    output:
+        results="results/tables/twas.tsv",
+        coverage="results/tables/twas_coverage.tsv",
+        provenance="results/tables/twas.provenance.json",
+    shell:
+        "{PYTHON} scripts/72_collate_twas.py"
+
+
+rule molecular_integration:
+    input:
+        qtl_runs=molecular_coloc_provenance,
+        twas=rules.twas.output,
+        feature_manifest="results/tables/molecular_feature_manifest.tsv",
+        feature_lock="results/tables/molecular_feature_manifest.lock.json",
+        search_coverage="results/tables/molecular_search_coverage.tsv",
+        search_plan="results/tables/molecular_search_plan.tsv",
+        search_plan_lock="results/tables/molecular_search_plan.lock.json",
+        models=rules.twas_model_index.output,
+        trait_coloc="results/tables/trait_trait_colocalization.tsv",
+        loci="results/atlas/loci.tsv",
+        traits="results/atlas/traits.tsv",
+        genes_annotation="ref/molecular/gtex_v8/gencode.v26.GRCh38.genes.gtf",
+    output:
+        molecular_coloc="results/tables/molecular_qtl_colocalization.tsv",
+        all_coloc="results/tables/colocalization.tsv",
+        coverage="results/tables/molecular_locus_coverage.tsv",
+        evidence="results/tables/molecular_evidence.tsv",
+        genes="results/atlas/genes.tsv",
+        provenance="results/atlas/molecular.provenance.json",
+    shell:
+        "{PYTHON} scripts/73_collate_molecular.py"
+
+
 rule validate_integrated_atlas:
     input:
         policy=DOWNSTREAM_POLICY,
         schema=ATLAS_SCHEMA,
+        molecular_coverage="results/tables/molecular_locus_coverage.tsv",
         tables=expand(
             "results/atlas/{name}",
             name=[
