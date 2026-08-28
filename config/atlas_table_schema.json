@@ -15,12 +15,12 @@
     },
     "loci.tsv": {
       "primary_key": ["locus_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["locus_id", "chromosome", "start_bp", "end_bp", "lead_snp", "sleep_trait", "non_sleep_trait", "analysis_tier", "placo_lead_p", "conjfdr_min_q", "effect_direction", "lava_block_id", "method_support", "evidence_level", "provenance_id"]
     },
     "variants.tsv": {
       "primary_key": ["locus_id", "variant_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["variant_id", "locus_id", "rsid", "chromosome", "position_bp", "effect_allele", "other_allele", "minor_allele_frequency", "sleep_beta", "sleep_se", "non_sleep_beta", "non_sleep_se", "pip_sleep", "pip_non_sleep", "credible_set_sleep", "credible_set_non_sleep", "shared_signal_posterior", "fine_mapping_method", "ld_reference", "qc_status", "provenance_id"]
     },
     "genes.tsv": {

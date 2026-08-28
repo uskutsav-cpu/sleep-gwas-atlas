@@ -11,6 +11,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import downstream_contract
 
 RELEASE_SCHEMA = "atlas-v1.0-release.1"
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -166,6 +167,8 @@ def main() -> int:
         fail("frozen pre-release acceptance evidence is incomplete")
     if manifest.get("non_release_acceptance_gates") != 22:
         fail("release manifest has the wrong non-release gate count")
+    if manifest.get("release_script_sha256") != downstream_contract.script_hashes(release, "release"):
+        fail("release validator/builder script family differs from the manifest")
 
     validate_command(
         [sys.executable, str(release / "scripts/52_validate_integrated_atlas.py"),

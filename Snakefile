@@ -277,6 +277,25 @@ rule genomic_sem_model:
         "{RSCRIPT} scripts/29_genomicsem_model.R"
 
 
+rule factor_gwas_terminal:
+    input:
+        efa="results/tables/genomic_sem_efa_models.tsv",
+        fits="results/tables/genomic_sem_model_fit.tsv",
+        loadings="results/tables/genomic_sem_factor_loadings.tsv",
+        syntax="results/tables/genomic_sem_model_syntax.tsv",
+        diagnostics="results/tables/genomic_sem_split_diagnostics.tsv",
+        inclusion="results/tables/genomicsem_trait_inclusion.tsv",
+        split="results/tables/chromosome_split_provenance.json",
+        odd="results/tables/genomicsem_discovery_odd_metadata.tsv",
+        even="results/tables/genomicsem_validation_even_metadata.tsv",
+    output:
+        factor="results/tables/factor_gwas_summary.tsv",
+        q_snp="results/tables/q_snp.tsv",
+        provenance="results/tables/factor_gwas.provenance.json",
+    shell:
+        "{PYTHON} scripts/30_finalize_genomicsem.py"
+
+
 rule lava_inputs:
     input:
         panel=PANEL,

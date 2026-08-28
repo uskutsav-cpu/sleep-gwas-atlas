@@ -14,6 +14,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+import downstream_contract
 
 RELEASE_NAME = "atlas-v1.0"
 RELEASE_SCHEMA = "atlas-v1.0-release.1"
@@ -222,6 +223,7 @@ def main() -> int:
             "atlas_schema_sha256": sha256(stage / "config/atlas_table_schema.json"),
             "checksums_sha256": sha256(stage / "checksums.sha256"),
             "non_release_acceptance_gates": 22,
+            "release_script_sha256": downstream_contract.script_hashes(root, "release"),
             "file_count": len(manifest_files),
             "files": manifest_files,
             "immutability_policy": "The release directory is created atomically and is never overwritten in place.",

@@ -60,7 +60,9 @@ An odd-chromosome discovery/even-chromosome confirmation analysis was then run
 for the 42 traits passing the multivariable LDSC input gate. None of ten
 discovery-derived candidate models passed held-out fit and residual
 admissibility together, so no factor model was promoted and factor GWAS/Q_SNP
-remain intentionally unrun. See `docs/genomic_sem_validation_results.md`.
+were correctly classified as not applicable. Header-only factor/Q_SNP tables
+and immutable terminal provenance publish that null without fabricating
+associations. See `docs/genomic_sem_validation_results.md`.
 
 The production LAVA workflow is now pinned and contract-complete, including
 all 112,275 local-univariate tests, overlap correction, all 396 eligible pair

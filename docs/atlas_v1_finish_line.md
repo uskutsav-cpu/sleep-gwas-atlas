@@ -24,7 +24,7 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 | Harmonization | Complete | All 45 traits have real filter-by-filter harmonization ledgers and canonical HapMap3 LDSC inputs. The six large GRCh38 replacements use checksum-bound streaming HapMap3 prefilters before the registered point liftover, while their complete raw sources remain retained for locus-level work. |
 | LDSC h2 and Phase 1 | Complete with exclusions | All 45 h² runs are present. Forty-three traits pass the predefined Z/intercept gate; T2D is dropped for intercept 1.315 (>1.20) and melanoma for h² Z 3.57 (<4). The exact 396 sleep×non-sleep pairs are present as 372 primary plus 24 clearly labelled QC-failed sensitivity rows. The locked-family correction yields 153 primary FDR<0.05 pairs. MS and melanoma liability h² exceed one and remain explicit interpretation/robustness warnings rather than being hidden. |
 | Full covariance | Complete with warnings | The real 45-by-45 S/Rg/I matrices, 1,035-by-1,035 V matrix, and all 1,035 lower-triangle estimates pass structural validation. S has three negative eigenvalues and V is ill-conditioned; the required 1,082 jackknife blocks and HDL implementation sensitivity remain explicit downstream warnings. |
-| Genomic SEM validation | Failed honestly | Odd-chromosome discovery and even-chromosome confirmation were completed for 42 QC-passing traits. None of 10 candidate models passed held-out fit plus residual-admissibility criteria; factor GWAS and Q_SNP are therefore not run. |
+| Genomic SEM validation | Passed as a validated null | Odd-chromosome discovery and even-chromosome confirmation were completed for 42 QC-passing traits. None of 10 candidate models passed held-out fit plus residual-admissibility criteria; factor GWAS and Q_SNP are therefore not applicable, with immutable header-only terminal outputs rather than fabricated associations. |
 | Other downstream science | Blocked | Pinned LAVA, MiXeR, PLACO+/conjFDR, fine-mapping, molecular-QTL/TWAS, regulatory, five-strategy cell-type, four-resource pathway, bidirectional-MR, atlas-edge, and robustness workflows now fail closed on exact missing inputs, releases, runtimes, or references. CATlas adult scATAC and the 16-tissue GTEx LDSC-SEG subset are source-ready (19/20 interpretation sources overall). The exact LDSC-SEG reference/runtime/trait contract is implemented, but its 1,876,474,664-byte streamed transfer is not started because current free space is below the locked 4 GiB floor and the 66-file temporary deletion family has not been authorized. Real production runs remain. |
 | Integrated atlas and robustness | Blocked | Canonical evidence tables and robustness outputs do not yet exist. |
 | Immutable release | Blocked | `releases/atlas-v1.0` must be produced only after every scientific gate passes. |
@@ -56,7 +56,7 @@ definitions and survives primary-source verification.
 6. Build one `shared_loci.tsv` from complementary PLACO and conjunction-FDR
    evidence with consistent locus definitions and effect directions.
 7. Use exploratory and validated confirmatory Genomic SEM models before factor
-   GWAS and Q_SNP.
+   GWAS and Q_SNP; if none validates, publish the locked not-applicable family.
 8. Fine-map priority shared loci, perform multi-signal trait and molecular-QTL
    colocalization, and integrate TWAS/sQTL/pQTL/PWAS evidence.
 9. Add regulatory-element, cell-type, pathway, network, and cautious

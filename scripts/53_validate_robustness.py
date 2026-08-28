@@ -10,6 +10,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
+import downstream_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 FORBIDDEN = ("SYNTHETIC", "PLACEHOLDER", "FAKE_RESULT", "SMOKE_TEST")
@@ -32,10 +33,15 @@ def main() -> int:
     parser.add_argument("--root", default=".")
     parser.add_argument("--input", default="results/tables/robustness_summary.tsv")
     parser.add_argument("--policy", default="config/downstream_analysis_policy.json")
+    parser.add_argument("--interpretation-policy", default="config/interpretation_analysis_policy.json")
+    parser.add_argument("--manifest", default="results/tables/robustness_task_manifest.tsv")
+    parser.add_argument("--manifest-lock", default="results/tables/robustness_task_manifest.lock.json")
+    parser.add_argument("--provenance", default="results/tables/robustness.provenance.json")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    policy = json.loads((root / args.policy).read_text(encoding="utf-8"))["robustness"]
+    downstream_path = root / args.policy
+    policy = json.loads(downstream_path.read_text(encoding="utf-8"))["robustness"]
     path = root / args.input
     if not path.is_file() or path.stat().st_size == 0:
         fail(f"missing real non-empty artifact: {args.input}")
@@ -47,6 +53,10 @@ def main() -> int:
         fail("robustness table header differs from the frozen policy")
     if not rows:
         fail("robustness table has no major-conclusion rows")
+    manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
+    tasks, lock = downstream_contract.validate_robustness_manifest(
+        root, manifest_path, lock_path, root / args.interpretation_policy, downstream_path,
+    )
     grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
     for line, row in enumerate(rows, start=2):
         identity = row["conclusion_id"]
@@ -89,6 +99,21 @@ def main() -> int:
         conclusions = {row["conclusion"] for row in values}
         if len(conclusions) != 1:
             fail(f"conclusion text drifted within {identity}")
+    if set(grouped) != set(lock["conclusion_ids_in_locked_order"]) or len(rows) != len(tasks):
+        fail("robustness table is not the exact locked conclusion-by-family matrix")
+    provenance_path = root / args.provenance
+    provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+    if (
+        provenance.get("policy_sha256") != downstream_contract.sha256(root / args.interpretation_policy)
+        or provenance.get("downstream_policy_sha256") != downstream_contract.sha256(downstream_path)
+        or provenance.get("task_manifest_sha256") != downstream_contract.sha256(manifest_path)
+        or provenance.get("task_manifest_lock_sha256") != downstream_contract.sha256(lock_path)
+        or provenance.get("row_count") != len(rows)
+        or provenance.get("output_sha256") != downstream_contract.sha256(path)
+        or provenance.get("script_sha256")
+        != downstream_contract.script_hashes(root, "robustness")
+    ):
+        fail("robustness aggregate differs from its sealed provenance")
     if not args.quiet:
         print(f"ROBUSTNESS_OK conclusions={len(grouped)} rows={len(rows)} families={len(required)}")
     return 0

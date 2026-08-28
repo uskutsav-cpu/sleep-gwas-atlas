@@ -12,6 +12,7 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
+import downstream_contract
 
 MISSING = {"", "NA"}
 ROOT = Path(__file__).resolve().parents[1]
@@ -195,16 +196,9 @@ def main() -> int:
     policy_path = root / args.policy
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
-    fields, tasks = read_tsv(manifest_path)
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if (
-        fields != policy["task_manifest_fields"]
-        or lock.get("policy_sha256") != sha256(policy_path)
-        or lock.get("task_manifest_sha256") != sha256(manifest_path)
-        or lock.get("task_ids_in_locked_order") != [row["task_id"] for row in tasks]
-        or lock.get("interpretation_results_accessed_before_task_lock") is not False
-    ):
-        fail("interpretation task family differs from its pre-result lock")
+    tasks, lock = downstream_contract.validate_interpretation_manifest(
+        root, manifest_path, lock_path, policy_path,
+    )
     by_family: dict[str, list[dict[str, str]]] = defaultdict(list)
     coverage: list[dict[str, object]] = []
     task_hashes: dict[str, str] = {}
@@ -218,9 +212,12 @@ def main() -> int:
             provenance.get("task_id") != task["task_id"]
             or provenance.get("policy_sha256") != sha256(policy_path)
             or provenance.get("task_manifest_sha256") != sha256(manifest_path)
+            or provenance.get("task_manifest_lock_sha256") != sha256(lock_path)
             or provenance.get("task_input_scope_sha256") != task["input_scope_sha256"]
             or status not in policy["allowed_terminal_statuses"]
             or provenance.get("result_sha256") != sha256(result_path)
+            or provenance.get("script_sha256")
+            != downstream_contract.script_hashes(root, "interpretation")
         ):
             fail(f"interpretation task provenance drifted: {task['task_id']}")
         family = task["analysis_family"]
@@ -301,6 +298,7 @@ def main() -> int:
             str(path.relative_to(root)): hashlib.sha256(text.encode()).hexdigest()
             for path, text in payloads.items()
         },
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
         "claim_limit": policy["claim_limit"],
     }
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"

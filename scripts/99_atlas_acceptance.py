@@ -236,11 +236,34 @@ def genomic_sem_gate(root: Path) -> Gate:
     fits = read_tsv(root / paths[0])
     validated = [row for row in fits if row.get("validation_status") == "VALIDATED"]
     if not validated:
-        return Gate(
-            "genomic_sem", "BLOCKED", ", ".join(paths),
-            "real chromosome-split models exist, but no candidate passed held-out validation",
+        validator = root / "scripts/30_finalize_genomicsem.py"
+        result = subprocess.run(
+            [sys.executable, str(validator), "--root", str(root), "--validate-only", "--quiet"],
+            capture_output=True, text=True,
         )
+        if result.returncode:
+            detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+            return Gate("genomic_sem", "BLOCKED", ", ".join(paths), f"validated-null publication failed: {detail}")
+        return Gate("genomic_sem", "PASS", "10 held-out candidates tested; no candidate passed held-out validation; immutable null published", "")
     return Gate("genomic_sem", "PASS", f"{len(validated)} held-out validated model(s)", "")
+
+
+def factor_gwas_gate(root: Path) -> Gate:
+    required = [
+        "results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv",
+        "results/tables/factor_gwas.provenance.json",
+    ]
+    missing = [path for path in required if not real_nonempty(root / path)]
+    if missing:
+        return Gate("factor_gwas", "BLOCKED", "", "publish factor GWAS/Q_SNP or a validated not-applicable null; missing: " + ", ".join(missing))
+    result = subprocess.run(
+        [sys.executable, str(root / "scripts/30_finalize_genomicsem.py"), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("factor_gwas", "BLOCKED", ", ".join(required), f"terminal factor-GWAS validation failed: {detail}")
+    return Gate("factor_gwas", "PASS", "not applicable: no held-out Genomic SEM model validated; header-only outputs are provenance sealed", "")
 
 
 def lava_gate(root: Path) -> Gate:
@@ -552,16 +575,13 @@ def build_gates(root: Path) -> list[Gate]:
             rg_gate(root, rows),
         ]
     )
-    artifact_specs = [
-        ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
-    ]
     gates.append(covariance_gate(root))
     gates.append(lava_gate(root))
     gates.append(mixer_gate(root))
     gates.append(pleiotropy_gate(root))
     gates.append(fine_mapping_gate(root))
     gates.extend(molecular_gates(root))
-    gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
+    gates.append(factor_gwas_gate(root))
     gates.extend(interpretation_gates(root))
     gates.append(integrated_atlas_gate(root))
     gates.append(robustness_gate(root))

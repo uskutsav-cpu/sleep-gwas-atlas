@@ -9,6 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import downstream_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -23,8 +24,12 @@ def main() -> int:
     parser.add_argument("--execute", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    with (root / args.manifest).open(encoding="utf-8", newline="") as handle:
-        tasks = list(csv.DictReader(handle, delimiter="\t"))
+    tasks, _ = downstream_contract.validate_robustness_manifest(
+        root, root / args.manifest,
+        root / "results/tables/robustness_task_manifest.lock.json",
+        root / "config/interpretation_analysis_policy.json",
+        root / "config/downstream_analysis_policy.json",
+    )
     selected = [row for row in tasks if row["task_id"] == args.task_id]
     if len(selected) != 1:
         fail(f"unknown or duplicate robustness task: {args.task_id}")

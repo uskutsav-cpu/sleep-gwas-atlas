@@ -1945,8 +1945,7 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(schema["tables"]["traits.tsv"]["expected_rows"], 45)
         self.assertEqual(schema["tables"]["trait_pairs.tsv"]["expected_rows"], 396)
         for name in policy["integrated_atlas"]["tables"][2:]:
-            expected_minimum = 1 if name in {"loci.tsv", "variants.tsv"} else 0
-            self.assertEqual(schema["tables"][name]["minimum_rows"], expected_minimum)
+            self.assertEqual(schema["tables"][name]["minimum_rows"], 0)
             self.assertIn("provenance_id", schema["tables"][name]["fields"])
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/52_validate_integrated_atlas.py")],
@@ -2004,6 +2003,19 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(policy["colocalization"]["p12_sensitivity"], [1e-6, 5e-6, 1e-5, 5e-5])
         engine = ROOT / policy["shared_engine"]["path"]
         self.assertEqual(hashlib.sha256(engine.read_bytes()).hexdigest(), policy["shared_engine"]["sha256"])
+
+    def test_genomicsem_validated_null_is_published_without_factor_results(self):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/30_finalize_genomicsem.py"), "--validate-only", "--quiet"],
+            cwd=ROOT, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual((ROOT / "results/tables/factor_gwas_summary.tsv").read_text(encoding="utf-8").count("\n"), 1)
+        self.assertEqual((ROOT / "results/tables/q_snp.tsv").read_text(encoding="utf-8").count("\n"), 1)
+        provenance = json.loads((ROOT / "results/tables/factor_gwas.provenance.json").read_text(encoding="utf-8"))
+        self.assertEqual(provenance["terminal_status"], "NOT_APPLICABLE_NO_VALIDATED_MODEL")
+        self.assertEqual(provenance["candidate_model_count"], 10)
+        self.assertEqual(provenance["validated_model_count"], 0)
 
     def test_finemapping_allele_alignment_is_signed_and_conservative(self):
         module = load_finemapping_materializer()

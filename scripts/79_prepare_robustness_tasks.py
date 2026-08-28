@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 
+import downstream_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -74,6 +75,14 @@ def main() -> int:
     conclusion_ids = [row["conclusion_id"] for row in conclusions]
     if len(conclusion_ids) != len(set(conclusion_ids)):
         fail("major conclusion IDs are duplicated")
+    edges_provenance_path = root / "results/atlas/edges.provenance.json"
+    edges_provenance = json.loads(edges_provenance_path.read_text(encoding="utf-8"))
+    if (
+        edges_provenance.get("outputs", {}).get(args.conclusions) != sha256(conclusion_path)
+        or edges_provenance.get("script_sha256")
+        != downstream_contract.script_hashes(root, "interpretation")
+    ):
+        fail("major conclusions differ from the sealed atlas-graph provenance")
     allowed_types = set(policy["robustness"]["major_conclusion_edge_levels"])
     applicability = policy["robustness"]["applicability_by_conclusion_type"]
     if set(applicability) != allowed_types:
@@ -119,11 +128,13 @@ def main() -> int:
         "schema_version": policy["schema_version"], "analysis_id": policy["analysis_id"],
         "policy_sha256": sha256(policy_path), "downstream_policy_sha256": sha256(downstream_path),
         "major_conclusions_sha256": sha256(conclusion_path),
+        "edges_provenance_sha256": sha256(edges_provenance_path),
         "task_manifest": args.out, "task_manifest_sha256": hashlib.sha256(payload.encode()).hexdigest(),
         "task_ids_in_locked_order": task_ids, "conclusion_ids_in_locked_order": conclusion_ids,
         "conclusion_count": len(conclusions), "task_count": len(tasks), "family_count": len(families),
         "applicable_task_count": sum(row["applicable"] == "TRUE" for row in tasks),
         "robustness_results_accessed_before_task_lock": False,
+        "script_sha256": downstream_contract.script_hashes(root, "robustness"),
     }
     lock_text = json.dumps(lock, indent=2, sort_keys=True) + "\n"
     out_path, lock_path = root / args.out, root / args.lock_out

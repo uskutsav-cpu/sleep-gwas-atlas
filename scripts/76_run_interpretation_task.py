@@ -9,6 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import downstream_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -24,8 +25,11 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.root).resolve()
     manifest_path = root / args.manifest
-    with manifest_path.open(encoding="utf-8", newline="") as handle:
-        tasks = list(csv.DictReader(handle, delimiter="\t"))
+    tasks, _ = downstream_contract.validate_interpretation_manifest(
+        root, manifest_path,
+        root / "results/tables/interpretation_task_manifest.lock.json",
+        root / "config/interpretation_analysis_policy.json",
+    )
     selected = [row for row in tasks if row["task_id"] == args.task_id]
     if len(selected) != 1:
         fail(f"unknown or duplicate interpretation task: {args.task_id}")

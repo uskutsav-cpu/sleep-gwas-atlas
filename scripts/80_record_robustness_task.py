@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 
+import downstream_contract
 
 SENSITIVITY_FIELDS = [
     "sensitivity_result", "direction_concordant", "significance_concordant",
@@ -67,16 +68,9 @@ def main() -> int:
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     downstream = json.loads(downstream_path.read_text(encoding="utf-8"))
     manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
-    fields, tasks = read_tsv(manifest_path)
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if (
-        fields != policy["robustness"]["task_manifest_fields"]
-        or lock.get("policy_sha256") != sha256(policy_path)
-        or lock.get("downstream_policy_sha256") != sha256(downstream_path)
-        or lock.get("task_manifest_sha256") != sha256(manifest_path)
-        or lock.get("task_ids_in_locked_order") != [row["task_id"] for row in tasks]
-    ):
-        fail("robustness task manifest differs from its pre-result lock")
+    tasks, lock = downstream_contract.validate_robustness_manifest(
+        root, manifest_path, lock_path, policy_path, downstream_path,
+    )
     selected = [row for row in tasks if row["task_id"] == args.task_id]
     if len(selected) != 1:
         fail(f"unknown or duplicate robustness task: {args.task_id}")
@@ -139,8 +133,10 @@ def main() -> int:
         "task_id": args.task_id, "conclusion_id": task["conclusion_id"],
         "robustness_family": task["robustness_family"], "applicable": applicable,
         "policy_sha256": sha256(policy_path), "downstream_policy_sha256": sha256(downstream_path),
-        "task_manifest_sha256": sha256(manifest_path), "source_input": source_input,
+        "task_manifest_sha256": sha256(manifest_path),
+        "task_manifest_lock_sha256": sha256(lock_path), "source_input": source_input,
         "result_path": task["normalized_result_path"], "result_sha256": hashlib.sha256(payload.encode()).hexdigest(),
+        "script_sha256": downstream_contract.script_hashes(root, "robustness"),
     }
     atomic_text(provenance_path, json.dumps(provenance, indent=2, sort_keys=True) + "\n")
     print(f"ROBUSTNESS_TASK_RECORDED task={args.task_id} applicable={task['applicable']}")

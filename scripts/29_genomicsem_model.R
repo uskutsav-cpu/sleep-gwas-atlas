@@ -206,7 +206,8 @@ for (id in names(candidate_models)) {
     )
   }
   syntax_rows[[length(syntax_rows) + 1L]] <- data.frame(
-    model_id = id, model = gsub("\n", "; ", model), warnings = paste(unique(captured_warnings), collapse = " | ")
+    model_id = id, model = gsub("[\r\n\t]+", "; ", model),
+    warnings = gsub("[\r\n\t]+", " ", paste(unique(captured_warnings), collapse = " | "))
   )
 }
 

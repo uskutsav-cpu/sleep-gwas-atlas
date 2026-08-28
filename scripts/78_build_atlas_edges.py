@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 
+import downstream_contract
 
 EDGE_FIELDS = [
     "edge_id", "source", "target", "relationship", "effect", "direction",
@@ -246,6 +247,7 @@ def main() -> int:
         "inputs": {str(path.relative_to(root)): sha256(path) for path in paths.values()},
         "edge_rows": len(edges), "major_conclusion_rows": len(conclusions),
         "outputs": {str(path.relative_to(root)): hashlib.sha256(text.encode()).hexdigest() for path, text in payloads.items()},
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
     }
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"
     provenance_path = root / args.provenance_out

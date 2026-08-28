@@ -11,6 +11,7 @@ import math
 import re
 from pathlib import Path
 
+import downstream_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 MISSING = {"", "NA"}
@@ -214,16 +215,9 @@ def main() -> int:
     policy_path = root / args.policy
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
-    manifest_fields, tasks = read_tsv(manifest_path)
-    if manifest_fields != policy["task_manifest_fields"]:
-        fail("interpretation task manifest schema drifted")
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if (
-        lock.get("policy_sha256") != sha256(policy_path)
-        or lock.get("task_manifest_sha256") != sha256(manifest_path)
-        or lock.get("task_ids_in_locked_order") != [row["task_id"] for row in tasks]
-    ):
-        fail("interpretation task manifest differs from its pre-result lock")
+    tasks, lock = downstream_contract.validate_interpretation_manifest(
+        root, manifest_path, lock_path, policy_path,
+    )
     selected = [row for row in tasks if row["task_id"] == args.task_id]
     if len(selected) != 1:
         fail(f"unknown or duplicate interpretation task: {args.task_id}")
@@ -287,11 +281,14 @@ def main() -> int:
         "schema_version": policy["schema_version"], "analysis_id": policy["analysis_id"],
         "task_id": args.task_id, "analysis_family": family, "terminal_status": status,
         "terminal_reason": reason, "policy_sha256": sha256(policy_path),
-        "task_manifest_sha256": sha256(manifest_path), "task_input_scope_sha256": task["input_scope_sha256"],
+        "task_manifest_sha256": sha256(manifest_path),
+        "task_manifest_lock_sha256": sha256(lock_path),
+        "task_input_scope_sha256": task["input_scope_sha256"],
         "source_id": task["source_id"], "source_release": task["source_release"],
         "external_input": external, "adapter_provenance": adapter_provenance,
         "result_path": task["normalized_result_path"],
         "result_rows": len(rows), "result_sha256": hashlib.sha256(payload.encode()).hexdigest(),
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
     }
     atomic_text(provenance_path, json.dumps(provenance, indent=2, sort_keys=True) + "\n")
     print(f"INTERPRETATION_TASK_RECORDED task={args.task_id} status={status} rows={len(rows)}")

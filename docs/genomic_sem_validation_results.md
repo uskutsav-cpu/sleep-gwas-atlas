@@ -31,8 +31,11 @@ smoothing changed at least one genetic-covariance Z statistic by more than
 
 Therefore the latent model is **not validated**. Factor GWAS and Q_SNP are not
 run, because doing so would promote a failed model into an apparently final
-result. The real model comparison and all loadings remain available in the
-ignored local result tables for audit:
+result. `scripts/30_finalize_genomicsem.py` instead validates the exact
+ten-candidate family and publishes schema-bearing, header-only factor-GWAS and
+Q_SNP tables plus `factor_gwas.provenance.json` with terminal status
+`NOT_APPLICABLE_NO_VALIDATED_MODEL`. The real model comparison and all loadings
+remain available in the ignored local result tables for audit:
 
 - `results/tables/genomic_sem_efa_models.tsv`
 - `results/tables/genomic_sem_model_fit.tsv`
@@ -53,4 +56,5 @@ Rscript scripts/28_chromosome_split_covariance.R \
   --metadata results/tables/genomicsem_validation_even_metadata.tsv \
   --log-prefix results/logs/genomicsem/validation_even
 Rscript scripts/29_genomicsem_model.R
+python3 scripts/30_finalize_genomicsem.py
 ```

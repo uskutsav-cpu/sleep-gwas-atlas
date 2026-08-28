@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 
+import downstream_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -62,17 +63,9 @@ def main() -> int:
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     downstream = json.loads(downstream_path.read_text(encoding="utf-8"))
     manifest_path, lock_path = root / args.manifest, root / args.manifest_lock
-    fields, tasks = read_tsv(manifest_path)
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    if (
-        fields != policy["robustness"]["task_manifest_fields"]
-        or lock.get("policy_sha256") != sha256(policy_path)
-        or lock.get("downstream_policy_sha256") != sha256(downstream_path)
-        or lock.get("task_manifest_sha256") != sha256(manifest_path)
-        or lock.get("task_ids_in_locked_order") != [row["task_id"] for row in tasks]
-        or lock.get("robustness_results_accessed_before_task_lock") is not False
-    ):
-        fail("robustness task family differs from its pre-result lock")
+    tasks, lock = downstream_contract.validate_robustness_manifest(
+        root, manifest_path, lock_path, policy_path, downstream_path,
+    )
     output_fields = downstream["robustness"]["table_fields"]
     rows: list[dict[str, str]] = []
     provenance_hashes: dict[str, str] = {}
@@ -86,7 +79,10 @@ def main() -> int:
             or provenance.get("policy_sha256") != sha256(policy_path)
             or provenance.get("downstream_policy_sha256") != sha256(downstream_path)
             or provenance.get("task_manifest_sha256") != sha256(manifest_path)
+            or provenance.get("task_manifest_lock_sha256") != sha256(lock_path)
             or provenance.get("result_sha256") != sha256(result_path)
+            or provenance.get("script_sha256")
+            != downstream_contract.script_hashes(root, "robustness")
         ):
             fail(f"robustness task provenance drifted: {task['task_id']}")
         result_fields, values = read_tsv(result_path)
@@ -117,6 +113,7 @@ def main() -> int:
         "task_provenance_sha256": provenance_hashes, "conclusion_count": lock["conclusion_count"],
         "family_count": lock["family_count"], "row_count": len(rows),
         "output": args.out, "output_sha256": hashlib.sha256(payload.encode()).hexdigest(),
+        "script_sha256": downstream_contract.script_hashes(root, "robustness"),
     }
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"
     provenance_path = root / args.provenance_out

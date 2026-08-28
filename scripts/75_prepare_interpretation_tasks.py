@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 
+import downstream_contract
 
 def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
@@ -145,9 +146,10 @@ def main() -> int:
     policy_path = root / args.policy
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     preflight_path = root / args.preflight
-    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if preflight.get("policy_sha256") != sha256(policy_path) or preflight.get("production_ready") is not True:
-        fail("interpretation preflight is not production-ready for pre-result task locking")
+    downstream_path = root / "config/downstream_analysis_policy.json"
+    downstream_contract.validate_interpretation_preflight(
+        root, policy_path, downstream_path, preflight_path,
+    )
     registry_path = root / policy["source_registry"]
     references_path = root / policy["method_references"]
     panel_path = root / "config/analysis_panel.tsv"
@@ -196,6 +198,7 @@ def main() -> int:
         "task_ids_in_locked_order": task_ids, "task_count": len(tasks),
         "task_counts_by_family": counts,
         "interpretation_results_accessed_before_task_lock": False,
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
     }
     lock_text = json.dumps(lock, indent=2, sort_keys=True) + "\n"
     out_path, lock_path = root / args.out, root / args.lock_out

@@ -9,6 +9,12 @@ be header-only after a genuine complete null analysis, but only when their
 separate checksum-bound task coverage is exact and contains no unresolved
 access blocker.
 
+Validated null families are first-class release evidence. When no Genomic SEM
+candidate passes the frozen held-out criteria, the release contains header-only
+factor-GWAS and Q_SNP tables plus terminal provenance, not invented association
+rows. A zero primary shared-locus family is handled analogously by the
+fine-mapping and downstream locus tables.
+
 The integrated validator checks the exact 45-trait and 396-pair families,
 autosomal locus and variant coordinates, allele validity, primary-key
 uniqueness, probability bounds, and foreign-key links from variants through

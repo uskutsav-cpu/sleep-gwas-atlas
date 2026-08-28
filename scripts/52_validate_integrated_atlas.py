@@ -10,6 +10,7 @@ import math
 import re
 from pathlib import Path
 
+import downstream_contract
 
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 MISSING = {"", "NA"}
@@ -234,7 +235,7 @@ def main() -> int:
             fail(f"invalid allele/coordinate record for {identity}")
         loci_with_variants.add(row["locus_id"])
     primary_loci = {row["locus_id"] for row in loci if row["analysis_tier"] == "PRIMARY_PHASE1"}
-    if not primary_loci or not primary_loci.issubset(loci_with_variants):
+    if not primary_loci.issubset(loci_with_variants):
         fail("not every primary cross-method shared locus has fine-mapped variants")
 
     genes = tables["genes.tsv"]
@@ -292,17 +293,9 @@ def main() -> int:
     interpretation_manifest_path = root / args.interpretation_manifest
     interpretation_lock_path = root / args.interpretation_manifest_lock
     interpretation_coverage_path = root / args.interpretation_coverage
-    interpretation_fields, interpretation_tasks = read_tsv(interpretation_manifest_path)
-    interpretation_lock = json.loads(interpretation_lock_path.read_text(encoding="utf-8"))
-    if (
-        interpretation_fields != interpretation_policy["task_manifest_fields"]
-        or interpretation_lock.get("policy_sha256") != sha256(interpretation_policy_path)
-        or interpretation_lock.get("task_manifest_sha256") != sha256(interpretation_manifest_path)
-        or interpretation_lock.get("task_ids_in_locked_order")
-        != [row["task_id"] for row in interpretation_tasks]
-        or interpretation_lock.get("interpretation_results_accessed_before_task_lock") is not False
-    ):
-        fail("interpretation task family differs from its pre-result lock")
+    interpretation_tasks, interpretation_lock = downstream_contract.validate_interpretation_manifest(
+        root, interpretation_manifest_path, interpretation_lock_path, interpretation_policy_path,
+    )
     interpretation_coverage_fields, interpretation_coverage = read_tsv(interpretation_coverage_path)
     if interpretation_coverage_fields != interpretation_policy["coverage_fields"]:
         fail("interpretation_coverage.tsv header differs from the frozen policy")
@@ -336,6 +329,9 @@ def main() -> int:
     if (
         interpretation_provenance.get("policy_sha256") != sha256(interpretation_policy_path)
         or interpretation_provenance.get("task_manifest_sha256") != sha256(interpretation_manifest_path)
+        or interpretation_provenance.get("task_manifest_lock_sha256") != sha256(interpretation_lock_path)
+        or interpretation_provenance.get("script_sha256")
+        != downstream_contract.script_hashes(root, "interpretation")
         or interpretation_provenance.get("outputs", {}).get(args.interpretation_coverage)
         != sha256(interpretation_coverage_path)
     ):
@@ -402,6 +398,16 @@ def main() -> int:
         required(row["evidence_level"], "evidence_level", identity)
         required(row["dataset"], "dataset", identity)
         required(row["version"], "version", identity)
+
+    edges_provenance_path = atlas_dir / "edges.provenance.json"
+    edges_provenance = json.loads(edges_provenance_path.read_text(encoding="utf-8"))
+    if (
+        edges_provenance.get("outputs", {}).get(f"{args.atlas_dir}/edges.tsv")
+        != sha256(atlas_dir / "edges.tsv")
+        or edges_provenance.get("script_sha256")
+        != downstream_contract.script_hashes(root, "interpretation")
+    ):
+        fail("atlas edges differ from sealed graph provenance")
 
     if not args.quiet:
         print(

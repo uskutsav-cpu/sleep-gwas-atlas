@@ -15,6 +15,7 @@ import tarfile
 import zipfile
 from pathlib import Path
 
+import downstream_contract
 from pathway_sources import (
     load_go_sets,
     load_magma_gene_sets,
@@ -1255,6 +1256,7 @@ def main() -> int:
         relative: {
             "ready": (root / relative).is_file() and (root / relative).stat().st_size > 0,
             "bytes": (root / relative).stat().st_size if (root / relative).is_file() else 0,
+            "sha256": sha256(root / relative) if (root / relative).is_file() and (root / relative).stat().st_size > 0 else "ABSENT",
         }
         for relative in upstream_paths
     }
@@ -1278,8 +1280,12 @@ def main() -> int:
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),
         "source_count": len(readiness), "upstream": upstream,
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
     }
-    atomic_tsv(root / args.readiness_out, READINESS_FIELDS, readiness)
+    readiness_path = root / args.readiness_out
+    atomic_tsv(readiness_path, READINESS_FIELDS, readiness)
+    report["readiness_path"] = args.readiness_out
+    report["readiness_sha256"] = sha256(readiness_path)
     atomic_json(root / args.report_out, report)
     if not args.quiet:
         print(
