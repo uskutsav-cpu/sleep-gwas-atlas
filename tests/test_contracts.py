@@ -123,6 +123,15 @@ def load_phase0_audit():
     return module
 
 
+def load_ranged_downloader():
+    spec = importlib.util.spec_from_file_location(
+        "ranged_downloader", ROOT / "scripts" / "14_ranged_download.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -175,6 +184,42 @@ class PanelContractTests(unittest.TestCase):
                 if trait.strip()
             }
         self.assertEqual(mapped, panel_ids)
+
+    def test_substitution_candidates_are_exactly_the_six_blockers(self):
+        selected = {row["trait_id"]: row["source_id"] for row in self.panel}
+        with (ROOT / "config" / "public_gwas_substitution_candidates.tsv").open(
+            newline="", encoding="utf-8"
+        ) as handle:
+            candidates = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(
+            {row["trait_id"] for row in candidates},
+            {"ms", "asthma", "t2d", "cad", "melanoma", "telomere_length"},
+        )
+        self.assertEqual(len(candidates), 6)
+        self.assertEqual(
+            sum(int(row["archive_bytes"]) for row in candidates),
+            4_437_046_355,
+        )
+        for row in candidates:
+            self.assertEqual(row["replaces_source_id"], selected[row["trait_id"]])
+            self.assertEqual(row["review_status"], "REVIEWED_AWAITING_ACQUISITION")
+            self.assertTrue(row["download_url"].startswith("https://"))
+            self.assertTrue(row["source_page_url"].startswith("https://"))
+            self.assertIn(row["build"], {"GRCh38/hg38"})
+
+    def test_ranged_downloader_supports_md5_bootstrap(self):
+        downloader = load_ranged_downloader()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "payload"
+            path.write_bytes(b"atlas-candidate")
+            self.assertEqual(
+                downloader.file_digest(path, "md5"),
+                hashlib.md5(b"atlas-candidate").hexdigest(),
+            )
+            self.assertEqual(
+                downloader.sha256(path),
+                hashlib.sha256(b"atlas-candidate").hexdigest(),
+            )
 
     def test_nonjournal_citation_is_exactly_the_neale_grip_release(self):
         audit = load_phase0_audit()

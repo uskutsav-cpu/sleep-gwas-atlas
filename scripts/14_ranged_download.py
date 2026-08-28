@@ -29,12 +29,16 @@ def fail(message: str) -> None:
     raise SystemExit(f"ERROR: {message}")
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
+def file_digest(path: Path, algorithm: str) -> str:
+    digest = hashlib.new(algorithm)
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def sha256(path: Path) -> str:
+    return file_digest(path, "sha256")
 
 
 def fetch_range(url: str, start: int, end: int, total: int, destination: Path) -> Path:
@@ -110,6 +114,13 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--expected-bytes", type=int, required=True)
     parser.add_argument("--expected-sha256")
+    parser.add_argument(
+        "--expected-md5",
+        help=(
+            "Optional upstream MD5 for first acquisition, before a local "
+            "SHA-256 has been registered."
+        ),
+    )
     parser.add_argument("--chunk-bytes", type=int, default=128 * 1024 * 1024)
     parser.add_argument(
         "--max-chunks", type=int, default=1,
@@ -127,6 +138,10 @@ def main() -> None:
         or args.workers <= 0
     ):
         fail("expected bytes, chunk bytes, max chunks, and workers must be positive")
+    if args.expected_sha256 and not re.fullmatch(r"[0-9a-f]{64}", args.expected_sha256):
+        fail("expected SHA-256 must be 64 lowercase hexadecimal characters")
+    if args.expected_md5 and not re.fullmatch(r"[0-9a-f]{32}", args.expected_md5):
+        fail("expected MD5 must be 32 lowercase hexadecimal characters")
 
     output = args.out
     partial = output.with_name(f"{output.name}.partial")
@@ -137,7 +152,11 @@ def main() -> None:
         actual_sha256 = sha256(output)
         if args.expected_sha256 and actual_sha256 != args.expected_sha256:
             fail("existing output SHA-256 does not match the registered value")
+        actual_md5 = file_digest(output, "md5")
+        if args.expected_md5 and actual_md5 != args.expected_md5:
+            fail("existing output MD5 does not match the registered upstream value")
         print(f"Already complete: {output} ({actual_sha256})")
+        print(f"MD5: {actual_md5}")
         return
 
     offset = partial.stat().st_size if partial.exists() else 0
@@ -193,9 +212,13 @@ def main() -> None:
     actual_sha256 = sha256(partial)
     if args.expected_sha256 and actual_sha256 != args.expected_sha256:
         fail("completed file SHA-256 does not match the registered value")
+    actual_md5 = file_digest(partial, "md5")
+    if args.expected_md5 and actual_md5 != args.expected_md5:
+        fail("completed file MD5 does not match the registered upstream value")
     os.replace(partial, output)
     print(f"Completed {output}")
     print(f"SHA-256: {actual_sha256}")
+    print(f"MD5: {actual_md5}")
 
 
 if __name__ == "__main__":
