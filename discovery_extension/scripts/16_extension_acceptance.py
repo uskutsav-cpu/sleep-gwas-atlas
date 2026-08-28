@@ -53,7 +53,8 @@ def main() -> None:
     replication_path = ROOT / "results/replication/replication_results.tsv"
     local_path = ROOT / "results/local/local_rg_results.tsv"
     local_readiness_path = ROOT / "results/local/local_architecture_readiness.tsv"
-    pleiotropy_path = ROOT / "results/pleiotropy/pleiotropy_results.tsv"
+    pleiotropy_path = ROOT / "results/pleiotropy/novel_shared_loci.tsv"
+    pleiotropy_readiness_path = ROOT / "results/pleiotropy/pleiotropy_readiness.tsv"
     fine_mapping_path = ROOT / "results/fine_mapping/fine_mapping_colocalization.tsv"
     mechanism_path = ROOT / "results/mechanism/mechanistic_synthesis.tsv"
 
@@ -71,6 +72,17 @@ def main() -> None:
         local_gate_status = "PROTOCOL_READY_CODE_BLOCKED"
     else:
         local_gate_status = "PROTOCOL_READY_UPSTREAM_BLOCKED"
+    pleiotropy_readiness_rows = read_tsv(pleiotropy_readiness_path) if pleiotropy_readiness_path.is_file() else []
+    pleiotropy_code_ready = bool(pleiotropy_readiness_rows) and all(row["code_status"] == "PASS" for row in pleiotropy_readiness_rows)
+    pleiotropy_inputs_ready = bool(pleiotropy_readiness_rows) and all(row["readiness"] == "READY_FOR_PAIR_MANIFEST_CURATION" for row in pleiotropy_readiness_rows)
+    if pleiotropy_path.is_file():
+        pleiotropy_gate_status = "PLEIOTROPY_ARTIFACT_PRESENT"
+    elif pleiotropy_inputs_ready:
+        pleiotropy_gate_status = "CODE_AND_INPUTS_READY_PAIR_MANIFEST_BLOCKED"
+    elif pleiotropy_code_ready:
+        pleiotropy_gate_status = "CODE_READY_UPSTREAM_DISCOVERY_REPLICATION_AND_DENSE_INPUTS_BLOCKED"
+    else:
+        pleiotropy_gate_status = "PROTOCOL_READY_UPSTREAM_BLOCKED"
     gates = [
         (1, "Freeze and protect core atlas", "PASS" if core_ok else "FAIL_CORE_CHECKPOINT_DRIFT", core_check,
          "Core remains the exact 45-trait/396-pair checkpoint." if core_ok else "A checkpointed core artifact differs in the current working tree; extension execution must remain stopped."),
@@ -100,8 +112,9 @@ def main() -> None:
         (12, "Local genetic correlation", local_gate_status,
          artifact_state(local_path) + ";readiness=" + artifact_state(local_readiness_path) + ";protocol=config/local_architecture_contract.json",
          "Pinned LAVA/HDL-L code passes runtime checks, but source-verified LD references and dense inputs are absent; global rg is not local sharing."),
-        (13, "Pleiotropy analysis", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not pleiotropy_path.is_file() else "PLEIOTROPY_ARTIFACT_PRESENT",
-         artifact_state(pleiotropy_path) + ";protocol=config/followup_contract.json", "Pleiotropy is evaluated as an alternative explanation, not an inconvenience."),
+        (13, "Pleiotropy analysis", pleiotropy_gate_status,
+         artifact_state(pleiotropy_path) + ";readiness=" + artifact_state(pleiotropy_readiness_path) + ";protocol=config/pleiotropy_contract.json",
+         "Pinned PLACO+ code passes, but replicated pair selection and genome-wide dense inputs are absent; statistical pleiotropy is not a shared causal variant."),
         (14, "Fine-mapping and colocalization", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not fine_mapping_path.is_file() else "FOLLOWUP_ARTIFACT_PRESENT",
          artifact_state(fine_mapping_path) + ";protocol=config/followup_contract.json", "Colocalization requires explicit hypotheses, priors, and sensitivity analyses."),
         (15, "Mechanistic annotation", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not mechanism_path.is_file() else "SYNTHESIS_ARTIFACT_PRESENT",
@@ -135,9 +148,9 @@ def main() -> None:
         ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PENDING_PAIR_AUDIT", artifact_state(novelty_path)),
         ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "PENDING_REPLICATION", artifact_state(replication_path)),
         ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "CODE_READY_INPUTS_BLOCKED" if local_code_ready and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path)),
-        ("R11", "Pleiotropy or mediated effects", "Evaluate shared-factor and directionally pleiotropic alternatives.", "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path)),
+        ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
         ("R12", "Colocalization overclaim", "Report hypotheses/priors/sensitivity; colocalization is not causality.", "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path)),
-        ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "four isolated synthetic workflows"),
+        ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "five isolated synthetic workflows"),
         ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "PASS_BLOCKED", preflight["status"]),
         ("R15", "Local LD-reference mismatch", "Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.", "PASS_BLOCKED", artifact_state(local_readiness_path)),
         ("R16", "Local multiplicity or h2-gate leakage", "Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.", "PASS_CONTRACT", "config/local_architecture_contract.json"),
@@ -173,6 +186,8 @@ def main() -> None:
         "The pinned LAVA 0.1.5 and HDL 1.4.3 packages load and expose their local-rg entrypoints. "
         "Their source-verified LD references are not present; the recommended LAVA UKB v1.1 reference "
         "alone is published as 15 GiB unzipped, so no local analysis was started.\n\n"
+        "The pinned PLACO+ 0.2.0 source passes its entrypoint and end-to-end synthetic checks. "
+        "No real PLACO+ scan was started because independently replicated pairs and genome-wide dense inputs do not exist.\n\n"
         f"Real acquisition is blocked: the exact compressed inputs total {preflight['compressed_source_gib']} GiB "
         f"and require {preflight['required_free_gib']} GiB with the locked safety factor, while the preflight "
         f"measured {preflight['available_free_gib']} GiB free ({preflight['shortfall_gib']} GiB short). "
@@ -197,6 +212,7 @@ def main() -> None:
         "source_check": source_check,
         "panel_sha256": sha256(ROOT / "config/candidate_traits.tsv"),
         "local_readiness_sha256": sha256(local_readiness_path) if local_readiness_path.is_file() else None,
+        "pleiotropy_readiness_sha256": sha256(pleiotropy_readiness_path) if pleiotropy_readiness_path.is_file() else None,
         "acceptance_gates_sha256": sha256(gates_path),
         "adversarial_checklist_sha256": sha256(checklist_path),
         "status_report_sha256": sha256(status_path),

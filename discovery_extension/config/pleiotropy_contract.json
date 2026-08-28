@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "high-priority pair with independent replication class REPLICATED; pair family and full-resolution inputs must be checksum-locked before PLACO+ result access",
+  "primary_method": "PLACO_PLUS_PRIMARY",
+  "software_version": "0.2.0",
+  "input_scope": "genome-wide harmonized summary statistics for both traits; candidate-variant-only PLACO+ is prohibited",
+  "variant_harmonization": {
+    "build": "GRCh37",
+    "ancestry": "EUR",
+    "effect_allele": "identical effect allele and strand across both traits",
+    "variant_type": "autosomal biallelic SNP",
+    "minimum_MAF": 0.01,
+    "minimum_INFO": 0.9,
+    "primary_z_squared_maximum": 80,
+    "large_effect_sensitivity": "variants excluded because either Z squared exceeds 80 remain in a separate two-trait genome-wide-significance screen"
+  },
+  "nuisance_estimation": {
+    "variance_function": "var.placo",
+    "correlation_function": "cor.pearson",
+    "marginal_p_threshold": 0.0001,
+    "correlation_policy": "estimate from the full eligible genome-wide variant set; account for correlated Z statistics and sample overlap"
+  },
+  "multiplicity": {
+    "conventional_variant_threshold": 5e-8,
+    "primary_locked_family_threshold": "5e-8 divided by the number of pair scans frozen in the pleiotropy manifest",
+    "conjunction_fdr": "optional sensitivity only when assumptions and exact tested family are documented; never substitute for PLACO+ primary results"
+  },
+  "locus_policy": "define independent loci after the variant scan using a checksum-locked ancestry-matched LD reference; retain lead SNP, locus bounds, all significant variants, and clumping parameters",
+  "canonical_output": "discovery_extension/results/pleiotropy/novel_shared_loci.tsv",
+  "required_interpretation": "PLACO+ identifies statistical association of a variant with both traits but cannot distinguish biological, horizontal, or vertical/mediated pleiotropy and does not prove a shared causal variant"
+}

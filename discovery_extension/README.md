@@ -148,6 +148,21 @@ and emits the four required local-architecture flags plus a pair summary. The
 lock and flag semantics are exercised without real data in
 `synthetic/test_local_architecture_contract.py`.
 
+The pleiotropy layer is also executable but input-gated. The official
+stand-alone PLACO+ 0.2.0 source is pinned by Git commit and file SHA-256;
+`28_fetch_placo_plus.sh` reproduces the checksum-verified local installation,
+and `28_pleiotropy_preflight.py` verifies `var.placo`, `cor.pearson`, and
+`placo.plus`. `29_prepare_pleiotropy_queue.py` freezes only independently
+replicated Tier B pairs, `30_lock_pleiotropy_manifest.py` traverses and locks
+the full genome-wide harmonized input plus the LD reference before result
+access, and `31_run_placo_plus.R` estimates the nuisance variance/correlation
+from genome-wide data and retains per-variant numerical failures.
+`31_collate_pleiotropy.py` streams the complete locked result family, validates
+post-scan LD clumping, and emits `novel_shared_loci.tsv` with an explicit
+statistical-pleiotropy-only claim guard. The real source functions and the
+end-to-end lock/runner/collator path are exercised under
+`synthetic/test_pleiotropy_contract.py`.
+
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total
 about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety

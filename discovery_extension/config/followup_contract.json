@@ -18,8 +18,11 @@
     "warning": "global rg does not establish local sharing"
   },
   "pleiotropy": {
+    "detailed_contract": "config/pleiotropy_contract.json",
+    "primary_method": "PLACO+ 0.2.0 on genome-wide harmonized data with estimated trait correlation",
+    "canonical_output": "results/pleiotropy/novel_shared_loci.tsv",
     "required_alternatives": ["horizontal pleiotropy", "vertical mediation", "shared latent factor", "sample overlap or residual confounding"],
-    "warning": "directional genetic evidence is not automatically causal"
+    "warning": "variant association with both traits does not identify the type of pleiotropy, prove a shared causal variant, or establish causality"
   },
   "fine_mapping_colocalization": {
     "required_outputs": ["locus and variant universe", "LD reference", "credible sets", "prior specification", "hypothesis posteriors", "prior sensitivity", "allele alignment QC"],
