@@ -15,7 +15,7 @@ if [ "$#" -ne 0 ]; then
 fi
 
 RUNTIME_MANIFEST=config/interpretation_causal_runtime.json
-RUNTIME_MANIFEST_SHA256=73356106a740b2fba2fbf7db78c6656b0549fe87240a9b468562d64279bee842
+RUNTIME_MANIFEST_SHA256=9a2d0106b5cd2f641b41f7d86447b8305b18abc9c01d8fc4249621860e166d94
 DEPENDENCY_MANIFEST=config/interpretation_causal_packages.tsv
 DEPENDENCY_MANIFEST_SHA256=6c9ae71bf61cf36de4a952c469ffe4e5dec1b56ff6ef71f80225ff650fe0e26b
 INSTALLED_MANIFEST=config/interpretation_causal_installed_packages.tsv

@@ -92,7 +92,7 @@ isolated `.mr-env/library`, exact source archives for TwoSampleMR 0.7.9,
 MR-PRESSO 1.0, cause 1.2.0, and lhcMR, 63 checksum-pinned dependency sources,
 and an exact 153-package installed dependency closure. Stable PLINK
 1.9.0-b.7.11 performs local-only LD operations against the same
-checksum-pinned 504-sample 1000 Genomes Phase 3 EUR GRCh37 archive used by the
+checksum-pinned 503-sample 1000 Genomes Phase 3 EUR GRCh37 archive used by the
 MAGMA workflow. The reference is materialized as a streamed SNP-major subset,
 so the 3.60-GB archive never needs to be fully extracted. Palindromic variants
 are always dropped (`harmonise_data` action 3), proxies and remote API clumping
@@ -145,6 +145,10 @@ estimator families. The compressed
 official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
 not materialized wholesale. Causal LD work uses a disk-bounded streamed subset;
+the current local derivation retained 1,206,400 exact allele-matched HapMap3
+variants in 232 MiB and passed a full PLINK allele-frequency read over all 503
+reference samples. Five HapMap3 IDs had allele mismatches and 10,906 were absent
+from the reference, all recorded in immutable derivation provenance.
 full MAGMA materialization remains guarded until at least 4,674,439,651 bytes
 are free and requires an explicit large-extraction acknowledgement.
 Four of six upstream canonical inputs do not yet exist, and the remaining

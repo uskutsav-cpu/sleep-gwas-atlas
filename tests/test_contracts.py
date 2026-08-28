@@ -2151,6 +2151,7 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(manifest["gene_count"], 20260)
         self.assertEqual(manifest["magma_version"], "1.10")
         self.assertEqual(manifest["gene_window_kb"], [1, 1])
+        self.assertEqual(manifest["reference_sample_count"], 503)
         self.assertEqual(manifest["reference_archive_uncompressed_bytes"], 3600697827)
         domains = {domain: 0 for domain in policy["cell_types"]["required_domains"]}
         for dataset in manifest["datasets"]:
@@ -2285,7 +2286,7 @@ class PanelContractTests(unittest.TestCase):
             "TWOSAMPLEMR_SOURCE", "MRPRESSO_SOURCE", "CAUSE_SOURCE", "LHCMR_SOURCE",
             "PLINK_1_9_STABLE_MAC_ARCHIVE", "PLINK_1_9_STABLE_UNIVERSAL_BINARY",
         })
-        self.assertEqual(manifest["ld_reference"]["sample_count"], 504)
+        self.assertEqual(manifest["ld_reference"]["sample_count"], 503)
         self.assertEqual(manifest["ld_reference"]["bed_record_bytes"], 126)
         self.assertTrue(manifest["determinism"]["local_ld_only"])
         self.assertEqual(manifest["determinism"]["harmonise_action"], 3)
@@ -2320,6 +2321,39 @@ class PanelContractTests(unittest.TestCase):
         preflight = (ROOT / "scripts/74_interpretation_preflight.py").read_text(encoding="utf-8")
         self.assertIn("validate_causal_runtime_bundle", preflight)
         self.assertIn("causal installed dependency closure differs", preflight)
+
+    def test_causal_reference_builder_streams_exact_snp_major_records(self):
+        module = load_numbered_script("94_prepare_causal_reference.py", "causal_reference")
+        bim = (
+            b"1 rs1 0 1 A G\n"
+            b"1 rs2 0 2 C T\n"
+            b"1 rs3 0 3 C A\n"
+        )
+        bed = b"\x6c\x1b\x01" + b"ab" + b"cd" + b"ef"
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            source = directory / "reference.zip"
+            with zipfile.ZipFile(source, "w") as archive:
+                archive.writestr("g1000_eur.bim", bim)
+                archive.writestr("g1000_eur.bed", bed)
+            with zipfile.ZipFile(source) as archive:
+                indices, counters, bim_hash = module.stream_bim(
+                    archive, archive.getinfo("g1000_eur.bim"),
+                    {"bytes": len(bim), "sha256": hashlib.sha256(bim).hexdigest()},
+                    {"rs1": frozenset(("A", "G")), "rs3": frozenset(("A", "C"))},
+                    directory / "subset.bim", 3, 2,
+                )
+                bed_hash = module.stream_bed(
+                    archive, archive.getinfo("g1000_eur.bed"),
+                    {"bytes": len(bed), "sha256": hashlib.sha256(bed).hexdigest()},
+                    indices, directory / "subset.bed", 2, 3,
+                )
+            self.assertEqual(indices, [0, 2])
+            self.assertEqual(counters["allele_matched_variants"], 2)
+            self.assertEqual((directory / "subset.bim").read_bytes(), b"1 rs1 0 1 A G\n1 rs3 0 3 C A\n")
+            self.assertEqual((directory / "subset.bed").read_bytes(), b"\x6c\x1b\x01abef")
+            self.assertEqual(bim_hash, hashlib.sha256(bim).hexdigest())
+            self.assertEqual(bed_hash, hashlib.sha256(bed).hexdigest())
 
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))

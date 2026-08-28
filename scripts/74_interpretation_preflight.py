@@ -414,6 +414,10 @@ def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, s
                 reference_observed[name] = {"bytes": info.file_size, "sha256": actual_hash}
                 if info.file_size != expected["bytes"] or actual_hash != expected["sha256"]:
                     return False, f"MAGMA EUR reference member differs from its exact pin: {name}", observed
+            with archive.open(infos["g1000_eur.fam"]) as handle:
+                reference_sample_count = sum(1 for _ in handle)
+            if reference_sample_count != manifest.get("reference_sample_count"):
+                return False, "MAGMA EUR reference sample count differs from its release pin", observed
     except (OSError, zipfile.BadZipFile, RuntimeError) as exc:
         return False, f"MAGMA source or EUR reference archive is invalid: {exc}", observed
 
@@ -507,7 +511,8 @@ def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, s
         return False, "FUMA matrix selection is not exactly two prespecified matrices per domain", observed
     observed.update({
         "gene_count": len(gene_ids), "magma_version": version_text,
-        "reference_members": reference_observed, "selected_datasets": selected_observed,
+        "reference_members": reference_observed, "reference_sample_count": reference_sample_count,
+        "selected_datasets": selected_observed,
         "selected_datasets_by_domain": domains,
     })
     return True, "", observed
@@ -704,17 +709,30 @@ def validate_causal_runtime_bundle(
     ld_reference = manifest.get("ld_reference", {})
     reference_manifest = root / str(ld_reference.get("source_manifest", ""))
     reference_archive = root / str(ld_reference.get("archive_path", ""))
+    instrument_universe = root / str(ld_reference.get("instrument_universe_path", ""))
     if (
         not reference_manifest.is_file()
         or sha256(reference_manifest) != ld_reference.get("source_manifest_sha256")
         or not reference_archive.is_file()
         or reference_archive.stat().st_size != ld_reference.get("archive_bytes")
         or sha256(reference_archive) != ld_reference.get("archive_sha256")
-        or ld_reference.get("sample_count") != 504
+        or not instrument_universe.is_file()
+        or instrument_universe.stat().st_size != ld_reference.get("instrument_universe_bytes")
+        or sha256(instrument_universe) != ld_reference.get("instrument_universe_sha256")
+        or ld_reference.get("sample_count") != 503
         or ld_reference.get("bed_record_bytes") != 126
         or not ld_reference.get("bed_variant_major")
     ):
         return False, "causal LD reference differs from its checksum-pinned EUR GRCh37 source", observed
+    try:
+        with instrument_universe.open(encoding="ascii", newline="") as handle:
+            if handle.readline().rstrip("\n") != "SNP\tA1\tA2":
+                return False, "causal HapMap3 instrument universe has an unexpected header", observed
+            instrument_rows = sum(1 for _ in handle)
+        if instrument_rows + 1 != ld_reference.get("instrument_universe_rows_including_header"):
+            return False, "causal HapMap3 instrument-universe row count differs from its pin", observed
+    except (OSError, UnicodeError) as exc:
+        return False, f"causal HapMap3 instrument universe is unreadable: {exc}", observed
 
     plink = subprocess.run(
         [components["PLINK_1_9_STABLE_UNIVERSAL_BINARY"], "--version"],
@@ -769,6 +787,8 @@ stopifnot(
         "r_version": "4.3.3", "r_architecture": "aarch64",
         "plink_version": plink_version,
         "ld_reference_archive_sha256": sha256(reference_archive),
+        "instrument_universe_sha256": sha256(instrument_universe),
+        "instrument_universe_rows": instrument_rows,
     })
     return True, "", observed
 
