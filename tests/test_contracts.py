@@ -1345,6 +1345,41 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('simsalapar_1.0-13.tar.gz', setup)
         self.assertIn('r-base=4.3.3', env)
 
+    def test_lava_policy_and_reference_plan_are_locked(self):
+        policy = json.loads((ROOT / "config" / "lava_analysis_policy.json").read_text(encoding="utf-8"))
+        self.assertEqual(policy["lava_version"], "0.1.5")
+        self.assertEqual(policy["lava_commit"], "e729a245f7b6923967a96804fbf5246eadf2d6c6")
+        self.assertEqual(policy["expected_loci"], 2495)
+        self.assertEqual(policy["expected_traits"], 45)
+        self.assertEqual(policy["expected_sleep_non_sleep_pairs"], 396)
+        self.assertEqual(policy["planned_univariate_tests"], 112275)
+        self.assertAlmostEqual(
+            policy["univariate_p_threshold"],
+            policy["univariate_alpha"] / policy["planned_univariate_tests"],
+        )
+        with (ROOT / "config" / "lava_reference_sources.tsv").open(newline="", encoding="utf-8") as handle:
+            sources = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(sources), 7)
+        self.assertEqual(sum(int(row["archive_bytes"]) for row in sources), 14110596095)
+
+    def test_lava_runtime_fails_closed_and_does_not_filter_on_global_rg(self):
+        setup = (ROOT / "scripts" / "30_setup_lava.sh").read_text(encoding="utf-8")
+        downloader = (ROOT / "scripts" / "32_download_lava_reference.sh").read_text(encoding="utf-8")
+        prepare = (ROOT / "scripts" / "31_prepare_lava.py").read_text(encoding="utf-8")
+        runtime = (ROOT / "scripts" / "33_run_lava.R").read_text(encoding="utf-8")
+        validator = (ROOT / "scripts" / "34_validate_lava.py").read_text(encoding="utf-8")
+        acceptance = (ROOT / "scripts" / "99_atlas_acceptance.py").read_text(encoding="utf-8")
+        self.assertIn("15477c9547c3533d681cbfb6491508a29342fe99b725845054887b9d29dc2bec", setup)
+        self.assertIn("The 15 GiB UK Biobank LD reference is deliberately not downloaded", setup)
+        self.assertIn("DOWNLOAD=false", downloader)
+        self.assertIn('if [ "$DOWNLOAD" != true ]', downloader)
+        self.assertIn('len(rg) != 396 or observed != expected', prepare)
+        self.assertNotIn('global_rg_p <=', runtime)
+        self.assertIn('univ$p <= numeric_policy("univariate_p_threshold")', runtime)
+        self.assertIn('run.bivar(locus', runtime)
+        self.assertIn('expected_bivar', validator)
+        self.assertIn('scripts/34_validate_lava.py', acceptance)
+
 
 if __name__ == "__main__":
     unittest.main()

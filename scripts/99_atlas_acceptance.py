@@ -243,6 +243,33 @@ def genomic_sem_gate(root: Path) -> Gate:
     return Gate("genomic_sem", "PASS", f"{len(validated)} held-out validated model(s)", "")
 
 
+def lava_gate(root: Path) -> Gate:
+    paths = [
+        "results/tables/lava_locus_status.tsv",
+        "results/tables/lava_univariate.tsv",
+        "results/tables/lava_bivariate.tsv",
+    ]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
+        return Gate(
+            "lava", "BLOCKED", "",
+            "run complete local-univariate and eligible bivariate LAVA; missing real non-empty artifact(s): "
+            + ", ".join(missing),
+        )
+    validator = root / "scripts/34_validate_lava.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("lava", "BLOCKED", ", ".join(paths), f"LAVA validation failed: {detail}")
+    return Gate(
+        "lava", "PASS",
+        "2,495 loci x 45 univariate family + locally eligible 396-pair bivariate family", "",
+    )
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -292,7 +319,6 @@ def build_gates(root: Path) -> list[Gate]:
     )
     artifact_specs = [
         ("mixer", ["results/tables/mixer_univariate.tsv", "results/tables/mixer_bivariate.tsv"], "run real univariate then eligible bivariate MiXeR"),
-        ("lava", ["results/tables/lava_univariate.tsv", "results/tables/lava_bivariate.tsv"], "run local univariate h2 and corrected bivariate LAVA"),
         ("pleiotropic_loci", ["results/atlas/shared_loci.tsv"], "combine PLACO and conjunction-FDR evidence"),
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
         ("fine_mapping", ["results/atlas/variants.tsv"], "fine-map priority loci with signal-specific credible sets and PIPs"),
@@ -321,6 +347,7 @@ def build_gates(root: Path) -> list[Gate]:
         ("robustness", ["results/tables/robustness_summary.tsv"], "complete the predefined major robustness pass"),
     ]
     gates.append(covariance_gate(root))
+    gates.append(lava_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(genomic_sem_gate(root))
     gates.append(release_gate(root))

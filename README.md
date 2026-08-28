@@ -62,6 +62,15 @@ discovery-derived candidate models passed held-out fit and residual
 admissibility together, so no factor model was promoted and factor GWAS/Q_SNP
 remain intentionally unrun. See `docs/genomic_sem_validation_results.md`.
 
+The production LAVA workflow is now pinned and contract-complete, including
+all 112,275 local-univariate tests, overlap correction, all 396 eligible pair
+definitions, per-locus checkpoints, and a strict result validator. The real
+analysis has not started because the official recommended UK Biobank LD v1.1
+reference requires 15 GiB uncompressed while the current volume has only about
+4–6 GiB free. The older 1,000 Genomes reference is not substituted because LAVA
+0.1.5 warns of local-h2 bias and type-I error inflation. See
+`docs/lava_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
@@ -178,6 +187,15 @@ official GenomicSEM commit recorded in `environment/tool_versions.tsv`:
 bash scripts/25_setup_genomicsem.sh
 ```
 
+LAVA shares this R runtime. Its separate setup pins the exact LAVA commit and
+all additional CRAN dependencies by source checksum; it extracts the official
+2,495-locus definition but never downloads the large LD reference implicitly:
+
+```bash
+bash scripts/30_setup_lava.sh
+bash scripts/32_download_lava_reference.sh  # storage preflight only
+```
+
 ## Snakemake workflow
 
 The default workflow validates the locked panel and produces a source/readiness ledger without downloading raw GWAS data:
@@ -193,6 +211,7 @@ snakemake --cores 1 phase0
 snakemake --cores 1 h2
 snakemake --cores 1 phase1_rg
 snakemake --cores 1 full_covariance
+snakemake --cores 1 lava_inputs
 ```
 
 `full_covariance` always reads all 45 ordered manifest traits, not the optional
@@ -203,6 +222,15 @@ produces the 45×45 genetic covariance/correlation/intercept matrices plus the
 For 45 traits GenomicSEM requires 1,082 jackknife blocks; this is a long-running
 production target and the resulting high-block-count diagnostic must remain an
 explicit robustness warning.
+
+The `lava` target is intentionally separate from downloading reference data.
+It requires the complete official UK Biobank LD v1.1 chromosome files, resumes
+through per-locus checkpoints, and publishes results only after the complete
+locked test family can be collated and validated:
+
+```bash
+snakemake --cores 1 lava
+```
 
 After the run, validate the complete export and derive the downstream SEM input
 ledger:

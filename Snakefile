@@ -15,6 +15,8 @@ LDSC_PYTHON = config["ldsc_python"]
 LDSC_DIR = config["ldsc_dir"]
 RSCRIPT = config["rscript"]
 EUR_LD_DIR = config["eur_ld_dir"]
+LAVA_REFERENCE_PREFIX = config["lava_reference_prefix"]
+LAVA_LOCUS_FILE = config["lava_locus_file"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -203,3 +205,42 @@ rule genomic_sem_model:
         diagnostics="results/tables/genomic_sem_split_diagnostics.tsv",
     shell:
         "{RSCRIPT} scripts/29_genomicsem_model.R"
+
+
+rule lava_inputs:
+    input:
+        panel=PANEL,
+        policy="config/lava_analysis_policy.json",
+        intercepts="results/tables/ldsc_intercept_45x45.tsv",
+        rg="results/tables/rg_matrix.tsv",
+        munged=expand("data/munged/{trait}.sumstats.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    output:
+        info="results/tables/lava_input_info.tsv",
+        overlap="results/tables/lava_sample_overlap.txt",
+        pairs="results/tables/lava_pair_manifest.tsv",
+        provenance="results/tables/lava_input_provenance.tsv",
+        runtime="results/tables/lava_runtime_policy.tsv",
+        diagnostics="results/tables/lava_input_diagnostics.json",
+    shell:
+        "{PYTHON} scripts/31_prepare_lava.py"
+
+
+rule lava:
+    input:
+        info="results/tables/lava_input_info.tsv",
+        overlap="results/tables/lava_sample_overlap.txt",
+        pairs="results/tables/lava_pair_manifest.tsv",
+        provenance="results/tables/lava_input_provenance.tsv",
+        runtime="results/tables/lava_runtime_policy.tsv",
+        locus=LAVA_LOCUS_FILE,
+        reference=expand(
+            LAVA_REFERENCE_PREFIX + "_chr{chromosome}.{suffix}",
+            chromosome=range(1, 23), suffix=["info", "bcor"],
+        ),
+    output:
+        status="results/tables/lava_locus_status.tsv",
+        univariate="results/tables/lava_univariate.tsv",
+        bivariate="results/tables/lava_bivariate.tsv",
+    shell:
+        "{RSCRIPT} scripts/33_run_lava.R && "
+        "{PYTHON} scripts/34_validate_lava.py --quiet"
