@@ -170,9 +170,10 @@ def main() -> int:
     locus_by_id = {row["locus_id"]: row for row in loci}
     shared_path = root / "results/atlas/shared_loci.tsv"
     _, shared = read_tsv(shared_path)
-    shared_by_id = {row.get("shared_locus_id", ""): row for row in shared}
-    if "" in shared_by_id or len(shared_by_id) != len(shared) or set(shared_by_id) != locus_ids:
-        fail("loci.tsv is not the exact cross-method shared-locus family")
+    shared_primary = [row for row in shared if row.get("analysis_tier") == "PRIMARY_PHASE1"]
+    shared_by_id = {row.get("shared_locus_id", ""): row for row in shared_primary}
+    if "" in shared_by_id or len(shared_by_id) != len(shared_primary) or set(shared_by_id) != locus_ids:
+        fail("loci.tsv is not the exact primary cross-method shared-locus family")
     for identity, locus in locus_by_id.items():
         upstream = shared_by_id[identity]
         if (

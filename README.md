@@ -98,6 +98,11 @@ The ten canonical atlas tables also have an exact cross-table schema in
 22 non-release acceptance checks, validates the nine-family robustness matrix,
 and never overwrites an existing release. See `docs/atlas_release_workflow.md`.
 
+Primary cross-method loci feed a checksum-locked SuSiE-RSS/coloc-SuSiE path
+that reuses signed LAVA UKB LD and rejects HapMap3-only inputs. Trait-trait
+colocalization remains distinct from the later molecular-QTL completion gate.
+See `docs/fine_mapping_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

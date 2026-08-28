@@ -27,6 +27,11 @@ Statistical pleiotropy is not interpreted as proof of a shared causal variant,
 biological mechanism, or causal direction. Those claims require the later
 fine-mapping and colocalization layers.
 
+The canonical locus table retains the two signed PLACO+ Z statistics at its
+lead variant and reports their effect pattern as `+/+`, `+/-`, `-/+`, or
+`-/-`. This direction label is descriptive on the shared reference allele; it
+is not a causal-direction estimate.
+
 ## Current preflight
 
 The official pleioFDR reference is exactly 2,383,912,974 bytes (2.22 GiB) and

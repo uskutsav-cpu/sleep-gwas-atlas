@@ -315,6 +315,31 @@ def pleiotropy_gate(root: Path) -> Gate:
     )
 
 
+def fine_mapping_gate(root: Path) -> Gate:
+    paths = [
+        "results/atlas/loci.tsv", "results/atlas/variants.tsv",
+        "results/tables/fine_mapping_credible_sets.tsv",
+        "results/tables/fine_mapping_diagnostics.tsv",
+        "results/tables/trait_trait_colocalization.tsv",
+        "results/atlas/fine_mapping.provenance.json",
+    ]
+    purpose = "fine-map every primary cross-method shared locus with signal-specific credible sets and PIPs"
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
+        return Gate(
+            "fine_mapping", "BLOCKED", "", f"{purpose}; missing real non-empty artifact(s): {', '.join(missing)}",
+        )
+    validator = root / "scripts/60_collate_finemapping.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("fine_mapping", "BLOCKED", ", ".join(paths), f"fine-mapping validation failed: {detail}")
+    return Gate("fine_mapping", "PASS", "all locked primary loci have converged SuSiE-RSS outputs", "")
+
+
 def integrated_atlas_gate(root: Path) -> Gate:
     paths = [
         "results/atlas/traits.tsv",
@@ -421,7 +446,6 @@ def build_gates(root: Path) -> list[Gate]:
     )
     artifact_specs = [
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
-        ("fine_mapping", ["results/atlas/variants.tsv"], "fine-map priority loci with signal-specific credible sets and PIPs"),
         ("colocalization", ["results/tables/colocalization.tsv"], "complete trait-trait and molecular-QTL signal-level colocalization"),
         ("molecular_integration", ["results/tables/molecular_evidence.tsv", "results/atlas/genes.tsv"], "integrate TWAS, sQTL, pQTL/PWAS, and convergent gene evidence"),
         ("regulatory_mapping", ["results/atlas/regulatory_elements.tsv"], "map fine-mapped variants through regulatory elements to genes"),
@@ -433,6 +457,7 @@ def build_gates(root: Path) -> list[Gate]:
     gates.append(lava_gate(root))
     gates.append(mixer_gate(root))
     gates.append(pleiotropy_gate(root))
+    gates.append(fine_mapping_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(integrated_atlas_gate(root))
     gates.append(robustness_gate(root))

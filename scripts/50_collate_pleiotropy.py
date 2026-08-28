@@ -15,7 +15,8 @@ from pathlib import Path
 
 PLACO_FIELDS = [
     "pair_id", "sleep_trait", "non_sleep_trait", "analysis_tier", "locus_id",
-    "CHR", "START", "STOP", "lead_snp", "lead_p_placo_plus",
+    "CHR", "START", "STOP", "lead_snp", "lead_p_placo_plus", "lead_z1", "lead_z2",
+    "effect_direction",
     "family_significant_variant_count", "family_significant_variants", "method",
 ]
 CONJFDR_FIELDS = [
@@ -27,6 +28,7 @@ SHARED_FIELDS = [
     "shared_locus_id", "pair_id", "sleep_trait", "non_sleep_trait", "analysis_tier",
     "locus_id", "CHR", "START", "STOP", "placo_lead_snp", "placo_lead_p",
     "conjfdr_lead_snp", "conjfdr_lead_fdr", "same_lead_snp",
+    "effect_direction",
     "placo_significant_variant_count", "conjfdr_significant_variant_count",
     "evidence_status", "claim_limit",
 ]
@@ -75,6 +77,12 @@ def table_text(fields: list[str], values: list[dict[str, object]]) -> str:
     writer.writeheader()
     writer.writerows(values)
     return output.getvalue()
+
+
+def effect_direction(z1: float, z2: float) -> str:
+    if z1 == 0 or z2 == 0:
+        raise SystemExit("ERROR: a PLACO+ locus lead has a zero signed effect")
+    return ("+" if z1 > 0 else "-") + "/" + ("+" if z2 > 0 else "-")
 
 
 def atomic_text(path: Path, payload: str) -> None:
@@ -190,7 +198,7 @@ def main() -> int:
         placo_hits, placo_fields = rows_and_fields(hits_path)
         required_placo = {
             "pair_id", "SNP", "CHR", "BP", "P_PLACO_PLUS",
-            "conventional_significant", "locked_family_significant",
+            "Z1", "Z2", "conventional_significant", "locked_family_significant",
         }
         if not required_placo.issubset(placo_fields):
             raise SystemExit(f"ERROR: PLACO+ hit schema is invalid for {pair_id}")
@@ -218,7 +226,8 @@ def main() -> int:
                 locus_id, start, stop = assign_block(chromosome, position, blocks, starts)
                 placo_grouped[(pair_id, locus_id)].append({
                     "snp": hit["SNP"], "p": p_value, "chr": chromosome,
-                    "start": start, "stop": stop,
+                    "start": start, "stop": stop, "z1": float(hit["Z1"]),
+                    "z2": float(hit["Z2"]),
                 })
         if family_count != int(summary["locked_family_hit_count"]):
             raise SystemExit(f"ERROR: PLACO+ family hit count differs from summary for {pair_id}")
@@ -283,6 +292,8 @@ def main() -> int:
             "non_sleep_trait": pair["non_sleep_trait"], "analysis_tier": pair["analysis_tier"],
             "locus_id": locus_id, "CHR": lead["chr"], "START": lead["start"], "STOP": lead["stop"],
             "lead_snp": lead["snp"], "lead_p_placo_plus": f"{lead['p']:.15g}",
+            "lead_z1": f"{lead['z1']:.15g}", "lead_z2": f"{lead['z2']:.15g}",
+            "effect_direction": effect_direction(lead["z1"], lead["z2"]),
             "family_significant_variant_count": len(values),
             "family_significant_variants": ";".join(sorted(item["snp"] for item in values)),
             "method": "PLACO_PLUS_FAMILY_CORRECTED",
@@ -316,6 +327,7 @@ def main() -> int:
             "placo_lead_snp": placo["lead_snp"], "placo_lead_p": placo["lead_p_placo_plus"],
             "conjfdr_lead_snp": conj["lead_snp"], "conjfdr_lead_fdr": conj["lead_conjfdr"],
             "same_lead_snp": str(placo["lead_snp"] == conj["lead_snp"]).upper(),
+            "effect_direction": placo["effect_direction"],
             "placo_significant_variant_count": placo["family_significant_variant_count"],
             "conjfdr_significant_variant_count": conj["significant_variant_count"],
             "evidence_status": "PLACO_PLUS_AND_CONJFDR_SAME_LOCKED_LD_BLOCK",

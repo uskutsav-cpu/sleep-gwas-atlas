@@ -21,7 +21,7 @@
     "variants.tsv": {
       "primary_key": ["locus_id", "variant_id"],
       "minimum_rows": 1,
-      "fields": ["variant_id", "locus_id", "rsid", "chromosome", "position_bp", "effect_allele", "other_allele", "effect_allele_frequency", "sleep_beta", "sleep_se", "non_sleep_beta", "non_sleep_se", "pip_sleep", "pip_non_sleep", "credible_set_sleep", "credible_set_non_sleep", "shared_signal_posterior", "fine_mapping_method", "ld_reference", "qc_status", "provenance_id"]
+      "fields": ["variant_id", "locus_id", "rsid", "chromosome", "position_bp", "effect_allele", "other_allele", "minor_allele_frequency", "sleep_beta", "sleep_se", "non_sleep_beta", "non_sleep_se", "pip_sleep", "pip_non_sleep", "credible_set_sleep", "credible_set_non_sleep", "shared_signal_posterior", "fine_mapping_method", "ld_reference", "qc_status", "provenance_id"]
     },
     "genes.tsv": {
       "primary_key": ["locus_id", "gene_id"],
@@ -54,6 +54,6 @@
       "fields": ["edge_id", "source", "target", "relationship", "effect", "direction", "p_value", "fdr", "tissue", "cell_type", "method", "evidence_level", "dataset", "version", "provenance_id"]
     }
   },
-  "numeric_probability_fields": ["global_rg_p", "global_rg_fdr_all_396", "global_rg_fdr_primary_372", "placo_lead_p", "conjfdr_min_q", "effect_allele_frequency", "pip_sleep", "pip_non_sleep", "shared_signal_posterior", "p_value", "fdr", "heterogeneity_p", "pleiotropy_p"],
+  "numeric_probability_fields": ["global_rg_p", "global_rg_fdr_all_396", "global_rg_fdr_primary_372", "placo_lead_p", "conjfdr_min_q", "minor_allele_frequency", "pip_sleep", "pip_non_sleep", "shared_signal_posterior", "p_value", "fdr", "heterogeneity_p", "pleiotropy_p"],
   "claim_boundary": "Passing the integrated schema proves structural traceability and provenance completeness, not biological causality."
 }

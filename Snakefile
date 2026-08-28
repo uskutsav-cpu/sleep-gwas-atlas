@@ -21,6 +21,7 @@ MIXER_POLICY = config["mixer_policy"]
 PLEIOTROPY_POLICY = config["pleiotropy_policy"]
 DOWNSTREAM_POLICY = config["downstream_policy"]
 ATLAS_SCHEMA = config["atlas_schema"]
+FINE_MAPPING_POLICY = config["fine_mapping_policy"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -395,6 +396,94 @@ rule atlas_core:
         provenance="results/atlas/core.provenance.json",
     shell:
         "{PYTHON} scripts/51_build_atlas_core.py"
+
+
+rule fine_mapping_preflight:
+    input:
+        panel=PANEL,
+        policy=FINE_MAPPING_POLICY,
+        downstream=DOWNSTREAM_POLICY,
+        sources="config/fine_mapping_sources.tsv",
+        references="config/fine_mapping_method_references.tsv",
+    output:
+        report="results/tables/fine_mapping_preflight.json",
+        traits="results/tables/fine_mapping_input_readiness.tsv",
+    shell:
+        "{PYTHON} scripts/56_finemapping_preflight.py --report-only"
+
+
+checkpoint fine_mapping_loci:
+    input:
+        preflight="results/tables/fine_mapping_preflight.json",
+        shared="results/atlas/shared_loci.tsv",
+        policy=FINE_MAPPING_POLICY,
+    output:
+        manifest="results/tables/fine_mapping_locus_manifest.tsv",
+        lock="results/tables/fine_mapping_locus_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/57_prepare_finemapping_loci.py"
+
+
+rule fine_mapping_input:
+    input:
+        manifest="results/tables/fine_mapping_locus_manifest.tsv",
+        lock="results/tables/fine_mapping_locus_manifest.lock.json",
+        preflight="results/tables/fine_mapping_preflight.json",
+        references=expand(
+            LAVA_REFERENCE_PREFIX + "_chr{chromosome}.{suffix}",
+            chromosome=range(1, 23), suffix=["info", "bcor"],
+        ),
+        extracted="ref/lava/ukb_v1.1/extracted_manifest.tsv",
+    output:
+        summary1="data/fine_mapping/{shared_locus_id}/sleep.tsv.gz",
+        summary2="data/fine_mapping/{shared_locus_id}/non_sleep.tsv.gz",
+        order="data/fine_mapping/{shared_locus_id}/variants.tsv",
+        ld="data/fine_mapping/{shared_locus_id}/ld.tsv.gz",
+        task="results/fine_mapping/tasks/{shared_locus_id}.tsv",
+        task_lock="results/fine_mapping/tasks/{shared_locus_id}.lock.json",
+    shell:
+        "{PYTHON} scripts/58_materialize_finemapping_locus.py {wildcards.shared_locus_id} --materialize"
+
+
+rule fine_mapping_locus:
+    input:
+        task="results/fine_mapping/tasks/{shared_locus_id}.tsv",
+        task_lock="results/fine_mapping/tasks/{shared_locus_id}.lock.json",
+    output:
+        variants="results/fine_mapping/runs/{shared_locus_id}/variants.tsv",
+        credible="results/fine_mapping/runs/{shared_locus_id}/credible_sets.tsv",
+        coloc="results/fine_mapping/runs/{shared_locus_id}/colocalization.tsv",
+        shared="results/fine_mapping/runs/{shared_locus_id}/shared_variant_posteriors.tsv",
+        diagnostics="results/fine_mapping/runs/{shared_locus_id}/diagnostics.tsv",
+        provenance="results/fine_mapping/runs/{shared_locus_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/59_run_finemapping_locus.py {wildcards.shared_locus_id} --execute"
+
+
+def fine_mapping_run_provenance(wildcards):
+    checkpoint_output = checkpoints.fine_mapping_loci.get(**wildcards).output.manifest
+    with open(checkpoint_output, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return expand(
+        "results/fine_mapping/runs/{shared_locus_id}/provenance.json",
+        shared_locus_id=[row["shared_locus_id"] for row in rows],
+    )
+
+
+rule fine_mapping:
+    input:
+        runs=fine_mapping_run_provenance,
+        manifest="results/tables/fine_mapping_locus_manifest.tsv",
+        lock="results/tables/fine_mapping_locus_manifest.lock.json",
+    output:
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        credible="results/tables/fine_mapping_credible_sets.tsv",
+        diagnostics="results/tables/fine_mapping_diagnostics.tsv",
+        coloc="results/tables/trait_trait_colocalization.tsv",
+        provenance="results/atlas/fine_mapping.provenance.json",
+    shell:
+        "{PYTHON} scripts/60_collate_finemapping.py"
 
 
 rule validate_integrated_atlas:

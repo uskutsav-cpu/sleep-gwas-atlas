@@ -165,9 +165,15 @@ def main() -> int:
         code_prefixes = ("config/", "environment/", "patches/", "scripts/", "docs/", "tests/", ".github/")
         payload = {
             Path(path) for path in tracked
-            if path in {"README.md", "Snakefile", ".gitignore"} or path.startswith(code_prefixes)
+            if path in {
+                "README.md", "Snakefile", ".gitignore",
+                "discovery_extension/scripts/35_run_susie_coloc.R",
+            } or path.startswith(code_prefixes)
         }
-        for directory in ("results/atlas", "results/tables", "results/logs", "results/figures"):
+        for directory in (
+            "results/atlas", "results/tables", "results/logs", "results/figures",
+            "results/fine_mapping",
+        ):
             payload.update(relative_files(root, directory))
         for relative in sorted(payload):
             copy_payload(root, stage, relative)

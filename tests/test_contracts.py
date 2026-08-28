@@ -151,6 +151,15 @@ def load_pleiotropy_materializer():
     return module
 
 
+def load_finemapping_materializer():
+    spec = importlib.util.spec_from_file_location(
+        "finemapping_materializer", ROOT / "scripts" / "58_materialize_finemapping_locus.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -1617,6 +1626,9 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('len(manifest) != policy["expected_sleep_non_sleep_pairs"]', collator)
         self.assertIn('set(placo_index) & set(conj_index)', collator)
         self.assertIn('PLACO_PLUS_AND_CONJFDR_SAME_LOCKED_LD_BLOCK', collator)
+        self.assertIn('"effect_direction"', collator)
+        self.assertIn('hit["Z1"]', collator)
+        self.assertIn('hit["Z2"]', collator)
         self.assertIn('"--validate-only", "--quiet"', acceptance)
         self.assertIn('396 locked PLACO+/conjunction-FDR pair scans', acceptance)
         workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
@@ -1692,6 +1704,64 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertIn("release contains unmanifested files", release_validator)
         self.assertIn("frozen pre-release acceptance evidence is incomplete", release_validator)
+
+    def test_finemapping_policy_is_all_primary_loci_and_signed_lava_ld(self):
+        policy = json.loads(
+            (ROOT / "config/fine_mapping_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        downstream = json.loads(
+            (ROOT / "config/downstream_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("Every cross-method shared locus", policy["entry_rule"])
+        self.assertIn("no result-ranked maximum", policy["entry_rule"])
+        self.assertEqual(policy["reference"]["mode"], "LAVA_BCOR_SIGNED_CORRELATION")
+        self.assertEqual(policy["reference"]["build"], "GRCh37")
+        self.assertEqual(policy["reference"]["ancestry"], "EUR")
+        self.assertEqual(policy["fine_mapping"]["version"], downstream["fine_mapping"]["susieR_version"])
+        self.assertEqual(policy["colocalization"]["version"], downstream["colocalization"]["coloc_version"])
+        self.assertFalse(policy["fine_mapping"]["estimate_residual_variance"])
+        self.assertEqual(policy["colocalization"]["p12_sensitivity"], [1e-6, 5e-6, 1e-5, 5e-5])
+        engine = ROOT / policy["shared_engine"]["path"]
+        self.assertEqual(hashlib.sha256(engine.read_bytes()).hexdigest(), policy["shared_engine"]["sha256"])
+
+    def test_finemapping_allele_alignment_is_signed_and_conservative(self):
+        module = load_finemapping_materializer()
+        self.assertEqual(module.aligned_sign("A", "C", "A", "C"), 1)
+        self.assertEqual(module.aligned_sign("C", "A", "A", "C"), -1)
+        self.assertEqual(module.aligned_sign("T", "G", "A", "C"), 1)
+        self.assertEqual(module.aligned_sign("G", "T", "A", "C"), -1)
+        self.assertIsNone(module.aligned_sign("A", "T", "A", "T"))
+        self.assertIsNone(module.aligned_sign("A", "G", "A", "C"))
+
+    def test_finemapping_workflow_fails_closed_and_does_not_claim_molecular_coloc(self):
+        preflight = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/56_finemapping_preflight.py"), "--report-only"],
+            cwd=ROOT, capture_output=True, text=True,
+        )
+        self.assertEqual(preflight.returncode, 0, preflight.stdout + preflight.stderr)
+        report = json.loads((ROOT / "results/tables/fine_mapping_preflight.json").read_text(encoding="utf-8"))
+        self.assertTrue(all(check["archive_present_and_pinned"] for check in report["code_checks"]))
+        self.assertTrue(report["runtime"]["pass"])
+        self.assertEqual(report["full_input_traits"], 36)
+        self.assertEqual(report["lava_reference_files"], 0)
+        self.assertFalse(report["ready"])
+        prepare = (ROOT / "scripts/57_prepare_finemapping_loci.py").read_text(encoding="utf-8")
+        self.assertIn('row["analysis_tier"] == "PRIMARY_PHASE1"', prepare)
+        self.assertNotIn("global_rg", prepare)
+        materialize = (ROOT / "scripts/58_materialize_finemapping_locus.py").read_text(encoding="utf-8")
+        self.assertIn("full non-HapMap3 harmonized input is absent", prepare)
+        self.assertIn('"results_accessed_before_lock": False', materialize)
+        self.assertIn('"single_signal_fallback_justification": "NOT_JUSTIFIED"', materialize)
+        collator = (ROOT / "scripts/60_collate_finemapping.py").read_text(encoding="utf-8")
+        self.assertIn("results/tables/trait_trait_colocalization.tsv", collator)
+        acceptance = (ROOT / "scripts/99_atlas_acceptance.py").read_text(encoding="utf-8")
+        self.assertIn("trait-trait and molecular-QTL signal-level colocalization", acceptance)
+        downloader = (ROOT / "scripts/32_download_lava_reference.sh").read_text(encoding="utf-8")
+        self.assertIn("extracted_manifest.tsv", downloader)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        self.assertIn("checkpoint fine_mapping_loci:", workflow)
+        for rule in ("fine_mapping_preflight", "fine_mapping_input", "fine_mapping_locus", "fine_mapping"):
+            self.assertIn(f"rule {rule}:", workflow)
 
 
 if __name__ == "__main__":

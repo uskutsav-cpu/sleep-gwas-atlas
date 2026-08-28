@@ -1,0 +1,53 @@
+{
+  "analysis_id": "atlas-v1.0-fine-mapping-colocalization",
+  "analysis_panel": "atlas-v1.0",
+  "entry_source": "results/atlas/shared_loci.tsv",
+  "entry_rule": "Every cross-method shared locus with analysis_tier PRIMARY_PHASE1; no result-ranked maximum and no global-rg filter",
+  "expected_build": "GRCh37",
+  "expected_ancestry": "EUR",
+  "minimum_maf": 0.01,
+  "minimum_locus_variants": 50,
+  "maximum_locus_variants": 5000,
+  "minimum_memory_bytes": 8589934592,
+  "minimum_free_storage_bytes": 21474836480,
+  "summary_input_scope": "Full autosomal post-QC summary statistics; HapMap3-prefiltered inputs are forbidden",
+  "reference": {
+    "id": "LAVA_UKB_v1.1_EUR_GRCh37",
+    "prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
+    "mode": "LAVA_BCOR_SIGNED_CORRELATION",
+    "ancestry": "EUR",
+    "build": "GRCh37",
+    "expected_chromosomes": 22,
+    "minimum_sample_size": 10000,
+    "allele_rule": "Both GWAS betas are oriented to the LAVA reference A1 allele before signed LD is extracted"
+  },
+  "fine_mapping": {
+    "method": "SuSiE-RSS",
+    "software": "susieR",
+    "version": "0.14.2",
+    "maximum_causal_signals": 10,
+    "credible_set_coverage": 0.95,
+    "minimum_absolute_correlation": 0.5,
+    "maximum_iterations": 1000,
+    "estimate_residual_variance": false,
+    "prior": "FLAT",
+    "required_diagnostics": ["convergence", "RSS-LD inconsistency s", "kriging allele-switch outliers", "credible-set purity", "LD symmetry", "LD eigenvalues"]
+  },
+  "colocalization": {
+    "primary_method": "coloc.susie",
+    "software": "coloc",
+    "version": "5.2.3",
+    "p1": 0.0001,
+    "p2": 0.0001,
+    "p12_primary": 0.00001,
+    "p12_sensitivity": [0.000001, 0.000005, 0.00001, 0.00005],
+    "shared_signal_min_pp_h4": 0.8,
+    "shared_signal_min_pp_h4_over_pp_h3": 5,
+    "single_signal_fallback": "NOT_JUSTIFIED for primary trait-trait analyses"
+  },
+  "shared_engine": {
+    "path": "discovery_extension/scripts/35_run_susie_coloc.R",
+    "sha256": "a0f262ccd8b0e959584fbfc9f3032e5a99c391e6928244282977d6357c17e1e5"
+  },
+  "claim_limit": "Fine-mapping and colocalization are model-based evidence; they do not prove a causal variant, gene, pathway, mechanism, mediation, or causal direction"
+}

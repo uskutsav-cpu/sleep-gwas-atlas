@@ -71,11 +71,21 @@ tail -n +2 "$SOURCE_TABLE" | while IFS=$'\t' read -r archive_id chromosomes url 
 done
 mv "$MANIFEST_TMP" "$TARGET/download_manifest.tsv"
 
+EXTRACTED_TMP="$TARGET/extracted_manifest.tsv.tmp"
+printf 'chromosome\tfile_type\tpath\tbytes\tsha256\n' > "$EXTRACTED_TMP"
 for chromosome in $(seq 1 22); do
   if [ ! -f "$TARGET/lava-ukb-v1.1_chr${chromosome}.info" ] || \
      [ ! -f "$TARGET/lava-ukb-v1.1_chr${chromosome}.bcor" ]; then
     echo "ERROR: exact LAVA .info/.bcor pair is missing for chromosome $chromosome" >&2
     exit 1
   fi
+  for suffix in info bcor; do
+    extracted="$TARGET/lava-ukb-v1.1_chr${chromosome}.${suffix}"
+    extracted_bytes=$(wc -c < "$extracted" | tr -d ' ')
+    extracted_sha=$(shasum -a 256 "$extracted" | awk '{print $1}')
+    printf '%s\t%s\t%s\t%s\t%s\n' \
+      "$chromosome" "$suffix" "$extracted" "$extracted_bytes" "$extracted_sha" >> "$EXTRACTED_TMP"
+  done
 done
+mv "$EXTRACTED_TMP" "$TARGET/extracted_manifest.tsv"
 echo "Downloaded and extracted the complete registered LAVA UKB v1.1 reference."
