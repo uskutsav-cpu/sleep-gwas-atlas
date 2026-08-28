@@ -1,5 +1,5 @@
 {
-  "checkpoint_schema_version": "1.0.0",
+  "checkpoint_schema_version": "1.1.0",
   "checkpoint_utc": "2026-08-28T03:38:08Z",
   "repository": "sleep-gwas-atlas",
   "git_commit": "22df92c8d6894f93c50561ae8a86acf2f48f50cb",
@@ -37,6 +37,10 @@
     "results/tables/phase1_summary_report.md": "b027c4e9443e796e68bb7f0bcfbf67a58c5770649ff385eb679ac72512984252",
     "results/figures/fig2_rg_heatmap.png": "9428f60a2eec814e47e105d4210b4f96585143791a034c8a0fbab4a0ac5a7bb3"
   },
+  "artifact_verification_policies": {
+    "default": "exact_sha256",
+    "environment/tool_versions.tsv": "checkpoint_rows_immutable_allow_unique_appended_components"
+  },
   "qc_status": {
     "panel_lock": "PASS",
     "source_curation": "PASS_45_OF_45",
@@ -73,7 +77,7 @@
   "provenance_notes": [
     "The complete primary result and other real outputs are intentionally gitignored local artifacts; their exact bytes are pinned here independently of Git.",
     "The checkpoint commit identifies the code/config state from which the current core was validated.",
+    "The checkpointed software-version rows remain immutable. Uniquely named rows may be appended for later, separate analyses without changing the recorded core runtime snapshot.",
     "Extension P values must never be merged into the locked 396-test core family."
   ]
 }
-

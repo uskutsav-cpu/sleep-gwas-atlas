@@ -1,5 +1,5 @@
 risk_id	risk	required_control	current_status	current_evidence
-R01	Core drift	Re-run byte-level core checkpoint before and after every extension stage.	FAIL_BLOCKING	CORE_CHECKPOINT_FAIL: hash environment/tool_versions.tsv: expected f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3, observed b97880daeb6f736d52dc0155c19f2cc25bb891d8ba95e2dc14b56a82a71e85e0
+R01	Core drift	Re-run byte-level core checkpoint before and after every extension stage.	PASS	CORE_CHECKPOINT_OK commit=22df92c8d6894f93c50561ae8a86acf2f48f50cb traits=45 pairs=396 result_sha256=161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077
 R02	Post-result panel selection	Panel membership/order/hash must predate extension rg.	PASS	2026-08-28T04:13:05Z
 R03	Multiple-testing leakage	Never combine the extension BH family with the immutable 396 core tests.	PASS_CONTRACT	extension_harmonization_policy.json
 R04	Weak h2	Exclude rerun h2 Z<4 from primary rg without replacement.	PENDING_REAL_H2	absent

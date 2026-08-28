@@ -25,6 +25,13 @@ The verifier fails closed if any pinned core artifact changes, if the current
 commit no longer descends from the checkpoint commit, or if the core result is
 not the exact 12 x 33 Cartesian product.
 
+Core analysis artifacts use exact SHA-256 verification. The shared
+`environment/tool_versions.tsv` registry uses a narrower append-only policy:
+every row present at the checkpoint must remain identical and in order, while
+uniquely named tools for later analyses may be appended. This preserves the
+recorded core runtime snapshot without treating unrelated new tooling as a
+change to the locked 45-trait/396-pair analysis.
+
 ## Namespace contract
 
 Extension-only configuration, manifests, logs, results, figures, provenance,

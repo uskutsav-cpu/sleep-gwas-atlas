@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -41,6 +42,34 @@ def load_tsv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle, delimiter="\t"))
 
 
+def verify_checkpoint_rows_with_unique_appends(
+    relative: str, checkpoint_commit: str
+) -> str | None:
+    """Keep checkpoint TSV rows exact while allowing new, uniquely named rows."""
+    snapshot = git("show", f"{checkpoint_commit}:{relative}", check=False)
+    if snapshot.returncode:
+        return f"checkpoint snapshot unavailable for {relative}"
+    checkpoint_reader = csv.DictReader(io.StringIO(snapshot.stdout), delimiter="\t")
+    checkpoint_rows = list(checkpoint_reader)
+    current_path = ROOT / relative
+    with current_path.open(newline="", encoding="utf-8") as handle:
+        current_reader = csv.DictReader(handle, delimiter="\t")
+        current_rows = list(current_reader)
+    if checkpoint_reader.fieldnames != current_reader.fieldnames:
+        return f"header changed for append-only artifact {relative}"
+    if current_rows[: len(checkpoint_rows)] != checkpoint_rows:
+        return f"checkpoint rows changed or were reordered in append-only artifact {relative}"
+    if len(current_rows) < len(checkpoint_rows):
+        return f"checkpoint rows were removed from append-only artifact {relative}"
+    identity = "component"
+    if identity not in (current_reader.fieldnames or []):
+        return f"append-only artifact {relative} lacks identity column {identity}"
+    identifiers = [row[identity] for row in current_rows]
+    if len(identifiers) != len(set(identifiers)):
+        return f"duplicate {identity} values in append-only artifact {relative}"
+    return None
+
+
 def main() -> None:
     checkpoint = json.loads(CHECKPOINT.read_text(encoding="utf-8"))
     checkpoint_commit = checkpoint["git_commit"]
@@ -50,10 +79,20 @@ def main() -> None:
         fail(f"HEAD does not descend from checkpoint commit {checkpoint_commit}")
 
     mismatches: list[str] = []
+    policies = checkpoint.get("artifact_verification_policies", {})
     for relative, expected in checkpoint["artifact_hashes_sha256"].items():
         path = ROOT / relative
         if not path.is_file():
             mismatches.append(f"missing {relative}")
+            continue
+        policy = policies.get(relative, policies.get("default", "exact_sha256"))
+        if policy == "checkpoint_rows_immutable_allow_unique_appended_components":
+            mismatch = verify_checkpoint_rows_with_unique_appends(relative, checkpoint_commit)
+            if mismatch:
+                mismatches.append(mismatch)
+            continue
+        if policy != "exact_sha256":
+            mismatches.append(f"unsupported verification policy for {relative}: {policy}")
             continue
         observed = sha256(path)
         if observed != expected:
@@ -105,4 +144,3 @@ if __name__ == "__main__":
         main()
     except (KeyError, ValueError, json.JSONDecodeError) as exc:
         fail(f"invalid checkpoint or core schema: {exc}")
-
