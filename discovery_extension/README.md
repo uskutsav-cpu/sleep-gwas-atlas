@@ -67,6 +67,17 @@ Both continuous and binary branches of the harmonizer have an isolated smoke
 test at `synthetic/test_panukbb_harmonization.py`. It writes only to a temporary
 directory and never creates or populates a real result path.
 
+The downstream contract is already executable once the acquisition gate is
+cleared: `11_munge_extension.sh` creates extension-only HapMap3 inputs,
+`12_h2_extension.sh` reruns observed-scale h2 and applies the fixed Z/intercept
+gate, `14_rg_extension.sh` runs the 12-by-pass-trait family, and
+`13_collate_extension_ldsc.py` writes both the primary tested family and the
+complete 1,200-pair status universe with extension-only BH FDR. The discovery
+overview is produced by `15_plot_extension.py`; its caption explicitly keeps
+pre-screen novelty categories distinct from pair-level novelty claims. The
+entire 100-trait h2, variable-size rg, FDR, exclusion-ledger, and figure path is
+exercised under `synthetic/test_extension_ldsc_collation.py` only.
+
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total
 about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety
