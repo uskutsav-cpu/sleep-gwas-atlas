@@ -524,6 +524,140 @@ def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, s
     return True, "", observed
 
 
+def validate_catlas_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["catlas_adult_v4"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "CATlas component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe CATlas component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"CATlas component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"CATlas component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"ADULT_CELL_METADATA", "CELL_TYPE_RESTRICTED_PEAKS", "CCRE_UNIVERSE"}
+    if set(components) != required:
+        return False, "CATlas manifest is not the exact required three-file bundle", observed
+
+    counts = manifest.get("source_counts", {})
+    adult_nuclei = 0
+    adult_types: set[str] = set()
+    try:
+        with gzip.open(components["ADULT_CELL_METADATA"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != ["cellID", "sample", "replicate", "logUMI", "tsse", "tissue", "cell type", "Life stage"]:
+                return False, "CATlas cell metadata header differs from the frozen schema", observed
+            for row in reader:
+                if row["Life stage"] == "Adult":
+                    adult_nuclei += 1
+                    adult_types.add(row["cell type"])
+        if adult_nuclei != counts.get("adult_nuclei") or len(adult_types) != counts.get("adult_cell_types"):
+            return False, "CATlas adult nuclei or cell-type counts differ from the release pin", observed
+    except (OSError, UnicodeError, KeyError) as exc:
+        return False, f"CATlas cell metadata is unreadable: {exc}", observed
+
+    all_ccres = adult_ccres = 0
+    try:
+        with gzip.open(components["CCRE_UNIVERSE"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            expected_header = [
+                "#Chromosome", "Start", "End", "Class", "Present in fetal tissues",
+                "Present in adult tissues", "CRE module",
+            ]
+            if reader.fieldnames != expected_header:
+                return False, "CATlas cCRE-universe header differs from the frozen schema", observed
+            for row in reader:
+                chromosome = row["#Chromosome"]
+                start, end = int(row["Start"]), int(row["End"])
+                if not chromosome.startswith("chr") or start < 0 or end - start != 400:
+                    return False, "CATlas cCRE universe contains an invalid interval", observed
+                if row["Present in adult tissues"] not in {"yes", "no"}:
+                    return False, "CATlas cCRE universe contains an invalid adult-presence label", observed
+                all_ccres += 1
+                adult_ccres += row["Present in adult tissues"] == "yes"
+        if all_ccres != counts.get("all_life_stage_ccres") or adult_ccres != counts.get("adult_present_ccres"):
+            return False, "CATlas cCRE-universe counts differ from the release pin", observed
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"CATlas cCRE universe is unreadable: {exc}", observed
+
+    selected = manifest.get("selected_cells", [])
+    selected_domains = [str(row.get("domain", "")) for row in selected]
+    selected_labels = [str(row.get("cell_type", "")) for row in selected]
+    selected_metadata = [str(row.get("metadata_cell_type", "")) for row in selected]
+    selected_members = [str(row.get("archive_member", "")) for row in selected]
+    required_domains = set(policy["cell_types"]["required_domains"])
+    if (
+        len(selected) != spec["expected_selected_cells"]
+        or set(selected_domains) != required_domains
+        or any(selected_domains.count(domain) != spec["selected_cells_by_domain"][domain] for domain in required_domains)
+        or len(selected_labels) != len(set(selected_labels))
+        or len(selected_metadata) != len(set(selected_metadata))
+        or len(selected_members) != len(set(selected_members))
+        or not set(selected_metadata).issubset(adult_types)
+    ):
+        return False, "CATlas pre-result cell selection or four-domain map differs from its pin", observed
+
+    archive_rows = 0
+    restricted_intervals: set[tuple[str, str, str]] = set()
+    selected_peak_rows: dict[str, int] = {}
+    try:
+        with zipfile.ZipFile(components["CELL_TYPE_RESTRICTED_PEAKS"]) as archive:
+            members = [member for member in archive.infolist() if member.filename.endswith(".bed.gz")]
+            member_names = {member.filename for member in members}
+            if len(members) != counts.get("peak_archive_members") or len(member_names) != len(members):
+                return False, "CATlas peak archive is not the exact 111-member family", observed
+            if not set(selected_members).issubset(member_names):
+                return False, "CATlas selected cell map names an absent peak member", observed
+            for member in members:
+                member_rows = 0
+                payload = gzip.decompress(archive.read(member)).decode("ascii")
+                for line in payload.splitlines():
+                    fields = line.split("\t")
+                    if len(fields) != 3:
+                        return False, f"CATlas peak member has an invalid row: {member.filename}", observed
+                    chromosome, start_text, end_text = fields
+                    start, end = int(start_text), int(end_text)
+                    if not chromosome.startswith("chr") or start < 0 or end - start != 400:
+                        return False, f"CATlas peak member has an invalid interval: {member.filename}", observed
+                    member_rows += 1
+                    archive_rows += 1
+                    restricted_intervals.add((chromosome, start_text, end_text))
+                if member.filename in set(selected_members):
+                    selected_peak_rows[member.filename] = member_rows
+    except (OSError, UnicodeError, ValueError, zipfile.BadZipFile) as exc:
+        return False, f"CATlas restricted-peak archive is unreadable: {exc}", observed
+    if (
+        archive_rows != counts.get("cell_type_restricted_assignments")
+        or len(restricted_intervals) != counts.get("cell_type_restricted_ccres")
+        or len(selected_peak_rows) != len(selected)
+    ):
+        return False, "CATlas restricted-peak assignment or unique-interval counts differ from the release pin", observed
+
+    observed.update({
+        "adult_nuclei": adult_nuclei, "adult_cell_types": len(adult_types),
+        "all_life_stage_ccres": all_ccres, "adult_present_ccres": adult_ccres,
+        "peak_archive_members": counts["peak_archive_members"],
+        "cell_type_restricted_assignments": archive_rows,
+        "cell_type_restricted_ccres": len(restricted_intervals),
+        "selected_cells": len(selected),
+        "selected_cells_by_domain": {
+            domain: selected_domains.count(domain) for domain in sorted(required_domains)
+        },
+        "selected_peak_rows": selected_peak_rows,
+    })
+    return True, "", observed
+
+
 def validate_public_pathway_bundle(
     root: Path, policy: dict[str, object],
 ) -> tuple[bool, str, dict[str, object]]:
@@ -923,6 +1057,8 @@ def main() -> int:
     pchic_source_id = policy["pchic_2016"]["source_id"]
     fuma_ready, fuma_blocker, fuma_validation = validate_fuma_bundle(root, policy)
     fuma_source_id = policy["fuma_scrna"]["source_id"]
+    catlas_ready, catlas_blocker, catlas_validation = validate_catlas_bundle(root, policy)
+    catlas_source_id = policy["catlas_adult_v4"]["source_id"]
     pathway_ready, pathway_blocker, pathway_validation = validate_public_pathway_bundle(root, policy)
     public_pathway_source_ids = set(policy["public_pathway_sources"]["source_ids"])
     causal_ready, causal_blocker, causal_validation = validate_causal_runtime_bundle(root, policy)
@@ -967,6 +1103,9 @@ def main() -> int:
             elif identity == fuma_source_id and not fuma_ready:
                 ready = False
                 blocker = fuma_blocker
+            elif identity == catlas_source_id and not catlas_ready:
+                ready = False
+                blocker = catlas_blocker
             elif identity in public_pathway_source_ids and not pathway_ready:
                 ready = False
                 blocker = pathway_blocker
@@ -1014,6 +1153,7 @@ def main() -> int:
         "abc_source_bundle": abc_validation,
         "pchic_source_bundle": pchic_validation,
         "fuma_scrna_source_bundle": fuma_validation,
+        "catlas_adult_source_bundle": catlas_validation,
         "public_pathway_source_bundle": pathway_validation,
         "causal_runtime_bundle": causal_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,

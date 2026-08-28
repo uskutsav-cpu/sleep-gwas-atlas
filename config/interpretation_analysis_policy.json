@@ -203,6 +203,28 @@
     "multiple_testing_family": "All cell types across the eight prespecified matrices for one trait and the FUMA_SCRNA MAGMA_Celltyping method",
     "claim_limit": "A positive MAGMA gene-property association identifies cell-type expression correlated with polygenic association after conditioning on average expression; it does not prove that the cell type or any expressed gene is causal, and mouse vascular evidence is explicitly cross-species"
   },
+  "catlas_adult_v4": {
+    "source_id": "SCATAC_MULTI_DOMAIN",
+    "component_manifest": "config/interpretation_catlas_adult_v4.json",
+    "component_manifest_sha256": "445e3ec18c0ec495568f2348c0c3d91f3695c7585307f7cb15077cd6feead5c1",
+    "expected_selected_cells": 43,
+    "selected_cells_by_domain": {
+      "brain": 10,
+      "immune": 9,
+      "metabolic": 9,
+      "vascular": 15
+    },
+    "gwas_path_template": "data/harmonized/{trait_id}.harmonized.tsv.gz",
+    "analysis_reference_prefix": "work/causal_reference/g1000_eur_hm3",
+    "variant_cache_path": "work/interpretation_automatic/catlas_adult_v4/fixed_variant_universe.tsv.gz",
+    "variant_cache_provenance_path": "work/interpretation_automatic/catlas_adult_v4/fixed_variant_universe.provenance.json",
+    "instrument_p_threshold": 5e-8,
+    "minimum_maf": 0.01,
+    "ld_pruning_r2": 0.1,
+    "ld_pruning_window_kb": 1000,
+    "multiple_testing_family": "All 43 prespecified adult CATlas cell types across four domains for one trait",
+    "claim_limit": "Enrichment of independent genome-wide-significant variants in cell-type-restricted accessible chromatin is a coarse annotation, not evidence that the cell type, regulatory element, variant, or nearby gene is causal"
+  },
   "cell_types": {
     "required_strategies": [
       "stratified_LDSC",

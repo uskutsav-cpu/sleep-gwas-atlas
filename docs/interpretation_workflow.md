@@ -74,6 +74,19 @@ the compiler identity and executable checksum are pinned. Vascular matrices
 originate from mouse vascular studies already mapped by FUMA to human Ensembl
 identifiers, so cross-species interpretation remains an explicit limitation.
 
+The complementary chromatin-accessibility strategy is frozen to CATlas
+Mendeley Data release v4 (`10.17632/yv4fzv6cnm.4`). Its three-file source
+bundle contains 615,998 adult nuclei across 111 source cell types, 890,130
+adult-present cCREs, and 111 cell-type-restricted peak sets. Exactly 43 adult
+cell types were selected before enrichment results: 10 brain, 9 immune, 9
+metabolic, and 15 vascular. For each trait, a one-sided hypergeometric test
+compares genome-wide-significant variants with a fixed common, autosomal,
+MAF-at-least-0.01, LD-pruned HapMap3 EUR universe, conditioning the background
+on adult cCRE overlap. The GRCh37 reference variants are uniquely lifted to
+GRCh38 before interval overlap, zero-signal families are retained, and BH is
+applied across all 43 cells per trait. This coarse annotation cannot establish
+that a cell type, element, variant, or nearby gene is causal.
+
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
 The complete null family remains auditable through coverage. Promoter,
@@ -138,13 +151,16 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, 17 of 20 interpretation source families are ready: GENCODE
+repository state, 18 of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
 2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
-FUMA single-cell/MAGMA bundle, the Reactome v97 and GO 2026-08-05 pathway
-families, the official MSigDB v2026.1 human collection, the FUMA-prepared
-MSigDB v2023.1Hs MAGMA gene-set file, the within-workflow regulatory cell-type
-layer, and all five causal estimator families. The compressed
+FUMA single-cell/MAGMA bundle, the immutable CATlas adult scATAC bundle, the
+Reactome v97 and GO 2026-08-05 pathway families, the official MSigDB v2026.1
+human collection, the FUMA-prepared MSigDB v2023.1Hs MAGMA gene-set file, the
+within-workflow regulatory cell-type layer, and all five causal estimator
+families. LDSC-SEG remains blocked on its requester-pays official source, and
+the molecular-QTL-derived cell strategy remains correctly blocked on upstream
+molecular artifacts. The compressed
 official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
 not materialized wholesale. Causal LD work uses a disk-bounded streamed subset;
@@ -152,8 +168,7 @@ the current local derivation retained 1,206,400 exact allele-matched HapMap3
 variants in 232 MiB and passed a full PLINK allele-frequency read over all 503
 reference samples. Five HapMap3 IDs had allele mismatches and 10,906 were absent
 from the reference, all recorded in immutable derivation provenance.
-full MAGMA materialization remains guarded until at least 4,674,439,651 bytes
+Full MAGMA materialization remains guarded until at least 4,674,439,651 bytes
 are free and requires an explicit large-extraction acknowledgement.
-Four of six upstream canonical inputs do not yet exist, and the remaining
-external releases or runtimes still require exact pre-result curation. No
-downstream task result has been generated or claimed.
+Four of six upstream canonical inputs do not yet exist. No downstream task
+result has been generated or claimed.

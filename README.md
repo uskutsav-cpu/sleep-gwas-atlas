@@ -114,11 +114,12 @@ The regulatory, cell-type, pathway, bidirectional-MR, graph-integration, and
 nine-family robustness layers now use a second pre-result task lock. Complete
 null analyses are preserved in a checksum-bound coverage ledger; they never
 require a fabricated regulatory element, cell type, pathway, causal claim, or
-gene. The current executable regulatory family pins GENCODE v26 promoters,
-SCREEN Registry V4 enhancer/open-chromatin contexts, HOCOMOCO H14CORE motifs,
-and the 131-biosample Nasser et al. ABC enhancer-gene atlas; remaining external
-resources stay blocked until their exact release, bytes, and SHA256 are
-curated. See `docs/interpretation_workflow.md`.
+gene. Eighteen of twenty interpretation source families are now locally ready,
+including GENCODE v26, SCREEN Registry V4, HOCOMOCO H14CORE, Nasser ABC,
+Javierre PCHi-C, the FUMA scRNA/MAGMA bundle, CATlas adult scATAC, four pathway
+resources, and all five causal runtimes. LDSC-SEG remains blocked on its
+requester-pays official source; the QTL-derived cell strategy correctly waits
+for upstream molecular artifacts. See `docs/interpretation_workflow.md`.
 
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the

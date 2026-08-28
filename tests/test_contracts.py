@@ -2198,6 +2198,63 @@ class PanelContractTests(unittest.TestCase):
             self.assertEqual(output.read_bytes(), text)
             self.assertEqual(records[0]["sha256"], hashlib.sha256(text).hexdigest())
 
+    def test_catlas_adult_source_and_enrichment_design_are_pre_result_locked(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        spec = policy["catlas_adult_v4"]
+        manifest_path = ROOT / spec["component_manifest"]
+        self.assertEqual(hashlib.sha256(manifest_path.read_bytes()).hexdigest(), spec["component_manifest_sha256"])
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(manifest["source_release"], "Mendeley_Data_yv4fzv6cnm_v4_2022-01-24")
+        self.assertEqual(manifest["data_doi"], "10.17632/yv4fzv6cnm.4")
+        self.assertEqual(
+            manifest["source_counts"],
+            {
+                "adult_nuclei": 615998,
+                "adult_cell_types": 111,
+                "adult_tissues": 30,
+                "all_life_stage_ccres": 1154611,
+                "adult_present_ccres": 890130,
+                "cell_type_restricted_ccres": 435142,
+                "cell_type_restricted_assignments": 1091805,
+                "peak_archive_members": 111,
+            },
+        )
+        selected = manifest["selected_cells"]
+        self.assertEqual(len(selected), 43)
+        observed_domains = {
+            domain: sum(row["domain"] == domain for row in selected)
+            for domain in policy["cell_types"]["required_domains"]
+        }
+        self.assertEqual(observed_domains, {"brain": 10, "immune": 9, "metabolic": 9, "vascular": 15})
+        self.assertEqual(observed_domains, spec["selected_cells_by_domain"])
+        for field in ("cell_type", "metadata_cell_type", "archive_member"):
+            values = [row[field] for row in selected]
+            self.assertEqual(len(values), len(set(values)))
+        design = manifest["enrichment_design"]
+        self.assertEqual(spec["instrument_p_threshold"], 5e-8)
+        self.assertEqual(spec["minimum_maf"], 0.01)
+        self.assertEqual(spec["ld_pruning_r2"], 0.1)
+        self.assertEqual(spec["ld_pruning_window_kb"], 1000)
+        self.assertEqual(design["test"], "one-sided hypergeometric overrepresentation")
+        self.assertEqual(design["effect"], "observed_over_expected_overlap_ratio")
+        self.assertIn("BH FDR across all 43 selected cells", design["multiple_testing"])
+        self.assertIn("not evidence", spec["claim_limit"])
+        with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
+            source = next(
+                row for row in csv.DictReader(handle, delimiter="\t")
+                if row["source_id"] == spec["source_id"]
+            )
+        peak_component = next(
+            row for row in manifest["components"] if row["component_id"] == "CELL_TYPE_RESTRICTED_PEAKS"
+        )
+        self.assertEqual(source["source_status"], "SOURCE_VERIFIED")
+        self.assertEqual(source["exact_release"], manifest["source_release"])
+        self.assertEqual(int(source["expected_bytes"]), peak_component["bytes"])
+        self.assertEqual(source["expected_sha256"], peak_component["sha256"])
+        preflight = (ROOT / "scripts/74_interpretation_preflight.py").read_text(encoding="utf-8")
+        self.assertIn("def validate_catlas_bundle", preflight)
+        self.assertIn("catlas_ready, catlas_blocker, catlas_validation", preflight)
+
     def test_magma_pvalue_materializer_and_gsa_parser_are_fail_closed(self):
         gene_module = load_numbered_script("90_prepare_magma_gene_results.py", "magma_genes")
         task_module = load_numbered_script("91_run_fuma_scrna_task.py", "magma_cell_task")
