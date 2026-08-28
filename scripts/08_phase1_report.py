@@ -101,13 +101,40 @@ def main():
     if os.path.exists(args.rg):
         correlation = pd.read_csv(args.rg, sep="\t")
         lines.append(f"- Parsed sleep-disease pairs: **{len(correlation)}**")
+        primary = correlation
+        if "analysis_tier" in correlation:
+            primary = correlation.loc[
+                correlation["analysis_tier"].eq("PRIMARY_PHASE1")
+            ].copy()
+            sensitivity_n = int(
+                correlation["analysis_tier"].eq("QC_FAILED_SENSITIVITY").sum()
+            )
+            lines.append(
+                f"- Primary Phase 1 pairs: **{len(primary)}**; "
+                f"h2-QC-failed sensitivity pairs: **{sensitivity_n}**"
+            )
         if "fdr" in correlation:
-            lines.append(f"- FDR < 0.05: **{int((correlation['fdr'] < 0.05).sum())}**")
+            lines.append(
+                "- Primary pairs with locked-396-family FDR < 0.05: "
+                f"**{int((primary['fdr'] < 0.05).sum())}**"
+            )
+        if "fdr_primary_phase1" in primary:
+            lines.append(
+                "- Primary pairs with primary-372-family FDR < 0.05: "
+                f"**{int((primary['fdr_primary_phase1'] < 0.05).sum())}**"
+            )
         if "rg" in correlation:
             lines.extend(["", "Strongest positive estimates (descriptive only):", ""])
-            lines.append(dataframe_to_markdown(table_subset(correlation.sort_values("rg", ascending=False).head(5), ["sleep_trait", "disease_trait", "rg", "se", "p", "fdr"])))
+            lines.append(dataframe_to_markdown(table_subset(primary.sort_values("rg", ascending=False).head(5), ["sleep_trait", "disease_trait", "rg", "se", "p", "fdr"])))
             lines.extend(["", "Strongest negative estimates (descriptive only):", ""])
-            lines.append(dataframe_to_markdown(table_subset(correlation.sort_values("rg", ascending=True).head(5), ["sleep_trait", "disease_trait", "rg", "se", "p", "fdr"])))
+            lines.append(dataframe_to_markdown(table_subset(primary.sort_values("rg", ascending=True).head(5), ["sleep_trait", "disease_trait", "rg", "se", "p", "fdr"])))
+        if "analysis_tier" in correlation and len(primary) != len(correlation):
+            lines.extend([
+                "",
+                "QC-failed sensitivity rows are retained to complete the locked "
+                "396-pair family, but are excluded from primary inference. Their "
+                "trait-level h2 failure reasons are stored in the rg table.",
+            ])
     else:
         lines.append(f"_Genetic-correlation table not found: `{args.rg}`._")
     lines.append("")

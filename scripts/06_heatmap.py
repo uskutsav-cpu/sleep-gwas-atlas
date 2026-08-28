@@ -88,17 +88,30 @@ def main():
                          values="rg", aggfunc="first")
     fdr = df.pivot_table(index="sleep_trait", columns="disease_trait",
                          values="fdr", aggfunc="first").reindex_like(mat)
+    if "analysis_tier" in df:
+        tier = df.pivot_table(
+            index="sleep_trait", columns="disease_trait",
+            values="analysis_tier", aggfunc="first",
+        ).reindex_like(mat)
+    else:
+        tier = pd.DataFrame("PRIMARY_PHASE1", index=mat.index, columns=mat.columns)
 
     if mat.empty or mat.shape[1] == 0:
         sys.exit("ERROR: rg table did not yield any sleep x disease cells")
 
     # Preserve the catalog order for rows and group disease columns by domain.
     sleep_order = [trait for trait in cfg.index if trait in mat.index and dom[trait] == "sleep"]
-    mat, fdr = mat.reindex(sleep_order), fdr.reindex(sleep_order)
+    mat, fdr, tier = (
+        mat.reindex(sleep_order), fdr.reindex(sleep_order), tier.reindex(sleep_order)
+    )
     cols = sorted(mat.columns,
                   key=lambda c: (DOMAIN_ORDER.index(dom.get(c, "cancer"))
                                  if dom.get(c) in DOMAIN_ORDER else 99, c))
-    mat, fdr = mat[cols], fdr[cols]
+    mat, fdr, tier = mat[cols], fdr[cols], tier[cols]
+    qc_failed_columns = {
+        column for column in tier.columns
+        if tier[column].eq("QC_FAILED_SENSITIVITY").any()
+    }
 
     vmax = float(np.nanmax(np.abs(mat.values))) if mat.size else 1.0
     vmax = max(vmax, 0.1)
@@ -118,7 +131,10 @@ def main():
     cell_fs = 6 if n_cols > 30 else 8
 
     ax.set_xticks(range(n_cols))
-    ax.set_xticklabels([lab.get(c, c) for c in mat.columns],
+    ax.set_xticklabels([
+        f"{lab.get(c, c)}†" if c in qc_failed_columns else lab.get(c, c)
+        for c in mat.columns
+    ],
                        rotation=55, ha="right", fontsize=lbl_fs)
     ax.set_yticks(range(n_rows))
     ax.set_yticklabels([lab.get(r, r) for r in mat.index], fontsize=lbl_fs)
@@ -130,11 +146,14 @@ def main():
             if pd.isna(v):
                 ax.text(j, i, "·", ha="center", va="center", color="0.6", fontsize=cell_fs)
                 continue
-            st = stars(fdr.values[i, j])
+            sensitivity = tier.values[i, j] == "QC_FAILED_SENSITIVITY"
+            st = "" if sensitivity else stars(fdr.values[i, j])
             if a.annot == "rg":
-                txt = f"{v:.2f}\n{st}" if n_cols <= 40 else st
+                txt = f"{v:.2f}\nQC" if sensitivity else (
+                    f"{v:.2f}\n{st}" if n_cols <= 40 else st
+                )
             elif a.annot == "stars":
-                txt = st
+                txt = "QC" if sensitivity else st
             else:
                 txt = ""
 
@@ -157,8 +176,9 @@ def main():
 
     cb = fig.colorbar(im, ax=ax, shrink=0.8, pad=0.015)
     cb.set_label("genetic correlation ($r_g$)", fontsize=9)
+    qc_note = "  †/QC = h²-QC-failed sensitivity only" if qc_failed_columns else ""
     ax.set_title("Sleep/circadian × disease genetic correlation (LDSC)\n"
-                 "* FDR<0.05  ** FDR<0.01  *** FDR<0.001",
+                 f"* FDR<0.05  ** FDR<0.01  *** FDR<0.001{qc_note}",
                  fontsize=10, pad=10)
 
     fig.tight_layout()

@@ -20,5 +20,7 @@ Current curation records:
   releases and local checkpoints.
 - `public_immune_gwas_acquisition.md` — verified public immune source releases
   and local checkpoints.
+- `public_substitution_phase1_results.md` — harmonization, h² QC, and locked
+  correlation-family results for the six public EUR substitutions.
 - `aging_source_queue.md` — primary-source discoveries awaiting their own
   download and file-level Phase 0 checks.

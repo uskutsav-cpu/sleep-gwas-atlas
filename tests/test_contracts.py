@@ -1229,6 +1229,67 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(rows.iloc[0]["sleep_trait"], "snoring")
         self.assertEqual(rows.iloc[0]["disease_trait"], "bmi")
 
+    def test_complete_rg_merge_labels_qc_failed_sensitivity(self):
+        with MANIFEST.open(newline="", encoding="utf-8") as handle:
+            panel = list(csv.DictReader(handle, delimiter="\t"))
+        sleeps = [row["trait_id"] for row in panel if row["domain"] == "sleep"]
+        diseases = [row["trait_id"] for row in panel if row["domain"] != "sleep"]
+        failed = diseases[-1]
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            h2 = directory / "h2.tsv"
+            primary = directory / "primary.tsv"
+            sensitivity = directory / "sensitivity.tsv"
+            output = directory / "out.tsv"
+            with h2.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(
+                    handle, fieldnames=["trait", "verdict", "qc_reason"],
+                    delimiter="\t",
+                )
+                writer.writeheader()
+                for row in panel:
+                    is_failed = row["trait_id"] == failed
+                    writer.writerow({
+                        "trait": row["trait_id"],
+                        "verdict": "DROP" if is_failed else "PASS",
+                        "qc_reason": "fixture_failure" if is_failed else "pass",
+                    })
+            fields = ["sleep_trait", "disease_trait", "rg", "se", "p", "fdr"]
+            for path, selected in [
+                (primary, [disease for disease in diseases if disease != failed]),
+                (sensitivity, [failed]),
+            ]:
+                with path.open("w", newline="", encoding="utf-8") as handle:
+                    writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t")
+                    writer.writeheader()
+                    for sleep in sleeps:
+                        for disease in selected:
+                            writer.writerow({
+                                "sleep_trait": sleep, "disease_trait": disease,
+                                "rg": 0.1, "se": 0.05, "p": 0.01, "fdr": 0.02,
+                            })
+            result = subprocess.run(
+                [
+                    sys.executable, str(ROOT / "scripts" / "23_merge_rg_families.py"),
+                    "--config", str(MANIFEST), "--h2", str(h2),
+                    "--primary", str(primary), "--sensitivity", str(sensitivity),
+                    "--out", str(output),
+                ],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            with output.open(newline="", encoding="utf-8") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(rows), 396)
+        failed_rows = [row for row in rows if row["disease_trait"] == failed]
+        self.assertEqual(len(failed_rows), 12)
+        self.assertTrue(all(
+            row["analysis_tier"] == "QC_FAILED_SENSITIVITY"
+            and row["interpretation_status"] == "EXCLUDED_FROM_PRIMARY_INFERENCE"
+            and row["disease_h2_qc_reason"] == "fixture_failure"
+            for row in failed_rows
+        ))
+
     def test_acceptance_audit_distinguishes_contract_from_science(self):
         result = subprocess.run(
             [

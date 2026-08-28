@@ -24,5 +24,5 @@ published HTTPS byte count before registering local MD5 and SHA-256 values.
 
 All six sources are GRCh38 and use checksum-pinned, predeclared hg38-to-hg19
 liftover plans for the EUR LDSC workflow. Source and schema readiness are now
-45/45. The remaining work is harmonization, LDSC QC, and downstream analysis;
-these are computational gates, not source-access blockers.
+45/45. Harmonization and LDSC h² are also complete for all six replacements;
+the remaining work is downstream analysis, not source access.

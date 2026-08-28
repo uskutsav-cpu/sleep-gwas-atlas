@@ -36,12 +36,15 @@ documented in `docs/remaining_source_access_blockers.md` and
 `docs/public_eur_substitution_plan.md`. The pipeline did not submit a request,
 sign a data-use agreement, or affirm a download checkbox on the user's behalf.
 
-Thirty-nine registered sources have been exercised locally end to end. All 12
-sleep traits and 27 non-sleep traits pass the predefined LDSC h² gate, and the
-complete currently available 12 × 27 family contains 324 unique correlations.
-The six new substitutes have passed full acquisition and source-schema audits
-and are materialized, but still require harmonization, munging, and h² QC before
-the locked 396-pair family can be recomputed.
+All 45 registered sources have now been exercised locally through
+harmonization, HapMap3 munging, and h² estimation. All 12 sleep traits and 31
+non-sleep traits pass the predefined LDSC h² gate; T2D fails the intercept gate
+and melanoma fails the h²-Z gate. The locked 396-pair sleep×non-sleep family is
+complete as 372 primary Phase 1 pairs plus 24 explicitly labelled
+`QC_FAILED_SENSITIVITY` pairs. There are 153 primary associations at FDR<0.05
+when correction is applied over all 396 tests (155 under the primary-only
+372-test correction). Sensitivity rows are retained for completeness but are
+excluded from primary inference.
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

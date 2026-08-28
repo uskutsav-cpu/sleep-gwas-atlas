@@ -21,14 +21,15 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 | Reproducible Phase 0/1 architecture | Complete | Granular readiness, pinned runtimes, Snakemake entry points, CI, negative contract tests, a checksum-pinned GRCh38-to-GRCh37 point-liftover path, and a full synthetic 396-pair smoke test are implemented. |
 | Source curation | Complete | 45/45 selected sources are registry-verified. Five official FinnGen R9 Finnish/European endpoints and the Burren 2024 NFE telomere stratum explicitly replace six access/ancestry blockers while preserving locked trait IDs and recording phenotype/power differences. |
 | Source schemas | Complete | All 45 literal, trait-specific allele/effect/statistic mappings are verified. The six replacement archives passed exact bytes/checksum, gzip CRC, literal-header, and complete audits totaling 115,865,922 rows; all six have pinned hg38-to-hg19 plans. |
-| Harmonization | Blocked | 39/45 traits have local harmonization QC ledgers. The six newly materialized substitutes (`ms`, `asthma`, `t2d`, `cad`, `telomere_length`, and `melanoma`) still require full harmonization and munging. |
-| LDSC h2 and Phase 1 | Blocked | All 12 sleep traits and 27 non-sleep traits pass h² QC. Their complete 324-pair sleep×non-sleep family is available locally; the final six h² results and remaining 72 pairs are pending. |
+| Harmonization | Complete | All 45 traits have real filter-by-filter harmonization ledgers and canonical HapMap3 LDSC inputs. The six large GRCh38 replacements use checksum-bound streaming HapMap3 prefilters before the registered point liftover, while their complete raw sources remain retained for locus-level work. |
+| LDSC h2 and Phase 1 | Complete with exclusions | All 45 h² runs are present. Forty-three traits pass the predefined Z/intercept gate; T2D is dropped for intercept 1.315 (>1.20) and melanoma for h² Z 3.57 (<4). The exact 396 sleep×non-sleep pairs are present as 372 primary plus 24 clearly labelled QC-failed sensitivity rows. The locked-family correction yields 153 primary FDR<0.05 pairs. MS and melanoma liability h² exceed one and remain explicit interpretation/robustness warnings rather than being hidden. |
 | Full covariance and downstream science | Blocked | MiXeR, LAVA, shared-locus discovery, Genomic SEM, factor GWAS, fine-mapping, colocalization, molecular/regulatory/cell/pathway work, and MR await real Phase 0/1 inputs. |
 | Integrated atlas and robustness | Blocked | Canonical evidence tables and robustness outputs do not yet exist. |
 | Immutable release | Blocked | `releases/atlas-v1.0` must be produced only after every scientific gate passes. |
 
-The immediate critical path is six-trait harmonization → munging → h² QC → the
-remaining 72 sleep×non-sleep correlations. The repository's larger remote experimental branch contains a
+The immediate critical path is the complete 45-trait genetic/sampling
+covariance structure required by Genomic SEM, followed by the prespecified
+downstream modules. The repository's larger remote experimental branch contains a
 broader 149-trait scope, so it must not be merged wholesale. Evidence may be
 harvested from it only when it matches one of the locked 45 selected phenotype
 definitions and survives primary-source verification.
