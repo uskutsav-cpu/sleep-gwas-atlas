@@ -24,6 +24,7 @@ Usage::
 import argparse
 import gzip
 import hashlib
+import json
 import os
 import re
 import sys
@@ -59,7 +60,12 @@ RSID = re.compile(r"rs[0-9]+$", re.IGNORECASE)
 ALIASES = {
     "SNP": ["snp", "rsid", "rs_id", "rsids", "markername", "variant_id", "id", "marker"],
     "CHR": ["chr", "chrom", "chromosome", "#chrom", "hg19chr"],
-    "BP": ["bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19"],
+    "BP": [
+        "bp", "pos", "position", "base_pair_location", "bp_hg19", "pos_hg19",
+        # Graham et al. 2021 GLGC European releases explicitly label this
+        # build-37 coordinate POS_b37 in their official README and headers.
+        "pos_b37",
+    ],
     "A1": [
         "a1", "effect_allele", "effec_allele", "ea", "allele1",
         "tested_allele", "alt",
@@ -248,6 +254,10 @@ def main():
         type=int,
         help="Registered byte count for the liftover chain.",
     )
+    parser.add_argument(
+        "--prefilter-provenance",
+        help="Provenance JSON from a registered bounded-memory source prefilter.",
+    )
     args = parser.parse_args()
 
     if bool(args.variant_map) != bool(args.variant_map_strategy):
@@ -262,6 +272,37 @@ def main():
 
     if not os.path.isfile(args.infile):
         fail(f"input file not found: {args.infile}")
+
+    prefilter_provenance = None
+    if args.prefilter_provenance:
+        if not os.path.isfile(args.prefilter_provenance):
+            fail(f"prefilter provenance not found: {args.prefilter_provenance}")
+        with open(args.prefilter_provenance, encoding="utf-8") as handle:
+            prefilter_provenance = json.load(handle)
+        required_prefilter_fields = {
+            "strategy", "input_path", "input_bytes", "input_sha256",
+            "allowlist_path", "allowlist_count", "allowlist_sha256",
+            "source_rows", "retained_rows", "output_path", "output_bytes",
+            "output_sha256",
+        }
+        missing_prefilter_fields = required_prefilter_fields.difference(
+            prefilter_provenance
+        )
+        if missing_prefilter_fields:
+            fail(
+                "prefilter provenance is missing fields: "
+                f"{sorted(missing_prefilter_fields)}"
+            )
+        if prefilter_provenance["strategy"] != "HAPMAP3_RSID_ALLOWLIST":
+            fail("unsupported prefilter provenance strategy")
+        if int(prefilter_provenance["output_bytes"]) != os.path.getsize(args.infile):
+            fail("prefilter output byte count does not match its provenance")
+        if prefilter_provenance["output_sha256"].lower() != sha256(args.infile):
+            fail("prefilter output SHA-256 does not match its provenance")
+        if int(prefilter_provenance["retained_rows"]) > int(
+            prefilter_provenance["source_rows"]
+        ):
+            fail("prefilter retained row count exceeds source row count")
 
     config = pd.read_csv(args.config, sep="\t", dtype=str)
     trait_rows = config.loc[config["trait_id"] == args.trait]
@@ -662,12 +703,35 @@ def main():
         )
         report.write(f"infile\t{os.path.abspath(args.infile)}\n")
         report.write(f"infile_sha256\t{sha256(args.infile)}\n")
+        report.write(
+            f"prefilter_strategy\t"
+            f"{prefilter_provenance['strategy'] if prefilter_provenance else 'not supplied'}\n"
+        )
+        if prefilter_provenance:
+            report.write(
+                f"prefilter_source_rows\t{prefilter_provenance['source_rows']}\n"
+            )
+            report.write(
+                f"prefilter_retained_rows\t{prefilter_provenance['retained_rows']}\n"
+            )
+            report.write(
+                f"prefilter_source_sha256\t{prefilter_provenance['input_sha256']}\n"
+            )
+            report.write(
+                f"prefilter_allowlist_sha256\t"
+                f"{prefilter_provenance['allowlist_sha256']}\n"
+            )
         report.write(f"rows_in\t{n_input}\n")
         report.write("\nstep\tdropped\tremaining\n")
         for reason, removed, remaining in steps:
             report.write(f"{reason}\t{removed}\t{remaining}\n")
         report.write(f"\nrows_out\t{len(out)}\n")
         report.write(f"pct_retained\t{100 * len(out) / n_input:.2f}\n")
+        if prefilter_provenance:
+            report.write(
+                f"pct_retained_from_source\t"
+                f"{100 * len(out) / int(prefilter_provenance['source_rows']):.2f}\n"
+            )
 
     log(f"kept {len(out):,} / {n_input:,} ({100 * len(out) / n_input:.1f}%)")
     log(f"wrote {output_path}")

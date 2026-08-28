@@ -3,6 +3,7 @@ import gzip
 import hashlib
 import importlib.util
 import math
+import json
 import os
 from pathlib import Path
 import shutil
@@ -800,9 +801,12 @@ class PanelContractTests(unittest.TestCase):
             for name in ["02_munge.sh", "_common.sh"]:
                 shutil.copy2(ROOT / "scripts" / name, root / "scripts" / name)
             (root / "config" / "analysis_panel.tsv").write_text(
-                "atlas_version\ttrait_id\traw_file\tbuild\tsource_status\tancestry\n"
-                "atlas-v1.0\tfixture\tfixture.txt.gz\thg19\tSOURCE_VERIFIED\tEUR\n"
-                "atlas-v1.0\tmapped_fixture\tmapped.txt.gz\tUNRESOLVED\tSOURCE_VERIFIED\tEUR\n",
+                "atlas_version\ttrait_id\tsource_id\traw_file\tbuild\t"
+                "source_status\tancestry\n"
+                "atlas-v1.0\tfixture\tfixture_source\tfixture.txt.gz\thg19\t"
+                "SOURCE_VERIFIED\tEUR\n"
+                "atlas-v1.0\tmapped_fixture\tmapped_source\tmapped.txt.gz\t"
+                "UNRESOLVED\tSOURCE_VERIFIED\tEUR\n",
                 encoding="utf-8",
             )
             (root / "config" / "variant_mapping_plans.tsv").write_text(
@@ -881,6 +885,68 @@ class PanelContractTests(unittest.TestCase):
         script = (ROOT / "scripts" / "01_harmonize.py").read_text(encoding="utf-8")
         self.assertIn('read_kwargs["usecols"] = selected_source_columns', script)
         self.assertIn('raw.rename(columns=source_to_standard, inplace=True)', script)
+        self.assertIn('"pos_b37"', script)
+
+    def test_streaming_hm3_prefilter_preserves_selected_source_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "source.tsv.gz"
+            allowlist = directory / "hm3.tsv"
+            output = directory / "filtered.tsv.gz"
+            provenance = directory / "filtered.provenance.json"
+            payload = (
+                b"rsID\tvalue\tnote\n"
+                b"rs1\t1.00\tkeep exact text\n"
+                b"rs2\t2e-3\tdrop\n"
+                b"RS3\tNA\tkeep case-insensitively\n"
+            )
+            with gzip.open(source, "wb") as handle:
+                handle.write(payload)
+            allowlist.write_text("SNP\tA1\tA2\nrs1\tA\tG\nrs3\tC\tT\n", encoding="utf-8")
+            source_bytes = source.stat().st_size
+            source_sha = hashlib.sha256(source.read_bytes()).hexdigest()
+            result = subprocess.run(
+                [
+                    sys.executable, str(ROOT / "scripts" / "21_prefilter_hm3.py"),
+                    "--input", str(source), "--output", str(output),
+                    "--provenance", str(provenance), "--snp-column", "rsID",
+                    "--allowlist", str(allowlist), "--expected-input-bytes",
+                    str(source_bytes), "--expected-input-sha256", source_sha,
+                ],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+            reused = subprocess.run(
+                [
+                    sys.executable, str(ROOT / "scripts" / "21_prefilter_hm3.py"),
+                    "--input", str(source), "--output", str(output),
+                    "--provenance", str(provenance), "--snp-column", "rsID",
+                    "--allowlist", str(allowlist), "--expected-input-bytes",
+                    str(source_bytes), "--expected-input-sha256", source_sha,
+                ],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            self.assertEqual(reused.returncode, 0, reused.stderr + reused.stdout)
+            self.assertIn("Reusing verified prefilter", reused.stdout)
+            with gzip.open(output, "rb") as handle:
+                filtered = handle.read()
+            ledger = json.loads(provenance.read_text(encoding="utf-8"))
+        self.assertEqual(
+            filtered,
+            payload.splitlines(keepends=True)[0]
+            + payload.splitlines(keepends=True)[1]
+            + payload.splitlines(keepends=True)[3],
+        )
+        self.assertEqual(ledger["source_rows"], 3)
+        self.assertEqual(ledger["retained_rows"], 2)
+
+    def test_hm3_prefilter_plan_is_exactly_the_three_glgc_traits(self):
+        with (ROOT / "config" / "hm3_prefilter_plans.tsv").open(
+            newline="", encoding="utf-8"
+        ) as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual({row["trait_id"] for row in rows}, {"ldl", "hdl", "triglycerides"})
+        self.assertTrue(all(row["strategy"] == "HAPMAP3_RSID_ALLOWLIST" for row in rows))
 
     def test_production_code_has_no_historic_manifest_reference(self):
         paths = list((ROOT / "scripts").glob("*.py"))

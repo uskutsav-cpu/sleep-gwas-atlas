@@ -13,6 +13,7 @@ mkdir -p data/harmonized data/munged
 
 for trait in "$@"; do
   raw_file=$(trait_field "$trait" raw_file) || die "trait '$trait' is not in $CONFIG"
+  source_id=$(trait_field "$trait" source_id) || die "trait '$trait' has no source_id in $CONFIG"
   source_build=$(trait_field "$trait" build) || die "trait '$trait' has no build in $CONFIG"
   source_status=$(trait_field "$trait" source_status) || die "trait '$trait' has no source status in $CONFIG"
   ancestry=$(trait_field "$trait" ancestry) || die "trait '$trait' has no ancestry in $CONFIG"
@@ -39,6 +40,34 @@ for trait in "$@"; do
       "$trait has build=$source_build; make an explicit build decision before munging"
   fi
   require_file "data/raw/$raw_file"
+
+  harmonize_infile="data/raw/$raw_file"
+  prefilter_args=()
+  prefilter_strategy=$(hm3_prefilter_field "$trait" strategy 2>/dev/null || true)
+  if [ -n "$prefilter_strategy" ]; then
+    [ "$prefilter_strategy" = "HAPMAP3_RSID_ALLOWLIST" ] || die \
+      "$trait has unsupported prefilter strategy=$prefilter_strategy"
+    planned_source=$(hm3_prefilter_field "$trait" source_id)
+    snp_column=$(hm3_prefilter_field "$trait" snp_column)
+    allowlist_path=$(hm3_prefilter_field "$trait" allowlist_path)
+    [ "$planned_source" = "$source_id" ] || die \
+      "$trait prefilter source=$planned_source does not match selected source=$source_id"
+    require_file "$allowlist_path"
+    source_bytes=$(public_source_field "$source_id" archive_bytes)
+    source_sha256=$(public_source_field "$source_id" archive_sha256)
+    [ -n "$source_bytes" ] && [ -n "$source_sha256" ] || die \
+      "$trait prefilter source lacks registered bytes/SHA-256"
+    mkdir -p data/harmonized/.prefilter
+    harmonize_infile="data/harmonized/.prefilter/$trait.hm3.tsv.gz"
+    prefilter_provenance="data/harmonized/$trait.prefilter.provenance.json"
+    echo "==> $trait: streaming registered HapMap3 prefilter"
+    "$PYTHON_BIN" scripts/21_prefilter_hm3.py \
+      --input "data/raw/$raw_file" --output "$harmonize_infile" \
+      --provenance "$prefilter_provenance" --snp-column "$snp_column" \
+      --allowlist "$allowlist_path" --expected-input-bytes "$source_bytes" \
+      --expected-input-sha256 "$source_sha256"
+    prefilter_args=(--prefilter-provenance "$prefilter_provenance")
+  fi
 
   source_build_args=()
   if [ "$source_build" = "hg19" ] || [ "$source_build" = "GRCh37" ] || \
@@ -78,7 +107,8 @@ for trait in "$@"; do
     ${source_build_args[@]+"${source_build_args[@]}"} \
     ${variant_map_args[@]+"${variant_map_args[@]}"} \
     ${liftover_args[@]+"${liftover_args[@]}"} \
-    --infile "data/raw/$raw_file" --outdir data/harmonized
+    ${prefilter_args[@]+"${prefilter_args[@]}"} \
+    --infile "$harmonize_infile" --outdir data/harmonized
 
   echo "==> $trait: HapMap3 munging"
   ldsc_ignore_args=()
