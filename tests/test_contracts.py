@@ -1640,6 +1640,59 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('"CORE_ATLAS_COMPLETE_DOWNSTREAM_LAYERS_PENDING"', builder)
         self.assertNotIn("PLACEHOLDER", builder)
 
+    def test_integrated_atlas_schema_is_exact_and_currently_fails_closed(self):
+        schema = json.loads(
+            (ROOT / "config/atlas_table_schema.json").read_text(encoding="utf-8")
+        )
+        policy = json.loads(
+            (ROOT / "config/downstream_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(list(schema["tables"]), policy["integrated_atlas"]["tables"])
+        self.assertEqual(
+            schema["tables"]["edges.tsv"]["fields"],
+            policy["integrated_atlas"]["edge_fields"],
+        )
+        self.assertEqual(schema["tables"]["traits.tsv"]["expected_rows"], 45)
+        self.assertEqual(schema["tables"]["trait_pairs.tsv"]["expected_rows"], 396)
+        for name in policy["integrated_atlas"]["tables"][2:]:
+            self.assertEqual(schema["tables"][name]["minimum_rows"], 1)
+            self.assertIn("provenance_id", schema["tables"][name]["fields"])
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/52_validate_integrated_atlas.py")],
+            cwd=ROOT, capture_output=True, text=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("loci.tsv", result.stdout + result.stderr)
+
+    def test_robustness_and_release_are_content_validated_not_presence_gated(self):
+        policy = json.loads(
+            (ROOT / "config/downstream_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(len(policy["robustness"]["required_families"]), 9)
+        self.assertEqual(
+            policy["robustness"]["table_fields"][0:3],
+            ["conclusion_id", "conclusion", "robustness_family"],
+        )
+        robustness = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/53_validate_robustness.py")],
+            cwd=ROOT, capture_output=True, text=True,
+        )
+        self.assertNotEqual(robustness.returncode, 0)
+        self.assertIn("robustness_summary.tsv", robustness.stdout + robustness.stderr)
+        acceptance = (ROOT / "scripts/99_atlas_acceptance.py").read_text(encoding="utf-8")
+        self.assertIn("scripts/52_validate_integrated_atlas.py", acceptance)
+        self.assertIn("scripts/53_validate_robustness.py", acceptance)
+        self.assertIn("scripts/55_validate_release.py", acceptance)
+        release_builder = (ROOT / "scripts/54_build_release.py").read_text(encoding="utf-8")
+        self.assertIn("non-release gates remain blocked", release_builder)
+        self.assertIn("releases are never overwritten", release_builder)
+        self.assertIn('parser.add_argument("--execute", action="store_true"', release_builder)
+        release_validator = (ROOT / "scripts/55_validate_release.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("release contains unmanifested files", release_validator)
+        self.assertIn("frozen pre-release acceptance evidence is incomplete", release_validator)
+
 
 if __name__ == "__main__":
     unittest.main()

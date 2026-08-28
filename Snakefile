@@ -20,6 +20,7 @@ LAVA_LOCUS_FILE = config["lava_locus_file"]
 MIXER_POLICY = config["mixer_policy"]
 PLEIOTROPY_POLICY = config["pleiotropy_policy"]
 DOWNSTREAM_POLICY = config["downstream_policy"]
+ATLAS_SCHEMA = config["atlas_schema"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -394,3 +395,42 @@ rule atlas_core:
         provenance="results/atlas/core.provenance.json",
     shell:
         "{PYTHON} scripts/51_build_atlas_core.py"
+
+
+rule validate_integrated_atlas:
+    input:
+        policy=DOWNSTREAM_POLICY,
+        schema=ATLAS_SCHEMA,
+        tables=expand(
+            "results/atlas/{name}",
+            name=[
+                "traits.tsv", "trait_pairs.tsv", "loci.tsv", "variants.tsv",
+                "genes.tsv", "regulatory_elements.tsv", "cell_types.tsv",
+                "pathways.tsv", "causal_tests.tsv", "edges.tsv",
+            ],
+        ),
+    output:
+        touch("results/atlas/ATLAS_SCHEMA_OK"),
+    shell:
+        "{PYTHON} scripts/52_validate_integrated_atlas.py --quiet"
+
+
+rule validate_robustness:
+    input:
+        policy=DOWNSTREAM_POLICY,
+        summary="results/tables/robustness_summary.tsv",
+    output:
+        touch("results/tables/ROBUSTNESS_OK"),
+    shell:
+        "{PYTHON} scripts/53_validate_robustness.py --quiet"
+
+
+rule atlas_release:
+    input:
+        atlas="results/atlas/ATLAS_SCHEMA_OK",
+        robustness="results/tables/ROBUSTNESS_OK",
+    output:
+        touch("releases/ATLAS_V1_RELEASE_OK"),
+    shell:
+        "{PYTHON} scripts/54_build_release.py --execute && "
+        "{PYTHON} scripts/55_validate_release.py --quiet"

@@ -315,6 +315,55 @@ def pleiotropy_gate(root: Path) -> Gate:
     )
 
 
+def integrated_atlas_gate(root: Path) -> Gate:
+    paths = [
+        "results/atlas/traits.tsv",
+        "results/atlas/trait_pairs.tsv",
+        "results/atlas/loci.tsv",
+        "results/atlas/variants.tsv",
+        "results/atlas/genes.tsv",
+        "results/atlas/regulatory_elements.tsv",
+        "results/atlas/cell_types.tsv",
+        "results/atlas/pathways.tsv",
+        "results/atlas/causal_tests.tsv",
+        "results/atlas/edges.tsv",
+    ]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
+        return Gate(
+            "integrated_atlas", "BLOCKED", "",
+            "assemble the canonical traceable evidence atlas; missing real non-empty artifact(s): "
+            + ", ".join(missing),
+        )
+    validator = root / "scripts/52_validate_integrated_atlas.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("integrated_atlas", "BLOCKED", ", ".join(paths), f"atlas validation failed: {detail}")
+    return Gate("integrated_atlas", "PASS", "ten schema-locked, cross-linked canonical tables", "")
+
+
+def robustness_gate(root: Path) -> Gate:
+    relative = "results/tables/robustness_summary.tsv"
+    if not real_nonempty(root / relative):
+        return Gate(
+            "robustness", "BLOCKED", "",
+            f"complete the predefined major robustness pass; missing real non-empty artifact: {relative}",
+        )
+    validator = root / "scripts/53_validate_robustness.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("robustness", "BLOCKED", relative, f"robustness validation failed: {detail}")
+    return Gate("robustness", "PASS", "complete nine-family robustness matrix", "")
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -333,7 +382,15 @@ def release_gate(root: Path) -> Gate:
             str(release.relative_to(root)),
             f"immutable release is incomplete; missing: {', '.join(missing)}",
         )
-    return Gate("atlas_v1_release", "PASS", "releases/atlas-v1.0", "")
+    validator = root / "scripts/55_validate_release.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("atlas_v1_release", "BLOCKED", "releases/atlas-v1.0", f"release validation failed: {detail}")
+    return Gate("atlas_v1_release", "PASS", "checksum-validated releases/atlas-v1.0", "")
 
 
 def build_gates(root: Path) -> list[Gate]:
@@ -371,29 +428,14 @@ def build_gates(root: Path) -> list[Gate]:
         ("cell_types", ["results/atlas/cell_types.tsv"], "complete multi-method cell-type analyses"),
         ("pathways", ["results/atlas/pathways.tsv"], "complete high-confidence pathway and network analyses"),
         ("causal_inference", ["results/atlas/causal_tests.tsv"], "complete bidirectional MR and sensitivity analyses"),
-        (
-            "integrated_atlas",
-            [
-                "results/atlas/traits.tsv",
-                "results/atlas/trait_pairs.tsv",
-                "results/atlas/loci.tsv",
-                "results/atlas/variants.tsv",
-                "results/atlas/genes.tsv",
-                "results/atlas/regulatory_elements.tsv",
-                "results/atlas/cell_types.tsv",
-                "results/atlas/pathways.tsv",
-                "results/atlas/causal_tests.tsv",
-                "results/atlas/edges.tsv",
-            ],
-            "assemble the canonical traceable evidence atlas",
-        ),
-        ("robustness", ["results/tables/robustness_summary.tsv"], "complete the predefined major robustness pass"),
     ]
     gates.append(covariance_gate(root))
     gates.append(lava_gate(root))
     gates.append(mixer_gate(root))
     gates.append(pleiotropy_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
+    gates.append(integrated_atlas_gate(root))
+    gates.append(robustness_gate(root))
     gates.append(genomic_sem_gate(root))
     gates.append(release_gate(root))
     return gates

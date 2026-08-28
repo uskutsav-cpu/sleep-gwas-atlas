@@ -63,6 +63,7 @@
   },
   "robustness": {
     "required_families": ["alternate_LD", "alternate_locus_boundaries", "fine_mapping_assumptions", "colocalization_priors_and_models", "cohort_overlap", "alternative_GWAS", "multiple_testing", "leave_one_trait_out_SEM", "local_correlation"],
+    "table_fields": ["conclusion_id", "conclusion", "robustness_family", "applicable", "primary_result", "sensitivity_result", "direction_concordant", "significance_concordant", "material_contradiction", "resolution", "evidence_path", "evidence_sha256", "provenance_id"],
     "major_conclusion_rule": "Every major conclusion must have a row for every applicable robustness family and no unresolved result-changing contradiction"
   },
   "integrated_atlas": {
