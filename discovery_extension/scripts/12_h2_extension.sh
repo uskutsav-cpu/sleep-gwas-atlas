@@ -34,7 +34,8 @@ done
 if [ "$all_mode" -eq 1 ]; then
   python3 discovery_extension/scripts/13_collate_extension_ldsc.py \
     --mode h2 --logdir "$logdir" \
-    --out discovery_extension/results/ldsc/extension_h2_qc.tsv
+    --out discovery_extension/results/ldsc/extension_trait_readiness.tsv \
+    --h2-failed-out discovery_extension/results/ldsc/extension_trait_qc_failed.tsv
 else
   echo "Controlled partial h2 run complete; the locked 100-trait h2 table was not regenerated."
 fi

@@ -19,6 +19,17 @@ INTERCEPT_PATTERN = re.compile(r"^Intercept:\s*(-?[\d.eE+-]+)\s*\(([\d.eE+-]+)\)
 MEAN_CHI_PATTERN = re.compile(r"Mean Chi\^2:\s*(-?[\d.eE+-]+)")
 LAMBDA_PATTERN = re.compile(r"Lambda GC:\s*(-?[\d.eE+-]+)")
 RATIO_PATTERN = re.compile(r"^Ratio:\s*(-?[\d.eE+-]+)", re.M)
+RATIO_NEGATIVE_PATTERN = re.compile(r"^Ratio < 0", re.M)
+INPUT_SNP_PATTERN = re.compile(r"Read summary statistics for ([0-9]+) SNPs\.")
+REGRESSION_SNP_PATTERN = re.compile(r"After merging with regression SNP LD, ([0-9]+) SNPs remain\.")
+PAIR_QC_PATTERN = re.compile(
+    r"Computing rg for phenotype [0-9]+/[0-9]+\s*\n"
+    r"Reading summary statistics from (.+?) \.\.\.\s*\n"
+    r"Read summary statistics for ([0-9]+) SNPs\.\s*\n"
+    r"After merging with summary statistics, ([0-9]+) SNPs remain\.\s*\n"
+    r"([0-9]+) SNPs with valid alleles\.",
+    re.M,
+)
 SYNTHETIC_MARKER = "SYNTHETIC EXTENSION LDSC OUTPUT - NOT REAL RESULTS"
 
 
@@ -90,6 +101,14 @@ def parse_h2(panel: list[dict[str, str]], logdir: Path) -> list[dict[str, object
         se = numeric(h2_match.group(3))
         intercept = numeric(intercept_match.group(1))
         intercept_se = numeric(intercept_match.group(2))
+        input_snp_match = INPUT_SNP_PATTERN.search(text)
+        regression_snp_match = REGRESSION_SNP_PATTERN.search(text)
+        if not input_snp_match or not regression_snp_match:
+            fail(f"required h2 SNP-count diagnostics are missing from {path}")
+        ratio_match = RATIO_PATTERN.search(text)
+        ratio_negative = bool(RATIO_NEGATIVE_PATTERN.search(text))
+        if not ratio_match and not ratio_negative:
+            fail(f"required attenuation-ratio diagnostic is missing from {path}")
         z = h2 / se if se > 0 else math.nan
         pass_z = math.isfinite(z) and z >= 4.0
         pass_intercept = math.isfinite(intercept) and intercept <= 1.2
@@ -106,17 +125,32 @@ def parse_h2(panel: list[dict[str, str]], logdir: Path) -> list[dict[str, object
             "novelty_priority": trait["novelty_priority"],
             "scale": h2_match.group(1).lower(), "h2": h2, "h2_se": se, "h2_z": z,
             "LDSC_intercept": intercept, "LDSC_intercept_se": intercept_se,
+            "input_snp_count": int(input_snp_match.group(1)),
+            "ldsc_regression_snp_count": int(regression_snp_match.group(1)),
             "lambda_gc": numeric(LAMBDA_PATTERN.search(text).group(1)) if LAMBDA_PATTERN.search(text) else math.nan,
             "mean_chi2": numeric(MEAN_CHI_PATTERN.search(text).group(1)) if MEAN_CHI_PATTERN.search(text) else math.nan,
-            "ratio": numeric(RATIO_PATTERN.search(text).group(1)) if RATIO_PATTERN.search(text) else math.nan,
+            "attenuation_ratio": numeric(ratio_match.group(1)) if ratio_match else "LT_ZERO",
+            "attenuation_ratio_status": "NUMERIC" if ratio_match else "NEGATIVE_NOT_ESTIMATED",
             "pass_h2_z_ge_4": str(pass_z), "pass_intercept_le_1.2": str(pass_intercept),
-            "primary_rg_eligibility": verdict, "qc_reason": reason, "input_log": str(path),
+            "primary_rg_eligibility": verdict, "analysis_status": "EXTENSION_H2_QC_COMPLETE",
+            "qc_reason": reason, "input_log": str(path),
         })
     return rows
 
 
 def parse_one_rg_log(path: Path) -> list[dict[str, object]]:
-    lines = path.read_text(encoding="utf-8").splitlines()
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    pair_qc: dict[str, dict[str, int]] = {}
+    for match in PAIR_QC_PATTERN.finditer(text):
+        trait_id = Path(match.group(1)).name.replace(".sumstats.gz", "")
+        if trait_id in pair_qc:
+            fail(f"duplicate per-pair SNP diagnostics for {trait_id} in {path}")
+        pair_qc[trait_id] = {
+            "extension_input_snp_count": int(match.group(2)),
+            "snp_overlap_after_merge": int(match.group(3)),
+            "snp_overlap_valid_alleles": int(match.group(4)),
+        }
     try:
         start = next(i for i, line in enumerate(lines) if "Summary of Genetic Correlation Results" in line)
     except StopIteration:
@@ -142,10 +176,20 @@ def parse_one_rg_log(path: Path) -> list[dict[str, object]]:
     for row in rows:
         sleep = Path(row["p1"]).name.replace(".sumstats.gz", "")
         extension = Path(row["p2"]).name.replace(".sumstats.gz", "")
+        if extension not in pair_qc:
+            fail(f"per-pair SNP-overlap diagnostics are missing for {extension} in {path}")
         output.append({
             "sleep_trait": sleep, "extension_trait_id": extension,
             "rg": numeric(row["rg"]), "se": numeric(row["se"]),
-            "z": numeric(row.get("z")), "p": numeric(row["p"]), "input_log": str(path),
+            "z": numeric(row.get("z")), "p": numeric(row["p"]),
+            "extension_h2_observed": numeric(row.get("h2_obs")),
+            "extension_h2_observed_se": numeric(row.get("h2_obs_se")),
+            "extension_h2_intercept": numeric(row.get("h2_int")),
+            "extension_h2_intercept_se": numeric(row.get("h2_int_se")),
+            "cross_trait_LDSC_intercept": numeric(row.get("gcov_int")),
+            "cross_trait_LDSC_intercept_se": numeric(row.get("gcov_int_se")),
+            **pair_qc[extension],
+            "input_log": str(path),
         })
     return output
 
@@ -198,6 +242,8 @@ def parse_rg(
             "phenotype_name": trait["phenotype_name"],
             "phenotype_domain": trait["phenotype_domain"],
             "novelty_priority": trait["novelty_priority"],
+            "ancestry": trait["ancestry"],
+            "analysis_status": "PRIMARY_EXTENSION_RG_COMPLETE",
             "extension_fdr_pass_0.05": str(float(row["extension_fdr"]) < 0.05),
             "abs_rg_ge_0.15": str(abs(float(row["rg"])) >= 0.15),
             "initial_screen_status": (
@@ -218,9 +264,14 @@ def parse_rg(
                 "novelty_priority": trait["novelty_priority"],
                 "extension_h2_z": h2["h2_z"], "extension_LDSC_intercept": h2["LDSC_intercept"],
                 "extension_h2_verdict": h2["primary_rg_eligibility"],
+                "ancestry": trait["ancestry"],
                 "pair_status": "PRIMARY_TESTED" if result else "H2_FAILED_PRIMARY_EXCLUSION",
                 "rg": result.get("rg", "NA"), "se": result.get("se", "NA"),
                 "z": result.get("z", "NA"), "p": result.get("p", "NA"),
+                "cross_trait_LDSC_intercept": result.get("cross_trait_LDSC_intercept", "NA"),
+                "cross_trait_LDSC_intercept_se": result.get("cross_trait_LDSC_intercept_se", "NA"),
+                "snp_overlap_after_merge": result.get("snp_overlap_after_merge", "NA"),
+                "snp_overlap_valid_alleles": result.get("snp_overlap_valid_alleles", "NA"),
                 "extension_fdr": result.get("extension_fdr", "NA"),
                 "initial_screen_status": result.get("initial_screen_status", "SENSITIVITY_ONLY_NOT_RUN"),
             })
@@ -234,6 +285,7 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--pair-universe-out", type=Path)
     parser.add_argument("--h2", type=Path)
+    parser.add_argument("--h2-failed-out", type=Path)
     parser.add_argument(
         "--panel", type=Path, default=Path("discovery_extension/config/candidate_traits.tsv")
     )
@@ -249,6 +301,9 @@ def main() -> None:
         rows = parse_h2(panel, args.logdir)
         fields = list(rows[0])
         write_tsv(args.out, fields, rows)
+        if args.h2_failed_out is not None:
+            failed = [row for row in rows if row["primary_rg_eligibility"] == "SENSITIVITY_ONLY"]
+            write_tsv(args.h2_failed_out, fields, failed)
         counts = {
             "rows": len(rows),
             "primary_pass": sum(row["primary_rg_eligibility"] == "PRIMARY_PASS" for row in rows),
@@ -269,6 +324,9 @@ def main() -> None:
         "multiple_testing": "Benjamini-Hochberg within primary extension rg family only" if args.mode == "rg" else "not_applicable",
         "output": str(args.out), "output_sha256": sha256(args.out),
     }
+    if args.mode == "h2" and args.h2_failed_out is not None:
+        provenance["h2_failed_output"] = str(args.h2_failed_out)
+        provenance["h2_failed_output_sha256"] = sha256(args.h2_failed_out)
     if args.mode == "rg":
         provenance["pair_universe_output"] = str(args.pair_universe_out)
         provenance["pair_universe_sha256"] = sha256(args.pair_universe_out)

@@ -44,5 +44,12 @@ done
 
 python3 discovery_extension/scripts/13_collate_extension_ldsc.py \
   --mode rg --logdir "$logdir" --h2 "$h2_table" \
-  --out discovery_extension/results/ldsc/extension_rg_primary.tsv \
+  --out discovery_extension/results/ldsc/extension_rg_matrix.tsv \
   --pair-universe-out discovery_extension/results/ldsc/extension_pair_universe.tsv
+
+python3 discovery_extension/scripts/19_build_extension_views.py
+FIGURE_PYTHON=${FIGURE_PYTHON:-.venv/bin/python}
+require_file "$FIGURE_PYTHON"
+MPLCONFIGDIR=${MPLCONFIGDIR:-"${TMPDIR:-/tmp}/sleep-gwas-extension-matplotlib"} \
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-"${TMPDIR:-/tmp}/sleep-gwas-extension-matplotlib"} \
+  "$FIGURE_PYTHON" discovery_extension/scripts/15_plot_extension.py

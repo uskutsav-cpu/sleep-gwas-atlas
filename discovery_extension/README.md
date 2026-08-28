@@ -80,10 +80,18 @@ cleared: `11_munge_extension.sh` creates extension-only HapMap3 inputs,
 gate, `14_rg_extension.sh` runs the 12-by-pass-trait family, and
 `13_collate_extension_ldsc.py` writes both the primary tested family and the
 complete 1,200-pair status universe with extension-only BH FDR. The discovery
-overview is produced by `15_plot_extension.py`; its caption explicitly keeps
+matrix records the cross-trait intercept, SE, post-merge and valid-allele SNP
+overlaps, ancestry, and analysis status for each tested pair. The h2 step emits
+the requested `extension_trait_readiness.tsv` plus a separate QC-failed table;
+the rg step emits `extension_rg_matrix.tsv`.
+
+`19_build_extension_views.py` creates ranked positive, ranked negative, and
+domain-specific tables. `15_plot_extension.py` creates the overview heatmap,
+an FDR network, and a multi-page domain-view PDF; its caption explicitly keeps
 pre-screen novelty categories distinct from pair-level novelty claims. The
-entire 100-trait h2, variable-size rg, FDR, exclusion-ledger, and figure path is
-exercised under `synthetic/test_extension_ldsc_collation.py` only.
+entire 100-trait h2, variable-size rg, FDR, SNP-diagnostic, exclusion-ledger,
+ranked-view, and figure path is exercised under
+`synthetic/test_extension_ldsc_collation.py` only.
 
 `16_extension_acceptance.py` emits a machine-readable 17-stage gate table, an
 adversarial-risk checklist, and a plain-language execution-status report. It
@@ -92,9 +100,17 @@ pending states instead of aborting before the failure is documented.
 
 For result-dependent follow-up, `17_prepare_pair_novelty_audit.py` creates a
 PENDING-only row for every extension-FDR-significant pair and
-`18_validate_pair_novelty_audit.py` refuses incomplete reviews or a STRONG
-novelty label without successful independent replication. The replication and
-local/pleiotropic/fine-mapping/colocalization/mechanistic rules are frozen in
+`18_validate_pair_novelty_audit.py` enforces the brief's six novelty classes,
+requires several targeted searches for `APPARENTLY_NOVEL`, and refuses a
+STRONG novelty label without successful independent replication. The canonical
+artifact is `results/novelty/extension_novelty_audit.tsv`.
+
+`20_prioritize_extension_pairs.py` applies the frozen Tier A/B/C rules across
+the complete tested family. Tier A requires extension FDR, effect size, both h2
+gates, clean analysis status, and Strong/Moderate pair novelty. Tier B requires
+those criteria plus independent replication or strong local support; everything
+else remains explicitly Tier C. The replication and local/pleiotropic/fine-
+mapping/colocalization/mechanistic rules are frozen in
 `config/replication_contract.json` and `config/followup_contract.json`.
 
 The current acquisition preflight is deliberately fail-closed. The 100 exact

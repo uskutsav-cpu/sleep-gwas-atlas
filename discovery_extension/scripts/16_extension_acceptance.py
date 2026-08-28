@@ -45,10 +45,10 @@ def main() -> None:
     lock = json.loads((ROOT / "config/extension_panel.lock.json").read_text())
     preflight = json.loads((ROOT / "provenance/acquisition_preflight.json").read_text())
 
-    h2_path = ROOT / "results/ldsc/extension_h2_qc.tsv"
-    rg_path = ROOT / "results/ldsc/extension_rg_primary.tsv"
+    h2_path = ROOT / "results/ldsc/extension_trait_readiness.tsv"
+    rg_path = ROOT / "results/ldsc/extension_rg_matrix.tsv"
     pair_universe_path = ROOT / "results/ldsc/extension_pair_universe.tsv"
-    novelty_path = ROOT / "results/novelty/pair_level_novelty_audit.tsv"
+    novelty_path = ROOT / "results/novelty/extension_novelty_audit.tsv"
     prioritization_path = ROOT / "results/prioritization/prioritized_pairs.tsv"
     replication_path = ROOT / "results/replication/replication_results.tsv"
     local_path = ROOT / "results/local/local_rg_results.tsv"

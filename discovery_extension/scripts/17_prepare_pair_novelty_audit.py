@@ -17,8 +17,11 @@ FIELDS = [
     "audit_status", "direct_prior_same_pair", "same_sleep_trait_context",
     "same_or_equivalent_phenotype", "same_direction", "broad_phenome_screen_overlap",
     "near_neighbor_evidence", "discovery_vs_replication_in_prior_work",
-    "search_databases", "search_queries", "search_date", "evidence_PMIDs_DOIs_URLs",
-    "independent_replication_status", "novelty_decision", "decision_rationale", "reviewer",
+    "exact_prior_rg_found", "closest_prior_result", "prior_method", "prior_effect",
+    "prior_publication", "prior_DOI", "prior_PMID", "search_databases",
+    "search_queries_used", "search_date", "evidence_PMIDs_DOIs_URLs",
+    "independent_replication_status", "novelty_class", "novelty_strength",
+    "decision_rationale", "reviewer_notes", "reviewer",
 ]
 
 
@@ -39,7 +42,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--rg", type=Path,
-        default=Path("discovery_extension/results/ldsc/extension_rg_primary.tsv"),
+        default=Path("discovery_extension/results/ldsc/extension_rg_matrix.tsv"),
     )
     parser.add_argument(
         "--panel", type=Path,
@@ -47,7 +50,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--out", type=Path,
-        default=Path("discovery_extension/results/novelty/pair_level_novelty_audit.tsv"),
+        default=Path("discovery_extension/results/novelty/extension_novelty_audit.tsv"),
     )
     parser.add_argument(
         "--provenance-out", type=Path,
@@ -78,11 +81,15 @@ def main() -> None:
             "direct_prior_same_pair": "PENDING", "same_sleep_trait_context": "PENDING",
             "same_or_equivalent_phenotype": "PENDING", "same_direction": "PENDING",
             "broad_phenome_screen_overlap": "PENDING", "near_neighbor_evidence": "PENDING",
-            "discovery_vs_replication_in_prior_work": "PENDING", "search_databases": "PENDING",
-            "search_queries": "PENDING", "search_date": "PENDING",
+            "discovery_vs_replication_in_prior_work": "PENDING",
+            "exact_prior_rg_found": "PENDING", "closest_prior_result": "PENDING",
+            "prior_method": "PENDING", "prior_effect": "PENDING",
+            "prior_publication": "PENDING", "prior_DOI": "PENDING", "prior_PMID": "PENDING",
+            "search_databases": "PENDING", "search_queries_used": "PENDING", "search_date": "PENDING",
             "evidence_PMIDs_DOIs_URLs": "PENDING",
             "independent_replication_status": "NOT_YET_ATTEMPTED",
-            "novelty_decision": "PENDING", "decision_rationale": "PENDING", "reviewer": "PENDING",
+            "novelty_class": "PENDING", "novelty_strength": "PENDING",
+            "decision_rationale": "PENDING", "reviewer_notes": "PENDING", "reviewer": "PENDING",
         })
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", newline="", encoding="utf-8") as handle:
@@ -93,7 +100,8 @@ def main() -> None:
         "schema_version": "1.0.0", "source_rg": str(args.rg),
         "source_rg_sha256": sha256(args.rg), "extension_fdr_threshold": 0.05,
         "audit_pair_count": len(output), "template_only": True,
-        "strong_novelty_rule": "completed pair-level no-direct-prior audit plus successful independent replication",
+        "allowed_novelty_classes": ["KNOWN_REPLICATION", "KNOWN_BUT_NEW_DATASET", "PARTIAL_EXTENSION", "NO_DIRECT_RG_FOUND", "APPARENTLY_NOVEL", "UNCERTAIN"],
+        "strong_novelty_rule": "APPARENTLY_NOVEL after several targeted searches, no direct prior rg, and successful independent replication",
         "warning": "PENDING fields are not negative evidence and preanalysis categories are not pair-level novelty conclusions",
         "output": str(args.out), "output_sha256": sha256(args.out),
     }
