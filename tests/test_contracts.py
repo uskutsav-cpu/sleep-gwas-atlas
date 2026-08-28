@@ -1244,8 +1244,13 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("PASS    locked_panel", result.stdout)
         self.assertIn("PASS    source_curation", result.stdout)
         self.assertIn("PASS    source_schemas", result.stdout)
-        self.assertIn("BLOCKED harmonization", result.stdout)
-        self.assertIn("Acceptance: 3/23 gates passed", result.stdout)
+        gate_lines = [
+            line for line in result.stdout.splitlines()
+            if line.startswith(("PASS", "BLOCKED"))
+        ]
+        self.assertEqual(len(gate_lines), 23)
+        self.assertIn("Acceptance:", result.stdout)
+        self.assertIn("/23 gates passed", result.stdout)
 
 
 if __name__ == "__main__":

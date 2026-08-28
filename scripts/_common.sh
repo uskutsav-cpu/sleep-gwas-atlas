@@ -4,7 +4,7 @@
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 PYTHON_BIN=${PYTHON_BIN:-python3}
-LDSC_PYTHON=${LDSC_PYTHON:-$PYTHON_BIN}
+LDSC_PYTHON=${LDSC_PYTHON:-.ldsc-env/bin/python}
 LDSC_DIR=${LDSC_DIR:-ldsc}
 # Production entry points always use the locked atlas-v1.0 manifest. Keeping
 # this path non-overridable prevents an environment variable from silently
