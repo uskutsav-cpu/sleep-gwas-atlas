@@ -320,6 +320,7 @@ rule mixer_preflight:
     input:
         panel=PANEL,
         policy=MIXER_POLICY,
+        reference_manifest="config/mixer_reference_files.tsv",
         prefilters="config/hm3_prefilter_plans.tsv",
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
@@ -328,6 +329,36 @@ rule mixer_preflight:
         traits="results/tables/mixer_input_readiness.tsv",
     shell:
         "{PYTHON} scripts/35_mixer_preflight.py --report-only"
+
+
+rule mixer_univariate_tasks:
+    input:
+        panel=PANEL,
+        policy=MIXER_POLICY,
+        input_manifest="results/tables/mixer_input_manifest.tsv",
+        input_lock="results/tables/mixer_input_manifest.lock.json",
+        reference_manifest="config/mixer_reference_files.tsv",
+        reference_provenance="ref/mixer/reference.provenance.json",
+    output:
+        manifest="results/tables/mixer_univariate_tasks.tsv",
+        lock="results/tables/mixer_univariate_tasks.lock.json",
+    shell:
+        "{PYTHON} scripts/mixer_tasks.py univariate --write"
+
+
+rule mixer_bivariate_tasks:
+    input:
+        panel=PANEL,
+        policy=MIXER_POLICY,
+        input_lock="results/tables/mixer_input_manifest.lock.json",
+        reference_provenance="ref/mixer/reference.provenance.json",
+        univariate="results/tables/mixer_univariate.tsv",
+        univariate_provenance="results/tables/mixer_univariate.provenance.json",
+    output:
+        manifest="results/tables/mixer_bivariate_tasks.tsv",
+        lock="results/tables/mixer_bivariate_tasks.lock.json",
+    shell:
+        "{PYTHON} scripts/mixer_tasks.py bivariate --write"
 
 
 rule pleiotropy_preflight:

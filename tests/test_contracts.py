@@ -1432,6 +1432,19 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(policy["fit_replicates"], 20)
         self.assertEqual(policy["univariate_aic_threshold"], 0)
         self.assertIn("HapMap3-prefiltered inputs are forbidden", policy["input_requirement"])
+        self.assertEqual(policy["reference_expected_files"], 64)
+        self.assertEqual(policy["reference_expected_bytes"], 6579093199)
+        reference_manifest = ROOT / policy["reference_file_manifest"]
+        self.assertEqual(
+            hashlib.sha256(reference_manifest.read_bytes()).hexdigest(),
+            policy["reference_file_manifest_sha256"],
+        )
+        with reference_manifest.open(encoding="utf-8", newline="") as handle:
+            reference_rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual(len(reference_rows), 64)
+        self.assertEqual(sum(int(row["bytes"]) for row in reference_rows), 6579093199)
+        self.assertEqual(len({row["path"] for row in reference_rows}), 64)
+        self.assertTrue(all(len(row["sha256"]) == 64 for row in reference_rows))
 
     def test_mixer_runtime_is_fail_closed_and_has_no_implicit_pull(self):
         preflight = (ROOT / "scripts" / "35_mixer_preflight.py").read_text(encoding="utf-8")
@@ -1446,12 +1459,15 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('physical_cores >= policy["recommended_physical_cores"]', preflight)
         self.assertIn('prefilter == "not supplied"', preflight)
         self.assertIn('prefilter != "not supplied"', prepare)
+        self.assertIn('"sleep-atlas-mixer-inputs.1"', prepare)
         self.assertIn('if [ "$PULL" != true ]', pull)
         self.assertNotIn("docker pull", runtime)
-        self.assertIn("for rep in $(seq 1 20)", runtime)
+        self.assertIn('for rep in $(seq 1 "$FIT_REPLICATES")', runtime)
+        self.assertIn("SEED_OFFSET + rep", runtime)
         self.assertNotIn("global_rg", runtime)
         self.assertIn('policy["univariate_aic_threshold"]', collate)
         self.assertIn("expected_pairs", validator)
+        self.assertIn("validate_phase_results", validator)
         self.assertIn("scripts/40_validate_mixer.py", acceptance)
 
     def test_mixer_input_conversion_is_atomic_and_deterministic(self):
@@ -1486,6 +1502,116 @@ class PanelContractTests(unittest.TestCase):
                 module.convert(invalid, failed)
             self.assertFalse(failed.exists())
             self.assertFalse(Path(str(failed) + ".tmp").exists())
+
+    def test_mixer_reference_seal_verifies_exact_payload_hashes(self):
+        module = load_numbered_script("35_mixer_preflight.py", "mixer_reference_seal")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            payload_root = root / "ref/mixer/reference"
+            payload_root.mkdir(parents=True)
+            first = payload_root / "a.bin"
+            second = payload_root / "b.bin"
+            first.write_bytes(b"first\n")
+            second.write_bytes(b"second\n")
+            records = [
+                {
+                    "path": "a.bin", "bytes": first.stat().st_size,
+                    "sha256": hashlib.sha256(first.read_bytes()).hexdigest(),
+                    "git_blob_sha1": "1" * 40,
+                },
+                {
+                    "path": "b.bin", "bytes": second.stat().st_size,
+                    "sha256": hashlib.sha256(second.read_bytes()).hexdigest(),
+                    "git_blob_sha1": "2" * 40,
+                },
+            ]
+            manifest = root / "manifest.tsv"
+            manifest.write_text("fixture\n", encoding="utf-8")
+            policy = {
+                "analysis_id": "TEST", "mixer_reference_repository": "https://example.invalid",
+                "mixer_reference_commit_at_lock": "a" * 40,
+                "reference_payload_root": "ref/mixer/reference",
+                "reference_provenance_path": "ref/mixer/reference.provenance.json",
+            }
+            module.seal_reference(root, policy, manifest, records)
+            check = module.reference_check(root, policy, manifest, records)
+            self.assertTrue(check["pass"])
+            second.write_bytes(b"changed-size\n")
+            check = module.reference_check(root, policy, manifest, records)
+            self.assertFalse(check["pass"])
+            self.assertIn("wrong size", check["blocker"])
+
+    def test_mixer_portable_task_families_are_complete_and_deterministic(self):
+        module = load_numbered_script("mixer_tasks.py", "mixer_portable_tasks")
+        policy = json.loads((ROOT / "config/mixer_analysis_policy.json").read_text(encoding="utf-8"))
+        univariate = module.build_univariate_tasks(self.panel, policy)
+        self.assertEqual(len(univariate), 45 * 21)
+        self.assertEqual(len({row["task_id"] for row in univariate}), len(univariate))
+        self.assertEqual(univariate[0]["seed"], 1001)
+        self.assertEqual(univariate[19]["seed"], 1020)
+        self.assertEqual(univariate[20]["phase"], "univariate_combine")
+        self.assertTrue(all(list(row) == policy["task_manifest_fields"] for row in univariate))
+
+        sleep = next(row["trait_id"] for row in self.panel if row["domain"] == "sleep")
+        non_sleep = next(row["trait_id"] for row in self.panel if row["domain"] != "sleep")
+        summaries = [
+            {
+                "trait_id": row["trait_id"],
+                "bivariate_eligibility": (
+                    "ELIGIBLE" if row["trait_id"] in {sleep, non_sleep}
+                    else "INELIGIBLE_LOW_POWER"
+                ),
+            }
+            for row in self.panel
+        ]
+        pairs = module.eligible_pairs(self.panel, summaries)
+        self.assertEqual(pairs, [(sleep, non_sleep)])
+        bivariate = module.build_bivariate_tasks(pairs, policy)
+        self.assertEqual(len(bivariate), 21)
+        self.assertEqual(bivariate[-1]["phase"], "bivariate_combine")
+        self.assertEqual(bivariate[0]["seed"], 1001)
+        self.assertTrue(all(list(row) == policy["task_manifest_fields"] for row in bivariate))
+
+    def test_mixer_task_manifest_lock_rejects_post_lock_mutation(self):
+        module = load_numbered_script("mixer_tasks.py", "mixer_task_lock")
+        source_policy = ROOT / "config/mixer_analysis_policy.json"
+        policy = json.loads(source_policy.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "config").mkdir()
+            (root / "results/tables").mkdir(parents=True)
+            (root / "ref/mixer").mkdir(parents=True)
+            (root / "scripts").mkdir()
+            policy_path = root / "config/mixer_analysis_policy.json"
+            panel_path = root / "config/analysis_panel.tsv"
+            shutil.copy2(source_policy, policy_path)
+            shutil.copy2(ROOT / "config/analysis_panel.tsv", panel_path)
+            shutil.copy2(ROOT / "scripts/38_run_mixer_task.sh", root / "scripts/38_run_mixer_task.sh")
+            (root / policy["input_manifest_lock_path"]).write_text("input-lock\n", encoding="utf-8")
+            (root / policy["reference_provenance_path"]).write_text("reference-lock\n", encoding="utf-8")
+            tasks = module.build_univariate_tasks(self.panel, policy)
+            manifest_path, _ = module.write_phase(
+                root, policy_path, policy, panel_path, "univariate", tasks, None,
+            )
+            rows, lock = module.validate_task_lock(root, policy, panel_path, "univariate")
+            self.assertEqual(len(rows), 945)
+            self.assertEqual(lock["task_count"], 945)
+            manifest_path.write_text(
+                manifest_path.read_text(encoding="utf-8") + "tampered\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(SystemExit, "pre-result lock"):
+                module.validate_task_lock(root, policy, panel_path, "univariate")
+
+    def test_mixer_collator_preserves_a_complete_zero_eligible_pair_family(self):
+        module = load_numbered_script("39_collate_mixer.py", "mixer_empty_bivariate")
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "mixer_bivariate.tsv"
+            module.write_tsv(path, module.BIVARIATE_FIELDS, [])
+            with path.open(encoding="utf-8", newline="") as handle:
+                reader = csv.DictReader(handle, delimiter="\t")
+                self.assertEqual(reader.fieldnames, module.BIVARIATE_FIELDS)
+                self.assertEqual(list(reader), [])
 
     def test_pleiotropy_policy_locks_both_methods_and_all_pairs(self):
         policy = json.loads(

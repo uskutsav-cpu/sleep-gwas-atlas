@@ -8,6 +8,25 @@ import json
 import math
 from pathlib import Path
 
+import mixer_tasks
+
+
+UNIVARIATE_FIELDS = [
+    "trait_id", "mixer_version", "container_digest", "reference_commit", "input_scope",
+    "replicates", "pi_mean", "pi_std", "sig2_beta_mean", "sig2_beta_std",
+    "sig2_zero_mean", "sig2_zero_std", "h2_mean", "h2_std", "n_causal_p9_mean",
+    "n_causal_p9_std", "AIC", "BIC", "power_interpretation", "bivariate_eligibility",
+    "source_summary",
+]
+BIVARIATE_FIELDS = [
+    "sleep_trait", "non_sleep_trait", "mixer_version", "container_digest",
+    "reference_commit", "replicates", "dice_mean", "dice_std", "pi1_mean", "pi1_std",
+    "pi2_mean", "pi2_std", "pi12_mean", "pi12_std", "n_shared_p9_mean",
+    "n_shared_p9_std", "rho_beta_mean", "rho_beta_std", "rg_mean", "rg_std",
+    "fraction_concordant_mean", "fraction_concordant_std", "best_vs_min_AIC",
+    "best_vs_min_BIC", "best_vs_max_AIC", "best_vs_max_BIC", "source_summary",
+]
+
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
@@ -35,14 +54,37 @@ def number(row: dict[str, str], key: str) -> float:
     return value
 
 
-def write_tsv(path: Path, rows: list[dict[str, object]]) -> None:
+def write_tsv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> None:
+    if any(list(row) != fields for row in rows):
+        raise SystemExit(f"ERROR: MiXeR rows differ from the canonical schema: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     with temporary.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), delimiter="\t", lineterminator="\n")
+        writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     temporary.replace(path)
+
+
+def publish_phase(
+    root: Path, policy: dict[str, object], panel_path: Path, phase: str,
+    path: Path, fields: list[str], rows: list[dict[str, object]],
+) -> None:
+    provenance_path = root / str(policy[f"{phase}_result_provenance_path"])
+    if path.exists() != provenance_path.exists():
+        raise SystemExit(f"ERROR: partial immutable MiXeR {phase} publication exists")
+    payload = mixer_tasks.table_text(fields, rows)
+    if path.exists():
+        if path.read_text(encoding="utf-8") != payload:
+            raise SystemExit(f"ERROR: existing MiXeR {phase} table differs from recomputation")
+        mixer_tasks.validate_phase_results(
+            root, policy, panel_path, phase, path, len(rows),
+        )
+        return
+    write_tsv(path, fields, rows)
+    mixer_tasks.seal_phase_results(
+        root, policy, panel_path, phase, path, len(rows),
+    )
 
 
 def univariate(root: Path, policy: dict[str, object], panel: list[dict[str, str]]) -> list[dict[str, object]]:
@@ -146,8 +188,6 @@ def bivariate(
                 "best_vs_max_BIC": number(source, "best_vs_max_BIC"),
                 "source_summary": str(path.relative_to(root)),
             })
-    if not rows:
-        raise SystemExit("ERROR: no sleep-by-non-sleep pair has two eligible univariate MiXeR models")
     return rows
 
 
@@ -158,17 +198,24 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.root).resolve()
     policy = json.loads((root / "config/mixer_analysis_policy.json").read_text(encoding="utf-8"))
-    panel = read_tsv(root / "config/analysis_panel.tsv")
+    panel_path = root / "config/analysis_panel.tsv"
+    panel = read_tsv(panel_path)
     if len(panel) != 45:
         raise SystemExit("ERROR: expected locked 45-trait panel")
     univ = univariate(root, policy, panel)
-    write_tsv(root / "results/tables/mixer_univariate.tsv", univ)
+    publish_phase(
+        root, policy, panel_path, "univariate",
+        root / "results/tables/mixer_univariate.tsv", UNIVARIATE_FIELDS, univ,
+    )
     if args.univariate_only:
         eligible = sum(row["bivariate_eligibility"] == "ELIGIBLE" for row in univ)
         print(f"Published 45 univariate MiXeR summaries; {eligible} eligible")
         return 0
     pair_rows = bivariate(root, policy, panel, univ)
-    write_tsv(root / "results/tables/mixer_bivariate.tsv", pair_rows)
+    publish_phase(
+        root, policy, panel_path, "bivariate",
+        root / "results/tables/mixer_bivariate.tsv", BIVARIATE_FIELDS, pair_rows,
+    )
     print(f"Published MiXeR: 45 univariate traits and {len(pair_rows)} eligible sleep-by-non-sleep pairs")
     return 0
 

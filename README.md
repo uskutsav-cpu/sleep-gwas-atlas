@@ -67,16 +67,18 @@ all 112,275 local-univariate tests, overlap correction, all 396 eligible pair
 definitions, per-locus checkpoints, and a strict result validator. The real
 analysis has not started because the official recommended UK Biobank LD v1.1
 reference requires 15 GiB uncompressed while the current volume has only about
-4–6 GiB free. The older 1,000 Genomes reference is not substituted because LAVA
+2.2 GiB free. The older 1,000 Genomes reference is not substituted because LAVA
 0.1.5 warns of local-h2 bias and type-I error inflation. See
 `docs/lava_workflow.md`.
 
 The production MiXeR workflow is also fully specified, version-pinned, and
 fail-closed. Real MiXeR cannot run on this laptop: the official container is
 Linux/amd64-only, the real-data tutorial requires at least 32 GB RAM and
-recommends 16 physical cores, the approximately 14 GB reference is absent, and
-nine LDSC inputs must be regenerated without their HapMap3 source prefilter.
-No container or reference is downloaded implicitly. See
+recommends 16 physical cores, the exact 6,579,093,199-byte runtime reference is
+absent, and nine LDSC inputs must be regenerated without their HapMap3 source
+prefilter. All 64 consumed reference files, converted inputs, pre-result task
+families, and returned results now have checksum locks suitable for an external
+x86_64 execution host. No container or reference is downloaded implicitly. See
 `docs/mixer_workflow.md`.
 
 Shared-locus discovery is now locked to complementary PLACO+ and official

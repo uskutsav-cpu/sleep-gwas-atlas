@@ -27,6 +27,9 @@ if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
   echo "ERROR: pinned MiXeR image is absent; inspect then explicitly run scripts/37_pull_mixer_image.sh --pull" >&2
   exit 1
 fi
+read -r FIT_REPLICATES SEED_OFFSET < <(
+  python3 -c 'import json; p=json.load(open("config/mixer_analysis_policy.json")); print(p["fit_replicates"], p["replicate_seed_offset"])'
+)
 
 run_container() {
   docker run --rm --platform linux/amd64 \
@@ -51,12 +54,13 @@ case "$MODE" in
     trait=$1
     rep=$2
     validate_trait "$trait"
-    case "$rep" in ''|*[!0-9]*) echo "ERROR: REP must be 1-20" >&2; exit 2 ;; esac
-    [ "$rep" -ge 1 ] && [ "$rep" -le 20 ] || { echo "ERROR: REP must be 1-20" >&2; exit 2; }
+    case "$rep" in ''|*[!0-9]*) echo "ERROR: REP must be 1-${FIT_REPLICATES}" >&2; exit 2 ;; esac
+    [ "$rep" -ge 1 ] && [ "$rep" -le "$FIT_REPLICATES" ] || { echo "ERROR: REP must be 1-${FIT_REPLICATES}" >&2; exit 2; }
+    python3 scripts/mixer_tasks.py univariate --verify-task "MIXER_U::${trait}::rep$(printf '%02d' "$rep")" >/dev/null
     mkdir -p results/mixer/univariate
     prefix="results/mixer/univariate/${trait}"
     extract="${REF}.prune_maf0p05_rand2M_r2p8.rep${rep}.snps"
-    seed=$((1000 + rep))
+    seed=$((SEED_OFFSET + rep))
     run_container "$MIXER_PY" fit1 "${common[@]}" --extract "$extract" --seed "$seed" \
       --trait1-file "data/mixer/${trait}.sumstats.gz" --out "${prefix}.fit.rep${rep}"
     run_container "$MIXER_PY" test1 "${common[@]}" --seed "$seed" \
@@ -67,8 +71,9 @@ case "$MODE" in
     [ "$#" -eq 1 ] || { usage >&2; exit 2; }
     trait=$1
     validate_trait "$trait"
+    python3 scripts/mixer_tasks.py univariate --verify-task "MIXER_U::${trait}::combine" >/dev/null
     prefix="results/mixer/univariate/${trait}"
-    for rep in $(seq 1 20); do
+    for rep in $(seq 1 "$FIT_REPLICATES"); do
       [ -s "${prefix}.fit.rep${rep}.json" ] && [ -s "${prefix}.test.rep${rep}.json" ] || {
         echo "ERROR: incomplete 20-replicate univariate family for $trait" >&2
         exit 1
@@ -86,9 +91,10 @@ case "$MODE" in
     rep=$3
     validate_trait "$sleep" sleep
     validate_trait "$disease" non_sleep
-    case "$rep" in ''|*[!0-9]*) echo "ERROR: REP must be 1-20" >&2; exit 2 ;; esac
-    [ "$rep" -ge 1 ] && [ "$rep" -le 20 ] || { echo "ERROR: REP must be 1-20" >&2; exit 2; }
-    python3 scripts/39_collate_mixer.py --univariate-only
+    case "$rep" in ''|*[!0-9]*) echo "ERROR: REP must be 1-${FIT_REPLICATES}" >&2; exit 2 ;; esac
+    [ "$rep" -ge 1 ] && [ "$rep" -le "$FIT_REPLICATES" ] || { echo "ERROR: REP must be 1-${FIT_REPLICATES}" >&2; exit 2; }
+    python3 scripts/mixer_tasks.py bivariate --verify-task "MIXER_B::${sleep}__${disease}::rep$(printf '%02d' "$rep")" >/dev/null
+    python3 scripts/40_validate_mixer.py --univariate-only --quiet
     python3 - "$sleep" "$disease" <<'PY'
 import csv, sys
 rows = list(csv.DictReader(open("results/tables/mixer_univariate.tsv"), delimiter="\t"))
@@ -102,7 +108,7 @@ PY
     first="results/mixer/univariate/${sleep}"
     second="results/mixer/univariate/${disease}"
     extract="${REF}.prune_maf0p05_rand2M_r2p8.rep${rep}.snps"
-    seed=$((1000 + rep))
+    seed=$((SEED_OFFSET + rep))
     run_container "$MIXER_PY" fit2 "${common[@]}" --extract "$extract" --seed "$seed" \
       --trait1-file "data/mixer/${sleep}.sumstats.gz" --trait2-file "data/mixer/${disease}.sumstats.gz" \
       --trait1-params "${first}.fit.rep${rep}.json" --trait2-params "${second}.fit.rep${rep}.json" \
@@ -117,8 +123,9 @@ PY
     disease=$2
     validate_trait "$sleep" sleep
     validate_trait "$disease" non_sleep
+    python3 scripts/mixer_tasks.py bivariate --verify-task "MIXER_B::${sleep}__${disease}::combine" >/dev/null
     prefix="results/mixer/bivariate/${sleep}_vs_${disease}"
-    for rep in $(seq 1 20); do
+    for rep in $(seq 1 "$FIT_REPLICATES"); do
       [ -s "${prefix}.fit.rep${rep}.json" ] && [ -s "${prefix}.test.rep${rep}.json" ] || {
         echo "ERROR: incomplete 20-replicate bivariate family for ${sleep}/${disease}" >&2
         exit 1

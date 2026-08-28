@@ -8,6 +8,8 @@ import json
 import math
 from pathlib import Path
 
+import mixer_tasks
+
 
 def read_tsv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8", newline="") as handle:
@@ -33,15 +35,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=".")
     parser.add_argument("--quiet", action="store_true")
+    parser.add_argument("--univariate-only", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
     policy = json.loads((root / "config/mixer_analysis_policy.json").read_text(encoding="utf-8"))
-    _, panel = read_tsv(root / "config/analysis_panel.tsv")
+    panel_path = root / "config/analysis_panel.tsv"
+    _, panel = read_tsv(panel_path)
     traits = [row["trait_id"] for row in panel]
     if len(traits) != 45 or len(set(traits)) != 45:
         fail("panel is not the exact 45-trait set")
     univ_fields, univ = read_tsv(root / "results/tables/mixer_univariate.tsv")
-    bivar_fields, bivar = read_tsv(root / "results/tables/mixer_bivariate.tsv")
     required_univ = {
         "trait_id", "mixer_version", "container_digest", "reference_commit", "input_scope",
         "replicates", "pi_mean", "pi_std", "sig2_beta_mean", "sig2_beta_std",
@@ -58,8 +61,6 @@ def main() -> int:
     }
     if missing := required_univ.difference(univ_fields):
         fail(f"univariate table lacks columns: {sorted(missing)}")
-    if missing := required_bivar.difference(bivar_fields):
-        fail(f"bivariate table lacks columns: {sorted(missing)}")
     if len(univ) != 45 or [row["trait_id"] for row in univ] != traits:
         fail("univariate table is not the ordered 45-trait family")
     common_expected = {
@@ -101,6 +102,19 @@ def main() -> int:
         if expected_eligibility == "ELIGIBLE":
             eligible.add(row["trait_id"])
 
+    mixer_tasks.validate_phase_results(
+        root, policy, panel_path, "univariate",
+        root / "results/tables/mixer_univariate.tsv", len(univ),
+    )
+
+    if args.univariate_only:
+        if not args.quiet:
+            print(f"Validated MiXeR: 45 univariate models, {len(eligible)} eligible traits")
+        return 0
+
+    bivar_fields, bivar = read_tsv(root / "results/tables/mixer_bivariate.tsv")
+    if missing := required_bivar.difference(bivar_fields):
+        fail(f"bivariate table lacks columns: {sorted(missing)}")
     expected_pairs = {
         (first["trait_id"], second["trait_id"])
         for first in panel if first["domain"] == "sleep" and first["trait_id"] in eligible
@@ -134,6 +148,10 @@ def main() -> int:
         ):
             if float(row[column]) < 0:
                 fail(f"negative uncertainty {column}")
+    mixer_tasks.validate_phase_results(
+        root, policy, panel_path, "bivariate",
+        root / "results/tables/mixer_bivariate.tsv", len(bivar),
+    )
     if not args.quiet:
         print(f"Validated MiXeR: 45 univariate models, {len(eligible)} eligible traits, {len(bivar)} eligible sleep-by-non-sleep pairs")
     return 0

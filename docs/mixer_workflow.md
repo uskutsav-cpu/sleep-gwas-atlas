@@ -54,14 +54,20 @@ python3 scripts/36_prepare_mixer_inputs.py --materialize
 The converter streams each GWAS, calculates `Z=BETA/SE`, writes deterministic
 gzip, and records input/output checksums and row counts. It fails before writing
 if any trait remains HapMap3-prefiltered or if free space is below 1.5 times the
-compressed sources plus 2 GiB.
+compressed sources plus 2 GiB. A successful conversion also writes an immutable
+companion lock binding the ordered 45 traits, panel, policy, manifest, and every
+converted file identity. Existing inputs or locks are never silently replaced.
 
 ## Required analysis host
 
 Official MiXeR containers are x86-only. The real-data tutorial specifies at
-least 32 GB RAM and recommends at least 16 physical cores; the official
-reference repository is about 14 GB. The current laptop is Apple M1/arm64 with
-8 GB RAM, 8 logical cores, and only about 5.4 GiB free. It therefore fails
+least 32 GB RAM and recommends at least 16 physical cores. The broader official
+reference repository is larger, but the exact 64-file family consumed by this
+analysis is 6,579,093,199 bytes: 22 BIM files, 22 run4 LD files, and 20
+replicate-specific extract lists. `config/mixer_reference_files.tsv` pins every
+payload to the Git LFS SHA-256 and pointer identity at official `comorment/mixer`
+commit `a4104bf34ed0509a6daa5b06594c40f0b655871c`. The current laptop is
+Apple M1/arm64 with 8 GB RAM, 8 logical cores, and only about 2.2 GiB free. It therefore fails
 architecture, memory, CPU, storage, reference, and full-input preflights.
 Unsupported amd64 emulation is not treated as a scientific production run.
 
@@ -77,11 +83,31 @@ bash scripts/37_pull_mixer_image.sh --pull
 
 The first command never downloads. Reference acquisition is also deliberately
 not automated because the official repository currently warns that its Git LFS
-quota is broken and routes users to an external Dropbox copy.
+quota is broken and routes users to an external Dropbox copy. After acquisition,
+hash all 6.58 GB once and seal the exact local family before any fit:
+
+```bash
+python3 scripts/35_mixer_preflight.py --seal-reference --report-only
+```
+
+Ordinary task preflights then compare the immutable seal and every live file
+size without rehashing 6.58 GB for each array job. Final result validation
+rehashes all returned task artifacts.
 
 ## Production tasks and validation
 
-The task runner maps directly to the official 2.2.1 real-data sequence:
+On the supported host, freeze the complete univariate family before execution:
+
+```bash
+python3 scripts/mixer_tasks.py univariate
+python3 scripts/mixer_tasks.py univariate --write
+```
+
+The first command is a read-only plan. The second is allowed only after the
+whole host, reference, source, and converted-input preflight passes. It creates
+900 replicate tasks plus 45 combine tasks, with exact commands, seeds, expected
+outputs, and a pre-result lock. The task runner refuses commands absent from
+that lock and maps each row directly to the official 2.2.1 sequence:
 
 ```bash
 bash scripts/38_run_mixer_task.sh univariate insomnia 1
@@ -95,11 +121,15 @@ submit these as cluster arrays. The runner refuses to proceed unless the whole
 preflight passes and the pinned image already exists, so it never triggers an
 implicit multi-gigabyte pull.
 
-After combining every univariate model, and then every pair implied by those
-univariate results, publish and validate canonical tables:
+After combining every univariate model, publish and validate it before the
+bivariate family can be defined. Then freeze exactly the pairs whose two
+univariate models pass AIC eligibility:
 
 ```bash
 python3 scripts/39_collate_mixer.py --univariate-only
+python3 scripts/40_validate_mixer.py --univariate-only
+python3 scripts/mixer_tasks.py bivariate
+python3 scripts/mixer_tasks.py bivariate --write
 python3 scripts/39_collate_mixer.py
 python3 scripts/40_validate_mixer.py
 ```
@@ -107,7 +137,12 @@ python3 scripts/40_validate_mixer.py
 The validator enforces 45 ordered univariate models, 20-replicate provenance,
 the AIC/BIC power rules, the exact eligible sleep-by-non-sleep pair family,
 finite parameters, plausible overlap/concordance ranges, and the pinned image
-and reference identifiers.
+and reference identifiers. A scientifically complete zero-eligible-pair family
+is represented by a schema-bearing empty bivariate table instead of being
+misreported as a pipeline failure. Each phase receives immutable provenance
+binding its task lock, exact input/reference seals, every returned artifact,
+and canonical table. This permits transfer by encrypted disk or `rsync`; no Git
+push is required.
 
 Official sources:
 

@@ -84,10 +84,17 @@ def main() -> int:
     parser.add_argument("--root", default=".")
     parser.add_argument("--out-dir", default="data/mixer")
     parser.add_argument("--manifest", default="results/tables/mixer_input_manifest.tsv")
+    parser.add_argument("--lock", default="results/tables/mixer_input_manifest.lock.json")
     parser.add_argument("--materialize", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
-    panel = preflight_module.read_tsv(root / "config/analysis_panel.tsv")
+    panel_path = root / "config/analysis_panel.tsv"
+    policy_path = root / "config/mixer_analysis_policy.json"
+    panel = preflight_module.read_tsv(panel_path)
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    trait_ids = [row["trait_id"] for row in panel]
+    if len(trait_ids) != policy["expected_traits"] or len(set(trait_ids)) != len(trait_ids):
+        raise SystemExit("ERROR: MiXeR input preparation requires the exact ordered 45-trait panel")
     planned_prefilters = {
         row["trait_id"]
         for row in preflight_module.read_tsv(root / "config/hm3_prefilter_plans.tsv")
@@ -118,6 +125,14 @@ def main() -> int:
     if free < required_free:
         raise SystemExit("ERROR: insufficient free space to materialize MiXeR inputs safely")
 
+    manifest = root / args.manifest
+    lock_path = root / args.lock
+    destinations = [root / args.out_dir / f"{trait}.sumstats.gz" for trait, _ in sources]
+    if manifest.exists() or lock_path.exists() or any(path.exists() for path in destinations):
+        raise SystemExit(
+            "ERROR: immutable MiXeR input output already exists; inspect it before any replacement"
+        )
+
     provenance = []
     for index, (trait, source) in enumerate(sources, start=1):
         destination = root / args.out_dir / f"{trait}.sumstats.gz"
@@ -130,7 +145,8 @@ def main() -> int:
             "status": "VALIDATED",
         })
         print(f"[{index}/45] {trait}: {metrics['rows']} rows")
-    manifest = root / args.manifest
+    if list(provenance[0]) != policy["input_manifest_fields"]:
+        raise SystemExit("ERROR: MiXeR input provenance differs from the locked manifest schema")
     manifest.parent.mkdir(parents=True, exist_ok=True)
     temporary = manifest.with_suffix(manifest.suffix + ".tmp")
     with temporary.open("w", encoding="utf-8", newline="") as handle:
@@ -139,6 +155,25 @@ def main() -> int:
         writer.writeheader()
         writer.writerows(provenance)
     temporary.replace(manifest)
+    lock = {
+        "schema_version": "sleep-atlas-mixer-inputs.1",
+        "analysis_id": policy["analysis_id"],
+        "panel_sha256": sha256(panel_path),
+        "policy_sha256": sha256(policy_path),
+        "trait_ids_in_locked_order": trait_ids,
+        "input_manifest": str(manifest.relative_to(root)),
+        "input_manifest_sha256": sha256(manifest),
+        "input_file_sha256": {
+            row["trait_id"]: row["output_sha256"] for row in provenance
+        },
+        "input_scope": "FULL_POST_QC_AUTOSOMAL",
+        "script_sha256": sha256(Path(__file__)),
+    }
+    temporary_lock = lock_path.with_name(lock_path.name + ".tmp")
+    temporary_lock.write_text(
+        json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+    )
+    temporary_lock.replace(lock_path)
     print("Published 45 checksum-bound full-summary-statistics MiXeR inputs")
     return 0
 
