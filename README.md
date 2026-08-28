@@ -70,7 +70,7 @@ definitions, SHA-256-bound per-locus checkpoints, immutable input/reference
 locks, and a strict result/provenance validator. The real
 analysis has not started because the official recommended UK Biobank LD v1.1
 reference requires 15 GiB uncompressed while the current volume has only about
-2.2 GiB free. The older 1,000 Genomes reference is not substituted because LAVA
+2.0 GiB free. The older 1,000 Genomes reference is not substituted because LAVA
 0.1.5 warns of local-h2 bias and type-I error inflation. See
 `docs/lava_workflow.md`.
 
@@ -81,7 +81,9 @@ recommends 16 physical cores, the exact 6,579,093,199-byte runtime reference is
 absent, and 16 LDSC inputs must be regenerated without either a HapMap3 source
 prefilter or HapMap3-only variant-identity map. All 64 consumed reference files, converted inputs, pre-result task
 families, and returned results now have checksum locks suitable for an external
-x86_64 execution host. No container or reference is downloaded implicitly. See
+x86_64 execution host. The complete univariate-first and dynamically eligible
+bivariate families are wired into Snakemake. No container or reference is
+downloaded implicitly. See
 `docs/mixer_workflow.md`.
 
 Shared-locus discovery is now locked to complementary PLACO+ and official
@@ -293,13 +295,31 @@ For 45 traits GenomicSEM requires 1,082 jackknife blocks; this is a long-running
 production target and the resulting high-block-count diagnostic must remain an
 explicit robustness warning.
 
-The `lava` target is intentionally separate from downloading reference data.
-It requires the complete official UK Biobank LD v1.1 chromosome files, resumes
-through per-locus checkpoints, and publishes results only after the complete
-locked test family can be collated and validated:
+The `lava` target resolves the complete official UK Biobank LD v1.1 chromosome
+family, resumes through per-locus checkpoints, and publishes results only after
+the complete locked test family can be collated and validated. Acquisition is
+fail-closed: an absent reference stops unless
+`acknowledge_lava_reference_download` was explicitly changed to `true` after
+reviewing the exact transfer:
 
 ```bash
 snakemake --cores 1 lava
+```
+
+The full production graph has one terminal target:
+
+```bash
+snakemake --cores 16 atlas_v1_release
+```
+
+It includes Genomic SEM terminal evidence, LAVA, univariate and eligible-pair
+MiXeR, PLACO+/conjFDR, fine-mapping, molecular/TWAS, interpretation,
+robustness, integrated-schema validation, and the immutable release. Every
+large transfer remains independently disabled in `config/workflow.yaml` by
+default. A dry run is safe and does not authorize those transfers:
+
+```bash
+snakemake --cores 1 -n atlas_v1_release
 ```
 
 After the run, validate the complete export and derive the downstream SEM input

@@ -39,12 +39,18 @@ H2_SCALE = config.get("h2_scale", "liability")
 
 with open(PANEL, newline="", encoding="utf-8") as handle:
     PANEL_ROWS = list(csv.DictReader(handle, delimiter="\t"))
+PANEL_TRAITS = [row["trait_id"] for row in PANEL_ROWS]
 RAW_BY_TRAIT = {row["trait_id"]: f"data/raw/{row['raw_file']}" for row in PANEL_ROWS}
 SOURCE_ID_BY_TRAIT = {row["trait_id"]: row["source_id"] for row in PANEL_ROWS}
 PANEL_IDS = set(RAW_BY_TRAIT)
 SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] == "sleep"]
 NON_SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] != "sleep"]
 PLEIOTROPY_PAIRS = [f"{sleep}__{other}" for sleep in SLEEP_TRAITS for other in NON_SLEEP_TRAITS]
+LAVA_REFERENCE_FILES = expand(
+    LAVA_REFERENCE_PREFIX + "_chr{chromosome}.{suffix}",
+    chromosome=range(1, 23), suffix=["info", "bcor"],
+)
+MIXER_INPUT_FILES = expand("data/mixer/{trait}.sumstats.gz", trait=PANEL_TRAITS)
 unknown = set(SELECTED).difference(PANEL_IDS)
 if unknown:
     raise ValueError(f"phase0_traits contains IDs outside the locked panel: {sorted(unknown)}")
@@ -335,6 +341,25 @@ rule factor_gwas_terminal:
         "{PYTHON} scripts/30_finalize_genomicsem.py"
 
 
+rule lava_reference:
+    input:
+        policy="config/lava_analysis_policy.json",
+        sources="config/lava_reference_sources.tsv",
+    output:
+        reference=LAVA_REFERENCE_FILES,
+        download_manifest="ref/lava/ukb_v1.1/download_manifest.tsv",
+        extracted_manifest="ref/lava/ukb_v1.1/extracted_manifest.tsv",
+        provenance="ref/lava/ukb_v1.1/reference.provenance.json",
+    params:
+        acknowledgement=(
+            "true" if config.get("acknowledge_lava_reference_download", False) else "false"
+        ),
+    shell:
+        "test '{params.acknowledgement}' = true || "
+        "(echo 'ERROR: the exact 14,110,596,095-byte LAVA transfer requires acknowledgement' >&2; exit 1); "
+        "bash scripts/32_download_lava_reference.sh --download"
+
+
 rule lava_inputs:
     input:
         panel=PANEL,
@@ -363,12 +388,9 @@ rule lava:
         runtime="results/tables/lava_runtime_policy.tsv",
         diagnostics="results/tables/lava_input_diagnostics.json",
         lock="results/tables/lava_input.lock.json",
-        reference_provenance="ref/lava/ukb_v1.1/reference.provenance.json",
+        reference_provenance=rules.lava_reference.output.provenance,
         locus=LAVA_LOCUS_FILE,
-        reference=expand(
-            LAVA_REFERENCE_PREFIX + "_chr{chromosome}.{suffix}",
-            chromosome=range(1, 23), suffix=["info", "bcor"],
-        ),
+        reference=rules.lava_reference.output.reference,
     output:
         status="results/tables/lava_locus_status.tsv",
         univariate="results/tables/lava_univariate.tsv",
@@ -450,6 +472,45 @@ rule dense_harmonization:
         "{PYTHON} scripts/101_prepare_dense_harmonization.py"
 
 
+rule mixer_reference_seal:
+    input:
+        policy=MIXER_POLICY,
+        manifest="config/mixer_reference_files.tsv",
+    output:
+        provenance="ref/mixer/reference.provenance.json",
+    shell:
+        "{PYTHON} scripts/35_mixer_preflight.py --seal-reference --report-only"
+
+
+rule mixer_container:
+    input:
+        policy=MIXER_POLICY,
+    output:
+        touch("results/checkpoints/MIXER_CONTAINER_OK"),
+    params:
+        mode=(
+            "--pull" if config.get("acknowledge_mixer_container_pull", False)
+            else "--require-present"
+        ),
+    shell:
+        "bash scripts/37_pull_mixer_image.sh {params.mode}"
+
+
+rule mixer_inputs:
+    input:
+        panel=PANEL,
+        policy=MIXER_POLICY,
+        harmonized=[full_harmonized_path(trait) for trait in PANEL_TRAITS],
+        qc=[full_harmonized_qc_path(trait) for trait in PANEL_TRAITS],
+        dense=rules.dense_harmonization.output,
+    output:
+        data=MIXER_INPUT_FILES,
+        manifest="results/tables/mixer_input_manifest.tsv",
+        lock="results/tables/mixer_input_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/36_prepare_mixer_inputs.py --materialize"
+
+
 rule mixer_preflight:
     input:
         panel=PANEL,
@@ -459,6 +520,9 @@ rule mixer_preflight:
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
         dense=rules.dense_harmonization.output,
+        reference=rules.mixer_reference_seal.output.provenance,
+        converted=rules.mixer_inputs.output,
+        container=rules.mixer_container.output,
     output:
         report="results/tables/mixer_preflight.json",
         traits="results/tables/mixer_input_readiness.tsv",
@@ -470,10 +534,12 @@ rule mixer_univariate_tasks:
     input:
         panel=PANEL,
         policy=MIXER_POLICY,
-        input_manifest="results/tables/mixer_input_manifest.tsv",
-        input_lock="results/tables/mixer_input_manifest.lock.json",
+        preflight=rules.mixer_preflight.output,
+        input_manifest=rules.mixer_inputs.output.manifest,
+        input_lock=rules.mixer_inputs.output.lock,
         reference_manifest="config/mixer_reference_files.tsv",
-        reference_provenance="ref/mixer/reference.provenance.json",
+        reference_provenance=rules.mixer_reference_seal.output.provenance,
+        container=rules.mixer_container.output,
     output:
         manifest="results/tables/mixer_univariate_tasks.tsv",
         lock="results/tables/mixer_univariate_tasks.lock.json",
@@ -481,19 +547,199 @@ rule mixer_univariate_tasks:
         "{PYTHON} scripts/mixer_tasks.py univariate --write"
 
 
-rule mixer_bivariate_tasks:
+rule mixer_univariate_replicate:
+    input:
+        manifest=rules.mixer_univariate_tasks.output.manifest,
+        lock=rules.mixer_univariate_tasks.output.lock,
+        inputs=rules.mixer_inputs.output,
+        reference=rules.mixer_reference_seal.output.provenance,
+        container=rules.mixer_container.output,
+    output:
+        fit="results/mixer/univariate/{trait}.fit.rep{rep}.json",
+        test="results/mixer/univariate/{trait}.test.rep{rep}.json",
+    wildcard_constraints:
+        trait="|".join(PANEL_TRAITS),
+        rep="[1-9]|1[0-9]|20",
+    threads: 16
+    shell:
+        "bash scripts/38_run_mixer_task.sh univariate {wildcards.trait} {wildcards.rep}"
+
+
+rule mixer_univariate_combine:
+    input:
+        fit=lambda wildcards: expand(
+            "results/mixer/univariate/{trait}.fit.rep{rep}.json",
+            trait=wildcards.trait, rep=range(1, 21),
+        ),
+        test=lambda wildcards: expand(
+            "results/mixer/univariate/{trait}.test.rep{rep}.json",
+            trait=wildcards.trait, rep=range(1, 21),
+        ),
+        manifest=rules.mixer_univariate_tasks.output.manifest,
+        lock=rules.mixer_univariate_tasks.output.lock,
+    output:
+        fit="results/mixer/univariate/{trait}.fit.json",
+        test="results/mixer/univariate/{trait}.test.json",
+        summary="results/mixer/univariate/{trait}.fit.summary.csv",
+    wildcard_constraints:
+        trait="|".join(PANEL_TRAITS),
+    threads: 16
+    shell:
+        "bash scripts/38_run_mixer_task.sh combine-univariate {wildcards.trait}"
+
+
+rule mixer_univariate:
+    input:
+        summaries=expand(
+            "results/mixer/univariate/{trait}.fit.summary.csv", trait=PANEL_TRAITS,
+        ),
+        tasks=rules.mixer_univariate_tasks.output,
+    output:
+        table="results/tables/mixer_univariate.tsv",
+        provenance="results/tables/mixer_univariate.provenance.json",
+    shell:
+        "{PYTHON} scripts/39_collate_mixer.py --univariate-only && "
+        "{PYTHON} scripts/40_validate_mixer.py --univariate-only --quiet"
+
+
+checkpoint mixer_bivariate_tasks:
     input:
         panel=PANEL,
         policy=MIXER_POLICY,
-        input_lock="results/tables/mixer_input_manifest.lock.json",
-        reference_provenance="ref/mixer/reference.provenance.json",
-        univariate="results/tables/mixer_univariate.tsv",
-        univariate_provenance="results/tables/mixer_univariate.provenance.json",
+        input_lock=rules.mixer_inputs.output.lock,
+        reference_provenance=rules.mixer_reference_seal.output.provenance,
+        univariate=rules.mixer_univariate.output.table,
+        univariate_provenance=rules.mixer_univariate.output.provenance,
     output:
         manifest="results/tables/mixer_bivariate_tasks.tsv",
         lock="results/tables/mixer_bivariate_tasks.lock.json",
     shell:
         "{PYTHON} scripts/mixer_tasks.py bivariate --write"
+
+
+rule mixer_bivariate_replicate:
+    input:
+        manifest=rules.mixer_bivariate_tasks.output.manifest,
+        lock=rules.mixer_bivariate_tasks.output.lock,
+        univariate=rules.mixer_univariate.output,
+        inputs=rules.mixer_inputs.output,
+        reference=rules.mixer_reference_seal.output.provenance,
+        container=rules.mixer_container.output,
+    output:
+        fit="results/mixer/bivariate/{sleep}_vs_{non_sleep}.fit.rep{rep}.json",
+        test="results/mixer/bivariate/{sleep}_vs_{non_sleep}.test.rep{rep}.json",
+    wildcard_constraints:
+        sleep="|".join(SLEEP_TRAITS),
+        non_sleep="|".join(NON_SLEEP_TRAITS),
+        rep="[1-9]|1[0-9]|20",
+    threads: 16
+    shell:
+        "bash scripts/38_run_mixer_task.sh bivariate "
+        "{wildcards.sleep} {wildcards.non_sleep} {wildcards.rep}"
+
+
+rule mixer_bivariate_combine:
+    input:
+        fit=lambda wildcards: expand(
+            "results/mixer/bivariate/{sleep}_vs_{non_sleep}.fit.rep{rep}.json",
+            sleep=wildcards.sleep, non_sleep=wildcards.non_sleep, rep=range(1, 21),
+        ),
+        test=lambda wildcards: expand(
+            "results/mixer/bivariate/{sleep}_vs_{non_sleep}.test.rep{rep}.json",
+            sleep=wildcards.sleep, non_sleep=wildcards.non_sleep, rep=range(1, 21),
+        ),
+        manifest=rules.mixer_bivariate_tasks.output.manifest,
+        lock=rules.mixer_bivariate_tasks.output.lock,
+    output:
+        fit="results/mixer/bivariate/{sleep}_vs_{non_sleep}.fit.json",
+        test="results/mixer/bivariate/{sleep}_vs_{non_sleep}.test.json",
+        summary="results/mixer/bivariate/{sleep}_vs_{non_sleep}.csv",
+    wildcard_constraints:
+        sleep="|".join(SLEEP_TRAITS),
+        non_sleep="|".join(NON_SLEEP_TRAITS),
+    threads: 16
+    shell:
+        "bash scripts/38_run_mixer_task.sh combine-bivariate "
+        "{wildcards.sleep} {wildcards.non_sleep}"
+
+
+def mixer_bivariate_summaries(wildcards):
+    manifest = checkpoints.mixer_bivariate_tasks.get(**wildcards).output.manifest
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    summaries = []
+    for row in rows:
+        if row["phase"] != "bivariate_combine":
+            continue
+        candidates = [
+            path for path in row["expected_outputs"].split(";") if path.endswith(".csv")
+        ]
+        if len(candidates) != 1:
+            raise ValueError(f"MiXeR bivariate combine task has no unique summary: {row['task_id']}")
+        summaries.append(candidates[0])
+    return summaries
+
+
+rule mixer:
+    input:
+        summaries=mixer_bivariate_summaries,
+        tasks="results/tables/mixer_bivariate_tasks.tsv",
+        lock="results/tables/mixer_bivariate_tasks.lock.json",
+        univariate=rules.mixer_univariate.output,
+    output:
+        table="results/tables/mixer_bivariate.tsv",
+        provenance="results/tables/mixer_bivariate.provenance.json",
+    shell:
+        "{PYTHON} scripts/39_collate_mixer.py && "
+        "{PYTHON} scripts/40_validate_mixer.py --quiet"
+
+
+rule pleiotropy_runtime:
+    input:
+        policy=PLEIOTROPY_POLICY,
+        sources="config/pleiotropy_reference_sources.tsv",
+        patch="patches/pleiofdr-enable-overlap.patch",
+    output:
+        placo=".r-env/share/placo/PLACO_v0.2.0.R",
+        pleiofdr="work/pleiofdr/pleiotropy_analysis.m",
+        template="ref/pleiofdr/9545380.ref",
+        reference="ref/pleiofdr/ref9545380_1kgPhase3eur_LDr2p1.mat",
+        provenance="ref/pleiofdr/runtime.provenance.json",
+    params:
+        software_ack=(
+            "true" if config.get("acknowledge_pleiotropy_software_download", False)
+            else "false"
+        ),
+        template_ack=(
+            "true" if config.get("acknowledge_pleiotropy_template_download", False)
+            else "false"
+        ),
+        reference_ack=(
+            "true" if config.get("acknowledge_pleiotropy_reference_download", False)
+            else "false"
+        ),
+        software_flag=(
+            "--download-software"
+            if config.get("acknowledge_pleiotropy_software_download", False) else ""
+        ),
+        template_flag=(
+            "--download-template"
+            if config.get("acknowledge_pleiotropy_template_download", False) else ""
+        ),
+        reference_flag=(
+            "--download-reference"
+            if config.get("acknowledge_pleiotropy_reference_download", False) else ""
+        ),
+    shell:
+        "test -s '{output.placo}' -a -s '{output.pleiofdr}' || "
+        "test '{params.software_ack}' = true || "
+        "(echo 'ERROR: pinned PLACO+/pleioFDR software acquisition requires acknowledgement' >&2; exit 1); "
+        "test -s '{output.template}' || test '{params.template_ack}' = true || "
+        "(echo 'ERROR: the exact 274,423,819-byte pleioFDR template requires acknowledgement' >&2; exit 1); "
+        "test -s '{output.reference}' || test '{params.reference_ack}' = true || "
+        "(echo 'ERROR: the exact 2,383,912,974-byte pleioFDR reference requires acknowledgement' >&2; exit 1); "
+        "bash scripts/41_setup_pleiotropy.sh {params.software_flag} "
+        "{params.template_flag} {params.reference_flag}"
 
 
 rule pleiotropy_preflight:
@@ -505,6 +751,7 @@ rule pleiotropy_preflight:
         harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
         qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
         dense=rules.dense_harmonization.output,
+        runtime=rules.pleiotropy_runtime.output,
     output:
         report="results/tables/pleiotropy_preflight.json",
         traits="results/tables/pleiotropy_input_readiness.tsv",
@@ -1512,8 +1759,16 @@ rule atlas_release:
     input:
         atlas="results/atlas/ATLAS_SCHEMA_OK",
         robustness="results/tables/ROBUSTNESS_OK",
+        genomicsem=rules.factor_gwas_terminal.output,
+        lava=rules.lava.output,
+        mixer=rules.mixer.output,
     output:
         touch("releases/ATLAS_V1_RELEASE_OK"),
     shell:
         "{PYTHON} scripts/54_build_release.py --execute && "
         "{PYTHON} scripts/55_validate_release.py --quiet"
+
+
+rule atlas_v1_release:
+    input:
+        rules.atlas_release.output

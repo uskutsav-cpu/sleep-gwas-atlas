@@ -73,7 +73,7 @@ all 44 extracted chromosome files, rehashes the whole family, and writes
 `reference.provenance.json`. Later locus jobs verify that seal and the live file
 sizes without repeatedly hashing the full reference.
 
-As of 28 August 2026, the local volume has only roughly 2.2 GiB free, so the
+As of 28 August 2026, the local volume has only roughly 2.0 GiB free, so the
 production reference has not been downloaded. No 1,000 Genomes substitution is
 permitted merely to fit the current disk.
 
@@ -85,6 +85,11 @@ Once the complete reference is present, run:
 snakemake --cores 1 lava
 python3 scripts/34_validate_lava.py
 ```
+
+Alternatively, after reviewing the exact seven-archive plan, set
+`acknowledge_lava_reference_download: true` in `config/workflow.yaml`; the same
+target then performs the guarded acquisition before LAVA. Leave it `false` when
+the sealed reference is already staged or when only planning the DAG.
 
 The production runner checkpoints each locus under
 `results/checkpoints/lava/`. Every checkpoint carries one SHA-256 run

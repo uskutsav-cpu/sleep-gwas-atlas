@@ -1741,6 +1741,8 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('prefilter != "not supplied"', prepare)
         self.assertIn('"sleep-atlas-mixer-inputs.1"', prepare)
         self.assertIn('if [ "$PULL" != true ]', pull)
+        self.assertIn('--require-present', pull)
+        self.assertIn('no pull was authorized', pull)
         self.assertNotIn("docker pull", runtime)
         self.assertIn('for rep in $(seq 1 "$FIT_REPLICATES")', runtime)
         self.assertIn("SEED_OFFSET + rep", runtime)
@@ -1749,6 +1751,33 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("expected_pairs", validator)
         self.assertIn("validate_phase_results", validator)
         self.assertIn("scripts/40_validate_mixer.py", acceptance)
+
+    def test_release_workflow_routes_every_terminal_module_and_keeps_transfers_opt_in(self):
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        config = (ROOT / "config/workflow.yaml").read_text(encoding="utf-8")
+        for rule in (
+            "lava_reference", "lava", "mixer_reference_seal", "mixer_container",
+            "mixer_inputs", "mixer_univariate_replicate", "mixer_univariate_combine",
+            "mixer_univariate", "mixer_bivariate_replicate", "mixer_bivariate_combine",
+            "mixer", "pleiotropy_runtime", "atlas_release", "atlas_v1_release",
+        ):
+            self.assertIn(f"rule {rule}:", workflow)
+        self.assertIn("checkpoint mixer_bivariate_tasks:", workflow)
+        for dependency in (
+            "genomicsem=rules.factor_gwas_terminal.output",
+            "lava=rules.lava.output",
+            "mixer=rules.mixer.output",
+        ):
+            self.assertIn(dependency, workflow)
+        for flag in (
+            "acknowledge_lava_reference_download",
+            "acknowledge_mixer_container_pull",
+            "acknowledge_pleiotropy_software_download",
+            "acknowledge_pleiotropy_template_download",
+            "acknowledge_pleiotropy_reference_download",
+        ):
+            self.assertIn(f"{flag}: false", config)
+            self.assertIn(f'config.get("{flag}", False)', workflow)
 
     def test_mixer_input_conversion_is_atomic_and_deterministic(self):
         spec = importlib.util.spec_from_file_location(

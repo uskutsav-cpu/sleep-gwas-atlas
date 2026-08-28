@@ -15,10 +15,12 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 
 ## Current state (2026-08-28)
 
-The executable acceptance audit currently passes **10/23** gates. All 107
+The executable acceptance audit currently passes **10/23** gates. All 108
 contract tests pass, every Python file compiles, every shell script parses, and
-all eight R scripts parse. The repository contains no tracked working-tree
-changes at this checkpoint.
+all eight R scripts parse. The complete `atlas_v1_release` route also resolves
+as a 3,042-job pre-checkpoint dry-run, with dynamic bivariate MiXeR and later
+families expanded only after their immutable manifests exist. The repository
+contains no tracked working-tree changes at this checkpoint.
 
 | Gate | State | Current evidence or blocker |
 |---|---|---|
@@ -36,7 +38,7 @@ changes at this checkpoint.
 
 ## Exact production-capacity blocker
 
-The present Mac is arm64 with 8 GiB RAM and approximately 2.2 GiB free. The
+The present Mac is arm64 with 8 GiB RAM and approximately 2.0 GiB free. The
 remaining primary jobs cannot be run safely on it. The fail-closed production
 contracts require:
 

@@ -75,8 +75,8 @@ analysis is 6,579,093,199 bytes: 22 BIM files, 22 run4 LD files, and 20
 replicate-specific extract lists. `config/mixer_reference_files.tsv` pins every
 payload to the Git LFS SHA-256 and pointer identity at official `comorment/mixer`
 commit `a4104bf34ed0509a6daa5b06594c40f0b655871c`. The current laptop is
-Apple M1/arm64 with 8 GB RAM, 8 logical cores, and only about 2.2 GiB free. It therefore fails
-architecture, memory, CPU, storage, reference, and full-input preflights.
+Apple M1/arm64 with 8 GB RAM, 8 logical cores, and only about 2.0 GiB free. It
+therefore fails architecture, memory, CPU, storage, reference, and full-input preflights.
 Unsupported amd64 emulation is not treated as a scientific production run.
 
 On a supported x86 host, materialize the official reference at
@@ -151,6 +151,21 @@ misreported as a pipeline failure. Each phase receives immutable provenance
 binding its task lock, exact input/reference seals, every returned artifact,
 and canonical table. This permits transfer by encrypted disk or `rsync`; no Git
 push is required.
+
+The same sequence is represented by the `mixer` Snakemake target. It converts
+all 45 full inputs, freezes and runs the 900 univariate replicates plus 45
+combines, checkpoints the observed eligibility family, then schedules exactly
+the eligible bivariate replicates and combines before final collation:
+
+```bash
+snakemake --cores 16 mixer
+```
+
+The 64-file reference must still be staged manually and sealed because the
+official repository currently routes around a broken Git LFS quota. The image
+is accepted when already present; otherwise
+`acknowledge_mixer_container_pull: true` must be set before Snakemake may pull
+the exact 2,106,984,629-byte image.
 
 Official sources:
 

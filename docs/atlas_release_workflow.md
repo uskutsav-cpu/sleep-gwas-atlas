@@ -54,3 +54,24 @@ an atomic rename. An existing release is never replaced in place.
 Raw and harmonized GWAS files are not redistributed in the release. Their
 registered source identities and checksums, canonical-data checksums in
 `traits.tsv`, and generating code are retained instead.
+
+## Complete production target
+
+`atlas_v1_release` is the single full-DAG entry point. It explicitly requires
+the terminal Genomic SEM, LAVA, MiXeR, integrated-atlas, and robustness outputs;
+the latter two transitively require the complete pleiotropy, fine-mapping,
+molecular/TWAS, and interpretation layers. From the current checkpoint its dry
+run resolves 3,042 jobs before dynamic bivariate MiXeR and later checkpoint
+families are expanded:
+
+```bash
+snakemake --cores 1 -n atlas_v1_release
+snakemake --cores 16 atlas_v1_release
+```
+
+The second command belongs on the documented production host, not the current
+laptop. Large acquisitions remain disabled by false-by-default acknowledgement
+keys in `config/workflow.yaml`; each key authorizes only its named transfer.
+The MiXeR 64-file reference is manual-stage-only and is checksum sealed before
+any task manifest can be written. The release rule runs last and still requires
+a clean tracked worktree and all 22 non-release acceptance gates.

@@ -37,7 +37,7 @@ is not a causal-direction estimate.
 The official pleioFDR reference is exactly 2,383,912,974 bytes (2.22 GiB) and
 the upstream workflow requires MATLAB and at least 16 GB RAM. It is not
 downloaded implicitly. This Apple M1 laptop has 8 GB RAM, no MATLAB, about
-2.2 GiB free, and only 29/45 full post-QC inputs. The 16 inputs that were
+2.0 GiB free, and only 29/45 full post-QC inputs. The 16 inputs that were
 source-prefiltered or variant-identity-mapped to HapMap3 for LDSC block 192 of
 396 pair scans:
 
@@ -135,6 +135,20 @@ immutable and include checksums for the full 396-pair returned-artifact family.
 The equivalent opt-in Snakemake targets are `placo_pair`, `conjfdr_pair`, and
 `pleiotropy`. They are intentionally outside the default `all` target because
 they materialize large files and launch production-scale computation.
+
+The terminal `pleiotropy` target resolves the pinned software, template, and
+LD-reference runtime first. Those three acquisitions have independent,
+false-by-default switches in `config/workflow.yaml`:
+
+```text
+acknowledge_pleiotropy_software_download
+acknowledge_pleiotropy_template_download
+acknowledge_pleiotropy_reference_download
+```
+
+Existing verified assets are sealed without requiring download approval. An
+absent asset stops at its corresponding gate, so authorizing the small software
+family never authorizes either large data payload.
 
 The setup script only prints the software/reference plan by default. The small
 code downloads require `--download-software`. The 2.22 GiB reference requires
