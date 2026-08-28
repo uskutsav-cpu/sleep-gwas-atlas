@@ -352,6 +352,10 @@ def integrated_atlas_gate(root: Path) -> Gate:
         "results/atlas/pathways.tsv",
         "results/atlas/causal_tests.tsv",
         "results/atlas/edges.tsv",
+        "results/tables/interpretation_coverage.tsv",
+        "results/atlas/interpretation.provenance.json",
+        "results/tables/major_conclusions.tsv",
+        "results/atlas/edges.provenance.json",
     ]
     missing = [path for path in paths if not real_nonempty(root / path)]
     if missing:
@@ -368,16 +372,33 @@ def integrated_atlas_gate(root: Path) -> Gate:
     if result.returncode:
         detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
         return Gate("integrated_atlas", "BLOCKED", ", ".join(paths), f"atlas validation failed: {detail}")
+    graph_validator = root / "scripts/78_build_atlas_edges.py"
+    graph_result = subprocess.run(
+        [sys.executable, str(graph_validator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if graph_result.returncode:
+        detail = (graph_result.stdout + graph_result.stderr).strip().replace("\n", "; ")
+        return Gate("integrated_atlas", "BLOCKED", ", ".join(paths), f"atlas graph validation failed: {detail}")
     return Gate("integrated_atlas", "PASS", "ten schema-locked, cross-linked canonical tables", "")
 
 
 def robustness_gate(root: Path) -> Gate:
-    relative = "results/tables/robustness_summary.tsv"
-    if not real_nonempty(root / relative):
+    paths = ["results/tables/robustness_summary.tsv", "results/tables/robustness.provenance.json"]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
         return Gate(
             "robustness", "BLOCKED", "",
-            f"complete the predefined major robustness pass; missing real non-empty artifact: {relative}",
+            "complete the predefined major robustness pass; missing real non-empty artifact(s): " + ", ".join(missing),
         )
+    collator = root / "scripts/81_collate_robustness.py"
+    collated = subprocess.run(
+        [sys.executable, str(collator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if collated.returncode:
+        detail = (collated.stdout + collated.stderr).strip().replace("\n", "; ")
+        return Gate("robustness", "BLOCKED", ", ".join(paths), f"robustness collation validation failed: {detail}")
     validator = root / "scripts/53_validate_robustness.py"
     result = subprocess.run(
         [sys.executable, str(validator), "--root", str(root), "--quiet"],
@@ -385,7 +406,7 @@ def robustness_gate(root: Path) -> Gate:
     )
     if result.returncode:
         detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
-        return Gate("robustness", "BLOCKED", relative, f"robustness validation failed: {detail}")
+        return Gate("robustness", "BLOCKED", ", ".join(paths), f"robustness validation failed: {detail}")
     return Gate("robustness", "PASS", "complete nine-family robustness matrix", "")
 
 
@@ -452,6 +473,48 @@ def molecular_gates(root: Path) -> list[Gate]:
     ]
 
 
+def interpretation_gates(root: Path) -> list[Gate]:
+    families = [
+        ("regulatory_mapping", "regulatory", "results/atlas/regulatory_elements.tsv", "map fine-mapped variants through all locked regulatory layers/domains"),
+        ("cell_types", "cell_type", "results/atlas/cell_types.tsv", "complete all five cell-type strategies across four domains"),
+        ("pathways", "pathway", "results/atlas/pathways.tsv", "complete all four frozen pathway resource families"),
+        ("causal_inference", "causal", "results/atlas/causal_tests.tsv", "complete both directions and all five estimator families for 396 pairs"),
+    ]
+    shared = [
+        "results/tables/interpretation_task_manifest.tsv",
+        "results/tables/interpretation_task_manifest.lock.json",
+        "results/tables/interpretation_coverage.tsv",
+        "results/atlas/interpretation.provenance.json",
+    ]
+    required = shared + [item[2] for item in families]
+    missing = [path for path in required if not real_nonempty(root / path)]
+    if missing:
+        detail = "missing real non-empty artifact(s): " + ", ".join(missing)
+        return [Gate(name, "BLOCKED", "", purpose + "; " + detail) for name, _family, _path, purpose in families]
+    validator = root / "scripts/77_collate_interpretation.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return [Gate(name, "BLOCKED", path, f"interpretation validation failed: {detail}") for name, _family, path, _purpose in families]
+    coverage = read_tsv(root / "results/tables/interpretation_coverage.tsv")
+    gates = []
+    for name, family, path, purpose in families:
+        rows = [row for row in coverage if row.get("analysis_family") == family]
+        blocked = sum(int(row.get("access_blocked_unit_count", "0")) for row in rows)
+        incomplete = [row for row in rows if row.get("coverage_status") != "COMPLETE"]
+        if not rows or blocked or incomplete:
+            gates.append(Gate(
+                name, "BLOCKED", path,
+                f"{purpose}; coverage rows={len(rows)} access-blocked units={blocked} incomplete rows={len(incomplete)}",
+            ))
+        else:
+            gates.append(Gate(name, "PASS", f"{len(rows)} checksum-validated terminal {family} tasks", ""))
+    return gates
+
+
 def build_gates(root: Path) -> list[Gate]:
     panel, rows = panel_gate(root)
     gates = [panel]
@@ -480,10 +543,6 @@ def build_gates(root: Path) -> list[Gate]:
     )
     artifact_specs = [
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
-        ("regulatory_mapping", ["results/atlas/regulatory_elements.tsv"], "map fine-mapped variants through regulatory elements to genes"),
-        ("cell_types", ["results/atlas/cell_types.tsv"], "complete multi-method cell-type analyses"),
-        ("pathways", ["results/atlas/pathways.tsv"], "complete high-confidence pathway and network analyses"),
-        ("causal_inference", ["results/atlas/causal_tests.tsv"], "complete bidirectional MR and sensitivity analyses"),
     ]
     gates.append(covariance_gate(root))
     gates.append(lava_gate(root))
@@ -492,6 +551,7 @@ def build_gates(root: Path) -> list[Gate]:
     gates.append(fine_mapping_gate(root))
     gates.extend(molecular_gates(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
+    gates.extend(interpretation_gates(root))
     gates.append(integrated_atlas_gate(root))
     gates.append(robustness_gate(root))
     gates.append(genomic_sem_gate(root))

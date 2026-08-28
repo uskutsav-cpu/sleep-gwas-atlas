@@ -29,4 +29,6 @@ python3 scripts/51_build_atlas_core.py --validate-only
 
 This publishes only `traits.tsv`, `trait_pairs.tsv`, and their checksum-bound
 provenance. The integrated-atlas acceptance gate remains blocked until every
-other canonical table contains validated real results.
+other layer has exact terminal coverage and every canonical evidence row, if
+any, is validated. A genuinely empty evidence table is permitted only when its
+complete locked task family records a real null or justified non-applicability.

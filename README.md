@@ -110,6 +110,13 @@ PredictDB model family for variance-controlled S-PrediXcan, and represents a
 fully searched locus with no supported gene as explicit coverage rather than a
 fabricated gene. See `docs/molecular_workflow.md`.
 
+The regulatory, cell-type, pathway, bidirectional-MR, graph-integration, and
+nine-family robustness layers now use a second pre-result task lock. Complete
+null analyses are preserved in a checksum-bound coverage ledger; they never
+require a fabricated regulatory element, cell type, pathway, causal claim, or
+gene. External resources remain blocked until their exact release, bytes, and
+SHA256 are curated. See `docs/interpretation_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

@@ -107,12 +107,19 @@ def main() -> int:
     parser.add_argument(
         "--molecular-coverage", default="results/tables/molecular_locus_coverage.tsv",
     )
+    parser.add_argument("--interpretation-policy", default="config/interpretation_analysis_policy.json")
+    parser.add_argument("--interpretation-manifest", default="results/tables/interpretation_task_manifest.tsv")
+    parser.add_argument("--interpretation-manifest-lock", default="results/tables/interpretation_task_manifest.lock.json")
+    parser.add_argument("--interpretation-coverage", default="results/tables/interpretation_coverage.tsv")
+    parser.add_argument("--interpretation-provenance", default="results/atlas/interpretation.provenance.json")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
     root = Path(args.root).resolve()
     atlas_dir = root / args.atlas_dir
     schema = json.loads((root / args.schema).read_text(encoding="utf-8"))
     policy = json.loads((root / args.policy).read_text(encoding="utf-8"))
+    interpretation_policy_path = root / args.interpretation_policy
+    interpretation_policy = json.loads(interpretation_policy_path.read_text(encoding="utf-8"))
     definitions = schema.get("tables", {})
     expected_names = policy["integrated_atlas"]["tables"]
     if list(definitions) != expected_names or len(expected_names) != 10:
@@ -282,6 +289,62 @@ def main() -> int:
     if observed_coverage != expected_coverage:
         fail("molecular coverage does not span every primary locus and required modality")
 
+    interpretation_manifest_path = root / args.interpretation_manifest
+    interpretation_lock_path = root / args.interpretation_manifest_lock
+    interpretation_coverage_path = root / args.interpretation_coverage
+    interpretation_fields, interpretation_tasks = read_tsv(interpretation_manifest_path)
+    interpretation_lock = json.loads(interpretation_lock_path.read_text(encoding="utf-8"))
+    if (
+        interpretation_fields != interpretation_policy["task_manifest_fields"]
+        or interpretation_lock.get("policy_sha256") != sha256(interpretation_policy_path)
+        or interpretation_lock.get("task_manifest_sha256") != sha256(interpretation_manifest_path)
+        or interpretation_lock.get("task_ids_in_locked_order")
+        != [row["task_id"] for row in interpretation_tasks]
+        or interpretation_lock.get("interpretation_results_accessed_before_task_lock") is not False
+    ):
+        fail("interpretation task family differs from its pre-result lock")
+    interpretation_coverage_fields, interpretation_coverage = read_tsv(interpretation_coverage_path)
+    if interpretation_coverage_fields != interpretation_policy["coverage_fields"]:
+        fail("interpretation_coverage.tsv header differs from the frozen policy")
+    unique_keys("interpretation_coverage.tsv", interpretation_coverage, ["coverage_id"])
+    expected_interpretation_coverage = {"ICOV__" + row["task_id"] for row in interpretation_tasks}
+    if {row["coverage_id"] for row in interpretation_coverage} != expected_interpretation_coverage:
+        fail("interpretation coverage is not the exact locked task family")
+    for row in interpretation_coverage:
+        identity = row["coverage_id"]
+        required_units = integer(row["required_unit_count"], "required_unit_count", identity, 1)
+        completed_units = integer(row["completed_unit_count"], "completed_unit_count", identity, 0)
+        components = [integer(row[field], field, identity, 0) for field in (
+            "analyzed_unit_count", "no_evidence_unit_count", "access_blocked_unit_count",
+            "not_applicable_unit_count",
+        )]
+        if (
+            row["coverage_status"] != "COMPLETE" or completed_units != required_units
+            or sum(components) != completed_units
+        ):
+            fail(f"incomplete interpretation coverage accounting for {identity}")
+        if components[2] != 0:
+            fail(f"access-blocked interpretation task remains unresolved: {identity}")
+        evidence_path = root / row["evidence_path"]
+        if (
+            not evidence_path.is_file() or not SHA256.fullmatch(row["evidence_sha256"])
+            or sha256(evidence_path) != row["evidence_sha256"]
+        ):
+            fail(f"interpretation coverage evidence differs for {identity}")
+    interpretation_provenance_path = root / args.interpretation_provenance
+    interpretation_provenance = json.loads(interpretation_provenance_path.read_text(encoding="utf-8"))
+    if (
+        interpretation_provenance.get("policy_sha256") != sha256(interpretation_policy_path)
+        or interpretation_provenance.get("task_manifest_sha256") != sha256(interpretation_manifest_path)
+        or interpretation_provenance.get("outputs", {}).get(args.interpretation_coverage)
+        != sha256(interpretation_coverage_path)
+    ):
+        fail("interpretation aggregate provenance differs from its locked inputs/coverage")
+    for name in ("regulatory_elements.tsv", "cell_types.tsv", "pathways.tsv", "causal_tests.tsv"):
+        relative = f"results/atlas/{name}"
+        if interpretation_provenance.get("outputs", {}).get(relative) != sha256(atlas_dir / name):
+            fail(f"{name} differs from interpretation aggregate provenance")
+
     regulatory = tables["regulatory_elements.tsv"]
     regulatory_ids = {row["regulatory_element_id"] for row in regulatory}
     for row in regulatory:
@@ -292,10 +355,10 @@ def main() -> int:
             fail(f"regulatory element {identity} references an absent locus/gene")
     required_layers = set(policy["regulatory_mapping"]["required_layers"])
     required_contexts = set(policy["regulatory_mapping"]["required_context_domains"])
-    if not required_layers.issubset({row["element_type"] for row in regulatory}):
-        fail("regulatory_elements.tsv does not cover every locked regulatory layer")
-    if not required_contexts.issubset({row["context_domain"] for row in regulatory}):
-        fail("regulatory_elements.tsv does not cover every locked context domain")
+    if any(row["element_type"] not in required_layers for row in regulatory):
+        fail("regulatory_elements.tsv contains an unlocked regulatory layer")
+    if any(row["context_domain"] not in required_contexts for row in regulatory):
+        fail("regulatory_elements.tsv contains an unlocked context domain")
 
     node_ids = traits | locus_ids | variant_ids | gene_ids | regulatory_ids
     for name in ("cell_types.tsv", "pathways.tsv"):
@@ -307,12 +370,12 @@ def main() -> int:
                 node_ids.add(row["cell_type_id"])
             else:
                 node_ids.add(row["pathway_id"])
-    if not set(policy["cell_types"]["required_strategies"]).issubset({row["method"] for row in tables["cell_types.tsv"]}):
-        fail("cell_types.tsv does not cover every locked method")
-    if not set(policy["cell_types"]["required_domains"]).issubset({row["domain"] for row in tables["cell_types.tsv"]}):
-        fail("cell_types.tsv does not cover every locked biological domain")
-    if not set(policy["pathways"]["required_resources"]).issubset({row["resource"] for row in tables["pathways.tsv"]}):
-        fail("pathways.tsv does not cover every locked resource")
+    if any(row["method"] not in set(policy["cell_types"]["required_strategies"]) for row in tables["cell_types.tsv"]):
+        fail("cell_types.tsv contains an unlocked method")
+    if any(row["domain"] not in set(policy["cell_types"]["required_domains"]) for row in tables["cell_types.tsv"]):
+        fail("cell_types.tsv contains an unlocked biological domain")
+    if any(row["resource"] not in set(policy["pathways"]["required_resources"]) for row in tables["pathways.tsv"]):
+        fail("pathways.tsv contains an unlocked resource")
 
     for row in tables["causal_tests.tsv"]:
         identity = row["causal_test_id"]
@@ -324,12 +387,11 @@ def main() -> int:
             fail(f"causal test {identity} has too few primary instruments")
         if minimum_f < policy["causal_inference"]["minimum_F_statistic"]:
             fail(f"causal test {identity} has a weak instrument")
-    causal_methods = {row["method"] for row in tables["causal_tests.tsv"]}
-    required_methods = set(policy["causal_inference"]["methods"][:4])
-    if not required_methods.issubset(causal_methods) or not causal_methods.intersection({"CAUSE", "LHC_MR", "CAUSE_or_LHC_MR_where_appropriate"}):
-        fail("causal_tests.tsv does not cover the locked robust-estimator family")
-    if {row["direction"] for row in tables["causal_tests.tsv"]} != set(policy["causal_inference"]["directions"]):
-        fail("causal_tests.tsv does not cover both locked directions")
+    allowed_causal_methods = set(policy["causal_inference"]["methods"][:4]) | {"CAUSE", "LHC_MR"}
+    if any(row["method"] not in allowed_causal_methods for row in tables["causal_tests.tsv"]):
+        fail("causal_tests.tsv contains an unlocked estimator")
+    if any(row["direction"] not in set(policy["causal_inference"]["directions"]) for row in tables["causal_tests.tsv"]):
+        fail("causal_tests.tsv contains an unlocked direction")
 
     for row in tables["edges.tsv"]:
         identity = row["edge_id"]

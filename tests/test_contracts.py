@@ -1679,7 +1679,8 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(schema["tables"]["traits.tsv"]["expected_rows"], 45)
         self.assertEqual(schema["tables"]["trait_pairs.tsv"]["expected_rows"], 396)
         for name in policy["integrated_atlas"]["tables"][2:]:
-            self.assertEqual(schema["tables"][name]["minimum_rows"], 1)
+            expected_minimum = 1 if name in {"loci.tsv", "variants.tsv"} else 0
+            self.assertEqual(schema["tables"][name]["minimum_rows"], expected_minimum)
             self.assertIn("provenance_id", schema["tables"][name]["fields"])
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/52_validate_integrated_atlas.py")],
@@ -1711,6 +1712,8 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("non-release gates remain blocked", release_builder)
         self.assertIn("releases are never overwritten", release_builder)
         self.assertIn('parser.add_argument("--execute", action="store_true"', release_builder)
+        for directory in ("results/molecular", "results/interpretation", "results/robustness"):
+            self.assertIn(f'"{directory}"', release_builder)
         release_validator = (ROOT / "scripts/55_validate_release.py").read_text(
             encoding="utf-8"
         )
@@ -1934,6 +1937,47 @@ class PanelContractTests(unittest.TestCase):
             "molecular_metadata", "molecular_preflight", "molecular_source_search",
             "molecular_coloc_run", "twas_model_index", "twas_run", "molecular_integration",
         ):
+            self.assertIn(f"rule {rule}:", workflow)
+
+    def test_interpretation_task_family_is_exact_cross_product(self):
+        module = load_numbered_script("75_prepare_interpretation_tasks.py", "interpretation_tasks")
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        with (ROOT / "config/interpretation_source_registry.tsv").open(encoding="utf-8", newline="") as handle:
+            sources = list(csv.DictReader(handle, delimiter="\t"))
+        panel = [{"trait_id": "sleep", "domain": "sleep"}, {"trait_id": "disease", "domain": "cardio"}]
+        pairs = [{"pair_id": "sleep__disease", "sleep_trait": "sleep", "non_sleep_trait": "disease"}]
+        loci = [{"locus_id": "L1", "sleep_trait": "sleep", "non_sleep_trait": "disease"}]
+        variants = [{"locus_id": "L1", "variant_id": "rs1"}]
+        genes = [{"locus_id": "L1", "gene_id": "ENSG1", "evidence_level": "HIGH_CONFIDENCE_CONVERGENT_GENE"}]
+        tasks = module.build_tasks(policy, panel, pairs, loci, variants, genes, sources)
+        counts = {family: sum(row["analysis_family"] == family for row in tasks) for family in (
+            "regulatory", "cell_type", "pathway", "causal",
+        )}
+        self.assertEqual(counts, {"regulatory": 24, "cell_type": 40, "pathway": 4, "causal": 10})
+        self.assertEqual(len({row["task_id"] for row in tasks}), len(tasks))
+
+    def test_interpretation_bh_and_null_evidence_contract(self):
+        module = load_numbered_script("77_collate_interpretation.py", "interpretation_collator")
+        self.assertEqual(module.bh([0.01, 0.04, 0.03]), [0.03, 0.04, 0.04])
+        schema = json.loads((ROOT / "config/atlas_table_schema.json").read_text(encoding="utf-8"))
+        for name in ("genes.tsv", "regulatory_elements.tsv", "cell_types.tsv", "pathways.tsv", "causal_tests.tsv"):
+            self.assertEqual(schema["tables"][name]["minimum_rows"], 0)
+        validator = (ROOT / "scripts/52_validate_integrated_atlas.py").read_text(encoding="utf-8")
+        self.assertIn("interpretation coverage is not the exact locked task family", validator)
+        self.assertIn("access-blocked interpretation task remains unresolved", validator)
+        release_validator = (ROOT / "scripts/55_validate_release.py").read_text(encoding="utf-8")
+        for component in ("MAGMA", "TwoSampleMR", "MR-PRESSO", "CAUSE_or_LHC_MR"):
+            self.assertIn(f'"{component}"', release_validator)
+
+    def test_robustness_applicability_is_locked_before_results(self):
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        families = policy["robustness"]["required_families"]
+        for conclusion_type, matrix in policy["robustness"]["applicability_by_conclusion_type"].items():
+            self.assertIn(conclusion_type, policy["robustness"]["major_conclusion_edge_levels"])
+            self.assertEqual(list(matrix), families)
+            self.assertTrue(all(value == "APPLICABLE" or len(value) > 15 for value in matrix.values()))
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        for rule in ("interpretation_preflight", "interpretation_task", "interpretation", "atlas_edges", "robustness_task", "robustness"):
             self.assertIn(f"rule {rule}:", workflow)
 
 

@@ -25,32 +25,32 @@
     },
     "genes.tsv": {
       "primary_key": ["locus_id", "gene_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["gene_id", "gene_symbol", "locus_id", "evidence_stream_count", "eqtl_status", "sqtl_status", "pqtl_pwas_status", "twas_status", "colocalization_status", "context", "evidence_level", "claim_limit", "provenance_id"]
     },
     "regulatory_elements.tsv": {
       "primary_key": ["regulatory_element_id", "variant_id", "target_gene_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["regulatory_element_id", "variant_id", "locus_id", "element_type", "biosample", "tissue", "cell_type", "context_domain", "target_gene_id", "link_method", "source_dataset", "source_version", "evidence_level", "provenance_id"]
     },
     "cell_types.tsv": {
       "primary_key": ["cell_type_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["cell_type_id", "cell_type", "tissue", "domain", "method", "trait_or_locus_id", "effect", "se", "p_value", "fdr", "evidence_level", "dataset", "version", "provenance_id"]
     },
     "pathways.tsv": {
       "primary_key": ["pathway_id", "trait_or_locus_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["pathway_id", "pathway_name", "resource", "gene_set_size", "contributing_genes", "trait_or_locus_id", "effect", "p_value", "fdr", "evidence_level", "dataset_version", "provenance_id"]
     },
     "causal_tests.tsv": {
       "primary_key": ["causal_test_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["causal_test_id", "exposure", "outcome", "direction", "method", "n_instruments", "effect", "se", "p_value", "f_statistic_min", "heterogeneity_p", "pleiotropy_p", "steiger_status", "sample_overlap_status", "colocalization_consistency", "evidence_level", "provenance_id"]
     },
     "edges.tsv": {
       "primary_key": ["edge_id"],
-      "minimum_rows": 1,
+      "minimum_rows": 0,
       "fields": ["edge_id", "source", "target", "relationship", "effect", "direction", "p_value", "fdr", "tissue", "cell_type", "method", "evidence_level", "dataset", "version", "provenance_id"]
     }
   },

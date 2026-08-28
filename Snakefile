@@ -23,6 +23,7 @@ DOWNSTREAM_POLICY = config["downstream_policy"]
 ATLAS_SCHEMA = config["atlas_schema"]
 FINE_MAPPING_POLICY = config["fine_mapping_policy"]
 MOLECULAR_POLICY = config.get("molecular_policy", "config/molecular_analysis_policy.json")
+INTERPRETATION_POLICY = config.get("interpretation_policy", "config/interpretation_analysis_policy.json")
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -777,11 +778,164 @@ rule molecular_integration:
         "{PYTHON} scripts/73_collate_molecular.py"
 
 
+rule interpretation_preflight:
+    input:
+        policy=INTERPRETATION_POLICY,
+        downstream=DOWNSTREAM_POLICY,
+        sources="config/interpretation_source_registry.tsv",
+        references="config/interpretation_method_references.tsv",
+        molecular=rules.molecular_integration.output,
+        traits="results/atlas/traits.tsv",
+        pairs="results/atlas/trait_pairs.tsv",
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        genes="results/atlas/genes.tsv",
+    output:
+        readiness="results/tables/interpretation_source_readiness.tsv",
+        report="results/tables/interpretation_preflight.json",
+    shell:
+        "{PYTHON} scripts/74_interpretation_preflight.py --report-only"
+
+
+checkpoint interpretation_tasks:
+    input:
+        preflight="results/tables/interpretation_preflight.json",
+        policy=INTERPRETATION_POLICY,
+        sources="config/interpretation_source_registry.tsv",
+        references="config/interpretation_method_references.tsv",
+        traits="results/atlas/traits.tsv",
+        pairs="results/atlas/trait_pairs.tsv",
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        genes="results/atlas/genes.tsv",
+    output:
+        manifest="results/tables/interpretation_task_manifest.tsv",
+        lock="results/tables/interpretation_task_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/75_prepare_interpretation_tasks.py"
+
+
+def interpretation_task_dependencies(wildcards):
+    manifest = checkpoints.interpretation_tasks.get(**wildcards).output.manifest
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    selected = [
+        row for row in rows
+        if row["task_id"] == wildcards.task_id and row["analysis_family"] == wildcards.family
+    ]
+    if len(selected) != 1:
+        raise ValueError(f"unknown interpretation task ID: {wildcards.task_id}")
+    task = selected[0]
+    if task["method"] == "regulatory_overlap":
+        return [row["provenance_path"] for row in rows if row["analysis_family"] == "regulatory"]
+    if task["method"] == "QTL_colocalization":
+        return ["results/tables/molecular_evidence.tsv", "results/atlas/molecular.provenance.json"]
+    return []
+
+
+rule interpretation_task:
+    input:
+        dependencies=interpretation_task_dependencies,
+        manifest="results/tables/interpretation_task_manifest.tsv",
+        lock="results/tables/interpretation_task_manifest.lock.json",
+    output:
+        result="results/interpretation/runs/{family}/{task_id}/normalized.tsv",
+        provenance="results/interpretation/runs/{family}/{task_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/76_run_interpretation_task.py {wildcards.task_id} --execute"
+
+
+def interpretation_task_provenance(wildcards):
+    manifest = checkpoints.interpretation_tasks.get(**wildcards).output.manifest
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return [row["provenance_path"] for row in rows]
+
+
+rule interpretation:
+    input:
+        task_provenance=interpretation_task_provenance,
+        manifest="results/tables/interpretation_task_manifest.tsv",
+        lock="results/tables/interpretation_task_manifest.lock.json",
+    output:
+        regulatory="results/atlas/regulatory_elements.tsv",
+        cells="results/atlas/cell_types.tsv",
+        pathways="results/atlas/pathways.tsv",
+        causal="results/atlas/causal_tests.tsv",
+        coverage="results/tables/interpretation_coverage.tsv",
+        provenance="results/atlas/interpretation.provenance.json",
+    shell:
+        "{PYTHON} scripts/77_collate_interpretation.py"
+
+
+rule atlas_edges:
+    input:
+        interpretation=rules.interpretation.output,
+        traits="results/atlas/traits.tsv",
+        pairs="results/atlas/trait_pairs.tsv",
+        loci="results/atlas/loci.tsv",
+        variants="results/atlas/variants.tsv",
+        genes="results/atlas/genes.tsv",
+    output:
+        edges="results/atlas/edges.tsv",
+        conclusions="results/tables/major_conclusions.tsv",
+        provenance="results/atlas/edges.provenance.json",
+    shell:
+        "{PYTHON} scripts/78_build_atlas_edges.py"
+
+
+checkpoint robustness_tasks:
+    input:
+        policy=INTERPRETATION_POLICY,
+        downstream=DOWNSTREAM_POLICY,
+        conclusions="results/tables/major_conclusions.tsv",
+        edges="results/atlas/edges.tsv",
+    output:
+        manifest="results/tables/robustness_task_manifest.tsv",
+        lock="results/tables/robustness_task_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/79_prepare_robustness_tasks.py"
+
+
+rule robustness_task:
+    input:
+        manifest="results/tables/robustness_task_manifest.tsv",
+        lock="results/tables/robustness_task_manifest.lock.json",
+    output:
+        result="results/robustness/runs/{task_id}/normalized.tsv",
+        provenance="results/robustness/runs/{task_id}/provenance.json",
+    shell:
+        "{PYTHON} scripts/80_run_robustness_task.py {wildcards.task_id} --execute"
+
+
+def robustness_task_provenance(wildcards):
+    manifest = checkpoints.robustness_tasks.get(**wildcards).output.manifest
+    with open(manifest, newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    return [row["provenance_path"] for row in rows]
+
+
+rule robustness:
+    input:
+        task_provenance=robustness_task_provenance,
+        manifest="results/tables/robustness_task_manifest.tsv",
+        lock="results/tables/robustness_task_manifest.lock.json",
+    output:
+        summary="results/tables/robustness_summary.tsv",
+        provenance="results/tables/robustness.provenance.json",
+    shell:
+        "{PYTHON} scripts/81_collate_robustness.py"
+
+
 rule validate_integrated_atlas:
     input:
         policy=DOWNSTREAM_POLICY,
         schema=ATLAS_SCHEMA,
         molecular_coverage="results/tables/molecular_locus_coverage.tsv",
+        interpretation_policy=INTERPRETATION_POLICY,
+        interpretation_coverage="results/tables/interpretation_coverage.tsv",
+        interpretation_provenance="results/atlas/interpretation.provenance.json",
+        edges_provenance="results/atlas/edges.provenance.json",
         tables=expand(
             "results/atlas/{name}",
             name=[
@@ -799,7 +953,8 @@ rule validate_integrated_atlas:
 rule validate_robustness:
     input:
         policy=DOWNSTREAM_POLICY,
-        summary="results/tables/robustness_summary.tsv",
+        summary=rules.robustness.output.summary,
+        provenance=rules.robustness.output.provenance,
     output:
         touch("results/tables/ROBUSTNESS_OK"),
     shell:

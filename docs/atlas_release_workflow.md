@@ -3,8 +3,11 @@
 The atlas release is deliberately impossible to create until every scientific
 gate other than the release itself passes. File presence alone is insufficient.
 `config/atlas_table_schema.json` freezes the exact ten-table field order,
-primary keys, row-count minima, probability constraints, and the non-result
-markers that are forbidden in scientific output.
+primary keys, row-count rules, probability constraints, and the non-result
+markers that are forbidden in scientific output. Positive-evidence tables may
+be header-only after a genuine complete null analysis, but only when their
+separate checksum-bound task coverage is exact and contains no unresolved
+access blocker.
 
 The integrated validator checks the exact 45-trait and 396-pair families,
 autosomal locus and variant coordinates, allele validity, primary-key

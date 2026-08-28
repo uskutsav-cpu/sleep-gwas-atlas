@@ -23,7 +23,7 @@ SOURCE_FIELDS = [
     "raw_file", "pmid", "doi", "ancestry", "build", "phenotype_definition",
     "source_status", "acquisition_status",
 ]
-RESULT_SUFFIXES = {".tsv", ".json", ".txt", ".md", ".gz", ".rds", ".png", ".pdf"}
+RESULT_SUFFIXES = {".tsv", ".json", ".txt", ".md", ".html", ".gz", ".rds", ".png", ".pdf"}
 FORBIDDEN_RESULT_MARKERS = ("SYNTHETIC SMOKE-TEST OUTPUT", "PLACEHOLDER", "FAKE_RESULT")
 
 
@@ -172,7 +172,9 @@ def main() -> int:
         }
         for directory in (
             "results/atlas", "results/tables", "results/logs", "results/figures",
-            "results/fine_mapping",
+            "results/sources", "results/fine_mapping", "results/molecular",
+            "results/twas", "results/pleiotropy", "results/interpretation",
+            "results/robustness",
         ):
             payload.update(relative_files(root, directory))
         for relative in sorted(payload):

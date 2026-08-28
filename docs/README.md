@@ -24,5 +24,7 @@ Current curation records:
   correlation-family results for the six public EUR substitutions.
 - `molecular_workflow.md` — complete molecular-QTL, variance-controlled TWAS,
   locus-coverage, and supported-gene integration contract.
+- `interpretation_workflow.md` — locked regulatory, cell-type, pathway,
+  bidirectional-MR, atlas-edge, and robustness task/coverage contract.
 - `aging_source_queue.md` — primary-source discoveries awaiting their own
   download and file-level Phase 0 checks.
