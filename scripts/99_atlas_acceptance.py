@@ -293,6 +293,28 @@ def mixer_gate(root: Path) -> Gate:
     )
 
 
+def pleiotropy_gate(root: Path) -> Gate:
+    relative = "results/atlas/shared_loci.tsv"
+    if not real_nonempty(root / relative):
+        return Gate(
+            "pleiotropic_loci", "BLOCKED", "",
+            "complete all 396 PLACO+/conjunction-FDR scans and cross-method collation; "
+            f"missing real non-empty artifact: {relative}",
+        )
+    validator = root / "scripts/50_collate_pleiotropy.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--validate-only", "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("pleiotropic_loci", "BLOCKED", relative, f"pleiotropy validation failed: {detail}")
+    return Gate(
+        "pleiotropic_loci", "PASS",
+        "396 locked PLACO+/conjunction-FDR pair scans + same-block consensus", "",
+    )
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -341,7 +363,6 @@ def build_gates(root: Path) -> list[Gate]:
         ]
     )
     artifact_specs = [
-        ("pleiotropic_loci", ["results/atlas/shared_loci.tsv"], "combine PLACO and conjunction-FDR evidence"),
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
         ("fine_mapping", ["results/atlas/variants.tsv"], "fine-map priority loci with signal-specific credible sets and PIPs"),
         ("colocalization", ["results/tables/colocalization.tsv"], "complete trait-trait and molecular-QTL signal-level colocalization"),
@@ -371,6 +392,7 @@ def build_gates(root: Path) -> list[Gate]:
     gates.append(covariance_gate(root))
     gates.append(lava_gate(root))
     gates.append(mixer_gate(root))
+    gates.append(pleiotropy_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(genomic_sem_gate(root))
     gates.append(release_gate(root))

@@ -79,6 +79,14 @@ nine LDSC inputs must be regenerated without their HapMap3 source prefilter.
 No container or reference is downloaded implicitly. See
 `docs/mixer_workflow.md`.
 
+Shared-locus discovery is now locked to complementary PLACO+ and official
+conjunctional-FDR scans over all 396 pairs, with a common 2,495-block locus
+definition and strict full-summary-statistics requirement. The local preflight
+finds 288/396 scans input-ready; 108 remain blocked by the nine HapMap3-only
+traits. The official 2.22 GiB pleioFDR reference, MATLAB, 16 GB RAM, and adequate
+working storage are also absent. Nothing is downloaded implicitly. See
+`docs/pleiotropic_loci_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
@@ -203,6 +211,8 @@ all additional CRAN dependencies by source checksum; it extracts the official
 bash scripts/30_setup_lava.sh
 bash scripts/32_download_lava_reference.sh  # storage preflight only
 python3 scripts/35_mixer_preflight.py --report-only
+python3 scripts/42_pleiotropy_preflight.py --report-only
+python3 scripts/43_prepare_pleiotropy_pairs.py --report-only
 ```
 
 ## Snakemake workflow

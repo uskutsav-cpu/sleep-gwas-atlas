@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -135,6 +136,15 @@ def load_ranged_downloader():
 def load_substitution_auditor():
     spec = importlib.util.spec_from_file_location(
         "substitution_auditor", ROOT / "scripts" / "22_audit_substitution_source.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_pleiotropy_materializer():
+    spec = importlib.util.spec_from_file_location(
+        "pleiotropy_materializer", ROOT / "scripts" / "44_materialize_pleiotropy_pair.py"
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -1452,6 +1462,167 @@ class PanelContractTests(unittest.TestCase):
                 module.convert(invalid, failed)
             self.assertFalse(failed.exists())
             self.assertFalse(Path(str(failed) + ".tmp").exists())
+
+    def test_pleiotropy_policy_locks_both_methods_and_all_pairs(self):
+        policy = json.loads(
+            (ROOT / "config" / "pleiotropy_analysis_policy.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(policy["expected_sleep_non_sleep_pairs"], 396)
+        self.assertIn("All locked 396", policy["pair_scope"])
+        self.assertEqual(policy["placo_version"], "0.2.0")
+        self.assertEqual(
+            policy["placo_source_sha256"],
+            "fb684a8ed88f27dd138f5c2e8613b092904e84f364030d036058f17db95b7124",
+        )
+        self.assertEqual(policy["pleiofdr_mode"], "conjfdr")
+        self.assertEqual(policy["pleiofdr_random_prune_iterations"], 500)
+        self.assertEqual(policy["pleiofdr_reference_bytes"], 2383912974)
+        self.assertEqual(policy["pleiofdr_variant_template_variants"], 9545380)
+        self.assertEqual(policy["pleiofdr_variant_template_bytes"], 274423819)
+        self.assertEqual(
+            policy["pleiofdr_variant_template_sha256"],
+            "06268420a0ec04e4529e832e1d4f4a53231b078cc5a3741a3eb215a5a4e1a9d5",
+        )
+        self.assertTrue(policy["pleiofdr_correct_sample_overlap"])
+        self.assertEqual(
+            policy["pleiofdr_overlap_patch_sha256"],
+            "a5ea51cafd08b783903733f6485272fd8d3563664b060ad31ae8a9266dced200",
+        )
+        self.assertAlmostEqual(
+            policy["placo_locked_pair_family_threshold"], 5e-8 / 396
+        )
+        self.assertIn("PLACO+ association and conjFDR", policy["canonical_rule"])
+
+    def test_pleiotropy_setup_and_manifest_are_fail_closed(self):
+        setup = (ROOT / "scripts" / "41_setup_pleiotropy.sh").read_text(
+            encoding="utf-8"
+        )
+        preflight = (ROOT / "scripts" / "42_pleiotropy_preflight.py").read_text(
+            encoding="utf-8"
+        )
+        prepare = (ROOT / "scripts" / "43_prepare_pleiotropy_pairs.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("DOWNLOAD_REFERENCE=false", setup)
+        self.assertIn('elif [ "$DOWNLOAD_REFERENCE" = true ]', setup)
+        self.assertIn("REFERENCE_BYTES=2383912974", setup)
+        self.assertIn("TEMPLATE_BYTES=274423819", setup)
+        self.assertIn("TEMPLATE_SHA=06268420a0ec04e4529e832e1d4f4a53231b078cc5a3741a3eb215a5a4e1a9d5", setup)
+        self.assertIn('prefilter == "not supplied"', preflight)
+        self.assertIn('matlab = shutil.which("matlab")', preflight)
+        self.assertIn("ready_pair_scans", preflight)
+        self.assertIn("set(rg_by_pair) != set(expected)", prepare)
+        self.assertIn('"global_rg_filters_pair_eligibility": False', prepare)
+        self.assertNotIn("global_rg_p <=", prepare)
+
+    def test_pleiotropy_pair_materializer_aligns_and_rejects_bad_rows(self):
+        module = load_pleiotropy_materializer()
+        self.assertEqual(module.align("A", "C", "A", "C", 2.0), (2.0, "DIRECT"))
+        self.assertEqual(module.align("A", "C", "C", "A", 2.0), (-2.0, "SWAPPED"))
+        self.assertEqual(module.align("A", "C", "T", "G", 2.0), (2.0, "COMPLEMENT"))
+        self.assertEqual(
+            module.align("A", "C", "G", "T", 2.0),
+            (-2.0, "COMPLEMENT_SWAPPED"),
+        )
+        self.assertIsNone(module.align("A", "C", "A", "G", 2.0))
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source.tsv.gz"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(
+                    "SNP\tCHR\tBP\tA1\tA2\tBETA\tSE\tP\tN\n"
+                    "rs1\t1\t101\tA\tC\t0.2\t0.1\t0.05\t1000\n"
+                    "rs2\t2\t202\tG\tT\t-0.3\t0.2\t0.01\t900\n"
+                )
+            rows = list(module.variant_rows(source))
+            self.assertEqual([row[0] for row in rows], ["rs1", "rs2"])
+            self.assertAlmostEqual(rows[0][5], 2.0)
+            self.assertAlmostEqual(rows[1][5], -1.5)
+            duplicate = Path(directory) / "duplicate.tsv.gz"
+            with gzip.open(duplicate, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(
+                    "SNP\tCHR\tBP\tA1\tA2\tBETA\tSE\tP\tN\n"
+                    "rs1\t1\t101\tA\tC\t0.2\t0.1\t0.05\t1000\n"
+                    "rs1\t1\t101\tA\tC\t0.2\t0.1\t0.05\t1000\n"
+                )
+            connection = sqlite3.connect(":memory:")
+            with self.assertRaises(SystemExit):
+                module.load_table(connection, "variants", duplicate)
+            connection.close()
+
+    def test_pleiotropy_materializer_has_no_implicit_large_run(self):
+        materializer = (ROOT / "scripts" / "44_materialize_pleiotropy_pair.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('parser.add_argument("--materialize", action="store_true")', materializer)
+        self.assertIn('if not args.materialize:', materializer)
+        self.assertIn('lock.get("policy_sha256") != sha256(policy_path)', materializer)
+        self.assertIn('policy["placo_z_squared_maximum"]', materializer)
+
+    def test_placo_task_and_runtime_are_checksum_locked(self):
+        task = (ROOT / "scripts" / "45_prepare_placo_task.py").read_text(
+            encoding="utf-8"
+        )
+        runtime = (ROOT / "scripts" / "46_run_placo_pair.R").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('manifest_lock.get("policy_sha256") != sha256(policy_path)', task)
+        self.assertIn('provenance.get("output_sha256") == pair_hash', task)
+        self.assertIn('sha256(placo_source) != policy["placo_source_sha256"]', task)
+        self.assertIn('args[[3L]] != "--execute"', runtime)
+        self.assertIn('lock$task_sha256 != sha256(task_path)', runtime)
+        self.assertIn('placo.plus(', runtime)
+        self.assertIn('failure_fraction > maximum_failure_fraction', runtime)
+        self.assertIn('family_threshold >= conventional_threshold', runtime)
+        self.assertNotIn("global_rg", runtime)
+
+    def test_pleiofdr_trait_materializer_is_reference_ordered_and_opt_in(self):
+        script = (ROOT / "scripts" / "47_prepare_pleiofdr_trait.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('parser.add_argument("--materialize", action="store_true")', script)
+        self.assertIn('if not args.materialize:', script)
+        self.assertIn('policy["pleiofdr_variant_template_sha256"]', script)
+        self.assertIn('reader.fieldnames != TEMPLATE_FIELDS', script)
+        self.assertIn('np.full(variant_count, np.nan', script)
+        self.assertIn('do_compression=True', script)
+        self.assertIn('normalise_mat_header(temporary)', script)
+
+    def test_conjfdr_task_and_runtime_require_pinned_overlap_correction(self):
+        task = (ROOT / "scripts" / "48_prepare_conjfdr_task.py").read_text(
+            encoding="utf-8"
+        )
+        runtime = (ROOT / "scripts" / "49_run_conjfdr_pair.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('dirty:', task)
+        self.assertIn('policy["pleiofdr_overlap_patch_sha256"]', task)
+        self.assertIn('"randprune_n={policy[\'pleiofdr_random_prune_iterations\']}"', task)
+        self.assertIn('"exclude_from_discovery=false"', task)
+        self.assertIn('"manh_plot=false"', task)
+        self.assertIn('if not args.execute:', runtime)
+        self.assertIn('task.get("correct_sample_overlap") != "TRUE"', runtime)
+        self.assertIn('shutil.which("matlab")', runtime)
+        self.assertIn('shutil.copytree(code, runtime', runtime)
+        self.assertIn('["patch", "-p1", "-i", str(patch)]', runtime)
+
+    def test_pleiotropy_collator_requires_all_pairs_and_same_block_consensus(self):
+        collator = (ROOT / "scripts" / "50_collate_pleiotropy.py").read_text(
+            encoding="utf-8"
+        )
+        acceptance = (ROOT / "scripts" / "99_atlas_acceptance.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('len(manifest) != policy["expected_sleep_non_sleep_pairs"]', collator)
+        self.assertIn('set(placo_index) & set(conj_index)', collator)
+        self.assertIn('PLACO_PLUS_AND_CONJFDR_SAME_LOCKED_LD_BLOCK', collator)
+        self.assertIn('"--validate-only", "--quiet"', acceptance)
+        self.assertIn('396 locked PLACO+/conjunction-FDR pair scans', acceptance)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        self.assertIn("rule placo_pair:", workflow)
+        self.assertIn("rule conjfdr_pair:", workflow)
+        self.assertIn("rule pleiotropy:", workflow)
 
 
 if __name__ == "__main__":

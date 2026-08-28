@@ -18,6 +18,7 @@ EUR_LD_DIR = config["eur_ld_dir"]
 LAVA_REFERENCE_PREFIX = config["lava_reference_prefix"]
 LAVA_LOCUS_FILE = config["lava_locus_file"]
 MIXER_POLICY = config["mixer_policy"]
+PLEIOTROPY_POLICY = config["pleiotropy_policy"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -25,6 +26,9 @@ with open(PANEL, newline="", encoding="utf-8") as handle:
     PANEL_ROWS = list(csv.DictReader(handle, delimiter="\t"))
 RAW_BY_TRAIT = {row["trait_id"]: f"data/raw/{row['raw_file']}" for row in PANEL_ROWS}
 PANEL_IDS = set(RAW_BY_TRAIT)
+SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] == "sleep"]
+NON_SLEEP_TRAITS = [row["trait_id"] for row in PANEL_ROWS if row["domain"] != "sleep"]
+PLEIOTROPY_PAIRS = [f"{sleep}__{other}" for sleep in SLEEP_TRAITS for other in NON_SLEEP_TRAITS]
 unknown = set(SELECTED).difference(PANEL_IDS)
 if unknown:
     raise ValueError(f"phase0_traits contains IDs outside the locked panel: {sorted(unknown)}")
@@ -259,3 +263,118 @@ rule mixer_preflight:
         traits="results/tables/mixer_input_readiness.tsv",
     shell:
         "{PYTHON} scripts/35_mixer_preflight.py --report-only"
+
+
+rule pleiotropy_preflight:
+    input:
+        panel=PANEL,
+        policy=PLEIOTROPY_POLICY,
+        sources="config/pleiotropy_reference_sources.tsv",
+        prefilters="config/hm3_prefilter_plans.tsv",
+        harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    output:
+        report="results/tables/pleiotropy_preflight.json",
+        traits="results/tables/pleiotropy_input_readiness.tsv",
+    shell:
+        "{PYTHON} scripts/42_pleiotropy_preflight.py --report-only"
+
+
+rule pleiotropy_pairs:
+    input:
+        panel=PANEL,
+        policy=PLEIOTROPY_POLICY,
+        prefilters="config/hm3_prefilter_plans.tsv",
+        rg="results/tables/rg_matrix.tsv",
+        harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    output:
+        manifest="results/tables/pleiotropy_pair_manifest.tsv",
+        lock="results/tables/pleiotropy_pair_manifest.lock.json",
+    shell:
+        "{PYTHON} scripts/43_prepare_pleiotropy_pairs.py --report-only"
+
+
+rule pleiotropy_pair_input:
+    input:
+        policy=PLEIOTROPY_POLICY,
+    output:
+        pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
+        provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
+    shell:
+        "{PYTHON} scripts/44_materialize_pleiotropy_pair.py {wildcards.pair_id} --materialize"
+
+
+rule placo_task:
+    input:
+        pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
+        provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
+    output:
+        task="results/pleiotropy/tasks/{pair_id}.tsv",
+        lock="results/pleiotropy/tasks/{pair_id}.lock.tsv",
+    shell:
+        "{PYTHON} scripts/45_prepare_placo_task.py {wildcards.pair_id}"
+
+
+rule placo_pair:
+    input:
+        task="results/pleiotropy/tasks/{pair_id}.tsv",
+        lock="results/pleiotropy/tasks/{pair_id}.lock.tsv",
+    output:
+        hits="results/pleiotropy/placo/{pair_id}.hits.tsv",
+        summary="results/pleiotropy/placo/{pair_id}.summary.tsv",
+    shell:
+        "{RSCRIPT} scripts/46_run_placo_pair.R {input.task} {input.lock} --execute"
+
+
+rule pleiofdr_trait:
+    input:
+        source="data/harmonized/{trait}.harmonized.tsv.gz",
+        qc="data/harmonized/{trait}.qc.txt",
+        template="ref/pleiofdr/9545380.ref",
+        policy=PLEIOTROPY_POLICY,
+    output:
+        mat="data/pleiofdr/{trait}.mat",
+        provenance="data/pleiofdr/{trait}.provenance.json",
+    shell:
+        "{PYTHON} scripts/47_prepare_pleiofdr_trait.py {wildcards.trait} --materialize"
+
+
+rule conjfdr_task:
+    input:
+        sleep=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[0] + ".mat",
+        non_sleep=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[1] + ".mat",
+        template="ref/pleiofdr/9545380.ref",
+        reference="ref/pleiofdr/ref9545380_1kgPhase3eur_LDr2p1.mat",
+        patch="patches/pleiofdr-enable-overlap.patch",
+    output:
+        config="results/pleiotropy/conjfdr_tasks/{pair_id}.config.txt",
+        task="results/pleiotropy/conjfdr_tasks/{pair_id}.tsv",
+        lock="results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv",
+    shell:
+        "{PYTHON} scripts/48_prepare_conjfdr_task.py {wildcards.pair_id}"
+
+
+rule conjfdr_pair:
+    input:
+        task="results/pleiotropy/conjfdr_tasks/{pair_id}.tsv",
+        lock="results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv",
+    output:
+        completion="results/pleiotropy/conjfdr/{pair_id}/atlas_completion.tsv",
+    shell:
+        "{PYTHON} scripts/49_run_conjfdr_pair.py {input.task} {input.lock} --execute"
+
+
+rule pleiotropy:
+    input:
+        placo_hits=expand("results/pleiotropy/placo/{pair_id}.hits.tsv", pair_id=PLEIOTROPY_PAIRS),
+        placo_summaries=expand("results/pleiotropy/placo/{pair_id}.summary.tsv", pair_id=PLEIOTROPY_PAIRS),
+        conjfdr=expand("results/pleiotropy/conjfdr/{pair_id}/atlas_completion.tsv", pair_id=PLEIOTROPY_PAIRS),
+        locus=LAVA_LOCUS_FILE,
+    output:
+        placo="results/tables/placo_loci.tsv",
+        conjfdr="results/tables/conjfdr_loci.tsv",
+        shared="results/atlas/shared_loci.tsv",
+        provenance="results/atlas/shared_loci.provenance.json",
+    shell:
+        "{PYTHON} scripts/50_collate_pleiotropy.py"
