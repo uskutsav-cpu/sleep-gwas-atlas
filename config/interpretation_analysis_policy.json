@@ -134,10 +134,27 @@
     "cache_provenance_path": "work/interpretation_automatic/abc_2021_overlaps.provenance.json",
     "claim_limit": "An ABC link is a context-specific enhancer-gene prediction; it is not experimental proof of regulation and becomes convergent gene evidence only when supported by an independent signal-level molecular modality"
   },
+  "pchic_2016": {
+    "source_id": "PROMOTER_CAPTURE_HIC",
+    "component_manifest": "config/interpretation_pchic_2016.json",
+    "component_manifest_sha256": "4ba88e68a0c29e6641790d2f475b1cf56dffdd310d6e02971d82c1c6821237ab",
+    "expected_rows": 728838,
+    "expected_cell_types": 17,
+    "chicago_score_threshold": 5.0,
+    "available_domains": ["immune"],
+    "unavailable_domains": ["brain", "metabolic", "vascular"],
+    "domain_rule": "The source contains 17 primary hematopoietic contexts, all assigned to immune; the other three locked domains are NOT_APPLICABLE for this source rather than negative",
+    "contact_rule": "Treat the consecutive GRCh37 restriction-fragment coordinates as one-based closed intervals; for each cell type retain only CHiCAGO score>=5; a variant in an other-end fragment links to source-declared baitName promoters, while a variant in a bait links to source-declared oeName promoters only when the other end is also baited",
+    "target_rule": "Split source promoter names on semicolons and retain only an exact symbol mapping to exactly one molecularly supported same-locus atlas gene; dot/NA, unmatched, and ambiguous names are excluded without nearest-gene substitution",
+    "deduplication_rule": "Reciprocal bait-to-bait rows collapse by locus, variant, variant-containing fragment, target gene, and cell type, retaining the maximum CHiCAGO score",
+    "cache_path": "work/interpretation_automatic/pchic_2016_overlaps.tsv",
+    "cache_provenance_path": "work/interpretation_automatic/pchic_2016_overlaps.provenance.json",
+    "claim_limit": "A CHiCAGO-supported promoter contact is physical-proximity evidence in a primary hematopoietic context; it does not prove enhancer activity or causal transcriptional regulation"
+  },
   "regulatory_build_harmonization": {
     "analysis_build": "GRCh37",
     "annotation_builds": ["GRCh37", "GRCh38"],
-    "native_grch37_source_ids": ["ABC_ENHANCER_GENE"],
+    "native_grch37_source_ids": ["ABC_ENHANCER_GENE", "PROMOTER_CAPTURE_HIC"],
     "lifted_grch38_source_ids": ["GENCODE_V26_PROMOTERS", "ENCODE_CCRE_V4_ENHANCER", "ENCODE_CCRE_V4_OPEN", "HOCOMOCO_V14"],
     "chain_path": "ref/hg19ToHg38.over.chain.gz",
     "chain_bytes": 227698,

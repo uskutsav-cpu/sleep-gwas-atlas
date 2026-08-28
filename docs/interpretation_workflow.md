@@ -31,7 +31,7 @@ each unit. Existing task results cause locking to fail.
 
 Each external or derived analysis is imported through an explicit curator JSON
 record and `scripts/76_record_interpretation_task.py`, except for the locked
-GENCODE, SCREEN, HOCOMOCO, and ABC adapters, which produce the same
+GENCODE, SCREEN, HOCOMOCO, ABC, and promoter-capture Hi-C adapters, which produce the same
 checksum-bound normalized record automatically. A task ends as
 `COMPLETED`, `NO_EVIDENCE_FOUND`, `ACCESS_BLOCKED`, or `NOT_APPLICABLE` with a
 reason. `COMPLETED` requires a real exact-schema table; the other states cannot
@@ -54,6 +54,13 @@ only 52 explicitly frozen non-transformed biosample labels across the four
 domains, and retains a target only when its exact symbol maps to one supported
 same-locus atlas gene. Its released score floor is 0.015 and the prespecified
 primary tier is 0.02. Neither tier is experimental proof of regulation.
+The native-GRCh37 Javierre et al. PCHi-C matrix is likewise streamed once.
+Only CHiCAGO scores of at least 5 are retained, reciprocal bait-to-bait links
+are deduplicated by their maximum score, and a promoter name must map exactly
+to one supported same-locus atlas gene. Its 17 primary hematopoietic contexts
+serve the immune domain; brain, metabolic, and vascular tasks are recorded as
+`NOT_APPLICABLE`, not as negative evidence. A qualifying contact is evidence
+of physical proximity, not proof of enhancer activity or causal regulation.
 
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
@@ -90,9 +97,10 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, six of 20 interpretation source families are ready: GENCODE
+repository state, seven of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
-2021 enhancer-gene atlas, and the within-workflow regulatory cell-type layer.
+2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, and the
+within-workflow regulatory cell-type layer.
 Four of six upstream canonical inputs do not yet exist, and the remaining
 external releases or runtimes still require exact pre-result curation. No
 downstream task result has been generated or claimed.

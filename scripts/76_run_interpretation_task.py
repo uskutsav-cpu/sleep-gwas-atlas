@@ -40,7 +40,7 @@ def main() -> int:
         policy = json.loads((root / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
         automatic_sources = {
             policy["promoter_mapping"]["source_id"], policy["hocomoco_v14"]["source_id"],
-            policy["abc_2021"]["source_id"],
+            policy["abc_2021"]["source_id"], policy["pchic_2016"]["source_id"],
             *policy["screen_registry_v4"]["source_ids"],
         }
         if task["analysis_family"] != "regulatory" or task["source_id"] not in automatic_sources:
@@ -54,6 +54,7 @@ def main() -> int:
         adapter_script = {
             policy["hocomoco_v14"]["source_id"]: "83_run_motif_task.py",
             policy["abc_2021"]["source_id"]: "85_run_abc_task.py",
+            policy["pchic_2016"]["source_id"]: "87_run_pchic_task.py",
         }.get(task["source_id"], "82_run_regulatory_task.py")
         adapter_command = [
             sys.executable, str(root / "scripts" / adapter_script), args.task_id,

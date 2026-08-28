@@ -50,6 +50,9 @@ HOCOMOCO_SOURCE_PATHS = [component["path"] for component in HOCOMOCO_SOURCE_BUND
 with open(INTERPRETATION_SPEC["abc_2021"]["component_manifest"], encoding="utf-8") as handle:
     ABC_SOURCE_BUNDLE = json.load(handle)
 ABC_SOURCE_PATHS = [component["path"] for component in ABC_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["pchic_2016"]["component_manifest"], encoding="utf-8") as handle:
+    PCHIC_SOURCE_BUNDLE = json.load(handle)
+PCHIC_SOURCE_PATHS = [component["path"] for component in PCHIC_SOURCE_BUNDLE["components"]]
 
 
 rule all:
@@ -801,8 +804,12 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["screen_registry_v4"]["component_manifest"],
             INTERPRETATION_SPEC["hocomoco_v14"]["component_manifest"],
             INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
+            INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
         ],
-        source_files=SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS,
+        source_files=(
+            SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS
+            + PCHIC_SOURCE_PATHS
+        ),
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",
         pairs="results/atlas/trait_pairs.tsv",
@@ -829,6 +836,21 @@ rule abc_overlap_cache:
         provenance=INTERPRETATION_SPEC["abc_2021"]["cache_provenance_path"],
     shell:
         "{PYTHON} scripts/84_prepare_abc_overlap_cache.py"
+
+
+rule pchic_overlap_cache:
+    input:
+        policy=INTERPRETATION_POLICY,
+        sources="config/interpretation_source_registry.tsv",
+        manifest=INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
+        source=PCHIC_SOURCE_PATHS,
+        variants="results/atlas/variants.tsv",
+        genes="results/atlas/genes.tsv",
+    output:
+        cache=INTERPRETATION_SPEC["pchic_2016"]["cache_path"],
+        provenance=INTERPRETATION_SPEC["pchic_2016"]["cache_provenance_path"],
+    shell:
+        "{PYTHON} scripts/86_prepare_pchic_overlap_cache.py"
 
 
 checkpoint interpretation_tasks:
@@ -860,6 +882,16 @@ def interpretation_task_dependencies(wildcards):
     if len(selected) != 1:
         raise ValueError(f"unknown interpretation task ID: {wildcards.task_id}")
     task = selected[0]
+    if task["source_id"] == INTERPRETATION_SPEC["pchic_2016"]["source_id"]:
+        if task["domain"] in set(INTERPRETATION_SPEC["pchic_2016"]["available_domains"]):
+            return [
+                rules.pchic_overlap_cache.output.cache,
+                rules.pchic_overlap_cache.output.provenance,
+            ]
+        return [
+            INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
+            *PCHIC_SOURCE_PATHS,
+        ]
     if task["source_id"] == INTERPRETATION_SPEC["abc_2021"]["source_id"]:
         return [
             rules.abc_overlap_cache.output.cache,

@@ -2088,6 +2088,55 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(counters["self_promoter_rows_excluded"], 1)
         self.assertEqual(list(rows[0]), policy["regulatory_mapping"]["canonical_fields"])
 
+    def test_pchic_adapter_maps_both_contact_directions_at_chicago_five(self):
+        module = load_numbered_script("86_prepare_pchic_overlap_cache.py", "pchic_adapter")
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        manifest_path = ROOT / policy["pchic_2016"]["component_manifest"]
+        self.assertEqual(
+            hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+            policy["pchic_2016"]["component_manifest_sha256"],
+        )
+        cells = {"Mon": "monocytes", "nB": "naive_B_cells"}
+        manifest = {"release": "PCHIC_TEST", "row_count": 1, "cell_types": cells}
+        variants = [
+            {
+                "locus_id": "L1", "variant_id": "rs_bait", "chromosome": "1", "position_bp": "101",
+                "qc_status": "PASS", "credible_set_sleep": "CS1", "credible_set_non_sleep": "NA",
+                "shared_signal_posterior": "NA",
+            },
+            {
+                "locus_id": "L1", "variant_id": "rs_oe", "chromosome": "1", "position_bp": "201",
+                "qc_status": "PASS", "credible_set_sleep": "CS1", "credible_set_non_sleep": "NA",
+                "shared_signal_posterior": "NA",
+            },
+        ]
+        genes = [
+            {"locus_id": "L1", "gene_id": "ENSG1", "gene_symbol": "G1"},
+            {"locus_id": "L1", "gene_id": "ENSG2", "gene_symbol": "G2"},
+        ]
+        fields = module.BASE_FIELDS + list(cells) + ["clusterID", "clusterPostProb"]
+        source_row = {field: "NA" for field in fields}
+        source_row.update({
+            "baitChr": "1", "baitStart": "100", "baitEnd": "110", "baitID": "1",
+            "baitName": "G1", "oeChr": "1", "oeStart": "200", "oeEnd": "210",
+            "oeID": "2", "oeName": "G2", "dist": "100", "Mon": "6", "nB": "4.9",
+            "clusterID": "1", "clusterPostProb": "0.9",
+        })
+        with tempfile.TemporaryDirectory() as temporary:
+            matrix = Path(temporary) / "pchic.tsv.gz"
+            with gzip.open(matrix, "wt", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                writer.writerow(source_row)
+            rows, counters = module.prepare_rows(policy, manifest, matrix, variants, genes)
+        self.assertEqual(len(rows), 2)
+        observed = {(row["variant_id"], row["target_gene_id"]) for row in rows}
+        self.assertEqual(observed, {("rs_bait", "ENSG2"), ("rs_oe", "ENSG1")})
+        self.assertTrue(all(row["biosample"] == "Mon" for row in rows))
+        self.assertTrue(all(row["effect"] == "6" for row in rows))
+        self.assertEqual(counters["source_rows"], 1)
+        self.assertTrue(all(list(row) == policy["regulatory_mapping"]["canonical_fields"] for row in rows))
+
     def test_robustness_applicability_is_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
         families = policy["robustness"]["required_families"]

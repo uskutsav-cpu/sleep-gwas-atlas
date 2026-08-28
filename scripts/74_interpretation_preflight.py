@@ -256,6 +256,86 @@ def validate_abc_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, st
     return True, "", observed
 
 
+def validate_pchic_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["pchic_2016"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "PCHi-C component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe PCHi-C component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"PCHi-C component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"PCHi-C component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"PCHIC_PEAK_MATRIX_CUTOFF5", "PCHIC_PEAK_MATRIX_README"}
+    if set(components) != required:
+        return False, "PCHi-C manifest is not the exact matrix-plus-README bundle", observed
+    readme = components["PCHIC_PEAK_MATRIX_README"].read_text(encoding="utf-8")
+    if "based on the GRCh37 assembly" not in readme or "Ensembl release v75" not in readme:
+        return False, "PCHi-C README does not verify build and promoter annotation", observed
+    base_fields = [
+        "baitChr", "baitStart", "baitEnd", "baitID", "baitName", "oeChr", "oeStart",
+        "oeEnd", "oeID", "oeName", "dist",
+    ]
+    cell_types = manifest.get("cell_types", {})
+    expected_header = base_fields + list(cell_types) + ["clusterID", "clusterPostProb"]
+    rows = 0
+    pairs: set[tuple[str, str]] = set()
+    score_counts = {name: 0 for name in cell_types}
+    try:
+        with gzip.open(components["PCHIC_PEAK_MATRIX_CUTOFF5"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != expected_header:
+                return False, "PCHi-C matrix header differs from the frozen schema", observed
+            header_hash = hashlib.sha256(("\t".join(reader.fieldnames) + "\n").encode()).hexdigest()
+            if header_hash != manifest.get("header_sha256"):
+                return False, "PCHi-C matrix header differs from its release pin", observed
+            for row in reader:
+                if len(row) != len(expected_header) or None in row:
+                    return False, "PCHi-C matrix contains a malformed row", observed
+                scores = [float(row[name]) for name in cell_types]
+                if any(not value >= 0 for value in scores) or not all(value < float("inf") for value in scores):
+                    return False, "PCHi-C matrix contains an invalid CHiCAGO score", observed
+                if not any(value >= spec["chicago_score_threshold"] for value in scores):
+                    return False, "PCHi-C cutoff-5 matrix contains a row without a qualifying cell", observed
+                for name, value in zip(cell_types, scores):
+                    if value >= spec["chicago_score_threshold"]:
+                        score_counts[name] += 1
+                rows += 1
+                pairs.add(tuple(sorted((row["baitID"], row["oeID"]))))
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"PCHi-C source is not a valid compressed peak matrix: {exc}", observed
+    required_domains = set(policy["regulatory_mapping"]["required_context_domains"])
+    available, unavailable = set(spec["available_domains"]), set(spec["unavailable_domains"])
+    if (
+        rows != manifest.get("row_count") or rows != spec["expected_rows"]
+        or len(pairs) != manifest.get("unique_unordered_fragment_pair_count")
+        or len(cell_types) != manifest.get("cell_type_count")
+        or len(cell_types) != spec["expected_cell_types"]
+        or score_counts != manifest.get("score_ge_5_rows_by_cell_type")
+        or available != set(manifest.get("available_domains", []))
+        or unavailable != set(manifest.get("unavailable_domains", []))
+        or available & unavailable or available | unavailable != required_domains
+    ):
+        return False, "PCHi-C rows, contacts, cell types, scores, or domain coverage differ from the frozen release", observed
+    observed.update({
+        "rows": rows, "unique_unordered_fragment_pairs": len(pairs),
+        "cell_types": len(cell_types), "score_ge_5_rows_by_cell_type": score_counts,
+        "available_domains": sorted(available), "unavailable_domains": sorted(unavailable),
+    })
+    return True, "", observed
+
+
 def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
     pairs = (
         (policy["regulatory_mapping"]["required_layers"], downstream["regulatory_mapping"]["required_layers"]),
@@ -340,6 +420,8 @@ def main() -> int:
     hocomoco_source_id = policy["hocomoco_v14"]["source_id"]
     abc_ready, abc_blocker, abc_validation = validate_abc_bundle(root, policy)
     abc_source_id = policy["abc_2021"]["source_id"]
+    pchic_ready, pchic_blocker, pchic_validation = validate_pchic_bundle(root, policy)
+    pchic_source_id = policy["pchic_2016"]["source_id"]
     allowed_source_status = {
         "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
         "DERIVED_WITHIN_WORKFLOW",
@@ -374,6 +456,9 @@ def main() -> int:
             elif identity == abc_source_id and not abc_ready:
                 ready = False
                 blocker = abc_blocker
+            elif identity == pchic_source_id and not pchic_ready:
+                ready = False
+                blocker = pchic_blocker
         elif row["source_status"] == "DERIVED_UPSTREAM":
             ready = path.is_file() and observed_bytes > 0
             if not ready:
@@ -413,6 +498,7 @@ def main() -> int:
         "screen_source_bundle": screen_validation,
         "hocomoco_source_bundle": hocomoco_validation,
         "abc_source_bundle": abc_validation,
+        "pchic_source_bundle": pchic_validation,
         "sources_ready": sources_ready, "upstream_ready": upstream_ready,
         "production_ready": sources_ready and upstream_ready,
         "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),
