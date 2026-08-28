@@ -29,7 +29,7 @@ liability_h2_ready: 0 / 45
 phase1_pass: 0 / 45
 ```
 
-The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. No real LDSC results are versioned on this branch; synthetic smoke-test artifacts are not scientific results.
+The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. The checksum-bound Phase-1 deep-analysis tables and figures are versioned on this branch; raw GWAS/LDSC intermediates remain ignored, and synthetic smoke-test artifacts are not scientific results.
 
 The former access blockers and the evidence-backed public substitutions are
 documented in `docs/remaining_source_access_blockers.md` and
@@ -45,6 +45,14 @@ complete as 372 primary Phase 1 pairs plus 24 explicitly labelled
 when correction is applied over all 396 tests (155 under the primary-only
 372-test correction). Sensitivity rows are retained for completeness but are
 excluded from primary inference.
+
+The pair-complete deep analysis of those 153 discoveries is in
+`results/analysis/PHASE1_DEEP_ANALYSIS.md`. It includes a dated four-lens
+literature audit for every discovery, numeric comparison with published rg
+estimates, transparent novelty and local-analysis priorities, five formal
+ranking views, and 12 checksum-recorded figures. It preserves the locked
+Phase-1 results and keeps T2D/melanoma sensitivity rows out of all headline
+counts and novelty claims.
 
 The complete multivariable LDSC covariance gate is also finished locally: all
 45 traits have S/Rg/I matrices, all 1,035 lower-triangle estimates, and a

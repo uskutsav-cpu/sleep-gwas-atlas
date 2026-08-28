@@ -16,6 +16,7 @@ import tempfile
 import unittest
 from unittest import mock
 import zipfile
+from collections import Counter
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -3549,19 +3550,107 @@ class Phase1DeepAnalysisContractTests(unittest.TestCase):
         self.assertTrue(all(Path(row["path"]).is_absolute() is False for row in hashes))
         self.assertTrue(all(len(row["sha256"]) == 64 for row in hashes))
 
-    def test_quantitative_figure_manifest_excludes_unreviewed_novelty_placeholder(self):
+    def test_deep_analysis_figure_manifest_includes_reviewed_literature_figure(self):
         manifest = json.loads(
             (ROOT / "results/figures/phase1_deep_analysis/figure_manifest.json").read_text(
                 encoding="utf-8"
             )
         )
-        self.assertFalse(manifest["literature_figure_included"])
-        self.assertEqual(len(manifest["figures"]), 11)
-        self.assertFalse(any("phase1_12" in row["path"] for row in manifest["figures"]))
+        self.assertTrue(manifest["literature_figure_included"])
+        self.assertEqual(len(manifest["figures"]), 12)
+        self.assertEqual(
+            sum("phase1_12" in row["path"] for row in manifest["figures"]), 1
+        )
         for row in manifest["figures"]:
             path = ROOT / row["path"]
             self.assertEqual(path.stat().st_size, row["bytes"])
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), row["sha256"])
+
+    def test_literature_audit_is_pair_complete_and_keeps_sensitivity_out(self):
+        rows = self.read_tsv("results/analysis/literature_novelty_audit.tsv")
+        self.assertEqual(len(rows), 153)
+        self.assertEqual(len({row["pair_id"] for row in rows}), 153)
+        self.assertFalse({"t2d", "melanoma"} & {row["external_trait"] for row in rows})
+        direct = [row for row in rows if row["direct_rg_found"] == "True"]
+        apparent = [
+            row for row in rows
+            if row["novelty_classification"] == "APPARENTLY_NOVEL"
+        ]
+        self.assertEqual((len(direct), len(apparent)), (97, 6))
+        self.assertTrue(all(float(row["abs_rg"]) >= 0.15 for row in apparent))
+        self.assertTrue(all(float(row["fdr"]) <= 0.01 for row in apparent))
+        self.assertTrue(all(row["result_confidence_class"] != "QC_CAUTION" for row in apparent))
+        self.assertTrue(all(row["search_status"] == "COMPLETE_FOUR_LENS_PLUS_SOURCE_TABLE_REVIEW" for row in rows))
+
+    def test_literature_queries_and_replication_contract(self):
+        queries = self.read_tsv("results/analysis/literature_search_queries.tsv")
+        self.assertEqual(len(queries), 612)
+        self.assertEqual({row["query_status"] for row in queries}, {"COMPLETE"})
+        self.assertTrue(all(row["as_of_date"] == "2026-08-28" for row in queries))
+        replication = self.read_tsv("results/analysis/published_rg_replication.tsv")
+        self.assertEqual(len(replication), 120)
+        discordant = {
+            (row["sleep_trait"], row["external_trait"])
+            for row in replication if row["direction_concordance"] == "DISCORDANT"
+        }
+        self.assertIn(("sleep_apnea", "atrial_fibrillation"), discordant)
+        self.assertIn(("sleep_apnea", "triglycerides"), discordant)
+        summary = json.loads(
+            (ROOT / "results/analysis/literature_audit_summary.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        metrics = summary["replication_metrics"]
+        self.assertEqual(metrics["exact_concept_unique_pairs"], 86)
+        self.assertGreater(metrics["pair_level_median_published_pearson"], 0.8)
+        self.assertGreater(metrics["pair_level_median_published_direction_concordance"], 0.85)
+
+    def test_priority_outputs_are_transparent_and_primary_only(self):
+        novelty = self.read_tsv("results/analysis/novel_connection_priorities.tsv")
+        local = self.read_tsv("results/analysis/local_followup_priorities.tsv")
+        top = self.read_tsv("results/analysis/top_findings.tsv")
+        self.assertEqual(len(novelty), 25)
+        self.assertEqual(
+            Counter(row["priority_tier"] for row in novelty),
+            Counter({"TIER_A": 5, "TIER_B": 10, "TIER_C": 5, "TIER_D": 5}),
+        )
+        self.assertEqual(len(local), 45)
+        self.assertTrue(any(
+            "E" in row["priority_categories"].split(";")
+            and row["locked_fdr_significant"] == "False"
+            for row in local
+        ))
+        self.assertEqual(len(top), 125)
+        self.assertEqual(
+            Counter(row["ranking_view"] for row in top),
+            Counter({
+                "EFFECT_MAGNITUDE": 25, "STATISTICAL_EVIDENCE": 25,
+                "NOVELTY": 25, "CONFIDENCE": 25, "MECHANISTIC_FOLLOWUP": 25,
+            }),
+        )
+        for rows in (novelty, local, top):
+            self.assertFalse(
+                {"t2d", "melanoma"} & {row["external_trait"] for row in rows}
+            )
+            self.assertTrue(all(
+                "no composite score" in row["ranking_rule"].lower() for row in rows
+            ))
+
+    def test_final_report_answers_required_scientific_contract(self):
+        report = (ROOT / "results/analysis/PHASE1_DEEP_ANALYSIS.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("153 of 372 primary pairs", report)
+        self.assertIn("Prior direct rg evidence:** 97/153", report)
+        self.assertIn(
+            "conservative apparently-unreported replication candidates:** 6", report
+        )
+        self.assertIn("## 11. Findings not to emphasize", report)
+        self.assertIn("**OBSERVED RESULT.**", report)
+        self.assertIn("**INTERPRETATION.**", report)
+        self.assertIn("**HYPOTHESIS.**", report)
+        self.assertIn("T2D and melanoma", report)
+        self.assertNotIn("first-ever discovery", report.lower())
 
 
 if __name__ == "__main__":
