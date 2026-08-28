@@ -2348,6 +2348,88 @@ class PanelContractTests(unittest.TestCase):
             self.assertEqual(module.annotation_rows(target, "ANNOT"), 3)
             self.assertEqual(module.annotation_rows(control, "All_Genes"), 3)
 
+    def test_ldsc_seg_reference_and_runtime_are_exactly_pre_result_locked(self):
+        policy_path = ROOT / "config/interpretation_analysis_policy.json"
+        policy = json.loads(policy_path.read_text(encoding="utf-8"))
+        spec = policy["ldsc_seg_gtex"]
+        reference_path = ROOT / spec["reference_config"]
+        self.assertEqual(
+            hashlib.sha256(reference_path.read_bytes()).hexdigest(),
+            spec["reference_config_sha256"],
+        )
+        reference = json.loads(reference_path.read_text(encoding="utf-8"))
+        self.assertEqual(reference["mirror_commit"], "0921fed7f6b9aee4c37b0162a41557579ec5fbc4")
+        families = {row["family_id"]: row for row in reference["reference_families"]}
+        self.assertEqual(set(families), {"GENOTYPE", "BASELINE_LD_V2_2", "WEIGHTS_HM3_NO_MHC"})
+        self.assertEqual(families["GENOTYPE"]["expected_files"], 66)
+        self.assertEqual(families["GENOTYPE"]["expected_bytes"], 1593837597)
+        self.assertEqual(families["BASELINE_LD_V2_2"]["expected_files"], 66)
+        self.assertEqual(families["WEIGHTS_HM3_NO_MHC"]["expected_files"], 22)
+        expected_total = sum(row["expected_bytes"] for row in families.values())
+        expected_total += reference["hm3_print_snps"]["expected_bytes"]
+        self.assertEqual(expected_total, reference["expected_download_bytes"])
+        self.assertEqual(expected_total, 1876474664)
+        self.assertEqual(reference["minimum_free_bytes_before_streaming"], 4 * 1024 ** 3)
+        self.assertTrue(reference["requires_large_download_acknowledgement"])
+        self.assertTrue(reference["requires_temporary_deletion_acknowledgement"])
+        self.assertEqual(reference["ldsc_commit"], "6c673952cee74bd5c57aef1555a03b1c015399a0")
+        self.assertEqual(reference["python_version"], "3.9.23")
+        self.assertEqual(reference["numpy_version"], "1.21.5")
+        self.assertEqual(reference["scipy_version"], "1.7.3")
+        self.assertEqual(reference["pandas_version"], "1.3.3")
+        self.assertEqual(spec["multiple_testing_family"], "All 16 prespecified GTEx tissues across four domains for one trait")
+
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        for rule in ("ldsc_seg_static_reference", "ldsc_seg_reference", "ldsc_seg_trait"):
+            self.assertIn(f"rule {rule}:", workflow)
+        self.assertIn("--acknowledge-large-download", workflow)
+        self.assertIn("--acknowledge-temporary-deletion", workflow)
+        self.assertIn("acknowledge_ldsc_seg_large_download", workflow)
+        self.assertIn("98_run_ldsc_seg_task.py", (ROOT / "scripts/76_run_interpretation_task.py").read_text())
+
+    def test_ldsc_seg_acknowledgement_and_result_validation_fail_closed(self):
+        reference_module = load_numbered_script(
+            "98_prepare_ldsc_seg_reference.py", "ldsc_seg_reference_runtime",
+        )
+        with self.assertRaisesRegex(SystemExit, "both acknowledgement flags"):
+            reference_module.derive_reference(
+                ROOT, ROOT / "unused-policy", {}, ROOT / "unused-selection",
+                ROOT / "unused-reference", {}, {},
+                acknowledge_large=False, acknowledge_deletion=False,
+            )
+
+        trait_module = load_numbered_script(
+            "98_prepare_ldsc_seg_trait.py", "ldsc_seg_trait_runtime",
+        )
+        selected = [
+            {"source_label": "Brain_Cortex"},
+            {"source_label": "Whole_Blood"},
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            result = Path(temporary) / "trait.cell_type_results.txt"
+            result.write_text(
+                "Name\tCoefficient\tCoefficient_std_error\tCoefficient_P_value\n"
+                "Whole_Blood\t0.2\t0.1\t0.0228\n"
+                "Brain_Cortex\t-0.1\t0.2\t0.6915\n",
+                encoding="utf-8",
+            )
+            rows = trait_module.validate_result(result, selected)
+            self.assertEqual({row["Name"] for row in rows}, {"Brain_Cortex", "Whole_Blood"})
+            result.write_text(
+                "Name\tCoefficient\tCoefficient_std_error\tCoefficient_P_value\n"
+                "Whole_Blood\t0.2\t0\t0.0228\n"
+                "Brain_Cortex\t-0.1\t0.2\t0.6915\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(SystemExit, "outside policy"):
+                trait_module.validate_result(result, selected)
+
+    def test_catlas_workflow_uses_component_scoped_rerun_triggers(self):
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        self.assertIn("policy=ancient(INTERPRETATION_POLICY)", workflow)
+        self.assertIn("policy_sha256=CATLAS_REFERENCE_POLICY_SHA256", workflow)
+        self.assertIn("policy_sha256=CATLAS_TRAIT_POLICY_SHA256", workflow)
+
     def test_catlas_trait_cache_and_enrichment_retain_complete_null_cells(self):
         trait_module = load_numbered_script("96_prepare_catlas_trait_cache.py", "catlas_trait")
         task_module = load_numbered_script("97_run_catlas_task.py", "catlas_task")

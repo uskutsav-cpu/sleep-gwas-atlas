@@ -23,6 +23,14 @@ interpretation_policy: config/interpretation_analysis_policy.json
 # a 2.920 GiB download and has explicitly approved starting it.
 acknowledge_large_downloads: false
 acknowledge_large_extracts: false
+# Keep false until the exact 1,876,474,664-byte LDSC-SEG reference transfer
+# plan has been shown and explicitly approved.
+acknowledge_ldsc_seg_large_download: false
+# Keep false until the exact 66-file, 1,593,837,597-byte temporary LDSC-SEG
+# genotype deletion family has been shown and explicitly approved. The guarded
+# derivation deletes each chromosome's three verified PLINK files only after
+# all 17 corresponding LD-score families publish successfully.
+acknowledge_temporary_reference_deletions: false
 
 # Explicit opt-in list for real-data work. Keep empty in Git: a researcher must
 # choose already source-verified traits and materialize their registered files

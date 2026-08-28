@@ -666,6 +666,13 @@ def validate_ldsc_seg_gtex_bundle(
     if not config_path.is_file() or sha256(config_path) != spec["selection_config_sha256"]:
         return False, "LDSC-SEG GTEx selection config is absent or differs from policy", {}
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    reference_config_path = root / spec["reference_config"]
+    if (
+        not reference_config_path.is_file()
+        or sha256(reference_config_path) != spec["reference_config_sha256"]
+    ):
+        return False, "LDSC-SEG reference config is absent or differs from policy", {}
+    reference_config = json.loads(reference_config_path.read_text(encoding="utf-8"))
     manifest_path = root / spec["source_manifest"]
     if (
         not manifest_path.is_file()
@@ -676,6 +683,7 @@ def validate_ldsc_seg_gtex_bundle(
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     observed: dict[str, object] = {
         "selection_config_sha256": sha256(config_path),
+        "reference_config_sha256": sha256(reference_config_path),
         "source_manifest_sha256": sha256(manifest_path),
     }
     selected = config.get("selected_tissues", [])
@@ -685,6 +693,13 @@ def validate_ldsc_seg_gtex_bundle(
     }
     if (
         config.get("source_id") != spec["source_id"]
+        or reference_config.get("mirror_commit") != config.get("mirror_commit")
+        or reference_config.get("ldscore_cache_dir") != spec.get("ldscore_cache_dir")
+        or reference_config.get("reference_provenance_path") != spec.get("ldscore_cache_provenance_path")
+        or reference_config.get("selected_ldcts_path") != spec.get("selected_ldcts_path")
+        or reference_config.get("trait_result_path_template") != spec.get("trait_result_path_template")
+        or reference_config.get("trait_log_path_template") != spec.get("trait_log_path_template")
+        or reference_config.get("trait_provenance_path_template") != spec.get("trait_provenance_path_template")
         or len(selected) != spec["expected_selected_tissues"]
         or domains != spec["selected_tissues_by_domain"]
         or manifest.get("config_sha256") != sha256(config_path)

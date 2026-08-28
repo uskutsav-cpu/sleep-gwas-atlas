@@ -2,6 +2,11 @@
 import csv
 import json
 
+from scripts.catlas_policy import (
+    reference_policy_sha256 as catlas_reference_policy_sha256,
+    trait_policy_sha256 as catlas_trait_policy_sha256,
+)
+
 
 configfile: "config/workflow.yaml"
 
@@ -41,6 +46,8 @@ if unknown:
 
 with open(INTERPRETATION_POLICY, encoding="utf-8") as handle:
     INTERPRETATION_SPEC = json.load(handle)
+CATLAS_REFERENCE_POLICY_SHA256 = catlas_reference_policy_sha256(INTERPRETATION_SPEC)
+CATLAS_TRAIT_POLICY_SHA256 = catlas_trait_policy_sha256(INTERPRETATION_SPEC)
 with open(INTERPRETATION_SPEC["screen_registry_v4"]["component_manifest"], encoding="utf-8") as handle:
     SCREEN_SOURCE_BUNDLE = json.load(handle)
 SCREEN_SOURCE_PATHS = [component["path"] for component in SCREEN_SOURCE_BUNDLE["components"]]
@@ -61,6 +68,8 @@ with open(INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"], encoding
 CATLAS_SOURCE_PATHS = [component["path"] for component in CATLAS_SOURCE_BUNDLE["components"]]
 with open(INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"], encoding="utf-8") as handle:
     LDSC_SEG_SELECTION = json.load(handle)
+with open(INTERPRETATION_SPEC["ldsc_seg_gtex"]["reference_config"], encoding="utf-8") as handle:
+    LDSC_SEG_REFERENCE = json.load(handle)
 LDSC_SEG_SOURCE_PATHS = [
     f"{LDSC_SEG_SELECTION['local_root']}/{LDSC_SEG_SELECTION['source_ldcts']}",
     *[
@@ -840,6 +849,58 @@ rule ldsc_seg_gtex_source:
         "{PYTHON} scripts/98_prepare_ldsc_seg_gtex_source.py"
 
 
+rule ldsc_seg_static_reference:
+    input:
+        policy=INTERPRETATION_POLICY,
+        selection=INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+        reference=INTERPRETATION_SPEC["ldsc_seg_gtex"]["reference_config"],
+    output:
+        provenance=LDSC_SEG_REFERENCE["static_reference_provenance_path"],
+    shell:
+        "{PYTHON} scripts/98_prepare_ldsc_seg_reference.py --download-static"
+
+
+rule ldsc_seg_reference:
+    input:
+        policy=INTERPRETATION_POLICY,
+        selection=INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+        reference=INTERPRETATION_SPEC["ldsc_seg_gtex"]["reference_config"],
+        source_manifest=INTERPRETATION_SPEC["ldsc_seg_gtex"]["source_manifest"],
+        source_files=LDSC_SEG_SOURCE_PATHS,
+        static=rules.ldsc_seg_static_reference.output.provenance,
+    output:
+        provenance=INTERPRETATION_SPEC["ldsc_seg_gtex"]["ldscore_cache_provenance_path"],
+        ldcts=INTERPRETATION_SPEC["ldsc_seg_gtex"]["selected_ldcts_path"],
+    params:
+        large=(
+            "--acknowledge-large-download"
+            if config.get("acknowledge_ldsc_seg_large_download", False) else ""
+        ),
+        deletion=(
+            "--acknowledge-temporary-deletion"
+            if config.get("acknowledge_temporary_reference_deletions", False) else ""
+        ),
+    shell:
+        "{PYTHON} scripts/98_prepare_ldsc_seg_reference.py --derive {params.large} {params.deletion}"
+
+
+rule ldsc_seg_trait:
+    input:
+        policy=INTERPRETATION_POLICY,
+        selection=INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+        reference_config=INTERPRETATION_SPEC["ldsc_seg_gtex"]["reference_config"],
+        reference=rules.ldsc_seg_reference.output,
+        manifest="results/tables/interpretation_task_manifest.tsv",
+        lock="results/tables/interpretation_task_manifest.lock.json",
+        sumstats="data/munged/{trait_id}.sumstats.gz",
+    output:
+        result=INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_result_path_template"],
+        log=INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_log_path_template"],
+        provenance=INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_provenance_path_template"],
+    shell:
+        "{PYTHON} scripts/98_prepare_ldsc_seg_trait.py {wildcards.trait_id} --execute"
+
+
 rule interpretation_preflight:
     input:
         policy=INTERPRETATION_POLICY,
@@ -854,6 +915,7 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
             INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"],
             INTERPRETATION_SPEC["ldsc_seg_gtex"]["selection_config"],
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["reference_config"],
             INTERPRETATION_SPEC["ldsc_seg_gtex"]["source_manifest"],
             INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"],
         ],
@@ -919,7 +981,7 @@ rule fuma_scrna_matrices:
 
 rule catlas_fixed_variant_universe:
     input:
-        policy=INTERPRETATION_POLICY,
+        policy=ancient(INTERPRETATION_POLICY),
         manifest=INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"],
         source=CATLAS_SOURCE_PATHS,
         chain=INTERPRETATION_SPEC["regulatory_build_harmonization"]["chain_path"],
@@ -928,6 +990,8 @@ rule catlas_fixed_variant_universe:
             for suffix in (".bed", ".bim", ".fam", ".provenance.json")
         ],
         runtime=INTERPRETATION_SPEC["causal_inference"]["component_manifest"],
+    params:
+        policy_sha256=CATLAS_REFERENCE_POLICY_SHA256,
     output:
         cache=INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_path"],
         provenance=INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_provenance_path"],
@@ -937,9 +1001,11 @@ rule catlas_fixed_variant_universe:
 
 rule catlas_trait_cache:
     input:
-        policy=INTERPRETATION_POLICY,
+        policy=ancient(INTERPRETATION_POLICY),
         universe=rules.catlas_fixed_variant_universe.output,
         gwas=INTERPRETATION_SPEC["catlas_adult_v4"]["gwas_path_template"],
+    params:
+        policy_sha256=CATLAS_TRAIT_POLICY_SHA256,
     output:
         cache=INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_path_template"],
         provenance=INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_provenance_path_template"],
@@ -1058,6 +1124,18 @@ def interpretation_task_dependencies(wildcards):
                 trait_id=task["trait_id"]
             ),
             INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_provenance_path_template"].format(
+                trait_id=task["trait_id"]
+            ),
+        ]
+    if task["source_id"] == INTERPRETATION_SPEC["ldsc_seg_gtex"]["source_id"]:
+        return [
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_result_path_template"].format(
+                trait_id=task["trait_id"]
+            ),
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_log_path_template"].format(
+                trait_id=task["trait_id"]
+            ),
+            INTERPRETATION_SPEC["ldsc_seg_gtex"]["trait_provenance_path_template"].format(
                 trait_id=task["trait_id"]
             ),
         ]

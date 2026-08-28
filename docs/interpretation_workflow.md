@@ -107,7 +107,23 @@ pinned from immutable `songlab/ldsc` commit
 original 205-entry `.ldcts` for identity checks; absent Franke and chromatin
 families are not substituted. Source curation is complete, while recomputing
 the selected LD scores from matching 1000 Genomes Phase 3 EUR genotypes and
-running `h2-cts` remain production work.
+running `h2-cts` remain production work. The production reference contract is
+now frozen in `config/interpretation_ldsc_seg_reference.json` against the same
+immutable mirror commit: baselineLD v2.2, HapMap3 non-MHC regression weights,
+the HapMap3 non-MHC print-SNP list, and all 22 chromosome-specific EUR PLINK
+families are locked by exact remote object identity, file count, and byte count.
+The full transfer is 1,876,474,664 bytes. Of that, 282,637,067 bytes are
+persistent and 1,593,837,597 bytes are temporary genotypes streamed one
+chromosome at a time. `scripts/98_prepare_ldsc_seg_reference.py` will delete
+only the exact 66 checksum-verified temporary PLINK files, and only after all
+17 annotation LD-score families for the chromosome validate and publish. Both
+the large transfer and those exact temporary deletions require explicit
+acknowledgement, and streaming also requires at least 4 GiB free. The local
+LDSC commit and Python/Numpy/SciPy/Pandas versions are pinned. Once derived,
+`scripts/98_prepare_ldsc_seg_trait.py` runs one joint 16-tissue `h2-cts` family
+per trait, and the task adapter partitions it into the four locked domains;
+BH correction is applied across all 16 tissues for that trait and method during
+canonical collation.
 
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.
@@ -190,6 +206,10 @@ the current local derivation retained 1,206,400 exact allele-matched HapMap3
 variants in 232 MiB and passed a full PLINK allele-frequency read over all 503
 reference samples. Five HapMap3 IDs had allele mismatches and 10,906 were absent
 from the reference, all recorded in immutable derivation provenance.
+The LDSC-SEG reference planner and trait/task execution path are also complete,
+but the reference has not been downloaded or derived: only about 2.37 GB was
+free when the contract was validated, below its 4 GiB safety floor. No
+temporary genotype deletion was authorized or performed.
 Full MAGMA materialization remains guarded until at least 4,674,439,651 bytes
 are free and requires an explicit large-extraction acknowledgement.
 Four of six upstream canonical inputs do not yet exist. No downstream task

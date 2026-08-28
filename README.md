@@ -120,7 +120,10 @@ Javierre PCHi-C, the FUMA scRNA/MAGMA bundle, CATlas adult scATAC, a pinned
 16-tissue GTEx LDSC-SEG subset, four pathway resources, and all five causal
 runtimes. Only the QTL-derived cell strategy remains source-blocked because it
 correctly waits for upstream molecular artifacts. See
-`docs/interpretation_workflow.md`.
+`docs/interpretation_workflow.md`. The LDSC-SEG production path now includes a
+checksum-locked, disk-bounded reference builder and all-trait `h2-cts` adapter;
+its 1.876 GB transfer and exact 66-file temporary deletion family remain behind
+explicit acknowledgement and a 4 GiB free-space floor.
 
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
