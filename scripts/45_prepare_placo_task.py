@@ -67,6 +67,14 @@ def main() -> int:
     placo_source = root / args.placo_source
     manifest_lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    if (
+        manifest_lock.get("schema_version") != "sleep-atlas-pleiotropy-pairs.1"
+        or manifest_lock.get("ready_pair_count") != policy["expected_sleep_non_sleep_pairs"]
+        or manifest_lock.get("blocked_pair_count") != 0
+        or manifest_lock.get("script_sha256")
+        != sha256(root / "scripts/43_prepare_pleiotropy_pairs.py")
+    ):
+        raise SystemExit("ERROR: complete immutable pleiotropy pair family is required")
     if manifest_lock.get("manifest_sha256") != sha256(manifest_path):
         raise SystemExit("ERROR: pleiotropy pair manifest differs from its lock")
     if manifest_lock.get("policy_sha256") != sha256(policy_path):
@@ -106,6 +114,8 @@ def main() -> int:
 
     task_path = root / args.task_dir / f"{args.pair_id}.tsv"
     task_lock_path = root / args.task_dir / f"{args.pair_id}.lock.tsv"
+    if task_path.exists() or task_lock_path.exists():
+        raise SystemExit("ERROR: immutable PLACO+ task or lock already exists")
     result_base = root / args.result_dir / args.pair_id
     task = {
         "analysis_id": policy["analysis_id"],
@@ -127,11 +137,14 @@ def main() -> int:
         "maximum_failure_fraction": policy["placo_maximum_numerical_failure_fraction"],
         "conventional_threshold": policy["placo_conventional_variant_threshold"],
         "family_threshold": policy["placo_locked_pair_family_threshold"],
+        "task_builder_sha256": sha256(Path(__file__)),
+        "runner_sha256": sha256(root / "scripts/46_run_placo_pair.R"),
         "variant_hits_out": relative(root, result_base.with_suffix(".hits.tsv")),
         "summary_out": relative(root, result_base.with_suffix(".summary.tsv")),
     }
     atomic_tsv(task_path, [task])
     task_lock = {
+        "schema_version": "sleep-atlas-placo-task.1",
         "analysis_id": policy["analysis_id"],
         "pair_id": args.pair_id,
         "task": relative(root, task_path),

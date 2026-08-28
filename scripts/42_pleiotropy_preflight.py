@@ -21,6 +21,13 @@ if MIXER_SPEC is None or MIXER_SPEC.loader is None:
     raise RuntimeError("could not load full-summary-statistics helpers")
 mixer = importlib.util.module_from_spec(MIXER_SPEC)
 MIXER_SPEC.loader.exec_module(mixer)
+CONTRACT_SPEC = importlib.util.spec_from_file_location(
+    "pleiotropy_contract", ROOT / "scripts/pleiotropy_contract.py"
+)
+if CONTRACT_SPEC is None or CONTRACT_SPEC.loader is None:
+    raise RuntimeError("could not load pleiotropy runtime contract")
+contract = importlib.util.module_from_spec(CONTRACT_SPEC)
+CONTRACT_SPEC.loader.exec_module(contract)
 
 
 def sha256(path: Path) -> str:
@@ -94,6 +101,11 @@ def main() -> int:
     memory_bytes = os.sysconf("SC_PHYS_PAGES") * os.sysconf("SC_PAGE_SIZE")
     free_bytes = shutil.disk_usage(root).free
     matlab = shutil.which("matlab") or ""
+    runtime_error = ""
+    try:
+        contract.validate_runtime(root)
+    except SystemExit as exc:
+        runtime_error = str(exc)
     checks = {
         "full_trait_inputs": {
             "pass": all(row["input_status"] == "READY_FULL_SUMSTATS" for row in trait_rows),
@@ -129,6 +141,12 @@ def main() -> int:
             "path": str(template.relative_to(root)),
             "observed_bytes": template.stat().st_size if template.is_file() else 0,
             "expected_bytes": policy["pleiofdr_variant_template_bytes"],
+        },
+        "runtime_provenance": {
+            "pass": not runtime_error,
+            "path": policy["runtime_provenance"],
+            "blocker": runtime_error,
+            "verification_mode": "sealed_SHA256_plus_live_size",
         },
         "scipy_mat_writer": {
             "pass": importlib.util.find_spec("scipy") is not None,

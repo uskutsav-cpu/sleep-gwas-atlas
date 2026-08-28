@@ -175,6 +175,8 @@ def main() -> int:
     database = work_dir / f"{args.trait_id}.sqlite"
     output = root / args.out_dir / f"{args.trait_id}.mat"
     provenance_path = root / args.out_dir / f"{args.trait_id}.provenance.json"
+    if output.exists() or provenance_path.exists():
+        raise SystemExit("ERROR: immutable pleioFDR trait input already exists")
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
     database.unlink(missing_ok=True)

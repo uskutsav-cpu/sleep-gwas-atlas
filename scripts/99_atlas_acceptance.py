@@ -295,12 +295,16 @@ def mixer_gate(root: Path) -> Gate:
 
 
 def pleiotropy_gate(root: Path) -> Gate:
-    relative = "results/atlas/shared_loci.tsv"
-    if not real_nonempty(root / relative):
+    paths = [
+        "results/atlas/shared_loci.tsv",
+        "results/atlas/shared_loci.provenance.json",
+    ]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
         return Gate(
             "pleiotropic_loci", "BLOCKED", "",
             "complete all 396 PLACO+/conjunction-FDR scans and cross-method collation; "
-            f"missing real non-empty artifact: {relative}",
+            f"missing real non-empty artifact(s): {', '.join(missing)}",
         )
     validator = root / "scripts/50_collate_pleiotropy.py"
     result = subprocess.run(
@@ -309,7 +313,7 @@ def pleiotropy_gate(root: Path) -> Gate:
     )
     if result.returncode:
         detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
-        return Gate("pleiotropic_loci", "BLOCKED", relative, f"pleiotropy validation failed: {detail}")
+        return Gate("pleiotropic_loci", "BLOCKED", ", ".join(paths), f"pleiotropy validation failed: {detail}")
     return Gate(
         "pleiotropic_loci", "PASS",
         "396 locked PLACO+/conjunction-FDR pair scans + same-block consensus", "",

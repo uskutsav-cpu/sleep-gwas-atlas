@@ -6,6 +6,7 @@ import argparse
 import csv
 import hashlib
 import importlib.util
+import io
 import json
 from pathlib import Path
 
@@ -28,15 +29,20 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def write_tsv(path: Path, rows: list[dict[str, object]]) -> None:
+def table_text(rows: list[dict[str, object]]) -> str:
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(
+        output, fieldnames=list(rows[0]), delimiter="\t", lineterminator="\n"
+    )
+    writer.writeheader()
+    writer.writerows(rows)
+    return output.getvalue()
+
+
+def atomic_text(path: Path, payload: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(
-            handle, fieldnames=list(rows[0]), delimiter="\t", lineterminator="\n"
-        )
-        writer.writeheader()
-        writer.writerows(rows)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(payload, encoding="utf-8")
     temporary.replace(path)
 
 
@@ -113,13 +119,15 @@ def main() -> int:
             "blocker": "" if ready else "one or both traits lack full non-HapMap3 post-QC summary statistics",
         })
     output = root / args.out
-    write_tsv(output, rows)
+    manifest_text = table_text(rows)
+    manifest_sha256 = hashlib.sha256(manifest_text.encode("utf-8")).hexdigest()
     lock = {
+        "schema_version": "sleep-atlas-pleiotropy-pairs.1",
         "analysis_id": policy["analysis_id"],
         "policy": "config/pleiotropy_analysis_policy.json",
         "policy_sha256": sha256(root / "config/pleiotropy_analysis_policy.json"),
         "manifest": str(output.relative_to(root)),
-        "manifest_sha256": sha256(output),
+        "manifest_sha256": manifest_sha256,
         "panel_order_sha256": hashlib.sha256("".join(f"{trait}\n" for trait in traits).encode()).hexdigest(),
         "pair_ids_in_locked_order": [row["pair_id"] for row in rows],
         "pair_count": len(rows),
@@ -129,17 +137,37 @@ def main() -> int:
         "placo_source_sha256": policy["placo_source_sha256"],
         "pleiofdr_commit": policy["pleiofdr_commit"],
         "locus_definition_sha256": policy["locus_definition_sha256"],
+        "script_sha256": sha256(Path(__file__)),
     }
     lock_path = root / args.lock_out
-    lock_path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = lock_path.with_suffix(lock_path.suffix + ".tmp")
-    temporary.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    temporary.replace(lock_path)
+    lock_text = json.dumps(lock, indent=2, sort_keys=True) + "\n"
     print(
         f"Pleiotropy pair family: {len(rows)} locked; "
         f"{lock['ready_pair_count']} full-input ready; {lock['blocked_pair_count']} blocked"
     )
-    return 0 if lock["blocked_pair_count"] == 0 or args.report_only else 1
+    if args.report_only:
+        print("No manifest written. The immutable pair family is published only when all 396 pairs are ready.")
+        return 0
+    if lock["blocked_pair_count"]:
+        raise SystemExit("ERROR: incomplete pleiotropy pair family was not published")
+    if output.exists() or lock_path.exists():
+        previous = {}
+        try:
+            previous = json.loads(lock_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            pass
+        if previous.get("blocked_pair_count", 0) == 0:
+            if (
+                not output.is_file() or output.read_text(encoding="utf-8") != manifest_text
+                or lock_path.read_text(encoding="utf-8") != lock_text
+            ):
+                raise SystemExit("ERROR: immutable complete pleiotropy pair family already exists and differs")
+            print("Validated existing immutable complete pleiotropy pair family")
+            return 0
+        print("Replacing a legacy incomplete planning manifest with the complete immutable family")
+    atomic_text(output, manifest_text)
+    atomic_text(lock_path, lock_text)
+    return 0
 
 
 if __name__ == "__main__":

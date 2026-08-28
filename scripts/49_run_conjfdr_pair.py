@@ -10,6 +10,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import pleiotropy_contract
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -55,14 +57,31 @@ def main() -> int:
     root = Path(args.root).resolve()
     task_path, lock_path = root / args.task, root / args.lock
     task, lock = one_row(task_path), one_row(lock_path)
+    if lock.get("schema_version") != "sleep-atlas-conjfdr-task.1":
+        raise SystemExit("ERROR: conjunction-FDR task lock has the wrong schema")
     if lock.get("task_sha256") != sha256(task_path):
         raise SystemExit("ERROR: conjunction-FDR task differs from its lock")
     if lock.get("analysis_id") != task.get("analysis_id") or lock.get("pair_id") != task.get("pair_id"):
         raise SystemExit("ERROR: conjunction-FDR task identity differs from its lock")
+    if (
+        task.get("task_builder_sha256") != sha256(root / "scripts/48_prepare_conjfdr_task.py")
+        or task.get("runner_sha256") != sha256(Path(__file__))
+    ):
+        raise SystemExit("ERROR: conjunction-FDR task creation or execution code drifted")
+    runtime_provenance = pleiotropy_contract.validate_runtime(root)
+    runtime_path = root / task.get("runtime_provenance", "")
+    reference_record = runtime_provenance["pleiofdr_reference"]
+    if (
+        task.get("runtime_provenance") != "ref/pleiofdr/runtime.provenance.json"
+        or task.get("runtime_provenance_sha256") != sha256(runtime_path)
+        or task.get("reference_sha256") != reference_record["sha256"]
+        or int(task.get("reference_bytes", "0")) != reference_record["bytes"]
+    ):
+        raise SystemExit("ERROR: conjunction-FDR runtime/reference provenance drifted")
     required_files = (
         ("config", "config_sha256"), ("sleep_mat", "sleep_mat_sha256"),
         ("non_sleep_mat", "non_sleep_mat_sha256"), ("template", "template_sha256"),
-        ("reference", "reference_sha256"), ("overlap_patch", "overlap_patch_sha256"),
+        ("overlap_patch", "overlap_patch_sha256"),
     )
     for field, hash_field in required_files:
         path = root / task[field]
@@ -87,6 +106,11 @@ def main() -> int:
     if shutil.disk_usage(root).free < 21474836480:
         raise SystemExit("ERROR: conjunction-FDR requires at least 20 GiB free storage")
 
+    outputs = [root / task[field] for field in ("all_results", "locus_results", "result_mat")]
+    completion_path = root / task["completion"]
+    if completion_path.exists() or any(path.exists() for path in outputs):
+        raise SystemExit("ERROR: immutable conjunction-FDR result family already exists")
+
     runtime = root / "work/pleiotropy/conjfdr_runtime" / task["pair_id"] / "software"
     if runtime.exists():
         raise SystemExit(f"ERROR: clean runtime already exists: {runtime}")
@@ -109,7 +133,6 @@ def main() -> int:
     log_path.write_text(result.stdout + result.stderr, encoding="utf-8")
     if result.returncode:
         raise SystemExit(f"ERROR: MATLAB conjunction-FDR failed; see {log_path}")
-    outputs = [root / task[field] for field in ("all_results", "locus_results", "result_mat")]
     missing = [str(path) for path in outputs if not path.is_file() or path.stat().st_size == 0]
     if missing:
         raise SystemExit("ERROR: conjunction-FDR omitted expected outputs: " + ", ".join(missing))
@@ -120,8 +143,11 @@ def main() -> int:
         "result_mat_sha256": sha256(outputs[2]), "matlab_log_sha256": sha256(log_path),
         "correct_sample_overlap": "TRUE", "random_prune_iterations": task["random_prune_iterations"],
         "conjfdr_threshold": task["conjfdr_threshold"],
+        "runtime_provenance_sha256": sha256(runtime_path),
+        "task_builder_sha256": task["task_builder_sha256"],
+        "runner_sha256": task["runner_sha256"],
     }
-    atomic_tsv(root / task["completion"], completion)
+    atomic_tsv(completion_path, completion)
     print(f"CONJFDR_PAIR_OK pair={task['pair_id']}")
     return 0
 

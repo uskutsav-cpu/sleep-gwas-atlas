@@ -103,3 +103,12 @@ elif [ "$DOWNLOAD_TEMPLATE" = true ]; then
 else
   echo "No variant-template download requested. Re-run with --download-template after reviewing the 0.26 GiB plan."
 fi
+
+if [ -f ref/pleiofdr/runtime.provenance.json ]; then
+  python3 scripts/pleiotropy_contract.py --verify-runtime
+elif [ -s "$PLACO_PATH" ] && [ -d "$PLEIOFDR_DIR/.git" ] && \
+     [ -s "$REFERENCE_PATH" ] && [ -s "$TEMPLATE_PATH" ]; then
+  python3 scripts/pleiotropy_contract.py --seal-runtime
+else
+  echo "Pleiotropy runtime remains unsealed until all four pinned components are present."
+fi

@@ -393,12 +393,16 @@ rule pleiotropy_pairs:
         manifest="results/tables/pleiotropy_pair_manifest.tsv",
         lock="results/tables/pleiotropy_pair_manifest.lock.json",
     shell:
-        "{PYTHON} scripts/43_prepare_pleiotropy_pairs.py --report-only"
+        "{PYTHON} scripts/43_prepare_pleiotropy_pairs.py"
 
 
 rule pleiotropy_pair_input:
     input:
         policy=PLEIOTROPY_POLICY,
+        manifest="results/tables/pleiotropy_pair_manifest.tsv",
+        lock="results/tables/pleiotropy_pair_manifest.lock.json",
+        sleep=lambda wildcards: "data/harmonized/" + wildcards.pair_id.split("__", 1)[0] + ".harmonized.tsv.gz",
+        non_sleep=lambda wildcards: "data/harmonized/" + wildcards.pair_id.split("__", 1)[1] + ".harmonized.tsv.gz",
     output:
         pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
         provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
@@ -410,6 +414,9 @@ rule placo_task:
     input:
         pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
         provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
+        manifest="results/tables/pleiotropy_pair_manifest.tsv",
+        manifest_lock="results/tables/pleiotropy_pair_manifest.lock.json",
+        source=".r-env/share/placo/PLACO_v0.2.0.R",
     output:
         task="results/pleiotropy/tasks/{pair_id}.tsv",
         lock="results/pleiotropy/tasks/{pair_id}.lock.tsv",
@@ -444,9 +451,12 @@ rule pleiofdr_trait:
 rule conjfdr_task:
     input:
         sleep=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[0] + ".mat",
+        sleep_provenance=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[0] + ".provenance.json",
         non_sleep=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[1] + ".mat",
+        non_sleep_provenance=lambda wildcards: "data/pleiofdr/" + wildcards.pair_id.split("__", 1)[1] + ".provenance.json",
         template="ref/pleiofdr/9545380.ref",
         reference="ref/pleiofdr/ref9545380_1kgPhase3eur_LDr2p1.mat",
+        runtime_provenance="ref/pleiofdr/runtime.provenance.json",
         patch="patches/pleiofdr-enable-overlap.patch",
     output:
         config="results/pleiotropy/conjfdr_tasks/{pair_id}.config.txt",
@@ -468,9 +478,17 @@ rule conjfdr_pair:
 
 rule pleiotropy:
     input:
+        pair_inputs=expand("results/pleiotropy/inputs/{pair_id}.tsv.gz", pair_id=PLEIOTROPY_PAIRS),
+        pair_provenance=expand("results/pleiotropy/inputs/{pair_id}.provenance.json", pair_id=PLEIOTROPY_PAIRS),
+        placo_tasks=expand("results/pleiotropy/tasks/{pair_id}.tsv", pair_id=PLEIOTROPY_PAIRS),
+        placo_locks=expand("results/pleiotropy/tasks/{pair_id}.lock.tsv", pair_id=PLEIOTROPY_PAIRS),
         placo_hits=expand("results/pleiotropy/placo/{pair_id}.hits.tsv", pair_id=PLEIOTROPY_PAIRS),
         placo_summaries=expand("results/pleiotropy/placo/{pair_id}.summary.tsv", pair_id=PLEIOTROPY_PAIRS),
+        conjfdr_configs=expand("results/pleiotropy/conjfdr_tasks/{pair_id}.config.txt", pair_id=PLEIOTROPY_PAIRS),
+        conjfdr_tasks=expand("results/pleiotropy/conjfdr_tasks/{pair_id}.tsv", pair_id=PLEIOTROPY_PAIRS),
+        conjfdr_locks=expand("results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv", pair_id=PLEIOTROPY_PAIRS),
         conjfdr=expand("results/pleiotropy/conjfdr/{pair_id}/atlas_completion.tsv", pair_id=PLEIOTROPY_PAIRS),
+        runtime_provenance="ref/pleiofdr/runtime.provenance.json",
         locus=LAVA_LOCUS_FILE,
     output:
         placo="results/tables/placo_loci.tsv",

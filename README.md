@@ -87,7 +87,10 @@ conjunctional-FDR scans over all 396 pairs, with a common 2,495-block locus
 definition and strict full-summary-statistics requirement. The local preflight
 finds 288/396 scans input-ready; 108 remain blocked by the nine HapMap3-only
 traits. The official 2.22 GiB pleioFDR reference, MATLAB, 16 GB RAM, and adequate
-working storage are also absent. Nothing is downloaded implicitly. See
+working storage are also absent. The runtime, 396-pair task family, returned
+artifacts, and canonical same-block consensus now have immutable checksum
+contracts suitable for an external MATLAB host. Nothing is downloaded
+implicitly. See
 `docs/pleiotropic_loci_workflow.md`.
 
 The remaining fine-mapping, colocalization, molecular/regulatory/cell/pathway,

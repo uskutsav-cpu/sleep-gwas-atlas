@@ -1695,6 +1695,11 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(policy["pleiofdr_mode"], "conjfdr")
         self.assertEqual(policy["pleiofdr_random_prune_iterations"], 500)
         self.assertEqual(policy["pleiofdr_reference_bytes"], 2383912974)
+        self.assertEqual(
+            hashlib.sha256((ROOT / policy["reference_source_registry"]).read_bytes()).hexdigest(),
+            policy["reference_source_registry_sha256"],
+        )
+        self.assertEqual(policy["runtime_provenance"], "ref/pleiofdr/runtime.provenance.json")
         self.assertEqual(policy["pleiofdr_variant_template_variants"], 9545380)
         self.assertEqual(policy["pleiofdr_variant_template_bytes"], 274423819)
         self.assertEqual(
@@ -1726,12 +1731,70 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("REFERENCE_BYTES=2383912974", setup)
         self.assertIn("TEMPLATE_BYTES=274423819", setup)
         self.assertIn("TEMPLATE_SHA=06268420a0ec04e4529e832e1d4f4a53231b078cc5a3741a3eb215a5a4e1a9d5", setup)
+        self.assertIn("scripts/pleiotropy_contract.py --seal-runtime", setup)
         self.assertIn('prefilter == "not supplied"', preflight)
         self.assertIn('matlab = shutil.which("matlab")', preflight)
         self.assertIn("ready_pair_scans", preflight)
         self.assertIn("set(rg_by_pair) != set(expected)", prepare)
         self.assertIn('"global_rg_filters_pair_eligibility": False', prepare)
+        self.assertIn("if args.report_only:", prepare)
+        self.assertIn("incomplete pleiotropy pair family was not published", prepare)
         self.assertNotIn("global_rg_p <=", prepare)
+
+    def test_pleiotropy_runtime_payload_binds_every_production_component(self):
+        module = load_numbered_script("pleiotropy_contract.py", "pleiotropy_runtime_contract")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "config").mkdir()
+            (root / ".r-env/share/placo").mkdir(parents=True)
+            (root / "work/pleiofdr").mkdir(parents=True)
+            (root / "ref/pleiofdr").mkdir(parents=True)
+            (root / "patches").mkdir()
+            policy_path = root / "config/pleiotropy_analysis_policy.json"
+            policy_path.write_text("{}\n", encoding="utf-8")
+            placo = root / ".r-env/share/placo/PLACO_v0.2.0.R"
+            placo.write_bytes(b"p" * 7515)
+            reference = root / "ref/pleiofdr/reference.mat"
+            template = root / "ref/pleiofdr/template.ref"
+            patch = root / "patches/overlap.patch"
+            reference.write_bytes(b"reference\n")
+            template.write_bytes(b"template\n")
+            patch.write_bytes(b"patch\n")
+            registry = root / "config/pleiotropy_reference_sources.tsv"
+            registry.write_text(
+                "resource_id\tversion_or_commit\tsource_url\texpected_bytes\tverification\tlocal_path\tstatus\n"
+                "placo_plus\tv\thttps://example.invalid\t7515\tSHA256\t.r-env/share/placo/PLACO_v0.2.0.R\tPINNED_PRESENT\n"
+                "pleiofdr\tc\thttps://example.invalid\tNA\tCOMMIT\twork/pleiofdr\tPINNED_PRESENT\n"
+                f"pleiofdr_reference\tr\thttps://example.invalid\t{reference.stat().st_size}\tSHA256\tref/pleiofdr/reference.mat\tPINNED_PRESENT\n"
+                f"pleiofdr_variant_template\tt\thttps://example.invalid\t{template.stat().st_size}\tSHA256\tref/pleiofdr/template.ref\tPINNED_PRESENT\n",
+                encoding="utf-8",
+            )
+            policy = {
+                "analysis_id": "TEST", "reference_source_registry": "config/pleiotropy_reference_sources.tsv",
+                "reference_source_registry_sha256": hashlib.sha256(registry.read_bytes()).hexdigest(),
+                "placo_source_path": ".r-env/share/placo/PLACO_v0.2.0.R",
+                "placo_source_sha256": hashlib.sha256(placo.read_bytes()).hexdigest(),
+                "pleiofdr_code_path": "work/pleiofdr", "pleiofdr_commit": "c" * 40,
+                "pleiofdr_reference_path": "ref/pleiofdr/reference.mat",
+                "pleiofdr_reference_bytes": reference.stat().st_size,
+                "pleiofdr_reference_etag": "etag",
+                "pleiofdr_variant_template_path": "ref/pleiofdr/template.ref",
+                "pleiofdr_variant_template_bytes": template.stat().st_size,
+                "pleiofdr_variant_template_sha256": hashlib.sha256(template.read_bytes()).hexdigest(),
+                "pleiofdr_overlap_patch": "patches/overlap.patch",
+                "pleiofdr_overlap_patch_sha256": hashlib.sha256(patch.read_bytes()).hexdigest(),
+            }
+            module.git_identity = lambda path: "c" * 40
+            payload = module.runtime_payload(
+                root, policy_path, policy, hashlib.sha256(reference.read_bytes()).hexdigest(),
+            )
+            self.assertEqual(payload["pleiofdr_reference"]["bytes"], reference.stat().st_size)
+            self.assertEqual(payload["variant_template"]["sha256"], policy["pleiofdr_variant_template_sha256"])
+            template.write_bytes(b"changed size\n")
+            with self.assertRaisesRegex(SystemExit, "variant template"):
+                module.runtime_payload(
+                    root, policy_path, policy, hashlib.sha256(reference.read_bytes()).hexdigest(),
+                )
 
     def test_pleiotropy_pair_materializer_aligns_and_rejects_bad_rows(self):
         module = load_pleiotropy_materializer()
@@ -1786,11 +1849,13 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('manifest_lock.get("policy_sha256") != sha256(policy_path)', task)
         self.assertIn('provenance.get("output_sha256") == pair_hash', task)
         self.assertIn('sha256(placo_source) != policy["placo_source_sha256"]', task)
+        self.assertIn('"runner_sha256": sha256(root / "scripts/46_run_placo_pair.R")', task)
         self.assertIn('args[[3L]] != "--execute"', runtime)
         self.assertIn('lock$task_sha256 != sha256(task_path)', runtime)
         self.assertIn('placo.plus(', runtime)
         self.assertIn('failure_fraction > maximum_failure_fraction', runtime)
         self.assertIn('family_threshold >= conventional_threshold', runtime)
+        self.assertIn("PLACO+ task creation or execution code drifted", runtime)
         self.assertNotIn("global_rg", runtime)
 
     def test_pleiofdr_trait_materializer_is_reference_ordered_and_opt_in(self):
@@ -1817,11 +1882,15 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('"randprune_n={policy[\'pleiofdr_random_prune_iterations\']}"', task)
         self.assertIn('"exclude_from_discovery=false"', task)
         self.assertIn('"manh_plot=false"', task)
+        self.assertNotIn('"reference_sha256": sha256(reference)', task)
+        self.assertIn('pleiotropy_contract.validate_runtime(root)', task)
         self.assertIn('if not args.execute:', runtime)
         self.assertIn('task.get("correct_sample_overlap") != "TRUE"', runtime)
         self.assertIn('shutil.which("matlab")', runtime)
         self.assertIn('shutil.copytree(code, runtime', runtime)
         self.assertIn('["patch", "-p1", "-i", str(patch)]', runtime)
+        self.assertIn("pleiotropy_contract.validate_runtime(root)", runtime)
+        self.assertIn("immutable conjunction-FDR result family already exists", runtime)
 
     def test_pleiotropy_collator_requires_all_pairs_and_same_block_consensus(self):
         collator = (ROOT / "scripts" / "50_collate_pleiotropy.py").read_text(
@@ -1836,6 +1905,10 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('"effect_direction"', collator)
         self.assertIn('hit["Z1"]', collator)
         self.assertIn('hit["Z2"]', collator)
+        self.assertIn("rehash_reference=True", collator)
+        self.assertIn('"schema_version": "sleep-atlas-pleiotropic-loci.1"', collator)
+        self.assertIn("conjfdr_result_mat", collator)
+        self.assertIn("immutable canonical pleiotropy publication already exists", collator)
         self.assertIn('"--validate-only", "--quiet"', acceptance)
         self.assertIn('396 locked PLACO+/conjunction-FDR pair scans', acceptance)
         workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")

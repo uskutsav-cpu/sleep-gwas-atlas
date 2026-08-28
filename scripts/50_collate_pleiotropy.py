@@ -12,6 +12,8 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
+import pleiotropy_contract
+
 
 PLACO_FIELDS = [
     "pair_id", "sleep_trait", "non_sleep_trait", "analysis_tier", "locus_id",
@@ -128,6 +130,8 @@ def main() -> int:
     parser.add_argument("--root", default=".")
     parser.add_argument("--manifest", default="results/tables/pleiotropy_pair_manifest.tsv")
     parser.add_argument("--manifest-lock", default="results/tables/pleiotropy_pair_manifest.lock.json")
+    parser.add_argument("--pair-dir", default="results/pleiotropy/inputs")
+    parser.add_argument("--placo-task-dir", default="results/pleiotropy/tasks")
     parser.add_argument("--placo-dir", default="results/pleiotropy/placo")
     parser.add_argument("--conjfdr-task-dir", default="results/pleiotropy/conjfdr_tasks")
     parser.add_argument("--placo-out", default="results/tables/placo_loci.tsv")
@@ -138,12 +142,21 @@ def main() -> int:
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
+    if args.report_only and args.validate_only:
+        raise SystemExit("ERROR: choose report-only or validate-only")
     root = Path(args.root).resolve()
     policy_path = root / "config/pleiotropy_analysis_policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     manifest_path = root / args.manifest
     manifest_lock_path = root / args.manifest_lock
     lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
+    if (
+        lock.get("schema_version") != "sleep-atlas-pleiotropy-pairs.1"
+        or lock.get("ready_pair_count") != policy["expected_sleep_non_sleep_pairs"]
+        or lock.get("blocked_pair_count") != 0
+        or lock.get("script_sha256") != sha256(root / "scripts/43_prepare_pleiotropy_pairs.py")
+    ):
+        raise SystemExit("ERROR: complete immutable pleiotropy pair family is required")
     if lock.get("manifest_sha256") != sha256(manifest_path):
         raise SystemExit("ERROR: pleiotropy manifest differs from its lock")
     if lock.get("policy_sha256") != sha256(policy_path):
@@ -159,8 +172,13 @@ def main() -> int:
     expected_paths: list[Path] = []
     for pair_id in pair_ids:
         expected_paths.extend([
+            root / args.pair_dir / f"{pair_id}.tsv.gz",
+            root / args.pair_dir / f"{pair_id}.provenance.json",
+            root / args.placo_task_dir / f"{pair_id}.tsv",
+            root / args.placo_task_dir / f"{pair_id}.lock.tsv",
             root / args.placo_dir / f"{pair_id}.summary.tsv",
             root / args.placo_dir / f"{pair_id}.hits.tsv",
+            root / args.conjfdr_task_dir / f"{pair_id}.config.txt",
             root / args.conjfdr_task_dir / f"{pair_id}.tsv",
             root / args.conjfdr_task_dir / f"{pair_id}.lock.tsv",
         ])
@@ -174,6 +192,10 @@ def main() -> int:
             return 0
         raise SystemExit("ERROR: " + message)
 
+    runtime_provenance = pleiotropy_contract.validate_runtime(
+        root, rehash_reference=True,
+    )
+
     locus_path = root / policy["locus_definition"]
     blocks, starts = load_blocks(
         locus_path, policy["locus_definition_sha256"], policy["expected_loci"]
@@ -181,10 +203,41 @@ def main() -> int:
     placo_grouped: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
     conj_grouped: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
     input_hashes: dict[str, dict[str, str]] = {}
+    digest_cache: dict[Path, str] = {}
+
+    def digest(path: Path) -> str:
+        if path not in digest_cache:
+            digest_cache[path] = sha256(path)
+        return digest_cache[path]
+
     for pair in manifest:
         pair_id = pair["pair_id"]
+        pair_path = root / args.pair_dir / f"{pair_id}.tsv.gz"
+        pair_provenance_path = root / args.pair_dir / f"{pair_id}.provenance.json"
+        placo_task_path = root / args.placo_task_dir / f"{pair_id}.tsv"
+        placo_lock_path = root / args.placo_task_dir / f"{pair_id}.lock.tsv"
         summary_path = root / args.placo_dir / f"{pair_id}.summary.tsv"
         hits_path = root / args.placo_dir / f"{pair_id}.hits.tsv"
+        pair_provenance = json.loads(pair_provenance_path.read_text(encoding="utf-8"))
+        placo_task, placo_lock = one_row(placo_task_path), one_row(placo_lock_path)
+        if (
+            placo_lock.get("schema_version") != "sleep-atlas-placo-task.1"
+            or placo_lock.get("task_sha256") != digest(placo_task_path)
+            or placo_lock.get("pair_id") != pair_id
+            or placo_task.get("pair_id") != pair_id
+            or placo_task.get("task_builder_sha256")
+            != digest(root / "scripts/45_prepare_placo_task.py")
+            or placo_task.get("runner_sha256") != digest(root / "scripts/46_run_placo_pair.R")
+            or placo_task.get("pair_input") != str(pair_path.relative_to(root))
+            or placo_task.get("pair_input_sha256") != digest(pair_path)
+            or placo_task.get("pair_provenance_sha256") != digest(pair_provenance_path)
+            or pair_provenance.get("output_sha256") != digest(pair_path)
+            or pair_provenance.get("manifest_sha256") != digest(manifest_path)
+            or pair_provenance.get("policy_sha256") != digest(policy_path)
+            or placo_task.get("variant_hits_out") != str(hits_path.relative_to(root))
+            or placo_task.get("summary_out") != str(summary_path.relative_to(root))
+        ):
+            raise SystemExit(f"ERROR: PLACO+ input/task provenance drifted for {pair_id}")
         summary = one_row(summary_path)
         if (
             summary.get("pair_id") != pair_id
@@ -193,6 +246,11 @@ def main() -> int:
             or float(summary.get("family_threshold", "nan")) != policy["placo_locked_pair_family_threshold"]
             or float(summary.get("numerical_failure_fraction", "nan"))
             > policy["placo_maximum_numerical_failure_fraction"]
+            or summary.get("task_sha256") != digest(placo_task_path)
+            or summary.get("input_sha256") != digest(pair_path)
+            or summary.get("placo_source_sha256") != policy["placo_source_sha256"]
+            or summary.get("task_builder_sha256") != placo_task["task_builder_sha256"]
+            or summary.get("runner_sha256") != placo_task["runner_sha256"]
         ):
             raise SystemExit(f"ERROR: invalid PLACO+ summary for {pair_id}")
         placo_hits, placo_fields = rows_and_fields(hits_path)
@@ -235,18 +293,53 @@ def main() -> int:
         task_path = root / args.conjfdr_task_dir / f"{pair_id}.tsv"
         task_lock_path = root / args.conjfdr_task_dir / f"{pair_id}.lock.tsv"
         task, task_lock = one_row(task_path), one_row(task_lock_path)
-        if task_lock.get("task_sha256") != sha256(task_path) or task.get("pair_id") != pair_id:
+        if (
+            task_lock.get("schema_version") != "sleep-atlas-conjfdr-task.1"
+            or task_lock.get("task_sha256") != digest(task_path)
+            or task_lock.get("pair_id") != pair_id
+            or task.get("pair_id") != pair_id
+            or task.get("task_builder_sha256")
+            != digest(root / "scripts/48_prepare_conjfdr_task.py")
+            or task.get("runner_sha256") != digest(root / "scripts/49_run_conjfdr_pair.py")
+            or task.get("runtime_provenance") != policy["runtime_provenance"]
+            or task.get("runtime_provenance_sha256")
+            != digest(root / str(policy["runtime_provenance"]))
+            or task.get("reference_sha256")
+            != runtime_provenance["pleiofdr_reference"]["sha256"]
+            or int(task.get("reference_bytes", "0"))
+            != runtime_provenance["pleiofdr_reference"]["bytes"]
+            or task.get("pleiofdr_commit") != runtime_provenance["pleiofdr_code"]["commit"]
+        ):
             raise SystemExit(f"ERROR: conjunction-FDR task/lock drifted for {pair_id}")
+        for field, hash_field in (
+            ("config", "config_sha256"), ("sleep_mat", "sleep_mat_sha256"),
+            ("non_sleep_mat", "non_sleep_mat_sha256"), ("template", "template_sha256"),
+            ("overlap_patch", "overlap_patch_sha256"),
+        ):
+            if digest(root / task[field]) != task[hash_field]:
+                raise SystemExit(f"ERROR: conjunction-FDR input drifted for {pair_id}: {field}")
         completion_path = root / task["completion"]
         all_results_path = root / task["all_results"]
-        if not completion_path.is_file() or not all_results_path.is_file():
+        locus_results_path = root / task["locus_results"]
+        result_mat_path = root / task["result_mat"]
+        matlab_log_path = root / task["result_dir"] / "matlab.log"
+        if not all(path.is_file() and path.stat().st_size for path in (
+            completion_path, all_results_path, locus_results_path, result_mat_path, matlab_log_path,
+        )):
             raise SystemExit(f"ERROR: conjunction-FDR result is absent for {pair_id}")
         completion = one_row(completion_path)
         if (
             completion.get("analysis_status") != "CONJFDR_COMPLETE"
             or completion.get("pair_id") != pair_id
-            or completion.get("task_sha256") != sha256(task_path)
-            or completion.get("all_results_sha256") != sha256(all_results_path)
+            or completion.get("task_sha256") != digest(task_path)
+            or completion.get("all_results_sha256") != digest(all_results_path)
+            or completion.get("locus_results_sha256") != digest(locus_results_path)
+            or completion.get("result_mat_sha256") != digest(result_mat_path)
+            or completion.get("matlab_log_sha256") != digest(matlab_log_path)
+            or completion.get("runtime_provenance_sha256")
+            != digest(root / str(policy["runtime_provenance"]))
+            or completion.get("task_builder_sha256") != task["task_builder_sha256"]
+            or completion.get("runner_sha256") != task["runner_sha256"]
             or completion.get("correct_sample_overlap") != "TRUE"
             or int(completion.get("random_prune_iterations", "0"))
             != policy["pleiofdr_random_prune_iterations"]
@@ -272,9 +365,15 @@ def main() -> int:
                 "start": start, "stop": stop,
             })
         input_hashes[pair_id] = {
-            "placo_summary": sha256(summary_path), "placo_hits": sha256(hits_path),
-            "conjfdr_task": sha256(task_path), "conjfdr_completion": sha256(completion_path),
-            "conjfdr_all": sha256(all_results_path),
+            "pair_input": digest(pair_path), "pair_provenance": digest(pair_provenance_path),
+            "placo_task": digest(placo_task_path), "placo_lock": digest(placo_lock_path),
+            "placo_summary": digest(summary_path), "placo_hits": digest(hits_path),
+            "conjfdr_task": digest(task_path), "conjfdr_lock": digest(task_lock_path),
+            "conjfdr_completion": digest(completion_path),
+            "conjfdr_all": digest(all_results_path),
+            "conjfdr_loci": digest(locus_results_path),
+            "conjfdr_result_mat": digest(result_mat_path),
+            "conjfdr_matlab_log": digest(matlab_log_path),
         }
 
     manifest_by_pair = {row["pair_id"]: row for row in manifest}
@@ -340,15 +439,41 @@ def main() -> int:
         root / args.shared_out: table_text(SHARED_FIELDS, shared),
     }
     provenance = {
+        "schema_version": "sleep-atlas-pleiotropic-loci.1",
         "analysis_id": policy["analysis_id"], "policy_sha256": sha256(policy_path),
         "manifest_sha256": sha256(manifest_path), "manifest_lock_sha256": sha256(manifest_lock_path),
+        "runtime_provenance_sha256": digest(root / str(policy["runtime_provenance"])),
         "locus_definition_sha256": sha256(locus_path), "completed_pair_scans": len(pair_ids),
         "placo_locus_count": len(placo_loci), "conjfdr_locus_count": len(conj_loci),
         "canonical_shared_locus_count": len(shared), "pair_input_hashes": input_hashes,
         "canonical_rule": policy["canonical_rule"], "claim_limit": policy["claim_limit"],
+        "canonical_output_sha256": {
+            str(path.relative_to(root)): hashlib.sha256(payload.encode("utf-8")).hexdigest()
+            for path, payload in payloads.items()
+        },
+        "script_sha256": {
+            relative: digest(root / relative) for relative in (
+                "scripts/43_prepare_pleiotropy_pairs.py",
+                "scripts/44_materialize_pleiotropy_pair.py",
+                "scripts/45_prepare_placo_task.py",
+                "scripts/46_run_placo_pair.R",
+                "scripts/47_prepare_pleiofdr_trait.py",
+                "scripts/48_prepare_conjfdr_task.py",
+                "scripts/49_run_conjfdr_pair.py",
+                "scripts/50_collate_pleiotropy.py",
+                "scripts/pleiotropy_contract.py",
+            )
+        },
     }
     provenance_text = json.dumps(provenance, indent=2, sort_keys=True) + "\n"
     provenance_path = root / args.provenance_out
+    if args.report_only:
+        if not args.quiet:
+            print(
+                f"Pleiotropy collation ready: {len(pair_ids)} pairs; {len(shared)} "
+                "cross-method shared loci; no canonical files written"
+            )
+        return 0
     if args.validate_only:
         for path, payload in payloads.items():
             if not path.is_file() or path.read_text(encoding="utf-8") != payload:
@@ -356,6 +481,8 @@ def main() -> int:
         if not provenance_path.is_file() or provenance_path.read_text(encoding="utf-8") != provenance_text:
             raise SystemExit("ERROR: canonical pleiotropy provenance drifted")
     else:
+        if provenance_path.exists() or any(path.exists() for path in payloads):
+            raise SystemExit("ERROR: immutable canonical pleiotropy publication already exists")
         for path, payload in payloads.items():
             atomic_text(path, payload)
         atomic_text(provenance_path, provenance_text)

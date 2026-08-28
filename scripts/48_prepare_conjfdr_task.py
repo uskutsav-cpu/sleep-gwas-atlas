@@ -10,6 +10,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import pleiotropy_contract
+
 
 PAIR_ID = re.compile(r"[a-z0-9_]+__[a-z0-9_]+$")
 
@@ -87,10 +89,19 @@ def main() -> int:
     root = Path(args.root).resolve()
     policy_path = root / "config/pleiotropy_analysis_policy.json"
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    runtime_provenance = pleiotropy_contract.validate_runtime(root)
     policy_hash = sha256(policy_path)
     manifest_path = root / args.manifest
     manifest_lock_path = root / args.manifest_lock
     manifest_lock = json.loads(manifest_lock_path.read_text(encoding="utf-8"))
+    if (
+        manifest_lock.get("schema_version") != "sleep-atlas-pleiotropy-pairs.1"
+        or manifest_lock.get("ready_pair_count") != policy["expected_sleep_non_sleep_pairs"]
+        or manifest_lock.get("blocked_pair_count") != 0
+        or manifest_lock.get("script_sha256")
+        != sha256(root / "scripts/43_prepare_pleiotropy_pairs.py")
+    ):
+        raise SystemExit("ERROR: complete immutable pleiotropy pair family is required")
     if manifest_lock.get("manifest_sha256") != sha256(manifest_path):
         raise SystemExit("ERROR: pair manifest differs from its lock")
     if manifest_lock.get("policy_sha256") != policy_hash:
@@ -173,6 +184,8 @@ def main() -> int:
     prefix = f"{pair['sleep_trait']}_{pair['non_sleep_trait']}_conjfdr_{policy['pleiofdr_conjfdr_threshold']}"
     task_path = task_dir / f"{args.pair_id}.tsv"
     lock_path = task_dir / f"{args.pair_id}.lock.tsv"
+    if config_path.exists() or task_path.exists() or lock_path.exists():
+        raise SystemExit("ERROR: immutable conjunction-FDR task family already exists")
     task = {
         "analysis_id": policy["analysis_id"], "pair_id": args.pair_id,
         "sleep_trait": pair["sleep_trait"], "non_sleep_trait": pair["non_sleep_trait"],
@@ -182,7 +195,11 @@ def main() -> int:
         "sleep_mat": relative(root, sleep_mat), "sleep_mat_sha256": sleep_hash,
         "non_sleep_mat": relative(root, disease_mat), "non_sleep_mat_sha256": disease_hash,
         "template": relative(root, template), "template_sha256": sha256(template),
-        "reference": relative(root, reference), "reference_sha256": sha256(reference),
+        "reference": relative(root, reference),
+        "reference_bytes": reference.stat().st_size,
+        "reference_sha256": runtime_provenance["pleiofdr_reference"]["sha256"],
+        "runtime_provenance": policy["runtime_provenance"],
+        "runtime_provenance_sha256": sha256(root / policy["runtime_provenance"]),
         "pleiofdr_code": relative(root, code), "pleiofdr_commit": commit,
         "overlap_patch": relative(root, patch), "overlap_patch_sha256": sha256(patch),
         "result_dir": relative(root, result_dir),
@@ -193,9 +210,12 @@ def main() -> int:
         "conjfdr_threshold": policy["pleiofdr_conjfdr_threshold"],
         "random_prune_iterations": policy["pleiofdr_random_prune_iterations"],
         "correct_sample_overlap": str(policy["pleiofdr_correct_sample_overlap"]).upper(),
+        "task_builder_sha256": sha256(Path(__file__)),
+        "runner_sha256": sha256(root / "scripts/49_run_conjfdr_pair.py"),
     }
     atomic_tsv(task_path, task)
     atomic_tsv(lock_path, {
+        "schema_version": "sleep-atlas-conjfdr-task.1",
         "analysis_id": policy["analysis_id"], "pair_id": args.pair_id,
         "task": relative(root, task_path), "task_sha256": sha256(task_path),
     })

@@ -7,6 +7,9 @@
   "expected_sleep_non_sleep_pairs": 396,
   "pair_scope": "All locked 396 sleep-by-non-sleep pairs; LDSC rg does not filter eligibility",
   "input_requirement": "Full autosomal post-QC summary statistics for both traits; HapMap3-prefiltered inputs are forbidden for primary locus discovery",
+  "reference_source_registry": "config/pleiotropy_reference_sources.tsv",
+  "reference_source_registry_sha256": "e6d82cb7483c03324300600b6c6de5d3ad1bb025a63f8a5dcefdf2cca3ed6f5a",
+  "runtime_provenance": "ref/pleiofdr/runtime.provenance.json",
   "placo_version": "0.2.0",
   "placo_commit": "3ba3cae1d323ad117fb4540e620bcefa79f70663",
   "placo_source_sha256": "fb684a8ed88f27dd138f5c2e8613b092904e84f364030d036058f17db95b7124",
@@ -22,11 +25,15 @@
   "pleiofdr_reference": "ref9545380_1kgPhase3eur_LDr2p1.mat",
   "pleiofdr_reference_bytes": 2383912974,
   "pleiofdr_reference_etag": "99759a251412ff12b065d1a75d19188f-139",
+  "pleiofdr_reference_path": "ref/pleiofdr/ref9545380_1kgPhase3eur_LDr2p1.mat",
   "pleiofdr_variant_template": "9545380.ref",
   "pleiofdr_variant_template_variants": 9545380,
   "pleiofdr_variant_template_bytes": 274423819,
   "pleiofdr_variant_template_sha256": "06268420a0ec04e4529e832e1d4f4a53231b078cc5a3741a3eb215a5a4e1a9d5",
   "pleiofdr_variant_template_etag": "6d28696d6108e66b4f79f81a0e937552-16",
+  "pleiofdr_variant_template_path": "ref/pleiofdr/9545380.ref",
+  "pleiofdr_code_path": "work/pleiofdr",
+  "placo_source_path": ".r-env/share/placo/PLACO_v0.2.0.R",
   "pleiofdr_random_prune_iterations": 500,
   "pleiofdr_conjfdr_threshold": 0.05,
   "pleiofdr_exclude_regions": "MHC chr6:25119106-33854733",
@@ -40,5 +47,11 @@
   "locus_definition_sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882",
   "expected_loci": 2495,
   "canonical_rule": "A canonical shared locus must have a family-corrected PLACO+ association and conjFDR <= 0.05 in the same locked LD block; method-specific results remain separately auditable",
-  "claim_limit": "Statistical pleiotropy does not establish a shared causal variant, mechanism, or causal direction"
+  "claim_limit": "Statistical pleiotropy does not establish a shared causal variant, mechanism, or causal direction",
+  "canonical_outputs": [
+    "results/tables/placo_loci.tsv",
+    "results/tables/conjfdr_loci.tsv",
+    "results/atlas/shared_loci.tsv"
+  ],
+  "canonical_provenance": "results/atlas/shared_loci.provenance.json"
 }

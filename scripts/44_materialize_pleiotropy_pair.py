@@ -135,6 +135,13 @@ def main() -> int:
     lock = json.loads((root / args.lock).read_text(encoding="utf-8"))
     policy_path = root / args.policy
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    if (
+        lock.get("schema_version") != "sleep-atlas-pleiotropy-pairs.1"
+        or lock.get("ready_pair_count") != policy["expected_sleep_non_sleep_pairs"]
+        or lock.get("blocked_pair_count") != 0
+        or lock.get("script_sha256") != sha256(root / "scripts/43_prepare_pleiotropy_pairs.py")
+    ):
+        raise SystemExit("ERROR: complete immutable pleiotropy pair family is required")
     if lock.get("analysis_id") != policy.get("analysis_id"):
         raise SystemExit("ERROR: pleiotropy policy and pair lock analysis IDs differ")
     if lock.get("policy_sha256") != sha256(policy_path):
@@ -171,6 +178,8 @@ def main() -> int:
     database = work / f"{args.pair_id}.sqlite"
     destination = root / args.out_dir / f"{args.pair_id}.tsv.gz"
     provenance_path = root / args.out_dir / f"{args.pair_id}.provenance.json"
+    if destination.exists() or provenance_path.exists():
+        raise SystemExit("ERROR: immutable materialized pleiotropy pair already exists")
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(destination.suffix + ".tmp")
     database.unlink(missing_ok=True)

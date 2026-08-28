@@ -25,6 +25,7 @@ sha256 <- function(path) {
 lock <- read.delim(lock_path, stringsAsFactors = FALSE, check.names = FALSE)
 task <- read.delim(task_path, stringsAsFactors = FALSE, check.names = FALSE)
 if (nrow(lock) != 1L || nrow(task) != 1L) stop("task and task lock must each contain one row")
+if (lock$schema_version != "sleep-atlas-placo-task.1") stop("PLACO+ task lock has the wrong schema")
 if (lock$task_sha256 != sha256(task_path)) stop("PLACO+ task differs from its lock")
 if (lock$analysis_id != task$analysis_id || lock$pair_id != task$pair_id) {
   stop("PLACO+ task identity differs from its lock")
@@ -34,14 +35,23 @@ required <- c(
   "analysis_id", "pair_id", "pair_input", "pair_input_sha256", "pair_input_rows",
   "placo_source", "placo_source_sha256", "marginal_p_threshold",
   "z_squared_maximum", "abs_tolerance", "maximum_failure_fraction",
-  "conventional_threshold", "family_threshold", "variant_hits_out", "summary_out"
+  "conventional_threshold", "family_threshold", "task_builder_sha256",
+  "runner_sha256", "variant_hits_out", "summary_out"
 )
 if (!all(required %in% names(task))) stop("PLACO+ task lacks required columns")
+if (sha256(file.path(root, "scripts/45_prepare_placo_task.py")) != task$task_builder_sha256 ||
+    sha256(file.path(root, "scripts/46_run_placo_pair.R")) != task$runner_sha256) {
+  stop("PLACO+ task creation or execution code drifted")
+}
 resolve <- function(path) normalizePath(file.path(root, path), mustWork = TRUE)
 pair_input <- resolve(task$pair_input)
 placo_source <- resolve(task$placo_source)
 if (sha256(pair_input) != task$pair_input_sha256) stop("materialized pair checksum drifted")
 if (sha256(placo_source) != task$placo_source_sha256) stop("pinned PLACO+ source checksum drifted")
+if (file.exists(file.path(root, task$variant_hits_out)) ||
+    file.exists(file.path(root, task$summary_out))) {
+  stop("immutable PLACO+ result family already exists")
+}
 
 numeric_field <- function(name, positive = TRUE) {
   value <- suppressWarnings(as.numeric(task[[name]]))
@@ -90,7 +100,6 @@ if (nrow(dat) > 1L) {
        dat$SNP[following] <= dat$SNP[previous])
   if (any(disordered)) stop("materialized pair is not in deterministic coordinate order")
 }
-
 source(placo_source, local = globalenv())
 needed <- c("var.placo", "cor.pearson", "placo.plus")
 if (!all(vapply(needed, exists, logical(1L), inherits = TRUE))) {
@@ -188,7 +197,9 @@ summary <- data.frame(
   locked_family_hit_count = sum(hits$locked_family_significant == TRUE),
   minimum_p_placo_plus = minimum_p, analysis_status = "PLACO_PLUS_COMPLETE",
   task_sha256 = sha256(task_path), input_sha256 = sha256(pair_input),
-  placo_source_sha256 = sha256(placo_source), stringsAsFactors = FALSE
+  placo_source_sha256 = sha256(placo_source),
+  task_builder_sha256 = task$task_builder_sha256,
+  runner_sha256 = task$runner_sha256, stringsAsFactors = FALSE
 )
 
 publish_table <- function(table, relative_path) {

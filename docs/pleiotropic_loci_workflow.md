@@ -37,7 +37,7 @@ is not a causal-direction estimate.
 The official pleioFDR reference is exactly 2,383,912,974 bytes (2.22 GiB) and
 the upstream workflow requires MATLAB and at least 16 GB RAM. It is not
 downloaded implicitly. This Apple M1 laptop has 8 GB RAM, no MATLAB, about
-5.3 GiB free, and only 36/45 full post-QC inputs. The nine inputs that were
+2.2 GiB free, and only 36/45 full post-QC inputs. The nine inputs that were
 source-prefiltered to HapMap3 for LDSC block 108 of 396 pair scans:
 
 ```text
@@ -59,6 +59,10 @@ pair, source hashes, policy hash, and available scratch space. Add
 is written deterministically and published atomically after full allele and
 coordinate checks.
 
+The pair planner is likewise non-mutating under `--report-only`. It publishes
+the immutable 396-row manifest only when all 396 pairs have two full inputs;
+an incomplete planning snapshot cannot authorize partial production tasks.
+
 After materialization, freeze and run one PLACO+ scan with:
 
 ```bash
@@ -73,6 +77,8 @@ loading results. It evaluates the full variant family, records all numerical
 failures, fails if their fraction exceeds the locked limit, and retains both
 the conventional and stricter 396-scan-family indicators. A real pair scan is
 substantial production compute and is never launched by a read-only preflight.
+Every task is also bound to the exact task builder and R runner, and existing
+task or result artifacts are never silently replaced.
 
 ConjFDR also needs the official 9,545,380-variant ordering template. Its exact
 274,423,819-byte payload is independently pinned by SHA-256. It is not
@@ -104,6 +110,13 @@ Mahalanobis sample-overlap correction. It refuses experimental Octave, less
 than 16 GiB RAM, less than 20 GiB free disk, drifted inputs, or execution
 without `--execute`.
 
+Once the exact PLACO+ source, clean pleioFDR commit, variant template, and LD
+reference are all present, setup hashes the complete family once and writes
+`ref/pleiofdr/runtime.provenance.json`. Pair tasks verify that immutable seal
+and live reference size instead of rereading 2.22 GiB for every array job. The
+final collator rehashes the LD reference once before publication and validates
+every PLACO+ task, conjunction-FDR task, returned CSV/MAT/log, and runner hash.
+
 After all 396 pair completions exist, the only canonical publisher is:
 
 ```bash
@@ -114,7 +127,8 @@ It validates every task and result hash, assigns method-specific hits to the
 locked 2,495 blocks, and publishes `results/atlas/shared_loci.tsv` only for
 pair/block combinations supported by both methods. `--report-only` is a
 non-mutating completeness audit; `--validate-only` recomputes and byte-checks
-an existing canonical result.
+an existing canonical result. Canonical outputs and their provenance are
+immutable and include checksums for the full 396-pair returned-artifact family.
 
 The equivalent opt-in Snakemake targets are `placo_pair`, `conjfdr_pair`, and
 `pleiotropy`. They are intentionally outside the default `all` target because
