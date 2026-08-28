@@ -15,6 +15,11 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 
 ## Current state (2026-08-28)
 
+The executable acceptance audit currently passes **10/23** gates. All 103
+contract tests pass, every Python file compiles, every shell script parses, and
+all eight R scripts parse. The repository contains no tracked working-tree
+changes at this checkpoint.
+
 | Gate | State | Current evidence or blocker |
 |---|---|---|
 | Locked scope | Complete | Exactly 12 sleep/circadian plus 33 non-sleep traits are locked by ordered-ID hash in `analysis_panel.tsv` and its lock file. |
@@ -25,16 +30,39 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 | LDSC h2 and Phase 1 | Complete with exclusions | All 45 h² runs are present. Forty-three traits pass the predefined Z/intercept gate; T2D is dropped for intercept 1.315 (>1.20) and melanoma for h² Z 3.57 (<4). The exact 396 sleep×non-sleep pairs are present as 372 primary plus 24 clearly labelled QC-failed sensitivity rows. The locked-family correction yields 153 primary FDR<0.05 pairs. MS and melanoma liability h² exceed one and remain explicit interpretation/robustness warnings rather than being hidden. |
 | Full covariance | Complete with warnings | The real 45-by-45 S/Rg/I matrices, 1,035-by-1,035 V matrix, and all 1,035 lower-triangle estimates pass structural validation. S has three negative eigenvalues and V is ill-conditioned; the required 1,082 jackknife blocks and HDL implementation sensitivity remain explicit downstream warnings. |
 | Genomic SEM validation | Passed as a validated null | Odd-chromosome discovery and even-chromosome confirmation were completed for 42 QC-passing traits. None of 10 candidate models passed held-out fit plus residual-admissibility criteria; factor GWAS and Q_SNP are therefore not applicable, with immutable header-only terminal outputs rather than fabricated associations. |
-| Other downstream science | Blocked | Pinned LAVA, MiXeR, PLACO+/conjFDR, fine-mapping, molecular-QTL/TWAS, regulatory, five-strategy cell-type, four-resource pathway, bidirectional-MR, atlas-edge, and robustness workflows now fail closed on exact missing inputs, releases, runtimes, or references. CATlas adult scATAC and the 16-tissue GTEx LDSC-SEG subset are source-ready (19/20 interpretation sources overall). The exact LDSC-SEG reference/runtime/trait contract is implemented, but its 1,876,474,664-byte streamed transfer is not started because current free space is below the locked 4 GiB floor and the 66-file temporary deletion family has not been authorized. Real production runs remain. |
+| Other downstream science | Blocked | Pinned LAVA, MiXeR, PLACO+/conjFDR, fine-mapping, molecular-QTL/TWAS, regulatory, five-strategy cell-type, four-resource pathway, bidirectional-MR, atlas-edge, and robustness workflows now fail closed on exact missing inputs, releases, runtimes, or references. Only 29/45 inputs are full-resolution; the other 16 are `parkinson`, `mdd`, `ibd`, `crohn`, `uc`, `ms`, `asthma`, `t2d`, `ldl`, `hdl`, `triglycerides`, `cad`, `stroke`, `longevity`, `telomere_length`, and `melanoma`. Dense source files for 13 of those 16 remain local; the three GLGC lipid archives are absent. CATlas adult scATAC and the 16-tissue GTEx LDSC-SEG subset are source-ready (19/20 interpretation sources overall). The exact LDSC-SEG reference/runtime/trait contract is implemented, but its 1,876,474,664-byte streamed transfer has not started because current free space is below the locked 4 GiB floor. Real production runs remain. |
 | Integrated atlas and robustness | Blocked | Canonical evidence tables and robustness outputs do not yet exist. |
 | Immutable release | Blocked | `releases/atlas-v1.0` must be produced only after every scientific gate passes. |
 
-The immediate critical path is univariate MiXeR and local-univariate LAVA,
-followed by eligible bivariate runs and the remaining prespecified downstream
-modules. Their production references require substantially more free storage
-and, for MiXeR, an x86_64 host with at least 32 GiB RAM. The complete covariance
-structure required by Genomic SEM is now
-available and structurally validated. The repository's larger remote experimental branch contains a
+## Exact production-capacity blocker
+
+The present Mac is arm64 with 8 GiB RAM and approximately 2.2 GiB free. The
+remaining primary jobs cannot be run safely on it. The fail-closed production
+contracts require:
+
+| Work family | Exact missing fixed payload | Minimum execution capacity |
+|---|---:|---|
+| LAVA UK Biobank LD v1.1 | 14,110,596,095 bytes compressed; 15 GiB reported extracted | 35 GiB free for download, extraction, and margin |
+| MiXeR | 6,579,093,199-byte 64-file reference plus 2,106,984,629 compressed container bytes | x86_64/amd64, 32 GiB RAM, 16 physical cores recommended, 30 GiB free |
+| PLACO+/conjunction FDR | 2,383,912,974-byte LD reference plus 274,423,819-byte variant template | MATLAB, SciPy, 16 GiB RAM, 20 GiB free |
+| TWAS | 3,135,665,776-byte, 98-file PredictDB model family plus the pinned MetaXcan runtime | 8 GiB RAM and 20 GiB free; all 45 full-resolution GWAS |
+| LDSC-SEG | 1,876,474,664 streamed bytes, of which 1,593,837,597 are temporary | 4 GiB free and explicit large-transfer/temporary-cleanup acknowledgement |
+| Three missing GLGC dense GWAS | 6,844,892,917 bytes across HDL, LDL, and triglycerides | enough additional working space to harmonize and retain all 16 dense replacements |
+
+The byte-pinned entries above total **37,312,044,073 bytes (34.750 GiB)** before
+MetaXcan package payloads, dynamic QTL queries, harmonized dense outputs,
+intermediate matrices, and final result artifacts. Because LAVA archives and extracted reference files coexist,
+the 35 GiB single-job floor is not a safe whole-project allocation; an x86_64
+host with at least 32 GiB RAM, MATLAB, and at least 100 GiB free is the
+conservative production handoff target.
+
+The immediate critical path is to create the 16 full-resolution canonical GWAS
+on that host, then run local-univariate LAVA and univariate MiXeR, followed by
+eligible bivariate runs and the remaining prespecified modules. Fine-mapping
+must wait for the complete 396-pair PLACO+/conjunction-FDR family because a
+missing `shared_loci.tsv` is unknown, not a valid zero-locus result. The
+complete covariance structure required by Genomic SEM is available and
+structurally validated. The repository's larger remote experimental branch contains a
 broader 149-trait scope, so it must not be merged wholesale. Evidence may be
 harvested from it only when it matches one of the locked 45 selected phenotype
 definitions and survives primary-source verification.
