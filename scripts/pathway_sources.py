@@ -86,6 +86,86 @@ def load_reactome_sets(
     }
 
 
+def load_msigdb_symbol_sets(
+    path: Path, symbol_map: dict[str, str], minimum_size: int, maximum_size: int,
+) -> tuple[dict[str, tuple[str, set[str]]], dict[str, int]]:
+    """Load the official all-collections human MSigDB symbols GMT."""
+    sets: dict[str, tuple[str, set[str]]] = {}
+    source_symbols: set[str] = set()
+    mapped_genes: set[str] = set()
+    eligible_gene_total = 0
+    source_sets = 0
+    seen: set[str] = set()
+    with path.open(encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, start=1):
+            fields = line.rstrip("\n").split("\t")
+            if len(fields) < 3 or not fields[0] or not fields[1]:
+                raise ValueError(f"invalid MSigDB GMT row at line {line_number}")
+            identity, description = fields[:2]
+            if identity in seen:
+                raise ValueError(f"duplicate MSigDB gene-set ID: {identity}")
+            seen.add(identity)
+            expected_url = f"https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/{identity}"
+            if description != expected_url:
+                raise ValueError(f"unexpected MSigDB gene-set URL at line {line_number}")
+            symbols = set(fields[2:])
+            source_symbols.update(symbols)
+            genes = {symbol_map[symbol] for symbol in symbols if symbol in symbol_map}
+            mapped_genes.update(genes)
+            if minimum_size <= len(genes) <= maximum_size:
+                sets[identity] = (identity, genes)
+                eligible_gene_total += len(genes)
+            source_sets += 1
+    return sets, {
+        "source_sets": source_sets,
+        "source_symbols": len(source_symbols),
+        "mapped_genes": len(mapped_genes),
+        "eligible_sets": len(sets),
+        "eligible_gene_memberships": eligible_gene_total,
+    }
+
+
+def load_magma_gene_sets(
+    path: Path, valid_gene_ids: set[str], minimum_size: int, maximum_size: int,
+) -> tuple[dict[str, tuple[str, set[str]]], dict[str, int]]:
+    """Load FUMA's Ensembl-mapped MSigDB file prepared for MAGMA."""
+    sets: dict[str, tuple[str, set[str]]] = {}
+    source_gene_ids: set[str] = set()
+    mapped_genes: set[str] = set()
+    eligible_gene_total = 0
+    source_sets = 0
+    seen: set[str] = set()
+    with path.open(encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, start=1):
+            fields = line.rstrip("\n").split("\t")
+            if len(fields) < 3 or not fields[0] or not fields[1]:
+                raise ValueError(f"invalid FUMA MAGMA gene-set row at line {line_number}")
+            identity, description = fields[:2]
+            if identity in seen:
+                raise ValueError(f"duplicate FUMA MAGMA gene-set ID: {identity}")
+            seen.add(identity)
+            expected_url = f"http://www.gsea-msigdb.org/gsea/msigdb/human/geneset/{identity}"
+            if description != expected_url:
+                raise ValueError(f"unexpected FUMA MAGMA gene-set URL at line {line_number}")
+            identifiers = set(fields[2:])
+            if any(not re.fullmatch(r"ENSG[0-9]{11}", value) for value in identifiers):
+                raise ValueError(f"invalid FUMA MAGMA Ensembl ID at line {line_number}")
+            source_gene_ids.update(identifiers)
+            genes = identifiers & valid_gene_ids
+            mapped_genes.update(genes)
+            if minimum_size <= len(genes) <= maximum_size:
+                sets[identity] = (identity, genes)
+                eligible_gene_total += len(genes)
+            source_sets += 1
+    return sets, {
+        "source_sets": source_sets,
+        "source_gene_ids": len(source_gene_ids),
+        "mapped_genes": len(mapped_genes),
+        "eligible_sets": len(sets),
+        "eligible_gene_memberships": eligible_gene_total,
+    }
+
+
 def parse_go_ontology(path: Path) -> tuple[dict[str, dict[str, object]], dict[str, str]]:
     text = path.read_text(encoding="utf-8")
     metadata: dict[str, str] = {}

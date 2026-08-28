@@ -2223,7 +2223,7 @@ class PanelContractTests(unittest.TestCase):
             rows = task_module.parse_gsa(gsa, ["A", "B"])
             self.assertEqual([row["VARIABLE"] for row in rows], ["A", "B"])
 
-    def test_reactome_and_go_sources_are_exactly_locked_before_results(self):
+    def test_four_pathway_sources_are_exactly_locked_before_results(self):
         policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
         spec = policy["public_pathway_sources"]
         manifest_path = ROOT / spec["component_manifest"]
@@ -2235,6 +2235,11 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(bundle["resources"]["GO"]["release"], "GO_pipeline_2026-08-05_ontology_2026-07-26")
         self.assertEqual(bundle["resources"]["GO"]["eligible_sets"], 7719)
         self.assertEqual(bundle["resources"]["GO"]["propagation_relations"], ["is_a", "part_of"])
+        self.assertEqual(bundle["resources"]["MSIGDB"]["release"], "MSigDB_v2026.1.Hs_2026-01-29")
+        self.assertEqual(bundle["resources"]["MSIGDB"]["source_sets"], 35361)
+        self.assertEqual(bundle["resources"]["MSIGDB"]["eligible_sets"], 29004)
+        self.assertEqual(bundle["resources"]["MAGMA_GENE_SETS"]["source_sets"], 17023)
+        self.assertEqual(bundle["resources"]["MAGMA_GENE_SETS"]["eligible_sets"], 12960)
         with (ROOT / policy["source_registry"]).open(encoding="utf-8", newline="") as handle:
             sources = {row["source_id"]: row for row in csv.DictReader(handle, delimiter="\t")}
         for source_id in spec["source_ids"]:
@@ -2266,6 +2271,25 @@ class PanelContractTests(unittest.TestCase):
             sets, observed = module.load_reactome_sets(archive, symbols, 1, 10)
             self.assertEqual(sets["R-HSA-1"][1], {"ENSG00000000001", "ENSG00000000002"})
             self.assertEqual(observed["eligible_sets"], 1)
+            msigdb = directory / "msigdb.gmt"
+            msigdb.write_text(
+                "SET_A\thttps://www.gsea-msigdb.org/gsea/msigdb/human/geneset/SET_A\tA\tB\tDUP\n",
+                encoding="utf-8",
+            )
+            sets, observed = module.load_msigdb_symbol_sets(msigdb, symbols, 1, 10)
+            self.assertEqual(sets["SET_A"][1], {"ENSG00000000001", "ENSG00000000002"})
+            self.assertEqual(observed["mapped_genes"], 2)
+            magma = directory / "magma.gmt"
+            magma.write_text(
+                "SET_B\thttp://www.gsea-msigdb.org/gsea/msigdb/human/geneset/SET_B\t"
+                "ENSG00000000001\tENSG00000000002\tENSG00000000009\n",
+                encoding="utf-8",
+            )
+            sets, observed = module.load_magma_gene_sets(
+                magma, {"ENSG00000000001", "ENSG00000000002"}, 1, 10,
+            )
+            self.assertEqual(sets["SET_B"][1], {"ENSG00000000001", "ENSG00000000002"})
+            self.assertEqual(observed["source_gene_ids"], 3)
         expected = sum(
             math.comb(3, value) * math.comb(7, 4 - value) / math.comb(10, 4)
             for value in range(2, 4)

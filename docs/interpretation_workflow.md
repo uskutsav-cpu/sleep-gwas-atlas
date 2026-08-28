@@ -104,6 +104,8 @@ estimates; its random fallback paths are forbidden.
 
 The public pathway adapters use the official Reactome v97 human GMT and the
 archived GO 2026-08-05 release (go-basic ontology plus human UniProt GAF).
+They also use the complete official human MSigDB v2026.1 symbols GMT and the
+exact FUMA 1.5.6+ Ensembl-mapped MSigDB v2023.1Hs file distributed for MAGMA.
 Source symbols map only when they resolve exactly and uniquely in GENCODE v26.
 GO `NOT` annotations are excluded and remaining annotations are propagated only
 through `is_a` and `part_of`. For each resource and locus, a one-sided
@@ -136,12 +138,13 @@ matrix and reject unresolved result-changing contradictions.
 ## Current production blockers
 
 The code and task contracts are ready, but production is not. At the current
-repository state, 15 of 20 interpretation source families are ready: GENCODE
+repository state, 17 of 20 interpretation source families are ready: GENCODE
 promoters, SCREEN enhancer/open-chromatin layers, HOCOMOCO H14CORE, the ABC
 2021 enhancer-gene atlas, the Javierre 2016 immune PCHi-C atlas, the pinned
 FUMA single-cell/MAGMA bundle, the Reactome v97 and GO 2026-08-05 pathway
-families, the within-workflow regulatory cell-type layer, and all five causal
-estimator families. The compressed
+families, the official MSigDB v2026.1 human collection, the FUMA-prepared
+MSigDB v2023.1Hs MAGMA gene-set file, the within-workflow regulatory cell-type
+layer, and all five causal estimator families. The compressed
 official 1000 Genomes Phase 3 GRCh37 European MAGMA
 reference is checksum-pinned, but its 3.60 GB extracted members are deliberately
 not materialized wholesale. Causal LD work uses a disk-bounded streamed subset;

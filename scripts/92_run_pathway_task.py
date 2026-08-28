@@ -13,6 +13,8 @@ from pathlib import Path
 from pathway_sources import (
     hypergeometric_right_tail,
     load_go_sets,
+    load_magma_gene_sets,
+    load_msigdb_symbol_sets,
     load_reactome_sets,
     load_unique_gencode_symbols,
 )
@@ -100,6 +102,32 @@ def source_sets(
                     "eligible_gene_memberships",
                 )
             },
+        }
+    elif source_id == "MSIGDB":
+        source = root / resource["path"]
+        check_file(source, resource, "MSigDB v2026.1 human symbols GMT")
+        sets, observed = load_msigdb_symbol_sets(
+            source, symbol_map, minimum_size, maximum_size,
+        )
+        files = [source]
+        expected = {
+            key: resource[key] for key in (
+                "source_sets", "source_symbols", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships",
+            )
+        }
+    elif source_id == "MAGMA_GENE_SETS":
+        source = root / resource["path"]
+        check_file(source, resource, "FUMA MSigDB v2023.1Hs MAGMA GMT")
+        sets, observed = load_magma_gene_sets(
+            source, set(symbol_map.values()), minimum_size, maximum_size,
+        )
+        files = [source]
+        expected = {
+            key: resource[key] for key in (
+                "source_sets", "source_gene_ids", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships",
+            )
         }
     else:
         fail(f"unsupported automatic public pathway source: {source_id}")
@@ -204,7 +232,9 @@ def main() -> int:
             effect = overlap * universe / (selected_size * set_size)
             rows.append({
                 "pathway_id": pathway_id, "pathway_name": pathway_name,
-                "resource": task["source_id"] if task["source_id"] != "REACTOME" else "Reactome",
+                "resource": {
+                    "REACTOME": "Reactome", "MAGMA_GENE_SETS": "MAGMA_gene_sets",
+                }.get(task["source_id"], task["source_id"]),
                 "gene_set_size": str(set_size),
                 "contributing_genes": ";".join(contributing) if contributing else "NA",
                 "trait_or_locus_id": locus_id, "effect": fmt(effect),

@@ -1,5 +1,5 @@
 {
-  "schema_version": "reactome-go-pathway-source-bundle.1",
+  "schema_version": "four-resource-pathway-source-bundle.2",
   "analysis_id": "atlas-v1.0",
   "set_size_range": [10, 1000],
   "identifier_mapping": {
@@ -74,6 +74,39 @@
       "eligible_gene_memberships": 611686,
       "eligible_gene_union": 16782,
       "rule": "Use human UniProt GAF symbols, exclude NOT rows, retain all released evidence codes, propagate annotations through is_a and part_of in the matching go-basic DAG, then apply the locked exact GENCODE mapping and set-size filter"
+    },
+    "MSIGDB": {
+      "release": "MSigDB_v2026.1.Hs_2026-01-29",
+      "release_page": "https://www.gsea-msigdb.org/gsea/msigdb/",
+      "license": "CC-BY-4.0-with-source-specific-additional-terms",
+      "url": "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2026.1.Hs/msigdb.v2026.1.Hs.symbols.gmt",
+      "path": "ref/interpretation/pathway/msigdb_2026.1.Hs/msigdb.v2026.1.Hs.symbols.gmt",
+      "bytes": 30255149,
+      "sha256": "fa938f38c8f41bafa31e9c479c997a4cdaf69621e89446f149a1d9442a80dead",
+      "source_sets": 35361,
+      "source_symbols": 43633,
+      "mapped_genes": 34241,
+      "eligible_sets": 29004,
+      "eligible_gene_memberships": 3430931,
+      "eligible_gene_union": 34100,
+      "rule": "Use the complete official human v2026.1 all-collection symbols GMT; deduplicate symbols within each set and map only exact unique GENCODE v26 symbols before applying the locked set-size filter"
+    },
+    "MAGMA_GENE_SETS": {
+      "release": "FUMA_MSigDB_v2023.1Hs_MAGMA_Ensembl_1.5.6plus",
+      "release_page": "https://fuma.ctglab.nl/downloadPage",
+      "download_code": "MSigDB20231Hs",
+      "license": "MSigDB-source-terms-apply",
+      "url": "https://fuma.ctglab.nl/tutorial/download_variants",
+      "path": "ref/interpretation/pathway/fuma_msigdb_2023.1Hs/msigdb_v2023.1Hs_magma_ensembl.gmt",
+      "bytes": 24365019,
+      "sha256": "4322bfcf758671dd749904c838a460468b6cb0e98d0ca90ed53387925b17311c",
+      "source_sets": 17023,
+      "source_gene_ids": 21302,
+      "mapped_genes": 20608,
+      "eligible_sets": 12960,
+      "eligible_gene_memberships": 1107120,
+      "eligible_gene_union": 20229,
+      "rule": "Use the exact FUMA 1.5.6+ MSigDB v2023.1Hs file prepared for MAGMA; retain only versionless Ensembl IDs present in the exact unique GENCODE v26 symbol map and apply the locked set-size filter"
     }
   },
   "claim_limit": "Pathway overrepresentation is a competitive annotation of a prespecified convergent-gene list; it does not establish pathway activity, direction, mediation, or causality"

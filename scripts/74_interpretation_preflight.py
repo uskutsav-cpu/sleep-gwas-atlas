@@ -15,7 +15,13 @@ import tarfile
 import zipfile
 from pathlib import Path
 
-from pathway_sources import load_go_sets, load_reactome_sets, load_unique_gencode_symbols
+from pathway_sources import (
+    load_go_sets,
+    load_magma_gene_sets,
+    load_msigdb_symbol_sets,
+    load_reactome_sets,
+    load_unique_gencode_symbols,
+)
 
 
 REGISTRY_FIELDS = [
@@ -604,12 +610,48 @@ def validate_public_pathway_bundle(
         }
         if go_observed != go_expected:
             raise ValueError("GO pathway family differs from its release pin")
+
+        msigdb = manifest["resources"]["MSIGDB"]
+        msigdb_path = pinned_path(msigdb, "MSigDB v2026.1 human symbols GMT")
+        msigdb_sets, msigdb_observed = load_msigdb_symbol_sets(
+            msigdb_path, symbol_map, minimum_size, maximum_size,
+        )
+        msigdb_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in msigdb_sets.values()))
+        )
+        msigdb_expected = {
+            key: msigdb[key] for key in (
+                "source_sets", "source_symbols", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if msigdb_observed != msigdb_expected:
+            raise ValueError("MSigDB v2026.1 pathway family differs from its release pin")
+
+        magma = manifest["resources"]["MAGMA_GENE_SETS"]
+        magma_path = pinned_path(magma, "FUMA MSigDB v2023.1Hs MAGMA GMT")
+        magma_sets, magma_observed = load_magma_gene_sets(
+            magma_path, set(symbol_map.values()), minimum_size, maximum_size,
+        )
+        magma_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in magma_sets.values()))
+        )
+        magma_expected = {
+            key: magma[key] for key in (
+                "source_sets", "source_gene_ids", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if magma_observed != magma_expected:
+            raise ValueError("FUMA MAGMA gene-set family differs from its release pin")
     except (OSError, UnicodeError, ValueError, KeyError, gzip.BadGzipFile, zipfile.BadZipFile) as exc:
         return False, f"public pathway source bundle is invalid: {exc}", observed
     observed.update({
         "identifier_mapping": mapping_observed,
         "REACTOME": reactome_observed,
         "GO": go_observed,
+        "MSIGDB": msigdb_observed,
+        "MAGMA_GENE_SETS": magma_observed,
     })
     return True, "", observed
 
