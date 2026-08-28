@@ -13,6 +13,10 @@ ALLOWED_CLASSES = {
     "NO_DIRECT_RG_FOUND", "APPARENTLY_NOVEL", "UNCERTAIN",
 }
 ALLOWED_STRENGTHS = {"STRONG", "MODERATE", "WEAK"}
+ALLOWED_REPLICATION_CLASSES = {
+    "REPLICATED", "DIRECTIONALLY_CONCORDANT", "UNDERPOWERED",
+    "FAILED_REPLICATION", "NO_INDEPENDENT_DATASET", "NOT_YET_ATTEMPTED",
+}
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
@@ -54,10 +58,24 @@ def main() -> None:
             "exact_prior_rg_found", "closest_prior_result", "prior_method", "prior_effect",
             "prior_publication", "prior_DOI", "prior_PMID", "search_databases",
             "search_queries_used", "search_date", "evidence_PMIDs_DOIs_URLs",
-            "decision_rationale", "reviewer_notes", "reviewer",
+            "biological_plausibility", "connection_obviousness",
+            "independent_replication_dataset_availability", "dense_summary_statistics_available",
+            "molecular_qtl_data_available", "decision_rationale", "reviewer_notes", "reviewer",
         ):
             if not row[field].strip() or row[field].startswith("PENDING"):
                 raise SystemExit(f"ERROR: completed audit lacks {field}: {pair}")
+        if row["biological_plausibility"] not in {"HIGH", "MODERATE", "LOW"}:
+            raise SystemExit(f"ERROR: invalid biological plausibility for {pair}")
+        if row["connection_obviousness"] not in {"NON_OBVIOUS", "SEMI_OBVIOUS", "EXPECTED"}:
+            raise SystemExit(f"ERROR: invalid connection obviousness for {pair}")
+        if row["independent_replication_dataset_availability"] not in {"AVAILABLE", "UNAVAILABLE", "UNCERTAIN"}:
+            raise SystemExit(f"ERROR: invalid independent replication availability for {pair}")
+        if row["dense_summary_statistics_available"] not in {"YES", "NO", "UNCERTAIN"}:
+            raise SystemExit(f"ERROR: invalid dense-summary-statistics availability for {pair}")
+        if row["molecular_qtl_data_available"] not in {"YES", "NO", "UNCERTAIN"}:
+            raise SystemExit(f"ERROR: invalid molecular-QTL availability for {pair}")
+        if row["independent_replication_class"] not in ALLOWED_REPLICATION_CLASSES:
+            raise SystemExit(f"ERROR: invalid replication class for {pair}")
         if row["novelty_class"] == "APPARENTLY_NOVEL":
             targeted_queries = [
                 query.strip() for query in row["search_queries_used"].split(" || ")
@@ -70,7 +88,7 @@ def main() -> None:
         if row["novelty_strength"] == "STRONG":
             if row["novelty_class"] != "APPARENTLY_NOVEL" or row["exact_prior_rg_found"] != "NO":
                 raise SystemExit(f"ERROR: STRONG novelty lacks APPARENTLY_NOVEL/no-direct-prior evidence: {pair}")
-            if row["independent_replication_status"] != "INDEPENDENT_REPLICATION_PASS":
+            if row["independent_replication_class"] != "REPLICATED":
                 raise SystemExit(f"ERROR: STRONG novelty lacks successful independent replication: {pair}")
     print(f"PAIR_NOVELTY_AUDIT_VALID pairs={len(audit)} complete={len(audit)}")
 

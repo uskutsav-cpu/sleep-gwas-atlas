@@ -63,7 +63,7 @@ def main() -> None:
     parser.add_argument("--local-evidence", type=Path)
     parser.add_argument(
         "--out", type=Path,
-        default=Path("discovery_extension/results/prioritization/prioritized_pairs.tsv"),
+        default=Path("discovery_extension/results/prioritization/novel_hit_priority.tsv"),
     )
     parser.add_argument(
         "--provenance-out", type=Path,
@@ -86,7 +86,7 @@ def main() -> None:
     extension_h2 = {row["extension_trait_id"]: row for row in read_tsv(args.extension_h2)}
     core_h2 = {row["trait"]: row for row in read_tsv(args.core_h2)}
     audits = {row["pair_id"]: row for row in read_tsv(args.novelty_audit)}
-    replication = optional_by_pair(args.replication, "replication_status")
+    replication = optional_by_pair(args.replication, "replication_class")
     local = optional_by_pair(args.local_evidence, "local_support_status")
     output: list[dict[str, object]] = []
     for row in rg_rows:
@@ -103,19 +103,25 @@ def main() -> None:
         audit = audits.get(pair_id)
         novelty_strength = audit["novelty_strength"] if audit else "NOT_AUDITED_NOT_FDR_SIGNIFICANT"
         novelty_class = audit["novelty_class"] if audit else "NOT_AUDITED_NOT_FDR_SIGNIFICANT"
-        novelty_pass = novelty_strength in {"STRONG", "MODERATE"}
-        replication_status = replication.get(
-            pair_id, audit["independent_replication_status"] if audit else "NOT_YET_ATTEMPTED"
+        novelty_pass = (
+            novelty_strength in {"STRONG", "MODERATE"}
+            and novelty_class in {"APPARENTLY_NOVEL", "NO_DIRECT_RG_FOUND"}
+        )
+        overlap = int(row["snp_overlap_valid_alleles"])
+        overlap_strength = "HIGH_GE_900000" if overlap >= 900000 else ("MODERATE_500000_TO_899999" if overlap >= 500000 else "LOW_LT_500000")
+        overlap_pass = overlap >= 500000
+        replication_class = replication.get(
+            pair_id, audit["independent_replication_class"] if audit else "NOT_YET_ATTEMPTED"
         )
         local_status = local.get(pair_id, "NOT_YET_ATTEMPTED")
-        baseline = fdr_pass and effect_pass and ext_pass and sleep_pass and analysis_clean and novelty_pass
-        reinforced = replication_status == "INDEPENDENT_REPLICATION_PASS" or local_status == "STRONG_LOCAL_SUPPORT"
+        baseline = fdr_pass and effect_pass and ext_pass and sleep_pass and analysis_clean and novelty_pass and overlap_pass
+        reinforced = replication_class == "REPLICATED" or local_status == "STRONG_LOCAL_SUPPORT"
         if baseline and reinforced:
             tier = "B"
             rationale = "Tier A discovery criteria plus independent replication or strong local support"
         elif baseline:
             tier = "A"
-            rationale = "extension FDR<0.05, abs(rg)>=0.15, both h2 pass, clean QC, and Strong/Moderate pair novelty"
+            rationale = "extension FDR<0.05, abs(rg)>=0.15, both h2 pass, clean QC, >=500000 valid-overlap SNPs, and Strong/Moderate APPARENTLY_NOVEL/NO_DIRECT_RG_FOUND evidence"
         else:
             tier = "C"
             failed = []
@@ -124,16 +130,32 @@ def main() -> None:
             if not ext_pass: failed.append("extension_h2_failed")
             if not sleep_pass: failed.append("sleep_h2_failed")
             if not analysis_clean: failed.append("analysis_status_not_clean")
-            if not novelty_pass: failed.append("pair_novelty_not_Strong_or_Moderate")
+            if not novelty_pass: failed.append("pair_novelty_class_or_strength_failed")
+            if not overlap_pass: failed.append("valid_allele_SNP_overlap_below_500000")
             rationale = ";".join(failed)
         output.append({
             "pair_id": pair_id, "sleep_trait": row["sleep_trait"],
             "extension_trait_id": row["extension_trait_id"], "phenotype_name": row["phenotype_name"],
             "phenotype_domain": row["phenotype_domain"], "rg": row["rg"], "se": row["se"],
             "p": row["p"], "extension_fdr": row["extension_fdr"],
+            "analysis_status": row["analysis_status"],
+            "cross_trait_LDSC_intercept": row["cross_trait_LDSC_intercept"],
+            "cross_trait_LDSC_intercept_se": row["cross_trait_LDSC_intercept_se"],
+            "snp_overlap_valid_alleles": overlap, "snp_overlap_strength": overlap_strength,
+            "extension_h2": extension_h2[row["extension_trait_id"]]["h2"],
+            "extension_h2_z": extension_h2[row["extension_trait_id"]]["h2_z"],
+            "extension_LDSC_intercept": extension_h2[row["extension_trait_id"]]["LDSC_intercept"],
+            "sleep_h2": core_h2[row["sleep_trait"]]["h2"],
+            "sleep_h2_z": core_h2[row["sleep_trait"]]["z"],
+            "sleep_LDSC_intercept": core_h2[row["sleep_trait"]]["intercept"],
             "extension_h2_pass": str(ext_pass), "sleep_h2_pass": str(sleep_pass),
             "pair_novelty_class": novelty_class, "pair_novelty_strength": novelty_strength,
-            "replication_status": replication_status, "local_support_status": local_status,
+            "biological_plausibility": audit["biological_plausibility"] if audit else "NOT_ASSESSED",
+            "connection_obviousness": audit["connection_obviousness"] if audit else "NOT_ASSESSED",
+            "independent_replication_dataset_availability": audit["independent_replication_dataset_availability"] if audit else "NOT_ASSESSED",
+            "dense_summary_statistics_available": audit["dense_summary_statistics_available"] if audit else "NOT_ASSESSED",
+            "molecular_qtl_data_available": audit["molecular_qtl_data_available"] if audit else "NOT_ASSESSED",
+            "replication_class": replication_class, "local_support_status": local_status,
             "priority_tier": tier, "priority_rationale": rationale,
             "claim_status": "REPLICATED_OR_LOCALLY_REINFORCED" if tier == "B" else ("DISCOVERY_ONLY" if tier == "A" else "NOT_PRIORITY_DISCOVERY"),
         })
@@ -146,7 +168,7 @@ def main() -> None:
         "extension_h2_sha256": sha256(args.extension_h2), "core_h2_sha256": sha256(args.core_h2),
         "novelty_audit_sha256": sha256(args.novelty_audit),
         "tier_rules": {
-            "A": "FDR<0.05; abs(rg)>=0.15; both h2 pass; clean analysis status; Strong or Moderate pair novelty",
+            "A": "FDR<0.05; abs(rg)>=0.15; both h2 pass; clean analysis status; >=500000 valid-overlap SNPs; Strong/Moderate APPARENTLY_NOVEL or NO_DIRECT_RG_FOUND pair",
             "B": "Tier A plus independent replication or strong local support",
             "C": "all other tested pairs, including nominal/suggestive, QC-sensitive, or novelty-ambiguous pairs",
         },

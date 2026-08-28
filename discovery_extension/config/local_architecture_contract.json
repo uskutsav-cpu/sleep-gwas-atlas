@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "complete discovery rg, pair-level novelty audit, and replication prioritization; no local result may be inspected before the pair family and input checksums are locked",
+  "primary_method": "LAVA_PRIMARY",
+  "robustness_method": "HDL_L_ROBUSTNESS",
+  "pair_strata": {
+    "PRIORITY_DISCOVERY": "Tier A or B apparently novel/no-direct-rg pair with dense full-resolution statistics",
+    "GLOBAL_NULL_SECONDARY": "globally non-significant pair selected before local result access using documented biological relevance or polygenic-overlap evidence"
+  },
+  "global_null_definition": "extension_fdr>=0.05 in the complete isolated extension family with clean global rg status and both traits passing h2 QC",
+  "global_null_curation_rule": "manual SELECTED_GLOBAL_NULL_SECONDARY status requires HIGH/MODERATE biological relevance or a non-placeholder polygenic-overlap rationale; global rg magnitude alone is insufficient",
+  "local_testing": {
+    "univariate_gate": "for LAVA_PRIMARY use run.univ.bivar with a pre-result Bonferroni threshold 0.05 divided by twice the locked pair-by-locus family size; retain and report local h2, SE, and P for both traits at every locked locus and preserve loci that cannot enter bivariate testing",
+    "primary_multiplicity": "Benjamini-Hochberg over all clean, estimable LAVA_PRIMARY bivariate local-rg P values in the exact locked pair-by-locus family",
+    "primary_fdr_threshold": 0.05,
+    "reproducibility": "freeze a deterministic nonzero LAVA simulation seed for every selected pair before result access",
+    "robustness_policy": "HDL-L is sensitivity evidence and is not mixed into the LAVA primary FDR family; same-locus directional support requires clean convergence/QC and nominal two-sided P<0.05",
+    "strong_local_support": "at least two FDR-significant LAVA loci, or at least one FDR-significant LAVA locus with directionally concordant clean HDL-L evidence at the same locus"
+  },
+  "required_locus_fields": [
+    "local h2 trait A", "local h2 trait B", "local rg", "SE", "P", "FDR",
+    "effect direction", "method", "convergence status", "QC status"
+  ],
+  "required_flags": [
+    "GLOBAL_NULL_LOCAL_POSITIVE",
+    "GLOBAL_NULL_LOCAL_NEGATIVE",
+    "OPPOSING_LOCAL_EFFECTS",
+    "MULTI_LOCUS_SHARED_ARCHITECTURE"
+  ],
+  "claim_limit": "global or local genetic correlation is not evidence of a shared causal variant or causality"
+}

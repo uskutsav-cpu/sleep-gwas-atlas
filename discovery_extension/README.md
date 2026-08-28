@@ -106,12 +106,47 @@ STRONG novelty label without successful independent replication. The canonical
 artifact is `results/novelty/extension_novelty_audit.tsv`.
 
 `20_prioritize_extension_pairs.py` applies the frozen Tier A/B/C rules across
-the complete tested family. Tier A requires extension FDR, effect size, both h2
-gates, clean analysis status, and Strong/Moderate pair novelty. Tier B requires
-those criteria plus independent replication or strong local support; everything
-else remains explicitly Tier C. The replication and local/pleiotropic/fine-
+the complete tested family and writes `novel_hit_priority.tsv`. Tier A requires
+extension FDR, effect size, both h2 gates, clean analysis status, at least
+500,000 valid-overlap SNPs, and Strong/Moderate `APPARENTLY_NOVEL` or
+`NO_DIRECT_RG_FOUND` pair evidence. It also preserves biological plausibility,
+obviousness, replication/dense-data/molecular-QTL availability, and the literal
+h2/intercept values rather than hiding them in a composite score. Tier B
+requires Tier A plus replication class `REPLICATED` or strong local support;
+everything else remains explicitly Tier C. The replication and local/pleiotropic/fine-
 mapping/colocalization/mechanistic rules are frozen in
 `config/replication_contract.json` and `config/followup_contract.json`.
+
+Replication is a second locked workflow, not a post hoc lookup:
+`21_prepare_replication_queue.py` emits result-free source-curation rows for
+Tier A/B pairs not yet replicated and independently locks that candidate
+family; `22_lock_replication_manifest.py` requires verified local
+full-resolution source SHA-256 values, completed source searches, phenotype
+compatibility, EUR ancestry, and confirmed non-overlap before result access;
+and `23_collate_replication.py`
+classifies the exact locked family as `REPLICATED`,
+`DIRECTIONALLY_CONCORDANT`, `UNDERPOWERED`, or `FAILED_REPLICATION` using the
+locked Bonferroni threshold, while retaining effect heterogeneity. An
+evidence-backed `NO_INDEPENDENT_DATASET` row is preserved as the explicit fifth
+outcome rather than being dropped from the candidate family. Both a successful
+source and an unavailable-source branch are exercised with synthetic data.
+
+Local architecture is likewise a locked, result-preserving workflow.
+`24_local_architecture_preflight.py` verifies the pinned official LAVA 0.1.5
+and HDL 1.4.3 code/entrypoints independently of their LD references and dense
+inputs. The source and reference manifests retain the exact Git commits,
+citations, official LAVA UKB v1.1 download components, and the unresolved
+checksum status rather than treating a URL as a verified file.
+`25_prepare_local_analysis_queue.py` keeps Tier A/B discoveries alongside a
+separate result-free curation set of globally-null pairs, so global rg
+significance is not the sole entry criterion. `26_lock_local_analysis_manifest.py`
+then freezes pair membership, dense-input/locus checksums, methods, and the
+pair-by-locus family before local result access. Finally,
+`27_collate_local_architecture.py` preserves every method/locus row, applies BH
+only to the clean estimable LAVA family, keeps HDL-L as sensitivity evidence,
+and emits the four required local-architecture flags plus a pair summary. The
+lock and flag semantics are exercised without real data in
+`synthetic/test_local_architecture_contract.py`.
 
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total

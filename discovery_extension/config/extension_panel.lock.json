@@ -171,10 +171,18 @@
     "scope": "12 locked core sleep traits crossed with extension traits passing rerun h2 QC"
   },
   "prioritization_tiers": {
-    "A": "extension FDR<0.05, abs(rg)>=0.15, both h2 pass, no major QC flag, pair-level novelty Strong or Moderate",
-    "B": "replicates or is strongly reinforced by local/fine-mapping/colocalization evidence",
+    "A": "extension FDR<0.05, abs(rg)>=0.15, both h2 pass, no major QC flag, at least 500000 valid-overlap SNPs, and pair-level Strong/Moderate APPARENTLY_NOVEL or NO_DIRECT_RG_FOUND evidence",
+    "B": "meets Tier A and has replication class REPLICATED or strong local support",
     "C": "nominal/suggestive, QC-sensitive, weakly replicated, or literature-ambiguous"
   },
+  "preanalysis_contract_amendments": [
+    {
+      "amended_utc": "2026-08-28T04:47:46Z",
+      "reason": "Aligned named priority, replication, SNP-overlap, and novelty-class outputs to the supplied Stage 8-10 brief before any extension h2 or rg result existed.",
+      "panel_membership_changed": false,
+      "statistical_threshold_changed_after_results": false
+    }
+  ],
   "schema_version": "1.0.0",
   "selection_timing": "before_any_extension_genetic_correlation"
 }

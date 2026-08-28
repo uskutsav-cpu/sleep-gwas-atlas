@@ -9,7 +9,12 @@
     "functional_and_mechanistic_annotation"
   ],
   "local_analysis": {
-    "required_outputs": ["locus boundaries", "method and LD reference", "local rg", "SE", "p", "tested-locus multiplicity correction", "convergence/QC"],
+    "detailed_contract": "config/local_architecture_contract.json",
+    "primary_method": "LAVA 0.1.5 with source-verified UKB v1.1 EUR reference",
+    "robustness_method": "HDL-L 1.4.3 where source-verified reference and compatible dense inputs are available",
+    "required_outputs": ["local h2 for both traits", "locus boundaries", "method and LD reference", "local rg", "SE", "p", "FDR", "effect direction", "tested-locus multiplicity correction", "convergence/QC"],
+    "required_secondary_set": "biologically relevant or polygenically overlapping globally-null pairs locked before local result access",
+    "required_flags": ["GLOBAL_NULL_LOCAL_POSITIVE", "GLOBAL_NULL_LOCAL_NEGATIVE", "OPPOSING_LOCAL_EFFECTS", "MULTI_LOCUS_SHARED_ARCHITECTURE"],
     "warning": "global rg does not establish local sharing"
   },
   "pleiotropy": {

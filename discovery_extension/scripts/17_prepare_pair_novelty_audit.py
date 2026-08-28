@@ -20,7 +20,10 @@ FIELDS = [
     "exact_prior_rg_found", "closest_prior_result", "prior_method", "prior_effect",
     "prior_publication", "prior_DOI", "prior_PMID", "search_databases",
     "search_queries_used", "search_date", "evidence_PMIDs_DOIs_URLs",
-    "independent_replication_status", "novelty_class", "novelty_strength",
+    "biological_plausibility", "connection_obviousness",
+    "independent_replication_dataset_availability", "dense_summary_statistics_available",
+    "molecular_qtl_data_available", "independent_replication_class",
+    "novelty_class", "novelty_strength",
     "decision_rationale", "reviewer_notes", "reviewer",
 ]
 
@@ -87,7 +90,10 @@ def main() -> None:
             "prior_publication": "PENDING", "prior_DOI": "PENDING", "prior_PMID": "PENDING",
             "search_databases": "PENDING", "search_queries_used": "PENDING", "search_date": "PENDING",
             "evidence_PMIDs_DOIs_URLs": "PENDING",
-            "independent_replication_status": "NOT_YET_ATTEMPTED",
+            "biological_plausibility": "PENDING", "connection_obviousness": "PENDING",
+            "independent_replication_dataset_availability": "PENDING",
+            "dense_summary_statistics_available": "PENDING", "molecular_qtl_data_available": "PENDING",
+            "independent_replication_class": "NOT_YET_ATTEMPTED",
             "novelty_class": "PENDING", "novelty_strength": "PENDING",
             "decision_rationale": "PENDING", "reviewer_notes": "PENDING", "reviewer": "PENDING",
         })
@@ -101,7 +107,7 @@ def main() -> None:
         "source_rg_sha256": sha256(args.rg), "extension_fdr_threshold": 0.05,
         "audit_pair_count": len(output), "template_only": True,
         "allowed_novelty_classes": ["KNOWN_REPLICATION", "KNOWN_BUT_NEW_DATASET", "PARTIAL_EXTENSION", "NO_DIRECT_RG_FOUND", "APPARENTLY_NOVEL", "UNCERTAIN"],
-        "strong_novelty_rule": "APPARENTLY_NOVEL after several targeted searches, no direct prior rg, and successful independent replication",
+        "strong_novelty_rule": "APPARENTLY_NOVEL after several targeted searches, no direct prior rg, and replication class REPLICATED",
         "warning": "PENDING fields are not negative evidence and preanalysis categories are not pair-level novelty conclusions",
         "output": str(args.out), "output_sha256": sha256(args.out),
     }

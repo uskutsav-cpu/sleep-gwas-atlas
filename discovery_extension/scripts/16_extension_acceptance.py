@@ -49,14 +49,28 @@ def main() -> None:
     rg_path = ROOT / "results/ldsc/extension_rg_matrix.tsv"
     pair_universe_path = ROOT / "results/ldsc/extension_pair_universe.tsv"
     novelty_path = ROOT / "results/novelty/extension_novelty_audit.tsv"
-    prioritization_path = ROOT / "results/prioritization/prioritized_pairs.tsv"
+    prioritization_path = ROOT / "results/prioritization/novel_hit_priority.tsv"
     replication_path = ROOT / "results/replication/replication_results.tsv"
     local_path = ROOT / "results/local/local_rg_results.tsv"
+    local_readiness_path = ROOT / "results/local/local_architecture_readiness.tsv"
     pleiotropy_path = ROOT / "results/pleiotropy/pleiotropy_results.tsv"
     fine_mapping_path = ROOT / "results/fine_mapping/fine_mapping_colocalization.tsv"
     mechanism_path = ROOT / "results/mechanism/mechanistic_synthesis.tsv"
 
     blocked = preflight["status"] != "READY"
+    local_readiness_rows = read_tsv(local_readiness_path) if local_readiness_path.is_file() else []
+    local_code_ready = bool(local_readiness_rows) and all(row["code_status"] == "PASS" for row in local_readiness_rows)
+    local_dependencies_ready = bool(local_readiness_rows) and all(row["readiness"] == "READY" for row in local_readiness_rows)
+    if local_path.is_file():
+        local_gate_status = "LOCAL_ARTIFACT_PRESENT"
+    elif local_dependencies_ready:
+        local_gate_status = "CODE_AND_INPUTS_READY_UPSTREAM_SELECTION_BLOCKED"
+    elif local_code_ready:
+        local_gate_status = "CODE_READY_REFERENCE_AND_DENSE_SUMSTATS_BLOCKED"
+    elif local_readiness_rows:
+        local_gate_status = "PROTOCOL_READY_CODE_BLOCKED"
+    else:
+        local_gate_status = "PROTOCOL_READY_UPSTREAM_BLOCKED"
     gates = [
         (1, "Freeze and protect core atlas", "PASS" if core_ok else "FAIL_CORE_CHECKPOINT_DRIFT", core_check,
          "Core remains the exact 45-trait/396-pair checkpoint." if core_ok else "A checkpointed core artifact differs in the current working tree; extension execution must remain stopped."),
@@ -83,8 +97,9 @@ def main() -> None:
          artifact_state(prioritization_path), "Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support."),
         (11, "Independent replication", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not replication_path.is_file() else "REPLICATION_ARTIFACT_PRESENT",
          artifact_state(replication_path) + ";protocol=config/replication_contract.json", "Same-cohort internal splits cannot satisfy the independent-replication gate."),
-        (12, "Local genetic correlation", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not local_path.is_file() else "LOCAL_ARTIFACT_PRESENT",
-         artifact_state(local_path) + ";protocol=config/followup_contract.json", "Global rg is not local sharing."),
+        (12, "Local genetic correlation", local_gate_status,
+         artifact_state(local_path) + ";readiness=" + artifact_state(local_readiness_path) + ";protocol=config/local_architecture_contract.json",
+         "Pinned LAVA/HDL-L code passes runtime checks, but source-verified LD references and dense inputs are absent; global rg is not local sharing."),
         (13, "Pleiotropy analysis", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not pleiotropy_path.is_file() else "PLEIOTROPY_ARTIFACT_PRESENT",
          artifact_state(pleiotropy_path) + ";protocol=config/followup_contract.json", "Pleiotropy is evaluated as an alternative explanation, not an inconvenience."),
         (14, "Fine-mapping and colocalization", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not fine_mapping_path.is_file() else "FOLLOWUP_ARTIFACT_PRESENT",
@@ -119,11 +134,15 @@ def main() -> None:
         ("R07", "Sparse or proxy phenotypes", "Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.", "PASS_METADATA", "candidate_traits.tsv"),
         ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PENDING_PAIR_AUDIT", artifact_state(novelty_path)),
         ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "PENDING_REPLICATION", artifact_state(replication_path)),
-        ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus.", "PENDING_LOCAL_ANALYSIS", artifact_state(local_path)),
+        ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "CODE_READY_INPUTS_BLOCKED" if local_code_ready and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path)),
         ("R11", "Pleiotropy or mediated effects", "Evaluate shared-factor and directionally pleiotropic alternatives.", "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path)),
         ("R12", "Colocalization overclaim", "Report hypotheses/priors/sensitivity; colocalization is not causality.", "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path)),
-        ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "two isolated smoke tests"),
+        ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "four isolated synthetic workflows"),
         ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "PASS_BLOCKED", preflight["status"]),
+        ("R15", "Local LD-reference mismatch", "Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.", "PASS_BLOCKED", artifact_state(local_readiness_path)),
+        ("R16", "Local multiplicity or h2-gate leakage", "Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.", "PASS_CONTRACT", "config/local_architecture_contract.json"),
+        ("R17", "Replication candidate attrition", "Lock the entire Tier A/B candidate family before source curation and preserve NO_INDEPENDENT_DATASET outcomes.", "PASS_CONTRACT", "scripts/21_prepare_replication_queue.py+22_lock_replication_manifest.py+23_collate_replication.py"),
+        ("R18", "LAVA simulation instability", "Freeze a deterministic nonzero simulation seed per selected pair and retain it in the manifest.", "PASS_CONTRACT", "config/local_architecture_contract.json"),
     ]
     checklist_path = ROOT / "results/adversarial_review_checklist.tsv"
     with checklist_path.open("w", newline="", encoding="utf-8") as handle:
@@ -151,6 +170,9 @@ def main() -> None:
         "242-trait candidate pool, and independently locked 100-trait extension panel are complete. "
         "Source schemas, exact URLs/checksums, a GRCh37 variant/INFO mapping contract, harmonization, "
         "h2/rg collation, isolated FDR, and plotting code are defined and synthetically tested.\n\n"
+        "The pinned LAVA 0.1.5 and HDL 1.4.3 packages load and expose their local-rg entrypoints. "
+        "Their source-verified LD references are not present; the recommended LAVA UKB v1.1 reference "
+        "alone is published as 15 GiB unzipped, so no local analysis was started.\n\n"
         f"Real acquisition is blocked: the exact compressed inputs total {preflight['compressed_source_gib']} GiB "
         f"and require {preflight['required_free_gib']} GiB with the locked safety factor, while the preflight "
         f"measured {preflight['available_free_gib']} GiB free ({preflight['shortfall_gib']} GiB short). "
@@ -174,6 +196,7 @@ def main() -> None:
         "source_check_pass": source_ok,
         "source_check": source_check,
         "panel_sha256": sha256(ROOT / "config/candidate_traits.tsv"),
+        "local_readiness_sha256": sha256(local_readiness_path) if local_readiness_path.is_file() else None,
         "acceptance_gates_sha256": sha256(gates_path),
         "adversarial_checklist_sha256": sha256(checklist_path),
         "status_report_sha256": sha256(status_path),

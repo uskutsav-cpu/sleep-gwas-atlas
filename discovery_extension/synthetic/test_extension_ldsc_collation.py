@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import subprocess
 import tempfile
 from pathlib import Path
@@ -172,8 +173,11 @@ def main() -> None:
             "search_databases": "PubMed;GWAS Catalog",
             "search_queries_used": "query one || query two || query three",
             "search_date": "2099-01-01", "evidence_PMIDs_DOIs_URLs": "PMID:00000000",
-            "independent_replication_status": "INDEPENDENT_REPLICATION_PASS",
-            "novelty_class": "APPARENTLY_NOVEL", "novelty_strength": "STRONG",
+            "biological_plausibility": "MODERATE", "connection_obviousness": "NON_OBVIOUS",
+            "independent_replication_dataset_availability": "AVAILABLE",
+            "dense_summary_statistics_available": "YES", "molecular_qtl_data_available": "YES",
+            "independent_replication_class": "NOT_YET_ATTEMPTED",
+            "novelty_class": "APPARENTLY_NOVEL", "novelty_strength": "MODERATE",
             "decision_rationale": "synthetic validator exercise", "reviewer_notes": "synthetic only",
             "reviewer": "synthetic_test",
         })
@@ -198,9 +202,131 @@ def main() -> None:
             ], check=True,
         )
         priority_rows = read_tsv(priorities)
-        if len(priority_rows) != 1176 or sum(row["priority_tier"] == "B" for row in priority_rows) != 1:
-            raise SystemExit("ERROR: synthetic A/B/C prioritization family is incorrect")
-    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 ranked_views=true figures=true novelty_gate=true prioritization=true isolated=true")
+        if len(priority_rows) != 1176 or sum(row["priority_tier"] == "A" for row in priority_rows) != 1:
+            raise SystemExit("ERROR: synthetic pre-replication A/B/C prioritization family is incorrect")
+
+        local_queue = work / "local_queue.tsv"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/25_prepare_local_analysis_queue.py"),
+                "--priority", str(priorities), "--out", str(local_queue),
+                "--provenance-out", str(work / "local_queue.json"),
+            ], check=True,
+        )
+        local_queue_rows = read_tsv(local_queue)
+        if len(local_queue_rows) != 1176 or sum(
+            row["selection_status"] == "SELECTED_PRIORITY_DISCOVERY" for row in local_queue_rows
+        ) != 1 or sum(
+            row["selection_status"] == "PENDING_GLOBAL_NULL_CURATION" for row in local_queue_rows
+        ) != 1175:
+            raise SystemExit("ERROR: synthetic priority/globally-null local queue is incorrect")
+
+        replication_queue = work / "replication_queue.tsv"
+        replication_candidate_lock = work / "replication_candidate_family.lock.json"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/21_prepare_replication_queue.py"),
+                "--priority", str(priorities), "--out", str(replication_queue),
+                "--panel", str(ROOT / "discovery_extension/config/candidate_traits.tsv"),
+                "--core", str(ROOT / "config/analysis_panel.tsv"),
+                "--provenance-out", str(work / "replication_queue.json"),
+                "--candidate-lock-out", str(replication_candidate_lock),
+            ], check=True,
+        )
+        queue_rows = read_tsv(replication_queue)
+        if len(queue_rows) != 1 or queue_rows[0]["source_curation_status"] != "PENDING_INDEPENDENT_SOURCE_CURATION":
+            raise SystemExit("ERROR: synthetic replication queue is incorrect")
+        curated = queue_rows[0]
+        replication_source = work / "synthetic_replication_sumstats.tsv.gz"
+        replication_source.write_bytes(b"SYNTHETIC REPLICATION SOURCE - NOT REAL RESULTS\n")
+        replication_source_sha = hashlib.sha256(replication_source.read_bytes()).hexdigest()
+        curated.update({
+            "replication_source_id": "synthetic_non_ukb", "replication_study_accession": "SYNTHETIC001",
+            "replication_publication": "synthetic test only", "replication_PMID": "00000000",
+            "replication_DOI": "10.0000/synthetic", "replication_source_url": "https://example.org/synthetic.gz",
+            "replication_checksum": f"sha256:{replication_source_sha}",
+            "replication_local_path": str(replication_source),
+            "replication_phenotype_definition": "synthetic exact phenotype",
+            "phenotype_match_status": "EXACT", "ancestry": "EUR", "build": "GRCh37",
+            "sample_size": "50000", "cases": "NA", "controls": "NA",
+            "discovery_cohort_relation": "NON_UKB", "participant_overlap_status": "NON_OVERLAPPING_CONFIRMED",
+            "participant_overlap_evidence": "synthetic disjoint cohorts", "source_identity_status": "VERIFIED",
+            "schema_status": "VERIFIED", "effect_allele_status": "UNAMBIGUOUS",
+            "full_resolution_availability": "YES", "source_curation_status": "COMPLETE_BEFORE_RESULTS",
+            "replication_search_databases": "GWAS Catalog;PubMed;consortium repository",
+            "replication_search_queries": "synthetic exact phenotype GWAS || synthetic consortium summary statistics",
+            "replication_search_date": "2099-01-01", "replication_search_evidence": "synthetic test evidence only",
+            "unavailable_reason": "NA",
+        })
+        with replication_queue.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, delimiter="\t", fieldnames=list(curated), lineterminator="\n")
+            writer.writeheader()
+            writer.writerow(curated)
+        replication_manifest, replication_lock = work / "replication_manifest.tsv", work / "replication_manifest.lock.json"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/22_lock_replication_manifest.py"),
+                "--queue", str(replication_queue), "--out", str(replication_manifest),
+                "--candidate-lock", str(replication_candidate_lock), "--lock", str(replication_lock),
+            ], check=True,
+        )
+        if not replication_manifest.is_file() or not replication_lock.is_file():
+            raise SystemExit("ERROR: synthetic replication manifest did not lock")
+
+        replication_h2 = work / "replication_h2.tsv"
+        with replication_h2.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle, delimiter="\t",
+                fieldnames=["replication_source_id", "h2", "h2_se", "h2_z", "LDSC_intercept", "primary_status"],
+                lineterminator="\n",
+            )
+            writer.writeheader()
+            writer.writerow({
+                "replication_source_id": "synthetic_non_ukb", "h2": 0.2, "h2_se": 0.02,
+                "h2_z": 10, "LDSC_intercept": 1.0, "primary_status": "PASS",
+            })
+        replication_rg = work / "replication_rg.tsv"
+        with replication_rg.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle, delimiter="\t",
+                fieldnames=[
+                    "pair_id", "sleep_trait", "replication_source_id", "rg", "se", "z", "p",
+                    "cross_trait_LDSC_intercept", "cross_trait_LDSC_intercept_se",
+                    "snp_overlap_valid_alleles", "ancestry", "analysis_status",
+                ], lineterminator="\n",
+            )
+            writer.writeheader()
+            writer.writerow({
+                "pair_id": curated["pair_id"], "sleep_trait": curated["sleep_trait"],
+                "replication_source_id": "synthetic_non_ukb", "rg": 0.18, "se": 0.04,
+                "z": 4.5, "p": 0.01, "cross_trait_LDSC_intercept": 0.0,
+                "cross_trait_LDSC_intercept_se": 0.005, "snp_overlap_valid_alleles": 900000,
+                "ancestry": "EUR", "analysis_status": "REPLICATION_RG_COMPLETE",
+            })
+        replication_results = work / "replication_results.tsv"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/23_collate_replication.py"),
+                "--manifest", str(replication_manifest), "--lock", str(replication_lock),
+                "--h2", str(replication_h2), "--rg", str(replication_rg),
+                "--out", str(replication_results), "--provenance-out", str(work / "replication_results.json"),
+            ], check=True,
+        )
+        if read_tsv(replication_results)[0]["replication_class"] != "REPLICATED":
+            raise SystemExit("ERROR: synthetic independent replication was not classified REPLICATED")
+        replicated_priorities = work / "replicated_priorities.tsv"
+        subprocess.run(
+            [
+                "python3", str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
+                "--rg", str(rg_out), "--extension-h2", str(h2_out),
+                "--core-h2", str(ROOT / "results/tables/h2_summary.tsv"),
+                "--novelty-audit", str(audit), "--replication", str(replication_results),
+                "--out", str(replicated_priorities), "--provenance-out", str(work / "replicated_priorities.json"),
+            ], check=True,
+        )
+        if sum(row["priority_tier"] == "B" for row in read_tsv(replicated_priorities)) != 1:
+            raise SystemExit("ERROR: synthetic replicated pair did not advance to Tier B")
+    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 ranked_views=true figures=true novelty_gate=true prioritization=true replication_lock=true local_queue=true isolated=true")
 
 
 if __name__ == "__main__":

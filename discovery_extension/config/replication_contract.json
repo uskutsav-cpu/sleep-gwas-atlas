@@ -12,14 +12,23 @@
     "same or explicitly harmonized phenotype definition",
     "same effect direction convention",
     "ancestry documented and analyzed consistently",
-    "exact file identity, build, schema, sample size, and checksum retained",
+    "candidate pair family locked before source curation",
+    "exact file identity, build, schema, sample size, and local full-resolution SHA256 retained and verified before the replication manifest is locked",
+    "completed independent-source search metadata retained even when no qualifying dataset exists",
     "replication trait passes h2 Z>=4 and LDSC intercept<=1.2 before pair testing"
   ],
   "success_rule": {
     "direction_concordant": true,
     "two_sided_p_threshold": "0.05 divided by the number of replication pairs frozen in the replication family",
-    "effect_consistency": "report discovery and replication rg with SE and heterogeneity; significance alone is insufficient",
-    "strong_novelty_requires_success": true
+    "effect_consistency": "report discovery and replication rg with SE plus an independent-estimate difference Z, Q, and one-degree-of-freedom heterogeneity P; significance alone is insufficient",
+    "strong_novelty_requires_class": "REPLICATED"
   },
-  "failure_reporting": "retain null, discordant, underpowered, QC-failed, and unavailable replication attempts; never replace a failed source after results are known"
+  "allowed_replication_classes": [
+    "REPLICATED",
+    "DIRECTIONALLY_CONCORDANT",
+    "UNDERPOWERED",
+    "FAILED_REPLICATION",
+    "NO_INDEPENDENT_DATASET"
+  ],
+  "failure_reporting": "retain null, discordant, underpowered, QC-failed, and evidence-backed unavailable replication attempts in the exact locked candidate family; never replace a failed source after results are known"
 }

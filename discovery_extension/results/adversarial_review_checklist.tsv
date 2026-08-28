@@ -8,8 +8,12 @@ R06	UK Biobank sample overlap	Inspect cross-trait intercepts and disclose overla
 R07	Sparse or proxy phenotypes	Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.	PASS_METADATA	candidate_traits.tsv
 R08	Panel-level novelty inflation	Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.	PENDING_PAIR_AUDIT	absent
 R09	Replication non-independence	Require non-overlapping participants and separately sourced summary statistics.	PENDING_REPLICATION	absent
-R10	Global-to-local overreach	Do not call global rg evidence of a shared locus.	PENDING_LOCAL_ANALYSIS	absent
+R10	Global-to-local overreach	Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.	CODE_READY_INPUTS_BLOCKED	absent;present:sha256=37888988af5fdf6148d701477c388b4f07857d97565f0db78d8257e7adff6b49
 R11	Pleiotropy or mediated effects	Evaluate shared-factor and directionally pleiotropic alternatives.	PENDING_PLEIOTROPY	absent
 R12	Colocalization overclaim	Report hypotheses/priors/sensitivity; colocalization is not causality.	PENDING_COLOCALIZATION	absent
-R13	Synthetic/real result contamination	Synthetic tests stay under synthetic or temporary paths and carry explicit markers.	PASS	two isolated smoke tests
+R13	Synthetic/real result contamination	Synthetic tests stay under synthetic or temporary paths and carry explicit markers.	PASS	four isolated synthetic workflows
 R14	Storage-driven partial acquisition	Do not silently analyze a result-selected subset of the locked panel.	PASS_BLOCKED	BLOCKED_INSUFFICIENT_STORAGE
+R15	Local LD-reference mismatch	Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.	PASS_BLOCKED	present:sha256=37888988af5fdf6148d701477c388b4f07857d97565f0db78d8257e7adff6b49
+R16	Local multiplicity or h2-gate leakage	Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.	PASS_CONTRACT	config/local_architecture_contract.json
+R17	Replication candidate attrition	Lock the entire Tier A/B candidate family before source curation and preserve NO_INDEPENDENT_DATASET outcomes.	PASS_CONTRACT	scripts/21_prepare_replication_queue.py+22_lock_replication_manifest.py+23_collate_replication.py
+R18	LAVA simulation instability	Freeze a deterministic nonzero simulation seed per selected pair and retain it in the manifest.	PASS_CONTRACT	config/local_architecture_contract.json

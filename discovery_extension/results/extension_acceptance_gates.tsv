@@ -4,13 +4,13 @@ stage	gate	status	evidence	interpretation
 3	Map prior sleep-trait correlation literature	PASS_WITH_SCOPE_LIMITATION	present:sha256=63348732d0a32a7373955b40fa0fdb6ae41c2d165ce60cc43c6a96a7c13e090d	8,896 extracted prior-screen rows; exact no-match is not proof of novelty.
 4	Build and lock candidate universe	PASS	EXTENSION_PANEL_OK traits=100 planned_rg=1200 panel_sha256=0a04a3074d798800f47671de39012cbfaf142b9173466e9a309400b7d5553329	242-trait candidate pool; 100 traits locked before extension rg; 1200 planned pairs.
 5	Verify sources, schemas, and harmonization	CONTRACT_PASS_EXECUTION_BLOCKED	SOURCE_CONTRACTS_VALID traits=100 schemas=2 source_gib=214.705 status=BLOCKED_INSUFFICIENT_STORAGE	Continuous, binary, variant-map, QC, and synthetic smoke-test contracts pass; real traversal awaits acquisition.
-6	Acquire full-resolution summary statistics	BLOCKED_INSUFFICIENT_STORAGE	present:sha256=315239e73eb1a9ff98bad8832688a9bbddc6ccd08436623667af25a2c0ce25ae	Need 246.91 GiB; measured 8.157 GiB; no bulk download started.
+6	Acquire full-resolution summary statistics	BLOCKED_INSUFFICIENT_STORAGE	present:sha256=315239e73eb1a9ff98bad8832688a9bbddc6ccd08436623667af25a2c0ce25ae	Need 246.91 GiB; measured 5.42 GiB; no bulk download started.
 7	Rerun extension LDSC h2 QC	BLOCKED_UPSTREAM	absent	Source h2 precheck is not accepted as the required extension rerun.
 8	Run global genetic correlations	BLOCKED_UPSTREAM	absent	BH FDR must remain confined to the primary extension family.
 9	Audit pair-level novelty	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=17_prepare_pair_novelty_audit.py+18_validate_pair_novelty_audit.py	Required for every extension-FDR-significant pair; no panel-level label substitutes.
 10	Prioritize findings	BLOCKED_UPSTREAM	absent	Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support.
 11	Independent replication	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/replication_contract.json	Same-cohort internal splits cannot satisfy the independent-replication gate.
-12	Local genetic correlation	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Global rg is not local sharing.
+12	Local genetic correlation	CODE_READY_REFERENCE_AND_DENSE_SUMSTATS_BLOCKED	absent;readiness=present:sha256=37888988af5fdf6148d701477c388b4f07857d97565f0db78d8257e7adff6b49;protocol=config/local_architecture_contract.json	Pinned LAVA/HDL-L code passes runtime checks, but source-verified LD references and dense inputs are absent; global rg is not local sharing.
 13	Pleiotropy analysis	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Pleiotropy is evaluated as an alternative explanation, not an inconvenience.
 14	Fine-mapping and colocalization	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Colocalization requires explicit hypotheses, priors, and sensitivity analyses.
 15	Mechanistic annotation	PROTOCOL_READY_UPSTREAM_BLOCKED	absent;protocol=config/followup_contract.json	Mechanistic interpretation is ranked and cannot convert correlation into causation.
