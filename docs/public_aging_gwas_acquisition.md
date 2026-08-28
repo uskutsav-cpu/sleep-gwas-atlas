@@ -1,15 +1,15 @@
 # Public aging-GWAS acquisition
 
 This log records source-verified public releases that have completed the
-source/build portion of Phase 0 and identifies the one release exercised
-locally. Source verification by itself does not imply materialization,
-harmonization, HapMap3 matching, or LDSC QC.
+source/build portion of Phase 0. Source verification by itself does not imply
+materialization, harmonization, HapMap3 matching, or LDSC QC.
 
 | Source ID | Trait | Publication | Public file |
 | --- | --- | --- | --- |
 | `zenin_2019_healthspan` | `healthspan` | Zenin et al. 2019, PMID 30729179 | [`GCST007406_buildGRCh37.tsv`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST007001-GCST008000/GCST007406/GCST007406_buildGRCh37.tsv) |
 | `timmers_2019_parental_lifespan` | `parental_lifespan` | Timmers et al. 2019, PMID 30642433 | [`lifegen_phase2_bothpl_alldr_2017_09_18.tsv.gz`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST009001-GCST010000/GCST009890/lifegen_phase2_bothpl_alldr_2017_09_18.tsv.gz) |
 | `atkins_2021_frailty_index` | `frailty` | Atkins et al. 2021, PMID 34431594 | [`GCST90020053_buildGRCh37.tsv`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90020001-GCST90021000/GCST90020053/GCST90020053_buildGRCh37.tsv) |
+| `burren_2024_telomere_nfe` | `telomere_length` | Burren et al. 2024, PMID 39192095 | [`GCST90435144.tsv.gz`](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90435001-GCST90436000/GCST90435144/GCST90435144.tsv.gz) |
 
 The official GWAS Catalog metadata specifies 300,447 genetically Caucasian
 British UK Biobank participants and names the genome assembly as GRCh37. The
@@ -60,7 +60,7 @@ in the registry. Raw `rs10875231` is at `1:100000012`, agreeing with the
 [Ensembl GRCh37 record](https://grch37.rest.ensembl.org/variation/human/rs10875231?content-type=application/json);
 the GRCh38 position is `1:99534456`.
 
-## Verified but not eligible for the EUR panel
+## Telomere-length source substitution
 
 The public [Codd et al. Figshare release](https://figshare.com/articles/dataset/UKB_telomere_gwas_summarystats_tsv_gz/14786055)
 for leukocyte telomere length was downloaded successfully (459,840,128 bytes;
@@ -71,12 +71,18 @@ effect-allele frequency, beta, standard error and p-value. Raw `rs10875231`
 at `1:100000012` is consistent with GRCh37.
 
 However, the source paper's 472,174-person full-UKB analysis includes
-non-European participants. The archive is registered for provenance and can
-be materialized reproducibly, but `telomere_length` remains `TODO` and must
-not be analysed with the EUR LDSC reference until a source-specific EUR subset
-is independently identified and checked.
+non-European participants. It is retained only as archived provenance and is
+not selected for the EUR analysis panel.
 
-## Verified EUR source awaiting a citation-policy decision
+The selected replacement is Burren et al. 2024 GWAS Catalog `GCST90435144`,
+the 438,351-person non-Finnish-European UK Biobank stratum. Its complete
+632,315,354-byte GRCh38 gzip passed byte-count, gzip CRC, literal-header, and
+15,022,702-row audits and has registered SHA-256
+`59a970cc74bc0a048041d9cbc849314734cf023a36ed9387bb60385d92cbd8eb`.
+Its registered, checksum-pinned GRCh38-to-GRCh37 liftover plan must be applied
+before EUR LDSC.
+
+## Verified EUR non-journal source
 
 The public Neale Lab round-2 left-hand grip-strength release is a GRCh37,
 inverse-rank-normalized field-46 GWAS in 359,704 phenotype-complete
@@ -91,7 +97,7 @@ the lockstep join explicitly: beta/SE/P/N come from the results file, while
 rsID/position/ref/alt/frequency/INFO come from the matched annotation row.
 
 This release is publicly citable by stable URL but was not accompanied by a
-peer-reviewed article or PMID. The atlas therefore verifies its source and
-schema reproducibly while keeping it blocked from `HARMONIZATION_READY` until
-the project adopts an explicit citation policy for public, unpublished data
-releases.
+peer-reviewed article or PMID. The atlas explicitly accepts the stable Neale
+release URL and official manifests as a non-journal primary citation. The
+source, schema, harmonization, and Phase 1 LDSC gates are complete; the absence
+of a PMID remains visible rather than being replaced by an unrelated citation.

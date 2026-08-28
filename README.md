@@ -11,10 +11,18 @@ An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
 The analysis scope is now frozen in `config/analysis_panel.tsv` at exactly 45 traits. `config/analysis_panel.lock.json` locks the ordered trait identities and domain counts, while every generated readiness or Phase 1 inclusion table records the full manifest SHA-256. A trait therefore cannot be silently swapped while preserving a 45-row count.
 
-The source registry currently provides evidence-backed public-source records for **42/45** selected traits. All 45 selections now have registry and schema rows, but the final three deliberately remain pending: the selected IMSGC multiple-sclerosis discovery meta-analysis has no located full-statistics release, the exact DIAGRAM type-2-diabetes route requires affirmative terms acceptance, and the selected dbGaP melanoma archive requires Authorized Access. This is deliberately broader than the old binary `CURATED` count: source verification does not claim that ancestry/build/schema checks, local materialization, harmonization, LDSC, prevalence evidence, or h² QC have passed. On a fresh clone with ignored raw data absent, the expected readiness summary is:
+The source registry now provides evidence-backed public-source and verified
+schema records for **45/45** selected traits. Six explicit substitutions resolve
+the prior access or ancestry blockers without changing the locked trait IDs:
+FinnGen R9 supplies Finnish/European MS, asthma, T2D, wide-IHD-as-CAD-proxy,
+and melanoma endpoints, while Burren 2024 `GCST90435144` supplies the NFE
+telomere-length stratum. Their phenotype and power differences are carried in
+the manifest rather than hidden. Source verification does not by itself claim
+that local materialization, harmonization, LDSC, or h² QC passed. On a fresh
+clone with ignored raw data absent, the expected readiness summary is:
 
 ```text
-source_verified: 42 / 45
+source_verified: 45 / 45
 harmonization_ready: 0 / 45
 ldsc_ready: 0 / 45
 liability_h2_ready: 0 / 45
@@ -23,25 +31,17 @@ phase1_pass: 0 / 45
 
 The historic 86-row `config/traits.tsv` and `config/panel_45_selection.tsv` remain as provenance for the candidate-selection process. They are not production inputs. No real LDSC results are versioned on this branch; synthetic smoke-test artifacts are not scientific results.
 
-The exact evidence and user/institution actions needed for the last three source
-records are documented in `docs/remaining_source_access_blockers.md`. The
-pipeline never submits a request, signs a data-use agreement, or affirms a
-download checkbox on the user's behalf.
+The former access blockers and the evidence-backed public substitutions are
+documented in `docs/remaining_source_access_blockers.md` and
+`docs/public_eur_substitution_plan.md`. The pipeline did not submit a request,
+sign a data-use agreement, or affirm a download checkbox on the user's behalf.
 
-Thirteen registered sources have also been exercised locally end to end. The
-ignored Jansen 2019 insomnia, Campos 2020 snoring, Yengo 2018 BMI, Deelen 2019
-longevity, Timmers 2019 parental-lifespan, Evangelou 2018 SBP, Nielsen 2018
-atrial-fibrillation, Demontis 2023 ADHD, Trubetskoy 2022 schizophrenia, Mishra
-2022 stroke, de Lange 2017 Crohn-disease and ulcerative-colitis strata, and
-Ishigaki 2022 rheumatoid-arthritis inputs produced 6,077,635/10,862,567,
-7,168,629/11,010,158, 1,973,592/2,336,269, 1,175,095/8,856,352,
-6,663,125/9,085,648, 5,964,514/7,088,067, 10,246,131/12,149,979,
-5,692,669/6,774,224, 6,341,702/7,659,767, 1,176,288/7,511,476,
-1,144,234/9,570,787, 1,144,294/9,588,016, and 9,659,407/13,297,690 retained
-harmonized variants, respectively. All thirteen were HapMap3-munged and passed
-the predefined LDSC h² gate in an explicitly named checkpoint; the gated Phase
-1 checkpoint contains the 2 locally ready sleep traits × 11 locally ready
-non-sleep traits = 22 pairs.
+Thirty-nine registered sources have been exercised locally end to end. All 12
+sleep traits and 27 non-sleep traits pass the predefined LDSC h² gate, and the
+complete currently available 12 × 27 family contains 324 unique correlations.
+The six new substitutes have passed full acquisition and source-schema audits
+and are materialized, but still require harmonization, munging, and h² QC before
+the locked 396-pair family can be recomputed.
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC

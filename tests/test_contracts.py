@@ -132,6 +132,15 @@ def load_ranged_downloader():
     return module
 
 
+def load_substitution_auditor():
+    spec = importlib.util.spec_from_file_location(
+        "substitution_auditor", ROOT / "scripts" / "22_audit_substitution_source.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 class PanelContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -201,8 +210,13 @@ class PanelContractTests(unittest.TestCase):
             4_437_046_355,
         )
         for row in candidates:
-            self.assertEqual(row["replaces_source_id"], selected[row["trait_id"]])
-            self.assertEqual(row["review_status"], "REVIEWED_AWAITING_ACQUISITION")
+            self.assertEqual(row["candidate_source_id"], selected[row["trait_id"]])
+            self.assertNotEqual(row["replaces_source_id"], selected[row["trait_id"]])
+            self.assertEqual(
+                row["review_status"],
+                "PROMOTED_SOURCE_VERIFIED",
+            )
+            self.assertRegex(row["archive_sha256"], r"^[0-9a-f]{64}$")
             self.assertTrue(row["download_url"].startswith("https://"))
             self.assertTrue(row["source_page_url"].startswith("https://"))
             self.assertIn(row["build"], {"GRCh38/hg38"})
@@ -220,6 +234,31 @@ class PanelContractTests(unittest.TestCase):
                 downloader.sha256(path),
                 hashlib.sha256(b"atlas-candidate").hexdigest(),
             )
+
+    def test_substitution_source_auditor_scans_literal_finngen_schema(self):
+        auditor = load_substitution_auditor()
+        header = "\t".join(auditor.FINNGEN_HEADER)
+        row = "\t".join([
+            "1", "1000000", "A", "G", "rs123", "GENE", "0.01", "2",
+            "0.2", "0.1", "0.3", "0.4", "0.3",
+        ])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "finngen.gz"
+            with gzip.open(path, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(f"{header}\n{row}\n")
+            candidate = {
+                "candidate_source_id": "finngen_r9_ms",
+                "trait_id": "ms",
+                "archive_name": path.name,
+                "archive_bytes": str(path.stat().st_size),
+                "archive_md5": hashlib.md5(path.read_bytes()).hexdigest(),
+                "archive_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+            report = auditor.audit_source(path, candidate)
+        self.assertEqual(report["source_rows"], 1)
+        self.assertEqual(report["autosomal_rows"], 1)
+        self.assertEqual(report["explicit_rsid_rows"], 1)
+        self.assertEqual(report["valid_effect_se_p_rows"], 1)
 
     def test_nonjournal_citation_is_exactly_the_neale_grip_release(self):
         audit = load_phase0_audit()
@@ -360,13 +399,13 @@ class PanelContractTests(unittest.TestCase):
             "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1"
         })
 
-    def test_pending_sources_do_not_reuse_stage_or_headline_sample_counts(self):
+    def test_public_substitutions_use_exact_endpoint_sample_counts(self):
         panel = {row["trait_id"]: row for row in self.panel}
         self.assertEqual(
             (panel["ms"]["ncase"], panel["ms"]["ncontrol"], panel["ms"]["n_total"]),
-            ("14802", "26703", "41505"),
+            ("2182", "373987", "376169"),
         )
-        self.assertEqual(panel["ms"]["source_status"], "SOURCE_PENDING")
+        self.assertEqual(panel["ms"]["source_status"], "SOURCE_VERIFIED")
         self.assertEqual(
             (
                 panel["melanoma"]["ncase"],
@@ -374,10 +413,10 @@ class PanelContractTests(unittest.TestCase):
                 panel["melanoma"]["n_total"],
                 panel["melanoma"]["build"],
             ),
-            ("30134", "81415", "111549", "hg38"),
+            ("2993", "287137", "290130", "hg38"),
         )
-        self.assertEqual(panel["melanoma"]["source_status"], "SOURCE_PENDING")
-        self.assertEqual(panel["t2d"]["source_status"], "SOURCE_PENDING")
+        self.assertEqual(panel["melanoma"]["source_status"], "SOURCE_VERIFIED")
+        self.assertEqual(panel["t2d"]["source_status"], "SOURCE_VERIFIED")
 
     def test_hm3_map_assigns_rsid_from_coordinate_and_alleles(self):
         payload = (
@@ -1197,9 +1236,10 @@ class PanelContractTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("PASS    locked_panel", result.stdout)
-        self.assertIn("BLOCKED source_curation", result.stdout)
-        self.assertIn("BLOCKED source_schemas", result.stdout)
-        self.assertIn("Acceptance: 1/23 gates passed", result.stdout)
+        self.assertIn("PASS    source_curation", result.stdout)
+        self.assertIn("PASS    source_schemas", result.stdout)
+        self.assertIn("BLOCKED harmonization", result.stdout)
+        self.assertIn("Acceptance: 3/23 gates passed", result.stdout)
 
 
 if __name__ == "__main__":

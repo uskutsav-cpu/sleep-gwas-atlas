@@ -19,16 +19,16 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 |---|---|---|
 | Locked scope | Complete | Exactly 12 sleep/circadian plus 33 non-sleep traits are locked by ordered-ID hash in `analysis_panel.tsv` and its lock file. |
 | Reproducible Phase 0/1 architecture | Complete | Granular readiness, pinned runtimes, Snakemake entry points, CI, negative contract tests, a checksum-pinned GRCh38-to-GRCh37 point-liftover path, and a full synthetic 396-pair smoke test are implemented. |
-| Source curation | Blocked | 42/45 selected sources are registry-verified. The three remaining selections have explicit pending records: the IMSGC multiple-sclerosis discovery meta-analysis lacks a located full-statistics release, DIAGRAM T2D requires affirmative terms acceptance, and dbGaP melanoma requires Authorized Access. |
-| Source schemas | Blocked | `gwas_schemas.tsv` covers all 45 selected traits and makes literal, trait-specific allele/effect/statistic mapping an explicit gate; 42 mappings are verified and the three inaccessible/unreleased files remain pending. The audited, checksum-validated GRCh37 HapMap3 identity mapper and exact per-source plans implement the required rsID/coordinate completion for major depression, Parkinson disease, CAD, IBD, Crohn, UC, stroke, and longevity. Longevity, stroke, and Crohn disease have now exercised that path locally; the other mapped traits still require local raw materialization, and CAD separately remains outside the EUR-only ancestry gate. |
-| Harmonization | Blocked | Insomnia, snoring, BMI, longevity, parental lifespan, SBP, atrial fibrillation, ADHD, schizophrenia, stroke, Crohn disease, ulcerative colitis, and rheumatoid arthritis have been locally materialized and harmonized, retaining 6,077,635/10,862,567, 7,168,629/11,010,158, 1,973,592/2,336,269, 1,175,095/8,856,352, 6,663,125/9,085,648, 5,964,514/7,088,067, 10,246,131/12,149,979, 5,692,669/6,774,224, 6,341,702/7,659,767, 1,176,288/7,511,476, 1,144,234/9,570,787, 1,144,294/9,588,016, and 9,659,407/13,297,690 rows. These ignored artifacts are absent from a fresh clone and the other 32 traits remain unresolved. |
-| LDSC h2 and Phase 1 | Blocked | The thirteen local inputs were HapMap3-munged and passed the predefined h² gate; an isolated checkpoint contains the 22 currently possible sleep×disease pairs. No complete real h²/396-pair outputs are versioned or written to canonical full-panel paths, and synthetic outputs remain tests only. |
+| Source curation | Complete | 45/45 selected sources are registry-verified. Five official FinnGen R9 Finnish/European endpoints and the Burren 2024 NFE telomere stratum explicitly replace six access/ancestry blockers while preserving locked trait IDs and recording phenotype/power differences. |
+| Source schemas | Complete | All 45 literal, trait-specific allele/effect/statistic mappings are verified. The six replacement archives passed exact bytes/checksum, gzip CRC, literal-header, and complete audits totaling 115,865,922 rows; all six have pinned hg38-to-hg19 plans. |
+| Harmonization | Blocked | 39/45 traits have local harmonization QC ledgers. The six newly materialized substitutes (`ms`, `asthma`, `t2d`, `cad`, `telomere_length`, and `melanoma`) still require full harmonization and munging. |
+| LDSC h2 and Phase 1 | Blocked | All 12 sleep traits and 27 non-sleep traits pass h² QC. Their complete 324-pair sleep×non-sleep family is available locally; the final six h² results and remaining 72 pairs are pending. |
 | Full covariance and downstream science | Blocked | MiXeR, LAVA, shared-locus discovery, Genomic SEM, factor GWAS, fine-mapping, colocalization, molecular/regulatory/cell/pathway work, and MR await real Phase 0/1 inputs. |
 | Integrated atlas and robustness | Blocked | Canonical evidence tables and robustness outputs do not yet exist. |
 | Immutable release | Blocked | `releases/atlas-v1.0` must be produced only after every scientific gate passes. |
 
-The immediate critical path is source curation → raw acquisition →
-harmonization. The repository's larger remote experimental branch contains a
+The immediate critical path is six-trait harmonization → munging → h² QC → the
+remaining 72 sleep×non-sleep correlations. The repository's larger remote experimental branch contains a
 broader 149-trait scope, so it must not be merged wholesale. Evidence may be
 harvested from it only when it matches one of the locked 45 selected phenotype
 definitions and survives primary-source verification.
