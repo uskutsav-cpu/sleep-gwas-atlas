@@ -9,6 +9,7 @@ import hashlib
 import io
 import json
 import math
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -42,6 +43,107 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def is_sha256(value: object) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+def validate_placo_input_identity(
+    pair_id: str,
+    pair_relative: str,
+    pair_manifest: dict[str, str],
+    pair_provenance: dict[str, object],
+    placo_task: dict[str, str],
+    placo_summary: dict[str, str],
+    manifest_sha256: str,
+    policy_sha256: str,
+    live_pair_sha256: str | None,
+) -> tuple[str, int]:
+    """Validate the immutable PLACO input chain, with or without its temp payload."""
+    bound_sha256 = placo_task.get("pair_input_sha256")
+    rows_written = pair_provenance.get("alignment_counts", {}).get("written")
+    expected_sources = [
+        pair_manifest["sleep_sumstats"], pair_manifest["non_sleep_sumstats"],
+    ]
+    expected_source_hashes = [
+        pair_manifest["sleep_sumstats_sha256"],
+        pair_manifest["non_sleep_sumstats_sha256"],
+    ]
+    if (
+        not is_sha256(bound_sha256)
+        or (live_pair_sha256 is not None and live_pair_sha256 != bound_sha256)
+        or placo_task.get("pair_input") != pair_relative
+        or pair_provenance.get("pair_id") != pair_id
+        or pair_provenance.get("output") != pair_relative
+        or pair_provenance.get("output_sha256") != bound_sha256
+        or pair_provenance.get("source_files") != expected_sources
+        or pair_provenance.get("source_sha256") != expected_source_hashes
+        or pair_provenance.get("manifest_sha256") != manifest_sha256
+        or pair_provenance.get("policy_sha256") != policy_sha256
+        or not isinstance(rows_written, int) or rows_written <= 0
+        or placo_task.get("pair_input_rows") != str(rows_written)
+        or placo_summary.get("input_sha256") != bound_sha256
+    ):
+        raise SystemExit(f"ERROR: PLACO+ input identity chain drifted for {pair_id}")
+    return bound_sha256, rows_written
+
+
+def validate_conjfdr_result_identity(
+    root: Path,
+    pair_id: str,
+    task_path: Path,
+    task_lock_path: Path,
+    completion_path: Path,
+    result_mat_path: Path,
+    receipt_path: Path,
+    task: dict[str, str],
+    task_lock: dict[str, str],
+    completion: dict[str, str],
+) -> tuple[str, int, bool]:
+    """Validate a sealed MAT result whether or not its temporary payload remains."""
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise SystemExit(
+            f"ERROR: conjunction-FDR MAT receipt is unreadable for {pair_id}: {exc}"
+        ) from exc
+    if not isinstance(receipt, dict):
+        raise SystemExit(
+            f"ERROR: conjunction-FDR MAT receipt must be an object for {pair_id}"
+        )
+    result_sha256 = receipt.get("result_mat_sha256")
+    result_bytes = receipt.get("result_mat_bytes")
+    if result_mat_path.exists() and not result_mat_path.is_file():
+        raise SystemExit(f"ERROR: conjunction-FDR MAT path is not a file for {pair_id}")
+    retained = result_mat_path.is_file()
+    if (
+        receipt.get("schema_version") != "sleep-atlas-conjfdr-result-mat.1"
+        or receipt.get("analysis_id") != task.get("analysis_id")
+        or receipt.get("pair_id") != pair_id
+        or receipt.get("task") != str(task_path.relative_to(root))
+        or receipt.get("task_sha256") != digest(task_path)
+        or receipt.get("task_lock") != str(task_lock_path.relative_to(root))
+        or receipt.get("task_lock_sha256") != digest(task_lock_path)
+        or receipt.get("completion") != str(completion_path.relative_to(root))
+        or receipt.get("completion_sha256") != digest(completion_path)
+        or receipt.get("result_mat") != str(result_mat_path.relative_to(root))
+        or not is_sha256(result_sha256)
+        or completion.get("result_mat_sha256") != result_sha256
+        or type(result_bytes) is not int or result_bytes <= 0
+        or receipt.get("sealer_sha256")
+        != digest(root / "scripts/49_seal_conjfdr_result.py")
+        or receipt.get("retention")
+        != "TEMPORARY_RESULT_MAT_MAY_BE_EVICTED_AFTER_THIS_RECEIPT"
+        or task_lock.get("task_sha256") != receipt.get("task_sha256")
+    ):
+        raise SystemExit(f"ERROR: conjunction-FDR MAT receipt chain drifted for {pair_id}")
+    if retained and (
+        result_mat_path.stat().st_size != result_bytes
+        or digest(result_mat_path) != result_sha256
+    ):
+        raise SystemExit(f"ERROR: retained conjunction-FDR MAT drifted for {pair_id}")
+    return result_sha256, result_bytes, retained
 
 
 def rows(path: Path, delimiter: str = "\t") -> list[dict[str, str]]:
@@ -172,7 +274,6 @@ def main() -> int:
     expected_paths: list[Path] = []
     for pair_id in pair_ids:
         expected_paths.extend([
-            root / args.pair_dir / f"{pair_id}.tsv.gz",
             root / args.pair_dir / f"{pair_id}.provenance.json",
             root / args.placo_task_dir / f"{pair_id}.tsv",
             root / args.placo_task_dir / f"{pair_id}.lock.tsv",
@@ -202,7 +303,7 @@ def main() -> int:
     )
     placo_grouped: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
     conj_grouped: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
-    input_hashes: dict[str, dict[str, str]] = {}
+    input_hashes: dict[str, dict[str, object]] = {}
     digest_cache: dict[Path, str] = {}
 
     def digest(path: Path) -> str:
@@ -220,6 +321,20 @@ def main() -> int:
         hits_path = root / args.placo_dir / f"{pair_id}.hits.tsv"
         pair_provenance = json.loads(pair_provenance_path.read_text(encoding="utf-8"))
         placo_task, placo_lock = one_row(placo_task_path), one_row(placo_lock_path)
+        summary = one_row(summary_path)
+        if pair_path.exists() and not pair_path.is_file():
+            raise SystemExit(f"ERROR: retained PLACO+ pair input is not a file for {pair_id}")
+        pair_input_sha256, _pair_input_rows = validate_placo_input_identity(
+            pair_id=pair_id,
+            pair_relative=str(pair_path.relative_to(root)),
+            pair_manifest=pair,
+            pair_provenance=pair_provenance,
+            placo_task=placo_task,
+            placo_summary=summary,
+            manifest_sha256=digest(manifest_path),
+            policy_sha256=digest(policy_path),
+            live_pair_sha256=digest(pair_path) if pair_path.is_file() else None,
+        )
         if (
             placo_lock.get("schema_version") != "sleep-atlas-placo-task.1"
             or placo_lock.get("task_sha256") != digest(placo_task_path)
@@ -228,17 +343,11 @@ def main() -> int:
             or placo_task.get("task_builder_sha256")
             != digest(root / "scripts/45_prepare_placo_task.py")
             or placo_task.get("runner_sha256") != digest(root / "scripts/46_run_placo_pair.R")
-            or placo_task.get("pair_input") != str(pair_path.relative_to(root))
-            or placo_task.get("pair_input_sha256") != digest(pair_path)
             or placo_task.get("pair_provenance_sha256") != digest(pair_provenance_path)
-            or pair_provenance.get("output_sha256") != digest(pair_path)
-            or pair_provenance.get("manifest_sha256") != digest(manifest_path)
-            or pair_provenance.get("policy_sha256") != digest(policy_path)
             or placo_task.get("variant_hits_out") != str(hits_path.relative_to(root))
             or placo_task.get("summary_out") != str(summary_path.relative_to(root))
         ):
             raise SystemExit(f"ERROR: PLACO+ input/task provenance drifted for {pair_id}")
-        summary = one_row(summary_path)
         if (
             summary.get("pair_id") != pair_id
             or summary.get("analysis_status") != "PLACO_PLUS_COMPLETE"
@@ -247,7 +356,7 @@ def main() -> int:
             or float(summary.get("numerical_failure_fraction", "nan"))
             > policy["placo_maximum_numerical_failure_fraction"]
             or summary.get("task_sha256") != digest(placo_task_path)
-            or summary.get("input_sha256") != digest(pair_path)
+            or summary.get("input_sha256") != pair_input_sha256
             or summary.get("placo_source_sha256") != policy["placo_source_sha256"]
             or summary.get("task_builder_sha256") != placo_task["task_builder_sha256"]
             or summary.get("runner_sha256") != placo_task["runner_sha256"]
@@ -322,9 +431,11 @@ def main() -> int:
         all_results_path = root / task["all_results"]
         locus_results_path = root / task["locus_results"]
         result_mat_path = root / task["result_mat"]
+        result_mat_receipt_path = result_mat_path.with_name("result_mat.receipt.json")
         matlab_log_path = root / task["result_dir"] / "matlab.log"
         if not all(path.is_file() and path.stat().st_size for path in (
-            completion_path, all_results_path, locus_results_path, result_mat_path, matlab_log_path,
+            completion_path, all_results_path, locus_results_path,
+            result_mat_receipt_path, matlab_log_path,
         )):
             raise SystemExit(f"ERROR: conjunction-FDR result is absent for {pair_id}")
         completion = one_row(completion_path)
@@ -334,7 +445,6 @@ def main() -> int:
             or completion.get("task_sha256") != digest(task_path)
             or completion.get("all_results_sha256") != digest(all_results_path)
             or completion.get("locus_results_sha256") != digest(locus_results_path)
-            or completion.get("result_mat_sha256") != digest(result_mat_path)
             or completion.get("matlab_log_sha256") != digest(matlab_log_path)
             or completion.get("runtime_provenance_sha256")
             != digest(root / str(policy["runtime_provenance"]))
@@ -345,6 +455,12 @@ def main() -> int:
             != policy["pleiofdr_random_prune_iterations"]
         ):
             raise SystemExit(f"ERROR: conjunction-FDR completion drifted for {pair_id}")
+        result_mat_sha256, result_mat_bytes, result_mat_retained = (
+            validate_conjfdr_result_identity(
+                root, pair_id, task_path, task_lock_path, completion_path,
+                result_mat_path, result_mat_receipt_path, task, task_lock, completion,
+            )
+        )
         conj_rows, conj_fields = rows_and_fields(all_results_path, delimiter=",")
         required_conj = {"snpid", "chrnum", "chrpos", "min_conjfdr"}
         if not required_conj.issubset(conj_fields):
@@ -365,14 +481,19 @@ def main() -> int:
                 "start": start, "stop": stop,
             })
         input_hashes[pair_id] = {
-            "pair_input": digest(pair_path), "pair_provenance": digest(pair_provenance_path),
+            "pair_input": pair_input_sha256,
+            "pair_input_retained_at_collation": str(pair_path.is_file()).upper(),
+            "pair_provenance": digest(pair_provenance_path),
             "placo_task": digest(placo_task_path), "placo_lock": digest(placo_lock_path),
             "placo_summary": digest(summary_path), "placo_hits": digest(hits_path),
             "conjfdr_task": digest(task_path), "conjfdr_lock": digest(task_lock_path),
             "conjfdr_completion": digest(completion_path),
             "conjfdr_all": digest(all_results_path),
             "conjfdr_loci": digest(locus_results_path),
-            "conjfdr_result_mat": digest(result_mat_path),
+            "conjfdr_result_mat": result_mat_sha256,
+            "conjfdr_result_mat_bytes": result_mat_bytes,
+            "conjfdr_result_mat_retained_at_collation": str(result_mat_retained).upper(),
+            "conjfdr_result_mat_receipt": digest(result_mat_receipt_path),
             "conjfdr_matlab_log": digest(matlab_log_path),
         }
 
@@ -460,6 +581,7 @@ def main() -> int:
                 "scripts/47_prepare_pleiofdr_trait.py",
                 "scripts/48_prepare_conjfdr_task.py",
                 "scripts/49_run_conjfdr_pair.py",
+                "scripts/49_seal_conjfdr_result.py",
                 "scripts/50_collate_pleiotropy.py",
                 "scripts/pleiotropy_contract.py",
             )

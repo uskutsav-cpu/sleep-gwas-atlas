@@ -158,7 +158,7 @@ combines, checkpoints the observed eligibility family, then schedules exactly
 the eligible bivariate replicates and combines before final collation:
 
 ```bash
-snakemake --cores 16 mixer
+snakemake --profile profiles/production mixer
 ```
 
 The 64-file reference must still be staged manually and sealed because the

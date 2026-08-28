@@ -163,7 +163,10 @@ def main() -> int:
     stage.mkdir(parents=True)
     try:
         tracked = git(root, "ls-files").splitlines()
-        code_prefixes = ("config/", "environment/", "patches/", "scripts/", "docs/", "tests/", ".github/")
+        code_prefixes = (
+            "config/", "environment/", "patches/", "profiles/", "scripts/",
+            "docs/", "tests/", ".github/",
+        )
         payload = {
             Path(path) for path in tracked
             if path in {

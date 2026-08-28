@@ -354,6 +354,10 @@ rule lava_reference:
         acknowledgement=(
             "true" if config.get("acknowledge_lava_reference_download", False) else "false"
         ),
+    resources:
+        mem_mb=1024,
+        disk_mb=35840,
+        heavy_jobs=1,
     shell:
         "test '{params.acknowledgement}' = true || "
         "(echo 'ERROR: the exact 14,110,596,095-byte LAVA transfer requires acknowledgement' >&2; exit 1); "
@@ -396,6 +400,10 @@ rule lava:
         univariate="results/tables/lava_univariate.tsv",
         bivariate="results/tables/lava_bivariate.tsv",
         provenance="results/tables/lava_results.provenance.json",
+    resources:
+        mem_mb=16384,
+        disk_mb=16384,
+        heavy_jobs=1,
     shell:
         "{RSCRIPT} scripts/33_run_lava.R && "
         "{PYTHON} scripts/34_validate_lava.py --seal-results --quiet"
@@ -411,6 +419,10 @@ rule dense_variant_map_source:
             "--acknowledge-large-download"
             if config.get("acknowledge_dense_variant_map_download", False) else ""
         ),
+    resources:
+        mem_mb=1024,
+        disk_mb=10240,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/100_build_dense_variant_map.py --download {params.acknowledgement}"
 
@@ -423,6 +435,10 @@ rule dense_variant_map:
     output:
         data=DENSE_MAP_SPEC["map_path"],
         provenance=DENSE_MAP_SPEC["map_provenance_path"],
+    resources:
+        mem_mb=4096,
+        disk_mb=16384,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/100_build_dense_variant_map.py --build && "
         "{PYTHON} scripts/100_build_dense_variant_map.py --validate-only"
@@ -439,6 +455,9 @@ rule dense_glgc_raw:
         approved="true" if config.get("acknowledge_dense_gwas_download", False) else "false",
     wildcard_constraints:
         trait="ldl|hdl|triglycerides",
+    resources:
+        mem_mb=1024,
+        disk_mb=8192,
     shell:
         "test '{params.approved}' = true || "
         "(echo 'ERROR: the exact 6,844,892,917-byte GLGC transfer requires acknowledgement' >&2; exit 1); "
@@ -455,6 +474,10 @@ rule dense_harmonized_trait:
         qc="data/harmonized_mixer_full/{trait}.qc.txt",
     wildcard_constraints:
         trait="|".join(DENSE_TRAITS),
+    resources:
+        mem_mb=4096,
+        disk_mb=20480,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/101_prepare_dense_harmonization.py --materialize "
         "--trait {wildcards.trait} --no-write-readiness"
@@ -492,6 +515,10 @@ rule mixer_container:
             "--pull" if config.get("acknowledge_mixer_container_pull", False)
             else "--require-present"
         ),
+    resources:
+        mem_mb=1024,
+        disk_mb=3072,
+        heavy_jobs=1,
     shell:
         "bash scripts/37_pull_mixer_image.sh {params.mode}"
 
@@ -507,6 +534,10 @@ rule mixer_inputs:
         data=MIXER_INPUT_FILES,
         manifest="results/tables/mixer_input_manifest.tsv",
         lock="results/tables/mixer_input_manifest.lock.json",
+    resources:
+        mem_mb=2048,
+        disk_mb=30720,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/36_prepare_mixer_inputs.py --materialize"
 
@@ -561,6 +592,10 @@ rule mixer_univariate_replicate:
         trait="|".join(PANEL_TRAITS),
         rep="[1-9]|1[0-9]|20",
     threads: 16
+    resources:
+        mem_mb=32768,
+        disk_mb=4096,
+        heavy_jobs=1,
     shell:
         "bash scripts/38_run_mixer_task.sh univariate {wildcards.trait} {wildcards.rep}"
 
@@ -584,6 +619,10 @@ rule mixer_univariate_combine:
     wildcard_constraints:
         trait="|".join(PANEL_TRAITS),
     threads: 16
+    resources:
+        mem_mb=32768,
+        disk_mb=4096,
+        heavy_jobs=1,
     shell:
         "bash scripts/38_run_mixer_task.sh combine-univariate {wildcards.trait}"
 
@@ -633,6 +672,10 @@ rule mixer_bivariate_replicate:
         non_sleep="|".join(NON_SLEEP_TRAITS),
         rep="[1-9]|1[0-9]|20",
     threads: 16
+    resources:
+        mem_mb=32768,
+        disk_mb=4096,
+        heavy_jobs=1,
     shell:
         "bash scripts/38_run_mixer_task.sh bivariate "
         "{wildcards.sleep} {wildcards.non_sleep} {wildcards.rep}"
@@ -658,6 +701,10 @@ rule mixer_bivariate_combine:
         sleep="|".join(SLEEP_TRAITS),
         non_sleep="|".join(NON_SLEEP_TRAITS),
     threads: 16
+    resources:
+        mem_mb=32768,
+        disk_mb=4096,
+        heavy_jobs=1,
     shell:
         "bash scripts/38_run_mixer_task.sh combine-bivariate "
         "{wildcards.sleep} {wildcards.non_sleep}"
@@ -730,6 +777,10 @@ rule pleiotropy_runtime:
             "--download-reference"
             if config.get("acknowledge_pleiotropy_reference_download", False) else ""
         ),
+    resources:
+        mem_mb=1024,
+        disk_mb=20480,
+        heavy_jobs=1,
     shell:
         "test -s '{output.placo}' -a -s '{output.pleiofdr}' || "
         "test '{params.software_ack}' = true || "
@@ -783,8 +834,12 @@ rule pleiotropy_pair_input:
         sleep=lambda wildcards: full_harmonized_path(wildcards.pair_id.split("__", 1)[0]),
         non_sleep=lambda wildcards: full_harmonized_path(wildcards.pair_id.split("__", 1)[1]),
     output:
-        pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
+        pair=temp("results/pleiotropy/inputs/{pair_id}.tsv.gz"),
         provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
+    priority: 10
+    resources:
+        mem_mb=2048,
+        disk_mb=8192,
     shell:
         "{PYTHON} scripts/44_materialize_pleiotropy_pair.py {wildcards.pair_id} --materialize"
 
@@ -799,6 +854,10 @@ rule placo_task:
     output:
         task="results/pleiotropy/tasks/{pair_id}.tsv",
         lock="results/pleiotropy/tasks/{pair_id}.lock.tsv",
+    priority: 20
+    resources:
+        mem_mb=1024,
+        disk_mb=1024,
     shell:
         "{PYTHON} scripts/45_prepare_placo_task.py {wildcards.pair_id}"
 
@@ -807,9 +866,15 @@ rule placo_pair:
     input:
         task="results/pleiotropy/tasks/{pair_id}.tsv",
         lock="results/pleiotropy/tasks/{pair_id}.lock.tsv",
+        pair="results/pleiotropy/inputs/{pair_id}.tsv.gz",
+        pair_provenance="results/pleiotropy/inputs/{pair_id}.provenance.json",
     output:
         hits="results/pleiotropy/placo/{pair_id}.hits.tsv",
         summary="results/pleiotropy/placo/{pair_id}.summary.tsv",
+    priority: 30
+    resources:
+        mem_mb=16384,
+        disk_mb=8192,
     shell:
         "{RSCRIPT} scripts/46_run_placo_pair.R {input.task} {input.lock} --execute"
 
@@ -823,6 +888,10 @@ rule pleiofdr_trait:
     output:
         mat="data/pleiofdr/{trait}.mat",
         provenance="data/pleiofdr/{trait}.provenance.json",
+    resources:
+        mem_mb=4096,
+        disk_mb=8192,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/47_prepare_pleiofdr_trait.py {wildcards.trait} --materialize"
 
@@ -851,13 +920,32 @@ rule conjfdr_pair:
         lock="results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv",
     output:
         completion="results/pleiotropy/conjfdr/{pair_id}/atlas_completion.tsv",
+        result_mat=temp("results/pleiotropy/conjfdr/{pair_id}/result.mat"),
+    resources:
+        mem_mb=16384,
+        disk_mb=8192,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/49_run_conjfdr_pair.py {input.task} {input.lock} --execute"
 
 
+rule conjfdr_result_receipt:
+    input:
+        task="results/pleiotropy/conjfdr_tasks/{pair_id}.tsv",
+        lock="results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv",
+        completion=rules.conjfdr_pair.output.completion,
+        result_mat=rules.conjfdr_pair.output.result_mat,
+    output:
+        receipt="results/pleiotropy/conjfdr/{pair_id}/result_mat.receipt.json",
+    resources:
+        mem_mb=1024,
+        disk_mb=1024,
+    shell:
+        "{PYTHON} scripts/49_seal_conjfdr_result.py {wildcards.pair_id}"
+
+
 rule pleiotropy:
     input:
-        pair_inputs=expand("results/pleiotropy/inputs/{pair_id}.tsv.gz", pair_id=PLEIOTROPY_PAIRS),
         pair_provenance=expand("results/pleiotropy/inputs/{pair_id}.provenance.json", pair_id=PLEIOTROPY_PAIRS),
         placo_tasks=expand("results/pleiotropy/tasks/{pair_id}.tsv", pair_id=PLEIOTROPY_PAIRS),
         placo_locks=expand("results/pleiotropy/tasks/{pair_id}.lock.tsv", pair_id=PLEIOTROPY_PAIRS),
@@ -867,6 +955,7 @@ rule pleiotropy:
         conjfdr_tasks=expand("results/pleiotropy/conjfdr_tasks/{pair_id}.tsv", pair_id=PLEIOTROPY_PAIRS),
         conjfdr_locks=expand("results/pleiotropy/conjfdr_tasks/{pair_id}.lock.tsv", pair_id=PLEIOTROPY_PAIRS),
         conjfdr=expand("results/pleiotropy/conjfdr/{pair_id}/atlas_completion.tsv", pair_id=PLEIOTROPY_PAIRS),
+        conjfdr_receipts=expand("results/pleiotropy/conjfdr/{pair_id}/result_mat.receipt.json", pair_id=PLEIOTROPY_PAIRS),
         runtime_provenance="ref/pleiofdr/runtime.provenance.json",
         locus=LAVA_LOCUS_FILE,
     output:
@@ -940,6 +1029,10 @@ rule fine_mapping_input:
         ld="data/fine_mapping/{shared_locus_id}/ld.tsv.gz",
         task="results/fine_mapping/tasks/{shared_locus_id}.tsv",
         task_lock="results/fine_mapping/tasks/{shared_locus_id}.lock.json",
+    resources:
+        mem_mb=8192,
+        disk_mb=8192,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/58_materialize_finemapping_locus.py {wildcards.shared_locus_id} --materialize"
 
@@ -955,6 +1048,10 @@ rule fine_mapping_locus:
         shared="results/fine_mapping/runs/{shared_locus_id}/shared_variant_posteriors.tsv",
         diagnostics="results/fine_mapping/runs/{shared_locus_id}/diagnostics.tsv",
         provenance="results/fine_mapping/runs/{shared_locus_id}/provenance.json",
+    resources:
+        mem_mb=8192,
+        disk_mb=8192,
+        heavy_jobs=1,
     shell:
         "{PYTHON} scripts/59_run_finemapping_locus.py {wildcards.shared_locus_id} --execute"
 

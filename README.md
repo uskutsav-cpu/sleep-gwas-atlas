@@ -309,7 +309,7 @@ snakemake --cores 1 lava
 The full production graph has one terminal target:
 
 ```bash
-snakemake --cores 16 atlas_v1_release
+snakemake --profile profiles/production atlas_v1_release
 ```
 
 It includes Genomic SEM terminal evidence, LAVA, univariate and eligible-pair
@@ -319,8 +319,15 @@ large transfer remains independently disabled in `config/workflow.yaml` by
 default. A dry run is safe and does not authorize those transfers:
 
 ```bash
-snakemake --cores 1 -n atlas_v1_release
+snakemake --profile profiles/production -n atlas_v1_release
 ```
+
+The checked-in single-host profile limits the aggregate scheduler budget to
+32 GiB RAM, 100 GiB working disk, and one heavy job at a time. It also marks
+full PLACO pair matrices and sealed conjunction-FDR `result.mat` payloads as
+temporary, so the complete 396-pair family is streamed instead of accumulated.
+Their checksums, receipts, task locks, compact result tables, logs, and
+provenance remain release inputs.
 
 After the run, validate the complete export and derive the downstream SEM input
 ledger:

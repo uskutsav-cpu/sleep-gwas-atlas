@@ -15,12 +15,14 @@ Omit `--report-only` in a release job so any incomplete gate returns a failure.
 
 ## Current state (2026-08-28)
 
-The executable acceptance audit currently passes **10/23** gates. All 108
+The executable acceptance audit currently passes **10/23** gates. All 110
 contract tests pass, every Python file compiles, every shell script parses, and
 all eight R scripts parse. The complete `atlas_v1_release` route also resolves
-as a 3,042-job pre-checkpoint dry-run, with dynamic bivariate MiXeR and later
-families expanded only after their immutable manifests exist. The repository
-contains no tracked working-tree changes at this checkpoint.
+as a 3,438-job pre-checkpoint dry-run, with dynamic bivariate MiXeR and later
+families expanded only after their immutable manifests exist. The checked-in
+production profile budgets 32 GiB RAM, 100 GiB working disk, and one heavy job
+at a time. Full PLACO pair joins and checksum-sealed conjunction-FDR MAT files
+are streamed temporary intermediates rather than a 396-file retained family.
 
 | Gate | State | Current evidence or blocker |
 |---|---|---|
@@ -57,7 +59,10 @@ MetaXcan package payloads, dynamic QTL queries, harmonized dense outputs,
 intermediate matrices, and final result artifacts. Because LAVA archives and extracted reference files coexist,
 the 35 GiB single-job floor is not a safe whole-project allocation; an x86_64
 host with at least 32 GiB RAM, MATLAB, and at least 100 GiB free is the
-conservative production handoff target.
+conservative production handoff target. That estimate assumes the checked-in
+production profile and its temporary-intermediate eviction; retaining all
+396 PLACO joins or all upstream conjunction-FDR MAT workspaces would require
+substantially more storage and is not the supported execution plan.
 
 The immediate critical path is to build the sealed genome-wide identity map and
 create the 16 full-resolution canonical GWAS on that host, then run

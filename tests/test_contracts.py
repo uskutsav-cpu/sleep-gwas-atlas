@@ -1755,6 +1755,8 @@ class PanelContractTests(unittest.TestCase):
     def test_release_workflow_routes_every_terminal_module_and_keeps_transfers_opt_in(self):
         workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
         config = (ROOT / "config/workflow.yaml").read_text(encoding="utf-8")
+        profile = (ROOT / "profiles/production/config.yaml").read_text(encoding="utf-8")
+        release_builder = (ROOT / "scripts/54_build_release.py").read_text(encoding="utf-8")
         for rule in (
             "lava_reference", "lava", "mixer_reference_seal", "mixer_container",
             "mixer_inputs", "mixer_univariate_replicate", "mixer_univariate_combine",
@@ -1778,6 +1780,11 @@ class PanelContractTests(unittest.TestCase):
         ):
             self.assertIn(f"{flag}: false", config)
             self.assertIn(f'config.get("{flag}", False)', workflow)
+        for resource in ("mem_mb: 32768", "disk_mb: 102400", "heavy_jobs: 1"):
+            self.assertIn(resource, profile)
+        self.assertIn('"profiles/"', release_builder)
+        self.assertEqual(workflow.count("mem_mb=32768"), 4)
+        self.assertGreaterEqual(workflow.count("heavy_jobs=1"), 12)
 
     def test_mixer_input_conversion_is_atomic_and_deterministic(self):
         spec = importlib.util.spec_from_file_location(
@@ -2135,6 +2142,58 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("pleiotropy_contract.validate_runtime(root)", runtime)
         self.assertIn("immutable conjunction-FDR result family already exists", runtime)
 
+    def test_conjfdr_result_receipt_survives_safe_mat_eviction(self):
+        module = load_numbered_script(
+            "49_seal_conjfdr_result.py", "conjfdr_result_receipt"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pair_id = "sleep__disease"
+            task_dir = root / "results/pleiotropy/conjfdr_tasks"
+            result_dir = root / f"results/pleiotropy/conjfdr/{pair_id}"
+            task_dir.mkdir(parents=True)
+            result_dir.mkdir(parents=True)
+            task_path = task_dir / f"{pair_id}.tsv"
+            lock_path = task_dir / f"{pair_id}.lock.tsv"
+            completion_path = result_dir / "atlas_completion.tsv"
+            result_mat = result_dir / "result.mat"
+            result_mat.write_bytes(b"MATLAB fixture payload\n")
+            task_path.write_text(
+                "analysis_id\tpair_id\tresult_mat\n"
+                f"TEST-PLEIO\t{pair_id}\t"
+                f"results/pleiotropy/conjfdr/{pair_id}/result.mat\n",
+                encoding="utf-8",
+            )
+            task_sha256 = hashlib.sha256(task_path.read_bytes()).hexdigest()
+            lock_path.write_text(
+                "schema_version\tpair_id\ttask_sha256\n"
+                f"sleep-atlas-conjfdr-task.1\t{pair_id}\t{task_sha256}\n",
+                encoding="utf-8",
+            )
+            result_sha256 = hashlib.sha256(result_mat.read_bytes()).hexdigest()
+            completion_path.write_text(
+                "pair_id\tanalysis_status\ttask_sha256\tresult_mat_sha256\n"
+                f"{pair_id}\tCONJFDR_COMPLETE\t{task_sha256}\t{result_sha256}\n",
+                encoding="utf-8",
+            )
+            receipt_path, receipt = module.build_receipt(root, pair_id)
+            module.atomic_json(receipt_path, receipt)
+            self.assertEqual(
+                module.validate_receipt(root, pair_id, require_mat=True), receipt
+            )
+            result_mat.unlink()
+            self.assertEqual(
+                module.validate_receipt(root, pair_id, require_mat=False), receipt
+            )
+            completion_path.write_text(
+                completion_path.read_text(encoding="utf-8").replace(
+                    "CONJFDR_COMPLETE", "BROKEN"
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(SystemExit, "receipt chain drifted"):
+                module.validate_receipt(root, pair_id, require_mat=False)
+
     def test_pleiotropy_collator_requires_all_pairs_and_same_block_consensus(self):
         collator = (ROOT / "scripts" / "50_collate_pleiotropy.py").read_text(
             encoding="utf-8"
@@ -2151,13 +2210,63 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn("rehash_reference=True", collator)
         self.assertIn('"schema_version": "sleep-atlas-pleiotropic-loci.1"', collator)
         self.assertIn("conjfdr_result_mat", collator)
+        self.assertIn("conjfdr_result_mat_receipt", collator)
+        self.assertIn("validate_conjfdr_result_identity", collator)
+        self.assertIn('pair_provenance.get("output_sha256") != bound_sha256', collator)
+        self.assertIn('placo_summary.get("input_sha256") != bound_sha256', collator)
+        self.assertIn('pair_provenance.get("source_sha256") != expected_source_hashes', collator)
+        self.assertNotIn('placo_task.get("pair_input_sha256") != digest(pair_path)', collator)
         self.assertIn("immutable canonical pleiotropy publication already exists", collator)
         self.assertIn('"--validate-only", "--quiet"', acceptance)
         self.assertIn('396 locked PLACO+/conjunction-FDR pair scans', acceptance)
         workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
         self.assertIn("rule placo_pair:", workflow)
         self.assertIn("rule conjfdr_pair:", workflow)
+        self.assertIn("rule conjfdr_result_receipt:", workflow)
         self.assertIn("rule pleiotropy:", workflow)
+        self.assertIn('pair=temp("results/pleiotropy/inputs/{pair_id}.tsv.gz")', workflow)
+        self.assertIn('result_mat=temp("results/pleiotropy/conjfdr/{pair_id}/result.mat")', workflow)
+        self.assertIn('conjfdr_receipts=expand("results/pleiotropy/conjfdr/', workflow)
+        self.assertNotIn('pair_inputs=expand("results/pleiotropy/inputs/', workflow)
+
+    def test_pleiotropy_collator_accepts_evicted_pair_only_with_complete_hash_chain(self):
+        module = load_numbered_script("50_collate_pleiotropy.py", "pleiotropy_temp_pair")
+        pair_hash, manifest_hash, policy_hash = "a" * 64, "b" * 64, "c" * 64
+        source_hashes = ["d" * 64, "e" * 64]
+        pair_manifest = {
+            "sleep_sumstats": "data/sleep.tsv.gz",
+            "non_sleep_sumstats": "data/disease.tsv.gz",
+            "sleep_sumstats_sha256": source_hashes[0],
+            "non_sleep_sumstats_sha256": source_hashes[1],
+        }
+        provenance = {
+            "pair_id": "sleep__disease",
+            "output": "results/pleiotropy/inputs/sleep__disease.tsv.gz",
+            "output_sha256": pair_hash,
+            "source_files": ["data/sleep.tsv.gz", "data/disease.tsv.gz"],
+            "source_sha256": source_hashes,
+            "manifest_sha256": manifest_hash,
+            "policy_sha256": policy_hash,
+            "alignment_counts": {"written": 123},
+        }
+        task = {
+            "pair_input": provenance["output"],
+            "pair_input_sha256": pair_hash,
+            "pair_input_rows": "123",
+        }
+        summary = {"input_sha256": pair_hash}
+        self.assertEqual(
+            module.validate_placo_input_identity(
+                "sleep__disease", provenance["output"], pair_manifest,
+                provenance, task, summary, manifest_hash, policy_hash, None,
+            ),
+            (pair_hash, 123),
+        )
+        with self.assertRaisesRegex(SystemExit, "identity chain drifted"):
+            module.validate_placo_input_identity(
+                "sleep__disease", provenance["output"], pair_manifest,
+                provenance, task, summary, manifest_hash, policy_hash, "f" * 64,
+            )
 
     def test_downstream_policy_and_atlas_core_are_locked_without_placeholders(self):
         policy = json.loads(

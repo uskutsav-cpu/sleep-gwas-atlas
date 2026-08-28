@@ -1,0 +1,17 @@
+# Single-host production scheduler for the locked atlas-v1.0 DAG.
+# The host preflights remain authoritative; these tokens prevent Snakemake from
+# concurrently launching jobs whose combined working sets exceed the documented
+# 32 GiB RAM / 100 GiB free-space handoff floor.
+cores: 16
+max-threads: 16
+resources:
+  mem_mb: 32768
+  disk_mb: 102400
+  heavy_jobs: 1
+default-resources:
+  mem_mb: 2048
+  disk_mb: 2048
+  heavy_jobs: 0
+latency-wait: 60
+rerun-incomplete: true
+printshellcmds: true

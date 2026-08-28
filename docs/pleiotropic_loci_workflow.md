@@ -104,20 +104,27 @@ python3 scripts/48_prepare_conjfdr_task.py insomnia__bmi
 python3 scripts/49_run_conjfdr_pair.py \
   results/pleiotropy/conjfdr_tasks/insomnia__bmi.tsv \
   results/pleiotropy/conjfdr_tasks/insomnia__bmi.lock.tsv --execute
+python3 scripts/49_seal_conjfdr_result.py insomnia__bmi
 ```
 
 The runner copies the clean pinned checkout into ignored scratch space and
 applies the checksum-locked one-line option patch that enables upstream's
 Mahalanobis sample-overlap correction. It refuses experimental Octave, less
 than 16 GiB RAM, less than 20 GiB free disk, drifted inputs, or execution
-without `--execute`.
+without `--execute`. The third command records the exact byte count and SHA-256
+of the upstream genome-wide `result.mat`, binds it to the task lock and
+completion record, and writes an immutable receipt. Snakemake runs that sealer
+automatically before treating the large MAT payload as evictable.
 
 Once the exact PLACO+ source, clean pleioFDR commit, variant template, and LD
 reference are all present, setup hashes the complete family once and writes
 `ref/pleiofdr/runtime.provenance.json`. Pair tasks verify that immutable seal
 and live reference size instead of rereading 2.22 GiB for every array job. The
 final collator rehashes the LD reference once before publication and validates
-every PLACO+ task, conjunction-FDR task, returned CSV/MAT/log, and runner hash.
+every PLACO+ task, conjunction-FDR task, returned CSV/log, MAT receipt, and
+runner hash. If a temporary MAT is still present it is rehashed and byte-checked
+against the receipt; if it has already been evicted, the complete immutable
+task/completion/receipt hash chain is required.
 
 After all 396 pair completions exist, the only canonical publisher is:
 
@@ -135,6 +142,26 @@ immutable and include checksums for the full 396-pair returned-artifact family.
 The equivalent opt-in Snakemake targets are `placo_pair`, `conjfdr_pair`, and
 `pleiotropy`. They are intentionally outside the default `all` target because
 they materialize large files and launch production-scale computation.
+
+The production DAG does not retain all 396 full-resolution pair joins. Each
+compressed PLACO pair matrix is a temporary dependency of its PLACO task and
+scan; after those consumers finish, Snakemake may remove it while retaining its
+source-bound provenance and the PLACO task/result checksums. Likewise, each
+upstream conjunction-FDR `result.mat` becomes temporary only after its durable
+receipt is written. Compact all-hit/locus CSVs, MATLAB logs, completion records,
+task locks, and receipts remain. The terminal collator explicitly supports this
+post-eviction state and fails if any link in either checksum chain is absent or
+inconsistent.
+
+For the complete family, use the checked-in bounded scheduler profile:
+
+```bash
+snakemake --profile profiles/production pleiotropy
+```
+
+It admits no more than one declared heavy job at a time under a 32 GiB RAM and
+100 GiB disk token budget. Individual runtime preflights and immutable input
+contracts remain authoritative; the scheduler budget does not waive them.
 
 The terminal `pleiotropy` target resolves the pinned software, template, and
 LD-reference runtime first. Those three acquisitions have independent,
