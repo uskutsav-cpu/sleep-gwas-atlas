@@ -1062,12 +1062,18 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(ledger["source_rows"], 3)
         self.assertEqual(ledger["retained_rows"], 2)
 
-    def test_hm3_prefilter_plan_is_exactly_the_three_glgc_traits(self):
+    def test_hm3_prefilter_plan_is_exactly_the_registered_large_traits(self):
         with (ROOT / "config" / "hm3_prefilter_plans.tsv").open(
             newline="", encoding="utf-8"
         ) as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
-        self.assertEqual({row["trait_id"] for row in rows}, {"ldl", "hdl", "triglycerides"})
+        self.assertEqual(
+            {row["trait_id"] for row in rows},
+            {
+                "ldl", "hdl", "triglycerides", "ms", "asthma", "t2d",
+                "cad", "telomere_length", "melanoma",
+            },
+        )
         self.assertTrue(all(row["strategy"] == "HAPMAP3_RSID_ALLOWLIST" for row in rows))
 
     def test_retained_prefilter_binds_removed_raw_to_registry(self):
