@@ -56,6 +56,9 @@ PCHIC_SOURCE_PATHS = [component["path"] for component in PCHIC_SOURCE_BUNDLE["co
 with open(INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"], encoding="utf-8") as handle:
     FUMA_SOURCE_BUNDLE = json.load(handle)
 FUMA_SOURCE_PATHS = [component["path"] for component in FUMA_SOURCE_BUNDLE["components"]]
+with open(INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"], encoding="utf-8") as handle:
+    CATLAS_SOURCE_BUNDLE = json.load(handle)
+CATLAS_SOURCE_PATHS = [component["path"] for component in CATLAS_SOURCE_BUNDLE["components"]]
 FUMA_MATRIX_PATHS = [
     f"{INTERPRETATION_SPEC['fuma_scrna']['matrix_cache_dir']}/{dataset['dataset_id']}.txt"
     for dataset in FUMA_SOURCE_BUNDLE["datasets"]
@@ -825,11 +828,13 @@ rule interpretation_preflight:
             INTERPRETATION_SPEC["abc_2021"]["component_manifest"],
             INTERPRETATION_SPEC["pchic_2016"]["component_manifest"],
             INTERPRETATION_SPEC["fuma_scrna"]["component_manifest"],
+            INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"],
             INTERPRETATION_SPEC["public_pathway_sources"]["component_manifest"],
         ],
         source_files=(
             SCREEN_SOURCE_PATHS + HOCOMOCO_SOURCE_PATHS + ABC_SOURCE_PATHS
-            + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS + PATHWAY_SOURCE_PATHS
+            + PCHIC_SOURCE_PATHS + FUMA_SOURCE_PATHS + CATLAS_SOURCE_PATHS
+            + PATHWAY_SOURCE_PATHS
         ),
         molecular=rules.molecular_integration.output,
         traits="results/atlas/traits.tsv",
@@ -884,6 +889,44 @@ rule fuma_scrna_matrices:
         provenance=INTERPRETATION_SPEC["fuma_scrna"]["matrix_cache_provenance_path"],
     shell:
         "{PYTHON} scripts/88_materialize_fuma_resources.py --matrices"
+
+
+rule catlas_fixed_variant_universe:
+    input:
+        policy=INTERPRETATION_POLICY,
+        manifest=INTERPRETATION_SPEC["catlas_adult_v4"]["component_manifest"],
+        source=CATLAS_SOURCE_PATHS,
+        chain=INTERPRETATION_SPEC["regulatory_build_harmonization"]["chain_path"],
+        reference=[
+            INTERPRETATION_SPEC["catlas_adult_v4"]["analysis_reference_prefix"] + suffix
+            for suffix in (".bed", ".bim", ".fam", ".provenance.json")
+        ],
+        runtime=INTERPRETATION_SPEC["causal_inference"]["component_manifest"],
+    output:
+        cache=INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_path"],
+        provenance=INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_provenance_path"],
+    shell:
+        "{PYTHON} scripts/95_prepare_catlas_reference.py"
+
+
+rule catlas_trait_cache:
+    input:
+        policy=INTERPRETATION_POLICY,
+        universe=rules.catlas_fixed_variant_universe.output,
+        gwas=INTERPRETATION_SPEC["catlas_adult_v4"]["gwas_path_template"],
+    output:
+        cache=INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_path_template"],
+        provenance=INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_provenance_path_template"],
+    shell:
+        "{PYTHON} scripts/96_prepare_catlas_trait_cache.py {wildcards.trait_id}"
+
+
+rule catlas_trait_caches:
+    input:
+        expand(
+            INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_provenance_path_template"],
+            trait_id=sorted(PANEL_IDS),
+        )
 
 
 rule magma_eur_reference:
@@ -980,6 +1023,17 @@ def interpretation_task_dependencies(wildcards):
             INTERPRETATION_SPEC["fuma_scrna"]["matrix_cache_provenance_path"],
             gene_prefix + ".genes.raw", gene_prefix + ".genes.out", gene_prefix + ".log",
             f"{INTERPRETATION_SPEC['fuma_scrna']['gene_results_dir']}/{task['trait_id']}/provenance.json",
+        ]
+    if task["source_id"] == INTERPRETATION_SPEC["catlas_adult_v4"]["source_id"]:
+        return [
+            INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_path"],
+            INTERPRETATION_SPEC["catlas_adult_v4"]["variant_cache_provenance_path"],
+            INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_path_template"].format(
+                trait_id=task["trait_id"]
+            ),
+            INTERPRETATION_SPEC["catlas_adult_v4"]["trait_cache_provenance_path_template"].format(
+                trait_id=task["trait_id"]
+            ),
         ]
     if task["source_id"] == INTERPRETATION_SPEC["pchic_2016"]["source_id"]:
         if task["domain"] in set(INTERPRETATION_SPEC["pchic_2016"]["available_domains"]):

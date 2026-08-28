@@ -206,7 +206,7 @@
   "catlas_adult_v4": {
     "source_id": "SCATAC_MULTI_DOMAIN",
     "component_manifest": "config/interpretation_catlas_adult_v4.json",
-    "component_manifest_sha256": "445e3ec18c0ec495568f2348c0c3d91f3695c7585307f7cb15077cd6feead5c1",
+    "component_manifest_sha256": "89d29f44e7d2f9d62d9f6fd30f7184e254e02b63069e910b01386a686f50a655",
     "expected_selected_cells": 43,
     "selected_cells_by_domain": {
       "brain": 10,
@@ -218,8 +218,14 @@
     "analysis_reference_prefix": "work/causal_reference/g1000_eur_hm3",
     "variant_cache_path": "work/interpretation_automatic/catlas_adult_v4/fixed_variant_universe.tsv.gz",
     "variant_cache_provenance_path": "work/interpretation_automatic/catlas_adult_v4/fixed_variant_universe.provenance.json",
+    "trait_cache_path_template": "work/interpretation_automatic/catlas_adult_v4/traits/{trait_id}.tsv.gz",
+    "trait_cache_provenance_path_template": "work/interpretation_automatic/catlas_adult_v4/traits/{trait_id}.provenance.json",
+    "variant_cache_fields": ["SNP", "CHR37", "BP37", "MAF", "CHR38", "BP38", "IN_ADULT_CCRE", "CELL_TYPE_IDS"],
+    "trait_cache_fields": ["SNP", "P"],
+    "cell_type_id_prefix": "CATLAS_ADULT_V4",
     "instrument_p_threshold": 5e-8,
     "minimum_maf": 0.01,
+    "minimum_trait_variant_coverage": 0.5,
     "ld_pruning_r2": 0.1,
     "ld_pruning_window_kb": 1000,
     "multiple_testing_family": "All 43 prespecified adult CATlas cell types across four domains for one trait",

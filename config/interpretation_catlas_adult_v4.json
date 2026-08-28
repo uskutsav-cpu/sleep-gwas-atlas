@@ -94,10 +94,11 @@
   ],
   "selection_rule": "Before atlas results, retain adult primary-tissue neural, glial, immune, adipose, liver, pancreatic, endothelial, smooth-muscle, and pericyte clusters that directly represent one of the four locked domains; do not relabel or add cells after inspecting enrichment results",
   "enrichment_design": {
-    "trait_signal_rule": "P<=5e-8 among a checksum-locked, common, autosomal, MAF>=0.01, LD-pruned HapMap3 EUR variant universe",
+    "trait_signal_rule": "P<=5e-8 among the trait-present subset of a checksum-locked, common, autosomal, MAF>=0.01, LD-pruned HapMap3 EUR variant universe",
     "ld_pruning": "PLINK 1.9 --indep-pairwise 1000kb 1 0.1 on the checksum-pinned 503-sample EUR reference, performed once before trait results",
     "build_rule": "Uniquely lift the fixed GRCh37 variant universe to GRCh38 with the checksum-pinned hg19ToHg38 chain; exclude non-unique and non-autosomal mappings",
-    "background_rule": "Condition on fixed-universe variants overlapping a source cCRE marked present in adult tissues",
+    "minimum_trait_variant_coverage": "Require at least 50% of the fixed variant universe with valid trait P values, matching the independently frozen FUMA reference-overlap floor; retain the exact fraction in provenance",
+    "background_rule": "Condition on trait-present fixed-universe variants overlapping a source cCRE marked present in adult tissues; never treat an absent GWAS variant as nonsignificant",
     "cell_annotation_rule": "Overlap the source half-open cell-type-restricted GRCh38 intervals; each selected source cluster is tested without result-dependent pooling",
     "test": "one-sided hypergeometric overrepresentation",
     "effect": "observed_over_expected_overlap_ratio",

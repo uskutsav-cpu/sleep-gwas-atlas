@@ -2233,6 +2233,7 @@ class PanelContractTests(unittest.TestCase):
         design = manifest["enrichment_design"]
         self.assertEqual(spec["instrument_p_threshold"], 5e-8)
         self.assertEqual(spec["minimum_maf"], 0.01)
+        self.assertEqual(spec["minimum_trait_variant_coverage"], 0.5)
         self.assertEqual(spec["ld_pruning_r2"], 0.1)
         self.assertEqual(spec["ld_pruning_window_kb"], 1000)
         self.assertEqual(design["test"], "one-sided hypergeometric overrepresentation")
@@ -2254,6 +2255,95 @@ class PanelContractTests(unittest.TestCase):
         preflight = (ROOT / "scripts/74_interpretation_preflight.py").read_text(encoding="utf-8")
         self.assertIn("def validate_catlas_bundle", preflight)
         self.assertIn("catlas_ready, catlas_blocker, catlas_validation", preflight)
+        dispatcher = (ROOT / "scripts/76_run_interpretation_task.py").read_text(encoding="utf-8")
+        self.assertIn("97_run_catlas_task.py", dispatcher)
+        workflow = (ROOT / "Snakefile").read_text(encoding="utf-8")
+        self.assertIn("rule catlas_fixed_variant_universe:", workflow)
+        self.assertIn("rule catlas_trait_cache:", workflow)
+
+    def test_catlas_reference_annotation_uses_half_open_adult_intervals(self):
+        module = load_numbered_script("95_prepare_catlas_reference.py", "catlas_reference")
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            ccre = temporary_path / "ccre.tsv.gz"
+            with gzip.open(ccre, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(
+                    "#Chromosome\tStart\tEnd\tClass\tPresent in fetal tissues\t"
+                    "Present in adult tissues\tCRE module\n"
+                    "chr1\t99\t102\tDistal\tno\tyes\t1\n"
+                    "chr1\t102\t104\tDistal\tyes\tno\t1\n"
+                )
+            peaks = temporary_path / "peaks.zip"
+            member = "2E_Cell_type_restricted_peaks/A.bed.gz"
+            with zipfile.ZipFile(peaks, "w") as archive:
+                archive.writestr(member, gzip.compress(b"chr1\t99\t102\n", mtime=0))
+            selected = [{"metadata_cell_type": "Cell A", "archive_member": member}]
+            adult, membership, counts = module.annotate_catlas(
+                ccre, peaks, selected, {"rs1": (1, 100), "rs2": (1, 103)}, "CATLAS_TEST",
+            )
+        self.assertEqual(adult, {"rs1"})
+        self.assertEqual(membership["rs1"], {"CATLAS_TEST::Cell A"})
+        self.assertEqual(membership["rs2"], set())
+        self.assertEqual(counts, {"CATLAS_TEST::Cell A": 1})
+
+    def test_catlas_trait_cache_and_enrichment_retain_complete_null_cells(self):
+        trait_module = load_numbered_script("96_prepare_catlas_trait_cache.py", "catlas_trait")
+        task_module = load_numbered_script("97_run_catlas_task.py", "catlas_task")
+        with tempfile.TemporaryDirectory() as temporary:
+            gwas = Path(temporary) / "trait.tsv.gz"
+            with gzip.open(gwas, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(
+                    "SNP\tCHR\tBP\tP\n"
+                    "rs3\t1\t300\t0.5\n"
+                    "rs1\t1\t100\t1e-9\n"
+                    "outside\t1\t999\t0.2\n"
+                    "rs2\t1\t200\t0.8\n"
+                    "rs4\t1\t401\t0.2\n"
+                )
+            trait_rows, counts = trait_module.materialize_trait(
+                gwas, ["rs1", "rs2", "rs3", "rs4"],
+                {"rs1": (1, 100), "rs2": (1, 200), "rs3": (1, 300), "rs4": (1, 400)},
+            )
+        self.assertEqual([row["SNP"] for row in trait_rows], ["rs1", "rs2", "rs3"])
+        self.assertEqual(counts["matched_variants"], 3)
+        self.assertEqual(counts["coordinate_mismatch_variants"], 1)
+
+        policy = json.loads((ROOT / "config/interpretation_analysis_policy.json").read_text(encoding="utf-8"))
+        policy = json.loads(json.dumps(policy))
+        policy["catlas_adult_v4"]["selected_cells_by_domain"]["brain"] = 2
+        source_manifest = {"selected_cells": [
+            {
+                "domain": "brain", "cell_type": "Cell A", "tissue": "brain",
+                "metadata_cell_type": "Cell A",
+            },
+            {
+                "domain": "brain", "cell_type": "Cell B", "tissue": "brain",
+                "metadata_cell_type": "Cell B",
+            },
+        ]}
+        task = {
+            "domain": "brain", "trait_id": "trait", "method": "scATAC_enrichment",
+            "source_id": "SCATAC_MULTI_DOMAIN", "source_release": "TEST",
+        }
+        universe_rows = [
+            {"SNP": "rs1", "IN_ADULT_CCRE": "1", "CELL_TYPE_IDS": "CATLAS_ADULT_V4::Cell A"},
+            {"SNP": "rs2", "IN_ADULT_CCRE": "1", "CELL_TYPE_IDS": "CATLAS_ADULT_V4::Cell B"},
+            {"SNP": "rs3", "IN_ADULT_CCRE": "1", "CELL_TYPE_IDS": "CATLAS_ADULT_V4::Cell A;CATLAS_ADULT_V4::Cell B"},
+            {"SNP": "rs4", "IN_ADULT_CCRE": "0", "CELL_TYPE_IDS": "CATLAS_ADULT_V4::Cell A"},
+        ]
+        rows, result_counts = task_module.compute_enrichment_rows(
+            policy, source_manifest, task, universe_rows,
+            [*trait_rows, {"SNP": "rs4", "P": "1e-12"}],
+        )
+        self.assertEqual(len(rows), 2)
+        self.assertAlmostEqual(float(rows[0]["effect"]), 1.5)
+        self.assertAlmostEqual(float(rows[0]["p_value"]), 2 / 3)
+        self.assertEqual(rows[1]["effect"], "0")
+        self.assertEqual(rows[1]["p_value"], "1")
+        self.assertTrue(all(row["fdr"] == "NA" and row["se"] == "NA" for row in rows))
+        self.assertTrue(all(list(row) == policy["cell_types"]["canonical_fields"] for row in rows))
+        self.assertEqual(result_counts["adult_ccre_background_variants"], 3)
+        self.assertEqual(result_counts["genome_wide_significant_background_variants"], 1)
 
     def test_magma_pvalue_materializer_and_gsa_parser_are_fail_closed(self):
         gene_module = load_numbered_script("90_prepare_magma_gene_results.py", "magma_genes")

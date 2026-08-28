@@ -82,10 +82,21 @@ cell types were selected before enrichment results: 10 brain, 9 immune, 9
 metabolic, and 15 vascular. For each trait, a one-sided hypergeometric test
 compares genome-wide-significant variants with a fixed common, autosomal,
 MAF-at-least-0.01, LD-pruned HapMap3 EUR universe, conditioning the background
-on adult cCRE overlap. The GRCh37 reference variants are uniquely lifted to
-GRCh38 before interval overlap, zero-signal families are retained, and BH is
-applied across all 43 cells per trait. This coarse annotation cannot establish
-that a cell type, element, variant, or nearby gene is causal.
+on adult cCRE overlap. Each trait must cover at least 50% of that fixed universe,
+matching the independently frozen FUMA reference-overlap floor; only variants
+with valid trait P values enter its analyzable background, so absence is never
+treated as a null association. The GRCh37 reference variants are uniquely
+lifted to GRCh38 before interval overlap, zero-signal families are retained,
+and BH is applied across all 43 cells per trait. This coarse annotation cannot
+establish that a cell type, element, variant, or nearby gene is causal.
+
+The current local production cache contains 72,394 uniquely lifted variants
+after LD pruning, including 12,585 variants in the adult-cCRE background. All
+43 cell types have nonzero fixed-reference overlap. Checksum-bound trait caches
+are complete for 45/45 traits; coverage ranges from 64.7% to 99.8%. Two
+coordinate-discordant telomere-length rsIDs were conservatively excluded and
+recorded. Enrichment results remain intentionally uncomputed until the complete
+interpretation task family can receive its pre-result lock.
 
 Cell-type and pathway P values receive BH correction within their frozen test
 families. Only FDR-supported rows enter those two canonical evidence tables.

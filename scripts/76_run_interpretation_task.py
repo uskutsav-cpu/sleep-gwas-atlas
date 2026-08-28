@@ -42,13 +42,15 @@ def main() -> int:
         automatic_sources = {
             policy["promoter_mapping"]["source_id"], policy["hocomoco_v14"]["source_id"],
             policy["abc_2021"]["source_id"], policy["pchic_2016"]["source_id"],
-            policy["fuma_scrna"]["source_id"],
+            policy["fuma_scrna"]["source_id"], policy["catlas_adult_v4"]["source_id"],
             *policy["screen_registry_v4"]["source_ids"], *public_pathway_sources,
         }
         automatic_family = (
             task["analysis_family"] == "regulatory"
             or task["analysis_family"] == "cell_type"
-            and task["source_id"] == policy["fuma_scrna"]["source_id"]
+            and task["source_id"] in {
+                policy["fuma_scrna"]["source_id"], policy["catlas_adult_v4"]["source_id"],
+            }
             or task["analysis_family"] == "pathway"
             and task["source_id"] in public_pathway_sources
         )
@@ -65,6 +67,7 @@ def main() -> int:
             policy["abc_2021"]["source_id"]: "85_run_abc_task.py",
             policy["pchic_2016"]["source_id"]: "87_run_pchic_task.py",
             policy["fuma_scrna"]["source_id"]: "91_run_fuma_scrna_task.py",
+            policy["catlas_adult_v4"]["source_id"]: "97_run_catlas_task.py",
             **{source_id: "92_run_pathway_task.py" for source_id in public_pathway_sources},
         }.get(task["source_id"], "82_run_regulatory_task.py")
         adapter_command = [
