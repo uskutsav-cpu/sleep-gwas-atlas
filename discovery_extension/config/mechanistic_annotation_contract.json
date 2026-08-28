@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "primary coloc-SuSiE signal pair that satisfies the locked shared-signal rule at p12=1e-5 and remains prior-robust across the full p12 grid",
+  "selection_timing": "after fine-mapping/colocalization but before mechanistic source searches",
+  "required_search_tasks_per_signal": [
+    "MOLECULAR_QTL",
+    "VARIANT_REGULATORY_ELEMENT",
+    "REGULATORY_ELEMENT_TARGET_GENE",
+    "TISSUE_CELL_EXPRESSION",
+    "CELL_STATE_ACCESSIBILITY",
+    "PATHWAY",
+    "MODEL_SYSTEM_PERTURBATION"
+  ],
+  "source_policy": {
+    "registry": "config/mechanistic_sources.tsv",
+    "exact_release_required": true,
+    "exact_accession_or_dataset_required": true,
+    "local_query_or_result_snapshot_required": true,
+    "snapshot_sha256_required": true,
+    "access_date_required": true,
+    "license_or_access_terms_required": true,
+    "primary_source_citation_required_for_supported_evidence": true,
+    "landing_page_alone_is_not_evidence": true
+  },
+  "allowed_search_outcomes": ["SUPPORTED", "NO_EVIDENCE_FOUND", "ACCESS_BLOCKED", "NOT_APPLICABLE"],
+  "supported_evidence_requirements": [
+    "stable variant/regulatory-element/gene/cell/pathway or perturbation identifier as applicable",
+    "exact source dataset or accession and release",
+    "local source snapshot and SHA-256",
+    "direction and quantitative metric when the source reports them",
+    "context and species",
+    "explicit caveat and claim boundary"
+  ],
+  "evidence_order": [
+    "REPLICATED_HUMAN_GENETICS",
+    "COLOCALIZED_MOLECULAR_QTL",
+    "FINE_MAPPED_REGULATORY_EVIDENCE",
+    "TISSUE_CELL_EXPRESSION_OR_ENRICHMENT",
+    "PATHWAY_OR_NETWORK_ANNOTATION",
+    "MODEL_SYSTEM_OR_PERTURBATION_EVIDENCE"
+  ],
+  "chain_nodes": [
+    "SLEEP_TRAIT",
+    "SHARED_SIGNAL_MODEL",
+    "CREDIBLE_VARIANT",
+    "REGULATORY_ELEMENT",
+    "TARGET_GENE",
+    "CELL_TYPE_OR_STATE",
+    "PATHWAY",
+    "EXTERNAL_PHENOTYPE"
+  ],
+  "chain_policy": "Every edge must cite one or more validated mechanistic evidence IDs or an explicit upstream fine-mapping/colocalization lock identifier; missing edges remain explicit and chains may not skip unsupported biological steps.",
+  "confidence_classes": {
+    "MULTI_LAYER_HUMAN_GENETIC_SUPPORT": "replicated pair plus prior-robust molecular-QTL colocalization, fine-mapped regulatory evidence, and context-matched tissue/cell evidence for the same gene with no unresolved contradiction",
+    "COLOCALIZED_MOLECULAR_SUPPORT": "prior-robust molecular-QTL colocalization for the gene but an incomplete regulatory or cellular chain",
+    "ANNOTATION_ONLY_SUPPORT": "gene is supported only by mapping, expression, regulatory overlap, pathway, or model-system annotation without molecular-QTL colocalization",
+    "INSUFFICIENT_OR_CONFLICTING": "no supported gene-level chain or a material direction/context/source contradiction remains"
+  },
+  "canonical_outputs": {
+    "evidence": "discovery_extension/results/mechanism/mechanistic_evidence.tsv",
+    "chains": "discovery_extension/results/mechanism/mechanistic_chains.tsv",
+    "synthesis": "discovery_extension/results/mechanism/mechanistic_synthesis.tsv"
+  },
+  "claim_limit": "Mechanistic synthesis ranks evidence under explicit provenance. It does not prove that a variant, regulatory element, gene, cell state, pathway, or perturbation causally mediates either phenotype."
+}

@@ -25,11 +25,19 @@
     "warning": "variant association with both traits does not identify the type of pleiotropy, prove a shared causal variant, or establish causality"
   },
   "fine_mapping_colocalization": {
-    "required_outputs": ["locus and variant universe", "LD reference", "credible sets", "prior specification", "hypothesis posteriors", "prior sensitivity", "allele alignment QC"],
+    "detailed_contract": "config/fine_mapping_colocalization_contract.json",
+    "primary_fine_mapping_method": "SuSiE-RSS via susieR 0.14.2",
+    "primary_colocalization_method": "coloc.susie via coloc 5.2.3",
+    "canonical_output": "results/fine_mapping/fine_mapping_colocalization.tsv",
+    "required_comparisons": ["trait to trait", "trait to eQTL", "trait to sQTL", "trait to pQTL"],
+    "required_outputs": ["locus and dense variant universe", "signed LD reference and exact SNP order", "posterior inclusion probabilities", "independent signals", "credible sets and purity", "explicit H0-H4 posteriors", "prior specification", "prior sensitivity", "allele alignment and LD-summary diagnostics"],
     "warning": "colocalization supports a shared signal model but does not prove a causal gene or pathway"
   },
   "mechanistic_annotation": {
+    "detailed_contract": "config/mechanistic_annotation_contract.json",
+    "source_registry": "config/mechanistic_sources.tsv",
     "evidence_order": ["replicated human genetics", "colocalized molecular QTL", "fine-mapped regulatory evidence", "tissue/cell enrichment", "pathway annotation", "model-system evidence"],
+    "canonical_outputs": ["results/mechanism/mechanistic_evidence.tsv", "results/mechanism/mechanistic_chains.tsv", "results/mechanism/mechanistic_synthesis.tsv"],
     "required_language": "rank evidence and preserve uncertainty; do not promote annotation into causal proof"
   }
 }

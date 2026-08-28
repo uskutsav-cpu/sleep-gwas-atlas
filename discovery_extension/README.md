@@ -163,6 +163,66 @@ statistical-pleiotropy-only claim guard. The real source functions and the
 end-to-end lock/runner/collator path are exercised under
 `synthetic/test_pleiotropy_contract.py`.
 
+The fine-mapping and colocalization layer is executable and independently
+input-gated. `32_fetch_finemapping_sources.sh` retrieves the two exact source
+archives and verifies their SHA-256 values (with `--install`, it installs them
+into the already bootstrapped repository R library). `32_finemapping_preflight.py`
+then verifies the locked archives and runtime entrypoints for susieR 0.14.2 and
+coloc 5.2.3.
+Exact primary-method and optional-sensitivity citations are recorded in
+`config/fine_mapping_method_references.tsv`.
+`33_prepare_finemapping_queue.py` selects at most 25 of the strongest
+independently replicated Tier B pleiotropic loci using upstream evidence only,
+then freezes the locus family before any fine-mapping or molecular-QTL source
+curation. `34_lock_finemapping_manifest.py` requires dense, coordinate- and
+effect-allele-identical locus summaries, a checksum-locked signed LD matrix and
+SNP order, quantitative/case-control sample metadata, and completed eQTL,
+sQTL, and pQTL searches. Evidence-backed `NO_SUITABLE_DATASET` search outcomes
+remain in the locked family.
+
+`35_run_susie_coloc.R` reports per-variant PIPs, independent credible sets and
+purity, RSS-LD inconsistency and kriging allele-switch diagnostics, complete
+H0-H4 posteriors, and variant-level H4 posteriors across the locked p12 grid.
+`coloc.susie` is primary when both datasets yield credible sets; `coloc.abf`
+is available only as a pre-justified single-signal fallback. Flat-prior
+SuSiE-RSS is primary; checksum-locked PolyFun weights and FINEMAP are permitted
+only as separately justified sensitivities. `36_collate_finemapping_coloc.py`
+validates the exact comparison/prior family and labels shared-signal support,
+distinct-signal support, QC-withheld inference, failures, and unavailable QTLs
+without causal overclaim. The complete lock/run/collation path is exercised
+under `synthetic/test_finemapping_colocalization_contract.py`; no synthetic
+row is written to a real result path.
+
+Mechanistic annotation is a provenance-constrained evidence synthesis, not a
+gene-nomination shortcut. `config/mechanistic_sources.tsv` records verified
+official search routes for GTEx, eQTL Catalogue, the unified Open Targets
+Platform, PsychENCODE, ENCODE/SCREEN, Single Cell Expression Atlas, GWAS
+Catalog molecular-QTL discovery, Reactome, and accession-level functional
+studies. Every registry row remains `RESULT_DEPENDENT_NOT_LOCKED`: a landing
+page is never evidence. `37_mechanism_preflight.py` validates that boundary.
+
+`38_prepare_mechanism_queue.py` freezes all prior-robust primary coloc-SuSiE
+signal pairs and seven evidence searches before source access. Curated evidence
+then must pass `39_validate_mechanistic_evidence.py`, which requires an exact
+release/accession, local query or result snapshot, SHA-256, access date,
+license/terms, context, caveat, and (for supported evidence) a primary-source
+citation. `40_synthesize_mechanisms.py` emits the validated evidence ledger,
+an edge-by-edge mechanistic graph, and a ranked noncausal synthesis. Required
+sleep trait → shared signal → credible variant → regulatory element → target
+gene → cell state → pathway → external phenotype edges without evidence are
+written as `MISSING`; they are never silently bridged. The isolated synthetic
+test `synthetic/test_mechanistic_annotation_contract.py` deliberately leaves
+two such edges missing and verifies that the output preserves those gaps.
+
+`41_adversarial_review.py` performs the pre-result challenge audit and records
+which findings-level checks remain impossible before acquisition. Finally,
+`42_build_final_report.py` emits the Stage-17 scientific summary,
+`results/final_extension_counts.tsv`, the schema-complete
+`results/top_novel_discoveries.tsv`, and checksum-linked provenance. When real
+outputs are absent, it writes `NA_BLOCKED_UPSTREAM`, never a misleading zero.
+The current top-discoveries table is deliberately header-only: it is an empty
+reporting surface, not evidence that the executed analysis found no hits.
+
 The current acquisition preflight is deliberately fail-closed. The 100 exact
 phenotype files, their indexes, and the shared Pan-UKB variant reference total
 about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "best independently replicated priority pairs/loci selected from upstream evidence and frozen before any fine-mapping or colocalization result access",
+  "selection": {
+    "upstream_locus_source": "discovery_extension/results/pleiotropy/novel_shared_loci.tsv",
+    "maximum_loci": 25,
+    "ranking": [
+      "replication class REPLICATED",
+      "priority tier B",
+      "ascending PLACO+ locus lead P",
+      "ascending discovery FDR",
+      "descending absolute discovery rg",
+      "stable pair/locus identifiers"
+    ],
+    "result_free_source_curation": true
+  },
+  "input_contract": {
+    "build": "GRCh37",
+    "ancestry": "EUR",
+    "variant_type": "autosomal biallelic SNP",
+    "minimum_MAF": 0.01,
+    "minimum_INFO": 0.9,
+    "minimum_locus_variants": 50,
+    "required_summary_columns": ["SNP", "CHR", "BP", "A1", "A2", "BETA", "SE", "MAF", "INFO", "PRIOR_WEIGHT"],
+    "variant_universe": "both summary-statistic datasets, LD rows/columns, and the variant-order file must contain the same SNPs in the same order",
+    "allele_policy": "A1 is the effect allele in both summary-statistic datasets and the signed LD matrix; strand and effect direction must be verified before lock",
+    "sample_size_policy": "record total N and effective N separately; case-control datasets must also record case fraction",
+    "dense_data_policy": "HapMap3-only or lead-variant-only inputs are prohibited"
+  },
+  "ld_contract": {
+    "matrix": "signed Pearson genotype correlation, symmetric and positive semidefinite with unit diagonal",
+    "source_types": ["IN_SAMPLE", "HIGH_QUALITY_MATCHED_REFERENCE"],
+    "ancestry_build_match_required": true,
+    "exact_variant_order_checksum_required": true,
+    "reference_checksum_required": true,
+    "symmetry_tolerance": 1e-08,
+    "diagonal_tolerance": 1e-06,
+    "minimum_eigenvalue_tolerance": -1e-06,
+    "kriging_allele_switch_rule": "logLR > 2 and absolute z > 2",
+    "warning": "external or allele-misaligned LD can create unreliable fine-mapping signals; physical proximity is not a substitute for LD"
+  },
+  "fine_mapping": {
+    "primary_method": "SUSIE_RSS_PRIMARY",
+    "software_version": "0.14.2",
+    "maximum_causal_signals": 10,
+    "credible_set_coverage": 0.95,
+    "minimum_absolute_correlation_for_credible_set": 0.5,
+    "maximum_iterations": 1000,
+    "estimate_residual_variance": false,
+    "required_diagnostics": ["convergence", "estimated RSS-LD inconsistency s", "kriging allele-switch outliers", "credible-set purity", "LD eigenvalue and symmetry"],
+    "required_outputs": ["posterior inclusion probabilities", "credible sets", "independent signal labels", "credible-set coverage and purity", "convergence and LD diagnostics"],
+    "functional_prior_policy": "Flat-prior SuSiE-RSS is primary. PolyFun-derived per-variant prior weights may be a prespecified sensitivity only when the genome-wide annotation model, ancestry, build, source commit, and output checksum are locked before locus result access.",
+    "finemap_policy": "FINEMAP is an optional complementary sensitivity only after an explicit locus-level justification, pinned executable/version, identical variant universe and LD, and pre-result lock; it is never silently substituted for SuSiE-RSS."
+  },
+  "comparisons": {
+    "required_per_locus": ["TRAIT_TRAIT", "EQTL_SEARCH", "SQTL_SEARCH", "PQTL_SEARCH"],
+    "allowed_analysis_types": ["TRAIT_TRAIT", "SLEEP_EQTL", "EXTERNAL_EQTL", "SLEEP_SQTL", "EXTERNAL_SQTL", "SLEEP_PQTL", "EXTERNAL_PQTL"],
+    "molecular_qtl_policy": "Every eQTL, sQTL, and pQTL modality must have either one or more checksum-locked compatible analyses or an evidence-backed NO_SUITABLE_DATASET row; unavailable modalities are retained, not dropped.",
+    "context_policy": "tissue, cell type, molecular feature, phenotype definition, ancestry, build, sample size, license, and sample overlap must be recorded before result access"
+  },
+  "colocalization": {
+    "primary_method": "COLOC_SUSIE_PRIMARY",
+    "software_version": "5.2.3",
+    "primary_priors": {"p1": 0.0001, "p2": 0.0001, "p12": 0.00001},
+    "p12_sensitivity_grid": [0.000001, 0.000005, 0.00001, 0.00005],
+    "hypotheses": {
+      "H0": "neither dataset is associated in the region",
+      "H1": "dataset 1 only is associated",
+      "H2": "dataset 2 only is associated",
+      "H3": "both datasets are associated through distinct variants",
+      "H4": "both datasets are associated through a shared variant model"
+    },
+    "primary_shared_signal_rule": "PP.H4 >= 0.80 and PP.H4 / PP.H3 >= 5 at p12=1e-5, with converged fine maps, no kriging allele-switch outlier, and no LD QC failure",
+    "prior_robust_rule": "the primary shared-signal rule holds at every locked p12 sensitivity value",
+    "single_signal_fallback": "coloc.abf may be reported as COLOC_ABF_FALLBACK only when either SuSiE dataset has no credible set and the single-causal-variant assumption is explicitly justified; fallback evidence cannot be labelled multi-signal colocalization",
+    "required_outputs": ["all H0-H4 posteriors", "signal pair identifiers", "priors", "prior sensitivity", "variant-level shared-signal posterior where available", "allele and LD QC"]
+  },
+  "canonical_outputs": {
+    "fine_mapping_variants": "discovery_extension/results/fine_mapping/fine_mapping_variants.tsv",
+    "credible_sets": "discovery_extension/results/fine_mapping/credible_sets.tsv",
+    "coloc_shared_variant_posteriors": "discovery_extension/results/fine_mapping/coloc_shared_variant_posteriors.tsv",
+    "fine_mapping_colocalization": "discovery_extension/results/fine_mapping/fine_mapping_colocalization.tsv"
+  },
+  "claim_limit": "Fine-mapping PIPs and credible sets are model-based probabilities. Colocalization supports a shared-signal model under stated data, LD, and priors; it does not prove a causal variant, gene, pathway, mediation direction, or biological mechanism."
+}
