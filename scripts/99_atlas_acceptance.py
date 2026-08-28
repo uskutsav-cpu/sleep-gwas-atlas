@@ -270,6 +270,29 @@ def lava_gate(root: Path) -> Gate:
     )
 
 
+def mixer_gate(root: Path) -> Gate:
+    paths = ["results/tables/mixer_univariate.tsv", "results/tables/mixer_bivariate.tsv"]
+    missing = [path for path in paths if not real_nonempty(root / path)]
+    if missing:
+        return Gate(
+            "mixer", "BLOCKED", "",
+            "run complete 20-replicate univariate MiXeR then every eligible sleep-by-non-sleep pair; "
+            "missing real non-empty artifact(s): " + ", ".join(missing),
+        )
+    validator = root / "scripts/40_validate_mixer.py"
+    result = subprocess.run(
+        [sys.executable, str(validator), "--root", str(root), "--quiet"],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + result.stderr).strip().replace("\n", "; ")
+        return Gate("mixer", "BLOCKED", ", ".join(paths), f"MiXeR validation failed: {detail}")
+    return Gate(
+        "mixer", "PASS",
+        "45 univariate 20-replicate models + exact AIC-eligible sleep-by-non-sleep pair family", "",
+    )
+
+
 def release_gate(root: Path) -> Gate:
     release = root / "releases/atlas-v1.0"
     required = [
@@ -318,7 +341,6 @@ def build_gates(root: Path) -> list[Gate]:
         ]
     )
     artifact_specs = [
-        ("mixer", ["results/tables/mixer_univariate.tsv", "results/tables/mixer_bivariate.tsv"], "run real univariate then eligible bivariate MiXeR"),
         ("pleiotropic_loci", ["results/atlas/shared_loci.tsv"], "combine PLACO and conjunction-FDR evidence"),
         ("factor_gwas", ["results/tables/factor_gwas_summary.tsv", "results/tables/q_snp.tsv"], "run factor GWAS and Q_SNP"),
         ("fine_mapping", ["results/atlas/variants.tsv"], "fine-map priority loci with signal-specific credible sets and PIPs"),
@@ -348,6 +370,7 @@ def build_gates(root: Path) -> list[Gate]:
     ]
     gates.append(covariance_gate(root))
     gates.append(lava_gate(root))
+    gates.append(mixer_gate(root))
     gates.extend(artifact_gate(root, name, paths, purpose) for name, paths, purpose in artifact_specs)
     gates.append(genomic_sem_gate(root))
     gates.append(release_gate(root))

@@ -17,6 +17,7 @@ RSCRIPT = config["rscript"]
 EUR_LD_DIR = config["eur_ld_dir"]
 LAVA_REFERENCE_PREFIX = config["lava_reference_prefix"]
 LAVA_LOCUS_FILE = config["lava_locus_file"]
+MIXER_POLICY = config["mixer_policy"]
 SELECTED = config.get("phase0_traits", [])
 H2_SCALE = config.get("h2_scale", "liability")
 
@@ -244,3 +245,17 @@ rule lava:
     shell:
         "{RSCRIPT} scripts/33_run_lava.R && "
         "{PYTHON} scripts/34_validate_lava.py --quiet"
+
+
+rule mixer_preflight:
+    input:
+        panel=PANEL,
+        policy=MIXER_POLICY,
+        prefilters="config/hm3_prefilter_plans.tsv",
+        harmonized=expand("data/harmonized/{trait}.harmonized.tsv.gz", trait=[row["trait_id"] for row in PANEL_ROWS]),
+        qc=expand("data/harmonized/{trait}.qc.txt", trait=[row["trait_id"] for row in PANEL_ROWS]),
+    output:
+        report="results/tables/mixer_preflight.json",
+        traits="results/tables/mixer_input_readiness.tsv",
+    shell:
+        "{PYTHON} scripts/35_mixer_preflight.py --report-only"

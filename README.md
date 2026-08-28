@@ -71,6 +71,14 @@ reference requires 15 GiB uncompressed while the current volume has only about
 0.1.5 warns of local-h2 bias and type-I error inflation. See
 `docs/lava_workflow.md`.
 
+The production MiXeR workflow is also fully specified, version-pinned, and
+fail-closed. Real MiXeR cannot run on this laptop: the official container is
+Linux/amd64-only, the real-data tutorial requires at least 32 GB RAM and
+recommends 16 physical cores, the approximately 14 GB reference is absent, and
+nine LDSC inputs must be regenerated without their HapMap3 source prefilter.
+No container or reference is downloaded implicitly. See
+`docs/mixer_workflow.md`.
+
 The insomnia liability conversion uses a rounded 30% frequent-complaint
 prevalence from the primary study. The longevity liability conversion uses the
 study's phenotype-defined 10% survival-tail prevalence, while AF uses the ESC
@@ -194,6 +202,7 @@ all additional CRAN dependencies by source checksum; it extracts the official
 ```bash
 bash scripts/30_setup_lava.sh
 bash scripts/32_download_lava_reference.sh  # storage preflight only
+python3 scripts/35_mixer_preflight.py --report-only
 ```
 
 ## Snakemake workflow

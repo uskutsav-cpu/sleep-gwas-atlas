@@ -1380,6 +1380,79 @@ class PanelContractTests(unittest.TestCase):
         self.assertIn('expected_bivar', validator)
         self.assertIn('scripts/34_validate_lava.py', acceptance)
 
+    def test_mixer_policy_is_version_and_scope_locked(self):
+        policy = json.loads(
+            (ROOT / "config" / "mixer_analysis_policy.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(policy["mixer_release"], "2.2.1")
+        self.assertEqual(
+            policy["mixer_release_tag_commit"],
+            "cf65c57d5d1ad76597db1d4fa3907f1d711d39e7",
+        )
+        self.assertEqual(
+            policy["container_amd64_manifest_digest"],
+            "sha256:5bf54ddd6f7f81b93eeb5450b1a6dc809d1fcf926b3a815d6d514f36ce04f51c",
+        )
+        self.assertEqual(policy["expected_traits"], 45)
+        self.assertEqual(policy["expected_sleep_non_sleep_pairs"], 396)
+        self.assertEqual(policy["fit_replicates"], 20)
+        self.assertEqual(policy["univariate_aic_threshold"], 0)
+        self.assertIn("HapMap3-prefiltered inputs are forbidden", policy["input_requirement"])
+
+    def test_mixer_runtime_is_fail_closed_and_has_no_implicit_pull(self):
+        preflight = (ROOT / "scripts" / "35_mixer_preflight.py").read_text(encoding="utf-8")
+        prepare = (ROOT / "scripts" / "36_prepare_mixer_inputs.py").read_text(encoding="utf-8")
+        pull = (ROOT / "scripts" / "37_pull_mixer_image.sh").read_text(encoding="utf-8")
+        runtime = (ROOT / "scripts" / "38_run_mixer_task.sh").read_text(encoding="utf-8")
+        collate = (ROOT / "scripts" / "39_collate_mixer.py").read_text(encoding="utf-8")
+        validator = (ROOT / "scripts" / "40_validate_mixer.py").read_text(encoding="utf-8")
+        acceptance = (ROOT / "scripts" / "99_atlas_acceptance.py").read_text(encoding="utf-8")
+        self.assertIn('machine in policy["supported_architectures"]', preflight)
+        self.assertIn('memory_bytes >= policy["minimum_memory_bytes"]', preflight)
+        self.assertIn('physical_cores >= policy["recommended_physical_cores"]', preflight)
+        self.assertIn('prefilter == "not supplied"', preflight)
+        self.assertIn('prefilter != "not supplied"', prepare)
+        self.assertIn('if [ "$PULL" != true ]', pull)
+        self.assertNotIn("docker pull", runtime)
+        self.assertIn("for rep in $(seq 1 20)", runtime)
+        self.assertNotIn("global_rg", runtime)
+        self.assertIn('policy["univariate_aic_threshold"]', collate)
+        self.assertIn("expected_pairs", validator)
+        self.assertIn("scripts/40_validate_mixer.py", acceptance)
+
+    def test_mixer_input_conversion_is_atomic_and_deterministic(self):
+        spec = importlib.util.spec_from_file_location(
+            "mixer_prepare", ROOT / "scripts" / "36_prepare_mixer_inputs.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            source = directory / "source.tsv.gz"
+            header = "SNP\tCHR\tBP\tA1\tA2\tN\tBETA\tSE\n"
+            body = "rs1\t1\t101\tA\tG\t1000\t0.2\t0.1\nrs2\t2\t202\tC\tT\t800\t-0.3\t0.2\n"
+            with gzip.open(source, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(header + body)
+            first = directory / "first.sumstats.gz"
+            second = directory / "second.sumstats.gz"
+            metrics = module.convert(source, first)
+            module.convert(source, second)
+            self.assertEqual(metrics["rows"], 2)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            with gzip.open(first, "rt", encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(list(rows[0]), module.OUTPUT_COLUMNS)
+            self.assertEqual([float(row["Z"]) for row in rows], [2.0, -1.5])
+
+            invalid = directory / "invalid.tsv.gz"
+            with gzip.open(invalid, "wt", encoding="utf-8", newline="") as handle:
+                handle.write(header + "rs3\t3\t303\tA\tC\t900\t0.1\t0\n")
+            failed = directory / "failed.sumstats.gz"
+            with self.assertRaises(SystemExit):
+                module.convert(invalid, failed)
+            self.assertFalse(failed.exists())
+            self.assertFalse(Path(str(failed) + ".tmp").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
