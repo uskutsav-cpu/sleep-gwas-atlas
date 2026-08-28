@@ -12,6 +12,7 @@ parse_args <- function(args) {
     out_dir = "results/tables",
     log_prefix = "results/logs/genomicsem/ldsc_45_trait"
   )
+  if (length(args) == 0L) return(defaults)
   if (length(args) %% 2 != 0) {
     fail("Arguments must be supplied as --name value pairs")
   }
