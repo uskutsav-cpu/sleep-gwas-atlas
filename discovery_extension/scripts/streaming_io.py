@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import BinaryIO, Iterator, TextIO
 
 
-class DigestingReader:
+class DigestingReader(io.RawIOBase):
     """Minimal binary wrapper that hashes/counts bytes consumed by gzip.GzipFile."""
 
     def __init__(self, raw: BinaryIO):
@@ -31,11 +31,23 @@ class DigestingReader:
             self.bytes_read += len(block)
         return block
 
+    def readinto(self, buffer: bytearray | memoryview) -> int:
+        block = self.raw.read(len(buffer))
+        if not block:
+            return 0
+        self.md5.update(block)
+        self.sha256.update(block)
+        self.bytes_read += len(block)
+        buffer[: len(block)] = block
+        return len(block)
+
     def readable(self) -> bool:
         return True
 
     def close(self) -> None:
-        self.raw.close()
+        if not self.closed:
+            self.raw.close()
+        super().close()
 
 
 def _parse_expected_md5(checksum: str | None) -> str | None:
@@ -107,6 +119,7 @@ def open_verified_gzip_text(
         response_headers = {key.lower(): value for key, value in raw.headers.items()}
 
     digesting = DigestingReader(raw)
+    buffered = io.BufferedReader(digesting, buffer_size=1024 * 1024)
     receipt: dict[str, object] = {
         "source": source_label,
         "expected_md5": locked_md5,
@@ -116,7 +129,7 @@ def open_verified_gzip_text(
         "http_version_id": response_headers.get("x-amz-version-id", "NA"),
     }
     try:
-        with gzip.GzipFile(fileobj=digesting, mode="rb") as compressed:
+        with gzip.GzipFile(fileobj=buffered, mode="rb") as compressed:
             with io.TextIOWrapper(compressed, encoding="utf-8", newline="") as text:
                 yield text, receipt
         observed_md5 = digesting.md5.hexdigest()
@@ -139,4 +152,4 @@ def open_verified_gzip_text(
             )
         receipt["verification_status"] = "PASS"
     finally:
-        digesting.close()
+        buffered.close()

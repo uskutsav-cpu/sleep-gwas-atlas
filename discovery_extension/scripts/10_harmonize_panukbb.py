@@ -135,7 +135,9 @@ def main() -> None:
                 else None
             ),
         ) as (source_handle, source_receipt):
-            with gzip.open(temporary, "wt", newline="", encoding="utf-8") as destination:
+            with gzip.open(
+                temporary, "wt", newline="", encoding="utf-8", compresslevel=1
+            ) as destination:
                 reader = csv.DictReader(source_handle, delimiter="\t")
                 common = {"chr", "pos", "ref", "alt", "beta_EUR", "se_EUR", "neglog10_pval_EUR", "low_confidence_EUR"}
                 frequency = {"af_cases_EUR", "af_controls_EUR"} if binary else {"af_EUR"}
