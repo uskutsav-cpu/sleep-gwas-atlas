@@ -106,6 +106,8 @@ def main() -> None:
     )
     parser.add_argument("--keep-harmonized", action="store_true")
     parser.add_argument("--preflight-only", action="store_true")
+    parser.add_argument("--shard-count", type=int, default=1)
+    parser.add_argument("--shard-index", type=int, default=0)
     args = parser.parse_args()
 
     subprocess.run(
@@ -170,7 +172,18 @@ def main() -> None:
 
     panel_rows = read_tsv(args.panel)
     panel = {row["extension_trait_id"]: row for row in panel_rows}
-    selected = [row["extension_trait_id"] for row in panel_rows] if args.all else args.trait_id
+    if args.shard_count < 1 or not 0 <= args.shard_index < args.shard_count:
+        raise SystemExit("ERROR: require shard-count >=1 and 0 <= shard-index < shard-count")
+    if not args.all and (args.shard_count != 1 or args.shard_index != 0):
+        raise SystemExit("ERROR: sharding is permitted only with --all")
+    if args.all:
+        selected = [
+            row["extension_trait_id"]
+            for index, row in enumerate(panel_rows)
+            if index % args.shard_count == args.shard_index
+        ]
+    else:
+        selected = args.trait_id
     assert selected is not None
     missing = [trait_id for trait_id in selected if trait_id not in panel]
     if missing:
@@ -214,7 +227,8 @@ def main() -> None:
         )
     print(
         f"STREAMING_FAMILY_ACKNOWLEDGED traits={len(selected)} compressed_gib={required_gib:.6f} "
-        f"keep_harmonized={str(args.keep_harmonized).lower()}"
+        f"keep_harmonized={str(args.keep_harmonized).lower()} "
+        f"shard={args.shard_index + 1}/{args.shard_count}"
     )
     if args.preflight_only:
         print(
@@ -314,7 +328,10 @@ def main() -> None:
             f"munged_sha256={receipt['munged_output_sha256']}"
         )
 
-    print(f"STREAMING_FAMILY_PASS traits={len(selected)} compressed_gib={required_gib:.6f}")
+    print(
+        f"STREAMING_FAMILY_PASS traits={len(selected)} compressed_gib={required_gib:.6f} "
+        f"shard={args.shard_index + 1}/{args.shard_count}"
+    )
 
 
 if __name__ == "__main__":
