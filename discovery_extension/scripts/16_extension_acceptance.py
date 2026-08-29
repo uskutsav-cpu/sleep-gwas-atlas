@@ -66,13 +66,17 @@ def main() -> None:
     replication_rg_path = ROOT / "results/replication/replication_rg.tsv"
     local_path = ROOT / "results/local/local_rg_results.tsv"
     local_readiness_path = ROOT / "results/local/local_architecture_readiness.tsv"
+    local_queue_path = ROOT / "results/local/local_analysis_queue.tsv"
     pleiotropy_path = ROOT / "results/pleiotropy/novel_shared_loci.tsv"
     pleiotropy_readiness_path = ROOT / "results/pleiotropy/pleiotropy_readiness.tsv"
+    pleiotropy_queue_path = ROOT / "results/pleiotropy/pleiotropy_input_queue.tsv"
+    pleiotropy_candidate_lock_path = ROOT / "config/pleiotropy_candidate_family.lock.json"
     fine_mapping_path = ROOT / "results/fine_mapping/fine_mapping_colocalization.tsv"
     fine_mapping_readiness_path = ROOT / "results/fine_mapping/fine_mapping_readiness.tsv"
     mechanism_path = ROOT / "results/mechanism/mechanistic_synthesis.tsv"
     mechanism_readiness_path = ROOT / "results/mechanism/mechanism_readiness.tsv"
     adversarial_review_path = ROOT / "adversarial_review.md"
+    adversarial_provenance_path = ROOT / "provenance/adversarial_review.json"
     final_report_path = ROOT / "final_report.md"
     final_counts_path = ROOT / "results/final_extension_counts.tsv"
     top_discoveries_path = ROOT / "results/top_novel_discoveries.tsv"
@@ -311,6 +315,12 @@ def main() -> None:
         pleiotropy_gate_status = "PLEIOTROPY_ARTIFACT_PRESENT"
     elif pleiotropy_inputs_ready:
         pleiotropy_gate_status = "CODE_AND_INPUTS_READY_PAIR_MANIFEST_BLOCKED"
+    elif (
+        pleiotropy_code_ready and pleiotropy_queue_path.is_file()
+        and pleiotropy_candidate_lock_path.is_file()
+        and len(read_tsv(pleiotropy_queue_path)) == replication_counts.get("REPLICATED", 0) == 23
+    ):
+        pleiotropy_gate_status = "CODE_READY_23_REPLICATED_PAIRS_LOCKED_DENSE_INPUTS_AND_LD_BLOCKED"
     elif pleiotropy_code_ready:
         pleiotropy_gate_status = "CODE_READY_UPSTREAM_DISCOVERY_REPLICATION_AND_DENSE_INPUTS_BLOCKED"
     else:
@@ -419,29 +429,34 @@ def main() -> None:
         (11, "Independent replication", replication_gate_status,
          artifact_state(replication_path) + ";h2=" + artifact_state(replication_h2_path) + ";rg=" + artifact_state(replication_rg_path) + ";queue=" + artifact_state(replication_queue_path) + ";search=" + artifact_state(replication_search_path) + ";candidate_lock=" + artifact_state(replication_candidate_lock_path) + ";manifest_lock=" + artifact_state(replication_manifest_lock_path) + ";protocol=config/replication_contract.json", "Same-cohort internal splits cannot satisfy the independent-replication gate."),
         (12, "Local genetic correlation", local_gate_status,
-         artifact_state(local_path) + ";readiness=" + artifact_state(local_readiness_path) + ";protocol=config/local_architecture_contract.json",
-         "Pinned LAVA/HDL-L code passes runtime checks, but source-verified LD references and dense inputs are absent; global rg is not local sharing."),
+         artifact_state(local_path) + ";readiness=" + artifact_state(local_readiness_path) + ";queue=" + artifact_state(local_queue_path) + ";protocol=config/local_architecture_contract.json",
+         "A result-free 217-priority/597-global-null queue is preserved. Pinned LAVA/HDL-L code passes, but source-verified LD references and dense inputs are absent; global rg is not local sharing."),
         (13, "Pleiotropy analysis", pleiotropy_gate_status,
-         artifact_state(pleiotropy_path) + ";readiness=" + artifact_state(pleiotropy_readiness_path) + ";protocol=config/pleiotropy_contract.json",
-         "Pinned PLACO+ code passes, but replicated pair selection and genome-wide dense inputs are absent; statistical pleiotropy is not a shared causal variant."),
+         artifact_state(pleiotropy_path) + ";readiness=" + artifact_state(pleiotropy_readiness_path) + ";queue=" + artifact_state(pleiotropy_queue_path) + ";candidate_lock=" + artifact_state(pleiotropy_candidate_lock_path) + ";protocol=config/pleiotropy_contract.json",
+         "Pinned PLACO+ code passes and the 23 replicated-pair family is pre-result locked, but genome-wide MAF/INFO-complete inputs and clumping LD are absent; statistical pleiotropy would not prove a shared causal variant."),
         (14, "Fine-mapping and colocalization", fine_mapping_gate_status,
          artifact_state(fine_mapping_path) + ";readiness=" + artifact_state(fine_mapping_readiness_path) + ";protocol=config/fine_mapping_colocalization_contract.json",
          "Pinned SuSiE-RSS/coloc-SuSiE code passes an end-to-end synthetic lock/run/collation test; real dense loci, signed LD, and molecular-QTL sources are absent."),
         (15, "Mechanistic annotation", mechanism_gate_status,
          artifact_state(mechanism_path) + ";readiness=" + artifact_state(mechanism_readiness_path) + ";protocol=config/mechanistic_annotation_contract.json",
          "A source-snapshotted evidence/graph/synthesis workflow passes synthetic tests; real signal-specific releases, accessions, evidence, and citations remain unavailable."),
-        (16, "Adversarial review", "PRE_RESULT_REVIEW_PRESENT_FINAL_FINDINGS_REVIEW_BLOCKED" if adversarial_review_path.is_file() else "CHECKLIST_READY_FINAL_REVIEW_BLOCKED",
+        (16, "Adversarial review", (
+            "PASS_QUALIFIED_GLOBAL_FINDINGS_DOWNSTREAM_CLAIMS_WITHHELD"
+            if adversarial_provenance_path.is_file()
+            and "QUALIFIED PASS" in json.loads(adversarial_provenance_path.read_text(encoding="utf-8")).get("verdict", "")
+            else "FINDINGS_REVIEW_PENDING"
+        ),
          artifact_state(adversarial_review_path) + ";checklist=" + str(ROOT / "results/adversarial_review_checklist.tsv"),
-         "The current review challenges design, provenance, and blockers; findings-level review awaits actual results."),
+         "The findings-level audit permits only qualified global-rg and independent-replication claims; it rejects stronger novelty, local, mechanistic, and causal language."),
         (17, "Publication-grade reporting", (
-            "PRE_RESULT_TRACEABILITY_REPORT_PRESENT_PUBLICATION_FINDINGS_BLOCKED"
-            if final_report_ready else "STATUS_REPORT_ONLY_FINAL_REPORT_BLOCKED"
+            "PASS_GLOBAL_DISCOVERY_AND_REPLICATION_REPORT_DOWNSTREAM_RESOURCE_BLOCKED"
+            if final_report_ready and replication_complete else "STATUS_REPORT_ONLY_FINAL_REPORT_BLOCKED"
         ),
          artifact_state(final_report_path) + ";counts=" + artifact_state(final_counts_path)
          + ";top_discoveries=" + artifact_state(top_discoveries_path)
          + ";provenance=" + artifact_state(final_report_provenance_path)
          + ";validation=" + final_report_validation,
-         "A complete report must encode unavailable outcomes as upstream-blocked, not zero; no findings are claimed until required downstream artifacts are complete and validated."),
+         "The report contains the real global and replication findings; unavailable local, pleiotropic, coloc, and mechanism counts remain upstream-blocked rather than zero."),
     ]
     gate_rows = [
         {"stage": stage, "gate": gate, "status": status, "evidence": evidence, "interpretation": interpretation}
@@ -464,8 +479,8 @@ def main() -> None:
         ("R07", "Sparse or proxy phenotypes", "Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.", "PASS_METADATA", "candidate_traits.tsv"),
         ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PASS_PAIR_AUDIT_COMPLETE" if novelty_complete else f"PENDING_PAIR_AUDIT_{novelty_pending_count}_OF_{len(novelty_rows)}", artifact_state(novelty_path)),
         ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "PASS_INDEPENDENT_REPLICATION_COMPLETE" if replication_complete else "SOURCE_CURATION_COMPLETE_ACQUISITION_PENDING" if replication_curation_complete else "CANDIDATE_FAMILY_LOCKED_SOURCE_CURATION_PENDING" if replication_candidate_locked else "PENDING_REPLICATION", artifact_state(replication_path) + ";" + artifact_state(replication_candidate_lock_path) + ";" + artifact_state(replication_search_path)),
-        ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "CODE_READY_INPUTS_BLOCKED" if local_code_ready and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path)),
-        ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
+        ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "PASS_QUEUE_LOCKED_INPUTS_BLOCKED" if local_code_ready and local_queue_path.is_file() and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path) + ";" + artifact_state(local_queue_path)),
+        ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "PASS_CANDIDATE_FAMILY_LOCKED_INPUTS_BLOCKED" if pleiotropy_code_ready and pleiotropy_candidate_lock_path.is_file() and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path) + ";" + artifact_state(pleiotropy_queue_path) + ";" + artifact_state(pleiotropy_candidate_lock_path)),
         ("R12", "Colocalization overclaim", "Report H0-H4, priors, sensitivity, and claim guards; colocalization is not causality.", "CODE_READY_INPUTS_BLOCKED" if fine_mapping_code_ready else "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path) + ";" + artifact_state(fine_mapping_readiness_path)),
         ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "seven isolated synthetic workflows"),
         ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "PASS_LOCKED_PANEL_COMPLETE" if len(streaming_completed_ids) == len(panel) else "IN_PROGRESS_LOCKED_PANEL_NO_RG" if streaming_completed_ids else "PASS_BLOCKED", f"streaming_receipts={len(streaming_completed_ids)}/{len(panel)};mirror={preflight['status']}"),
@@ -491,6 +506,8 @@ def main() -> None:
         overall = f"IN_PROGRESS_STREAMING_ACQUISITION_{len(streaming_completed_ids)}_OF_{len(panel)}"
     elif mirror_blocked and not streaming_contract_ready:
         overall = "BLOCKED_AT_FULL_RESOLUTION_ACQUISITION_GATE"
+    elif replication_complete and final_report_ready:
+        overall = "GLOBAL_DISCOVERY_AND_REPLICATION_COMPLETE_DOWNSTREAM_RESOURCE_BLOCKED"
     else:
         overall = "IN_PROGRESS"
     status_path = ROOT / "results/extension_status.md"
@@ -511,7 +528,8 @@ def main() -> None:
         "Their source-verified LD references are not present; the recommended LAVA UKB v1.1 reference "
         "alone is published as 15 GiB unzipped, so no local analysis was started.\n\n"
         "The pinned PLACO+ 0.2.0 source passes its entrypoint and end-to-end synthetic checks. "
-        "No real PLACO+ scan was started because independently replicated pairs and genome-wide dense inputs do not exist.\n\n"
+        "All 23 independently replicated Tier-B pairs are frozen in a result-free candidate family. No real PLACO+ "
+        "scan was started because genome-wide MAF/INFO-complete inputs and ancestry-matched clumping LD do not exist locally.\n\n"
         "The pinned susieR 0.14.2 and coloc 5.2.3 packages pass entrypoint and end-to-end synthetic "
         "fine-mapping/colocalization checks, including dense SNP-order/allele/LD validation, PIPs, credible sets, "
         "H0-H4 posteriors, prior sensitivity, and retained unavailable-QTL outcomes. No real locus analysis was started.\n\n"
@@ -535,12 +553,12 @@ def main() -> None:
         )
         + f"The pair-level novelty audit is complete for {len(novelty_rows) - novelty_pending_count}/{len(novelty_rows)} FDR-significant pairs. "
         + f"Post-follow-up prioritization contains {priority_tier_a_count} Tier A and {priority_tier_b_count} Tier B pairs; the independent-replication candidate family is locked at {len(replication_queue_rows) if replication_candidate_locked else 0} pairs. Source curation retained {replication_testable_count} source-available and {replication_unavailable_count} unavailable pairs before replication-result access. Replication classifications are {dict(sorted(replication_counts.items())) if replication_complete else 'not yet validated'}. "
-        "Therefore no final local correlation, pleiotropy, fine-mapping, colocalization, "
-        "mechanistic inference, or final manuscript claim exists yet.\n\n"
+        "Qualified global discovery and independent-replication findings are reportable. Local correlation, pleiotropy, "
+        "fine-mapping, colocalization, mechanistic inference, and causal claims remain unavailable.\n\n"
         "See `extension_acceptance_gates.tsv` for all 17 gates and "
         "`adversarial_review_checklist.tsv` for the current challenge audit. "
-        "The Stage-17 `final_report.md` and `final_extension_counts.tsv` preserve all unavailable "
-        "findings as `NA_BLOCKED_UPSTREAM`; the header-only `top_novel_discoveries.tsv` is not evidence of zero discoveries.\n",
+        "The Stage-17 `final_report.md` and `final_extension_counts.tsv` preserve unavailable downstream "
+        "findings as `NA_BLOCKED_UPSTREAM`; `top_novel_discoveries.tsv` contains the exact 23 replicated Tier-B pairs.\n",
         encoding="utf-8",
     )
 

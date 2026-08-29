@@ -74,8 +74,8 @@ Both continuous and binary branches of the harmonizer have an isolated smoke
 test at `synthetic/test_panukbb_harmonization.py`. It writes only to a temporary
 directory and never creates or populates a real result path.
 
-The downstream contract is already executable once the acquisition gate is
-cleared: `11_munge_extension.sh` creates extension-only HapMap3 inputs,
+The storage-bounded downstream contract has been executed for the complete
+locked family: `11_munge_extension.sh` creates extension-only HapMap3 inputs,
 `12_h2_extension.sh` reruns observed-scale h2 and applies the fixed Z/intercept
 gate, `14_rg_extension.sh` runs the 12-by-pass-trait family, and
 `13_collate_extension_ldsc.py` writes both the primary tested family and the
@@ -83,7 +83,9 @@ complete 1,200-pair status universe with extension-only BH FDR. The discovery
 matrix records the cross-trait intercept, SE, post-merge and valid-allele SNP
 overlaps, ancestry, and analysis status for each tested pair. The h2 step emits
 the requested `extension_trait_readiness.tsv` plus a separate QC-failed table;
-the rg step emits `extension_rg_matrix.tsv`.
+the rg step emits `extension_rg_matrix.tsv`. All 100 traits passed the locked
+h2 gates, and the exact 1,200-pair primary family completed without replacement
+or post-result panel edits.
 
 `19_build_extension_views.py` creates ranked positive, ranked negative, and
 domain-specific tables. `15_plot_extension.py` creates the overview heatmap,
@@ -214,14 +216,45 @@ written as `MISSING`; they are never silently bridged. The isolated synthetic
 test `synthetic/test_mechanistic_annotation_contract.py` deliberately leaves
 two such edges missing and verifies that the output preserves those gaps.
 
-`41_adversarial_review.py` performs the pre-result challenge audit and records
-which findings-level checks remain impossible before acquisition. Finally,
+`41_adversarial_review.py` performs the findings-level challenge audit over the
+real h2, rg, novelty, and independent-replication artifacts while preserving
+the blocked status of local/mechanistic claims. Finally,
 `42_build_final_report.py` emits the Stage-17 scientific summary,
 `results/final_extension_counts.tsv`, the schema-complete
-`results/top_novel_discoveries.tsv`, and checksum-linked provenance. When real
-outputs are absent, it writes `NA_BLOCKED_UPSTREAM`, never a misleading zero.
-The current top-discoveries table is deliberately header-only: it is an empty
-reporting surface, not evidence that the executed analysis found no hits.
+`results/top_novel_discoveries.tsv`, and checksum-linked provenance. The
+current top table is the exact 23-pair independently replicated Tier-B family.
+When a downstream result class is absent, the table and report write
+`NA_BLOCKED_UPSTREAM`, never a misleading zero. `50_plot_replication.py`
+renders all 41 h2-eligible replication estimates, the 23 replicated effects,
+and the locked-family attrition flow as PNG/PDF with a claim-limited caption.
+
+## Executed scientific checkpoint
+
+As of 2026-08-29, the separate extension has the following validated state:
+
+- Core verifier: 45 traits, 396 pairs, result SHA-256
+  `161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077`.
+- Extension panel: 100 prospectively selected traits; 100/100 primary h2-pass.
+- Global screen: 1,200/1,200 pairs, 603 extension-BH-FDR hits, 381 with both
+  FDR<0.05 and |rg|>=0.15.
+- Literature audit: 603/603 complete; 1 `KNOWN_BUT_NEW_DATASET`, 294
+  `PARTIAL_EXTENSION`, 308 `NO_DIRECT_RG_FOUND`, and 0 `APPARENTLY_NOVEL`.
+- Frozen replication family: 217 candidates; 23 `REPLICATED`, 18 additional
+  `DIRECTIONALLY_CONCORDANT`, 17 `UNDERPOWERED`, and 159
+  `NO_INDEPENDENT_DATASET`; no tested pair was direction-discordant.
+- Replicated phenotype matching: 18 exact and 5 comparable-with-documented-
+  differences; 7/23 have discovery-versus-replication heterogeneity P<0.05.
+- Downstream: a result-free 814-row local queue retains 217 priorities and 597
+  globally-null candidates, while the exact 23 replicated PLACO+ candidates
+  are independently pre-result locked. Real LAVA/HDL-L/PLACO+/fine-map/coloc/
+  mechanism results remain unavailable because dense MAF/INFO-complete inputs,
+  ancestry-matched clumping/signed LD, and the 15-GiB LAVA reference are not
+  locally available.
+
+The adversarial verdict is a qualified pass for global discovery and
+independent replication only. The maximum defensible novelty language is
+"underreported"; genetic correlation is not causation, and no first-ever,
+local-sharing, pleiotropy, colocalization, gene, or mechanism claim is made.
 
 The full-mirror acquisition preflight remains deliberately fail-closed. The
 100 exact phenotype files, their indexes, and the shared Pan-UKB variant
@@ -248,11 +281,11 @@ removed only after the munged input and log are checksum-sealed.
   --all --acknowledge-network-gib 211.978694
 ```
 
-The all-trait command transfers roughly 212 GiB and is resumable from verified
-per-trait receipts. `results/extension_status.md` records exact completion
-counts. A controlled one-trait h2 log is not accepted as the required complete
-100-trait h2 table, and no rg/FDR or biological claim begins from a partial
-acquisition.
+The all-trait command transferred roughly 212 GiB through the streaming path
+and sealed 100/100 per-trait receipts without retaining the original compressed
+mirror. `results/extension_status.md` records exact completion counts. The
+streaming outputs are scientifically sufficient for LDSC; they are not
+silently relabeled as the dense locus inputs required downstream.
 
 The external imaging queue is deliberately not part of the 100-trait lock: its
 papers and repositories are verified, but exact file identities, checksums,
