@@ -99,7 +99,7 @@ def main() -> None:
     }:
         fail("primary h2 gate differs from the locked extension contract")
     filters = "\n".join(policy["filters_in_order"])
-    for required in ("INFO >= 0.9", "MAF >= 0.01", "MHC chr6:25000000-34000000", "strand-ambiguous"):
+    for required in ("INFO > 0.9", "MAF > 0.01", "MHC chr6:25000000-34000000", "strand-ambiguous"):
         if required not in filters:
             fail(f"harmonization policy is missing: {required}")
     if not policy["primary_rg_family"]["never_merge_with_core_family"]:

@@ -3,7 +3,7 @@
     "A1": "source alt and beta effect allele",
     "A2": "source ref"
   },
-  "analysis_status": "BLOCKED_RAW_SOURCE_NOT_LOCAL",
+  "analysis_status": "STREAMING_ACQUISITION_ENABLED_FULL_PANEL_INCOMPLETE",
   "binary_effective_n": "4/(1/cases+1/controls)",
   "binary_frequency": "(af_cases_EUR*cases + af_controls_EUR*controls)/(cases+controls)",
   "canonical_columns": [
@@ -27,8 +27,8 @@
     "single-base A/C/G/T alleles only; A1 must differ from A2",
     "drop all strand-ambiguous A/T and C/G SNPs",
     "finite beta; finite positive SE; 0<P<=1; 0<=FRQ<=1",
-    "variant-manifest imputation INFO >= 0.9 and <= 1",
-    "common variant MAF >= 0.01",
+    "variant-manifest imputation INFO > 0.9 and <= 1",
+    "common variant MAF > 0.01",
     "exclude extended MHC chr6:25000000-34000000 inclusive",
     "one row per rsID; duplicate/conflicting rows fail closed"
   ],

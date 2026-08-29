@@ -70,7 +70,65 @@ def main() -> None:
     top_discoveries_path = ROOT / "results/top_novel_discoveries.tsv"
     final_report_provenance_path = ROOT / "provenance/final_report.json"
 
-    blocked = preflight["status"] != "READY"
+    panel_ids = [row["extension_trait_id"] for row in panel]
+    streaming_contract_path = ROOT / "config/streaming_acquisition_contract.json"
+    streaming_snapshot_path = ROOT / "provenance/panukbb/remote_object_snapshot.tsv"
+    streaming_snapshot_provenance_path = ROOT / "provenance/panukbb/remote_object_snapshot.json"
+    streaming_reference_path = ROOT / "data/reference/panukbb_hm3_variant_reference.tsv.gz"
+    streaming_reference_provenance_path = ROOT / "provenance/panukbb/hm3_variant_reference_build.json"
+    streaming_receipt_dir = ROOT / "provenance/streaming_receipts"
+    current_streaming_code_sha256 = {
+        str(path): sha256(path)
+        for path in (
+            ROOT / "scripts/streaming_io.py",
+            ROOT / "scripts/10_harmonize_panukbb.py",
+            ROOT / "scripts/11_munge_extension.sh",
+        )
+    }
+    streaming_contract_ready = all(
+        path.is_file()
+        for path in (
+            streaming_contract_path,
+            streaming_snapshot_path,
+            streaming_snapshot_provenance_path,
+            streaming_reference_provenance_path,
+        )
+    )
+    streaming_reference_ready = False
+    if streaming_contract_ready and streaming_reference_path.is_file():
+        reference_provenance = json.loads(streaming_reference_provenance_path.read_text())
+        streaming_reference_ready = (
+            reference_provenance.get("output_sha256") == sha256(streaming_reference_path)
+            and reference_provenance.get("variant_manifest_stream_receipt", {}).get("verification_status") == "PASS"
+        )
+    streaming_completed_ids: list[str] = []
+    for trait_id in panel_ids:
+        receipt_path = streaming_receipt_dir / f"{trait_id}.json"
+        munged_path = ROOT / f"data/munged/{trait_id}.sumstats.gz"
+        munging_log_path = ROOT / f"data/munged/{trait_id}.log"
+        if not all(path.is_file() for path in (receipt_path, munged_path, munging_log_path)):
+            continue
+        try:
+            receipt = json.loads(receipt_path.read_text())
+            valid = (
+                receipt.get("extension_trait_id") == trait_id
+                and receipt.get("pipeline_status") == "STREAM_HARMONIZE_MUNGE_PASS"
+                and receipt.get("source_verification", {}).get("verification_status") == "PASS"
+                and receipt.get("munged_output_sha256") == sha256(munged_path)
+                and receipt.get("munging_log_sha256") == sha256(munging_log_path)
+                and receipt.get("harmonization_policy_sha256")
+                == sha256(ROOT / "config/extension_harmonization_policy.json")
+                and receipt.get("pipeline_code_sha256") == current_streaming_code_sha256
+            )
+        except (json.JSONDecodeError, OSError):
+            valid = False
+        if valid:
+            streaming_completed_ids.append(trait_id)
+    partial_h2_log_count = sum(
+        (ROOT / f"logs/h2/h2_{trait_id}.log").is_file() for trait_id in panel_ids
+    )
+    mirror_blocked = preflight["status"] != "READY"
+    blocked = not rg_path.is_file()
     expected_top_fields = [
         "rank", "pair_id", "sleep_trait", "external_phenotype", "discovery_rg",
         "discovery_fdr", "replication_rg", "replication_p", "prior_literature_status",
@@ -154,6 +212,22 @@ def main() -> None:
         mechanism_gate_status = "PROTOCOL_READY_UPSTREAM_FINE_MAPPING_AND_EXACT_SOURCE_RELEASES_BLOCKED"
     else:
         mechanism_gate_status = "PROTOCOL_NOT_VALIDATED"
+    if len(streaming_completed_ids) == len(panel):
+        acquisition_gate_status = "PASS_STREAMING_ACQUISITION"
+    elif streaming_completed_ids:
+        acquisition_gate_status = f"IN_PROGRESS_STREAMING_{len(streaming_completed_ids)}_OF_{len(panel)}"
+    elif streaming_reference_ready:
+        acquisition_gate_status = "READY_FOR_STREAMING_ACQUISITION"
+    elif streaming_contract_ready:
+        acquisition_gate_status = "STREAMING_CONTRACT_READY_REFERENCE_NOT_LOCAL"
+    else:
+        acquisition_gate_status = "BLOCKED_INSUFFICIENT_STORAGE" if mirror_blocked else "PENDING_ACQUISITION"
+    if h2_path.is_file():
+        h2_gate_status = "PASS_ARTIFACT_PRESENT"
+    elif partial_h2_log_count:
+        h2_gate_status = f"IN_PROGRESS_PARTIAL_H2_{partial_h2_log_count}_OF_{len(panel)}"
+    else:
+        h2_gate_status = "BLOCKED_UPSTREAM"
     gates = [
         (1, "Freeze and protect core atlas", "PASS" if core_ok else "FAIL_CORE_CHECKPOINT_DRIFT", core_check,
          "Core remains the exact 45-trait/396-pair checkpoint." if core_ok else "A checkpointed core artifact differs in the current working tree; extension execution must remain stopped."),
@@ -164,14 +238,14 @@ def main() -> None:
          "8,896 extracted prior-screen rows; exact no-match is not proof of novelty."),
         (4, "Build and lock candidate universe", "PASS" if panel_ok else "LOCK_PRESENT_CORE_REVALIDATION_BLOCKED", panel_check,
          f"242-trait candidate pool; {len(panel)} traits locked before extension rg; {lock['planned_raw_rg_test_count']} planned pairs."),
-        (5, "Verify sources, schemas, and harmonization", ("CONTRACT_PASS_EXECUTION_BLOCKED" if blocked else "PASS") if source_ok else "CONTRACT_PRESENT_CORE_REVALIDATION_BLOCKED",
+        (5, "Verify sources, schemas, and harmonization", ("CONTRACT_PASS_STREAMING_EXECUTION_IN_PROGRESS" if streaming_contract_ready else "CONTRACT_PASS_EXECUTION_BLOCKED") if source_ok else "CONTRACT_PRESENT_CORE_REVALIDATION_BLOCKED",
          source_check,
-         "Continuous, binary, variant-map, QC, and synthetic smoke-test contracts pass; real traversal awaits acquisition."),
-        (6, "Acquire full-resolution summary statistics", "BLOCKED_INSUFFICIENT_STORAGE" if blocked else "PENDING_ACQUISITION",
-         artifact_state(ROOT / "results/acquisition_plan.tsv"),
-         f"Need {preflight['required_free_gib']} GiB; measured {preflight['available_free_gib']} GiB; no bulk download started."),
-        (7, "Rerun extension LDSC h2 QC", "BLOCKED_UPSTREAM" if not h2_path.is_file() else "PASS_ARTIFACT_PRESENT",
-         artifact_state(h2_path), "Source h2 precheck is not accepted as the required extension rerun."),
+         "Continuous, binary, variant-map, QC, synthetic smoke-test, and version-pinned streaming contracts pass."),
+        (6, "Acquire full-resolution summary statistics", acquisition_gate_status,
+         artifact_state(ROOT / "results/acquisition_plan.tsv") + f";streaming_receipts={len(streaming_completed_ids)}/{len(panel)}",
+         f"The {preflight['required_free_gib']} GiB local mirror remains unavailable; exact version-pinned sources are streamed and body-checksummed one trait at a time. Completed {len(streaming_completed_ids)}/{len(panel)}."),
+        (7, "Rerun extension LDSC h2 QC", h2_gate_status,
+         artifact_state(h2_path) + f";partial_h2_logs={partial_h2_log_count}/{len(panel)}", "Source h2 precheck is not accepted as the required complete extension rerun."),
         (8, "Run global genetic correlations", "BLOCKED_UPSTREAM" if not rg_path.is_file() else "PASS_ARTIFACT_PRESENT",
          artifact_state(rg_path), "BH FDR must remain confined to the primary extension family."),
         (9, "Audit pair-level novelty", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not novelty_path.is_file() else "REVIEW_ARTIFACT_PRESENT",
@@ -203,7 +277,7 @@ def main() -> None:
          + ";top_discoveries=" + artifact_state(top_discoveries_path)
          + ";provenance=" + artifact_state(final_report_provenance_path)
          + ";validation=" + final_report_validation,
-         "A complete pre-result report must encode unavailable outcomes as upstream-blocked, not zero; no findings are claimed while acquisition is blocked."),
+         "A complete pre-result report must encode unavailable outcomes as upstream-blocked, not zero; no findings are claimed while acquisition is incomplete."),
     ]
     gate_rows = [
         {"stage": stage, "gate": gate, "status": status, "evidence": evidence, "interpretation": interpretation}
@@ -230,7 +304,7 @@ def main() -> None:
         ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
         ("R12", "Colocalization overclaim", "Report H0-H4, priors, sensitivity, and claim guards; colocalization is not causality.", "CODE_READY_INPUTS_BLOCKED" if fine_mapping_code_ready else "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path) + ";" + artifact_state(fine_mapping_readiness_path)),
         ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "seven isolated synthetic workflows"),
-        ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "PASS_BLOCKED", preflight["status"]),
+        ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "IN_PROGRESS_LOCKED_PANEL_NO_RG" if streaming_completed_ids else "PASS_BLOCKED", f"streaming_receipts={len(streaming_completed_ids)}/{len(panel)};mirror={preflight['status']}"),
         ("R15", "Local LD-reference mismatch", "Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.", "PASS_BLOCKED", artifact_state(local_readiness_path)),
         ("R16", "Local multiplicity or h2-gate leakage", "Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.", "PASS_CONTRACT", "config/local_architecture_contract.json"),
         ("R17", "Replication candidate attrition", "Lock the entire Tier A/B candidate family before source curation and preserve NO_INDEPENDENT_DATASET outcomes.", "PASS_CONTRACT", "scripts/21_prepare_replication_queue.py+22_lock_replication_manifest.py+23_collate_replication.py"),
@@ -249,7 +323,9 @@ def main() -> None:
 
     if not core_ok:
         overall = "BLOCKED_AT_CORE_CHECKPOINT_AND_FULL_RESOLUTION_ACQUISITION_GATES"
-    elif blocked:
+    elif len(streaming_completed_ids) < len(panel) and streaming_contract_ready:
+        overall = f"IN_PROGRESS_STREAMING_ACQUISITION_{len(streaming_completed_ids)}_OF_{len(panel)}"
+    elif mirror_blocked and not streaming_contract_ready:
         overall = "BLOCKED_AT_FULL_RESOLUTION_ACQUISITION_GATE"
     else:
         overall = "IN_PROGRESS"
@@ -278,10 +354,12 @@ def main() -> None:
         "The mechanistic source registry and locked evidence workflow pass an end-to-end synthetic test. "
         "It requires exact releases/accessions, local source snapshots and checksums, primary citations, and explicit "
         "MISSING chain edges; verified landing pages alone are never treated as mechanistic evidence. No real mechanistic search was started.\n\n"
-        f"Real acquisition is blocked: the exact compressed inputs total {preflight['compressed_source_gib']} GiB "
-        f"and require {preflight['required_free_gib']} GiB with the locked safety factor, while the preflight "
-        f"measured {preflight['available_free_gib']} GiB free ({preflight['shortfall_gib']} GiB short). "
-        "No bulk download was started. Therefore no extension h2 rerun, genetic correlation, extension FDR hit, "
+        f"The original full local mirror remains blocked: the exact compressed inputs total {preflight['compressed_source_gib']} GiB "
+        f"and require {preflight['required_free_gib']} GiB with the locked safety factor. A pre-result streaming contract now pins all "
+        f"202 S3 objects by version ID, verifies every full source body before output promotion, and preserves dense-locus access through "
+        f"the exact versioned bgzip/tabix objects. Streaming acquisition has sealed {len(streaming_completed_ids)}/{len(panel)} traits; "
+        f"{partial_h2_log_count}/{len(panel)} controlled partial h2 logs exist. The complete extension h2 table and rg family do not yet exist. "
+        "Therefore no extension FDR hit, "
         "pair-level novelty claim, replication, local correlation, pleiotropy, fine-mapping, colocalization, "
         "mechanistic inference, or final manuscript claim exists yet.\n\n"
         "See `extension_acceptance_gates.tsv` for all 17 gates and "
@@ -302,6 +380,13 @@ def main() -> None:
         "panel_check": panel_check,
         "source_check_pass": source_ok,
         "source_check": source_check,
+        "streaming_contract_ready": streaming_contract_ready,
+        "streaming_reference_ready": streaming_reference_ready,
+        "streaming_completed_trait_count": len(streaming_completed_ids),
+        "streaming_completed_trait_ids": streaming_completed_ids,
+        "partial_h2_log_count": partial_h2_log_count,
+        "remote_object_snapshot_sha256": sha256(streaming_snapshot_path) if streaming_snapshot_path.is_file() else None,
+        "streaming_reference_sha256": sha256(streaming_reference_path) if streaming_reference_path.is_file() else None,
         "panel_sha256": sha256(ROOT / "config/candidate_traits.tsv"),
         "local_readiness_sha256": sha256(local_readiness_path) if local_readiness_path.is_file() else None,
         "pleiotropy_readiness_sha256": sha256(pleiotropy_readiness_path) if pleiotropy_readiness_path.is_file() else None,

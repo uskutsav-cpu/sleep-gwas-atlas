@@ -223,13 +223,36 @@ outputs are absent, it writes `NA_BLOCKED_UPSTREAM`, never a misleading zero.
 The current top-discoveries table is deliberately header-only: it is an empty
 reporting surface, not evidence that the executed analysis found no hits.
 
-The current acquisition preflight is deliberately fail-closed. The 100 exact
-phenotype files, their indexes, and the shared Pan-UKB variant reference total
-about 214.7 GiB compressed (about 246.9 GiB with the locked 1.15 safety
-factor). `provenance/acquisition_preflight.json` records the volume-specific
-free-space measurement and shortfall. No bulk download, harmonized statistic,
-h2 rerun, genetic correlation, FDR result, or biological follow-up is claimed
-until this gate passes.
+The full-mirror acquisition preflight remains deliberately fail-closed. The
+100 exact phenotype files, their indexes, and the shared Pan-UKB variant
+reference total about 214.7 GiB compressed (about 246.9 GiB with the locked
+1.15 safety factor). `provenance/acquisition_preflight.json` preserves that
+volume-specific failure.
+
+A separate pre-result streaming contract now provides a storage-bounded path
+without weakening the panel or scientific filters. It pins all 202 official
+S3 objects by version ID, consumes and checksums every byte of each selected
+phenotype source, retains only the compact HapMap3 LDSC input locally, and
+keeps the exact versioned bgzip/tabix pair available for later dense-locus
+retrieval. A source is never promoted from HEAD metadata alone: multipart MD5
+verification must pass during the body stream. The temporary pre-munge file is
+removed only after the munged input and log are checksum-sealed.
+
+```bash
+.venv/bin/python discovery_extension/scripts/06_snapshot_remote_sources.py
+.venv/bin/python discovery_extension/scripts/09_build_panukbb_hm3_reference.py \
+  --variant-manifest-url 'VERSION_PINNED_URL_FROM_REMOTE_SNAPSHOT' \
+  --variant-manifest-checksum etag:e70ebc8289f762dd8d5086f54e766654 \
+  --variant-manifest-size-bytes 2701503051
+.venv/bin/python discovery_extension/scripts/10_stream_and_munge_panukbb.py \
+  --all --acknowledge-network-gib 211.978694
+```
+
+The all-trait command transfers roughly 212 GiB and is resumable from verified
+per-trait receipts. `results/extension_status.md` records exact completion
+counts. A controlled one-trait h2 log is not accepted as the required complete
+100-trait h2 table, and no rg/FDR or biological claim begins from a partial
+acquisition.
 
 The external imaging queue is deliberately not part of the 100-trait lock: its
 papers and repositories are verified, but exact file identities, checksums,

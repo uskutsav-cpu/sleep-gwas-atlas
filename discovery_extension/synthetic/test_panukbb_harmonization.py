@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import gzip
+import hashlib
 import subprocess
 import tempfile
 from pathlib import Path
@@ -18,6 +19,14 @@ def write_gzip_tsv(path: Path, fields: list[str], rows: list[dict[str, object]])
         writer = csv.DictWriter(handle, delimiter="\t", fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def md5(path: Path) -> str:
+    digest = hashlib.md5(usedforsecurity=False)
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def main() -> None:
@@ -78,24 +87,6 @@ def main() -> None:
             ["chr", "pos", "ref", "alt", "af_EUR", "beta_EUR", "se_EUR", "neglog10_pval_EUR", "low_confidence_EUR"],
             source_rows,
         )
-        with panel.open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(
-                handle, delimiter="\t",
-                fieldnames=["extension_trait_id", "source_filename", "binary_or_continuous", "sample_size", "cases", "controls"],
-                lineterminator="\n",
-            )
-            writer.writeheader()
-            writer.writerow({
-                "extension_trait_id": "synthetic_trait", "source_filename": source.name,
-                "binary_or_continuous": "continuous", "sample_size": 100000,
-                "cases": "NA", "controls": "NA",
-            })
-            writer.writerow({
-                "extension_trait_id": "synthetic_binary", "source_filename": binary_source.name,
-                "binary_or_continuous": "binary", "sample_size": 4000,
-                "cases": 1000, "controls": 3000,
-            })
-
         write_gzip_tsv(
             binary_source,
             ["chr", "pos", "ref", "alt", "af_cases_EUR", "af_controls_EUR", "beta_EUR", "se_EUR", "neglog10_pval_EUR", "low_confidence_EUR"],
@@ -106,7 +97,28 @@ def main() -> None:
                 "low_confidence_EUR": "false",
             }],
         )
-
+        with panel.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(
+                handle, delimiter="\t",
+                fieldnames=[
+                    "extension_trait_id", "source_filename", "binary_or_continuous",
+                    "sample_size", "cases", "controls", "checksum", "source_file_size_bytes",
+                ],
+                lineterminator="\n",
+            )
+            writer.writeheader()
+            writer.writerow({
+                "extension_trait_id": "synthetic_trait", "source_filename": source.name,
+                "binary_or_continuous": "continuous", "sample_size": 100000,
+                "cases": "NA", "controls": "NA",
+                "checksum": f"md5:{md5(source)}", "source_file_size_bytes": source.stat().st_size,
+            })
+            writer.writerow({
+                "extension_trait_id": "synthetic_binary", "source_filename": binary_source.name,
+                "binary_or_continuous": "binary", "sample_size": 4000,
+                "cases": 1000, "controls": 3000,
+                "checksum": f"md5:{md5(binary_source)}", "source_file_size_bytes": binary_source.stat().st_size,
+            })
         subprocess.run(
             [
                 "python3", str(ROOT / "discovery_extension/scripts/10_harmonize_panukbb.py"),
@@ -125,8 +137,8 @@ def main() -> None:
             "low_confidence_EUR": "1",
             "extended_MHC": "1",
             "strand_ambiguous": "1",
-            "info_below_0_9_or_above_1": "1",
-            "maf_below_0_01_or_invalid_frequency": "1",
+            "info_at_or_below_0_9_or_above_1": "1",
+            "maf_at_or_below_0_01_or_invalid_frequency": "1",
             "not_exact_pinned_hapmap3_identity": "1",
             "output_rows": "1",
         }
