@@ -77,9 +77,11 @@ def parse_log(path: Path) -> list[dict[str, object]]:
         source_id = Path(row["p2"]).name.removesuffix(".sumstats.gz")
         if source_id not in pair_qc:
             raise SystemExit(f"ERROR: pair diagnostics missing for {source_id} in {path}")
+        z_value = number(row.get("z"))
+        p_value = math.erfc(abs(z_value) / math.sqrt(2)) if math.isfinite(z_value) else number(row["p"])
         output.append({
             "sleep_trait": sleep, "replication_source_id": source_id,
-            "rg": number(row["rg"]), "se": number(row["se"]), "z": number(row.get("z")), "p": number(row["p"]),
+            "rg": number(row["rg"]), "se": number(row["se"]), "z": z_value, "p": p_value,
             "replication_h2_observed": number(row.get("h2_obs")),
             "replication_h2_observed_se": number(row.get("h2_obs_se")),
             "replication_h2_intercept": number(row.get("h2_int")),
@@ -146,6 +148,7 @@ def main() -> None:
         "schema_version": "1.0.0", "manifest_sha256": sha256(args.manifest), "lock_sha256": sha256(args.lock),
         "h2_sha256": sha256(args.h2), "jobs_sha256": sha256(args.jobs), "pair_count": len(output),
         "multiplicity": "No replication-side FDR; success uses the frozen 0.05/217 Bonferroni threshold.",
+        "p_value_precision": "Two-sided normal-tail p recomputed from the LDSC log z statistic because the LDSC scalar display rounds some p values to four decimals.",
         "output_sha256": sha256(args.out),
     }
     args.provenance_out.parent.mkdir(parents=True, exist_ok=True)

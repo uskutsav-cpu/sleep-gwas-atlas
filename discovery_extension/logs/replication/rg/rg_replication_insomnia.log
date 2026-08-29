@@ -1,0 +1,254 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out discovery_extension/logs/replication/rg/rg_replication_insomnia \
+--rg data/munged/insomnia.sumstats.gz,discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_K11_DIAHER.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_SMOKING_DEPEND.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_J10_COPD.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_M13_INTERVERTEB.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_K11_CHOLELITH.sumstats.gz \
+--ref-ld-chr ref/eur_w_ld_chr/ \
+--w-ld-chr ref/eur_w_ld_chr/ 
+
+Beginning analysis at Sat Aug 29 07:42:24 2026
+Reading summary statistics from data/munged/insomnia.sumstats.gz ...
+Read summary statistics for 1133335 SNPs.
+Reading reference panel LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1130007 SNPs remain.
+After merging with regression SNP LD, 1130007 SNPs remain.
+Computing rg for phenotype 2/9
+Reading summary statistics from discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz ...
+Read summary statistics for 826029 SNPs.
+After merging with summary statistics, 816635 SNPs remain.
+816635 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.057 (0.0028)
+Lambda GC: 1.3443
+Mean Chi^2: 1.4115
+Intercept: 1.0187 (0.0108)
+Ratio: 0.0454 (0.0264)
+
+Heritability of phenotype 2/9
+-----------------------------
+Total Observed scale h2: 0.055 (0.0035)
+Lambda GC: 1.4622
+Mean Chi^2: 1.463
+Intercept: 1.1312 (0.0109)
+Ratio: 0.2833 (0.0235)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0229 (0.002)
+Mean z1*z2: 0.1643
+Intercept: 0.0171 (0.0075)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.4098 (0.0332)
+Z-score: 12.3362
+P: 5.7793e-35
+
+Computing rg for phenotype 3/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz ...
+Read summary statistics for 1156795 SNPs.
+After merging with summary statistics, 1108837 SNPs remain.
+1108837 SNPs with valid alleles.
+
+Heritability of phenotype 3/9
+-----------------------------
+Total Observed scale h2: 0.0779 (0.005)
+Lambda GC: 1.2658
+Mean Chi^2: 1.2873
+Intercept: 1.0662 (0.0094)
+Ratio: 0.2305 (0.0326)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0242 (0.0026)
+Mean z1*z2: 0.0978
+Intercept: -0.0039 (0.006)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.364 (0.0375)
+Z-score: 9.6967
+P: 3.1137e-22
+
+Computing rg for phenotype 4/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_DIAHER.sumstats.gz ...
+Read summary statistics for 1156832 SNPs.
+After merging with summary statistics, 1108874 SNPs remain.
+1108874 SNPs with valid alleles.
+
+Heritability of phenotype 4/9
+-----------------------------
+Total Observed scale h2: 0.1595 (0.0139)
+Lambda GC: 1.2541
+Mean Chi^2: 1.2879
+Intercept: 1.0768 (0.0097)
+Ratio: 0.2667 (0.0335)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0182 (0.0037)
+Mean z1*z2: 0.0554
+Intercept: 0.0019 (0.0055)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1915 (0.039)
+Z-score: 4.9051
+P: 9.3403e-07
+
+Computing rg for phenotype 5/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz ...
+Read summary statistics for 1156827 SNPs.
+After merging with summary statistics, 1108867 SNPs remain.
+1108867 SNPs with valid alleles.
+
+Heritability of phenotype 5/9
+-----------------------------
+Total Observed scale h2: 0.0757 (0.0133)
+Lambda GC: 1.079
+Mean Chi^2: 1.092
+Intercept: 1.0192 (0.0078)
+Ratio: 0.2093 (0.0849)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0201 (0.0035)
+Mean z1*z2: 0.0445
+Intercept: -0.0033 (0.0052)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3062 (0.0602)
+Z-score: 5.0822
+P: 3.7304e-07
+
+Computing rg for phenotype 6/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_SMOKING_DEPEND.sumstats.gz ...
+Read summary statistics for 1156810 SNPs.
+After merging with summary statistics, 1108850 SNPs remain.
+1108850 SNPs with valid alleles.
+
+Heritability of phenotype 6/9
+-----------------------------
+Total Observed scale h2: 0.2287 (0.0381)
+Lambda GC: 1.0889
+Mean Chi^2: 1.0909
+Intercept: 1.0278 (0.0072)
+Ratio: 0.3062 (0.0793)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0485 (0.0066)
+Mean z1*z2: 0.0546
+Intercept: -0.0087 (0.0054)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.4258 (0.0631)
+Z-score: 6.7491
+P: 1.4881e-11
+
+Computing rg for phenotype 7/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_J10_COPD.sumstats.gz ...
+Read summary statistics for 1156879 SNPs.
+After merging with summary statistics, 1108919 SNPs remain.
+1108919 SNPs with valid alleles.
+
+Heritability of phenotype 7/9
+-----------------------------
+Total Observed scale h2: 0.184 (0.0156)
+Lambda GC: 1.3948
+Mean Chi^2: 1.4653
+Intercept: 1.1109 (0.0111)
+Ratio: 0.2384 (0.0239)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0333 (0.0031)
+Mean z1*z2: 0.1082
+Intercept: -0.0068 (0.0056)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.326 (0.033)
+Z-score: 9.8796
+P: 5.1057e-23
+
+Computing rg for phenotype 8/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_M13_INTERVERTEB.sumstats.gz ...
+Read summary statistics for 1156836 SNPs.
+After merging with summary statistics, 1108875 SNPs remain.
+1108875 SNPs with valid alleles.
+
+Heritability of phenotype 8/9
+-----------------------------
+Total Observed scale h2: 0.1277 (0.0065)
+Lambda GC: 1.5256
+Mean Chi^2: 1.6389
+Intercept: 1.1601 (0.0141)
+Ratio: 0.2506 (0.022)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0311 (0.0026)
+Mean z1*z2: 0.156
+Intercept: 0.0017 (0.0064)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3653 (0.0272)
+Z-score: 13.4413
+P: 3.4608e-41
+
+Computing rg for phenotype 9/9
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_CHOLELITH.sumstats.gz ...
+Read summary statistics for 1156802 SNPs.
+After merging with summary statistics, 1108845 SNPs remain.
+1108845 SNPs with valid alleles.
+
+Heritability of phenotype 9/9
+-----------------------------
+Total Observed scale h2: 0.1201 (0.0156)
+Lambda GC: 1.4384
+Mean Chi^2: 1.6616
+Intercept: 1.2135 (0.0443)
+Ratio: 0.3228 (0.067)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0062 (0.0023)
+Mean z1*z2: 0.0463
+Intercept: 0.0145 (0.0064)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.0753 (0.0291)
+Z-score: 2.589
+P: 0.0096
+
+
+Summary of Genetic Correlation Results
+                              p1                                                                                  p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+data/munged/insomnia.sumstats.gz   discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz 0.4098 0.0332 12.3362 0.0000  0.0550     0.0035  1.1312     0.0109    0.0171       0.0075
+data/munged/insomnia.sumstats.gz      discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz 0.3640 0.0375  9.6967 0.0000  0.0779     0.0050  1.0662     0.0094   -0.0039       0.0060
+data/munged/insomnia.sumstats.gz      discovery_extension/data/replication/munged/finngen_r13_K11_DIAHER.sumstats.gz 0.1915 0.0390  4.9051 0.0000  0.1595     0.0139  1.0768     0.0097    0.0019       0.0055
+data/munged/insomnia.sumstats.gz discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz 0.3062 0.0602  5.0822 0.0000  0.0757     0.0133  1.0192     0.0078   -0.0033       0.0052
+data/munged/insomnia.sumstats.gz  discovery_extension/data/replication/munged/finngen_r13_SMOKING_DEPEND.sumstats.gz 0.4258 0.0631  6.7491 0.0000  0.2287     0.0381  1.0278     0.0072   -0.0087       0.0054
+data/munged/insomnia.sumstats.gz        discovery_extension/data/replication/munged/finngen_r13_J10_COPD.sumstats.gz 0.3260 0.0330  9.8796 0.0000  0.1840     0.0156  1.1109     0.0111   -0.0068       0.0056
+data/munged/insomnia.sumstats.gz discovery_extension/data/replication/munged/finngen_r13_M13_INTERVERTEB.sumstats.gz 0.3653 0.0272 13.4413 0.0000  0.1277     0.0065  1.1601     0.0141    0.0017       0.0064
+data/munged/insomnia.sumstats.gz   discovery_extension/data/replication/munged/finngen_r13_K11_CHOLELITH.sumstats.gz 0.0753 0.0291  2.5890 0.0096  0.1201     0.0156  1.2135     0.0443    0.0145       0.0064
+
+Analysis finished at Sat Aug 29 07:42:51 2026
+Total time elapsed: 26.85s
