@@ -13,7 +13,8 @@
     "same effect direction convention",
     "ancestry documented and analyzed consistently",
     "candidate pair family locked before source curation",
-    "exact file identity, build, schema, sample size, and local full-resolution SHA256 retained and verified before the replication manifest is locked",
+    "exact file identity, build, schema, and sample size are frozen before acquisition; either a local full-resolution SHA256, a generation-pinned remote object, or a stable study-accession path with locked MD5, ETag, and size is required",
+    "remote streaming is allowed only when the entire compressed body is consumed and verified before the replication manifest is locked, a SHA256 receipt is retained, and the harmonized output checksum is retained",
     "completed independent-source search metadata retained even when no qualifying dataset exists",
     "replication trait passes h2 Z>=4 and LDSC intercept<=1.2 before pair testing"
   ],

@@ -58,6 +58,8 @@ def main() -> None:
     replication_path = ROOT / "results/replication/replication_results.tsv"
     replication_queue_path = ROOT / "results/replication/replication_source_queue.tsv"
     replication_candidate_lock_path = ROOT / "config/replication_candidate_family.lock.json"
+    replication_manifest_lock_path = ROOT / "config/replication_manifest.lock.json"
+    replication_search_path = ROOT / "results/replication/replication_unique_phenotype_search.tsv"
     local_path = ROOT / "results/local/local_rg_results.tsv"
     local_readiness_path = ROOT / "results/local/local_architecture_readiness.tsv"
     pleiotropy_path = ROOT / "results/pleiotropy/novel_shared_loci.tsv"
@@ -152,6 +154,20 @@ def main() -> None:
             )
         except (KeyError, json.JSONDecodeError, OSError):
             replication_candidate_locked = False
+    replication_testable_count = sum(
+        row.get("source_curation_status") == "COMPLETE_BEFORE_RESULTS"
+        for row in replication_queue_rows
+    )
+    replication_unavailable_count = sum(
+        row.get("source_curation_status") == "NO_INDEPENDENT_DATASET_COMPLETE_BEFORE_RESULTS"
+        for row in replication_queue_rows
+    )
+    replication_curation_complete = (
+        replication_candidate_locked
+        and replication_testable_count + replication_unavailable_count == len(replication_queue_rows)
+        and all(row.get("results_accessed_before_lock") == "NO" for row in replication_queue_rows)
+        and replication_search_path.is_file()
+    )
     streaming_contract_path = ROOT / "config/streaming_acquisition_contract.json"
     streaming_snapshot_path = ROOT / "provenance/panukbb/remote_object_snapshot.tsv"
     streaming_snapshot_provenance_path = ROOT / "provenance/panukbb/remote_object_snapshot.json"
@@ -337,6 +353,10 @@ def main() -> None:
         priority_gate_status = "BLOCKED_UPSTREAM"
     if replication_path.is_file():
         replication_gate_status = "REPLICATION_ARTIFACT_PRESENT"
+    elif replication_manifest_lock_path.is_file():
+        replication_gate_status = f"MANIFEST_LOCKED_ANALYSIS_PENDING_{replication_testable_count}_TESTABLE_{replication_unavailable_count}_UNAVAILABLE"
+    elif replication_curation_complete:
+        replication_gate_status = f"SOURCE_CURATION_COMPLETE_ACQUISITION_PENDING_{replication_testable_count}_TESTABLE_{replication_unavailable_count}_UNAVAILABLE"
     elif replication_candidate_locked:
         replication_gate_status = f"CANDIDATE_FAMILY_LOCKED_SOURCE_CURATION_PENDING_{len(replication_queue_rows)}"
     else:
@@ -367,7 +387,7 @@ def main() -> None:
         (10, "Prioritize findings", priority_gate_status,
          artifact_state(prioritization_path) + f";pairs={len(priority_rows)}/{len(expected_rg_pairs)};tier_A={priority_tier_a_count};tier_B={priority_tier_b_count}", "Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support."),
         (11, "Independent replication", replication_gate_status,
-         artifact_state(replication_path) + ";queue=" + artifact_state(replication_queue_path) + ";candidate_lock=" + artifact_state(replication_candidate_lock_path) + ";protocol=config/replication_contract.json", "Same-cohort internal splits cannot satisfy the independent-replication gate."),
+         artifact_state(replication_path) + ";queue=" + artifact_state(replication_queue_path) + ";search=" + artifact_state(replication_search_path) + ";candidate_lock=" + artifact_state(replication_candidate_lock_path) + ";manifest_lock=" + artifact_state(replication_manifest_lock_path) + ";protocol=config/replication_contract.json", "Same-cohort internal splits cannot satisfy the independent-replication gate."),
         (12, "Local genetic correlation", local_gate_status,
          artifact_state(local_path) + ";readiness=" + artifact_state(local_readiness_path) + ";protocol=config/local_architecture_contract.json",
          "Pinned LAVA/HDL-L code passes runtime checks, but source-verified LD references and dense inputs are absent; global rg is not local sharing."),
@@ -413,7 +433,7 @@ def main() -> None:
         ("R06", "UK Biobank sample overlap", "Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.", "PASS_DIAGNOSTICS_RECORDED_DISCLOSURE_REQUIRED" if rg_complete else "PENDING_REAL_RG", artifact_state(rg_path)),
         ("R07", "Sparse or proxy phenotypes", "Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.", "PASS_METADATA", "candidate_traits.tsv"),
         ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PASS_PAIR_AUDIT_COMPLETE" if novelty_complete else f"PENDING_PAIR_AUDIT_{novelty_pending_count}_OF_{len(novelty_rows)}", artifact_state(novelty_path)),
-        ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "CANDIDATE_FAMILY_LOCKED_SOURCE_CURATION_PENDING" if replication_candidate_locked else "PENDING_REPLICATION", artifact_state(replication_path) + ";" + artifact_state(replication_candidate_lock_path)),
+        ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "SOURCE_CURATION_COMPLETE_ACQUISITION_PENDING" if replication_curation_complete else "CANDIDATE_FAMILY_LOCKED_SOURCE_CURATION_PENDING" if replication_candidate_locked else "PENDING_REPLICATION", artifact_state(replication_path) + ";" + artifact_state(replication_candidate_lock_path) + ";" + artifact_state(replication_search_path)),
         ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "CODE_READY_INPUTS_BLOCKED" if local_code_ready and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path)),
         ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
         ("R12", "Colocalization overclaim", "Report H0-H4, priors, sensitivity, and claim guards; colocalization is not causality.", "CODE_READY_INPUTS_BLOCKED" if fine_mapping_code_ready else "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path) + ";" + artifact_state(fine_mapping_readiness_path)),
@@ -484,7 +504,7 @@ def main() -> None:
             "The complete extension rg family does not yet pass validation. "
         )
         + f"The pair-level novelty audit is complete for {len(novelty_rows) - novelty_pending_count}/{len(novelty_rows)} FDR-significant pairs. "
-        + f"Prioritization contains {priority_tier_a_count} Tier A and {priority_tier_b_count} Tier B pairs; the independent-replication candidate family is locked at {len(replication_queue_rows) if replication_candidate_locked else 0} pairs. "
+        + f"Prioritization contains {priority_tier_a_count} Tier A and {priority_tier_b_count} Tier B pairs; the independent-replication candidate family is locked at {len(replication_queue_rows) if replication_candidate_locked else 0} pairs. Source curation retains {replication_testable_count} testable and {replication_unavailable_count} unavailable pairs before replication-result access. "
         "Therefore no final pair-level novelty claim, replication, local correlation, pleiotropy, fine-mapping, colocalization, "
         "mechanistic inference, or final manuscript claim exists yet.\n\n"
         "See `extension_acceptance_gates.tsv` for all 17 gates and "
