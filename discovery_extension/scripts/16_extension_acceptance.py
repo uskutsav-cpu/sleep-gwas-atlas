@@ -87,6 +87,47 @@ def main() -> None:
             )
         except (KeyError, OSError):
             h2_complete = False
+    sleep_ids = [
+        row["trait_id"] for row in read_tsv(Path("config/analysis_panel.tsv"))
+        if row["domain"] == "sleep"
+    ]
+    expected_rg_pairs = {(sleep_id, trait_id) for sleep_id in sleep_ids for trait_id in panel_ids}
+    rg_rows: list[dict[str, str]] = []
+    rg_complete = False
+    rg_fdr_count = 0
+    rg_joint_screen_count = 0
+    if rg_path.is_file():
+        try:
+            rg_rows = read_tsv(rg_path)
+            observed_rg_pairs = {(row["sleep_trait"], row["extension_trait_id"]) for row in rg_rows}
+            rg_complete = (
+                len(rg_rows) == len(expected_rg_pairs)
+                and observed_rg_pairs == expected_rg_pairs
+                and all(row["analysis_status"] == "PRIMARY_EXTENSION_RG_COMPLETE" for row in rg_rows)
+            )
+            rg_fdr_count = sum(float(row["extension_fdr"]) < 0.05 for row in rg_rows)
+            rg_joint_screen_count = sum(
+                float(row["extension_fdr"]) < 0.05 and abs(float(row["rg"])) >= 0.15
+                for row in rg_rows
+            )
+        except (KeyError, OSError, ValueError):
+            rg_complete = False
+    novelty_rows = read_tsv(novelty_path) if novelty_path.is_file() else []
+    novelty_expected_pairs = {
+        (row["sleep_trait"], row["extension_trait_id"])
+        for row in rg_rows if float(row["extension_fdr"]) < 0.05
+    } if rg_complete else set()
+    novelty_observed_pairs = {
+        (row["sleep_trait"], row["extension_trait_id"])
+        for row in novelty_rows
+    }
+    novelty_complete = (
+        bool(novelty_expected_pairs)
+        and len(novelty_rows) == len(novelty_expected_pairs)
+        and novelty_observed_pairs == novelty_expected_pairs
+        and all(row.get("audit_status") == "COMPLETE" for row in novelty_rows)
+    )
+    novelty_pending_count = sum(row.get("audit_status") != "COMPLETE" for row in novelty_rows)
     streaming_contract_path = ROOT / "config/streaming_acquisition_contract.json"
     streaming_snapshot_path = ROOT / "provenance/panukbb/remote_object_snapshot.tsv"
     streaming_snapshot_provenance_path = ROOT / "provenance/panukbb/remote_object_snapshot.json"
@@ -249,6 +290,18 @@ def main() -> None:
         h2_gate_status = f"IN_PROGRESS_PARTIAL_H2_{partial_h2_log_count}_OF_{len(panel)}"
     else:
         h2_gate_status = "BLOCKED_UPSTREAM"
+    if rg_complete:
+        rg_gate_status = f"PASS_COMPLETE_{len(rg_rows)}_PAIRS_FDR_{rg_fdr_count}"
+    elif rg_path.is_file():
+        rg_gate_status = "FAIL_INCOMPLETE_OR_INVALID_ARTIFACT"
+    else:
+        rg_gate_status = "BLOCKED_UPSTREAM"
+    if novelty_complete:
+        novelty_gate_status = f"PASS_COMPLETE_{len(novelty_rows)}_PAIRS"
+    elif novelty_path.is_file():
+        novelty_gate_status = f"TEMPLATE_PRESENT_PENDING_{novelty_pending_count}_OF_{len(novelty_rows)}"
+    else:
+        novelty_gate_status = "PROTOCOL_READY_UPSTREAM_BLOCKED"
     gates = [
         (1, "Freeze and protect core atlas", "PASS" if core_ok else "FAIL_CORE_CHECKPOINT_DRIFT", core_check,
          "Core remains the exact 45-trait/396-pair checkpoint." if core_ok else "A checkpointed core artifact differs in the current working tree; extension execution must remain stopped."),
@@ -268,9 +321,9 @@ def main() -> None:
         (7, "Rerun extension LDSC h2 QC", h2_gate_status,
          artifact_state(h2_path) + f";h2_logs={partial_h2_log_count}/{len(panel)};primary={h2_primary_count};sensitivity={h2_sensitivity_count}",
          "The harmonized extension rerun, not the source precheck, determines primary rg eligibility."),
-        (8, "Run global genetic correlations", "BLOCKED_UPSTREAM" if not rg_path.is_file() else "PASS_ARTIFACT_PRESENT",
-         artifact_state(rg_path), "BH FDR must remain confined to the primary extension family."),
-        (9, "Audit pair-level novelty", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not novelty_path.is_file() else "REVIEW_ARTIFACT_PRESENT",
+        (8, "Run global genetic correlations", rg_gate_status,
+         artifact_state(rg_path) + f";pairs={len(rg_rows)}/{len(expected_rg_pairs)};fdr={rg_fdr_count};joint_screen={rg_joint_screen_count}", "BH FDR remains confined to the primary extension family."),
+        (9, "Audit pair-level novelty", novelty_gate_status,
          artifact_state(novelty_path) + ";protocol=17_prepare_pair_novelty_audit.py+18_validate_pair_novelty_audit.py", "Required for every extension-FDR-significant pair; no panel-level label substitutes."),
         (10, "Prioritize findings", "BLOCKED_UPSTREAM" if not prioritization_path.is_file() else "REVIEW_ARTIFACT_PRESENT",
          artifact_state(prioritization_path), "Tier A requires effect, QC, FDR, and pair-level novelty; Tier B additionally requires replication or strong local support."),
@@ -318,9 +371,9 @@ def main() -> None:
         ("R03", "Multiple-testing leakage", "Never combine the extension BH family with the immutable 396 core tests.", "PASS_CONTRACT", "extension_harmonization_policy.json"),
         ("R04", "Weak h2", "Exclude rerun h2 Z<4 from primary rg without replacement.", "PASS_REAL_H2_GATE_APPLIED" if h2_complete else "PENDING_REAL_H2", artifact_state(h2_path)),
         ("R05", "LDSC intercept inflation", "Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.", "PASS_REAL_H2_GATE_APPLIED" if h2_complete else "PENDING_REAL_H2", artifact_state(h2_path)),
-        ("R06", "UK Biobank sample overlap", "Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.", "PENDING_REAL_RG", artifact_state(rg_path)),
+        ("R06", "UK Biobank sample overlap", "Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.", "PASS_DIAGNOSTICS_RECORDED_DISCLOSURE_REQUIRED" if rg_complete else "PENDING_REAL_RG", artifact_state(rg_path)),
         ("R07", "Sparse or proxy phenotypes", "Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.", "PASS_METADATA", "candidate_traits.tsv"),
-        ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PENDING_PAIR_AUDIT", artifact_state(novelty_path)),
+        ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PASS_PAIR_AUDIT_COMPLETE" if novelty_complete else f"PENDING_PAIR_AUDIT_{novelty_pending_count}_OF_{len(novelty_rows)}", artifact_state(novelty_path)),
         ("R09", "Replication non-independence", "Require non-overlapping participants and separately sourced summary statistics.", "PENDING_REPLICATION", artifact_state(replication_path)),
         ("R10", "Global-to-local overreach", "Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.", "CODE_READY_INPUTS_BLOCKED" if local_code_ready and not local_dependencies_ready else "PENDING_LOCAL_ANALYSIS", artifact_state(local_path) + ";" + artifact_state(local_readiness_path)),
         ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
@@ -386,9 +439,13 @@ def main() -> None:
             if h2_complete else
             "The complete extension h2 table does not yet pass validation. "
         )
-        + "The rg family does not yet exist. "
-        "Therefore no extension FDR hit, "
-        "pair-level novelty claim, replication, local correlation, pleiotropy, fine-mapping, colocalization, "
+        + (
+            f"The complete extension rg family contains {len(rg_rows)} pairs, {rg_fdr_count} extension-FDR hits, and {rg_joint_screen_count} joint FDR/effect-screen hits. "
+            if rg_complete else
+            "The complete extension rg family does not yet pass validation. "
+        )
+        + f"The pair-level novelty audit is complete for {len(novelty_rows) - novelty_pending_count}/{len(novelty_rows)} FDR-significant pairs. "
+        "Therefore no final pair-level novelty claim, replication, local correlation, pleiotropy, fine-mapping, colocalization, "
         "mechanistic inference, or final manuscript claim exists yet.\n\n"
         "See `extension_acceptance_gates.tsv` for all 17 gates and "
         "`adversarial_review_checklist.tsv` for the current challenge audit. "

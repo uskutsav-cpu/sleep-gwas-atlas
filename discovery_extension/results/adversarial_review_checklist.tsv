@@ -4,9 +4,9 @@ R02	Post-result panel selection	Panel membership/order/hash must predate extensi
 R03	Multiple-testing leakage	Never combine the extension BH family with the immutable 396 core tests.	PASS_CONTRACT	extension_harmonization_policy.json
 R04	Weak h2	Exclude rerun h2 Z<4 from primary rg without replacement.	PASS_REAL_H2_GATE_APPLIED	present:sha256=95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c
 R05	LDSC intercept inflation	Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.	PASS_REAL_H2_GATE_APPLIED	present:sha256=95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c
-R06	UK Biobank sample overlap	Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.	PENDING_REAL_RG	absent
+R06	UK Biobank sample overlap	Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.	PASS_DIAGNOSTICS_RECORDED_DISCLOSURE_REQUIRED	present:sha256=5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166
 R07	Sparse or proxy phenotypes	Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.	PASS_METADATA	candidate_traits.tsv
-R08	Panel-level novelty inflation	Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.	PENDING_PAIR_AUDIT	absent
+R08	Panel-level novelty inflation	Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.	PENDING_PAIR_AUDIT_603_OF_603	present:sha256=7b2e64455d75ecd65d0aafe387d4c4550793da087e261ecaed449a830668cfba
 R09	Replication non-independence	Require non-overlapping participants and separately sourced summary statistics.	PENDING_REPLICATION	absent
 R10	Global-to-local overreach	Do not call global rg evidence of a shared locus; retain a prespecified globally-null secondary local set.	CODE_READY_INPUTS_BLOCKED	absent;present:sha256=c96194d21c538dac5d68b0b83ee4568f6d7df3fe74ad355b3e17ca561c0449cc
 R11	Pleiotropy or mediated effects	Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.	CODE_READY_INPUTS_BLOCKED	absent;present:sha256=5bed771d4e8579d14785ac59d7798b815270f0da252d4238b13f6d54f04b61d7
