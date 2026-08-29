@@ -1,0 +1,18 @@
+{
+  "core_h2_sha256": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67",
+  "counts": {
+    "A": 217,
+    "C": 983
+  },
+  "extension_h2_sha256": "95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c",
+  "novelty_audit_sha256": "af910799e1ff94de584239879d63495dda537632efd2f4877f1a238e1f2933d8",
+  "output": "discovery_extension/results/prioritization/novel_hit_priority.tsv",
+  "output_sha256": "e7b816a9c6e2163ad1724201fc3c1d127fe7112659af64631286d68da93f6845",
+  "schema_version": "1.0.0",
+  "source_rg_sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166",
+  "tier_rules": {
+    "A": "FDR<0.05; abs(rg)>=0.15; both h2 pass; clean analysis status; >=500000 valid-overlap SNPs; Strong/Moderate APPARENTLY_NOVEL or NO_DIRECT_RG_FOUND pair",
+    "B": "Tier A plus independent replication or strong local support",
+    "C": "all other tested pairs, including nominal/suggestive, QC-sensitive, or novelty-ambiguous pairs"
+  }
+}
