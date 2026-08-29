@@ -143,7 +143,8 @@ def main() -> None:
 
     print(
         f"SOURCE_CONTRACTS_VALID traits={len(panel)} schemas={len(schemas)} "
-        f"source_gib={preflight['compressed_source_gib']} status={preflight['status']}"
+        f"source_gib={preflight['compressed_source_gib']} mirror_status={preflight['status']} "
+        "streaming_contract=PASS"
     )
 
 

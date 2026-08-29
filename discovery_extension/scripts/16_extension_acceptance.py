@@ -71,6 +71,22 @@ def main() -> None:
     final_report_provenance_path = ROOT / "provenance/final_report.json"
 
     panel_ids = [row["extension_trait_id"] for row in panel]
+    h2_rows: list[dict[str, str]] = []
+    h2_primary_count = 0
+    h2_sensitivity_count = 0
+    h2_complete = False
+    if h2_path.is_file():
+        try:
+            h2_rows = read_tsv(h2_path)
+            h2_primary_count = sum(row["primary_rg_eligibility"] == "PRIMARY_PASS" for row in h2_rows)
+            h2_sensitivity_count = sum(row["primary_rg_eligibility"] == "SENSITIVITY_ONLY" for row in h2_rows)
+            h2_complete = (
+                [row["extension_trait_id"] for row in h2_rows] == panel_ids
+                and h2_primary_count + h2_sensitivity_count == len(panel_ids)
+                and all(row["analysis_status"] == "EXTENSION_H2_QC_COMPLETE" for row in h2_rows)
+            )
+        except (KeyError, OSError):
+            h2_complete = False
     streaming_contract_path = ROOT / "config/streaming_acquisition_contract.json"
     streaming_snapshot_path = ROOT / "provenance/panukbb/remote_object_snapshot.tsv"
     streaming_snapshot_provenance_path = ROOT / "provenance/panukbb/remote_object_snapshot.json"
@@ -222,8 +238,13 @@ def main() -> None:
         acquisition_gate_status = "STREAMING_CONTRACT_READY_REFERENCE_NOT_LOCAL"
     else:
         acquisition_gate_status = "BLOCKED_INSUFFICIENT_STORAGE" if mirror_blocked else "PENDING_ACQUISITION"
-    if h2_path.is_file():
-        h2_gate_status = "PASS_ARTIFACT_PRESENT"
+    if h2_complete:
+        h2_gate_status = (
+            f"PASS_COMPLETE_{len(h2_rows)}_TRAITS_PRIMARY_{h2_primary_count}_"
+            f"SENSITIVITY_{h2_sensitivity_count}"
+        )
+    elif h2_path.is_file():
+        h2_gate_status = "FAIL_INCOMPLETE_OR_INVALID_ARTIFACT"
     elif partial_h2_log_count:
         h2_gate_status = f"IN_PROGRESS_PARTIAL_H2_{partial_h2_log_count}_OF_{len(panel)}"
     else:
@@ -238,14 +259,15 @@ def main() -> None:
          "8,896 extracted prior-screen rows; exact no-match is not proof of novelty."),
         (4, "Build and lock candidate universe", "PASS" if panel_ok else "LOCK_PRESENT_CORE_REVALIDATION_BLOCKED", panel_check,
          f"242-trait candidate pool; {len(panel)} traits locked before extension rg; {lock['planned_raw_rg_test_count']} planned pairs."),
-        (5, "Verify sources, schemas, and harmonization", ("CONTRACT_PASS_STREAMING_EXECUTION_IN_PROGRESS" if streaming_contract_ready else "CONTRACT_PASS_EXECUTION_BLOCKED") if source_ok else "CONTRACT_PRESENT_CORE_REVALIDATION_BLOCKED",
+        (5, "Verify sources, schemas, and harmonization", ("CONTRACT_PASS_STREAMING_ACQUISITION_COMPLETE" if len(streaming_completed_ids) == len(panel) else "CONTRACT_PASS_STREAMING_EXECUTION_IN_PROGRESS" if streaming_contract_ready else "CONTRACT_PASS_EXECUTION_BLOCKED") if source_ok else "CONTRACT_PRESENT_CORE_REVALIDATION_BLOCKED",
          source_check,
          "Continuous, binary, variant-map, QC, synthetic smoke-test, and version-pinned streaming contracts pass."),
         (6, "Acquire full-resolution summary statistics", acquisition_gate_status,
          artifact_state(ROOT / "results/acquisition_plan.tsv") + f";streaming_receipts={len(streaming_completed_ids)}/{len(panel)}",
-         f"The {preflight['required_free_gib']} GiB local mirror remains unavailable; exact version-pinned sources are streamed and body-checksummed one trait at a time. Completed {len(streaming_completed_ids)}/{len(panel)}."),
+         f"The {preflight['required_free_gib']} GiB local mirror remains unavailable; exact version-pinned sources were streamed, body-checksummed, harmonized, munged, and receipt-sealed one trait at a time. Completed {len(streaming_completed_ids)}/{len(panel)}."),
         (7, "Rerun extension LDSC h2 QC", h2_gate_status,
-         artifact_state(h2_path) + f";partial_h2_logs={partial_h2_log_count}/{len(panel)}", "Source h2 precheck is not accepted as the required complete extension rerun."),
+         artifact_state(h2_path) + f";h2_logs={partial_h2_log_count}/{len(panel)};primary={h2_primary_count};sensitivity={h2_sensitivity_count}",
+         "The harmonized extension rerun, not the source precheck, determines primary rg eligibility."),
         (8, "Run global genetic correlations", "BLOCKED_UPSTREAM" if not rg_path.is_file() else "PASS_ARTIFACT_PRESENT",
          artifact_state(rg_path), "BH FDR must remain confined to the primary extension family."),
         (9, "Audit pair-level novelty", "PROTOCOL_READY_UPSTREAM_BLOCKED" if not novelty_path.is_file() else "REVIEW_ARTIFACT_PRESENT",
@@ -277,7 +299,7 @@ def main() -> None:
          + ";top_discoveries=" + artifact_state(top_discoveries_path)
          + ";provenance=" + artifact_state(final_report_provenance_path)
          + ";validation=" + final_report_validation,
-         "A complete pre-result report must encode unavailable outcomes as upstream-blocked, not zero; no findings are claimed while acquisition is incomplete."),
+         "A complete report must encode unavailable outcomes as upstream-blocked, not zero; no findings are claimed until required downstream artifacts are complete and validated."),
     ]
     gate_rows = [
         {"stage": stage, "gate": gate, "status": status, "evidence": evidence, "interpretation": interpretation}
@@ -294,8 +316,8 @@ def main() -> None:
         ("R01", "Core drift", "Re-run byte-level core checkpoint before and after every extension stage.", "PASS" if core_ok else "FAIL_BLOCKING", core_check),
         ("R02", "Post-result panel selection", "Panel membership/order/hash must predate extension rg.", "PASS", lock["locked_utc"]),
         ("R03", "Multiple-testing leakage", "Never combine the extension BH family with the immutable 396 core tests.", "PASS_CONTRACT", "extension_harmonization_policy.json"),
-        ("R04", "Weak h2", "Exclude rerun h2 Z<4 from primary rg without replacement.", "PENDING_REAL_H2", artifact_state(h2_path)),
-        ("R05", "LDSC intercept inflation", "Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.", "PENDING_REAL_H2", artifact_state(h2_path)),
+        ("R04", "Weak h2", "Exclude rerun h2 Z<4 from primary rg without replacement.", "PASS_REAL_H2_GATE_APPLIED" if h2_complete else "PENDING_REAL_H2", artifact_state(h2_path)),
+        ("R05", "LDSC intercept inflation", "Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.", "PASS_REAL_H2_GATE_APPLIED" if h2_complete else "PENDING_REAL_H2", artifact_state(h2_path)),
         ("R06", "UK Biobank sample overlap", "Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.", "PENDING_REAL_RG", artifact_state(rg_path)),
         ("R07", "Sparse or proxy phenotypes", "Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.", "PASS_METADATA", "candidate_traits.tsv"),
         ("R08", "Panel-level novelty inflation", "Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.", "PENDING_PAIR_AUDIT", artifact_state(novelty_path)),
@@ -304,7 +326,7 @@ def main() -> None:
         ("R11", "Pleiotropy or mediated effects", "Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.", "CODE_READY_INPUTS_BLOCKED" if pleiotropy_code_ready and not pleiotropy_inputs_ready else "PENDING_PLEIOTROPY", artifact_state(pleiotropy_path) + ";" + artifact_state(pleiotropy_readiness_path)),
         ("R12", "Colocalization overclaim", "Report H0-H4, priors, sensitivity, and claim guards; colocalization is not causality.", "CODE_READY_INPUTS_BLOCKED" if fine_mapping_code_ready else "PENDING_COLOCALIZATION", artifact_state(fine_mapping_path) + ";" + artifact_state(fine_mapping_readiness_path)),
         ("R13", "Synthetic/real result contamination", "Synthetic tests stay under synthetic or temporary paths and carry explicit markers.", "PASS", "seven isolated synthetic workflows"),
-        ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "IN_PROGRESS_LOCKED_PANEL_NO_RG" if streaming_completed_ids else "PASS_BLOCKED", f"streaming_receipts={len(streaming_completed_ids)}/{len(panel)};mirror={preflight['status']}"),
+        ("R14", "Storage-driven partial acquisition", "Do not silently analyze a result-selected subset of the locked panel.", "PASS_LOCKED_PANEL_COMPLETE" if len(streaming_completed_ids) == len(panel) else "IN_PROGRESS_LOCKED_PANEL_NO_RG" if streaming_completed_ids else "PASS_BLOCKED", f"streaming_receipts={len(streaming_completed_ids)}/{len(panel)};mirror={preflight['status']}"),
         ("R15", "Local LD-reference mismatch", "Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.", "PASS_BLOCKED", artifact_state(local_readiness_path)),
         ("R16", "Local multiplicity or h2-gate leakage", "Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.", "PASS_CONTRACT", "config/local_architecture_contract.json"),
         ("R17", "Replication candidate attrition", "Lock the entire Tier A/B candidate family before source curation and preserve NO_INDEPENDENT_DATASET outcomes.", "PASS_CONTRACT", "scripts/21_prepare_replication_queue.py+22_lock_replication_manifest.py+23_collate_replication.py"),
@@ -358,7 +380,13 @@ def main() -> None:
         f"and require {preflight['required_free_gib']} GiB with the locked safety factor. A pre-result streaming contract now pins all "
         f"202 S3 objects by version ID, verifies every full source body before output promotion, and preserves dense-locus access through "
         f"the exact versioned bgzip/tabix objects. Streaming acquisition has sealed {len(streaming_completed_ids)}/{len(panel)} traits; "
-        f"{partial_h2_log_count}/{len(panel)} controlled partial h2 logs exist. The complete extension h2 table and rg family do not yet exist. "
+        f"{partial_h2_log_count}/{len(panel)} controlled h2 logs exist. "
+        + (
+            f"The complete extension h2 table validates {h2_primary_count} primary and {h2_sensitivity_count} sensitivity-only traits. "
+            if h2_complete else
+            "The complete extension h2 table does not yet pass validation. "
+        )
+        + "The rg family does not yet exist. "
         "Therefore no extension FDR hit, "
         "pair-level novelty claim, replication, local correlation, pleiotropy, fine-mapping, colocalization, "
         "mechanistic inference, or final manuscript claim exists yet.\n\n"

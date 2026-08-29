@@ -2,8 +2,8 @@ risk_id	risk	required_control	current_status	current_evidence
 R01	Core drift	Re-run byte-level core checkpoint before and after every extension stage.	PASS	CORE_CHECKPOINT_OK commit=22df92c8d6894f93c50561ae8a86acf2f48f50cb traits=45 pairs=396 result_sha256=161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077
 R02	Post-result panel selection	Panel membership/order/hash must predate extension rg.	PASS	2026-08-28T04:13:05Z
 R03	Multiple-testing leakage	Never combine the extension BH family with the immutable 396 core tests.	PASS_CONTRACT	extension_harmonization_policy.json
-R04	Weak h2	Exclude rerun h2 Z<4 from primary rg without replacement.	PENDING_REAL_H2	absent
-R05	LDSC intercept inflation	Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.	PENDING_REAL_H2	absent
+R04	Weak h2	Exclude rerun h2 Z<4 from primary rg without replacement.	PASS_REAL_H2_GATE_APPLIED	present:sha256=95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c
+R05	LDSC intercept inflation	Exclude rerun intercept>1.2 from primary rg and retain sensitivity status.	PASS_REAL_H2_GATE_APPLIED	present:sha256=95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c
 R06	UK Biobank sample overlap	Inspect cross-trait intercepts and disclose overlap; do not equate LDSC adjustment with independent replication.	PENDING_REAL_RG	absent
 R07	Sparse or proxy phenotypes	Retain exact phenotype definitions and distinguish medication/proxy traits from diagnoses.	PASS_METADATA	candidate_traits.tsv
 R08	Panel-level novelty inflation	Require pair-level direct/same-phenotype/same-direction/same-sleep-context audit.	PENDING_PAIR_AUDIT	absent
@@ -12,7 +12,7 @@ R10	Global-to-local overreach	Do not call global rg evidence of a shared locus; 
 R11	Pleiotropy or mediated effects	Evaluate horizontal, vertical/mediated, shared-factor, and sample-overlap alternatives; run PLACO+ on genome-wide data only.	CODE_READY_INPUTS_BLOCKED	absent;present:sha256=5bed771d4e8579d14785ac59d7798b815270f0da252d4238b13f6d54f04b61d7
 R12	Colocalization overclaim	Report H0-H4, priors, sensitivity, and claim guards; colocalization is not causality.	CODE_READY_INPUTS_BLOCKED	absent;present:sha256=10a13727ffbe9c7f9ca07a2d1a53fe2489ae17d36f86a6354002d58cbfad4328
 R13	Synthetic/real result contamination	Synthetic tests stay under synthetic or temporary paths and carry explicit markers.	PASS	seven isolated synthetic workflows
-R14	Storage-driven partial acquisition	Do not silently analyze a result-selected subset of the locked panel.	IN_PROGRESS_LOCKED_PANEL_NO_RG	streaming_receipts=1/100;mirror=BLOCKED_INSUFFICIENT_STORAGE
+R14	Storage-driven partial acquisition	Do not silently analyze a result-selected subset of the locked panel.	PASS_LOCKED_PANEL_COMPLETE	streaming_receipts=100/100;mirror=BLOCKED_INSUFFICIENT_STORAGE
 R15	Local LD-reference mismatch	Require checksum-locked ancestry-matched LAVA/HDL-L references; do not fall back silently to a smaller panel.	PASS_BLOCKED	present:sha256=c96194d21c538dac5d68b0b83ee4568f6d7df3fe74ad355b3e17ca561c0449cc
 R16	Local multiplicity or h2-gate leakage	Freeze the pair-by-locus family, LAVA local-h2 Bonferroni gate, and local-rg BH family before result access.	PASS_CONTRACT	config/local_architecture_contract.json
 R17	Replication candidate attrition	Lock the entire Tier A/B candidate family before source curation and preserve NO_INDEPENDENT_DATASET outcomes.	PASS_CONTRACT	scripts/21_prepare_replication_queue.py+22_lock_replication_manifest.py+23_collate_replication.py
