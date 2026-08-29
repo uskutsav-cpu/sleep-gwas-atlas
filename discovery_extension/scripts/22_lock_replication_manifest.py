@@ -101,6 +101,7 @@ def main() -> None:
         "--lock", type=Path,
         default=Path("discovery_extension/config/replication_manifest.lock.json"),
     )
+    parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
     fields, rows = read_tsv(args.queue)
     candidate_lock = json.loads(args.candidate_lock.read_text(encoding="utf-8"))
@@ -169,6 +170,22 @@ def main() -> None:
         else:
             raise SystemExit(f"ERROR: unsupported replication storage mode: {row['pair_id']}")
         testable_rows.append(row)
+    if args.validate_only:
+        if not args.out.is_file() or not args.lock.is_file():
+            raise SystemExit("ERROR: locked replication manifest artifacts are absent")
+        existing_lock = json.loads(args.lock.read_text(encoding="utf-8"))
+        if (
+            sha256(args.out) != existing_lock.get("manifest_sha256")
+            or sha256(args.queue) != existing_lock.get("source_queue_sha256")
+            or sha256(args.candidate_lock) != existing_lock.get("candidate_family_lock_sha256")
+            or existing_lock.get("pair_ids_in_locked_order") != [row["pair_id"] for row in rows]
+            or existing_lock.get("testable_pair_ids_in_locked_order") != [row["pair_id"] for row in testable_rows]
+            or existing_lock.get("unavailable_pair_ids_in_locked_order") != [row["pair_id"] for row in unavailable_rows]
+            or existing_lock.get("stream_receipts_by_source") != stream_receipts
+        ):
+            raise SystemExit("ERROR: retained replication manifest lock differs from current validated inputs")
+        print(f"REPLICATION_MANIFEST_VALID pairs={len(rows)} testable={len(testable_rows)} unavailable={len(unavailable_rows)} sha256={existing_lock['manifest_sha256']}")
+        return
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, delimiter="\t", fieldnames=fields, lineterminator="\n")

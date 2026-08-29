@@ -84,12 +84,20 @@ def main() -> None:
     if set(testable_pair_ids) | set(unavailable_pair_ids) != set(pair_ids) or set(testable_pair_ids) & set(unavailable_pair_ids):
         raise SystemExit("ERROR: lock does not partition the replication candidate family")
     rg_rows = read_tsv(args.rg)
-    if {row["pair_id"] for row in rg_rows} != set(testable_pair_ids) or len(rg_rows) != len(testable_pair_ids):
-        raise SystemExit("ERROR: replication rg results are not the exact locked testable family")
-    rg_by_pair = {row["pair_id"]: row for row in rg_rows}
     expected_sources = {manifest_by_pair[pair_id]["replication_source_id"] for pair_id in testable_pair_ids}
     if set(h2_by_source) != expected_sources:
         raise SystemExit("ERROR: replication h2 results are not the exact locked source family")
+    h2_pass_sources = {
+        source_id for source_id, row in h2_by_source.items()
+        if row["primary_status"] == "PASS" and float(row["h2_z"]) >= 4 and float(row["LDSC_intercept"]) <= 1.2
+    }
+    expected_rg_pair_ids = {
+        pair_id for pair_id in testable_pair_ids
+        if manifest_by_pair[pair_id]["replication_source_id"] in h2_pass_sources
+    }
+    if {row["pair_id"] for row in rg_rows} != expected_rg_pair_ids or len(rg_rows) != len(expected_rg_pair_ids):
+        raise SystemExit("ERROR: replication rg results are not the exact h2-pass subset of the locked source-available family")
+    rg_by_pair = {row["pair_id"]: row for row in rg_rows}
 
     alpha = float(lock["bonferroni_alpha"])
     output: list[dict[str, object]] = []
@@ -120,16 +128,43 @@ def main() -> None:
                 "replication_class": "NO_INDEPENDENT_DATASET",
             })
             continue
-        result = rg_by_pair[pair_id]
-        if result["sleep_trait"] != source["sleep_trait"] or result["replication_source_id"] != source["replication_source_id"]:
-            raise SystemExit(f"ERROR: replication result identity differs from lock: {pair_id}")
-        if result["ancestry"] != source["ancestry"] or result["analysis_status"] != "REPLICATION_RG_COMPLETE":
-            raise SystemExit(f"ERROR: replication ancestry/status failed: {pair_id}")
         if source["replication_source_id"] not in h2_by_source:
             raise SystemExit(f"ERROR: replication h2 result missing: {pair_id}")
         h2 = h2_by_source[source["replication_source_id"]]
         h2_z, h2_intercept = float(h2["h2_z"]), float(h2["LDSC_intercept"])
         h2_pass = h2["primary_status"] == "PASS" and h2_z >= 4 and h2_intercept <= 1.2
+        if not h2_pass:
+            output.append({
+                "pair_id": pair_id, "sleep_trait": source["sleep_trait"],
+                "extension_trait_id": source["extension_trait_id"],
+                "external_phenotype_name": source["external_phenotype_name"],
+                "replication_source_id": source["replication_source_id"],
+                "replication_study_accession": source["replication_study_accession"],
+                "replication_phenotype_definition": source["replication_phenotype_definition"],
+                "participant_overlap_status": source["participant_overlap_status"],
+                "discovery_rg": source["discovery_rg"], "discovery_se": source["discovery_se"],
+                "discovery_fdr": source["discovery_fdr"], "replication_rg": "NA",
+                "replication_se": "NA", "replication_z": "NA", "replication_p": "NA",
+                "replication_alpha": alpha, "direction_concordant": "NA",
+                "heterogeneity_z": "NA", "heterogeneity_Q": "NA", "heterogeneity_p": "NA",
+                "replication_h2": h2["h2"], "replication_h2_se": h2["h2_se"],
+                "replication_h2_z": h2_z, "replication_LDSC_intercept": h2_intercept,
+                "replication_h2_pass": "False", "cross_trait_LDSC_intercept": "NA",
+                "cross_trait_LDSC_intercept_se": "NA", "snp_overlap_valid_alleles": "NA",
+                "ancestry": source["ancestry"], "analysis_status": "REPLICATION_H2_FAILED_NO_PAIR_TEST",
+                "replication_search_databases": source["replication_search_databases"],
+                "replication_search_queries": source["replication_search_queries"],
+                "replication_search_date": source["replication_search_date"],
+                "replication_search_evidence": source["replication_search_evidence"],
+                "unavailable_reason": "Replication source acquired but failed the prespecified h2 Z/intercept gate; pairwise rg was not run.",
+                "replication_class": "UNDERPOWERED",
+            })
+            continue
+        result = rg_by_pair[pair_id]
+        if result["sleep_trait"] != source["sleep_trait"] or result["replication_source_id"] != source["replication_source_id"]:
+            raise SystemExit(f"ERROR: replication result identity differs from lock: {pair_id}")
+        if result["ancestry"] != source["ancestry"] or result["analysis_status"] != "REPLICATION_RG_COMPLETE":
+            raise SystemExit(f"ERROR: replication ancestry/status failed: {pair_id}")
         discovery_rg, discovery_se = float(source["discovery_rg"]), float(source["discovery_se"])
         replication_rg, replication_se = float(result["rg"]), float(result["se"])
         p_value = float(result["p"])
@@ -139,9 +174,7 @@ def main() -> None:
         heterogeneity_z = (replication_rg - discovery_rg) / math.sqrt(discovery_se**2 + replication_se**2)
         heterogeneity_q = heterogeneity_z**2
         heterogeneity_p = math.erfc(math.sqrt(heterogeneity_q / 2))
-        if not h2_pass:
-            replication_class = "UNDERPOWERED"
-        elif concordant and p_value < alpha:
+        if concordant and p_value < alpha:
             replication_class = "REPLICATED"
         elif concordant:
             replication_class = "DIRECTIONALLY_CONCORDANT"
