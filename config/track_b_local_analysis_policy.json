@@ -1,0 +1,56 @@
+{
+  "analysis_id": "track-b-v1.0-local",
+  "bivariate_fdr_alpha": 0.05,
+  "conditional_covariates": {
+    "A": [
+      "bmi",
+      "sleep_apnea"
+    ],
+    "B": [
+      "mdd"
+    ],
+    "CONTROL": []
+  },
+  "conditional_covariate_rationale": {
+    "A": "BMI and clinically defined sleep apnea are the smallest directly justified set for testing adiposity and sleep-disordered-breathing explanations of snoring-lifespan local sharing.",
+    "B": "Major depressive disorder is the single predeclared broad psychiatric competing architecture for insomnia-ADHD; adding metabolic, smoking, and vascular traits without a locus-specific rationale would overcondition.",
+    "CONTROL": "The positive control is used for pipeline concordance and has no predeclared conditional headline test."
+  },
+  "expected_analysis_traits": 8,
+  "expected_discovery_pairs": 3,
+  "expected_loci": 2495,
+  "lava_version": "0.1.5",
+  "local_method_robustness": {
+    "alternative_method": "HDL-L_or_rho-HESS",
+    "comparison_labels": [
+      "CONCORDANT",
+      "PARTIAL_CONCORDANCE",
+      "DISCORDANT"
+    ],
+    "execution_rule": "Use an ancestry-matched independently implemented local method only when its reference and software pass provenance gates; do not substitute overlapping peaks for a robustness result."
+  },
+  "pair_order": [
+    "A",
+    "B",
+    "CONTROL"
+  ],
+  "planned_bivariate_pair_locus_family_max": 7485,
+  "planned_univariate_tests": 19960,
+  "random_seed": 20260901,
+  "reference": "LAVA UK Biobank European v1.1 100000-person LD reference",
+  "reference_minimum_free_bytes": 37580963840,
+  "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
+  "reference_source_registry": "config/lava_reference_sources.tsv",
+  "trait_order": [
+    "snoring",
+    "parental_lifespan",
+    "insomnia",
+    "adhd",
+    "frailty",
+    "bmi",
+    "sleep_apnea",
+    "mdd"
+  ],
+  "univariate_alpha": 0.05,
+  "univariate_p_threshold": 2.50501002004008e-06
+}
