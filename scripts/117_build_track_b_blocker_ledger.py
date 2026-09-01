@@ -184,7 +184,7 @@ def build_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
             lava_status, ";".join(lava_classes) or "NONE",
             f"reference_present={str(lava_reference_ok).upper()};free_bytes={free};minimum_free_bytes={local_policy['reference_minimum_free_bytes']}",
             "Checksum-ledgered official LAVA UKB EUR v1.1 reference plus the 35 GiB acquisition/extraction storage gate",
-            f"{rel(LOCAL_POLICY)};{rel(LOCAL_LOCK)};{rel(TRACK_B / 'lava_pair_manifest.tsv')}"),
+            f"{rel(LOCAL_POLICY)};{rel(LOCAL_LOCK)};{rel(TRACK_B / 'lava_pair_manifest.tsv')};scripts/119_track_b_lava_contract.py;scripts/120_run_track_b_lava.R;scripts/121_validate_track_b_lava.py"),
         row(4, "LOCAL_CONDITIONAL", "Conditional local sharing", "A: BMI+sleep apnea; B: MDD",
             "BLOCKED_UPSTREAM", "UPSTREAM_LOCAL_RESULT",
             "Covariates and timing are frozen; no valid LAVA local result exists",

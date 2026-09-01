@@ -4,7 +4,7 @@ This is an execution-readiness artifact, not an analysis result. It records term
 
 Current machine snapshot:
 
-- free storage: 244744192 bytes (0.228 GiB)
+- free storage: 189267968 bytes (0.176 GiB)
 - physical memory visible to the process: 8589934592 bytes (8.000 GiB)
 - MATLAB: `NONE`
 

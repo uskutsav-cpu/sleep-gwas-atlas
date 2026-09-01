@@ -20,6 +20,10 @@
   "expected_discovery_pairs": 3,
   "expected_loci": 2495,
   "lava_version": "0.1.5",
+  "maximum_bivariate_failure_fraction": 0.05,
+  "maximum_conditional_failure_fraction": 0.05,
+  "maximum_locus_failure_fraction": 0.01,
+  "maximum_univariate_untested_fraction": 0.05,
   "local_method_robustness": {
     "alternative_method": "HDL-L_or_rho-HESS",
     "comparison_labels": [
@@ -41,6 +45,16 @@
   "reference_minimum_free_bytes": 37580963840,
   "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
   "reference_source_registry": "config/lava_reference_sources.tsv",
+  "runtime": {
+    "cap_estimates": true,
+    "conditional_max_r2": 0.95,
+    "max_block_size": 3000,
+    "max_proportion_K": 0.75,
+    "min_K": 2,
+    "prune_threshold": 99
+  },
+  "conditional_execution_gate": "Run partial local genetic correlation only for primary bivariate rows passing Track B BH FDR<=0.05 and only when every predeclared conditioner passes the same locus-level univariate threshold",
+  "conditional_multiple_testing": "BH FDR across all successfully tested conditional rows for the frozen A and B covariate sets",
   "trait_order": [
     "snoring",
     "parental_lifespan",

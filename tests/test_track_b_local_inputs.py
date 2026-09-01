@@ -51,6 +51,13 @@ class TrackBLocalInputTests(unittest.TestCase):
         self.assertEqual(lock["current_compute_snapshot"]["status"], "BLOCKED_BY_COMPUTE")
         self.assertEqual(lock["reference_minimum_free_bytes"], 37580963840)
 
+    def test_runtime_and_conditional_family_are_frozen(self) -> None:
+        runtime = {row["key"]: row["value"] for row in read_tsv(TRACK_B / "lava_runtime_policy.tsv")}
+        self.assertEqual(runtime["expected_traits"], "8")
+        self.assertEqual(runtime["expected_pairs"], "3")
+        self.assertEqual(runtime["planned_univariate_tests"], str(2495 * 8))
+        self.assertIn("FDR<=0.05", runtime["conditional_execution_gate"])
+
 
 if __name__ == "__main__":
     unittest.main()

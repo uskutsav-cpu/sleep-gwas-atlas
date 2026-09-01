@@ -27,6 +27,7 @@ OVERLAP = Path("results/track_b/lava_sample_overlap.txt")
 PROVENANCE = Path("results/track_b/lava_input_provenance.tsv")
 CONDITIONAL = Path("results/track_b/local_conditional_manifest.tsv")
 ROBUSTNESS = Path("results/track_b/local_method_robustness_plan.tsv")
+RUNTIME_POLICY = Path("results/track_b/lava_runtime_policy.tsv")
 HANDOFF = Path("results/track_b/LOCAL_ANALYSIS_HANDOFF.md")
 LOCK = Path("results/track_b/local_analysis_input.lock.json")
 REFERENCE_PROVENANCE = Path("ref/lava/ukb_v1.1/reference.provenance.json")
@@ -206,6 +207,30 @@ def robustness_rows() -> list[dict[str, object]]:
     ]
 
 
+def runtime_rows(policy: dict[str, object]) -> list[dict[str, object]]:
+    runtime = policy["runtime"]
+    values = {
+        "analysis_id": policy["analysis_id"], "lava_version": policy["lava_version"],
+        "reference_prefix": policy["reference_prefix"], "expected_loci": policy["expected_loci"],
+        "expected_traits": policy["expected_analysis_traits"], "expected_pairs": policy["expected_discovery_pairs"],
+        "planned_univariate_tests": policy["planned_univariate_tests"],
+        "univariate_p_threshold": policy["univariate_p_threshold"],
+        "bivariate_fdr_alpha": policy["bivariate_fdr_alpha"],
+        "conditional_fdr_alpha": policy["bivariate_fdr_alpha"],
+        "maximum_locus_failure_fraction": policy["maximum_locus_failure_fraction"],
+        "maximum_univariate_untested_fraction": policy["maximum_univariate_untested_fraction"],
+        "maximum_bivariate_failure_fraction": policy["maximum_bivariate_failure_fraction"],
+        "maximum_conditional_failure_fraction": policy["maximum_conditional_failure_fraction"],
+        "random_seed": policy["random_seed"], "min_K": runtime["min_K"],
+        "prune_threshold": runtime["prune_threshold"], "max_proportion_K": runtime["max_proportion_K"],
+        "max_block_size": runtime["max_block_size"], "cap_estimates": str(runtime["cap_estimates"]).lower(),
+        "conditional_max_r2": runtime["conditional_max_r2"],
+        "conditional_execution_gate": policy["conditional_execution_gate"],
+        "conditional_multiple_testing": policy["conditional_multiple_testing"],
+    }
+    return [{"key": key, "value": value} for key, value in values.items()]
+
+
 def handoff_text(policy: dict[str, object], free_bytes: int) -> str:
     return f"""# Track B local-analysis production handoff
 
@@ -234,9 +259,12 @@ python3 scripts/115_build_track_b_dense_qc.py --verify
 python3 scripts/116_prepare_track_b_local_inputs.py --verify
 bash scripts/32_download_lava_reference.sh --download
 python3 scripts/lava_contract.py --verify-reference --rehash
+python3 scripts/119_track_b_lava_contract.py --preflight
+.r-env/bin/Rscript scripts/120_run_track_b_lava.R
+python3 scripts/121_validate_track_b_lava.py
 ```
 
-Do not run the existing 45-trait/396-pair LAVA result family as a substitute for Track B. A Track B runner must consume `results/track_b/lava_pair_manifest.tsv`, use all 2,495 loci, run univariate h2 for all eight predeclared traits, and apply BH FDR across every actually tested locus row for the three frozen pairs. Conditional tests must use only the covariates in `local_conditional_manifest.tsv`.
+Do not run the existing 45-trait/396-pair LAVA result family as a substitute for Track B. The dedicated Track B runner consumes `results/track_b/lava_pair_manifest.tsv`, uses all 2,495 loci, runs univariate h2 for all eight predeclared traits, and applies BH FDR across every actually tested locus row for the three frozen pairs. Conditional tests are result-gated and use only the covariates in `local_conditional_manifest.tsv`.
 
 No local result exists yet. No empty table or synthetic output is presented as science.
 """
@@ -268,6 +296,7 @@ def build() -> dict[Path, str]:
             "pair_id", "trait1", "trait2", "covariate", "rationale", "selection_timing", "execution_status",
         ], conditional),
         ROBUSTNESS: tsv_text(["method", "status", "reference", "comparison_rule", "allowed_labels"], robustness),
+        RUNTIME_POLICY: tsv_text(["key", "value"], runtime_rows(policy)),
         HANDOFF: handoff_text(policy, free_bytes),
     }
     immutable_hashes = {str(path): hashlib.sha256(value.encode()).hexdigest() for path, value in outputs.items() if path != HANDOFF}
