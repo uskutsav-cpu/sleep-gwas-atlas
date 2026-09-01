@@ -179,7 +179,7 @@ def build_rows() -> tuple[list[dict[str, object]], dict[str, object]]:
         row(2, "REPLICATION_B", "Independent external-trait LDSC", "B: insomnia x ADHD",
             pair_b_status, pair_b_class, pair_b_observed,
             "At least 500 MiB free, then run the frozen version-pinned FinnGen R13 streaming ingest and LDSC",
-            f"{rel(SOURCE_AUDIT)};{rel(SOURCE_LOCK)};scripts/114_stream_track_b_pair_b_replication.py"),
+            f"{rel(SOURCE_AUDIT)};{rel(SOURCE_LOCK)};scripts/114_stream_track_b_pair_b_replication.py;scripts/118_run_track_b_pair_b_ldsc.py"),
         row(3, "LOCAL_LAVA", "LAVA univariate and bivariate local sharing", "A;B;CONTROL across 2,495 loci",
             lava_status, ";".join(lava_classes) or "NONE",
             f"reference_present={str(lava_reference_ok).upper()};free_bytes={free};minimum_free_bytes={local_policy['reference_minimum_free_bytes']}",
