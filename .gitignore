@@ -9,11 +9,17 @@ results/figures/*.png
 results/figures/*.pdf
 results/logs/*
 results/tables/*
+results/checkpoints/*
+results/mixer/*
+results/track_b/checkpoints/
+results/track_b/lava_chromosome_inputs/
+results/track_b/staging/
 
 # Synthetic smoke-test output. This directory exists so that fake LDSC logs
 # and real ones can never sit in the same folder. Nothing in it is ever a
 # result, and nothing in it is ever committed.
 results/_smoketest/
+results/_literature_cache/
 
 # Summary statistics: large, redistribution-restricted, and reproducible
 # from the download step. (Remove these three lines if you decide raw
@@ -21,7 +27,41 @@ results/_smoketest/
 data/raw/*
 data/harmonized/*
 data/munged/*
+data/munged_chromosome_split/*
+data/harmonized_mixer_full/*
+data/mixer/*
+data/pleiofdr/*
+data/fine_mapping/*
+data/molecular_coloc/*
+data/twas/*
 data/_test_*/
+discovery_extension/data/
+discovery_extension/logs/h2/
+discovery_extension/logs/rg/
+discovery_extension/results/ldsc/
+discovery_extension/results/qc/
+work/pleiofdr/
+work/pleiotropy/
+work/track_b_pleiotropy/
+work/pleiofdr_traits/
+work/fine_mapping/
+work/fine_mapping_runs/
+work/molecular/
+work/molecular_coloc_runs/
+work/twas_model_index/
+work/twas_phi_inventory/
+work/twas_runs/
+work/interpretation_imports/
+work/interpretation_automatic/
+work/causal_reference/
+work/causal_traits/
+work/causal_runs/
+work/robustness_imports/
+results/fine_mapping/*
+results/molecular/*
+results/twas/*
+results/interpretation/*
+results/robustness/*
 
 # Keep the directory skeleton so the pipeline's mkdir assumptions hold.
 !.gitkeep
@@ -33,4 +73,9 @@ __pycache__/
 *.pyc
 .venv/
 .ldsc-env/
+.r-env/
+.molecular-env/
+.mr-env/
+.snakemake/
+.cache/
 .DS_Store

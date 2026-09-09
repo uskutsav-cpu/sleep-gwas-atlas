@@ -1,0 +1,66 @@
+{
+  "additional_reviewed_direct_pairs": 14,
+  "apparently_novel_pairs": 6,
+  "candidate_records_screened": 1195,
+  "claim_limit": "No first-ever claims are made. Search absence is frozen to the recorded date and databases and can be overturned by missed, newly indexed, or future work.",
+  "classification_counts": {
+    "APPARENTLY_NOVEL": 6,
+    "DIRECT_RG_PREVIOUSLY_REPORTED": 77,
+    "DIRECT_RG_REPLICATION_DIFFERENT_DATASET": 20,
+    "MR_ONLY": 30,
+    "NO_DIRECT_RG_FOUND": 7,
+    "OBSERVATIONAL_ONLY": 7,
+    "RELATED_GENETIC_EVIDENCE_ONLY": 5,
+    "UNCERTAIN": 1
+  },
+  "classification_rule": {
+    "apparently_novel": "No direct or pair-specific genetic evidence in all four fixed queries plus targeted/source review, abs_rg>=0.15, FDR<=0.01, and no QC_CAUTION result.",
+    "direct": "Explicit numeric or verbal genome-wide rg in a reviewed publication table, full text, or abstract.",
+    "no_direct": "No explicit direct rg located; related genetic, MR, observational, uncertainty, and effect/QC-qualified apparently novel states remain distinct."
+  },
+  "direct_evidence_rows": 125,
+  "direct_rg_evidence_pairs": 97,
+  "direct_source_supplement_pairs": 83,
+  "directionally_contradictory_pair_count": 7,
+  "directionally_contradictory_pairs": [
+    "longsleep__crohn",
+    "napping__crohn",
+    "napping__ibd",
+    "sleep_apnea__atrial_fibrillation",
+    "sleep_apnea__triglycerides",
+    "sleepdur__crohn",
+    "sleepiness__crohn"
+  ],
+  "four_lens_query_count": 612,
+  "input_hashes": {
+    "config/literature_pair_reviews.tsv": "430f53facd478f3596ad01ffdc4121f22085ea900e5288d4d897ec92d3f03609",
+    "config/reviewed_additional_rg_evidence.tsv": "ab477b1108349c91eb5e09330dc86924dba0e79035cb4fee53ca49e068b6157e",
+    "results/analysis/literature_search_candidates.tsv": "ce6898e2f2d03780ce4dd5a9a7166a0d32c3881a9386a40454eea644768e34b5",
+    "results/analysis/literature_search_queries.tsv": "c150ab28f1f863e5baccfbca69d7925aa1c5284653d386b6a99c0cd5a1dbbea5",
+    "results/analysis/phase1_master_analysis.tsv": "496064aeb7555a21b1dc08f2205b158ed0f708a78fd76dbe85685730218c1491",
+    "results/analysis/published_rg_source_evidence.tsv": "aeb96fecc5cee9fac65323827998b42055b543292684e360d6444ddac3870226"
+  },
+  "no_direct_rg_found_pairs": 56,
+  "output_content_hashes": {
+    "literature_novelty_audit.tsv": "745e1df271f649803159cc4ce6466cd39a15fe320b5d7e7ec183ee94090e0389",
+    "negative_rg.tsv": "1672d42435597794fb4aedb8f7027c74bcf6fec242c43b33d32aae42f0599e5a",
+    "published_rg_replication.tsv": "a0632e6e00f2549b7a08aa97b77b8d24919584502cd03210e513338d4c4e6c4a"
+  },
+  "replication_metrics": {
+    "all_numeric_direct_evidence_rows": 120,
+    "exact_concept_numeric_comparator_rows": 93,
+    "exact_concept_unique_pairs": 86,
+    "interpretation_limit": "Most published comparisons reuse or overlap public GWAS inputs; these are pipeline positive controls, not independent biological replications.",
+    "pair_level_median_published_direction_concordance": 0.8837209302325582,
+    "pair_level_median_published_mean_absolute_difference": 0.06972151162790698,
+    "pair_level_median_published_pearson": 0.8224718328185474,
+    "proportion_consistent_within_combined_95pct_uncertainty": 0.8160919540229885,
+    "row_level_direction_concordance": 0.8924731182795699,
+    "row_level_mean_absolute_difference": 0.06967258064516128,
+    "row_level_pearson_atlas_vs_published": 0.8418928611204314,
+    "uncertainty_comparable_row_count": 87
+  },
+  "schema_version": "sleep-atlas-phase1-literature-audit.1",
+  "search_as_of_date": "2026-08-28",
+  "significant_pairs_reviewed": 153
+}

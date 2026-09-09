@@ -1,0 +1,77 @@
+{
+  "analysis_id": "atlas-v1.0-downstream",
+  "analysis_panel": "atlas-v1.0",
+  "expected_traits": 45,
+  "expected_sleep_non_sleep_pairs": 396,
+  "fine_mapping": {
+    "entry_gate": "Every PRIMARY_PHASE1 canonical cross-method shared locus; QC-failed sensitivity loci remain separate",
+    "primary_method": "SuSiE-RSS",
+    "susieR_version": "0.14.2",
+    "maximum_causal_signals": 10,
+    "credible_set_coverage": 0.95,
+    "minimum_absolute_correlation": 0.5,
+    "maximum_iterations": 1000,
+    "estimate_residual_variance": false,
+    "minimum_locus_variants": 50,
+    "ld_source": "LAVA UK Biobank LD v1.1, European ancestry, GRCh37",
+    "required_diagnostics": ["convergence", "RSS-LD inconsistency s", "kriging allele-switch outliers", "credible-set purity", "LD symmetry", "LD eigenvalues"]
+  },
+  "colocalization": {
+    "primary_method": "coloc.susie",
+    "coloc_version": "5.2.3",
+    "p1": 0.0001,
+    "p2": 0.0001,
+    "p12_primary": 0.00001,
+    "p12_sensitivity": [0.000001, 0.000005, 0.00001, 0.00005],
+    "shared_signal_rule": "PP.H4 >= 0.80 and PP.H4/PP.H3 >= 5 with passing fine-mapping/LD QC",
+    "prior_robust_rule": "Shared-signal rule passes at every locked p12 value",
+    "single_signal_fallback": "coloc.abf only when no credible set is estimable and the single-signal assumption is explicitly justified"
+  },
+  "molecular_integration": {
+    "required_modalities": ["eQTL", "sQTL", "pQTL_or_PWAS", "TWAS"],
+    "allowed_outcomes": ["SUPPORTED", "NO_EVIDENCE_FOUND", "ACCESS_BLOCKED", "NOT_APPLICABLE"],
+    "source_lock_required_before_results": true,
+    "minimum_convergent_evidence_streams_for_high_confidence_gene": 2,
+    "claim_limit": "Molecular association or prediction does not prove mediation or causality"
+  },
+  "regulatory_mapping": {
+    "required_layers": ["promoter", "enhancer", "open_chromatin", "TF_motif", "enhancer_promoter_link", "3D_contact_where_available"],
+    "required_context_domains": ["brain", "immune", "metabolic", "vascular"],
+    "claim_limit": "Regulatory overlap is annotation unless linked by signal-level and context-matched evidence"
+  },
+  "cell_types": {
+    "required_strategies": ["stratified_LDSC", "MAGMA_Celltyping", "scATAC_enrichment", "regulatory_overlap", "QTL_colocalization"],
+    "minimum_independent_strategies_for_supported_claim": 2,
+    "required_domains": ["brain", "immune", "metabolic", "vascular"]
+  },
+  "pathways": {
+    "required_resources": ["Reactome", "GO", "MSigDB", "MAGMA_gene_sets"],
+    "gene_input": "High-confidence convergent genes only; nearest-gene-only assignments are forbidden",
+    "multiple_testing": "BH FDR within each frozen resource/test family"
+  },
+  "causal_inference": {
+    "timing": "last downstream layer after locus and molecular analyses",
+    "directions": ["sleep_to_non_sleep", "non_sleep_to_sleep"],
+    "methods": ["IVW", "weighted_median", "MR_Egger", "MR_PRESSO", "CAUSE_or_LHC_MR_where_appropriate"],
+    "instrument_p_threshold": 5e-8,
+    "clump_r2": 0.001,
+    "clump_window_kb": 10000,
+    "minimum_instruments_for_primary_multi_instrument_inference": 3,
+    "minimum_F_statistic": 10,
+    "required_checks": ["heterogeneity", "horizontal_pleiotropy", "Steiger_directionality", "sample_overlap", "colocalization_consistency"],
+    "claim_rule": "Causal language requires concordant robust estimators, adequate instruments, no material pleiotropy warning, and compatible colocalization"
+  },
+  "robustness": {
+    "required_families": ["alternate_LD", "alternate_locus_boundaries", "fine_mapping_assumptions", "colocalization_priors_and_models", "cohort_overlap", "alternative_GWAS", "multiple_testing", "leave_one_trait_out_SEM", "local_correlation"],
+    "table_fields": ["conclusion_id", "conclusion", "robustness_family", "applicable", "primary_result", "sensitivity_result", "direction_concordant", "significance_concordant", "material_contradiction", "resolution", "evidence_path", "evidence_sha256", "provenance_id"],
+    "major_conclusion_rule": "Every major conclusion must have a row for every applicable robustness family and no unresolved result-changing contradiction"
+  },
+  "integrated_atlas": {
+    "tables": ["traits.tsv", "trait_pairs.tsv", "loci.tsv", "variants.tsv", "genes.tsv", "regulatory_elements.tsv", "cell_types.tsv", "pathways.tsv", "causal_tests.tsv", "edges.tsv"],
+    "edge_fields": ["edge_id", "source", "target", "relationship", "effect", "direction", "p_value", "fdr", "tissue", "cell_type", "method", "evidence_level", "dataset", "version", "provenance_id"]
+  },
+  "release": {
+    "name": "atlas-v1.0",
+    "condition": "All acceptance gates complete, all required validators pass, no synthetic artifact is included, and the exact code commit and file checksums are frozen"
+  }
+}

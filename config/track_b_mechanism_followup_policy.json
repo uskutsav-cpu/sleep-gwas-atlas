@@ -1,0 +1,208 @@
+{
+  "schema_version": "track-b-mechanism-pre-result-readiness.1",
+  "contract_scope": "PRE_RESULT_ONLY_PHASES_13_TO_29_WITH_EXPLICIT_PRE_PHASE_METHOD_GATES",
+  "analysis_build": "GRCh37",
+  "analysis_ancestry": "European",
+  "forbidden_inputs": [
+    "results/track_b/finemap",
+    "results/track_b/fine_mapping",
+    "results/track_b/placo",
+    "results/track_b/pleiotropy",
+    "results/track_b/mechanism_followup/science"
+  ],
+  "governing_documents": [
+    {
+      "document_id": "ORIGINAL_TRACK_B_PLAN",
+      "sha256": "11f25b0f18767c34e7900456f2ff5fe88b88c780765074d8f2a1e9ec90a9d569",
+      "scope": "phases_0_to_42"
+    },
+    {
+      "document_id": "POST_LAVA_TRACK_B_PLAN",
+      "sha256": "5dda37c8a7ed5665f20d40c30650c95e9d227bef3430899adb84ecf64649ed0d",
+      "scope": "phases_1_to_38"
+    }
+  ],
+  "pinned_inputs": {
+    "config/analysis_panel.lock.json": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c",
+    "config/analysis_panel.tsv": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "results/track_b/pair_manifest.lock.json": "003d0cd24d7e9215f8367d23275a32c03f7435bf47924e90284d4a5a8b9df0fa",
+    "results/track_b/pair_manifest.tsv": "b3c520424415895df18b87141d9b99721d3bf49330844524731dd563da12dd4f",
+    "config/molecular_analysis_policy.json": "0fb348ec171a5861da37ee5b73e2734946bc0ec4c68fc8372fd905cdb87390ba",
+    "config/molecular_source_registry.tsv": "ac6cb174de5c23ad56b2ff249984ab3315f692be651589e71fe981b7f7565f11",
+    "config/molecular_method_references.tsv": "241f8f639fe9114d51baa762fa07357873f22cf8155ca7e7ef1048e2169bd64d",
+    "config/interpretation_analysis_policy.json": "aedc398cf377f9c75c56d7f7aae7772c64fc3db81dd1f16b38b307c8168b383e",
+    "config/interpretation_source_registry.tsv": "11b525969e0184b2132160112f3760e5301902bd3a14f1c277ef58e9e868c193",
+    "config/interpretation_method_references.tsv": "399dd38badd2bb27332b7846db477597d7dfe2a46d97f12fe80a244ecc151542",
+    "config/downstream_analysis_policy.json": "1a22e03fe8a62eed460de460900f49a7546df12437b20e7997946f7c809c676c",
+    "config/interpretation_screen_registry_v4.json": "47fdd559358ed85e0314f01abfcc9d68933ef22f921fea063046f68b87cbf4a2",
+    "config/interpretation_fuma_scrna.json": "4f28ea6f9a9ab76d553b65cffbae4b8ca748225c791dadf7e8fdc4c59ec8bf9b",
+    "config/interpretation_catlas_adult_v4.json": "89d29f44e7d2f9d62d9f6fd30f7184e254e02b63069e910b01386a686f50a655",
+    "config/interpretation_ldsc_seg_reference.json": "e152110bc3db4b822e7a642040acf6f755939d6721de3854df17046b95c3fa2d",
+    "config/interpretation_ldsc_seg_gtex.json": "cf08a10f8b518f6ee07f8a33201b43de1fa8025a36815361f1563928c12d5d5c",
+    "config/interpretation_abc_2021.json": "d858327720b7b6000ded9b3d4ca5b7fc017f490d6ea243bb576368af6fb7b1fa",
+    "config/interpretation_pchic_2016.json": "4ba88e68a0c29e6641790d2f475b1cf56dffdd310d6e02971d82c1c6821237ab",
+    "config/interpretation_hocomoco_v14.json": "40450abb7c8f7a2382a88502175195683d93be4a48524197084bd91dbc5b6b3a",
+    "config/interpretation_pathway_sources.json": "3b65f601928b95f99bab15c3e7e31c0c2a3ecfe555fafc231ab9ab9f9b9dcfdf",
+    "config/interpretation_causal_runtime.json": "9a2d0106b5cd2f641b41f7d86447b8305b18abc9c01d8fc4249621860e166d94",
+    "config/interpretation_causal_packages.tsv": "6c9ae71bf61cf36de4a952c469ffe4e5dec1b56ff6ef71f80225ff650fe0e26b",
+    "config/interpretation_causal_installed_packages.tsv": "77e51c68395bf9cd0ceeb1bd04a41256b9b29734a6cda83cd5afeb82164a6e09",
+    "results/tables/twas_phi_model_inventory.tsv": "3a1296373a215abd100062adf55a98f4e5b6cdbb8f95e8210efe7071124cca7e",
+    "results/tables/twas_phi_model_inventory.lock.json": "d78f9411b37410de1c08726a86e51fdbe34ca08bed0e5f0a8bf5c4450129b4c2",
+    "results/track_b/local_method_robustness_plan.tsv": "e01ba2e5834473222902035de4e85f0e175ddd8e2b4c58e4330989fefc4e5ec3",
+    "scripts/63_query_eqtl_catalogue.py": "a7aa050ed1d3224f3cb7756a167844700f01d26b00d492309ef5580671813e9b",
+    "scripts/71_run_twas.py": "5a978a281bd3a05a39bc6ecd15a06b4918bc3503be74e6d740e8c1e06ef21d48",
+    "scripts/74_interpretation_preflight.py": "865d51a388d2be4e15f18902deb537f76ffebfdabad04a43e86c54a0c17363cc",
+    "scripts/76_run_interpretation_task.py": "0e7aba6ba46789456e62d4cebe7751a14e065ccdb947b11a04078d2eaed559f0",
+    "scripts/82_run_regulatory_task.py": "050e6b8b7bc263434edc2b28c68186739269dc7d5cb92d5661b920ffd7c82c8c",
+    "scripts/83_run_motif_task.py": "ed126f70070708ceb513a20e18916bf08d4998bc874df4aac39e6b510059b756",
+    "scripts/84_prepare_abc_overlap_cache.py": "b18fa3baf0cd77cac3698ec217d58c607bf44fe9e82da4ae6e2c58cefef6aded",
+    "scripts/85_run_abc_task.py": "4c68675b8aca8d643742be1cfa35dae90b6d36187a53956cd18b4ef1d94d90de",
+    "scripts/86_prepare_pchic_overlap_cache.py": "83d57f6f9d60b65965c36625712fe98bb9a0ab1ce68e2cf2d444306acd03195a",
+    "scripts/87_run_pchic_task.py": "842efd8b8cacc9c289ee4f06b990ce0dccfc563ded4f3773c82dbf167f43f2b9",
+    "scripts/88_materialize_fuma_resources.py": "3b802a890c97b3333b17770215fd283ca171c204d9b04458a09c3e26ecd15f3e",
+    "scripts/89_prepare_magma_annotation.py": "ad2f2eb57232e46dfd61ed014758809d3815604c3bad6bae6724be8898ac5e4a",
+    "scripts/90_prepare_magma_gene_results.py": "6c3d65f7127a3945b9a61c5a21ef729db78fcd40794dccb165f189870fa226dd",
+    "scripts/91_run_fuma_scrna_task.py": "bf290cc5352bead6f0d2e6fdf3a06785953a16e713dc48420faeefa9fa50bae5",
+    "scripts/92_run_pathway_task.py": "15c40aa8c9deff389dc378dcb0bb152c79776c33c467dae12848409fcce94dce",
+    "scripts/94_prepare_causal_reference.py": "6686db83c1aff8a9df1f69ff8c09a43f63fbde7701b742be7e3aea927a38d743"
+    ,"scripts/97_run_catlas_task.py": "26248ada2cc9b0a8931445f95bc6eb8c733514107c6bad309219242ab649c876"
+    ,"scripts/98_run_ldsc_seg_task.py": "b50cadc6ca232b13e18102cdc2fa18c2ec4160c2ebbbbfae77949a74e42128cb"
+    ,"ldsc/ldsc.py": "4236e817b1c7443131a9f078390072c38bee85112e891c29351e3e7d663b8a25"
+    ,".ldsc-env/bin/python3.9": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba"
+    ,"scripts/downstream_contract.py": "7a9fd41f85e60d8ed393653f4d1c3a76fe752269675007fb4a181fa0d9ca4c55"
+    ,"scripts/pathway_sources.py": "b7b41abd89c4414d17075651c3876fe578d2eecf892cc731bbb48d50565290c6"
+  },
+  "expected_pair_identities": {
+    "A": ["snoring", "parental_lifespan"],
+    "B": ["insomnia", "adhd"],
+    "CONTROL": ["insomnia", "frailty"]
+  },
+  "expected_sleep_trait_ids": [
+    "insomnia", "sleepdur", "shortsleep", "longsleep", "chronotype", "sleepiness",
+    "napping", "snoring", "sleep_apnea", "sleep_efficiency", "accel_sleep_duration", "sleep_timing"
+  ],
+  "expected_analysis_ids": [
+    "P07_CONJFDR", "P09_HDL_L", "P09_RHO_HESS", "P13_MAGMA_BROAD_TISSUE",
+    "P13_SLDSC_GTEX", "P13_GTEX_TISSUE_QTL", "P14_BRAIN_CELL_CLASS_DISCOVERY",
+    "P15_BRAIN_CELL_SUBTYPE_DISCOVERY", "P16_HUMAN_CELL_CLASS_REPLICATION",
+    "P16_HUMAN_CELL_SUBTYPE_REPLICATION", "P17_CELL_EQTL", "P18_CELL_SQTL",
+    "P19_THREE_WAY_COLOC", "P20_CATLAS_SCATAC", "P20_SCREEN_CHROMATIN",
+    "P20_HOCOMOCO_MOTIF", "P21_ABC_ENHANCER_GENE", "P21_PCHIC_ENHANCER_GENE",
+    "P21_TWAS", "P22_REGULATORY_CHAIN", "P23_SPATIAL", "P24_LOCKED_ATLAS_CROSS_SLEEP",
+    "P25_PAIR_A_VS_B", "P26_POSITIVE_CONTROL", "P27_PATHWAYS", "P28_GRN",
+    "P29_BIDIRECTIONAL_MR"
+  ],
+  "required_qtl_datasets": {
+    "eQTL": ["QTD000559", "QTD000569"],
+    "sQTL": ["QTD000560", "QTD000563", "QTD000570", "QTD000573"]
+  },
+  "runtime_evidence": [
+    {"runtime_id": "LDSC_PYTHON_SITE_PACKAGES", "path": ".ldsc-env/lib/python3.9/site-packages", "kind": "TREE", "bytes": 179581743, "file_count": 6491, "sha256": "04c16d9e6e58b43f15a67b2ff0bc4edd295e255a64a15b5191c26178f92e7f5c"},
+    {"runtime_id": "CAUSAL_R_LIBRARY", "path": ".mr-env/library", "kind": "TREE", "bytes": 107950602, "file_count": 4254, "sha256": "53fe1b02e9e19d4dbd83415e6cdaa222d983682b3800634f87bbf6bcbb1e1dce"},
+    {"runtime_id": "BASE_R_LIBRARY", "path": ".r-env/lib/R/library", "kind": "TREE", "bytes": 215439016, "file_count": 5793, "sha256": "b95fa407c4a0ae88183b550089343933c52ae7fd74df7f333c3b7a9d1f752c70"},
+    {"runtime_id": "RSCRIPT_ENTRYPOINT", "path": ".r-env/bin/Rscript", "kind": "FILE", "bytes": 68896, "file_count": 1, "sha256": "fd88e7b40903dcc10937a70579ab448adea03622c4898ac18b77fed3434712b4"}
+  ],
+  "absence_probes": {
+    "broad_tissue_magma": "ref/mechanism_followup/broad_tissue_magma/expression_matrix.tsv.gz",
+    "human_subtype_replication": "ref/mechanism_followup/human_brain_subtype_replication/expression_matrix.tsv.gz",
+    "qtl_payload_root": "ref/molecular/eqtl_catalogue_r7/payloads",
+    "psychencode_payload_root": "ref/molecular/psychencode",
+    "tabix": ".molecular-env/bin/tabix",
+    "hocomoco_sequence": "ref/interpretation/regulatory/hg38.fa",
+    "ldsc_static_reference": "ref/interpretation/cell_type/ldsc_seg_reference_0921fed7/static.provenance.json",
+    "ldsc_static_reference_root": "ref/interpretation/cell_type/ldsc_seg_reference_0921fed7",
+    "spatial": "ref/mechanism_followup/spatial/source_manifest.json",
+    "matched_multimodal_grn": "ref/mechanism_followup/grn/source_manifest.json",
+    "track_b_mr_executor": "scripts/track_b_bidirectional_mr.py",
+    "conjfdr_runtime": "ref/track_b/conjfdr/runtime_manifest.json",
+    "hdl_l_reference": "ref/track_b/hdl_l/reference_manifest.json",
+    "rho_hess_reference": "ref/track_b/rho_hess/reference_manifest.json"
+    ,"three_way_coloc_executor": "scripts/track_b_three_way_coloc.py"
+    ,"regulatory_chain_executor": "scripts/track_b_regulatory_chain.py"
+    ,"cross_sleep_executor": "scripts/track_b_cross_sleep.py"
+    ,"grn_executor": "scripts/track_b_grn.py"
+  },
+  "analyses": [
+    {
+      "analysis_id": "P07_CONJFDR", "phase": "7", "analysis": "Conditional/conjunctional FDR sensitivity", "scope": "Pair A, Pair B, CONTROL; complete frozen genome-wide family", "requirements": ["conjfdr_runtime"], "required_inputs": "Dense EUR full-summary statistics for both traits in each frozen pair; frozen global null/correlation calibration and full multiple-testing family", "required_software": "Validated conjFDR/pleioFDR executor plus MATLAB-compatible runtime", "reference": "Method-specific LD/null reference frozen before results", "build": "GRCh37 after exact harmonization", "ancestry": "European", "ram_decomposition": "Global nuisance calibration cannot be split; variant testing may be chunked only after the global parameters are frozen and if mathematically identical", "output": "results/track_b/mechanism_followup/science/conjfdr.tsv", "unblock": "Install and checksum-lock a validated Track B conjFDR runtime, reference and executor without reading Track B results", "claim_limit": "Sensitivity evidence only; absence or failure is not a null result"
+    },
+    {
+      "analysis_id": "P09_HDL_L", "phase": "9", "analysis": "HDL-L local genetic-correlation sensitivity", "scope": "All loci in the original frozen family for A, B and CONTROL", "requirements": ["hdl_l_reference"], "required_inputs": "Full per-locus SNP family and method-native ancestry-matched LD reference", "required_software": "Validated HDL-L implementation", "reference": "Independent checksum-pinned EUR GRCh37 HDL-L reference", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Safe one complete LD-dependent locus per fresh process; never split a locus", "output": "results/track_b/mechanism_followup/science/hdl_l.tsv", "unblock": "Provide and checksum-lock the HDL-L implementation and its independent ancestry/build-matched reference", "claim_limit": "Sensitivity comparison to LAVA only; failed/skipped loci remain failures, not nulls"
+    },
+    {
+      "analysis_id": "P09_RHO_HESS", "phase": "9", "analysis": "rho-HESS local genetic-correlation sensitivity", "scope": "All loci in the original frozen family for A, B and CONTROL", "requirements": ["rho_hess_reference"], "required_inputs": "Full per-locus SNP family and method-native ancestry-matched LD reference", "required_software": "Validated rho-HESS implementation and sealed Track B contract", "reference": "Separate checksum-pinned EUR GRCh37 rho-HESS reference", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Safe one complete LD-dependent locus per fresh process; never split a locus", "output": "results/track_b/mechanism_followup/science/rho_hess.tsv", "unblock": "Provide a separate frozen rho-HESS contract, executor and ancestry/build-matched reference", "claim_limit": "Independent sensitivity only; it is not a proxy for LAVA"
+    },
+    {
+      "analysis_id": "P13_MAGMA_BROAD_TISSUE", "phase": "13", "analysis": "Broad tissue enrichment with MAGMA", "scope": "Prespecified brain, immune, metabolic, vascular, lung/airway and skeletal-muscle tissue family", "requirements": ["fuma_bundle", "broad_tissue_magma"], "required_inputs": "Full dense trait summary statistics; complete predeclared human broad-tissue expression family", "required_software": "MAGMA v1.10", "reference": "1000 Genomes Phase 3 EUR GRCh37", "build": "GWAS/reference GRCh37; expression gene IDs Ensembl-matched", "ancestry": "European", "ram_decomposition": "Safe by trait and frozen tissue matrix after gene results are computed; preserve the full tissue correction family", "output": "results/track_b/mechanism_followup/science/broad_tissue_magma.tsv", "unblock": "Provide a checksum-pinned human broad-tissue matrix covering the entire predeclared family, including lung/airway and skeletal muscle", "claim_limit": "Tissue enrichment prioritizes tissue context and does not prove causality"
+    },
+    {
+      "analysis_id": "P13_SLDSC_GTEX", "phase": "13", "analysis": "GTEx expression-linked tissue enrichment with S-LDSC", "scope": "All 16 frozen GTEx tissues across four domains; explicitly not complete lung/airway or skeletal-muscle coverage", "requirements": ["ldsc_source_bundle", "ldsc_runtime", "ldsc_static_reference"], "required_inputs": "375-file frozen GTEx annotation family, baselineLD v2.2, weights, HapMap3 list and per-chromosome EUR genotypes", "required_software": "LDSC commit 6c673952cee74bd5c57aef1555a03b1c015399a0 under Python 3.9.23", "reference": "1000 Genomes Phase 3 EUR GRCh37; baselineLD v2.2", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Safe one chromosome at a time for annotation LD scores, then one trait at a time; all 16 tissues remain in each correction family", "output": "results/track_b/mechanism_followup/science/gtex_sldsc.tsv", "unblock": "Materialize and checksum-lock the complete static reference family named by interpretation_ldsc_seg_reference.json", "claim_limit": "Expression-linked annotation enrichment does not identify a causal tissue, cell type, gene or mechanism"
+    },
+    {
+      "analysis_id": "P13_GTEX_TISSUE_QTL", "phase": "13", "analysis": "Broad GTEx tissue eQTL/sQTL integration", "scope": "All preregistered GTEx v8 contexts; no post-result context selection", "requirements": ["qtl_metadata", "qtl_payloads", "tabix"], "required_inputs": "GTEx v8 molecular-QTL payloads and matching tabix indexes plus frozen metadata", "required_software": "tabix and the locked SuSiE/coloc molecular runtime", "reference": "GTEx v8, GENCODE v26, GRCh38 with bidirectional GRCh37 chain", "build": "Source GRCh38; analysis GRCh37 via exact locked liftover", "ancestry": "Source-context ancestry must be documented per dataset; no ancestry substitution", "ram_decomposition": "Safe one validated locus and molecular feature at a time; never split an LD block", "output": "results/track_b/mechanism_followup/science/gtex_tissue_qtl.tsv", "unblock": "Acquire, checksum-lock and index the complete preregistered GTEx v8 QTL family and install tabix", "claim_limit": "QTL association/colocalization is context-specific model evidence, not proof of mediation"
+    },
+    {
+      "analysis_id": "P14_BRAIN_CELL_CLASS_DISCOVERY", "phase": "14", "analysis": "Human brain broad-cell-class discovery", "scope": "Allen Human MTG level 2, all 75 frozen columns with global FUMA-family correction", "requirements": ["fuma_bundle", "brain_discovery_human"], "required_inputs": "Allen Human MTG level-2 expression matrix and MAGMA gene results for each eligible trait", "required_software": "MAGMA v1.10 and scripts/76_run_interpretation_task.py", "reference": "FUMA commit dd526163; MAGMA EUR GRCh37", "build": "GWAS/reference GRCh37; Ensembl v92 genes", "ancestry": "European GWAS; human expression", "ram_decomposition": "Safe by trait/dataset after one complete MAGMA gene model; retain every cell column in the frozen family", "output": "results/track_b/mechanism_followup/science/brain_cell_class_discovery.tsv", "unblock": "Upstream locus/trait gates must identify the eligible frozen analysis units", "claim_limit": "Discovery enrichment in human middle temporal gyrus is regional expression correlation, not causal-cell evidence"
+    },
+    {
+      "analysis_id": "P15_BRAIN_CELL_SUBTYPE_DISCOVERY", "phase": "15", "analysis": "Human brain cell-subtype discovery", "scope": "All neuronal and glial subtypes in Allen Human MTG level 2; no post-result collapsing", "requirements": ["fuma_bundle", "brain_discovery_human"], "required_inputs": "Same frozen Allen Human MTG matrix with subtype-resolved columns", "required_software": "MAGMA v1.10 and scripts/76_run_interpretation_task.py", "reference": "FUMA commit dd526163; MAGMA EUR GRCh37", "build": "GWAS/reference GRCh37; Ensembl v92 genes", "ancestry": "European GWAS; human expression", "ram_decomposition": "Safe by trait/dataset; keep the full subtype denominator", "output": "results/track_b/mechanism_followup/science/brain_cell_subtype_discovery.tsv", "unblock": "Upstream discovery-class gate must be met without changing the frozen subtype family", "claim_limit": "Subtype discovery is limited to adult human middle temporal gyrus and is not whole-brain proof"
+    },
+    {
+      "analysis_id": "P16_HUMAN_CELL_CLASS_REPLICATION", "phase": "16", "analysis": "Independent human brain cell-class replication", "scope": "All 7 frozen GSE67835 Human Cortex classes, analyzed independently of Allen MTG", "requirements": ["fuma_bundle", "brain_replication_human_class"], "required_inputs": "GSE67835 Human Cortex without fetal samples", "required_software": "MAGMA v1.10 and scripts/76_run_interpretation_task.py", "reference": "FUMA commit dd526163; independent GSE67835 human matrix", "build": "GWAS/reference GRCh37; Ensembl-mapped human genes", "ancestry": "European GWAS; human expression", "ram_decomposition": "Safe by trait/dataset; correction remains across every class in the independent matrix", "output": "results/track_b/mechanism_followup/science/human_cell_class_replication.tsv", "unblock": "Upstream discovery result must define the preregistered replication query", "claim_limit": "Replication is broad-class concordance in a second human cortex matrix, not subtype replication"
+    },
+    {
+      "analysis_id": "P16_HUMAN_CELL_SUBTYPE_REPLICATION", "phase": "16", "analysis": "Independent human brain subtype replication", "scope": "Independent human subtype-resolved brain atlas; mouse and the 7-class GSE67835 matrix are ineligible", "requirements": ["human_subtype_replication"], "required_inputs": "A checksum-pinned independent human subtype-resolved brain expression atlas", "required_software": "Compatible frozen gene-property executor", "reference": "Human, independent cohort/atlas, documented brain region and life stage", "build": "Documented gene annotation/build", "ancestry": "Human expression; GWAS European", "ram_decomposition": "Safe by trait and atlas; retain the complete predeclared subtype family", "output": "results/track_b/mechanism_followup/science/human_cell_subtype_replication.tsv", "unblock": "Provide and freeze an independent human subtype-resolved brain atlas before discovery results are read", "claim_limit": "Mouse evidence cannot satisfy human replication; broad classes cannot establish subtype replication"
+    },
+    {
+      "analysis_id": "P17_CELL_EQTL", "phase": "17", "analysis": "Cell-specific eQTL integration", "scope": "Frozen Young 2019 microglia and Aygun 2021 neuron ge datasets; PsychENCODE only as controlled supplementary source", "requirements": ["qtl_metadata", "qtl_payloads", "tabix"], "required_inputs": "QTD000559 and QTD000569 full QTL payloads plus indexes; controlled PsychENCODE payload only if access is obtained", "required_software": "tabix, SuSiE-RSS and coloc.susie locked runtime", "reference": "eQTL Catalogue r7 June 2024; PsychENCODE access-controlled", "build": "Source GRCh38; analysis GRCh37 via locked chains", "ancestry": "Dataset-specific documented ancestry; no assumed EUR label", "ram_decomposition": "Safe one complete locus-feature-dataset unit at a time; global family denominator frozen before tests", "output": "results/track_b/mechanism_followup/science/cell_eqtl.tsv", "unblock": "Acquire and checksum-lock the complete selected QTL payloads and .tbi indexes and install tabix; record PsychENCODE access separately", "claim_limit": "Cell-sorted QTL support is context evidence and does not prove cellular mediation"
+    },
+    {
+      "analysis_id": "P18_CELL_SQTL", "phase": "18", "analysis": "Cell-specific sQTL integration", "scope": "Frozen Young 2019 microglia and Aygun 2021 neuron exon/leafcutter families", "requirements": ["qtl_metadata", "qtl_payloads", "tabix"], "required_inputs": "QTD000560, QTD000563, QTD000570 and QTD000573 full payloads plus matching indexes", "required_software": "tabix, SuSiE-RSS and coloc.susie locked runtime", "reference": "eQTL Catalogue r7 June 2024", "build": "Source GRCh38; analysis GRCh37 via locked chains", "ancestry": "Dataset-specific documented ancestry", "ram_decomposition": "Safe one complete locus-feature-dataset unit at a time; never split LD-dependent units", "output": "results/track_b/mechanism_followup/science/cell_sqtl.tsv", "unblock": "Acquire, checksum-lock and index all selected splicing-QTL payloads and install tabix", "claim_limit": "Splicing-QTL colocalization supports a context-specific shared signal, not causal splicing mediation"
+    },
+    {
+      "analysis_id": "P19_THREE_WAY_COLOC", "phase": "19", "analysis": "Three-way trait-trait-molecular colocalization", "scope": "Every eligible locus and frozen molecular feature for Pair A, Pair B and CONTROL", "requirements": ["qtl_payloads", "tabix", "three_way_coloc_executor"], "required_inputs": "Both full trait summaries, complete locus LD, and complete molecular-QTL data for the same variants/features", "required_software": "Predeclared multi-signal three-way coloc implementation; pairwise overlap is not a substitute", "reference": "Ancestry/build-matched locus LD and frozen molecular release", "build": "GRCh37 analysis with exact molecular liftover", "ancestry": "European trait LD; molecular ancestry documented", "ram_decomposition": "Safe one full locus and feature at a time; never split an LD block; correct over the full frozen family", "output": "results/track_b/mechanism_followup/science/three_way_coloc.tsv", "unblock": "Provide all molecular payload/index inputs and a checksum-locked three-way multi-signal executor before results are inspected", "claim_limit": "A three-way shared-signal posterior is model-dependent and does not prove mediation or a causal gene"
+    },
+    {
+      "analysis_id": "P20_CATLAS_SCATAC", "phase": "20", "analysis": "Human adult scATAC cell-type enrichment", "scope": "All 43 prespecified CATlas adult cell types across brain, immune, metabolic and vascular domains", "requirements": ["catlas_bundle"], "required_inputs": "CATlas v4 adult metadata, 111-member restricted-peak archive and adult cCRE universe", "required_software": "scripts/76_run_interpretation_task.py and local PLINK reference preparation", "reference": "CATlas adult v4 GRCh38; EUR GRCh37 GWAS reference", "build": "CATlas GRCh38 with unique locked liftover from GRCh37", "ancestry": "European GWAS; human adult atlas", "ram_decomposition": "Safe by trait and complete cell-type family; variant cache can be built chromosome-wise without changing the family", "output": "results/track_b/mechanism_followup/science/catlas_scatac.tsv", "unblock": "Upstream variant/trait gates must define eligible units", "claim_limit": "Accessible-chromatin enrichment is coarse annotation, not causal-cell or causal-variant proof"
+    },
+    {
+      "analysis_id": "P20_SCREEN_CHROMATIN", "phase": "20", "analysis": "SCREEN enhancer/open-chromatin overlap", "scope": "Registry V4 Core Collection across frozen brain, immune, metabolic and vascular ontology mappings", "requirements": ["screen_bundle"], "required_inputs": "All 2,348,854 GRCh38 cCREs, full 170-biosample class matrix and exact metadata snapshot", "required_software": "scripts/76_run_interpretation_task.py", "reference": "SCREEN r3.2026.3 Registry V4", "build": "GRCh38 with unique GRCh37-to-GRCh38 liftover", "ancestry": "Not ancestry-specific annotation; trait inference remains European", "ram_decomposition": "Safe by complete locus/biosample unit after one streaming index; preserve all eligible biosamples", "output": "results/track_b/mechanism_followup/science/screen_chromatin.tsv", "unblock": "Upstream fine-mapped/shared-signal variant gate must be available", "claim_limit": "Interval overlap is annotation and does not assign a target gene"
+    },
+    {
+      "analysis_id": "P20_HOCOMOCO_MOTIF", "phase": "20", "analysis": "Allele-dependent HOCOMOCO motif scoring", "scope": "All 1,595 H14CORE motifs at eligible SCREEN-accessible variants", "requirements": ["hocomoco_bundle", "hocomoco_sequence"], "required_inputs": "H14CORE MEME/PWM/threshold/annotation family plus checksum-locked hg38 allele windows", "required_software": "Validated local motif scorer", "reference": "HOCOMOCO v14; GRCh38 sequence", "build": "GRCh38", "ancestry": "Not ancestry-specific sequence annotation", "ram_decomposition": "Safe per variant window after the complete motif family is loaded; retain all motifs in correction/reporting family", "output": "results/track_b/mechanism_followup/science/hocomoco_motifs.tsv", "unblock": "Provide a local checksum-pinned hg38 FASTA/index or pre-result authorized immutable sequence snapshots and a validated scorer", "claim_limit": "Predicted allele-dependent motif change is not in-vivo TF binding or gene regulation"
+    },
+    {
+      "analysis_id": "P21_ABC_ENHANCER_GENE", "phase": "21", "analysis": "ABC enhancer-to-gene linking", "scope": "All 52 frozen non-transformed contexts in four domains; source availability limits brain interpretation", "requirements": ["abc_bundle"], "required_inputs": "All 7,717,392 ABC 2021 GRCh37 prediction rows and exact context map", "required_software": "scripts/76_run_interpretation_task.py", "reference": "ABC 2021 release, native GRCh37", "build": "GRCh37", "ancestry": "Not ancestry-specific annotation", "ram_decomposition": "Safe by chromosome/locus while streaming the full source; do not post-select biosamples", "output": "results/track_b/mechanism_followup/science/abc_links.tsv", "unblock": "Upstream eligible variants and molecularly supported same-locus genes must exist", "claim_limit": "ABC is a context-specific prediction; available brain contexts are limited and not a universal adult-brain reference"
+    },
+    {
+      "analysis_id": "P21_PCHIC_ENHANCER_GENE", "phase": "21", "analysis": "Promoter-capture Hi-C linking", "scope": "All 17 primary hematopoietic contexts for immune only; brain, metabolic and vascular are unavailable, not negative", "requirements": ["pchic_bundle"], "required_inputs": "All 728,838 native-GRCh37 CHiCAGO rows", "required_software": "scripts/76_run_interpretation_task.py", "reference": "Javierre 2016 promoter-capture Hi-C", "build": "GRCh37", "ancestry": "Not ancestry-specific annotation", "ram_decomposition": "Safe by locus/cell type while streaming full source; keep all 17 contexts", "output": "results/track_b/mechanism_followup/science/pchic_links.tsv", "unblock": "Upstream eligible variants and molecularly supported same-locus genes must exist", "claim_limit": "Physical proximity in hematopoietic cells does not prove enhancer activity or regulation; unavailable domains cannot be called null"
+    },
+    {
+      "analysis_id": "P21_TWAS", "phase": "21", "analysis": "GTEx v8 phi-corrected S-PrediXcan", "scope": "All 49 contexts and 98 covariance/model files for all locked traits", "requirements": ["twas_models", "twas_runtime"], "required_inputs": "Complete 3,135,665,776-byte phi-enabled model family and dense summary statistics", "required_software": "MetaXcan 0.8.1 under the exact molecular Python environment", "reference": "GTEx v8 elastic-net-with-phi release updated 2024-11-12", "build": "Model-specific GTEx build with GENCODE v26 locus integration", "ancestry": "Model ancestry as documented; GWAS European", "ram_decomposition": "Safe one trait/context/model database at a time after full 98-file identity lock; FDR uses every tested model-feature in the family", "output": "results/track_b/mechanism_followup/science/twas.tsv", "unblock": "Download and checksum-lock all 98 frozen model files and construct the exact .molecular-env/python runtime", "claim_limit": "TWAS is genetically predicted expression association and does not prove mediation or a causal gene"
+    },
+    {
+      "analysis_id": "P22_REGULATORY_CHAIN", "phase": "22", "analysis": "Variant-to-element-to-gene-to-cell regulatory chain", "scope": "Every eligible locus; require convergent independent evidence without nearest-gene substitution", "requirements": ["screen_bundle", "catlas_bundle", "qtl_payloads", "regulatory_chain_executor"], "required_inputs": "Fine-mapped/shared variants, context-matched chromatin, source-declared enhancer-gene links and molecular signal evidence", "required_software": "Frozen chain integrator enforcing same-locus/same-context identities", "reference": "SCREEN/CATlas/ABC/PCHiC/QTL releases pinned in this contract", "build": "GRCh37 analysis with explicit GRCh38 harmonization", "ancestry": "European trait LD; annotation context documented", "ram_decomposition": "Safe one complete locus at a time after global families/thresholds are frozen", "output": "results/track_b/mechanism_followup/science/regulatory_chains.tsv", "unblock": "Provide molecular QTL payloads and a checksum-locked chain integrator; upstream signals must then pass preregistered gates", "claim_limit": "A convergent chain is a mechanistic hypothesis, not proof of causality or mediation"
+    },
+    {
+      "analysis_id": "P23_SPATIAL", "phase": "23", "analysis": "Spatial localization", "scope": "Authorized human spatial brain or relevant tissue dataset selected before results", "requirements": ["spatial"], "required_inputs": "Checksum-pinned spatial expression payload, coordinates, sample metadata and region/cell annotations", "required_software": "Dataset-matched spatial analysis runtime and frozen mapping protocol", "reference": "No authorized local spatial reference currently exists", "build": "Dataset-specific and documented", "ancestry": "Human; cohort ancestry/context documented", "ram_decomposition": "Usually safe by sample/section only if normalization/model equivalence is preserved; freeze global parameters first", "output": "results/track_b/mechanism_followup/science/spatial.tsv", "unblock": "Provide an authorized immutable human spatial dataset, metadata, reference build and validated executor before upstream results are inspected", "claim_limit": "Absence of a spatial resource or blocked access is not absence of spatial localization"
+    },
+    {
+      "analysis_id": "P24_LOCKED_ATLAS_CROSS_SLEEP", "phase": "24", "analysis": "Cross-sleep-trait evaluation", "scope": "All 12 sleep traits in locked analysis-panel order; no result-driven subset", "requirements": ["analysis_panel", "dense_sleep_family", "cross_sleep_executor"], "required_inputs": "All 12 dense harmonized sleep GWAS and the complete upstream locus/gene/cell regulatory targets", "required_software": "Frozen cross-trait integration executor preserving the 12-trait family", "reference": "atlas-v1.0 analysis panel", "build": "Per-trait locked build: 11 hg19/GRCh37 sleep traits and sleep_apnea hg38/GRCh38; each downstream method must apply an explicit predeclared build harmonization", "ancestry": "European", "ram_decomposition": "Safe one trait/locus at a time after family and correction denominator are frozen", "output": "results/track_b/mechanism_followup/science/cross_sleep.tsv", "unblock": "Provide and checksum-lock the cross-sleep integration executor; upstream mechanism targets must then exist", "claim_limit": "Cross-trait recurrence is shared evidence and does not establish direction or mechanism"
+    },
+    {
+      "analysis_id": "P25_PAIR_A_VS_B", "phase": "25", "analysis": "Pair A versus Pair B comparison", "scope": "Exactly A snoring-parental_lifespan versus B insomnia-ADHD", "requirements": ["pair_manifest"], "required_inputs": "Complete homologous outputs for both frozen discovery pairs", "required_software": "Deterministic fieldwise comparison using common evidence definitions", "reference": "Frozen Track B pair manifest", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Safe by evidence table after complete homologous outputs are frozen", "output": "results/track_b/mechanism_followup/science/pair_a_vs_b.tsv", "unblock": "Both pairs must complete the same preregistered upstream and mechanism families", "claim_limit": "Differences describe the two frozen pairs and are not general sleep-versus-brain taxonomy"
+    },
+    {
+      "analysis_id": "P26_POSITIVE_CONTROL", "phase": "26", "analysis": "Insomnia-frailty positive control", "scope": "Exactly CONTROL insomnia-frailty, never substituted", "requirements": ["pair_manifest"], "required_inputs": "Complete CONTROL outputs produced under the same methods and thresholds as A/B", "required_software": "Same validated production executors used for discovery pairs", "reference": "Frozen Track B CONTROL identity", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Same safe decomposition as the corresponding production analyses", "output": "results/track_b/mechanism_followup/science/positive_control.tsv", "unblock": "CONTROL must complete the homologous upstream and mechanism analyses", "claim_limit": "The control validates pipeline behavior; it is not a novelty claim and failure is not a negative biological result"
+    },
+    {
+      "analysis_id": "P27_PATHWAYS", "phase": "27", "analysis": "Convergent-gene pathway enrichment", "scope": "Complete Reactome v97, GO 2026-08-05, MSigDB 2026.1.Hs and FUMA/MAGMA 2023.1Hs families", "requirements": ["pathway_bundle", "pathway_executor"], "required_inputs": "Only HIGH_CONFIDENCE_CONVERGENT_GENE rows plus exact GENCODE v26 map and all eligible gene sets", "required_software": "scripts/92_run_pathway_task.py", "reference": "Four checksum-pinned pathway releases", "build": "GENCODE v26 GRCh38 identifiers; locus mapping explicit", "ancestry": "Not ancestry-specific gene sets", "ram_decomposition": "Safe one locus/resource at a time; retain every eligible set and zero-overlap row in each FDR family", "output": "results/track_b/mechanism_followup/science/pathways.tsv", "unblock": "Upstream high-confidence convergent-gene lists must exist without changing the resource family", "claim_limit": "Overrepresentation does not establish pathway activity, direction, mediation or causality"
+    },
+    {
+      "analysis_id": "P28_GRN", "phase": "28", "analysis": "Gene-regulatory network inference", "scope": "Human context-matched multimodal expression plus accessibility; no unmatched pseudo-network", "requirements": ["matched_multimodal_grn", "grn_executor"], "required_inputs": "Matched expression/accessibility observations, donor/cell metadata and frozen target-gene universe", "required_software": "Validated GRN method matched to data design", "reference": "No local matched multimodal human reference currently exists", "build": "Dataset-specific and documented", "ancestry": "Human; tissue/cell/donor context documented", "ram_decomposition": "Depends on algorithm; block until equivalence of any cell/region batching is demonstrated", "output": "results/track_b/mechanism_followup/science/grn.tsv", "unblock": "Provide checksum-pinned matched multimodal human data and a validated predeclared GRN executor before upstream results are inspected", "claim_limit": "A predicted network is hypothesis-generating; missing/unmatched data cannot support a regulatory-network claim"
+    },
+    {
+      "analysis_id": "P29_BIDIRECTIONAL_MR", "phase": "29", "analysis": "Bidirectional Mendelian randomization", "scope": "Both directions for A, B and CONTROL with frozen estimator family and family-wide BH correction", "requirements": ["causal_bundle", "track_b_mr_executor"], "required_inputs": "Dense exposure/outcome summaries, exact EUR HapMap3 LD instruments, overlap metadata and compatible colocalization evidence", "required_software": "TwoSampleMR 0.7.9, MRPRESSO 1.0, cause 1.2.0, lhcMR sensitivity and a validated automatic Track B executor", "reference": "1000 Genomes Phase 3 EUR 503-sample GRCh37", "build": "GRCh37", "ancestry": "European", "ram_decomposition": "Safe one direction/pair/estimator at a time only after the complete 396-pair family and global CAUSE nuisance rules are frozen", "output": "results/track_b/mechanism_followup/science/bidirectional_mr.tsv", "unblock": "Implement and checksum-lock an automatic executor that enforces instrument, overlap, Steiger, pleiotropy and family-wide correction rules", "claim_limit": "Causal wording requires every prespecified robustness condition; association or a single estimator is insufficient"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "entry_gate": "prioritized discovery pair with completed pair-level novelty audit; Tier B claims additionally require independent replication or prespecified strong local support",
+  "order": [
+    "local_genetic_correlation",
+    "pleiotropy_and_shared_factor_alternatives",
+    "locus_definition_and_fine_mapping",
+    "colocalization_with_explicit_hypotheses_priors_and_sensitivity",
+    "functional_and_mechanistic_annotation"
+  ],
+  "local_analysis": {
+    "detailed_contract": "config/local_architecture_contract.json",
+    "primary_method": "LAVA 0.1.5 with source-verified UKB v1.1 EUR reference",
+    "robustness_method": "HDL-L 1.4.3 where source-verified reference and compatible dense inputs are available",
+    "required_outputs": ["local h2 for both traits", "locus boundaries", "method and LD reference", "local rg", "SE", "p", "FDR", "effect direction", "tested-locus multiplicity correction", "convergence/QC"],
+    "required_secondary_set": "biologically relevant or polygenically overlapping globally-null pairs locked before local result access",
+    "required_flags": ["GLOBAL_NULL_LOCAL_POSITIVE", "GLOBAL_NULL_LOCAL_NEGATIVE", "OPPOSING_LOCAL_EFFECTS", "MULTI_LOCUS_SHARED_ARCHITECTURE"],
+    "warning": "global rg does not establish local sharing"
+  },
+  "pleiotropy": {
+    "detailed_contract": "config/pleiotropy_contract.json",
+    "primary_method": "PLACO+ 0.2.0 on genome-wide harmonized data with estimated trait correlation",
+    "canonical_output": "results/pleiotropy/novel_shared_loci.tsv",
+    "required_alternatives": ["horizontal pleiotropy", "vertical mediation", "shared latent factor", "sample overlap or residual confounding"],
+    "warning": "variant association with both traits does not identify the type of pleiotropy, prove a shared causal variant, or establish causality"
+  },
+  "fine_mapping_colocalization": {
+    "detailed_contract": "config/fine_mapping_colocalization_contract.json",
+    "primary_fine_mapping_method": "SuSiE-RSS via susieR 0.14.2",
+    "primary_colocalization_method": "coloc.susie via coloc 5.2.3",
+    "canonical_output": "results/fine_mapping/fine_mapping_colocalization.tsv",
+    "required_comparisons": ["trait to trait", "trait to eQTL", "trait to sQTL", "trait to pQTL"],
+    "required_outputs": ["locus and dense variant universe", "signed LD reference and exact SNP order", "posterior inclusion probabilities", "independent signals", "credible sets and purity", "explicit H0-H4 posteriors", "prior specification", "prior sensitivity", "allele alignment and LD-summary diagnostics"],
+    "warning": "colocalization supports a shared signal model but does not prove a causal gene or pathway"
+  },
+  "mechanistic_annotation": {
+    "detailed_contract": "config/mechanistic_annotation_contract.json",
+    "source_registry": "config/mechanistic_sources.tsv",
+    "evidence_order": ["replicated human genetics", "colocalized molecular QTL", "fine-mapped regulatory evidence", "tissue/cell enrichment", "pathway annotation", "model-system evidence"],
+    "canonical_outputs": ["results/mechanism/mechanistic_evidence.tsv", "results/mechanism/mechanistic_chains.tsv", "results/mechanism/mechanistic_synthesis.tsv"],
+    "required_language": "rank evidence and preserve uncertainty; do not promote annotation into causal proof"
+  }
+}

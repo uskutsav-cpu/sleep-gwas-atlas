@@ -10,23 +10,32 @@ ROOT=$(pwd)
 CONDA_BIN=${CONDA_BIN:-conda}
 LDSC_ENV_DIR=${LDSC_ENV_DIR:-.ldsc-env}
 LDSC_DIR=${LDSC_DIR:-ldsc}
+LDSC_REPOSITORY=https://github.com/CBIIT/ldsc.git
+LDSC_COMMIT=6c673952cee74bd5c57aef1555a03b1c015399a0
 REFERENCE_URL=${REFERENCE_URL:-https://zenodo.org/records/8182036/files/eur_w_ld_chr.tar.gz?download=1}
 REFERENCE_MD5=${REFERENCE_MD5:-e2f16343c4cfaa76caa7d0c03d26b489}
+REFERENCE_SHA256=${REFERENCE_SHA256:-9537f00eb0d163a935aaa2cf04b358b7cf21852279b9c7925802526f6060b069}
+VARIANT_MAP_SHA256=${VARIANT_MAP_SHA256:-6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4}
+LIFTOVER_URL=${LIFTOVER_URL:-https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz}
+LIFTOVER_BYTES=${LIFTOVER_BYTES:-1246411}
+LIFTOVER_MD5=${LIFTOVER_MD5:-ff3031d93792f4cbb86af44055efd903}
+LIFTOVER_SHA256=${LIFTOVER_SHA256:-14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1}
 
-echo "==> [1/4] Python 3.9 LDSC environment"
+echo "==> [1/6] Python 3.9 LDSC environment"
 if ! command -v "$CONDA_BIN" > /dev/null 2>&1; then
   echo "ERROR: conda is required to create the reproducible Python 3.9 LDSC environment." >&2
   echo "Install Miniforge/conda, or set CONDA_BIN to its executable path." >&2
   exit 1
 fi
 PACKAGES=(
-  python=3.9 numpy=1.23 pandas=1.5 scipy=1.9 python-dateutil=2.8 pytz=2022
-  bitarray=2 nose=1.3 pybedtools=0.10 flask requests matplotlib=3.7
+  python=3.9.23 numpy=1.21.5 pandas=1.3.3 scipy=1.7.3
+  python-dateutil=2.8.2 pytz=2022.7.1 bitarray=2.8.3 nose=1.3.7
+  pybedtools=0.10.0 flask=2.3.3 requests=2.31.0
 )
 if [ ! -x "$LDSC_ENV_DIR/bin/python" ]; then
   # Direct community channels avoid implicitly accepting Anaconda's commercial
-  # channel Terms of Service. Versions follow CBIIT/ldsc's environment3.yml;
-  # matplotlib is added for this repository's reporting scripts.
+  # channel Terms of Service. Versions follow CBIIT/ldsc's environment3.yml.
+  # Reporting dependencies stay in the separate workflow environment.
   "$CONDA_BIN" create --yes --override-channels \
     --channel conda-forge --channel bioconda --prefix "$LDSC_ENV_DIR" \
     "${PACKAGES[@]}"
@@ -38,23 +47,29 @@ else
     "${PACKAGES[@]}"
 fi
 LDSC_PYTHON="$LDSC_ENV_DIR/bin/python"
-"$LDSC_PYTHON" -c 'import numpy, pandas, scipy, matplotlib, pybedtools'
+"$LDSC_PYTHON" -c 'import numpy, pandas, scipy, pybedtools'
 
-echo "==> [2/4] LDSC (maintained Python 3 implementation)"
+echo "==> [2/6] LDSC (maintained Python 3 implementation)"
 if [ ! -d "$LDSC_DIR/.git" ]; then
-  git clone --branch ldsc39 --depth 1 https://github.com/CBIIT/ldsc.git "$LDSC_DIR"
-else
-  echo "    $LDSC_DIR already exists, leaving its checked-out revision unchanged"
+  git clone "$LDSC_REPOSITORY" "$LDSC_DIR"
+  git -C "$LDSC_DIR" checkout --detach "$LDSC_COMMIT"
 fi
+ACTUAL_LDSC_COMMIT=$(git -C "$LDSC_DIR" rev-parse HEAD)
+if [ "$ACTUAL_LDSC_COMMIT" != "$LDSC_COMMIT" ]; then
+  echo "ERROR: LDSC must be pinned at $LDSC_COMMIT, found $ACTUAL_LDSC_COMMIT" >&2
+  echo "       Move the existing LDSC checkout aside and rerun setup." >&2
+  exit 1
+fi
+echo "    pinned LDSC commit: $ACTUAL_LDSC_COMMIT"
 # CBIIT/ldsc's ldsc39 revision opens compressed summary statistics in binary
 # mode while parsing their header. Python 3 therefore raises TypeError before
 # analysis. Apply this narrowly scoped, version-checked compatibility patch;
 # setup deliberately aborts rather than silently applying it to another LDSC
 # revision. The patch only changes the header stream to text mode.
 LDSC_COMPAT_PATCH="$ROOT/patches/ldsc39-python3-compressed-header.patch"
-if git -C "$LDSC_DIR" apply --unidiff-zero --reverse --check "$LDSC_COMPAT_PATCH"; then
+if git -C "$LDSC_DIR" apply --unidiff-zero --reverse --check "$LDSC_COMPAT_PATCH" 2>/dev/null; then
   echo "    Python 3 compressed-header compatibility patch already applied"
-elif git -C "$LDSC_DIR" apply --unidiff-zero --check "$LDSC_COMPAT_PATCH"; then
+elif git -C "$LDSC_DIR" apply --unidiff-zero --check "$LDSC_COMPAT_PATCH" 2>/dev/null; then
   git -C "$LDSC_DIR" apply --unidiff-zero "$LDSC_COMPAT_PATCH"
   echo "    applied Python 3 compressed-header compatibility patch"
 else
@@ -66,7 +81,7 @@ fi
 "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" -h > /dev/null
 echo "    LDSC OK"
 
-echo "==> [3/4] Reference files -> ref/"
+echo "==> [3/6] Reference files -> ref/"
 mkdir -p ref && cd ref
 # European LD scores computed on 1000G Phase 3, HapMap3 SNPs. Zenodo record
 # 8182036 explicitly documents this archive as a gzip copy of the original
@@ -77,6 +92,11 @@ if [ ! -d eur_w_ld_chr ]; then
   ACTUAL_MD5=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.md5(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$ARCHIVE")
   if [ "$ACTUAL_MD5" != "$REFERENCE_MD5" ]; then
     echo "ERROR: EUR LD archive MD5 mismatch: expected $REFERENCE_MD5, got $ACTUAL_MD5" >&2
+    exit 1
+  fi
+  ACTUAL_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$ARCHIVE")
+  if [ "$ACTUAL_SHA256" != "$REFERENCE_SHA256" ]; then
+    echo "ERROR: EUR LD archive SHA-256 mismatch: expected $REFERENCE_SHA256, got $ACTUAL_SHA256" >&2
     exit 1
   fi
   tar -xzf "$ARCHIVE"
@@ -92,7 +112,33 @@ ln -sfn eur_w_ld_chr/w_hm3.snplist w_hm3.snplist
 cd "$ROOT"
 echo "    ref/ contains:"; ls ref | sed 's/^/      /'
 
-echo "==> [4/4] Done."
+echo "==> [4/6] Audited HapMap3 GRCh37 identity map"
+"$LDSC_PYTHON" scripts/19_build_hm3_variant_map.py \
+  --reference-dir ref/eur_w_ld_chr \
+  --out ref/hm3_grch37_variant_map.tsv.gz
+ACTUAL_MAP_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' ref/hm3_grch37_variant_map.tsv.gz)
+if [ "$ACTUAL_MAP_SHA256" != "$VARIANT_MAP_SHA256" ]; then
+  echo "ERROR: derived variant-map SHA-256 mismatch: expected $VARIANT_MAP_SHA256, got $ACTUAL_MAP_SHA256" >&2
+  exit 1
+fi
+
+echo "==> [5/6] UCSC hg38-to-hg19 liftover chain"
+LIFTOVER_PATH=ref/hg38ToHg19.over.chain.gz
+if [ ! -s "$LIFTOVER_PATH" ]; then
+  curl --fail --location --retry 3 --output "$LIFTOVER_PATH" "$LIFTOVER_URL"
+fi
+ACTUAL_LIFTOVER_BYTES=$(wc -c < "$LIFTOVER_PATH" | tr -d ' ')
+ACTUAL_LIFTOVER_MD5=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.md5(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$LIFTOVER_PATH")
+ACTUAL_LIFTOVER_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$LIFTOVER_PATH")
+if [ "$ACTUAL_LIFTOVER_BYTES" != "$LIFTOVER_BYTES" ] || \
+   [ "$ACTUAL_LIFTOVER_MD5" != "$LIFTOVER_MD5" ] || \
+   [ "$ACTUAL_LIFTOVER_SHA256" != "$LIFTOVER_SHA256" ]; then
+  echo "ERROR: UCSC liftover chain does not match the registered bytes/hashes" >&2
+  exit 1
+fi
+gzip -t "$LIFTOVER_PATH"
+
+echo "==> [6/6] Done."
 cat <<'EOF'
 
 NOTE ON DOWNLOAD MIRRORS
@@ -103,11 +149,11 @@ NOTE ON DOWNLOAD MIRRORS
 
 NEXT
   1. Put only verified hg19, EUR raw sumstats in data/raw/, named as in
-     config/traits.tsv. Do not use an hg38 file without an explicit,
+     config/analysis_panel.tsv. Do not use an hg38 file without an explicit,
      documented liftover decision.
-  2. export PYTHON_BIN=.ldsc-env/bin/python LDSC_PYTHON=.ldsc-env/bin/python
-     LDSC_DIR=ldsc
-  3. bash scripts/02_munge.sh insomnia mdd
-  4. bash scripts/03_h2_qc.sh insomnia mdd
+  2. Keep PYTHON_BIN on the workflow environment and export only
+     LDSC_PYTHON=.ldsc-env/bin/python LDSC_DIR=ldsc
+  3. bash scripts/02_munge.sh insomnia bipolar
+  4. bash scripts/03_h2_qc.sh insomnia bipolar
   5. bash scripts/04_rg.sh --h2 results/tables/h2_summary.tsv
 EOF

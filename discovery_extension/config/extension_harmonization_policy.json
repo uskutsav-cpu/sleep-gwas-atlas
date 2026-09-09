@@ -1,0 +1,65 @@
+{
+  "allele_semantics": {
+    "A1": "source alt and beta effect allele",
+    "A2": "source ref"
+  },
+  "analysis_status": "STREAMING_ACQUISITION_ENABLED_FULL_PANEL_INCOMPLETE",
+  "binary_effective_n": "4/(1/cases+1/controls)",
+  "binary_frequency": "(af_cases_EUR*cases + af_controls_EUR*controls)/(cases+controls)",
+  "canonical_columns": [
+    "SNP",
+    "CHR",
+    "BP",
+    "A1",
+    "A2",
+    "FRQ",
+    "BETA",
+    "SE",
+    "P",
+    "N",
+    "INFO"
+  ],
+  "filters_in_order": [
+    "source low_confidence_EUR must equal false",
+    "exact variant-manifest join on chrom,pos,ref,alt",
+    "valid rsID required; no guessed or ambiguous identity",
+    "autosomal chromosomes 1-22 only",
+    "single-base A/C/G/T alleles only; A1 must differ from A2",
+    "drop all strand-ambiguous A/T and C/G SNPs",
+    "finite beta; finite positive SE; 0<P<=1; 0<=FRQ<=1",
+    "variant-manifest imputation INFO > 0.9 and <= 1",
+    "common variant MAF > 0.01",
+    "exclude extended MHC chr6:25000000-34000000 inclusive",
+    "one row per rsID; duplicate/conflicting rows fail closed"
+  ],
+  "input_build": "GRCh37",
+  "ldsc_restriction": {
+    "policy": "retain only exact GRCh37 HapMap3 coordinate-and-allele matches",
+    "reference": "ref/hm3_grch37_variant_map.tsv.gz",
+    "reference_sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
+  },
+  "output_build": "GRCh37",
+  "p_value": {
+    "numeric_floor": 1e-300,
+    "source": "neglog10_pval_EUR",
+    "transform": "10**(-x)"
+  },
+  "panel_name": "novelty-enriched-phenome-discovery-extension-v1",
+  "panel_sha256": "0a04a3074d798800f47671de39012cbfaf142b9173466e9a309400b7d5553329",
+  "primary_h2_gate": {
+    "LDSC_intercept_maximum_inclusive": 1.2,
+    "failure_disposition": "exclude trait from primary extension rg/FDR family; retain in sensitivity ledger without replacement",
+    "h2_z_minimum_inclusive": 4.0,
+    "rerun_required_after_harmonization": true
+  },
+  "primary_rg_family": {
+    "fdr_threshold": 0.05,
+    "locked_extension_trait_count": 100,
+    "multiple_testing": "Benjamini-Hochberg across all primary extension pairs only",
+    "never_merge_with_core_family": true,
+    "planned_raw_tests_before_rerun_h2_exclusion": 1200,
+    "sleep_trait_count": 12
+  },
+  "schema_version": "1.0.0",
+  "selection_timing": "before_any_extension_genetic_correlation"
+}

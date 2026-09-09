@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Turn LDSC .log files into tidy tables, apply the h2 QC gate, and generate
-dual-strategy problem comparison tables.
+"""Turn LDSC logs into locked-panel tables and apply the h2 QC gate.
 
-The gate decides which traits are powered enough to carry GenomicSEM downstream,
-and the problem comparison table contrasts competing phenotype tail definitions,
-insomnia summary stats releases, and liability scale ascertainment.
+The gate decides which traits are powered enough to carry downstream. Excluded
+alternative phenotype definitions are not parsed into production comparisons.
 
     python3 05_collate.py --mode h2 --logdir results/logs --out results/tables/h2_summary.tsv
     python3 05_collate.py --mode rg --logdir results/logs --out results/tables/rg_matrix.tsv
 """
 import argparse
 import glob
+import itertools
 import os
 import re
 
@@ -41,21 +40,25 @@ def f(x):
         return float("nan")
 
 
-def load_traits_meta(config_path="config/traits.tsv"):
-    if os.path.exists(config_path):
-        metadata = pd.read_csv(config_path, sep="\t")
-        if metadata["trait_id"].duplicated().any():
-            dupes = metadata.loc[metadata["trait_id"].duplicated(), "trait_id"].tolist()
-            raise ValueError(f"duplicate trait_id values in config: {dupes}")
-        return metadata.set_index("trait_id")
-    return None
+def load_traits_meta(config_path="config/analysis_panel.tsv"):
+    if not os.path.isfile(config_path):
+        raise SystemExit(f"ERROR: locked panel manifest does not exist: {config_path}")
+    metadata = pd.read_csv(config_path, sep="\t")
+    if metadata["trait_id"].duplicated().any():
+        dupes = metadata.loc[metadata["trait_id"].duplicated(), "trait_id"].tolist()
+        raise ValueError(f"duplicate trait_id values in config: {dupes}")
+    return metadata.set_index("trait_id")
 
 
 def refuse_synthetic_in_real_directory(logdir):
     """Never let a copied smoke-test log turn into a plausible result table."""
     log_paths = glob.glob(os.path.join(logdir, "*.log"))
-    contains_synthetic = any(SYNTHETIC_MARKER in open(path, encoding="utf-8").read()
-                             for path in log_paths)
+
+    def contains_marker(path):
+        with open(path, encoding="utf-8") as handle:
+            return SYNTHETIC_MARKER in handle.read()
+
+    contains_synthetic = any(contains_marker(path) for path in log_paths)
     if contains_synthetic and "_smoketest" not in os.path.normpath(logdir).split(os.sep):
         raise SystemExit(
             "ERROR: synthetic LDSC logs were found outside results/_smoketest/. "
@@ -63,12 +66,23 @@ def refuse_synthetic_in_real_directory(logdir):
         )
 
 
-def parse_h2(logdir, config_path="config/traits.tsv"):
+def parse_h2(logdir, config_path="config/analysis_panel.tsv", expected_traits=None):
     refuse_synthetic_in_real_directory(logdir)
     meta_df = load_traits_meta(config_path)
     rows = []
-    for path in sorted(glob.glob(os.path.join(logdir, "h2_*.log"))):
+    if expected_traits:
+        if len(expected_traits) != len(set(expected_traits)):
+            raise SystemExit("ERROR: duplicate trait in the requested h2 family")
+        log_paths = [os.path.join(logdir, f"h2_{trait}.log") for trait in expected_traits]
+        missing_logs = [path for path in log_paths if not os.path.isfile(path)]
+        if missing_logs:
+            raise SystemExit(f"ERROR: requested h2 logs are missing: {missing_logs}")
+    else:
+        log_paths = sorted(glob.glob(os.path.join(logdir, "h2_*.log")))
+    for path in log_paths:
         trait = os.path.basename(path)[3:-4]
+        if meta_df is not None and trait not in meta_df.index:
+            raise SystemExit(f"ERROR: h2 log is outside the locked panel: {path}")
         with open(path, encoding="utf-8") as handle:
             txt = handle.read()
         m = H2_PAT.search(txt)
@@ -102,8 +116,12 @@ def parse_h2(logdir, config_path="config/traits.tsv"):
             "lambda_gc": f(LAM_PAT.search(txt).group(1)) if LAM_PAT.search(txt) else float("nan"),
             "mean_chi2": f(CHI_PAT.search(txt).group(1)) if CHI_PAT.search(txt) else float("nan"),
             "ratio": f(RAT_PAT.search(txt).group(1)) if RAT_PAT.search(txt) else float("nan"),
-            "n_eff_h2": round(n_eff_h2, 1) if not np.isnan(n_eff_h2) else float("nan"),
-            "mixer_pass": (n_eff_h2 > 12000) if not np.isnan(n_eff_h2) else False
+            # This reproduces CDG3's LDSC screening arithmetic only. It is not
+            # MiXeR eligibility; that decision must come from a successful
+            # univariate MiXeR fit and its own diagnostics.
+            "ldsc_n_eff_h2": round(n_eff_h2, 1) if not np.isnan(n_eff_h2) else float("nan"),
+            "ldsc_n_eff_h2_gt_12000": (n_eff_h2 > 12000) if not np.isnan(n_eff_h2) else False,
+            "mixer_univariate_status": "NOT_RUN",
         })
     df = pd.DataFrame(rows)
     if "h2" not in df:
@@ -121,53 +139,31 @@ def parse_h2(logdir, config_path="config/traits.tsv"):
     return df.sort_values("z", ascending=False)
 
 
-def generate_problem_comparison_table(df_h2, out_path):
-    """Generate side-by-side comparison table for competing problem variants."""
-    pairs = [
-        ("Short Sleep", "shortsleep_dashti", "<7h (Dashti 2019)", "shortsleep_az", "<=5h (Austin-Zimmerman 2023)"),
-        ("Long Sleep",  "longsleep_dashti",  ">=9h (Dashti 2019)", "longsleep_az",  ">=10h (Austin-Zimmerman 2023)"),
-        ("Insomnia",    "insomnia_ukb",      "UKB-only (Public)",  "insomnia_full", "UKB+23andMe (Full)")
-    ]
-
-    comp_rows = []
-    df_idx = df_h2.set_index("trait") if "trait" in df_h2 else df_h2
-
-    for pheno_label, t1, opt1_name, t2, opt2_name in pairs:
-        r1 = df_idx.loc[t1] if t1 in df_idx.index else None
-        r2 = df_idx.loc[t2] if t2 in df_idx.index else None
-
-        h2_1 = f"{r1['h2']:.4f} ({r1['se']:.4f})" if r1 is not None and 'h2' in r1 else "NA"
-        z1 = f"{r1['z']:.2f}" if r1 is not None and 'z' in r1 else "NA"
-        icept1 = f"{r1['intercept']:.4f}" if r1 is not None and 'intercept' in r1 else "NA"
-        v1 = r1['verdict'] if r1 is not None and 'verdict' in r1 else "NA"
-        mixer1 = "PASS" if r1 is not None and r1.get('mixer_pass', False) else "DROP"
-
-        h2_2 = f"{r2['h2']:.4f} ({r2['se']:.4f})" if r2 is not None and 'h2' in r2 else "NA"
-        z2 = f"{r2['z']:.2f}" if r2 is not None and 'z' in r2 else "NA"
-        icept2 = f"{r2['intercept']:.4f}" if r2 is not None and 'intercept' in r2 else "NA"
-        v2 = r2['verdict'] if r2 is not None and 'verdict' in r2 else "NA"
-        mixer2 = "PASS" if r2 is not None and r2.get('mixer_pass', False) else "DROP"
-
-        comp_rows.append({
-            "Phenotype": pheno_label,
-            "Option 1": opt1_name,
-            "Opt1_h2": h2_1, "Opt1_Z": z1, "Opt1_Intercept": icept1, "Opt1_QC": v1, "Opt1_MiXeR": mixer1,
-            "Option 2": opt2_name,
-            "Opt2_h2": h2_2, "Opt2_Z": z2, "Opt2_Intercept": icept2, "Opt2_QC": v2, "Opt2_MiXeR": mixer2,
-        })
-
-    comp_df = pd.DataFrame(comp_rows)
-    comp_df.to_csv(out_path, sep="\t", index=False)
-    print(f"\nwrote problem comparison summary table: {out_path}")
-    print(comp_df.to_string(index=False))
-    return comp_df
-
-
-def parse_rg(logdir):
+def parse_rg(logdir, config_path="config/analysis_panel.tsv", inclusion_path=None):
     """LDSC prints a fixed-width table after 'Summary of Genetic Correlation'."""
     refuse_synthetic_in_real_directory(logdir)
+    expected = None
+    if inclusion_path:
+        inclusion = pd.read_csv(inclusion_path, sep="\t", dtype=str).fillna("")
+        required = {"trait_id", "domain", "include_phase1"}
+        missing = required.difference(inclusion.columns)
+        if missing:
+            raise SystemExit(f"ERROR: inclusion table missing columns: {sorted(missing)}")
+        included = inclusion[inclusion["include_phase1"].str.lower().eq("true")]
+        sleeps = included.loc[included["domain"].eq("sleep"), "trait_id"].tolist()
+        diseases = included.loc[~included["domain"].eq("sleep"), "trait_id"].tolist()
+        expected = set(itertools.product(sleeps, diseases))
+        # Matrix logs contain all selected non-sleep traits for one sleep
+        # trait. Controlled one-pair reruns use rg_SLEEP__DISEASE.log; never
+        # mix those diagnostics into the readiness-selected matrix family.
+        log_paths = [os.path.join(logdir, f"rg_{trait}.log") for trait in sleeps]
+        missing_logs = [path for path in log_paths if not os.path.isfile(path)]
+        if missing_logs:
+            raise SystemExit(f"ERROR: readiness-selected rg logs are missing: {missing_logs}")
+    else:
+        log_paths = sorted(glob.glob(os.path.join(logdir, "rg_*.log")))
     frames = []
-    for path in sorted(glob.glob(os.path.join(logdir, "rg_*.log"))):
+    for path in log_paths:
         with open(path, encoding="utf-8") as handle:
             lines = handle.read().splitlines()
         try:
@@ -193,13 +189,13 @@ def parse_rg(logdir):
             frame = pd.DataFrame(body, columns=header)
             # Some LDSC versions round the fixed-width summary-table p column
             # to 0.0000 for small values even though the preceding scalar
-            # ``P:`` line retains scientific notation. Controlled ``--pair``
-            # runs have exactly one result row, so preserve that authoritative
-            # scalar rather than turning a finite p-value into zero/FDR zero.
+            # ``P:`` lines retain scientific notation. LDSC emits one scalar
+            # for every result row in the same order, so preserve the complete
+            # sequence rather than turning finite p-values into zero/FDR zero.
             scalar_p = [line.split(":", 1)[1].strip() for line in lines[:i]
                         if line.startswith("P:")]
-            if len(frame) == 1 and scalar_p:
-                frame.loc[frame.index[0], "p"] = scalar_p[-1]
+            if len(scalar_p) == len(frame):
+                frame.loc[:, "p"] = scalar_p
             frame["input_log"] = path
             frames.append(frame)
     if not frames:
@@ -212,6 +208,45 @@ def parse_rg(logdir):
         df[c] = (df[c].str.replace(r".*/", "", regex=True)
                       .str.replace(".sumstats.gz", "", regex=False))
     df = df.rename(columns={"p1": "sleep_trait", "p2": "disease_trait"})
+
+    meta_df = load_traits_meta(config_path)
+    if meta_df is not None:
+        panel_ids = set(meta_df.index)
+        observed_ids = set(df["sleep_trait"]).union(df["disease_trait"])
+        unknown = observed_ids.difference(panel_ids)
+        if unknown:
+            raise SystemExit(f"ERROR: rg logs contain traits outside the locked panel: {sorted(unknown)}")
+        wrong_sleep = [
+            trait for trait in df["sleep_trait"].unique()
+            if meta_df.loc[trait, "domain"] != "sleep"
+        ]
+        wrong_disease = [
+            trait for trait in df["disease_trait"].unique()
+            if meta_df.loc[trait, "domain"] == "sleep"
+        ]
+        if wrong_sleep or wrong_disease:
+            raise SystemExit(
+                f"ERROR: rg pair roles disagree with the panel: "
+                f"sleep={wrong_sleep}, non_sleep={wrong_disease}"
+            )
+    pair_columns = ["sleep_trait", "disease_trait"]
+    if df.duplicated(pair_columns).any():
+        duplicates = df.loc[df.duplicated(pair_columns, keep=False), pair_columns]
+        raise SystemExit(
+            "ERROR: duplicate rg pairs found across logs: "
+            + ", ".join(f"{a}__{b}" for a, b in duplicates.drop_duplicates().itertuples(index=False))
+        )
+
+    if expected is not None:
+        actual = set(df[pair_columns].itertuples(index=False, name=None))
+        if actual != expected:
+            missing_pairs = sorted(expected.difference(actual))
+            extra_pairs = sorted(actual.difference(expected))
+            raise SystemExit(
+                f"ERROR: rg logs do not match the readiness-selected family: "
+                f"expected={len(expected)}, actual={len(actual)}, "
+                f"missing={missing_pairs[:5]}, extra={extra_pairs[:5]}"
+            )
 
     d = df.dropna(subset=["p"]).sort_values("p").copy()
     m = len(d)
@@ -228,19 +263,25 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["h2", "rg"], required=True)
     ap.add_argument("--logdir", default="results/logs")
-    ap.add_argument("--config", default="config/traits.tsv")
+    ap.add_argument("--config", default="config/analysis_panel.tsv")
+    ap.add_argument("--inclusion", help="Phase 1 inclusion table defining the exact rg family")
+    ap.add_argument("--traits", nargs="+", help="Exact trait family to collate in h2 mode")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    df = parse_h2(a.logdir, a.config) if a.mode == "h2" else parse_rg(a.logdir)
+    if a.mode == "h2" and a.inclusion:
+        raise SystemExit("ERROR: --inclusion is only valid with --mode rg")
+    if a.mode == "rg" and a.traits:
+        raise SystemExit("ERROR: --traits is only valid with --mode h2")
+    df = (
+        parse_h2(a.logdir, a.config, a.traits)
+        if a.mode == "h2"
+        else parse_rg(a.logdir, a.config, a.inclusion)
+    )
     if df.empty:
         print("!! nothing parsed - check that LDSC actually ran")
         raise SystemExit(1)
     df.to_csv(a.out, sep="\t", index=False, float_format="%.4g")
     print(f"Parsed {len(df)} {a.mode} result rows")
     print(f"wrote {a.out}")
-
-    if a.mode == "h2":
-        comp_out = os.path.join(os.path.dirname(a.out), "problem_comparison_summary.tsv")
-        generate_problem_comparison_table(df, comp_out)

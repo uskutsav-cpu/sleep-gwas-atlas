@@ -1,0 +1,365 @@
+{
+  "analysis_id": "sleep-circadian-genetic-atlas-track-b",
+  "analysis_panel_hash": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+  "checkpoint_timing": "before_Track_B_pair_selection_or_local_result_access",
+  "checkpoint_utc": "2026-09-01T20:41:08Z",
+  "compute_environment": {
+    "architecture": "arm64",
+    "assessment": "BLOCKED_BY_COMPUTE_FOR_LAVA_PLEIOFDR_AND_LARGE_FINE_MAPPING",
+    "cpu_count": 8,
+    "disk_free_bytes": 2134224896,
+    "disk_free_gib": 1.988,
+    "disk_total_bytes": 245107195904,
+    "memory_bytes": 8589934592,
+    "release": "25.5.0",
+    "system": "Darwin"
+  },
+  "dense_full_resolution_gwas": {
+    "available_count": 29,
+    "available_traits": [
+      "insomnia",
+      "sleepdur",
+      "shortsleep",
+      "longsleep",
+      "chronotype",
+      "sleepiness",
+      "napping",
+      "snoring",
+      "sleep_apnea",
+      "sleep_efficiency",
+      "accel_sleep_duration",
+      "sleep_timing",
+      "alz",
+      "scz",
+      "bipolar",
+      "adhd",
+      "ra",
+      "bmi",
+      "atrial_fibrillation",
+      "sbp",
+      "parental_lifespan",
+      "healthspan",
+      "frailty",
+      "grip_strength",
+      "breast_cancer",
+      "prostate_cancer",
+      "colorectal_cancer",
+      "lung_cancer",
+      "ovarian_cancer"
+    ],
+    "missing_or_hapmap3_only_count": 16,
+    "missing_or_hapmap3_only_traits": [
+      "parkinson",
+      "mdd",
+      "ibd",
+      "crohn",
+      "uc",
+      "ms",
+      "asthma",
+      "t2d",
+      "ldl",
+      "hdl",
+      "triglycerides",
+      "cad",
+      "stroke",
+      "longevity",
+      "telomere_length",
+      "melanoma"
+    ],
+    "schema_caveat": "Repository-ready dense files carry SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N; INFO and case/control counts are retained in QC/manifests rather than row-wise. Track B dense-input QC is therefore still required.",
+    "source": "results/tables/pleiotropy_input_readiness.tsv"
+  },
+  "git": {
+    "baseline_dirty_entries": [
+      {
+        "bytes": 6706,
+        "path": "results/validation/replication_ldsc.tsv",
+        "sha256": "5a29686afcc9095d31b750a5e85e43151c34886ffe936a7cf5184e9dc4264459",
+        "status": "??"
+      },
+      {
+        "bytes": 11204,
+        "path": "results/validation/replication_source_search.tsv",
+        "sha256": "b2fc8a98254af4b4b39fc465652ff37a008c2571582e925248e713a7e4945fc7",
+        "status": "??"
+      },
+      {
+        "bytes": 17035,
+        "path": "scripts/102_build_replication_search.py",
+        "sha256": "a565724b45a6bf8a348cca3880276252a4ad5e3c0870843eb24f57e4248b69b1",
+        "status": "??"
+      },
+      {
+        "bytes": 14013,
+        "path": "scripts/110_track_b_checkpoint.py",
+        "sha256": "7a6fac94c8b4e5d2da5bd7c9c63d250dd4cca871151e705c3666ef127642c0b8",
+        "status": "??"
+      },
+      {
+        "bytes": 24323,
+        "path": "scripts/111_freeze_track_b_pairs.py",
+        "sha256": "1301b2a702d8ea62df4b43df242d31b6f887dc3926b8a3af8f5a5e3a03f1b4df",
+        "status": "??"
+      },
+      {
+        "bytes": 3823,
+        "path": "tests/test_track_b_freeze.py",
+        "sha256": "29231357dac84850367efb13696f1c8faad29922b44e3ad12fe9a911f8209bd5",
+        "status": "??"
+      }
+    ],
+    "branch": "codex/lock-analysis-panel",
+    "commit": "34b6e48d8bb16ba5799073ee6940c2d845154289",
+    "remote": "https://github.com/uskutsav-cpu/sleep-gwas-atlas.git"
+  },
+  "hard_constraints": {
+    "canonical_phase1_rg_unchanged": true,
+    "locked_45_trait_core_unchanged": true,
+    "synthetic_results_counted_as_scientific": false,
+    "track_b_local_results_accessed_before_checkpoint": false
+  },
+  "input_hashes": {
+    "config/analysis_panel.lock.json": {
+      "bytes": 380,
+      "path": "config/analysis_panel.lock.json",
+      "sha256": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c"
+    },
+    "config/analysis_panel.tsv": {
+      "bytes": 24571,
+      "path": "config/analysis_panel.tsv",
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    "discovery_extension/core_checkpoint.json": {
+      "bytes": 4678,
+      "path": "discovery_extension/core_checkpoint.json",
+      "sha256": "e3c3c88dbc6b36161d2df9eaf6b69d6802b8f56fd3053bb38a43b313856cf55c"
+    },
+    "discovery_extension/results/ldsc/extension_rg_matrix.tsv": {
+      "bytes": 428348,
+      "path": "discovery_extension/results/ldsc/extension_rg_matrix.tsv",
+      "sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166"
+    },
+    "discovery_extension/results/replication/replication_results.tsv": {
+      "bytes": 180140,
+      "path": "discovery_extension/results/replication/replication_results.tsv",
+      "sha256": "c4b4da28640101102cc2784eeb772e8af0ab59f6fb3b3e3247015b9ae496cf84"
+    },
+    "environment/tool_versions.tsv": {
+      "bytes": 2662,
+      "path": "environment/tool_versions.tsv",
+      "sha256": "7e4d80a0b04c52ecc7ba06023b97129b0314bdafe98cc45bf4c46934016447ae"
+    },
+    "results/analysis/literature_novelty_audit.tsv": {
+      "bytes": 329991,
+      "path": "results/analysis/literature_novelty_audit.tsv",
+      "sha256": "745e1df271f649803159cc4ce6466cd39a15fe320b5d7e7ec183ee94090e0389"
+    },
+    "results/analysis/local_followup_priorities.tsv": {
+      "bytes": 24742,
+      "path": "results/analysis/local_followup_priorities.tsv",
+      "sha256": "c09ff15c4818eb742729c2eead63d22249e4f7dc921b1b47cc25fefb049adf36"
+    },
+    "results/analysis/phase1_master_analysis.tsv": {
+      "bytes": 272116,
+      "path": "results/analysis/phase1_master_analysis.tsv",
+      "sha256": "496064aeb7555a21b1dc08f2205b158ed0f708a78fd76dbe85685730218c1491"
+    },
+    "results/tables/dense_harmonization_readiness.tsv": {
+      "bytes": 3969,
+      "path": "results/tables/dense_harmonization_readiness.tsv",
+      "sha256": "302eaf2eaf84cbd18e72379fe6412f173ffefe8832158c92c46ffd2aab820eed"
+    },
+    "results/tables/h2_summary.tsv": {
+      "bytes": 6547,
+      "path": "results/tables/h2_summary.tsv",
+      "sha256": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67"
+    },
+    "results/tables/interpretation_source_readiness.tsv": {
+      "bytes": 5293,
+      "path": "results/tables/interpretation_source_readiness.tsv",
+      "sha256": "b61f93fc3a0ae2f1560c8313e4ee1ea62ccd71db88771a7e323fed9b3888037a"
+    },
+    "results/tables/ldsc_covariance_45x45.tsv": {
+      "bytes": 41093,
+      "path": "results/tables/ldsc_covariance_45x45.tsv",
+      "sha256": "adb9804e135169c8091abbe18dc07946fedbff9d0147cd93f5e33abebe690a10"
+    },
+    "results/tables/ldsc_sampling_covariance_1035x1035.tsv.gz": {
+      "bytes": 9693527,
+      "path": "results/tables/ldsc_sampling_covariance_1035x1035.tsv.gz",
+      "sha256": "f2ff988cdcf37328ffdf860c89c253438d413b254647d16a0c9ab84bd73f0d74"
+    },
+    "results/tables/pleiotropy_input_readiness.tsv": {
+      "bytes": 6366,
+      "path": "results/tables/pleiotropy_input_readiness.tsv",
+      "sha256": "071eaaaf76a62c469a7fef8ef1c05a2a587078f4dd3cd02b18ebd084f4773b36"
+    },
+    "results/tables/rg_matrix.tsv": {
+      "bytes": 79897,
+      "path": "results/tables/rg_matrix.tsv",
+      "sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077"
+    },
+    "results/tables/trait_readiness.tsv": {
+      "bytes": 10619,
+      "path": "results/tables/trait_readiness.tsv",
+      "sha256": "935bfb7d67ae10683a9f2d35acc7d0f8d60e1ddbf5888d779b058dc2e22ea470"
+    }
+  },
+  "integrity": {
+    "canonical_h2_traits": 45,
+    "canonical_rg_pairs": 396,
+    "extension_replicated_pairs": 23,
+    "extension_replication_candidates": 217,
+    "extension_rg_pairs": 1200,
+    "external_traits": 33,
+    "locked_panel_traits": 45,
+    "sleep_traits": 12
+  },
+  "operational_snapshot_policy": "Observed preflight snapshots are recorded but not immutable inputs because tests and read-only preflight reruns legitimately refresh timestamps and free-space observations.",
+  "operational_snapshots": {
+    "results/tables/fine_mapping_preflight.json": {
+      "bytes": 2606,
+      "path": "results/tables/fine_mapping_preflight.json",
+      "sha256": "2e7e1799ee96460335022809685a949ec01c64985a09ad6f2529b8c063100dcb"
+    },
+    "results/tables/lava_input_diagnostics.json": {
+      "bytes": 871,
+      "path": "results/tables/lava_input_diagnostics.json",
+      "sha256": "1e7e097049654266480986f23cb6a5e5d562ec2fbc1e8fd177d1a24931dace26"
+    },
+    "results/tables/molecular_preflight.json": {
+      "bytes": 4312,
+      "path": "results/tables/molecular_preflight.json",
+      "sha256": "0e05b9e77dccb86a85aa462a54997158110a24d386f6f725289cc1b12f6d0092"
+    }
+  },
+  "real_analysis_outputs": {
+    "extension_global_rg": "COMPLETE_1200_OF_1200",
+    "extension_replication": "COMPLETE_LOCKED_FAMILY",
+    "genomic_sem_covariance": "COMPLETE_WITH_RECORDED_NUMERICAL_WARNINGS",
+    "phase1_global_rg": "COMPLETE_396_OF_396",
+    "phase1_h2": "COMPLETE_45_OF_45",
+    "track_b_local_or_mechanistic_results": "NONE_AT_CHECKPOINT"
+  },
+  "resources": {
+    "authorized_spatial_resource": "NOT_FOUND",
+    "ld_references": [
+      {
+        "path": "ref/eur_w_ld_chr",
+        "resource": "1000G_EUR_LDSC_scores",
+        "status": "AVAILABLE"
+      },
+      {
+        "path": "ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile",
+        "resource": "LAVA_2495_locus_definition",
+        "status": "AVAILABLE"
+      },
+      {
+        "path": "ref/lava/ukb_v1.1",
+        "resource": "LAVA_UKB_EUR_LD_v1.1",
+        "status": "MISSING_BLOCKED_BY_DISK"
+      },
+      {
+        "path": "ref/pleiofdr/ref9545380_1kgPhase3eur_LDr2p1.mat",
+        "resource": "pleioFDR_1KG_Phase3_EUR_reference",
+        "status": "MISSING"
+      }
+    ],
+    "qtl_resources": [
+      {
+        "path": "ref/molecular/eqtl_catalogue_r7/dataset_metadata_r7.tsv",
+        "resource": "eQTL_Catalogue_release_7_metadata",
+        "status": "AVAILABLE_METADATA_ONLY"
+      },
+      {
+        "path": "results/tables/molecular_evidence.tsv",
+        "resource": "cell_specific_QTL_results",
+        "status": "MISSING_BLOCKED_UPSTREAM"
+      }
+    ],
+    "single_cell_and_chromatin_resources": [
+      {
+        "blocker": "",
+        "method": "stratified_LDSC",
+        "path": "ref/interpretation/cell_type/ldsc_seg_gtex_0921fed7/source_manifest.json",
+        "release": "songlab_ldsc_0921fed7_GTEx_2025-09-18",
+        "source_id": "LDSC_SEG",
+        "status": "READY"
+      },
+      {
+        "blocker": "",
+        "method": "MAGMA_Celltyping",
+        "path": "ref/interpretation/cell_type/fuma_scrna/FUMA_scRNA_data-dd526163ea80af1a80a6cdc80db167144500694b.tar.gz",
+        "release": "FUMA_scRNA_data_dd526163ea80af1a80a6cdc80db167144500694b_2022-12-21",
+        "source_id": "FUMA_SCRNA",
+        "status": "READY"
+      },
+      {
+        "blocker": "",
+        "method": "scATAC_enrichment",
+        "path": "ref/interpretation/cell_type/catlas_adult_v4/2E_Cell_type_restricted_peaks.zip",
+        "release": "Mendeley_Data_yv4fzv6cnm_v4_2022-01-24",
+        "source_id": "SCATAC_MULTI_DOMAIN",
+        "status": "READY"
+      },
+      {
+        "blocker": "readiness ledger reports READY but the referenced local artifact is absent",
+        "method": "regulatory_overlap",
+        "path": "results/atlas/regulatory_elements.tsv",
+        "release": "atlas-v1.0-regulatory",
+        "source_id": "REGULATORY_DERIVED",
+        "status": "INCONSISTENT_REPORTED_READY_OUTPUT_MISSING"
+      },
+      {
+        "blocker": "required upstream atlas artifact is not complete",
+        "method": "QTL_colocalization",
+        "path": "results/tables/molecular_evidence.tsv",
+        "release": "atlas-v1.0-molecular",
+        "source_id": "QTL_DERIVED",
+        "status": "BLOCKED"
+      }
+    ]
+  },
+  "rg_table_hash": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+  "schema_version": "1.0.0",
+  "software_versions": {
+    "observed_R": "R version 4.6.1 (2026-06-24) -- \"Happy Hop\"",
+    "observed_git": "git version 2.50.1 (Apple Git-155)",
+    "observed_python": "3.13.5",
+    "pinned": {
+      "GPArotation": "2025.3-1",
+      "GenomicSEM": "6b65ca5db39fdade08b0d811477be1cdd57b5039",
+      "GenomicSEM_R_package": "0.0.5",
+      "LAVA": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+      "LAVA_R_package": "0.1.5",
+      "MetaXcan": "0.8.1",
+      "MiXeR": "2.2.1",
+      "MiXeR_amd64_container": "sha256:5bf54ddd6f7f81b93eeb5450b1a6dc809d1fcf926b3a815d6d514f36ce04f51c",
+      "MiXeR_reference": "a4104bf34ed0509a6daa5b06594c40f0b655871c",
+      "MiXeR_release_commit": "cf65c57d5d1ad76597db1d4fa3907f1d711d39e7",
+      "PLACO+": "0.2.0",
+      "PLACO+_commit": "3ba3cae1d323ad117fb4540e620bcefa79f70663",
+      "R": "4.3.3",
+      "analysis_panel": "atlas-v1.0",
+      "coloc": "5.2.3",
+      "cpp11": "0.5.2",
+      "keep": "1.0",
+      "lavaan": "0.6-19",
+      "ldsc_CBIIT": "6c673952cee74bd5c57aef1555a03b1c015399a0",
+      "matplotlib": "3.9.4",
+      "matrixsampling": "2.0.0",
+      "nlme": "3.1-168",
+      "numpy": "1.26.4",
+      "pandas": "2.2.3",
+      "pleioFDR": "0da963cac22fe8de9030166d7aea974bcbb0a367",
+      "pleioFDR_reference": "ref9545380_1kgPhase3eur_LDr2p1",
+      "plink": "1.90b7.7",
+      "psych": "2.5.6",
+      "python_ldsc": "3.9.23",
+      "python_workflow": "3.11.11",
+      "simsalapar": "1.0-13",
+      "snakemake": "8.30.0",
+      "susieR": "0.14.2"
+    }
+  }
+}

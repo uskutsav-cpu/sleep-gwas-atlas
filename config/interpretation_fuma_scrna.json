@@ -1,0 +1,206 @@
+{
+  "schema_version": "fuma-scrna-magma-celltyping-source-bundle.1",
+  "release": "FUMA_scRNA_data_dd526163ea80af1a80a6cdc80db167144500694b_2022-12-21",
+  "repository": "https://github.com/vufuma/FUMA_scRNA_data",
+  "commit": "dd526163ea80af1a80a6cdc80db167144500694b",
+  "commit_date": "2022-12-21T09:19:12Z",
+  "processed_data_tree_sha": "958094b328f35de0557f3be0733e29f5eb1bb6fc",
+  "processed_matrix_count": 179,
+  "processed_matrix_total_bytes": 436490812,
+  "gene_annotation": "Ensembl_v92_GRCh37_20260_coding_genes",
+  "gene_count": 20260,
+  "magma_version": "1.10",
+  "magma_gene_model": "snp-wise=mean",
+  "gene_window_kb": [1, 1],
+  "reference_panel": "1000_Genomes_Phase3_EUR_503_GRCh37_2018-09-17",
+  "reference_sample_count": 503,
+  "reference_archive_uncompressed_bytes": 3600697827,
+  "required_domains": ["brain", "immune", "metabolic", "vascular"],
+  "components": [
+    {
+      "component_id": "FUMA_SCRNA_COMMIT_ARCHIVE",
+      "url": "https://codeload.github.com/vufuma/FUMA_scRNA_data/tar.gz/dd526163ea80af1a80a6cdc80db167144500694b",
+      "path": "ref/interpretation/cell_type/fuma_scrna/FUMA_scRNA_data-dd526163ea80af1a80a6cdc80db167144500694b.tar.gz",
+      "bytes": 438582802,
+      "sha256": "2df915e81ac2b7d7e7deed6c1c5f56b0e0d08c6890c31a08763d619117242e9c"
+    },
+    {
+      "component_id": "FUMA_ENSEMBL_V92_GENE_BOUNDARIES",
+      "url": "http://pvsge063.labs.vu.nl/tutorial/download_variants?variant_code=MAGMAgenev92",
+      "path": "ref/interpretation/cell_type/fuma_scrna/ENSGv92.coding.genes.txt",
+      "bytes": 925575,
+      "sha256": "4a17a1fd68965f956bf780ef7b393f0abe0226642ae33f919896859c6b66dd90"
+    },
+    {
+      "component_id": "MAGMA_V1_10_SOURCE_ARCHIVE",
+      "url": "https://vu.data.surf.nl/index.php/s/1OOi7bxLWef0GwY/download",
+      "path": "ref/interpretation/cell_type/magma_v1.10/magma_v1.10_source.zip",
+      "bytes": 4700343,
+      "sha256": "c744c662204e6888f007b1db2c54d608545f2e71a73e5b42bf43102597c178af"
+    },
+    {
+      "component_id": "MAGMA_V1_10_ARM64_BINARY",
+      "url": "DERIVED_FROM_MAGMA_V1_10_SOURCE_ARCHIVE",
+      "path": "ref/interpretation/cell_type/magma_v1.10/source_arm64/magma",
+      "bytes": 2828776,
+      "sha256": "0d7fd4b7ba56bd93b2565ac7cbbfdda58ffaa9f3377a34b5658172f3513d25be"
+    },
+    {
+      "component_id": "MAGMA_1000G_PHASE3_EUR_ARCHIVE",
+      "url": "https://vu.data.surf.nl/index.php/s/VZNByNwpD8qqINe/download",
+      "path": "ref/interpretation/cell_type/magma_v1.10/g1000_eur.zip",
+      "bytes": 511626945,
+      "sha256": "83a48fd9dcaa0b9a874b18c63143a4ede93f05505b215b0bd8790130a0d7a954"
+    }
+  ],
+  "runtime_build": {
+    "source_component_id": "MAGMA_V1_10_SOURCE_ARCHIVE",
+    "binary_component_id": "MAGMA_V1_10_ARM64_BINARY",
+    "architecture": "arm64",
+    "compiler": "Apple clang 21.0.0 (clang-2100.1.1.101)",
+    "compile_flags": "-w -O2 -std=c++11 -DEIGEN_DONT_VECTORIZE -I src/eigen -I src/boost/boost_1_74_0",
+    "source_changes": false,
+    "reason_for_no_vectorization": "The vendored legacy Eigen NEON prefetch assembly is not valid on arm64; disabling Eigen vectorization leaves MAGMA statistical source unchanged and produces a native executable"
+  },
+  "reference_members": [
+    {
+      "name": "README",
+      "bytes": 1212,
+      "sha256": "9e7b92ced443609ffd498fc8e6c6ecc3a27a0a1111b0f3795ec71c7c440fa4c9"
+    },
+    {
+      "name": "g1000_eur.bed",
+      "bytes": 2855798067,
+      "sha256": "fadce7321e622ed20e3cb7798b3e54699c7f342752c642a14ddb982d93d8e08c"
+    },
+    {
+      "name": "g1000_eur.bim",
+      "bytes": 658724714,
+      "sha256": "b7dfeb30cef0573059ae43dd85a6924e46e418d6fe03df6b0ff1166c79cfa131"
+    },
+    {
+      "name": "g1000_eur.fam",
+      "bytes": 12575,
+      "sha256": "79dee21226fd04b5a889cbbeacd08079e1740e7d63b0a4dea115527e8fea4dae"
+    },
+    {
+      "name": "g1000_eur.synonyms",
+      "bytes": 86161259,
+      "sha256": "33cf56ff20d1ca6129dc5dbddf35ebebcfedf1f4ffd13afacbc21bf805505b3a"
+    }
+  ],
+  "datasets": [
+    {
+      "dataset_id": "Allen_Human_MTG_level2",
+      "member": "processed_data/Allen_Human_MTG_level2.txt.gz",
+      "domain": "brain",
+      "species": "human",
+      "tissue": "middle_temporal_gyrus",
+      "compressed_bytes": 13781051,
+      "compressed_sha256": "f20bdb4e9a5d759063a1dd28e7fe8658f2893042e346077f89d97ca1151a565b",
+      "text_bytes": 30505558,
+      "text_sha256": "eae19362b53e8d6eec3d2a50582fd48e8738b2c7fc49ee3b18988c2940d72124",
+      "header_sha256": "fd5644732f53cbaa859dec3108311943bfbd8c175d8e89388c9f363b82612be9",
+      "gene_rows": 29155,
+      "cell_type_count": 75
+    },
+    {
+      "dataset_id": "GSE67835_Human_Cortex_woFetal",
+      "member": "processed_data/GSE67835_Human_Cortex_woFetal.txt.gz",
+      "domain": "brain",
+      "species": "human",
+      "tissue": "cerebral_cortex",
+      "compressed_bytes": 1048690,
+      "compressed_sha256": "aaf3a2ad3e0e58a4b275c082189b6c486e5594a36c3b140084a806c16ac62780",
+      "text_bytes": 2438789,
+      "text_sha256": "35676120adf207a8153b5a40947cfe8ca0b6fd23bb77d0865847ec94be9c2c57",
+      "header_sha256": "d3196f6e6c755963175911d9324ad7ec94562c6fc1c551c0f7708215aaf29e8e",
+      "gene_rows": 19749,
+      "cell_type_count": 7
+    },
+    {
+      "dataset_id": "GSE89232_Human_Blood",
+      "member": "processed_data/GSE89232_Human_Blood.txt.gz",
+      "domain": "immune",
+      "species": "human",
+      "tissue": "blood_dendritic_cell_compartment",
+      "compressed_bytes": 712575,
+      "compressed_sha256": "33f1043cdb15e9002d378cc973cee8df39fef237b7ba225d9690880620a6fb7b",
+      "text_bytes": 1650631,
+      "text_sha256": "173f25c5f2adb66260da46d93ab83d5ebf275643c8293d62a5b26e2f86e1af14",
+      "header_sha256": "9280a8916666ca030053e3aca75077df7b43ea2679c3ca835e64f1a434d192cd",
+      "gene_rows": 17035,
+      "cell_type_count": 4
+    },
+    {
+      "dataset_id": "PBMC_10x_68k",
+      "member": "processed_data/PBMC_10x_68k.txt.gz",
+      "domain": "immune",
+      "species": "human",
+      "tissue": "peripheral_blood_mononuclear_cells",
+      "compressed_bytes": 1348837,
+      "compressed_sha256": "d2120a0fd432ccc662776253f8f09acf18c95b7e818cef8c9bf8f986d9ad22e1",
+      "text_bytes": 4411894,
+      "text_sha256": "edbb819875d29849b36a60722de29e509153d2496a3a8969ab292a3e4991e9f4",
+      "header_sha256": "76621b66e12f81cf8df31516baf5aa420b63b2990d182c42794868d7d216e9f1",
+      "gene_rows": 32738,
+      "cell_type_count": 11
+    },
+    {
+      "dataset_id": "GSE81547_Human_Pancreas",
+      "member": "processed_data/GSE81547_Human_Pancreas.txt.gz",
+      "domain": "metabolic",
+      "species": "human",
+      "tissue": "pancreas",
+      "compressed_bytes": 1175094,
+      "compressed_sha256": "71ed130b0345589f7375137a9c7a94a19aeb3afa21790658c8e4e93a07733055",
+      "text_bytes": 2682768,
+      "text_sha256": "e4ab91116275e6cad699f3671168f3df5498a5144f4a43b7648266d90f9f5369",
+      "header_sha256": "73fd13165d9867daf6a186b3833becf375f15049d121336a2acb6d3fd0c7b140",
+      "gene_rows": 20760,
+      "cell_type_count": 7
+    },
+    {
+      "dataset_id": "GSE84133_Human_Pancreas",
+      "member": "processed_data/GSE84133_Human_Pancreas.txt.gz",
+      "domain": "metabolic",
+      "species": "human",
+      "tissue": "pancreas",
+      "compressed_bytes": 1188619,
+      "compressed_sha256": "41ee3f76029c5c0706a7023502b764000d2bc157cd95bb1891ea3cada8e2e599",
+      "text_bytes": 3752032,
+      "text_sha256": "e352b34d043a4ca2190252ddee4e0d33ab343e571d3acdac25f448a4ec8fbe06",
+      "header_sha256": "125bd7524d4df8ab8be23c75a5c21115b1137bef5c90925589102cd2007f2556",
+      "gene_rows": 19546,
+      "cell_type_count": 14
+    },
+    {
+      "dataset_id": "GSE98816_Mouse_Brain_Vascular",
+      "member": "processed_data/GSE98816_Mouse_Brain_Vascular.txt.gz",
+      "domain": "vascular",
+      "species": "mouse_mapped_to_human_Ensembl_gene_ID",
+      "tissue": "brain_vasculature",
+      "compressed_bytes": 1763190,
+      "compressed_sha256": "fdfd761a3efaa731c718a77f9f4e4eabb9d4bb49192506c75c424f0c3de5b6f2",
+      "text_bytes": 3886304,
+      "text_sha256": "c66aea4edeffd2945d1985475386ddc2e8c12a620401c24ba4d1c4f15a1528f2",
+      "header_sha256": "0fee7aba08bbba2ea22dff440a5db524d21846e05bd785ba5cda26025137a4ef",
+      "gene_rows": 15302,
+      "cell_type_count": 15
+    },
+    {
+      "dataset_id": "GSE99235_Mouse_Lung_Vascular",
+      "member": "processed_data/GSE99235_Mouse_Lung_Vascular.txt.gz",
+      "domain": "vascular",
+      "species": "mouse_mapped_to_human_Ensembl_gene_ID",
+      "tissue": "lung_vasculature",
+      "compressed_bytes": 2008843,
+      "compressed_sha256": "dfa501788cfc3a61e6a0e687abfde811acd1d31a16ffb950e9b6d6abcc832993",
+      "text_bytes": 4411950,
+      "text_sha256": "c62ca818888daa5708a0dcd2be3577def79f052e8e86d842002e020db6f77739",
+      "header_sha256": "9fa5ec4bdf62e90c218a2a539fbf4df980570ba3dd339abb8b44a3e723e4da43",
+      "gene_rows": 15801,
+      "cell_type_count": 17
+    }
+  ]
+}

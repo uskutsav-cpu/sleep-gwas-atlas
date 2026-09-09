@@ -1,0 +1,113 @@
+{
+  "schema_version": "four-resource-pathway-source-bundle.2",
+  "analysis_id": "atlas-v1.0",
+  "set_size_range": [10, 1000],
+  "identifier_mapping": {
+    "reference": "GTEx_v8_GENCODE_v26_GRCh38",
+    "path": "ref/molecular/gtex_v8/gencode.v26.GRCh38.genes.gtf",
+    "bytes": 134502408,
+    "sha256": "2a7ae0883b35e7ff66a8f71a1779198acc6609d648ff55d7b670d010a9f243f6",
+    "rule": "Map exact source gene symbols only when the GENCODE v26 gene symbol resolves to exactly one versionless Ensembl gene ID; exclude unmapped and ambiguous symbols without alias substitution",
+    "gene_rows": 56200,
+    "distinct_symbols": 54592,
+    "unique_symbols": 54436,
+    "ambiguous_symbols": 156
+  },
+  "enrichment": {
+    "test": "one_sided_hypergeometric_overrepresentation",
+    "selected_genes": "HIGH_CONFIDENCE_CONVERGENT_GENE rows grouped by atlas locus",
+    "background": "All exact uniquely mapped GENCODE v26 genes present in at least one eligible gene set in the tested resource",
+    "effect": "Observed-over-expected enrichment ratio k*M/(N*K)",
+    "null_rows": "Retain every eligible set for each tested locus, including overlap=0 and P=1, so the full multiple-testing family is auditable",
+    "multiple_testing": "BH FDR within each resource and locus in the interpretation collator"
+  },
+  "resources": {
+    "REACTOME": {
+      "release": "Reactome_v97_2026-06-30",
+      "release_page": "https://reactome.org/",
+      "url": "https://download.reactome.org/97/ReactomePathways.gmt.zip",
+      "path": "ref/interpretation/pathway/reactome_v97/ReactomePathways.gmt.zip",
+      "bytes": 298479,
+      "sha256": "8c1dbc8578431da5d2d5118262718c60b553a9be3398e93658daa069e4a9afd4",
+      "archive_member": "ReactomePathways.gmt",
+      "archive_member_bytes": 1032186,
+      "archive_member_sha256": "89983d5c1f0af11c52edfeee7323eb425580ac6281d387a528562ab1787ce56b",
+      "source_pathways": 2868,
+      "source_symbols": 11990,
+      "mapped_genes": 11223,
+      "eligible_sets": 1744,
+      "eligible_gene_memberships": 106757,
+      "eligible_gene_union": 10919,
+      "rule": "Use the human R-HSA pathway ID and name from the single official GMT member; deduplicate symbols within each pathway and apply the locked exact GENCODE mapping and set-size filter"
+    },
+    "GO": {
+      "release": "GO_pipeline_2026-08-05_ontology_2026-07-26",
+      "release_page": "https://release.geneontology.org/2026-08-05/",
+      "release_archive_doi": "10.5281/zenodo.21844811",
+      "ontology": {
+        "url": "https://release.geneontology.org/2026-08-05/ontology/go-basic.obo",
+        "path": "ref/interpretation/pathway/go_2026-08-05/go-basic.obo",
+        "bytes": 32227785,
+        "sha256": "b08d45b268b8c24ccb2513dbbbc7d4df9f6521c099b413f79eb31e06e0fa3bcc",
+        "data_version": "releases/2026-07-26",
+        "active_terms": 38092
+      },
+      "annotation": {
+        "url": "https://release.geneontology.org/2026-08-05/annotations/gaf/HUMAN-uniprot.gaf.gz",
+        "path": "ref/interpretation/pathway/go_2026-08-05/HUMAN-uniprot.gaf.gz",
+        "bytes": 12109254,
+        "sha256": "a0afba19dfb1f8fa996bc1bdcd61fd0c9bd4cf0d2bf2509d09ac86993c0e70a2",
+        "rows": 910476,
+        "date_generated": "2026-07-28 19:42",
+        "go_version": "http://purl.obolibrary.org/obo/go/releases/2026-07-26/extensions/go-plus.ofn"
+      },
+      "namespaces": ["biological_process", "molecular_function", "cellular_component"],
+      "propagation_relations": ["is_a", "part_of"],
+      "evidence_codes": "all released evidence codes",
+      "exclude_qualifier": "NOT",
+      "excluded_not_rows": 1497,
+      "excluded_unmapped_rows": 77678,
+      "direct_annotated_terms": 17728,
+      "propagated_terms": 20861,
+      "mapped_genes": 18374,
+      "eligible_sets": 7719,
+      "eligible_gene_memberships": 611686,
+      "eligible_gene_union": 16782,
+      "rule": "Use human UniProt GAF symbols, exclude NOT rows, retain all released evidence codes, propagate annotations through is_a and part_of in the matching go-basic DAG, then apply the locked exact GENCODE mapping and set-size filter"
+    },
+    "MSIGDB": {
+      "release": "MSigDB_v2026.1.Hs_2026-01-29",
+      "release_page": "https://www.gsea-msigdb.org/gsea/msigdb/",
+      "license": "CC-BY-4.0-with-source-specific-additional-terms",
+      "url": "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2026.1.Hs/msigdb.v2026.1.Hs.symbols.gmt",
+      "path": "ref/interpretation/pathway/msigdb_2026.1.Hs/msigdb.v2026.1.Hs.symbols.gmt",
+      "bytes": 30255149,
+      "sha256": "fa938f38c8f41bafa31e9c479c997a4cdaf69621e89446f149a1d9442a80dead",
+      "source_sets": 35361,
+      "source_symbols": 43633,
+      "mapped_genes": 34241,
+      "eligible_sets": 29004,
+      "eligible_gene_memberships": 3430931,
+      "eligible_gene_union": 34100,
+      "rule": "Use the complete official human v2026.1 all-collection symbols GMT; deduplicate symbols within each set and map only exact unique GENCODE v26 symbols before applying the locked set-size filter"
+    },
+    "MAGMA_GENE_SETS": {
+      "release": "FUMA_MSigDB_v2023.1Hs_MAGMA_Ensembl_1.5.6plus",
+      "release_page": "https://fuma.ctglab.nl/downloadPage",
+      "download_code": "MSigDB20231Hs",
+      "license": "MSigDB-source-terms-apply",
+      "url": "https://fuma.ctglab.nl/tutorial/download_variants",
+      "path": "ref/interpretation/pathway/fuma_msigdb_2023.1Hs/msigdb_v2023.1Hs_magma_ensembl.gmt",
+      "bytes": 24365019,
+      "sha256": "4322bfcf758671dd749904c838a460468b6cb0e98d0ca90ed53387925b17311c",
+      "source_sets": 17023,
+      "source_gene_ids": 21302,
+      "mapped_genes": 20608,
+      "eligible_sets": 12960,
+      "eligible_gene_memberships": 1107120,
+      "eligible_gene_union": 20229,
+      "rule": "Use the exact FUMA 1.5.6+ MSigDB v2023.1Hs file prepared for MAGMA; retain only versionless Ensembl IDs present in the exact unique GENCODE v26 symbol map and apply the locked set-size filter"
+    }
+  },
+  "claim_limit": "Pathway overrepresentation is a competitive annotation of a prespecified convergent-gene list; it does not establish pathway activity, direction, mediation, or causality"
+}

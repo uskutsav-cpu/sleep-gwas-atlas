@@ -1,0 +1,12 @@
+diff --git a/runme.m b/runme.m
+index d9ac2ab..f02bea7 100644
+--- a/runme.m
++++ b/runme.m
+@@ -125,3 +125,7 @@
+ options.dummy_zscore = cfg.get_bool(CFG_DUMMY_ZSCORE_BOOL);
+ options.mafthresh = cfg.get_num(CFG_MAFTHRESH_NUM);
++% Atlas-v1.0 requires the upstream Mahalanobis decorrelation path because
++% many locked GWAS share UK Biobank or control samples. This patch changes
++% only the upstream option default; the algorithm itself remains unmodified.
++options.correct_for_sample_overlap = true;
+ exit_matlab_upon_completion = cfg.get_bool(CFG_EXIT_MATLAB_UPON_COMPLETION);

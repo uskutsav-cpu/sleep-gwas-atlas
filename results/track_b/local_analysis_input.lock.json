@@ -1,0 +1,40 @@
+{
+  "analysis_id": "track-b-v1.0-local",
+  "current_compute_snapshot": {
+    "benchmark_state": "RAM_BENCHMARK_REQUIRED",
+    "free_bytes": 17686564864,
+    "maximum_observed_peak_ram_gib": null,
+    "measured_discovery_loci": 0,
+    "memory_admission_rule": "MAXIMUM_OBSERVED_INTACT_LOCUS_PEAK_RSS_PLUS_1_GIB_RESERVE_MUST_NOT_EXCEED_PHYSICAL_RAM",
+    "memory_safety_reserve_bytes": 1073741824,
+    "note": "Operational disk/RAM snapshot excluded from immutable artifact hashes; the 35 GiB storage gate applies only while the reference must be acquired, and no compute-memory blocker is asserted before per-locus measurement.",
+    "physical_memory_bytes": 8589934592,
+    "ram_decision_rule": "MEASURE_PROCESS_PEAK_RSS_PER_LOCUS; DO_NOT_APPLY_AN_ASSUMED_MONOLITHIC_RAM_MINIMUM",
+    "reference_acquisition_storage_gate_applies": false,
+    "status": "RAM_BENCHMARK_REQUIRED"
+  },
+  "input_artifact_sha256": {
+    "results/track_b/lava_input_info.tsv": "5832e910f603111424ad9ac374a66bddd4e1321bd1631bc353006980a6cecf21",
+    "results/track_b/lava_input_provenance.tsv": "5b8cee810a85413d00896290492948f702d031da22100b90d338daa03d9a2476",
+    "results/track_b/lava_pair_manifest.tsv": "17475fc56b0a66d6dca3dbf7de3b2b33590b77c148275c21c70c727c988258e7",
+    "results/track_b/lava_runtime_policy.tsv": "05e825ae1a68768bf4bb31f40e5ce5f6fda3ab736e5b792e8260d41238325175",
+    "results/track_b/lava_sample_overlap.txt": "28f21b3d88bc05c66d47f52ec8582d1fa63f1c12fef82db58cb869779a90a0eb",
+    "results/track_b/local_conditional_manifest.tsv": "62b2911b5fa4186477192a230dd6e24a767319688a21ec8b5a793bbc0340b0cd",
+    "results/track_b/local_method_robustness_plan.tsv": "e01ba2e5834473222902035de4e85f0e175ddd8e2b4c58e4330989fefc4e5ec3"
+  },
+  "local_results_accessed_before_input_freeze": false,
+  "locus_file_sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882",
+  "overlap_diagnostics": {
+    "condition_number": 1.6407063150028651,
+    "maximum_eigenvalue": 1.3390595323968633,
+    "minimum_eigenvalue": 0.8161482162604615
+  },
+  "pair_manifest_sha256": "b3c520424415895df18b87141d9b99721d3bf49330844524731dd563da12dd4f",
+  "policy_sha256": "d84eba4feba928115b3057e7abe146afc808de9adfcc792e2a0ec25902c1f962",
+  "reference_minimum_free_bytes": 37580963840,
+  "reference_status": "READY",
+  "required_reference_provenance": "ref/lava/ukb_v1.1/reference.provenance.json",
+  "result_substitution_policy": "FORBIDDEN_SYNTHETIC_OR_PARTIAL_OUTPUTS_CANNOT_BE_PROMOTED_TO_REAL_LOCAL_RESULTS",
+  "schema_version": 1,
+  "selection_timing": "BEFORE_LOCAL_RESULT_ACCESS"
+}

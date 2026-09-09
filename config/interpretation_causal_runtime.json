@@ -1,0 +1,126 @@
+{
+  "schema_version": "sleep-atlas-causal-runtime.1",
+  "release": "atlas_causal_runtime_2026-08-28",
+  "runtime": {
+    "rscript_path": ".r-env/bin/Rscript",
+    "r_version": "4.3.3",
+    "architecture": "aarch64",
+    "causal_library": ".mr-env/library",
+    "genomicsem_environment_manifest": "environment/genomicsem.yml",
+    "genomicsem_environment_manifest_sha256": "eb4fc3d4fba252ba053c1685e2a7e8de93f53a8c01d5b92190c463f24214efae",
+    "dependency_source_manifest": "config/interpretation_causal_packages.tsv",
+    "dependency_source_manifest_sha256": "6c9ae71bf61cf36de4a952c469ffe4e5dec1b56ff6ef71f80225ff650fe0e26b",
+    "dependency_source_count": 63,
+    "installed_package_manifest": "config/interpretation_causal_installed_packages.tsv",
+    "installed_package_manifest_sha256": "77e51c68395bf9cd0ceeb1bd04a41256b9b29734a6cda83cd5afeb82164a6e09",
+    "installed_dependency_closure_count": 153,
+    "darwin_arm64_flibs_rule": "Use the only versioned .r-env/lib/gcc/arm64-apple-darwin20.0.0 directory instead of the stale directory in R Makeconf; fail if the directory family is not unique",
+    "network_runtime_calls": "FORBIDDEN"
+  },
+  "components": [
+    {
+      "component_id": "TWOSAMPLEMR_SOURCE",
+      "package": "TwoSampleMR",
+      "version": "0.7.9",
+      "upstream_commit": "c14776b89056e88422d9dff92b517b870a1339a4",
+      "url": "https://mrcieu.r-universe.dev/src/contrib/TwoSampleMR_0.7.9.tar.gz?sha256=d4ceabf89d8a21badc57b86a10fa73a6bb2d1931ba43be4f1badeed79cc6a3af&file=/TwoSampleMR_0.7.9.tar.gz",
+      "path": "ref/interpretation/causal/twosamplemr_0.7.9/TwoSampleMR_0.7.9.tar.gz",
+      "bytes": 8813664,
+      "sha256": "d4ceabf89d8a21badc57b86a10fa73a6bb2d1931ba43be4f1badeed79cc6a3af"
+    },
+    {
+      "component_id": "MRPRESSO_SOURCE",
+      "package": "MRPRESSO",
+      "version": "1.0",
+      "upstream_commit": "3e3c92d7eda6dce0d1d66077373ec0f7ff4f7e87",
+      "url": "https://codeload.github.com/rondolab/MR-PRESSO/tar.gz/3e3c92d7eda6dce0d1d66077373ec0f7ff4f7e87",
+      "path": "ref/interpretation/causal/mrpresso_3e3c92d/MR-PRESSO-3e3c92d7eda6dce0d1d66077373ec0f7ff4f7e87.tar.gz",
+      "bytes": 453853,
+      "sha256": "8bee27809fdf2ab69e549d08db0ff914d1af80f16119973c56f98c07f54f8728"
+    },
+    {
+      "component_id": "CAUSE_SOURCE",
+      "package": "cause",
+      "version": "1.2.0",
+      "upstream_commit": "8d86fc8e9a4509feec84b60b03a3048fe7562c4c",
+      "url": "https://codeload.github.com/jean997/cause/tar.gz/8d86fc8e9a4509feec84b60b03a3048fe7562c4c",
+      "path": "ref/interpretation/causal/cause_1.2.0/cause-8d86fc8e9a4509feec84b60b03a3048fe7562c4c.tar.gz",
+      "bytes": 29278307,
+      "sha256": "931c1f8bbdcb27557deb5e56cee1432334ad718269b430fd76e0183a646fed50"
+    },
+    {
+      "component_id": "LHCMR_SOURCE",
+      "package": "lhcMR",
+      "version": "0.0.0.9000",
+      "upstream_commit": "aee7f348744dc7be8b4e7cd52d645ee225cd8b95",
+      "url": "https://codeload.github.com/LizaDarrous/lhcMR/tar.gz/aee7f348744dc7be8b4e7cd52d645ee225cd8b95",
+      "path": "ref/interpretation/causal/lhcmr_aee7f348/lhcMR-aee7f348744dc7be8b4e7cd52d645ee225cd8b95.tar.gz",
+      "bytes": 123245,
+      "sha256": "0ed84d01fca5a5119ea60a11abdb2224fbf5de5abf6a2631f9183af19a8dcec9"
+    },
+    {
+      "component_id": "PLINK_1_9_STABLE_MAC_ARCHIVE",
+      "version": "1.9.0-b.7.11",
+      "release_date": "2025-08-19",
+      "url": "https://s3.amazonaws.com/plink1-assets/plink_mac_20250819.zip",
+      "path": "ref/interpretation/causal/plink_1.9_b7.11/plink_mac_20250819.zip",
+      "bytes": 2130883,
+      "sha256": "d6c129f940d7235ef24ba2dc5ec926f66690c2a439186a010343844893fda29b"
+    },
+    {
+      "component_id": "PLINK_1_9_STABLE_UNIVERSAL_BINARY",
+      "version": "1.9.0-b.7.11",
+      "release_date": "2025-08-19",
+      "url": "DERIVED_FROM_PLINK_1_9_STABLE_MAC_ARCHIVE",
+      "path": "ref/interpretation/causal/plink_1.9_b7.11/plink",
+      "bytes": 4344760,
+      "sha256": "5e49297d82c680f2ccfe45c62c974773f6c6e360e5d8a453f831ad95a480b642"
+    }
+  ],
+  "ld_reference": {
+    "source_manifest": "config/interpretation_fuma_scrna.json",
+    "source_manifest_sha256": "4f28ea6f9a9ab76d553b65cffbae4b8ca748225c791dadf7e8fdc4c59ec8bf9b",
+    "source_component_id": "MAGMA_1000G_PHASE3_EUR_ARCHIVE",
+    "release": "1000_Genomes_Phase3_EUR_503_GRCh37_2018-09-17",
+    "archive_path": "ref/interpretation/cell_type/magma_v1.10/g1000_eur.zip",
+    "archive_bytes": 511626945,
+    "archive_sha256": "83a48fd9dcaa0b9a874b18c63143a4ede93f05505b215b0bd8790130a0d7a954",
+    "instrument_universe_path": "ref/eur_w_ld_chr/w_hm3.snplist",
+    "instrument_universe_bytes": 17264312,
+    "instrument_universe_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+    "instrument_universe_rows_including_header": 1217312,
+    "instrument_universe_rule": "Use only unique HapMap3 rsIDs whose unordered allele pair exactly matches the EUR reference BIM; this conservative universe is fixed before any causal result",
+    "sample_count": 503,
+    "bed_variant_major": true,
+    "bed_record_bytes": 126,
+    "materialization": "Stream the exact BIM and SNP-major BED members and retain only the preregistered allele-matched HapMap3 universe required by the causal task family; do not extract the full 3.60-GB reference",
+    "ancestry": "European",
+    "build": "GRCh37"
+  },
+  "determinism": {
+    "base_seed": 451337,
+    "task_seed_rule": "base_seed plus the unsigned first 8 hexadecimal digits of SHA256(task_id), modulo 2147483646, plus 1",
+    "harmonise_action": 3,
+    "palindromic_rule": "Drop every palindromic SNP regardless of allele frequency",
+    "proxy_rule": "No proxy variants",
+    "strand_rule": "Exact non-palindromic allele matching with outcome effect sign flipped only on an unambiguous allele swap",
+    "local_ld_only": true
+  },
+  "estimators": {
+    "IVW": {"package": "TwoSampleMR", "minimum_instruments": 3},
+    "weighted_median": {"package": "TwoSampleMR", "minimum_instruments": 3},
+    "MR_Egger": {"package": "TwoSampleMR", "minimum_instruments": 3, "intercept_test_required": true},
+    "MR_PRESSO": {"package": "MRPRESSO", "minimum_instruments": 4, "nb_distribution": 100000, "global_test_required": true, "outlier_test_when_estimable": true},
+    "CAUSE_or_LHC_MR_where_appropriate": {
+      "primary": "CAUSE",
+      "cause_package": "cause",
+      "cause_exposure_p_threshold": 0.001,
+      "cause_minimum_null_parameter_variants": 100000,
+      "cause_ld_pruning_r2": 0.1,
+      "lhc_mr_role": "Sensitivity only when known sample overlap is scientifically material and real LDSC intercepts plus real bidirectional MR starting estimates are available",
+      "lhc_mr_package": "lhcMR",
+      "forbidden_lhc_mr_fallbacks": ["run_ldsc=FALSE", "run_MR=FALSE"],
+      "ineligible_rule": "Record NOT_APPLICABLE with the exact failed eligibility criterion; never replace a failed robust-overlap method with an unregistered estimator"
+    }
+  }
+}

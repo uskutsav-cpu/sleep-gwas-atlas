@@ -1,0 +1,34 @@
+component	version_or_commit	status	purpose
+analysis_panel	atlas-v1.0	ACTIVE	Locked 45-trait scope
+python_workflow	3.11.11	PINNED	Snakemake, validation, QC, reports, and CI
+snakemake	8.30.0	PINNED	Workflow orchestration
+numpy	1.26.4	PINNED	Pipeline numerical operations
+pandas	2.2.3	PINNED	Manifest and results tables
+matplotlib	3.9.4	PINNED	Figures
+python_ldsc	3.9.23	PINNED	Dedicated LDSC runtime
+ldsc_CBIIT	6c673952cee74bd5c57aef1555a03b1c015399a0	PINNED	Harmonization munging and LDSC h2/rg
+plink	1.90b7.7	PINNED	LD and locus utilities when introduced
+R	4.3.3	PINNED	GenomicSEM and downstream R analyses when introduced
+GenomicSEM	6b65ca5db39fdade08b0d811477be1cdd57b5039	PINNED	Multivariable LDSC covariance, exploratory/confirmatory SEM, userGWAS, and Q_SNP
+GenomicSEM_R_package	0.0.5	PINNED	Package version at the pinned GenomicSEM commit
+simsalapar	1.0-13	PINNED	Required GenomicSEM import installed from the exact CRAN source release
+lavaan	0.6-19	PINNED	Structural equation model estimation used by GenomicSEM
+psych	2.5.6	PINNED	Exploratory factor analysis for chromosome-split model discovery
+GPArotation	2025.3-1	PINNED	Oblique EFA rotation used by psych
+nlme	3.1-168	PINNED	Pinned psych dependency
+LAVA	e729a245f7b6923967a96804fbf5246eadf2d6c6	PINNED	Local univariate heritability and bivariate genetic correlation
+LAVA_R_package	0.1.5	PINNED	Package version at the pinned LAVA commit
+matrixsampling	2.0.0	PINNED	LAVA matrix-variate simulation dependency
+cpp11	0.5.2	PINNED	LAVA compiled-code interface dependency
+keep	1.0	PINNED	matrixsampling array-dimension dependency
+MiXeR	2.2.1	PINNED	Univariate polygenicity and bivariate polygenic-overlap models
+MiXeR_release_commit	cf65c57d5d1ad76597db1d4fa3907f1d711d39e7	PINNED	Official v2.2.1 tag commit
+MiXeR_amd64_container	sha256:5bf54ddd6f7f81b93eeb5450b1a6dc809d1fcf926b3a815d6d514f36ce04f51c	PINNED	Official Linux/amd64 image manifest
+MiXeR_reference	a4104bf34ed0509a6daa5b06594c40f0b655871c	PINNED	Official reference repository commit observed at policy lock
+PLACO+	0.2.0	PINNED	Pairwise composite-null pleiotropy test with correlated-Z support
+PLACO+_commit	3ba3cae1d323ad117fb4540e620bcefa79f70663	PINNED	Official PLACO+ source commit
+pleioFDR	0da963cac22fe8de9030166d7aea974bcbb0a367	PINNED	Official conjunctional-FDR implementation commit
+pleioFDR_reference	ref9545380_1kgPhase3eur_LDr2p1	PINNED	Official 2,383,912,974-byte 1KG Phase3 EUR reference
+susieR	0.14.2	PINNED	Primary multi-signal SuSiE-RSS fine-mapping
+coloc	5.2.3	PINNED	Primary signal-specific coloc.susie analysis and prior sensitivity
+MetaXcan	0.8.1	PINNED	Variance-controlled S-PrediXcan transcriptome-wide association testing

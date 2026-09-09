@@ -1,0 +1,613 @@
+{
+  "schema_version": "sleep-atlas-track-b-finemapping-policy.1",
+  "analysis_id": "track-b-v1.0-finemapping-trait-coloc",
+  "analysis_build": "hg19",
+  "ancestry": "EUR",
+  "selection_timing": "BEFORE_TRACK_B_FINE_MAPPING_OR_TRAIT_COLOC_RESULT_ACCESS",
+  "results_accessed_before_contract_freeze": false,
+  "pair_scope": {
+    "pair_order": [
+      "A",
+      "B",
+      "CONTROL"
+    ],
+    "primary_pairs": [
+      "A",
+      "B"
+    ],
+    "control_pairs": [
+      "CONTROL"
+    ],
+    "pairs": [
+      {
+        "pair_id": "A",
+        "trait1": "snoring",
+        "trait2": "parental_lifespan",
+        "family_role": "PRIMARY_DISCOVERY"
+      },
+      {
+        "pair_id": "B",
+        "trait1": "insomnia",
+        "trait2": "adhd",
+        "family_role": "PRIMARY_DISCOVERY"
+      },
+      {
+        "pair_id": "CONTROL",
+        "trait1": "insomnia",
+        "trait2": "frailty",
+        "family_role": "POSITIVE_CONTROL_NON_NOVELTY"
+      }
+    ],
+    "pair_replacement_policy": "FORBIDDEN; failed, null, diffuse, or invalid loci remain attached to their frozen pair",
+    "control_policy": "CONTROL evaluates expected pipeline recovery and calibration only; it is excluded from novelty, primary-family discovery, and mechanistic claims"
+  },
+  "immutable_pre_result_inputs": {
+    "pair_manifest": "results/track_b/pair_manifest.tsv",
+    "pair_manifest_lock": "results/track_b/pair_manifest.lock.json",
+    "dense_qc": "results/track_b/03_dense_input_qc.tsv",
+    "dense_qc_lock": "results/track_b/03_dense_input_qc.lock.json",
+    "local_analysis_policy": "config/track_b_local_analysis_policy.json",
+    "local_analysis_input_lock": "results/track_b/local_analysis_input.lock.json",
+    "software_sources": "config/fine_mapping_sources.tsv",
+    "method_references": "discovery_extension/config/fine_mapping_method_references.tsv",
+    "shared_r_engine": "discovery_extension/scripts/35_run_susie_coloc.R",
+    "shared_python_contract": "scripts/fine_mapping_contract.py",
+    "pleiotropy_contract_lock": "results/track_b/pleiotropy/contract.lock.json",
+    "pleiotropy_input_gate_lock": "results/track_b/pleiotropy/input_gate.lock.json"
+  },
+  "future_upstream_results": {
+    "local_sharing": {
+      "canonical_result": "results/track_b/04_lava_local_results.tsv",
+      "result_provenance": "results/track_b/local/lava_results.provenance.json",
+      "required_schema": [
+        "pair_id",
+        "chr",
+        "start",
+        "end",
+        "locus_id",
+        "trait1",
+        "trait2",
+        "local_h2_trait1",
+        "local_h2_trait2",
+        "local_h2_scale",
+        "local_covariance",
+        "local_rg",
+        "SE",
+        "SE_method",
+        "local_rg_CI_lower",
+        "local_rg_CI_upper",
+        "P",
+        "FDR",
+        "direction",
+        "SNP_count",
+        "QC",
+        "interpretation_status"
+      ],
+      "eligible_row_rule": "Include every pair-locus row with QC=PASS, finite local_rg and P, and FDR<=0.05; do not require pleiotropy support",
+      "allowed_interpretations": [
+        "STRONG_LOCAL_SHARING",
+        "MULTIPLE_LOCAL_LOCI",
+        "OPPOSING_LOCAL_EFFECTS"
+      ]
+    },
+    "pleiotropy": {
+      "contract_lock": "results/track_b/pleiotropy/contract.lock.json",
+      "input_gate_lock": "results/track_b/pleiotropy/input_gate.lock.json",
+      "placo_variants": "results/track_b/07_placo_plus_variants.tsv",
+      "method_union_loci": "results/track_b/08_shared_loci.tsv",
+      "method_comparison": "results/track_b/09_pleiotropy_comparison.tsv",
+      "result_provenance": "results/track_b/pleiotropy/results/results.provenance.json",
+      "control_directory": "results/track_b/control_insomnia_frailty",
+      "method_union_required_schema_prefix": [
+        "pair_id",
+        "lead_variant",
+        "chr",
+        "position",
+        "PLACO_P",
+        "FDR",
+        "trait1_P",
+        "trait2_P",
+        "locus_start",
+        "locus_end",
+        "independent_signal",
+        "annotations"
+      ],
+      "method_union_schema_rule": "The validated 08_shared_loci.tsv schema must begin with the exact frozen prefix; any additional fields must be declared and validated by the sealed pleiotropy result provenance",
+      "eligible_primary_rule": "Include every validated A/B method-union locus supported by completed PLACO or completed conjFDR; intersection is not required and a blocked method is not a null result",
+      "eligible_control_rule": "Include every validated CONTROL recovery locus from the separately sealed control family and retain its non-novelty role",
+      "required_method_labels": [
+        "PLACO_AND_CONJFDR",
+        "PLACO_ONLY",
+        "CONJFDR_ONLY"
+      ],
+      "blocked_method_label_rule": "PLACO_ONLY or CONJFDR_ONLY is forbidden when the other method was blocked or not tested"
+    }
+  },
+  "locus_entry_contract": {
+    "family_definition": "The nonduplicated union of scientifically valid local-sharing loci and scientifically valid completed-method PLACO/conjFDR loci for A, B, and CONTROL",
+    "intersection_required": false,
+    "consensus_only_selection_forbidden": true,
+    "result_ranked_maximum_forbidden": true,
+    "global_rg_filter_forbidden": true,
+    "deduplication_rule": "Within each pair, map each eligible upstream signal to its ancestry-matched signed-LD analysis block; collapse duplicate source rows for the same pair and block into one locus entry while retaining every upstream evidence identifier and method label",
+    "multi_signal_rule": "Multiple eligible signals in one pair/block are retained as one multi-signal fine-mapping locus, not ranked down to one lead",
+    "cross_pair_rule": "The same genomic block in A, B, and CONTROL remains three distinct pair-locus entries",
+    "coordinate_rule": "Use the sealed GRCh37/hg19 LD-block coordinates; distance-only overlap does not establish shared causal signal",
+    "ordered_source_labels": [
+      "LOCAL_SHARING",
+      "PLACO",
+      "CONJFDR"
+    ],
+    "future_locus_manifest": "results/track_b/finemapping/locus_manifest.tsv",
+    "future_locus_manifest_lock": "results/track_b/finemapping/locus_manifest.lock.json",
+    "locus_manifest_schema": [
+      "analysis_id",
+      "locus_entry_id",
+      "pair_id",
+      "family_role",
+      "trait1",
+      "trait2",
+      "CHR",
+      "START",
+      "STOP",
+      "ld_block_id",
+      "inclusion_sources",
+      "local_evidence_ids",
+      "pleiotropy_evidence_ids",
+      "method_availability",
+      "trait1_dense_input",
+      "trait2_dense_input",
+      "variant_order_path",
+      "signed_ld_path",
+      "variant_count",
+      "trait1_summary_sha256",
+      "trait2_summary_sha256",
+      "variant_order_sha256",
+      "signed_ld_sha256",
+      "estimated_peak_rss_bytes",
+      "memory_admission_status",
+      "task_path",
+      "claim_limit"
+    ],
+    "zero_family_terminal_status": "NOT_APPLICABLE_ZERO_ELIGIBLE_LOCUS_FAMILY",
+    "zero_family_rule": "Only after both complete sealed upstream families validate may a zero-entry union terminate as NOT_APPLICABLE; record upstream hashes and family counts in terminal provenance and do not create header-only 10/11/12 science outputs",
+    "future_zero_family_provenance": "results/track_b/finemapping/zero_family.provenance.json"
+  },
+  "dense_input_contract": {
+    "scope": "All five frozen Track B full autosomal post-QC dense GWAS inputs; HapMap3-only LDSC inputs, lead-only inputs, and imputed proxy substitutions are forbidden",
+    "unique_traits": [
+      "snoring",
+      "parental_lifespan",
+      "insomnia",
+      "adhd",
+      "frailty"
+    ],
+    "required_columns": [
+      "SNP",
+      "CHR",
+      "BP",
+      "A1",
+      "A2",
+      "FRQ",
+      "BETA",
+      "SE",
+      "P",
+      "N"
+    ],
+    "minimum_variant_rows_per_trait": 5000000,
+    "minimum_maf": 0.01,
+    "hapmap3_only_forbidden": true,
+    "exact_rsid_coordinate_allele_match_required": true,
+    "ambiguous_or_mismatched_alleles_forbidden": true,
+    "source_level_info_limitation_policy": "Snoring and frailty may retain their frozen source-level INFO limitation; it must be reported and cannot be represented as row-wise INFO",
+    "variant_universe_rule": "Both trait summaries, the signed-LD matrix, and the variant-order file contain the identical nonduplicated SNP family in identical order",
+    "minimum_locus_variants": 50,
+    "maximum_locus_variants": null,
+    "locus_size_rule": "Use every eligible QC-passing SNP in the complete validated locus; no count cap, thinning, window subdivision, or lead-centered truncation is allowed"
+  },
+  "signed_ld_contract": {
+    "reference_id": "LAVA_UKB_v1.1_EUR_GRCh37",
+    "reference_provenance": "ref/lava/ukb_v1.1/reference.provenance.json",
+    "reference_manifest": "ref/lava/ukb_v1.1/extracted_manifest.tsv",
+    "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
+    "ancestry": "EUR",
+    "build": "GRCh37/hg19",
+    "matrix": "Signed Pearson genotype correlation oriented to the common effect allele",
+    "minimum_reference_sample_size": 10000,
+    "exact_variant_order_sha256_required": true,
+    "reference_payload_sha256_required": true,
+    "symmetry_tolerance": 1e-08,
+    "diagonal_tolerance": 1e-06,
+    "minimum_eigenvalue_tolerance": -1e-06,
+    "allele_rule": "Both GWAS betas are oriented to the reference A1 allele before signed LD is extracted; unsigned r2, distance, and allele-unverified LD are forbidden",
+    "reuse_rule": "A signed-LD payload may be reused only for the identical block, build, ancestry, reference release, SNP order, and allele orientation"
+  },
+  "software_contract": {
+    "susieR": {
+      "version": "0.14.2",
+      "source_archive": ".r-env/share/finemapping/source_archives/susieR_0.14.2.tar.gz",
+      "source_archive_sha256": "ba02322eb1f7a7cc024c9278aa7903a34d8ad5d6f3b12c168374bc6214ed2c6e",
+      "installed_description": ".r-env/lib/R/library/susieR/DESCRIPTION",
+      "required_entrypoints": [
+        "susie_rss",
+        "susie_get_cs",
+        "estimate_s_rss",
+        "kriging_rss"
+      ]
+    },
+    "coloc": {
+      "version": "5.2.3",
+      "source_archive": ".r-env/share/finemapping/source_archives/coloc_v5.2.3.tar.gz",
+      "source_archive_sha256": "9cfc21315468bbe984faf9facaaa76e0127999ff4cf798a0a41cec904dd86c60",
+      "installed_description": ".r-env/lib/R/library/coloc/DESCRIPTION",
+      "required_entrypoints": [
+        "coloc.susie",
+        "runsusie",
+        "sensitivity"
+      ]
+    },
+    "shared_r_engine_sha256": "a0f262ccd8b0e959584fbfc9f3032e5a99c391e6928244282977d6357c17e1e5",
+    "shared_engine_use_rule": "The pinned shared R engine may be reused only behind this Track B locus-family, schema, diagnostics, and publication contract",
+    "shared_python_contract_use_rule": "Reuse low-level dense-input, signed-LD, and engine-output validators only; the generic atlas consensus-only shared-locus selector, manifest builder, and canonical collator are forbidden for Track B"
+  },
+  "fine_mapping_contract": {
+    "primary_method": "SuSiE-RSS",
+    "maximum_causal_signals": 10,
+    "credible_set_coverage": 0.95,
+    "minimum_absolute_correlation_for_credible_set": 0.5,
+    "maximum_iterations": 1000,
+    "estimate_residual_variance": false,
+    "primary_prior": "FLAT",
+    "high_pip_threshold": 0.5,
+    "small_credible_set_maximum_variants": 10,
+    "functional_prior_sensitivity_rule": "PolyFun-derived weights are optional sensitivity only after the genome-wide annotation model, ancestry, build, version, and weights are separately locked before any locus result access",
+    "alternative_method_rule": "FINEMAP or SuSiE-inf is optional sensitivity only after a locus-specific scientific justification and executable lock; it never silently replaces SuSiE-RSS"
+  },
+  "colocalization_contract": {
+    "primary_method": "coloc.susie",
+    "p1": 0.0001,
+    "p2": 0.0001,
+    "p12_primary": 0.00001,
+    "p12_sensitivity_grid": [
+      0.000001,
+      0.000005,
+      0.00001,
+      0.00005
+    ],
+    "hypotheses": {
+      "H0": "neither trait is associated in the locus",
+      "H1": "trait 1 only is associated",
+      "H2": "trait 2 only is associated",
+      "H3": "both traits are associated through distinct signals",
+      "H4": "both traits are associated through a shared-signal model"
+    },
+    "strong_rule": "At the primary p12, PP.H4>=0.80 and PP.H4/PP.H3>=5 with valid converged fine maps; the identical signal pair must pass at every p12 value for prior_robust=TRUE",
+    "moderate_rule": "At the primary p12, PP.H4>=0.50 and PP.H4/PP.H3>=2 with valid converged fine maps but the strong prior-robust rule is not met",
+    "distinct_rule": "At the primary p12, PP.H3>=0.80 and PP.H3/PP.H4>=5 with valid converged fine maps",
+    "inconclusive_rule": "Valid inputs that meet none of the strong, moderate, or distinct rules",
+    "invalid_input_rule": "Any failed allele, variant-order, LD, probability, convergence, or required-diagnostic gate",
+    "prior_robust_rule": "Evaluate the same signal1/signal2 pair at every locked p12 value; never pool the best signal pair across priors",
+    "single_signal_fallback": "FORBIDDEN for the primary Track B trait-trait family; absence of a valid SuSiE credible set is retained as INCONCLUSIVE or INVALID_INPUT according to diagnostics",
+    "claim_rule": "Trait colocalization supports a shared-signal model under the stated priors and LD; it does not prove a shared causal variant, mechanism, mediation, or causal direction"
+  },
+  "diagnostic_contract": {
+    "future_output": "results/track_b/finemapping/diagnostics.tsv",
+    "required_schema": [
+      "analysis_id",
+      "pair_id",
+      "family_role",
+      "locus_entry_id",
+      "dataset_role",
+      "trait_id",
+      "variant_count",
+      "ld_variant_count",
+      "allele_match_count",
+      "model_converged",
+      "niter",
+      "credible_set_count",
+      "max_pip",
+      "rss_ld_s",
+      "kriging_allele_switch_outlier_count",
+      "kriging_allele_switch_outliers",
+      "ld_symmetry_max_abs",
+      "ld_diagonal_max_abs",
+      "ld_minimum_eigenvalue",
+      "reference_sample_size",
+      "diagnostic_status",
+      "error"
+    ],
+    "required_checks": [
+      "exact SNP-order identity",
+      "effect-allele identity",
+      "finite signed LD",
+      "LD symmetry",
+      "LD unit diagonal",
+      "LD positive semidefiniteness",
+      "SuSiE convergence",
+      "iteration count",
+      "RSS-LD inconsistency s",
+      "kriging allele-switch outliers",
+      "credible-set coverage and purity"
+    ],
+    "allowed_statuses": [
+      "PASS",
+      "FAILED_ALLELE_OR_ORDER",
+      "FAILED_LD_QC",
+      "FAILED_MODEL_CONVERGENCE",
+      "FAILED_KRIGING_QC",
+      "FAILED_REQUIRED_DIAGNOSTIC"
+    ],
+    "failure_rule": "Failures remain explicit with retained diagnostics and an error; they are never dropped, retried with post-result parameter changes, or converted to null evidence"
+  },
+  "ram_aware_execution_contract": {
+    "execution_unit": "ONE_VALIDATED_PAIR_LOCUS_PER_FRESH_OS_PROCESS",
+    "maximum_concurrent_loci_per_worker": 1,
+    "process_reuse_across_loci_forbidden": true,
+    "full_locus_variant_universe_required": true,
+    "full_ancestry_matched_signed_ld_required": true,
+    "locus_splitting_forbidden": true,
+    "variant_thinning_for_compute_forbidden": true,
+    "fresh_process_rule": "The coordinator validates one locked task, launches one new R process for that pair-locus, measures it, seals or records failure, waits for process exit, and only then considers another locus",
+    "admission_estimate": {
+      "formula": "estimated_peak_rss_bytes=max(absolute_minimum_memory_bytes,ld_scalar_bytes*variant_count^2*ld_live_copy_multiplier+fixed_process_overhead_bytes)",
+      "ld_scalar_bytes": 8,
+      "ld_live_copy_multiplier": 8,
+      "fixed_process_overhead_bytes": 2147483648,
+      "absolute_minimum_memory_bytes": 4294967296,
+      "minimum_unallocated_host_reserve_bytes": 1073741824,
+      "admission_rule": "available_memory_before_bytes>=estimated_peak_rss_bytes+minimum_unallocated_host_reserve_bytes",
+      "estimate_role": "Conservative prelaunch scheduling gate; measured peak RSS is the authoritative post-run value"
+    },
+    "insufficient_memory_rule": "Record BLOCKED_BY_COMPUTE and reschedule the identical checksum-locked full locus on a larger host; never split, thin, truncate, or change model parameters",
+    "oom_rule": "Record FAILED_RESOURCE_OOM with the exact task/input hashes and observed metrics, then retry only the unchanged locus on a larger host; an OOM is not INVALID_INPUT or a negative scientific result",
+    "atomic_resume": {
+      "future_run_directory": "results/track_b/finemapping/runs",
+      "future_staging_directory": "work/track_b_finemapping/runs",
+      "future_run_index": "results/track_b/finemapping/run_index.tsv",
+      "staging_rule": "Write one fingerprinted per-attempt staging directory, fsync outputs and provenance, validate all hashes/schemas/family identities, then publish the sealed per-locus directory with an exclusive no-replace operation",
+      "resume_rule": "Skip a locus only when its sealed provenance revalidates the exact task, policy, engine, summaries, variant order, signed LD, metrics, and outputs; a mismatched canonical directory fails closed and is never overwritten",
+      "partial_attempt_rule": "An incomplete staging attempt is never scientific output and is never promoted; retain or quarantine its diagnostics before launching a fresh unchanged attempt"
+    },
+    "future_resource_metrics": "results/track_b/finemapping/resource_metrics.tsv",
+    "resource_metrics_schema": [
+      "analysis_id",
+      "run_fingerprint",
+      "locus_entry_id",
+      "pair_id",
+      "attempt_id",
+      "worker_environment_id",
+      "process_isolation",
+      "variant_count",
+      "ld_dimension",
+      "estimated_peak_rss_bytes",
+      "host_physical_memory_bytes",
+      "available_memory_before_bytes",
+      "admission_status",
+      "started_utc",
+      "finished_utc",
+      "elapsed_monotonic_seconds",
+      "peak_rss_bytes",
+      "rss_measurement_backend",
+      "exit_code",
+      "terminal_status",
+      "task_sha256",
+      "trait1_summary_sha256",
+      "trait2_summary_sha256",
+      "variant_order_sha256",
+      "signed_ld_sha256",
+      "engine_sha256",
+      "policy_sha256",
+      "output_manifest_sha256",
+      "error"
+    ],
+    "allowed_rss_measurement_backends": [
+      "CGROUP_V2_MEMORY_PEAK_BYTES",
+      "GNU_TIME_MAXIMUM_RESIDENT_SET_SIZE_KIB_NORMALIZED_TO_BYTES",
+      "DARWIN_TIME_MAXIMUM_RESIDENT_SET_SIZE_BYTES",
+      "RUSAGE_MAXRSS_PLATFORM_NORMALIZED_TO_BYTES"
+    ],
+    "measurement_rule": "Record normalized peak_rss_bytes and monotonic elapsed seconds for every admitted attempt, including nonzero exits and OOM; missing or ambiguous RSS units fail the metrics contract",
+    "terminal_statuses": [
+      "COMPLETE_SEALED",
+      "BLOCKED_BY_COMPUTE",
+      "FAILED_RESOURCE_OOM",
+      "FAILED_ENGINE",
+      "FAILED_VALIDATION"
+    ],
+    "hash_interface_rule": "The run fingerprint and metrics row bind policy, engine, task, both locus summaries, exact SNP order, full signed LD, and the sealed output manifest"
+  },
+  "required_science_outputs": {
+    "output_10": {
+      "path": "results/track_b/10_finemap_trait1.tsv",
+      "trait_role": "TRAIT1_SLEEP",
+      "schema": [
+        "analysis_id",
+        "pair_id",
+        "family_role",
+        "locus_entry_id",
+        "locus_id",
+        "CHR",
+        "START",
+        "STOP",
+        "trait_id",
+        "trait_role",
+        "SNP",
+        "BP",
+        "A1",
+        "A2",
+        "BETA",
+        "SE",
+        "P",
+        "EAF",
+        "INFO",
+        "N",
+        "prior_role",
+        "prior_weight",
+        "PIP",
+        "credible_set_ids",
+        "credible_set_sizes",
+        "credible_set_requested_coverage",
+        "credible_set_achieved_coverage",
+        "credible_set_min_abs_corr",
+        "credible_set_mean_abs_corr",
+        "max_alpha_component",
+        "model_converged",
+        "niter",
+        "rss_ld_s",
+        "kriging_allele_switch_outlier",
+        "ld_reference_id",
+        "ld_variant_order_sha256",
+        "fine_mapping_classifications",
+        "analysis_status",
+        "claim_limit"
+      ]
+    },
+    "output_11": {
+      "path": "results/track_b/11_finemap_trait2.tsv",
+      "trait_role": "TRAIT2_EXTERNAL",
+      "schema": [
+        "analysis_id",
+        "pair_id",
+        "family_role",
+        "locus_entry_id",
+        "locus_id",
+        "CHR",
+        "START",
+        "STOP",
+        "trait_id",
+        "trait_role",
+        "SNP",
+        "BP",
+        "A1",
+        "A2",
+        "BETA",
+        "SE",
+        "P",
+        "EAF",
+        "INFO",
+        "N",
+        "prior_role",
+        "prior_weight",
+        "PIP",
+        "credible_set_ids",
+        "credible_set_sizes",
+        "credible_set_requested_coverage",
+        "credible_set_achieved_coverage",
+        "credible_set_min_abs_corr",
+        "credible_set_mean_abs_corr",
+        "max_alpha_component",
+        "model_converged",
+        "niter",
+        "rss_ld_s",
+        "kriging_allele_switch_outlier",
+        "ld_reference_id",
+        "ld_variant_order_sha256",
+        "fine_mapping_classifications",
+        "analysis_status",
+        "claim_limit"
+      ]
+    },
+    "output_12": {
+      "path": "results/track_b/12_trait_trait_coloc.tsv",
+      "schema": [
+        "analysis_id",
+        "pair_id",
+        "family_role",
+        "locus_entry_id",
+        "locus_id",
+        "CHR",
+        "START",
+        "STOP",
+        "trait1",
+        "trait2",
+        "signal1",
+        "signal2",
+        "coloc_method",
+        "p1",
+        "p2",
+        "p12",
+        "prior_role",
+        "nsnps",
+        "PP_H0",
+        "PP_H1",
+        "PP_H2",
+        "PP_H3",
+        "PP_H4",
+        "PP_H4_over_PP_H3",
+        "top_shared_variant",
+        "top_shared_variant_PP_H4",
+        "primary_shared_signal_rule_pass",
+        "same_signal_pair_prior_robust",
+        "fine_mapping_qc",
+        "ld_qc",
+        "classification",
+        "analysis_status",
+        "claim_limit"
+      ]
+    }
+  },
+  "classification_contract": {
+    "fine_mapping_labels_in_order": [
+      "HIGH_PIP_VARIANT",
+      "SMALL_CREDIBLE_SET",
+      "DIFFUSE_SIGNAL",
+      "LD_UNCERTAINTY",
+      "MODEL_INSTABILITY"
+    ],
+    "fine_mapping_rules": {
+      "HIGH_PIP_VARIANT": "PIP>=0.50 in an otherwise valid converged trait-locus model",
+      "SMALL_CREDIBLE_SET": "Variant belongs to a <=10-variant 95% credible set with min_abs_corr>=0.50",
+      "DIFFUSE_SIGNAL": "Valid converged trait-locus model has neither a PIP>=0.50 variant nor a qualifying small credible set",
+      "LD_UNCERTAINTY": "Variant order, allele orientation, LD reference matching, symmetry, diagonal, eigenvalue, RSS-LD, kriging, or credible-set-purity diagnostics indicate LD uncertainty",
+      "MODEL_INSTABILITY": "SuSiE fails to converge, exceeds the iteration limit, or is unstable independently of a separately reported LD uncertainty"
+    },
+    "trait_coloc_allowed": [
+      "STRONG_SHARED_SIGNAL",
+      "MODERATE_SHARED_SIGNAL",
+      "DISTINCT_SIGNALS",
+      "INCONCLUSIVE",
+      "INVALID_INPUT"
+    ],
+    "classification_priority": "INVALID_INPUT, then STRONG_SHARED_SIGNAL, MODERATE_SHARED_SIGNAL, DISTINCT_SIGNALS, INCONCLUSIVE",
+    "control_suffix_rule": "CONTROL rows use the same statistical classifications but remain family_role=POSITIVE_CONTROL_NON_NOVELTY and cannot support a novelty claim"
+  },
+  "execution_and_publication": {
+    "pre_result_locus_manifest_lock_required": true,
+    "results_access_before_manifest_lock_forbidden": true,
+    "complete_locus_family_required": true,
+    "failed_loci_retained": true,
+    "parameter_changes_after_result_access_forbidden": true,
+    "canonical_output_overwrite_forbidden": true,
+    "staged_validation_required": true,
+    "exclusive_publication_required": true,
+    "result_provenance_required": true,
+    "generic_atlas_science_output_substitution_forbidden": true,
+    "future_result_provenance": "results/track_b/finemapping/results.provenance.json",
+    "publication_rule": "Validate exact schemas, row-family completeness, classifications, priors, diagnostics, hashes, and no preexisting canonical output before one exclusive publication; partial or header-only publication is forbidden",
+    "blocked_rule": "Before a complete validated locus family exists, publish readiness only and do not create 10/11/12 placeholders"
+  },
+  "result_status_semantics": {
+    "fine_mapping_allowed": [
+      "COMPLETE",
+      "FAILED_QC"
+    ],
+    "trait_coloc_allowed": [
+      "TESTED",
+      "INVALID_INPUT"
+    ],
+    "complete_family_rule": "Every locked pair-locus and both trait roles must terminate with one allowed fine-mapping status; every locked signal-pair/prior row must terminate with one allowed trait-coloc status",
+    "failure_rule": "FAILED_QC and INVALID_INPUT rows retain diagnostics and errors; they are not deleted, converted to null evidence, or replaced by a different method",
+    "blocked_rule": "BLOCKED_UPSTREAM is a readiness state only and is forbidden inside 10/11/12 scientific result rows"
+  },
+  "current_readiness": {
+    "status": "BLOCKED_UPSTREAM",
+    "reason": "Validated complete Track B local-sharing and PLACO/conjFDR locus families are not yet both available and sealed",
+    "science_outputs_created": false
+  },
+  "claim_limits": {
+    "fine_mapping": "PIPs and credible sets are model-based candidate-variant evidence and do not prove a causal variant or biological mechanism",
+    "trait_coloc": "Trait colocalization supports a shared-signal model under stated data, LD, and priors; it does not prove causality, mediation, a causal gene, or mechanism",
+    "control": "CONTROL evaluates expected recovery only and is excluded from novelty and mechanistic claims",
+    "blocked": "BLOCKED_UPSTREAM is not a null, negative, zero-locus, diffuse, or invalid fine-mapping result"
+  }
+}

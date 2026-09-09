@@ -1,0 +1,202 @@
+{
+  "analysis_id": "atlas-v1.0-molecular",
+  "schema_version": "1.0.0",
+  "entry_gate": "Every PRIMARY_PHASE1 fine-mapped locus after the locus family and trait-trait results are checksum locked",
+  "selection_timing": "Source families and query rules are frozen before molecular-QTL source access; exact features are frozen after source snapshots but before any trait-molecular result is read",
+  "source_release_policy": {
+    "eqtl_catalogue_release": "r7_June_2024",
+    "reject_prerelease": ["r8_pre-release_January_2026"],
+    "eqtl_catalogue_resource_commit": "10966d360a4394c16e338fb9345ec71f4cd5b1fa",
+    "gtex_release": "v8",
+    "predictdb_model_release": "elastic-net-with-phi_Box_folder_updated_2024-11-12",
+    "excluded_twas_models": [
+      "Zenodo_3518299_GTEx_v8_MASHR_eQTL_missing_phi",
+      "Zenodo_3518299_GTEx_v8_MASHR_sQTL_missing_phi"
+    ],
+    "psychencode_role": "supplementary_access_block_allowed",
+    "landing_page_alone_is_evidence": false
+  },
+  "metadata_assets": [
+    {
+      "id": "EQTL_CATALOGUE_R7_DATASETS",
+      "url": "https://raw.githubusercontent.com/eQTL-Catalogue/eQTL-Catalogue-resources/10966d360a4394c16e338fb9345ec71f4cd5b1fa/data_tables/dataset_metadata_r7.tsv",
+      "path": "ref/molecular/eqtl_catalogue_r7/dataset_metadata_r7.tsv",
+      "bytes": 75969,
+      "sha256": "70b0b6eac8a607568d11b3f2d8ad6cf6e9bb430ffafa4883627797d8967785ea"
+    },
+    {
+      "id": "EQTL_CATALOGUE_R7_TABIX_PATHS",
+      "url": "https://raw.githubusercontent.com/eQTL-Catalogue/eQTL-Catalogue-resources/10966d360a4394c16e338fb9345ec71f4cd5b1fa/tabix/tabix_ftp_paths.tsv",
+      "path": "ref/molecular/eqtl_catalogue_r7/tabix_ftp_paths.tsv",
+      "bytes": 287387,
+      "sha256": "20912adbeb700bb0224e73f1acba79921cb7afd4323955b00e4e9a73da49b7f4"
+    },
+    {
+      "id": "EQTL_CATALOGUE_GTEX_V8_PATHS",
+      "url": "https://raw.githubusercontent.com/eQTL-Catalogue/eQTL-Catalogue-resources/10966d360a4394c16e338fb9345ec71f4cd5b1fa/tabix/tabix_ftp_paths_imported.tsv",
+      "path": "ref/molecular/eqtl_catalogue_r7/tabix_ftp_paths_imported.tsv",
+      "bytes": 8717,
+      "sha256": "0159a70dd39d609296c6a0d8fd162667d3e4ca180d0032be47b91d217c810957"
+    },
+    {
+      "id": "GTEX_V8_GENCODE_V26_COLLAPSED_GENES",
+      "url": "https://storage.googleapis.com/adult-gtex/references/v8/reference-tables/gencode.v26.GRCh38.genes.gtf",
+      "path": "ref/molecular/gtex_v8/gencode.v26.GRCh38.genes.gtf",
+      "bytes": 134502408,
+      "sha256": "2a7ae0883b35e7ff66a8f71a1779198acc6609d648ff55d7b670d010a9f243f6"
+    }
+  ],
+  "reference_build": {
+    "analysis_build": "GRCh37",
+    "molecular_source_build": "GRCh38",
+    "chain_path": "ref/hg19ToHg38.over.chain.gz",
+    "chain_bytes": 227698,
+    "chain_md5": "35887f73fe5e2231656504d1f6430900",
+    "chain_sha256": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+    "official_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz",
+    "mapping_rule": "Both one-based interval endpoints must map uniquely to the same autosome in forward order; every returned variant must map uniquely back to the locked GRCh37 LD variant by rsID plus allele-compatible coordinate"
+  },
+  "source_to_analysis_chain": {
+    "path": "ref/hg38ToHg19.over.chain.gz",
+    "bytes": 1246411,
+    "sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1"
+  },
+  "search_family": {
+    "uniform_quant_methods": {
+      "ge": "eQTL",
+      "leafcutter": "sQTL",
+      "aptamer": "pQTL"
+    },
+    "imported_families": ["GTEx_V8_ge"],
+    "include_all_release7_datasets_for_selected_quant_methods": true,
+    "minimum_sample_size": 1,
+    "no_result_ranked_dataset_or_context_cap": true,
+    "terminal_outcomes": ["NO_FEATURES_IN_LOCUS", "NO_ANALYZABLE_FEATURES", "ACCESS_BLOCKED", "NOT_APPLICABLE"],
+    "complete_coverage_required": true
+  },
+  "normalized_qtl_schema": [
+    "source_variant_id", "rsid", "source_chromosome", "source_position", "source_ref", "source_alt",
+    "chromosome", "position", "effect_allele", "other_allele", "beta", "se", "maf", "n",
+    "feature_id", "feature_name", "gene_id", "gene_symbol", "context", "source_dataset_id",
+    "modality", "liftover_status"
+  ],
+  "variant_qc": {
+    "autosomes_only": true,
+    "biallelic_snps_only": true,
+    "exclude_ambiguous_strands": true,
+    "minimum_maf": 0.01,
+    "minimum_shared_variants": 50,
+    "maximum_shared_variants": 5000,
+    "duplicate_rule": "One row per feature and GRCh37 rsID; disagreeing duplicates fail and exact duplicates collapse with a ledger",
+    "allele_rule": "Orient molecular beta to the signed LAVA reference A1; complement only when the checksum-pinned chain reports reverse strand"
+  },
+  "fine_mapping": {
+    "method": "SuSiE-RSS",
+    "susieR_version": "0.14.2",
+    "maximum_causal_signals": 10,
+    "credible_set_coverage": 0.95,
+    "minimum_absolute_correlation": 0.5,
+    "maximum_iterations": 1000,
+    "estimate_residual_variance": false,
+    "prior_method": "FLAT",
+    "qtl_sdY_rule": "Use 1 only when the locked source documents inverse-normalized or standardized molecular phenotypes; otherwise estimate per variant from beta, SE, MAF, and N and lock the median"
+  },
+  "colocalization": {
+    "method": "coloc.susie",
+    "coloc_version": "5.2.3",
+    "p1": 0.0001,
+    "p2": 0.0001,
+    "p12_primary": 0.00001,
+    "p12_sensitivity": [0.000001, 0.000005, 0.00001, 0.00005],
+    "shared_signal_min_pp_h4": 0.8,
+    "shared_signal_min_pp_h4_over_pp_h3": 5,
+    "prior_robust_rule": "The shared-signal rule passes for the same signal pair at every locked p12 value",
+    "single_signal_fallback": "FORBIDDEN_FOR_PRIMARY_MOLECULAR_ANALYSIS"
+  },
+  "twas": {
+    "primary_method": "S-PrediXcan",
+    "metaxcan_version": "0.8.1",
+    "metaxcan_commit": "964f1fdb5bf9585585690e85bb0eca7b67663ddb",
+    "source_archive_path": ".molecular-env/source_archives/MetaXcan_v0.8.1.tar.gz",
+    "source_archive_bytes": 6484124,
+    "source_archive_sha256": "3a6e1ceefef8961e10b4096e6768577ee46c67a8273087eb2d88e17be2d9f1d3",
+    "entrypoint_path": ".molecular-env/MetaXcan/software/SPrediXcan.py",
+    "entrypoint_sha256": "94e79ae2eb42b8875f1696e8d7b371385f680f8d1dbb3fb44b8818f250fd2fcd",
+    "runtime_environment": ".molecular-env/python",
+    "runtime_versions": {
+      "python": "3.9",
+      "numpy": "1.26",
+      "pandas": "2.2",
+      "scipy": "1.12",
+      "pyliftover": "0.4",
+      "statsmodels": "0.14",
+      "h5py": "3.12",
+      "pyarrow": "19.0",
+      "pip": "25.0",
+      "cyvcf2": "0.30.28",
+      "bgen-reader": "4.0.8"
+    },
+    "model_families": ["GTEx_v8_ELASTIC_NET_PHI_eQTL"],
+    "phi_model_source": {
+      "official_url": "https://github.com/hakyimlab/twas-inflation#application-to-real-twas",
+      "box_url": "https://uchicago.app.box.com/s/w0nzszuvuwcsznvo8x4c15o4hujqrwm7",
+      "box_shared_name": "w0nzszuvuwcsznvo8x4c15o4hujqrwm7",
+      "box_folder_id": "293555826464",
+      "release_name": "elastic-net-with-phi",
+      "release_updated_utc_date": "2024-11-12",
+      "expected_file_count": 98,
+      "expected_context_count": 49,
+      "expected_total_bytes": 3135665776,
+      "expected_db_prefix": "en_",
+      "install_dir": "ref/molecular/predictdb_phi_gtex_v8",
+      "inventory_path": "results/tables/twas_phi_model_inventory.tsv",
+      "inventory_lock_path": "results/tables/twas_phi_model_inventory.lock.json",
+      "download_lock_path": "results/tables/twas_phi_model_downloads.lock.json",
+      "source_snapshot_dir": "results/sources/twas_phi_model_inventory",
+      "download_identity_rule": "Box file ID, exact filename, and byte size are locked before download; SHA-256 is locked immediately after download and before indexing or analysis"
+    },
+    "trait_family": "all_45_locked_traits",
+    "contexts": "all_49_contexts_in_the_locked_phi_enabled_GTEx_v8_expression_model_release",
+    "gwas_input": "full dense canonical harmonized summary statistics only",
+    "variance_control": {
+      "required": true,
+      "method": "MetaXcan gene-specific phi correction",
+      "formula": "z_corrected=z_uncalibrated/sqrt(1+phi*N*h2)",
+      "model_phi_required_for_every_reported_feature": true,
+      "missing_model_phi_rule": "Exclude the affected model-feature before association reporting, record MODEL_FEATURE_MISSING_PHI, and never substitute a tissue-level or cross-gene value",
+      "heritability_source": "results/atlas/traits.tsv",
+      "heritability_rule": "Use the exact checksum-locked LDSC estimate and reported scale; do not transform, cap, or substitute it after viewing TWAS results",
+      "admissible_heritability_interval": "0<h2<=1",
+      "sample_size_rule": "Use the positive integer n_total frozen in results/atlas/traits.tsv",
+      "invalid_input_outcome": "NOT_APPLICABLE with an exact pre-result reason",
+      "raw_statistics_retained": true
+    },
+    "missing_model_variant_policy": "Report model coverage; do not impute without a separately frozen imputation protocol",
+    "multiple_testing": "BH FDR across every model-feature test within each trait and model family",
+    "significance_fdr": 0.05,
+    "locus_integration_rule": "A TWAS result enters locus-level molecular evidence only when the version-stripped GENCODE gene overlaps the checksum-pinned GRCh38 lift of a locked locus; genes.tsv contains only genes with at least one supported evidence stream, and a locus with no supported gene is represented by complete terminal coverage rather than a fabricated gene",
+    "gene_annotation_asset_id": "GTEX_V8_GENCODE_V26_COLLAPSED_GENES"
+  },
+  "runtime": {
+    "minimum_memory_gib": 8,
+    "minimum_free_disk_gib_for_production": 20,
+    "tabix_required": true,
+    "production_execution_warning_minutes": 30,
+    "large_download_warning_gib": 1
+  },
+  "required_modalities": ["eQTL", "sQTL", "pQTL_or_PWAS", "TWAS"],
+  "allowed_final_outcomes": ["SUPPORTED", "NO_EVIDENCE_FOUND", "ACCESS_BLOCKED", "NOT_APPLICABLE"],
+  "generic_engine": {
+    "path": "discovery_extension/scripts/35_run_susie_coloc.R",
+    "sha256": "a0f262ccd8b0e959584fbfc9f3032e5a99c391e6928244282977d6357c17e1e5"
+  },
+  "canonical_outputs": {
+    "molecular_qtl_colocalization": "results/tables/molecular_qtl_colocalization.tsv",
+    "all_colocalization": "results/tables/colocalization.tsv",
+    "twas": "results/tables/twas.tsv",
+    "molecular_locus_coverage": "results/tables/molecular_locus_coverage.tsv",
+    "molecular_evidence": "results/tables/molecular_evidence.tsv",
+    "genes": "results/atlas/genes.tsv"
+  },
+  "claim_limit": "Molecular association, TWAS prediction, fine-mapping probability, and colocalization support a model-dependent convergent-gene hypothesis; none proves mediation, a causal gene, or a biological mechanism."
+}

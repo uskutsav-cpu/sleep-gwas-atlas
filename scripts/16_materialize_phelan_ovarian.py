@@ -26,6 +26,8 @@ import re
 import tempfile
 import zipfile
 
+from panel_guard import require_locked_traits
+
 
 ARCHIVE_BYTES = 3_774_309_689
 MEMBERS = [f"Summary_chr{chromosome}.txt" for chromosome in range(1, 24)]
@@ -188,6 +190,7 @@ def materialize(source: Path, output: Path) -> None:
 
 
 def main() -> None:
+    require_locked_traits({"ovarian_cancer": "phelan_2017_ovarian_cancer"})
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--expected-sha256", required=True)

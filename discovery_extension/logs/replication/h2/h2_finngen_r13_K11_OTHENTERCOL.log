@@ -1,0 +1,32 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out discovery_extension/logs/replication/h2/h2_finngen_r13_K11_OTHENTERCOL \
+--h2 discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz \
+--ref-ld-chr ref/eur_w_ld_chr/ \
+--w-ld-chr ref/eur_w_ld_chr/ 
+
+Beginning analysis at Sat Aug 29 07:40:55 2026
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz ...
+Read summary statistics for 1156827 SNPs.
+Reading reference panel LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1156827 SNPs remain.
+After merging with regression SNP LD, 1156827 SNPs remain.
+Using two-step estimator with cutoff at 30.
+Total Observed scale h2: 0.0764 (0.0147)
+Lambda GC: 1.0775
+Mean Chi^2: 1.0902
+Intercept: 1.0184 (0.0081)
+Ratio: 0.2036 (0.0896)
+Analysis finished at Sat Aug 29 07:41:01 2026
+Total time elapsed: 5.7s

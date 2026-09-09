@@ -18,21 +18,25 @@ Read `README.md` and `methods_map.md` at the start of every session.
 ## Current state
 
 The empirical Phase 0/1 analysis is not complete: no real LDSC results are
-versioned in Git. `sleepdur`, `sleepiness`, and `napping` are the only `CURATED`
-registry rows, backed by public raw sources and build-discriminating hg19
-validation; the other 83 rows remain `status=TODO`. Real raw data remain ignored local dependencies;
-their source registry is `config/public_gwas_sources.tsv`. The verified EUR
+versioned in Git. Production scope is locked at exactly 45 rows (12 sleep and
+33 non-sleep) in `config/analysis_panel.tsv`; the ordered trait identities are
+checksum-locked by `config/analysis_panel.lock.json`. The historic 86-row
+`config/traits.tsv` is not a production input. Seventeen selected traits have
+evidence-backed public source records, but source verification is not the same
+as harmonization or LDSC readiness. Real raw data remain ignored local
+dependencies; their source registry is `config/public_gwas_sources.tsv`. The verified EUR
 1000 Genomes/HapMap3 reference panel is installed by `scripts/00_setup.sh`; see
 `docs/reference_panel_provenance.md`. The end-to-end pipeline is smoke-tested
 with deliberately fake input only. `scripts/10_phase0_audit.py` reports the
 explicit source-metadata gaps; do not describe a smoke-test artifact as a
 result.
 
-The runnable path uses the maintained Python 3 `ldsc39` branch from
-CBIIT/ldsc. `scripts/03_h2_qc.sh` requires a cited population prevalence for
+The runnable path uses CBIIT/ldsc at pinned commit
+`6c673952cee74bd5c57aef1555a03b1c015399a0`. `scripts/03_h2_qc.sh` requires a cited population prevalence for
 final liability-scale binary h2; `--observed-scale` is an interim QC/rg option,
-not a replacement. `scripts/04_rg.sh` includes only traits that are both
-`CURATED` and h2 `PASS`, recorded in `phase1_inclusion.tsv`.
+not a replacement. `scripts/04_rg.sh` validates the panel and derives a
+readiness ledger before including only `LIABILITY_H2_READY` traits with h2
+`PASS`, recorded in `phase1_inclusion.tsv`.
 
 ## Non-negotiable rules
 
@@ -58,6 +62,10 @@ not a replacement. `scripts/04_rg.sh` includes only traits that are both
    intercept of 1.3, a trait with 200k SNPs when others have 1.2M — get
    surfaced explicitly, not quietly worked around.
 
+6. **Do not expand or swap the 45-trait panel during atlas-v1.0.** Candidate
+   traits can remain documented outside the production manifest. Any identity
+   or ordering change requires an explicit lock update and mentor review.
+
 ## QC provenance
 
 Every filter in `01_harmonize.py` is tagged `[CDG3]` (from the Nature
@@ -79,8 +87,9 @@ implications and should never be reported as the same kind of failure.
 - `shortsleep` and especially `longsleep` are dichotomised tails of a
   continuous phenotype and are expected to fail the power gate. That is a
   finding, not a bug — report it as one.
-- CDG3 used `N_eff × h² > 12,000` as the inclusion threshold for MiXeR.
-  Worth computing for each sleep trait.
+- CDG3 used `N_eff × h² > 12,000` as a screening threshold before MiXeR.
+  Record it as `ldsc_n_eff_h2_gt_12000`, never `mixer_pass`; actual eligibility
+  must come from MiXeR's own univariate model and diagnostics.
 
 ## Working style
 

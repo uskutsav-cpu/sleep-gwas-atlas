@@ -1,0 +1,131 @@
+{
+  "analysis_id": "track-b-v1.0-local",
+  "bivariate_fdr_alpha": 0.05,
+  "bivariate_multiple_testing": "BH FDR across every locally h2-eligible pair-locus row in the three frozen pairs; failed eligible attempts contribute p=1",
+  "conditional_covariates": {
+    "A": [
+      "bmi",
+      "sleep_apnea"
+    ],
+    "B": [
+      "mdd"
+    ],
+    "CONTROL": []
+  },
+  "conditional_covariate_rationale": {
+    "A": "BMI and clinically defined sleep apnea are the smallest directly justified set for testing adiposity and sleep-disordered-breathing explanations of snoring-lifespan local sharing.",
+    "B": "Major depressive disorder is the single predeclared broad psychiatric competing architecture for insomnia-ADHD; adding metabolic, smoking, and vascular traits without a locus-specific rationale would overcondition.",
+    "CONTROL": "The positive control is used for pipeline concordance and has no predeclared conditional headline test."
+  },
+  "conditional_models": {
+    "A": [
+      {
+        "conditional_model_id": "A_BMI_ONLY",
+        "covariates": [
+          "bmi"
+        ],
+        "rationale": "Separately tests whether BMI-related local genetic signal attenuates snoring-lifespan sharing."
+      },
+      {
+        "conditional_model_id": "A_SLEEP_APNEA_ONLY",
+        "covariates": [
+          "sleep_apnea"
+        ],
+        "rationale": "Separately tests whether clinically defined sleep-apnea local genetic signal attenuates snoring-lifespan sharing."
+      }
+    ],
+    "B": [
+      {
+        "conditional_model_id": "B_MDD_ONLY",
+        "covariates": [
+          "mdd"
+        ],
+        "rationale": "Tests the single predeclared broad psychiatric competing architecture for insomnia-ADHD."
+      }
+    ],
+    "CONTROL": []
+  },
+  "expected_analysis_traits": 8,
+  "expected_discovery_pairs": 3,
+  "expected_loci": 2495,
+  "lava_version": "0.1.5",
+  "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+  "lava_source_archive_sha256": "15477c9547c3533d681cbfb6491508a29342fe99b725845054887b9d29dc2bec",
+  "lava_process_locus_nref_correction": false,
+  "maximum_bivariate_failure_fraction": 0.05,
+  "maximum_conditional_failure_fraction": 0.05,
+  "maximum_locus_failure_fraction": 0.01,
+  "maximum_univariate_untested_fraction": 0.05,
+  "ram_aware_execution": {
+    "benchmark_selection": "DISCOVERY_INPUT_ONLY_REFERENCE_CHROMOSOME_THEN_LOCUS_SNP_BURDEN_MIN_MEDIAN_MAX_WITH_PREFROZEN_FALLBACKS; CONDITIONAL_POST_FULL_FAMILY_BH_ELIGIBILITY_THEN_SAME_BURDEN_RANKING",
+    "benchmark_success_rule": "REPRESENTATIVE_MUST_COMPLETE_LOCUS_CONSTRUCTION; SCIENTIFIC_PROCESS_FAILURE_IS_PRESERVED_BUT_CANNOT_ESTABLISH_A_RAM_PASS",
+    "conditional_pass": "AFTER_FULL_DISCOVERY_FAMILY_BH_ONE_COMPLETE_LOCUS_PER_FRESH_R_PROCESS",
+    "discovery_pass": "ONE_COMPLETE_PREDECLARED_LOCUS_PER_FRESH_R_PROCESS",
+    "execution_unit": "WHOLE_PREDECLARED_LAVA_LOCUS",
+    "failure_rule": "PRESERVE_EVERY_FAILED_OR_UNSTABLE_LOCUS; NEVER_RECODE_SKIPPED_OR_FAILED_AS_NULL",
+    "family_correction_rule": "COLLATE_ALL_2495_LOCUS_CHECKPOINTS_BEFORE_BH; FAILED_ELIGIBLE_ATTEMPTS_CONTRIBUTE_P_EQUALS_1",
+    "maximum_loci_per_process": 1,
+    "memory_decision_rule": "MEASURE_PROCESS_PEAK_RSS_PER_LOCUS; DO_NOT_APPLY_AN_ASSUMED_MONOLITHIC_RAM_MINIMUM",
+    "memory_safety_reserve_bytes": 1073741824,
+    "memory_admission_rule": "MAXIMUM_OBSERVED_INTACT_LOCUS_PEAK_RSS_PLUS_1_GIB_RESERVE_MUST_NOT_EXCEED_PHYSICAL_RAM",
+    "reference_loading_rule": "LOAD_ONLY_THE_EXACT_HASH_BOUND_CHROMOSOME_SUMSTAT_SHARDS_AND_COMPLETE_REFERENCE_CHROMOSOME_CONTAINING_THE_CURRENT_LOCUS",
+    "chromosome_shard_rule": "ORDER_PRESERVING_EXACT_INTERSECTION_WITH_SEALED_CHROMOSOME_REFERENCE; NO_RESULT_OR_STATISTIC_FILTERING",
+    "resume_rule": "IMMUTABLE_FINGERPRINT_BOUND_COMPLETE_ATTEMPT_BUNDLE_COMMITTED_BY_ONE_ATOMIC_READY_LINK_PER_LOCUS_AND_PHASE",
+    "worker_process_rule": "FRESH_R_PROCESS_PER_LOCUS_WITH_EXPLICIT_OBJECT_REMOVAL_AND_FULL_GARBAGE_COLLECTION"
+  },
+  "local_method_robustness": {
+    "alternative_method": "HDL-L_or_rho-HESS",
+    "comparison_labels": [
+      "CONCORDANT",
+      "PARTIAL_CONCORDANCE",
+      "DISCORDANT"
+    ],
+    "execution_rule": "Use an ancestry-matched independently implemented local method only when its reference and software pass provenance gates; do not substitute overlapping peaks for a robustness result."
+  },
+  "interpretation_policy": {
+    "conditional_attenuation_formula": "1 - abs(conditioned_local_rg) / abs(unconditioned_local_rg); negative values denote strengthened absolute sharing after conditioning",
+    "conditional_attenuation_fraction_full": 0.75,
+    "conditional_attenuation_fraction_partial": 0.25,
+    "conditional_rule": "UNSTABLE for a failed model, non-finite estimate, or sign reversal; UNDERPOWERED when any conditioner fails the same-locus h2 gate; among valid same-direction estimates, INDEPENDENT_LOCAL_COMPONENT requires conditional FDR<=0.05 and <25% absolute attenuation, FULLY_ATTENUATED requires conditional FDR>0.05 and >=75% absolute attenuation, and all other valid results are PARTIALLY_ATTENUATED.",
+    "local_rule": "For each pair, FDR-supported loci with both positive and negative directions are OPPOSING_LOCAL_EFFECTS; otherwise two or more FDR-supported loci are MULTIPLE_LOCAL_LOCI and one is STRONG_LOCAL_SHARING. Successfully tested nonsignificant rows are NO_LOCAL_SHARING; rows without a valid bivariate test are UNDERPOWERED.",
+    "rho_se_method": "(rho.upper-rho.lower)/(2*1.959963984540054) from the LAVA 95% confidence interval"
+  },
+  "pair_order": [
+    "A",
+    "B",
+    "CONTROL"
+  ],
+  "planned_bivariate_pair_locus_family_max": 7485,
+  "planned_univariate_tests": 19960,
+  "random_seed": 20260901,
+  "reference": "LAVA UK Biobank European v1.1 100000-person LD reference",
+  "reference_minimum_free_bytes": 37580963840,
+  "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1",
+  "reference_source_registry": "config/lava_reference_sources.tsv",
+  "locus_definition": {
+    "path": "ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile",
+    "sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882"
+  },
+  "runtime": {
+    "cap_estimates": true,
+    "conditional_max_r2": 0.95,
+    "max_block_size": 3000,
+    "max_proportion_K": 0.75,
+    "min_K": 2,
+    "prune_threshold": 99
+  },
+  "conditional_execution_gate": "Run each frozen partial-local model only for primary bivariate rows passing Track B BH FDR<=0.05 and only when every conditioner in that model passes the same locus-level univariate threshold",
+  "conditional_multiple_testing": "BH FDR across every model-locus row eligible for conditional testing; failed eligible attempts contribute p=1 and conditioner-ineligible rows are excluded",
+  "trait_order": [
+    "snoring",
+    "parental_lifespan",
+    "insomnia",
+    "adhd",
+    "frailty",
+    "bmi",
+    "sleep_apnea",
+    "mdd"
+  ],
+  "univariate_alpha": 0.05,
+  "univariate_p_threshold": 2.50501002004008e-06
+}

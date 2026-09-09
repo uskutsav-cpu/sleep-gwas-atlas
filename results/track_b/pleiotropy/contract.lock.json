@@ -1,0 +1,98 @@
+{
+  "analysis_id": "track-b-v1.0-pleiotropy",
+  "control_pair_family": [
+    "CONTROL"
+  ],
+  "generic_396_pair_substitution_forbidden": true,
+  "method_union_not_intersection": true,
+  "pleiotropy_results_accessed_before_contract_freeze": false,
+  "policy": "config/track_b_pleiotropy_policy.json",
+  "policy_sha256": "3f2a09bc64fd3a9f3603663912c67636c77f28c40f493d01691feeb9e94adcd4",
+  "primary_pair_family": [
+    "A",
+    "B"
+  ],
+  "schema_version": "sleep-atlas-track-b-pleiotropy-contract.1",
+  "scientific_result_substitution_policy": "FORBIDDEN; gates and locks are not scientific results",
+  "script_sha256": {
+    "scripts/123_track_b_pleiotropy_contract.py": "7001146c8548cbb2a6d117f3b5bc7b247d22b3b307b2b67d4cb020f7d64830a2",
+    "scripts/124_build_track_b_pleiotropy_input_gate.py": "72dbf1f51a54064247bfe1f2ed06b5ec12ace18fc19445514357a093855c3e56",
+    "scripts/127_prepare_track_b_pleiotropy_ld.py": "f976ffeb59d4de64291e7909b2f12c2fc2e158a5037cee30b63d136e5cd96b9d"
+  },
+  "selection_timing": "BEFORE_TRACK_B_PLEIOTROPY_RESULT_ACCESS",
+  "thresholds": {
+    "conjfdr": 0.05,
+    "control_genome_wide": 5e-08,
+    "per_pair_genome_wide": 5e-08,
+    "primary_pair_family_headline": 2.5e-08,
+    "within_pair_bh_alpha": 0.05
+  },
+  "upstream": {
+    "dense_qc_lock_sha256": "0ded393dcf24ae2dcda290cda275fd40536fec75cad71be1e6ce608fb271a487",
+    "dense_qc_sha256": "f7f604ba9c5db881c82e51c28e838693f884f10dd1476603cf1a92964efab865",
+    "dense_traits": [
+      {
+        "bytes": 163291287,
+        "path": "data/harmonized/snoring.harmonized.tsv.gz",
+        "rows": 7168629,
+        "schema": "SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N",
+        "sha256": "1b0f6170f09cada35613599e70f03f9df0baf24e9cfe2579ab1364817fe6b416",
+        "trait_id": "snoring"
+      },
+      {
+        "bytes": 215512936,
+        "path": "data/harmonized/parental_lifespan.harmonized.tsv.gz",
+        "rows": 6663125,
+        "schema": "SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N",
+        "sha256": "293c80a8f291147f18f3274cb2eef057c09fa43b54a1e30a684f106e0f60ae79",
+        "trait_id": "parental_lifespan"
+      },
+      {
+        "bytes": 125531591,
+        "path": "data/harmonized/insomnia.harmonized.tsv.gz",
+        "rows": 6077635,
+        "schema": "SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N",
+        "sha256": "23e06f4a682477064e73551eeab78c292af4d2058fe636ddf328c4bccf560ea4",
+        "trait_id": "insomnia"
+      },
+      {
+        "bytes": 148886736,
+        "path": "data/harmonized/adhd.harmonized.tsv.gz",
+        "rows": 5692669,
+        "schema": "SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N",
+        "sha256": "25cdc39268559321465583a445fadc02b49efc1019cfa9a3a07a33e2b24dfcd3",
+        "trait_id": "adhd"
+      },
+      {
+        "bytes": 106450123,
+        "path": "data/harmonized/frailty.harmonized.tsv.gz",
+        "rows": 6291635,
+        "schema": "SNP,CHR,BP,A1,A2,FRQ,BETA,SE,P,N",
+        "sha256": "2b18346e024040ee8cbebade0888292cc971e5f1656591351c1698af88626e3c",
+        "trait_id": "frailty"
+      }
+    ],
+    "pair_manifest_lock_sha256": "003d0cd24d7e9215f8367d23275a32c03f7435bf47924e90284d4a5a8b9df0fa",
+    "pair_manifest_sha256": "b3c520424415895df18b87141d9b99721d3bf49330844524731dd563da12dd4f",
+    "pairs": [
+      {
+        "family_role": "PRIMARY_DISCOVERY",
+        "pair_id": "A",
+        "trait1": "snoring",
+        "trait2": "parental_lifespan"
+      },
+      {
+        "family_role": "PRIMARY_DISCOVERY",
+        "pair_id": "B",
+        "trait1": "insomnia",
+        "trait2": "adhd"
+      },
+      {
+        "family_role": "POSITIVE_CONTROL",
+        "pair_id": "CONTROL",
+        "trait1": "insomnia",
+        "trait2": "frailty"
+      }
+    ]
+  }
+}

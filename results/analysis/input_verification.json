@@ -1,0 +1,45 @@
+{
+  "all_396_fdr_le_0_05_including_sensitivity": 161,
+  "analysis_parameters": {
+    "domain_permutation_unit": "whole external-trait 12-rg profile",
+    "domain_permutations": 50000,
+    "locked_fdr_threshold": 0.05,
+    "random_seed": 20260828,
+    "sleep_profile_scope": "31 primary external traits; T2D and melanoma excluded"
+  },
+  "analyzed_input_file_count": 36,
+  "core_provenance_count_semantics": {
+    "diagnosis": "The field counts the separate primary-only 372-test BH family (155), not the locked all-396 primary discovery family (153). The immutable core is not modified; deep analysis uses rg_matrix.fdr.",
+    "reported_field": "primary_fdr_significant_pair_count",
+    "reported_value": 155
+  },
+  "external_trait_count": 33,
+  "input_hash_manifest_sha256": "1913e4fcf6304c01ca60834b24078dc156e2db3220eb89d5fe38ea864238d12f",
+  "legacy_phase1_summary": {
+    "diagnosis": "The legacy Markdown predates the complete rerun and reports 27 h2 traits / 136 rg pairs; canonical TSVs and core provenance supersede it.",
+    "status": "STALE_NOT_USED_FOR_ANALYSIS"
+  },
+  "locked_396_primary_fdr_le_0_05": 153,
+  "maximum_abs_recomputed_vs_reported_z_difference": 0.045319148936169285,
+  "maximum_snp_overlap": 1175492,
+  "minimum_snp_overlap": 787776,
+  "pair_count": 396,
+  "primary_372_sensitivity_fdr_le_0_05": 155,
+  "primary_definition": "analysis_tier == PRIMARY_PHASE1 and locked all-396 BH fdr <= 0.05",
+  "primary_pair_count": 372,
+  "requested_phase1_completion": {
+    "diagnosis": "No file by this name exists in the worktree or Git history; results/atlas/core.provenance.json is the checksum-bound canonical completion equivalent.",
+    "path": "results/tables/phase1_completion.json",
+    "status": "ABSENT"
+  },
+  "schema_version": "sleep-atlas-phase1-deep-analysis-inputs.1",
+  "sensitivity_external_traits": [
+    "t2d",
+    "melanoma"
+  ],
+  "sensitivity_pair_count": 24,
+  "sleep_trait_count": 12,
+  "trait_count": 45,
+  "unique_pair_count": 396,
+  "verification_status": "PASS_WITH_DOCUMENTED_METADATA_DISCREPANCIES"
+}

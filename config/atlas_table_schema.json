@@ -1,0 +1,59 @@
+{
+  "schema_version": "atlas-v1.0.0",
+  "missing_value": "NA",
+  "forbidden_markers": ["SYNTHETIC", "PLACEHOLDER", "FAKE_RESULT", "SMOKE_TEST"],
+  "tables": {
+    "traits.tsv": {
+      "primary_key": ["trait_id"],
+      "expected_rows": 45,
+      "fields": ["trait_id", "label", "domain", "type", "phenotype_definition", "source_id", "dataset_version", "pmid", "doi", "ancestry", "build", "ncase", "ncontrol", "n_total", "population_prevalence", "source_status", "harmonized_path", "harmonized_sha256", "harmonized_rows", "munged_path", "munged_sha256", "h2_scale", "h2", "h2_se", "h2_z", "ldsc_intercept", "ldsc_ratio", "phase1_verdict", "phase1_qc_reason"]
+    },
+    "trait_pairs.tsv": {
+      "primary_key": ["pair_id"],
+      "expected_rows": 396,
+      "fields": ["pair_id", "sleep_trait", "non_sleep_trait", "analysis_tier", "interpretation_status", "global_rg", "global_rg_se", "global_rg_z", "global_rg_p", "global_rg_fdr_all_396", "global_rg_fdr_primary_372", "global_rg_primary_significant", "effect_direction", "ldsc_input_log"]
+    },
+    "loci.tsv": {
+      "primary_key": ["locus_id"],
+      "minimum_rows": 0,
+      "fields": ["locus_id", "chromosome", "start_bp", "end_bp", "lead_snp", "sleep_trait", "non_sleep_trait", "analysis_tier", "placo_lead_p", "conjfdr_min_q", "effect_direction", "lava_block_id", "method_support", "evidence_level", "provenance_id"]
+    },
+    "variants.tsv": {
+      "primary_key": ["locus_id", "variant_id"],
+      "minimum_rows": 0,
+      "fields": ["variant_id", "locus_id", "rsid", "chromosome", "position_bp", "effect_allele", "other_allele", "minor_allele_frequency", "sleep_beta", "sleep_se", "non_sleep_beta", "non_sleep_se", "pip_sleep", "pip_non_sleep", "credible_set_sleep", "credible_set_non_sleep", "shared_signal_posterior", "fine_mapping_method", "ld_reference", "qc_status", "provenance_id"]
+    },
+    "genes.tsv": {
+      "primary_key": ["locus_id", "gene_id"],
+      "minimum_rows": 0,
+      "fields": ["gene_id", "gene_symbol", "locus_id", "evidence_stream_count", "eqtl_status", "sqtl_status", "pqtl_pwas_status", "twas_status", "colocalization_status", "context", "evidence_level", "claim_limit", "provenance_id"]
+    },
+    "regulatory_elements.tsv": {
+      "primary_key": ["regulatory_evidence_id"],
+      "minimum_rows": 0,
+      "fields": ["regulatory_evidence_id", "regulatory_element_id", "variant_id", "locus_id", "element_type", "annotation", "effect", "p_value", "biosample", "tissue", "cell_type", "context_domain", "target_gene_id", "link_method", "source_dataset", "source_version", "evidence_level", "provenance_id"]
+    },
+    "cell_types.tsv": {
+      "primary_key": ["cell_type_id"],
+      "minimum_rows": 0,
+      "fields": ["cell_type_id", "cell_type", "tissue", "domain", "method", "trait_or_locus_id", "effect", "se", "p_value", "fdr", "evidence_level", "dataset", "version", "provenance_id"]
+    },
+    "pathways.tsv": {
+      "primary_key": ["pathway_id", "trait_or_locus_id"],
+      "minimum_rows": 0,
+      "fields": ["pathway_id", "pathway_name", "resource", "gene_set_size", "contributing_genes", "trait_or_locus_id", "effect", "p_value", "fdr", "evidence_level", "dataset_version", "provenance_id"]
+    },
+    "causal_tests.tsv": {
+      "primary_key": ["causal_test_id"],
+      "minimum_rows": 0,
+      "fields": ["causal_test_id", "exposure", "outcome", "direction", "method", "n_instruments", "effect", "se", "p_value", "f_statistic_min", "heterogeneity_p", "pleiotropy_p", "steiger_status", "sample_overlap_status", "colocalization_consistency", "evidence_level", "provenance_id"]
+    },
+    "edges.tsv": {
+      "primary_key": ["edge_id"],
+      "minimum_rows": 0,
+      "fields": ["edge_id", "source", "target", "relationship", "effect", "direction", "p_value", "fdr", "tissue", "cell_type", "method", "evidence_level", "dataset", "version", "provenance_id"]
+    }
+  },
+  "numeric_probability_fields": ["global_rg_p", "global_rg_fdr_all_396", "global_rg_fdr_primary_372", "placo_lead_p", "conjfdr_min_q", "minor_allele_frequency", "pip_sleep", "pip_non_sleep", "shared_signal_posterior", "p_value", "fdr", "heterogeneity_p", "pleiotropy_p"],
+  "claim_boundary": "Passing the integrated schema proves structural traceability and provenance completeness, not biological causality."
+}

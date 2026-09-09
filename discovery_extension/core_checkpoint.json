@@ -1,0 +1,83 @@
+{
+  "checkpoint_schema_version": "1.1.0",
+  "checkpoint_utc": "2026-08-28T03:38:08Z",
+  "repository": "sleep-gwas-atlas",
+  "git_commit": "22df92c8d6894f93c50561ae8a86acf2f48f50cb",
+  "git_branch_at_checkpoint": "codex/lock-analysis-panel",
+  "worktree_clean_at_checkpoint": true,
+  "core_panel_version": "atlas-v1.0",
+  "core_trait_count": 45,
+  "sleep_trait_count": 12,
+  "non_sleep_trait_count": 33,
+  "primary_pair_count": 396,
+  "primary_phase1_pair_count": 372,
+  "qc_failed_sensitivity_pair_count": 24,
+  "primary_fdr_significant_count_locked_396_family": 153,
+  "analysis_panel_sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+  "ordered_trait_ids_sha256": "bdaac811dbed05d5a7c0427c1580f7f043c4c5e365d823495a05294e7c8d6c8a",
+  "primary_result_path": "results/tables/rg_matrix.tsv",
+  "primary_result_sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+  "artifact_hashes_sha256": {
+    "config/analysis_panel.tsv": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "config/analysis_panel.lock.json": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c",
+    "config/public_gwas_sources.tsv": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+    "config/gwas_schemas.tsv": "df2e56799a8cb07be849c96940d553710210725563e29e63baf62cc5a59dd51c",
+    "config/variant_mapping_plans.tsv": "78f4d89b82c1a0f9db571a3c240e162f354c8961cd5eda17e7556e6dcd1dcee1",
+    "config/liftover_plans.tsv": "dda87cffebe55fc3792ab75d08abbc61b5ff49d138a7410ad0480d36682b90e3",
+    "environment/tool_versions.tsv": "f718e813510722e06e05c1d755cd53a6f9ebed4981af4e3bcf8c6339b74d51c3",
+    "results/tables/analysis_panel_provenance.tsv": "d5801a6c4ce658f94720751364fd49d7eb311afdae43f00754801da7905fca9c",
+    "results/tables/source_readiness.tsv": "7c12e824de311260eb27352c5291356ddc7f221e7bb0cdb39c4f79bb2c009352",
+    "results/tables/phase0_readiness.tsv": "a928f61cdeb40bbbf6f925ee4db9e3c5d8d01d371cc5b2454f21203e766d9099",
+    "results/tables/trait_readiness.tsv": "935bfb7d67ae10683a9f2d35acc7d0f8d60e1ddbf5888d779b058dc2e22ea470",
+    "results/tables/h2_summary.tsv": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67",
+    "results/tables/phase1_inclusion.tsv": "0e4c27de6fd6afb8bd7f160f84ef3a97da9172f42439f86c1dc9e92370ef1cbb",
+    "results/tables/rg_primary_phase1.tsv": "9beb16a412df19f4c152d4562a0ea1a99698122a23b30b356ea34c3bec66f821",
+    "results/tables/rg_qc_failed_sensitivity.tsv": "33b8aebbb919fa9c4fb93a53bd298e37ea1900122af577155dc528100e6dcc1d",
+    "results/tables/rg_matrix.tsv": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+    "results/tables/phase1_summary_report.md": "b027c4e9443e796e68bb7f0bcfbf67a58c5770649ff385eb679ac72512984252",
+    "results/figures/fig2_rg_heatmap.png": "9428f60a2eec814e47e105d4210b4f96585143791a034c8a0fbab4a0ac5a7bb3"
+  },
+  "artifact_verification_policies": {
+    "default": "exact_sha256",
+    "environment/tool_versions.tsv": "checkpoint_rows_immutable_allow_unique_appended_components"
+  },
+  "qc_status": {
+    "panel_lock": "PASS",
+    "source_curation": "PASS_45_OF_45",
+    "source_schemas": "PASS_45_OF_45",
+    "harmonization": "PASS_45_OF_45",
+    "ldsc_inputs": "PASS_45_OF_45",
+    "ldsc_h2": "PASS_COMPLETE",
+    "h2_pass_traits": 43,
+    "h2_failed_traits": 2,
+    "h2_failures": {
+      "t2d": "intercept_above_1.2",
+      "melanoma": "h2_z_below_4"
+    },
+    "sleep_disease_rg": "PASS_EXACT_396_PAIR_FAMILY",
+    "full_covariance": "BLOCKED_NOT_PART_OF_PHASE1_CHECKPOINT",
+    "atlas_acceptance_gates_passed": 7,
+    "atlas_acceptance_gates_total": 23
+  },
+  "software_versions": {
+    "python_workflow": "3.11.11",
+    "snakemake": "8.30.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "matplotlib": "3.9.4",
+    "python_ldsc": "3.9.23",
+    "ldsc_CBIIT_commit": "6c673952cee74bd5c57aef1555a03b1c015399a0",
+    "plink": "1.90b7.7",
+    "R": "4.3.3",
+    "GenomicSEM_commit": "6b65ca5db39fdade08b0d811477be1cdd57b5039",
+    "GenomicSEM_R_package": "0.0.5",
+    "simsalapar": "1.0-13",
+    "lavaan": "0.6-19"
+  },
+  "provenance_notes": [
+    "The complete primary result and other real outputs are intentionally gitignored local artifacts; their exact bytes are pinned here independently of Git.",
+    "The checkpoint commit identifies the code/config state from which the current core was validated.",
+    "The checkpointed software-version rows remain immutable. Uniquely named rows may be appended for later, separate analyses without changing the recorded core runtime snapshot.",
+    "Extension P values must never be merged into the locked 396-test core family."
+  ]
+}

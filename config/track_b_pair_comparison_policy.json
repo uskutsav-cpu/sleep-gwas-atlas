@@ -1,0 +1,160 @@
+{
+  "schema_version": "sleep-atlas-track-b-pair-comparison-policy.1",
+  "analysis_id": "P25_PAIR_A_VS_B",
+  "contract_revision": 1,
+  "selection_timing": "BEFORE_ANY_PHASE25_PAIR_COMPARISON_RESULT_ACCESS",
+  "result_blind": true,
+  "future_results_accessed_before_freeze": false,
+  "purpose": "A deterministic homologous-field comparison of frozen Pair A and Pair B; it does not encode or test an airway-versus-brain hypothesis.",
+  "immutable_core": {
+    "panel": {
+      "path": "config/analysis_panel.tsv",
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    "panel_lock": {
+      "path": "config/analysis_panel.lock.json",
+      "sha256": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c"
+    },
+    "pair_manifest": {
+      "path": "results/track_b/pair_manifest.tsv",
+      "sha256": "b3c520424415895df18b87141d9b99721d3bf49330844524731dd563da12dd4f"
+    },
+    "pair_manifest_lock": {
+      "path": "results/track_b/pair_manifest.lock.json",
+      "sha256": "003d0cd24d7e9215f8367d23275a32c03f7435bf47924e90284d4a5a8b9df0fa"
+    },
+    "frozen_readiness_v3_lock": {
+      "path": "results/track_b/mechanism_followup/v3/PRE_RESULT_READINESS.lock.json",
+      "sha256": "28ba9e3b4be939657391f9ad9e90e89fdacd6e2be834e7602ced3e67c72eae0e",
+      "retention": "READ_ONLY_HISTORICAL_BASELINE"
+    },
+    "phase24_policy": "config/track_b_cross_sleep_policy.json",
+    "phase24_contract_lock": "results/track_b/mechanism_followup/phase24_25/P24_CROSS_SLEEP.contract.lock.json"
+  },
+  "pair_scope": {
+    "pair_a": {"pair_id": "A", "anchor_sleep_trait": "snoring", "external_trait": "parental_lifespan", "family_role": "PRIMARY_DISCOVERY"},
+    "pair_b": {"pair_id": "B", "anchor_sleep_trait": "insomnia", "external_trait": "adhd", "family_role": "PRIMARY_DISCOVERY"},
+    "control": {"pair_id": "CONTROL", "anchor_sleep_trait": "insomnia", "external_trait": "frailty", "family_role": "POSITIVE_CONTROL_NON_NOVELTY"},
+    "replacement_policy": "FORBIDDEN; no trait or pair may be substituted after seeing a result",
+    "biological_axis_hypothesis": "NONE; airway-versus-brain and every other narrative label are post-comparison interpretations outside this executor"
+  },
+  "comparison_dimensions": {
+    "sleep_traits_in_locked_panel_order": [
+      "insomnia",
+      "sleepdur",
+      "shortsleep",
+      "longsleep",
+      "chronotype",
+      "sleepiness",
+      "napping",
+      "snoring",
+      "sleep_apnea",
+      "sleep_efficiency",
+      "accel_sleep_duration",
+      "sleep_timing"
+    ],
+    "evidence_layers_in_order": [
+      "GLOBAL_RG_CONTEXT",
+      "LOCUS_SHARED_EVIDENCE",
+      "VARIANT_SHARED_SIGNAL",
+      "GENE_MECHANISM_EVIDENCE"
+    ],
+    "comparison_dimension_count": 48,
+    "primary_key": ["queried_sleep_trait", "evidence_level"],
+    "homology_rule": "Compare A and B only within the identical queried sleep trait and evidence layer; never compare a locus row to a variant/gene/global row.",
+    "result_ranked_dimension_selection_forbidden": true
+  },
+  "upstream_gate": {
+    "primary_input": "results/track_b/mechanism_followup/science/cross_sleep.tsv",
+    "control_input": "results/track_b/mechanism_followup/science/cross_sleep_control.tsv",
+    "phase24_provenance": "results/track_b/mechanism_followup/science/cross_sleep.provenance.json",
+    "requirements": "The complete 96-row A/B Phase24 family and separately sealed 48-row CONTROL family must validate against the Phase24 contract and one provenance commit. Global-rg-only, partial-layer, partial-trait, header-only, synthetic, or unsealed inputs are forbidden.",
+    "absent_input_state": "BLOCKED_UPSTREAM",
+    "failure_is_not_null": true,
+    "not_applicable_requires_sealed_upstream_zero": true
+  },
+  "comparison_algorithm": {
+    "allowed_outcomes": ["SHARED", "DISTINCT", "NO_DETECTED_SUPPORT", "NOT_APPLICABLE", "BLOCKED"],
+    "priority": ["BLOCKED", "NOT_APPLICABLE", "NO_DETECTED_SUPPORT", "SHARED", "DISTINCT"],
+    "rules": [
+      "If either input status is BLOCKED or FAILED, outcome is BLOCKED.",
+      "If both statuses are NOT_APPLICABLE, outcome is NOT_APPLICABLE; one-sided NOT_APPLICABLE is BLOCKED_NONCOMPARABLE.",
+      "If both statuses are TESTED_NO_SUPPORT, outcome is NO_DETECTED_SUPPORT; this is not an equivalence or biological-null claim.",
+      "If exactly one status is SUPPORTED and the other is TESTED_NO_SUPPORT, outcome is DISTINCT.",
+      "For GLOBAL_RG_CONTEXT only, two SUPPORTED statuses are SHARED at the phenotype-pattern level and never at locus, variant, gene, or mechanism level.",
+      "For non-global layers, two SUPPORTED statuses are SHARED when their complete supported-entity sets intersect and DISTINCT when they are disjoint.",
+      "A SHARED row may retain pair-specific entities; shared and pair-specific sets are reported without ranking or truncation."
+    ],
+    "effect_size_contrast": "NOT_ESTIMATED; different external phenotypes make an unmodelled numeric A-minus-B contrast scientifically invalid",
+    "direction_concordance": "Reported descriptively only when both homologous rows expose comparable directions; it never changes the five-class outcome",
+    "tie_breaking": "NONE; sets are canonical lexicographic order and no best row is selected"
+  },
+  "status_semantics": {
+    "SUPPORTED": "At least one entity met the preregistered upstream rule in a complete corrected family.",
+    "TESTED_NO_SUPPORT": "The complete preregistered upstream family was tested and had no entity meeting the support rule; power and QC remain explicit, and this is not a biological null.",
+    "NOT_APPLICABLE": "A checksum-locked upstream-zero state proves no eligible family existed.",
+    "BLOCKED": "Required data, lock, software, denominator, or coverage is absent; no scientific result exists.",
+    "FAILED": "Execution or validation failed; it remains a failure and is never a null."
+  },
+  "phase25_multiple_testing": {
+    "new_hypothesis_count": 0,
+    "correction_denominator": 0,
+    "rule": "Phase25 is a deterministic comparison of upstream categorical evidence and performs no new hypothesis test, p-value subtraction, p-value combination, or correction."
+  },
+  "control_contract": {
+    "validation_required": true,
+    "hash_bound_in_phase25_provenance": true,
+    "included_in_a_vs_b_rows": false,
+    "used_as_tie_breaker": false,
+    "used_to_rescue_or_reclassify_a_or_b": false,
+    "separate_future_phase": "P26_POSITIVE_CONTROL",
+    "claim_limit": "CONTROL assesses recovery/calibration only and cannot support novelty or a Pair-A-versus-Pair-B biological narrative."
+  },
+  "output_contract": {
+    "comparison_path": "results/track_b/mechanism_followup/science/pair_a_vs_b.tsv",
+    "provenance_path": "results/track_b/mechanism_followup/science/pair_a_vs_b.provenance.json",
+    "minimum_rows": 48,
+    "row_count_rule": "At least one row per fixed comparison dimension; when support exists, one row per entity in the complete A/B union, without ranking or truncation.",
+    "fields": [
+      "analysis_id",
+      "queried_sleep_trait",
+      "evidence_level",
+      "entity_id",
+      "pair_a_status",
+      "pair_a_source_status",
+      "pair_b_status",
+      "pair_b_source_status",
+      "pair_a_estimate",
+      "pair_a_standard_error",
+      "pair_a_p_value",
+      "pair_a_adjusted_p_value",
+      "pair_a_effect_direction",
+      "pair_a_power_qc_status",
+      "pair_b_estimate",
+      "pair_b_standard_error",
+      "pair_b_p_value",
+      "pair_b_adjusted_p_value",
+      "pair_b_effect_direction",
+      "pair_b_power_qc_status",
+      "comparison_outcome",
+      "comparison_detail",
+      "direction_concordance",
+      "phase25_correction_denominator",
+      "control_handling",
+      "claim_limit"
+    ],
+    "publication": "atomic no-replace; byte-identical partial output may resume; provenance is the last commit artifact",
+    "header_only_output_for_absent_upstream_forbidden": true
+  },
+  "claim_limits": {
+    "phase": "The output describes only the two frozen pairs under homologous evidence definitions. It is not a general sleep taxonomy, an airway-versus-brain test, evidence of causality, or evidence that a shared locus/variant/gene has the same mechanism.",
+    "blocked": "BLOCKED means non-comparable, not equal, different, null, negative, or nonsignificant.",
+    "no_detected_support": "NO_DETECTED_SUPPORT means neither complete family crossed its preregistered support rule. No equivalence margin or powered equivalence test is defined, so NULL is not an allowed outcome."
+  },
+  "current_readiness": {
+    "comparison_algorithm": "IMPLEMENTED_RESULT_BLIND",
+    "upstream_phase24_outputs": "BLOCKED_UPSTREAM_REAL_RESULTS_ABSENT",
+    "overall": "BLOCKED_UPSTREAM",
+    "production_science_executed": false
+  }
+}

@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out discovery_extension/logs/replication/rg/rg_replication_sleep_apnea \
+--rg data/munged/sleep_apnea.sumstats.gz,discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz \
+--ref-ld-chr ref/eur_w_ld_chr/ \
+--w-ld-chr ref/eur_w_ld_chr/ 
+
+Beginning analysis at Sat Aug 29 07:43:23 2026
+Reading summary statistics from data/munged/sleep_apnea.sumstats.gz ...
+Read summary statistics for 1159122 SNPs.
+Reading reference panel LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1154434 SNPs remain.
+After merging with regression SNP LD, 1154434 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz ...
+Read summary statistics for 826029 SNPs.
+After merging with summary statistics, 812325 SNPs remain.
+812325 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.1148 (0.0076)
+Lambda GC: 1.4281
+Mean Chi^2: 1.4785
+Intercept: 1.1218 (0.0136)
+Ratio: 0.2544 (0.0284)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.055 (0.0035)
+Lambda GC: 1.4609
+Mean Chi^2: 1.4629
+Intercept: 1.1312 (0.0112)
+Ratio: 0.2833 (0.0242)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0312 (0.0037)
+Mean z1*z2: 0.1337
+Intercept: 0.0017 (0.0082)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.392 (0.0446)
+Z-score: 8.7954
+P: 1.4252e-18
+
+
+Summary of Genetic Correlation Results
+                                 p1                                                                                p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+data/munged/sleep_apnea.sumstats.gz discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz 0.3920 0.0446 8.7954 0.0000  0.0550     0.0035  1.1312     0.0112    0.0017       0.0082
+
+Analysis finished at Sat Aug 29 07:43:31 2026
+Total time elapsed: 7.64s

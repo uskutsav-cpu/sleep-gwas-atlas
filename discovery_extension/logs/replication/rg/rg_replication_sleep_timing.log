@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out discovery_extension/logs/replication/rg/rg_replication_sleep_timing \
+--rg data/munged/sleep_timing.sumstats.gz,discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz \
+--ref-ld-chr ref/eur_w_ld_chr/ \
+--w-ld-chr ref/eur_w_ld_chr/ 
+
+Beginning analysis at Sat Aug 29 07:44:57 2026
+Reading summary statistics from data/munged/sleep_timing.sumstats.gz ...
+Read summary statistics for 1176759 SNPs.
+Reading reference panel LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1173004 SNPs remain.
+After merging with regression SNP LD, 1173004 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz ...
+Read summary statistics for 1156795 SNPs.
+After merging with summary statistics, 1148970 SNPs remain.
+1148970 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0681 (0.0075)
+Lambda GC: 1.1459
+Mean Chi^2: 1.1351
+Intercept: 1.0204 (0.0074)
+Ratio: 0.1512 (0.0545)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0777 (0.0049)
+Lambda GC: 1.2628
+Mean Chi^2: 1.2841
+Intercept: 1.0674 (0.0093)
+Ratio: 0.2372 (0.0326)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.004 (0.0044)
+Mean z1*z2: -0.0065
+Intercept: 0.0056 (0.005)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0554 (0.06)
+Z-score: -0.9232
+P: 0.3559
+
+
+Summary of Genetic Correlation Results
+                                  p1                                                                             p2      rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+data/munged/sleep_timing.sumstats.gz discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz -0.0554 0.0600 -0.9232 0.3559  0.0777     0.0049  1.0674     0.0093    0.0056       0.0050
+
+Analysis finished at Sat Aug 29 07:45:05 2026
+Total time elapsed: 8.26s

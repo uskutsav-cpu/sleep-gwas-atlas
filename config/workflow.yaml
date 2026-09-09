@@ -1,0 +1,59 @@
+panel: config/analysis_panel.tsv
+panel_lock: config/analysis_panel.lock.json
+sources: config/public_gwas_sources.tsv
+schemas: config/gwas_schemas.tsv
+variant_mappings: config/variant_mapping_plans.tsv
+liftover_plans: config/liftover_plans.tsv
+python: python3
+ldsc_python: .ldsc-env/bin/python
+ldsc_dir: ldsc
+rscript: .r-env/bin/Rscript
+eur_ld_dir: ref/eur_w_ld_chr
+lava_reference_prefix: ref/lava/ukb_v1.1/lava-ukb-v1.1
+lava_locus_file: ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile
+mixer_policy: config/mixer_analysis_policy.json
+pleiotropy_policy: config/pleiotropy_analysis_policy.json
+downstream_policy: config/downstream_analysis_policy.json
+atlas_schema: config/atlas_table_schema.json
+fine_mapping_policy: config/fine_mapping_analysis_policy.json
+molecular_policy: config/molecular_analysis_policy.json
+interpretation_policy: config/interpretation_analysis_policy.json
+dense_map_policy: config/dense_variant_map_policy.json
+dense_harmonization_policy: config/dense_harmonization_policy.json
+
+# Keep false until the user has been warned that the exact phi-model family is
+# a 2.920 GiB download and has explicitly approved starting it.
+acknowledge_large_downloads: false
+# Keep false until the exact 2,701,503,051-byte Pan-UKBB identity-manifest
+# transfer has been shown and explicitly approved.
+acknowledge_dense_variant_map_download: false
+# Keep false until the exact 6,844,892,917-byte three-file GLGC transfer has
+# been shown and explicitly approved.
+acknowledge_dense_gwas_download: false
+acknowledge_large_extracts: false
+# Keep false until the exact 14,110,596,095-byte seven-archive LAVA reference
+# transfer has been shown and explicitly approved.
+acknowledge_lava_reference_download: false
+# Keep false until the exact 2,106,984,629-byte amd64 MiXeR v2.2.1 image pull
+# has been shown and explicitly approved.
+acknowledge_mixer_container_pull: false
+# Keep false until each pinned pleiotropy runtime family has been shown and
+# explicitly approved. Software, template, and LD reference are independent
+# transfers so approval for one never authorizes another.
+acknowledge_pleiotropy_software_download: false
+acknowledge_pleiotropy_template_download: false
+acknowledge_pleiotropy_reference_download: false
+# Keep false until the exact 1,876,474,664-byte LDSC-SEG reference transfer
+# plan has been shown and explicitly approved.
+acknowledge_ldsc_seg_large_download: false
+# Keep false until the exact 66-file, 1,593,837,597-byte temporary LDSC-SEG
+# genotype deletion family has been shown and explicitly approved. The guarded
+# derivation deletes each chromosome's three verified PLINK files only after
+# all 17 corresponding LD-score families publish successfully.
+acknowledge_temporary_reference_deletions: false
+
+# Explicit opt-in list for real-data work. Keep empty in Git: a researcher must
+# choose already source-verified traits and materialize their registered files
+# before invoking the phase0, h2, or phase1_rg targets.
+phase0_traits: []
+h2_scale: liability

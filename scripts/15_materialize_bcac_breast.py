@@ -18,6 +18,8 @@ import hashlib
 import json
 import os
 from pathlib import Path
+
+from panel_guard import require_locked_traits
 import re
 import tempfile
 
@@ -278,6 +280,7 @@ def materialize(source: Path, output: Path, progress_every: int) -> None:
 
 
 def main() -> None:
+    require_locked_traits({"breast_cancer": "bcac_2020_overall_breast_cancer"})
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--out", type=Path)

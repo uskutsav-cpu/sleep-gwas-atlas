@@ -7,11 +7,12 @@
 #   bash scripts/11_materialize_public_gwas.sh --verify
 #
 # This intentionally does not infer a source, accept a form, perform a
-# liftover, or set any trait to CURATED. The Phase 0 audit remains the gate.
+# liftover, or advance any readiness stage. The Phase 0 audit remains the gate.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/_common.sh
 
-SOURCES=${SOURCES:-config/public_gwas_sources.tsv}
+SOURCES=config/public_gwas_sources.tsv
 RAW_DIR=${RAW_DIR:-data/raw}
 ARCHIVE_DIR=${ARCHIVE_DIR:-$RAW_DIR/.archives}
 PYTHON_BIN=${PYTHON_BIN:-python3}
@@ -31,11 +32,18 @@ registry intentionally names the same exact phenotype twice. A source marked
 ``GZIP_WRAPPED_ZIP_COLUMNS`` is a reviewed multi-phenotype nested archive; it
 is handled only by its named, source-specific materializer. A source marked
 ``DIRECT_TSV`` is a single, uncompressed tabular release and is losslessly
-gzip-wrapped after its registered integrity check. A source marked
+gzip-wrapped after its registered integrity check. The named PRACTICAL
+prostate-cancer mode fail-closes on the exact reviewed malformed-row count and
+writes a provenance sidecar for its explicit exclusions. A source marked
 ``DIRECT_GZIP`` is already a single gzipped tabular release and is hard-linked
 into the raw directory after its registered integrity check. Large public
 Google Drive releases with a reviewed source-specific materializer are fetched
-by validated byte ranges rather than a blind resume.
+by validated byte ranges rather than a blind resume. ``OPENGWAS_VCF`` uses the
+registered stable link-generation endpoint and dataset ID, verifies the exact
+short-lived download, and converts GWAS-VCF fields with an explicit schema.
+Set ``RANGE_WORKERS`` above 1 to use concurrent, exact Content-Range-validated
+chunks for other public servers that support HTTP ranges; the final registered
+byte count and SHA-256 remain mandatory.
 EOF
 }
 
@@ -46,6 +54,7 @@ case "$MODE" in
 esac
 
 [ -f "$SOURCES" ] || { echo "ERROR: source registry not found: $SOURCES" >&2; exit 1; }
+validate_panel
 mkdir -p "$RAW_DIR" "$ARCHIVE_DIR"
 
 read_source() {
@@ -77,6 +86,13 @@ fi
 SOURCE_ROW=$(read_source) || { echo "ERROR: unknown source_id: $SOURCE_ID" >&2; exit 1; }
 IFS=$'\t' read -r source_id trait_ids source_page download_url access archive_name archive_bytes archive_sha256 archive_member raw_files pmid ancestry build_status acquisition_status notes <<< "$SOURCE_ROW"
 [ "$access" = PUBLIC ] || { echo "ERROR: $source_id is not approved as PUBLIC" >&2; exit 1; }
+IFS=',' read -r -a mapped_traits <<< "$trait_ids"
+for trait_id in "${mapped_traits[@]}"; do
+  manifest_source=$(trait_field "$trait_id" source_id) || die \
+    "$source_id maps a trait outside the locked panel: $trait_id"
+  [ "$manifest_source" = "$source_id" ] || die \
+    "$trait_id selects source_id=$manifest_source in the locked panel, not $source_id"
+done
 ARCHIVE="$ARCHIVE_DIR/$archive_name"
 
 require_archive_integrity() {
@@ -99,6 +115,20 @@ if [ "$MODE" = --download ]; then
       --url "$download_url" --out "$ARCHIVE" \
       --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256" \
       --max-chunks 4
+  elif [ "$archive_member" = "OPENGWAS_VCF" ]; then
+    "$PYTHON_BIN" scripts/18_materialize_opengwas_vcf.py \
+      --download --dataset-id "${archive_name%.vcf.gz}" \
+      --endpoint "$download_url" --out "$ARCHIVE" \
+      --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256"
+  elif [ "${RANGE_WORKERS:-1}" -gt 1 ]; then
+    if [ -s "$ARCHIVE" ] && [ ! -e "$ARCHIVE.partial" ]; then
+      mv "$ARCHIVE" "$ARCHIVE.partial"
+    fi
+    "$PYTHON_BIN" scripts/14_ranged_download.py \
+      --url "$download_url" --out "$ARCHIVE" \
+      --expected-bytes "$archive_bytes" --expected-sha256 "$archive_sha256" \
+      --chunk-bytes "${RANGE_CHUNK_BYTES:-16777216}" --max-chunks 1000000 \
+      --workers "$RANGE_WORKERS"
   else
     curl --fail --location --retry 3 --continue-at - --output "$ARCHIVE" "$download_url"
   fi
@@ -118,6 +148,11 @@ if [ "$MODE" = --download ]; then
   elif [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
     "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
       --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --verify-only
+  elif [ "$archive_member" = "PRACTICAL_2018_FILTER_MALFORMED" ]; then
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --verify-only
+  elif [ "$archive_member" = "OPENGWAS_VCF" ]; then
+    gzip -t "$ARCHIVE"
   elif [ "$archive_member" = "DIRECT_TSV" ]; then
     test -s "$ARCHIVE" || { echo "ERROR: downloaded direct TSV is empty" >&2; exit 1; }
   elif [ "$archive_member" = "DIRECT_GZIP" ]; then
@@ -144,6 +179,24 @@ cleanup_materialization() {
 }
 trap cleanup_materialization EXIT
 IFS=',' read -r -a outputs <<< "$raw_files"
+if [ "$archive_member" = "OPENGWAS_VCF" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: OPENGWAS_VCF must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -s "$PRIMARY" ]; then
+    "$PYTHON_BIN" scripts/18_materialize_opengwas_vcf.py \
+      --materialize --dataset-id "${archive_name%.vcf.gz}" \
+      --source "$ARCHIVE" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
 if [ "$archive_member" = "BCAC_2020_META_RSID" ]; then
   [ "${#outputs[@]}" -eq 1 ] || {
     echo "ERROR: BCAC_2020_META_RSID must register exactly one raw output" >&2
@@ -172,6 +225,26 @@ if [ "$archive_member" = "PHELAN_2017_OVARIAN_OVERALL_RSID" ]; then
   if [ ! -s "$PRIMARY" ]; then
     "$PYTHON_BIN" scripts/16_materialize_phelan_ovarian.py \
       --source "$ARCHIVE" --expected-sha256 "$archive_sha256" --out "$PRIMARY"
+  fi
+  gzip -t "$PRIMARY"
+  echo "Materialized $source_id"
+  printf '  archive sha256: '; shasum -a 256 "$ARCHIVE" | awk '{print $1}'
+  printf '  raw sha256: '; shasum -a 256 "$PRIMARY" | awk '{print $1}'
+  printf '  files: %s\n' "$raw_files"
+  exit 0
+fi
+if [ "$archive_member" = "PRACTICAL_2018_FILTER_MALFORMED" ]; then
+  [ "${#outputs[@]}" -eq 1 ] || {
+    echo "ERROR: PRACTICAL_2018_FILTER_MALFORMED must register exactly one raw output" >&2
+    exit 1
+  }
+  PRIMARY="$RAW_DIR/${outputs[0]}"
+  if [ ! -s "$PRIMARY" ] || [ ! -s "$PRIMARY.provenance.json" ]; then
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --out "$PRIMARY"
+  else
+    "$PYTHON_BIN" scripts/20_materialize_practical_prostate.py \
+      --source "$ARCHIVE" --verify-only
   fi
   gzip -t "$PRIMARY"
   echo "Materialized $source_id"

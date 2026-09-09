@@ -1,0 +1,1304 @@
+#!/usr/bin/env python3
+"""Audit locked regulatory, cell, pathway, and causal interpretation inputs."""
+from __future__ import annotations
+
+import argparse
+import csv
+import gzip
+import hashlib
+import io
+import json
+import math
+import re
+import subprocess
+import tarfile
+import zipfile
+from pathlib import Path
+
+import downstream_contract
+from pathway_sources import (
+    load_go_sets,
+    load_magma_gene_sets,
+    load_msigdb_symbol_sets,
+    load_reactome_sets,
+    load_unique_gencode_symbols,
+)
+
+
+REGISTRY_FIELDS = [
+    "source_id", "analysis_family", "method", "layer_or_resource",
+    "coverage_domains", "exact_release", "build", "access_mode", "source_url",
+    "local_path", "expected_bytes", "expected_sha256", "source_status", "notes",
+]
+READINESS_FIELDS = [
+    "source_id", "analysis_family", "method", "layer_or_resource",
+    "coverage_domains", "exact_release", "local_path", "observed_bytes",
+    "observed_sha256", "readiness_status", "blocker",
+]
+SHA256 = re.compile(r"^[0-9a-f]{64}$")
+FAMILIES = {"regulatory", "cell_type", "pathway", "causal"}
+SCREEN_METADATA = re.compile(
+    r'\{"name":"([^"]*)","collection":"Core","ontology":"([^"]*)",'
+    r'"lifeStage":"([^"]*)","sampleType":"([^"]*)","displayName":"([^"]*)",'
+    r'"assays":\[\{"id":"dnase-[^"]*","assay":"dnase","url":"[^"]*",'
+    r'"experimentAccession":"(ENCSR[^"]*)"'
+)
+
+
+def fail(message: str) -> None:
+    raise SystemExit(f"ERROR: {message}")
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def read_tsv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
+    if not path.is_file() or path.stat().st_size == 0:
+        fail(f"missing real non-empty artifact: {path}")
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        return reader.fieldnames or [], list(reader)
+
+
+def atomic_tsv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+    temporary.replace(path)
+
+
+def atomic_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def split_domains(value: str) -> set[str]:
+    return {item for item in value.split(";") if item and item != "NA"}
+
+
+def validate_screen_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["screen_registry_v4"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file():
+        return False, "SCREEN component manifest is absent", {}
+    if sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "SCREEN component manifest differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe SCREEN component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"SCREEN component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"SCREEN component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {
+        "GRCH38_CCRE_COORDINATES", "CORE_COLLECTION_CLASS_MATRIX",
+        "DOWNLOADS_BIOSAMPLE_METADATA_SNAPSHOT",
+    }
+    if set(components) != required:
+        return False, "SCREEN component manifest is not the exact required three-file bundle", observed
+    bed_rows = sum(1 for _ in components["GRCH38_CCRE_COORDINATES"].open("rb"))
+    if bed_rows != manifest.get("ccre_count"):
+        return False, "SCREEN coordinate row count differs from the release manifest", observed
+    with gzip.open(components["CORE_COLLECTION_CLASS_MATRIX"], "rb") as handle:
+        header = handle.readline()
+        header_fields = header.rstrip(b"\n").decode("ascii").split("\t")
+        matrix_lines = 1 + sum(1 for _ in handle)
+    if (
+        len(header_fields) != manifest.get("matrix_column_count")
+        or matrix_lines != manifest.get("matrix_line_count_including_header")
+        or hashlib.sha256(header).hexdigest() != manifest.get("matrix_header_sha256")
+        or len(header_fields[1:]) != manifest.get("core_biosample_count")
+    ):
+        return False, "SCREEN Core Collection matrix shape/header differs from its release pin", observed
+    metadata_text = components["DOWNLOADS_BIOSAMPLE_METADATA_SNAPSHOT"].read_text(encoding="utf-8")
+    metadata_rows = SCREEN_METADATA.findall(metadata_text)
+    metadata_accessions = [row[5] for row in metadata_rows]
+    if (
+        len(metadata_rows) != manifest.get("core_biosample_count")
+        or len(metadata_accessions) != len(set(metadata_accessions))
+        or set(metadata_accessions) != set(header_fields[1:])
+    ):
+        return False, "SCREEN Core Collection metadata does not exactly match the matrix header", observed
+    observed.update({"coordinate_rows": bed_rows, "matrix_lines": matrix_lines, "core_biosamples": len(metadata_rows)})
+    return True, "", observed
+
+
+def validate_hocomoco_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["hocomoco_v14"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "HOCOMOCO component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    components: dict[str, Path] = {}
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe HOCOMOCO component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"HOCOMOCO component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"HOCOMOCO component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"H14CORE_MEME", "H14CORE_ANNOTATION", "H14CORE_PWM", "H14CORE_THRESHOLDS"}
+    if set(components) != required:
+        return False, "HOCOMOCO manifest is not the exact required four-file bundle", observed
+    motif_count = sum(
+        line.startswith("MOTIF ")
+        for line in components["H14CORE_MEME"].read_text(encoding="utf-8").splitlines()
+    )
+    annotation = [
+        json.loads(line) for line in components["H14CORE_ANNOTATION"].read_text(encoding="utf-8").splitlines()
+        if line
+    ]
+    annotation_names = [row.get("name") for row in annotation]
+    with tarfile.open(components["H14CORE_PWM"], "r:gz") as archive:
+        pwm_names = [Path(member.name).stem for member in archive.getmembers() if member.isfile() and member.name.endswith(".pwm")]
+    with tarfile.open(components["H14CORE_THRESHOLDS"], "r:gz") as archive:
+        threshold_names = [Path(member.name).stem for member in archive.getmembers() if member.isfile() and member.name.endswith(".thr")]
+    expected = int(spec["expected_motifs"])
+    if (
+        motif_count != expected or len(annotation_names) != expected
+        or len(set(annotation_names)) != expected or set(annotation_names) != set(pwm_names)
+        or set(annotation_names) != set(threshold_names)
+    ):
+        return False, "HOCOMOCO motif, annotation, PWM, and threshold identities are not the exact H14CORE family", observed
+    observed["motif_count"] = motif_count
+    return True, "", observed
+
+
+def validate_abc_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["abc_2021"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "ABC component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    components = manifest.get("components", [])
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    if len(components) != 1 or components[0].get("component_id") != "ABC_ALL_PREDICTIONS":
+        return False, "ABC manifest is not the exact required one-file bundle", observed
+    component = components[0]
+    relative = Path(str(component.get("path", "")))
+    if relative.is_absolute() or ".." in relative.parts:
+        return False, "unsafe ABC component path", observed
+    path = root / relative
+    if not path.is_file():
+        return False, "ABC all-predictions source is absent", observed
+    actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+    observed["components"]["ABC_ALL_PREDICTIONS"] = {
+        "bytes": actual_bytes, "sha256": actual_hash,
+    }
+    if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+        return False, "ABC all-predictions source differs from its exact pin", observed
+    expected_header = [
+        "chr", "start", "end", "name", "class", "activity_base", "TargetGene",
+        "TargetGeneTSS", "TargetGeneExpression", "TargetGenePromoterActivityQuantile",
+        "TargetGeneIsExpressed", "distance", "isSelfPromoter", "hic_contact",
+        "powerlaw_contact", "powerlaw_contact_reference", "hic_contact_pl_scaled",
+        "hic_pseudocount", "hic_contact_pl_scaled_adj", "ABC.Score.Numerator",
+        "ABC.Score", "powerlaw.Score.Numerator", "powerlaw.Score", "CellType",
+    ]
+    rows = 0
+    biosamples: set[str] = set()
+    genes: set[str] = set()
+    minimum_score, maximum_score = float("inf"), float("-inf")
+    try:
+        with gzip.open(path, "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != expected_header:
+                return False, "ABC header differs from the frozen 24-column schema", observed
+            raw_header = ("\t".join(reader.fieldnames) + "\n").encode()
+            if hashlib.sha256(raw_header).hexdigest() != manifest.get("header_sha256"):
+                return False, "ABC header differs from its release pin", observed
+            for row in reader:
+                if len(row) != len(expected_header) or None in row:
+                    return False, "ABC source contains a malformed row", observed
+                score = float(row["ABC.Score"])
+                if not 0 <= score <= 1:
+                    return False, "ABC source contains an invalid score", observed
+                rows += 1
+                biosamples.add(row["CellType"])
+                genes.add(row["TargetGene"])
+                minimum_score = min(minimum_score, score)
+                maximum_score = max(maximum_score, score)
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"ABC source is not a valid compressed prediction table: {exc}", observed
+    biosample_hash = hashlib.sha256(("\n".join(sorted(biosamples)) + "\n").encode()).hexdigest()
+    domain_map = manifest.get("domain_biosamples", {})
+    mapped = [value for domain in policy["regulatory_mapping"]["required_context_domains"] for value in domain_map.get(domain, [])]
+    if (
+        rows != manifest.get("row_count") or rows != spec["expected_rows"]
+        or len(biosamples) != manifest.get("biosample_count")
+        or len(biosamples) != spec["expected_biosamples"]
+        or len(genes) != manifest.get("gene_symbol_count")
+        or biosample_hash != manifest.get("sorted_biosample_list_sha256")
+        or minimum_score != manifest.get("minimum_released_abc_score")
+        or maximum_score != manifest.get("maximum_observed_abc_score")
+        or set(domain_map) != set(policy["regulatory_mapping"]["required_context_domains"])
+        or not mapped or len(mapped) != len(set(mapped)) or not set(mapped).issubset(biosamples)
+    ):
+        return False, "ABC rows, scores, genes, biosamples, or domain map differ from the frozen release", observed
+    observed.update({
+        "rows": rows, "biosamples": len(biosamples), "mapped_biosamples": len(mapped),
+        "gene_symbols": len(genes), "minimum_score": minimum_score,
+        "maximum_score": maximum_score, "sorted_biosample_list_sha256": biosample_hash,
+    })
+    return True, "", observed
+
+
+def validate_pchic_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["pchic_2016"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "PCHi-C component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe PCHi-C component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"PCHi-C component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"PCHi-C component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"PCHIC_PEAK_MATRIX_CUTOFF5", "PCHIC_PEAK_MATRIX_README"}
+    if set(components) != required:
+        return False, "PCHi-C manifest is not the exact matrix-plus-README bundle", observed
+    readme = components["PCHIC_PEAK_MATRIX_README"].read_text(encoding="utf-8")
+    if "based on the GRCh37 assembly" not in readme or "Ensembl release v75" not in readme:
+        return False, "PCHi-C README does not verify build and promoter annotation", observed
+    base_fields = [
+        "baitChr", "baitStart", "baitEnd", "baitID", "baitName", "oeChr", "oeStart",
+        "oeEnd", "oeID", "oeName", "dist",
+    ]
+    cell_types = manifest.get("cell_types", {})
+    expected_header = base_fields + list(cell_types) + ["clusterID", "clusterPostProb"]
+    rows = 0
+    pairs: set[tuple[str, str]] = set()
+    score_counts = {name: 0 for name in cell_types}
+    try:
+        with gzip.open(components["PCHIC_PEAK_MATRIX_CUTOFF5"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != expected_header:
+                return False, "PCHi-C matrix header differs from the frozen schema", observed
+            header_hash = hashlib.sha256(("\t".join(reader.fieldnames) + "\n").encode()).hexdigest()
+            if header_hash != manifest.get("header_sha256"):
+                return False, "PCHi-C matrix header differs from its release pin", observed
+            for row in reader:
+                if len(row) != len(expected_header) or None in row:
+                    return False, "PCHi-C matrix contains a malformed row", observed
+                scores = [float(row[name]) for name in cell_types]
+                if any(not value >= 0 for value in scores) or not all(value < float("inf") for value in scores):
+                    return False, "PCHi-C matrix contains an invalid CHiCAGO score", observed
+                if not any(value >= spec["chicago_score_threshold"] for value in scores):
+                    return False, "PCHi-C cutoff-5 matrix contains a row without a qualifying cell", observed
+                for name, value in zip(cell_types, scores):
+                    if value >= spec["chicago_score_threshold"]:
+                        score_counts[name] += 1
+                rows += 1
+                pairs.add(tuple(sorted((row["baitID"], row["oeID"]))))
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"PCHi-C source is not a valid compressed peak matrix: {exc}", observed
+    required_domains = set(policy["regulatory_mapping"]["required_context_domains"])
+    available, unavailable = set(spec["available_domains"]), set(spec["unavailable_domains"])
+    if (
+        rows != manifest.get("row_count") or rows != spec["expected_rows"]
+        or len(pairs) != manifest.get("unique_unordered_fragment_pair_count")
+        or len(cell_types) != manifest.get("cell_type_count")
+        or len(cell_types) != spec["expected_cell_types"]
+        or score_counts != manifest.get("score_ge_5_rows_by_cell_type")
+        or available != set(manifest.get("available_domains", []))
+        or unavailable != set(manifest.get("unavailable_domains", []))
+        or available & unavailable or available | unavailable != required_domains
+    ):
+        return False, "PCHi-C rows, contacts, cell types, scores, or domain coverage differ from the frozen release", observed
+    observed.update({
+        "rows": rows, "unique_unordered_fragment_pairs": len(pairs),
+        "cell_types": len(cell_types), "score_ge_5_rows_by_cell_type": score_counts,
+        "available_domains": sorted(available), "unavailable_domains": sorted(unavailable),
+    })
+    return True, "", observed
+
+
+def validate_fuma_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["fuma_scrna"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "FUMA scRNA component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe FUMA scRNA component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"FUMA scRNA component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"FUMA scRNA component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {
+        "FUMA_SCRNA_COMMIT_ARCHIVE", "FUMA_ENSEMBL_V92_GENE_BOUNDARIES",
+        "MAGMA_V1_10_SOURCE_ARCHIVE", "MAGMA_V1_10_ARM64_BINARY",
+        "MAGMA_1000G_PHASE3_EUR_ARCHIVE",
+    }
+    if set(components) != required:
+        return False, "FUMA scRNA manifest is not the exact required five-component bundle", observed
+
+    gene_ids: set[str] = set()
+    try:
+        with components["FUMA_ENSEMBL_V92_GENE_BOUNDARIES"].open(encoding="utf-8") as handle:
+            for line_number, line in enumerate(handle, start=1):
+                values = line.rstrip("\n").split()
+                if (
+                    len(values) != 6 or not re.fullmatch(r"ENSG[0-9]{11}", values[0])
+                    or values[0] in gene_ids
+                ):
+                    return False, f"invalid or duplicate Ensembl-v92 gene boundary at line {line_number}", observed
+                chromosome = 23 if values[1] == "X" else 24 if values[1] == "Y" else int(values[1])
+                start, end = int(values[2]), int(values[3])
+                if not 1 <= chromosome <= 24 or start < 1 or end < start or values[4] not in {"+", "-"}:
+                    return False, f"invalid Ensembl-v92 gene coordinate at line {line_number}", observed
+                gene_ids.add(values[0])
+    except (OSError, UnicodeError, ValueError) as exc:
+        return False, f"FUMA Ensembl-v92 gene boundary file is invalid: {exc}", observed
+    if len(gene_ids) != manifest.get("gene_count"):
+        return False, "FUMA Ensembl-v92 gene count differs from its release pin", observed
+
+    try:
+        with zipfile.ZipFile(components["MAGMA_V1_10_SOURCE_ARCHIVE"]) as archive:
+            names = {info.filename for info in archive.infolist()}
+            if any(Path(name).is_absolute() or ".." in Path(name).parts for name in names):
+                return False, "MAGMA source archive contains an unsafe path", observed
+            if "makefile" not in names or "src/magma.cpp" not in names:
+                return False, "MAGMA source archive lacks its makefile or primary source", observed
+        reference_expected = {row["name"]: row for row in manifest.get("reference_members", [])}
+        with zipfile.ZipFile(components["MAGMA_1000G_PHASE3_EUR_ARCHIVE"]) as archive:
+            infos = {info.filename: info for info in archive.infolist() if not info.is_dir()}
+            if set(infos) != set(reference_expected):
+                return False, "MAGMA EUR reference archive member family differs from its pin", observed
+            reference_observed: dict[str, object] = {}
+            for name, info in infos.items():
+                expected = reference_expected[name]
+                digest = hashlib.sha256()
+                with archive.open(info) as handle:
+                    for block in iter(lambda: handle.read(1024 * 1024), b""):
+                        digest.update(block)
+                actual_hash = digest.hexdigest()
+                reference_observed[name] = {"bytes": info.file_size, "sha256": actual_hash}
+                if info.file_size != expected["bytes"] or actual_hash != expected["sha256"]:
+                    return False, f"MAGMA EUR reference member differs from its exact pin: {name}", observed
+            with archive.open(infos["g1000_eur.fam"]) as handle:
+                reference_sample_count = sum(1 for _ in handle)
+            if reference_sample_count != manifest.get("reference_sample_count"):
+                return False, "MAGMA EUR reference sample count differs from its release pin", observed
+    except (OSError, zipfile.BadZipFile, RuntimeError) as exc:
+        return False, f"MAGMA source or EUR reference archive is invalid: {exc}", observed
+
+    binary = components["MAGMA_V1_10_ARM64_BINARY"]
+    version = subprocess.run([binary, "--version"], capture_output=True, text=True, check=False)
+    version_text = (version.stdout + version.stderr).strip()
+    if version.returncode or version_text != "MAGMA version: v1.10 (custom)":
+        return False, "checksum-pinned MAGMA binary does not report v1.10", observed
+
+    archive_path = components["FUMA_SCRNA_COMMIT_ARCHIVE"]
+    prefix = spec["archive_member_prefix"]
+    domains = {domain: 0 for domain in policy["cell_types"]["required_domains"]}
+    selected_observed: dict[str, object] = {}
+    try:
+        with tarfile.open(archive_path, "r:gz") as archive:
+            files = [member for member in archive.getmembers() if member.isfile()]
+            if any(Path(member.name).is_absolute() or ".." in Path(member.name).parts for member in files):
+                return False, "FUMA scRNA commit archive contains an unsafe path", observed
+            matrices = [
+                member for member in files
+                if member.name.startswith(prefix + "processed_data/") and member.name.endswith(".txt.gz")
+            ]
+            if (
+                len(matrices) != manifest.get("processed_matrix_count")
+                or sum(member.size for member in matrices) != manifest.get("processed_matrix_total_bytes")
+            ):
+                return False, "FUMA processed-matrix tree count or bytes differ from the frozen commit", observed
+            members = {member.name: member for member in files}
+            for dataset in manifest.get("datasets", []):
+                identity = dataset["dataset_id"]
+                member_name = prefix + dataset["member"]
+                member = members.get(member_name)
+                if member is None:
+                    return False, f"selected FUMA matrix is absent: {identity}", observed
+                handle = archive.extractfile(member)
+                if handle is None:
+                    return False, f"selected FUMA matrix cannot be read: {identity}", observed
+                raw = handle.read()
+                if (
+                    len(raw) != dataset["compressed_bytes"]
+                    or hashlib.sha256(raw).hexdigest() != dataset["compressed_sha256"]
+                ):
+                    return False, f"selected FUMA matrix differs from its compressed pin: {identity}", observed
+                text_bytes = gzip.decompress(raw)
+                if (
+                    len(text_bytes) != dataset["text_bytes"]
+                    or hashlib.sha256(text_bytes).hexdigest() != dataset["text_sha256"]
+                ):
+                    return False, f"selected FUMA matrix differs from its text pin: {identity}", observed
+                stream = io.BytesIO(text_bytes)
+                raw_header = stream.readline()
+                header = raw_header.decode("utf-8").split()
+                if (
+                    hashlib.sha256(raw_header).hexdigest() != dataset["header_sha256"]
+                    or len(header) != dataset["cell_type_count"] + 2
+                    or header[0] != "GENE" or header[-1] != "Average"
+                    or len(header) != len(set(header))
+                ):
+                    return False, f"selected FUMA matrix header differs from its pin: {identity}", observed
+                rows, seen = 0, set()
+                maximum_average_difference = 0.0
+                for line in stream:
+                    values = line.decode("utf-8").split()
+                    if len(values) != len(header) or values[0] in seen:
+                        return False, f"selected FUMA matrix has malformed or duplicate rows: {identity}", observed
+                    seen.add(values[0])
+                    numbers = [float(value) for value in values[1:]]
+                    if (
+                        not re.fullmatch(r"ENSG[0-9]{11}", values[0])
+                        or any(not math.isfinite(value) or value < 0 for value in numbers)
+                    ):
+                        return False, f"selected FUMA matrix has invalid genes or values: {identity}", observed
+                    maximum_average_difference = max(
+                        maximum_average_difference,
+                        abs(numbers[-1] - sum(numbers[:-1]) / len(numbers[:-1])),
+                    )
+                    rows += 1
+                if rows != dataset["gene_rows"] or maximum_average_difference > 1e-10:
+                    return False, f"selected FUMA matrix rows or Average column differ from its pin: {identity}", observed
+                domain = dataset["domain"]
+                if domain not in domains:
+                    return False, f"selected FUMA matrix has an unknown domain: {identity}", observed
+                domains[domain] += 1
+                selected_observed[identity] = {
+                    "gene_rows": rows, "cell_type_count": len(header) - 2,
+                    "maximum_average_difference": maximum_average_difference,
+                }
+    except (OSError, tarfile.TarError, gzip.BadGzipFile, UnicodeError, ValueError) as exc:
+        return False, f"FUMA scRNA commit archive or selected matrix is invalid: {exc}", observed
+    if domains != {domain: 2 for domain in domains}:
+        return False, "FUMA matrix selection is not exactly two prespecified matrices per domain", observed
+    observed.update({
+        "gene_count": len(gene_ids), "magma_version": version_text,
+        "reference_members": reference_observed, "reference_sample_count": reference_sample_count,
+        "selected_datasets": selected_observed,
+        "selected_datasets_by_domain": domains,
+    })
+    return True, "", observed
+
+
+def validate_catlas_bundle(root: Path, policy: dict[str, object]) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["catlas_adult_v4"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "CATlas component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    components: dict[str, Path] = {}
+    for component in manifest.get("components", []):
+        identity = component.get("component_id", "UNKNOWN")
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe CATlas component path for {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"CATlas component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"CATlas component differs from its exact pin: {identity}", observed
+        components[identity] = path
+    required = {"ADULT_CELL_METADATA", "CELL_TYPE_RESTRICTED_PEAKS", "CCRE_UNIVERSE"}
+    if set(components) != required:
+        return False, "CATlas manifest is not the exact required three-file bundle", observed
+
+    counts = manifest.get("source_counts", {})
+    adult_nuclei = 0
+    adult_types: set[str] = set()
+    try:
+        with gzip.open(components["ADULT_CELL_METADATA"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != ["cellID", "sample", "replicate", "logUMI", "tsse", "tissue", "cell type", "Life stage"]:
+                return False, "CATlas cell metadata header differs from the frozen schema", observed
+            for row in reader:
+                if row["Life stage"] == "Adult":
+                    adult_nuclei += 1
+                    adult_types.add(row["cell type"])
+        if adult_nuclei != counts.get("adult_nuclei") or len(adult_types) != counts.get("adult_cell_types"):
+            return False, "CATlas adult nuclei or cell-type counts differ from the release pin", observed
+    except (OSError, UnicodeError, KeyError) as exc:
+        return False, f"CATlas cell metadata is unreadable: {exc}", observed
+
+    all_ccres = adult_ccres = 0
+    try:
+        with gzip.open(components["CCRE_UNIVERSE"], "rt", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            expected_header = [
+                "#Chromosome", "Start", "End", "Class", "Present in fetal tissues",
+                "Present in adult tissues", "CRE module",
+            ]
+            if reader.fieldnames != expected_header:
+                return False, "CATlas cCRE-universe header differs from the frozen schema", observed
+            for row in reader:
+                chromosome = row["#Chromosome"]
+                start, end = int(row["Start"]), int(row["End"])
+                if not chromosome.startswith("chr") or start < 0 or end - start != 400:
+                    return False, "CATlas cCRE universe contains an invalid interval", observed
+                if row["Present in adult tissues"] not in {"yes", "no"}:
+                    return False, "CATlas cCRE universe contains an invalid adult-presence label", observed
+                all_ccres += 1
+                adult_ccres += row["Present in adult tissues"] == "yes"
+        if all_ccres != counts.get("all_life_stage_ccres") or adult_ccres != counts.get("adult_present_ccres"):
+            return False, "CATlas cCRE-universe counts differ from the release pin", observed
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"CATlas cCRE universe is unreadable: {exc}", observed
+
+    selected = manifest.get("selected_cells", [])
+    selected_domains = [str(row.get("domain", "")) for row in selected]
+    selected_labels = [str(row.get("cell_type", "")) for row in selected]
+    selected_metadata = [str(row.get("metadata_cell_type", "")) for row in selected]
+    selected_members = [str(row.get("archive_member", "")) for row in selected]
+    required_domains = set(policy["cell_types"]["required_domains"])
+    if (
+        len(selected) != spec["expected_selected_cells"]
+        or set(selected_domains) != required_domains
+        or any(selected_domains.count(domain) != spec["selected_cells_by_domain"][domain] for domain in required_domains)
+        or len(selected_labels) != len(set(selected_labels))
+        or len(selected_metadata) != len(set(selected_metadata))
+        or len(selected_members) != len(set(selected_members))
+        or not set(selected_metadata).issubset(adult_types)
+    ):
+        return False, "CATlas pre-result cell selection or four-domain map differs from its pin", observed
+
+    archive_rows = 0
+    restricted_intervals: set[tuple[str, str, str]] = set()
+    selected_peak_rows: dict[str, int] = {}
+    try:
+        with zipfile.ZipFile(components["CELL_TYPE_RESTRICTED_PEAKS"]) as archive:
+            members = [member for member in archive.infolist() if member.filename.endswith(".bed.gz")]
+            member_names = {member.filename for member in members}
+            if len(members) != counts.get("peak_archive_members") or len(member_names) != len(members):
+                return False, "CATlas peak archive is not the exact 111-member family", observed
+            if not set(selected_members).issubset(member_names):
+                return False, "CATlas selected cell map names an absent peak member", observed
+            for member in members:
+                member_rows = 0
+                payload = gzip.decompress(archive.read(member)).decode("ascii")
+                for line in payload.splitlines():
+                    fields = line.split("\t")
+                    if len(fields) != 3:
+                        return False, f"CATlas peak member has an invalid row: {member.filename}", observed
+                    chromosome, start_text, end_text = fields
+                    start, end = int(start_text), int(end_text)
+                    if not chromosome.startswith("chr") or start < 0 or end - start != 400:
+                        return False, f"CATlas peak member has an invalid interval: {member.filename}", observed
+                    member_rows += 1
+                    archive_rows += 1
+                    restricted_intervals.add((chromosome, start_text, end_text))
+                if member.filename in set(selected_members):
+                    selected_peak_rows[member.filename] = member_rows
+    except (OSError, UnicodeError, ValueError, zipfile.BadZipFile) as exc:
+        return False, f"CATlas restricted-peak archive is unreadable: {exc}", observed
+    if (
+        archive_rows != counts.get("cell_type_restricted_assignments")
+        or len(restricted_intervals) != counts.get("cell_type_restricted_ccres")
+        or len(selected_peak_rows) != len(selected)
+    ):
+        return False, "CATlas restricted-peak assignment or unique-interval counts differ from the release pin", observed
+
+    observed.update({
+        "adult_nuclei": adult_nuclei, "adult_cell_types": len(adult_types),
+        "all_life_stage_ccres": all_ccres, "adult_present_ccres": adult_ccres,
+        "peak_archive_members": counts["peak_archive_members"],
+        "cell_type_restricted_assignments": archive_rows,
+        "cell_type_restricted_ccres": len(restricted_intervals),
+        "selected_cells": len(selected),
+        "selected_cells_by_domain": {
+            domain: selected_domains.count(domain) for domain in sorted(required_domains)
+        },
+        "selected_peak_rows": selected_peak_rows,
+    })
+    return True, "", observed
+
+
+def validate_ldsc_seg_gtex_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["ldsc_seg_gtex"]
+    config_path = root / spec["selection_config"]
+    if not config_path.is_file() or sha256(config_path) != spec["selection_config_sha256"]:
+        return False, "LDSC-SEG GTEx selection config is absent or differs from policy", {}
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    reference_config_path = root / spec["reference_config"]
+    if (
+        not reference_config_path.is_file()
+        or sha256(reference_config_path) != spec["reference_config_sha256"]
+    ):
+        return False, "LDSC-SEG reference config is absent or differs from policy", {}
+    reference_config = json.loads(reference_config_path.read_text(encoding="utf-8"))
+    manifest_path = root / spec["source_manifest"]
+    if (
+        not manifest_path.is_file()
+        or manifest_path.stat().st_size != spec["source_manifest_bytes"]
+        or sha256(manifest_path) != spec["source_manifest_sha256"]
+    ):
+        return False, "LDSC-SEG GTEx source manifest is absent or differs from policy", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {
+        "selection_config_sha256": sha256(config_path),
+        "reference_config_sha256": sha256(reference_config_path),
+        "source_manifest_sha256": sha256(manifest_path),
+    }
+    selected = config.get("selected_tissues", [])
+    domains = {
+        domain: sum(row.get("domain") == domain for row in selected)
+        for domain in policy["cell_types"]["required_domains"]
+    }
+    if (
+        config.get("source_id") != spec["source_id"]
+        or reference_config.get("mirror_commit") != config.get("mirror_commit")
+        or reference_config.get("ldscore_cache_dir") != spec.get("ldscore_cache_dir")
+        or reference_config.get("reference_provenance_path") != spec.get("ldscore_cache_provenance_path")
+        or reference_config.get("selected_ldcts_path") != spec.get("selected_ldcts_path")
+        or reference_config.get("trait_result_path_template") != spec.get("trait_result_path_template")
+        or reference_config.get("trait_log_path_template") != spec.get("trait_log_path_template")
+        or reference_config.get("trait_provenance_path_template") != spec.get("trait_provenance_path_template")
+        or len(selected) != spec["expected_selected_tissues"]
+        or domains != spec["selected_tissues_by_domain"]
+        or manifest.get("config_sha256") != sha256(config_path)
+        or manifest.get("mirror_commit") != config.get("mirror_commit")
+        or manifest.get("selected_tissues") != selected
+        or manifest.get("selected_tissues_by_domain") != domains
+        or manifest.get("source_file_count") != spec["expected_source_files"]
+        or manifest.get("source_file_count") != config.get("expected_source_files")
+    ):
+        return False, "LDSC-SEG GTEx release, selection, or source family differs from policy", observed
+    files = manifest.get("files", [])
+    if len(files) != spec["expected_source_files"]:
+        return False, "LDSC-SEG GTEx source manifest has an incomplete file family", observed
+    paths: set[str] = set()
+    source_bytes = 0
+    for record in files:
+        relative = Path(str(record.get("local_path", "")))
+        repository_path = str(record.get("repository_path", ""))
+        if relative.is_absolute() or ".." in relative.parts or not repository_path or repository_path in paths:
+            return False, "LDSC-SEG GTEx source manifest contains an unsafe or duplicate path", observed
+        path = root / relative
+        if (
+            not path.is_file() or path.stat().st_size != record.get("bytes")
+            or sha256(path) != record.get("sha256")
+            or config["mirror_commit"] not in str(record.get("url", ""))
+        ):
+            return False, f"LDSC-SEG GTEx source file differs from its pin: {repository_path}", observed
+        paths.add(repository_path)
+        source_bytes += path.stat().st_size
+    expected_paths = {str(config["source_ldcts"])}
+    indices = {int(row["source_index"]) for row in selected}
+    for chromosome in range(1, 23):
+        expected_paths.add(f"{config['source_prefix']}/GTEx.control.{chromosome}.annot.gz")
+        expected_paths.update(
+            f"{config['source_prefix']}/GTEx.{index}.{chromosome}.annot.gz"
+            for index in indices
+        )
+    row_counts = manifest.get("variant_rows_by_chromosome", {})
+    if (
+        paths != expected_paths or source_bytes != manifest.get("source_bytes")
+        or set(row_counts) != {str(value) for value in range(1, 23)}
+        or any(not isinstance(value, int) or value <= 0 for value in row_counts.values())
+    ):
+        return False, "LDSC-SEG GTEx paths, bytes, or chromosome row counts differ from the frozen family", observed
+    ldcts_path = root / config["local_root"] / config["source_ldcts"]
+    try:
+        with ldcts_path.open(encoding="utf-8", newline="") as handle:
+            source_ldcts = {
+                row[0]: row[1] for row in csv.reader(handle, delimiter="\t") if len(row) == 2
+            }
+    except (OSError, UnicodeError) as exc:
+        return False, f"LDSC-SEG GTEx ldcts is unreadable: {exc}", observed
+    if len(source_ldcts) != manifest.get("source_ldcts_entries") or len(source_ldcts) != 205:
+        return False, "LDSC-SEG GTEx ldcts entry count differs from the source release", observed
+    for tissue in selected:
+        expected = (
+            f"Multi_tissue_gene_expr_1000Gv3_ldscores/GTEx.{tissue['source_index']}.,"
+            "Multi_tissue_gene_expr_1000Gv3_ldscores/GTEx.control."
+        )
+        if source_ldcts.get(tissue["source_label"]) != expected:
+            return False, f"LDSC-SEG selected tissue differs from ldcts: {tissue['source_label']}", observed
+    observed.update({
+        "mirror_commit": config["mirror_commit"], "source_files": len(files),
+        "source_bytes": source_bytes, "selected_tissues": len(selected),
+        "selected_tissues_by_domain": domains, "source_ldcts_entries": len(source_ldcts),
+        "variant_rows_by_chromosome": row_counts,
+    })
+    return True, "", observed
+
+
+def validate_public_pathway_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["public_pathway_sources"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "public pathway component manifest is absent or differs from the policy pin", {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path)}
+    if (
+        set(spec["source_ids"]) != set(manifest.get("resources", {}))
+        or manifest.get("set_size_range") != [
+            policy["pathways"]["minimum_gene_set_size"],
+            policy["pathways"]["maximum_gene_set_size"],
+        ]
+    ):
+        return False, "public pathway source IDs or set-size family differs from policy", observed
+
+    def pinned_path(row: dict[str, object], label: str) -> Path:
+        relative = Path(str(row.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"unsafe {label} path")
+        path = root / relative
+        if (
+            not path.is_file() or path.stat().st_size != row.get("bytes")
+            or sha256(path) != row.get("sha256")
+        ):
+            raise ValueError(f"{label} differs from its exact pin")
+        return path
+
+    try:
+        mapping = manifest["identifier_mapping"]
+        gencode = pinned_path(mapping, "GENCODE pathway identifier reference")
+        symbol_map, mapping_observed = load_unique_gencode_symbols(gencode)
+        mapping_expected = {
+            key: mapping[key] for key in (
+                "gene_rows", "distinct_symbols", "unique_symbols", "ambiguous_symbols",
+            )
+        }
+        if mapping_observed != mapping_expected:
+            raise ValueError("GENCODE exact-symbol family differs from its release pin")
+        minimum_size, maximum_size = map(int, manifest["set_size_range"])
+
+        reactome = manifest["resources"]["REACTOME"]
+        reactome_path = pinned_path(reactome, "Reactome v97 archive")
+        reactome_sets, reactome_observed = load_reactome_sets(
+            reactome_path, symbol_map, minimum_size, maximum_size,
+        )
+        reactome_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in reactome_sets.values()))
+        )
+        reactome_expected = {
+            key: reactome[key] for key in (
+                "archive_member", "archive_member_bytes", "archive_member_sha256",
+                "source_pathways", "source_symbols", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if reactome_observed != reactome_expected:
+            raise ValueError("Reactome v97 pathway family differs from its release pin")
+
+        go = manifest["resources"]["GO"]
+        ontology = pinned_path(go["ontology"], "GO ontology")
+        annotation = pinned_path(go["annotation"], "GO human annotation")
+        go_sets, go_observed = load_go_sets(
+            ontology, annotation, symbol_map, minimum_size, maximum_size,
+        )
+        go_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in go_sets.values()))
+        )
+        go_expected = {
+            "ontology_data_version": go["ontology"]["data_version"],
+            "active_ontology_terms": go["ontology"]["active_terms"],
+            "gaf_rows": go["annotation"]["rows"],
+            "gaf_date_generated": go["annotation"]["date_generated"],
+            "gaf_go_version": go["annotation"]["go_version"],
+            **{
+                key: go[key] for key in (
+                    "excluded_not_rows", "excluded_unmapped_rows", "direct_annotated_terms",
+                    "propagated_terms", "mapped_genes", "eligible_sets",
+                    "eligible_gene_memberships", "eligible_gene_union",
+                )
+            },
+        }
+        if go_observed != go_expected:
+            raise ValueError("GO pathway family differs from its release pin")
+
+        msigdb = manifest["resources"]["MSIGDB"]
+        msigdb_path = pinned_path(msigdb, "MSigDB v2026.1 human symbols GMT")
+        msigdb_sets, msigdb_observed = load_msigdb_symbol_sets(
+            msigdb_path, symbol_map, minimum_size, maximum_size,
+        )
+        msigdb_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in msigdb_sets.values()))
+        )
+        msigdb_expected = {
+            key: msigdb[key] for key in (
+                "source_sets", "source_symbols", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if msigdb_observed != msigdb_expected:
+            raise ValueError("MSigDB v2026.1 pathway family differs from its release pin")
+
+        magma = manifest["resources"]["MAGMA_GENE_SETS"]
+        magma_path = pinned_path(magma, "FUMA MSigDB v2023.1Hs MAGMA GMT")
+        magma_sets, magma_observed = load_magma_gene_sets(
+            magma_path, set(symbol_map.values()), minimum_size, maximum_size,
+        )
+        magma_observed["eligible_gene_union"] = len(
+            set().union(*(genes for _, genes in magma_sets.values()))
+        )
+        magma_expected = {
+            key: magma[key] for key in (
+                "source_sets", "source_gene_ids", "mapped_genes", "eligible_sets",
+                "eligible_gene_memberships", "eligible_gene_union",
+            )
+        }
+        if magma_observed != magma_expected:
+            raise ValueError("FUMA MAGMA gene-set family differs from its release pin")
+    except (OSError, UnicodeError, ValueError, KeyError, gzip.BadGzipFile, zipfile.BadZipFile) as exc:
+        return False, f"public pathway source bundle is invalid: {exc}", observed
+    observed.update({
+        "identifier_mapping": mapping_observed,
+        "REACTOME": reactome_observed,
+        "GO": go_observed,
+        "MSIGDB": msigdb_observed,
+        "MAGMA_GENE_SETS": magma_observed,
+    })
+    return True, "", observed
+
+
+def validate_causal_runtime_bundle(
+    root: Path, policy: dict[str, object],
+) -> tuple[bool, str, dict[str, object]]:
+    spec = policy["causal_inference"]
+    manifest_path = root / spec["component_manifest"]
+    if not manifest_path.is_file() or sha256(manifest_path) != spec["component_manifest_sha256"]:
+        return False, "causal runtime manifest is absent or differs from the policy pin", {}
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return False, f"causal runtime manifest is invalid: {exc}", {}
+    observed: dict[str, object] = {"manifest_sha256": sha256(manifest_path), "components": {}}
+    if manifest.get("schema_version") != "sleep-atlas-causal-runtime.1":
+        return False, "causal runtime manifest has an unexpected schema version", observed
+
+    expected_components = {
+        "TWOSAMPLEMR_SOURCE", "MRPRESSO_SOURCE", "CAUSE_SOURCE", "LHCMR_SOURCE",
+        "PLINK_1_9_STABLE_MAC_ARCHIVE", "PLINK_1_9_STABLE_UNIVERSAL_BINARY",
+    }
+    components: dict[str, Path] = {}
+    rows = manifest.get("components", [])
+    if not isinstance(rows, list) or {row.get("component_id") for row in rows} != expected_components:
+        return False, "causal runtime component family differs from the exact six-component pin", observed
+    for component in rows:
+        identity = str(component["component_id"])
+        relative = Path(str(component.get("path", "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe causal runtime component path: {identity}", observed
+        path = root / relative
+        if not path.is_file():
+            return False, f"causal runtime component is absent: {identity}", observed
+        actual_bytes, actual_hash = path.stat().st_size, sha256(path)
+        observed["components"][identity] = {"bytes": actual_bytes, "sha256": actual_hash}
+        if actual_bytes != component.get("bytes") or actual_hash != component.get("sha256"):
+            return False, f"causal runtime component differs from its exact pin: {identity}", observed
+        components[identity] = path
+
+    runtime = manifest.get("runtime", {})
+    manifest_specs = (
+        ("genomicsem_environment_manifest", "genomicsem_environment_manifest_sha256"),
+        ("dependency_source_manifest", "dependency_source_manifest_sha256"),
+        ("installed_package_manifest", "installed_package_manifest_sha256"),
+    )
+    pinned_manifests: dict[str, Path] = {}
+    for path_key, hash_key in manifest_specs:
+        relative = Path(str(runtime.get(path_key, "")))
+        if relative.is_absolute() or ".." in relative.parts:
+            return False, f"unsafe causal runtime manifest path: {path_key}", observed
+        path = root / relative
+        if not path.is_file() or sha256(path) != runtime.get(hash_key):
+            return False, f"causal runtime dependency manifest is absent or differs: {path_key}", observed
+        pinned_manifests[path_key] = path
+
+    try:
+        with pinned_manifests["dependency_source_manifest"].open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            dependency_rows = list(reader)
+            dependency_fields = reader.fieldnames
+        if dependency_fields != ["package", "version", "archive", "bytes", "sha256", "source_url"]:
+            raise ValueError("dependency source table has an unexpected schema")
+        if len(dependency_rows) != runtime.get("dependency_source_count"):
+            raise ValueError("dependency source count differs from the runtime pin")
+        if len({row["package"] for row in dependency_rows}) != len(dependency_rows):
+            raise ValueError("dependency source table contains duplicate packages")
+        for row in dependency_rows:
+            relative = Path(row["archive"])
+            if relative.is_absolute() or ".." in relative.parts:
+                raise ValueError(f"unsafe dependency archive path: {row['package']}")
+            archive = root / relative
+            if (
+                not row["bytes"].isdigit() or not SHA256.fullmatch(row["sha256"])
+                or not archive.is_file() or archive.stat().st_size != int(row["bytes"])
+                or sha256(archive) != row["sha256"]
+            ):
+                raise ValueError(f"dependency archive differs from its exact pin: {row['package']}")
+
+        with pinned_manifests["installed_package_manifest"].open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            installed_rows = list(reader)
+            installed_fields = reader.fieldnames
+        if installed_fields != ["package", "version", "library"]:
+            raise ValueError("installed-package table has an unexpected schema")
+        if len(installed_rows) != runtime.get("installed_dependency_closure_count"):
+            raise ValueError("installed dependency closure count differs from the runtime pin")
+        if (
+            len({row["package"] for row in installed_rows}) != len(installed_rows)
+            or any(row["library"] not in {"causal", "genomicsem"} for row in installed_rows)
+        ):
+            raise ValueError("installed-package table has duplicate packages or unknown libraries")
+    except (OSError, UnicodeError, ValueError, KeyError) as exc:
+        return False, f"causal dependency lock is invalid: {exc}", observed
+
+    ld_reference = manifest.get("ld_reference", {})
+    reference_manifest = root / str(ld_reference.get("source_manifest", ""))
+    reference_archive = root / str(ld_reference.get("archive_path", ""))
+    instrument_universe = root / str(ld_reference.get("instrument_universe_path", ""))
+    if (
+        not reference_manifest.is_file()
+        or sha256(reference_manifest) != ld_reference.get("source_manifest_sha256")
+        or not reference_archive.is_file()
+        or reference_archive.stat().st_size != ld_reference.get("archive_bytes")
+        or sha256(reference_archive) != ld_reference.get("archive_sha256")
+        or not instrument_universe.is_file()
+        or instrument_universe.stat().st_size != ld_reference.get("instrument_universe_bytes")
+        or sha256(instrument_universe) != ld_reference.get("instrument_universe_sha256")
+        or ld_reference.get("sample_count") != 503
+        or ld_reference.get("bed_record_bytes") != 126
+        or not ld_reference.get("bed_variant_major")
+    ):
+        return False, "causal LD reference differs from its checksum-pinned EUR GRCh37 source", observed
+    try:
+        with instrument_universe.open(encoding="ascii", newline="") as handle:
+            if handle.readline().rstrip("\n") != "SNP\tA1\tA2":
+                return False, "causal HapMap3 instrument universe has an unexpected header", observed
+            instrument_rows = sum(1 for _ in handle)
+        if instrument_rows + 1 != ld_reference.get("instrument_universe_rows_including_header"):
+            return False, "causal HapMap3 instrument-universe row count differs from its pin", observed
+    except (OSError, UnicodeError) as exc:
+        return False, f"causal HapMap3 instrument universe is unreadable: {exc}", observed
+
+    plink = subprocess.run(
+        [components["PLINK_1_9_STABLE_UNIVERSAL_BINARY"], "--version"],
+        capture_output=True, text=True, check=False,
+    )
+    plink_version = (plink.stdout + plink.stderr).strip()
+    if plink.returncode or plink_version != "PLINK v1.9.0-b.7.11 64-bit (19 Aug 2025)":
+        return False, "causal PLINK binary reports an unexpected version", observed
+
+    rscript = root / str(runtime.get("rscript_path", ""))
+    causal_library = root / str(runtime.get("causal_library", ""))
+    if not rscript.is_file() or not causal_library.is_dir():
+        return False, "causal R executable or isolated library is absent", observed
+    r_code = r'''
+args <- commandArgs(trailingOnly = TRUE)
+root <- normalizePath(args[[1L]])
+.libPaths(c(normalizePath(file.path(root, ".mr-env/library")), .libPaths()))
+targets <- c("TwoSampleMR", "MRPRESSO", "cause", "lhcMR")
+db <- installed.packages()
+if (any(!targets %in% rownames(db))) quit(status = 2L)
+deps <- tools::package_dependencies(targets, db = db, recursive = TRUE)
+packages <- sort(unique(c(names(deps), unlist(deps))))
+cat(paste(R.version$major, R.version$minor, R.version$arch, sep = "\t"), "\n", sep = "")
+for (package in packages) {
+  library_name <- if (endsWith(normalizePath(db[package, "LibPath"]), "/.mr-env/library")) "causal" else "genomicsem"
+  cat(paste(package, db[package, "Version"], library_name, sep = "\t"), "\n", sep = "")
+}
+stopifnot(
+  is.function(getExportedValue("TwoSampleMR", "harmonise_data")),
+  is.function(getExportedValue("MRPRESSO", "mr_presso")),
+  is.function(getExportedValue("cause", "cause")),
+  is.function(getExportedValue("lhcMR", "calculate_SP"))
+)
+'''
+    runtime_check = subprocess.run(
+        [rscript, "--vanilla", "-e", r_code, str(root)],
+        capture_output=True, text=True, check=False, timeout=60,
+    )
+    if runtime_check.returncode:
+        return False, "causal R dependency closure failed to load or expose required functions", observed
+    lines = runtime_check.stdout.splitlines()
+    if not lines or lines[0].split("\t") != ["4", "3.3", "aarch64"]:
+        return False, "causal R version or architecture differs from its pin", observed
+    installed_expected = [(row["package"], row["version"], row["library"]) for row in installed_rows]
+    installed_observed = [tuple(line.split("\t")) for line in lines[1:] if line]
+    if installed_observed != installed_expected:
+        return False, "causal installed dependency closure differs from its exact package/version/library pin", observed
+
+    observed.update({
+        "dependency_source_count": len(dependency_rows),
+        "installed_dependency_closure_count": len(installed_observed),
+        "r_version": "4.3.3", "r_architecture": "aarch64",
+        "plink_version": plink_version,
+        "ld_reference_archive_sha256": sha256(reference_archive),
+        "instrument_universe_sha256": sha256(instrument_universe),
+        "instrument_universe_rows": instrument_rows,
+    })
+    return True, "", observed
+
+
+def validate_policy_alignment(policy: dict[str, object], downstream: dict[str, object]) -> None:
+    pairs = (
+        (policy["regulatory_mapping"]["required_layers"], downstream["regulatory_mapping"]["required_layers"]),
+        (policy["regulatory_mapping"]["required_context_domains"], downstream["regulatory_mapping"]["required_context_domains"]),
+        (policy["cell_types"]["required_strategies"], downstream["cell_types"]["required_strategies"]),
+        (policy["cell_types"]["required_domains"], downstream["cell_types"]["required_domains"]),
+        (policy["pathways"]["required_resources"], downstream["pathways"]["required_resources"]),
+        (policy["causal_inference"]["directions"], downstream["causal_inference"]["directions"]),
+        (policy["causal_inference"]["methods"], downstream["causal_inference"]["methods"]),
+        (policy["robustness"]["required_families"], downstream["robustness"]["required_families"]),
+    )
+    if any(left != right for left, right in pairs):
+        fail("interpretation and downstream policies define different locked method families")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", default=".")
+    parser.add_argument("--policy", default="config/interpretation_analysis_policy.json")
+    parser.add_argument("--downstream-policy", default="config/downstream_analysis_policy.json")
+    parser.add_argument("--readiness-out", default="results/tables/interpretation_source_readiness.tsv")
+    parser.add_argument("--report-out", default="results/tables/interpretation_preflight.json")
+    parser.add_argument("--report-only", action="store_true")
+    parser.add_argument("--quiet", action="store_true")
+    args = parser.parse_args()
+    root = Path(args.root).resolve()
+    policy_path = root / args.policy
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    downstream_path = root / args.downstream_policy
+    downstream = json.loads(downstream_path.read_text(encoding="utf-8"))
+    validate_policy_alignment(policy, downstream)
+
+    panel_fields, panel = read_tsv(root / "config/analysis_panel.tsv")
+    del panel_fields
+    traits = [row["trait_id"] for row in panel]
+    sleep_count = sum(row["domain"] == "sleep" for row in panel)
+    if (
+        len(panel) != policy["expected_traits"] or len(set(traits)) != len(traits)
+        or sleep_count != policy["expected_sleep_traits"]
+        or len(panel) - sleep_count != policy["expected_non_sleep_traits"]
+    ):
+        fail("interpretation workflow requires the exact locked 45/12/33 panel")
+
+    registry_path = root / policy["source_registry"]
+    references_path = root / policy["method_references"]
+    reference_fields, references = read_tsv(references_path)
+    if reference_fields != ["reference_id", "analysis_layer", "title", "doi", "pmid", "url", "role"] or not references:
+        fail("interpretation method-reference registry has an unexpected schema")
+    if any(row["analysis_layer"] not in {"regulatory", "cell_type", "pathway", "causal"} for row in references):
+        fail("interpretation method-reference registry contains an unknown layer")
+    fields, registry = read_tsv(registry_path)
+    if fields != REGISTRY_FIELDS or not registry:
+        fail("interpretation source registry has an unexpected schema")
+    source_ids = [row["source_id"] for row in registry]
+    if len(source_ids) != len(set(source_ids)):
+        fail("interpretation source registry contains duplicate source IDs")
+    if {row["analysis_family"] for row in registry} != FAMILIES:
+        fail("interpretation source registry does not cover the exact four analysis families")
+
+    regulatory = [row for row in registry if row["analysis_family"] == "regulatory"]
+    cells = [row for row in registry if row["analysis_family"] == "cell_type"]
+    pathways = [row for row in registry if row["analysis_family"] == "pathway"]
+    causal = [row for row in registry if row["analysis_family"] == "causal"]
+    required_domains = set(policy["regulatory_mapping"]["required_context_domains"])
+    if {row["layer_or_resource"] for row in regulatory} != set(policy["regulatory_mapping"]["required_layers"]):
+        fail("source registry does not cover each locked regulatory layer exactly")
+    if any(not required_domains.issubset(split_domains(row["coverage_domains"])) for row in regulatory):
+        fail("a regulatory source omits a locked context domain")
+    if {row["method"] for row in cells} != set(policy["cell_types"]["required_strategies"]):
+        fail("source registry does not cover each locked cell-type strategy exactly")
+    if any(not set(policy["cell_types"]["required_domains"]).issubset(split_domains(row["coverage_domains"])) for row in cells):
+        fail("a cell-type source omits a locked biological domain")
+    if {row["layer_or_resource"] for row in pathways} != set(policy["pathways"]["required_resources"]):
+        fail("source registry does not cover each locked pathway resource exactly")
+    if {row["method"] for row in causal} != set(policy["causal_inference"]["methods"]):
+        fail("source registry does not cover each locked causal estimator family exactly")
+
+    readiness: list[dict[str, object]] = []
+    screen_ready, screen_blocker, screen_validation = validate_screen_bundle(root, policy)
+    screen_source_ids = set(policy["screen_registry_v4"]["source_ids"])
+    hocomoco_ready, hocomoco_blocker, hocomoco_validation = validate_hocomoco_bundle(root, policy)
+    hocomoco_source_id = policy["hocomoco_v14"]["source_id"]
+    abc_ready, abc_blocker, abc_validation = validate_abc_bundle(root, policy)
+    abc_source_id = policy["abc_2021"]["source_id"]
+    pchic_ready, pchic_blocker, pchic_validation = validate_pchic_bundle(root, policy)
+    pchic_source_id = policy["pchic_2016"]["source_id"]
+    fuma_ready, fuma_blocker, fuma_validation = validate_fuma_bundle(root, policy)
+    fuma_source_id = policy["fuma_scrna"]["source_id"]
+    catlas_ready, catlas_blocker, catlas_validation = validate_catlas_bundle(root, policy)
+    catlas_source_id = policy["catlas_adult_v4"]["source_id"]
+    ldsc_seg_ready, ldsc_seg_blocker, ldsc_seg_validation = validate_ldsc_seg_gtex_bundle(root, policy)
+    ldsc_seg_source_id = policy["ldsc_seg_gtex"]["source_id"]
+    pathway_ready, pathway_blocker, pathway_validation = validate_public_pathway_bundle(root, policy)
+    public_pathway_source_ids = set(policy["public_pathway_sources"]["source_ids"])
+    causal_ready, causal_blocker, causal_validation = validate_causal_runtime_bundle(root, policy)
+    causal_source_ids = {row["source_id"] for row in causal}
+    allowed_source_status = {
+        "SOURCE_VERIFIED", "CURATION_REQUIRED", "DERIVED_UPSTREAM",
+        "DERIVED_WITHIN_WORKFLOW",
+    }
+    for row in registry:
+        identity = row["source_id"]
+        if row["source_status"] not in allowed_source_status:
+            fail(f"unknown source status for {identity}")
+        relative = Path(row["local_path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            fail(f"unsafe source path for {identity}")
+        path = root / relative
+        observed_bytes = path.stat().st_size if path.is_file() else 0
+        observed_hash = sha256(path) if path.is_file() else "NA"
+        ready = False
+        blocker = ""
+        if row["source_status"] == "SOURCE_VERIFIED":
+            if not row["expected_bytes"].isdigit() or not SHA256.fullmatch(row["expected_sha256"]):
+                fail(f"verified source lacks an exact byte/SHA256 pin: {identity}")
+            ready = (
+                path.is_file() and observed_bytes == int(row["expected_bytes"])
+                and observed_hash == row["expected_sha256"]
+            )
+            if not ready:
+                blocker = "local source is absent or differs from exact bytes/SHA256"
+            elif identity in screen_source_ids and not screen_ready:
+                ready = False
+                blocker = screen_blocker
+            elif identity == hocomoco_source_id and not hocomoco_ready:
+                ready = False
+                blocker = hocomoco_blocker
+            elif identity == abc_source_id and not abc_ready:
+                ready = False
+                blocker = abc_blocker
+            elif identity == pchic_source_id and not pchic_ready:
+                ready = False
+                blocker = pchic_blocker
+            elif identity == fuma_source_id and not fuma_ready:
+                ready = False
+                blocker = fuma_blocker
+            elif identity == catlas_source_id and not catlas_ready:
+                ready = False
+                blocker = catlas_blocker
+            elif identity == ldsc_seg_source_id and not ldsc_seg_ready:
+                ready = False
+                blocker = ldsc_seg_blocker
+            elif identity in public_pathway_source_ids and not pathway_ready:
+                ready = False
+                blocker = pathway_blocker
+            elif identity in causal_source_ids and not causal_ready:
+                ready = False
+                blocker = causal_blocker
+        elif row["source_status"] == "DERIVED_UPSTREAM":
+            ready = path.is_file() and observed_bytes > 0
+            if not ready:
+                blocker = "required upstream atlas artifact is not complete"
+        elif row["source_status"] == "DERIVED_WITHIN_WORKFLOW":
+            ready = True
+        else:
+            blocker = "source release, exact bytes, and SHA256 require pre-result curation"
+        readiness.append({
+            "source_id": identity, "analysis_family": row["analysis_family"],
+            "method": row["method"], "layer_or_resource": row["layer_or_resource"],
+            "coverage_domains": row["coverage_domains"], "exact_release": row["exact_release"],
+            "local_path": row["local_path"], "observed_bytes": observed_bytes,
+            "observed_sha256": observed_hash, "readiness_status": "READY" if ready else "BLOCKED",
+            "blocker": blocker,
+        })
+
+    upstream_paths = [
+        "results/atlas/traits.tsv", "results/atlas/trait_pairs.tsv", "results/atlas/loci.tsv",
+        "results/atlas/variants.tsv", "results/atlas/genes.tsv",
+        "results/tables/molecular_locus_coverage.tsv",
+    ]
+    upstream = {
+        relative: {
+            "ready": (root / relative).is_file() and (root / relative).stat().st_size > 0,
+            "bytes": (root / relative).stat().st_size if (root / relative).is_file() else 0,
+            "sha256": sha256(root / relative) if (root / relative).is_file() and (root / relative).stat().st_size > 0 else "ABSENT",
+        }
+        for relative in upstream_paths
+    }
+    sources_ready = all(row["readiness_status"] == "READY" for row in readiness)
+    upstream_ready = all(value["ready"] for value in upstream.values())
+    report = {
+        "schema_version": policy["schema_version"], "analysis_id": policy["analysis_id"],
+        "policy_sha256": sha256(policy_path), "downstream_policy_sha256": sha256(downstream_path),
+        "source_registry_sha256": sha256(registry_path),
+        "method_references_sha256": sha256(references_path), "code_ready": True,
+        "screen_source_bundle": screen_validation,
+        "hocomoco_source_bundle": hocomoco_validation,
+        "abc_source_bundle": abc_validation,
+        "pchic_source_bundle": pchic_validation,
+        "fuma_scrna_source_bundle": fuma_validation,
+        "catlas_adult_source_bundle": catlas_validation,
+        "ldsc_seg_gtex_source_bundle": ldsc_seg_validation,
+        "public_pathway_source_bundle": pathway_validation,
+        "causal_runtime_bundle": causal_validation,
+        "sources_ready": sources_ready, "upstream_ready": upstream_ready,
+        "production_ready": sources_ready and upstream_ready,
+        "ready_source_count": sum(row["readiness_status"] == "READY" for row in readiness),
+        "source_count": len(readiness), "upstream": upstream,
+        "script_sha256": downstream_contract.script_hashes(root, "interpretation"),
+    }
+    readiness_path = root / args.readiness_out
+    atomic_tsv(readiness_path, READINESS_FIELDS, readiness)
+    report["readiness_path"] = args.readiness_out
+    report["readiness_sha256"] = sha256(readiness_path)
+    atomic_json(root / args.report_out, report)
+    if not args.quiet:
+        print(
+            "INTERPRETATION_PREFLIGHT_"
+            + ("READY" if report["production_ready"] else "BLOCKED")
+            + f" sources={report['ready_source_count']}/{report['source_count']} "
+            + f"upstream={sum(value['ready'] for value in upstream.values())}/{len(upstream)}"
+        )
+        for row in readiness:
+            if row["readiness_status"] != "READY":
+                print(f"BLOCKED {row['source_id']}: {row['blocker']}")
+    return 0 if report["production_ready"] or args.report_only else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

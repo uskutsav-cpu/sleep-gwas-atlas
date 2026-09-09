@@ -1,0 +1,30 @@
+{
+  "candidate_pool_rows": 242,
+  "candidate_pool_sha256": "7fb8712fee484827453152d12726a701977f0fb419d896ac89b25b3aa3ea482d",
+  "exclusion_audit_sha256": "43d8bcef80fd41dbf3f9f0b7b6cf60566e9f30a04fd444b8f5278f5c518e8ede",
+  "filters": {
+    "exclusions": [
+      "direct sleep phenotypes and close core phenotype representations",
+      "hospital administrative/process phenotypes",
+      "family-history proxies",
+      "negative composite definitions",
+      "duplicate pharmacologic-class rows when a named-drug row is available"
+    ],
+    "sample_size_and_case_control_minima": "inherited_from_01_build_panukbb_universe.py",
+    "source_LDSC_intercept_maximum": 1.2,
+    "source_PanUKBB_h2_z_minimum": 4.0
+  },
+  "input_sha256": "a49db48132fea42945e000840023b18f7acf1cfcc9f6ca9bcca94fd0109e4462",
+  "schema_version": "1.0.0",
+  "selection_timing": "before_any_extension_genetic_correlation",
+  "source_rows": 452,
+  "status_counts": {
+    "PASS": 242,
+    "administrative_process_phenotype": 12,
+    "core_or_sleep_overlap": 19,
+    "duplicate_pharmacologic_class_row": 14,
+    "family_history_proxy": 13,
+    "negative_composite_definition": 14,
+    "source_ldsc_intercept_above_1.2": 138
+  }
+}

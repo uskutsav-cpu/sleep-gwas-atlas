@@ -1,0 +1,70 @@
+name: Brain6 extension validation
+on:
+  push:
+    paths:
+      - 'extensions/brain6/**'
+      - '.github/workflows/brain6-ci.yml'
+  pull_request:
+    paths:
+      - 'extensions/brain6/**'
+      - '.github/workflows/brain6-ci.yml'
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    defaults:
+      run:
+        working-directory: extensions/brain6
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '${{ matrix.python }}'
+      - run: python -m pip install -e '.[test]'
+      - run: python -m pytest -q
+      - run: python -m compileall -q brain6 scripts
+      - run: bash -n scripts/run_brain6.sh
+      - run: python -m brain6 demo --out work/SYNTHETIC-ci
+  r-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - name: Parse native adapter syntax, without claiming statistical execution
+        working-directory: extensions/brain6
+        run: Rscript -e 'for (f in list.files("scripts", pattern="[.]R$", full.names=TRUE)) { parse(file=f); cat("Parsed:", f, "\n") }'
+
+  native-cran-plink-smoke:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extensions/brain6
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+      - name: Install native smoke-test dependencies, not production versions
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plink1.9
+          Rscript -e 'install.packages(c("jsonlite","data.table","R.utils","susieR","coloc"), repos="https://cloud.r-project.org")'
+          python -m pip install -e '.[test]'
+      - name: Actual native smoke checks on artificial data
+        run: |
+          Rscript -e 'stopifnot(all(vapply(c("jsonlite","data.table","susieR","coloc"), requireNamespace, logical(1), quietly=TRUE)))'
+          plink1.9 --version
+          python -m pytest -q tests/test_native_runtime.py -k 'not twosamplemr' --junitxml=native-smoke.xml
+      - name: Record versions used for smoke tests
+        if: always()
+        run: Rscript -e 'sessionInfo(); for(p in c("susieR","coloc","data.table","jsonlite")) if(requireNamespace(p,quietly=TRUE)) cat(p,as.character(packageVersion(p)),"\n")' > native-smoke-environment.txt

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "defined_before_extension_h2_or_rg": true,
+  "panel_membership_changed": false,
+  "statistical_thresholds_changed": false,
+  "purpose": "Permit checksum-verified one-pass processing when a full local mirror cannot fit, while retaining immutable full-resolution remote objects for locus follow-up.",
+  "source_requirements": {
+    "official_https_only": true,
+    "s3_version_id_required": true,
+    "manifest_checksum_required": true,
+    "compressed_byte_count_required": true,
+    "entire_compressed_object_must_be_consumed": true,
+    "checksum_must_pass_before_output_promotion": true
+  },
+  "local_retention": {
+    "retain": [
+      "remote object snapshot with version-pinned URL",
+      "official expected checksum and compressed byte count",
+      "observed MD5 and SHA-256 streaming receipt",
+      "harmonization QC ledger",
+      "HapMap3 LDSC input and munging log"
+    ],
+    "temporary": [
+      "HapMap3 harmonized pre-munge file"
+    ],
+    "not_locally_mirrored": [
+      "complete per-phenotype bgzip source"
+    ]
+  },
+  "full_resolution_followup": {
+    "retention_mode": "official S3 versionId-pinned bgzip object plus versionId-pinned tabix index",
+    "locus_retrieval": "retrieve the complete dense locus slice from the exact locked source only after a locus is selected by the frozen follow-up protocol",
+    "failure_policy": "if the exact remote version or checksum cannot be recovered, dense follow-up is BLOCKED_SOURCE_UNAVAILABLE; never substitute another release"
+  },
+  "scientific_boundaries": [
+    "Streaming changes storage mechanics only; the 100 traits and their order remain locked.",
+    "The source, allele, ancestry, build, QC, h2, rg, and FDR contracts are unchanged.",
+    "HapMap3 output is sufficient only for global LDSC; it is never reused as dense locus evidence.",
+    "No extension result may be inspected until its source checksum and harmonization receipt pass."
+  ]
+}
