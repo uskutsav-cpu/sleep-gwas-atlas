@@ -39,7 +39,7 @@ def adapter(tmp_path,method,cfg,job_name):
 def test_real_r_parse_all_adapters():
     r=native_r()
     code='for (f in commandArgs(TRUE)) { parse(file=f); cat("PARSED",basename(f),"\\n") }'
-    result=subprocess.run([r,'-e',code,*map(str,(ROOT/'brain6/resources').glob('*.R'))],capture_output=True,text=True)
+    result=subprocess.run([r,'-e',code,*map(str,sorted(set((ROOT/'brain6/resources').glob('*.R'))|set((ROOT/'scripts').glob('*.R'))))],capture_output=True,text=True)
     assert result.returncode==0,result.stdout+result.stderr
 
 

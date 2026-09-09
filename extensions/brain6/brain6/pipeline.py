@@ -144,6 +144,21 @@ def run_pipeline(runtime_path, *, only=None, allow_synthetic=False):
         elif kind=="campaign_audit":
             from .campaign import audit
             audit(p["manifest"],root,task["id"])
+        elif kind in {"joint_placo_family","local_rg_family","pathway_family","block_comparison","robustness_family","cell_family"}:
+            if kind=="joint_placo_family":
+                from .family24 import joint_placo as fn
+            elif kind=="local_rg_family":
+                from .family24 import local_family as fn
+            elif kind=="pathway_family":
+                from .pathway24 import run as fn
+            elif kind=="block_comparison":
+                from .compare24 import compare as fn
+            elif kind=="cell_family":
+                from .cell24 import run as fn
+            else:
+                from .robustness24 import summarize as fn
+            require(read_json(p["manifest"]).get("synthetic",False)==synthetic,"Synthetic manifest mismatch")
+            fn(p["manifest"],root,task["id"])
         elif kind=="native":
             from .executor import run_job
             jobdir=root/"job_specs";jobdir.mkdir(exist_ok=True)

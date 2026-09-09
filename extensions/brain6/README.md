@@ -1,4 +1,4 @@
-# Brain6 v0.2: six-disorder deep-analysis extension
+# Brain6 v0.3: measured-atlas review and computational completion tools
 
 An additive, executable extension for `uskutsav-cpu/sleep-gwas-atlas`.
 
@@ -6,7 +6,31 @@ An additive, executable extension for `uskutsav-cpu/sleep-gwas-atlas`.
 
 **Delivery status:** Python components and synthetic software integration have been executed and tested. Native R, PLINK, LDSC, MATLAB and Snakemake production analyses have **not** been executed in the delivery environment. This package is not a finished empirical study, a verified live-repository merge, or a publication-ready scientific release. See `docs/IMPLEMENTATION_STATUS.md` and the delivery validation directory.
 
-## New in v0.2
+## New in v0.3
+
+**305 extension tests passed; four native-runtime tests skipped in this delivery environment.**
+This release additionally audited the actual supplied September 4 global matrix,
+176 LDSC-format shards (9,089,240 rows), original replication ledger and existing
+S/V covariance/model exports. These are archival reanalyses, NOT newly completed
+whole-genome or cell-mechanism experiments. Dense GWAS, reference LD and QTL
+bytes were not supplied by the archived symlinks. No new empirical native
+analyses were performed and the 24-step project is not complete.
+
+Read **[V03_RUNBOOK.md](docs/V03_RUNBOOK.md)** first. It includes the exact
+non-destructive installer/host-audit commands, source-scale corrections,
+full-family collectors, cell/pathway/comparison tests, and fail-closed 24-step
+coverage/release rules. **The archived Alzheimer's subset has no original-FDR
+significant sleep pair; do not fabricate one to fill a six-pair grid.**
+
+New operations include `host-audit24`, `source-inventory`, `shard-audit`,
+`doctor24`, `joint-placo-family`, `local-family`, `cell-family24`, `pathways24`,
+`compare24`, `robustness24`, `provenance24`, `validate24`, `plan24`, `audit24`,
+and `seal24`. Existing native adapters are retained with extra input-scale and
+artifact-integrity checks. Safe upgrades recognize exact v0.2 payload bytes,
+not arbitrary local edits. Cached v0.2 computations are not silently revalidated
+under the changed v0.3 code fingerprint.
+
+## Previously added in v0.2 (historical validation counts)
 
 This release builds on the recovered v0.1 package, rather than replacing the live atlas. **206 Python tests pass and four real-native smoke tests skip because their runtimes are missing in this delivery environment.** These are extension tests, not a combined test of your inaccessible current repository.
 
