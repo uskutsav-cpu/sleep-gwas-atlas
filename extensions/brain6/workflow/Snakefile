@@ -1,0 +1,40 @@
+# Run from extensions/brain6. Jobs use the same synchronous transaction runner.
+# Requires explicit runtime file; does not alter the core repository Snakefile.
+import json
+import sys
+from pathlib import Path
+
+runtime_path = config.get("runtime")
+if not runtime_path:
+    raise ValueError("Supply --config runtime=/absolute/path/to/runtime.json")
+runtime_path = str(Path(runtime_path).resolve())
+from brain6.io import read_json
+from brain6.pipeline import sorted_tasks
+runtime = read_json(runtime_path)
+sorted_tasks(runtime["tasks"])
+if not runtime.get("reviewed") or not runtime.get("tasks"):
+    raise ValueError("Reviewed, nonempty task bindings are required")
+root = str(Path(runtime["output_root"]).resolve())
+tasks = {t["id"]:t for t in runtime["tasks"]}
+synthetic_flag = "--synthetic" if runtime.get("synthetic") else ""
+
+rule all:
+    input:
+        expand(root + "/{task}/receipt.json", task=list(tasks))
+
+rule task:
+    input:
+        runtime=runtime_path,
+        dependencies=lambda wc: [root + "/" + dep + "/receipt.json" for dep in tasks[wc.task].get("depends_on",[])]
+    output:
+        receipt=root + "/{task}/receipt.json"
+    threads: 1
+    resources:
+        mem_mb=lambda wc: tasks[wc.task].get("mem_mb", 4096),
+        production_slots=1
+    params:
+        task=lambda wc:wc.task,
+        python=sys.executable,
+        synthetic=synthetic_flag
+    shell:
+        "{params.python:q} -m brain6 pipeline --runtime {input.runtime:q} --only {params.task:q} {params.synthetic}"

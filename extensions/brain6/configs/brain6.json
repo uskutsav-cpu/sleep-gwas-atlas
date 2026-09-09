@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment": "brain6-v1",
+  "synthetic": false,
+  "brain_traits": [
+    "adhd",
+    "mdd",
+    "scz",
+    "bipolar",
+    "alz",
+    "parkinson"
+  ],
+  "sleep_traits": [
+    "insomnia",
+    "sleepdur",
+    "shortsleep",
+    "longsleep",
+    "chronotype",
+    "sleepiness",
+    "napping",
+    "snoring",
+    "sleep_apnea",
+    "sleep_efficiency",
+    "accel_sleep_duration",
+    "sleep_timing"
+  ],
+  "expected_matrix_rows": 396,
+  "matrix_columns": {
+    "sleep_trait": "sleep_trait",
+    "disease_trait": "disease_trait",
+    "rg": "rg",
+    "se": "se",
+    "p": "p",
+    "fdr": "fdr"
+  },
+  "matrix_qc_column": "analysis_status",
+  "primary_qc_values": [
+    "PRIMARY"
+  ],
+  "global_fdr_max": 0.05,
+  "native_policy": {
+    "pleiotropy": "PLACO_PLUS",
+    "local_rg": "UNRESOLVED_REQUIRES_REVIEW",
+    "preserve_track_b": true
+  },
+  "note": "DRAFT configuration. Bind the actual QC column/status labels; no new empirical results are included."
+}
