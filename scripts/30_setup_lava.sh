@@ -116,5 +116,6 @@ fi
   stopifnot(as.character(packageVersion("cpp11")) == "0.5.2")
   stopifnot(as.character(packageVersion("keep")) == "1.0")
 '
+.r-env/bin/Rscript scripts/133_validate_track_b_lava_runtime.R
 echo "LAVA 0.1.5 and the 2,495-locus GRCh37 file are ready."
 echo "The 15 GiB UK Biobank LD reference is deliberately not downloaded by this setup."

@@ -10,7 +10,11 @@ import hashlib
 import io
 import json
 import math
+import os
 import shutil
+import subprocess
+import sys
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -31,6 +35,21 @@ RUNTIME_POLICY = Path("results/track_b/lava_runtime_policy.tsv")
 HANDOFF = Path("results/track_b/LOCAL_ANALYSIS_HANDOFF.md")
 LOCK = Path("results/track_b/local_analysis_input.lock.json")
 REFERENCE_PROVENANCE = Path("ref/lava/ukb_v1.1/reference.provenance.json")
+RAM_BENCHMARK = Path("results/track_b/RAM_BENCHMARK.tsv")
+RAM_BENCHMARK_PROVENANCE = Path("results/track_b/RAM_BENCHMARK.provenance.json")
+CHROMOSOME_INPUT_LOCK = Path("results/track_b/lava_chromosome_inputs.provenance.json")
+LAVA_CONTRACT = Path("scripts/119_track_b_lava_contract.py")
+CHECKPOINT_DIR = Path("results/track_b/checkpoints/lava")
+STAGING_ROOT = Path("results/track_b/staging")
+RESULT_EVIDENCE = [
+    Path("results/track_b/local/lava_results.provenance.json"),
+    Path("results/track_b/local/lava_locus_status.tsv"),
+    Path("results/track_b/local/lava_univariate.tsv"),
+    Path("results/track_b/local/lava_bivariate.tsv"),
+    Path("results/track_b/local/lava_conditional.tsv"),
+    Path("results/track_b/04_lava_local_results.tsv"),
+    Path("results/track_b/05_local_conditional_results.tsv"),
+]
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
@@ -63,11 +82,29 @@ def load_policy() -> dict[str, object]:
         or policy["expected_analysis_traits"] != 8
         or policy["planned_univariate_tests"] != 2495 * 8
         or policy["planned_bivariate_pair_locus_family_max"] != 2495 * 3
+        or policy.get("ram_aware_execution", {}).get("execution_unit") != "WHOLE_PREDECLARED_LAVA_LOCUS"
+        or policy.get("ram_aware_execution", {}).get("maximum_loci_per_process") != 1
+        or policy.get("locus_definition", {}).get("path") != str(LAVA_LOCUS)
+        or policy.get("locus_definition", {}).get("sha256") != "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882"
     ):
         raise SystemExit("ERROR: Track B local policy scope drifted")
     expected = policy["univariate_alpha"] / policy["planned_univariate_tests"]
     if not math.isclose(expected, policy["univariate_p_threshold"], rel_tol=1e-12):
         raise SystemExit("ERROR: Track B local univariate threshold is inconsistent")
+    model_ids: list[str] = []
+    for pair_id in policy["pair_order"]:
+        models = policy["conditional_models"][pair_id]
+        observed_covariates = [
+            covariate for model in models for covariate in model["covariates"]
+        ]
+        if observed_covariates != policy["conditional_covariates"][pair_id]:
+            raise SystemExit(f"ERROR: conditional model/covariate drift for {pair_id}")
+        for model in models:
+            model_ids.append(str(model["conditional_model_id"]))
+            if not model["covariates"] or not str(model["rationale"]).strip():
+                raise SystemExit(f"ERROR: incomplete conditional model for {pair_id}")
+    if len(model_ids) != len(set(model_ids)):
+        raise SystemExit("ERROR: duplicate Track B conditional model ID")
     return policy
 
 
@@ -78,6 +115,21 @@ def validate_locus_file(policy: dict[str, object]) -> None:
         lines = sum(1 for _ in handle)
     if lines != int(policy["expected_loci"]) + 1:
         raise SystemExit(f"ERROR: expected 2,495 LAVA loci, found {lines-1}")
+    if sha256(LAVA_LOCUS) != policy["locus_definition"]["sha256"]:
+        raise SystemExit("ERROR: LAVA locus definition differs from the policy-pinned SHA-256")
+
+
+def refuse_post_result_refreeze() -> None:
+    evidence = [path for path in RESULT_EVIDENCE if path.exists()]
+    if CHECKPOINT_DIR.is_dir():
+        evidence.extend(sorted(CHECKPOINT_DIR.glob("*/discovery/locus_*"))[:1])
+    if STAGING_ROOT.is_dir():
+        evidence.extend(sorted(STAGING_ROOT.glob("lava_*"))[:1])
+    if evidence:
+        raise SystemExit(
+            "ERROR: refusing to refreeze Track B local inputs after checkpoint/staging/result evidence exists: "
+            + ", ".join(str(path) for path in evidence[:3])
+        )
 
 
 def validate_sumstats(path: Path) -> str:
@@ -133,7 +185,7 @@ def pair_rows(policy: dict[str, object]) -> list[dict[str, object]]:
             "discovery_P": row["P"],
             "discovery_FDR": row["FDR"],
             "planned_loci": policy["expected_loci"],
-            "bivariate_family": "BH_FDR_ACROSS_ALL_ACTUALLY_TESTED_PAIR_LOCUS_ROWS_FOR_THREE_FROZEN_PAIRS",
+            "bivariate_family": policy["bivariate_multiple_testing"],
             "pair_replacement": "FORBIDDEN",
         })
     return rows
@@ -171,20 +223,22 @@ def conditional_rows(policy: dict[str, object]) -> list[dict[str, object]]:
     pairs = {row["pair_id"]: row for row in read_tsv(PAIR_MANIFEST)}
     output = []
     for pair_id in policy["pair_order"]:
-        covariates = policy["conditional_covariates"][pair_id]
-        if not covariates:
+        models = policy["conditional_models"][pair_id]
+        if not models:
             output.append({
                 "pair_id": pair_id, "trait1": pairs[pair_id]["sleep_trait"],
-                "trait2": pairs[pair_id]["external_trait"], "covariate": "NONE",
+                "trait2": pairs[pair_id]["external_trait"], "conditional_model_id": "NONE",
+                "covariates": "NONE",
                 "rationale": policy["conditional_covariate_rationale"][pair_id],
                 "selection_timing": "BEFORE_LOCAL_RESULT_ACCESS", "execution_status": "NOT_PLANNED_FOR_CONTROL",
             })
             continue
-        for covariate in covariates:
+        for model in models:
             output.append({
                 "pair_id": pair_id, "trait1": pairs[pair_id]["sleep_trait"],
-                "trait2": pairs[pair_id]["external_trait"], "covariate": covariate,
-                "rationale": policy["conditional_covariate_rationale"][pair_id],
+                "trait2": pairs[pair_id]["external_trait"],
+                "conditional_model_id": model["conditional_model_id"],
+                "covariates": ";".join(model["covariates"]), "rationale": model["rationale"],
                 "selection_timing": "BEFORE_LOCAL_RESULT_ACCESS", "execution_status": "PENDING_LAVA_REFERENCE",
             })
     return output
@@ -209,6 +263,7 @@ def robustness_rows() -> list[dict[str, object]]:
 
 def runtime_rows(policy: dict[str, object]) -> list[dict[str, object]]:
     runtime = policy["runtime"]
+    ram = policy["ram_aware_execution"]
     values = {
         "analysis_id": policy["analysis_id"], "lava_version": policy["lava_version"],
         "reference_prefix": policy["reference_prefix"], "expected_loci": policy["expected_loci"],
@@ -221,31 +276,135 @@ def runtime_rows(policy: dict[str, object]) -> list[dict[str, object]]:
         "maximum_univariate_untested_fraction": policy["maximum_univariate_untested_fraction"],
         "maximum_bivariate_failure_fraction": policy["maximum_bivariate_failure_fraction"],
         "maximum_conditional_failure_fraction": policy["maximum_conditional_failure_fraction"],
+        "ram_execution_unit": ram["execution_unit"],
+        "maximum_loci_per_process": ram["maximum_loci_per_process"],
+        "worker_process_rule": ram["worker_process_rule"],
+        "reference_loading_rule": ram["reference_loading_rule"],
+        "family_correction_rule": ram["family_correction_rule"],
+        "memory_decision_rule": ram["memory_decision_rule"],
+        "memory_safety_reserve_bytes": ram["memory_safety_reserve_bytes"],
+        "memory_admission_rule": ram["memory_admission_rule"],
+        "resume_rule": ram["resume_rule"],
         "random_seed": policy["random_seed"], "min_K": runtime["min_K"],
         "prune_threshold": runtime["prune_threshold"], "max_proportion_K": runtime["max_proportion_K"],
         "max_block_size": runtime["max_block_size"], "cap_estimates": str(runtime["cap_estimates"]).lower(),
         "conditional_max_r2": runtime["conditional_max_r2"],
+        "conditional_attenuation_fraction_partial": policy["interpretation_policy"]["conditional_attenuation_fraction_partial"],
+        "conditional_attenuation_fraction_full": policy["interpretation_policy"]["conditional_attenuation_fraction_full"],
         "conditional_execution_gate": policy["conditional_execution_gate"],
         "conditional_multiple_testing": policy["conditional_multiple_testing"],
     }
     return [{"key": key, "value": value} for key, value in values.items()]
 
 
-def handoff_text(policy: dict[str, object], free_bytes: int) -> str:
+@lru_cache(maxsize=1)
+def current_lava_fingerprint() -> str | None:
+    if not CHROMOSOME_INPUT_LOCK.is_file() or not REFERENCE_PROVENANCE.is_file():
+        return None
+    result = subprocess.run(
+        [sys.executable, str(LAVA_CONTRACT), "--execution-fingerprint"],
+        text=True, capture_output=True, check=False,
+    )
+    value = result.stdout.strip()
+    return value if result.returncode == 0 and len(value) == 64 else None
+
+
+def ram_benchmark_state(
+    physical_memory_bytes: int, safety_reserve_bytes: int,
+) -> tuple[str, float | None, int]:
+    """Return an operational state without inventing an a-priori RAM minimum."""
+    if (
+        not RAM_BENCHMARK.is_file() or RAM_BENCHMARK.stat().st_size == 0
+        or not RAM_BENCHMARK_PROVENANCE.is_file()
+    ):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    try:
+        provenance = json.loads(RAM_BENCHMARK_PROVENANCE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    fingerprint = current_lava_fingerprint()
+    if (
+        provenance.get("schema_version") != 2
+        or fingerprint is None
+        or provenance.get("execution_fingerprint") != fingerprint
+        or provenance.get("benchmark_sha256") != sha256(RAM_BENCHMARK)
+        or provenance.get("memory_safety_reserve_bytes") != safety_reserve_bytes
+    ):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    selected = provenance.get("selected_representatives", {})
+    discovery = selected.get("discovery", {}) if isinstance(selected, dict) else {}
+    conditional = selected.get("conditional", {}) if isinstance(selected, dict) else {}
+    if set(discovery) != {"SMALL", "MEDIAN", "LARGE"}:
+        return "RAM_BENCHMARK_REQUIRED", None, len(discovery)
+    evidence = provenance.get("measured_admission_units", [])
+    attempt_rows = provenance.get("all_lava_attempt_rows", [])
+    if not isinstance(evidence, list) or not isinstance(attempt_rows, list):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    try:
+        exact_peaks = [int(item["peak_rss_bytes"]) for item in evidence]
+        exact_peaks.extend(int(round(float(item["peak_ram_gb"]) * 1024**3)) for item in attempt_rows)
+        peaks = [value / 1024**3 for value in exact_peaks]
+    except (KeyError, TypeError, ValueError):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    if not peaks or any(not math.isfinite(peak) or peak <= 0 for peak in peaks):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    if provenance.get("maximum_measured_admission_peak_rss_bytes") != max(exact_peaks):
+        return "RAM_BENCHMARK_REQUIRED", None, 0
+    if provenance.get("state") == "DISCOVERY_REPRESENTATIVES_COMPLETE_CONDITIONAL_PENDING":
+        return "CONDITIONAL_RAM_BENCHMARK_PENDING", max(peaks), len(attempt_rows)
+    if provenance.get("state") != "ALL_REQUIRED_PHASE_REPRESENTATIVES_COMPLETE":
+        return "RAM_BENCHMARK_REQUIRED", max(peaks), len(attempt_rows)
+    maximum = max(peaks)
+    state = (
+        "MEASURED_SEQUENTIAL_RAM_PASS"
+        if maximum * 1024**3 + safety_reserve_bytes <= physical_memory_bytes
+        else "BLOCKED_BY_MEASURED_PER_LOCUS_RAM"
+    )
+    return state, maximum, len(attempt_rows)
+
+
+def handoff_text(
+    policy: dict[str, object], free_bytes: int, physical_memory_bytes: int,
+    reference_ready: bool,
+) -> str:
+    acquisition_storage_ready = free_bytes >= int(policy["reference_minimum_free_bytes"])
+    safety_reserve = int(policy["ram_aware_execution"]["memory_safety_reserve_bytes"])
+    benchmark_state, measured_peak_gib, measured_loci = ram_benchmark_state(
+        physical_memory_bytes, safety_reserve,
+    )
+    data_status = "READY" if reference_ready else "BLOCKED_BY_DATA"
+    if not reference_ready and not acquisition_storage_ready:
+        compute_status = "BLOCKED_BY_COMPUTE_STORAGE"
+    elif benchmark_state == "BLOCKED_BY_MEASURED_PER_LOCUS_RAM":
+        compute_status = benchmark_state
+    elif benchmark_state == "MEASURED_SEQUENTIAL_RAM_PASS":
+        compute_status = "READY_FOR_SEQUENTIAL_EXECUTION"
+    elif benchmark_state == "CONDITIONAL_RAM_BENCHMARK_PENDING":
+        compute_status = "READY_FOR_SEQUENTIAL_DISCOVERY_CONDITIONAL_BENCHMARK_PENDING"
+    else:
+        compute_status = "READY_FOR_RAM_BENCHMARK"
+    reference_sentence = (
+        "The official LAVA UK Biobank European v1.1 LD payload is present and sealed."
+        if reference_ready else
+        "The official LAVA UK Biobank European v1.1 LD payload is absent."
+    )
     return f"""# Track B local-analysis production handoff
 
-Current status: `BLOCKED_BY_DATA` and `BLOCKED_BY_COMPUTE`.
+Current data status: `{data_status}`. Current compute status: `{compute_status}`.
 
-The three frozen pairs, eight required analysis traits, 2,495 loci, LDSC overlap submatrix, conditional covariates, correction families, and input hashes are prepared and locked. The official LAVA UK Biobank European v1.1 LD payload is absent.
+The three frozen pairs, eight required analysis traits, 2,495 loci, LDSC overlap submatrix, conditional covariates, correction families, and input hashes are prepared and locked. {reference_sentence}
 
 Current free space at preparation: {free_bytes} bytes ({free_bytes/1024**3:.3f} GiB).
 Policy minimum for checksum-ledgered acquisition and extraction: {policy['reference_minimum_free_bytes']} bytes (35 GiB).
+Physical memory at preparation: {physical_memory_bytes} bytes ({physical_memory_bytes/1024**3:.3f} GiB).
+Fingerprint-bound RAM evidence: `{benchmark_state}` ({measured_loci} selected intact phase representatives; maximum observed peak {measured_peak_gib if measured_peak_gib is not None else 'NA'} GiB).
+No assumed monolithic RAM minimum is used for the production decision; admission preserves a {safety_reserve} byte (1 GiB) non-worker reserve.
 
 ## Minimum production environment
 
 - x86_64 Linux recommended
 - R 4.3.x with LAVA 0.1.5
-- at least 16 GiB RAM; 32 GiB recommended for parallel or conditional work
+- enough RAM for the largest measured whole-locus worker; execute one fresh R process per locus
 - at least 35 GiB free for reference acquisition; 60 GiB recommended for outputs/checkpoints
 - the exact repository commit and ignored dense/munged inputs whose hashes are in `local_analysis_input.lock.json`
 
@@ -258,13 +417,16 @@ python3 scripts/113_freeze_track_b_replication_sources.py --verify
 python3 scripts/115_build_track_b_dense_qc.py --verify
 python3 scripts/116_prepare_track_b_local_inputs.py --verify
 bash scripts/32_download_lava_reference.sh --download
-python3 scripts/lava_contract.py --verify-reference --rehash
+python3 scripts/lava_contract.py --verify-reference
+python3 scripts/129_prepare_track_b_lava_chromosome_inputs.py
+python3 scripts/129_prepare_track_b_lava_chromosome_inputs.py --verify
 python3 scripts/119_track_b_lava_contract.py --preflight
-.r-env/bin/Rscript scripts/120_run_track_b_lava.R
+python3 scripts/131_run_track_b_lava_sequential.py --benchmark
+python3 scripts/131_run_track_b_lava_sequential.py --run
 python3 scripts/121_validate_track_b_lava.py
 ```
 
-Do not run the existing 45-trait/396-pair LAVA result family as a substitute for Track B. The dedicated Track B runner consumes `results/track_b/lava_pair_manifest.tsv`, uses all 2,495 loci, runs univariate h2 for all eight predeclared traits, and applies BH FDR across every actually tested locus row for the three frozen pairs. Conditional tests are result-gated and use only the covariates in `local_conditional_manifest.tsv`.
+Do not run the existing 45-trait/396-pair LAVA result family as a substitute for Track B. The dedicated Track B supervisor consumes `results/track_b/lava_pair_manifest.tsv`, uses all 2,495 complete loci, runs each locus in a fresh R process, and applies BH FDR only after collating the full frozen family. Conditional tests run in a second per-locus pass after the discovery-family BH gate and use only the separately frozen BMI-only, sleep-apnea-only, and MDD-only models in `local_conditional_manifest.tsv`.
 
 No local result exists yet. No empty table or synthetic output is presented as science.
 """
@@ -282,6 +444,12 @@ def build() -> dict[Path, str]:
     conditional = conditional_rows(policy)
     robustness = robustness_rows()
     free_bytes = shutil.disk_usage(Path(".")).free
+    physical_memory_bytes = os.sysconf("SC_PHYS_PAGES") * os.sysconf("SC_PAGE_SIZE")
+    reference_ready = REFERENCE_PROVENANCE.is_file()
+    safety_reserve = int(policy["ram_aware_execution"]["memory_safety_reserve_bytes"])
+    benchmark_state, measured_peak_gib, measured_loci = ram_benchmark_state(
+        physical_memory_bytes, safety_reserve,
+    )
     outputs = {
         INPUT_INFO: tsv_text(["phenotype", "cases", "controls", "prevalence", "filename"], info),
         PAIR_INPUT: tsv_text([
@@ -293,11 +461,12 @@ def build() -> dict[Path, str]:
             "phenotype", "filename", "bytes", "sha256", "observed_columns", "validation_status",
         ], provenance),
         CONDITIONAL: tsv_text([
-            "pair_id", "trait1", "trait2", "covariate", "rationale", "selection_timing", "execution_status",
+            "pair_id", "trait1", "trait2", "conditional_model_id", "covariates",
+            "rationale", "selection_timing", "execution_status",
         ], conditional),
         ROBUSTNESS: tsv_text(["method", "status", "reference", "comparison_rule", "allowed_labels"], robustness),
         RUNTIME_POLICY: tsv_text(["key", "value"], runtime_rows(policy)),
-        HANDOFF: handoff_text(policy, free_bytes),
+        HANDOFF: handoff_text(policy, free_bytes, physical_memory_bytes, reference_ready),
     }
     immutable_hashes = {str(path): hashlib.sha256(value.encode()).hexdigest() for path, value in outputs.items() if path != HANDOFF}
     lock = {
@@ -310,13 +479,29 @@ def build() -> dict[Path, str]:
         "locus_file_sha256": sha256(LAVA_LOCUS),
         "input_artifact_sha256": immutable_hashes,
         "overlap_diagnostics": overlap_diagnostics,
-        "reference_status": "READY" if REFERENCE_PROVENANCE.is_file() else "BLOCKED_BY_DATA",
+        "reference_status": "READY" if reference_ready else "BLOCKED_BY_DATA",
         "required_reference_provenance": str(REFERENCE_PROVENANCE),
         "reference_minimum_free_bytes": policy["reference_minimum_free_bytes"],
         "current_compute_snapshot": {
             "free_bytes": free_bytes,
-            "status": "PASS" if free_bytes >= int(policy["reference_minimum_free_bytes"]) else "BLOCKED_BY_COMPUTE",
-            "note": "Operational snapshot excluded from immutable artifact hashes; rerun to refresh after cleanup or handoff.",
+            "physical_memory_bytes": physical_memory_bytes,
+            "ram_decision_rule": policy["ram_aware_execution"]["memory_decision_rule"],
+            "memory_safety_reserve_bytes": safety_reserve,
+            "memory_admission_rule": policy["ram_aware_execution"]["memory_admission_rule"],
+            "benchmark_state": benchmark_state,
+            "measured_discovery_loci": measured_loci,
+            "maximum_observed_peak_ram_gib": measured_peak_gib,
+            "reference_acquisition_storage_gate_applies": not reference_ready,
+            "status": (
+                "BLOCKED_BY_COMPUTE_STORAGE"
+                if not reference_ready and free_bytes < int(policy["reference_minimum_free_bytes"])
+                else benchmark_state
+            ),
+            "note": (
+                "Operational disk/RAM snapshot excluded from immutable artifact hashes; "
+                "the 35 GiB storage gate applies only while the reference must be acquired, "
+                "and no compute-memory blocker is asserted before per-locus measurement."
+            ),
         },
         "result_substitution_policy": "FORBIDDEN_SYNTHETIC_OR_PARTIAL_OUTPUTS_CANNOT_BE_PROMOTED_TO_REAL_LOCAL_RESULTS",
     }
@@ -355,9 +540,14 @@ def main() -> None:
                 raise SystemExit(f"ERROR: Track B local input lock drifted: {key}")
         print("verified Track B local inputs: 3 pairs, 8 traits, 2495 loci")
         return
+    refuse_post_result_refreeze()
     for path, value in expected.items():
         atomic_text(path, value)
-    print("wrote Track B local inputs: 3 pairs, 8 traits, 2495 loci; reference status blocked")
+    reference_status = json.loads(expected[LOCK])["reference_status"]
+    print(
+        "wrote Track B local inputs: 3 pairs, 8 traits, 2495 loci; "
+        f"reference status {reference_status.lower()}"
+    )
 
 
 if __name__ == "__main__":

@@ -14,13 +14,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class TrackBReplicationLDSCTests(unittest.TestCase):
-    def test_preflight_fails_closed_until_real_ingest_exists(self) -> None:
-        result = subprocess.run(
-            ["python3", str(SCRIPT), "--preflight"], cwd=ROOT,
-            check=False, text=True, capture_output=True,
-        )
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("BLOCKED_BY_DATA", result.stdout + result.stderr)
+    def test_preflight_is_state_aware_and_fails_closed_without_ingest(self) -> None:
+        MODULE.preflight()
+        original = MODULE.REPLICATION_INPUT
+        try:
+            MODULE.REPLICATION_INPUT = ROOT / "work/fixtures/definitely_missing_pair_b.sumstats.gz"
+            with self.assertRaisesRegex(SystemExit, "BLOCKED_BY_DATA"):
+                MODULE.preflight()
+        finally:
+            MODULE.REPLICATION_INPUT = original
 
     def test_h2_parser_enforces_prespecified_gate(self) -> None:
         text = """Read summary statistics for 1000000 SNPs.
@@ -53,15 +55,15 @@ p1 p2 rg se z p h2_obs h2_obs_se h2_int h2_int_se gcov_int gcov_int_se
         pair = {"discovery_rg": "0.30"}
         self.assertEqual(
             MODULE.classify(pair, {"rg": 0.2, "rg_p": 0.01}),
-            ("CONCORDANT", "CONCORDANT_NOMINAL_REPLICATION"),
+            ("CONCORDANT", "DIRECTIONAL_REPLICATION"),
         )
         self.assertEqual(
             MODULE.classify(pair, {"rg": -0.2, "rg_p": 0.01}),
-            ("OPPOSITE", "SIGNIFICANT_OPPOSITE_DIRECTION_NO_GO"),
+            ("OPPOSITE", "OPPOSITE_DIRECTION"),
         )
         self.assertEqual(
             MODULE.classify(pair, {"rg": 0.1, "rg_p": 0.2})[1],
-            "NOT_SIGNIFICANT_EXTERNAL_SAMPLE",
+            "UNDERPOWERED",
         )
 
     def test_h2_failure_record_has_no_inferred_rg(self) -> None:
@@ -77,10 +79,10 @@ Intercept: 1.04 (0.01)
             "cross_trait_intercept": "NA", "cross_trait_intercept_se": "NA",
             "rg_input_snps": "NA", "rg_overlap_after_merge": "NA", "rg_valid_alleles": "NA",
             "direction_vs_discovery": "NOT_APPLICABLE",
-            "replication_class": "REPLICATION_H2_QC_FAIL", "claim_limit": "test",
+            "replication_class": "UNDERPOWERED", "claim_limit": "test",
         }
         rendered = MODULE.output_text(record)
-        self.assertIn("REPLICATION_H2_QC_FAIL", rendered)
+        self.assertIn("UNDERPOWERED", rendered)
         self.assertIn("\tNA\tNA\tNA\tNA\t", rendered)
 
 

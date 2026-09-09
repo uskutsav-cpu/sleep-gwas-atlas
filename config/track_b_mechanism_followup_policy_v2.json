@@ -1,0 +1,26 @@
+{
+  "schema_version": "track-b-mechanism-pre-result-readiness.2",
+  "contract_revision": 2,
+  "base_policy_path": "config/track_b_mechanism_followup_policy.json",
+  "base_policy_sha256": "503d34e1cdebac5c1e427c41a71b9c320bde948828ddf18df9767d7ac4e06c7e",
+  "base_implementation_path": "scripts/160_build_track_b_mechanism_readiness.py",
+  "base_implementation_sha256": "7283de7830ed6a9602f32b3ebc9e38768efea97ccbb4b48d543dee4aa9629b27",
+  "supersedes": {
+    "lock_path": "results/track_b/mechanism_followup/PRE_RESULT_READINESS.lock.json",
+    "lock_sha256": "4ab3c004d109fa856936a5411f4495975b176333916bbe3f70b7974aac9de40f",
+    "retention": "PRESERVE_BYTE_EXACT_AS_AUDIT_TRAIL_DO_NOT_USE_FOR_EXECUTION",
+    "reason": "Revision 1 incorrectly included exon-QTL datasets QTD000560 and QTD000570 in the required cell-sQTL payload family even though the pre-existing molecular policy freezes sQTL to quant_method=leafcutter. Revision 2 removes only those two non-predeclared exon payload requirements; no result was read and no scientific threshold, model, locus, trait, or correction family changed."
+  },
+  "exact_correction": {
+    "required_qtl_datasets": {
+      "eQTL": ["QTD000559", "QTD000569"],
+      "sQTL": ["QTD000563", "QTD000573"]
+    },
+    "analysis_id": "P18_CELL_SQTL",
+    "scope": "Frozen Young 2019 microglia and Aygun 2021 neuron leafcutter sQTL datasets; no post-result dataset selection",
+    "required_inputs": "QTD000563 and QTD000573 full leafcutter payloads plus matching indexes"
+  },
+  "forbidden_change": "Every base-policy field other than the exact correction above must remain byte-for-byte semantically identical after overlay",
+  "result_blind": true,
+  "future_results_accessed": false
+}

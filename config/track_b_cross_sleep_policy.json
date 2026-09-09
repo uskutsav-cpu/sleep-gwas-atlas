@@ -1,0 +1,317 @@
+{
+  "schema_version": "sleep-atlas-track-b-cross-sleep-policy.1",
+  "analysis_id": "P24_LOCKED_ATLAS_CROSS_SLEEP",
+  "contract_revision": 1,
+  "selection_timing": "BEFORE_ANY_PHASE24_CROSS_SLEEP_RESULT_ACCESS",
+  "result_blind": true,
+  "future_results_accessed_before_freeze": false,
+  "purpose": "A descriptive, layer-separated generalization view over the twelve already locked sleep phenotypes; it is not a new phenome scan and performs no new statistical test.",
+  "immutable_core": {
+    "panel": {
+      "path": "config/analysis_panel.tsv",
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    "panel_lock": {
+      "path": "config/analysis_panel.lock.json",
+      "sha256": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c"
+    },
+    "atlas_traits": {
+      "path": "results/atlas/traits.tsv",
+      "sha256": "8844a14179f88d0e84ffe6d3fdf9d9478c9d5103bb4f5da0a17fb1ad6a485a5e",
+      "rows": 45
+    },
+    "atlas_pairs": {
+      "path": "results/atlas/trait_pairs.tsv",
+      "sha256": "561c38df341c41d862362389d670457ff7520ae14ae4931e5a73163389ba8da5",
+      "rows": 396
+    },
+    "atlas_core_provenance": {
+      "path": "results/atlas/core.provenance.json",
+      "sha256": "bbe0c3513e43513e561ff8695d9cef93ef733ed0e62e83ee8ac7d06a8639790a"
+    },
+    "pair_manifest": {
+      "path": "results/track_b/pair_manifest.tsv",
+      "sha256": "b3c520424415895df18b87141d9b99721d3bf49330844524731dd563da12dd4f",
+      "rows": 3
+    },
+    "pair_manifest_lock": {
+      "path": "results/track_b/pair_manifest.lock.json",
+      "sha256": "003d0cd24d7e9215f8367d23275a32c03f7435bf47924e90284d4a5a8b9df0fa"
+    },
+    "dense_track_b_qc": {
+      "path": "results/track_b/03_dense_input_qc.tsv",
+      "sha256": "f7f604ba9c5db881c82e51c28e838693f884f10dd1476603cf1a92964efab865"
+    },
+    "dense_track_b_qc_lock": {
+      "path": "results/track_b/03_dense_input_qc.lock.json",
+      "sha256": "0ded393dcf24ae2dcda290cda275fd40536fec75cad71be1e6ce608fb271a487"
+    },
+    "atlas_schema": {
+      "path": "config/atlas_table_schema.json",
+      "sha256": "c1413b301d4da992424e6229cc022f0b2517303f91c42a4d8bb95da7f4e671b9"
+    },
+    "downstream_policy": {
+      "path": "config/downstream_analysis_policy.json",
+      "sha256": "1a22e03fe8a62eed460de460900f49a7546df12437b20e7997946f7c809c676c"
+    },
+    "official_locus_partition": {
+      "path": "ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile",
+      "sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882",
+      "locus_count": 2495,
+      "role": "work partition and complete-locus accounting universe, never evidence by itself"
+    },
+    "frozen_readiness_v3_lock": {
+      "path": "results/track_b/mechanism_followup/v3/PRE_RESULT_READINESS.lock.json",
+      "sha256": "28ba9e3b4be939657391f9ad9e90e89fdacd6e2be834e7602ced3e67c72eae0e",
+      "retention": "READ_ONLY_HISTORICAL_BASELINE"
+    }
+  },
+  "sleep_traits_in_locked_panel_order": [
+    "insomnia",
+    "sleepdur",
+    "shortsleep",
+    "longsleep",
+    "chronotype",
+    "sleepiness",
+    "napping",
+    "snoring",
+    "sleep_apnea",
+    "sleep_efficiency",
+    "accel_sleep_duration",
+    "sleep_timing"
+  ],
+  "dense_sleep_family": [
+    {"trait_id": "insomnia", "build": "hg19", "path": "data/harmonized/insomnia.harmonized.tsv.gz", "sha256": "23e06f4a682477064e73551eeab78c292af4d2058fe636ddf328c4bccf560ea4", "rows": 6077635},
+    {"trait_id": "sleepdur", "build": "hg19", "path": "data/harmonized/sleepdur.harmonized.tsv.gz", "sha256": "39ffd53bc3858d7dc1ef82cb3057daad5ca83d8677c05ce58b696457b542c9cb", "rows": 6549809},
+    {"trait_id": "shortsleep", "build": "hg19", "path": "data/harmonized/shortsleep.harmonized.tsv.gz", "sha256": "3cc70e0c511ed0a54865467dea28ac102a707de83734b0d71c5be4281cd55d0b", "rows": 6549791},
+    {"trait_id": "longsleep", "build": "hg19", "path": "data/harmonized/longsleep.harmonized.tsv.gz", "sha256": "ff0f50390411fa0d0b236f5b38311ee5ec0df423707adfd5ab18b42ba8a59d76", "rows": 6549769},
+    {"trait_id": "chronotype", "build": "hg19", "path": "data/harmonized/chronotype.harmonized.tsv.gz", "sha256": "fd4989c61415208d079b29395390a648ec71b9d7003adbbba724b054c7abb90f", "rows": 6482405},
+    {"trait_id": "sleepiness", "build": "hg19", "path": "data/harmonized/sleepiness.harmonized.tsv.gz", "sha256": "54b9d15a35949b77becd2908b31b046304aecb8916e84f7f2f7632f4f4f460b8", "rows": 6549823},
+    {"trait_id": "napping", "build": "hg19", "path": "data/harmonized/napping.harmonized.tsv.gz", "sha256": "963315e95b41ba28b9e4d2a7e1d623bffca09fade3321ca8f9cfdb2a2233d505", "rows": 7042618},
+    {"trait_id": "snoring", "build": "hg19", "path": "data/harmonized/snoring.harmonized.tsv.gz", "sha256": "1b0f6170f09cada35613599e70f03f9df0baf24e9cfe2579ab1364817fe6b416", "rows": 7168629},
+    {"trait_id": "sleep_apnea", "build": "hg38", "path": "data/harmonized/sleep_apnea.harmonized.tsv.gz", "sha256": "bf203697fcdc4bdff209f8e49b5af6de54234af365a873b5504df119c43e5932", "rows": 6841149},
+    {"trait_id": "sleep_efficiency", "build": "hg19", "path": "data/harmonized/sleep_efficiency.harmonized.tsv.gz", "sha256": "7ef7c98963c579635d31bcfd997cf02ccd996defe63a782279a6974642c38a0a", "rows": 6482540},
+    {"trait_id": "accel_sleep_duration", "build": "hg19", "path": "data/harmonized/accel_sleep_duration.harmonized.tsv.gz", "sha256": "2542acca8721854536a9abd7f75222ff13aebab34c89c6ffbbcabfa4e57a9023", "rows": 6482514},
+    {"trait_id": "sleep_timing", "build": "hg19", "path": "data/harmonized/sleep_timing.harmonized.tsv.gz", "sha256": "6f8b137e091b208e7e7337f989f9072f82c0d894613f1792d9fa55c992003955", "rows": 6482540}
+  ],
+  "pair_scope": {
+    "pair_order": ["A", "B", "CONTROL"],
+    "primary_pairs": ["A", "B"],
+    "control_pairs": ["CONTROL"],
+    "pairs": [
+      {"pair_id": "A", "anchor_sleep_trait": "snoring", "external_trait": "parental_lifespan", "family_role": "PRIMARY_DISCOVERY"},
+      {"pair_id": "B", "anchor_sleep_trait": "insomnia", "external_trait": "adhd", "family_role": "PRIMARY_DISCOVERY"},
+      {"pair_id": "CONTROL", "anchor_sleep_trait": "insomnia", "external_trait": "frailty", "family_role": "POSITIVE_CONTROL_NON_NOVELTY"}
+    ],
+    "replacement_policy": "FORBIDDEN; failure, null, or unavailable evidence remains attached to its frozen pair",
+    "control_separation": "CONTROL is validated and published in a separate file and is never included in the A/B inference family"
+  },
+  "query_family": {
+    "definition": "Cartesian product of each frozen pair's external trait and all twelve locked sleep traits, in pair then panel order",
+    "primary_query_count": 24,
+    "control_query_count": 12,
+    "total_query_count": 36,
+    "unrestricted_phenome_scan_forbidden": true,
+    "non_sleep_query_traits_forbidden_except_frozen_external_targets": true,
+    "result_driven_sleep_trait_selection_forbidden": true,
+    "result_ranked_locus_or_entity_selection_forbidden": true
+  },
+  "evidence_layers_in_order": [
+    "GLOBAL_RG_CONTEXT",
+    "LOCUS_SHARED_EVIDENCE",
+    "VARIANT_SHARED_SIGNAL",
+    "GENE_MECHANISM_EVIDENCE"
+  ],
+  "sleep_dimensions": {
+    "BREATHING": ["snoring", "sleep_apnea"],
+    "DISRUPTION": ["insomnia", "sleepiness", "napping", "sleep_efficiency"],
+    "DURATION": ["sleepdur", "shortsleep", "longsleep", "accel_sleep_duration"],
+    "TIMING": ["chronotype", "sleep_timing"],
+    "partition_rule": "These four result-blind groups partition all twelve locked sleep traits exactly once and are classification labels, not mechanistic truth."
+  },
+  "mechanism_level_generalization": {
+    "applicable_layers": ["LOCUS_SHARED_EVIDENCE", "VARIANT_SHARED_SIGNAL", "GENE_MECHANISM_EVIDENCE"],
+    "allowed_classifications": ["SNORING_SPECIFIC", "INSOMNIA_SPECIFIC", "SLEEP_BREATHING_SHARED", "SLEEP_DISRUPTION_SHARED", "MULTIPLE_SLEEP_DIMENSIONS", "NONSPECIFIC", "NO_DETECTED_SUPPORT", "INCONCLUSIVE", "BLOCKED"],
+    "priority_and_rules": [
+      "BLOCKED when any of the twelve query rows for the pair/layer is BLOCKED or FAILED.",
+      "INCONCLUSIVE when the layer is not blocked but any query is NOT_APPLICABLE or otherwise lacks complete comparable coverage.",
+      "NO_DETECTED_SUPPORT when all twelve query families completed and none has supported evidence; this is not a biological null.",
+      "SNORING_SPECIFIC when the complete supported sleep-trait set for an entity is exactly {snoring}.",
+      "INSOMNIA_SPECIFIC when the complete supported sleep-trait set for an entity is exactly {insomnia}.",
+      "SLEEP_BREATHING_SHARED when the set is exactly {snoring,sleep_apnea}.",
+      "SLEEP_DISRUPTION_SHARED when the set is confined to DISRUPTION, contains insomnia, and contains at least one additional DISRUPTION trait.",
+      "MULTIPLE_SLEEP_DIMENSIONS when support spans at least two frozen dimensions.",
+      "NONSPECIFIC for every other complete supported pattern, including a single non-snoring/non-insomnia trait or a within-duration/within-timing pattern."
+    ],
+    "global_rg_exclusion": "GLOBAL_RG_CONTEXT never receives a mechanism-level classification.",
+    "claim_limit": "These labels summarize recurrence patterns among the frozen sleep traits; even GENE_MECHANISM_EVIDENCE remains hypothesis-level and does not prove a shared mechanism."
+  },
+  "layer_contract": {
+    "GLOBAL_RG_CONTEXT": {
+      "source": "results/atlas/trait_pairs.tsv",
+      "complete_source_family_size": 396,
+      "source_correction": "BH over all 396 locked sleep-by-non-sleep pairs",
+      "source_correction_denominator": 396,
+      "support_rule": "global_rg_fdr_all_396 <= 0.05",
+      "phase24_new_hypothesis_count": 0,
+      "claim_limit": "Genome-wide LDSC genetic correlation is context only; it is not locus, variant, gene, regulatory, cell, mediation, direction, or mechanism evidence."
+    },
+    "LOCUS_SHARED_EVIDENCE": {
+      "future_input": "results/track_b/mechanism_followup/upstream/phase24_locus_evidence.tsv",
+      "future_input_lock": "results/track_b/mechanism_followup/upstream/phase24_locus_evidence.lock.json",
+      "required_query_rows": 36,
+      "complete_locus_accounting_per_query": 2495,
+      "possible_primary_locus_accounting_rows": 59880,
+      "possible_control_locus_accounting_rows": 29940,
+      "phase24_new_hypothesis_count": 0,
+      "source_correction_rule": "Use only a checksum-locked complete upstream family whose exact denominator was frozen before its results; Phase24 never recomputes or changes it.",
+      "claim_limit": "Locus recurrence is local/shared-locus statistical evidence; a common block does not establish the same causal variant, gene, mechanism, mediation, or direction."
+    },
+    "VARIANT_SHARED_SIGNAL": {
+      "future_input": "results/track_b/mechanism_followup/upstream/phase24_variant_evidence.tsv",
+      "future_input_lock": "results/track_b/mechanism_followup/upstream/phase24_variant_evidence.lock.json",
+      "required_query_rows": 36,
+      "phase24_new_hypothesis_count": 0,
+      "current_boundary": "BLOCKED_PRE_RESULT_VARIANT_FAMILY_NOT_FROZEN",
+      "source_correction_rule": "The exact allele-harmonized variant family and its correction denominator must be checksum-locked before any cross-sleep variant result; a lead-only or significant-only list is forbidden.",
+      "claim_limit": "Variant recurrence requires harmonized variant identity plus valid shared-signal or fine-mapping support; marginal association or block membership is not variant-mechanism evidence."
+    },
+    "GENE_MECHANISM_EVIDENCE": {
+      "future_input": "results/track_b/mechanism_followup/upstream/phase24_gene_mechanism_evidence.tsv",
+      "future_input_lock": "results/track_b/mechanism_followup/upstream/phase24_gene_mechanism_evidence.lock.json",
+      "required_query_rows": 36,
+      "phase24_new_hypothesis_count": 0,
+      "current_boundary": "BLOCKED_PRE_RESULT_GENE_MECHANISM_FAMILY_NOT_FROZEN",
+      "source_correction_rule": "The complete gene/feature/context family, correction denominator, null coverage, and failure ledger must be checksum-locked before results; nearest-gene or annotation-only substitution is forbidden.",
+      "claim_limit": "Gene-mechanism recurrence requires same-locus source-declared molecular/regulatory evidence and remains a mechanistic hypothesis, not proof of a causal gene, mediation, direction, or general mechanism."
+    }
+  },
+  "supplement_schema": [
+    "analysis_id",
+    "pair_id",
+    "family_role",
+    "anchor_sleep_trait",
+    "external_trait",
+    "queried_sleep_trait",
+    "evidence_level",
+    "record_kind",
+    "entity_id",
+    "upstream_status",
+    "family_complete",
+    "tested_hypothesis_count",
+    "failed_hypothesis_count",
+    "supported_entity_count",
+    "supported_entity_ids",
+    "estimate",
+    "standard_error",
+    "p_value",
+    "adjusted_p_value",
+    "effect_direction",
+    "power_qc_status",
+    "upstream_correction_method",
+    "upstream_correction_denominator",
+    "pre_result_family_lock_path",
+    "pre_result_family_lock_sha256",
+    "source_result_path",
+    "source_result_sha256",
+    "claim_limit"
+  ],
+  "supplement_lock_requirements": {
+    "schema_version": "sleep-atlas-track-b-cross-sleep-layer-lock.1",
+    "results_accessed_before_family_lock": false,
+    "complete_fixed_query_family": true,
+    "result_ranked_selection": false,
+    "all_supported_entities_retained": true,
+    "exact_statistics_and_power_qc_retained": true,
+    "raw_or_uncorrected_p_value_substitution_forbidden": true
+  },
+  "upstream_statuses": ["COMPLETE", "NOT_APPLICABLE_UPSTREAM_ZERO", "BLOCKED_UPSTREAM", "FAILED_UPSTREAM"],
+  "output_statuses": ["SUPPORTED", "TESTED_NO_SUPPORT", "NOT_APPLICABLE", "BLOCKED", "FAILED"],
+  "classification_by_layer": {
+    "GLOBAL_RG_CONTEXT": ["GLOBAL_RG_CONTEXT_SUPPORTED", "GLOBAL_RG_CONTEXT_NO_DETECTED_SUPPORT"],
+    "LOCUS_SHARED_EVIDENCE": ["LOCUS_SUPPORTED", "LOCUS_TESTED_NO_SUPPORT", "LOCUS_NOT_APPLICABLE", "LOCUS_BLOCKED", "LOCUS_FAILED"],
+    "VARIANT_SHARED_SIGNAL": ["VARIANT_SUPPORTED", "VARIANT_TESTED_NO_SUPPORT", "VARIANT_NOT_APPLICABLE", "VARIANT_BLOCKED", "VARIANT_FAILED"],
+    "GENE_MECHANISM_EVIDENCE": ["GENE_MECHANISM_SUPPORTED_HYPOTHESIS", "GENE_MECHANISM_TESTED_NO_SUPPORT", "GENE_MECHANISM_NOT_APPLICABLE", "GENE_MECHANISM_BLOCKED", "GENE_MECHANISM_FAILED"]
+  },
+  "phase24_multiple_testing": {
+    "new_hypothesis_count_primary": 0,
+    "new_hypothesis_count_control": 0,
+    "rule": "Phase24 is a deterministic evidence view. It performs no p-value combination, re-testing, or post hoc correction; each inferential layer must retain its exact pre-result upstream denominator."
+  },
+  "output_contract": {
+    "primary_path": "results/track_b/mechanism_followup/science/cross_sleep.tsv",
+    "control_path": "results/track_b/mechanism_followup/science/cross_sleep_control.tsv",
+    "primary_generalization_path": "results/track_b/mechanism_followup/science/cross_sleep_generalization.tsv",
+    "control_generalization_path": "results/track_b/mechanism_followup/science/cross_sleep_control_generalization.tsv",
+    "provenance_path": "results/track_b/mechanism_followup/science/cross_sleep.provenance.json",
+    "primary_minimum_coverage_rows": 96,
+    "control_minimum_coverage_rows": 48,
+    "row_count_rule": "Exactly one coverage row per fixed query/layer plus every supported evidence entity; the number of evidence rows is not capped or ranked.",
+    "fields": [
+      "analysis_id",
+      "evidence_row_id",
+      "pair_id",
+      "family_role",
+      "anchor_sleep_trait",
+      "external_trait",
+      "queried_sleep_trait",
+      "evidence_level",
+      "record_kind",
+      "entity_id",
+      "evidence_status",
+      "classification",
+      "supported_entity_count",
+      "supported_entity_ids",
+      "estimate",
+      "standard_error",
+      "p_value",
+      "adjusted_p_value",
+      "effect_direction",
+      "power_qc_status",
+      "tested_hypothesis_count",
+      "failed_hypothesis_count",
+      "upstream_correction_method",
+      "upstream_correction_denominator",
+      "phase24_correction_denominator",
+      "source_result_path",
+      "source_result_sha256",
+      "claim_limit"
+    ],
+    "generalization_fields": [
+      "analysis_id",
+      "pair_id",
+      "family_role",
+      "anchor_sleep_trait",
+      "external_trait",
+      "evidence_level",
+      "entity_id",
+      "supported_sleep_trait_count",
+      "supported_sleep_traits",
+      "supported_dimension_count",
+      "supported_dimensions",
+      "generalization_classification",
+      "coverage_status",
+      "source_evidence_row_ids",
+      "claim_limit"
+    ],
+    "publication": "atomic no-replace; byte-identical partial outputs may resume; provenance is the last commit artifact",
+    "header_only_output_for_absent_upstream_forbidden": true
+  },
+  "upstream_gate": {
+    "rule": "The core, all twelve dense sleep summaries, and all three non-global layer tables plus their pre-result locks must validate before publication. Physical absence stops preflight without writing anything. Explicit blocked/failed rows remain blocked/failed and are never recoded as null.",
+    "zero_family_rule": "Only a checksum-locked NOT_APPLICABLE_UPSTREAM_ZERO state may yield NOT_APPLICABLE; an absent file, failed analysis, or missing denominator is BLOCKED or FAILED, never null.",
+    "global_rg_not_sufficient": true
+  },
+  "claim_limits": {
+    "phase": "The view describes recurrence among the twelve frozen sleep phenotypes for the three frozen external targets only; it does not generalize to a phenome, establish an airway-versus-brain taxonomy, or prove mechanism.",
+    "control": "CONTROL is recovery/calibration context only, is excluded from novelty and the A/B family, and cannot support a mechanistic claim."
+  },
+  "current_readiness": {
+    "global_rg_context": "INPUT_READY_EXECUTION_NOT_REQUESTED",
+    "locus_shared_evidence": "BLOCKED_UPSTREAM_REAL_RESULTS_ABSENT",
+    "variant_shared_signal": "BLOCKED_PRE_RESULT_VARIANT_FAMILY_NOT_FROZEN",
+    "gene_mechanism_evidence": "BLOCKED_PRE_RESULT_GENE_MECHANISM_FAMILY_NOT_FROZEN",
+    "overall": "BLOCKED_UPSTREAM",
+    "production_science_executed": false
+  }
+}

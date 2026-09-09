@@ -38,24 +38,48 @@ class TrackBLocalInputTests(unittest.TestCase):
 
     def test_conditioners_are_minimal_and_pre_result(self) -> None:
         rows = read_tsv(TRACK_B / "local_conditional_manifest.tsv")
-        by_pair: dict[str, list[str]] = {}
+        by_pair: dict[str, list[tuple[str, str]]] = {}
         for row in rows:
-            by_pair.setdefault(row["pair_id"], []).append(row["covariate"])
+            by_pair.setdefault(row["pair_id"], []).append((row["conditional_model_id"], row["covariates"]))
             self.assertEqual(row["selection_timing"], "BEFORE_LOCAL_RESULT_ACCESS")
-        self.assertEqual(by_pair, {"A": ["bmi", "sleep_apnea"], "B": ["mdd"], "CONTROL": ["NONE"]})
+        self.assertEqual(by_pair, {
+            "A": [("A_BMI_ONLY", "bmi"), ("A_SLEEP_APNEA_ONLY", "sleep_apnea")],
+            "B": [("B_MDD_ONLY", "mdd")],
+            "CONTROL": [("NONE", "NONE")],
+        })
 
-    def test_missing_reference_is_preserved_as_blocker(self) -> None:
+    def test_reference_and_compute_snapshot_are_state_aware(self) -> None:
         lock = json.loads((TRACK_B / "local_analysis_input.lock.json").read_text(encoding="utf-8"))
         self.assertFalse(lock["local_results_accessed_before_input_freeze"])
-        self.assertEqual(lock["reference_status"], "BLOCKED_BY_DATA")
-        self.assertEqual(lock["current_compute_snapshot"]["status"], "BLOCKED_BY_COMPUTE")
+        reference_ready = (ROOT / lock["required_reference_provenance"]).is_file()
+        self.assertEqual(lock["reference_status"], "READY" if reference_ready else "BLOCKED_BY_DATA")
         self.assertEqual(lock["reference_minimum_free_bytes"], 37580963840)
+        self.assertEqual(
+            lock["current_compute_snapshot"]["reference_acquisition_storage_gate_applies"],
+            not reference_ready,
+        )
+        expected_compute = (
+            "BLOCKED_BY_COMPUTE_STORAGE"
+            if not reference_ready
+            and lock["current_compute_snapshot"]["free_bytes"] < lock["reference_minimum_free_bytes"]
+            else lock["current_compute_snapshot"]["benchmark_state"]
+        )
+        self.assertEqual(lock["current_compute_snapshot"]["status"], expected_compute)
+        self.assertNotIn("minimum_ram_bytes", lock["current_compute_snapshot"])
+        self.assertIn("MEASURE", lock["current_compute_snapshot"]["ram_decision_rule"])
 
     def test_runtime_and_conditional_family_are_frozen(self) -> None:
         runtime = {row["key"]: row["value"] for row in read_tsv(TRACK_B / "lava_runtime_policy.tsv")}
         self.assertEqual(runtime["expected_traits"], "8")
         self.assertEqual(runtime["expected_pairs"], "3")
         self.assertEqual(runtime["planned_univariate_tests"], str(2495 * 8))
+        self.assertEqual(runtime["conditional_attenuation_fraction_partial"], "0.25")
+        self.assertEqual(runtime["conditional_attenuation_fraction_full"], "0.75")
+        self.assertEqual(runtime["ram_execution_unit"], "WHOLE_PREDECLARED_LAVA_LOCUS")
+        self.assertEqual(runtime["maximum_loci_per_process"], "1")
+        self.assertIn("FRESH_R_PROCESS_PER_LOCUS", runtime["worker_process_rule"])
+        self.assertIn("DO_NOT_APPLY_AN_ASSUMED", runtime["memory_decision_rule"])
+        self.assertNotIn("minimum_ram_bytes", runtime)
         self.assertIn("FDR<=0.05", runtime["conditional_execution_gate"])
 
 

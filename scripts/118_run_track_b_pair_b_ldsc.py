@@ -174,11 +174,11 @@ def classify(pair: dict[str, str], rg: dict[str, object]) -> tuple[str, str]:
     concordant = observed == 0 or discovery == 0 or math.copysign(1, observed) == math.copysign(1, discovery)
     direction = "CONCORDANT" if concordant else "OPPOSITE"
     if float(rg["rg_p"]) < REPLICATION_ALPHA and concordant:
-        status = "CONCORDANT_NOMINAL_REPLICATION"
+        status = "DIRECTIONAL_REPLICATION"
     elif float(rg["rg_p"]) < REPLICATION_ALPHA:
-        status = "SIGNIFICANT_OPPOSITE_DIRECTION_NO_GO"
+        status = "OPPOSITE_DIRECTION"
     else:
-        status = "NOT_SIGNIFICANT_EXTERNAL_SAMPLE"
+        status = "UNDERPOWERED"
     return direction, status
 
 
@@ -270,7 +270,7 @@ def main() -> None:
             "cross_trait_intercept": "NA", "cross_trait_intercept_se": "NA",
             "rg_input_snps": "NA", "rg_overlap_after_merge": "NA", "rg_valid_alleles": "NA",
             "direction_vs_discovery": "NOT_APPLICABLE",
-            "replication_class": "REPLICATION_H2_QC_FAIL",
+            "replication_class": "UNDERPOWERED",
             "claim_limit": "Replication source did not pass the predeclared h2 gate; no cross-trait LDSC result was run or inferred",
         }
         publish(record, [h2_log], "PAIR_B_REPLICATION_H2_QC_FAIL")
