@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-09-28T19:53:19.662337+00:00",
+  "start_date": "2026-09-28",
+  "end_date": "2026-09-28",
+  "config_path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/config/pubmed_queries.json",
+  "config_sha256": "057a46bbff6af9c720a35bcb285622bbfda043477667920293629aafed5a368d",
+  "collector_path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/scripts/01_pubmed_search.py",
+  "collector_sha256": "e0a9d6f314a68cfe79921a9fcbaad50b80848b953ec89c03c8160f03907dd477",
+  "queries": [
+    {
+      "query_id": "primary_sleep_frailty",
+      "count": 0,
+      "fetched": 0,
+      "segments": 1,
+      "start_date": "2026-09-28",
+      "end_date": "2026-09-28",
+      "query": "(((sleep[Title/Abstract] OR insomnia[Title/Abstract] OR \"sleep duration\"[Title/Abstract] OR \"short sleep\"[Title/Abstract] OR \"long sleep\"[Title/Abstract] OR \"sleep quality\"[Title/Abstract] OR \"sleep fragmentation\"[Title/Abstract] OR \"sleep efficiency\"[Title/Abstract] OR \"daytime sleepiness\"[Title/Abstract] OR napping[Title/Abstract] OR \"sleep apnea\"[Title/Abstract] OR snoring[Title/Abstract] OR chronotype[Title/Abstract] OR circadian[Title/Abstract]) AND (frail*[Title/Abstract] OR \"frailty index\"[Title/Abstract] OR \"frailty phenotype\"[Title/Abstract] OR \"Fried frailty\"[Title/Abstract] OR \"Fried Frailty Score\"[Title/Abstract] OR \"Clinical Frailty Scale\"[Title/Abstract] OR prefrail*[Title/Abstract] OR \"pre-frail\"[Title/Abstract] OR \"cognitive frailty\"[Title/Abstract]))) AND (\"2026/09/28\"[Date - Publication] : \"2026/09/28\"[Date - Publication])"
+    },
+    {
+      "query_id": "genetic_sleep_frailty",
+      "count": 0,
+      "fetched": 0,
+      "segments": 1,
+      "start_date": "2026-09-28",
+      "end_date": "2026-09-28",
+      "query": "(((sleep[Title/Abstract] OR insomnia[Title/Abstract] OR \"sleep duration\"[Title/Abstract] OR \"short sleep\"[Title/Abstract] OR \"long sleep\"[Title/Abstract] OR \"sleep apnea\"[Title/Abstract] OR snoring[Title/Abstract] OR chronotype[Title/Abstract] OR circadian[Title/Abstract]) AND (frail*[Title/Abstract] OR \"frailty index\"[Title/Abstract] OR \"frailty phenotype\"[Title/Abstract] OR \"Fried Frailty Score\"[Title/Abstract]) AND (GWAS[Title/Abstract] OR genetic*[Title/Abstract] OR \"genetic correlation\"[Title/Abstract] OR LDSC[Title/Abstract] OR LAVA[Title/Abstract] OR \"Mendelian randomization\"[Title/Abstract] OR \"Mendelian randomisation\"[Title/Abstract] OR colocal*[Title/Abstract] OR \"fine mapping\"[Title/Abstract] OR \"fine-mapping\"[Title/Abstract] OR pleiotrop*[Title/Abstract]))) AND (\"2026/09/28\"[Date - Publication] : \"2026/09/28\"[Date - Publication])"
+    },
+    {
+      "query_id": "frailty_neighborhood",
+      "count": 0,
+      "fetched": 0,
+      "segments": 1,
+      "start_date": "2026-09-28",
+      "end_date": "2026-09-28",
+      "query": "(((sleep[Title/Abstract] OR insomnia[Title/Abstract] OR \"sleep duration\"[Title/Abstract] OR \"short sleep\"[Title/Abstract] OR \"long sleep\"[Title/Abstract] OR \"sleep apnea\"[Title/Abstract] OR snoring[Title/Abstract] OR chronotype[Title/Abstract] OR circadian[Title/Abstract]) AND (sarcopen*[Title/Abstract] OR \"grip strength\"[Title/Abstract] OR \"gait speed\"[Title/Abstract] OR \"walking speed\"[Title/Abstract] OR exhaustion[Title/Abstract] OR \"physical activity\"[Title/Abstract] OR \"weight loss\"[Title/Abstract] OR disability[Title/Abstract] OR falls[Title/Abstract] OR cognition[Title/Abstract] OR dementia[Title/Abstract] OR Alzheimer*[Title/Abstract] OR Parkinson*[Title/Abstract] OR longevity[Title/Abstract] OR lifespan[Title/Abstract] OR healthspan[Title/Abstract] OR mortality[Title/Abstract]))) AND (\"2026/09/28\"[Date - Publication] : \"2026/09/28\"[Date - Publication])"
+    }
+  ],
+  "records_returned_across_queries": 0,
+  "integration_status": "SEPARATE_CACHE_NOT_MERGED",
+  "command": "frailty_paper/scripts/54_collect_pubmed_window.py"
+}

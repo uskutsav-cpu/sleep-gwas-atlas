@@ -1,0 +1,138 @@
+{
+  "analysis_id": "brain6-placo-ld-range-exception-replay-v1",
+  "created_at_utc": "2026-09-24T23:11:14Z",
+  "inputs": {
+    "exception_table": {
+      "path": "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv",
+      "sha256": "e5fd91b4122219826c2bc5557e939379ace102d2bb30f795a7c2b1e614ae07bb"
+    },
+    "prior_extraction_provenance": {
+      "path": "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json",
+      "sha256": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd"
+    },
+    "reference_files": {
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.bcor": {
+        "bytes": 756216786,
+        "sha256": "e23ef2240a8765df81d5f0c12bad7e57464bc029566a7bb0199e4388c00b109e"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.info": {
+        "bytes": 18083594,
+        "sha256": "d09b1c0e65ff9f629fdf74b3dc4ce757adfd22dc9cdb1965aeac8e652720e04c"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.bcor": {
+        "bytes": 497140002,
+        "sha256": "05c31e12960b2fb58550c4d226ae9651e47425d1148c342fcf3e9b8d5a0dcbd1"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.info": {
+        "bytes": 13301708,
+        "sha256": "917aeda237e2f37e39ab939bed15d9639bdb0a03a626d804ffd48de5a1762121"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.bcor": {
+        "bytes": 459816616,
+        "sha256": "b95817799a25a4567cb8dfa2b52852c10509494d88bef74d17676c0409d93610"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.info": {
+        "bytes": 11766269,
+        "sha256": "c90ee4ba59680d88afd241fb458de3451100b73e71f136994969c53f9e3cafad"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.bcor": {
+        "bytes": 400622966,
+        "sha256": "8cc495223b2d570a72fe3a12d56d9f80e6e320d9e1764fca74179ceac203a5ae"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.info": {
+        "bytes": 9330737,
+        "sha256": "55e48183d786607b22a838227c7aa34c2f1f2d512958bf0521c8650a2a546327"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.bcor": {
+        "bytes": 1294155802,
+        "sha256": "9229102840524a186db78ea7788bf05ee78b36752c087e0c7c6156053eee605c"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.info": {
+        "bytes": 29900875,
+        "sha256": "b6484a8e69465479c006e1cc241059dabd91de5594ddabb28c497618fa643060"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.bcor": {
+        "bytes": 966835032,
+        "sha256": "fcdd429c41b039790d58bf18377e768551a3cd2afb5c2110caebe829a637259b"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.info": {
+        "bytes": 23098698,
+        "sha256": "e32bb4bdb1d2af0c84353ae59f0eddd41e6dd3e1bcd98d47dc9e69716df0443d"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.bcor": {
+        "bytes": 908378028,
+        "sha256": "38d1471b446e1855c8874a79b3842aa350a4ac1794df63332cd0c078921592a0"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.info": {
+        "bytes": 20834624,
+        "sha256": "33f249bafbf34db65f96fe66855aaf809b7343724fd2d519fec3aa084002d4e9"
+      }
+    },
+    "reference_provenance": {
+      "path": "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/reference.provenance.json",
+      "sha256": "35ab371935b9c260dab21be248f4907b693565787ef9f62334e7d8030204270e"
+    }
+  },
+  "interpretation": "Read-only reproducibility audit. Each unique out-of-range PLACO LD edge was reloaded through pinned LAVA 0.1.5 read.ld after chromosome-level reference loading. This verifies that the stored edge values are reproduced by the native reader and rules out pair-table ordering or downstream Python joins as their source. It does not identify whether the cause is source-reference construction, compressed/eigen-decomposed reconstruction, or another upstream property; no raw genotype reconstruction was available. No LD value was clamped or used to alter prior candidate outputs.",
+  "method": {
+    "correlation_range": [
+      -1,
+      1
+    ],
+    "edge_tolerance": 1e-12,
+    "matrix_checks": [
+      "finite",
+      "symmetric within 1e-8",
+      "unit diagonal within 1e-6",
+      "minimum eigenvalue reported for the requested exception-SNP submatrix"
+    ],
+    "no_clamping": true,
+    "unit": "unique chromosome/SNP1/SNP2 edge"
+  },
+  "output": {
+    "path": "brain6/qc/placo_ld_range_exception_replay_v1.tsv",
+    "sha256": "5e0dfe232679052171f90ec6128bf744d55545135bdc4aa80c3f424523532dae"
+  },
+  "runtime": {
+    "LAVA": "0.1.5",
+    "R": "4.3.3",
+    "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+    "rscript_path": "/Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin/Rscript",
+    "rscript_sha256": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108",
+    "runtime_validation": "PASS from scripts/133_validate_track_b_lava_runtime.R"
+  },
+  "scope": {
+    "chromosomes": [
+      2,
+      5,
+      7,
+      11,
+      13,
+      14,
+      17
+    ],
+    "full_five_pair_family": false,
+    "maximum_absolute_replay_delta": 5.10702591327572e-15,
+    "minimum_submatrix_eigenvalue": -0.00153138342508064,
+    "protected_track_b_present": false,
+    "reference_matrix_diagonal_error": 0.0,
+    "reference_matrix_symmetry_error": 0.0,
+    "replay_status": "PASS",
+    "replayed_edges": 12317,
+    "unique_edges": 12317
+  },
+  "sources": {
+    "original_extractor": {
+      "path": "brain6/scripts/extract_placo_windowed_ld.R",
+      "sha256": "7a254c55756e51f938bb6dea619cf8827137b62c7558dbb7b19aded0e216236d"
+    },
+    "replay_script": {
+      "path": "brain6/scripts/replay_placo_ld_range_exceptions.R",
+      "sha256": "fbfa74716fb44aa51ac3e07690ed8ed607b49ee6f111c45b01e2df9b38cc523e"
+    },
+    "runtime_validator": {
+      "path": "scripts/133_validate_track_b_lava_runtime.R",
+      "sha256": "05baf8d3abf8766afd680ecd8c44bc48dd94a965d31281dc25a8f7c79c748c0e"
+    }
+  }
+}

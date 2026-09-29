@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6-lava-local-rg-v2",
+  "family_lock_sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+  "worker_protocol": "one_frozen_locus_per_R_process; all_five_selected_pairs_per_locus",
+  "maximum_process_attempts_per_locus": 2,
+  "locus_processing": {
+    "min_K": 2,
+    "prune_thresh": 99,
+    "max_prop_K": 0.75,
+    "drop_failed": true,
+    "max_block_size": 3000,
+    "cap_estimates": true
+  },
+  "univariate": {
+    "cap_estimates": true,
+    "gate_p_strictly_less_than": 2.86286859433152e-6
+  },
+  "bivariate": {
+    "adap_thresh": [1e-4, 1e-6],
+    "p_values": true,
+    "confidence_intervals": true,
+    "parameter_limit": 1.25,
+    "cap_estimates": true
+  },
+  "statistical_scope": "No change to the frozen five-pair by 2,495-locus family, unique-trait Bonferroni gate, or full-family BH correction.",
+  "participant_level_overlap_verified": false
+}

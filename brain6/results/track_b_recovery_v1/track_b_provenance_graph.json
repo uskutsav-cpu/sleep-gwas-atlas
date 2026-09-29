@@ -1,0 +1,148 @@
+{
+  "nodes": [
+    {
+      "id": "dense_sources",
+      "type": "input",
+      "source": "archived terminal_gate.lock.json/frozen_v1/dense_sources"
+    },
+    {
+      "id": "contract",
+      "type": "lock",
+      "sha256": "28869d2206c8930c68f253cfa3cc6efb093abc89d666ab6d797abe8e88eb3c95"
+    },
+    {
+      "id": "v1_gate",
+      "type": "lock",
+      "sha256": "79d2ae0faa0beb6368496617ab4c88a580a34e7f459f4825d5586e31eecb2101"
+    },
+    {
+      "id": "v2_gate",
+      "type": "lock",
+      "sha256": "9e9a40aa47711fdfb8191ca8cdfcf84828ae5d3f2715578b9bf91e939260ac97"
+    },
+    {
+      "id": "aligned_input",
+      "type": "input",
+      "sha256": "59c21df0bf237e8ede77cfcdbf7b37b54444bc852d39991c88ba74465b2f02e7",
+      "state": "INTENTIONALLY_CLEANED;REGENERATION_UNVERIFIED"
+    },
+    {
+      "id": "task",
+      "type": "command_configuration",
+      "sha256": "a6f00bc70d128bde299e090561c5596e40386519f081bfeaa123336a315005ea"
+    },
+    {
+      "id": "code",
+      "type": "implementation",
+      "source": "/Volumes/Extreme SSD/Codex Archive/2026-09-19/codex-2026-09-01-sleep_gwas_atlas.tar",
+      "verified_sha256": {
+        "scripts/141_run_track_b_placo_pair_v2.R": "18b01861165925227d59f7c55fc4b4549c6a17775100458845dc76ec56d002f9",
+        "scripts/140_materialize_track_b_placo_pair_v2.py": "9cabcf1c281aa9e31243ca0c4ee0e62df34cbe102d2902e84410a6f216909c0b",
+        "scripts/125_materialize_track_b_placo_pair.py": "04e9f2f96c81fc1d612ea6c2aa307041594eb865318f87b2a4a469fa1efb2a54",
+        "scripts/143_run_track_b_placo_sequential_v2.py": "6cf2c55113e0d9a69e6825bda973c87e9e22c51adf622adf419e5225034d4e11",
+        "scripts/139_build_track_b_placo_terminal_gate_v2.py": "50a65cc503b60fc2732dfa8ebf380971c4f20297137514e643d185ec7c2286cc"
+      }
+    },
+    {
+      "id": "nuisance",
+      "type": "checkpoint",
+      "sha256": "f51d16d39329b5d739f10a56809e418e448f02e664db137fcb59d888015ed243"
+    },
+    {
+      "id": "shards_276",
+      "type": "computation",
+      "count": 276,
+      "state": "INTENTIONALLY_CLEANED;ATTESTED_ONLY"
+    },
+    {
+      "id": "ledger",
+      "type": "output",
+      "sha256": "f0eb8b9e8a5b3b4a0ea6151ed75473b0be3d311e463824889a050d83beaaac2e",
+      "rows": 5514399
+    },
+    {
+      "id": "monitor",
+      "type": "receipt",
+      "sha256": "a2800a6c65ab7a663e44d735b7e2631eacf43de2c384900fde2dc44c2b18f3f5",
+      "exit_status": 0
+    },
+    {
+      "id": "provenance",
+      "type": "receipt",
+      "sha256": "fb6565e7a165297a1b733882ba0375fc0668018ddff3887abd3178ac120298d3"
+    },
+    {
+      "id": "cleanup",
+      "type": "receipt",
+      "sha256": "721494f18d56c0a205b68d3be6c619c293eeff721a48499055de41965fecab6b",
+      "removed_artifacts": 562
+    },
+    {
+      "id": "v3_admission",
+      "type": "gate",
+      "state": "BLOCKED"
+    }
+  ],
+  "edges": [
+    [
+      "dense_sources",
+      "v1_gate"
+    ],
+    [
+      "v1_gate",
+      "v2_gate"
+    ],
+    [
+      "contract",
+      "v2_gate"
+    ],
+    [
+      "v2_gate",
+      "aligned_input"
+    ],
+    [
+      "aligned_input",
+      "task"
+    ],
+    [
+      "code",
+      "task"
+    ],
+    [
+      "task",
+      "nuisance"
+    ],
+    [
+      "nuisance",
+      "shards_276"
+    ],
+    [
+      "code",
+      "shards_276"
+    ],
+    [
+      "shards_276",
+      "ledger"
+    ],
+    [
+      "ledger",
+      "monitor"
+    ],
+    [
+      "ledger",
+      "provenance"
+    ],
+    [
+      "monitor",
+      "cleanup"
+    ],
+    [
+      "provenance",
+      "cleanup"
+    ],
+    [
+      "cleanup",
+      "v3_admission"
+    ]
+  ]
+}

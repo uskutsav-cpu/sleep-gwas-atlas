@@ -1,0 +1,43 @@
+{
+  "accessed_utc": "2026-09-24T01:46:45Z",
+  "access_method": "Ordinary HTTP GET of the public metadata API invoked by the HLMA download-page client bundle; the 13,050-byte JSON response is saved and SHA-256 pinned. Portal file_path IDs were compared with official NGDC OMIX release-page titles/counts/sizes. No dataset archives or processed objects were requested.",
+  "source_url": "https://db.genomics.cn/cell/hlma/download",
+  "primary_article_url": "https://www.nature.com/articles/s41586-024-07348-6",
+  "inventory_row_count": 23,
+  "inventory_scope": "23 targeted processed object rows (snRNA count, peak-matrix, scRNA count, H5AD); portal archive URL/ID only, no archive/member identity claim.",
+  "inputs_sha256": {
+    "frailty_paper/manifests/hlma_processed_file_inventory.tsv": "51fde827fe6a39d7ad1ead2267d1120a32502e2032df18c91e412feeaf8d28c9",
+    "frailty_paper/analysis/hlma_processed_data_portal_audit_2026-09-23.md": "0a209db9ad6ecbb818e5c78c6023be281c4237720e784e897f782784620d5222",
+    "frailty_paper/analysis/hlma_portal_omix_crosswalk_2026-09-24.md": "a97e1963e4a5bd6ba9100a4621c2d0f8b451125f384b6c20026ad07b3142e345",
+    "frailty_paper/analysis/hlma_supplementary_metadata_audit_2026-09-24.md": "ab5bb132aae2dc907f1ef1eb5a3bd8dee93d8bda86ab28901853b06410c5fc7e",
+    "frailty_paper/manifests/muscle_single_cell_resource_index.tsv": "80fac74ad5401166eb8e590174332a7b47a6d84912097171dddadc0a36f98fa3",
+    "frailty_paper/manifests/targeted_resource_audit.tsv": "66dc5248f36e98ac0e3fcac92a5e71380f5becf2bef4914baa27b9ff75a277aa",
+    "frailty_paper/manifests/hlma_portal_download_metadata_2026-09-24.json": "bcacfd5f78af7745470ef49d0259ef5db1245fa25ec616e34f026ddf39c1c94d",
+    "frailty_paper/scripts/46_build_hlma_portal_archive_crosswalk.py": "0e392498ea7f12b16e491bf68a3751b3a61e4fb34f38188c434c95fcfc7d9575",
+    "frailty_paper/manifests/hlma_fragment_archive_crosswalk.tsv": "e8f1c1d4e5af971ddce0beaaf3ee5eb564264194f55b0c826fe34f4b4ac534ff"
+  },
+  "output_sha256": "51fde827fe6a39d7ad1ead2267d1120a32502e2032df18c91e412feeaf8d28c9",
+  "limitations": [
+    "All archive IDs and URLs are taken from the portal API file_path field; no archive bytes or archive members were downloaded or verified.",
+    "Four fragment rows point to P-sample OMIX records whose official titles name different samples; four archive groups also have portal-row/release sample-count differences. Do not infer aliases or missing/duplicated files.",
+    "The previously noted P27/P17 and snRNA-China title/size discrepancies remain unresolved. Myofiber_sn_RNA.h5ad (560M) maps to an OMIX record titled for Myonucleus (6.01 GB).",
+    "Three H5AD listing rows share one OMIX004308-01 archive path; exact file-member identities remain unresolved. Broad FAPs/Stromal and All-CellType/Skeletal-muscle label compatibility does not prove identity.",
+    "Per-file CNP mapping remains UNKNOWN; study-level CNP accessions are not assigned to objects. Selected-object build and object-specific reuse terms remain unknown; public/open-access metadata is not a reuse license.",
+    "The scRNA donor code YM5 remains unmatched to Supplementary Table 1."
+  ],
+  "official_release_pages": [
+    "https://ngdc.cncb.ac.cn/omix/release/OMIX004305",
+    "https://ngdc.cncb.ac.cn/omix/release/OMIX006021",
+    "https://ngdc.cncb.ac.cn/omix/release/OMIX004308",
+    "https://ngdc.cncb.ac.cn/omix/release/OMIX006022"
+  ],
+  "api_endpoint": "https://db.genomics.cn/cdcp_hlma/api/download/get_download",
+  "portal_listing_row_count": 69,
+  "fragment_crosswalk_row_count": 46,
+  "portal_reported_distinct_path_ids": 26,
+  "fragment_path_ids": 10,
+  "outputs_sha256": {
+    "frailty_paper/manifests/hlma_processed_file_inventory.tsv": "51fde827fe6a39d7ad1ead2267d1120a32502e2032df18c91e412feeaf8d28c9",
+    "frailty_paper/manifests/hlma_fragment_archive_crosswalk.tsv": "e8f1c1d4e5af971ddce0beaaf3ee5eb564264194f55b0c826fe34f4b4ac534ff"
+  }
+}

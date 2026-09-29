@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "generated_at_utc": "2026-09-23T05:37:33.003765+00:00",
+  "pair": "insomnia__adhd",
+  "replication_class": "DIRECTIONAL_REPLICATION",
+  "direction_vs_discovery": "CONCORDANT",
+  "same_sleep_gwas_used_for_both_estimates": true,
+  "confidence_interval": "pointwise normal 95% interval: rg +/- 1.96 * SE",
+  "estimates": [
+    {
+      "evidence_stage": "LOCKED_GLOBAL_DISCOVERY",
+      "rg": 0.4033,
+      "se": 0.0318,
+      "ci95_low": 0.340972,
+      "ci95_high": 0.465628
+    },
+    {
+      "evidence_stage": "EXTERNAL_ADHD_COHORT_DIRECTIONAL_REPLICATION",
+      "rg": 0.3817,
+      "se": 0.0521,
+      "ci95_low": 0.279584,
+      "ci95_high": 0.48381599999999997,
+      "cases": 5559,
+      "controls": 489493
+    }
+  ],
+  "inputs": [
+    {
+      "path": "results/track_b/replication/pair_b_ldsc.tsv",
+      "bytes": 684,
+      "sha256": "16a2019f40826bcb08eba0118be383e13a0e29cfcacdc5f76df37abcb4b8a48a"
+    },
+    {
+      "path": "results/track_b/replication/pair_b_ldsc.provenance.json",
+      "bytes": 1322,
+      "sha256": "88432d481a7b0f7e066e27f3b4ad3062080a66fb20f6f97addc460a9fe0cbfd3"
+    },
+    {
+      "path": "results/track_b/replication_source.lock.json",
+      "bytes": 944,
+      "sha256": "46e8c5dd1b6d9363aed797e0e1478f83b05284e41f25331cb2f1445c5bfe5e22"
+    },
+    {
+      "path": "brain6/results/global/brain6_72_locked.tsv",
+      "bytes": 44053,
+      "sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d"
+    },
+    {
+      "path": "brain6/manifests/gwas_master.tsv",
+      "bytes": 9488,
+      "sha256": "bfdf722feab17e19a3a9e7e733e845866d75abbf6f58393ece99b71fdc9624a7"
+    },
+    {
+      "path": "brain6/scripts/plot_replication_comparison.py",
+      "bytes": 7698,
+      "sha256": "05ddd7098c64f83012fc60f36b2d9fe264eeb42c1c8dc0007c168bf56ecd2538"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "brain6/results/replication/figures/fig_replication_insomnia_adhd.png",
+      "bytes": 179998,
+      "sha256": "f4972e73f6e273f042915d0fab43854d3015df5ad653ee45848cda28e7ecc6e9"
+    },
+    {
+      "path": "brain6/results/replication/figures/fig_replication_insomnia_adhd.pdf",
+      "bytes": 32575,
+      "sha256": "d2d4921460978f49f19db5616751199beb724b23dbfa061b15787a149df35ef3"
+    }
+  ],
+  "caveats": [
+    "Finnish founder-population and phenotype differences",
+    "individual-level overlap not verified",
+    "same insomnia GWAS used; not fully independent two-trait replication"
+  ]
+}

@@ -1,0 +1,7 @@
+# FI×sleep LAVA full-family audit — 2026-09-26 11:27 UTC
+
+The full read-only auditor validated 13,399/29,940 receipt files from 11:27:52 to 11:27:57 UTC. Inventory advanced to 13,400 during the scan while runner state held at 13,399. Receipt, claim, duplicate trait/locus, and duplicate claim issues were zero. Workers 78548 and 78549 passed liveness checks on distinct claims: longsleep locus 736 and sleep_apnea locus 1169. Launch failures and stale-claim recoveries were zero.
+
+Six workers remain requested and two effective under the persisted swap safeguard. Frozen lock SHA-256 `74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70` and input-manifest SHA-256 `8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2` are unchanged.
+
+From the 11:20:18 audit (13,319 validated) to this scan, observed throughput was approximately 634 receipts/hour. At 11:27:57, 16,541 remained, corresponding to about 26.1 hours at that short-window rate; this estimate is provisional and noisy. Failure categories total 2,567 (2,325 all-phenotype negative-variance; 242 no-reference-SNP). All 12 frozen 1% gates fail, so local-sharing inference and PLACO remain inadmissible. Host memory was 51% free, system disk 6.5 GiB free, and external storage 1.6 TiB free; process-table and system I/O tools were denied by OS permissions. No scientific inputs, settings, thresholds, or receipts changed. Machine-readable evidence: `lava_full_receipt_integrity_2026-09-26_1128.json`.

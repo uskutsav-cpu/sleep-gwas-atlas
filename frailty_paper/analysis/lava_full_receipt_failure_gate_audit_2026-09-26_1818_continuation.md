@@ -1,0 +1,9 @@
+# FI×sleep LAVA continuation audit — 2026-09-26 18:18 UTC
+
+The read-only full-family auditor validated 17,105 of 29,940 expected receipts between 18:18:51 and 18:20:08 UTC. The receipt inventory advanced from 17,105 to 17,107 while scanning. There were no receipt or claim issues, duplicate trait/locus identities, launch failures, or stale-claim recoveries. The two active jobs were `sleepdur` locus 1536 (PID 78549) and `sleepiness` locus 1536 (PID 78548); both PIDs passed liveness checks. Two workers are effective from six requested because the runner's existing safeguard records swap at 2,772/3,072 MiB and reduces concurrency. Do not force six while this safeguard is active.
+
+The run lock, input-manifest, and serial-runner SHA-256 values are unchanged from the 17:50 audit. Failure categories now total 3,288 (3,036 negative-variance and 252 no-specified-SNP-in-reference). All 12 frozen 1% gates fail, so no LAVA local-sharing inference is admissible. Compared with the 17:50 validated count (17,040), the 65 additional validations over about 28 minutes correspond to roughly 138 receipts/hour; a naive remainder estimate is about 93 hours and is highly provisional.
+
+The official article's data-availability statement and its Figshare page now identify the full Fried Frailty Score UK Biobank GWAS file (609.63 MB, CC BY 4.0), resolving the previous source-discovery gap. A normal browser download was initiated from the page, but the file has not appeared in Downloads and the tracked data placeholder remains zero bytes. Acquisition, checksum, schema, build, and effect-semantics verification therefore remain pending; no manifest row or analysis input was changed.
+
+Machine-readable audit: `lava_full_receipt_integrity_2026-09-26_1818_continuation.json`. This is an advancing snapshot, not a completed analysis.

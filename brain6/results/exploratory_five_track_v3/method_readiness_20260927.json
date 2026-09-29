@@ -1,0 +1,130 @@
+{
+  "analysis_id": "brain6_exploratory_method_readiness_v1",
+  "analysis_label": "EXPLORATORY",
+  "dense_inputs_verified": [
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "total",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/adhd.harmonized.tsv.gz",
+      "sha256": "25cdc39268559321465583a445fadc02b49efc1019cfa9a3a07a33e2b24dfcd3",
+      "trait": "adhd"
+    },
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "effective",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/bipolar.harmonized.tsv.gz",
+      "sha256": "f55dc16a1c45f90189e7469065409e92ac68b0c47eb34de4a307a81fc518e15a",
+      "trait": "bipolar"
+    },
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "total",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/insomnia.harmonized.tsv.gz",
+      "sha256": "23e06f4a682477064e73551eeab78c292af4d2058fe636ddf328c4bccf560ea4",
+      "trait": "insomnia"
+    },
+    {
+      "effect_scale": "beta",
+      "genome_build": "GRCh37",
+      "n_semantics": "total",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/longsleep.harmonized.tsv.gz",
+      "sha256": "ff0f50390411fa0d0b236f5b38311ee5ec0df423707adfd5ab18b42ba8a59d76",
+      "trait": "longsleep"
+    },
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "total",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/mdd.harmonized.tsv.gz",
+      "sha256": "7aa0c5f4903d951ece36b64d6349c45c0b134a26dbe8dccd7ae3b9f77d030f58",
+      "trait": "mdd"
+    },
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "total",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/parkinson.harmonized.tsv.gz",
+      "sha256": "d6fef80964c812c66cadbaa99a38c040dac22383f84f81de5558edada067b132",
+      "trait": "parkinson"
+    },
+    {
+      "effect_scale": "log_odds",
+      "genome_build": "GRCh37",
+      "n_semantics": "effective",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/scz.harmonized.tsv.gz",
+      "sha256": "02a168a4693e2b1f589401f345626c3f4b966d2080356d25c1419c4fb601c6df",
+      "trait": "scz"
+    }
+  ],
+  "methods": [
+    {
+      "class": "A",
+      "method": "five_track_candidate_reconciliation",
+      "reason": "All 25 pair candidates and 20 geographic groups are receipt bound.",
+      "status": "COMPLETE_EXPLORATORY"
+    },
+    {
+      "class": "A/B",
+      "method": "independent_ld_and_signed_direction",
+      "reason": "Five cross-pair genotype LD edges and 2,686 signed-LD candidate statuses are versioned; six raw R values fail range QC.",
+      "status": "COMPLETE_EXPLORATORY_WITH_EXCEPTIONS"
+    },
+    {
+      "class": "A",
+      "method": "locus_specific_replication",
+      "reason": "Existing FinnGen ADHD result is global pair-level directional replication only.",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "class": "B",
+      "method": "susie_fine_mapping",
+      "reason": "Pinned R lacks susieR; reviewed trait-specific N/case-fraction and full regional LD contract absent; UKB raw LD has documented out-of-range entries.",
+      "status": "NOT_RUN_METHOD_PREREQUISITES_UNREVIEWED"
+    },
+    {
+      "class": "B",
+      "method": "trait_trait_coloc",
+      "reason": "Pinned R lacks coloc; reviewed regional dataset, sample-size, prior and overlap settings absent; multi-signal path also requires valid fine-mapping.",
+      "status": "NOT_RUN_METHOD_PREREQUISITES_UNREVIEWED"
+    },
+    {
+      "class": "B",
+      "method": "eqtl_sqtl_coloc",
+      "reason": "No source-verified full-cis QTL dataset or reviewed molecular follow-up configuration is locally bound.",
+      "status": "NOT_RUN_NO_VERIFIED_QTL_INPUT"
+    },
+    {
+      "class": "B",
+      "method": "regulatory_cell_type_pathway",
+      "reason": "B Ensembl lead-level regulatory lookup was cached; no weighted functional input, tissue panel/background or multiplicity family is reviewed.",
+      "status": "DESCRIPTIVE_COORDINATE_CONTEXT_ONLY"
+    },
+    {
+      "class": "C",
+      "method": "lava_local_rg_and_final_tiers",
+      "reason": "Canonical v3 failed frozen family QC: 3,720 NOT_RUN versus maximum 873.",
+      "status": "BLOCKED_LAVA"
+    }
+  ],
+  "native_R_inventory": "susieR=FALSE coloc=FALSE",
+  "plink2_executable": null,
+  "plink_executable": null,
+  "qtl_directories_with_files": [],
+  "script_sha256": "089095bb8eb7ec826031609a4699fd77bdf281e5bac396c830bf651c112c6106",
+  "source_sha256": {
+    "brain6/manifests/locked_dense_input_audit.tsv": "77674161c7733b8468b6a60d7160c5ec98eb89ff9e45361b09b60cb8d72e90cc",
+    "extensions/brain6/configs/followup.template.json": "f543803d1d4ad06d42a317cbf4b2a4d45aa8c9417624e2aebc5b1ec1f7addecd",
+    "extensions/brain6/configs/molecular_followup.template.json": "293942f5f80010a8f691459cf836dddbd3bb8260aa8520e116902c709cf4057f",
+    "pinned_Rscript": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108",
+    "source_card_adhd": "b895561bd34010594948f026a0abfadbe1079af666b1f2de9176244cae4e2f25",
+    "source_card_bipolar": "90cde749b4fc53125cfb2059c4fd688c88b6d4c306ae94f4488d0a97ee686d78",
+    "source_card_insomnia": "9749c8275d8aa7db5d0d18a937309f351ce47e8ae66e6ddeb25d47b173a95d04",
+    "source_card_longsleep": "6dd2c2da1418502349d92ecaa937577de28b6915393c06c97cbde6c3812bdd1b",
+    "source_card_mdd": "7e5c6fff95539fc99352564c3a5fcb3910560e42ba54c307b689f4d378a2c660",
+    "source_card_parkinson": "5277821d3aea6bbb14263d0f015cce4071bb75e4983f9418d6478a00c2ab7887",
+    "source_card_scz": "1e696b534c4eff4214a233a7b58352bb9152d08802a4bcb0aa09be2e5bd6d686"
+  }
+}

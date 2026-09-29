@@ -37,6 +37,7 @@ def rank_pairs(matrix: str | Path, config: dict) -> list[dict]:
         for k in ["rg", "se", "p", "fdr"]:
             try:
                 r[k] = float(r[k])
+                if not math.isfinite(r[k]): r[k] = None
             except (ValueError, TypeError):
                 r[k] = None
         numeric = all(r[k] is not None and math.isfinite(r[k]) for k in ["rg", "se", "p", "fdr"])

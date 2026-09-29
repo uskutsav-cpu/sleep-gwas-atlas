@@ -1,0 +1,35 @@
+{
+  "analysis_id": "brain6-placo-candidate-mhc-exclusion-v1",
+  "candidate_threshold_unchanged": 1e-08,
+  "coordinate_build": "GRCh37/hg19",
+  "excluded_interval": {
+    "chromosome": "6",
+    "end_exclusive": 34000000,
+    "name": "extended major histocompatibility complex",
+    "start_inclusive": 25000000
+  },
+  "family_complete": false,
+  "interpretation": "Do not recompute P-values, q-values, thresholds, pair correction, or candidate membership. Report descriptive partial-family counts only; do not call candidates independent or causal loci.",
+  "interval_reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11130317/",
+  "output_path": "brain6/results/sensitivity/placo_candidate_mhc_exclusion.tsv",
+  "output_sha256": "56878f6245e36cb47b6af4cf019ced5eede1afe8b358bb2fe87dd7aeec81f30e",
+  "pair_scope": [
+    "insomnia__mdd",
+    "longsleep__bipolar",
+    "longsleep__parkinson",
+    "longsleep__scz"
+  ],
+  "plan_path": "brain6/config/placo_candidate_mhc_exclusion_v1.json",
+  "plan_sha256": "35741b290cb483d239196fd9b862640717dc7d3fd8de8a4f5c9d625c4bb183af",
+  "protected_track_b_present": false,
+  "python_version": "3.11.11",
+  "script_path": "brain6/scripts/analyze_placo_candidate_mhc_exclusion.py",
+  "script_sha256": "e359c6f442b2f536807d6bd6cc8b04c38792d8b391e8d2848373733be50b1975",
+  "source_hashes": {
+    "brain6/config/placo_family_v3/family_lock.json": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7",
+    "brain6/results/loci/placo_candidate_loci_partial.provenance.json": "9c087da949ed70a21182ab5157537fe009d7bc3ec0ee48fa8aa611602192ad19",
+    "brain6/results/loci/placo_candidate_loci_partial.tsv": "fe73f37d96e33275b6a739d73d8f808d36070698342e6b872ca9fc1187e7c419",
+    "brain6/results/loci/placo_candidate_variants_partial.tsv": "8aab50a8d06c3af2d7a45297142181326d505f410389dd7e9b3e570dc0affc47"
+  },
+  "status": "PASS_PARTIAL_FAMILY_DESCRIPTIVE_COUNTS"
+}

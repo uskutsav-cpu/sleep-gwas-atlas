@@ -1,0 +1,117 @@
+{
+  "analysis_id": "brain6-lava-rescue-v1",
+  "bh_12475_complete": false,
+  "bivariate_slots_executed": 0,
+  "canonical_decision_sha256": "3569ce81d33479321f9b3adec7bd09c9b54a10a01f1fa4abd15888d9d2e66b22",
+  "canonical_not_run_reasons": {
+    "FEWER_THAN_MIN_K": 2,
+    "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 154,
+    "LOW_LOCAL_H2_UNDERPOWERED": 3564
+  },
+  "canonical_observed_status_counts": {
+    "NOT_RUN": 3720,
+    "TESTED": 13745
+  },
+  "classification": "FAIL_QC",
+  "correctable_large_scale_technical_cause_demonstrated": false,
+  "family_complete": false,
+  "frozen_maximum_untested": 873,
+  "full_rescue_executed": false,
+  "manifest_sha256": "355a568910cd932e68feb9e032bfabc43d8087d2f86fbf3dd000d4fd39d6ceb7",
+  "matrix_sha256": "0aa32e9332f52b0fcc826e2e18240471c24e25f6fdf769342967da0693b5678f",
+  "minimum_untested_if_all_min_k_fixed": 3564,
+  "minimum_untested_if_both_sleep_traits_perfect": 1758,
+  "per_pair_derived_gate_status": {
+    "insomnia__adhd": {
+      "AT_LEAST_ONE_NOT_RUN": 808,
+      "STRICT_UNIV_GATE_MISS": 1687
+    },
+    "insomnia__mdd": {
+      "AT_LEAST_ONE_NOT_RUN": 1072,
+      "STRICT_UNIV_GATE_MISS": 1423
+    },
+    "longsleep__bipolar": {
+      "AT_LEAST_ONE_NOT_RUN": 1360,
+      "STRICT_UNIV_GATE_MISS": 1135
+    },
+    "longsleep__parkinson": {
+      "AT_LEAST_ONE_NOT_RUN": 1582,
+      "BOTH_STRICT_UNIV_PASS": 1,
+      "STRICT_UNIV_GATE_MISS": 912
+    },
+    "longsleep__scz": {
+      "AT_LEAST_ONE_NOT_RUN": 1342,
+      "BOTH_STRICT_UNIV_PASS": 1,
+      "STRICT_UNIV_GATE_MISS": 1152
+    }
+  },
+  "per_trait": {
+    "adhd": {
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 23,
+      "LOW_LOCAL_H2_UNDERPOWERED": 200,
+      "NOT_RUN": 223,
+      "STRICT_GATE_PASS": 88,
+      "TESTED": 2272
+    },
+    "bipolar": {
+      "FEWER_THAN_MIN_K": 1,
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 22,
+      "LOW_LOCAL_H2_UNDERPOWERED": 145,
+      "NOT_RUN": 168,
+      "STRICT_GATE_PASS": 64,
+      "TESTED": 2327
+    },
+    "insomnia": {
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 20,
+      "LOW_LOCAL_H2_UNDERPOWERED": 651,
+      "NOT_RUN": 671,
+      "TESTED": 1824
+    },
+    "longsleep": {
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 20,
+      "LOW_LOCAL_H2_UNDERPOWERED": 1271,
+      "NOT_RUN": 1291,
+      "STRICT_GATE_PASS": 1,
+      "TESTED": 1204
+    },
+    "mdd": {
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 24,
+      "LOW_LOCAL_H2_UNDERPOWERED": 565,
+      "NOT_RUN": 589,
+      "STRICT_GATE_PASS": 14,
+      "TESTED": 1906
+    },
+    "parkinson": {
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 23,
+      "LOW_LOCAL_H2_UNDERPOWERED": 613,
+      "NOT_RUN": 636,
+      "STRICT_GATE_PASS": 12,
+      "TESTED": 1859
+    },
+    "scz": {
+      "FEWER_THAN_MIN_K": 1,
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 22,
+      "LOW_LOCAL_H2_UNDERPOWERED": 119,
+      "NOT_RUN": 142,
+      "STRICT_GATE_PASS": 167,
+      "TESTED": 2353
+    }
+  },
+  "pilot_exit_status": 0,
+  "pilot_loci": [
+    "1",
+    "950",
+    "1416",
+    "2207"
+  ],
+  "pilot_receipts": {
+    "1": "533f448bec3c48874bb3d0e33436ed58a9c7e69fd6b6ce8dc9f80cc6c5897145",
+    "1416": "3ea121edd7c80fba008211bfbd9c529fd5fc54940603090a6322e822f3c46a19",
+    "2207": "07f900bac3973d315be96e7f315ff5ed5f1dac0484d786990e1cde5174f2248b",
+    "950": "5c659d80a5285760746758bc1fa8e30c69a858e53f755c95724c562433effced"
+  },
+  "promotion_permitted": false,
+  "protocol_sha256": "659155d2d9da83b61e9e68c3aa080e2955cb0a0566068e09ce2f2c69afb204bb",
+  "reason": "No demonstrated technical defect can bridge 3564 low-local-h2 cells to the fixed 873-cell maximum; the diagnostic pilot verified input and receipt integrity at four prospectively selected loci.",
+  "schema_version": 1
+}

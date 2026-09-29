@@ -1,0 +1,66 @@
+# Power-optimized sleep GWAS audit (interim)
+
+Audit checkpoint: 2026-09-25 UTC. This report is an outcome-blinded technical screen and interim run-status record. It does not alter canonical Brain6 LAVA v3 or promote the frailty LAVA sensitivity family.
+
+## Scope and locked decisions
+
+Brain6 canonical v3 is a seven-input family, but only **insomnia** and **longsleep** are sleep GWAS. The other five inputs (ADHD, bipolar disorder, major depression, Parkinson disease, and schizophrenia) are disorder GWAS. The separate sleep–frailty project has a locked 12-sleep-trait family; it already includes Dashti 2019 continuous sleep duration (`sleepdur`) alongside long sleep. The continuous phenotype is related to, but not interchangeable with, the >=9-hour tail.
+
+Canonical run `d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b` remains immutable: 17,465 planned cells, 13,745 TESTED, 3,720 NOT_RUN, 0 FAILED. It retains `FAILED_QC_NOT_PROMOTED` under its frozen 5% cap. The four-worker setting is already present in the completed v3 lock. The separate frailty run remains at four workers; this audit did not change its scheduler, receipts, inputs, or result directories.
+
+## Canonical v3 trait diagnostics
+
+Counts below come from the frozen Tables S25/S26 and canonical receipts. The local-h2 summaries are medians among TESTED cells only; NOT_RUN cells have no observed local-h2 estimate. “LAVA-eligible” means TESTED under the local-h2/reference-K processing gate. The stricter Bonferroni local-univariate p<2.8629e-6 count is shown separately and is not the processing status. Neither count is a bivariate result. Global reference-panel overlap counts are not separately tabulated in the frozen tables; the per-locus shared-reference K rule is represented by its NOT_RUN cause counts.
+
+| Trait | Role | GWAS / PMID / DOI | N; cases / controls; effective N | Definition; ancestry; build | Usable variants | Frozen reference overlap | SNP h2 | Median local h2 (TESTED only) | LAVA-eligible / 2,495 | Local-h2 p<2.8629e-6 | Low h2 NOT_RUN | Ref-K NOT_RUN | Other NOT_RUN | TESTED / NOT_RUN |
+|---|---|---|---|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| insomnia | sleep | Jansen 2019; PMID 30804565; 10.1038/s41588-018-0333-3 | 386,533; 109,402 / 277,131; 313,750 | UKB field 1200 insomnia symptoms; EUR; hg19 | 6,077,635 | Not separately summarized; 20 loci fail shared-K | 0.1008 | 0.00008568 | 1,824 (73.11%) | 0 | 651 | 20 | 0 | 1,824 / 671 |
+| longsleep | sleep | Dashti 2019; PMID 30846698; 10.1038/s41467-019-08917-4 | 339,926; 34,184 / 305,742; 122,985 | Self-reported >=9 h vs 7–8 h; EUR; hg19 | 6,549,769 | Not separately summarized; 20 loci fail shared-K | Not recorded for binary long sleep | 0.00012766 | 1,204 (48.26%) | 1 | 1,271 | 20 | 0 | 1,204 / 1,291 |
+| ADHD | disorder | Demontis 2023; PMID 36702997; 10.1038/s41588-022-01285-8 | 225,534; 38,691 / 186,843; 128,214 | ADHD case-control meta-analysis; EUR; hg19 | 5,692,669 | Not separately summarized; 23 loci fail shared-K | Not recorded in locked summary | 0.00036384 | 2,272 (91.06%) | 88 | 200 | 23 | 0 | 2,272 / 223 |
+| bipolar | disorder | Mullins 2021; PMID 34002096; 10.1038/s41588-021-00857-4 | 413,466; 41,917 / 371,549; 150,670 | Lifetime bipolar disorder; EUR; hg19 | 6,339,466 | Not separately summarized; 22 loci fail shared-K | Not recorded in locked summary | 0.00051896 | 2,327 (93.27%) | 64 | 145 | 22 | 1 | 2,327 / 168 |
+| MDD | disorder | Howard 2019; PMID 30718901; 10.1038/s41593-018-0326-7 | 500,199; 170,756 / 329,443; 449,856 | UKB broad depression + PGC MDD; EUR; build unresolved in source card | 1,156,949 | Not separately summarized; 24 loci fail shared-K | Not recorded in locked summary | 0.00004466 | 1,906 (76.39%) | 14 | 565 | 24 | 0 | 1,906 / 589 |
+| Parkinson | disorder | Nalls 2019; PMID 31701892; 10.1016/S1474-4422(19)30320-5 | 482,730; 33,674 / 449,056; 125,300 | PD plus UKB family-history proxy cases; EUR; hg19 | 1,132,078 | Not separately summarized; 23 loci fail shared-K | Not recorded in locked summary | 0.00016117 | 1,859 (74.51%) | 12 | 613 | 23 | 0 | 1,859 / 636 |
+| SCZ | disorder | Trubetskoy 2022; PMID 35396580; 10.1038/s41586-022-04434-5 | 130,644; 53,386 / 77,258; 126,282 | PGC3 Wave 3 European autosomal stratum; EUR; hg19 | 6,341,702 | Not separately summarized; 22 loci fail shared-K | Not recorded in locked summary | 0.00051533 | 2,353 (94.31%) | 167 | 119 | 22 | 1 | 2,353 / 142 |
+
+Case-control effective N uses `4/(1/Ncase + 1/Ncontrol)`. Long sleep is the weakest technical phenotype by NOT_RUN burden: 1,291/2,495 (51.74%), versus 671/2,495 (26.89%) for insomnia. Its low-local-h2 failures (1,271) account for 98.45% of its NOT_RUN cells; only 20 (0.80% of loci) fail the shared-reference K requirement. Thus the principal observed limitation is local-h2 support, not lack of total summary-statistic variants or broad reference overlap.
+
+## Candidate screening and recommendation
+
+The objective screen was frozen in `frailty_paper/config/power_optimized_sleep_sensitivity_v1.yaml` before review of sleep–frailty bivariate estimates. It requires an outcome-blinded LAVA pilot of at least 100 chromosome-stratified loci and either a >=10 percentage-point gain in eligible loci or a >=25% reduction in low-local-h2 failures, while preserving phenotype interpretation, provenance, ancestry/build compatibility, and all locked LAVA QC rules.
+
+| Candidate | Phenotype and power | Access / harmonization | Outcome-blinded local-h2 screen | Decision |
+|---|---|---|---|---|
+| Dashti 2019 continuous duration, GCST007561 (PMID 30846698; DOI 10.1038/s41467-019-08917-4) | Self-reported hours per 24 h including naps; EUR; GRCh37; N=446,118, about 3.63x long-sleep effective N. Related duration construct, not equivalent to >=9 h. | Public GWAS Catalog ZIP, SHA-256 `77ebce3fcabb32a36e028390c7a34ce7f6aac11e2b663014132be1dc0f82d7c8`; decompressed summary SHA-256 `b1115038b2e1232617a9a6a2ed445c54a12948c27d28ecb23dc7af2ced0fdda0`. Source provides effect/non-effect alleles, beta per hour, SE, P, frequency and INFO; 14.66M source variants before study/QC filtering. The existing locked FI×sleep preparation already contains harmonized `sleepdur` input (6,549,809 rows; source SHA-256 `f2c0b9eaa4623e9757de86d6542fb3267874a2def626ca548fccb3ab97fced41`). UKB participant overlap with long sleep and FI is expected but exact intersections are unknown. | Interim matched receipts (2026-09-25 01:05:12 UTC): 122/177 eligible (68.93%) vs long sleep 93/177 (52.54%), +16.38 percentage points; ineligible count 55 vs 84 (-34.52%). This subset covers only 7/22 autosomes, so it does **not** satisfy the frozen chromosome-stratified pilot rule and is not formal promotion evidence. Recorded shared-reference K was >=29 in all pilot receipts where K was available (134 long-sleep and 151 duration loci; medians 275 and 286). The existing full 12-trait FI×sleep family already includes this input; no separate candidate run was launched. | **SUPPLEMENT WITH SENSITIVITY** within the already-locked family. Wait for full 2,495-locus comparison before any further power-optimization decision; do not replace canonical long sleep or duplicate running slots. |
+| Austin-Zimmerman et al. 2023 long sleep (PMID 37735530; 10.1038/s41467-023-41679-0) | >=10 h binary phenotype differs from canonical >=9 h; EUR UKB+MVP component has 15,962 cases and 382,950 controls (N=398,912; effective N≈61,293), below canonical long-sleep effective N≈122,985. | Public article/supplement available; not a power improvement and threshold/provenance differ. | Not run: fails phenotype/power screen. | **KEEP** canonical long sleep; no replacement. |
+| Austin-Zimmerman et al. 2025 duration preprint | Larger combined quantitative phenotype (N=646,218), but includes a different UKB+MVP cohort and is not a direct binary long-sleep equivalent. | Full summary statistics are stated as available upon reasonable request after peer review; not independently downloadable/checksum-verifiable at this audit. | Not run: access/provenance gate fails. | **NO VALID ALTERNATIVE FOUND** for current use. |
+| Jansen et al. 2019 full insomnia meta-analysis | Larger meta-analysis (N=1,331,010) includes 23andMe and is a close construct match. | Freely available Jansen release excludes 23andMe; full dense meta statistics are agreement-restricted and unavailable to this audit. | Not run: cannot use inaccessible statistics. | **KEEP** current UKB-only insomnia; no usable public higher-powered replacement verified. |
+
+The continuous-duration candidate is directly represented in the current locked FI×sleep sensitivity family, so the appropriate action is to complete and audit that existing family, not launch another family over the same 2,495 loci and source. The available matched receipts are an in-progress, chromosome-unbalanced screen. Their numeric gain is suggestive, but they fail the frozen sample-selection condition and cannot be used as a promotion decision. They do not establish local sharing, replication, or a confirmatory result. No bivariate estimates were used to select the candidate.
+
+Trait recommendations: **KEEP** insomnia in the primary analysis; **SUPPLEMENT WITH SENSITIVITY** for long sleep using the already-running `sleepdur` sensitivity; keep ADHD, bipolar disorder, MDD, Parkinson disease, and schizophrenia as their existing disorder inputs because none is a sleep phenotype subject to this replacement screen.
+
+## Current sensitivity run status
+
+At 2026-09-25 01:05:20 UTC, the pre-existing `frailty_fi_sleep_lava_sensitivity_v1` scheduler reported 6,674 / 29,940 verified slots (22.29%), four workers (PIDs 91492–91495), zero launch failures, and zero stale-claim recoveries. Its recorded concurrency change is from six to four workers, preserving prior receipts; all four workers held active claims. The separately captured, chromosome-unbalanced screen (01:05:12 UTC) covers 177 matched loci as listed in `power_optimized_sleep_pilot_2026-09-25.json`; `sleepdur` and `longsleep` do not yet have complete 2,495-locus family outputs. Their full sensitivity estimates, newly testable local-rg cells, and direction/numerical concordance remain pending. The run is explicitly sensitivity-only; the locked frailty replication gate bars confirmatory or Tier 1 claims. No downstream fine-mapping, colocalization, enrichment, or replication work is eligible from this interim screen.
+
+## Runtime and audit summary
+
+- Current canonical Brain6 inputs evaluated: seven total (two sleep phenotypes and five disorder phenotypes).
+- Sleep alternatives evaluated: continuous Dashti duration, 2023 >=10 h long sleep, 2025 duration preprint, and the full insomnia meta-analysis.
+- Independently accessible candidates: the continuous-duration summary statistics and 2023 paper/supplement; only the former passed the objective power/provenance screen.
+- Candidate harmonized and reference-screened: one (continuous duration; already prepared in the locked FI×sleep family).
+- Interim candidate screen: 177 matched loci across 7/22 autosomes; +16.38 percentage points LAVA eligibility and 34.52% fewer ineligible slots, but not a formal pilot because the frozen chromosome-stratification requirement is unmet.
+- Separate sensitivity families launched for this audit: zero. Existing locked FI×sleep sensitivity family containing `sleepdur`: active, 29,940 planned pair-locus slots; its receipts are being produced by four workers.
+- Complete 2,495-locus replacement sensitivities completed: zero. Downstream loci newly eligible from a complete candidate comparison: pending.
+
+## Source notes
+
+- Dashti et al. 2019, *Nature Communications*: https://www.nature.com/articles/s41467-019-08917-4
+- GWAS Catalog GCST007561 summary-statistics archive: https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST007001-GCST008000/GCST007561/Dashti_30846698_sleepdurationsumstats.txt.zip
+- Austin-Zimmerman et al. 2023, *Nature Communications*: https://pmc.ncbi.nlm.nih.gov/articles/PMC10539313/
+- Austin-Zimmerman et al. 2025 preprint: https://www.medrxiv.org/content/10.1101/2025.05.19.25327902v1
+- Jansen et al. 2019, *Nature Genetics*: https://www.nature.com/articles/s41588-018-0333-3
+
+## Reproducible inputs and limits
+
+Canonical counts are from `brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv`, `canonical_v3_status_by_locus_v1.tsv`, frozen source availability metadata, and existing Table S25/S26 receipts. Pilot counts were tallied by `brain6/scripts/audit_power_optimized_sleep_pilot.py` from matched `sleepdur` and `longsleep` identity-checked locus receipts and paired nonempty logs under the existing external run root; only LAVA univariate status fields were used. The exact matched indices and per-trait receipt/log manifest hashes are in `power_optimized_sleep_pilot_2026-09-25.json`; source/config/code/output hashes are recorded in `power_optimized_sleep_audit_2026-09-25.provenance.json`. Receipts outside this pilot are still being generated. A complete source-level count of variants intersecting the entire frozen reference panel is not included in the locked Brain6 summary tables, so no such total is inferred here; the locked per-locus shared-K failure counts are reported instead. Exact cohort intersections remain unknown and are not assumed to be zero.

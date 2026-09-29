@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6-placo-candidate-mhc-exclusion-v1",
+  "scope": "Partial four-pair PLACO candidate variants and candidate intervals only; protected Track B is absent.",
+  "coordinate_build": "GRCh37/hg19",
+  "excluded_interval": {
+    "chromosome": "6",
+    "start_inclusive": 25000000,
+    "end_exclusive": 34000000,
+    "name": "extended major histocompatibility complex"
+  },
+  "interval_basis": "chr6:25-34 Mb is a published extended-MHC sensitivity interval on GRCh37/hg19; this is an exclusion sensitivity, not a new discovery threshold.",
+  "interval_reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11130317/",
+  "candidate_definition": "Use the existing checksum-verified partial candidate table, whose members were generated from QC-passed PLACO pair outputs at the frozen 1e-8 candidate threshold and existing LD-clumping rule.",
+  "position_policy": "Only EXACT_MATCH variants in the frozen UK Biobank LAVA reference count as position-validated. Unmatched or position-mismatched rows are reported separately and never treated as outside-MHC.",
+  "interval_policy": "A candidate interval is outside MHC only if its complete half-open [START, STOP) interval does not overlap the excluded interval.",
+  "inference_policy": "Do not recompute P-values, q-values, thresholds, pair correction, or candidate membership. Report descriptive partial-family counts only; do not call candidates independent or causal loci.",
+  "expected_pairs": [
+    "insomnia__mdd",
+    "longsleep__bipolar",
+    "longsleep__parkinson",
+    "longsleep__scz"
+  ],
+  "source_paths": {
+    "family_lock": "brain6/config/placo_family_v3/family_lock.json",
+    "candidate_variants": "brain6/results/loci/placo_candidate_variants_partial.tsv",
+    "candidate_loci": "brain6/results/loci/placo_candidate_loci_partial.tsv",
+    "candidate_provenance": "brain6/results/loci/placo_candidate_loci_partial.provenance.json"
+  }
+}

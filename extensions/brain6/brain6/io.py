@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import contextlib
 import csv
+import errno
 import gzip
 import hashlib
 import io
@@ -127,11 +128,33 @@ def atomic_text(path: str | Path, *, immutable: bool = True,
             raw.flush()
             os.fsync(raw.fileno())
         if immutable:
-            # link() is an atomic no-clobber publication; same filesystem.
-            os.link(tmp, path)
-            os.unlink(tmp)
+            # A hard link is the strongest portable no-clobber publication
+            # primitive. Some external filesystems (notably exFAT) do not
+            # implement hard links, so reserve the destination exclusively
+            # before an atomic same-filesystem rename as a fallback.
+            try:
+                os.link(tmp, path)
+            except OSError as exc:
+                unsupported = {errno.EPERM, errno.EXDEV, errno.ENOSYS}
+                if hasattr(errno, "EOPNOTSUPP"):
+                    unsupported.add(errno.EOPNOTSUPP)
+                if hasattr(errno, "ENOTSUP"):
+                    unsupported.add(errno.ENOTSUP)
+                if exc.errno not in unsupported:
+                    raise
+                fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o666)
+                os.close(fd)
+                try:
+                    os.rename(tmp, path)
+                except BaseException:
+                    path.unlink(missing_ok=True)
+                    raise
+            else:
+                os.unlink(tmp)
         else:
-            os.replace(tmp, path)
+            # os.replace maps to a filesystem operation that may be disabled
+            # on removable volumes even where atomic rename is supported.
+            os.rename(tmp, path)
     finally:
         if os.path.exists(tmp):
             os.unlink(tmp)

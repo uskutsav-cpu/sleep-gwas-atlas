@@ -1,0 +1,30 @@
+component	version	status_or_evidence
+Environment snapshot date	2026-09-23 19:32 UTC	Runtime/software inventory captured from the production host after the full Brain6 check; not a final result freeze
+Repository code tested commit	0438e69	Branch frailty-paper-v1; full make -C brain6 check passed at 19:32 UTC on this exact code snapshot: 54 script tests, 308 extension tests, 3 expected native skips, output/manuscript validation and receipt audit; subsequent changes in this checkpoint are inventory/report records only
+Operating system	macOS 26.5.1 (Darwin 25.5.0, arm64)	sw_vers: build 25F80; uname: Darwin kernel 25.5.0, arm64
+Python (host system)	3.13.5	python3 --version; not the default Makefile interpreter
+Pandas (host system)	3.0.5	Available in system Python only; global-map rebuild now defaults to the Brain6 venv
+Python (Brain6 extension venv)	3.13.13	extensions/brain6/.venv/bin/python --version
+Pandas (Brain6 extension venv)	NOT_INSTALLED	Declared by the project analysis extra; installing from PyPI failed because DNS/network access to pypi.org is unavailable in this environment
+NumPy (Brain6 extension venv)	2.5.3	Installed in Brain6 extension venv
+SciPy (Brain6 extension venv)	1.18.1	Installed in Brain6 extension venv
+Matplotlib (Brain6 extension venv)	3.11.2	Installed in Brain6 extension venv
+pytest (Brain6 extension venv)	9.1.1	Installed in Brain6 extension venv
+LDSC	3.0.1	Local repository revision 6c673952cee74bd5c57aef1555a03b1c015399a0 (ldsc_1.0.0_20240909-67-g6c67395-dirty); Python 3.9.23; working tree has project patches
+R (LAVA/PLACO runtime)	4.3.3	Pinned runtime at /Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin/Rscript
+data.table (R runtime)	1.17.8	Installed in pinned R 4.3.3 runtime
+jsonlite (R runtime)	2.0.0	Installed in pinned R 4.3.3 runtime
+LAVA	0.1.5	Verified by scripts/133_validate_track_b_lava_runtime.R; commit e729a245f7b6923967a96804fbf5246eadf2d6c6; active Brain6 local family in progress
+Official LAVA UK Biobank LD reference	UKB v1.1; N=100,000 unrelated European-ancestry participants	SHA-256-verified official HTTPS acquisition; sealed external reference provenance; GRCh37 coordinates
+PLACO+	0.2.0	Official RayDebashree/PLACO source; upstream commit 3ba3cae1d323ad117fb4540e620bcefa79f70663; source checksum in placo_source_v0.2.0.json; active Brain6 family in progress
+HDL-L	NOT_INSTALLED / NOT_IMPLEMENTED	HDL namespace absent from pinned R 4.3.3 and host R 4.6.1; no Brain6 HDL-L executable or adapter is present
+PLINK 1.9	NOT_INSTALLED	No executable on PATH or in checked /opt/homebrew/bin, /usr/local/bin, or /Volumes/Extreme SSD/brain6-work locations; native LD/clumping test skipped; no Brain6 PLINK analysis run
+SuSiE	NOT_INSTALLED	R package susieR absent from pinned R 4.3.3 and host R 4.6.1; no accepted empirical Brain6 loci yet
+coloc	NOT_INSTALLED	R package absent from pinned R 4.3.3 and host R 4.6.1; no accepted empirical Brain6 loci yet
+TwoSampleMR	NOT_INSTALLED	R package absent from pinned R 4.3.3 and host R 4.6.1; no admitted Brain6 MR family
+MATLAB	UNAVAILABLE	No Brain6 result; no licensed runtime verified
+Snakemake	9.27.0	Installed in extensions/brain6/.venv; not used because frozen workflows run through Python runners and Make targets
+Brain6 script tests	54 passed	Full make -C brain6 check at 19:32 UTC on code commit 0438e69; python -m pytest -q brain6/scripts/tests
+Brain6 extension tests	308 passed; 3 skipped	Full make -C brain6 check at 19:32 UTC on code commit 0438e69; pinned R 4.3.3 first on PATH; skips: susieR, PLINK 1.9, TwoSampleMR absent
+Brain6 global figure renderer	Python 3.13.13; NumPy 2.4.3; pandas 3.0.5; SciPy 1.18.1; Matplotlib 3.11.2	`make -C brain6 refresh-figures PYTHON=/opt/miniconda3/bin/python`; complete source, code, font, and output hashes are recorded in `results/global/figures/figure_build_provenance.json`
+R (host system)	4.6.1	/opt/homebrew/bin/Rscript --version; host runtime inspected read-only

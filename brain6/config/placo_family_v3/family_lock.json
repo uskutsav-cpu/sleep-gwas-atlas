@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "family_id": "brain6_placo_plus_v3",
+  "supersedes": "brain6_placo_plus_v2",
+  "supersession_reason": "v2 transactional artifact receipts detected implementation fingerprint drift after package resource synchronization; no v2 chunk outputs were promoted or interpreted",
+  "pair_selection_lock": "extensions/brain6/work/overnight-v03/brain6-pairs.lock.json",
+  "pair_selection_lock_sha256": "56c0e697663562150bdcfd7550107df91c34118bdd3bdc2b15396a7ed67b6652",
+  "n_selected_tracks": 5,
+  "protected_legacy_pair": "insomnia__adhd",
+  "pairs": {
+    "insomnia__mdd": {
+      "plan_path": "brain6/config/placo_family_v3/insomnia__mdd/plan.json",
+      "plan_sha256": "1f6a21c820f0529283c9a863ec368d1fe0f4f7a7812162177dd4ba27b7079fad",
+      "expected_rows": 1122359,
+      "n_chunks": 57
+    },
+    "longsleep__bipolar": {
+      "plan_path": "brain6/config/placo_family_v3/longsleep__bipolar/plan.json",
+      "plan_sha256": "7f6963994f56ffb9e59ddb5faef05d3a5c85a1d337e21ff221a34efb33a9f8e3",
+      "expected_rows": 6305673,
+      "n_chunks": 316
+    },
+    "longsleep__parkinson": {
+      "plan_path": "brain6/config/placo_family_v3/longsleep__parkinson/plan.json",
+      "plan_sha256": "4e5c2cd471157f8be31d26cc02a898732add7abc6b536fabab8177bf608950cb",
+      "expected_rows": 1131725,
+      "n_chunks": 57
+    },
+    "longsleep__scz": {
+      "plan_path": "brain6/config/placo_family_v3/longsleep__scz/plan.json",
+      "plan_sha256": "76fd989e6c20544de321cb1cb3678b1560a1270d68bd87db2a252227eced6e9b",
+      "expected_rows": 6296500,
+      "n_chunks": 315
+    }
+  },
+  "method": "PLACO_PLUS",
+  "placo_source_path": "/Volumes/Extreme SSD/brain6-work/PLACO-v0.2.0/PLACO_v0.2.0.R",
+  "placo_source_sha256": "fb684a8ed88f27dd138f5c2e8613b092904e84f364030d036058f17db95b7124",
+  "adapter_path": "extensions/brain6/scripts/placo.R",
+  "adapter_sha256": "e097104aed7f0fb36c1937a273e7d0bb7887a7177a22133a4e107d0042820097",
+  "bundled_adapter_path": "extensions/brain6/brain6/resources/placo.R",
+  "bundled_adapter_sha256": "e097104aed7f0fb36c1937a273e7d0bb7887a7177a22133a4e107d0042820097",
+  "extension_code_inventory": [
+    {
+      "path": "extensions/brain6/brain6/__init__.py",
+      "sha256": "f76c27e2ab58b12130b72a718611e160f57a17611b175e6ad44534d0725cd8d1"
+    },
+    {
+      "path": "extensions/brain6/brain6/__main__.py",
+      "sha256": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4"
+    },
+    {
+      "path": "extensions/brain6/brain6/annotations.py",
+      "sha256": "f8bc219f3c562079e7d1187890e9c78b4e275299d0f930310934c9fe8ddb9832"
+    },
+    {
+      "path": "extensions/brain6/brain6/artifacts.py",
+      "sha256": "73dd7cde4cc2998d4693f78ff43bfd03bb3ac85ba0031854f92765daefe82833"
+    },
+    {
+      "path": "extensions/brain6/brain6/assembly.py",
+      "sha256": "88e4a6e57f9c67e2c69fcc8958dd4abf647edec876ff4e0b65543e223b9b8149"
+    },
+    {
+      "path": "extensions/brain6/brain6/atlas_review.py",
+      "sha256": "87d78f9c55a11d8f34a7dbda1f86567f54439a5e99807fa2530defd906818ee7"
+    },
+    {
+      "path": "extensions/brain6/brain6/audit.py",
+      "sha256": "e5e7f0361cd7424d5b13fb3807e60b72076a6f4ad138f8c2ece8b16a6998d296"
+    },
+    {
+      "path": "extensions/brain6/brain6/bindings.py",
+      "sha256": "1cf1eaa74abbab35fea3301df6c04d7689b75d7f1f557a881fd0293ee39180b5"
+    },
+    {
+      "path": "extensions/brain6/brain6/campaign.py",
+      "sha256": "9ebd765b0a8c30ce38fc6eb7772e3bd48034a947224116d092cfa06e1e1c6e72"
+    },
+    {
+      "path": "extensions/brain6/brain6/cell24.py",
+      "sha256": "195c3dfe13a2fc742f0e0ac2a530ff4c58b7aa5da96bd9e323bedb50a4e444d6"
+    },
+    {
+      "path": "extensions/brain6/brain6/cli.py",
+      "sha256": "9b97c84f5ffce24dd8064a9b6ec8f56891960e28cb60622e25e223a4194d6a7e"
+    },
+    {
+      "path": "extensions/brain6/brain6/compare24.py",
+      "sha256": "36153ade3902af5f1af5f6cd9de752ce1a3ae686dd4c17d0736df95e1bfb093c"
+    },
+    {
+      "path": "extensions/brain6/brain6/completion24.py",
+      "sha256": "cfd162cb9367072d5a11759488d31950f0ef8dc264020c063f3ecd337b7d1628"
+    },
+    {
+      "path": "extensions/brain6/brain6/demo.py",
+      "sha256": "96295aed5e22a635d499685f0315200dd87df00b0fd74726d1dd7281548191c6"
+    },
+    {
+      "path": "extensions/brain6/brain6/doctor.py",
+      "sha256": "a4a18b5c7ac4dccb73b6d09035d313cd310290872260c9652f3796a4454c2c91"
+    },
+    {
+      "path": "extensions/brain6/brain6/download.py",
+      "sha256": "c8314679d7f91d70b6a47a000ecff425a5c97899f7042b115e94232892a82535"
+    },
+    {
+      "path": "extensions/brain6/brain6/evidence.py",
+      "sha256": "88d6f290ce593306d0cba2ba698ee215b24c65c0c10488957104a3bf6eab0580"
+    },
+    {
+      "path": "extensions/brain6/brain6/executor.py",
+      "sha256": "257cf4096ed8a9db66cdc9868ae4b3fac88df303d8f99cf93881a7fe3e40a591"
+    },
+    {
+      "path": "extensions/brain6/brain6/family24.py",
+      "sha256": "555e6330267d36ef9d3004cfc0b9109343b54903de0c44ba01e6c4037f309633"
+    },
+    {
+      "path": "extensions/brain6/brain6/followup.py",
+      "sha256": "545592a0cd206cf8bd33f05201e042d26b5018b28dbd35cd2a31d4c6348b4976"
+    },
+    {
+      "path": "extensions/brain6/brain6/gwas.py",
+      "sha256": "2782227a1c48fadc82c4e384441ec6d517ceb8db4f2e5580bb10a54cb62f0187"
+    },
+    {
+      "path": "extensions/brain6/brain6/host24.py",
+      "sha256": "b972b0246c01eb4e873814552c96a07f092a282c5f0f07229b829d53e38db439"
+    },
+    {
+      "path": "extensions/brain6/brain6/inputs24.py",
+      "sha256": "89fcd09ded8afac5975c50fa8c943a788a4a1aa259cc74843c61e06918cb8f6e"
+    },
+    {
+      "path": "extensions/brain6/brain6/install.py",
+      "sha256": "6f69781139afb28a9eb4a3d262d60d61ec9f0e9b89985a8f55a7a069c316299d"
+    },
+    {
+      "path": "extensions/brain6/brain6/io.py",
+      "sha256": "e3178e759e7218fe10c3e052651141e643e9056b3142c14f2fc09ba2c8427e59"
+    },
+    {
+      "path": "extensions/brain6/brain6/ld.py",
+      "sha256": "e716ada5f9dcd889abf4671ec717472bd5c06f43b1cb1d516b2e724b906465cd"
+    },
+    {
+      "path": "extensions/brain6/brain6/legacy.py",
+      "sha256": "c1f0ab9da5e1525badb5db747c4c74cc32fcb7a3fc8ca8bbe77a5497f02be12e"
+    },
+    {
+      "path": "extensions/brain6/brain6/matlab.py",
+      "sha256": "91d0538933a269ee25a0326e1fe74b0d4cc48ac01993328f5d01ea35d6a41baa"
+    },
+    {
+      "path": "extensions/brain6/brain6/molecular.py",
+      "sha256": "3960f5ef0682fb1c4686d9b84007c7a3635a53fa57502a963a18807e444499f0"
+    },
+    {
+      "path": "extensions/brain6/brain6/mr_workflow.py",
+      "sha256": "5c25fda25f7a0ebc59b235e9e6ff52b68cb5a36d188ced114ae6987bc527c348"
+    },
+    {
+      "path": "extensions/brain6/brain6/native.py",
+      "sha256": "2102f449933ac4039f543b1f61fea51bffc0cab281ab04ff0f332778e0277f99"
+    },
+    {
+      "path": "extensions/brain6/brain6/pairs.py",
+      "sha256": "a504f38068faababc08257d6d39038fc5ea87d0344d9ea52afaf3a8f0779c1d6"
+    },
+    {
+      "path": "extensions/brain6/brain6/pathway24.py",
+      "sha256": "54d6c3e64e7e7a97651f00c39d5aeae421249358ce109986691e6652cf9046c3"
+    },
+    {
+      "path": "extensions/brain6/brain6/pipeline.py",
+      "sha256": "e7c671829d05514b2db03ca23d7d2b24ebdc632e66816e2f046ba5364696d526"
+    },
+    {
+      "path": "extensions/brain6/brain6/planning.py",
+      "sha256": "a1f2d999197a6591a55b364228f0f1337d47c5273fc1cfdabc368870aa2da1e9"
+    },
+    {
+      "path": "extensions/brain6/brain6/pleiotropy.py",
+      "sha256": "c3839261ca9607a098d5a290c449bcf92c2d09bc20ef5cd3d2a4e542c08337a5"
+    },
+    {
+      "path": "extensions/brain6/brain6/plots.py",
+      "sha256": "1e8cfb50bd3f108c380efa5a317cd36044c2c240a722ad38abf4b9da8982ea95"
+    },
+    {
+      "path": "extensions/brain6/brain6/provenance24.py",
+      "sha256": "252712bd6c6619fe03fe6e129aa4b224057518c84af20414369517895bee93ff"
+    },
+    {
+      "path": "extensions/brain6/brain6/qtl.py",
+      "sha256": "86d367de3bb62f357fbbea2267450f2186188e2bad14d19fb272364c8ad87dea"
+    },
+    {
+      "path": "extensions/brain6/brain6/replication.py",
+      "sha256": "fc84a4cccd2512a13d23adf10fc5ea96b28a5f1e8514026bee38c3165a017669"
+    },
+    {
+      "path": "extensions/brain6/brain6/report.py",
+      "sha256": "639d37b4130b3ffc7a6d044b59a9cea6d9176a1a9bc9976139d02c4a131919a4"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/check_native.R",
+      "sha256": "e1935957da149ce77dcce527484f78df26cdc317e15516b88a6f6da30495936d"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/coloc.R",
+      "sha256": "4f2c43ccd2c0acce1ffee6394be9a618bfaf1f545ab0b309843052b16077866a"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/common.R",
+      "sha256": "40d239435165585c57a47ac5d98a578375d5cf41b9e6983b50400fc89205b977"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/genomicsem.R",
+      "sha256": "fee79b2b15ca9dfb7e6e1a3e23e0b271450cbe8ba88c106eeba0e51270022068"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/lava.R",
+      "sha256": "170213a2c97b8dd3623daeaadfc7476b7c654140de065a793e366c19a9fb75e7"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/mr.R",
+      "sha256": "f39c72892d6ac0818aecc99578594ba541bf802ac3071ab8b4ebaedab48ebc92"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/native_cli.py",
+      "sha256": "8c5d3c312fadfe960408ff912f2226cf820b976c165d357965a3ba14330a4c9b"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/native_environment.R",
+      "sha256": "81f179456fde73759cc50ac02723e187c9a90313c7b5dfc199e4f3398c6f885c"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/placo.R",
+      "sha256": "e097104aed7f0fb36c1937a273e7d0bb7887a7177a22133a4e107d0042820097"
+    },
+    {
+      "path": "extensions/brain6/brain6/resources/susie.R",
+      "sha256": "6bd2296c528c8f328ef902665f801ce7cf7fe46e2d2ede434df6050689e6baab"
+    },
+    {
+      "path": "extensions/brain6/brain6/robustness24.py",
+      "sha256": "dc4ab93d90c462bd32c80d05a07645d572eb5b4a78c4f3775b3c743f111cb090"
+    },
+    {
+      "path": "extensions/brain6/brain6/scale24.py",
+      "sha256": "132c3cba727b29eae7de7d8773a34b86bc0ab3d77a18c1e399a37d0d314fd22e"
+    },
+    {
+      "path": "extensions/brain6/brain6/shards24.py",
+      "sha256": "0e22c94cc1dd08d1b5e97c13df430204be6342d23ec740d6c2e5d7e2cd641ab5"
+    },
+    {
+      "path": "extensions/brain6/brain6/stats.py",
+      "sha256": "11790863ba6e0ef5ee374f886e19c1f2f919c519ad31fbc0ba48fc62106b57af"
+    },
+    {
+      "path": "extensions/brain6/brain6/validation24.py",
+      "sha256": "d0e84a74cf5ea3e835e4a1699203597a9825a99940bc0f1d0075bbe046a94009"
+    },
+    {
+      "path": "extensions/brain6/scripts/audit_on_host.sh",
+      "sha256": "56bdfe56fbba858a6603701e819477902a5056fa9b3e13d65b2aa6227fa53ee0"
+    },
+    {
+      "path": "extensions/brain6/scripts/benchmark_python.py",
+      "sha256": "3a49c09dfc8f6da67f1bd828ee75eecafdb0988f3c3fd8074e826a7044aaa881"
+    },
+    {
+      "path": "extensions/brain6/scripts/bootstrap_native.R",
+      "sha256": "0611ebf9e49b8a9900ff9fcba6769f0631d26f0c7c2f98b1f7fa7988b1f009f7"
+    },
+    {
+      "path": "extensions/brain6/scripts/check_native.R",
+      "sha256": "e1935957da149ce77dcce527484f78df26cdc317e15516b88a6f6da30495936d"
+    },
+    {
+      "path": "extensions/brain6/scripts/coloc.R",
+      "sha256": "4f2c43ccd2c0acce1ffee6394be9a618bfaf1f545ab0b309843052b16077866a"
+    },
+    {
+      "path": "extensions/brain6/scripts/common.R",
+      "sha256": "40d239435165585c57a47ac5d98a578375d5cf41b9e6983b50400fc89205b977"
+    },
+    {
+      "path": "extensions/brain6/scripts/demo_v02.py",
+      "sha256": "3e68c15910f0b0562adfb44c701e0d01d88ea6550d68949a759acc0886636bf1"
+    },
+    {
+      "path": "extensions/brain6/scripts/genomicsem.R",
+      "sha256": "fee79b2b15ca9dfb7e6e1a3e23e0b271450cbe8ba88c106eeba0e51270022068"
+    },
+    {
+      "path": "extensions/brain6/scripts/lava.R",
+      "sha256": "170213a2c97b8dd3623daeaadfc7476b7c654140de065a793e366c19a9fb75e7"
+    },
+    {
+      "path": "extensions/brain6/scripts/mr.R",
+      "sha256": "f39c72892d6ac0818aecc99578594ba541bf802ac3071ab8b4ebaedab48ebc92"
+    },
+    {
+      "path": "extensions/brain6/scripts/native_cli.py",
+      "sha256": "8c5d3c312fadfe960408ff912f2226cf820b976c165d357965a3ba14330a4c9b"
+    },
+    {
+      "path": "extensions/brain6/scripts/native_environment.R",
+      "sha256": "81f179456fde73759cc50ac02723e187c9a90313c7b5dfc199e4f3398c6f885c"
+    },
+    {
+      "path": "extensions/brain6/scripts/placo.R",
+      "sha256": "e097104aed7f0fb36c1937a273e7d0bb7887a7177a22133a4e107d0042820097"
+    },
+    {
+      "path": "extensions/brain6/scripts/run_brain6.sh",
+      "sha256": "1c551839c30b0a2f2d61cc6986a87aee834795c69949a4dd242cdebd8db97479"
+    },
+    {
+      "path": "extensions/brain6/scripts/susie.R",
+      "sha256": "6bd2296c528c8f328ef902665f801ce7cf7fe46e2d2ede434df6050689e6baab"
+    }
+  ],
+  "runtime_path": "/Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin/Rscript",
+  "runtime_sha256": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108",
+  "execution_roots": {
+    "insomnia__mdd": "/Volumes/Extreme SSD/brain6-work/placo-family-v3-results/insomnia__mdd",
+    "longsleep__bipolar": "/Volumes/Extreme SSD/brain6-work/placo-family-v3-results/longsleep__bipolar",
+    "longsleep__parkinson": "/Volumes/Extreme SSD/brain6-work/placo-family-v3-results/longsleep__parkinson",
+    "longsleep__scz": "/Volumes/Extreme SSD/brain6-work/placo-family-v3-results/longsleep__scz"
+  },
+  "zero_z_rule": "If Z1==0 or Z2==0, return exact P=1; otherwise call hash-pinned upstream PLACO+ unchanged.",
+  "extreme_z2": 80,
+  "p_threshold": 0.0001,
+  "minimum_variants": 1000000,
+  "seed": 20260908,
+  "absolute_tolerance": 1e-13,
+  "max_pair_numerical_failure_rate": 0.001,
+  "within_pair_adjustment": "Benjamini-Hochberg on all pair rows; numerical failures count conservatively in denominator and remain marked failed",
+  "across_pair_adjustment": "Bonferroni across 5 selected tracks, including protected Track B",
+  "headline_threshold": 1e-08,
+  "plans_created_before_v3_results": true,
+  "results_reviewed_at_lock_time": false,
+  "readme_path": "brain6/config/placo_family_v3/README.md",
+  "readme_sha256": "41028d70e0750ebff15fbabd55210031066da7dab9768248db7793bb1e32b85d"
+}

@@ -9,7 +9,7 @@ source scripts/_common.sh
 require_file "$CONFIG"
 validate_panel
 require_ldsc
-mkdir -p data/harmonized data/munged
+prepare_analysis_workspace
 
 for trait in "$@"; do
   raw_file=$(trait_field "$trait" raw_file) || die "trait '$trait' is not in $CONFIG"
@@ -57,9 +57,9 @@ for trait in "$@"; do
     source_sha256=$(public_source_field "$source_id" archive_sha256)
     [ -n "$source_bytes" ] && [ -n "$source_sha256" ] || die \
       "$trait prefilter source lacks registered bytes/SHA-256"
-    mkdir -p data/harmonized/.prefilter
-    harmonize_infile="data/harmonized/.prefilter/$trait.hm3.tsv.gz"
-    prefilter_provenance="data/harmonized/$trait.prefilter.provenance.json"
+    mkdir -p "$HARMONIZED_DIR/.prefilter"
+    harmonize_infile="$HARMONIZED_DIR/.prefilter/$trait.hm3.tsv.gz"
+    prefilter_provenance="$HARMONIZED_DIR/$trait.prefilter.provenance.json"
     echo "==> $trait: streaming registered HapMap3 prefilter"
     "$PYTHON_BIN" scripts/21_prefilter_hm3.py \
       --input "data/raw/$raw_file" --output "$harmonize_infile" \
@@ -108,12 +108,12 @@ for trait in "$@"; do
     ${variant_map_args[@]+"${variant_map_args[@]}"} \
     ${liftover_args[@]+"${liftover_args[@]}"} \
     ${prefilter_args[@]+"${prefilter_args[@]}"} \
-    --infile "$harmonize_infile" --outdir data/harmonized
+    --infile "$harmonize_infile" --outdir "$HARMONIZED_DIR"
 
   echo "==> $trait: HapMap3 munging"
   ldsc_ignore_args=()
   if grep -Fq 'FRQ column absent - source-level MAF QC must be documented' \
-      "data/harmonized/$trait.qc.txt"; then
+      "$HARMONIZED_DIR/$trait.qc.txt"; then
     # The harmonized contract carries an explicit FRQ=NA placeholder when the
     # source has no allele-frequency field.  LDSC otherwise recognizes FRQ as
     # a required numeric column and drops every row before HapMap3 matching.
@@ -123,15 +123,15 @@ for trait in "$@"; do
     echo "  source has no FRQ; ignoring the all-missing FRQ placeholder in LDSC"
   fi
   "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" \
-    --sumstats "data/harmonized/$trait.harmonized.tsv.gz" \
-    --merge-alleles ref/w_hm3.snplist --chunksize 500000 \
+    --sumstats "$HARMONIZED_DIR/$trait.harmonized.tsv.gz" \
+    --merge-alleles "$REF_DIR/w_hm3.snplist" --chunksize 500000 \
     ${ldsc_ignore_args[@]+"${ldsc_ignore_args[@]}"} \
-    --out "data/munged/$trait"
-  require_file "data/munged/$trait.sumstats.gz"
-  require_file "data/munged/$trait.log"
-  if grep -q 'WARNING' "data/munged/$trait.log"; then
-    echo "  WARNING: LDSC reported warnings for $trait; inspect data/munged/$trait.log before h2." >&2
+    --out "$MUNGED_DIR/$trait"
+  require_file "$MUNGED_DIR/$trait.sumstats.gz"
+  require_file "$MUNGED_DIR/$trait.log"
+  if grep -q 'WARNING' "$MUNGED_DIR/$trait.log"; then
+    echo "  WARNING: LDSC reported warnings for $trait; inspect $MUNGED_DIR/$trait.log before h2." >&2
   fi
 done
 
-echo "Munging complete. Review each data/harmonized/*.qc.txt and data/munged/*.log before h2."
+echo "Munging complete. Review each $HARMONIZED_DIR/*.qc.txt and $MUNGED_DIR/*.log before h2."

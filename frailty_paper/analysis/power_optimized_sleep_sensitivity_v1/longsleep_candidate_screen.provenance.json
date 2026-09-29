@@ -1,0 +1,68 @@
+{
+  "analysis_id": "power_optimized_sleep_sensitivity_v1_longsleep_candidate_audit",
+  "verified_at_utc": "2026-09-25T01:51:04Z",
+  "association_outcomes_accessed": false,
+  "candidate_tsv": "frailty_paper/analysis/power_optimized_sleep_sensitivity_v1/longsleep_candidate_screen.tsv",
+  "candidate_tsv_sha256": "d1a5b82bf68615a6263802045a09ff6702bd6ce98efb8f20761b41052426c394",
+  "locked_power_config": "frailty_paper/config/power_optimized_sleep_sensitivity_v1.yaml",
+  "locked_power_config_sha256": "8b1eb3bfc32cec9955d754a402182b06ea98a5bc84e151cccae61e410b4dc327",
+  "resource_manifest": "frailty_paper/manifests/all_acquired_resources.tsv",
+  "resource_manifest_sha256": "61cfa0052eb64009d1e34090e4f54d116457e1137af5e2203de2a9e6d0d04df1",
+  "case_control_effective_n": {
+    "formula": "4 / (1/N_cases + 1/N_controls)",
+    "locked_ge9h": {
+      "cases": 34184,
+      "controls": 305742,
+      "N_eff": 122985.409
+    },
+    "austin_zimmerman_2023_eur_ge10h": {
+      "cases": 15962,
+      "controls": 382950,
+      "N_eff": 61293.196
+    },
+    "candidate_to_locked_ratio": 0.49837779,
+    "candidate_percent_lower": 50.1622
+  },
+  "primary_sources": [
+    {
+      "role": "2023 article",
+      "url": "https://www.nature.com/articles/s41467-023-41249-y",
+      "facts_verified": [
+        "EUR meta-analysis uses UK Biobank and MVP",
+        "long sleep is >=10 hours versus normal 7-8 hours",
+        "15,962 EUR long-sleep cases",
+        "total EUR study sample N=445,966; binary long-vs-normal contrast excludes short-sleep cases",
+        "study describes MVP EUR data as independent replication for the 2019 UKB GWAS"
+      ]
+    },
+    {
+      "role": "author lab summary-statistics listing",
+      "url": "https://medicine.yale.edu/lab/gelernter/stats/",
+      "facts_verified": [
+        "lists European ancestry Long Sleep summary-statistics file"
+      ]
+    },
+    {
+      "role": "direct listed EUR long-sleep file",
+      "url": "https://hugesumstats.yale.edu/dl/eur_meta_long_dbgap.txt.gz",
+      "facts_verified": [
+        "official author page links directly to this gzip file",
+        "not downloaded or checksummed because candidate failed pre-acquisition power/phenotype gate"
+      ]
+    },
+    {
+      "role": "locked 2019 comparator article",
+      "url": "https://www.nature.com/articles/s41467-019-08917-4",
+      "facts_verified": [
+        "long sleep is >=9 hours versus 7-8 hours",
+        "34,184 cases and 305,742 controls"
+      ]
+    }
+  ],
+  "conclusion": "The public 2023 EUR meta-analysis does not pass the prespecified power/phenotype promotion screen and is not an independent replication of the UKB-only locked GWAS because it includes UK Biobank. No local LAVA or bivariate outcomes were reviewed for this candidate.",
+  "limitations": [
+    "The author-listed EUR meta-analysis file was not downloaded, checksum-verified, or harmonized.",
+    "The separate MVP-only component may be an independent replication path, but its access requirements and full-summary-statistics availability were not established here.",
+    "Ancestry/build and exact variant overlap for the EUR file remain unverified."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "rule_id": "brain6_cross_layer_evidence_rules_v1",
+  "status": "FROZEN_BEFORE_CROSS_LAYER_TABLE_BUILD",
+  "scope": "Descriptive integration of the five post-atlas primary Brain6 pairs only.",
+  "does_not_reestimate": [
+    "global LDSC effects or original 396-family q values",
+    "replication statistics",
+    "PLACO+ statistics or family correction",
+    "LAVA local correlations or QC",
+    "fine-mapping, colocalization, QTL, or functional evidence"
+  ],
+  "category_precedence": [
+    "MULTI_LAYER_SUPPORTED",
+    "GENETIC_ONLY",
+    "LOCAL_ONLY",
+    "REPLICATION_ONLY",
+    "SUGGESTIVE",
+    "UNRESOLVED"
+  ],
+  "categories": {
+    "MULTI_LAYER_SUPPORTED": "Requires an inherited global signal, an admissible replication result, QC-passed promoted canonical LAVA v3 local-rg evidence, and at least one completed variant-sharing or molecular colocalization layer. All required layers must be present for the same pair.",
+    "GENETIC_ONLY": "Requires an inherited original-396-family significant global rg. Replication or partial-family PLACO may be shown as additional context, but without promoted local-rg and downstream variant/mechanism evidence the result remains in this category.",
+    "LOCAL_ONLY": "Requires a QC-passed, promoted canonical LAVA v3 local-rg result with no inherited original-396-family significant global result.",
+    "REPLICATION_ONLY": "Requires an admissible replication result when no inherited global signal or promoted local-rg result exists.",
+    "SUGGESTIVE": "Used only when the pair has available but non-significant or incomplete genetic evidence and none of the stronger categories applies.",
+    "UNRESOLVED": "Used when no admissible empirical evidence is available for the pair."
+  },
+  "interpretation_limits": [
+    "This is a transparent evidence-category assignment, not a numerical score or new hypothesis test.",
+    "The five-track PLACO family is incomplete because protected Track B insomnia-ADHD is absent; four pair outputs remain partial-family evidence.",
+    "Canonical LAVA v3 failed its frozen family QC and contributes no promoted local-rg results; separately versioned roundoff work is not conflated with that decision.",
+    "Directional replication is not labeled exact replication.",
+    "No missing downstream result is interpreted as a null finding."
+  ]
+}

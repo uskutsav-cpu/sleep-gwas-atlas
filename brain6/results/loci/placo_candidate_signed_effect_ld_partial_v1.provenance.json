@@ -1,0 +1,153 @@
+{
+  "analysis_id": "brain6-placo-partial-signed-effect-ld-v1",
+  "interpretation": "Post-selection comparison of each PLACO candidate's harmonized sleep/disorder beta signs, both oriented to the official LAVA reference A1 allele, against signed reference LD to the range-filtered clump lead. Raw out-of-range LD is retained and excluded without clipping. This partial four-pair diagnostic is not an independent-locus test, fine-mapping result, replication, or causal claim; protected Track B is unavailable.",
+  "methods": {
+    "LD": "Pinned LAVA 0.1.5 read.ld from official UKB LAVA v1.1; candidate-to-range-filtered-lead signed r",
+    "effect_alignment": "Pair-joined BETA1/BETA2 aligned to the sleep-trait A1; both effects sign-flipped together as needed to orient to each reference A1",
+    "effect_vs_ld": "Descriptive indicator compares sign(beta_candidate * beta_lead) with sign(r); no statistical test",
+    "invalid_ld": "Preserve raw r outside [-1,1]; omit signed correlation and direction comparison; do not clip"
+  },
+  "outputs": [
+    {
+      "path": "brain6/results/loci/placo_candidate_signed_effect_ld_partial_v1.tsv",
+      "rows": 2297,
+      "sha256": "b2fa338dcbf7c86c46967e0f8a153e331e402e7bb84fe78ef71d61b6b57415f2"
+    },
+    {
+      "path": "brain6/results/supplement/table_S23_partial_placo_signed_effect_ld.tsv",
+      "rows": 4,
+      "sha256": "50cccb39224a48daa9af7437125a7a6b5b264a7fd19d5c8805e3e6e95fa132b9"
+    }
+  ],
+  "reference_sample_size": "100000",
+  "schema_version": 1,
+  "scope": {
+    "candidate_rows": 2297,
+    "complete_five_track_family": false,
+    "pair_counts": {
+      "insomnia__mdd": {
+        "at_least_one_effect_opposite_to_ld_sign": 0,
+        "both_effects_consistent_with_ld_sign": 124,
+        "candidate_rows": 124,
+        "out_of_range_raw_ld_rows": 0,
+        "unmatched_or_unalignable_rows": 0,
+        "valid_signed_ld_rows": 124
+      },
+      "longsleep__bipolar": {
+        "at_least_one_effect_opposite_to_ld_sign": 0,
+        "both_effects_consistent_with_ld_sign": 26,
+        "candidate_rows": 27,
+        "out_of_range_raw_ld_rows": 0,
+        "unmatched_or_unalignable_rows": 1,
+        "valid_signed_ld_rows": 26
+      },
+      "longsleep__parkinson": {
+        "at_least_one_effect_opposite_to_ld_sign": 0,
+        "both_effects_consistent_with_ld_sign": 15,
+        "candidate_rows": 15,
+        "out_of_range_raw_ld_rows": 0,
+        "unmatched_or_unalignable_rows": 0,
+        "valid_signed_ld_rows": 15
+      },
+      "longsleep__scz": {
+        "at_least_one_effect_opposite_to_ld_sign": 0,
+        "both_effects_consistent_with_ld_sign": 2108,
+        "candidate_rows": 2131,
+        "out_of_range_raw_ld_rows": 0,
+        "unmatched_or_unalignable_rows": 23,
+        "valid_signed_ld_rows": 2108
+      }
+    },
+    "pairs": [
+      "insomnia__mdd",
+      "longsleep__bipolar",
+      "longsleep__parkinson",
+      "longsleep__scz"
+    ]
+  },
+  "sources": {
+    "builder_script": {
+      "path": "brain6/scripts/build_partial_placo_signed_effect_ld.py",
+      "sha256": "bdf2f95d199c96baf4b6aa88191d9006ff792a3ee6e3db32be6a8b6de9cc9855"
+    },
+    "candidate_provenance": {
+      "path": "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json",
+      "sha256": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd"
+    },
+    "candidate_table": {
+      "path": "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv",
+      "sha256": "89212b9b590f2eddd9ffdd0531db05e518a8fa47c778c5aa6d74323591d8bcfd"
+    },
+    "extractor_script": {
+      "path": "brain6/scripts/extract_placo_candidate_lead_ld.R",
+      "sha256": "478eb8cb1718d60629f04c5239c5abd6cd005025e24a499612933f068ac138ee"
+    },
+    "joined_pair_inputs": {
+      "insomnia__mdd": {
+        "pair_receipt_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_insomnia__mdd/receipt.json",
+        "pair_receipt_sha256": "d4dda1d4ac0a520059d9dd737dbcddddfdbf6731738d13a4d3ab55e03255c44a",
+        "pair_tsv_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_insomnia__mdd/pair.tsv.gz",
+        "pair_tsv_sha256": "091c3402911cb91b40caf71c241cca74f6590644350528657cb869452f0b845a"
+      },
+      "longsleep__bipolar": {
+        "pair_receipt_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__bipolar/receipt.json",
+        "pair_receipt_sha256": "f6fddaae0d40ac040aa7a0dbbcf7f15b01d8260c993739095814c95a248a059f",
+        "pair_tsv_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__bipolar/pair.tsv.gz",
+        "pair_tsv_sha256": "ab726b9b677c776f2d557a77ae3b776148cb30f628665ce2237291c60bd1b33c"
+      },
+      "longsleep__parkinson": {
+        "pair_receipt_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__parkinson/receipt.json",
+        "pair_receipt_sha256": "9ee074834311799fdb87991e05f2e1b3f0b8c76cd91514ccfe09ce1bb7de674b",
+        "pair_tsv_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__parkinson/pair.tsv.gz",
+        "pair_tsv_sha256": "1bcfacdc35f05d5af783b70cc912a18523352ff09932a8f78adbf7ee09fccda3"
+      },
+      "longsleep__scz": {
+        "pair_receipt_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__scz/receipt.json",
+        "pair_receipt_sha256": "89c07fcd1bd8a82bbdf1322e798ab6b82763a6d3c50f8e1e38c3e0bc182f5b82",
+        "pair_tsv_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__scz/pair.tsv.gz",
+        "pair_tsv_sha256": "eaf1e4fe8cf172b849a7be59c95f3aa246c431d5a8e977e19a1de5d6a149b0f8"
+      }
+    },
+    "pair_receipt_files": {
+      "insomnia__mdd": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_insomnia__mdd/receipt.json",
+      "longsleep__bipolar": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__bipolar/receipt.json",
+      "longsleep__parkinson": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__parkinson/receipt.json",
+      "longsleep__scz": "/Volumes/Extreme SSD/brain6-work/preparation-v1/pair_longsleep__scz/receipt.json"
+    },
+    "reference_files": {
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.bcor": "e23ef2240a8765df81d5f0c12bad7e57464bc029566a7bb0199e4388c00b109e",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.info": "d09b1c0e65ff9f629fdf74b3dc4ce757adfd22dc9cdb1965aeac8e652720e04c",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.bcor": "05c31e12960b2fb58550c4d226ae9651e47425d1148c342fcf3e9b8d5a0dcbd1",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.info": "917aeda237e2f37e39ab939bed15d9639bdb0a03a626d804ffd48de5a1762121",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.bcor": "b95817799a25a4567cb8dfa2b52852c10509494d88bef74d17676c0409d93610",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.info": "c90ee4ba59680d88afd241fb458de3451100b73e71f136994969c53f9e3cafad",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr15.bcor": "dfae7b790eadf0dc6e01aa1947d38e9d4112867538bbe1b7d7f84565b7127d0b",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr15.info": "6e5cd69e0cae2e195e933fab01ee28fc04b2ce0303b3d09c37d44953233418d0",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.bcor": "8cc495223b2d570a72fe3a12d56d9f80e6e320d9e1764fca74179ceac203a5ae",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.info": "55e48183d786607b22a838227c7aa34c2f1f2d512958bf0521c8650a2a546327",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr18.bcor": "c775128f34df2de284c7d14678b93ad81d1186aa6e1f4b4ba7cba87199c02a5a",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr18.info": "fb44b7911fc5463c5fc8eb2b72f55f88145456d553dffa557bf3ec3fab059735",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.bcor": "9229102840524a186db78ea7788bf05ee78b36752c087e0c7c6156053eee605c",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.info": "b6484a8e69465479c006e1cc241059dabd91de5594ddabb28c497618fa643060",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr3.bcor": "446d21166d9966e44d7e19c8102a474e0edf7fd152d35c561848a016da091918",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr3.info": "5ca4b3b8a0baae43b73a97e17d611b8069d84e7e8ac22f0180774c878e42e9cc",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr4.bcor": "3fff449251e459323b91eee3ddf0ada999e46dfd5cabd64c96fbe87acb24b7c4",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr4.info": "716a15e8899b9cc85c4897fa61cdbc9e01c44e3e0c63dff14e6a30dafce41b24",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.bcor": "fcdd429c41b039790d58bf18377e768551a3cd2afb5c2110caebe829a637259b",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.info": "e32bb4bdb1d2af0c84353ae59f0eddd41e6dd3e1bcd98d47dc9e69716df0443d",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr6.bcor": "9292e1fec7d205c382d830b7fd9858863cb83e1c28f96b2320492fbc59bba57d",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr6.info": "4cb99759dbde57b4f9206f7c5e21ff8f38b0b87da2ab29b9dc91867b4fd29807",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.bcor": "38d1471b446e1855c8874a79b3842aa350a4ac1794df63332cd0c078921592a0",
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.info": "33f249bafbf34db65f96fe66855aaf809b7343724fd2d519fec3aa084002d4e9"
+    },
+    "reference_provenance": {
+      "path": "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/reference.provenance.json",
+      "sha256": "35ab371935b9c260dab21be248f4907b693565787ef9f62334e7d8030204270e"
+    },
+    "rscript_binary": {
+      "path": "/Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin/Rscript",
+      "sha256": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108"
+    }
+  },
+  "status": "PASS_PARTIAL_FAMILY_DESCRIPTIVE_WITH_LD_RANGE_EXCEPTIONS"
+}

@@ -1,0 +1,387 @@
+{
+  "generated_at_utc": "2026-09-25T00:01:17+00:00",
+  "git_branch": "frailty-paper-v1",
+  "git_head": "53ca8d080434b3e3ba2f55a1ccd4f6a5b67b715f",
+  "interpretation": "Evidence-backed stage snapshot after terminal roundoff execution and checksum-bound native LAVA replay of PLACO LD range exceptions; scientific and external blockers remain.",
+  "receipt_audit_path": "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json",
+  "receipt_audit_sha256": "9ef3ff48f306852316e382f2d1a3e6a946f837fbf60798a0fb01b3b9392b7f25",
+  "schema_version": 1,
+  "stages": [
+    {
+      "evidence": [
+        "brain6/results/global/brain6_72_locked.tsv",
+        "brain6/STATUS.md"
+      ],
+      "evidence_sha256": {
+        "brain6/STATUS.md": "1310109fa2c91477b905c1b0c1cdd81c9621b0cf96000ea3f6d99842926aecef",
+        "brain6/results/global/brain6_72_locked.tsv": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d"
+      },
+      "stage": "locked_global_brain_map",
+      "status": "COMPLETE_VALID"
+    },
+    {
+      "evidence": [
+        "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json",
+        "brain6/results/lava/canonical_v3_not_run_cells.provenance.json"
+      ],
+      "evidence_sha256": {
+        "brain6/results/lava/canonical_v3_not_run_cells.provenance.json": "e074f8ecad4ce48816017af2fcc99a8c9c0abefb05cbce317569688850654303",
+        "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json": "3569ce81d33479321f9b3adec7bd09c9b54a10a01f1fa4abd15888d9d2e66b22"
+      },
+      "stage": "canonical_lava_v3",
+      "status": "COMPLETE_FAILED_QC"
+    },
+    {
+      "evidence": [
+        "brain6/results/lava/canonical_v3_cause_breakdown_v2.provenance.json",
+        "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv",
+        "brain6/results/lava/canonical_v3_status_by_locus_v1.tsv",
+        "brain6/scripts/build_lava_canonical_v3_cause_summaries.py",
+        "brain6/scripts/tests/test_build_lava_canonical_v3_cause_summaries.py",
+        "brain6/paper/supplement.md"
+      ],
+      "evidence_sha256": {
+        "brain6/paper/supplement.md": "8904f3d1c31103585b3091e30e1a2f46d5b0f6195befaaadb8d56a498fbd7f56",
+        "brain6/results/lava/canonical_v3_cause_breakdown_v2.provenance.json": "742f7a7fce8e3f9580b5bcfd1b1ea9679a19d8190bfd72b75d0a9be75f30ad2b",
+        "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65",
+        "brain6/results/lava/canonical_v3_status_by_locus_v1.tsv": "f016c0c375975292e071668132a1d607835cccdbcb6848098b02c5ec0ea3070c",
+        "brain6/scripts/build_lava_canonical_v3_cause_summaries.py": "dcec6978b458f8659e11ece2eb9dab4a9f635c77539a8d6773df6aab6b8dbc31",
+        "brain6/scripts/tests/test_build_lava_canonical_v3_cause_summaries.py": "890bb4d880def8abb2642f80535f2046f94c92afcdad80fd4c8f99718b84c2bc"
+      },
+      "interpretation": "Receipt-derived descriptive eligibility diagnostics only; canonical v3 remains FAILED_QC_NOT_PROMOTED.",
+      "stage": "canonical_lava_v3_not_run_cause_breakdown",
+      "status": "COMPLETE_VALID"
+    },
+    {
+      "evidence": [
+        "brain6/manifests/lava_roundoff_v1_run.json",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2139Z.json",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2112Z.json",
+        "brain6/qc/lava_roundoff_targeted_comparison_locus1997.json",
+        "brain6/results/lava/lava_baseline_roundoff_pair_locus_comparison_v1.tsv",
+        "brain6/results/lava/lava_baseline_roundoff_pair_locus_comparison_v1.provenance.json",
+        "brain6/results/supplement/table_S24_lava_roundoff_comparison.tsv",
+        "brain6/scripts/compare_lava_baseline_roundoff.py",
+        "brain6/scripts/tests/test_compare_lava_baseline_roundoff.py",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2220Z.json",
+        "brain6/results/lava/lava_pair_context_univariates_v1.tsv",
+        "brain6/results/supplement/table_S27_lava_pair_context_univariates.tsv",
+        "brain6/results/lava/lava_pair_context_univariates_v1.provenance.json",
+        "brain6/scripts/audit_lava_pair_context_univariates.py",
+        "brain6/scripts/tests/test_audit_lava_pair_context_univariates.py",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json"
+      ],
+      "evidence_sha256": {
+        "brain6/manifests/lava_roundoff_v1_run.json": "96eabc617b235b48ff51820ab635bd76a7adfff35666c574742ff82a65f61650",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2112Z.json": "c71d717a0c6a44007956a8022f2da8a8f0556ce72a6e1d087bb6fffbe43ae82a",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2139Z.json": "59c38a76d053c4e8a4ad810c3636f184b18e18ea412aab7ba041c819e3cb3b71",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2220Z.json": "b2b18ca7ce41736d62162ee014bdfa60cf105f182da524d5797d82e39b092a89",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json": "9ef3ff48f306852316e382f2d1a3e6a946f837fbf60798a0fb01b3b9392b7f25",
+        "brain6/qc/lava_roundoff_targeted_comparison_locus1997.json": "54fbfe312ccb1828a0a53f91b32f72bf64e6f25b0f934fa7953d034f550924d8",
+        "brain6/results/lava/lava_baseline_roundoff_pair_locus_comparison_v1.provenance.json": "200ea362d900304aa13953fba3cb0f446c720ff7eccb553c2849cbc53aee1919",
+        "brain6/results/lava/lava_baseline_roundoff_pair_locus_comparison_v1.tsv": "7380657c997de2c7280b826fce64a3530935fc733c3e45b815fe83bdec4d1b17",
+        "brain6/results/lava/lava_pair_context_univariates_v1.provenance.json": "e662f457bf67acdf27848ed2403321d343ec17556a4ca27b853e3f18d5581137",
+        "brain6/results/lava/lava_pair_context_univariates_v1.tsv": "4d7244b29b51a732ce3a5cced2483e1a71f27d4b8f00e2bbfcf22beaa82319d5",
+        "brain6/results/supplement/table_S24_lava_roundoff_comparison.tsv": "f25930d36d71070a6f8acbc45e1518bc5eb9c1fa4114ce70d7a681d1e7195892",
+        "brain6/results/supplement/table_S27_lava_pair_context_univariates.tsv": "bfa746cba0da4dd5487e8a8a56c4d532a7ae166d8bab2e48bde606bff84b74a4",
+        "brain6/scripts/audit_lava_pair_context_univariates.py": "e8ffe20b6143a57457a2214be32eb92152c4b8296242ca226138c69e4b9b0314",
+        "brain6/scripts/compare_lava_baseline_roundoff.py": "5b3031371b8406b2c20b3751ec435a25f16d068b9e7feb7a3e29809d8ef318dc",
+        "brain6/scripts/tests/test_audit_lava_pair_context_univariates.py": "e8f9617ec4629e2552ad8c2bdedd7986ef66ef0ef6c167c92cdbae299ab25050",
+        "brain6/scripts/tests/test_compare_lava_baseline_roundoff.py": "44328341569c61e17d622d9361ae1ff792219d25a435428a633d9485379aa89d"
+      },
+      "progress": {
+        "aggregation_error": "Pair-specific inputs disagree on the shared univariate test: insomnia/2",
+        "comparison": "Two baseline process-null failures at locus 1997 became UNIVARIATE_UNDERPOWERED; five fewer-than-three-shared-SNP failures persist; sole TESTED slot unchanged (p and local-rg deltas 0).",
+        "family_decision": "NOT_CREATED",
+        "isolated_retry": {
+          "merged": false,
+          "provenance_sha256": "646e9b6477750b6b148a9f0f44bd6167783b1e465ea83bb85cdb678516ec260d",
+          "result": "UNIVARIATE_UNDERPOWERED",
+          "retry_id": "envfix-20260924-001",
+          "status": "PASS_RETRY_ARTIFACT"
+        },
+        "pair_context_audit": {
+          "baseline_disagreements": 2802,
+          "baseline_repeated_keys": 2804,
+          "baseline_unique_keys_observed": 14632,
+          "interpretation": "Roundoff does not resolve pair-context dependence or coverage; no family decision or promotion.",
+          "roundoff_disagreements": 2804,
+          "roundoff_repeated_keys": 2806,
+          "roundoff_unique_keys_observed": 14633,
+          "row_count": 36819
+        },
+        "planned_loci": 2495,
+        "planned_pair_locus_slots": 12475,
+        "receipt_errors": 0,
+        "status": "COMPLETE_RECEIPTS_AGGREGATION_FAILED",
+        "status_counts": {
+          "FAILED": 6,
+          "NO_OVERLAP": 111,
+          "TESTED": 1,
+          "UNIVARIATE_UNDERPOWERED": 12357
+        },
+        "validation_audit_path": "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json",
+        "validation_audit_sha256": "9ef3ff48f306852316e382f2d1a3e6a946f837fbf60798a0fb01b3b9392b7f25",
+        "validation_gate": "PASS_159_BRAIN6_TESTS_308_EXTENSION_TESTS_3_EXPECTED_SKIPS",
+        "verified_at_utc": "2026-09-24T22:54:40+00:00",
+        "verified_loci": 2495
+      },
+      "stage": "roundoff_recovery_lava_v1",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/BLOCKERS.md",
+        "brain6/STATUS.md",
+        "brain6/qc/protected_track_b_archive_audit.md"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "feea59c5914936ab0e5ce0eb8263a6420049dcaec0eb78c26f4817e27d2253fc",
+        "brain6/STATUS.md": "1310109fa2c91477b905c1b0c1cdd81c9621b0cf96000ea3f6d99842926aecef",
+        "brain6/qc/protected_track_b_archive_audit.md": "327091229db0c3319e6908a158c347363feadb9c32a4dfc501c8a992b3fef2df"
+      },
+      "stage": "protected_track_b",
+      "status": "BLOCKED_EXTERNAL"
+    },
+    {
+      "evidence": [
+        "brain6/results/replication/replication_master.tsv",
+        "brain6/BLOCKERS.md"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "feea59c5914936ab0e5ce0eb8263a6420049dcaec0eb78c26f4817e27d2253fc",
+        "brain6/results/replication/replication_master.tsv": "b221f5953405e58251eff5ef05cced2e9b04e16aeb517524842633eeb4f1d11e"
+      },
+      "stage": "independent_replication",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/results/placo/placo_master.tsv",
+        "brain6/STATUS.md",
+        "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json",
+        "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv",
+        "brain6/results/loci/placo_candidate_loci_valid_ld_partial_v2.tsv",
+        "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv",
+        "brain6/results/supplement/table_S22_partial_placo_valid_ld_rebuild.tsv"
+      ],
+      "evidence_sha256": {
+        "brain6/STATUS.md": "1310109fa2c91477b905c1b0c1cdd81c9621b0cf96000ea3f6d99842926aecef",
+        "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv": "e5fd91b4122219826c2bc5557e939379ace102d2bb30f795a7c2b1e614ae07bb",
+        "brain6/results/loci/placo_candidate_loci_valid_ld_partial_v2.tsv": "f1fa4e46cba989c00d6d2b5214ee54236bca9aa1f84b7536cbffd8a9c1d512b9",
+        "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd",
+        "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv": "89212b9b590f2eddd9ffdd0531db05e518a8fa47c778c5aa6d74323591d8bcfd",
+        "brain6/results/placo/placo_master.tsv": "729b7698fa45876bb649375091368a59ce8b4c38376795c6abcb0aac87997031",
+        "brain6/results/supplement/table_S22_partial_placo_valid_ld_rebuild.tsv": "a7e40f3b090d963acac191e6cd7e350676881b6782642dc129e35f5b8ad5065f"
+      },
+      "stage": "placo_shared_association",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/results/lava/canonical_v3_not_run_cells.provenance.json"
+      ],
+      "evidence_sha256": {
+        "brain6/FINAL_READINESS_REPORT.md": "5192013de50633bde3fc944c9313763e515e7f9b61c7cfa1972646e527c1f213",
+        "brain6/results/lava/canonical_v3_not_run_cells.provenance.json": "e074f8ecad4ce48816017af2fcc99a8c9c0abefb05cbce317569688850654303"
+      },
+      "stage": "local_genetic_architecture",
+      "status": "COMPLETE_FAILED_QC"
+    },
+    {
+      "evidence": [
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/BLOCKERS.md"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "feea59c5914936ab0e5ce0eb8263a6420049dcaec0eb78c26f4817e27d2253fc",
+        "brain6/FINAL_READINESS_REPORT.md": "5192013de50633bde3fc944c9313763e515e7f9b61c7cfa1972646e527c1f213"
+      },
+      "stage": "fine_mapping_and_trait_colocalization",
+      "status": "NOT_APPLICABLE"
+    },
+    {
+      "evidence": [
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/BLOCKERS.md"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "feea59c5914936ab0e5ce0eb8263a6420049dcaec0eb78c26f4817e27d2253fc",
+        "brain6/FINAL_READINESS_REPORT.md": "5192013de50633bde3fc944c9313763e515e7f9b61c7cfa1972646e527c1f213"
+      },
+      "stage": "qtl_regulatory_cell_pathway",
+      "status": "NOT_APPLICABLE"
+    },
+    {
+      "evidence": [
+        "brain6/results/evidence/brain6_cross_layer_evidence.tsv",
+        "brain6/STATUS.md"
+      ],
+      "evidence_sha256": {
+        "brain6/STATUS.md": "1310109fa2c91477b905c1b0c1cdd81c9621b0cf96000ea3f6d99842926aecef",
+        "brain6/results/evidence/brain6_cross_layer_evidence.tsv": "bb789596447b99fe70b95349a6ef977640c98b3be1dd48dead5bf5e5e6c89b8a"
+      },
+      "stage": "cross_layer_integration",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/README.md",
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/FINAL_BRAIN6_REPORT.md"
+      ],
+      "evidence_sha256": {
+        "brain6/FINAL_BRAIN6_REPORT.md": "ea8ea95fb0bee48902a86b247932ea2125e891ce922687ebca9cda38dab92312",
+        "brain6/FINAL_READINESS_REPORT.md": "5192013de50633bde3fc944c9313763e515e7f9b61c7cfa1972646e527c1f213",
+        "brain6/README.md": "b0dbe44dc5084c9d26c011d761b0fd8cc6c67a67769445921f8d8f9e22df1050"
+      },
+      "stage": "figures_tables_and_manuscript",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/BLOCKERS.md",
+        "brain6/FINAL_BRAIN6_REPORT.md",
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/PROGRESS_LOG.md",
+        "brain6/STATUS.md",
+        "brain6/paper/REVIEWER_2_AUDIT.md",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json",
+        "brain6/qc/placo_ld_range_exception_replay_v1.provenance.json",
+        "brain6/qc/placo_ld_range_exception_replay_v1.tsv",
+        "brain6/scripts/validate_current_outputs.py"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "b196a7884374d219783296cfc1f54b76d9b34ec92792f2f4e14165be5849f6c7",
+        "brain6/FINAL_BRAIN6_REPORT.md": "a3767b3944ab24324a4e5817a1ea448a7ff09f863b99984fa945c4bbeb99d5aa",
+        "brain6/FINAL_READINESS_REPORT.md": "ddc012d2caf50f9738bbe385766d243f336753c34ca9e069a75c30b2dfba77b8",
+        "brain6/PROGRESS_LOG.md": "c6666c52c5a5f2eb8808d3be4f4889652c377f54fadfac7248f093052078a871",
+        "brain6/STATUS.md": "54b8284dae14172ad64e3b1a545172b0b3b141d35ee2cc0c50ce41335f47ec5d",
+        "brain6/paper/REVIEWER_2_AUDIT.md": "731ff308fc6eee13080cdbf71e7536f3fb274f6d8994cd5cb0da4d774e3d1359",
+        "brain6/qc/lava_production_checkpoint_audit_20260924T2252Z.json": "9ef3ff48f306852316e382f2d1a3e6a946f837fbf60798a0fb01b3b9392b7f25",
+        "brain6/qc/placo_ld_range_exception_replay_v1.provenance.json": "13ee194dcbc8d65a204650ff3086f3d468824bc6d0083957845fd425c6c0950e",
+        "brain6/qc/placo_ld_range_exception_replay_v1.tsv": "5e0dfe232679052171f90ec6128bf744d55545135bdc4aa80c3f424523532dae",
+        "brain6/scripts/validate_current_outputs.py": "66dd9d6844b0f650f7859a9a0e29e1f05a2643df0ed33b714af3e3d5898fc18a"
+      },
+      "result": "164 Brain6 tests passed; 308 extension tests passed; 3 expected native-tool skips; current-output (including 12,317-edge native-reader replay), manuscript, provisional-report, and production receipt validations passed at 2026-09-24 23:26 UTC.",
+      "stage": "integrated_validation",
+      "status": "COMPLETE_VALID",
+      "validation_run": "make -C brain6 check PYTHON=/opt/miniconda3/bin/python MPLCONFIGDIR=/private/tmp/brain6-mpl"
+    },
+    {
+      "evidence": [
+        "brain6/results/loci/placo_candidate_directions_partial.tsv",
+        "brain6/results/loci/placo_candidate_directions_partial.provenance.json",
+        "brain6/paper/supplement.md"
+      ],
+      "evidence_sha256": {
+        "brain6/paper/supplement.md": "8904f3d1c31103585b3091e30e1a2f46d5b0f6195befaaadb8d56a498fbd7f56",
+        "brain6/results/loci/placo_candidate_directions_partial.provenance.json": "ce5cd7286f3a4fb02ee5a32888cf269e515c0c97d51bd19120660a01cc79482c",
+        "brain6/results/loci/placo_candidate_directions_partial.tsv": "1eb4124c38b7185e8f629e3344ae507d587a3b8650ce8710161f003b8aa720f0"
+      },
+      "progress": {
+        "candidate_rows": 2297,
+        "complete_five_track_family": false,
+        "direction_counts": {
+          "CONCORDANT": 2296,
+          "OPPOSING": 1
+        },
+        "interpretation": "post-selection harmonized same-variant Z-sign description only",
+        "pairs": 4
+      },
+      "stage": "partial_placo_candidate_directions",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json",
+        "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv",
+        "brain6/results/loci/placo_candidate_loci_valid_ld_partial_v2.tsv",
+        "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv",
+        "brain6/results/supplement/table_S22_partial_placo_valid_ld_rebuild.tsv",
+        "brain6/scripts/rebuild_partial_placo_clumps_valid_ld.py",
+        "brain6/scripts/extract_placo_windowed_ld.R",
+        "brain6/scripts/tests/test_rebuild_partial_placo_clumps_valid_ld.py",
+        "brain6/Makefile"
+      ],
+      "evidence_sha256": {
+        "brain6/Makefile": "0e603e7c4ce676ff989b437744efc27e9b7dbfa672e909d0356b3e9f2595df70",
+        "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv": "e5fd91b4122219826c2bc5557e939379ace102d2bb30f795a7c2b1e614ae07bb",
+        "brain6/results/loci/placo_candidate_loci_valid_ld_partial_v2.tsv": "f1fa4e46cba989c00d6d2b5214ee54236bca9aa1f84b7536cbffd8a9c1d512b9",
+        "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd",
+        "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv": "89212b9b590f2eddd9ffdd0531db05e518a8fa47c778c5aa6d74323591d8bcfd",
+        "brain6/results/supplement/table_S22_partial_placo_valid_ld_rebuild.tsv": "a7e40f3b090d963acac191e6cd7e350676881b6782642dc129e35f5b8ad5065f",
+        "brain6/scripts/extract_placo_windowed_ld.R": "7a254c55756e51f938bb6dea619cf8827137b62c7558dbb7b19aded0e216236d",
+        "brain6/scripts/rebuild_partial_placo_clumps_valid_ld.py": "5956214b4bd8165f378dde4f828542c3aa6ebb8ab6fd223c5d24d82b54a667bf",
+        "brain6/scripts/tests/test_rebuild_partial_placo_clumps_valid_ld.py": "034b34b7edb537270ca430ba6dac6d73a34b33281f20b9743db7c53b6588097b"
+      },
+      "interpretation": "Partial PLACO candidate grouping QC only. Invalid raw reference correlations are preserved and excluded without clamping; unresolved LD-quality and missing effect-allele limitations prevent independent-locus claims.",
+      "progress": {
+        "broad_merged_intervals": 19,
+        "candidate_rows": 2297,
+        "complete_five_track_family": false,
+        "exact_reference_matches": 2273,
+        "in_window_raw_ld_edges": 1526086,
+        "original_lead_signals": 21,
+        "out_of_range_unique_edges": 12317,
+        "pair_specific_exception_rows": 12321,
+        "pairs": 4,
+        "range_filtered_lead_signals": 25,
+        "unmatched_rows": 24
+      },
+      "stage": "partial_placo_ld_range_qc",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": [
+        "brain6/results/lava/lava_pair_context_univariates_v1.tsv",
+        "brain6/results/supplement/table_S27_lava_pair_context_univariates.tsv",
+        "brain6/results/lava/lava_pair_context_univariates_v1.provenance.json",
+        "brain6/scripts/audit_lava_pair_context_univariates.py",
+        "brain6/scripts/tests/test_audit_lava_pair_context_univariates.py"
+      ],
+      "evidence_sha256": {
+        "brain6/results/lava/lava_pair_context_univariates_v1.provenance.json": "e662f457bf67acdf27848ed2403321d343ec17556a4ca27b853e3f18d5581137",
+        "brain6/results/lava/lava_pair_context_univariates_v1.tsv": "4d7244b29b51a732ce3a5cced2483e1a71f27d4b8f00e2bbfcf22beaa82319d5",
+        "brain6/results/supplement/table_S27_lava_pair_context_univariates.tsv": "bfa746cba0da4dd5487e8a8a56c4d532a7ae166d8bab2e48bde606bff84b74a4",
+        "brain6/scripts/audit_lava_pair_context_univariates.py": "e8ffe20b6143a57457a2214be32eb92152c4b8296242ca226138c69e4b9b0314",
+        "brain6/scripts/tests/test_audit_lava_pair_context_univariates.py": "e8f9617ec4629e2552ad8c2bdedd7986ef66ef0ef6c167c92cdbae299ab25050"
+      },
+      "result": "Receipt-verified all 2495 loci in each old run; 36819 contextual univariate rows and canonical-v3 comparison; descriptive only.",
+      "stage": "pair_context_univariate_audit",
+      "status": "COMPLETE_VALID"
+    },
+    {
+      "evidence": [
+        "brain6/BLOCKERS.md",
+        "brain6/FINAL_BRAIN6_REPORT.md",
+        "brain6/FINAL_READINESS_REPORT.md",
+        "brain6/PROGRESS_LOG.md",
+        "brain6/STATUS.md",
+        "brain6/paper/REVIEWER_2_AUDIT.md",
+        "brain6/qc/placo_ld_range_exception_replay_v1.provenance.json",
+        "brain6/qc/placo_ld_range_exception_replay_v1.tsv",
+        "brain6/scripts/replay_placo_ld_range_exceptions.R",
+        "brain6/scripts/validate_current_outputs.py"
+      ],
+      "evidence_sha256": {
+        "brain6/BLOCKERS.md": "b196a7884374d219783296cfc1f54b76d9b34ec92792f2f4e14165be5849f6c7",
+        "brain6/FINAL_BRAIN6_REPORT.md": "a3767b3944ab24324a4e5817a1ea448a7ff09f863b99984fa945c4bbeb99d5aa",
+        "brain6/FINAL_READINESS_REPORT.md": "ddc012d2caf50f9738bbe385766d243f336753c34ca9e069a75c30b2dfba77b8",
+        "brain6/PROGRESS_LOG.md": "c6666c52c5a5f2eb8808d3be4f4889652c377f54fadfac7248f093052078a871",
+        "brain6/STATUS.md": "54b8284dae14172ad64e3b1a545172b0b3b141d35ee2cc0c50ce41335f47ec5d",
+        "brain6/paper/REVIEWER_2_AUDIT.md": "731ff308fc6eee13080cdbf71e7536f3fb274f6d8994cd5cb0da4d774e3d1359",
+        "brain6/qc/placo_ld_range_exception_replay_v1.provenance.json": "13ee194dcbc8d65a204650ff3086f3d468824bc6d0083957845fd425c6c0950e",
+        "brain6/qc/placo_ld_range_exception_replay_v1.tsv": "5e0dfe232679052171f90ec6128bf744d55545135bdc4aa80c3f424523532dae",
+        "brain6/scripts/replay_placo_ld_range_exceptions.R": "fbfa74716fb44aa51ac3e07690ed8ed607b49ee6f111c45b01e2df9b38cc523e",
+        "brain6/scripts/validate_current_outputs.py": "66dd9d6844b0f650f7859a9a0e29e1f05a2643df0ed33b714af3e3d5898fc18a"
+      },
+      "interpretation": "All unique raw exception edges reproduced by pinned LAVA read.ld; anomaly is in the returned selected-SNP submatrices, but reference construction versus stored-matrix reconstruction remains unresolved.",
+      "result": "12,317/12,317 unique edges replayed within 5.2e-15; seven selected-SNP submatrices symmetric and unit-diagonal with minimum eigenvalue -0.001531; this does not establish reference-generation root cause.",
+      "stage": "placo_ld_range_exception_native_reader_replay",
+      "status": "COMPLETE_DIAGNOSTIC_ONLY_VALIDATED"
+    }
+  ],
+  "state": "INCOMPLETE_SCIENTIFIC_AND_EXTERNAL_BLOCKERS"
+}

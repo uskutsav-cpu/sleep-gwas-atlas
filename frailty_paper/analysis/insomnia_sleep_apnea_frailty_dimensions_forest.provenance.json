@@ -1,0 +1,41 @@
+{
+  "command": "python frailty_paper/scripts/33_plot_insomnia_sleep_apnea_frailty_forest.py --outdir frailty_paper/analysis",
+  "created_utc": "2026-09-23T15:47:40.038087+00:00",
+  "endpoints": [
+    "frailty",
+    "frailty_general",
+    "frailty_factor_1",
+    "frailty_factor_2",
+    "frailty_factor_3",
+    "frailty_factor_4",
+    "frailty_factor_5",
+    "frailty_factor_6"
+  ],
+  "inputs": {
+    "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+    "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068"
+  },
+  "limitations": [
+    "The endpoints use different locked q-value families.",
+    "Exact participant overlap is unknown.",
+    "Fried, HFRS, and physical components are not available here.",
+    "Forest comparisons are descriptive and are not tests of differences or causal effects."
+  ],
+  "matplotlib": "3.9.4",
+  "multiplicity": {
+    "frailty": 396,
+    "latent_factors": 84
+  },
+  "outputs": {
+    "frailty_paper/analysis/insomnia_sleep_apnea_frailty_dimensions_forest.pdf": "f7adc4307a3d30970e2560f381438bcb381f4bc9abccea2acd363239524fe313",
+    "frailty_paper/analysis/insomnia_sleep_apnea_frailty_dimensions_forest.png": "746d6a048becdcef5fb0cd24cf22ccb1b46bfef873703f79412161f022e8c5d5"
+  },
+  "python": "3.11.11",
+  "row_count": 16,
+  "script": "frailty_paper/scripts/33_plot_insomnia_sleep_apnea_frailty_forest.py",
+  "script_sha256": "f22ca10f41028a8179c274a1b07e685d0f3bc88442025480cd89f7528228e97f",
+  "sleep_traits": [
+    "insomnia",
+    "sleep_apnea"
+  ]
+}

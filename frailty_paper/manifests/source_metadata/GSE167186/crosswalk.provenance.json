@@ -1,0 +1,46 @@
+{
+  "age_range_years": {
+    "Old": [
+      70,
+      90
+    ],
+    "Young": [
+      19,
+      22
+    ]
+  },
+  "crosswalk_built_utc": "2026-09-25T03:07:43Z",
+  "crosswalk_output": "frailty_paper/manifests/muscle_gse167186_snRNA_donor_crosswalk.tsv",
+  "crosswalk_sha256": "930c5f7f292e12a402eb6c8712b58e94d395d3a60bbab7a0797bda6db7b655c9",
+  "genome_build": "GRCh38 listed in each of the 17 GEO MINiML sample processing records",
+  "old_n": 11,
+  "resource_id": "MUSCLE_AGING_GSE167186_SNRNA",
+  "samples_crosschecked": 17,
+  "scope_note": "The 72-subject parent study also includes bulk RNA-seq samples with sarcopenia-related categories; those categories were not transferred to the distinct 17-sample snRNA subset. No count matrix or sequencing data were downloaded.",
+  "source_discrepancies": [
+    "GSM5098753 (OldHM23): GEO MINiML reports age 90; the primary paper reports recruiting older adults ages 65\u201385. Retain the GEO-reported age and resolve before age-restricted interpretations."
+  ],
+  "sources": [
+    {
+      "bytes": 10124,
+      "downloaded_utc": "2026-09-25T03:05:25.317295Z",
+      "file": "GSE167186_SimplifiedMetadataSheet.xlsx",
+      "purpose": "Official sample-name, GEO accession, and listed filtered matrix filename map.",
+      "sha256": "561c0c5d5ebbfcd4ec4a938d0121955aa25ca1a911bc795a23925cfaaa9130ba",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE167nnn/GSE167186/suppl/GSE167186_SimplifiedMetadataSheet.xlsx"
+    },
+    {
+      "bytes": 10633,
+      "downloaded_utc": "2026-09-25T03:06:31.000391Z",
+      "file": "GSE167186_family.xml.tgz",
+      "purpose": "Official series/sample metadata, including sample title, group, age, tissue, and per-sample genome build.",
+      "sha256": "3650339f1fc214e7c26e7f87f95d377ab172135360ed31f23aca2f296b0e1aa2",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE167nnn/GSE167186/miniml/GSE167186_family.xml.tgz"
+    }
+  ],
+  "unavailable_fields": [
+    "sex absent from the 17 GEO snRNA sample records",
+    "clinical frailty/sarcopenia measures absent from the 17 GEO snRNA sample records"
+  ],
+  "young_n": 6
+}

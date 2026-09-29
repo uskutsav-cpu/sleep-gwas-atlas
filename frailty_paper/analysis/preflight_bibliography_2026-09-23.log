@@ -1,0 +1,178 @@
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python scripts/16_verify_acquired_resource_manifest.py --repo .. --external-storage-root "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1"
+RESOURCE_MANIFEST_OK rows=347 files_verified=347
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python scripts/13_validate_analysis_plan.py --repo ..
+ANALYSIS_PLAN_LOCK_OK version=1 sleep_traits=12 multiplicity=396
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python scripts/20_validate_cohort_overlap.py --repo ..
+cohort ledger valid: 34 rows; frozen 12-trait panel/source IDs match; exact intersections unknown
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python scripts/17_validate_review_screening.py --review-dir review
+title_abstract_records=56092
+title_abstract_decided=0
+fulltext_records=0
+fulltext_decided=0
+fulltext_exclusions=0
+REVIEW_SCREENING_OK
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python scripts/42_audit_bibliography.py --repo .. --output frailty_paper/analysis/manuscript_bibliography_audit_2026-09-23.json
+{
+  "schema_version": "frailty_bibliography_audit.v1",
+  "status": "PASS",
+  "manuscript": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/paper/manuscript.md",
+  "references": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/paper/references.bib",
+  "script": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/scripts/42_audit_bibliography.py",
+  "command": "python frailty_paper/scripts/42_audit_bibliography.py --repo <repo>",
+  "inputs_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/paper/manuscript.md": "a097893b6dc1b8c94259d74307b55eb747f94c6e0da4f1a5badd1529a472e053",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/paper/references.bib": "39afeecb25a2a8724ffd99cbfcf576b726b193ee21547dd009bd637bf38e84f6"
+  },
+  "script_sha256": "136612bcc3dce0b016e97b45a530bfb3c52751f95b0e1601287c34efec7cb842",
+  "citation_uses": 27,
+  "unique_citations": [
+    "atkins2021",
+    "buliksullivan2015",
+    "che2025frailtysleepmr",
+    "dashti2019",
+    "deng2024sleepfrailtymr",
+    "foote2025",
+    "gao2025sleepfrailtymr",
+    "giambartolomei2014",
+    "huang2026osafrailtymr",
+    "insomniafrailty2025",
+    "jansen2019",
+    "jones2019",
+    "li2024sedentarysleepfrailty",
+    "lu2024sleepdisturbancefrailtymr",
+    "mak2025",
+    "ray2020",
+    "sleepdurationfrailty2025",
+    "sleepqualityfrailty2025",
+    "song2024sleepfrailtygenetics",
+    "wai2020",
+    "wang2019",
+    "werme2022",
+    "ye2023",
+    "zhang2025sleepfrailtyagingmr",
+    "zhang2026sleepagingfrailtymr",
+    "zou2022"
+  ],
+  "bibliography_entries": 26,
+  "bibliography_keys": [
+    "atkins2021",
+    "buliksullivan2015",
+    "che2025frailtysleepmr",
+    "dashti2019",
+    "deng2024sleepfrailtymr",
+    "foote2025",
+    "gao2025sleepfrailtymr",
+    "giambartolomei2014",
+    "huang2026osafrailtymr",
+    "insomniafrailty2025",
+    "jansen2019",
+    "jones2019",
+    "li2024sedentarysleepfrailty",
+    "lu2024sleepdisturbancefrailtymr",
+    "mak2025",
+    "ray2020",
+    "sleepdurationfrailty2025",
+    "sleepqualityfrailty2025",
+    "song2024sleepfrailtygenetics",
+    "wai2020",
+    "wang2019",
+    "werme2022",
+    "ye2023",
+    "zhang2025sleepfrailtyagingmr",
+    "zhang2026sleepagingfrailtymr",
+    "zou2022"
+  ],
+  "duplicate_keys": [],
+  "missing_keys": [],
+  "uncited_keys": [],
+  "errors": []
+}
+../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python -m unittest discover -s tests -v
+test_builds_one_pair_annotation_with_exact_overlap_unknown (test_aging_context_overlap.AgingContextOverlapTests.test_builds_one_pair_annotation_with_exact_overlap_unknown) ... ok
+test_cohort_status_never_calls_unknown_zero (test_aging_context_overlap.AgingContextOverlapTests.test_cohort_status_never_calls_unknown_zero) ... ok
+test_audit_reports_missing_uncited_duplicate_and_hashes (test_bibliography_audit.BibliographyAuditTests.test_audit_reports_missing_uncited_duplicate_and_hashes) ... ok
+test_parses_regular_entries_and_ignores_bibtex_directives (test_bibliography_audit.BibliographyAuditTests.test_parses_regular_entries_and_ignores_bibtex_directives) ... ok
+test_reads_only_pandoc_citation_clusters (test_bibliography_audit.BibliographyAuditTests.test_reads_only_pandoc_citation_clusters) ... ok
+test_exact_frozen_trait_family_and_provenance (test_build_h2_master.BuildH2MasterTests.test_exact_frozen_trait_family_and_provenance) ... ok
+test_source_row_deletion_fails_closed (test_build_h2_master.BuildH2MasterTests.test_source_row_deletion_fails_closed) ... ok
+test_refuses_stale_q_values_when_raw_p_differs (test_collate_fi_sleep_rg.FISleepRgCollatorTests.test_refuses_stale_q_values_when_raw_p_differs) ... ok
+test_uses_locked_full_family_q_after_exact_raw_p_validation (test_collate_fi_sleep_rg.FISleepRgCollatorTests.test_uses_locked_full_family_q_after_exact_raw_p_validation) ... ok
+test_only_empty_placeholder_outputs_can_be_redirected (test_external_storage_setup.DerivedOutputStorageTests.test_only_empty_placeholder_outputs_can_be_redirected) ... ok
+test_redirect_preserves_empty_source_and_creates_external_links (test_external_storage_setup.DerivedOutputStorageTests.test_redirect_preserves_empty_source_and_creates_external_links) ... ok
+test_preserves_primary_bh_and_applies_same_family_bonferroni (test_fi_correction_sensitivity.FICorrectionSensitivityTests.test_preserves_primary_bh_and_applies_same_family_bonferroni) ... ok
+test_rejects_changed_family_or_incomplete_trait_panel (test_fi_correction_sensitivity.FICorrectionSensitivityTests.test_rejects_changed_family_or_incomplete_trait_panel) ... ok
+test_available_endpoints_and_separate_fdr_families (test_frailty_dimension_forest.FrailtyDimensionForestTests.test_available_endpoints_and_separate_fdr_families) ... ok
+test_relative_output_directory_resolves_from_working_directory (test_frailty_dimension_forest.FrailtyDimensionForestTests.test_relative_output_directory_resolves_from_working_directory) ... ok
+test_extract_is_exact_sleep_by_context_cartesian_family_and_preserves_q (test_frozen_aging_context.FrozenAgingContextTests.test_extract_is_exact_sleep_by_context_cartesian_family_and_preserves_q) ... ok
+test_missing_context_trait_fails_closed (test_frozen_aging_context.FrozenAgingContextTests.test_missing_context_trait_fails_closed) ... ok
+test_missing_frozen_pair_fails_closed (test_frozen_aging_context.FrozenAgingContextTests.test_missing_frozen_pair_fails_closed) ... ok
+test_a2_is_recognized_as_non_effect_allele (test_gwas_source_scan.GwasSourceScanTests.test_a2_is_recognized_as_non_effect_allele) ... ok
+test_finngen_sleep_apnea_headers_are_recognized (test_gwas_source_scan.GwasSourceScanTests.test_finngen_sleep_apnea_headers_are_recognized) ... ok
+test_impossible_values_are_counted_but_not_filtered (test_gwas_source_scan.GwasSourceScanTests.test_impossible_values_are_counted_but_not_filtered) ... ok
+test_log10p_is_supported_for_deposit_style_files (test_gwas_source_scan.GwasSourceScanTests.test_log10p_is_supported_for_deposit_style_files) ... ok
+test_odds_ratio_is_log_scaled_for_scan_without_rewriting_source (test_gwas_source_scan.GwasSourceScanTests.test_odds_ratio_is_log_scaled_for_scan_without_rewriting_source) ... ok
+test_sleep_trait_specific_beta_headers_are_recognized (test_gwas_source_scan.GwasSourceScanTests.test_sleep_trait_specific_beta_headers_are_recognized) ... ok
+test_standard_summary_statistics_header_and_domains (test_gwas_source_scan.GwasSourceScanTests.test_standard_summary_statistics_header_and_domains) ... ok
+test_rejects_incomplete_or_changed_family (test_latent_correction_sensitivity.LatentCorrectionSensitivityTests.test_rejects_incomplete_or_changed_family) ... ok
+test_rejects_nonfinite_raw_p (test_latent_correction_sensitivity.LatentCorrectionSensitivityTests.test_rejects_nonfinite_raw_p) ... ok
+test_same_family_bonferroni_preserves_bh_and_marks_unknown_overlap (test_latent_correction_sensitivity.LatentCorrectionSensitivityTests.test_same_family_bonferroni_preserves_bh_and_marks_unknown_overlap) ... ok
+test_fixed_84_pair_family_and_matrix (test_latent_factor_heatmap.LatentFactorHeatmapTests.test_fixed_84_pair_family_and_matrix) ... ok
+test_missing_pair_fails_closed (test_latent_factor_heatmap.LatentFactorHeatmapTests.test_missing_pair_fails_closed) ... ok
+test_output_labels_support_relative_and_external_paths (test_latent_factor_heatmap.LatentFactorHeatmapTests.test_output_labels_support_relative_and_external_paths) ... ok
+test_orientation_classes (test_latent_hm3_alleles.LatentHm3AlleleTests.test_orientation_classes) ... ok
+test_completed_correction_and_workflow_checks_are_evidence_labeled (test_phase16_sensitivity_summary.Phase16SensitivitySummaryTest.test_completed_correction_and_workflow_checks_are_evidence_labeled) ... ok
+test_matrix_covers_all_headlines_and_sensitivity_domains (test_phase16_sensitivity_summary.Phase16SensitivitySummaryTest.test_matrix_covers_all_headlines_and_sensitivity_domains) ... ok
+test_overlap_and_replication_remain_explicitly_unresolved (test_phase16_sensitivity_summary.Phase16SensitivitySummaryTest.test_overlap_and_replication_remain_explicitly_unresolved) ... ok
+test_unavailable_tests_are_not_reported_as_negative_results (test_phase16_sensitivity_summary.Phase16SensitivitySummaryTest.test_unavailable_tests_are_not_reported_as_negative_results) ... ok
+test_all_components_pass_structure_but_remain_analysis_blocked (test_physical_component_qc_summary.PhysicalComponentQCSummaryTests.test_all_components_pass_structure_but_remain_analysis_blocked) ... ok
+test_fail_closed_if_expected_component_is_missing (test_physical_component_qc_summary.PhysicalComponentQCSummaryTests.test_fail_closed_if_expected_component_is_missing) ... ok
+test_manifest_rejects_paths_outside_repository (test_pubmed_acquisition.AcquiredResourceManifestTests.test_manifest_rejects_paths_outside_repository) ... ok
+test_manifest_reports_hash_mismatch (test_pubmed_acquisition.AcquiredResourceManifestTests.test_manifest_reports_hash_mismatch) ... ok
+test_manifest_verifies_file_size_and_hash (test_pubmed_acquisition.AcquiredResourceManifestTests.test_manifest_verifies_file_size_and_hash) ... ok
+test_export_import_does_not_change_original_bytes (test_pubmed_acquisition.ManualExportImportTests.test_export_import_does_not_change_original_bytes) ... ok
+test_manual_and_pubmed_records_deduplicate_by_doi (test_pubmed_acquisition.ManualExportImportTests.test_manual_and_pubmed_records_deduplicate_by_doi) ... ok
+test_ris_import_retains_accession_database_and_metadata (test_pubmed_acquisition.ManualExportImportTests.test_ris_import_retains_accession_database_and_metadata) ... ok
+test_scopus_csv_import_and_missing_title_are_explicit (test_pubmed_acquisition.ManualExportImportTests.test_scopus_csv_import_and_missing_title_are_explicit) ... ok
+test_stale_normalized_import_is_rejected_without_raw_exports (test_pubmed_acquisition.ManualExportImportTests.test_stale_normalized_import_is_rejected_without_raw_exports) ... ok
+test_batch_parser_retains_pubmed_book_articles (test_pubmed_acquisition.PubmedBatchCheckpointTests.test_batch_parser_retains_pubmed_book_articles) ... ok
+test_complete_cached_batch_is_reused_without_fetch (test_pubmed_acquisition.PubmedBatchCheckpointTests.test_complete_cached_batch_is_reused_without_fetch) ... linked derived output /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/harmonized -> /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/external/data/harmonized; empty original retained at /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/harmonized.local-preserved
+linked derived output /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/munged -> /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/external/data/munged; empty original retained at /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/munged.local-preserved
+derived output already linked: /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/harmonized -> /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/external/data/harmonized
+derived output already linked: /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/repo/data/munged -> /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpk4jg2ocj/external/data/munged
+[primary] reuse /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/tmpqk8fvsap/segment_2020-01-01_2020-12-31/batch_000000.xml
+ok
+test_truncated_cached_batch_is_replaced_atomically (test_pubmed_acquisition.PubmedBatchCheckpointTests.test_truncated_cached_batch_is_replaced_atomically) ... ok
+test_book_article_uses_chapter_title_and_collection (test_pubmed_acquisition.PubmedBookTitleTests.test_book_article_uses_chapter_title_and_collection) ... ok
+test_book_title_fills_missing_chapter_title (test_pubmed_acquisition.PubmedBookTitleTests.test_book_title_fills_missing_chapter_title) ... ok
+test_journal_article_title_is_unchanged (test_pubmed_acquisition.PubmedBookTitleTests.test_journal_article_title_is_unchanged) ... ok
+test_truncated_transport_response_is_retried (test_pubmed_acquisition.PubmedRetryTests.test_truncated_transport_response_is_retried) ... ok
+test_blank_generated_queues_allow_rebuild (test_pubmed_acquisition.ReviewOutputProtectionTests.test_blank_generated_queues_allow_rebuild) ... ok
+test_reviewer_decision_prevents_destructive_rebuild (test_pubmed_acquisition.ReviewOutputProtectionTests.test_reviewer_decision_prevents_destructive_rebuild) ... ok
+test_conflicting_titles_sharing_a_doi_are_not_collapsed (test_pubmed_acquisition.ReviewScreeningValidationTests.test_conflicting_titles_sharing_a_doi_are_not_collapsed) ... ok
+test_consistent_dual_screening_and_reasoned_exclusion_pass (test_pubmed_acquisition.ReviewScreeningValidationTests.test_consistent_dual_screening_and_reasoned_exclusion_pass) ... ok
+test_disagreement_requires_adjudication (test_pubmed_acquisition.ReviewScreeningValidationTests.test_disagreement_requires_adjudication) ... ok
+test_fulltext_location_is_protected (test_pubmed_acquisition.ReviewScreeningValidationTests.test_fulltext_location_is_protected) ... ok
+test_generic_matching_title_does_not_merge_distinct_identifiers (test_pubmed_acquisition.ReviewScreeningValidationTests.test_generic_matching_title_does_not_merge_distinct_identifiers) ... ok
+test_title_abstract_include_must_route_to_fulltext (test_pubmed_acquisition.ReviewScreeningValidationTests.test_title_abstract_include_must_route_to_fulltext) ... ok
+test_unresolved_or_missing_reason_exclusion_is_flagged (test_pubmed_acquisition.ReviewScreeningValidationTests.test_unresolved_or_missing_reason_exclusion_is_flagged) ... ok
+test_unrecognized_partial_is_quarantined_before_verified_promotion (test_pubmed_acquisition.ZenodoDownloadTests.test_unrecognized_partial_is_quarantined_before_verified_promotion) ... ok
+test_checklist_item_counts_and_required_subitems (test_reporting_checklists.ReportingChecklistTests.test_checklist_item_counts_and_required_subitems) ... ok
+test_every_item_has_location_status_and_gap (test_reporting_checklists.ReportingChecklistTests.test_every_item_has_location_status_and_gap) ... ok
+test_pair_family_is_exactly_twelve_by_seven (test_run_secondary_factor_rg.SecondaryFactorRgRunTests.test_pair_family_is_exactly_twelve_by_seven) ... ok
+test_resume_requires_seven_rows_not_just_seven_input_paths (test_run_secondary_factor_rg.SecondaryFactorRgRunTests.test_resume_requires_seven_rows_not_just_seven_input_paths) ... ok
+test_refuses_existing_non_venv_target (test_setup_script_safety.SetupScriptSafetyTests.test_refuses_existing_non_venv_target) ... ok
+test_refuses_to_overlay_existing_environment_with_wrong_python (test_setup_script_safety.SetupScriptSafetyTests.test_refuses_to_overlay_existing_environment_with_wrong_python) ... ok
+test_current_source_linked_table_counts (test_supplementary_tables.SupplementaryTableBuilderTests.test_current_source_linked_table_counts) ... ok
+test_global_rg_keeps_families_and_claim_limits_separate (test_supplementary_tables.SupplementaryTableBuilderTests.test_global_rg_keeps_families_and_claim_limits_separate) ... ok
+test_index_marks_unavailable_results_explicitly (test_supplementary_tables.SupplementaryTableBuilderTests.test_index_marks_unavailable_results_explicitly) ... ok
+test_s15_keeps_correction_families_and_denominators_separate (test_supplementary_tables.SupplementaryTableBuilderTests.test_s15_keeps_correction_families_and_denominators_separate) ... ok
+test_software_table_separates_pins_from_observed_runs (test_supplementary_tables.SupplementaryTableBuilderTests.test_software_table_separates_pins_from_observed_runs) ... ok
+test_basis_file_tampering_is_reported (test_validate_analysis_plan.AnalysisPlanLockTests.test_basis_file_tampering_is_reported) ... ok
+test_plan_tampering_is_reported (test_validate_analysis_plan.AnalysisPlanLockTests.test_plan_tampering_is_reported) ... ok
+test_valid_frozen_plan_and_basis_pass (test_validate_analysis_plan.AnalysisPlanLockTests.test_valid_frozen_plan_and_basis_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 2.172s
+
+OK
+  moved unrecognized partial to summary.tsv.gz.part.unverified

@@ -1,0 +1,88 @@
+{
+  "analysis_id": "brain6_power_optimized_sensitivity_v1_longsleep_trait_only_screen",
+  "configured_workers": 4,
+  "durable_summary_outputs": 0,
+  "durable_tsv_outputs": 0,
+  "generated_utc": "2026-09-26T06:03:40+00:00",
+  "interpretation": "All four original session handles were directly polled in this continuation turn and remain live with fresh shared-SNP harmonization output. Worker 2 advanced to SCREEN_PROGRESS 400/624; the other workers remain at last recorded markers 300/624, 300/624, and 300/623. No final-write TSV or summary exists. The separate OS process audit is unavailable because the sandbox denies ps; no CPU/RSS/OS-PID inference is made.",
+  "last_structured_markers": {
+    "worker_1": "300/624",
+    "worker_2": "300/624",
+    "worker_3": "300/624",
+    "worker_4": "300/623"
+  },
+  "os_process_audit_snapshot": "qc/power_screen_runtime_20260926T0600Z.json",
+  "os_process_audit_status": "PROCESS_INVENTORY_UNAVAILABLE",
+  "os_process_inventory_error": {
+    "message": "[Errno 1] Operation not permitted: 'ps'",
+    "type": "PermissionError"
+  },
+  "schema_version": 1,
+  "session_handles_live": 4,
+  "session_handles_polled": 4,
+  "status": "RUNNING_BY_SESSION_HANDLES",
+  "structured_markers_seen_this_turn": {
+    "worker_1": "300/624",
+    "worker_2": "400/624",
+    "worker_3": "300/624",
+    "worker_4": "300/623"
+  },
+  "workers": [
+    {
+      "config_sha256": "427131552255e9c6d563057c990be56340225d770af38506b2998571387246ce",
+      "expected_loci": 624,
+      "last_structured_progress_marker": "300/624",
+      "latest_poll_emitted_shared_snp_harmonization": true,
+      "output_exists": false,
+      "output_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_1.tsv",
+      "pid": 80450,
+      "session_handle_live": true,
+      "session_id": 90183,
+      "summary_exists": false,
+      "summary_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_1.summary.json",
+      "worker_id": 1
+    },
+    {
+      "config_sha256": "4126ebf863ac006e08a522855a50a75de5df4415c8d7599ef298270054d94647",
+      "expected_loci": 624,
+      "last_structured_progress_marker": "400/624",
+      "latest_poll_emitted_shared_snp_harmonization": true,
+      "output_exists": false,
+      "output_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_2.tsv",
+      "pid": 80451,
+      "session_handle_live": true,
+      "session_id": 34876,
+      "summary_exists": false,
+      "summary_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_2.summary.json",
+      "worker_id": 2
+    },
+    {
+      "config_sha256": "59e3b1da718c739f65c7b4e4394206b45231da7d8fde170312549b020c5356fa",
+      "expected_loci": 624,
+      "last_structured_progress_marker": "300/624",
+      "latest_poll_emitted_shared_snp_harmonization": true,
+      "output_exists": false,
+      "output_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_3.tsv",
+      "pid": 80454,
+      "session_handle_live": true,
+      "session_id": 80233,
+      "summary_exists": false,
+      "summary_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_3.summary.json",
+      "worker_id": 3
+    },
+    {
+      "config_sha256": "b6592ffb06fdafa705748fc8a8ebd8c9f51c11bc7b14589ff2a3d79fbdea0d83",
+      "expected_loci": 623,
+      "last_structured_progress_marker": "300/623",
+      "latest_poll_emitted_shared_snp_harmonization": true,
+      "output_exists": false,
+      "output_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_4.tsv",
+      "pid": 80455,
+      "session_handle_live": true,
+      "session_id": 86201,
+      "summary_exists": false,
+      "summary_path": "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/worker_4.summary.json",
+      "worker_id": 4
+    }
+  ]
+}

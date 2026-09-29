@@ -1,0 +1,43 @@
+{
+  "builder": "brain6/scripts/build_brain6_novelty_crosswalk.py",
+  "builder_sha256": "75581e9955c6d68a2ad400e2ecf2799ae6fb54a6308e181b0b573c90bdf4357c",
+  "inputs": {
+    "brain6/results/global/brain6_72_locked.tsv": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d",
+    "results/analysis/literature_novelty_audit.tsv": "745e1df271f649803159cc4ce6466cd39a15fe320b5d7e7ec183ee94090e0389",
+    "results/analysis/literature_search_queries.tsv": "c150ab28f1f863e5baccfbca69d7925aa1c5284653d386b6a99c0cd5a1dbbea5",
+    "results/analysis/published_rg_source_evidence.tsv": "aeb96fecc5cee9fac65323827998b42055b543292684e360d6444ddac3870226"
+  },
+  "limitations": [
+    "The parent audit is dated 2026-08-28 and was not refreshed in this build.",
+    "Search-based absence is not proof that no prior report exists.",
+    "Prior direct rg comparisons are mostly not fully independent of discovery GWAS.",
+    "This crosswalk does not validate the original 396-family results or imply causality."
+  ],
+  "output": {
+    "path": "brain6/results/novelty/brain6_significant_pair_novelty_crosswalk.tsv",
+    "rows": 35,
+    "sha256": "9c2c030783c0357ade95ce243c7781340c9e3fbb9039dde61fed20704ae467df"
+  },
+  "schema_version": 1,
+  "scope": "All and only 35 Brain6 pairs significant under the inherited original 396-test family.",
+  "status": "PASS_DATED_LITERATURE_CROSSWALK_NO_NOVELTY_CLAIM",
+  "summary": {
+    "apparent_novelty_count": 0,
+    "classification_counts": {
+      "DIRECT_RG_PREVIOUSLY_REPORTED": 25,
+      "DIRECT_RG_REPLICATION_DIFFERENT_DATASET": 9,
+      "MR_ONLY": 1
+    },
+    "direct_rg_count": 34,
+    "direct_rg_independence_counts": {
+      "NA": 1,
+      "NOT_FULLY_INDEPENDENT": 25,
+      "NOT_FULLY_INDEPENDENT;PARTIALLY_INDEPENDENT_OR_OVERLAPPING": 1,
+      "PARTIALLY_INDEPENDENT_OR_OVERLAPPING": 8
+    },
+    "global_pair_count": 72,
+    "inherited_significant_pair_count": 35,
+    "interpretation": "Dated parent-atlas literature crosswalk, not a fresh current-date search; direct rg comparisons frequently reuse or overlap discovery GWAS and are not independent replication. No first-ever claim is supported.",
+    "parent_audit_search_as_of_date": "2026-08-28"
+  }
+}

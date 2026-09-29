@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "rule_id": "brain6_shared_locus_evidence_tiers_v1",
+  "status": "FROZEN_PRE_ANNOTATION",
+  "frozen_before_functional_annotation": true,
+  "functional_annotation_reviewed_before_freeze": false,
+  "scope": "Pair-by-locus evidence integration for the five preselected Brain6 deep-follow-up pairs. This rule does not create evidence or promote any current partial-family PLACO candidate to a final shared locus.",
+  "source_locks": {
+    "global_map": {
+      "path": "brain6/results/global/brain6_72_locked.tsv",
+      "sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d",
+      "significance_source": "original locked 396-test atlas q value; no new 72-test correction"
+    },
+    "deep_track_selection": {
+      "path": "brain6/config/deep_tracks_v1.tsv",
+      "sha256": "fc1c6e8dc3bc0d7200974ab135c7f50dbb84756b82fbe64d6689fd4f8b3d53ef"
+    },
+    "lava_family": {
+      "path": "brain6/config/lava_family_v2.json",
+      "sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+      "family_size": 12475,
+      "correction": "Benjamini-Hochberg across the complete frozen five-pair by 2,495-locus family"
+    },
+    "placo_family": {
+      "path": "brain6/config/placo_family_v3/family_lock.json",
+      "sha256": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7",
+      "required_tracks": 5,
+      "headline_p_threshold": 1e-8,
+      "interpretation": "PLACO is shared-association evidence, not biological pleiotropy or causality"
+    },
+    "shared_locus_rule": {
+      "path": "brain6/config/shared_locus_rule_v1.json",
+      "sha256": "66a9c923ca23c2349e1a690466d3897312b42891b9c2947715ef6bf52610b1d1"
+    },
+    "replication_master_at_freeze": {
+      "path": "brain6/results/replication/replication_master.tsv",
+      "sha256": "b221f5953405e58251eff5ef05cced2e9b04e16aeb517524842633eeb4f1d11e",
+      "use": "Source baseline only; use the completed, source-verified replication ledger at tier assignment"
+    }
+  },
+  "prerequisites": {
+    "lava": "Select exactly one complete, identity-verified run for the full 12,475-slot family; never merge baseline and roundoff runs. Require the predeclared maximum failure fraction and a complete family-level BH correction.",
+    "placo": "All four v3 pairs and protected Track B must have source-verified outputs and complete five-track correction; partial-family outputs cannot assign final tiers.",
+    "loci": "Use only exact-reference matched candidate variants and the frozen shared_locus_rule_v1 clumping/region-merge procedure. Unmatched variants remain audited but do not define independent loci.",
+    "annotation": "Do not inspect or use gene, QTL, cell-type, regulatory, or pathway annotations when assigning tiers. Freeze this rule before any such review."
+  },
+  "criteria": {
+    "global_discovery": "The linked pair is significant using its inherited q value from the original 396-test atlas family (q < 0.05).",
+    "local_primary": "The selected complete LAVA run reports the pair-locus as TESTED and its q value is < 0.05 in the complete 12,475-test BH family.",
+    "local_robust": "local_primary passes, and every applicable, predeclared local robustness analysis is complete, direction-concordant, and has no failed or unknown gate; the matrix must include local-h2 threshold, sample-overlap, MHC-exclusion, and HDL-L checks, plus alternate-LD-reference checks where scientifically defensible. Missing or unrun checks do not count as robust.",
+    "shared_variant": "At least one lead variant in the frozen nonduplicated locus has P_PLACO < 1e-8, Q_BONFERRONI_ACROSS_PAIRS < 0.05, and an exact chromosome-position match to the locked reference in a complete five-track family.",
+    "independent_replication": "A source-verified external estimate for the linked global pair has two-sided P < 0.05, direction concordant with discovery, exact phenotype relation, documented non-overlapping cohorts, and no unresolved participant-level overlap. A directional replication label with unresolved overlap does not satisfy this criterion.",
+    "contradictory_replication": "A source-verified eligible external replication is direction-discordant or has two-sided P >= 0.05; such a pair cannot be promoted to TIER_1 or TIER_2."
+  },
+  "tiers": {
+    "TIER_1": "global_discovery AND independent_replication AND local_robust AND shared_variant AND NOT contradictory_replication",
+    "TIER_2": "global_discovery AND local_robust AND shared_variant AND NOT contradictory_replication, when TIER_1 is not met because fully independent replication is not established",
+    "TIER_3": "shared_variant only, or shared_variant with incomplete global/local/replication support; label exploratory and PLACO-only where applicable. Requires complete five-track PLACO evidence and must never be described as robust local sharing or a causal/biological mechanism.",
+    "NOT_TIERED": "No qualifying shared_variant evidence, contradictory replication, incomplete prerequisite families, or an ineligible global pair (including Alzheimer NO_ELIGIBLE_PAIR). Preserve missing/unknown states; do not impute a tier."
+  },
+  "assignment_policy": {
+    "unit": "pair-by-locus",
+    "precedence": ["TIER_1", "TIER_2", "TIER_3", "NOT_TIERED"],
+    "missing_evidence": "Unknown, unavailable, partial-family, or unrun evidence fails the corresponding positive criterion; do not treat it as negative evidence.",
+    "annotation_firewall": "Tier assignment must be completed and hashed before any functional annotation is joined.",
+    "claims": "A tier is an evidence summary only. It does not establish a causal variant, causal gene, mediation, or biological pleiotropy."
+  },
+  "output_schema": [
+    "pair", "disorder", "sleep_trait", "chr", "start", "end", "lead_variant",
+    "PLACO_P", "local_rg_LAVA", "local_rg_HDLL", "replication_level",
+    "evidence_tier", "notes"
+  ],
+  "current_assignment_status": "NONE_ASSIGNED_UPSTREAM_FAMILIES_INCOMPLETE"
+}

@@ -8,6 +8,18 @@ need(cfg$method %in% c("PLACO_PLUS","PLACO"), "Unknown PLACO method")
 need(is.numeric(cfg$extreme_z2) && cfg$extreme_z2>0, "Freeze the extreme-Z threshold")
 need(is.numeric(cfg$p_threshold) && cfg$p_threshold>0 && cfg$p_threshold<1,
      "Freeze null parameter-estimation threshold")
+
+# The statistic is Z1*Z2. When either Z is exactly zero, the observed
+# statistic is exactly zero and its two-sided tail probability is exactly 1.
+# The upstream density has an integrable K0 singularity at zero; numerical
+# integration at that boundary may otherwise return NA or an out-of-range
+# value. This exact boundary case is handled analytically, without changing
+# the upstream PLACO+ calculation for nonzero statistics.
+placo_plus_pvalue <- function(z, VarZ, CorZ, AbsTol) {
+  if (any(z == 0)) return(1.0)
+  placo.plus(z, VarZ=VarZ, CorZ=CorZ, AbsTol=AbsTol)$p.placo.plus
+}
+
 if (cfg$mode == "estimate") {
   # Use ALL genome-wide eligible variants, not just significant candidates.
   d <- read_dt(cfg$pair_file, c("Z1","Z2","P1","P2"))
@@ -46,7 +58,7 @@ if (cfg$mode == "estimate") {
   for (i in which(!exclusions)) {
     ans <- tryCatch({
       if (cfg$method == "PLACO_PLUS") {
-        placo.plus(c(d$Z1[i],d$Z2[i]),VarZ=par$VarZ,CorZ=par$CorZ,AbsTol=cfg$absolute_tolerance)$p.placo.plus
+        placo_plus_pvalue(c(d$Z1[i],d$Z2[i]),VarZ=par$VarZ,CorZ=par$CorZ,AbsTol=cfg$absolute_tolerance)
       } else {
         placo(c(d$Z1[i],d$Z2[i]),VarZ=par$VarZ,AbsTol=cfg$absolute_tolerance)$p.placo
       }

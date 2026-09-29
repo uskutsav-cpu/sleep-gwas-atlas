@@ -1,0 +1,66 @@
+{
+  "article_url": "https://www.nature.com/articles/s43856-026-01656-w",
+  "builder": {
+    "path": "brain6/scripts/audit_fan_2026_rg_context.py",
+    "sha256": "f0aac7bddaf5feeb14f2c1e836d711e024ddd319c6e1a7b853e7519c6a474130"
+  },
+  "citation": "Fan Z et al. Communications Medicine. 2026;6:435. doi:10.1038/s43856-026-01656-w",
+  "generated_utc_date": "2026-09-26",
+  "inputs": {
+    "brain6_locked_global_map": {
+      "path": "brain6/results/global/brain6_72_locked.tsv",
+      "sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d"
+    },
+    "fan_supplementary_data_11": {
+      "download_date": "2026-09-26",
+      "downloaded_basename": "brain6_fan2026_MOESM12_ESM.xlsx",
+      "sha256": "84b832a3fba7235a712d528aa87ddd089fb68831fcf709245c0c405c2e654711",
+      "source_retrieval": "Downloaded unmodified for this audit; source can be reacquired at source_url and checked against sha256.",
+      "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs43856-026-01656-w/MediaObjects/43856_2026_1656_MOESM12_ESM.xlsx"
+    },
+    "fan_supplementary_data_2": {
+      "download_date": "2026-09-26",
+      "downloaded_basename": "brain6_fan2026_MOESM3_ESM.xlsx",
+      "sha256": "134bb87af34768b3245055ab4e31d514ecea200f24216192f2b9ed5648f846e0",
+      "source_retrieval": "Downloaded unmodified for this audit; source can be reacquired at source_url and checked against sha256.",
+      "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs43856-026-01656-w/MediaObjects/43856_2026_1656_MOESM3_ESM.xlsx"
+    },
+    "fan_supplementary_data_4": {
+      "download_date": "2026-09-26",
+      "downloaded_basename": "brain6_fan2026_MOESM5_ESM.xlsx",
+      "sha256": "5dbef46d2bc98fa7107eb9403f9aadf5dfdb8d0a7e32b8c2258ee7db5de58164",
+      "source_retrieval": "Downloaded unmodified for this audit; source can be reacquired at source_url and checked against sha256.",
+      "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs43856-026-01656-w/MediaObjects/43856_2026_1656_MOESM5_ESM.xlsx"
+    }
+  },
+  "limitations": [
+    "Source overlap is intrinsic because Fan et al. reused published GWAS; these comparisons are literature context, not independent replication.",
+    "The two Jones 2019 chronotype rows share a source paper but the a/b suffix-to-release mapping is not resolved from the supplement metadata; those rows are not called exact source pairs.",
+    "Pairs without a matched source-pair row are not evidence that no related published correlation exists."
+  ],
+  "method": "Match locked significant Brain6 pairs to Fan Data11 only where sleep and disease source labels are source-identical; chronotype suffixes remain ambiguous.",
+  "output": {
+    "path": "brain6/results/novelty/fan_2026_source_match_context.tsv",
+    "sha256": "1808fa3b158f221ae923bf24e54a7c49bfeaed4802ed759fe3c31cdb774497fb"
+  },
+  "rebuild_check": {
+    "matches_committed_output_byte_for_byte": true,
+    "temporary_output_sha256": "1808fa3b158f221ae923bf24e54a7c49bfeaed4802ed759fe3c31cdb774497fb"
+  },
+  "schema_version": 1,
+  "status": "PASS_SOURCE_MATCH_AUDIT_NOT_INDEPENDENT_REPLICATION",
+  "summary": {
+    "additional_chronotype_candidate_rows": 4,
+    "additional_chronotype_pairs_with_ambiguous_release": 2,
+    "brain6_inherited_significant_pairs": 35,
+    "chronotype_candidate_rows_direction_concordant": 4,
+    "chronotype_rows_passing_fan_p_fdr_005": 3,
+    "chronotype_source_suffix_unresolved_rows": 4,
+    "exact_pairs_direction_concordant": 11,
+    "exact_pairs_passing_fan_p_fdr_005": 11,
+    "independent_replication": false,
+    "novelty_classifications_changed": false,
+    "source_exact_pairs": 11
+  },
+  "supplement_license": "CC BY-NC-ND 4.0; source workbooks were not copied into the repository."
+}

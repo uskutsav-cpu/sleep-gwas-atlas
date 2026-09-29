@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "family_id": "brain6_placo_plus_v2",
+  "pair_selection_lock": "extensions/brain6/work/overnight-v03/brain6-pairs.lock.json",
+  "n_selected_tracks": 5,
+  "protected_legacy_pair": "insomnia__adhd",
+  "pairs": {
+    "insomnia__mdd": {
+      "plan_path": "brain6/config/placo_family_v2/insomnia__mdd/plan.json",
+      "plan_sha256": "44dc45af5ecdfa425617150ce2f6393b0d74d47bb059bda663dcef354845ad1f",
+      "expected_rows": 1122359,
+      "n_chunks": 57
+    },
+    "longsleep__bipolar": {
+      "plan_path": "brain6/config/placo_family_v2/longsleep__bipolar/plan.json",
+      "plan_sha256": "87c1948af01e4d63e601ad115a11eebe98d19ff45c2df5e11aa5b9dfa4bcf52c",
+      "expected_rows": 6305673,
+      "n_chunks": 316
+    },
+    "longsleep__parkinson": {
+      "plan_path": "brain6/config/placo_family_v2/longsleep__parkinson/plan.json",
+      "plan_sha256": "c5588c5001185812f8abae0556154bbf6228cba302aa6f4335c8f5963694b044",
+      "expected_rows": 1131725,
+      "n_chunks": 57
+    },
+    "longsleep__scz": {
+      "plan_path": "brain6/config/placo_family_v2/longsleep__scz/plan.json",
+      "plan_sha256": "e745bc3382f44f19811df2d6f092160f366deed612eb060e27be129a79c9e209",
+      "expected_rows": 6296500,
+      "n_chunks": 315
+    }
+  },
+  "method": "PLACO_PLUS",
+  "placo_source_sha256": "fb684a8ed88f27dd138f5c2e8613b092904e84f364030d036058f17db95b7124",
+  "adapter_sha256": "e097104aed7f0fb36c1937a273e7d0bb7887a7177a22133a4e107d0042820097",
+  "zero_z_rule": "If Z1==0 or Z2==0, return exact P=1; otherwise call hash-pinned upstream PLACO+ unchanged.",
+  "extreme_z2": 80,
+  "p_threshold": 0.0001,
+  "minimum_variants": 1000000,
+  "seed": 20260908,
+  "absolute_tolerance": 1e-13,
+  "max_pair_numerical_failure_rate": 0.001,
+  "within_pair_adjustment": "Benjamini-Hochberg on all pair rows; failures count conservatively in denominator and stay marked failed",
+  "across_pair_adjustment": "Bonferroni across 5 selected tracks, including protected Track B",
+  "headline_threshold": 1e-08,
+  "plans_created_before_v2_results": true,
+  "results_reviewed_at_lock_time": false,
+  "execution_roots": {
+    "insomnia__mdd": "/Volumes/Extreme SSD/brain6-work/placo-family-v2-results/insomnia__mdd",
+    "longsleep__bipolar": "/Volumes/Extreme SSD/brain6-work/placo-family-v2-results/longsleep__bipolar",
+    "longsleep__parkinson": "/Volumes/Extreme SSD/brain6-work/placo-family-v2-results/longsleep__parkinson",
+    "longsleep__scz": "/Volumes/Extreme SSD/brain6-work/placo-family-v2-results/longsleep__scz"
+  }
+}

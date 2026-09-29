@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6-lava-canonical-v3",
+  "family_lock_sha256": "f30c46f1eaaaf50d4697cf8af97f3acd44bef2ad8e067c016f3b2568b424b417",
+  "worker_protocol": "four concurrent persistent R processes; five-locus chromosome batches; load the official chromosome reference once per batch; checksum every cell input and checkpoint every locus with seven trait-cell hashes",
+  "batch_size_loci": 5,
+  "max_attempts_per_locus": 2,
+  "maximum_univariate_untested_fraction": 0.05,
+  "gate_p_strictly_less_than": 2.86286859433152e-06,
+  "execution_policy": {
+    "locus_processing": {
+      "min_K": 2,
+      "prune_thresh": 99,
+      "max_prop_K": 0.75,
+      "drop_failed": true,
+      "max_block_size": 3000,
+      "cap_estimates": true
+    },
+    "univariate": {
+      "cap_estimates": true
+    },
+    "random_seed": 20260922,
+    "reference_cache_scope": "single chromosome batch per persistent R process",
+    "trait_sumstats_reads_per_cell": 1,
+    "blas_threads": 1,
+    "openmp_threads": 1,
+    "numerical_stability_patch": {
+      "id": "LAVA015_BLOCK_REDUCED_SYMMETRY_V1",
+      "rule": "symmetrize only when asymmetry <= 100 * eps * max(1,nrow(M)) * max(1,max(abs(M))); otherwise fail",
+      "scientific_parameters_changed": false
+    },
+    "input_provenance_source": "v1 byte-identical materialized locus inputs; bound by exact per-file hashes in v3 receipts",
+    "worker_count": 4
+  },
+  "participant_level_overlap_verified": false,
+  "run_policy": "Do not create family-level decision or downstream pair results until all 17,465 intended cells are audited and the frozen 5% maximum untested fraction passes.",
+  "worker_count": 4
+}

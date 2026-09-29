@@ -1,0 +1,45 @@
+{
+  "audit_id": "cohort_overlap_insomnia_adhd_replication_20260925",
+  "created_utc": "2026-09-25",
+  "inputs": {
+    "brain6/manifests/cohort_overlap.tsv": "7584318f6464ab5a3a9b33ac3ff41fe032b402f13c38c582f97cb2c59d5212f1",
+    "brain6/manifests/gwas_master.tsv": "bfdf722feab17e19a3a9e7e733e845866d75abbf6f58393ece99b71fdc9624a7",
+    "brain6/results/replication/replication_master.tsv": "b221f5953405e58251eff5ef05cced2e9b04e16aeb517524842633eeb4f1d11e"
+  },
+  "limitations": [
+    "Ten PGC contributing cohorts not enumerated in the reviewed main-text material.",
+    "No individual-level linkage or direct overlap estimate.",
+    "FinnGen endpoint ascertainment differs from Demontis discovery case definitions.",
+    "Same insomnia exposure is retained for both global discovery and FinnGen outcome estimate."
+  ],
+  "outputs": {
+    "brain6/qc/cohort_overlap_insomnia_adhd_replication_20260925.md": "8d19a37f564ed532dd6284ffe7bb48e649479f5343ba1a827386838f0a05ca1b"
+  },
+  "schema_version": 1,
+  "scope": "public cohort-description audit only; no individual-level data or overlap estimate",
+  "sources": [
+    {
+      "citation": "Demontis et al. 2023, DOI 10.1038/s41588-022-01285-8",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/10914347/",
+      "use": "Primary ADHD study description: iPSYCH, deCODE, ten European-ancestry PGC cohorts."
+    },
+    {
+      "citation": "Jansen et al. 2019, DOI 10.1038/s41588-018-0333-3",
+      "url": "https://www.nature.com/articles/s41588-018-0333-3",
+      "use": "Primary insomnia study; UK Biobank-only source row frozen in gwas_master."
+    },
+    {
+      "url": "https://www.finngen.fi/en/cohort_and_data",
+      "use": "FinnGen national biobank and register cohort description."
+    },
+    {
+      "url": "https://r11.risteys.finngen.fi/endpoints/F5_ADHD",
+      "use": "FinnGen F5_ADHD endpoint registry-code definition."
+    },
+    {
+      "url": "https://www.finngen.fi/en/access_results",
+      "use": "FinnGen release and results access documentation."
+    }
+  ],
+  "status": "UNKNOWN_OVERLAP_RETAINED_DIRECTIONAL_REPLICATION_ONLY"
+}

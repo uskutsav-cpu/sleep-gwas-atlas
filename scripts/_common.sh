@@ -6,6 +6,15 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 PYTHON_BIN=${PYTHON_BIN:-python3}
 LDSC_PYTHON=${LDSC_PYTHON:-.ldsc-env/bin/python}
 LDSC_DIR=${LDSC_DIR:-ldsc}
+REF_DIR=${REF_DIR:-ref}
+HARMONIZED_DIR=${HARMONIZED_DIR:-data/harmonized}
+MUNGED_DIR=${MUNGED_DIR:-data/munged}
+case "$HARMONIZED_DIR" in
+  /*) DEFAULT_ANALYSIS_TMPDIR="$HARMONIZED_DIR/.tmp" ;;
+  *) DEFAULT_ANALYSIS_TMPDIR="$ROOT/$HARMONIZED_DIR/.tmp" ;;
+esac
+TMPDIR=${TMPDIR:-$DEFAULT_ANALYSIS_TMPDIR}
+export TMPDIR
 # Production entry points always use the locked atlas-v1.0 manifest. Keeping
 # this path non-overridable prevents an environment variable from silently
 # changing the analysed phenotype set.
@@ -107,8 +116,15 @@ public_source_field() {
 require_ldsc() {
   require_file "$LDSC_DIR/ldsc.py"
   require_file "$LDSC_DIR/munge_sumstats.py"
-  require_file "ref/w_hm3.snplist"
-  require_file "ref/eur_w_ld_chr/1.l2.ldscore.gz"
+  require_file "$REF_DIR/w_hm3.snplist"
+  require_file "$REF_DIR/eur_w_ld_chr/1.l2.ldscore.gz"
+}
+
+prepare_analysis_workspace() {
+  mkdir -p "$HARMONIZED_DIR" "$MUNGED_DIR" "$TMPDIR"
+  for output_dir in "$HARMONIZED_DIR" "$MUNGED_DIR" "$TMPDIR"; do
+    bash "$ROOT/frailty_paper/scripts/09_require_storage.sh" "$ROOT" "$output_dir"
+  done
 }
 
 validate_panel() {

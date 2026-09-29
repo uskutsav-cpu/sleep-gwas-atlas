@@ -1,0 +1,74 @@
+{
+  "audit_file": "lava_full_receipt_audit_2026-09-28_2100_live.json",
+  "audit_summary": {
+    "active_job_pid_liveness": {
+      "37878": true,
+      "89389": true
+    },
+    "active_job_pids": [
+      37878,
+      89389
+    ],
+    "all_traits_pass_1pct_gate": false,
+    "audit_time_end_utc": "2026-09-28T21:01:00+00:00",
+    "audit_time_start_utc": "2026-09-28T21:00:19+00:00",
+    "claim_issues": [],
+    "duplicate_claim_identities": [],
+    "duplicate_trait_locus_identities": [],
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "process_failure_categories": {
+      "all_phenotypes_negative_variance": 4800,
+      "no_specified_snps_in_reference": 252,
+      "other_process_failure": 4
+    },
+    "receipt_file_list_changed_during_scan": false,
+    "receipt_files_validated": 27828,
+    "receipt_issues": [],
+    "requested_parallel_workers": 6,
+    "stale_claims_recovered": 0
+  },
+  "capture_utc": "2026-09-28T21:01:40+00:00",
+  "runner_state": {
+    "active_jobs": [
+      {
+        "claimed_utc": "2026-09-28T13:05:40.821432+00:00",
+        "locus_index": 196,
+        "pair_order": 4,
+        "process_group": 37878,
+        "trait": "longsleep",
+        "worker_pid": 37878
+      },
+      {
+        "claimed_utc": "2026-09-28T13:05:54.969542+00:00",
+        "locus_index": 196,
+        "pair_order": 5,
+        "process_group": 89389,
+        "trait": "napping",
+        "worker_pid": 89389
+      }
+    ],
+    "analysis_id": "frailty_fi_sleep_lava_sensitivity_v1",
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "measured_receipts_per_hour": 0.0,
+    "parallel_workers": 2,
+    "requested_parallel_workers": 6,
+    "resource_fallback_reason": "swap use reached 5440/5632 MiB (\u226595% of allocated swap); reducing three workers to two",
+    "stale_claims_recovered": 0,
+    "throughput_window_seconds": 1802.7221069579973,
+    "updated_utc": "2026-09-28T21:01:32.274546+00:00",
+    "verified_receipts": 27828,
+    "worker_pids": {
+      "1": 37878,
+      "2": 89389,
+      "3": 6231,
+      "4": 6232
+    }
+  }
+}

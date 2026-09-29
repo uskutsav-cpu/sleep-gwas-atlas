@@ -1,0 +1,211 @@
+{
+  "audited_at_utc": "2026-09-24T17:05:39+00:00",
+  "audit_status": "PASS_RECEIPT_INTEGRITY",
+  "placo": {
+    "code_lock": {
+      "status": "PASS",
+      "files_checked": 74
+    },
+    "verified_chunks": 745,
+    "planned_chunks": 745,
+    "manifest_counts_match": true,
+    "pairs": {
+      "insomnia__mdd": {
+        "verified_chunks": 57,
+        "expected_chunks": 57,
+        "complete": true,
+        "first_missing_chunk": null,
+        "collation": {
+          "status": "COMPLETE_QC_PASS",
+          "receipt_verified": true,
+          "lock_present": false,
+          "partial_directories": []
+        },
+        "manifest_completed_chunks": 57,
+        "manifest_matches_receipts": true
+      },
+      "longsleep__bipolar": {
+        "verified_chunks": 316,
+        "expected_chunks": 316,
+        "complete": true,
+        "first_missing_chunk": null,
+        "collation": {
+          "status": "COMPLETE_QC_PASS",
+          "receipt_verified": true,
+          "lock_present": false,
+          "partial_directories": []
+        },
+        "manifest_completed_chunks": 316,
+        "manifest_matches_receipts": true
+      },
+      "longsleep__parkinson": {
+        "verified_chunks": 57,
+        "expected_chunks": 57,
+        "complete": true,
+        "first_missing_chunk": null,
+        "collation": {
+          "status": "COMPLETE_QC_PASS",
+          "receipt_verified": true,
+          "lock_present": false,
+          "partial_directories": []
+        },
+        "manifest_completed_chunks": 57,
+        "manifest_matches_receipts": true
+      },
+      "longsleep__scz": {
+        "verified_chunks": 315,
+        "expected_chunks": 315,
+        "complete": true,
+        "first_missing_chunk": null,
+        "collation": {
+          "status": "COMPLETE_QC_PASS",
+          "receipt_verified": true,
+          "lock_present": false,
+          "partial_directories": []
+        },
+        "manifest_completed_chunks": 315,
+        "manifest_matches_receipts": true
+      }
+    }
+  },
+  "lava": {
+    "verified_loci": 2495,
+    "planned_loci": 2495,
+    "complete": true,
+    "pair_locus_status_counts": {
+      "UNIVARIATE_UNDERPOWERED": 12356,
+      "TESTED": 1,
+      "NO_OVERLAP": 111,
+      "FAILED": 7
+    },
+    "pair_locus_reason_counts": {
+      "UNIVARIATE_UNDERPOWERED:LOW_LOCAL_H2_NOT_EXECUTION_FAILURE": 580,
+      "UNIVARIATE_UNDERPOWERED:ONE_TRAIT_DROPPED_FOR_LOW_LOCAL_H2": 5147,
+      "UNIVARIATE_UNDERPOWERED:ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE": 6629,
+      "NO_OVERLAP:FEWER_THAN_MIN_K_SHARED_VARIANTS_IN_SEALED_REFERENCE": 109,
+      "FAILED:Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets": 5,
+      "NO_OVERLAP:LAVA_REFERENCE_HARMONIZATION_LEFT_FEWER_THAN_MIN_K_SNPs": 2,
+      "FAILED:LAVA_PROCESS_LOCUS_RETURNED_NULL": 2
+    },
+    "failed_slots": [
+      {
+        "locus_id": "1416",
+        "pair_id": "insomnia__mdd",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1416",
+        "pair_id": "longsleep__parkinson",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__scz",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__bipolar",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__parkinson",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1997",
+        "pair_id": "longsleep__scz",
+        "reason": "LAVA_PROCESS_LOCUS_RETURNED_NULL"
+      },
+      {
+        "locus_id": "1997",
+        "pair_id": "longsleep__bipolar",
+        "reason": "LAVA_PROCESS_LOCUS_RETURNED_NULL"
+      }
+    ],
+    "observed_failed_slot_fraction_of_planned_family": 0.0005611222444889779,
+    "predeclared_failure_rate_ceiling": 0.01,
+    "failure_rate_ceiling_status": "PASS",
+    "no_overlap_unique_loci": 24,
+    "no_overlap_slots_by_pair": {
+      "insomnia__adhd": 23,
+      "insomnia__mdd": 23,
+      "longsleep__scz": 22,
+      "longsleep__bipolar": 22,
+      "longsleep__parkinson": 21
+    },
+    "receipt_errors": 0,
+    "run_id": "13b80e6b64a5179fec70ba510a89c51241c9d58ec05833cc52161b435aee44fa",
+    "run_variant": "baseline",
+    "manifest_completed_loci": 743,
+    "manifest_matches_receipts": false
+  },
+  "lava_roundoff": {
+    "verified_loci": 2013,
+    "planned_loci": 2495,
+    "complete": false,
+    "pair_locus_status_counts": {
+      "UNIVARIATE_UNDERPOWERED": 9952,
+      "TESTED": 1,
+      "FAILED": 6,
+      "NO_OVERLAP": 106
+    },
+    "pair_locus_reason_counts": {
+      "UNIVARIATE_UNDERPOWERED:LOW_LOCAL_H2_NOT_EXECUTION_FAILURE": 450,
+      "UNIVARIATE_UNDERPOWERED:ONE_TRAIT_DROPPED_FOR_LOW_LOCAL_H2": 4144,
+      "UNIVARIATE_UNDERPOWERED:ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE": 5358,
+      "FAILED:No write permission for directory: /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/RtmpHgg4Tt": 1,
+      "NO_OVERLAP:FEWER_THAN_MIN_K_SHARED_VARIANTS_IN_SEALED_REFERENCE": 104,
+      "FAILED:Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets": 5,
+      "NO_OVERLAP:LAVA_REFERENCE_HARMONIZATION_LEFT_FEWER_THAN_MIN_K_SNPs": 2
+    },
+    "failed_slots": [
+      {
+        "locus_id": "740",
+        "pair_id": "longsleep__parkinson",
+        "reason": "No write permission for directory: /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/RtmpHgg4Tt"
+      },
+      {
+        "locus_id": "1416",
+        "pair_id": "insomnia__mdd",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1416",
+        "pair_id": "longsleep__parkinson",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__scz",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__bipolar",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      },
+      {
+        "locus_id": "1417",
+        "pair_id": "longsleep__parkinson",
+        "reason": "Less than 3 SNPs shared across data sets; make sure you have matching SNP ID formats across sumstats / reference data sets"
+      }
+    ],
+    "observed_failed_slot_fraction_of_planned_family": 0.0004809619238476954,
+    "predeclared_failure_rate_ceiling": 0.01,
+    "failure_rate_ceiling_status": "PROVISIONALLY_WITHIN_CEILING",
+    "no_overlap_unique_loci": 23,
+    "no_overlap_slots_by_pair": {
+      "insomnia__adhd": 22,
+      "insomnia__mdd": 22,
+      "longsleep__scz": 21,
+      "longsleep__bipolar": 21,
+      "longsleep__parkinson": 20
+    },
+    "receipt_errors": 0,
+    "run_id": "af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf",
+    "run_variant": "roundoff_v1"
+  },
+  "interpretation": "Receipt/collation-state audit only; baseline and corrected LAVA runs remain separate, unfinished families are not final results, and no statistical correction is performed."
+}

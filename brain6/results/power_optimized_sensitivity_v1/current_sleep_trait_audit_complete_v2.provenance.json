@@ -1,0 +1,38 @@
+{
+  "analysis_id": "brain6_current_sleep_trait_audit_canonical_metrics_v2",
+  "builder_path": "brain6/scripts/build_current_sleep_trait_audit_canonical_metrics.py",
+  "builder_sha256": "da9cf9c1eb5c65c6f56864abe6867191e35f97a9600067cc333c7d7beb9a995e",
+  "canonical_run_id": "d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b",
+  "historical_input_preserved": "brain6/results/power_optimized_sensitivity_v1/current_sleep_trait_audit_complete.tsv",
+  "inputs_sha256": {
+    "brain6/results/power_optimized_sensitivity_v1/canonical_family_trait_power_audit_v1.provenance.json": "4c697587ae015bb68c849306c26aaf98a768531b5e4ff02cee498a08bde20561",
+    "brain6/results/power_optimized_sensitivity_v1/canonical_family_trait_power_audit_v1.tsv": "5e60bd7a04b851be07310b13af5f23b5cfe5a0c3c0ef2085317eccab1272bf49",
+    "brain6/results/power_optimized_sensitivity_v1/canonical_sleep_reference_overlap_v1.provenance.json": "b3e898eba5ebba4ad743220058b8f0ed0c63f2b1a5f26fe1e5a10767b6304370",
+    "brain6/results/power_optimized_sensitivity_v1/current_sleep_trait_audit_complete.tsv": "c70e4c126bb2f512af7f9702e49ad7819c2db98ed21c42ed15da40a74c30b332"
+  },
+  "method": "Preserve the exact-ID overlap and receipt counts from the prior report table; replace local-h2 median/quartiles and inherited SNP-h2 with values from the hash-bound seven-input canonical family audit. Quartiles are linear-interpolation quantiles over TESTED loci only.",
+  "outputs_sha256": {
+    "current_sleep_trait_audit_complete_v2.tsv": "3e03d54dbe2e82bc06ebc127cbbb2c4d3bac9e5f5e8ab7475978454d480a36bf"
+  },
+  "schema_version": 1,
+  "scope": "Corrected reportable diagnostics for the two sleep traits in the seven-input immutable canonical LAVA v3 family",
+  "status": "PASS_CORRECTED_CANONICAL_METRICS",
+  "trait_metrics": {
+    "insomnia": {
+      "local_h2_median_tested": "8.568065e-05",
+      "local_h2_q25_tested": "4.1079e-05",
+      "local_h2_q75_tested": "0.000141092",
+      "not_run": 671,
+      "snp_h2": "0.1008 liability scale",
+      "tested": 1824
+    },
+    "longsleep": {
+      "local_h2_median_tested": "0.0001276585",
+      "local_h2_q25_tested": "5.891565e-05",
+      "local_h2_q75_tested": "0.000225666",
+      "not_run": 1291,
+      "snp_h2": "0.2329 liability scale",
+      "tested": 1204
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "audited_at_utc": "2026-09-24T06:24:33+00:00",
+  "status": "PASS_FOUR_PAIR_QC; FIVE_TRACK_FAMILY_INCOMPLETE",
+  "family_lock_sha256": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7",
+  "n_required_tracks": 5,
+  "published_v3_pairs": [
+    "insomnia__mdd",
+    "longsleep__bipolar",
+    "longsleep__parkinson",
+    "longsleep__scz"
+  ],
+  "protected_track_b_published": false,
+  "published_output_sha256": {
+    "insomnia__mdd": "e3f6562cccfcec6fa856e959afe02e9abc69ab6928d5ba53be9c2ba67940e543",
+    "longsleep__bipolar": "c4c1f282bc84a01273ac0f66b43ca990f90a57c3f2f392efc71a248a4109be2c",
+    "longsleep__parkinson": "87a74858b8034376c1aa45335f898974672bbea9a49fcf97340ad82a0d03cfc8",
+    "longsleep__scz": "9b4574ab61d6fb23eb8343eb3b5eeac8fa33800f4e7ab432ef510453f69cf6d1"
+  },
+  "collation_receipt_sha256": {
+    "insomnia__mdd": "f035860e962bf9fc1881ca681e2af437da648d2abfc491b9b893d3de8ef1d7d4",
+    "longsleep__bipolar": "cb0451f3daacc93959bb1dc7cabac2e95a2564b569096bda0157f44ae64fd97b",
+    "longsleep__parkinson": "2dea8e366dd5370b758e2984eb14bfa15bae7e64c760f992008af9b83d586fc6",
+    "longsleep__scz": "a433f47651d4ee71f6d9f149d1cc6b0ac77205e0a9f23eb03b7700e08c15be27"
+  },
+  "full_family_complete": false,
+  "q_values_independently_verified": 14856053,
+  "pairs": [
+    {
+      "pair_id": "insomnia__mdd",
+      "total_rows": 1122359,
+      "tested": 1122358,
+      "excluded_extreme_z": 1,
+      "numerical_failures": 0,
+      "denominator": 1122358,
+      "failure_rate": 0.0,
+      "headline_variants": 124,
+      "adjustment_tracks": 5
+    },
+    {
+      "pair_id": "longsleep__bipolar",
+      "total_rows": 6305673,
+      "tested": 6305663,
+      "excluded_extreme_z": 0,
+      "numerical_failures": 10,
+      "denominator": 6305673,
+      "failure_rate": 1.5858735459323692e-06,
+      "headline_variants": 27,
+      "adjustment_tracks": 5
+    },
+    {
+      "pair_id": "longsleep__parkinson",
+      "total_rows": 1131725,
+      "tested": 1131670,
+      "excluded_extreme_z": 55,
+      "numerical_failures": 0,
+      "denominator": 1131670,
+      "failure_rate": 0.0,
+      "headline_variants": 15,
+      "adjustment_tracks": 5
+    },
+    {
+      "pair_id": "longsleep__scz",
+      "total_rows": 6296500,
+      "tested": 6296362,
+      "excluded_extreme_z": 127,
+      "numerical_failures": 11,
+      "denominator": 6296373,
+      "failure_rate": 1.747037540501492e-06,
+      "headline_variants": 2131,
+      "adjustment_tracks": 5
+    }
+  ],
+  "interpretation": "Four PLACO v3 pairs pass pair-level QC; five-track correction is verified, but the protected Track B output is not present and no full-family conclusion is made."
+}

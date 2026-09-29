@@ -327,7 +327,14 @@ if [ "$archive_member" = "DIRECT_GZIP" ]; then
   }
   PRIMARY="$RAW_DIR/${outputs[0]}"
   if [ ! -e "$PRIMARY" ]; then
-    ln "$ARCHIVE" "$PRIMARY"
+    if ! ln "$ARCHIVE" "$PRIMARY" 2>/dev/null; then
+      # Some external filesystems (for example exFAT) do not support hard links.
+      # Point the registered raw name at the verified archive rather than
+      # copying a large byte-identical file or weakening its integrity checks.
+      ARCHIVE_ABS="$(cd "$(dirname "$ARCHIVE")" && pwd)/$(basename "$ARCHIVE")"
+      ln -s "$ARCHIVE_ABS" "$PRIMARY"
+      echo "Hard links unavailable; using a symlink to the verified archive."
+    fi
   elif ! cmp -s "$ARCHIVE" "$PRIMARY"; then
     echo "ERROR: existing raw file differs from registered direct gzip: $PRIMARY" >&2
     exit 1

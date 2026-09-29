@@ -1,0 +1,23 @@
+{
+  "analysis_family": "secondary_sleep_x_latent_frailty",
+  "command": "python frailty_paper/scripts/32_plot_latent_factor_heatmap.py --outdir frailty_paper/analysis",
+  "created_utc": "2026-09-23T15:47:38.410194+00:00",
+  "family_denominator": 84,
+  "input": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+  "input_sha256": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068",
+  "interpretation_status": "SENSITIVITY_ONLY",
+  "limitations": [
+    "Exact participant overlap is unknown for all UK Biobank-containing factor comparisons.",
+    "Genetic correlation is not evidence of causation."
+  ],
+  "matplotlib": "3.9.4",
+  "outputs": {
+    "frailty_paper/analysis/sleep_latent_frailty_rg_heatmap.pdf": "ea73ddd9310aa1c0d6955371db634ace6cec053582879b23e294a153816d6d04",
+    "frailty_paper/analysis/sleep_latent_frailty_rg_heatmap.png": "0ac5b91d475490f4e8f997a4792d46e2ae6aa7aa73c4ab263b299900a8dc3169"
+  },
+  "python": "3.11.11",
+  "q_column": "q_value (BH over all 84 pairs)",
+  "rows": 84,
+  "script": "frailty_paper/scripts/32_plot_latent_factor_heatmap.py",
+  "script_sha256": "737d089688f7653abf631f2cd7955a01c9e3271cc38638623d30805f245e8697"
+}

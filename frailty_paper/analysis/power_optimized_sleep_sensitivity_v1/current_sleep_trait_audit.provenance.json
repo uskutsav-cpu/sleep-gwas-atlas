@@ -1,0 +1,29 @@
+{
+  "analysis_id": "power_optimized_sleep_sensitivity_v1_screen",
+  "generated_utc": "2026-09-25T01:52:16.796941+00:00",
+  "script_sha256": "87bfa39a0fcc96d30bbbf150123520e032d5b6966f930a13df054a73a18b93c3",
+  "scope": "12 locked sleep traits, plus an explicit scope reconciliation for the 7-input Brain6 canonical v3 family",
+  "association_outcomes_accessed": false,
+  "inputs_sha256": {
+    "sleep_panel": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "source_scan": "cd745c2455c0d3b7bcc87040e9ada5c45d945b5d81ecd44c28e608d6c108d701",
+    "sleep_h2": "caba4a8d02ae377eb771cfa9bc82b04605b38a37c627842276ee45b70d4e7dc2",
+    "resources": "61cfa0052eb64009d1e34090e4f54d116457e1137af5e2203de2a9e6d0d04df1",
+    "canonical_family": "5754038d3956d13206a8ec8e1346f5bfaab6b98a4247bdfe31f6b7f7b453baa2",
+    "canonical_results": "ac450685970a35a4d0d06a9f02dd45ee5ac8f1af905ef411564b7e1f7f2f5352",
+    "canonical_not_run": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65",
+    "brain6_gwas": "bfdf722feab17e19a3a9e7e733e845866d75abbf6f58393ece99b71fdc9624a7",
+    "execution_config": "f37a212ff44472004549095a3b17d28da0d130e2ab2a9ea507feb87312b65d27",
+    "frailty_lava_lock": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70"
+  },
+  "outputs_sha256": {
+    "frailty_paper/analysis/power_optimized_sleep_sensitivity_v1/current_sleep_trait_audit.tsv": "350cce179edc5c344ccf7e69c20282eadf75cf5746ea22e555690ffa6985641e",
+    "frailty_paper/analysis/power_optimized_sleep_sensitivity_v1/brain6_v3_seven_input_diagnostics.tsv": "3a18284aece9e1077c1d2424155eb05fff43845ca804ea1d7365421d26027386"
+  },
+  "limitations": [
+    "No per-variant candidate-to-LAVA-reference overlap has yet been independently counted.",
+    "Frailty local-LAVA pairwise receipts are ongoing and are not treated as canonical independent univariate h2 results.",
+    "Canonical local-h2 quantiles summarize tested loci only; low-h2 loci are recorded by frozen reason and do not have an h2 estimate.",
+    "Source row counts are not asserted to be unique or fully QC-passed variant counts."
+  ]
+}

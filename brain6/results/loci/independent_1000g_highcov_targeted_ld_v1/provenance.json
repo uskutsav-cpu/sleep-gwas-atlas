@@ -1,0 +1,38 @@
+{
+  "analysis_id": "brain6_1000g_highcov_targeted_ld_v1",
+  "created_utc": "2026-09-26T21:03:56.599134+00:00",
+  "sample_selection": "503 Phase 3 EUR participants, matched by sample ID within the 3202 high coverage call set",
+  "method": "Unique plus-strand UCSC hg19ToHg38 chain mapping; exact unordered SNP alleles; unphased dosage Pearson r",
+  "limitations": [
+    "The high coverage and Phase 3 panels reuse the same 503 individuals; they are not independent replication cohorts",
+    "Targeted to chr5 missing lead and chr17 LD discrepancy, not all 19 regions"
+  ],
+  "scans": [
+    {
+      "chrom": "5",
+      "start": 104343554,
+      "stop": 104742532,
+      "records_scanned": 10661,
+      "vcf_url": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr5.filtered.SNV_INDEL_SV_phased_panel.vcf.gz"
+    },
+    {
+      "chrom": "17",
+      "start": 45402382,
+      "stop": 46785767,
+      "records_scanned": 28311,
+      "vcf_url": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/1kGP_high_coverage_Illumina.chr17.filtered.SNV_INDEL_SV_phased_panel.vcf.gz"
+    }
+  ],
+  "inputs_sha256": {
+    "/Volumes/Extreme SSD/brain6-work/independent-ld-reference-v1/hg19ToHg38.over.chain.gz": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+    "/Volumes/Extreme SSD/brain6-work/independent-ld-reference-v1/integrated_call_samples_v3.20130502.ALL.panel": "b4023dc6ee2d62ee89c8d4d347db4d348e65518d66d346574cdae7a4bbd76858",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/loci/placo_factor_normalized_sensitivity_v2/placo_candidate_variants.tsv": "aa045fce607081644f4f4bba11545def94b422770f2afaa14816deab292b0690",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/loci/placo_candidate_signed_effect_ld_partial_v1.tsv": "b2fa338dcbf7c86c46967e0f8a153e331e402e7bb84fe78ef71d61b6b57415f2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/loci/independent_1000g_phase3_eur_ld_v1/candidate_lead_ld.tsv": "d5ea156f44bc20095d990225b478cc34da93c427f5a251a855e34c98abb99f81",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/audit_1000g_highcov_targeted_ld_v1.py": "10dc8edea64e541c62d990ea3510cd50d08f137c76a711775d4925178ad72123"
+  },
+  "outputs_sha256": {
+    "target_variant_liftover.tsv": "a9c8aa65d2e20e981758d2ec5f061b4ebe86d65e7f2b335c76cd83fcd99cc450",
+    "targeted_highcov_ld.tsv": "6b7eb3fa53efee15ba15fdc4e9599fd8d203bf90b26340aaa54484778e14e509"
+  }
+}

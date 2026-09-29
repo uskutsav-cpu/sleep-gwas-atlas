@@ -1,0 +1,57 @@
+{
+  "analysis_id": "brain6_mdd2025_trait_only_pilot_v1",
+  "adjudication": "DIAGNOSTIC_NUMERICAL_PASS_SCIENTIFIC_INTERPRETATION_HOLD",
+  "canonical_lava_v3_modified": false,
+  "candidate_region_promotion_authorized": false,
+  "exit_codes": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0
+  },
+  "full_mdd_trait_only_screen_authorized": false,
+  "lava_rescue_v1_classification_unchanged": "FAIL_QC",
+  "mdd_only_best_possible_family_not_run": 3131,
+  "pilot_comparison": {
+    "canonical_low_local_h2_not_run": 27,
+    "canonical_tested": 83,
+    "pilot_low_local_h2_not_run": 3,
+    "pilot_not_run": 3,
+    "pilot_tested": 108,
+    "total_loci": 111
+  },
+  "pilot_numeric_decision": "PASS_TRAIT_ONLY_DIAGNOSTIC",
+  "pilot_output_root": "/Volumes/Extreme SSD/brain6-work/lava-multitrait-feasibility-v1/mdd2025_trait_pilot_v1/results",
+  "reason_full_screen_not_authorized": [
+    "A pre-outcome scientific audit identified unresolved source NEFF versus LAVA binary N/case-proportion semantics.",
+    "Even if all 589 canonical MDD NOT_RUN cells became testable, the other six traits leave 3131 NOT_RUN cells, above the unchanged 873-cell family ceiling."
+  ],
+  "receipt_sha256": {
+    "pilot_decision.json": "1fe39c0fad9ea3ecb4ab9d2a76066dd03dd554fa0a15b501d8217a2b67af45b2",
+    "resume_attempt_1.exit.json": "830817c979170a4996bf05a3f1b2f31222f455e5b80974d35b11acf4583e783b",
+    "resume_attempt_2.exit.json": "8e274a1668364970f1fa05304e05a74f48f660c32beb06bd83ebc7656e8d2def",
+    "mdd2025_source": "5d6fc5aee638e73457da703b75e0b4d4dacfb1b87578fd464b771209c0dfb22a",
+    "pre_outcome_sample_size_audit": "9a7be6e6d4c61f1b1511ddcf4615ac6132a70ac0b7d486596cb74eb61a144d47",
+    "family_lower_bounds": "3f8d522c8d76c72eb82fa8cd0567e56a00923c44e43760174cbb06d7ed993883",
+    "lava_rescue_v1_qc": "bb82ac68c3312cce2fe81852d96547822780d93a2dcd3ae2b498351539f769ac"
+  },
+  "sample_size_field_audit": {
+    "source_rows": 7363302,
+    "valid_n_rows": 7363302,
+    "method": "For each source row, compare NEFF with 4*NCAS*NCON/(NCAS+NCON); read no association statistic. Quantiles use every 1000th row in file order.",
+    "neff_over_effective_from_counts_mean": 0.8829708909441167,
+    "neff_over_effective_from_counts_min": 0.8593440649058064,
+    "neff_over_effective_from_counts_max": 0.9528959875442881,
+    "neff_over_effective_from_counts_sample_median": 0.8803236780853537,
+    "case_fraction_from_counts_mean": 0.20854204872685245,
+    "pilot_fixed_case_fraction": 0.20608016586178252
+  },
+  "schema_version": 1,
+  "worker_loci": {
+    "1": {"completed": 28, "expected": 28, "tested": 28, "not_run": 0, "failed": 0},
+    "2": {"completed": 28, "expected": 28, "tested": 28, "not_run": 0, "failed": 0},
+    "3": {"completed": 28, "expected": 28, "tested": 27, "not_run": 1, "failed": 0},
+    "4": {"completed": 27, "expected": 27, "tested": 25, "not_run": 2, "failed": 0}
+  },
+  "whole_family_not_run_ceiling": 873
+}

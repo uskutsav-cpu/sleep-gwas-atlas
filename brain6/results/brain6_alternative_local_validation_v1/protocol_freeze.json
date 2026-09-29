@@ -1,0 +1,534 @@
+{
+  "aborted_pre_output_attempt": "Combined-reference insomnia__adhd process stopped at local covariance stage with no result/receipt; see combined_reference_abort.md",
+  "adapter_reference_bim": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/eur_maf05_nonpal.bim",
+  "alpha_block": 5.906674542232723e-06,
+  "alpha_family": 0.05,
+  "candidate_rule": "SUPPORTED_FWER if at least one finite covariance p<=alpha_block in a LDetect block overlapping the frozen candidate interval and the full pair run passes completeness QC; direction is sign(rho), discordance with lead noted",
+  "family_correction": "Bonferroni over five frozen pairs times all 1693 non-MHC blocks, even unestimated blocks",
+  "freeze_date": "2026-09-28",
+  "freeze_revision": "v1b: same reference records split by chromosome to satisfy upstream sorted genetic-map requirement; before any real local output",
+  "frozen_files": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/method_adjudication.md",
+      "sha256": "a2bc21e851a1774b8b05514318c46d8b5a723c3094ed3139ff89d88c9b810d98"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/munged_input_sha256.txt",
+      "sha256": "5b9067bbea34b3d27f0c039dcb7fe0d109ee768b5b223eaba2a6538313967af0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/reference_prep_stdout.json",
+      "sha256": "a61329a42d9dae16ad8f73947da9f6c7550f106bfe8d7f1e23abb65510b21815"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/SUPERGNOVA_strict_runtime.patch",
+      "sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/prepare_supergnova_reference_v1.py",
+      "sha256": "07ee86bafe804268c4b8bb907bbc5ee0ae12a155c7f2dea584df9abde84739b7"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/prepare_supergnova_sumstats_v1.py",
+      "sha256": "68c9f50963bc40b48bdddfa521daea17bf6a35885222b017d312ac4f1b27ca0c"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/run_supergnova_family_v1.py",
+      "sha256": "23414436540d0c0e9ed2982c49cc400e617bf4c615a5209f88ca7fbe1c527544"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/manifests/gwas_external_availability.tsv",
+      "sha256": "f35807e76267d745047d3d2c5db68e81b3deace5b9d12d8b02573b5c3d30428a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/loci/five_track_cross_pair_region_reconciliation_v1/geographic_region_groups.tsv",
+      "sha256": "2293f0eef76fd23ce5f10b98af5d3b5f6bb1b51552c74ae279e9fee87cdc2352"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/loci/five_track_cross_pair_region_reconciliation_v1/pair_candidate_members.tsv",
+      "sha256": "f44ada4c6129b205f8569b6721e01e25eae8952497540b38c2c8c5d1397ea991"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/lava_confirmatory_source_triage_v1/longsleep_original_model_20260927.md",
+      "sha256": "80e33c3fac1af308bf52bd47df1972491054a545fe8b3a6b07c33a97df52130f"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._calculate.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._heritability.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._ldsc_thin.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._pheno.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._prep.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/._supergnova.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/calculate.py",
+      "sha256": "fb31e6c448e921547c571465c0413b45bd84dc8501da4503f1e845e673b1afe4"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/heritability.py",
+      "sha256": "409fdacea55afe3d02a2a632a26a190fda220524d74813fbd95936544fcb78ff"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/ldsc_thin.py",
+      "sha256": "c098fe26dbdd38adbb9452ec825f00e996e2d039bd5c079f6775595b7a8e897a"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/pheno.py",
+      "sha256": "41b11584997874625b35aa40e7ebf34bad43557315460fb209fbbbd393a07177"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/prep.py",
+      "sha256": "58efe211b2a721609600948ee7f83dd1eed313764f69936ad2496e2ed79f310c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/supergnova.py",
+      "sha256": "c2b4d8b57756bb9f5c3196d69afbee6b0ea8798ef4699e73fc7f725e49ba332f"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/ld/._ldscore.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/ld/._parse.py",
+      "sha256": "6ec8d530280356d164342816f9b7add29f27aca674cb3bc4b3aa5a1c615b9d38"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/ld/ldscore.py",
+      "sha256": "68f1138e11162204de731ff6dad96dd948c95f9d2dbb15ddb389a791c684f9d0"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/SUPERGNOVA_source/ld/parse.py",
+      "sha256": "825ac39cb3c1ded486533f9722b28b1e89056a1500dcc6672425ab3e6b64bee5"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/eur_maf05_nonpal.bed",
+      "sha256": "5bf5a4b5d8dea055030ef9650363f91a086b6b7d32c0292d65c9924fde0eb473"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/eur_maf05_nonpal.bim",
+      "sha256": "7c2ea4fcb6e95ad878c9aa24abd9284fa76cfb2548221ac577ef9a4465d39a4f"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/eur_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/ldetect_eur_nonmhc.tsv",
+      "sha256": "cb3d6c4ec18adf023c17cecec95099973759c6f70e0378433254ab42689324ff"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/reference_prep_provenance.json",
+      "sha256": "a61329a42d9dae16ad8f73947da9f6c7550f106bfe8d7f1e23abb65510b21815"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/adhd.sumstats.gz",
+      "sha256": "dadb8adcabcb1e8e2d59c8f85fbc4fdd48d38753668bf0a377e938e4ad065b4c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+      "sha256": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/longsleep.sumstats.gz",
+      "sha256": "c51a2fd474497f5b89fa9ad4c36fe5aa500f6130325f28ef61706715c3362238"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/mdd.sumstats.gz",
+      "sha256": "9c532b4f90ea97b26a73467b95ca9a5f2fb550b3fd1c3476cdc3a8b40e8ebcbc"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/parkinson.sumstats.gz",
+      "sha256": "2bea5fd36b09b1bd542bf1c472218c16c6af9cb242c1c8def58a834908e28716"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/scz.sumstats.gz",
+      "sha256": "4b805ec71bcc022f1dd0ba07f3abbd2dc0684fd91c643ca70ec1e5050e0d76a7"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bipolar.sumstats.gz",
+      "sha256": "f8f6de202acfb6e38dc12725be1a095bc380c3d8f039719f5e163543730639b9"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/split_supergnova_reference_by_chrom_v1.py",
+      "sha256": "2aa316e90902b260537de0a7c1aff0e4469a03fab7b116c7b173670ce0c38a15"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/split_reference_stdout.json",
+      "sha256": "8080b4083c02a0399568cbf513c87a46d3434071dbdc289ac5c50cf5a7651baf"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/brain6_alternative_local_validation_v1/combined_reference_abort.md",
+      "sha256": "eef39025ec71d7a98dd928213e0c922dbd525150a1753acc84849f681960a556"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr10_maf05_nonpal.bed",
+      "sha256": "f134b4252b958018aae25247b800d2f007325693d4e616d80e1b5a3d7fcc2b93"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr10_maf05_nonpal.bim",
+      "sha256": "ef9f4eb253de5f257bc010eafcfbaff3ff28e4d4402f97fa265b52c65d1ecebe"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr10_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr11_maf05_nonpal.bed",
+      "sha256": "94beb9ac297df11b3359b3d0b3ce016ebaf666490910805cd3ca9d34e1ce7b21"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr11_maf05_nonpal.bim",
+      "sha256": "b6a2fee586a6e86aa64fe268be667c32184453ab26c1e9daba80c94ef65bfac9"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr11_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr12_maf05_nonpal.bed",
+      "sha256": "8f4ee557dd465cbf024d80cf58947464597afef739d83b2930a026b0c69c80f3"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr12_maf05_nonpal.bim",
+      "sha256": "1992dffe2ce23dcd7d90589d963a4ce02cee7ddd0ce8c45e43970ae61b4b738a"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr12_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr13_maf05_nonpal.bed",
+      "sha256": "ab91d0be9de8d46d9608a8f958c33c3334273b38080e56af67ce9a44c5eb5c9b"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr13_maf05_nonpal.bim",
+      "sha256": "771d2727314b5daeac96be74da1cfb5d9e3f1dfa1adaa5265b45124cac562d85"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr13_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr14_maf05_nonpal.bed",
+      "sha256": "738fe3d609f6c542c1f21f622a36526d4c8c7291085d6c3cf9b84b28e890b571"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr14_maf05_nonpal.bim",
+      "sha256": "ec82bb33bcb29f956fbc8607cd045de751bd0d1d4ddc93abce47f470780c7d75"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr14_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr15_maf05_nonpal.bed",
+      "sha256": "ab5d1c3383b6c92f4a259477c13a7a9f2501dbbcbf932c9f6ee0279348a23556"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr15_maf05_nonpal.bim",
+      "sha256": "5ec68cc13db220bbcc0a84ff0cd780a325e2e5f4fc262ebff8963f26f6826095"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr15_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr16_maf05_nonpal.bed",
+      "sha256": "0a750ed97b0102b1a840b99b88540171e94f79b4729878ea9130551c515993b3"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr16_maf05_nonpal.bim",
+      "sha256": "1ddabbf3b289e245cb537a108d7a6f75c75b34648b31f75a4d91926db98f99d4"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr16_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr17_maf05_nonpal.bed",
+      "sha256": "6bb4686edfd402ba5a7d7b326bb37139b1b01cd506211c444ec45bc6fd58b7b6"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr17_maf05_nonpal.bim",
+      "sha256": "4077175db5a0e23d52005bcaf814f7a18170c780a71c904de3492ee990a52e33"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr17_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr18_maf05_nonpal.bed",
+      "sha256": "f72a90d2e738631c761029fb70d4d2ce94817353aa4c100acaf170981a80efd8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr18_maf05_nonpal.bim",
+      "sha256": "10f35b04ab2827512352dacc95136247c09a482c6ff8b8079d029862f1b728f9"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr18_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr19_maf05_nonpal.bed",
+      "sha256": "720314cb3365c2c10654af8a7bc8fd9a6d72ff04b8ee7e918c14bc835e450f10"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr19_maf05_nonpal.bim",
+      "sha256": "2379efed241ce6a37a70fac175870526cf7fde4850943612798df71d973e2454"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr19_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr1_maf05_nonpal.bed",
+      "sha256": "47306ecce4a91852abcf48dd78402b47f0c016d645b125f4c42508d70c0e9b24"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr1_maf05_nonpal.bim",
+      "sha256": "6a46b0094190fc605d7fa469640c3e847a421ad17eb2ffb058aac27f25ffb418"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr1_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr20_maf05_nonpal.bed",
+      "sha256": "bbba9b7c4fc5f0bedc0cc16a7f737fb9d76c57291788ff4ccef650991f7ffe17"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr20_maf05_nonpal.bim",
+      "sha256": "291889e959de5f22bb83cbd3f33391b70fc62219868a5261c0f86c53f526b360"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr20_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr21_maf05_nonpal.bed",
+      "sha256": "3cc1f49d0399c81bcd6b8344b79e3400581db212620fc8f9c1371acb7c9399d5"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr21_maf05_nonpal.bim",
+      "sha256": "6f53b1c7459bc9f771a89db39bc7cc2d39189240b2070142b5e5926fc19861f6"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr21_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr22_maf05_nonpal.bed",
+      "sha256": "b25e4e2bf53e52c682289749907e51da8393a18e9807675e166e51f45f863785"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr22_maf05_nonpal.bim",
+      "sha256": "73b219f6d38becb985f3737281ab58c504949f075933133c0f5a7e218da70c75"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr22_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr2_maf05_nonpal.bed",
+      "sha256": "219f75a66d8d88fea87ded72b42bc277e2b22e4511996a884bb289c4f7af8d9f"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr2_maf05_nonpal.bim",
+      "sha256": "ce6f578478b328737867fc3c87ef7aeca20a62b486abbca8e22a92723e7b7843"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr2_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr3_maf05_nonpal.bed",
+      "sha256": "e826e3ce73d8103e2c59484f89abaa258cb34e5b4655a7a54485006ea8d79124"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr3_maf05_nonpal.bim",
+      "sha256": "69230280b3ee177fb9a520a9b2c96ee44b29f3645d18674cd864d230422cb56b"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr3_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr4_maf05_nonpal.bed",
+      "sha256": "f74dc7dba1d1ea2fbd7d18acceb9e4f29b1dd7bd75c5dbfb97feb616c4a1efea"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr4_maf05_nonpal.bim",
+      "sha256": "6074c53ed89e4c52a87c2794bfe6f56a825ae1012a67a54ec824f01d7734e09c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr4_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr5_maf05_nonpal.bed",
+      "sha256": "b62125f584370e2855cf94ef8cea938c885f13989d0e8812be238aff19a40dd1"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr5_maf05_nonpal.bim",
+      "sha256": "39912d6cc19e3c059e14a488a63a3a60b58308332eebf3ca213ab08c3f05e25a"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr5_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr6_maf05_nonpal.bed",
+      "sha256": "d0801bc6443ea9058c6eaef08e042f32fcacfa5f551a7fa96f01b19950e71967"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr6_maf05_nonpal.bim",
+      "sha256": "534ae1f2a941d106e7bf49dbad66d50cd90939739a377f2b997733597d520018"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr6_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr7_maf05_nonpal.bed",
+      "sha256": "da0b202aab7b6dbde3a35e43b7cab1691206c3e3b10ce310889064e2e8e1ae32"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr7_maf05_nonpal.bim",
+      "sha256": "0bebfaaa5a52f8594642b346d4782b1702c09be8784db72b2726316c74ae1fba"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr7_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr8_maf05_nonpal.bed",
+      "sha256": "6c5e55b4619de54169c659bee50b912689e8ecf1d037a54f036751a2fac4d6c8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr8_maf05_nonpal.bim",
+      "sha256": "9b20e1e118294aa3bcd5e30f724049d8898bfad9d331652d6e5cdf283de7b46d"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr8_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr9_maf05_nonpal.bed",
+      "sha256": "b704d78c729077a9dc2f9f7cb5f6f0504676067292b3fcd49343ef04421b361e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr9_maf05_nonpal.bim",
+      "sha256": "123b4a38d18a93d9f805433c90bed99fbc8cbd329b1bb02b688331b5eebc6731"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr9_maf05_nonpal.fam",
+      "sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/split_reference_provenance.json",
+      "sha256": "8080b4083c02a0399568cbf513c87a46d3434071dbdc289ac5c50cf5a7651baf"
+    }
+  ],
+  "method": "SUPERGNOVA local genetic covariance",
+  "method_patch": "brain6/results/brain6_alternative_local_validation_v1/SUPERGNOVA_strict_runtime.patch",
+  "method_upstream_commit": "319e84e114a4f954005a4592756c56cfee083667",
+  "n_blocks_nonmhc": 1693,
+  "n_handling": "Pass published public-release study-wide total N explicitly; historical munged N column ignored; varying SNP contribution is a stated method limitation",
+  "not_run_rule": "m<120 is NOT_TESTED_LOW_SNP; <120 positive LD eigenvalues is NOT_TESTED_LOW_RANK; errors/nonfinite estimates never count as null",
+  "overlap_handling": "SUPERGNOVA genome-wide intercept estimated from paired Z and LD; do not provide invented shared-person counts",
+  "pairs": {
+    "insomnia__adhd": [
+      "insomnia",
+      "adhd"
+    ],
+    "insomnia__mdd": [
+      "insomnia",
+      "mdd"
+    ],
+    "longsleep__bipolar": [
+      "longsleep",
+      "bipolar"
+    ],
+    "longsleep__parkinson": [
+      "longsleep",
+      "parkinson"
+    ],
+    "longsleep__scz": [
+      "longsleep",
+      "scz"
+    ]
+  },
+  "partition_file": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/prepared_v1/ldetect_eur_nonmhc.tsv",
+  "primary_lava_status": "FAILED_QC_NOT_PROMOTED; 13745 TESTED, 3720 NOT_RUN, 0 FAILED; frozen ceiling 873",
+  "primary_statistic": "local observed-scale genetic covariance rho and two-sided p; correlation descriptive only with nonnegative h2 and finite software output",
+  "protocol_id": "brain6_alternative_local_validation_v1",
+  "python_executable": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/bin/python",
+  "python_packages": {
+    "bitarray": "2.8.5",
+    "numpy": "1.24.4",
+    "pandas": "1.5.3",
+    "python": "3.10",
+    "scikit-learn": "1.2.2",
+    "scipy": "1.10.1"
+  },
+  "reference_bim_sha256": "7c2ea4fcb6e95ad878c9aa24abd9284fa76cfb2548221ac577ef9a4465d39a4f",
+  "reference_filter": "GRCh37 1000G Phase3 EUR n=503; MAF>=0.05; unique rsID biallelic SNP; exclude A/T and C/G; interpolated HapMapII GRCh37 cM; LDetect EUR 1-based inclusive non-MHC blocks",
+  "reference_prefix": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/per_chr_v1/eur_chr@_maf05_nonpal",
+  "scope": "secondary methodological validation; same GWAS sources; not independent cohort replication or LAVA confirmation",
+  "ssd_root": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1",
+  "synthetic_only_smoke": "Two chr1 blocks x 325 generated Z rows passed four-worker end-to-end runtime on 2026-09-28; no Brain6 association data or candidate regions used.",
+  "traits": {
+    "adhd": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/adhd.sumstats.gz",
+      "input_sha256": "dadb8adcabcb1e8e2d59c8f85fbc4fdd48d38753668bf0a377e938e4ad065b4c",
+      "n_total": 225534
+    },
+    "bipolar": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bipolar.sumstats.gz",
+      "input_sha256": "f8f6de202acfb6e38dc12725be1a095bc380c3d8f039719f5e163543730639b9",
+      "n_total": 413466
+    },
+    "insomnia": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+      "input_sha256": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+      "n_total": 386533
+    },
+    "longsleep": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/longsleep.sumstats.gz",
+      "input_sha256": "c51a2fd474497f5b89fa9ad4c36fe5aa500f6130325f28ef61706715c3362238",
+      "n_total": 339926
+    },
+    "mdd": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/mdd.sumstats.gz",
+      "input_sha256": "9c532b4f90ea97b26a73467b95ca9a5f2fb550b3fd1c3476cdc3a8b40e8ebcbc",
+      "n_total": 500199
+    },
+    "parkinson": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/parkinson.sumstats.gz",
+      "input_sha256": "2bea5fd36b09b1bd542bf1c472218c16c6af9cb242c1c8def58a834908e28716",
+      "n_total": 482730
+    },
+    "scz": {
+      "input": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/scz.sumstats.gz",
+      "input_sha256": "4b805ec71bcc022f1dd0ba07f3abbd2dc0684fd91c643ca70ec1e5050e0d76a7",
+      "n_total": 130644
+    }
+  },
+  "workers": 4
+}

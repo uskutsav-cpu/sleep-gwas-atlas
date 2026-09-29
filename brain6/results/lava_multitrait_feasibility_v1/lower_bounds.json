@@ -1,0 +1,63 @@
+{
+  "analysis_id": "brain6-lava-multitrait-feasibility-v1",
+  "canonical_family_cells": 17465,
+  "canonical_not_run": 3720,
+  "canonical_not_run_by_trait": {
+    "adhd": 223,
+    "bipolar": 168,
+    "insomnia": 671,
+    "longsleep": 1291,
+    "mdd": 589,
+    "parkinson": 636,
+    "scz": 142
+  },
+  "frozen_maximum_not_run": 873,
+  "interpretation": "These are arithmetic lower bounds, not predicted experimental results. The observed continuous-duration substitute cannot pass the unchanged seven-trait 5% ceiling even if all other six traits had zero NOT_RUN cells. Any viable separate rescue must use a stronger long-sleep representation or an explicitly different prospective family/QC protocol; the canonical v3 failure remains unchanged.",
+  "minimum_number_of_perfect_replacements_without_insomnia": 5,
+  "minimum_number_of_perfect_trait_replacements": 4,
+  "observed_continuous_duration_alone_exceeds_family_ceiling_by": 3,
+  "observed_continuous_duration_best_possible_whole_family_not_run_even_if_every_other_trait_perfect": 876,
+  "observed_continuous_duration_not_run": 876,
+  "perfect_replacement_sets_at_minimum": [
+    {
+      "best_possible_not_run_if_all_replacements_perfect": 533,
+      "replacement_count": 4,
+      "traits_replaced": [
+        "insomnia",
+        "longsleep",
+        "mdd",
+        "parkinson"
+      ]
+    }
+  ],
+  "perfect_replacement_sets_at_minimum_without_insomnia": [
+    {
+      "best_possible_not_run_if_all_replacements_perfect": 813,
+      "replacement_count": 5,
+      "traits_replaced": [
+        "adhd",
+        "bipolar",
+        "longsleep",
+        "mdd",
+        "parkinson"
+      ]
+    },
+    {
+      "best_possible_not_run_if_all_replacements_perfect": 839,
+      "replacement_count": 5,
+      "traits_replaced": [
+        "adhd",
+        "longsleep",
+        "mdd",
+        "parkinson",
+        "scz"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/summary.json": "5821ade3094da42c15f4c35e8da964d34db691554a4db78d94a37b97e3244173",
+    "brain6/results/power_optimized_sensitivity_v1/sensitivity_family_feasibility_v1.json": "f57e10a7c7e1be2b0a84c99a39e8a8452844bd76139543eff230f078cbf01587"
+  },
+  "status": "PROVEN_INFEASIBLE_FOR_CURRENT_SINGLE_TRAIT_REPLACEMENT"
+}

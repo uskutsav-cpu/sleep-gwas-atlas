@@ -1,0 +1,45 @@
+{
+  "acquired_resource_manifest": "frailty_paper/manifests/all_acquired_resources.tsv",
+  "acquired_resource_manifest_sha256": "79cbd595bbc4b8bf5a45d9f5cff107fb6e278f607258b32637adf813bd0d14c7",
+  "analysis_scope": "Read-only allele-orientation check for the seven mapped frailty factors, restricted to the pinned EUR HapMap3 GRCh37 map.",
+  "command": [
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/.venv/bin/python",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/scripts/36_compare_latent_hm3_alleles.py",
+    "--repo",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03",
+    "--reference-map",
+    "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/hm3_grch37_variant_map.tsv.gz",
+    "--output",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/manifests/gwas_latent_hm3_allele_compatibility.tsv",
+    "--provenance",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/manifests/gwas_latent_hm3_allele_compatibility.provenance.json"
+  ],
+  "factor_source_sha256": {
+    "GCST90624046": "376ba5f1aa4591a8f7a08301aa6f515ff5272ae8e0a4ef366778b59965dd006b",
+    "GCST90624047": "0d22984f087f83ee037945766dfc43218d431b1062bfdc4dbc640591c49e26ab",
+    "GCST90624048": "daab6a18435745cc7e5a0efb0619a6b833692ae392c347b4ed2348313a9a70fa",
+    "GCST90624049": "bc53a7826ed281f136d07c126d1e6b0edbb282646e44e589d151e991d21c1e67",
+    "GCST90624050": "2f38e1ac1f4a9a2a722c9c1c4def21b130ca053485e80ad63ed3a35456ab32b3",
+    "GCST90624051": "bab192aec4206200688379eb8f28d10ee644a2ad1ef495a441d525451eb5c256",
+    "GCST90624052": "9faf10f2b8badd66895fb4a821cede3d70786525281a520e4d0a3b84bbea917d"
+  },
+  "limitations": [
+    "Only source rows whose rsID occurs in the HapMap3 map are assessed.",
+    "A1/A2 are the bundled HapMap3/EUR LD reference allele pair, not a claim about genomic REF/ALT.",
+    "Palindromic A/T and C/G variants remain orientation-ambiguous; effect-allele frequency is not used to infer strand.",
+    "This audit neither changes effects nor produces harmonized output."
+  ],
+  "output": "frailty_paper/manifests/gwas_latent_hm3_allele_compatibility.tsv",
+  "output_sha256": "c6c3b7e8627dc056fd56b20e5feb94837ab7b9ffa1ed9b95d30333c522bd255d",
+  "python": "3.13.13",
+  "reference_map": "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/hm3_grch37_variant_map.tsv.gz",
+  "reference_map_build": "GRCh37/hg19",
+  "reference_map_provenance": "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/hm3_grch37_variant_map.tsv.gz.provenance.json",
+  "reference_map_provenance_sha256": "5f786febaba44c8f561c2c1b4402901c91fa7666e03fc3bf68fe73584d4c0516",
+  "reference_map_rows": 1184461,
+  "reference_map_schema": "atlas.hm3-grch37-variant-map.v1",
+  "reference_map_sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+  "schema_version": "frailty_latent_hm3_allele_compatibility.1",
+  "script": "frailty_paper/scripts/36_compare_latent_hm3_alleles.py",
+  "script_sha256": "028acdadc08ce574d39fc33d006afac43f8b94e45a6225bf121860623ccc1270"
+}

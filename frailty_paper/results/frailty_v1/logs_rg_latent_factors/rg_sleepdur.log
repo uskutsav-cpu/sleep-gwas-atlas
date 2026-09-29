@@ -1,0 +1,227 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/results/frailty_v1/logs_rg_latent_factors/rg_sleepdur \
+--rg /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_general.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_1.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_2.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_3.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_4.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_5.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_6.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Wed Sep 23 04:25:39 2026
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz ...
+Read summary statistics for 1179618 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1175819 SNPs remain.
+After merging with regression SNP LD, 1175819 SNPs remain.
+Computing rg for phenotype 2/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_general.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+491715 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0576 (0.0032)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5623
+Intercept: 1.048 (0.0154)
+Ratio: 0.0854 (0.0273)
+
+Heritability of phenotype 2/8
+-----------------------------
+Total Observed scale h2: 0.0225 (0.0009)
+Lambda GC: 1.7885
+Mean Chi^2: 1.9833
+Intercept: 1.0274 (0.0184)
+Ratio: 0.0278 (0.0187)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0093 (0.001)
+Mean z1*z2: -0.2812
+Intercept: -0.1032 (0.0104)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.2587 (0.0284)
+Z-score: -9.1142
+P: 7.9227e-20
+
+Computing rg for phenotype 3/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_1.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+891043 SNPs with valid alleles.
+
+Heritability of phenotype 3/8
+-----------------------------
+Total Observed scale h2: 0.0255 (0.0016)
+Lambda GC: 1.2966
+Mean Chi^2: 1.3408
+Intercept: 1.0433 (0.0105)
+Ratio: 0.1272 (0.0309)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0013 (0.0014)
+Mean z1*z2: -0.0647
+Intercept: -0.055 (0.0073)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0313 (0.0329)
+Z-score: -0.952
+P: 0.3411
+
+Computing rg for phenotype 4/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_2.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+887269 SNPs with valid alleles.
+
+Heritability of phenotype 4/8
+-----------------------------
+Total Observed scale h2: 0.0181 (0.001)
+Lambda GC: 1.2299
+Mean Chi^2: 1.2786
+Intercept: 0.9912 (0.0095)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0004 (0.0011)
+Mean z1*z2: 0.0135
+Intercept: 0.0145 (0.0073)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0125 (0.0327)
+Z-score: -0.3805
+P: 0.7035
+
+Computing rg for phenotype 5/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_3.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+822120 SNPs with valid alleles.
+
+Heritability of phenotype 5/8
+-----------------------------
+Total Observed scale h2: 0.0687 (0.0028)
+Lambda GC: 1.8405
+Mean Chi^2: 2.1709
+Intercept: 1.1741 (0.0177)
+Ratio: 0.1487 (0.0151)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0023 (0.0016)
+Mean z1*z2: 0.0097
+Intercept: 0.0368 (0.0091)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0349 (0.0234)
+Z-score: -1.4941
+P: 0.1351
+
+Computing rg for phenotype 6/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_4.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+372883 SNPs with valid alleles.
+
+Heritability of phenotype 6/8
+-----------------------------
+Total Observed scale h2: 0.1695 (0.0079)
+Lambda GC: 2.0556
+Mean Chi^2: 2.4052
+Intercept: 1.1257 (0.0251)
+Ratio: 0.0894 (0.0178)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0045 (0.0034)
+Mean z1*z2: 0.0771
+Intercept: 0.0345 (0.0137)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.0429 (0.0323)
+Z-score: 1.3257
+P: 0.1849
+
+Computing rg for phenotype 7/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_5.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+884720 SNPs with valid alleles.
+
+Heritability of phenotype 7/8
+-----------------------------
+Total Observed scale h2: 0.1036 (0.0045)
+Lambda GC: 1.6372
+Mean Chi^2: 1.8167
+Intercept: 1.0986 (0.0136)
+Ratio: 0.1207 (0.0167)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.009 (0.0024)
+Mean z1*z2: 0.0892
+Intercept: 0.0073 (0.0093)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1088 (0.0279)
+Z-score: 3.9022
+P: 9.533e-05
+
+Computing rg for phenotype 8/8
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_6.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1175819 SNPs remain.
+890287 SNPs with valid alleles.
+
+Heritability of phenotype 8/8
+-----------------------------
+Total Observed scale h2: 0.036 (0.0021)
+Lambda GC: 1.3034
+Mean Chi^2: 1.3554
+Intercept: 1.068 (0.01)
+Ratio: 0.1914 (0.028)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.009 (0.0016)
+Mean z1*z2: -0.0485
+Intercept: 0.0253 (0.0071)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.1837 (0.0316)
+Z-score: -5.8113
+P: 6.1993e-09
+
+
+Summary of Genetic Correlation Results
+                                                                                                        p1                                                                                                                           p2      rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz  /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_general.sumstats.gz -0.2587 0.0284 -9.1142 0.0000  0.0225     0.0009  1.0274     0.0184   -0.1032       0.0104
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_1.sumstats.gz -0.0313 0.0329 -0.9520 0.3411  0.0255     0.0016  1.0433     0.0105   -0.0550       0.0073
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_2.sumstats.gz -0.0125 0.0327 -0.3805 0.7035  0.0181     0.0010  0.9912     0.0095    0.0145       0.0073
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_3.sumstats.gz -0.0349 0.0234 -1.4941 0.1351  0.0687     0.0028  1.1741     0.0177    0.0368       0.0091
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_4.sumstats.gz  0.0429 0.0323  1.3257 0.1849  0.1695     0.0079  1.1257     0.0251    0.0345       0.0137
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_5.sumstats.gz  0.1088 0.0279  3.9022 0.0001  0.1036     0.0045  1.0986     0.0136    0.0073       0.0093
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleepdur.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged_secondary/frailty_factor_6.sumstats.gz -0.1837 0.0316 -5.8113 0.0000  0.0360     0.0021  1.0680     0.0100    0.0253       0.0071
+
+Analysis finished at Wed Sep 23 04:26:07 2026
+Total time elapsed: 28.17s

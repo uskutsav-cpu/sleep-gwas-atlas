@@ -1,0 +1,11 @@
+# FI×sleep LAVA full-family audit — 2026-09-26 09:11 UTC
+
+The read-only full-family auditor validated 11,626 of 29,940 immutable receipt files from 09:10:49 to 09:10:56 UTC. The inventory grew by two while scanning; the coordinator reported 11,626 verified receipts at audit end and 11,628 by the next snapshot. Remaining receipts at the coordinator snapshot: 18,312.
+
+Receipt validation reported zero issues. The two active claims were distinct: `napping` locus 650 (PID 78548) and `sleep_apnea` locus 1078 (PID 78549); both PIDs passed the auditor's liveness check. Duplicate claims, launch failures, and stale recoveries were zero. The coordinator remains six workers requested and two effective under the existing swap safeguard. Its latest recorded trigger is 2,772/3,072 MiB swap (90%), so the lower concurrency is being retained. The parallelized run is making progress without restarting or changing the frozen analysis.
+
+Against the 09:06 audit's 11,565 validated receipts, the 09:11 scan validated 61 more over approximately 4.2 minutes, an observed rate of about 880 receipts/hour. This short-window rate is noisy; the prior longer-window estimate was about 740/hour. At 18,312 remaining, the current-rate estimate is roughly 21 hours, subject to workload variation and host memory limits. System CPU and per-process RAM/disk-I/O telemetry could not be collected in this sandbox (`ps`, `sysctl`, and `iostat` access returned Operation not permitted); the runner's own persisted swap measurement and auditor PID-liveness checks are recorded above.
+
+Frozen lock SHA-256 remains `74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70`; input-manifest SHA-256 remains `8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2`. No scientific settings, inputs, or receipt files were changed. The all-traits 1% failure gate remains failed: 1,989 all-phenotype negative-variance process outcomes and 242 no-reference-SNP outcomes. No local-sharing inference is promoted. Overall readiness remains **NO-GO** pending these frozen analysis gates and the unresolved human-review, licensed-source, HFRS-access, cohort-overlap, and independent-replication requirements.
+
+Machine-readable details: `analysis/lava_full_receipt_integrity_2026-09-26_0911.json`.

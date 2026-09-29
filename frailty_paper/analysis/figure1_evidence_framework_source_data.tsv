@@ -1,0 +1,29 @@
+panel	item	label	value	status	source	note
+A_review_flow	pubmed	PubMed records identified	61009	ACQUIRED	frailty_paper/review/prisma_flow.tsv	311 XML files; exact query counts and checksums are retained in review manifests
+A_review_flow	manual	Records from other databases	0	NOT_ACQUIRED	frailty_paper/review/prisma_flow.tsv	Licensed database exports are absent
+A_review_flow	duplicates	Duplicate occurrences linked	4892	DEDUPLICATED_WITH_AUDIT_TRAIL	frailty_paper/review/prisma_flow.tsv	PMID, DOI, normalized-title priority
+A_review_flow	queue	Deduplicated screening queue	56117	AWAITING_SCREENING	frailty_paper/review/prisma_flow.tsv	Screening has not started
+A_review_flow	screened	Records screened	0	NOT_STARTED	frailty_paper/review/prisma_flow.tsv
+A_review_flow	full_texts	Reports assessed for eligibility	0	NOT_STARTED	frailty_paper/review/prisma_flow.tsv	No reports have been sought or retrieved
+A_review_flow	included	Studies included	0	NOT_STARTED	frailty_paper/review/prisma_flow.tsv
+B_design	primary_fi	Sleep × Frailty Index	12 pairs; 9/12 inherited BH q≤0.05	READ_ONLY_FROZEN_ATLAS_REUSE	frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv	All-396 q-values retained; not independent replication
+B_design	latent	Sleep × latent factors	84 pairs; 48/84 BH q≤0.05	SECONDARY_SENSITIVITY_ONLY	frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv	Exact participant overlap unknown
+B_design	aging	Aging context	72 pairs; 26/72 inherited BH q≤0.05	READ_ONLY_FROZEN_ATLAS_REUSE	frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv	Not independent replication
+B_design	downstream	Replication, local, locus, molecular	Not completed	GATED_OR_NOT_JUSTIFIED	frailty_paper/config/analysis_plan_v1.yaml	Only proceed after source, overlap, input and family gates
+C_sleep_taxonomy	insomnia	Insomnia	Self-reported symptoms and behavior	LOCKED_PANEL	config/analysis_panel.tsv	UK Biobank field 1200: usually having trouble falling asleep or waking during the night versus never/rarely or sometimes
+C_sleep_taxonomy	sleepiness	Daytime sleepiness	Self-reported symptoms and behavior	LOCKED_PANEL	config/analysis_panel.tsv	Continuous UKB daytime-sleepiness phenotype
+C_sleep_taxonomy	napping	Daytime napping	Self-reported symptoms and behavior	LOCKED_PANEL	config/analysis_panel.tsv	Daytime-napping frequency
+C_sleep_taxonomy	snoring	Habitual snoring	Self-reported symptoms and behavior	LOCKED_PANEL	config/analysis_panel.tsv	UK Biobank field 1210: yes versus no to whether a partner, close relative, or friend complains about the participant's snoring
+C_sleep_taxonomy	sleepdur	Sleep duration (continuous)	Duration and chronotype	LOCKED_PANEL	config/analysis_panel.tsv	Continuous self-reported sleep duration in hours
+C_sleep_taxonomy	shortsleep	Short sleep (<7 h)	Duration and chronotype	LOCKED_PANEL	config/analysis_panel.tsv	Self-reported sleep duration <7 h; 7–8 h controls
+C_sleep_taxonomy	longsleep	Long sleep (≥9 h)	Duration and chronotype	LOCKED_PANEL	config/analysis_panel.tsv	Self-reported sleep duration >=9 h; 7–8 h controls
+C_sleep_taxonomy	chronotype	Chronotype / morningness	Duration and chronotype	LOCKED_PANEL	config/analysis_panel.tsv	Definitely or more a morning person versus definitely or more an evening person in UK Biobank field 1180
+C_sleep_taxonomy	sleep_apnea	Sleep apnea	Clinical record phenotype	LOCKED_PANEL	config/analysis_panel.tsv	FinnGen R9 G6_SLEEPAPNO: hospital-discharge or cause-of-death ICD-10 G47.3 / ICD-9 3472, with G6_NARCOCATA and G6_SLEEPDISOTH excluded from controls
+C_sleep_taxonomy	sleep_efficiency	Sleep efficiency	Actigraphy-derived measures	LOCKED_PANEL	config/analysis_panel.tsv	Rank-normalized actigraphy sleep efficiency
+C_sleep_taxonomy	accel_sleep_duration	Sleep duration	Actigraphy-derived measures	LOCKED_PANEL	config/analysis_panel.tsv	Rank-normalized actigraphy SPT-window sleep duration
+C_sleep_taxonomy	sleep_timing	Sleep timing	Actigraphy-derived measures	LOCKED_PANEL	config/analysis_panel.tsv	Rank-normalized actigraphy SPT-window midpoint
+D_frailty_definitions	frailty_index	Frailty Index	Deficit accumulation; current central endpoint	PRIMARY; FI ESTIMATES AVAILABLE	frailty_paper/config/analysis_plan_v1.yaml	12 frozen-atlas sleep pairs
+D_frailty_definitions	latent_factors	Latent frailty factors	General factor + six specific factors from 30 deficits	SECONDARY; SENSITIVITY ONLY	frailty_paper/config/analysis_plan_v1.yaml	Exact participant overlap unknown
+D_frailty_definitions	fried	Fried Frailty Score	Physical frailty phenotype	SOURCE NOT ACQUIRED	frailty_paper/analysis/fried_ffs_source_access_audit_2026-09-23.md	Full statistics unavailable from verified route
+D_frailty_definitions	hfrs	Hospital Frailty Risk Score	Continuous weighted 109-code EHR score	EXACT GWAS FILE UNVERIFIED	frailty_paper/manifests/targeted_resource_audit.tsv	No sleep-pair estimate available
+D_frailty_definitions	components	Five physical components	Weight loss, exhaustion, low activity, slow walking, low grip	SOURCE QC BLOCKED	frailty_paper/analysis/physical_component_candidate_source_audit_2026-09-23.md	Build/effect/provenance unresolved; not harmonized

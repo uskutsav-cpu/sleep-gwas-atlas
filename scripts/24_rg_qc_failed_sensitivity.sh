@@ -15,6 +15,8 @@ INCLUSION=results/tables/phase1_inclusion.tsv
 require_file "$H2"
 require_file results/tables/rg_matrix.tsv
 validate_panel
+require_ldsc
+prepare_analysis_workspace
 "$PYTHON_BIN" scripts/10_phase0_audit.py --config "$CONFIG" --lock "$PANEL_LOCK" \
   --h2 "$H2" --out "$READINESS" --strict
 "$PYTHON_BIN" scripts/09_select_phase1_traits.py --config "$CONFIG" --lock "$PANEL_LOCK" \
@@ -32,17 +34,17 @@ failed_diseases=$(awk -F'\t' '
 [ -n "$sleep_traits" ] || die "locked panel contains no sleep traits"
 [ -n "$failed_diseases" ] || die "no LDSC-ready non-sleep h2-QC failures to analyze"
 for trait in $sleep_traits $failed_diseases; do
-  require_file "data/munged/$trait.sumstats.gz"
+  require_file "$MUNGED_DIR/$trait.sumstats.gz"
 done
 
 mkdir -p "$LOGDIR" "$(dirname "$SENSITIVITY")"
 cp results/tables/rg_matrix.tsv "$PRIMARY"
-list=$(printf '%s\n' $failed_diseases | sed 's|^|data/munged/|; s|$|.sumstats.gz|' | paste -sd, -)
+list=$(printf '%s\n' $failed_diseases | sed "s|^|$MUNGED_DIR/|; s|$|.sumstats.gz|" | paste -sd, -)
 for sleep_trait in $sleep_traits; do
   echo "==> sensitivity rg $sleep_trait vs $failed_diseases"
   "$LDSC_PYTHON" "$LDSC_DIR/ldsc.py" \
-    --rg "data/munged/$sleep_trait.sumstats.gz,$list" \
-    --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/ \
+    --rg "$MUNGED_DIR/$sleep_trait.sumstats.gz,$list" \
+    --ref-ld-chr "$REF_DIR/eur_w_ld_chr/" --w-ld-chr "$REF_DIR/eur_w_ld_chr/" \
     --out "$LOGDIR/rg_$sleep_trait"
 done
 

@@ -1,0 +1,116 @@
+{
+  "analysis_id": "brain6-lava-rescue-v1-diagnostic-pilot",
+  "canonical_receipt_path": "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/receipts/locus_950.json",
+  "canonical_receipt_sha256": "036abd46b597bb6f6dbdd3e70c7575b18cd93905b2e955fd8cb6fc5b31a8bc53",
+  "canonical_statuses": {
+    "adhd": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "bipolar": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "insomnia": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "longsleep": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "mdd": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "parkinson": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    },
+    "scz": {
+      "reason": "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS",
+      "status": "NOT_RUN"
+    }
+  },
+  "checks": {
+    "adhd_cell_identity": true,
+    "adhd_status_concordance": true,
+    "bipolar_cell_identity": true,
+    "bipolar_status_concordance": true,
+    "input_info_schema": true,
+    "input_info_sha256": true,
+    "insomnia_cell_identity": true,
+    "insomnia_status_concordance": true,
+    "longsleep_cell_identity": true,
+    "longsleep_status_concordance": true,
+    "mdd_cell_identity": true,
+    "mdd_status_concordance": true,
+    "output_sha256": true,
+    "parkinson_cell_identity": true,
+    "parkinson_status_concordance": true,
+    "reference_provenance_sha256": true,
+    "scz_cell_identity": true,
+    "scz_status_concordance": true,
+    "worker_config_sha256": true
+  },
+  "command": "python3 brain6/results/lava_rescue_v1/build_rescue_audit.py",
+  "environment": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.5"
+  },
+  "exit_status": 0,
+  "locus_id": "950",
+  "protocol_sha256": "659155d2d9da83b61e9e68c3aa080e2955cb0a0566068e09ce2f2c69afb204bb",
+  "qc": "PASS_INPUT_RECEIPT_INTEGRITY_NO_CORRECTABLE_DEFECT_SHOWN",
+  "sumstats": {
+    "adhd": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/adhd.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "bipolar": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/bipolar.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "insomnia": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/insomnia.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "longsleep": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/longsleep.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "mdd": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/mdd.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "parkinson": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/parkinson.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    },
+    "scz": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_950/scz.sumstats.tsv.gz",
+      "rows": 0,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "572dbf5336c52498fc275cb5567ea69fd69e92b6d18994b8e2d9fdbd0954867b"
+    }
+  }
+}

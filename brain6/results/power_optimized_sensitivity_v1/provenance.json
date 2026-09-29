@@ -1,0 +1,70 @@
+{
+  "analysis_id": "brain6_power_optimized_sleep_screen_v1",
+  "builder_script": "brain6/scripts/build_power_optimized_sleep_audit.py",
+  "builder_sha256": "5cee90e00cafe5e7b4c089288757b556d252414d6173777bd8f58035fb1367e1",
+  "candidate_reference_overlap": {
+    "frozen_reference_overlap": 6093758,
+    "loci_materialized": 2495,
+    "overlap_fraction": 0.9604258571912654,
+    "source_qc_variants": 6344850
+  },
+  "canonical_decision": "FAILED_QC_NOT_PROMOTED",
+  "canonical_run_id": "d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b",
+  "decision_rule": {
+    "downstream_association_results_consulted": false,
+    "material_improvement_strict_gate_eligible_loci_percentage_points": 10,
+    "minimum_additional_loci": 250
+  },
+  "external_literature_search": {
+    "candidate": "Austin-Zimmerman et al. 2025 continuous sleep duration",
+    "finding": "NCBI/PubMed and medRxiv classify the record as a preprint; data availability is conditional on reasonable request after peer-reviewed publication; current Catalog search lists Austin-Zimmerman 2023 but no 2025 accession; no usable summary-statistics file identified",
+    "sources": [
+      "https://www.medrxiv.org/content/10.1101/2025.05.19.25327902v1",
+      "https://pubmed.ncbi.nlm.nih.gov/40475156/",
+      "https://www.ebi.ac.uk/gwas/search?query=sleep+duration"
+    ],
+    "verified_at_date": "2026-09-26"
+  },
+  "external_source": {
+    "archive_bytes": 378315754,
+    "archive_integrity": "PASS",
+    "archive_path": "/Volumes/Extreme SSD/brain6-work/power-optimized-sensitivity-v1/sources/Dashti_2019_GCST007561_sleep_duration.zip",
+    "archive_sha256": "77ebce3fcabb32a36e028390c7a34ce7f6aac11e2b663014132be1dc0f82d7c8",
+    "extracted_member_bytes": 1035966151,
+    "extracted_member_sha256": "b1115038b2e1232617a9a6a2ed445c54a12948c27d28ecb23dc7af2ced0fdda0"
+  },
+  "inputs": {
+    "brain6/config/power_optimized_sensitivity_v1/source_sleep_duration_continuous_dashti2019.json": "54468448f392cb15c610dfa8270993911faaa02b176504e027d31c50bb0d1ef4",
+    "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65",
+    "brain6/results/lava/canonical_v3_not_run_cells.tsv": "7704ac250fbbac02729948813ceda23155cccbcd68393fcb1f266d3f412ca2ca",
+    "brain6/results/power_optimized_sensitivity_v1/canonical_sleep_reference_overlap_v1.provenance.json": "b3e898eba5ebba4ad743220058b8f0ed0c63f2b1a5f26fe1e5a10767b6304370",
+    "brain6/results/power_optimized_sensitivity_v1/canonical_sleep_reference_overlap_v1.tsv": "8bb4d79470f0b97aff269063d261615f86c46efb81003d1e97e3a7d618836053",
+    "brain6/results/power_optimized_sensitivity_v1/current_sleep_trait_audit_complete.tsv": "c70e4c126bb2f512af7f9702e49ad7819c2db98ed21c42ed15da40a74c30b332",
+    "brain6/results/power_optimized_sensitivity_v1/lava_inputs_v1/materialization.provenance.json": "a02f7806cd50021c93a7a7f90aa9014d62adfa006e276d91196afa1ea9451535",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/config.json": "14c62f7bee819ceb3918db7e680ec22f1bd38adc40a1e50e170ddfbd0cc6fdee",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/sleep_duration_continuous_lava_univariate.tsv": "66237a337f462abcac6b9a334c79d4bdf86ce975b22133524dd816e420460a2e",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/summary.json": "5821ade3094da42c15f4c35e8da964d34db691554a4db78d94a37b97e3244173",
+    "brain6/results/power_optimized_sensitivity_v1/normalized/sleep_duration_continuous_dashti_2019/receipt.json": "de4360ea7ba26bfba0b1250711dcf1f3b73b1caa9045c3772a3d334c6505cc2c",
+    "brain6/results/supplement/table_S1_gwas_metadata.tsv": "f35807e76267d745047d3d2c5db68e81b3deace5b9d12d8b02573b5c3d30428a",
+    "brain6/results/supplement/table_S3_h2_qc.tsv": "09095c9643bebd33fd5f479f4331870c8e768258ee75dd92c799c50a5d26b6d5",
+    "brain6/scripts/audit_canonical_sleep_reference_overlap.py": "5a451a8a90a6357912f06aa0cfb0670a879a94e7d44a4a53bad60d7d23441bac",
+    "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json": "3569ce81d33479321f9b3adec7bd09c9b54a10a01f1fa4abd15888d9d2e66b22",
+    "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/results/canonical_family_results.tsv": "ac450685970a35a4d0d06a9f02dd45ee5ac8f1af905ef411564b7e1f7f2f5352"
+  },
+  "outputs": {
+    "README.md": "c74da0584d50b6e82b56abb8b2a43f6e470b643c2d06c144a03b4a7aaae460cc",
+    "candidate_replacement_screen.tsv": "13af5a0b66884ad4bca361bcf8e33d7457526ffe00a9686628f402a4d1f8c494",
+    "canonical_sleep_reference_overlap_v1.provenance.json": "b3e898eba5ebba4ad743220058b8f0ed0c63f2b1a5f26fe1e5a10767b6304370",
+    "canonical_sleep_reference_overlap_v1.tsv": "8bb4d79470f0b97aff269063d261615f86c46efb81003d1e97e3a7d618836053",
+    "current_sleep_trait_audit.tsv": "749277467ef3c6756903ecc0b9b4129ff48e17c26beb6c6a2d99effafc543afd",
+    "current_sleep_trait_audit_complete.tsv": "c70e4c126bb2f512af7f9702e49ad7819c2db98ed21c42ed15da40a74c30b332"
+  },
+  "readme_enrichment": "Documents the corrected canonical-metric audit V2 and complete six-candidate comparison V2 as reportable artifacts; retains earlier tables as historical records; canonical LAVA remains failed-QC and unchanged.",
+  "reference_overlap_audit_provenance_sha256": "b3e898eba5ebba4ad743220058b8f0ed0c63f2b1a5f26fe1e5a10767b6304370",
+  "scope": "Brain6 only; outcome-blinded candidate screen; no frailty/FI results or sensitivity receipts included",
+  "status": "COMPLETE_SCREEN_NO_PROMOTION",
+  "trait_only_lava_screen": "COMPLETE_2495_LOCI_NO_PROMOTION",
+  "trait_only_screen_aggregate_summary_sha256": "5821ade3094da42c15f4c35e8da964d34db691554a4db78d94a37b97e3244173",
+  "trait_only_screen_completion_provenance_path": "brain6/results/power_optimized_sensitivity_v1/completed_trait_only_screen_comparison_v1.provenance.json",
+  "verified_at_utc": "2026-09-26T10:37:47+00:00"
+}

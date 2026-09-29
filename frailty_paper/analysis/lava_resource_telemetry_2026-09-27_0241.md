@@ -1,0 +1,10 @@
+# FI×sleep LAVA resource and throughput checkpoint — 2026-09-27 02:41 UTC
+
+- Full audit: `lava_receipt_full_audit_2026-09-27_0241.json`; 19,295/29,940 receipt files validated and inventory reached 19,296 during the scan. No receipt, claim, duplicate-identity or duplicate-claim issues; no launches failed and no stale claims were recovered.
+- The existing coordinator remains active. Two of six requested workers are effective. PIDs 72534 and 72535 were live on distinct insomnia/locus-1855 and longsleep/locus-1855 claims during the audit. The other two registered worker-slot PIDs (72536, 72537) were dead, consistent with the persisted two-worker state.
+- The resource guard reports swap use of 3,883/5,120 MiB and its deep-pressure fallback at two workers. `memory_pressure -Q` reported 40% system-wide free memory. `ps` and `sysctl` were denied by the host sandbox, so CPU utilization, per-process memory, logical-core count, exact swap, and disk I/O were not available in this sample.
+- `df -h` reported 1.6 GiB free on the internal volume and 1.5 TiB on the external analysis SSD. Large analysis outputs remain directed to the external SSD.
+- From the 02:30:19 audit (19,239) to 02:41:38 (19,295), 56 receipts were added in 11m19s: about 297/hour. The runner state at 02:40:59 showed 19,294/29,940, or 10,646 remaining. At the short-window rate, this suggests about 35.9 hours, strictly provisional.
+- Historical measured rates were about 392/hour in the six-worker trial and about 622/hour in a four-worker interval; those short samples occurred under earlier host conditions and are not directly comparable. The current two-worker rate is about 297/hour. Do not increase concurrency while the existing deep-swap guard remains engaged.
+- Frozen analysis-lock SHA-256 remains `74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70`; input-manifest SHA-256 remains `8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2`.
+- All 12 locked 1% gates still fail (3,398 negative-variance, 252 no-reference-SNP, one other). This remains a sensitivity analysis; no local-sharing or PLACO inference is supported.

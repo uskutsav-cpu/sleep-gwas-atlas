@@ -12,7 +12,7 @@ import tempfile
 from .io import ContractError,require,sha256,safe_write_path,read_json
 
 EXPECTED_REPOSITORY='uskutsav-cpu/sleep-gwas-atlas'
-DEFAULT_BRANCH='feature/brain6-deep-analysis-v02'
+DEFAULT_BRANCH='feature/brain6-computational-v03'
 
 
 def git(repo,*args):
@@ -72,6 +72,8 @@ def apply_overlay(repo,payload,manifest,*,apply=False,branch=DEFAULT_BRANCH,comm
     repo=Path(repo).resolve();payload=Path(payload).resolve()
     # Existing staged changes must not be committed together with our additions.
     if commit:require(not git(repo,'diff','--cached','--name-only'),'Existing staged changes: commit/unstage those separately; nothing changed')
+    merge_head=subprocess.run(['git','-C',str(repo),'rev-parse','-q','--verify','MERGE_HEAD'],capture_output=True,check=False)
+    require(merge_head.returncode!=0,'Finish the existing merge before applying an extension upgrade')
     current=git(repo,'branch','--show-current')
     require(current,'Detached HEAD: explicitly choose a working branch first')
     if current!=branch:
@@ -105,7 +107,7 @@ def apply_overlay(repo,payload,manifest,*,apply=False,branch=DEFAULT_BRANCH,comm
         require(staged<=set(plan['payload_files']),'Unrelated concurrent staging detected; refusing commit')
         if staged:
             git(repo,'diff','--cached','--check')
-            git(repo,'commit','-m','Add audited Brain6 v0.2 analysis and integrity checks')
+            git(repo,'commit','-m','Add audited Brain6 v0.3 computational audits and full-family analysis')
         commit_sha=git(repo,'rev-parse','HEAD')
     if push:git(repo,'push','-u','origin',f'HEAD:refs/heads/{branch}')
     return {**plan,'action':'APPLIED','branch':branch,'commit':commit_sha,'remote_changed':push}
@@ -115,7 +117,7 @@ def main(argv=None,*,payload_root=None,manifest_path=None,baseline_path=None):
     p=argparse.ArgumentParser(description='Safely add Brain6; defaults to read-only conflict checks.')
     p.add_argument('repo',help='Existing sleep-gwas-atlas checkout root')
     p.add_argument('--apply',action='store_true');p.add_argument('--commit',action='store_true')
-    p.add_argument('--upgrade',action='store_true',help='Allow replacement only of exact recognized v0.1 payload files')
+    p.add_argument('--upgrade',action='store_true',help='Allow replacement only of exact recognized v0.2 payload files')
     p.add_argument('--push',action='store_true');p.add_argument('--branch',default=DEFAULT_BRANCH)
     a=p.parse_args(argv)
     try:

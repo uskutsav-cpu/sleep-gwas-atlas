@@ -1,0 +1,29 @@
+{
+  "analysis_id": "brain6-track-b-gate-delta-v1",
+  "current_input_gate_sha256": "66916e3416a37ce3c31ffb12d1ccf51a59b1f065ed002efbe7b196f5ffa7c402",
+  "current_readiness_sha256": "5cf3edd0618ea2dfce700e632b088fff0d5fdab49f86f2c826a8a2228fe48d1e",
+  "gate_delta": {
+    "readiness_gate_sha256": {
+      "current": "5cf3edd0618ea2dfce700e632b088fff0d5fdab49f86f2c826a8a2228fe48d1e",
+      "historical": "8f24aebc71bb806bb9cea16cced554de29d24885aa1a09e0cb49bc4b698d6a48"
+    }
+  },
+  "historical_input_gate_sha256": "79d2ae0faa0beb6368496617ab4c88a580a34e7f459f4825d5586e31eecb2101",
+  "historical_readiness_sha256": "8f24aebc71bb806bb9cea16cced554de29d24885aa1a09e0cb49bc4b698d6a48",
+  "interpretation": "The current input-gate identity changed only through two appended readiness blocker strings; this does not itself prove protected-v3 admission.",
+  "readiness_delta": [
+    {
+      "component_id": "METHOD_UNION_08_09",
+      "current": "UPSTREAM_COMPLETED_METHOD_RESULTS;TRACK_B_UNION_VALIDATOR_NOT_IMPLEMENTED;FULL_EUR_LD_REFERENCE_MATERIALIZATION;ACTIVE_LAVA_DOWNLOAD_BLOCKS_LD_MATERIALIZATION",
+      "field": "blockers",
+      "historical": "UPSTREAM_COMPLETED_METHOD_RESULTS;TRACK_B_UNION_VALIDATOR_NOT_IMPLEMENTED;FULL_EUR_LD_REFERENCE_MATERIALIZATION"
+    },
+    {
+      "component_id": "PLACO_PLUS",
+      "current": "UPSTREAM_LOCAL_ANALYSIS;TRACK_B_FULL_P_RUNNER_AND_VALIDATOR_NOT_IMPLEMENTED;FULL_EUR_LD_REFERENCE_MATERIALIZATION;ACTIVE_LAVA_DOWNLOAD_BLOCKS_LD_MATERIALIZATION",
+      "field": "blockers",
+      "historical": "UPSTREAM_LOCAL_ANALYSIS;TRACK_B_FULL_P_RUNNER_AND_VALIDATOR_NOT_IMPLEMENTED;FULL_EUR_LD_REFERENCE_MATERIALIZATION"
+    }
+  ],
+  "status": "READ_ONLY_DIAGNOSTIC_NOT_ADMISSION"
+}

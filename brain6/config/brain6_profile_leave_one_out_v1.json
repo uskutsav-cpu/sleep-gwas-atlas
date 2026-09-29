@@ -1,0 +1,32 @@
+{
+  "analysis_id": "brain6-profile-leave-one-sleep-trait-out-v1",
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_COMPUTATION",
+  "purpose": "Descriptive robustness check for the two disorder-profile correlations already reported in the Brain6 global-map manuscript.",
+  "selection_timing": "POST_ATLAS_PRIORITIZED_DESCRIPTIVE_FOLLOW_UP",
+  "input": {
+    "locked_family_config": "brain6/config/brain6_locked_family.yaml",
+    "global_map": "brain6/results/global/brain6_72_locked.tsv",
+    "measure": "global_rg"
+  },
+  "profiles": [
+    {"disorder_a": "adhd", "disorder_b": "mdd", "claim_id": "profile_adhd_mdd"},
+    {"disorder_a": "scz", "disorder_b": "bipolar", "claim_id": "profile_scz_bipolar"}
+  ],
+  "method": {
+    "statistic": "Pearson product-moment correlation across the remaining sleep-trait global-rg profile values",
+    "perturbation": "Omit each configured sleep trait exactly once, then recompute the correlation across all remaining traits.",
+    "expected_sleep_trait_count": 12,
+    "traits_per_leave_one_out_profile": 11,
+    "inferential_p_values": false,
+    "confidence_intervals": false,
+    "multiple_testing_correction": "NOT_APPLICABLE_DESCRIPTIVE_ONLY",
+    "degenerate_profiles": "FAIL_CLOSED"
+  },
+  "reporting": {
+    "primary_output": "brain6/results/global/disorder_profile_leave_one_sleep_trait_out.tsv",
+    "provenance_output": "brain6/results/global/disorder_profile_leave_one_sleep_trait_out.provenance.json",
+    "summaries": ["full_profile_r", "leave_one_out_min_r", "leave_one_out_max_r", "leave_one_out_range_width"],
+    "interpretation": "Descriptive sensitivity only; not an independent validation, hypothesis test, or new discovery family."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "analysis": "same-family Bonferroni sensitivity for secondary latent-factor LDSC",
+  "command": "python frailty_paper/scripts/40_build_latent_correction_sensitivity.py --repo <repo-root>",
+  "source_file": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+  "source_sha256": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068",
+  "script_file": "frailty_paper/scripts/40_build_latent_correction_sensitivity.py",
+  "script_sha256": "7b951510c6de1e8c4b08040a6ddb3a08fa814b53bf1e59b9cf39dc19237df2be",
+  "output_file": "frailty_paper/analysis/latent_factor_correction_sensitivity.tsv",
+  "output_sha256": "133a5c66665eb08d24f1c6e66b5f6181f5537551a9a9ce2dabff5181453cbc5f",
+  "family_denominator": 84,
+  "alpha": 0.05,
+  "rows": 84,
+  "bh_significant": 48,
+  "bonferroni_significant": 37,
+  "interpretation": "Bonferroni is an alternate correction sensitivity; the predeclared BH q-values remain primary."
+}

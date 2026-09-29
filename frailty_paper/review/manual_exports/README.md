@@ -1,0 +1,5 @@
+# Manual database exports
+
+Place untouched Embase, Scopus, Web of Science and (if used) PsycINFO exports here. Use `../manual_search_instructions.md`. Name files with a database prefix (`embase_`, `scopus_`, `webofscience_`/`wos_`, or `psycinfo_`) and save RIS or CSV without editing the export. Then run `make -C frailty_paper import-review-exports`; the generated `manual_import_manifest.tsv` records SHA-256, size, row count, format, and source. `manual_normalized_records.tsv` retains database record identifiers for integration with PubMed. Run the combined review-record builder only before reviewer decisions have been entered; it refuses destructive overwrite. No exports were present at the latest check.
+
+Before running searches, use `search_register.tsv` to track each planned primary and secondary database search. After execution, append one row per search to `search_log.tsv` with the exact query, platform, date, filters, counts, export filename, bytes and SHA-256. Keep both files as the audit record; do not populate counts or execution fields before a search has actually run.

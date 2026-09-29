@@ -1,0 +1,33 @@
+{
+  "analysis_id": "brain6_finngen_pd_r4_fallback_feasibility_v1",
+  "candidate_table": {
+    "bytes": 740,
+    "path": "brain6/qc/finngen_pd_r4_fallback_candidate_20260925.tsv",
+    "rows": 1,
+    "sha256": "475c67da35ad062a54115d2759a8eae6db4ffa361b357066eb2a8a8008ae7f87"
+  },
+  "decision": {
+    "admitted_as_replication": false,
+    "eligible_in_principle": true,
+    "minimum_next_step": "Acquire the source only after authorized FinnGen access; verify R4 manifest row, source bytes, schema/build, and full raw-to-harmonized receipt before any rg analysis.",
+    "preferred_candidate": "FinnGen R9 G6_PARKINSON",
+    "reason": "R9 has 4,235 cases and approximate effective N 16,750 versus R4 1,587 cases and approximate effective N 6,243; both require official access and R4 release-object metadata is not verified."
+  },
+  "effective_N_formula": "4 * cases * controls / (cases + controls)",
+  "effective_N_is_approximation": true,
+  "generated_utc": "2026-09-25T17:10:00+00:00",
+  "limitations": [
+    "No FinnGen R4 summary-statistic bytes or release manifest were acquired in this audit.",
+    "The source paper reports R4 cases and controls at cohort level; allele fields, exact R4 object identity, genome build, variant counts, and local checksum remain unverified.",
+    "The 2024 combined PD meta-analysis is not treated as independent replication because its European component is the Nalls et al. discovery source; only the separate FinnGen R4 stratum is a potential independent outcome source.",
+    "R4 access requires the official request workflow; no form was submitted."
+  ],
+  "sources": {
+    "endpoint_metadata_r9_comparable": "https://r9.risteys.finngen.fi/endpoints/G6_PARKINSON_EXMORE",
+    "finnGen_r4_download_instructions": "https://finngen.gitbook.io/documentation/r4/data-download",
+    "finnGen_r4_release_announcement": "https://www.finngen.fi/en/public-release-finngen-data-freeze-4-results-and-summary-statistics",
+    "primary_paper": "https://doi.org/10.1038/s41588-023-01584-8",
+    "primary_paper_full_text": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10786718/"
+  },
+  "status": "DOCUMENTED_LOWER_POWER_PD_REPLICATION_FALLBACK_NO_DATA_ACQUIRED"
+}

@@ -102,6 +102,26 @@ def parser():
     a.add_argument("--synthetic",action="store_true")
     a=sub.add_parser("molecular-followup")
     a.add_argument("--settings",required=True);a.add_argument("--synthetic",action="store_true")
+    for cmd in ["joint-placo-family","local-family","pathways24","compare24","robustness24","provenance24","cell-family24","validate24"]:
+        a=sub.add_parser(cmd)
+        for key in ["manifest","root","name"]:a.add_argument("--"+key,required=True)
+    a=sub.add_parser("doctor24");a.add_argument("--out",required=True);a.add_argument("--expected")
+    for cmd in ["atlas-review","covariance-review","source-inventory","shard-audit"]:
+        a=sub.add_parser(cmd)
+        for key in ["repo","root","name"]:a.add_argument("--"+key,required=True)
+        if cmd=="atlas-review":a.add_argument("--archive-date")
+        if cmd=="source-inventory":a.add_argument("--hash-dense",action="store_true")
+        if cmd=="shard-audit":a.add_argument("--trait")
+    a=sub.add_parser("plan24");a.add_argument("--pair-lock",required=True);a.add_argument("--out",required=True)
+    a=sub.add_parser("audit24")
+    for key in ["manifest","root","name"]:a.add_argument("--"+key,required=True)
+    a.add_argument("--synthetic",action="store_true")
+    a=sub.add_parser("seal24")
+    for key in ["manifest","audit","root","name"]:a.add_argument("--"+key,required=True)
+    a.add_argument("--synthetic",action="store_true")
+    a=sub.add_parser("host-audit24")
+    a.add_argument("--repo",required=True);a.add_argument("--out",required=True)
+    a.add_argument("--archive-date");a.add_argument("--hash-dense",action="store_true");a.add_argument("--scan-shards",action="store_true")
     return p
 
 
@@ -231,10 +251,55 @@ def main(argv=None):
         elif a.command=="deep-followup":
             from .followup import run_followup
             result=run_followup(a.settings,allow_synthetic=a.synthetic)
+        elif a.command in {"joint-placo-family","local-family","pathways24","compare24","robustness24","provenance24","cell-family24","validate24"}:
+            if a.command=="joint-placo-family":
+                from .family24 import joint_placo as fn
+            elif a.command=="local-family":
+                from .family24 import local_family as fn
+            elif a.command=="pathways24":
+                from .pathway24 import run as fn
+            elif a.command=="compare24":
+                from .compare24 import compare as fn
+            elif a.command=="robustness24":
+                from .robustness24 import summarize as fn
+            elif a.command=="cell-family24":
+                from .cell24 import run as fn
+            elif a.command=="validate24":
+                from .validation24 import run as fn
+            else:
+                from .provenance24 import audit as fn
+            result=fn(a.manifest,a.root,a.name)
+        elif a.command=="doctor24":
+            from .doctor import inspect_environment
+            result=inspect_environment(a.out,expected=a.expected)
+        elif a.command=="atlas-review":
+            from .atlas_review import review
+            result=review(a.repo,a.root,a.name,archive_date=a.archive_date)
+        elif a.command=="covariance-review":
+            from .atlas_review import inspect_covariance
+            result=inspect_covariance(a.repo,a.root,a.name)
+        elif a.command=="source-inventory":
+            from .inputs24 import inventory
+            result=inventory(a.repo,a.root,a.name,hash_dense=a.hash_dense)
+        elif a.command=="shard-audit":
+            from .shards24 import audit_shards
+            result=audit_shards(a.repo,a.root,a.name,trait=a.trait)
+        elif a.command=="plan24":
+            from .completion24 import draft
+            result=draft(a.pair_lock,a.out)
+        elif a.command=="audit24":
+            from .completion24 import audit
+            result=audit(a.manifest,a.root,a.name,allow_synthetic=a.synthetic)
+        elif a.command=="seal24":
+            from .completion24 import seal
+            result=seal(a.manifest,a.audit,a.root,a.name,allow_synthetic=a.synthetic)
+        elif a.command=="host-audit24":
+            from .host24 import inspect
+            result=inspect(a.repo,a.out,archive_date=a.archive_date,hash_dense=a.hash_dense,scan_shards=a.scan_shards)
         else:raise ContractError("Unknown command")
         print(json.dumps(result,indent=2,default=str,allow_nan=False))
         return 0
-    except (ContractError,FileNotFoundError,KeyError,ValueError) as e:
+    except (ContractError,OSError,KeyError,ValueError) as e:
         print(f"brain6: {type(e).__name__}: {e}",file=sys.stderr)
         return 2
 

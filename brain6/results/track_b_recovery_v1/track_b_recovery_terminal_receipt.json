@@ -1,0 +1,31 @@
+{
+  "audit_script_sha256": "46c366b950be738c7894bae5e72181ba9c566cd29ed0bdeca3a4ce081a6b7a66",
+  "checks": {
+    "B_cleanup_receipt_valid": true,
+    "B_full_scan_log_complete": true,
+    "B_full_scan_monitor_success": true,
+    "all_562_retired_work_paths_absent": true,
+    "dense_sources_match_current_cards": true,
+    "embedded_receipt_hashes_match": true,
+    "ledger_counts_match": true,
+    "recovered_source_hashes_match": true,
+    "retained_file_hashes_match": true
+  },
+  "classification": "BLOCKED_V3_ADMISSION",
+  "created_utc": "2026-09-27T02:14:59.004999+00:00",
+  "original_aligned_input": "INTENTIONALLY_CLEANED;BIT_IDENTICAL_REGENERATION_UNVERIFIED",
+  "original_shards": "INTENTIONALLY_CLEANED;V4_CLEANUP_RECEIPT_ATTESTED",
+  "outputs_sha256": {
+    "track_b_provenance_graph.json": "76d1d5d824ba2c9c5ce52c5c6e337a4c8facff809f3d0efa7be4fd379db0b8de",
+    "track_b_recovery_audit.json": "3fda85243b9d6667db95890af1a32cd782f261eaa1bd50791c266e7409761545",
+    "track_b_recovery_inventory.md": "b8b1c88a261d36301a5c17b3b3a22068dc416372cb7148585ee47bd2d82ff77e",
+    "track_b_recovery_summary.md": "db80874b543232bd788b754b9d538c0639690a734b188472e8010fa1640f44b6"
+  },
+  "promotion_performed": false,
+  "remaining_blockers": [
+    "No frozen Brain6 v3 importer/admission rule for the verified legacy V2 terminal-gate alias and V4 clean-package attestation.",
+    "Current v3 gate hash differs from historical V1 gate; readiness-gate blocker text changed after original freeze.",
+    "Legacy 17-field B ledger requires explicit checked adapter to the v3 10-field pair schema before five-track family accounting."
+  ],
+  "schema_version": "brain6-track-b-recovery-terminal-receipt.1"
+}

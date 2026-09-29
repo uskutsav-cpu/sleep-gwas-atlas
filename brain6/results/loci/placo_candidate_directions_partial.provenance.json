@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6-placo-partial-candidate-direction-v1",
+  "status": "PASS_PARTIAL_FAMILY_DESCRIPTIVE",
+  "interpretation": "Post-selection sign description at the same harmonized variant. Z1 and Z2 are aligned to trait 1's allele by the checksum-pinned pair harmonizer. Concordant/opposing signs are not signed LD, independent replication, causal evidence, or a new hypothesis test. Only four of five selected tracks are present; 24 candidates lack exact LD-reference positions.",
+  "scope": {
+    "pair_ids": [
+      "insomnia__mdd",
+      "longsleep__bipolar",
+      "longsleep__parkinson",
+      "longsleep__scz"
+    ],
+    "n_pairs": 4,
+    "n_candidates": 2297,
+    "complete_five_track_family": false
+  },
+  "direction_counts": {
+    "all": {
+      "CONCORDANT": 2296,
+      "OPPOSING": 1
+    },
+    "by_pair": {
+      "insomnia__mdd": {
+        "CONCORDANT": 124
+      },
+      "longsleep__bipolar": {
+        "CONCORDANT": 26,
+        "OPPOSING": 1
+      },
+      "longsleep__parkinson": {
+        "CONCORDANT": 15
+      },
+      "longsleep__scz": {
+        "CONCORDANT": 2131
+      }
+    }
+  },
+  "candidate_status_counts": {
+    "insomnia__mdd": {
+      "LD_CLUMPED": 118,
+      "LEAD": 6
+    },
+    "longsleep__bipolar": {
+      "LD_CLUMPED": 23,
+      "LEAD": 3,
+      "NOT_CLUMPED_NO_EXACT_REFERENCE_MATCH": 1
+    },
+    "longsleep__parkinson": {
+      "LD_CLUMPED": 12,
+      "LEAD": 3
+    },
+    "longsleep__scz": {
+      "LD_CLUMPED": 2099,
+      "LEAD": 9,
+      "NOT_CLUMPED_NO_EXACT_REFERENCE_MATCH": 23
+    }
+  },
+  "methods": {
+    "direction_rule": "CONCORDANT iff sign(Z_SLEEP) == sign(Z_DISORDER); otherwise OPPOSING; zero Z is undefined",
+    "sign_basis": "Z1/Z2 are the pair join's harmonized Z statistics on trait 1 A1; B effects are aligned to A1",
+    "multiplicity": "No new test or correction; source PLACO P, within-pair q, and across-pair q are carried through unchanged"
+  },
+  "sources": {
+    "builder_script": {
+      "path": "brain6/scripts/build_partial_placo_direction_table.py",
+      "sha256": "a8ddc0aabcde10c0d15cc7415988fa94712c0995c969c421e4ea4bd0ec0a4d9c"
+    },
+    "candidate_table": {
+      "path": "brain6/results/loci/placo_candidate_variants_partial.tsv",
+      "sha256": "8aab50a8d06c3af2d7a45297142181326d505f410389dd7e9b3e570dc0affc47"
+    },
+    "placo_master": {
+      "path": "brain6/results/placo/placo_master.tsv",
+      "sha256": "729b7698fa45876bb649375091368a59ce8b4c38376795c6abcb0aac87997031"
+    },
+    "placo_family_lock": {
+      "path": "brain6/config/placo_family_v3/family_lock.json",
+      "sha256": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7"
+    },
+    "pair_lock": {
+      "path": "extensions/brain6/work/overnight-v03/brain6-pairs.lock.json",
+      "sha256": "56c0e697663562150bdcfd7550107df91c34118bdd3bdc2b15396a7ed67b6652"
+    },
+    "pair_variant_files": {
+      "brain6/results/placo/insomnia__mdd/variants.tsv.gz": "e3f6562cccfcec6fa856e959afe02e9abc69ab6928d5ba53be9c2ba67940e543",
+      "brain6/results/placo/longsleep__bipolar/variants.tsv.gz": "c4c1f282bc84a01273ac0f66b43ca990f90a57c3f2f392efc71a248a4109be2c",
+      "brain6/results/placo/longsleep__parkinson/variants.tsv.gz": "87a74858b8034376c1aa45335f898974672bbea9a49fcf97340ad82a0d03cfc8",
+      "brain6/results/placo/longsleep__scz/variants.tsv.gz": "9b4574ab61d6fb23eb8343eb3b5eeac8fa33800f4e7ab432ef510453f69cf6d1"
+    },
+    "pair_harmonizer": {
+      "path": "extensions/brain6/brain6/gwas.py",
+      "sha256": "2782227a1c48fadc82c4e384441ec6d517ceb8db4f2e5580bb10a54cb62f0187"
+    }
+  },
+  "output": {
+    "path": "brain6/results/loci/placo_candidate_directions_partial.tsv",
+    "sha256": "1eb4124c38b7185e8f629e3344ae507d587a3b8650ce8710161f003b8aa720f0",
+    "rows": 2297
+  }
+}

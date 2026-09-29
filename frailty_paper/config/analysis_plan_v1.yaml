@@ -1,0 +1,156 @@
+plan_id: frailty_sleep_genetics_v1
+version: 1
+status: FROZEN_PRE_NEW_FRAILTY_ANALYSES
+frozen_date: 2026-09-22
+repository_branch: frailty-paper-v1
+source_commit_at_freeze: 660c9b5
+purpose: >-
+  Evaluate genetic overlap between the pre-existing 12-trait sleep panel and a
+  central frailty index, with construct-level replication using the Fried
+  phenotype score where eligible public summary statistics pass provenance and
+  QC. Preserve the original atlas and its statistical families.
+
+estimand_and_hierarchy:
+  primary_endpoint:
+    trait_id: frailty
+    source_id: GCST90020053
+    role: CENTRAL_FRAILTY_INDEX
+  replication_endpoint:
+    trait_id: fried_frailty_score
+    source_id: GCST90295968
+    role: CONSTRUCT_REPLICATION_NOT_EXACT_REPLICATION
+    rule: >-
+      Analyze as a separate frailty construct. Do not meta-analyze with the
+      primary endpoint or call independent replication until sample overlap,
+      phenotype direction, ancestry, build, and source provenance are resolved.
+  secondary_measures:
+    - fried_component_gwas
+    - grip_strength
+    - parental_lifespan
+    - longevity
+    - healthspan
+    - alz
+    - parkinson
+    - hfrs
+    - latent_frailty_factors
+  secondary_rule: >-
+    These are secondary or contextual endpoints. Do not replace the primary
+    index after examining results; do not make a confirmatory claim from them
+    without a separately frozen family and a completed source audit.
+
+locked_inputs:
+  sleep_panel: config/analysis_panel.tsv
+  sleep_panel_lock: config/analysis_panel.lock.json
+  sleep_panel_version: atlas-v1.0
+  sleep_trait_count: 12
+  sleep_order: LOCKED_PANEL_ORDER
+  source_registry: config/traits.tsv
+  frailty_target_registry: frailty_paper/config/target_traits.tsv
+  permitted_genome_build: GRCh37_hg19_UNLESS_SOURCE_REQUIRES_LIFTOVER
+  ancestry_rule: Match ancestry across traits and reference; no cross-ancestry LD substitution.
+  immutable_rule: Never overwrite the original 45-trait atlas, Track B inputs, locks, or results.
+
+analysis_sequence:
+  - id: source_audit_and_overlap
+    gate: >-
+      Record source accession/version, phenotype definition, ancestry, build,
+      N/cases/controls, allele definitions, sample overlap evidence, access
+      terms, raw-file checksum, and source-file row count before harmonization.
+      Unknown overlap remains unknown; overlap-dependent methods are blocked
+      or explicitly sensitivity-only until resolved.
+  - id: harmonization_qc
+    gate: >-
+      Require complete compressed-file integrity, exact schema, finite effect
+      and standard error, valid p values, unique variant identity, allele
+      alignment, documented build, and full autosomal dense summary statistics.
+      Do not use lead-only or HapMap3-only inputs for primary locus work.
+      Inherit MAF >= 0.01 where the relevant locked contract requires it.
+  - id: univariate_heritability
+    gate: >-
+      Estimate LDSC h2 and intercept for every planned frailty and sleep GWAS.
+      A phenotype fails the established Genomic SEM input gate unless finite
+      h2 Z >= 4 and finite LDSC intercept <= 1.20; retain the failure reason.
+      Never encode missing or failed estimates as zero.
+  - id: global_genetic_correlation
+    gate: >-
+      Estimate two-sided LDSC rg for the fixed 12 sleep x primary FI comparisons.
+      Report estimates, SE, p, intercept/overlap diagnostics, and direction.
+      For claims integrated with the original atlas, use its locked BH family
+      of all 396 sleep-by-non-sleep pairs; do not recompute q values over only
+      the 12 frailty pairs. Treat Fried-score results as construct replication
+      and evaluate them separately with the same full-family conservative rule.
+  - id: external_replication
+    gate: >-
+      Report exact and related-phenotype evidence separately. Require ancestry,
+      phenotype-direction and sample-overlap review. Do not call a same-cohort
+      UK Biobank result independent replication. No effect-size meta-analysis
+      across distinct frailty constructs.
+  - id: local_sharing
+    gate: >-
+      Run only for traits passing the documented h2 and input gates, using the
+      existing GRCh37 EUR LAVA reference with matching variant alleles/order.
+      Apply the locked LAVA family correction; collate the complete planned
+      locus family before BH FDR <= 0.05. Failed eligible tests contribute
+      p=1; skipped/failed rows are never null evidence. Freeze exact planned
+      denominator and checksums before executing new LAVA jobs.
+  - id: pleiotropic_loci
+    gate: >-
+      Require full dense, harmonized inputs and preregistered eligible trait
+      pairs. Retain the original atlas pair-family denominator of 396 for any
+      cross-sleep PLACO primary threshold (5e-8/396 = 1.2626262626262626e-10),
+      alongside PLACO marginal p <= 1e-4 and z^2 <= 80. Keep conjFDR q <= 0.05
+      distinct; do not claim cross-method canonical sharing unless both
+      completed methods support the same locked locus. A blocked method is not
+      a negative result.
+  - id: fine_mapping_and_colocalization
+    gate: >-
+      Only after complete upstream local/pleiotropy families and frozen
+      nonduplicated locus union. Reuse the locked SuSiE-RSS 0.14.2 and coloc
+      5.2.3 contracts: 95% credible sets; max 10 causal signals; minimum 50
+      variants; full locus (no truncation); coloc priors p1=p2=1e-4,
+      p12=1e-5 primary with locked sensitivity set; shared support requires
+      PP.H4 >= 0.80 and PP.H4/PP.H3 >= 5. Require ancestry-matched signed LD,
+      exact variant order, convergence and all existing diagnostics.
+      Fine-mapping/coloc are not proof of causality or mechanism.
+  - id: molecular_context
+    gate: >-
+      Only after eligible loci are frozen. Query QTL/cell resources at matching
+      loci and record exact study, ancestry, build, tissue/cell annotation,
+      assay, overlap, and evidence limitations. No bulk pQTL/eQTL or single-cell
+      acquisition under current storage constraint.
+  - id: manuscript
+    gate: >-
+      Generate every numerical Results statement only from sealed, validated
+      tables. Distinguish blocked, failed, underpowered, no detected support,
+      and not applicable. No causal language from genetic correlation,
+      pleiotropy, fine-mapping, colocalization, or molecular overlap alone.
+
+multiplicity:
+  original_atlas_scope: 396
+  global_rg_reporting_family: >-
+    Original locked all-396 pair family, including when displaying the frailty
+    subset; retain original q-values and do not create a subset q-value for
+    confirmatory claims.
+  fried_construct_replication_family: >-
+    Separate 396-pair conservative family; no pooling with primary FI tests.
+  locus_and_molecular_families: >-
+    Exact family and denominator must be written to a subordinate lock after
+    source/QC gates pass and before any result access. Apply the complete-family
+    correction dictated by the corresponding existing contract. No denominator
+    shrinkage, threshold loosening, or post-result family changes.
+
+interpretation:
+  global_rg: Shared genetic architecture, not causality.
+  local_rg: Regional sharing under the selected reference and model, not a shared causal variant.
+  placo_or_conjfdr: Statistical pleiotropy, not a shared causal variant or mechanism.
+  fine_mapping: Candidate-variant evidence, not proof of causal variant.
+  coloc: Shared-signal model conditional on data, LD, and priors; not proof of mediation or causality.
+  molecular_resources: Contextual functional support, not independent replication unless cohort independence is documented.
+
+known_preanalysis_blockers:
+  - Insufficient storage for remaining core collection and QTL indexes.
+  - Fried-score source access/checksum and complete materialization not verified.
+  - Exact sample-overlap estimates for major frailty and sleep GWAS are incomplete.
+  - No frailty-specific harmonization/QC or LDSC results exist yet.
+  - HFRS requires FinnGen summary-statistics access instructions and endpoint verification.
+  - Latent GWAS Catalog metadata and accession-to-factor mapping remain incomplete.

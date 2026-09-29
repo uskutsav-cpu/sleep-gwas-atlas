@@ -1,0 +1,53 @@
+{
+  "brain6_input": {
+    "brain6_gwas_master_sha256": "bfdf722feab17e19a3a9e7e733e845866d75abbf6f58393ece99b71fdc9624a7",
+    "brain6_insomnia_cases": 109402,
+    "brain6_insomnia_controls": 277131,
+    "brain6_insomnia_doi": "10.1038/s41588-018-0333-3",
+    "brain6_insomnia_neff_from_case_control_counts": 313750,
+    "brain6_insomnia_pmid": "30804565",
+    "brain6_insomnia_study": "Jansen 2019 Nat Genet \u2014 UKB-only public release without 23andMe",
+    "neff_formula": "round(4 / (1/cases + 1/controls))"
+  },
+  "comparison": {
+    "exact_gwas_release_matches": 0,
+    "independent_replication": false,
+    "locus_overlap_compared": false,
+    "novelty_classes_changed": false,
+    "pairwise_coefficients_compared": false,
+    "participant_overlap_verified": false,
+    "reported_significant_genetic_correlations": 4,
+    "rows": 4,
+    "statistical_families_changed": false
+  },
+  "decision": "ADD_CONTEXT_ONLY; DO_NOT_CHANGE_LOCKED_BRAIN6_NOVELTY_OR_FDR",
+  "limitations": [
+    "The article reports insomnia Neff=314,149; Brain6 case/control counts imply Neff=313,750. The close values do not prove source or participant identity.",
+    "The abstract does not supply pair-specific rg, SE, P, or GWAS release identity; those values are not imputed.",
+    "The reported shared-locus counts are reproduced as source summaries only and were not compared with Brain6 loci.",
+    "The existing 2026-08-28 35-pair crosswalk remains the novelty classification source and still needs an exhaustive source-level refresh before submission."
+  ],
+  "output_path": "brain6/results/novelty/xue_2026_insomnia_psychiatric_context.tsv",
+  "output_sha256": "0e6c3ac358eaed51d9828b783f993c08b7bf80de7dc98bfd8c90e1137826c0fa",
+  "schema_version": 1,
+  "scope": "Four insomnia\u2013psychiatric pairs reported as significant in Xue et al. 2026; source-level comparison only.",
+  "script_sha256": "2564f7b9f12aa5a2deba37d9edc726f559637bf128c1947ff0ccb7b8beab484f",
+  "source": {
+    "citation": "Xue B, Niu M, Sun Y, et al. Sleep. 2026;49(1):zsaf317.",
+    "doi": "10.1093/sleep/zsaf317",
+    "issue": "2026-01",
+    "method": "Bivariate MiXeR; conjFDR and ASSET cross-trait loci; MAGMA; SEISMIC",
+    "online_publication_date": "2025-10-09",
+    "overlap_limit": "Source GWAS and participant identity with Brain6 are unverified; similar effective N is a compatibility clue, not proof of identical samples.",
+    "pmid": "41065713",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/41065713/",
+    "reported_insomnia_neff": 314149,
+    "reported_significant_insomnia_correlations": "ADHD; bipolar disorder; MDD; schizophrenia",
+    "source_id": "xue_2026_insomnia_psychiatric",
+    "source_summary_limit": "The public abstract reports significance and per-disorder shared-locus counts, not pair-specific rg/SE/P or GWAS release identities.",
+    "url": "https://academic.oup.com/sleep/article-abstract/49/1/zsaf317/8279895"
+  },
+  "source_accessed_date": "2026-09-26",
+  "status": "PASS_SOURCE_LEVEL_PRIOR_CONTEXT_NOT_REPLICATION",
+  "transcription_basis": "Publisher/PubMed abstract metadata; source-specific supplemental coefficients and release IDs were not extracted."
+}

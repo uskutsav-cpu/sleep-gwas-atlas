@@ -1,0 +1,70 @@
+{
+  "analysis_id": "brain6-lava-local-rg-v1",
+  "bivariate_family": {
+    "correction": "Benjamini-Hochberg across the fixed 12,475-slot family.",
+    "n_slots": 12475,
+    "no_overlap_input_p_for_family_correction": 1.0,
+    "non_tested_slot_p_for_family_correction": 1.0,
+    "numerical_failure_p_for_family_correction": 1.0,
+    "report_all_statuses": true,
+    "unit": "locked_pair_by_locus",
+    "univariate_gate_miss_p_for_family_correction": 1.0
+  },
+  "execution": {
+    "maximum_locus_failure_fraction": 0.01,
+    "maximum_univariate_untested_fraction": 0.05,
+    "one_locus_per_process": true,
+    "random_seed": 20260922,
+    "reuse_track_b_brain6_local_results": false
+  },
+  "locus_definition": {
+    "build": "GRCh37/hg19",
+    "n_loci": 2495,
+    "path": "ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile",
+    "rule": "Use all and only the pinned 2,495 loci; do not select loci from Brain6 results.",
+    "sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882"
+  },
+  "overlap_gate": {
+    "assume_zero_overlap": false,
+    "bivariate_execution_permitted_before_review": false,
+    "pairwise_sample_overlap_file": null,
+    "status": "REQUIRED_REVIEW_PENDING"
+  },
+  "pair_lock_sha256": "577445f1c164e848d3602c2d9205b08586cc0f224db28f78c5b8f23bf9a78024",
+  "pairs": [
+    "insomnia__adhd",
+    "insomnia__mdd",
+    "longsleep__scz",
+    "longsleep__bipolar",
+    "longsleep__parkinson"
+  ],
+  "review_status": "PREDECLARED_REQUIRES_OVERLAP_REVIEW",
+  "runtime": {
+    "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+    "lava_version": "0.1.5",
+    "r_major_minor": "4.3",
+    "reference": "official UK Biobank LAVA v1.1",
+    "reference_must_pass_repository_hash_size_and_index_validation": true,
+    "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1"
+  },
+  "schema_version": 1,
+  "scientific_status": "NOT_RUN",
+  "selection_is_post_global_screen": true,
+  "selection_sha256": "fc1c6e8dc3bc0d7200974ab135c7f50dbb84756b82fbe64d6689fd4f8b3d53ef",
+  "trait_ids": [
+    "adhd",
+    "bipolar",
+    "insomnia",
+    "longsleep",
+    "mdd",
+    "parkinson",
+    "scz"
+  ],
+  "univariate_gate": {
+    "eligibility_rule": "Both traits in a pair must pass the univariate gate at that locus.",
+    "familywise_alpha": 0.05,
+    "n_tests": 17465,
+    "p_threshold_strictly_less_than": 2.86286859433152e-06,
+    "unit": "unique_trait_by_locus"
+  }
+}

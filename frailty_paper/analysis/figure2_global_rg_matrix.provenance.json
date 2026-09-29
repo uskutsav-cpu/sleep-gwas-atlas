@@ -1,0 +1,81 @@
+{
+  "command": [
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-py311/bin/python",
+    "frailty_paper/scripts/38_plot_global_rg_matrix.py",
+    "--repo",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03",
+    "--outdir",
+    "frailty_paper/analysis",
+    "--replace-outputs"
+  ],
+  "created_utc": "2026-09-24T05:10:35.586587+00:00",
+  "families": {
+    "FI": {
+      "bh_q_le_0_05": 9,
+      "pairs": 12,
+      "q_family": "frozen all-396 BH",
+      "same_family_bonferroni_p_times_396_le_0_05": 9
+    },
+    "latent": {
+      "bh_q_le_0_05": 48,
+      "interpretation": "SENSITIVITY_ONLY",
+      "pairs": 84,
+      "q_family": "fixed 84-pair BH"
+    }
+  },
+  "independent_pairwise_replication": "NONE_ESTABLISHED_IN_AUDITED_CANDIDATES",
+  "inputs": {
+    "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+    "frailty_paper/analysis/frozen_fi_correction_sensitivity.tsv": "83274185d5928a425808f10521f10985a03fe453ef731c9a32cff5eb0c7077d6",
+    "frailty_paper/analysis/replication_resource_audit.tsv": "46d7c4ed2567833bd630fa4d79ca27ab79468fd655bde504f1cd15b4c4f30f0a",
+    "frailty_paper/config/secondary_frailty_factors_v1.tsv": "e85a75dd4741efcbbc200d564016af4a158953e9d79e21139a1e6cfce9227cba",
+    "frailty_paper/config/secondary_sleep_factor_panel_v1.tsv": "31721a4c0660ae131b2e2e1c0cce698587833248df71c587e0dc6a18e13dcd01",
+    "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068"
+  },
+  "limitations": [
+    "FI and latent estimates use distinct correction families and are not formally compared.",
+    "Exact participant intersections remain unknown.",
+    "Latent-factor estimates are sensitivity-only, not independent replication.",
+    "Global genetic correlation is not causation and does not identify loci or mechanisms."
+  ],
+  "outputs": {
+    "frailty_paper/analysis/figure2_global_rg_matrix.pdf": "7e7bc7ce2a8666bb167f1d2fe536169334e72ecc7b7621f49e68f06394331852",
+    "frailty_paper/analysis/figure2_global_rg_matrix.png": "e417722d89065b3ec5e09c43641ccbce5db1c032e055d4b3f4daf7490ac8f439",
+    "frailty_paper/analysis/figure2_global_rg_matrix.svg": "46633cc9b6e51fce9fe530b17deb6fc7f16cdfc5f0c538b05a9f6b0b62b6d556"
+  },
+  "python": "3.11.11",
+  "render_commands": [
+    [
+      "rsvg-convert",
+      "-f",
+      "pdf",
+      "-o",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure2_global_rg_matrix.pdf",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure2_global_rg_matrix.svg"
+    ],
+    [
+      "rsvg-convert",
+      "-w",
+      "4000",
+      "-f",
+      "png",
+      "-b",
+      "#F5F7FA",
+      "-o",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure2_global_rg_matrix.png",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure2_global_rg_matrix.svg"
+    ]
+  ],
+  "rendering": {
+    "pdf": "vector SVG rendering",
+    "png_width_px": 4000
+  },
+  "rsvg_convert_executable": "/opt/homebrew/bin/rsvg-convert",
+  "rsvg_convert_version": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.58.0\n  harfbuzz 14.2.1\n  fontconfig 2.18.2",
+  "schema_version": "frailty_paper_figure2_global_rg.v1",
+  "script": "frailty_paper/scripts/38_plot_global_rg_matrix.py",
+  "script_sha256": "fc133b5d2d15ceb0f9c20b45a156dce3ed64ef886c1891dbc62dc648ee65b1b9",
+  "source_data_tsv": "frailty_paper/analysis/figure2_global_rg_matrix_source_data.tsv",
+  "source_data_tsv_sha256": "7db9c2a3cba442e721cbae026dae102154e3abbc8fc099d7e251c98ccf63c176",
+  "working_directory": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03"
+}

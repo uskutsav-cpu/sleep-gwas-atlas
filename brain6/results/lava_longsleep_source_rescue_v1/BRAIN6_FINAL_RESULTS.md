@@ -1,0 +1,9 @@
+# Brain6 final results under the frozen gate
+
+The final **confirmatory** result is a quality-control stop: canonical LAVA v3 completed all 17,465 trait–locus cells but 3,720 were `NOT_RUN`, exceeding the prespecified 873 maximum. None failed technically. No candidate crossed the confirmatory family gate, so the [20 geographic regions and 25 preserved pair-specific candidates](BRAIN6_FINAL_REGION_EVIDENCE.tsv) all retain `confirmatory_promotion=NO`. Existing PLACO and exploratory evidence is retained as such; it is not local genetic-correlation confirmation.
+
+The exact ≥9 h versus 7–8 h Dashti release was audited at source level. It contains 14,661,601 SNP rows with BETA, SE, P, frequency, and INFO, but no N or cases/controls column. Its EBI mirror is byte-identical. Historical Brain6 constant `N≈122,985` is balanced-equivalent N constructed from study-level counts, not a source value. LAVA 0.1.5 uses supplied per-variant N in binary reconstruction and local heritability. A frozen 88-locus total-N linear diagnostic produced no net testability gain and did not justify full-scale rerun. The source remains unadmitted for a replacement LAVA input.
+
+In the separate ≥10 h UKB+MVP exploratory source, 20 of 26 frozen leads had an exact rsID/position match; across the 25 candidates there were 3 prespecified exact-variant supportive labels, 14 concordant-direction-only, 2 nonreplicating, and 6 unavailable. Because the cohort overlaps UK Biobank and the phenotype cutoff differs, these are **exploratory phenotype-adjacent observations**, not independent or confirmatory replication. [Full report](LONG_SLEEP_REPLICATION_REPORT.md).
+
+No new GWAS fine-mapping, trait–trait colocalization, eQTL/sQTL colocalization, gene prioritization, tissue/cell-type, pathway, or therapeutic-target claim was run through a passed confirmatory gate. Previously produced exploratory analyses remain outside the confirmatory claim set.

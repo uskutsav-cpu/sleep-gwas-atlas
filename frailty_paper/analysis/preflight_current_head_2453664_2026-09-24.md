@@ -1,0 +1,7 @@
+# Current-head frailty preflight
+
+- Source commit: `2453664dd8f234dff4a117f4177911260963a28e` (`Record chronotype checkpoint commit`).
+- Command: `make -C frailty_paper preflight PYTHON=../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python FRAILTY_EXTERNAL_STORAGE_ROOT='/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1'`.
+- Result: exit 0. Resource manifest 351/351; metadata 351 rows/22 required columns; frozen plan v1/12 sleep traits/396 multiplicity family; cohort overlap ledger 34 rows; review queue 56,092 records/zero decisions; bibliography passed (29 citation uses/27 keys); missing abstract audit 935/935 source XML records/zero recovered abstracts; manuscript quantitative claims 28/28; Q_SNP scan 32,035,589 rows/zero significant variants/zero exclusions; reporting locators 92 rows/93 references; unit suite 112/112 passed (1.956 seconds).
+- Key output SHA-256: claim audit `7583339b67ed595d899d88c81bbe0380df349e16f87c48bcc3f9a5b1613f4450`; missing-abstract audit `1517008c64f5ced3b221443ec07705319e0143b4f28c23a1616e09e54e28fc30`; Q_SNP table `65e14f9364c2f123749f8bb737203ecf885fe683a3472b17e7232e6f47106127`; Q_SNP provenance `887c17971f9e5877754abba9eda8dad0ae44a35926e497fab85ed0b14ceaa755`; reporting locator audit `8228a80a933a424ab824d62d272189ae31fea5636502b1bafe7853a4ac96455d`.
+- Scope: validates the frailty package against mounted resources at the stated source revision. It does not clear unscreened records, manual database access, phenotype eligibility, sample overlap, replication, or LAVA completeness gates.

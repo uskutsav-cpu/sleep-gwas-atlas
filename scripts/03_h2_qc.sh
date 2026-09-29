@@ -22,6 +22,7 @@ fi
 require_file "$CONFIG"
 validate_panel
 require_ldsc
+prepare_analysis_workspace
 
 LOGDIR=${LDSC_LOGDIR:-results/logs}
 H2_OUT=${H2_OUT:-results/tables/h2_summary.tsv}
@@ -32,12 +33,12 @@ for trait in "$@"; do
   source_status=$(trait_field "$trait" source_status) || die "trait '$trait' has no source status in $CONFIG"
   [ "$source_status" = "SOURCE_VERIFIED" ] || die \
     "$trait has source_status=$source_status; complete source verification before h2"
-  require_file "data/munged/$trait.sumstats.gz"
+  require_file "$MUNGED_DIR/$trait.sumstats.gz"
   echo "==> h2 $trait ($trait_type)"
 
   command=("$LDSC_PYTHON" "$LDSC_DIR/ldsc.py"
-    --h2 "data/munged/$trait.sumstats.gz"
-    --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/
+    --h2 "$MUNGED_DIR/$trait.sumstats.gz"
+    --ref-ld-chr "$REF_DIR/eur_w_ld_chr/" --w-ld-chr "$REF_DIR/eur_w_ld_chr/"
     --out "$LOGDIR/h2_$trait")
 
   if [ "$trait_type" = "binary" ] && [ "$observed_scale" -eq 0 ]; then

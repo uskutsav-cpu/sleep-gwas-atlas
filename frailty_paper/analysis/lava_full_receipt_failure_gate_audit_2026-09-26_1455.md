@@ -1,0 +1,7 @@
+# FI×sleep LAVA full-family audit — 2026-09-26 14:55 UTC
+
+The read-only auditor validated 16,096/29,940 receipts (53.76%) from 2026-09-26T14:55:21+00:00 to 2026-09-26T14:55:28+00:00. Three receipts arrived during the scan (16,096 at start; 16,099 after); runner-verified state was 16,096 at both checks. Receipt, claim, duplicate-claim, and duplicate trait/locus identity issue lists were empty. Workers 78548 and 78549 were live on distinct claims: insomnia locus 1436 and snoring locus 1435. Launch failures and stale-claim recoveries were zero.
+
+Six workers are requested and two effective under the persisted safeguard; swap use reached 2,772/3,072 MiB (90%), which reduces concurrency. Frozen lock SHA-256 `74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70` and input-manifest SHA-256 `8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2` are unchanged; the runner lock matches. The audit is read-only and did not mutate run state or receipts.
+
+Compared with the 14:51:19 snapshot, 56 additional receipts were validated over 4m02s (~832/hour); 13,844 slots remain unvalidated. This short-window rate gives a provisional ~16.6-hour estimate. Failure categories total 3,092: 2,850 all-phenotype negative-variance and 242 no-reference-SNP outcomes. All 12 frozen 1% trait gates fail; local-sharing, PLACO, and downstream inference remain inadmissible. Machine-readable evidence: `lava_full_receipt_integrity_2026-09-26_1455.json`.

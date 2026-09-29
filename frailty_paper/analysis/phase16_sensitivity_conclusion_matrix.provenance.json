@@ -1,0 +1,62 @@
+{
+  "assessment_legend": {
+    "NOT_TESTED": "The test is unavailable, unresolved, blocked, or not justified; do not interpret as a null result.",
+    "PARTIAL*": "Related evidence is available but is not a direct test of the same estimand or endpoint.",
+    "SURVIVES": "The stated conclusion retains its locked significance decision under a completed sensitivity.",
+    "WORKFLOW_CONCORDANT": "Same-source reproducibility evidence only; not independent replication."
+  },
+  "claims": 7,
+  "command": "python frailty_paper/scripts/41_build_phase16_sensitivity_summary.py --repo <repo>",
+  "inputs": {
+    "analysis_plan": {
+      "path": "frailty_paper/config/analysis_plan_v1.yaml",
+      "sha256": "bfa00cbb54ed151e3555f1987f86f39d84b11c4bc92046a60c05ace45e0084f4"
+    },
+    "fi_correction": {
+      "path": "frailty_paper/analysis/frozen_fi_correction_sensitivity.tsv",
+      "sha256": "83274185d5928a425808f10521f10985a03fe453ef731c9a32cff5eb0c7077d6"
+    },
+    "fi_frozen": {
+      "path": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "sha256": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045"
+    },
+    "fi_rerun": {
+      "path": "frailty_paper/results/frailty_v1/global_rg_sleep_frailty.tsv",
+      "sha256": "02a65f01dd4d92576ee1e3b62f85fb10447ac3baf5211ed1c511e57ba7e6da81"
+    },
+    "h2_master": {
+      "path": "frailty_paper/results/frailty_v1/ldsc/h2_master.tsv",
+      "sha256": "d246f5f83d1b929e30bf60e127481c0202aad640434798522f445da5a8935cdf"
+    },
+    "latent_correction": {
+      "path": "frailty_paper/analysis/latent_factor_correction_sensitivity.tsv",
+      "sha256": "133a5c66665eb08d24f1c6e66b5f6181f5537551a9a9ce2dabff5181453cbc5f"
+    },
+    "overlap": {
+      "path": "frailty_paper/analysis/sample_overlap_assessment.tsv",
+      "sha256": "5a51559519b3492d4c8b7f41a5158b43ad75e774ac9880ca0e250ff70227a1d7"
+    },
+    "physical_qc": {
+      "path": "frailty_paper/manifests/physical_component_qc.tsv",
+      "sha256": "ba8293ee0509f890749c14b9f257f324b16f824a0b14ce6d2fda711cfd5b7cad"
+    },
+    "replication": {
+      "path": "frailty_paper/analysis/replication_resource_audit.tsv",
+      "sha256": "cb410b4f108c6043b94b3a9f886227647dcb24874b8338cee170f42dcd64d2ef"
+    }
+  },
+  "limitations": [
+    "This status matrix does not create new effect estimates or relax frozen thresholds.",
+    "All blocked/not-tested cells remain open sensitivity domains, not evidence of robustness or absence.",
+    "Latent factors and actigraphy are different endpoints; their results are descriptive cross-phenotype checks, not equivalence tests."
+  ],
+  "output": {
+    "path": "frailty_paper/analysis/phase16_sensitivity_conclusion_matrix.tsv",
+    "rows": 119,
+    "sha256": "3376f420710714a47c634d326023a639f29540d7033cb109227b62d2160bd912"
+  },
+  "schema_version": "frailty_phase16_sensitivity_matrix.v1",
+  "script": "frailty_paper/scripts/41_build_phase16_sensitivity_summary.py",
+  "script_sha256": "d3120ca09aab9288a73957145eb8c762968219c0196383959b0f184ba87ef6f4",
+  "sensitivity_domains_per_claim": 17
+}
