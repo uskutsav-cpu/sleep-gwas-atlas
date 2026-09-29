@@ -1,0 +1,119 @@
+{
+  "analysis_id": "brain6-lava-canonical-v3",
+  "bivariate_family": {
+    "correction": "Benjamini-Hochberg across the fixed 12,475-slot family.",
+    "n_slots": 12475,
+    "no_overlap_input_p_for_family_correction": 1.0,
+    "non_tested_slot_p_for_family_correction": 1.0,
+    "numerical_failure_p_for_family_correction": 1.0,
+    "report_all_statuses": true,
+    "unit": "locked_pair_by_locus",
+    "univariate_gate_miss_p_for_family_correction": 1.0
+  },
+  "execution": {
+    "maximum_locus_failure_fraction": 0.01,
+    "maximum_univariate_untested_fraction": 0.05,
+    "one_locus_per_process": false,
+    "batching_protocol": "persistent chromosome-batched workers with at most five loci per batch",
+    "random_seed": 20260922,
+    "reuse_track_b_brain6_local_results": false
+  },
+  "locus_definition": {
+    "build": "GRCh37/hg19",
+    "n_loci": 2495,
+    "path": "ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile",
+    "rule": "Use all and only the pinned 2,495 loci; do not select loci from Brain6 results.",
+    "sha256": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882"
+  },
+  "overlap_gate": {
+    "assume_zero_overlap": false,
+    "bivariate_execution_permitted_without_method_specific_overlap_file": false,
+    "pairwise_sample_overlap_file_manifest": {
+      "assume_zero_overlap": false,
+      "atlas_map_sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d",
+      "manifest_path": "brain6/manifests/lava_overlap_v2/lava_overlap_family_v2.tsv",
+      "manifest_sha256": "9cac309e31a4b7e3571a8c1e2a82b0e28a5f86099e120ac9f10130fc32f45590",
+      "matrices": [
+        {
+          "pair_id": "insomnia__adhd",
+          "path": "brain6/manifests/lava_overlap_v2/insomnia__adhd.txt",
+          "sha256": "98a7978270c63e985f99c76846b2b9bbec4001f9815ed8772bddcb82d0e8b342"
+        },
+        {
+          "pair_id": "insomnia__mdd",
+          "path": "brain6/manifests/lava_overlap_v2/insomnia__mdd.txt",
+          "sha256": "8e0a1d2c45e237847e482c55b45bc4c0b4d2cc299451cfdac6ba54d610deef93"
+        },
+        {
+          "pair_id": "longsleep__scz",
+          "path": "brain6/manifests/lava_overlap_v2/longsleep__scz.txt",
+          "sha256": "9129bb733cc048b64032027af2816221fa8e8642bd8fec3ef4e626fa0192cdaa"
+        },
+        {
+          "pair_id": "longsleep__bipolar",
+          "path": "brain6/manifests/lava_overlap_v2/longsleep__bipolar.txt",
+          "sha256": "f81ce321751f2fd46fcb56d06cdcdbeb678800fae76f90e3f33d1a54a759b1d8"
+        },
+        {
+          "pair_id": "longsleep__parkinson",
+          "path": "brain6/manifests/lava_overlap_v2/longsleep__parkinson.txt",
+          "sha256": "a357282976231bd159e0476ee8bbdc18e666c463a3098a1d9a35375245e28482"
+        }
+      ],
+      "method": "Use each selected pair's stored cross-trait LDSC intercept as the off-diagonal covariance and its two stored univariate LDSC intercepts as diagonal covariances; LAVA converts this matrix to a correlation matrix.",
+      "participant_level_overlap_verified": false,
+      "status": "LDSC_INTERCEPT_DERIVED_PAIRWISE_COVARIANCE",
+      "trait_metadata_sha256": "8844a14179f88d0e84ffe6d3fdf9d9478c9d5103bb4f5da0a17fb1ad6a485a5e"
+    },
+    "participant_level_overlap_is_verified": false,
+    "status": "LDSC_INTERCEPT_DERIVED_PAIRWISE_COVARIANCE"
+  },
+  "pair_lock_sha256": "577445f1c164e848d3602c2d9205b08586cc0f224db28f78c5b8f23bf9a78024",
+  "pairs": [
+    "insomnia__adhd",
+    "insomnia__mdd",
+    "longsleep__scz",
+    "longsleep__bipolar",
+    "longsleep__parkinson"
+  ],
+  "review_status": "PREDECLARED_WITH_SOURCE_BOUND_OVERLAP; INTERPRETATION_REVIEW_REQUIRED",
+  "runtime": {
+    "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+    "lava_version": "0.1.5",
+    "r_major_minor": "4.3",
+    "reference": "official UK Biobank LAVA v1.1",
+    "reference_must_pass_repository_hash_size_and_index_validation": true,
+    "reference_prefix": "ref/lava/ukb_v1.1/lava-ukb-v1.1"
+  },
+  "schema_version": 1,
+  "scientific_status": "NOT_RUN",
+  "selection_is_post_global_screen": true,
+  "selection_sha256": "fc1c6e8dc3bc0d7200974ab135c7f50dbb84756b82fbe64d6689fd4f8b3d53ef",
+  "trait_ids": [
+    "adhd",
+    "bipolar",
+    "insomnia",
+    "longsleep",
+    "mdd",
+    "parkinson",
+    "scz"
+  ],
+  "univariate_gate": {
+    "eligibility_rule": "Both traits in a pair must pass the univariate gate at that locus.",
+    "familywise_alpha": 0.05,
+    "n_tests": 17465,
+    "p_threshold_strictly_less_than": 2.86286859433152e-06,
+    "unit": "unique_trait_by_locus"
+  },
+  "canonical_univariate": {
+    "unit": "unique_trait_by_locus",
+    "n_tests": 17465,
+    "traits": 7,
+    "loci": 2495,
+    "familywise_alpha": 0.05,
+    "gate_p_strictly_less_than": 2.86286859433152e-06,
+    "maximum_untested_fraction": 0.05,
+    "method": "For each trait and locus, run LAVA process.input with only that trait and no sample-overlap matrix; compute local h2 with LAVA 0.1.5; run bivariate tests only after both canonical results pass the fixed gate."
+  },
+  "provenance_note": "New, pair-independent canonical family following the preserved v2 aggregation failure. v2 and the separate roundoff run remain unmodified and are not merged."
+}

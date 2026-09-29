@@ -1,0 +1,203 @@
+{
+  "analysis_id": "brain6_placo_factor_normalized_sensitivity_v1",
+  "interpretation": "Within primary format-14 blocks, the LAVA reader's unit-diagonal/off-diagonal factor-product matrix is replaced by the correlation normalization of the same low-rank factor Gram matrix. Floating-point excursions <=1e-12 outside [-1,1] are normalized to the exact mathematical boundary; larger excursions fail closed. This is an internal matrix sensitivity, not exact genotype-level LD validation. No prior or canonical files are modified.",
+  "method": {
+    "cross_block": "pinned LAVA read.ld output unchanged",
+    "external_genotype_validation": "NOT_AVAILABLE",
+    "normalization": "G = V diag(lambda) V^T; R_ij = G_ij/sqrt(G_ii*G_jj); unit diagonal; only <=1e-12 floating-point excursions are normalized to +/-1, larger violations fail",
+    "promotion": "NONE",
+    "source": "Pinned LAVA 0.1.5 UKB v1.1 format-14 eigen factors",
+    "window_bp": 500000,
+    "within_block": "factor-normalized correlation"
+  },
+  "outputs": [
+    {
+      "bytes": 339841,
+      "name": "variants",
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v1/placo_candidate_variants.tsv",
+      "sha256": "aa045fce607081644f4f4bba11545def94b422770f2afaa14816deab292b0690"
+    },
+    {
+      "bytes": 29767,
+      "name": "loci",
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v1/placo_candidate_loci.tsv",
+      "sha256": "fe73f37d96e33275b6a739d73d8f808d36070698342e6b872ca9fc1187e7c419"
+    },
+    {
+      "bytes": 1885984,
+      "name": "replaced_edges",
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v1/normalized_range_exceptions.tsv",
+      "sha256": "4b1b639bbe6e5da29a3cf325b7f5cd0c84a976b4422d2040456c6122a79ad117"
+    },
+    {
+      "bytes": 786,
+      "name": "summary",
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v1/pair_summary.tsv",
+      "sha256": "ae345e9314adc61f3124ef0ed88fd4a536409e3cea8686e5bc402ce729a56f13"
+    }
+  ],
+  "scope": {
+    "candidate_intervals": 19,
+    "candidate_rows": 2297,
+    "candidate_variants": 2297,
+    "exact_candidate_snps": 2255,
+    "full_five_pair_family": false,
+    "invalid_cross_block_edges": 0,
+    "pairs": [
+      "insomnia__mdd",
+      "longsleep__bipolar",
+      "longsleep__parkinson",
+      "longsleep__scz"
+    ],
+    "primary_blocks_touched": 45,
+    "range_exception_edges_normalized": 12317,
+    "reference_N": 100000,
+    "roundoff_boundary_values_normalized": 1922,
+    "same_block_edges_replaced": 157403
+  },
+  "sources": {
+    "builder": {
+      "path": "brain6/scripts/build_placo_factor_normalized_sensitivity_v1.py",
+      "sha256": "3a7697b4cb99fc07ccf314268b344cd0e87f258b171806ea982aad0e6dd89069"
+    },
+    "candidate_input_hashes": {
+      "insomnia__mdd": "e3f6562cccfcec6fa856e959afe02e9abc69ab6928d5ba53be9c2ba67940e543",
+      "longsleep__bipolar": "c4c1f282bc84a01273ac0f66b43ca990f90a57c3f2f392efc71a248a4109be2c",
+      "longsleep__parkinson": "87a74858b8034376c1aa45335f898974672bbea9a49fcf97340ad82a0d03cfc8",
+      "longsleep__scz": "9b4574ab61d6fb23eb8343eb3b5eeac8fa33800f4e7ab432ef510453f69cf6d1"
+    },
+    "factor_psd_audit": {
+      "path": "brain6/qc/placo_ld_primary_block_psd_v2.provenance.json",
+      "sha256": "27c18036f95081529fe5549b524ae392953436a845678b06952aca027d59363f"
+    },
+    "factor_reader_audit_script": {
+      "path": "brain6/scripts/audit_placo_ld_factor_normalization_v1.py",
+      "sha256": "80627d5f3298ae9b495711a2c4db3685ff746b9f7570dafa8e4c7bf991a79db2"
+    },
+    "family_lock": {
+      "path": "brain6/config/placo_family_v3/family_lock.json",
+      "sha256": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7"
+    },
+    "lava_reader_source": "https://github.com/josefin-werme/LAVA/blob/main/src/load_ld.cpp",
+    "lava_reference_docs": "https://github.com/josefin-werme/LAVA/blob/main/REFERENCE.md",
+    "locus_rule": {
+      "path": "brain6/config/shared_locus_rule_v1.json",
+      "sha256": "66a9c923ca23c2349e1a690466d3897312b42891b9c2947715ef6bf52610b1d1"
+    },
+    "master": {
+      "path": "brain6/results/placo/placo_master.tsv",
+      "sha256": "729b7698fa45876bb649375091368a59ce8b4c38376795c6abcb0aac87997031"
+    },
+    "prior_valid_ld_provenance": {
+      "path": "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json",
+      "sha256": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd"
+    },
+    "reference_files": {
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.bcor": {
+        "bytes": 756216786,
+        "sha256": "e23ef2240a8765df81d5f0c12bad7e57464bc029566a7bb0199e4388c00b109e"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.info": {
+        "bytes": 18083594,
+        "sha256": "d09b1c0e65ff9f629fdf74b3dc4ce757adfd22dc9cdb1965aeac8e652720e04c"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.bcor": {
+        "bytes": 497140002,
+        "sha256": "05c31e12960b2fb58550c4d226ae9651e47425d1148c342fcf3e9b8d5a0dcbd1"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.info": {
+        "bytes": 13301708,
+        "sha256": "917aeda237e2f37e39ab939bed15d9639bdb0a03a626d804ffd48de5a1762121"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.bcor": {
+        "bytes": 459816616,
+        "sha256": "b95817799a25a4567cb8dfa2b52852c10509494d88bef74d17676c0409d93610"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.info": {
+        "bytes": 11766269,
+        "sha256": "c90ee4ba59680d88afd241fb458de3451100b73e71f136994969c53f9e3cafad"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr15.bcor": {
+        "bytes": 447851614,
+        "sha256": "dfae7b790eadf0dc6e01aa1947d38e9d4112867538bbe1b7d7f84565b7127d0b"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr15.info": {
+        "bytes": 9973383,
+        "sha256": "6e5cd69e0cae2e195e933fab01ee28fc04b2ce0303b3d09c37d44953233418d0"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.bcor": {
+        "bytes": 400622966,
+        "sha256": "8cc495223b2d570a72fe3a12d56d9f80e6e320d9e1764fca74179ceac203a5ae"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.info": {
+        "bytes": 9330737,
+        "sha256": "55e48183d786607b22a838227c7aa34c2f1f2d512958bf0521c8650a2a546327"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr18.bcor": {
+        "bytes": 411455738,
+        "sha256": "c775128f34df2de284c7d14678b93ad81d1186aa6e1f4b4ba7cba87199c02a5a"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr18.info": {
+        "bytes": 10237341,
+        "sha256": "fb44b7911fc5463c5fc8eb2b72f55f88145456d553dffa557bf3ec3fab059735"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.bcor": {
+        "bytes": 1294155802,
+        "sha256": "9229102840524a186db78ea7788bf05ee78b36752c087e0c7c6156053eee605c"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.info": {
+        "bytes": 29900875,
+        "sha256": "b6484a8e69465479c006e1cc241059dabd91de5594ddabb28c497618fa643060"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr3.bcor": {
+        "bytes": 1100461074,
+        "sha256": "446d21166d9966e44d7e19c8102a474e0edf7fd152d35c561848a016da091918"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr3.info": {
+        "bytes": 25341448,
+        "sha256": "5ca4b3b8a0baae43b73a97e17d611b8069d84e7e8ac22f0180774c878e42e9cc"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr4.bcor": {
+        "bytes": 999542700,
+        "sha256": "3fff449251e459323b91eee3ddf0ada999e46dfd5cabd64c96fbe87acb24b7c4"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr4.info": {
+        "bytes": 26151646,
+        "sha256": "716a15e8899b9cc85c4897fa61cdbc9e01c44e3e0c63dff14e6a30dafce41b24"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.bcor": {
+        "bytes": 966835032,
+        "sha256": "fcdd429c41b039790d58bf18377e768551a3cd2afb5c2110caebe829a637259b"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.info": {
+        "bytes": 23098698,
+        "sha256": "e32bb4bdb1d2af0c84353ae59f0eddd41e6dd3e1bcd98d47dc9e69716df0443d"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr6.bcor": {
+        "bytes": 1114499134,
+        "sha256": "9292e1fec7d205c382d830b7fd9858863cb83e1c28f96b2320492fbc59bba57d"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr6.info": {
+        "bytes": 24159348,
+        "sha256": "4cb99759dbde57b4f9206f7c5e21ff8f38b0b87da2ab29b9dc91867b4fd29807"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.bcor": {
+        "bytes": 908378028,
+        "sha256": "38d1471b446e1855c8874a79b3842aa350a4ac1794df63332cd0c078921592a0"
+      },
+      "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.info": {
+        "bytes": 20834624,
+        "sha256": "33f249bafbf34db65f96fe66855aaf809b7343724fd2d519fec3aa084002d4e9"
+      }
+    },
+    "reference_provenance": {
+      "path": "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/reference.provenance.json",
+      "sha256": "35ab371935b9c260dab21be248f4907b693565787ef9f62334e7d8030204270e"
+    },
+    "run_manifest": {
+      "path": "brain6/manifests/placo_family_v3_run.json",
+      "sha256": "01358b08c392fecec458526ed84d395fc25c53451685d02b48e9881b8da11de7"
+    }
+  },
+  "status": "DIAGNOSTIC_SENSITIVITY_NOT_PROMOTED"
+}

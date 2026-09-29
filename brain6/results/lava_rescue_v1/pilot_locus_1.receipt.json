@@ -1,0 +1,116 @@
+{
+  "analysis_id": "brain6-lava-rescue-v1-diagnostic-pilot",
+  "canonical_receipt_path": "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/receipts/locus_1.json",
+  "canonical_receipt_sha256": "453ad528b00e1173a0eaae6e434ea5293695c77c09a39da5f2ed87fa560866ea",
+  "canonical_statuses": {
+    "adhd": {
+      "reason": "LOW_LOCAL_H2_UNDERPOWERED",
+      "status": "NOT_RUN"
+    },
+    "bipolar": {
+      "reason": "",
+      "status": "TESTED"
+    },
+    "insomnia": {
+      "reason": "",
+      "status": "TESTED"
+    },
+    "longsleep": {
+      "reason": "LOW_LOCAL_H2_UNDERPOWERED",
+      "status": "NOT_RUN"
+    },
+    "mdd": {
+      "reason": "",
+      "status": "TESTED"
+    },
+    "parkinson": {
+      "reason": "LOW_LOCAL_H2_UNDERPOWERED",
+      "status": "NOT_RUN"
+    },
+    "scz": {
+      "reason": "",
+      "status": "TESTED"
+    }
+  },
+  "checks": {
+    "adhd_cell_identity": true,
+    "adhd_status_concordance": true,
+    "bipolar_cell_identity": true,
+    "bipolar_status_concordance": true,
+    "input_info_schema": true,
+    "input_info_sha256": true,
+    "insomnia_cell_identity": true,
+    "insomnia_status_concordance": true,
+    "longsleep_cell_identity": true,
+    "longsleep_status_concordance": true,
+    "mdd_cell_identity": true,
+    "mdd_status_concordance": true,
+    "output_sha256": true,
+    "parkinson_cell_identity": true,
+    "parkinson_status_concordance": true,
+    "reference_provenance_sha256": true,
+    "scz_cell_identity": true,
+    "scz_status_concordance": true,
+    "worker_config_sha256": true
+  },
+  "command": "python3 brain6/results/lava_rescue_v1/build_rescue_audit.py",
+  "environment": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.5"
+  },
+  "exit_status": 0,
+  "locus_id": "1",
+  "protocol_sha256": "659155d2d9da83b61e9e68c3aa080e2955cb0a0566068e09ce2f2c69afb204bb",
+  "qc": "PASS_INPUT_RECEIPT_INTEGRITY_NO_CORRECTABLE_DEFECT_SHOWN",
+  "sumstats": {
+    "adhd": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/adhd.sumstats.tsv.gz",
+      "rows": 126,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "e5bce22353dad81aecf92da2af4c6d52427cd98de6f07183c26f260fb1741ad3"
+    },
+    "bipolar": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/bipolar.sumstats.tsv.gz",
+      "rows": 1366,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "a5b4bd70727ebebb1f772b87d58cbfcb8c4623b385373a852df249e38e89f09c"
+    },
+    "insomnia": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/insomnia.sumstats.tsv.gz",
+      "rows": 1455,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "b33c501ed9489ffd16554799cdde174e3ef60f774565fa3586e70bd05dd8ab96"
+    },
+    "longsleep": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/longsleep.sumstats.tsv.gz",
+      "rows": 1456,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "0618d4d9883087c30acc8e5670946a723a85ba7c35fbe9a85bbcc7fd77349424"
+    },
+    "mdd": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/mdd.sumstats.tsv.gz",
+      "rows": 93,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "1c2b1d845a89faefc1270af8e503a184769f506bed90eb8387f682809b00ab4e"
+    },
+    "parkinson": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/parkinson.sumstats.tsv.gz",
+      "rows": 165,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "222de4a3df0a4849d05b439dd8ddf958481f8b5e33c6b5d6edc38560a3a9b83c"
+    },
+    "scz": {
+      "field_qc": "PASS",
+      "path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/locus_1/scz.sumstats.tsv.gz",
+      "rows": 1327,
+      "schema": "SNP,A1,A2,Z,N",
+      "sha256": "976637a5aff0251d1cbc5984a00ab8db0d6d1f68a26e1668154417080a114e89"
+    }
+  }
+}

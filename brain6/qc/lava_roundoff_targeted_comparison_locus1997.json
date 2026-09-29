@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "comparison_id": "brain6-lava-roundoff-targeted-baseline-comparison-v1",
+  "status": "PASS_RECEIPT_VERIFIED_TARGETED_COMPARISON",
+  "snapshot_audit": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/qc/lava_production_checkpoint_audit_20260924T1753Z.json",
+    "sha256": "71ef6ab30e739b30ea644ac70ad2d34f851b79d9c81362c011fe219536bd186d",
+    "audited_at_utc": "2026-09-24T17:53:30+00:00",
+    "roundoff_verified_loci": 2103
+  },
+  "scope": {
+    "locus_id": "1997",
+    "pair_count": 5,
+    "full_family_complete": false,
+    "interpretation": "targeted locus diagnosis only; no family inference"
+  },
+  "shared_identity_fields": {
+    "analysis_id": "brain6-lava-local-rg-v2",
+    "family_lock_sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+    "materialized_inputs_sha256": "c50dae720237b548a282d931118f61348821a139f198c64d6d6876a015ce3d02",
+    "lava_commit": "e729a245f7b6923967a96804fbf5246eadf2d6c6",
+    "lava_version": "0.1.5",
+    "r_version": "4.3.3",
+    "rscript_binary_sha256": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108",
+    "runtime_validation_output_sha256": "f4d71dfc64152f0593412036f56b6ee64ce215d9251298651d66092be701763e",
+    "runtime_validator_sha256": "05baf8d3abf8766afd680ecd8c44bc48dd94a965d31281dc25a8f7c79c748c0e",
+    "materializer_script_sha256": "ad1f16f7c3d3841bd7c8c27242676674a63a3b0b0c987c45c989313be6c58370",
+    "family_aggregator_source_sha256": "555e6330267d36ef9d3004cfc0b9109343b54903de0c44ba01e6c4037f309633"
+  },
+  "changed_execution_fields": {
+    "baseline": {
+      "execution_lock_sha256": "50afe11721bfe8f898bfb62ff526334a17e84b959715ae4b33329107967666dc",
+      "orchestrator_script_sha256": "f804bff198c002f906fc09ae7b617923a791091feb241020ff455b221a6109be",
+      "worker_sha256": "97db34c6b21fc2ea8d23704d57c2e5d3251be0567f0f6ba5ec9e9fae9aba293c"
+    },
+    "roundoff_v1": {
+      "execution_lock_sha256": "af7fe43dca7be3ba61fce6497088ff853c23067c4c1e82378a026696f9c95215",
+      "orchestrator_script_sha256": "7a180c5e430b6d6f149f0bb11b8e8a665130b5ff6cd75e2264120aa2dbca4c0e",
+      "worker_sha256": "f3d8b454dab46832bdd7ce19d1db58ab6d28a48c50985cb21abcfa9b0fcf2e02"
+    }
+  },
+  "receipts": {
+    "baseline": {
+      "path": "/Volumes/Extreme SSD/brain6-work/lava-results-v1/13b80e6b64a5179fec70ba510a89c51241c9d58ec05833cc52161b435aee44fa/loci/1997/receipt.json",
+      "sha256": "0063474ad526bde5233ed0466cf7b4e44e54b0856333e257aa3c9d7fa8cf1af1",
+      "pair_results_sha256": "f762273be3fc7d35236841b83176086f27b12ccb7af42264b4f2e1fbf66db7c3"
+    },
+    "roundoff_v1": {
+      "path": "/Volumes/Extreme SSD/brain6-work/lava-results-v1/af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf/loci/1997/receipt.json",
+      "sha256": "a7af66d66f3e94eda1742987d883fd75f224740336de3c15e659724665804605",
+      "pair_results_sha256": "2ff67b62852d88d6088ad061c23b9820769de5dfe169b8a61d23b9b3fcfdc90c"
+    }
+  },
+  "pair_comparison": [
+    {
+      "pair_id": "insomnia__adhd",
+      "baseline_status": "UNIVARIATE_UNDERPOWERED",
+      "baseline_reason": "LOW_LOCAL_H2_NOT_EXECUTION_FAILURE",
+      "baseline_p": "NA",
+      "baseline_local_rg": "NA",
+      "roundoff_status": "UNIVARIATE_UNDERPOWERED",
+      "roundoff_reason": "ONE_TRAIT_DROPPED_FOR_LOW_LOCAL_H2",
+      "roundoff_p": "NA",
+      "roundoff_local_rg": "NA",
+      "status_changed": false,
+      "estimate_comparable": false
+    },
+    {
+      "pair_id": "insomnia__mdd",
+      "baseline_status": "UNIVARIATE_UNDERPOWERED",
+      "baseline_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "baseline_p": "NA",
+      "baseline_local_rg": "NA",
+      "roundoff_status": "UNIVARIATE_UNDERPOWERED",
+      "roundoff_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "roundoff_p": "NA",
+      "roundoff_local_rg": "NA",
+      "status_changed": false,
+      "estimate_comparable": false
+    },
+    {
+      "pair_id": "longsleep__scz",
+      "baseline_status": "FAILED",
+      "baseline_reason": "LAVA_PROCESS_LOCUS_RETURNED_NULL",
+      "baseline_p": "NA",
+      "baseline_local_rg": "NA",
+      "roundoff_status": "UNIVARIATE_UNDERPOWERED",
+      "roundoff_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "roundoff_p": "NA",
+      "roundoff_local_rg": "NA",
+      "status_changed": true,
+      "estimate_comparable": false
+    },
+    {
+      "pair_id": "longsleep__bipolar",
+      "baseline_status": "FAILED",
+      "baseline_reason": "LAVA_PROCESS_LOCUS_RETURNED_NULL",
+      "baseline_p": "NA",
+      "baseline_local_rg": "NA",
+      "roundoff_status": "UNIVARIATE_UNDERPOWERED",
+      "roundoff_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "roundoff_p": "NA",
+      "roundoff_local_rg": "NA",
+      "status_changed": true,
+      "estimate_comparable": false
+    },
+    {
+      "pair_id": "longsleep__parkinson",
+      "baseline_status": "UNIVARIATE_UNDERPOWERED",
+      "baseline_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "baseline_p": "NA",
+      "baseline_local_rg": "NA",
+      "roundoff_status": "UNIVARIATE_UNDERPOWERED",
+      "roundoff_reason": "ONE_OR_MORE_TRAITS_DID_NOT_PASS_FROZEN_LOCAL_UNIVARIATE_GATE",
+      "roundoff_p": "NA",
+      "roundoff_local_rg": "NA",
+      "status_changed": false,
+      "estimate_comparable": false
+    }
+  ],
+  "summary": {
+    "baseline_failed_slots_at_locus": 2,
+    "roundoff_failed_slots_at_locus": 0,
+    "baseline_null_to_roundoff_gated": 2,
+    "pairs_with_tested_bivariate_estimates_in_both": 0
+  },
+  "interpretation": "At this locus, the roundoff-v1 execution returns gate-only UNIVARIATE_UNDERPOWERED for the two pairs that were FAILED with LAVA_PROCESS_LOCUS_RETURNED_NULL in baseline. This is consistent with avoiding the prior null-process failure; neither pair passes the frozen univariate gate, so no local-rg estimate is produced. The other three pairs remain univariate-gated. This single-locus observation does not establish family-level QC or broader numerical equivalence."
+}

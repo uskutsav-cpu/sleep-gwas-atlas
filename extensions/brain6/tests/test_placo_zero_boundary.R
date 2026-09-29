@@ -1,0 +1,16 @@
+args <- commandArgs(trailingOnly=TRUE)
+stopifnot(length(args) == 2L)
+adapter <- normalizePath(args[[1]], mustWork=TRUE)
+placo_source <- normalizePath(args[[2]], mustWork=TRUE)
+source(placo_source)
+expressions <- parse(adapter)
+helper_expr <- Filter(function(x) is.call(x) && identical(x[[1]], as.name("<-")) &&
+                      identical(x[[2]], as.name("placo_plus_pvalue")), expressions)
+stopifnot(length(helper_expr) == 1L)
+eval(helper_expr[[1]], envir=.GlobalEnv)
+stopifnot(identical(placo_plus_pvalue(c(0, 2), c(1.2, 1.3), 0.2, 1e-13), 1.0))
+stopifnot(identical(placo_plus_pvalue(c(-1.5, 0), c(1.2, 1.3), 0.2, 1e-13), 1.0))
+expected <- placo.plus(c(1.2, -0.8), VarZ=c(1.2, 1.3), CorZ=0.2, AbsTol=1e-13)$p.placo.plus
+observed <- placo_plus_pvalue(c(1.2, -0.8), VarZ=c(1.2, 1.3), CorZ=0.2, AbsTol=1e-13)
+stopifnot(is.finite(observed), identical(observed, expected))
+cat("PLACO+ zero-boundary checks passed; nonzero case matches official function.\n")

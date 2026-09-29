@@ -1,0 +1,52 @@
+{
+  "analysis_id": "brain6_partial_candidate_lead_nearest_gene_ensembl_grch37_v1",
+  "builder": {
+    "path": "brain6/scripts/annotate_partial_candidate_leads_ensembl_grch37.py",
+    "sha256": "788243edf0cd5c8689ef12b034e7116da5e78fafb86e5a72e0d26351186ff309"
+  },
+  "output": {
+    "path": "brain6/results/annotation/partial_candidate_lead_nearest_gene_grch37_v1.tsv",
+    "rows": 21,
+    "sha256": "c258792eb10fc35b1eb0ec06561700b7f0b0b30a417410800e2dffedaef96512"
+  },
+  "raw_response_snapshot": {
+    "path": "brain6/results/annotation/partial_candidate_lead_ensembl_grch37_responses_v1.json",
+    "sha256": "21589ba44e0745504f48a0c86ac875ef27414c65f948d649f5843a0814518a8f"
+  },
+  "retrieved_at_utc": "2026-09-26T18:08:28+00:00",
+  "schema_version": 1,
+  "scope": {
+    "all_gate_rows_remain_not_tiered": true,
+    "annotation_window_bp_each_side": 500000,
+    "assembly": "GRCh37",
+    "causal_gene_claims": false,
+    "colocalization_performed": false,
+    "evidence_tier_changed": false,
+    "fine_mapping_performed": false,
+    "gated_regions": 19,
+    "lead_signals": 21,
+    "unique_nearest_gene_rows": 21
+  },
+  "sources": {
+    "api": "https://grch37.rest.ensembl.org/overlap/region/human",
+    "api_method": "GET feature=gene; nearest feature chosen by distance to gene body, then TSS, then Ensembl ID",
+    "cache_used": true,
+    "candidate_sensitivity_provenance": {
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v2/provenance.json",
+      "sha256": "ad8a4b049188f537900aa79ceb47b9d10e762a1727594ca05f60e57d58094007"
+    },
+    "candidate_variants": {
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v2/placo_candidate_variants.tsv",
+      "sha256": "aa045fce607081644f4f4bba11545def94b422770f2afaa14816deab292b0690"
+    },
+    "gate": {
+      "path": "brain6/results/annotation/partial_candidate_region_gate_v1.tsv",
+      "sha256": "7481f45d747c864404b85361406e4a32ec3c3679cd940040b2ed5b9eaa92557a"
+    },
+    "gate_provenance": {
+      "path": "brain6/results/annotation/partial_candidate_region_gate_v1.provenance.json",
+      "sha256": "923f89574bb4ce6c9edadf2471ab200262a16745e6fbfae79464bda7683916c0"
+    }
+  },
+  "status": "PASS_DESCRIPTIVE_POSITIONAL_ANNOTATION_NOT_GENE_PRIORITIZATION"
+}

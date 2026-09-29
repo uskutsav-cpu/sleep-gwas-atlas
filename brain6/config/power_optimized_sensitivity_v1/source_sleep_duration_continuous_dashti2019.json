@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "trait_id": "sleep_duration_continuous_dashti_2019",
+  "path": "/Volumes/Extreme SSD/brain6-work/power-optimized-sensitivity-v1/sources/Dashti_2019_sleep_duration.tsv",
+  "sha256": "b1115038b2e1232617a9a6a2ed445c54a12948c27d28ecb23dc7af2ced0fdda0",
+  "study_id": "Dashti et al. 2019; PMID 30846698; DOI 10.1038/s41467-019-08917-4; GWAS Catalog GCST007561",
+  "citation": "Dashti et al. 2019, Nature Communications 10:1100, https://doi.org/10.1038/s41467-019-08917-4",
+  "source_uri": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST007001-GCST008000/GCST007561/Dashti_30846698_sleepdurationsumstats.txt.zip",
+  "phenotype_definition": "Continuous self-reported hours of sleep in 24 hours, including naps; related to but not equivalent to the canonical >=9-hour binary tail",
+  "ancestry": "EUR",
+  "genome_build": "GRCh37",
+  "effect_scale": "beta",
+  "n_semantics": "total",
+  "sample_size": 446118,
+  "delimiter": "\t",
+  "access_permitted": true,
+  "license": "Article is CC BY 4.0; source-file-specific terms must be checked before redistribution",
+  "column_map": {
+    "SNP": "SNP",
+    "CHR": "CHR",
+    "BP": "BP",
+    "A1": "ALLELE1",
+    "A2": "ALLELE0",
+    "EAF": "A1FREQ",
+    "INFO": "INFO",
+    "BETA": "BETA_SLEEPDURATION",
+    "SE": "SE_SLEEPDURATION",
+    "P": "P_SLEEPDURATION"
+  },
+  "qc": {
+    "min_maf": 0.01,
+    "min_info": 0.9,
+    "require_eaf": true,
+    "require_info": false,
+    "min_n": 100,
+    "batch_rows": 20000,
+    "exclude_regions": []
+  },
+  "minimum_free_bytes": 2147483648,
+  "synthetic": false,
+  "scope": "Brain6-only power-optimized sensitivity input; never replace or modify canonical v3"
+}

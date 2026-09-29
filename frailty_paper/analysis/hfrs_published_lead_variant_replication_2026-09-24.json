@@ -1,0 +1,108 @@
+{
+  "article": "Mak et al., Nature Aging 5:1589\u20131600 (2025), doi:10.1038/s43587-025-00925-y",
+  "article_url": "https://www.nature.com/articles/s43587-025-00925-y",
+  "audit": "Descriptive reproduction of publisher-supplement lead-row UKB p-value counts",
+  "availability_definition": "UKB beta, SE and p are all non-missing/non-dot publisher-table cells",
+  "detailed_tsv": "frailty_paper/analysis/hfrs_published_lead_variant_replication_2026-09-24.tsv",
+  "detailed_tsv_sha256": "49cd0be2e0c99bc9ae64c6f2059565b77ddd0f447ca6a06605f4988b9c7426ee",
+  "generated_utc": "2026-09-26T10:08:07+00:00",
+  "interpretation_limits": [
+    "The publisher tables contain FinnGen discovery hits only, not complete genome-wide summary statistics.",
+    "UK Biobank has known cohort-level overlap with many project inputs; exact participant intersections remain unknown.",
+    "These source-study variant checks are not sleep-frailty pairwise replication and do not resolve D10 HFRS source/access eligibility.",
+    "This audit compares table p-values and availability only; it does not infer cross-cohort effect direction from allele fields.",
+    "The public workbook has one fewer available all-hit HFRS row and one fewer nominally significant HFRS lead than the article reports; no undocumented correction is applied."
+  ],
+  "results": {
+    "ST1": {
+      "all_hit_ukb": {
+        "available_beta_se_p": 1261,
+        "gws_p_lt_5e_8": 73,
+        "nominal_p_lt_0_05": 688
+      },
+      "article_reported": {
+        "discovery_rows": 1588,
+        "lead_rows": 53,
+        "ukb_available_hits": 1262,
+        "ukb_available_leads": 36,
+        "ukb_gws_hits": 73,
+        "ukb_gws_leads": 2,
+        "ukb_nominal_hits": 688,
+        "ukb_nominal_leads": 14
+      },
+      "difference_from_article_reported": {
+        "discovery_rows": 0,
+        "lead_rows": 0,
+        "ukb_available_hits_beta_se_p": -1,
+        "ukb_available_leads_beta_se_p": 0,
+        "ukb_gws_hits_p_lt_5e_8": 0,
+        "ukb_gws_leads_p_lt_5e_8": 0,
+        "ukb_nominal_hits_p_lt_0_05": 0,
+        "ukb_nominal_leads_p_lt_0_05": -1
+      },
+      "discovery_rows": 1588,
+      "lead_rows": 53,
+      "lead_rows_missing_ukb_field": {
+        "ukb_SE": 17,
+        "ukb_beta": 17,
+        "ukb_p": 17
+      },
+      "lead_ukb": {
+        "available_beta_se_p": 36,
+        "gws_p_lt_5e_8": 2,
+        "nominal_p_lt_0_05": 13
+      }
+    },
+    "ST2": {
+      "all_hit_ukb": {
+        "available_beta_se_p": 435,
+        "gws_p_lt_5e_8": 21,
+        "nominal_p_lt_0_05": 118
+      },
+      "article_reported": {
+        "discovery_rows": 492,
+        "lead_rows": 42,
+        "ukb_available_hits": 435,
+        "ukb_available_leads": 26,
+        "ukb_gws_hits": 21,
+        "ukb_gws_leads": 1,
+        "ukb_nominal_hits": 118,
+        "ukb_nominal_leads": 10
+      },
+      "difference_from_article_reported": {
+        "discovery_rows": 0,
+        "lead_rows": 0,
+        "ukb_available_hits_beta_se_p": 0,
+        "ukb_available_leads_beta_se_p": 0,
+        "ukb_gws_hits_p_lt_5e_8": 0,
+        "ukb_gws_leads_p_lt_5e_8": 0,
+        "ukb_nominal_hits_p_lt_0_05": 0,
+        "ukb_nominal_leads_p_lt_0_05": 0
+      },
+      "discovery_rows": 492,
+      "lead_rows": 42,
+      "lead_rows_missing_ukb_field": {
+        "ukb_SE": 16,
+        "ukb_beta": 16,
+        "ukb_p": 16
+      },
+      "lead_ukb": {
+        "available_beta_se_p": 26,
+        "gws_p_lt_5e_8": 1,
+        "nominal_p_lt_0_05": 10
+      }
+    }
+  },
+  "script": "frailty_paper/scripts/49_audit_hfrs_published_lead_replication.py",
+  "script_sha256": "3ddad4a3afd94e4f2a878cb6146a4288f311a16b00e833a1aa39f6b15bf54e28",
+  "significance_definitions": {
+    "genome_wide": "UKB p < 5e-8",
+    "nominal": "UKB p < 0.05"
+  },
+  "source_file": "frailty_paper/data/gwas/hfrs_mak_2025/mak_2025_hfrs_supplementary_tables.xlsx",
+  "source_sha256": "123c340cf063e2ef618b8ef543dedea6b7c8ef69008488f01027eedbffc04625",
+  "workbook_sheets": [
+    "ST1",
+    "ST2"
+  ]
+}

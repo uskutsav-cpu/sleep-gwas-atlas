@@ -1,0 +1,55 @@
+family_id: secondary_sleep_x_latent_frailty_v1
+status: FROZEN_BEFORE_SECONDARY_H2_AND_RG
+frozen_date: 2026-09-23
+role: SECONDARY_EXPLORATORY
+source_study: Mak et al. 2025 Nature Genetics multivariate frailty study
+source_accessions:
+  - GCST90624046
+  - GCST90624047
+  - GCST90624048
+  - GCST90624049
+  - GCST90624050
+  - GCST90624051
+  - GCST90624052
+sleep_traits:
+  - insomnia
+  - sleepdur
+  - shortsleep
+  - longsleep
+  - chronotype
+  - sleepiness
+  - napping
+  - snoring
+  - sleep_apnea
+  - sleep_efficiency
+  - accel_sleep_duration
+  - sleep_timing
+planned_pair_count: 84
+ancestry: European; use matched EUR LDSC reference
+genome_build: GRCh37
+source_qc:
+  require_checksum_verified_GWAS_Catalog_TSV_and_YAML: true
+  require_full_stream_and_header_scan: true
+  require_global_variant_key_uniqueness: true
+  require_documented_build_and_ancestry: true
+  use_per_variant_effective_N_when_supplied: true
+  retain_Factor_2_N_difference_note: TSV 755864 versus YAML 755865; source paper defines N-hat as expected effective sample size
+h2_gate:
+  source: inherited repository LDSC h2 gate
+  minimum_Z: 4
+  maximum_finite_intercept: 1.2
+  report_scale: observed
+global_rg:
+  method: LDSC
+  two_sided: true
+  correction: Benjamini-Hochberg q <= 0.05
+  correction_family_size: 84
+  family_policy: retain all 84 planned pairs; for h2-ineligible or failed tests, retain status and use p=1 only for family correction, never as an observed result
+  report: rg, SE, Z, raw P, family q, h2/intercept diagnostics, allele/build QC, source accession, cohort overlap
+overlap_and_claims:
+  expected_UKB_overlap: true
+  exact_participant_intersections: UNKNOWN
+  status_until_exact_overlap_resolved: SENSITIVITY_ONLY
+  independent_replication: NOT_ESTABLISHED
+  causal_interpretation: PROHIBITED
+  cell_or_molecular_followup: blocked until upstream results and separate locus-family lock

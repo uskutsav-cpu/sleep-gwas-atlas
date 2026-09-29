@@ -1,0 +1,125 @@
+{
+  "created_utc": "2026-09-23T18:24:24Z",
+  "current_revalidation": {
+    "environment_path": "work/conda-envs/frailty-paper-py311-clean-2026-09-23",
+    "include_system_site_packages": false,
+    "pip_check": {
+      "command": "work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python -m pip check",
+      "log": "frailty_paper/analysis/clean_venv_py311_pip_check_2026-09-24.log",
+      "sha256": "955f41577c363af65a62eb7624024eb34695cdde9c78db5ebd4512fd317228e9",
+      "status": "PASS_NO_BROKEN_REQUIREMENTS"
+    },
+    "python": "3.11.11",
+    "repository_head": "fc56cc2e92a962b9f35b87f1a4b6d11f947055da",
+    "tests": {
+      "command": "work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python -m unittest discover -s frailty_paper/tests -v",
+      "failed": 0,
+      "log": "frailty_paper/analysis/clean_venv_py311_unittest_2026-09-24_91.log",
+      "passed": 91,
+      "sha256": "67ecd05fe524b0576d8f7f718d360b9e99035e3545bf0dc409696d17498dec2e",
+      "status": "PASS",
+      "total": 91
+    },
+    "verified_utc": "2026-09-24T00:13:00Z",
+    "working_tree_has_test_assertion_update": true
+  },
+  "dependency_check": {
+    "command": "work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python -m pip check",
+    "log": "frailty_paper/analysis/clean_venv_py311_pip_check_2026-09-23.log",
+    "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "status": "PASS_NO_BROKEN_REQUIREMENTS"
+  },
+  "direct_versions": {
+    "beautifulsoup4": "4.15.0",
+    "biopython": "1.88",
+    "lxml": "6.1.3",
+    "matplotlib": "3.9.4",
+    "numpy": "1.26.4",
+    "openpyxl": "3.1.5",
+    "pandas": "2.2.3",
+    "python": "3.11.11",
+    "pyyaml": "6.0.3",
+    "requests": "2.34.2",
+    "scipy": "1.14.1",
+    "snakemake": "8.30.0"
+  },
+  "environment_path": "work/conda-envs/frailty-paper-py311-clean-2026-09-23",
+  "evidence_hashes": {
+    "frailty_paper/Makefile": "68f6720f1005b3fddc064677ce8e8ae23bea288b2bfd02ee0adbd4551bf1292e",
+    "frailty_paper/scripts/00_setup.sh": "d5999c47b877c00dfc0c67b1e136f60a0042f5060dbcf9da3cae29f921471ac1",
+    "frailty_paper/scripts/39_build_supplementary_tables.py": "532ba7c726163cbf308868d444bf142b61bbb8b12812fc5f675a78fe5c78fe9a",
+    "frailty_paper/tests/test_setup_script_safety.py": "aa7795d1fabdd08fee5d40706cc1db98d21d719e4849a9d07ea73c59ddd702fa",
+    "frailty_paper/tests/test_supplementary_tables.py": "2199d2f6142f52f33cfb788598e1d182d1072bbd3b7c8cf1e874237c04998080",
+    "makefile": "68f6720f1005b3fddc064677ce8e8ae23bea288b2bfd02ee0adbd4551bf1292e",
+    "package_freeze": "f7ea4f4b75b54882685c67780342eff68d59259e242b5b1be9aed8837f26e279",
+    "pip_check_log": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "preflight_log": "dce4408139354f7bc09dd338d87b3a546b4c885986ee70f947ab34d01c9573b8",
+    "preflight_recheck_live_head": "7b53a161634e20642151221cbd215c6d7f146f7ac397d92724ed9412740c7571",
+    "pyvenv_cfg": "aa6f2731e573f010a3f881b6a1c53f7972e74b5b390e654931536adc911a0e39",
+    "setup_replay_log": "c4e48f71222bb86ed276bc7e575f113e1e818e81031c445ede501d9aaf080a6d",
+    "setup_script": "d5999c47b877c00dfc0c67b1e136f60a0042f5060dbcf9da3cae29f921471ac1",
+    "setup_test": "aa7795d1fabdd08fee5d40706cc1db98d21d719e4849a9d07ea73c59ddd702fa",
+    "supplementary_table_test": "2199d2f6142f52f33cfb788598e1d182d1072bbd3b7c8cf1e874237c04998080",
+    "table_builder": "532ba7c726163cbf308868d444bf142b61bbb8b12812fc5f675a78fe5c78fe9a",
+    "unittest_log": "3e9312405b0f46aad2ec962d315a86fdbdf4ff79c7011f9ea00d740ec9116f32",
+    "versions_file": "45c2a620e50dd412d0f4676cf4ae490167f55db0961e3e33ffb4e75baf28fedc"
+  },
+  "include_system_site_packages": false,
+  "preflight": {
+    "analysis_plan": {
+      "multiplicity": 396,
+      "sleep_traits": 12,
+      "version": 1
+    },
+    "cohort_overlap_rows": 34,
+    "command": "make -C frailty_paper PYTHON='../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python' preflight FRAILTY_EXTERNAL_STORAGE_ROOT='/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1'",
+    "head_after": "460bff9",
+    "head_before": "460bff9",
+    "log": "frailty_paper/analysis/preflight_clean_venv_2026-09-23.log",
+    "manifest_files_verified": 347,
+    "review_records_decided": 0,
+    "review_records_queued": 56092,
+    "sha256": "dce4408139354f7bc09dd338d87b3a546b4c885986ee70f947ab34d01c9573b8",
+    "status": "PASS",
+    "tests_passed": 70
+  },
+  "preflight_recheck_live_head": {
+    "analysis_plan": {
+      "multiplicity": 396,
+      "sleep_traits": 12,
+      "version": 1
+    },
+    "cohort_overlap_rows": 34,
+    "command": "make -C frailty_paper PYTHON='../work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python' preflight FRAILTY_EXTERNAL_STORAGE_ROOT='/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1'",
+    "fulltext_records_decided": 0,
+    "head_after": "3d38d8bcf9d86cfa41439431ec05ca4581e183a8",
+    "head_before": "3d38d8bcf9d86cfa41439431ec05ca4581e183a8",
+    "log": "frailty_paper/analysis/preflight_clean_venv_live_head_2026-09-23.log",
+    "manifest_files_verified": 347,
+    "review_records_decided": 0,
+    "review_records_queued": 56092,
+    "sha256": "7b53a161634e20642151221cbd215c6d7f146f7ac397d92724ed9412740c7571",
+    "status": "PASS",
+    "tests_passed": 70
+  },
+  "python": "3.11.11",
+  "repository_head": "460bff9",
+  "resolved_package_freeze": {
+    "file": "environment/frailty_workflow_py311_clean_venv_freeze_2026-09-23.txt",
+    "limitation": "Exact versions recorded; PyPI artifact hashes are not included.",
+    "package_count": 69,
+    "sha256": "f7ea4f4b75b54882685c67780342eff68d59259e242b5b1be9aed8837f26e279"
+  },
+  "schema_version": "frailty_clean_venv_setup_validation.v1",
+  "setup_command": "make -C frailty_paper setup-env FRAILTY_PYTHON=work/conda-envs/frailty-py311/bin/python FRAILTY_VENV_DIR=work/conda-envs/frailty-paper-py311-clean-2026-09-23",
+  "setup_replay": "PASS_OFFLINE; PIP_NO_INDEX=1; fresh target replayed without dependency changes",
+  "test_run": {
+    "command": "work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python -m unittest discover -s frailty_paper/tests -v",
+    "failed": 0,
+    "log": "frailty_paper/analysis/clean_venv_py311_unittest_2026-09-23.log",
+    "passed": 70,
+    "sha256": "3e9312405b0f46aad2ec962d315a86fdbdf4ff79c7011f9ea00d740ec9116f32",
+    "status": "PASS",
+    "total": 70
+  }
+}

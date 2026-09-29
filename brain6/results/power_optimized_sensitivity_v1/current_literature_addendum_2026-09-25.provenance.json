@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "generated_date": "2026-09-25",
+  "scope": "Append-only outcome-blinded literature check; does not modify the frozen audit or promotion rule",
+  "source": {
+    "citation": "Portas L, Yuan H, Cai L, et al. Genetic architecture of sleep in a genome wide association study of device measured sleep traits. Nature Communications. 2026;17:4715.",
+    "doi": "10.1038/s41467-026-71252-y",
+    "pmid": "41922918",
+    "article_url": "https://www.nature.com/articles/s41467-026-71252-y",
+    "catalog_url": "https://www.ebi.ac.uk/gwas/studies/GCST90824104",
+    "catalog_downloads_url": "https://www.ebi.ac.uk/gwas/downloads/summary-statistics",
+    "accessions": ["GCST90824104", "GCST90824105", "GCST90824106", "GCST90824107"],
+    "accession_group": "GCP001581",
+    "article_published": "2026-04-01",
+    "catalog_checked": "2026-09-25"
+  },
+  "candidate_facts": {
+    "sample_size": 80013,
+    "ancestry": "European",
+    "cohort": "UK Biobank",
+    "reported_variant_count": ">9.8 million common variants",
+    "traits": ["night-time sleep duration", "sleep efficiency", "inferred REM duration", "inferred NREM duration"],
+    "same_phenotype_as_current_long_sleep": false,
+    "exact_participant_overlap": "unknown; cohort-level UK Biobank overlap is documented",
+    "summary_statistics_file_downloaded": false,
+    "summary_statistics_file_sha256": null,
+    "effect_fields_verified_from_file": false,
+    "association_file_build_verified": false,
+    "catalog_metadata_state": "GCST90824104 page reports no peer-reviewed publication association and Full Summary Statistics Not available while listing an FTP link; no file acquired to resolve this state"
+  },
+  "decision": {
+    "eligible_for_long_sleep_power_screen": false,
+    "reasons": ["different accelerometer-derived construct rather than the self-reported >=9-hour binary tail", "N=80,013 is below the current long-sleep N=339,926 and related continuous-duration N=446,118", "summary-statistic file fields, checksum, and build were not verified"],
+    "downstream_associations_consulted": false
+  },
+  "preserved_audit": {
+    "upstream_provenance_path": "brain6/results/power_optimized_sensitivity_v1/provenance.json",
+    "upstream_provenance_sha256": "b5616f683a438d555fe5c08c850922482cce2bd89044121359c5d307f3b24ace",
+    "frozen_candidate_table_sha256": "c7c2349f19e7a8eebbeae3d3189fa730d8def6bc01108a4c21b1a511ebc736a3"
+  },
+  "outputs": {
+    "brain6/results/power_optimized_sensitivity_v1/current_literature_addendum_2026-09-25.md": "e5bcd080a61cecd7f25bd4999e67deb7b6638ca7a9136900b573a20b13ed2be5",
+    "brain6/results/power_optimized_sensitivity_v1/current_literature_addendum_2026-09-25.tsv": "bb85e39a333e8b2046cdf06fb6c225a048ff7d0b92ffe9f985ef4e16d37b6983"
+  }
+}

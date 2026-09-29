@@ -4,20 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sleep-gwas-brain6"
-version = "0.2.0"
+version = "0.3.0"
 description = "Auditable six-disorder extension for sleep-gwas-atlas"
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.26,<3", "scipy>=1.11,<2", "matplotlib>=3.8,<4"]
 
 [project.optional-dependencies]
-test = ["pytest>=8,<10"]
+test = ["pandas>=2.2,<4", "pytest>=8,<10"]
 workflow = ["snakemake>=8,<10"]
+analysis = ["pandas>=2.2,<4"]
 
 [project.scripts]
 brain6 = "brain6.cli:main"
 
 [tool.setuptools]
-packages = ["brain6"]
+packages = ["brain6", "brain6.resources"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,0 +1,51 @@
+{
+  "analysis_id": "brain6_placo_candidate_locus_lead_stability_v1",
+  "builder": {
+    "path": "brain6/scripts/compare_partial_placo_locus_lead_stability.py",
+    "sha256": "39fd99737b0d547348fd0c2885784a66fa0d3ae8020c66dfce470748c819a5e6"
+  },
+  "method": {
+    "candidate_threshold": 1e-08,
+    "comparison": "Lead-ID set comparison across baseline partial clumping, raw out-of-range-edge exclusion, and factor-normalized internal sensitivity",
+    "interpretation_boundary": "The four range-filter-only leads are method-sensitive candidates, not confirmed independent loci.",
+    "r2_threshold": 0.1,
+    "window_kb": 500
+  },
+  "output": {
+    "path": "brain6/results/loci/placo_candidate_locus_lead_stability_v1.tsv",
+    "rows": 25,
+    "sha256": "bbba3e962d0d195323512a784aba159be4cee9f7347ffaaa9d88a260671c1260"
+  },
+  "schema_version": 1,
+  "scope": {
+    "baseline_and_factor_only": 0,
+    "baseline_leads": 21,
+    "candidate_intervals_each_method": 19,
+    "factor_normalized_sensitivity_leads": 21,
+    "fine_mapping_or_colocalization": false,
+    "full_five_track_family": false,
+    "genotype_level_ld_validation": false,
+    "pairs": [
+      "insomnia__mdd",
+      "longsleep__bipolar",
+      "longsleep__parkinson",
+      "longsleep__scz"
+    ],
+    "range_edges_excluded_leads": 25,
+    "range_filter_only": 4,
+    "stable_all_three": 21,
+    "tier_promotion": false
+  },
+  "sources": {
+    "brain6/results/loci/placo_candidate_loci_partial.provenance.json": "9c087da949ed70a21182ab5157537fe009d7bc3ec0ee48fa8aa611602192ad19",
+    "brain6/results/loci/placo_candidate_loci_partial.tsv": "fe73f37d96e33275b6a739d73d8f808d36070698342e6b872ca9fc1187e7c419",
+    "brain6/results/loci/placo_candidate_loci_valid_ld_partial_v2.tsv": "f1fa4e46cba989c00d6d2b5214ee54236bca9aa1f84b7536cbffd8a9c1d512b9",
+    "brain6/results/loci/placo_candidate_valid_ld_partial_v2.provenance.json": "6bdb16cefba1cae98f1d73f513342f5d8c62835aef3e28feb243e3ae92df8edd",
+    "brain6/results/loci/placo_candidate_variants_partial.tsv": "8aab50a8d06c3af2d7a45297142181326d505f410389dd7e9b3e570dc0affc47",
+    "brain6/results/loci/placo_candidate_variants_valid_ld_partial_v2.tsv": "89212b9b590f2eddd9ffdd0531db05e518a8fa47c778c5aa6d74323591d8bcfd",
+    "brain6/results/loci/placo_factor_normalized_sensitivity_v2/placo_candidate_loci.tsv": "fe73f37d96e33275b6a739d73d8f808d36070698342e6b872ca9fc1187e7c419",
+    "brain6/results/loci/placo_factor_normalized_sensitivity_v2/placo_candidate_variants.tsv": "aa045fce607081644f4f4bba11545def94b422770f2afaa14816deab292b0690",
+    "brain6/results/loci/placo_factor_normalized_sensitivity_v2/provenance.json": "ad8a4b049188f537900aa79ceb47b9d10e762a1727594ca05f60e57d58094007"
+  },
+  "status": "PASS_DIAGNOSTIC_ONLY_NO_PROMOTION"
+}

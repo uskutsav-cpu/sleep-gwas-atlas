@@ -10,6 +10,12 @@ ROOT=$(pwd)
 CONDA_BIN=${CONDA_BIN:-conda}
 LDSC_ENV_DIR=${LDSC_ENV_DIR:-.ldsc-env}
 LDSC_DIR=${LDSC_DIR:-ldsc}
+REF_DIR=${REF_DIR:-$ROOT/ref}
+case "$LDSC_ENV_DIR" in /*) ;; *) LDSC_ENV_DIR="$ROOT/$LDSC_ENV_DIR" ;; esac
+case "$LDSC_DIR" in /*) ;; *) LDSC_DIR="$ROOT/$LDSC_DIR" ;; esac
+case "$REF_DIR" in /*) ;; *) REF_DIR="$ROOT/$REF_DIR" ;; esac
+mkdir -p "$REF_DIR"
+REF_DIR=$(cd "$REF_DIR" && pwd)
 LDSC_REPOSITORY=https://github.com/CBIIT/ldsc.git
 LDSC_COMMIT=6c673952cee74bd5c57aef1555a03b1c015399a0
 REFERENCE_URL=${REFERENCE_URL:-https://zenodo.org/records/8182036/files/eur_w_ld_chr.tar.gz?download=1}
@@ -81,8 +87,8 @@ fi
 "$LDSC_PYTHON" "$LDSC_DIR/munge_sumstats.py" -h > /dev/null
 echo "    LDSC OK"
 
-echo "==> [3/6] Reference files -> ref/"
-mkdir -p ref && cd ref
+echo "==> [3/6] Reference files -> $REF_DIR"
+cd "$REF_DIR"
 # European LD scores computed on 1000G Phase 3, HapMap3 SNPs. Zenodo record
 # 8182036 explicitly documents this archive as a gzip copy of the original
 # Alkes-group distribution and supplies the MD5 below.
@@ -110,20 +116,20 @@ done
 test -s eur_w_ld_chr/w_hm3.snplist
 ln -sfn eur_w_ld_chr/w_hm3.snplist w_hm3.snplist
 cd "$ROOT"
-echo "    ref/ contains:"; ls ref | sed 's/^/      /'
+echo "    reference directory contains:"; ls "$REF_DIR" | sed 's/^/      /'
 
 echo "==> [4/6] Audited HapMap3 GRCh37 identity map"
 "$LDSC_PYTHON" scripts/19_build_hm3_variant_map.py \
-  --reference-dir ref/eur_w_ld_chr \
-  --out ref/hm3_grch37_variant_map.tsv.gz
-ACTUAL_MAP_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' ref/hm3_grch37_variant_map.tsv.gz)
+  --reference-dir "$REF_DIR/eur_w_ld_chr" \
+  --out "$REF_DIR/hm3_grch37_variant_map.tsv.gz"
+ACTUAL_MAP_SHA256=$("$LDSC_PYTHON" -c 'import hashlib, sys; h = hashlib.sha256(); f = open(sys.argv[1], "rb"); [h.update(chunk) for chunk in iter(lambda: f.read(1024 * 1024), b"")]; print(h.hexdigest())' "$REF_DIR/hm3_grch37_variant_map.tsv.gz")
 if [ "$ACTUAL_MAP_SHA256" != "$VARIANT_MAP_SHA256" ]; then
   echo "ERROR: derived variant-map SHA-256 mismatch: expected $VARIANT_MAP_SHA256, got $ACTUAL_MAP_SHA256" >&2
   exit 1
 fi
 
 echo "==> [5/6] UCSC hg38-to-hg19 liftover chain"
-LIFTOVER_PATH=ref/hg38ToHg19.over.chain.gz
+LIFTOVER_PATH="$REF_DIR/hg38ToHg19.over.chain.gz"
 if [ ! -s "$LIFTOVER_PATH" ]; then
   curl --fail --location --retry 3 --output "$LIFTOVER_PATH" "$LIFTOVER_URL"
 fi
@@ -137,6 +143,15 @@ if [ "$ACTUAL_LIFTOVER_BYTES" != "$LIFTOVER_BYTES" ] || \
   exit 1
 fi
 gzip -t "$LIFTOVER_PATH"
+
+# Existing frozen configs name these resources relative to ref/. Preserve
+# those identities while keeping the large reference payload on the mounted
+# analysis volume.
+mkdir -p "$ROOT/ref"
+for resource in eur_w_ld_chr w_hm3.snplist hm3_grch37_variant_map.tsv.gz \
+  hm3_grch37_variant_map.tsv.gz.provenance.json hg38ToHg19.over.chain.gz; do
+  ln -sfn "$REF_DIR/$resource" "$ROOT/ref/$resource"
+done
 
 echo "==> [6/6] Done."
 cat <<'EOF'

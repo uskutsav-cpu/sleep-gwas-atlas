@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PRIOR_NEGATIVE_LDSC_CONTEXT",
+  "scope": "One source-level literature row for the inherited significant Brain6 longsleep–Parkinson pair.",
+  "builder": "brain6/scripts/build_grover_2022_sleep_pd_ldsc_context.py",
+  "builder_sha256": "c95117065886ac0a33661f848a1a1a81c4ea9307241c501e423a9c2771f42cbc",
+  "input_hashes": {
+    "brain6/manifests/gwas_master.tsv": "bfdf722feab17e19a3a9e7e733e845866d75abbf6f58393ece99b71fdc9624a7"
+  },
+  "source_file_hashes": {
+    "brain6/qc/replication_sources/grover_2022_article_fullTextXML.xml": "5b2ac67765f387776a1ba22d30bc5037dfd8ca67705aa21367b6204d794407de"
+  },
+  "source": {
+    "citation": "Grover S, Sharma M. Sleep, Pain, and Neurodegeneration: A Mendelian Randomization Study. Front Neurol. 2022;13:765321.",
+    "pmid": "35585838",
+    "doi": "10.3389/fneur.2022.765321",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9108392/",
+    "reviewed_sections": [
+      "methods: cross-trait LDSC",
+      "results: pairwise genetic-correlation screen",
+      "Table 1: GWAS source/sample metadata"
+    ],
+    "article_reported": "No correlation of any NDD with sleep or pain-related traits in the pairwise genetic-correlation analysis.",
+    "numeric_estimate_limitation": "No pair-specific numeric rg/SE/P is stated in the article text; the linked supplementary workbook was not inspected.",
+    "numeric_rg_se_p_in_article_text": false,
+    "linked_supplementary_workbook_reviewed": false,
+    "linked_supplementary_file": {
+      "filename": "Table_1.xlsx",
+      "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "size_bytes": 722516,
+      "cloudpmc_path": "8fc4/9108392/54eee41c5296/Table_1.xlsx",
+      "source_xml": "brain6/qc/replication_sources/grover_2022_article_fullTextXML.xml",
+      "binary_sha256": null,
+      "binary_retrieved": false,
+      "retrieval_status": "OFFICIAL_FILE_METADATA_VERIFIED_BUT_BINARY_UNAVAILABLE",
+      "retrieval_attempts": [
+        {
+          "endpoint": "Europe PMC supplementaryFiles REST endpoint",
+          "status": "TIMED_OUT_NO_BYTES"
+        },
+        {
+          "endpoint": "PMC linked Table_1.xlsx asset",
+          "status": "POW_INTERSTITIAL_NOT_XLSX"
+        },
+        {
+          "endpoint": "Frontiers article file route",
+          "status": "404"
+        }
+      ],
+      "numeric_pair_estimate_reviewed": false
+    }
+  },
+  "output": {
+    "path": "brain6/results/novelty/grover_2022_sleep_pd_ldsc_context.tsv",
+    "sha256": "f36f83edad23137708480caa13e3e64f363d7221a12cafffed2709b6c78182da",
+    "rows": 1
+  }
+}

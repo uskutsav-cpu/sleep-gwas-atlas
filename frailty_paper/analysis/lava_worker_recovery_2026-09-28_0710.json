@@ -1,0 +1,44 @@
+{
+  "current_audit": "frailty_paper/analysis/lava_full_receipt_audit_2026-09-28_0710.json",
+  "event": "worker_2_recovered_after_temp_path_errors",
+  "first_replacement": {
+    "failure": "R rejected TMPDIR path because external volume mount path contains a space",
+    "finished_utc": "2026-09-28T07:05:03.701585+00:00",
+    "pid": 84762,
+    "started_utc": "2026-09-28T07:03:39Z",
+    "unsuccessful_attempts_observed": 285
+  },
+  "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+  "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+  "observed_utc": "2026-09-28T07:11:15.361847+00:00",
+  "original_worker": {
+    "failure": "temporary scratch directory creation/writes failed with ENOSPC in host default temporary directory",
+    "finished_utc": "2026-09-28T06:56:46.238711+00:00",
+    "pid": 37879
+  },
+  "prior_receipts_overwritten": false,
+  "safety_before_second_replacement": {
+    "audit": "frailty_paper/analysis/lava_full_receipt_audit_2026-09-28_0702_pre_worker_restore.json",
+    "claim_issues": [],
+    "duplicate_claim_identities": [],
+    "duplicate_trait_locus_identities": [],
+    "only_live_claim_owner_pid": 37878,
+    "prior_worker_dead_confirmed": true,
+    "receipt_issues": [],
+    "validated_receipts": 23827
+  },
+  "scientific_configuration_changed": false,
+  "second_replacement": {
+    "alias_target": "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/lava_sensitivity_v1/tmp/codex_worker_scratch",
+    "pid": 89389,
+    "r_tempdir_probe": "PASS; R tempdir stayed on alias without spaces",
+    "started_utc": "2026-09-28T07:05:42.968732+00:00",
+    "tmpdir_env": "/private/tmp/frailty_lava_scratch_alias",
+    "valid_receipt_events_observed": [
+      "longsleep locus 2307",
+      "sleep_apnea locus 2307",
+      "sleep_timing locus 2307",
+      "sleepiness locus 2307"
+    ]
+  }
+}

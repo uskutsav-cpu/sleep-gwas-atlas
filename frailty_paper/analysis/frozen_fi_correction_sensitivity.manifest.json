@@ -1,0 +1,19 @@
+{
+  "artifact_role": "DERIVED_CORRECTION_SENSITIVITY_FROM_FROZEN_P_VALUES_NOT_NEW_GWAS_ANALYSIS",
+  "bh_significant_count": 9,
+  "bonferroni_significant_count": 9,
+  "command": "python frailty_paper/scripts/35_build_fi_correction_sensitivity.py --repo ..",
+  "input": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+  "input_audit_manifest": "frailty_paper/manifests/frozen_atlas_frailty_manifest.json",
+  "input_audit_manifest_sha256": "127052c2f0a5be5fd0ac0a645a35afb72d9905a2b3aae614bd69c7913f3c3e05",
+  "input_sha256": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+  "interpretation_limit": "The Bonferroni column is an explicitly secondary robustness description. It does not replace inherited BH q-values, add independent evidence, or remedy absent original harmonized/munged inputs.",
+  "locked_family_size": 396,
+  "output_sha256": "83274185d5928a425808f10521f10985a03fe453ef731c9a32cff5eb0c7077d6",
+  "primary_correction": "BH q-values over all 396 frozen sleep-by-non-sleep tests, inherited unchanged",
+  "python_version": "3.13.13",
+  "rows": 12,
+  "script": "frailty_paper/scripts/35_build_fi_correction_sensitivity.py",
+  "script_sha256": "b4aa6950abe10328a665a20dc5ac8c95b2d416cdc614da6d789488f44cf84728",
+  "sensitivity_correction": "Bonferroni adjusted P = min(raw P * 396, 1), alpha 0.05"
+}

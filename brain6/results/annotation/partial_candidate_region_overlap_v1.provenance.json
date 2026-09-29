@@ -1,0 +1,51 @@
+{
+  "analysis_id": "brain6_partial_placo_cross_pair_region_overlap_v1",
+  "builder": {
+    "path": "brain6/scripts/build_partial_candidate_region_overlap.py",
+    "sha256": "680ae9406a20a06e9240a5463962a7cd7808b6fe6ac7cac4f8eac2486779d104"
+  },
+  "limitations": [
+    "Source is a four-pair diagnostic PLACO family; protected Track B is absent.",
+    "Intervals are 500-kb lead-flank regions after factor-normalized reference-LD grouping, not genotype-validated independent loci.",
+    "Shared lead IDs or broad coordinate overlap do not demonstrate shared causal variants, colocalization, or independent replication."
+  ],
+  "method": "Inclusive genomic interval overlap across different PLACO pair outputs; exact overlap of lead-variant IDs tracked separately.",
+  "output": {
+    "path": "brain6/results/annotation/partial_candidate_region_overlap_v1.tsv",
+    "rows": 3,
+    "sha256": "1b499a5ffc65ee19c41e0cc1890305fed14eba5bdbc44cbe24195ce9fbadc93d"
+  },
+  "schema_version": 1,
+  "scope": {
+    "all_regions_remain_not_tiered": true,
+    "candidate_regions": 19,
+    "cross_pair_region_comparisons_same_chromosome": 9,
+    "exact_shared_lead_variant_ids": [
+      "rs1051168"
+    ],
+    "overlapping_region_pairs": 3,
+    "pairs": [
+      "insomnia__mdd",
+      "longsleep__bipolar",
+      "longsleep__parkinson",
+      "longsleep__scz"
+    ],
+    "pairs_with_exact_shared_lead_variant": 1,
+    "shared_locus_claims": false
+  },
+  "sources": {
+    "candidate_region_gate": {
+      "path": "brain6/results/annotation/partial_candidate_region_gate_v1.tsv",
+      "sha256": "7481f45d747c864404b85361406e4a32ec3c3679cd940040b2ed5b9eaa92557a"
+    },
+    "candidate_region_gate_provenance": {
+      "path": "brain6/results/annotation/partial_candidate_region_gate_v1.provenance.json",
+      "sha256": "923f89574bb4ce6c9edadf2471ab200262a16745e6fbfae79464bda7683916c0"
+    },
+    "factor_normalized_sensitivity_provenance": {
+      "path": "brain6/results/loci/placo_factor_normalized_sensitivity_v2/provenance.json",
+      "sha256": "ad8a4b049188f537900aa79ceb47b9d10e762a1727594ca05f60e57d58094007"
+    }
+  },
+  "status": "PASS_DESCRIPTIVE_NOT_SHARED_LOCUS_EVIDENCE"
+}

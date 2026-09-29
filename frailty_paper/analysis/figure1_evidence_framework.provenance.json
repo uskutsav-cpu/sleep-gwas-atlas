@@ -1,0 +1,86 @@
+{
+  "analysis_summary": {
+    "aging_context_pairs": 72,
+    "aging_q_le_0_05_all_396": 26,
+    "fi_pairs": 12,
+    "fi_q_le_0_05_all_396": 9,
+    "latent_pairs": 84,
+    "latent_q_le_0_05_family_84": 48
+  },
+  "command": [
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-paper-py311-clean-2026-09-23/bin/python",
+    "frailty_paper/scripts/37_plot_evidence_framework.py",
+    "--repo",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03",
+    "--outdir",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis",
+    "--replace-outputs"
+  ],
+  "created_utc": "2026-09-25T09:47:28.189991+00:00",
+  "inputs": {
+    "config/analysis_panel.tsv": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "frailty_paper/analysis/fried_ffs_source_access_audit_2026-09-23.md": "72301c3f8db237631da66721c8e1ed70bfdba09a4d7cd5529aacf1132308d303",
+    "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv": "00dfa114d23b9f24010ce374dde250c3f8de6c0e752f00c89788bf545530b13a",
+    "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+    "frailty_paper/analysis/physical_component_candidate_source_audit_2026-09-23.md": "b456a402e6bde5c7c9e6611f8a47288346020865a962d39eff697dcbea0d8bbd",
+    "frailty_paper/config/analysis_plan_v1.yaml": "bfa00cbb54ed151e3555f1987f86f39d84b11c4bc92046a60c05ace45e0084f4",
+    "frailty_paper/manifests/targeted_resource_audit.tsv": "fad19388579662d6e032fae55a447572a7bdefd1f8dea2a38a9cfbf523e65432",
+    "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068",
+    "frailty_paper/review/prisma_flow.tsv": "54c189ef9699fa229936c5880bf47cf058eb4ece2cc840a0a50e991db5a99dbe",
+    "frailty_paper/review/source_record_counts.tsv": "effeea5ccf6fc3c391c9ede0c83b4551d4f831e07af5231631a317659ad665e9"
+  },
+  "limitations": [
+    "Working framework figure, not a completed PRISMA flow or final manuscript figure.",
+    "PubMed only: 56,117 unique records remain unscreened; licensed database exports are absent.",
+    "FI and aging panels reuse frozen atlas estimates; latent-factor analyses are sensitivity-only with exact overlap unknown.",
+    "No independent replication, physical-component, HFRS, local-locus, fine-mapping, colocalization, or molecular follow-up result is shown.",
+    "Genetic correlation does not establish causal direction or mechanism."
+  ],
+  "outputs": {
+    "frailty_paper/analysis/figure1_evidence_framework.pdf": "b2edd7f7b6289c3ea05e6abb3dfcec7dc8605ac4b5b7682b6aa612f0feabd132",
+    "frailty_paper/analysis/figure1_evidence_framework.png": "8324ca7e3e5cfad275eb7d2ae811b5578b53d815ba14ac6cfe3bd4343e6283d4",
+    "frailty_paper/analysis/figure1_evidence_framework.svg": "fc8759617698f8d484040a87321e18d538e19d4f2919319519c3bb74603827b6"
+  },
+  "python": "3.11.11",
+  "render_commands": [
+    [
+      "rsvg-convert",
+      "-f",
+      "pdf",
+      "-o",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure1_evidence_framework.pdf",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure1_evidence_framework.svg"
+    ],
+    [
+      "rsvg-convert",
+      "-w",
+      "4000",
+      "-f",
+      "png",
+      "-b",
+      "#F5F7FA",
+      "-o",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure1_evidence_framework.png",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/frailty_paper/analysis/figure1_evidence_framework.svg"
+    ]
+  ],
+  "rendering": {
+    "engine": "librsvg rsvg-convert",
+    "pdf": "vector SVG rendering",
+    "png_width_px": 4000
+  },
+  "review_counts": {
+    "duplicates": 4892,
+    "manual": 0,
+    "pubmed": 61009,
+    "queue": 56117
+  },
+  "rsvg_convert_executable": "/opt/homebrew/bin/rsvg-convert",
+  "rsvg_convert_version": "rsvg-convert version 2.62.3\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.58.0\n  harfbuzz 14.2.1\n  fontconfig 2.18.2",
+  "schema_version": "frailty_paper_figure1_evidence_framework.v1",
+  "script": "frailty_paper/scripts/37_plot_evidence_framework.py",
+  "script_sha256": "cb2b49ce5d5e40053418ca58b700f68a051c210c2e10e63d258e47274134b9de",
+  "source_data_tsv": "frailty_paper/analysis/figure1_evidence_framework_source_data.tsv",
+  "source_data_tsv_sha256": "ef886604bd2f4d68181fa46452a87b9c32cfa52bdd7801937a1ef8861bdddb5b",
+  "working_directory": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03"
+}

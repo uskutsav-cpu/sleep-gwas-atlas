@@ -1,0 +1,68 @@
+{
+  "completed_at": "2026-09-25T07:08:51Z",
+  "created_at": "2026-09-25T06:59:57Z",
+  "fingerprint": "47ff2935b670096f289d4b65cd01304aed98bf9f26e4856654412077b5e690b5",
+  "inputs": [
+    {
+      "bytes": 1681,
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/config/power_optimized_sensitivity_v1/source_sleep_duration_continuous_dashti2019.json",
+      "sha256": "54468448f392cb15c610dfa8270993911faaa02b176504e027d31c50bb0d1ef4"
+    },
+    {
+      "bytes": 1035966151,
+      "path": "/Volumes/Extreme SSD/brain6-work/power-optimized-sensitivity-v1/sources/Dashti_2019_sleep_duration.tsv",
+      "sha256": "b1115038b2e1232617a9a6a2ed445c54a12948c27d28ecb23dc7af2ced0fdda0"
+    }
+  ],
+  "interpretation": "Source normalization QC only; not a hypothesis-test result",
+  "outputs": [
+    {
+      "bytes": 245,
+      "path": "qc.json",
+      "sha256": "5ab285b1e4272009e5bfd5de0525d8f8dd3007fa70deb25e38308a1a46148774"
+    },
+    {
+      "bytes": 161736745,
+      "path": "sumstats.tsv.gz",
+      "sha256": "a202778d5143cb0ceb4d2fc8ae1cfa7c5c5a7b5554127b3e5a8d4a97f483267c"
+    },
+    {
+      "bytes": 678490112,
+      "path": "variants.sqlite",
+      "sha256": "79fabc676607f2e5524305009a47bcf673b2a49e61bfc1b3be746d75098799a0"
+    }
+  ],
+  "parameters": {
+    "batch_rows": 20000,
+    "exclude_regions": [],
+    "min_info": 0.9,
+    "min_maf": 0.01,
+    "min_n": 100,
+    "require_eaf": true,
+    "require_info": false
+  },
+  "qc": {
+    "ambiguous_position_rows": 0,
+    "ambiguous_positions": 0,
+    "duplicate_ids": 1068,
+    "frequency_filter": 5831499,
+    "info_filter": 261630,
+    "input_rows": 14661601,
+    "palindromic_or_non_biallelic_snp": 2221486,
+    "retained_rows": 6344850
+  },
+  "scientific_status": "PASS",
+  "source": {
+    "ancestry": "EUR",
+    "effect_scale": "beta",
+    "genome_build": "GRCh37",
+    "n_semantics": "total",
+    "phenotype_definition": "Continuous self-reported hours of sleep in 24 hours, including naps; related to but not equivalent to the canonical >=9-hour binary tail",
+    "study_id": "Dashti et al. 2019; PMID 30846698; DOI 10.1038/s41467-019-08917-4; GWAS Catalog GCST007561",
+    "trait_id": "sleep_duration_continuous_dashti_2019"
+  },
+  "stage": "normalize",
+  "status": "COMPLETE",
+  "synthetic": false,
+  "version": "0.3.0"
+}

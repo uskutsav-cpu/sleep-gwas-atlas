@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6-lava-local-rg-v2",
+  "family_lock_sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+  "worker_protocol": "one_frozen_locus_per_R_process; all_five_selected_pairs_per_locus",
+  "maximum_process_attempts_per_locus": 2,
+  "locus_processing": {
+    "min_K": 2,
+    "prune_thresh": 99,
+    "max_prop_K": 0.75,
+    "drop_failed": true,
+    "max_block_size": 3000,
+    "cap_estimates": true
+  },
+  "univariate": {
+    "cap_estimates": true,
+    "gate_p_strictly_less_than": 2.86286859433152e-06
+  },
+  "bivariate": {
+    "adap_thresh": [
+      0.0001,
+      1e-06
+    ],
+    "p_values": true,
+    "confidence_intervals": true,
+    "parameter_limit": 1.25,
+    "cap_estimates": true
+  },
+  "statistical_scope": "No change to the frozen five-pair by 2,495-locus family, unique-trait Bonferroni gate, or full-family BH correction. A pinned-LAVA 0.1.5 numerical-only patch symmetrizes the block-reduced LD matrix when asymmetry is within 100 * machine epsilon * matrix dimension * matrix scale; larger asymmetry fails. The family, loci, gates, thresholds, and correction remain unchanged.",
+  "participant_level_overlap_verified": false,
+  "numerical_stability_patch": {
+    "id": "LAVA015_BLOCK_REDUCED_SYMMETRY_V1",
+    "target": "Only the mathematically symmetric block-reduced LD matrix immediately before recursive eigen decomposition.",
+    "rule": "Compute tolerance as 100 * .Machine$double.eps * max(1,nrow(M)) * max(1,max(abs(M))). Symmetrize (M+t(M))/2 only when asymmetry is positive and no larger than tolerance; fail otherwise.",
+    "scientific_parameters_changed": false,
+    "motivation": "Pinned LAVA 0.1.5 uses a general eigensolver on a floating-point block projection; roundoff-level asymmetry can produce tiny complex eigenvalues and abort the cumulative-eigenvalue step.",
+    "worker_script_sha256": "f3d8b454dab46832bdd7ce19d1db58ab6d28a48c50985cb21abcfa9b0fcf2e02"
+  }
+}

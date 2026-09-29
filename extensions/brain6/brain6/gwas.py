@@ -180,6 +180,8 @@ def normalize(source_path: str | Path, out_root: str | Path, relative: str,
         meta["source"] = {k: source[k] for k in ["trait_id", "study_id", "phenotype_definition",
                                                "genome_build", "ancestry", "effect_scale", "n_semantics"]}
         meta["qc"] = dict(qc)
+        meta["scientific_status"] = "PASS"
+        meta["interpretation"] = "Source normalization QC only; not a hypothesis-test result"
         write_json(work / "qc.json", dict(qc))
         db.close()
     return target
@@ -205,7 +207,7 @@ def join_pair(left: str | Path, right: str | Path, out_root: str | Path,
     params = dict(min_variants=min_variants, min_overlap=min_overlap,
                   max_eaf_difference=max_eaf_difference)
     with transaction(out_root, relative, stage="join_pair",
-                     inputs=[left / "variants.sqlite", right / "variants.sqlite"],
+                     inputs=[left / "variants.sqlite", right / "variants.sqlite", left / "receipt.json", right / "receipt.json"],
                      parameters=params, synthetic=synthetic) as (work, meta):
         db = sqlite3.connect(f"{(left / 'variants.sqlite').resolve().as_uri()}?mode=ro", uri=True)
         db.execute("ATTACH DATABASE ? AS b", (f"{(right / 'variants.sqlite').resolve().as_uri()}?mode=ro",))
@@ -240,7 +242,7 @@ def join_pair(left: str | Path, right: str | Path, out_root: str | Path,
         if not synthetic:
             require(chromosomes == set(range(1, 23)), "Missing autosome coverage")
         meta.update(qc=dict(qc), overlap_fraction=fraction, chromosomes=sorted(chromosomes),
-                    left=lm["source"], right=rm["source"])
+                    left=lm["source"], right=rm["source"], scientific_status="PASS")
         write_json(work / "qc.json", {**dict(qc), "overlap_fraction": fraction})
         db.close()
     return Path(out_root) / relative

@@ -1,0 +1,192 @@
+{
+  "audit_file": "lava_full_receipt_audit_2026-09-28_2350_live.json",
+  "audit_summary": {
+    "active_job_pid_liveness": {
+      "46837": true,
+      "46838": true,
+      "46839": true,
+      "46840": true
+    },
+    "active_job_pids": [
+      46837,
+      46838,
+      46839,
+      46840
+    ],
+    "all_traits_pass_1pct_gate": false,
+    "audit_time_end_utc": "2026-09-28T23:50:59+00:00",
+    "audit_time_start_utc": "2026-09-28T23:49:39+00:00",
+    "claim_issues": [],
+    "duplicate_claim_identities": [],
+    "duplicate_trait_locus_identities": [],
+    "effective_parallel_workers": 4,
+    "expected_receipts": 29940,
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "process_failure_categories": {
+      "all_phenotypes_negative_variance": 4810,
+      "no_specified_snps_in_reference": 252,
+      "other_process_failure": 4
+    },
+    "receipt_file_list_changed_during_scan": true,
+    "receipt_files_after_scan": 27882,
+    "receipt_files_at_scan_start": 27875,
+    "receipt_files_validated": 27875,
+    "receipt_issues": [],
+    "requested_parallel_workers": 6,
+    "stale_claims_recovered": 4
+  },
+  "capture_utc": "2026-09-28T23:53:20+00:00",
+  "runner_state": {
+    "active_jobs": [
+      {
+        "claimed_utc": "2026-09-28T23:54:31.238995+00:00",
+        "locus_index": 213,
+        "pair_order": 6,
+        "process_group": 46837,
+        "trait": "shortsleep",
+        "worker_pid": 46837
+      },
+      {
+        "claimed_utc": "2026-09-28T23:55:06.461397+00:00",
+        "locus_index": 213,
+        "pair_order": 7,
+        "process_group": 46838,
+        "trait": "sleep_apnea",
+        "worker_pid": 46838
+      }
+    ],
+    "analysis_id": "frailty_fi_sleep_lava_sensitivity_v1",
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "measured_receipts_per_hour": null,
+    "parallel_workers": 2,
+    "requested_parallel_workers": 6,
+    "resource_fallback_reason": "swap use reached 6071/7168 MiB (\u22655800 MiB used); reducing three workers to two",
+    "stale_claims_recovered": 4,
+    "throughput_window_seconds": 0.0,
+    "updated_utc": "2026-09-28T23:55:23.338529+00:00",
+    "verified_receipts": 27905,
+    "worker_pids": {
+      "1": 46837,
+      "2": 46838,
+      "3": 46839,
+      "4": 46840,
+      "5": 46841,
+      "6": 46842
+    }
+  },
+  "runner_script_sha256": "97468c52ca9a9803ee0c0781bc730d48fc350d79289b6955ef3534bd9d8646c4",
+  "process_snapshot": [
+    {
+      "pid": 46673,
+      "role": "coordinator",
+      "worker_count_requested": 6,
+      "sample_utc": "2026-09-28T23:53:20+00:00"
+    },
+    {
+      "worker_pid": 46837,
+      "worker": 1,
+      "trait": "sleep_efficiency",
+      "locus_index": 212,
+      "R_pid": 49736,
+      "R_cpu_percent": 74.4
+    },
+    {
+      "worker_pid": 46838,
+      "worker": 2,
+      "trait": "sleep_apnea",
+      "locus_index": 212,
+      "R_pid": 49658,
+      "R_cpu_percent": 161.5
+    },
+    {
+      "worker_pid": 46839,
+      "worker": 3,
+      "trait": "sleepdur",
+      "locus_index": 212,
+      "R_pid": 49817,
+      "R_cpu_percent": 64.1
+    },
+    {
+      "worker_pid": 46840,
+      "worker": 4,
+      "trait": "sleep_timing",
+      "locus_index": 212,
+      "R_pid": 49783,
+      "R_cpu_percent": 76.5
+    }
+  ],
+  "resource_sample": {
+    "sample_utc": "2026-09-28T23:52:21+00:00",
+    "logical_cpus": 8,
+    "cpu_percent": {
+      "user": 46.73,
+      "system": 45.0,
+      "idle": 8.25
+    },
+    "load_average": [
+      16.74,
+      15.78,
+      14.85
+    ],
+    "physical_memory_mib": {
+      "used": 7470,
+      "wired": 1797,
+      "compressor": 2345,
+      "unused": 160
+    },
+    "memory_pressure_free_percent": 35,
+    "swap_total_mib": 5120.0,
+    "swap_used_mib": 4524.38,
+    "swap_free_mib": 595.62,
+    "swap_used_fraction": 0.88367,
+    "internal_free": "4.1 GiB",
+    "external_ssd_free": "1.3 TiB",
+    "iostat_device_labels": [
+      "disk0",
+      "disk4"
+    ],
+    "iostat_one_second_mbps": [
+      62.55,
+      30.12
+    ],
+    "iostat_limitation": "System-wide device I/O sample; includes other active workloads and is not attributed solely to LAVA."
+  },
+  "receipt_progress": {
+    "validated_in_full_audit": 27875,
+    "inventory_at_scan_end": 27882,
+    "runner_state_at_capture": 27905,
+    "expected": 29940,
+    "remaining_by_runner": 2035,
+    "post_resume_event_count": 78,
+    "post_resume_unique_trait_locus_count": 78,
+    "post_resume_duplicate_event_count": 0,
+    "post_resume_events_per_hour_since_23_40": 304.1,
+    "interreceipt_interval_count": 72,
+    "mean_interreceipt_interval_seconds": 42.4,
+    "median_interreceipt_interval_seconds": 39.9,
+    "warning": "Receipt-event throughput and interreceipt intervals are short-window operational measurements, not guaranteed locus runtime or a stable ETA."
+  },
+  "stale_claim_recovery": {
+    "recorded_process_groups_confirmed_absent_before_restart": [
+      7390,
+      37878,
+      89389,
+      5041,
+      5076,
+      6231,
+      6232
+    ],
+    "recovered_claim_artifacts": 4,
+    "launch_failures": 0
+  },
+  "configuration_hashes": {
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "match_frozen_inputs": true
+  }
+}

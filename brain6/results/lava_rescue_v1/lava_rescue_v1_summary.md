@@ -1,0 +1,11 @@
+# LAVA rescue v1 terminal summary
+
+**Classification: `FAIL_QC`.** Frozen canonical v3 remains `FAILED_QC_NOT_PROMOTED` and has not been modified. Rescue-v1 produced a separate prospective protocol, a complete 29,940-row observed/derived audit matrix, input/hash-bound manifest, four resumable pilot receipts, and independent QC JSON. It produced **zero new univariate or bivariate association estimates**.
+
+The cause of canonical failure is 3,720/17,465 untested trait-locus cells versus 873 allowed. Of those, 3,564 are low-local-h² support outcomes, 154 insufficient shared-reference variants, and two insufficient LAVA components. Zero v3 cells are marked `FAILED`. Both sleep traits made hypothetically perfect would still leave 1,758 untested disorder cells, so the existing inputs cannot pass through a sleep-only or small reference repair.
+
+The prospectively chosen loci 1, 950, 1416, and 2207 passed receipt hash, input schema, duplicate-SNP, allele, finite-Z, positive-N and reason/status concordance checks. Locus 950 has 1,907 reference variants but zero variants in all seven pre-materialization normalized GWAS files; the 20-locus MHC gap is upstream of LAVA materialization, with intent unresolved. It accounts for only part of the 156 minimum-K failures. No correction capable of addressing the dominant low-h² burden was demonstrated. The protocol therefore withheld the full run and the 12,475-slot pairwise stage.
+
+The frozen tier rule requires a complete, identity-verified five-pair LAVA family and full-family BH correction. Rescue-v1 satisfies neither, and it cannot reopen the 19-region decisions. Even a future technically successful separate rescue would require explicit admissibility review under the frozen tier rule and complete local robustness checks; the existing region-decision files are not edited.
+
+**Actionable path:** obtain scientifically comparable, better-powered and source-verified GWAS for the affected traits, or propose an explicit, prospectively justified change to the LAVA family/QC and downstream tier framework. Then run a new, separately versioned outcome-blinded power/compatibility pilot before any full family. No threshold or pair/locus selection change is authorized by this result.

@@ -1,0 +1,121 @@
+{
+  "command": "python frailty_paper/scripts/51_prioritize_screening_queue.py --repo /Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03",
+  "created_utc": "2026-09-24T22:59:23.025742+00:00",
+  "direct_sleep_frailty_term_overlap": 1035,
+  "frozen_protocol": "frailty_paper/review/protocol.md",
+  "matched_group_counts": {
+    "genetic_method": 1,
+    "no_keyword_match": 259,
+    "observational_design": 54,
+    "primary_frailty": 2,
+    "primary_frailty;observational_design": 4,
+    "primary_frailty;secondary_aging_outcome": 4,
+    "primary_frailty;secondary_aging_outcome;observational_design": 1,
+    "secondary_aging_outcome": 308,
+    "secondary_aging_outcome;genetic_method": 3,
+    "secondary_aging_outcome;observational_design": 149,
+    "sleep_exposure": 9449,
+    "sleep_exposure;genetic_method": 99,
+    "sleep_exposure;observational_design": 2922,
+    "sleep_exposure;observational_design;genetic_method": 28,
+    "sleep_exposure;primary_frailty": 133,
+    "sleep_exposure;primary_frailty;genetic_method": 10,
+    "sleep_exposure;primary_frailty;observational_design": 202,
+    "sleep_exposure;primary_frailty;observational_design;genetic_method": 3,
+    "sleep_exposure;primary_frailty;secondary_aging_outcome": 300,
+    "sleep_exposure;primary_frailty;secondary_aging_outcome;genetic_method": 5,
+    "sleep_exposure;primary_frailty;secondary_aging_outcome;observational_design": 377,
+    "sleep_exposure;primary_frailty;secondary_aging_outcome;observational_design;genetic_method": 5,
+    "sleep_exposure;secondary_aging_outcome": 26132,
+    "sleep_exposure;secondary_aging_outcome;genetic_method": 197,
+    "sleep_exposure;secondary_aging_outcome;observational_design": 15374,
+    "sleep_exposure;secondary_aging_outcome;observational_design;genetic_method": 96
+  },
+  "missing_abstracts": 935,
+  "output": "frailty_paper/review/screening/title_abstract_triage_priority.tsv",
+  "output_sha256": "7f1b91884ed2493fe7e107af90fb15e62be44eb4b53ba92e71bba0fcb6e2f908",
+  "priority_rule": {
+    "decisions": "NO screening decisions made; all records retained in priority list and source queue unchanged",
+    "groups": {
+      "genetic_method": [
+        "\\bGWAS\\b",
+        "genetic correlation",
+        "Mendelian randomi[sz]ation",
+        "\\bMR\\b",
+        "genetic association",
+        "fine.?mapping",
+        "colocali[sz]ation",
+        "QTL"
+      ],
+      "observational_design": [
+        "cohort",
+        "cross.?sectional",
+        "case.?control",
+        "longitudinal",
+        "population.?based",
+        "prospective",
+        "retrospective"
+      ],
+      "primary_frailty": [
+        "frailt\\w*",
+        "\\bFried\\b",
+        "clinical frailty scale",
+        "frailty index",
+        "frailty phenotype",
+        "pre.?frail"
+      ],
+      "secondary_aging_outcome": [
+        "sarcopen\\w*",
+        "grip strength",
+        "walking speed",
+        "gait speed",
+        "mobility",
+        "physical activit\\w*",
+        "disabilit\\w*",
+        "fall\\w*",
+        "healthspan",
+        "longevity",
+        "cognit\\w*",
+        "mortality"
+      ],
+      "sleep_exposure": [
+        "\\bsleep\\b",
+        "insomnia",
+        "chronotyp\\w*",
+        "circadian",
+        "nap(?:ping)?",
+        "sleepiness",
+        "snoring",
+        "apn[oe]a",
+        "\\bosa\\b",
+        "sleep.?disordered breathing",
+        "sleep duration",
+        "sleep quality",
+        "sleep efficiency",
+        "sleep fragmentation"
+      ]
+    },
+    "limitations": [
+      "Keyword matches are not eligibility judgments.",
+      "No record is excluded, included, or marked unclear by this script.",
+      "No age, population, design, or phenotype eligibility is inferred from missing terms.",
+      "Abstract-missing records remain in the list and are flagged.",
+      "This ranked list may bias reviewer attention; reviewers should preserve independent decisions and can ignore the order."
+    ],
+    "method": "deterministic keyword grouping; binary group weights; title hit adds one point for sleep and/or primary frailty group",
+    "purpose": "ordering assistance only; reviewers must independently screen every record against protocol",
+    "weights": {
+      "genetic_method": 1,
+      "observational_design": 1,
+      "primary_frailty": 4,
+      "secondary_aging_outcome": 1,
+      "sleep_exposure": 3
+    }
+  },
+  "protocol_sha256": "1013526fa40de6708ed9e547e09c1cb0ae3de0c27d8cbe2d5d04a99ffa796abb",
+  "records": 56117,
+  "script": "frailty_paper/scripts/51_prioritize_screening_queue.py",
+  "script_sha256": "0986084f79cd7a5df49ffac314979cb70bd8c01ec740cbadb2dbf231aba9434b",
+  "source_queue": "frailty_paper/review/screening/title_abstract_queue.tsv",
+  "source_queue_sha256": "3ae3fb3b4765c85536c3ccf64d20297a632af892e2c66e622ee665db1ea43b2e"
+}

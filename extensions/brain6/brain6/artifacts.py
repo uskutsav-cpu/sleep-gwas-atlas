@@ -66,6 +66,10 @@ def transaction(root: str | Path, relative: str, *, stage: str,
                 "version": __version__}
         try:
             yield work, meta
+            # Recheck bytes AND code after execution: do not seal a result whose
+            # inputs were changed by another writer while this task ran.
+            end_key, _ = fingerprint(inputs, parameters, stage)
+            require(end_key == key, "Inputs or implementation changed during execution; artifact not published")
             outputs = []
             for p in sorted(work.rglob("*")):
                 require(not p.is_symlink(), f"Output symlink forbidden: {p}")

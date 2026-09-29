@@ -1,5 +1,7 @@
 import gzip
+import errno
 import math
+import os
 from pathlib import Path
 import numpy as np
 import pytest
@@ -32,6 +34,23 @@ def test_atomic_no_clobber(tmp_path):
     write_json(tmp_path/'a.json',{'x':1})
     with pytest.raises(ContractError):write_json(tmp_path/'a.json',{'x':2})
     assert read_json(tmp_path/'a.json')=={'x':1}
+
+def test_atomic_uses_rename_when_hardlinks_are_unsupported(tmp_path,monkeypatch):
+    def no_hardlinks(*args,**kwargs):
+        raise OSError(errno.EOPNOTSUPP,'hard links are unsupported')
+    monkeypatch.setattr(os,'link',no_hardlinks)
+    out=tmp_path/'external-volume.tsv'
+    with atomic_text(out) as f:f.write('complete\n')
+    assert out.read_text()=='complete\n'
+    assert not list(tmp_path.glob('*.partial'))
+    with pytest.raises(ContractError):
+        with atomic_text(out) as f:f.write('clobber\n')
+    assert out.read_text()=='complete\n'
+
+def test_atomic_replace_uses_rename(tmp_path):
+    out=tmp_path/'replace.tsv';out.write_text('old\n')
+    with atomic_text(out,immutable=False) as f:f.write('new\n')
+    assert out.read_text()=='new\n'
 
 def test_deterministic_gzip_and_magic(tmp_path):
     for name in ['a.gz','b.gz']:

@@ -1,0 +1,69 @@
+{
+  "analysis_id": "brain6-lava-baseline-roundoff-descriptive-comparison-v1",
+  "audit_path": "brain6/qc/lava_production_checkpoint_audit_20260924T2139Z.json",
+  "audit_sha256": "59c38a76d053c4e8a4ad810c3636f184b18e18ea412aab7ba041c819e3cb3b71",
+  "audit_time_utc": "2026-09-24T21:40:02+00:00",
+  "baseline_run_id": "13b80e6b64a5179fec70ba510a89c51241c9d58ec05833cc52161b435aee44fa",
+  "both_tested_slots": 1,
+  "both_tested_with_numeric_p_and_rg": 1,
+  "builder_path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/scripts/compare_lava_baseline_roundoff.py",
+  "builder_sha256": "5b3031371b8406b2c20b3751ec435a25f16d068b9e7feb7a3e29809d8ef318dc",
+  "comparison_table_path": "brain6/results/lava/lava_baseline_roundoff_pair_locus_comparison_v1.tsv",
+  "comparison_table_sha256": "7380657c997de2c7280b826fce64a3530935fc733c3e45b815fe83bdec4d1b17",
+  "environmental_retry": {
+    "artifact_path": "/Volumes/Extreme SSD/brain6-work/lava-results-v1/af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf/targeted_retries/envfix-20260924-001/retry_provenance.json",
+    "artifact_sha256": "646e9b6477750b6b148a9f0f44bd6167783b1e465ea83bb85cdb678516ec260d",
+    "interpretation": "Retry changed the preserved environmental failure to UNIVARIATE_UNDERPOWERED; it remains isolated and is not merged into the family.",
+    "original_receipt_sha256_unchanged": "b6a29cdbf5b10e65490bda220c097eba78b8c0c35073529efa16d8ec7ad34b23",
+    "pair_result": {
+      "local_rg": "NA",
+      "locus_id": "740",
+      "p": "NA",
+      "pair_id": "longsleep__parkinson",
+      "reason": "ONE_TRAIT_DROPPED_FOR_LOW_LOCAL_H2",
+      "status": "UNIVARIATE_UNDERPOWERED"
+    },
+    "receipt_sha256": "f579564bac69c9728aa2714555d18250649d5f3afa110df324dc0ff01920161e",
+    "retry_id": "envfix-20260924-001",
+    "status": "PASS_RETRY_ARTIFACT"
+  },
+  "interpretation": "Receipt-verified pair-by-locus comparison only. It does not resolve the roundoff aggregator's shared-univariate disagreement, apply family correction, or promote local-rg inference.",
+  "loci": 2495,
+  "numeric_difference_summary": {
+    "max_abs_delta_local_rg": 0.0,
+    "max_abs_delta_p": 0.0,
+    "significance_status_changes_at_p_0_05": 0
+  },
+  "pair_ids": [
+    "insomnia__adhd",
+    "insomnia__mdd",
+    "longsleep__scz",
+    "longsleep__bipolar",
+    "longsleep__parkinson"
+  ],
+  "pair_result_file_inventory_sha256": {
+    "baseline": "135b20f91dd44569bd8b293d948cf3a87160a1856e344a732802fa46fae9c70b",
+    "roundoff": "816b8e1ff465fd3b104f9243b1d3400f977c31b6275366a34d43d4d05436ab1e"
+  },
+  "planned_pair_locus_slots": 12475,
+  "roundoff_aggregation_error": "Pair-specific inputs disagree on the shared univariate test: insomnia/2",
+  "roundoff_run_id": "af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf",
+  "schema_version": 1,
+  "source_manifests": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/config/lava_family_v2.json": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/manifests/lava_family_v2_run.json": "cf7500b014a2e9b1bbeda2d5aaeca724e9aeeeae9a34b0a7641adcfb95451a49",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/manifests/lava_roundoff_v1_run.json": "96eabc617b235b48ff51820ab635bd76a7adfff35666c574742ff82a65f61650",
+    "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile": "462e81bce9ca85c9f11c0feb4d1bda24dd2c0fe095bfcc83fd32f77dff9a0882"
+  },
+  "status": "DESCRIPTIVE_COMPLETE_FAMILY_QC_UNRESOLVED",
+  "status_transitions": {
+    "FAILED->FAILED": 5,
+    "FAILED->UNIVARIATE_UNDERPOWERED": 2,
+    "NO_OVERLAP->NO_OVERLAP": 111,
+    "TESTED->TESTED": 1,
+    "UNIVARIATE_UNDERPOWERED->FAILED": 1,
+    "UNIVARIATE_UNDERPOWERED->UNIVARIATE_UNDERPOWERED": 12355
+  },
+  "summary_table_path": "brain6/results/supplement/table_S24_lava_roundoff_comparison.tsv",
+  "summary_table_sha256": "f25930d36d71070a6f8acbc45e1518bc5eb9c1fa4114ce70d7a681d1e7195892"
+}

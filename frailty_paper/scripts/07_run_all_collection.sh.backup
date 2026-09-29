@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="${1:-$PWD}"
+cd "$ROOT"
+PAPER="$ROOT/frailty_paper"
+
+bash "$PAPER/scripts/00_setup.sh" "$ROOT"
+# shellcheck disable=SC1091
+source "$PAPER/.venv/bin/activate"
+
+python "$PAPER/scripts/01_pubmed_search.py" \
+  --config "$PAPER/config/pubmed_queries.json" \
+  --outdir "$PAPER/review/pubmed"
+
+bash "$PAPER/scripts/02_collect_core_public_gwas.sh" "$ROOT"
+bash "$PAPER/scripts/04_collect_frailty_specific_gwas.sh" "$ROOT"
+
+python "$PAPER/scripts/05_collect_resource_indexes.py" \
+  --root "$PAPER" \
+  --download-brainscope-key
+
+python "$PAPER/scripts/06_build_manifests.py" --repo "$ROOT"
+
+echo
+echo "=== COLLECTION COMPLETE ==="
+echo "PubMed master:      $PAPER/review/pubmed/pubmed_master.csv"
+echo "Extraction template:$PAPER/review/extraction_template.tsv"
+echo "GWAS audit:         $PAPER/manifests/existing_repo_trait_audit.tsv"
+echo "Checksums:          $PAPER/manifests/file_checksums.tsv"
+echo
+echo "MANUAL SYSTEMATIC-REVIEW STEP STILL REQUIRED: export Embase, Scopus, Web of Science (and PsycINFO if used) into $PAPER/review/manual_exports/."
+echo "Do not call the review complete from PubMed alone."

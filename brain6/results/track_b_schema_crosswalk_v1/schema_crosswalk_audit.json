@@ -1,0 +1,146 @@
+{
+  "admission_status": "BLOCKED_PENDING_EXPLICIT_FROZEN_RULE_AND_INDEPENDENT_VALIDATOR",
+  "analysis_id": "brain6-track-b-schema-crosswalk-v1",
+  "counts": {
+    "adjacent_duplicate_keys": 0,
+    "chromosome_order_violations": 0,
+    "derived_five_track_q_below_0_05": 1472,
+    "legacy_bh_q_below_0_05": 3755,
+    "numerical_failures": 0,
+    "primary_legacy_p_below_2_5e_8": 441,
+    "rows": 5514399,
+    "tested": 5514399,
+    "v3_p_below_1e_8": 389
+  },
+  "family_lock_sha256": "e11a96bbb77ac6ad3e42426d3abdd927a7cf28c6d1150875d646d20a0d02c8b7",
+  "field_map": {
+    "BP": "BP",
+    "CHR": "CHR",
+    "P_PLACO": "P_PLACO_PLUS",
+    "Q_BONFERRONI_ACROSS_PAIRS": "min(1, 5 * PLACO_BH_Q)",
+    "Q_WITHIN_PAIR": "PLACO_BH_Q",
+    "SNP": "SNP",
+    "Z1": "Z1",
+    "Z2": "Z2",
+    "headline": "P_PLACO_PLUS < 1e-8",
+    "status": "analysis_status (TESTED only)"
+  },
+  "first_three_proposed_rows": [
+    {
+      "BP": "798400",
+      "CHR": "1",
+      "P_PLACO": "0.700375518413223",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.999999965842484",
+      "SNP": "rs10900604",
+      "Z1": "-1.0226835998281",
+      "Z2": "0.214125169205431",
+      "headline": "False",
+      "status": "TESTED"
+    },
+    {
+      "BP": "798959",
+      "CHR": "1",
+      "P_PLACO": "0.725572772066455",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.999999965842484",
+      "SNP": "rs11240777",
+      "Z1": "-0.960213032872755",
+      "Z2": "0.200300601353248",
+      "headline": "False",
+      "status": "TESTED"
+    },
+    {
+      "BP": "913889",
+      "CHR": "1",
+      "P_PLACO": "0.0868416118647586",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.952160993441492",
+      "SNP": "rs2340596",
+      "Z1": "1.72501759173504",
+      "Z2": "-1.32463911711542",
+      "headline": "False",
+      "status": "TESTED"
+    }
+  ],
+  "last_three_proposed_rows": [
+    {
+      "BP": "51165664",
+      "CHR": "22",
+      "P_PLACO": "0.206282016627379",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.999999965842484",
+      "SNP": "rs8137951",
+      "Z1": "0.900278251090066",
+      "Z2": "1.51406753941199",
+      "headline": "False",
+      "status": "TESTED"
+    },
+    {
+      "BP": "51171497",
+      "CHR": "22",
+      "P_PLACO": "0.450676951657588",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.999999965842484",
+      "SNP": "rs2301584",
+      "Z1": "-0.917030347082989",
+      "Z2": "-0.647716362960708",
+      "headline": "False",
+      "status": "TESTED"
+    },
+    {
+      "BP": "51185848",
+      "CHR": "22",
+      "P_PLACO": "0.308988009821825",
+      "Q_BONFERRONI_ACROSS_PAIRS": "1.0",
+      "Q_WITHIN_PAIR": "0.999999965842484",
+      "SNP": "rs3865764",
+      "Z1": "-0.691832187533528",
+      "Z2": "-1.37939158742345",
+      "headline": "False",
+      "status": "TESTED"
+    }
+  ],
+  "not_proven": [
+    "scientific equivalence of legacy and v3 implementation",
+    "frozen admission of V2 terminal-gate alias and V4 cleanup",
+    "independent whole-family correction/region eligibility"
+  ],
+  "scope": "READ_ONLY_TECHNICAL_CROSSWALK_NOT_CANONICAL_ADMISSION",
+  "source_header": [
+    "analysis_id",
+    "pair_id",
+    "SNP",
+    "CHR",
+    "BP",
+    "A1",
+    "A2",
+    "Z1",
+    "Z2",
+    "P1",
+    "P2",
+    "T_PLACO_PLUS",
+    "P_PLACO_PLUS",
+    "PLACO_BH_Q",
+    "within_pair_family_n",
+    "analysis_status",
+    "numerical_error"
+  ],
+  "source_path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/track_b/pleiotropy/results/placo/B.full.tsv.gz",
+  "source_provenance_sha256": "fb6565e7a165297a1b733882ba0375fc0668018ddff3887abd3178ac120298d3",
+  "source_sha256": "f0eb8b9e8a5b3b4a0ea6151ed75473b0be3d311e463824889a050d83beaaac2e",
+  "target_header": [
+    "SNP",
+    "CHR",
+    "BP",
+    "Z1",
+    "Z2",
+    "P_PLACO",
+    "Q_WITHIN_PAIR",
+    "Q_BONFERRONI_ACROSS_PAIRS",
+    "status",
+    "headline"
+  ],
+  "target_template_path": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/brain6/results/placo/insomnia__mdd/variants.tsv.gz",
+  "target_template_sha256": "e3f6562cccfcec6fa856e959afe02e9abc69ab6928d5ba53be9c2ba67940e543"
+}

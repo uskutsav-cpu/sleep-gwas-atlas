@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "rule_id": "brain6_placo_candidate_loci_v1",
+  "stage": "post-PLACO, pre-functional-annotation candidate-locus definition",
+  "status": "FROZEN_RULE_PARTIAL_FAMILY_RESULTS",
+  "candidate_criterion": "P_PLACO < 1e-8 from a pair-level QC-PASS collation; the threshold is 5e-8 Bonferroni-adjusted across the five selected tracks",
+  "clumping": {
+    "algorithm": "greedy lead-variant clumping ordered by P_PLACO, then chromosome, position, and SNP ID",
+    "reference": "LAVA UK Biobank reference v1.1",
+    "reference_sample_size": 100000,
+    "reference_ancestry": "European",
+    "ld_metric": "squared Pearson correlation from the pinned LAVA .bcor/.info reference",
+    "r2_threshold": 0.1,
+    "window_kb": 500,
+    "only_exact_snp_chr_position_reference_matches_are_clumped": true
+  },
+  "region_definition": {
+    "lead_flank_kb": 500,
+    "merge_overlapping_intervals_within_pair_and_chromosome": true,
+    "retain_all_independent_clump_leads_when_regions_merge": true
+  },
+  "missing_reference_variant_policy": "Retain in candidate-variant audit as NOT_CLUMPED_NO_EXACT_REFERENCE_MATCH; do not call independent",
+  "partial_family_policy": "Candidate outputs must be labelled PARTIAL_FAMILY until all four v3 pair collations and protected Track B inputs are validated",
+  "coordinate_policy": "Require exact CHR/BP agreement with the locked reference; the build label is not inferred from rsID alone",
+  "evidence_boundary": "PLACO candidate loci only; not evidence of local rg, causal variants, shared causal signals, genes, or mechanisms",
+  "rule_frozen_after_initial_PLACO_pair_outputs": true,
+  "annotation_reviewed_before_freeze": false
+}

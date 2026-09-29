@@ -1,0 +1,54 @@
+{
+  "analysis_id": "brain6_power_optimized_sensitivity_v1_promotion_rule_reassessment",
+  "association_results_consulted": false,
+  "canonical_invariant": "FAILED_QC_NOT_PROMOTED; immutable",
+  "decision_rule": {
+    "canonical_qc_rule_modified": false,
+    "eligible_if_any": {
+      "finite_local_h2_processability_gain_percentage_points_at_least": 10,
+      "low_local_h2_not_run_relative_reduction_percent_at_least": 25
+    },
+    "frozen_canonical_family_untested_fraction_ceiling": 0.05,
+    "frozen_canonical_strict_univariate_gate_p_below": 2.86286859433152e-06
+  },
+  "decision_status": "FULL_SENSITIVITY_TECHNICAL_ADVANCEMENT_JUSTIFIED",
+  "frozen_family_qc": {
+    "candidate_not_run": 876,
+    "candidate_untested_fraction": 0.3511022044088176,
+    "maximum_untested_loci_at_5_percent": 124,
+    "passes": false
+  },
+  "input_sha256": {
+    "brain6/results/power_optimized_sensitivity_v1/current_sleep_trait_audit_complete_v2.tsv": "3e03d54dbe2e82bc06ebc127cbbb2c4d3bac9e5f5e8ab7475978454d480a36bf",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/sleep_duration_continuous_lava_univariate.tsv": "66237a337f462abcac6b9a334c79d4bdf86ce975b22133524dd816e420460a2e",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/summary.json": "5821ade3094da42c15f4c35e8da964d34db691554a4db78d94a37b97e3244173",
+    "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/results/canonical_family_results.tsv": "ac450685970a35a4d0d06a9f02dd45ee5ac8f1af905ef411564b7e1f7f2f5352"
+  },
+  "metrics": {
+    "candidate_low_h2_not_run": 876,
+    "candidate_tested": 1619,
+    "canonical_longsleep_low_h2_not_run": 1271,
+    "canonical_longsleep_tested": 1204,
+    "finite_local_h2_gain_loci": 415,
+    "finite_local_h2_processability_gain_pp": 16.63326653306613,
+    "loci": 2495,
+    "low_local_h2_not_run_relative_reduction_pct": 31.07789142407553,
+    "strict_univariate_gate_gain_loci": 6,
+    "strict_univariate_gate_gain_pp": 0.24048096192384769
+  },
+  "pairwise_interpretation": "Eligibility only; no bivariate local-rg results generated or reviewed. New candidate-specific LDSC overlap matrices are still required.",
+  "qualifying_criteria": {
+    "finite_local_h2_processability_gain": true,
+    "low_local_h2_not_run_reduction": true
+  },
+  "rules_source": "User-specified Phase 5 in pasted request: at least one of the listed objective local-h2 improvement examples; technical eligibility only, no association-based promotion.",
+  "schema_version": 1,
+  "strict_gate_intersections_by_disorder": {
+    "bipolar": [],
+    "parkinson": [],
+    "scz": [
+      "266",
+      "1719"
+    ]
+  }
+}

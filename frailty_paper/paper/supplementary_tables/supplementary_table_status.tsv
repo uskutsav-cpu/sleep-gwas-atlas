@@ -1,0 +1,17 @@
+table	title	status	data_rows	file	source	limitation
+S1	GWAS metadata	PARTIAL_METADATA_TABLE	33	table_s1_gwas_metadata.tsv	table_s1_gwas_metadata.tsv	All 33 registered GWAS metadata rows; source eligibility differs by phenotype.
+S2	Systematic-review studies	NOT_AVAILABLE_UNSCREENED	NA	NOT_GENERATED		No included studies; 56,117 records remain unscreened and licensed exports are absent.
+S3	Risk-of-bias results	NOT_AVAILABLE_NO_APPRAISALS	NA	NOT_GENERATED		No included studies have been appraised.
+S4	SNP heritability	PARTIAL_H2_TABLE	20	table_s4_snp_heritability.tsv	table_s4_snp_heritability.tsv	20 current sleep/FI/latent h2 rows; physical, Fried and HFRS rows unavailable.
+S5	Global genetic correlation	PARTIAL_GLOBAL_RG_TABLE	168	table_s5_global_rg.tsv	table_s5_global_rg.tsv	168 FI, latent and read-only aging-context estimates; no eligible physical/Fried/HFRS estimates.
+S6	Physical-component results	BLOCKED_SOURCE_PROVENANCE	NA	NOT_GENERATED		Five candidate files are structurally readable but lack eligible source/build/effect provenance.
+S7	Latent-factor results	SENSITIVITY_ONLY	84	table_s7_latent_factor_rg.tsv	table_s7_latent_factor_rg.tsv	84 secondary latent-factor rg estimates; direct insomnia/general-factor part-whole dependence is flagged; exact participant overlap remains unknown.
+S8	Replication	PARTIAL_REPLICATION_FEASIBILITY	15	table_s8_replication_audit.tsv	table_s8_replication_audit.tsv	Audited candidate resources; no eligible independent pairwise sleep-frailty rg replication established.
+S9	LAVA	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible independent replicated frailty pair has passed upstream gates.
+S10	PLACO/shared loci	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible frailty-specific LAVA-prioritized loci.
+S11	Fine-mapping	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible frailty-specific shared loci.
+S12	Trait-trait colocalization	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible frailty-specific locus inputs.
+S13	Molecular QTL evidence	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible frailty-specific shared loci for molecular-QTL analysis.
+S14	Cell-type evidence	NOT_JUSTIFIED	NA	NOT_GENERATED		No eligible candidate loci/genes for cell-type analysis.
+S15	Sensitivity analyses	PARTIAL_CORRECTION_SENSITIVITY	96 correction rows + 119 conclusion-by-sensitivity rows	table_s15_correction_sensitivity.tsv; table_s15_sensitivity_conclusion_matrix.tsv	table_s15_correction_sensitivity.tsv; table_s15_sensitivity_conclusion_matrix.tsv	The numeric correction table reports primary sleep × FI all-396 Bonferroni and latent-factor same-family 84-pair Bonferroni. The companion conclusion matrix distinguishes completed, partial, unresolved, blocked, and not-justified sensitivity domains; unavailable tests are not null results.
+S16	Software/resources/versions	PARTIAL_VERSION_INVENTORY	53	table_s16_software_resources_versions.tsv	table_s16_software_resources_versions.tsv	Includes locked versions and captured analysis, validation, and current manuscript-audit executions; does not cover every future tool run or the final full scientific replay.

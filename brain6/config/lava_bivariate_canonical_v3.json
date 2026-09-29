@@ -1,0 +1,110 @@
+{
+  "analysis_id": "brain6-lava-local-rg-v3",
+  "bivariate_parameters": {
+    "adap_thresh": [
+      0.0001,
+      1e-06
+    ],
+    "cap_estimates": true,
+    "confidence_intervals": true,
+    "p_values": true,
+    "parameter_limit": 1.25
+  },
+  "canonical_source": {
+    "analysis_id": "brain6-lava-canonical-v3",
+    "execution_lock_sha256": "f37a212ff44472004549095a3b17d28da0d130e2ab2a9ea507feb87312b65d27",
+    "family_lock_sha256": "f30c46f1eaaaf50d4697cf8af97f3acd44bef2ad8e067c016f3b2568b424b417",
+    "intended_trait_locus_tests": 17465,
+    "maximum_untested_fraction": 0.05,
+    "required_state": "completed canonical audit with qc_pass=true",
+    "run_id": "d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b"
+  },
+  "eligibility": {
+    "assume_zero_overlap": false,
+    "minimum_shared_reference_variants": 2,
+    "participant_level_overlap_verified": false,
+    "rule": "Both canonical unique trait-by-locus univariate results must be TESTED and each P must be strictly less than the bound threshold before pair-specific harmonization or bivariate execution.",
+    "strict_p_threshold": 2.86286859433152e-06
+  },
+  "execution": {
+    "max_process_attempts_per_locus": 2,
+    "output_root": "work/lava-local-rg-v3",
+    "overwrite_existing_output": false,
+    "random_seed": 20260922,
+    "worker_count": 4,
+    "worker_protocol": "Python coordinator writes gate-only receipts without R when no pair passes the frozen univariate and coverage gates; up to four one-locus R workers run only for eligible loci"
+  },
+  "locus_processing": {
+    "cap_estimates": true,
+    "drop_failed": true,
+    "max_block_size": 3000,
+    "max_prop_K": 0.75,
+    "min_K": 2,
+    "prune_thresh": 99
+  },
+  "pair_family": {
+    "allowed_statuses": [
+      "TESTED",
+      "UNIVARIATE_UNDERPOWERED",
+      "NO_OVERLAP",
+      "FAILED",
+      "NOT_RUN"
+    ],
+    "correction": "Benjamini-Hochberg across the fixed 12,475 pair-by-locus family; non-tested slots occupy their family position at P=1 and remain NA for reported q values",
+    "maximum_execution_failure_fraction": 0.01,
+    "maximum_univariate_untested_fraction": 0.05,
+    "n_loci": 2495,
+    "n_pairs": 5,
+    "n_slots": 12475,
+    "pair_ids": [
+      "insomnia__adhd",
+      "insomnia__mdd",
+      "longsleep__scz",
+      "longsleep__bipolar",
+      "longsleep__parkinson"
+    ],
+    "pair_lock_sha256": "577445f1c164e848d3602c2d9205b08586cc0f224db28f78c5b8f23bf9a78024",
+    "report_all_statuses": true
+  },
+  "provenance": {
+    "input_provenance_path": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1/provenance.json",
+    "input_provenance_sha256": "c50dae720237b548a282d931118f61348821a139f198c64d6d6876a015ce3d02",
+    "official_reference_provenance_sha256": "35ab371935b9c260dab21be248f4907b693565787ef9f62334e7d8030204270e",
+    "overlap_matrices": [
+      {
+        "pair_id": "insomnia__adhd",
+        "path": "brain6/manifests/lava_overlap_v2/insomnia__adhd.txt",
+        "sha256": "98a7978270c63e985f99c76846b2b9bbec4001f9815ed8772bddcb82d0e8b342"
+      },
+      {
+        "pair_id": "insomnia__mdd",
+        "path": "brain6/manifests/lava_overlap_v2/insomnia__mdd.txt",
+        "sha256": "8e0a1d2c45e237847e482c55b45bc4c0b4d2cc299451cfdac6ba54d610deef93"
+      },
+      {
+        "pair_id": "longsleep__scz",
+        "path": "brain6/manifests/lava_overlap_v2/longsleep__scz.txt",
+        "sha256": "9129bb733cc048b64032027af2816221fa8e8642bd8fec3ef4e626fa0192cdaa"
+      },
+      {
+        "pair_id": "longsleep__bipolar",
+        "path": "brain6/manifests/lava_overlap_v2/longsleep__bipolar.txt",
+        "sha256": "f81ce321751f2fd46fcb56d06cdcdbeb678800fae76f90e3f33d1a54a759b1d8"
+      },
+      {
+        "pair_id": "longsleep__parkinson",
+        "path": "brain6/manifests/lava_overlap_v2/longsleep__parkinson.txt",
+        "sha256": "a357282976231bd159e0476ee8bbdc18e666c463a3098a1d9a35375245e28482"
+      }
+    ],
+    "roundoff_policy_id": "LAVA015_BLOCK_REDUCED_SYMMETRY_V1",
+    "source_execution_policy_path": "brain6/config/lava_execution_v1.json",
+    "source_execution_policy_sha256": "50afe11721bfe8f898bfb62ff526334a17e84b959715ae4b33329107967666dc",
+    "source_family_policy_path": "brain6/config/lava_family_v2.json",
+    "source_family_policy_sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+    "worker_script_path": "brain6/scripts/run_lava_family_locus_v3.R",
+    "worker_script_sha256": "5049eb6491b55c89095d89135299d5065effcb07512d1a92afce46ceee3a4645"
+  },
+  "review_status": "PREDECLARED_BEFORE_V3_BIVARIATE_RESULTS",
+  "schema_version": 1
+}

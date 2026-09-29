@@ -13,6 +13,7 @@ mkdir -p "$MPLCONFIGDIR"
 
 require_file "$CONFIG"
 require_ldsc
+prepare_analysis_workspace
 LOGDIR=${LDSC_LOGDIR:-results/logs}
 RG_OUT=${RG_OUT:-results/tables/rg_matrix.tsv}
 RG_FIGURE_OUT=${RG_FIGURE_OUT:-results/figures/fig2_rg_heatmap.png}
@@ -59,10 +60,10 @@ fi
 [ -n "$sleep_traits" ] || die "no readiness-eligible sleep traits passed h2 QC"
 [ -n "$disease_traits" ] || die "no readiness-eligible disease traits passed h2 QC"
 for trait in $sleep_traits $disease_traits; do
-  require_file "data/munged/$trait.sumstats.gz"
+  require_file "$MUNGED_DIR/$trait.sumstats.gz"
 done
 
-list=$(printf '%s\n' $disease_traits | sed 's|^|data/munged/|; s|$|.sumstats.gz|' | paste -sd, -)
+list=$(printf '%s\n' $disease_traits | sed "s|^|$MUNGED_DIR/|; s|$|.sumstats.gz|" | paste -sd, -)
 for sleep_trait in $sleep_traits; do
   echo "==> rg $sleep_trait vs ${disease_traits}"
   if [ "$pair_mode" -eq 1 ]; then
@@ -71,8 +72,8 @@ for sleep_trait in $sleep_traits; do
     rg_out="$LOGDIR/rg_$sleep_trait"
   fi
   "$LDSC_PYTHON" "$LDSC_DIR/ldsc.py" \
-    --rg "data/munged/$sleep_trait.sumstats.gz,$list" \
-    --ref-ld-chr ref/eur_w_ld_chr/ --w-ld-chr ref/eur_w_ld_chr/ \
+    --rg "$MUNGED_DIR/$sleep_trait.sumstats.gz,$list" \
+    --ref-ld-chr "$REF_DIR/eur_w_ld_chr/" --w-ld-chr "$REF_DIR/eur_w_ld_chr/" \
     --out "$rg_out"
 done
 

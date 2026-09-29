@@ -182,8 +182,27 @@ def parse_rg(logdir, config_path="config/analysis_panel.tsv", inclusion_path=Non
                 break
             fields = l.split()
             if len(fields) != len(header):
-                # LDSC writes a prose footer after the table in some versions.
-                break
+                # LDSC's fixed-width table does not quote p1/p2. Paths with
+                # spaces (for example an external volume named "Extreme SSD")
+                # therefore split into extra fields. Recover the two input
+                # paths by their stable .sumstats.gz suffix, then split only
+                # the numeric tail. Keep the old prose-footer behavior when
+                # the row does not match this shape.
+                match = re.match(
+                    r"^(.*?)\.sumstats\.gz\s+(.*?)\.sumstats\.gz\s+(.+)$", l
+                )
+                if match:
+                    numeric = match.group(3).split()
+                    if len(numeric) == len(header) - 2:
+                        fields = [
+                            match.group(1) + ".sumstats.gz",
+                            match.group(2) + ".sumstats.gz",
+                            *numeric,
+                        ]
+                    else:
+                        break
+                else:
+                    break
             body.append(fields)
         if body:
             frame = pd.DataFrame(body, columns=header)

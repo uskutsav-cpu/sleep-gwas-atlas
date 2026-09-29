@@ -1,0 +1,44 @@
+# Project scope audit
+
+Audit date: 2026-09-25. The Brain6 / Sleep GWAS Atlas and the FI-based sleep–frailty paper are separate analyses with separate result namespaces and promotion rules. The Brain6 canonical v3 family has seven total inputs, of which only insomnia and long sleep are sleep GWAS; the other five are brain-disorder GWAS.
+
+## Brain6-only runs and artifacts
+
+- The locked Brain6 global atlas and its 72 sleep–brain-disorder LDSC rows, figures, tables, and provenance.
+- The seven-input canonical Brain6 LAVA v3 run at `work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b`, with 2,495/2,495 verified loci, 17,465 cells, and immutable decision `FAILED_QC_NOT_PROMOTED`.
+- The separate Brain6 v2 failure and roundoff/recovery artifacts, receipt audits, pair-context diagnostics, partial four-pair PLACO outputs, replication ledger, Brain6 manuscript material, Brain6-only project-state inventory, and diagnostic-only LAVA-reference LD factor/block-PSD audits. The LD diagnostics do not alter candidate clumping or promote normalized reference values.
+- No FI or frailty result has been used to replace, reinterpret, or promote a canonical Brain6 result. A new Brain6-only, outcome-blinded power screen is under `brain6/results/power_optimized_sensitivity_v1/`; it uses only canonical receipts and Brain6 source metadata, and does not use FI sensitivity results.
+
+## Frailty-only runs and artifacts
+
+- The `frailty_paper/` source, code, data, results, and manuscript.
+- `frailty_fi_sleep_lava_sensitivity_v1` at `/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/lava_sensitivity_v1` is a separate 29,940-slot FI×sleep family. Earlier checkpoints, receipts, and the 05:40 pause remain preserved. The scheduler was externally resumed again at 05:53 UTC with four workers; a fresh pause was requested at 06:07 UTC under `pause_20260925T060720Z_b646`. Four loci in flight at the pause each completed and published receipts; all four workers emitted `worker_finished`, and the coordinator and worker PIDs were independently absent on process inspection before finalizing. The scheduler later resumed externally at 09:52:33 UTC; a fresh graceful pause was requested at 09:57:38 UTC under `pause_20260925T095738Z_d138`. Four already-claimed loci completed and published receipts before the workers exited; the idle coordinator was stopped only after process inspection confirmed every worker was defunct. Current state: 8,206/29,940 receipts validate, 21,734/21,734 remaining slots are held, zero non-pause claims, zero active workers, no runner lock, zero receipt-validation errors, and zero duplicate receipt events since this pause. Effective concurrency before pause was four (the invocation's six-worker request had been reduced by the existing swap fallback). Current corrected immutable checkpoint: `paused_checkpoint_20260925T1006Z_status_corrected.json` (SHA-256 `4f1b2b83951c7f997beeb1b75b69f7b2f1106c975c800e9a763b7fa2eb6b2014`); receipt manifest `receipt_manifest_20260925T1006Z.tsv` (SHA-256 `5177c8ce9d81376a3dc1182f6ac0b4eca94767d077fed5e560139251931c3e80`). All earlier pause checkpoints remain unchanged. Resume requires explicit authorization and `--resume-paused --workers 4` after confirming the runner lock is absent.
+- The prior continuous sleep-duration comparator screen and interim pair-context receipt audit under `frailty_paper/analysis/power_optimized_sleep_sensitivity_v1/brain6_comparator/` remain frailty-sensitivity diagnostics only. They are not imported as Brain6 results. An independent Brain6-only trait audit and continuous-duration trait-only screen now live under `brain6/results/power_optimized_sensitivity_v1/`; they use a separate source archive from `/Volumes/Extreme SSD/brain6-work/power-optimized-sensitivity-v1/sources/` and do not use FI outputs.
+
+## Shared infrastructure
+
+- This checkout and Git history contain both top-level projects; a shared repository or branch does not make their analyses the same project.
+- Both projects can refer to common public GWAS source facts, the pinned LAVA 0.1.5 runtime, and the same UK Biobank-European LAVA reference/locus definitions. Each analysis retains its own manifest, run identity, input hashes, receipts, correction family, and report.
+
+## Cross-references corrected
+
+- The Brain6 state-inventory builder and Brain6 report validator no longer read or require the FI scheduler.
+- The three September 25 combined-scope snapshots were moved byte-for-byte to `frailty_paper/analysis/scope_reconciliation/legacy_combined_inventories/` and verified against their original SHA-256 values. Their migration manifest records each source path and checksum. They are not current Brain6 inventory evidence; the new Brain6-only inventory supersedes them.
+- The earlier power-optimized FI sensitivity report, config, pilot snapshots, auditor, and its test were removed from the Brain6 namespace and retained in the frailty namespace listed above.
+
+## Accidental cross-references found and corrected
+
+- The repository-root `data/raw`, `data/harmonized`, and `data/munged` symlinks currently target the external frailty workspace. They are preserved because they are existing dirty-worktree state, but are not treated as Brain6 data or used by the Brain6-only audit. Their target aliases are a scope leak; Brain6 analysis must use the explicit Brain6 archive/preparation paths recorded in its manifests. No FI result is imported through these symlinks.
+
+The following artifacts were previously placed under `brain6/` even though they describe only the separate FI power-sensitivity screen. They were retained and relocated; the old Brain6 paths are absent and the replacements are under the frailty namespace:
+
+- `brain6/config/power_optimized_sensitivity_v1.json` and `brain6/config/power_optimized_sensitivity_v1/source_dashti_2019_continuous.json` → `frailty_paper/config/power_optimized_sleep_sensitivity_v1/brain6_comparator/` (including `config.json`, `config.original_scope.json`, and the source definition).
+- `brain6/results/power_optimized_sensitivity_v1/power_optimized_sleep_audit_2026-09-25.md`, its provenance JSON, and `power_optimized_sleep_pilot_2026-09-25.json` → `frailty_paper/analysis/power_optimized_sleep_sensitivity_v1/brain6_comparator/`.
+- `brain6/scripts/audit_power_optimized_sleep_pilot.py` → `frailty_paper/scripts/audit_brain6_sleep_power_pilot.py`; `brain6/scripts/tests/test_audit_power_optimized_sleep_pilot.py` → `frailty_paper/tests/test_audit_brain6_sleep_power_pilot.py`.
+- Historical combined-scope inventories `brain6/results/project_state_inventory_20260925.json`, `project_state_inventory_20260925T0151Z.json`, and `project_state_inventory_20260925T0154Z.json` → `frailty_paper/analysis/scope_reconciliation/legacy_combined_inventories/`, byte-for-byte, with hashes in `scope_migration_manifest.json`. The current Brain6-only inventory is the latest immutable timestamped inventory under `brain6/results/`; prior inventories remain preserved as historical snapshots. These supersede those mixed-scope inventories for Brain6 status.
+
+Remaining mentions of FI in `brain6/SCOPE_AUDIT.md`, `brain6/PROGRESS_LOG.md`, and the introductory scope sentence in `brain6/FINAL_BRAIN6_REPORT.md` are boundary documentation only. No FI receipt, estimate, claim, manifest, sensitivity output, or conclusion is included in canonical Brain6 tables or results.
+
+## Latest FI scope-boundary checkpoint — 2026-09-25 10:52 UTC
+
+The FI×sleep family remains separate and paused after an accidental resume during the four-worker scheduler request. The supported pause control is active at `desired_workers=4`; all four in-flight jobs completed before the workers and coordinator exited. Independent validation confirms 8,267/29,940 receipt identities/statuses, 21,673 pause holds exactly equal the unfinished slot complement, zero normal claims, zero duplicate receipt events since pause, and no runner lock or active workers. The prior 8,245 receipt hashes remain unchanged. An additive semantic copy of the immediately preceding resumed four-worker concurrency control is preserved as `concurrency_pre_pause_20260925T104634Z.json` (SHA-256 `3f2c73cd14f1c64572d4585d0eab599382a97d57b2ab5d9b317b836cfbc4746c`); its note explicitly records that the original control bytes were not separately archived before the pause write, so this is a field-level reconstruction rather than a byte-identical backup. The live pause control remains untouched. Additive external checkpoint `paused_checkpoint_20260925T1052Z_scope_corrected.json` SHA-256 `5386393d3f423183fa5df350de332ed916a9eb1ea131e057a07531fd27235b22`; receipt manifest `receipt_manifest_20260925T1052Z.tsv` SHA-256 `eb93d1349bcf9dc7193ecc4d739105b82944c96401c63beda5dedcf419735efe`. Canonical Brain6 v3 and its decision remain unchanged; no FI result is promoted.

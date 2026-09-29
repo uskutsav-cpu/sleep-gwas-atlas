@@ -1,0 +1,9 @@
+# Admissible manuscript claims at this terminal state
+
+**Can report:** the prespecified seven-trait LAVA v3 family completed 17,465 trait–locus evaluations with 13,745 TESTED, 3,720 NOT_RUN, and zero technical FAILED; it failed the 873 NOT_RUN QC ceiling and yielded **no promotable confirmatory region**. The exact Dashti ≥9 h versus 7–8 h public file lacks native variant-level N. Its GWAS Catalog copy is byte-identical. The source-verified total-N linear diagnostic did not improve net testability across 88 frozen loci. Separate ≥10 h UKB+MVP lookups found phenotype-adjacent aligned signs and three prespecified candidate-level exact P/direction labels, with UKB overlap.
+
+**Must qualify:** the coauthored BOLT-LMM statement establishes analysis class but not a complete per-variant export manifest; source-valid LAVA representation remains unresolved. Yale results are exploratory and overlapping, and directional agreement is weak evidence when P is large. A geographically small P does not establish LD proxy or locus replication under the frozen descriptive threshold.
+
+**Cannot claim:** passed confirmatory local genetic correlation, a promoted brain–sleep locus, independent long-sleep replication, GWAS fine-mapping PIP, trait–trait or molecular-QTL colocalization, causal gene, pathway mechanism, or clinical/therapeutic target on the basis of this failed family. An existing exploratory credible-set overlap must not be described as actual colocalization; any molecular-QTL SuSiE PIP remains distinct from a GWAS fine-mapping PIP.
+
+Suggested results sentence: “The prespecified LAVA family completed all planned cells without technical failures, but 3,720 of 17,465 trait–locus evaluations were not testable, exceeding the frozen limit of 873. Accordingly, no candidate region was promoted to confirmatory local genetic-correlation evidence.”

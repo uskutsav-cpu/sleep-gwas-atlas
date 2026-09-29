@@ -1,0 +1,32 @@
+{
+  "created_utc": "2026-09-23T15:47:36.520716+00:00",
+  "command": "python frailty_paper/scripts/22_plot_frozen_fi_rg.py --outdir frailty_paper/analysis",
+  "input": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+  "input_sha256": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+  "frozen_audit_manifest": "frailty_paper/manifests/frozen_atlas_frailty_manifest.json",
+  "frozen_audit_manifest_sha256": "127052c2f0a5be5fd0ac0a645a35afb72d9905a2b3aae614bd69c7913f3c3e05",
+  "registered_input_sha256": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045",
+  "script": "frailty_paper/scripts/22_plot_frozen_fi_rg.py",
+  "script_sha256": "8c9fc790613bde2acfc5e6857193ada24e0cb41c47adaa999ffe97074aee579e",
+  "python": "3.11.11",
+  "matplotlib": "3.9.4",
+  "environment_pin_file": "environment/tool_versions.tsv",
+  "environment_pins": {
+    "python_workflow": "3.11.11",
+    "matplotlib": "3.9.4"
+  },
+  "environment_gate_passed": true,
+  "preview_only": false,
+  "environment_mismatches": {},
+  "rows": 12,
+  "q_column": "global_rg_fdr_all_396 (unchanged from frozen atlas extract)",
+  "outputs": {
+    "frailty_paper/analysis/preliminary_frozen_fi_global_rg_forest.png": "b091971ccb563c03e0dbf6d4a4d7e4a8fa42192bcf00347af1e20580565a7c87",
+    "frailty_paper/analysis/preliminary_frozen_fi_global_rg_forest.pdf": "0334948e4f713e9f7ea7781ff80d3940e2d3b7868e0fdde36fa5826631d0d5a9"
+  },
+  "limitations": [
+    "Uses the frozen extract; does not regenerate LDSC or verify absent harmonized/munged source inputs.",
+    "The 95% intervals are displayed as rg \u00b1 1.96 \u00d7 SE.",
+    "Sleep-trait direction depends on the registered source phenotype coding."
+  ]
+}

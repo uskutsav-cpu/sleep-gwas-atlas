@@ -104,7 +104,8 @@ def run_followup(settings_path, *, allow_synthetic=False):
         except (ContractError,FileNotFoundError,KeyError,ValueError) as exc:
             failures+=1;state['status']='FAILED_OR_BLOCKED';state['reason']=str(exc)
         summaries.append(state)
-    status='NO_SIGNAL' if not loci else ('FAILED_QC_NOT_CONSUMED' if failures/len(loci)>c['maximum_locus_failure_rate'] else 'PASS')
+    status='NO_SIGNAL' if not loci else ('FAILED_QC_NOT_CONSUMED' if failures/len(loci)>c['maximum_locus_failure_rate']
+            else 'INSUFFICIENT_EVIDENCE' if any(s['status']!='PASS' for s in summaries) else 'PASS')
     # Summary completion describes evidence accounting, not a mechanism finding.
     with transaction(root,'summary',stage='deep_followup_summary',inputs=source_files+[loci_path],
                      parameters={'pair_id':c['pair_id']},synthetic=synthetic) as (work,meta):

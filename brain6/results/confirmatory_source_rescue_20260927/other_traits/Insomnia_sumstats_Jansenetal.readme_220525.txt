@@ -1,0 +1,32 @@
+README:
+
+Genome-wide analysis of insomnia in 1,331,010 individuals identifies new risk loci and functional pathways. (Jansen et al., Nature Genetics, 2018)
+
+This file includes GWAS summary statistics of insomnia in UK Biobank (N=386,533 individuals)
+Due to restrictions on sharing the data, the results do not include 23andMe participants
+To fully recreate our meta-analytic results for insomnia:
+(a) obtain insomnia GWAS summary statistics from 23andMe through application
+(b) conduct a meta-analysis of our sumstats with the 23andMe GWAS summary statistics
+
+# Header information:
+Columns (not all are present for each sumstats file, see note bottom of file):
+SNP: rsID of the variant
+UNIQUE_ID: unique SNP ID based on chromosome, position and alleles
+CHR: chromosome number
+BP: base pair position reported on GRCh37
+A1: effect allele (minor allele)
+A2: non-effect allele
+MAF: Minor allele frequency (frequency of the effect allele)
+OR: odds ratio related to the effect allele
+SE: standard error
+P: P-value
+N: per-SNP sample size
+INFO: info score (SNP quality measure)
+
+# GWAS of sleep-related phenotypes:
+-Morningness (UKB, N=345,552)
+-Sleep duration (UKB, N=384,317)
+-Ease of getting up (UKB, N=385,949)
+-Daytime napping (UKB, N=386,577)
+-Daytime dozing (UKB, N=386,548)
+-Snoring (UKB, N=359,916)

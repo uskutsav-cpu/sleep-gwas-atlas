@@ -1,0 +1,100 @@
+{
+  "analysis_id": "brain6-lava-local-rg-v2",
+  "baseline_run_id": "13b80e6b64a5179fec70ba510a89c51241c9d58ec05833cc52161b435aee44fa",
+  "codex_exec_session_id": 44584,
+  "command": "extensions/brain6/.venv/bin/python brain6/scripts/run_lava_family_roundoff_v1.py --input-root '/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1' --output-root '/Volumes/Extreme SSD/brain6-work/lava-results-v1' --rscript '/Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin/Rscript'",
+  "coordinator_pid": 87303,
+  "execution_lock_path": "brain6/config/lava_execution_roundoff_v1.json",
+  "execution_lock_sha256": "af7fe43dca7be3ba61fce6497088ff853c23067c4c1e82378a026696f9c95215",
+  "family_decision_status": "NOT_CREATED_AGGREGATION_FAILED",
+  "family_lock_path": "brain6/config/lava_family_v2.json",
+  "family_lock_sha256": "18bc23cfda9d3752a6233ee24c75aa51c4d4dec1e375c469a2a9548c1da60105",
+  "input_root": "/Volumes/Extreme SSD/brain6-work/preparation-v1/lava-inputs-v1",
+  "interpretation": "Independent, full-family rerun of the unchanged 12,475 pair-by-locus family using a numerical-only correction for roundoff asymmetry in LAVA 0.1.5 blockwise LD projections. No thresholds, inputs, locus definitions, or correction changed. Do not merge baseline and corrected-run slots; use the complete corrected run as a whole.",
+  "isolated_environmental_retry": {
+    "merged_into_family": false,
+    "pair_result": {
+      "local_rg": "NA",
+      "locus_id": "740",
+      "p": "NA",
+      "pair_id": "longsleep__parkinson",
+      "reason": "ONE_TRAIT_DROPPED_FOR_LOW_LOCAL_H2",
+      "status": "UNIVARIATE_UNDERPOWERED"
+    },
+    "provenance_path": "/Volumes/Extreme SSD/brain6-work/lava-results-v1/af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf/targeted_retries/envfix-20260924-001/retry_provenance.json",
+    "provenance_sha256": "646e9b6477750b6b148a9f0f44bd6167783b1e465ea83bb85cdb678516ec260d",
+    "retry_id": "envfix-20260924-001",
+    "status": "PASS_RETRY_ARTIFACT"
+  },
+  "last_progress_audit_utc": "2026-09-24T21:40:02+00:00",
+  "last_progress_status_counts": {
+    "FAILED": 6,
+    "NO_OVERLAP": 111,
+    "TESTED": 1,
+    "UNIVARIATE_UNDERPOWERED": 12357
+  },
+  "last_resumed_at_utc": "2026-09-24T15:21:26+00:00",
+  "materialized_input_provenance_sha256": "c50dae720237b548a282d931118f61348821a139f198c64d6d6876a015ce3d02",
+  "orchestrator_path": "brain6/scripts/run_lava_family_roundoff_v1.py",
+  "orchestrator_sha256": "7a180c5e430b6d6f149f0bb11b8e8a665130b5ff6cd75e2264120aa2dbca4c0e",
+  "output_root": "/Volumes/Extreme SSD/brain6-work/lava-results-v1/af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf",
+  "preflight": {
+    "locus_id": "1",
+    "output_root": "/private/tmp/brain6-lava-roundoff-preflight",
+    "status": "PASS"
+  },
+  "receipt_audit": {
+    "audited_at_utc": "2026-09-24T21:40:02+00:00",
+    "complete": true,
+    "invalid_receipts": 0,
+    "pair_locus_status_counts": {
+      "FAILED": 6,
+      "NO_OVERLAP": 111,
+      "TESTED": 1,
+      "UNIVARIATE_UNDERPOWERED": 12357
+    },
+    "planned_loci": 2495,
+    "report_path": "brain6/qc/lava_production_checkpoint_audit_20260924T2139Z.json",
+    "report_sha256": "59c38a76d053c4e8a4ad810c3636f184b18e18ea412aab7ba041c819e3cb3b71",
+    "verified_loci": 2495
+  },
+  "receipt_audit_report_path": "brain6/qc/lava_production_checkpoint_audit_20260924T2139Z.json",
+  "receipt_audit_report_sha256": "59c38a76d053c4e8a4ad810c3636f184b18e18ea412aab7ba041c819e3cb3b71",
+  "reference": "official UK Biobank LAVA v1.1; pinned R 4.3.3/LAVA 0.1.5",
+  "resume_history": [
+    {
+      "environmental_fix": "Set TMPDIR, TMP and TEMP to /private/tmp/brain6-lava-roundoff-tmp; no statistical setting or input changed.",
+      "event": "RESUMED_FROM_EXISTING_CHECKPOINTS",
+      "first_post_resume_verified_loci": 1770,
+      "output_root_unchanged": true,
+      "pre_resume_verified_loci": 1761,
+      "prior_coordinator_pid": 1004,
+      "prior_exec_session_id": 68498,
+      "prior_manifest_sha256": "d725e9480417b4a87558cbc1af8e642cb93c122d35587a38743f78f1abfe30da",
+      "prior_pid_absent_confirmed": true,
+      "resumed_coordinator_pid": 87303,
+      "resumed_exec_session_id": 44584,
+      "run_id_unchanged": true,
+      "run_lock_stale_pid_absent_confirmed": true,
+      "timestamp_utc": "2026-09-24T15:21:26+00:00"
+    }
+  ],
+  "run_id": "af43fde06c4c6c0d57a6ab104bea5aa33f24fb2ff2b89b53163529160452d0cf",
+  "run_label": "roundoff-stability follow-up v1",
+  "run_lock_released": true,
+  "schema_version": 1,
+  "started_at_utc": "2026-09-23T18:23:51+00:00",
+  "status": "AGGREGATION_FAILED_COMPLETE_RECEIPTS",
+  "target_diagnostic": {
+    "failed_slots": 0,
+    "locus_id": "1997",
+    "output_root": "/private/tmp/brain6-lava-roundoff-locus1997",
+    "status": "PASS_TARGETED_DIAGNOSTIC",
+    "tested_slots": 0,
+    "underpowered_slots": 5
+  },
+  "terminal_error": "ValueError: Pair-specific inputs disagree on the shared univariate test: insomnia/2",
+  "terminal_observed_at_utc": "2026-09-24T21:40:02+00:00",
+  "worker_path": "brain6/scripts/run_lava_family_locus_roundoff_v1.R",
+  "worker_sha256": "f3d8b454dab46832bdd7ce19d1db58ab6d28a48c50985cb21abcfa9b0fcf2e02"
+}

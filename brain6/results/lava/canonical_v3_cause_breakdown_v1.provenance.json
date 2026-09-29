@@ -1,0 +1,86 @@
+{
+  "analysis_id": "brain6-lava-canonical-v3-cause-breakdown-v1",
+  "builder_path": "brain6/scripts/build_lava_canonical_v3_cause_summaries.py",
+  "builder_sha256": "aca6181fff65419582e220be523e8e750e3183106cc3945eca50d4ec7a61d1fc",
+  "interpretation": "Descriptive breakdown of the frozen canonical v3 receipts; these counts explain test eligibility/status, not null association evidence or numerical failures. The immutable FAILED_QC_NOT_PROMOTED decision and 5% threshold are unchanged.",
+  "locus_table": {
+    "path": "brain6/results/lava/canonical_v3_status_by_locus_v1.tsv",
+    "rows": 2495,
+    "sha256": "f016c0c375975292e071668132a1d607835cccdbcb6848098b02c5ec0ea3070c"
+  },
+  "run_id": "d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b",
+  "schema_version": 1,
+  "source_hashes": {
+    "canonical_aggregate": "ac450685970a35a4d0d06a9f02dd45ee5ac8f1af905ef411564b7e1f7f2f5352",
+    "canonical_family_decision": "3569ce81d33479321f9b3adec7bd09c9b54a10a01f1fa4abd15888d9d2e66b22",
+    "canonical_latest_audit": "2154b557db8624f4e3b7807e0487f8c8b1f695cb6cd9e902cc33e34628e2557f",
+    "cell_level_not_run_provenance": "e074f8ecad4ce48816017af2fcc99a8c9c0abefb05cbce317569688850654303",
+    "cell_level_not_run_table": "7704ac250fbbac02729948813ceda23155cccbcd68393fcb1f266d3f412ca2ca"
+  },
+  "status": "COMPLETE_DIAGNOSTIC_ONLY",
+  "summary": {
+    "cause_counts": {
+      "FEWER_THAN_MIN_K": 2,
+      "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 154,
+      "LOW_LOCAL_H2_UNDERPOWERED": 3564
+    },
+    "cells": 17465,
+    "failed_cells": 0,
+    "loci": 2495,
+    "loci_with_at_least_five_not_run": 41,
+    "max_not_run_cells_at_one_locus": 7,
+    "not_run_cells": 3720,
+    "not_run_loci": 2020,
+    "tested_cells": 13745,
+    "trait_counts": {
+      "adhd": {
+        "FEWER_THAN_MIN_K": 0,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 23,
+        "LOW_LOCAL_H2_UNDERPOWERED": 200,
+        "NOT_RUN": 223
+      },
+      "bipolar": {
+        "FEWER_THAN_MIN_K": 1,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 22,
+        "LOW_LOCAL_H2_UNDERPOWERED": 145,
+        "NOT_RUN": 168
+      },
+      "insomnia": {
+        "FEWER_THAN_MIN_K": 0,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 20,
+        "LOW_LOCAL_H2_UNDERPOWERED": 651,
+        "NOT_RUN": 671
+      },
+      "longsleep": {
+        "FEWER_THAN_MIN_K": 0,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 20,
+        "LOW_LOCAL_H2_UNDERPOWERED": 1271,
+        "NOT_RUN": 1291
+      },
+      "mdd": {
+        "FEWER_THAN_MIN_K": 0,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 24,
+        "LOW_LOCAL_H2_UNDERPOWERED": 565,
+        "NOT_RUN": 589
+      },
+      "parkinson": {
+        "FEWER_THAN_MIN_K": 0,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 23,
+        "LOW_LOCAL_H2_UNDERPOWERED": 613,
+        "NOT_RUN": 636
+      },
+      "scz": {
+        "FEWER_THAN_MIN_K": 1,
+        "FEWER_THAN_MIN_K_SHARED_REFERENCE_VARIANTS": 22,
+        "LOW_LOCAL_H2_UNDERPOWERED": 119,
+        "NOT_RUN": 142
+      }
+    },
+    "traits": 7
+  },
+  "trait_table": {
+    "path": "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv",
+    "rows": 7,
+    "sha256": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65"
+  }
+}

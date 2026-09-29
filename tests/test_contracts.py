@@ -1454,6 +1454,27 @@ class PanelContractTests(unittest.TestCase):
         self.assertEqual(by_trait.loc["longevity", "p"], 0.4283)
         self.assertGreater(by_trait.loc["bmi", "fdr"], 0)
 
+    def test_rg_collator_parses_input_paths_containing_spaces(self):
+        collator = load_collator()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "rg_insomnia__frailty.log"
+            path.write_text(
+                "P: 4.3215e-163\n"
+                "Summary of Genetic Correlation Results\n"
+                "p1 p2 rg se z p h2_obs h2_obs_se h2_int h2_int_se gcov_int gcov_int_se\n"
+                "/Volumes/Extreme SSD/munged/insomnia.sumstats.gz "
+                "/Volumes/Extreme SSD/munged/frailty.sumstats.gz "
+                "0.6405 0.0235 27.2150 0.0000 0.1095 0.0051 "
+                "1.0188 0.0094 0.1593 0.0063\n\n",
+                encoding="utf-8",
+            )
+            rows = collator.parse_rg(directory, str(MANIFEST))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows.iloc[0]["sleep_trait"], "insomnia")
+        self.assertEqual(rows.iloc[0]["disease_trait"], "frailty")
+        self.assertAlmostEqual(rows.iloc[0]["rg"], 0.6405)
+        self.assertEqual(rows.iloc[0]["p"], 4.3215e-163)
+
     def test_rg_matrix_collation_ignores_controlled_pair_logs(self):
         collator = load_collator()
         with tempfile.TemporaryDirectory() as directory:

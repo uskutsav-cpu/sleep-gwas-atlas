@@ -1,0 +1,109 @@
+diff --git a/calculate.py b/calculate.py
+index 9164c94..9c27fb4
+--- a/calculate.py
++++ b/calculate.py
+@@ -22,6 +22,14 @@ def nearest_Corr(input_mat):
+     A = (A.T * multiplier).T
+     return A
+ 
++def skipped_block(chrom, start, end, m, reason):
++    """Explicitly retain a scientific no-estimate block in the family."""
++    return pd.DataFrame(OrderedDict({
++        "chr": [chrom], "start": [start], "end": [end],
++        "rho": [np.nan], "corr": [np.nan], "h2_1": [np.nan],
++        "h2_2": [np.nan], "var": [np.nan], "p": [np.nan],
++        "m": [int(m)], "analysis_status": [reason]}))
++
+ 
+ def calLocalCov(i, partition, geno_array, coords, bps, gwas_snps, ld_scores, n1, n2, pheno_corr, pheno_corr_var):
+     m = len(gwas_snps)
+@@ -32,8 +40,7 @@ def calLocalCov(i, partition, geno_array, coords, bps, gwas_snps, ld_scores, n1,
+     idx = np.logical_and(np.logical_and(gwas_snps['CHR']==CHR, bps <= END), bps >= START)
+     m0 = np.sum(idx)
+     if m0 < 120:
+-        df = pd.DataFrame(OrderedDict({"chr":[], "start":[], "end":[], "rho":[], "corr":[], "h2_1":[], "h2_2":[], "var":[], "p":[], "m":[]}))
+-        return df
++        return skipped_block(CHR, START, END, m0, "NOT_TESTED_LOW_SNP")
+     
+     tmp_coords = coords[idx]
+ 
+@@ -52,8 +59,7 @@ def calLocalCov(i, partition, geno_array, coords, bps, gwas_snps, ld_scores, n1,
+     d = d[order]
+     v = v[:,order]
+     if np.sum(d>0) < 120:
+-        df = pd.DataFrame(OrderedDict({"chr":[], "start":[], "end":[], "rho":[], "corr":[], "h2_1":[], "h2_2":[], "var":[], "p":[], "m":[]}))
+-        return df
++        return skipped_block(CHR, START, END, m0, "NOT_TESTED_LOW_RANK")
+     
+     sub_d = d[d>0]
+     sub_v = v[:,d>0]
+@@ -121,7 +127,7 @@ def calLocalCov(i, partition, geno_array, coords, bps, gwas_snps, ld_scores, n1,
+     else:
+         corr = Localrho / sqrt(Localh1 * Localh2)
+ 
+-    df = pd.DataFrame(OrderedDict({"chr":[CHR], "start":[START], "end":[END], "rho":[Localrho], "corr":[corr], "h2_1":[Localh1], "h2_2":[Localh2], "var":[var_rho], "p":[p_value], "m":[m0]}))
++    df = pd.DataFrame(OrderedDict({"chr":[CHR], "start":[START], "end":[END], "rho":[Localrho], "corr":[corr], "h2_1":[Localh1], "h2_2":[Localh2], "var":[var_rho], "p":[p_value], "m":[m0], "analysis_status":["ESTIMATED"]}))
+ 
+     return df
+ 
+@@ -158,16 +164,18 @@ def _supergnova(bfile, partition, thread, gwas_snps, ld_scores, n1, n2, pheno_co
+ 
+     ## Calculating local genetic covariance
+     
+-    results = []
+-    def collect_results(result):
+-        results.append(result)
++    # Retain every Future so a failed block cannot disappear silently from the
++    # genome-wide family when apply_async raises inside a worker.
++    futures = []
+     pool = multiprocessing.Pool(processes = thread)
+     for i in range(blockN):
+-        pool.apply_async(calLocalCov, args=(i, tmp_partition, geno_array, coords, 
+-            bps, tmp_gwas_snps, tmp_ld_scores, n1, n2, pheno_corr, pheno_corr_var),
+-            callback=collect_results)
++        futures.append(pool.apply_async(calLocalCov, args=(i, tmp_partition, geno_array, coords,
++            bps, tmp_gwas_snps, tmp_ld_scores, n1, n2, pheno_corr, pheno_corr_var)))
+     pool.close()
+-    pool.join()
++    try:
++        results = [future.get() for future in futures]
++    finally:
++        pool.join()
+     df = pd.concat(results, ignore_index=True)
+     #df = pd.DataFrame(results)
+     #df.columns = ["chr", "start", "end", "rho", "corr", "h1", "h2", "var", "p", "m"]
+diff --git a/prep.py b/prep.py
+index 6d9f46f..ed3fbaf 100755
+--- a/prep.py
++++ b/prep.py
+@@ -25,7 +25,11 @@ def allign_alleles(df):
+         ((a[0] == 3 - a[5]) & (a[1] == 3 - a[4])))
+     df['Z_x'] *= -2 * reversed_alleles_x + 1
+     df['Z_y'] *= -2 * reversed_alleles_y + 1
+-    df.where(pd.Series(((matched_alleles_x|reversed_alleles_x)&(matched_alleles_y|reversed_alleles_y))), inplace=True)
++    # pandas >=1.5 rejects mixed-dtype DataFrame.where(..., inplace=True).
++    # Drop only the exact allele-mismatch rows; this is the same inclusion rule.
++    matched = ((matched_alleles_x | reversed_alleles_x) &
++               (matched_alleles_y | reversed_alleles_y))
++    df.drop(df.index[~matched], inplace=True)
+     df.dropna(inplace=True)
+ 
+ 
+diff --git a/supergnova.py b/supergnova.py
+index edda9bb..134c034
+--- a/supergnova.py
++++ b/supergnova.py
+@@ -33,7 +33,7 @@ except TypeError:
+ pd.set_option('display.max_rows', 500)
+ pd.set_option('display.max_columns', 500)
+ pd.set_option('display.width', 1000)
+-pd.set_option('precision', 4)
++pd.set_option('display.precision', 4)
+ pd.set_option('max_colwidth',1000)
+ np.set_printoptions(linewidth=1000)
+ np.set_printoptions(precision=4)
+@@ -91,4 +91,3 @@ parser.add_argument('--thread', default= multiprocessing.cpu_count(), type=int,
+ 
+ if __name__ == '__main__':
+     pipeline(parser.parse_args())
+-

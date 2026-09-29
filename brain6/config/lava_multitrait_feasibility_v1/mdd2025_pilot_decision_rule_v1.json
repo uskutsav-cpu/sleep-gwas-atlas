@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "analysis_id": "brain6_mdd2025_trait_only_pilot_v1",
+  "decision_scope": "Whether to justify a complete 2495-locus MDD2025 trait-only sensitivity screen; never family promotion",
+  "comparison": "Same preselected pilot loci in the frozen canonical MDD univariate aggregate",
+  "canonical_aggregate_sha256": "ac450685970a35a4d0d06a9f02dd45ee5ac8f1af905ef411564b7e1f7f2f5352",
+  "advance_if_any": {
+    "absolute_tested_fraction_gain_at_least": 0.10,
+    "relative_low_local_h2_not_run_reduction_at_least": 0.25
+  },
+  "required_conditions": [
+    "All 111 fixed pilot loci have receipt-bound outcomes",
+    "Zero execution failures",
+    "Source, locus, reference and software hashes match the fixed pilot manifest",
+    "No PLACO or downstream frailty association outcome used for candidate selection or decision"
+  ],
+  "interpretation_limit": "The five-per-chromosome plus MHC-control pilot is diagnostic and is not an unbiased estimate of the full-family NOT_RUN fraction. A positive pilot only authorizes a complete trait-only screen under a separate sensitivity protocol."
+}

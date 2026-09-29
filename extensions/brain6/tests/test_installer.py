@@ -115,3 +115,12 @@ def test_symlink_upgrade_forbidden(git_fixture,tmp_path):
     baseline=tmp_path/'baseline.json';write_json(baseline,{'extensions/brain6/new.txt':sha256(outside)})
     with pytest.raises(ContractError):apply_overlay(r,p,m,apply=True,baseline_manifest=baseline)
     assert outside.read_text()=='baseline'
+
+
+def test_installer_refuses_unfinished_merge(git_fixture):
+    repo,payload,manifest,git=git_fixture
+    (repo/'.git/MERGE_HEAD').write_text(git('rev-parse','HEAD')+'\n')
+    with pytest.raises(ContractError,match='Finish the existing merge'):
+        apply_overlay(repo,payload,manifest,apply=True)
+    assert git('branch','--show-current')=='main'
+    assert not (repo/'extensions').exists()

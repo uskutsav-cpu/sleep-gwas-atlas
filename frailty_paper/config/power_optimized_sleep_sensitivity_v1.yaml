@@ -1,0 +1,68 @@
+analysis_id: power_optimized_sleep_sensitivity_v1
+status: SCREENING_RULES_FROZEN_BEFORE_SLEEP_FRAILTY_ASSOCIATION_REVIEW
+frozen_utc: 2026-09-24T23:49:00Z
+purpose: >-
+  Evaluate phenotype-equivalent or closely related higher-powered sleep GWAS
+  representations using phenotype, power, ancestry, provenance, harmonization,
+  and LAVA reference coverage only. This configuration does not alter the
+  locked 12-trait panel, Brain6 canonical v3, or the running frailty LAVA family.
+scope:
+  source_of_truth_sleep_panel: config/analysis_panel.tsv
+  locked_sleep_trait_count: 12
+  brain6_canonical_v3_trait_count: 7
+  brain6_canonical_v3_sleep_traits: [insomnia, longsleep]
+  scope_note: >-
+    Brain6 canonical v3 is a seven-input family comprising two sleep GWAS and
+    five brain-disorder GWAS. The separate sleep-frailty study has a locked
+    12-sleep-trait panel. Never interpret the other five Brain6 inputs as sleep
+    phenotypes or claim that v3 receipts cover the remaining 10 sleep traits.
+selection_criteria:
+  phenotype:
+    requirement: Same construct or close biological representation; retain the original phenotype in all primary analyses.
+    continuous_duration_rule: >-
+      Continuous self-reported sleep duration is a related sensitivity for the
+      long-sleep tail, not an equivalent replacement for >=9-hour long sleep.
+  power:
+    requirement: Materially better expected statistical power, judged without association results.
+    effective_sample_size_case_control: "4 / (1/N_cases + 1/N_controls)"
+    continuous_trait_sample_size: N_total
+  ancestry_reference:
+    requirement: EUR input harmonized to GRCh37 and evaluated against the same frozen LAVA UKB-EUR reference and exact 2,495 loci.
+    min_k: 2
+    min_shared_variant_rule: Preserve existing LAVA behavior; do not relax it.
+  availability_provenance:
+    requirement: Full genome-wide summary statistics, public/licensed access documented, checksum verified, alleles/effect/SE/P available, and cohort overlap recorded as known or unknown.
+    unknown_overlap: Keep UNKNOWN; do not assume zero.
+  quantitative_local_h2_promotion_gate:
+    requirement: A blinded univariate LAVA pilot must show either >=10 percentage-point absolute increase in eligible loci OR >=25% relative reduction in low-local-h2 NOT_RUN cells versus the matching canonical trait.
+    minimum_pilot: 100 loci, chromosome-stratified across the frozen locus set, before a complete 2,495-locus sensitivity.
+    outcome_independence: Do not inspect sleep-frailty or sleep-brain bivariate estimates when selecting candidates.
+  promotion:
+    rule: >-
+      A candidate may proceed to a separately named full sensitivity only if all
+      phenotype, power, access, provenance, harmonization, ancestry, and
+      reference gates pass and the univariate LAVA promotion gate is met.
+      Passing the eligibility gate does not make the candidate confirmatory or
+      prove shared biology. Preserve all locked family thresholds and report
+      sensitivity family QC separately.
+current_runs:
+  brain6_canonical_v3:
+    analysis_id: brain6-lava-canonical-v3
+    run_id: d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b
+    immutable_decision: FAILED_QC_NOT_PROMOTED
+  frailty_lava:
+    analysis_id: frailty_fi_sleep_lava_sensitivity_v1
+    status: RUNNING
+    expected_pair_locus_slots: 29940
+    workers: 4
+    rule: Do not restart, edit, or merge this run; wait for its receipt-bound completion before any additional LAVA workload.
+candidate_screen:
+  candidate_continuous_sleep_duration:
+    trait_id: sleepdur
+    source_id: dashti_2019_sleep_duration
+    role: Existing-panel sensitivity candidate; not a replacement
+    phenotype_match: CLOSE_RELATED_NOT_EQUIVALENT
+    promotion_status: PENDING_BLINDED_UNIVARIATE_LAVA_PILOT
+  candidate_longsleep_2023:
+    role: Screened and not selected
+    reason: EUR long-sleep effective sample size is lower than the locked 2019 >=9h input under the declared case-control formula.

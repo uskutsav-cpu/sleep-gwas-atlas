@@ -1,0 +1,7 @@
+# Frailty project checkpoint — 2026-09-27 19:54 UTC
+
+The existing FI × sleep LAVA run remains active on the external SSD. Runner state at 2026-09-27T19:55:28.756146+00:00 reports 20,820/29,940 receipts, three workers, zero launch failures and zero stale-claim recoveries. Rolling 30.1-minute rate is 633.60/hour; the provisional remaining estimate is 14.4 hours. Full read-only audit at 19:54:16–19:54:27 validated 20,806 receipts; inventory advanced to 20,809 during scanning, with no receipt/claim/duplicate-identity issues and all three workers live. All 12 locked gates fail (3,642 negative-variance; 252 no-reference-SNP; one other process failure). Evidence: `lava_full_receipt_audit_2026-09-27_1954.json`, `lava_runner_state_snapshot_2026-09-27_1954.json`.
+
+Figure 4 was regenerated and visually checked against this audit. It shows the validated count and all 12 gate failures and says gate failure does not establish absence of local sharing. Figure/source hashes are in `figures4_5_downstream_evidence_status.provenance.json`.
+
+Two distinct reviewers are ready; their separate canonical archives have verified SHA-256s, 113 batches each, and intact ZIP structure. The frozen 56,117-record queue still has zero decisions. No reviewer messages were sent and no decisions were applied. Licensed database exports/full texts, human decisions/adjudication, exact HFRS identity/access and exact cohort intersections remain outstanding.

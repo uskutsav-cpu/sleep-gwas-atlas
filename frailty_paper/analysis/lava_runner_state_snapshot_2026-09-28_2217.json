@@ -1,0 +1,175 @@
+{
+  "audit_file": "lava_full_receipt_audit_2026-09-28_2207_live.json",
+  "audit_summary": {
+    "active_job_pid_liveness": {
+      "37878": true,
+      "89389": true
+    },
+    "active_job_pids": [
+      37878,
+      89389
+    ],
+    "all_traits_pass_1pct_gate": false,
+    "audit_time_end_utc": "2026-09-28T22:07:34+00:00",
+    "audit_time_start_utc": "2026-09-28T22:07:14+00:00",
+    "claim_issues": [],
+    "duplicate_claim_identities": [],
+    "duplicate_trait_locus_identities": [],
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "process_failure_categories": {
+      "all_phenotypes_negative_variance": 4800,
+      "no_specified_snps_in_reference": 252,
+      "other_process_failure": 4
+    },
+    "receipt_file_list_changed_during_scan": false,
+    "receipt_files_after_scan": 27828,
+    "receipt_files_at_scan_start": 27828,
+    "receipt_files_validated": 27828,
+    "receipt_issues": [],
+    "requested_parallel_workers": 6,
+    "stale_claims_recovered": 0
+  },
+  "capture_utc": "2026-09-28T22:17:17+00:00",
+  "runner_script_sha256": "97468c52ca9a9803ee0c0781bc730d48fc350d79289b6955ef3534bd9d8646c4",
+  "runner_state": {
+    "active_jobs": [
+      {
+        "claimed_utc": "2026-09-28T13:05:40.821432+00:00",
+        "locus_index": 196,
+        "pair_order": 4,
+        "process_group": 37878,
+        "trait": "longsleep",
+        "worker_pid": 37878
+      },
+      {
+        "claimed_utc": "2026-09-28T13:05:54.969542+00:00",
+        "locus_index": 196,
+        "pair_order": 5,
+        "process_group": 89389,
+        "trait": "napping",
+        "worker_pid": 89389
+      }
+    ],
+    "analysis_id": "frailty_fi_sleep_lava_sensitivity_v1",
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "measured_receipts_per_hour": 0.0,
+    "parallel_workers": 2,
+    "requested_parallel_workers": 6,
+    "resource_fallback_reason": "swap use reached 5440/5632 MiB (\u226595% of allocated swap); reducing three workers to two",
+    "stale_claims_recovered": 0,
+    "throughput_window_seconds": 1808.9313039169938,
+    "updated_utc": "2026-09-28T22:18:34.124808+00:00",
+    "verified_receipts": 27828,
+    "worker_pids": {
+      "1": 37878,
+      "2": 89389,
+      "3": 6231,
+      "4": 6232
+    }
+  },
+  "resource_sample": {
+    "sample_utc": "2026-09-28T22:17:17+00:00",
+    "logical_cpus": 8,
+    "swap_total_mib": 8448.0,
+    "swap_used_mib": 8332.5,
+    "swap_free_mib": 115.5,
+    "swap_used_fraction": 0.98632,
+    "memory_pressure_free_percent": 32,
+    "internal_free_mib": 257,
+    "external_volume_free": "1.3 TiB",
+    "active_lava_scratch_kib": {
+      "worker_1_internal_tmp": 320,
+      "worker_2_private_tmp": 136192,
+      "external_run_tmp": 588800
+    },
+    "note": "Temporary usage is a point-in-time size; do not remove or relocate while jobs are live."
+  },
+  "process_snapshot": [
+    {
+      "pid": 7390,
+      "role": "coordinator",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "elapsed": "02:57:45",
+      "cpu_percent": 0.0,
+      "state": "sleeping",
+      "requested_workers": 6
+    },
+    {
+      "pid": 37878,
+      "role": "worker_1",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "elapsed": "17:37:20",
+      "cpu_percent": 0.0,
+      "state": "sleeping",
+      "claim": "longsleep locus 196"
+    },
+    {
+      "pid": 5041,
+      "role": "worker_1_R_child",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "elapsed": "09:11:37",
+      "cpu_percent": 31.3,
+      "state": "running",
+      "claim": "longsleep locus 196"
+    },
+    {
+      "pid": 89389,
+      "role": "worker_2",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "elapsed": "15:11:35",
+      "cpu_percent": 0.0,
+      "state": "sleeping",
+      "claim": "napping locus 196"
+    },
+    {
+      "pid": 5076,
+      "role": "worker_2_R_child",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "elapsed": "09:11:23",
+      "cpu_percent": 31.6,
+      "state": "running",
+      "claim": "napping locus 196"
+    },
+    {
+      "pid": 6231,
+      "role": "worker_3_historical_registration",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "live": false
+    },
+    {
+      "pid": 6232,
+      "role": "worker_4_historical_registration",
+      "sample_utc": "2026-09-28T22:17:17+00:00",
+      "live": false
+    }
+  ],
+  "receipt_plateau": {
+    "last_event_utc": "2026-09-28T19:36:32.216371+00:00",
+    "remaining": 2112,
+    "runner_receipt_rate_per_hour": 0.0,
+    "runner_window_seconds": 1808.9313039169938,
+    "current_claim_elapsed_hours_approx": 9.19
+  },
+  "historical_throughput_context": {
+    "previous_pre_parallelization_estimate_per_hour": 81,
+    "measured_postresume_effective_two_worker_window_per_hour": 363.55,
+    "measured_window_end_utc": "2026-09-28T05:10:16.337925+00:00",
+    "current_window_note": "Current rolling window is zero because no receipt completed; it does not support a completion estimate."
+  },
+  "current_locus_logs": {
+    "longsleep_0196": "R log last updated at job start (13:05 UTC) and reached 457,955 shared SNPs and allele alignment; no subsequent line was flushed.",
+    "napping_0196": "R log is empty since job start; process remains in running state."
+  },
+  "configuration_hashes": {
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "match_frozen_inputs": true
+  }
+}

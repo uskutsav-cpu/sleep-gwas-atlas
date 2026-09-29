@@ -1,0 +1,123 @@
+{
+  "analysis_id": "brain6-placo-ld-factor-normalization-v1",
+  "interpretation": "Diagnostic-only reconstruction of LAVA format-14 factor products. Unit-diagonal scaling is a sensitivity diagnostic, not corrected LD; all original raw edges remain excluded and no candidate/locus result is promoted.",
+  "method": {
+    "diagnostic_scaling": "raw / sqrt(factor_diagonal_i * factor_diagonal_j); not used downstream",
+    "format_id": 14,
+    "overwrite_prior_outputs": false,
+    "reconstruction": "sum((v_i * eigenvalue) * v_j) in float64; compare with native LAVA read.ld output",
+    "stored_values": "float32 eigenvectors and eigenvalues"
+  },
+  "output": {
+    "path": "brain6/qc/placo_ld_factor_normalization_v3.tsv",
+    "rows": 12317,
+    "sha256": "37bf4460b165ee150f5367d3cc257b6566e5186674d941b454c77f0281b6266d"
+  },
+  "reference_files": {
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.bcor": {
+      "bytes": 756216786,
+      "sha256": "e23ef2240a8765df81d5f0c12bad7e57464bc029566a7bb0199e4388c00b109e"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr11.info": {
+      "bytes": 18083594,
+      "sha256": "d09b1c0e65ff9f629fdf74b3dc4ce757adfd22dc9cdb1965aeac8e652720e04c"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.bcor": {
+      "bytes": 497140002,
+      "sha256": "05c31e12960b2fb58550c4d226ae9651e47425d1148c342fcf3e9b8d5a0dcbd1"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr13.info": {
+      "bytes": 13301708,
+      "sha256": "917aeda237e2f37e39ab939bed15d9639bdb0a03a626d804ffd48de5a1762121"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.bcor": {
+      "bytes": 459816616,
+      "sha256": "b95817799a25a4567cb8dfa2b52852c10509494d88bef74d17676c0409d93610"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr14.info": {
+      "bytes": 11766269,
+      "sha256": "c90ee4ba59680d88afd241fb458de3451100b73e71f136994969c53f9e3cafad"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.bcor": {
+      "bytes": 400622966,
+      "sha256": "8cc495223b2d570a72fe3a12d56d9f80e6e320d9e1764fca74179ceac203a5ae"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr17.info": {
+      "bytes": 9330737,
+      "sha256": "55e48183d786607b22a838227c7aa34c2f1f2d512958bf0521c8650a2a546327"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.bcor": {
+      "bytes": 1294155802,
+      "sha256": "9229102840524a186db78ea7788bf05ee78b36752c087e0c7c6156053eee605c"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr2.info": {
+      "bytes": 29900875,
+      "sha256": "b6484a8e69465479c006e1cc241059dabd91de5594ddabb28c497618fa643060"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.bcor": {
+      "bytes": 966835032,
+      "sha256": "fcdd429c41b039790d58bf18377e768551a3cd2afb5c2110caebe829a637259b"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr5.info": {
+      "bytes": 23098698,
+      "sha256": "e32bb4bdb1d2af0c84353ae59f0eddd41e6dd3e1bcd98d47dc9e69716df0443d"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.bcor": {
+      "bytes": 908378028,
+      "sha256": "38d1471b446e1855c8874a79b3842aa350a4ac1794df63332cd0c078921592a0"
+    },
+    "/Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1/lava-ukb-v1.1_chr7.info": {
+      "bytes": 20834624,
+      "sha256": "33f249bafbf34db65f96fe66855aaf809b7343724fd2d519fec3aa084002d4e9"
+    }
+  },
+  "runtime": {
+    "numpy": "2.4.3",
+    "python": "3.13.13"
+  },
+  "sources": {
+    "audit_script": {
+      "path": "brain6/scripts/audit_placo_ld_factor_normalization_v1.py",
+      "sha256": "80627d5f3298ae9b495711a2c4db3685ff746b9f7570dafa8e4c7bf991a79db2"
+    },
+    "exception_table": {
+      "path": "brain6/results/loci/placo_candidate_ld_range_exceptions_partial_v2.tsv",
+      "sha256": "e5fd91b4122219826c2bc5557e939379ace102d2bb30f795a7c2b1e614ae07bb"
+    },
+    "lava_load_ld_source": "https://github.com/josefin-werme/LAVA/blob/main/src/load_ld.cpp",
+    "lava_load_ld_source_scope": "Current upstream format-level implementation; pinned runtime replay remains authoritative for the historical run.",
+    "native_replay": {
+      "path": "brain6/qc/placo_ld_range_exception_replay_v1.tsv",
+      "sha256": "5e0dfe232679052171f90ec6128bf744d55545135bdc4aa80c3f424523532dae"
+    },
+    "replay_provenance": {
+      "path": "brain6/qc/placo_ld_range_exception_replay_v1.provenance.json",
+      "sha256": "13ee194dcbc8d65a204650ff3086f3d468824bc6d0083957845fd425c6c0950e"
+    }
+  },
+  "summary": {
+    "all_within_primary_blocks": true,
+    "chromosomes": [
+      2,
+      5,
+      7,
+      11,
+      13,
+      14,
+      17
+    ],
+    "diagnostic_near_perfect_ld_threshold_abs_r_ge_0999_count": 12317,
+    "factor_diagonal_max": 1.0017012812410069,
+    "factor_diagonal_median": 1.0000042857645137,
+    "factor_diagonal_min": 0.9996840901146516,
+    "max_factor_vs_lava_abs_delta": 5.10702591327572e-15,
+    "promoted_edges": 0,
+    "raw_abs_r_max": 1.00144017852362,
+    "raw_abs_r_median": 1.0000043697564,
+    "raw_abs_r_min": 1.00000000172448,
+    "scaled_abs_r_gt_1": 0,
+    "scaled_abs_r_max": 1.0,
+    "scaled_abs_r_min": 0.9992110144519273,
+    "unique_edges": 12317
+  }
+}

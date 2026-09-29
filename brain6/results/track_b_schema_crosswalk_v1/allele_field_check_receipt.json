@@ -1,0 +1,9 @@
+{
+  "amendment_proposal_sha256": "dfddd00f3d5f75d5bf486d61f0bb836796a0a69466ab6c644e2eeb6e51d3c216",
+  "analysis_id": "brain6-track-b-allele-field-addendum-v1",
+  "command": "gzip -cd SOURCE | awk -F '\\t' 'NR>1 && (length($6)!=1 || length($7)!=1 || $6 !~ /^[ACGT]$/ || $7 !~ /^[ACGT]$/) {n++} END {print n+0}'",
+  "exit_status": 0,
+  "invalid_allele_rows": 0,
+  "scope": "INDEPENDENT_FULL_LEDGER_EXACT_SINGLE_BASE_ALLELE_CHECK",
+  "source_sha256": "f0eb8b9e8a5b3b4a0ea6151ed75473b0be3d311e463824889a050d83beaaac2e"
+}

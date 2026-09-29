@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out frailty_paper/results/frailty_v1/logs_rg_sleep_fi/pair_napping__frailty/rg_napping__frailty \
+--rg /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/napping.sumstats.gz,/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/frailty.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Wed Sep 23 03:51:16 2026
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/napping.sumstats.gz ...
+Read summary statistics for 1177711 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1173942 SNPs remain.
+After merging with regression SNP LD, 1173942 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/frailty.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1173942 SNPs remain.
+1164877 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0833 (0.0034)
+Lambda GC: 1.5585
+Mean Chi^2: 1.7835
+Intercept: 1.0379 (0.0115)
+Ratio: 0.0484 (0.0146)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.1094 (0.0051)
+Lambda GC: 1.3238
+Mean Chi^2: 1.399
+Intercept: 1.0199 (0.0089)
+Ratio: 0.0498 (0.0223)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0239 (0.0022)
+Mean z1*z2: 0.24
+Intercept: 0.1146 (0.0063)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.2506 (0.0228)
+Z-score: 10.9922
+P: 4.166e-28
+
+
+Summary of Genetic Correlation Results
+                                                                                                       p1                                                                                                        p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/napping.sumstats.gz /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/frailty.sumstats.gz 0.2506 0.0228 10.9922 0.0000  0.1094     0.0051  1.0199     0.0089    0.1146       0.0063
+
+Analysis finished at Wed Sep 23 03:51:26 2026
+Total time elapsed: 10.6s

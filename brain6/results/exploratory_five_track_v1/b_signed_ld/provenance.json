@@ -1,0 +1,31 @@
+{
+  "analysis_id": "brain6_admitted_b_exploratory_signed_ld_v1",
+  "analysis_label": "EXPLORATORY",
+  "candidate_rows": 389,
+  "lead_rows": 6,
+  "limitations": [
+    "Post-selection descriptive signed-LD/effect-direction comparison, not independent replication or fine-mapping.",
+    "Palindromic SNPs are omitted from orientation-based comparison.",
+    "Raw signed R outside [-1,1] is retained only as a QC failure and never clipped.",
+    "No LAVA local-rg or final region tier is promoted."
+  ],
+  "output_sha256": {
+    "candidate_signed_ld.tsv": "e5920aed53c9975db61556af706497c90c8ae8b6401a33bdee6b762c37a6891f"
+  },
+  "reference_sample_size": 100000,
+  "script_sha256": "f7b26aed6da5a4d1855e960dbb6c797c4058a02ec0fbcfc80d02dcd4765c4b74",
+  "source_sha256": {
+    "brain6/results/loci/placo_five_track_candidate_loci_v1/candidate_variants.tsv": "50f9e15d52c564c695389778946139372cdcddb39bea68835db0df04069ae0f6",
+    "brain6/results/placo/insomnia__adhd/B.full.tsv.gz": "f0eb8b9e8a5b3b4a0ea6151ed75473b0be3d311e463824889a050d83beaaac2e",
+    "brain6/results/placo/insomnia__adhd/admission_receipt.json": "25c304d7107cc68ed7d8825ad4403ff031b17910d1ac3627c4751a621a985738",
+    "brain6/scripts/extract_placo_candidate_lead_ld.R": "478eb8cb1718d60629f04c5239c5abd6cd005025e24a499612933f068ac138ee",
+    "joined_pair_receipt": "346e1f966f278695bdf4e6662b3190bbb43ab358a964e7cf9bc863bbaff8776f",
+    "joined_pair_tsv": "f3cabd08e4b9a252facf6ac0d6c69aff51c56ed334ac41d22014e6e2b684be2b",
+    "pinned_rscript": "0948a03d938dd0d90b2436c87eca8e1dd59e6d0449bbf5d42bad8e9909102108",
+    "reference_provenance": "35ab371935b9c260dab21be248f4907b693565787ef9f62334e7d8030204270e"
+  },
+  "status_counts": {
+    "OUT_OF_RANGE_RAW_R": 2,
+    "PASS_SIGNED_LD": 387
+  }
+}

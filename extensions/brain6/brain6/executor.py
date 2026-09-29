@@ -38,6 +38,10 @@ def run_job(job_path: str | Path, out_root: str | Path, *, timeout: int | None =
     require(not synthetic or allow_synthetic, "Synthetic job requires explicit --synthetic")
     for record in job["inputs"].values():
         check_hash(record["path"], record["sha256"])
+    if not synthetic and job.get('method') in {'susie','mr'}:
+        from .scale24 import validate_scale
+        require('settings' in job['inputs'], 'Native effect-scale audit needs bound settings')
+        validate_scale(job['method'], read_json(job['inputs']['settings']['path']))
     for dep in job.get("dependency_receipts", []):
         receipt = verify_artifact(dep["path"], dep.get("fingerprint"))
         require(receipt["synthetic"] == synthetic, "Synthetic dependency contamination")

@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "audited_at_utc": "2026-09-25T09:02:07.681416+00:00",
+  "status": "PASS",
+  "claims_checked": 28,
+  "claims_passed": 28,
+  "sources": {
+    "manuscript": {
+      "path": "frailty_paper/paper/manuscript.md",
+      "sha256": "ed571323fd62dc49173a688a16d4ce0d90ad6dfe36f8854608adfb5023782566"
+    },
+    "fi_rg": {
+      "path": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "sha256": "205a39753fff491db551ecc0bd2a267c9eccf9da45e629edcdfa85a57e5de045"
+    },
+    "fi_correction": {
+      "path": "frailty_paper/analysis/frozen_fi_correction_sensitivity.tsv",
+      "sha256": "83274185d5928a425808f10521f10985a03fe453ef731c9a32cff5eb0c7077d6"
+    },
+    "latent_rg": {
+      "path": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "sha256": "63488cd04d3542619d04d0fd0d1fb839c6fb36d598cccb6983f00c1299591068"
+    },
+    "latent_correction": {
+      "path": "frailty_paper/analysis/latent_factor_correction_sensitivity.tsv",
+      "sha256": "133a5c66665eb08d24f1c6e66b5f6181f5537551a9a9ce2dabff5181453cbc5f"
+    },
+    "latent_h2": {
+      "path": "frailty_paper/results/frailty_v1/h2_latent_factors.tsv",
+      "sha256": "753c2c283f070ff947a1bddc24dcf8c8343115982ebeaa50e46bb2ce5d99a4da"
+    },
+    "aging_rg": {
+      "path": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "sha256": "00dfa114d23b9f24010ce374dde250c3f8de6c0e752f00c89788bf545530b13a"
+    },
+    "record_counts": {
+      "path": "frailty_paper/review/source_record_counts.tsv",
+      "sha256": "effeea5ccf6fc3c391c9ede0c83b4551d4f831e07af5231631a317659ad665e9"
+    },
+    "screening_queue": {
+      "path": "frailty_paper/review/screening/title_abstract_queue.tsv",
+      "sha256": "3ae3fb3b4765c85536c3ccf64d20297a632af892e2c66e622ee665db1ea43b2e"
+    }
+  },
+  "script_sha256": "6513926e86c44d9099ad255baa39e70f9179dcfd437759f2aa6ea789eac775c9",
+  "claims": [
+    {
+      "claim_id": "fi_bh_count",
+      "expected_from_source": [
+        9,
+        12
+      ],
+      "observed_from_source": [
+        9,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_bonferroni_count",
+      "expected_from_source": [
+        9,
+        12
+      ],
+      "observed_from_source": [
+        9,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_fi_correction_sensitivity.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_insomnia_estimate",
+      "expected_from_source": [
+        0.6405,
+        0.0235
+      ],
+      "observed_from_source": [
+        0.6405,
+        0.0235
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_sleep_apnea_estimate",
+      "expected_from_source": [
+        0.4687,
+        0.0321
+      ],
+      "observed_from_source": [
+        0.4687,
+        0.0321
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_shortsleep_estimate",
+      "expected_from_source": [
+        0.4543,
+        0.0272
+      ],
+      "observed_from_source": [
+        0.4543,
+        0.0272
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_sleepdur_estimate",
+      "expected_from_source": [
+        -0.222,
+        0.0275
+      ],
+      "observed_from_source": [
+        -0.222,
+        0.0275
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "fi_sleep_efficiency_estimate",
+      "expected_from_source": [
+        -0.152,
+        0.0365
+      ],
+      "observed_from_source": [
+        -0.152,
+        0.0365
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_frailty_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_bh_count",
+      "expected_from_source": [
+        48,
+        84
+      ],
+      "observed_from_source": [
+        48,
+        84
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_bonferroni_count",
+      "expected_from_source": [
+        37,
+        84
+      ],
+      "observed_from_source": [
+        37,
+        84
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/latent_factor_correction_sensitivity.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_insomnia_frailty_general",
+      "expected_from_source": [
+        0.6658,
+        0.0256,
+        1.73e-147
+      ],
+      "observed_from_source": [
+        0.6658,
+        0.0256,
+        1.731e-147
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_shortsleep_frailty_general",
+      "expected_from_source": [
+        0.5278,
+        0.0319,
+        5.76e-60
+      ],
+      "observed_from_source": [
+        0.5278,
+        0.0319,
+        5.764e-60
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_sleep_apnea_frailty_general",
+      "expected_from_source": [
+        0.4272,
+        0.0375,
+        8.53e-29
+      ],
+      "observed_from_source": [
+        0.4272,
+        0.0375,
+        8.525e-29
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_sleepdur_frailty_general",
+      "expected_from_source": [
+        -0.2587,
+        0.0284,
+        6.66e-19
+      ],
+      "observed_from_source": [
+        -0.2587,
+        0.0284,
+        6.655e-19
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_sleep_apnea_frailty_factor_4",
+      "expected_from_source": [
+        0.4276,
+        0.0419,
+        2.19e-23
+      ],
+      "observed_from_source": [
+        0.4276,
+        0.0419,
+        2.19e-23
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/rg_sleep_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_h2_gates",
+      "expected_from_source": [
+        7,
+        7
+      ],
+      "observed_from_source": [
+        7,
+        7
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/h2_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "latent_max_intercept",
+      "expected_from_source": [
+        "frailty_factor_3",
+        1.195
+      ],
+      "observed_from_source": [
+        "frailty_factor_3",
+        1.195
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/results/frailty_v1/h2_latent_factors.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_bh_count",
+      "expected_from_source": [
+        26,
+        72
+      ],
+      "observed_from_source": [
+        26,
+        72
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_parental_lifespan_count",
+      "expected_from_source": [
+        9,
+        12
+      ],
+      "observed_from_source": [
+        9,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_healthspan_count",
+      "expected_from_source": [
+        8,
+        12
+      ],
+      "observed_from_source": [
+        8,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_grip_strength_count",
+      "expected_from_source": [
+        7,
+        12
+      ],
+      "observed_from_source": [
+        7,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_longevity_count",
+      "expected_from_source": [
+        1,
+        12
+      ],
+      "observed_from_source": [
+        1,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_parkinson_count",
+      "expected_from_source": [
+        1,
+        12
+      ],
+      "observed_from_source": [
+        1,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_alz_count",
+      "expected_from_source": [
+        0,
+        12
+      ],
+      "observed_from_source": [
+        0,
+        12
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_insomnia_healthspan",
+      "expected_from_source": [
+        0.3432,
+        3.7e-15
+      ],
+      "observed_from_source": [
+        0.3432,
+        3.701435294117647e-15
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "aging_insomnia_parental_lifespan",
+      "expected_from_source": [
+        -0.274,
+        7.98e-13
+      ],
+      "observed_from_source": [
+        -0.274,
+        7.982100000000001e-13
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/analysis/frozen_atlas_aging_context_global_rg.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "pubmed_retrieved_count",
+      "expected_from_source": [
+        61009
+      ],
+      "observed_from_source": [
+        61009
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/review/source_record_counts.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "pubmed_deduplicated_count",
+      "expected_from_source": [
+        56117
+      ],
+      "observed_from_source": [
+        56117
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/review/source_record_counts.tsv",
+      "status": "PASS"
+    },
+    {
+      "claim_id": "screening_queue_count",
+      "expected_from_source": [
+        56117
+      ],
+      "observed_from_source": [
+        56117
+      ],
+      "manuscript_text_verified": true,
+      "source": "frailty_paper/review/screening/title_abstract_queue.tsv",
+      "status": "PASS"
+    }
+  ],
+  "interpretation": "This audit checks selected quantitative manuscript statements against current source tables. It does not validate scientific eligibility, screening decisions, causal interpretation, or complete manuscript accuracy."
+}

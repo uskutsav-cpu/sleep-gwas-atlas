@@ -1,0 +1,23 @@
+{
+  "artifact": "frailty_paper/manifests/physical_component_qc.tsv",
+  "command": "python frailty_paper/scripts/34_build_physical_component_qc_summary.py --repo ..",
+  "input_sha256": {
+    "frailty_paper/manifests/all_acquired_resources.tsv": "79cbd595bbc4b8bf5a45d9f5cff107fb6e278f607258b32637adf813bd0d14c7",
+    "frailty_paper/manifests/gwas_component_duplicate_audit.tsv": "f991600782a20b8d0bd3aa1120362535df35a64df11e6f7876abd6531020080d",
+    "frailty_paper/manifests/gwas_source_scan.tsv": "7de34d5abb9546e88d5e72641c0413b5a61b2f5c10f64c909b9f9803e9d48c35"
+  },
+  "interpretation": "All five files pass recorded structural checks and duplicate-key audits, but none passes the scientific provenance gate for harmonization/LDSC.",
+  "operation": "aggregation of existing structural and duplicate-key audits only; raw GWAS records are not changed or reanalyzed",
+  "output_sha256": "ba8293ee0509f890749c14b9f257f324b16f824a0b14ce6d2fda711cfd5b7cad",
+  "python_version": "3.13.13",
+  "resource_ids": [
+    "zenodo_14011550_exhaustion",
+    "zenodo_14011550_low_grip_strength",
+    "zenodo_14011550_low_physical_activity",
+    "zenodo_14011550_slow_walking_speed",
+    "zenodo_14011550_weight_loss"
+  ],
+  "row_count": 5,
+  "script": "frailty_paper/scripts/34_build_physical_component_qc_summary.py",
+  "script_sha256": "c416d41134dbde2208ed036170142754042ac24acec8b76ae56db1eddf5c305e"
+}

@@ -1,0 +1,34 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out frailty_paper/results/frailty_v1/logs_sleep_panel/h2_sleep_apnea \
+--h2 /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleep_apnea.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--samp-prev 0.103813 \
+--pop-prev 0.05 
+
+Beginning analysis at Wed Sep 23 03:46:25 2026
+Reading summary statistics from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/munged/sleep_apnea.sumstats.gz ...
+Read summary statistics for 1159122 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1154434 SNPs remain.
+After merging with regression SNP LD, 1154434 SNPs remain.
+Using two-step estimator with cutoff at 30.
+Total Liability scale h2: 0.2604 (0.0158)
+Lambda GC: 1.3894
+Mean Chi^2: 1.4339
+Intercept: 1.1169 (0.0103)
+Ratio: 0.2693 (0.0238)
+Analysis finished at Wed Sep 23 03:46:33 2026
+Total time elapsed: 7.84s

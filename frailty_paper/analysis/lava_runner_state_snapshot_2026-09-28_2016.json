@@ -1,0 +1,266 @@
+{
+  "capture_utc": "2026-09-28T20:16:01Z",
+  "concurrency": {
+    "desired_workers": 2,
+    "parallel_receipts_per_hour_initial": 373,
+    "pause_completed_utc": "2026-09-25T10:38:25.811359+00:00",
+    "pause_hold_claims": 21695,
+    "pause_holds_released": 0,
+    "pause_id": "pause_20260925T1546Z_requested_four_worker_restart",
+    "pause_reason": "Safely transition active four-worker run to requested six-worker coordinator launch after current loci finish.",
+    "pause_requested": false,
+    "pause_requested_utc": "2026-09-26T02:12:00+00:00",
+    "previous_workers": 4,
+    "reason": "Reduced from six after initial monitoring observed 166 MB unused RAM, 4.77 GB swap used of 5.63 GB, 3.5% CPU idle, and 31.7 load average on an 8-core host; preserve completed receipts and continue at four.",
+    "recorded_utc": "2026-09-25T10:46:34.182887+00:00",
+    "resource_fallback_events": [
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 1748/2048 MiB (\u226582%); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-25T14:47:54.342855+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 4842/5120 MiB (\u226590%); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-25T14:52:53.571917+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 6649/7168 MiB (\u226582% of allocated swap); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-25T15:58:19.530913+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 5856/7168 MiB (\u22653584 MiB used); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-25T16:01:27.044863+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 3233/4096 MiB (\u22651536 MiB used); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-25T22:04:15.412509+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 4156/5120 MiB (\u22653584 MiB used); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-25T22:05:47.260787+00:00"
+      },
+      {
+        "from_workers": 6,
+        "reason": "swap use reached 1593/2048 MiB (\u22651536 MiB used); reducing six workers to four",
+        "to_workers": 4,
+        "utc": "2026-09-26T02:21:02.636979+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 1910/3072 MiB (\u22651536 MiB used); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-26T02:21:12.928057+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 2772/3072 MiB (\u226590% of allocated swap); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-26T02:22:26.370231+00:00"
+      },
+      {
+        "from_workers": 6,
+        "reason": "swap use reached 4555/5120 MiB (\u226582% of allocated swap); reducing six workers to four",
+        "to_workers": 4,
+        "utc": "2026-09-26T19:09:17.945098+00:00"
+      },
+      {
+        "from_workers": 6,
+        "reason": "swap use reached 4413/6144 MiB (\u22651536 MiB used); reducing six workers to four",
+        "to_workers": 4,
+        "utc": "2026-09-26T19:12:03.761151+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 3899/5120 MiB (\u22651536 MiB used); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-26T19:13:12.624065+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 3883/5120 MiB (\u22653584 MiB used); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-26T19:13:23.294440+00:00"
+      },
+      {
+        "from_workers": 6,
+        "reason": "swap use reached 2582/3072 MiB (\u226582% of allocated swap); reducing six workers to four",
+        "to_workers": 4,
+        "utc": "2026-09-27T17:55:58.960655+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 2991/3072 MiB (\u226595% of allocated swap); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-27T18:35:11.810438+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 6310/7168 MiB (\u22655800 MiB used); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-27T20:38:32.585562+00:00"
+      },
+      {
+        "from_workers": 6,
+        "reason": "swap use reached 3542/4096 MiB (\u226582% of allocated swap); reducing six workers to four",
+        "to_workers": 4,
+        "utc": "2026-09-28T19:19:33.301814+00:00"
+      },
+      {
+        "from_workers": 4,
+        "reason": "swap use reached 4994/5120 MiB (\u226595% of allocated swap); reducing four workers to three",
+        "to_workers": 3,
+        "utc": "2026-09-28T19:32:13.519944+00:00"
+      },
+      {
+        "from_workers": 3,
+        "reason": "swap use reached 5440/5632 MiB (\u226595% of allocated swap); reducing three workers to two",
+        "to_workers": 2,
+        "utc": "2026-09-28T19:36:24.564554+00:00"
+      }
+    ],
+    "resource_fallback_reason": "swap use reached 5440/5632 MiB (\u226595% of allocated swap); reducing three workers to two",
+    "resource_fallback_utc": "2026-09-28T19:36:24.564554+00:00",
+    "resumed_utc": "2026-09-26T02:13:59.488685+00:00",
+    "serial_recent_receipts_per_hour_estimate": 81
+  },
+  "coordinator_throughput_window": {
+    "coordinator_updated_utc": "2026-09-28T20:13:27.452965+00:00",
+    "estimate_status": "UNRELIABLE: no receipt event appended since 2026-09-28T19:36:32.216371Z while both original locus-196 jobs remain CPU-active.",
+    "receipts_remaining": 2112,
+    "reported_rate_per_hour": 121.79416655599975,
+    "reported_window_seconds": 1803.042019249995
+  },
+  "external_run_root": "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/lava_sensitivity_v1",
+  "frozen_analysis_lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+  "host_sample": {
+    "active_r_processes": [
+      {
+        "elapsed": "07:09:57",
+        "instant_cpu_percent": 93.0,
+        "locus_index": 196,
+        "pid": 5041,
+        "state": "R",
+        "trait": "longsleep",
+        "worker_pid": 37878
+      },
+      {
+        "elapsed": "07:09:43",
+        "instant_cpu_percent": 92.2,
+        "locus_index": 196,
+        "pid": 5076,
+        "state": "R",
+        "trait": "napping",
+        "worker_pid": 89389
+      }
+    ],
+    "coordinator_pid": 7390,
+    "coordinator_state_updated_utc": "2026-09-28T20:16:01.215888+00:00",
+    "cpu_cores": 8,
+    "cpu_idle_percent": 22.48,
+    "disk_io_sample_1_mb_s": {
+      "external_ssd_disk4": 2.17,
+      "internal_disk0": 23.88
+    },
+    "disk_io_sample_2_mb_s": {
+      "external_ssd_disk4": 2.87,
+      "internal_disk0": 14.14
+    },
+    "load_average": [
+      10.32,
+      13.2,
+      13.27
+    ],
+    "physical_memory_unused_mib": 80,
+    "sample_utc": "2026-09-28T20:15:38Z",
+    "ssd_free": "1.3 TiB",
+    "swap_total_mib": 6656.0,
+    "swap_used_mib": 5281.44
+  },
+  "host_sample_age_note": "Host telemetry sampled 2026-09-28 20:15:38\u201320:16:00 UTC. Process liveness from ps at 20:15:38 UTC; coordinator snapshot updated 20:16:01 UTC.",
+  "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+  "intervention": "Read-only audit and host-resource monitoring only; no receipt, claim, worker, process, input, or scientific configuration was changed.",
+  "latest_full_receipt_audit": {
+    "active_job_pid_liveness": {
+      "37878": true,
+      "89389": true
+    },
+    "all_traits_pass_1pct_gate": false,
+    "audit_end_utc": "2026-09-28T20:10:44+00:00",
+    "audit_start_utc": "2026-09-28T20:09:33+00:00",
+    "file": "frailty_paper/analysis/lava_full_receipt_audit_2026-09-28_2006_post_plateau.json",
+    "issues": {
+      "claim_issues": 0,
+      "duplicate_claims": 0,
+      "duplicate_identities": 0,
+      "receipt_issues": 0
+    },
+    "note": "Full audit at 20:09:33\u201320:10:44 UTC; liveness confirmed for both active claims. Live process CPU rechecked at 20:15:38 UTC.",
+    "process_failure_categories": {
+      "all_phenotypes_negative_variance": 4800,
+      "no_specified_snps_in_reference": 252,
+      "other_process_failure": 4
+    },
+    "receipt_files_at_scan_end": 27828,
+    "receipt_files_at_scan_start": 27828,
+    "validated_receipts": 27828
+  },
+  "parallel_events_sha256": "3a1761b5d8e01c678a2dca2686f5d9fd0660df94c7a5bfc1f80a2eedf9d9267d",
+  "receipt_event_window": {
+    "elapsed_since_last_receipt_seconds": 2222.0,
+    "event_file": "parallel_events.jsonl",
+    "last_receipt_utc": "2026-09-28T19:36:32.216371+00:00",
+    "note": "No receipt event appended since 2026-09-28T19:36:32.216371Z through the 20:16:01 coordinator snapshot.",
+    "parallel_events_sha256": "3a1761b5d8e01c678a2dca2686f5d9fd0660df94c7a5bfc1f80a2eedf9d9267d",
+    "receipt_events_since_last_checkpoint": 0
+  },
+  "runner_state": {
+    "active_jobs": [
+      {
+        "claimed_utc": "2026-09-28T13:05:40.821432+00:00",
+        "locus_index": 196,
+        "pair_order": 4,
+        "process_group": 37878,
+        "trait": "longsleep",
+        "worker_pid": 37878
+      },
+      {
+        "claimed_utc": "2026-09-28T13:05:54.969542+00:00",
+        "locus_index": 196,
+        "pair_order": 5,
+        "process_group": 89389,
+        "trait": "napping",
+        "worker_pid": 89389
+      }
+    ],
+    "analysis_id": "frailty_fi_sleep_lava_sensitivity_v1",
+    "effective_parallel_workers": 2,
+    "expected_receipts": 29940,
+    "input_manifest_sha256": "8c9921bd154c8b9bc4333db754d14e19f0af4dcc060c3ecfd91be68545abe8e2",
+    "launch_failures_this_invocation": 0,
+    "lock_sha256": "74d0df6e897ff75ca7128876438cfc9bcb3495f4033cb35f77bef4cee4a00e70",
+    "parallel_workers": 2,
+    "requested_parallel_workers": 6,
+    "resource_fallback_reason": "swap use reached 5440/5632 MiB (\u226595% of allocated swap); reducing three workers to two",
+    "stale_claims_recovered": 0,
+    "updated_utc": "2026-09-28T20:13:27.452965+00:00",
+    "verified_receipts": 27828,
+    "worker_pids": {
+      "1": 37878,
+      "2": 89389,
+      "3": 6231,
+      "4": 6232
+    }
+  },
+  "scientific_qc": "All 12 locked trait failure gates remain failed; no local-sharing inference is admissible."
+}

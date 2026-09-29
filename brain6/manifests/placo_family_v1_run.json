@@ -1,0 +1,29 @@
+{
+  "status": "ABORTED_EXACT_ZERO_NUMERICAL_EDGE",
+  "family_id": "brain6_placo_plus_v1",
+  "family_lock": "brain6/config/placo_family_v1/README.md",
+  "pairs": [
+    "insomnia__mdd",
+    "longsleep__scz",
+    "longsleep__bipolar",
+    "longsleep__parkinson"
+  ],
+  "five_track_correction": true,
+  "headline_threshold": 1e-08,
+  "current_pair": "insomnia__mdd",
+  "exec_session_id": 29623,
+  "worker_pid": 29501,
+  "command": "env PATH=/Volumes/Extreme SSD/brain6-work/r-env-4.3.3-short/bin:$PATH PYTHONPATH=extensions/brain6 extensions/brain6/.venv/bin/python -m brain6.cli execute-placo --plan brain6/config/placo_family_v1/insomnia__mdd/plan.json",
+  "current_pair_expected_rows": 1122359,
+  "current_pair_expected_chunks": 57,
+  "completed_chunks": 2,
+  "failed_chunks": 0,
+  "global_parameter_estimate_status": "PASS",
+  "global_parameter_estimate_rows": 1122358,
+  "prior_failed_attempt": "Default Homebrew R 4.6.1 lacked jsonlite; no outputs promoted; retried using checksum-validated external R 4.3.3 conda runtime",
+  "results_interpreted": false,
+  "known_numerical_failures": 1213,
+  "known_tested_rows": 38787,
+  "reason": "First two chunks expose invalid integrals for exact zero Z; row-by-row failures exactly equal zero-Z rows and exceed unchanged 0.1% pair failure ceiling. Run stopped before collating or interpreting results.",
+  "corrective_change": "Exact mathematical boundary P=1 for Z1==0 or Z2==0 is now covered by a tested adapter wrapper; corrective execution will use a separate v2 immutable plan."
+}

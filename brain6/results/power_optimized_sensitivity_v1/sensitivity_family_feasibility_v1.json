@@ -1,0 +1,51 @@
+{
+  "analysis_id": "brain6_power_optimized_sensitivity_family_feasibility_v1",
+  "association_results_consulted": false,
+  "assumptions": [
+    "The seven-trait family size and 5% missingness ceiling remain frozen.",
+    "Replacing one sleep trait does not alter eligibility counts for retained traits.",
+    "The zero-NOT_RUN cases are theoretical lower bounds, not observed analyses."
+  ],
+  "best_case_lower_bounds": {
+    "both_sleep_traits_zero_not_run": {
+      "excess_over_frozen_limit": 885,
+      "passes": false,
+      "retained_five_disorder_traits_not_run": 1758
+    },
+    "one_longsleep_replacement_zero_not_run": {
+      "excess_over_frozen_limit": 1556,
+      "not_run": 2429,
+      "passes": false
+    }
+  },
+  "canonical_not_run_by_trait": {
+    "adhd": 223,
+    "bipolar": 168,
+    "insomnia": 671,
+    "longsleep": 1291,
+    "mdd": 589,
+    "parkinson": 636,
+    "scz": 142
+  },
+  "family": {
+    "candidate_family_not_run": 3305,
+    "candidate_longsleep_replacement_not_run": 876,
+    "canonical_not_run": 3720,
+    "cells": 17465,
+    "maximum_not_run": 873
+  },
+  "implication": "No single sleep-trait replacement can pass the frozen seven-trait family QC. Even perfect local-h2 eligibility for both sleep traits would leave the five unchanged disorder inputs above the family ceiling. Do not launch bivariate LAVA or relax the threshold on the basis of another sleep-only candidate.",
+  "scenarios_not_run_cells": {
+    "observed_candidate_replacing_longsleep": 3305,
+    "perfect_longsleep_replacement_zero_not_run": 2429,
+    "perfect_replacements_for_both_sleep_traits_zero_not_run": 1758
+  },
+  "schema_version": 1,
+  "source_sha256": {
+    "brain6/results/lava/canonical_v3_not_run_by_trait_v1.tsv": "61fde8516c6563225ca4dc61055cad97c20dc6922915a785e3ef3d4dc6883b65",
+    "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1/summary.json": "5821ade3094da42c15f4c35e8da964d34db691554a4db78d94a37b97e3244173",
+    "brain6/results/power_optimized_sensitivity_v1/promotion_rule_reassessment_2026-09-26.json": "d88a4da048c94dae61c079e2220296afb79bff904f87e9d2d7949216ddab5fab",
+    "work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json": "3569ce81d33479321f9b3adec7bd09c9b54a10a01f1fa4abd15888d9d2e66b22"
+  },
+  "status": "PASS_SLEEP_ONLY_REPLACEMENTS_CANNOT_PASS_FROZEN_FAMILY_QC"
+}

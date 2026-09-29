@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+import argparse, csv, datetime as dt, json, os, time
+from pathlib import Path
+import requests
+from lxml import etree
+
+BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+
+def req(session, endpoint, params, api_key=None):
+    if api_key:
+        params["api_key"] = api_key
+    for attempt in range(6):
+        r = session.get(f"{BASE}/{endpoint}", params=params, timeout=90)
+        if r.status_code == 200:
+            time.sleep(0.11 if api_key else 0.36)
+            return r
+        if r.status_code in {429, 500, 502, 503, 504}:
+            time.sleep(2 ** attempt)
+            continue
+        r.raise_for_status()
+    raise RuntimeError(f"NCBI request failed after retries: {endpoint}")
+
+def text(el):
+    if el is None:
+        return ""
+    return "".join(el.itertext()).strip()
+
+def parse_article(article, query_id):
+    med = article.find("MedlineCitation")
+    art = med.find("Article") if med is not None else None
+    pmid = text(med.find("PMID")) if med is not None else ""
+    title = text(art.find("ArticleTitle")) if art is not None else ""
+    journal = text(art.find("Journal/Title")) if art is not None else ""
+    year = ""
+    if art is not None:
+        pubdate = art.find("Journal/JournalIssue/PubDate")
+        if pubdate is not None:
+            year = text(pubdate.find("Year")) or text(pubdate.find("MedlineDate"))[:4]
+    abstract = " ".join(text(x) for x in art.findall("Abstract/AbstractText")) if art is not None else ""
+    doi = ""
+    pubmed_data = article.find("PubmedData")
+    if pubmed_data is not None:
+        for aid in pubmed_data.findall("ArticleIdList/ArticleId"):
+            if aid.get("IdType") == "doi":
+                doi = text(aid)
+                break
+    return {
+        "pmid": pmid, "doi": doi, "year": year, "journal": journal,
+        "title": title, "abstract": abstract, "query_id": query_id,
+    }
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--config", required=True)
+    ap.add_argument("--outdir", required=True)
+    ap.add_argument("--email", default=os.environ.get("NCBI_EMAIL", ""))
+    ap.add_argument("--api-key", default=os.environ.get("NCBI_API_KEY", ""))
+    args = ap.parse_args()
+    cfg = json.loads(Path(args.config).read_text())
+    out = Path(args.outdir); out.mkdir(parents=True, exist_ok=True)
+    session = requests.Session()
+    session.headers.update({"User-Agent": "sleep-frailty-systematic-review/1.0"})
+    all_rows = []
+    log_rows = []
+    as_of = cfg.get("as_of_date", "2026/09/22")
+    for qid, q in cfg["queries"].items():
+        dated = f"({q}) AND (\"1900/01/01\"[Date - Publication] : \"{as_of}\"[Date - Publication])"
+        params = {"db":"pubmed","term":dated,"retmode":"json","retmax":0,"usehistory":"y"}
+        if args.email: params["email"] = args.email
+        r = req(session, "esearch.fcgi", params, args.api_key).json()["esearchresult"]
+        count = int(r["count"]); webenv = r["webenv"]; qkey = r["querykey"]
+        qdir = out / qid; qdir.mkdir(exist_ok=True)
+        (qdir / "query.txt").write_text(dated + "\n", encoding="utf-8")
+        for start in range(0, count, 200):
+            p = {"db":"pubmed","query_key":qkey,"WebEnv":webenv,"retstart":start,"retmax":200,"retmode":"xml"}
+            if args.email: p["email"] = args.email
+            rr = req(session, "efetch.fcgi", p, args.api_key)
+            xml_path = qdir / f"batch_{start:06d}.xml"
+            xml_path.write_bytes(rr.content)
+            root = etree.fromstring(rr.content)
+            for article in root.findall("PubmedArticle"):
+                all_rows.append(parse_article(article, qid))
+        log_rows.append({"query_id":qid,"count":count,"date_run":dt.date.today().isoformat(),"as_of_date":as_of,"query":dated})
+
+    by_pmid = {}
+    for row in all_rows:
+        key = row["pmid"] or (row["doi"].lower() if row["doi"] else row["title"].lower())
+        if key not in by_pmid:
+            by_pmid[key] = row.copy(); by_pmid[key]["query_ids"] = {row["query_id"]}
+        else:
+            by_pmid[key]["query_ids"].add(row["query_id"])
+    master = []
+    for row in by_pmid.values():
+        row["query_ids"] = ";".join(sorted(row["query_ids"]))
+        row.pop("query_id", None)
+        master.append(row)
+    master.sort(key=lambda x: (x.get("year", ""), x.get("pmid", "")), reverse=True)
+    fields = ["pmid","doi","year","journal","title","abstract","query_ids"]
+    with (out / "pubmed_master.csv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(master)
+    with (out / "search_log.tsv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["query_id","count","date_run","as_of_date","query"], delimiter="\t")
+        w.writeheader(); w.writerows(log_rows)
+    print(f"PubMed complete: {len(master)} unique records across {len(log_rows)} searches")
+
+if __name__ == "__main__": main()
