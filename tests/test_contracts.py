@@ -1171,6 +1171,9 @@ class PanelContractTests(unittest.TestCase):
                 (root / name).mkdir(parents=True, exist_ok=True)
             for name in ["02_munge.sh", "_common.sh"]:
                 shutil.copy2(ROOT / "scripts" / name, root / "scripts" / name)
+            storage_guard = root / "frailty_paper" / "scripts" / "09_require_storage.sh"
+            storage_guard.parent.mkdir(parents=True, exist_ok=True)
+            storage_guard.write_text("#!/usr/bin/env bash\nset -euo pipefail\n", encoding="utf-8")
             (root / "config" / "analysis_panel.tsv").write_text(
                 "atlas_version\ttrait_id\tsource_id\traw_file\tbuild\t"
                 "source_status\tancestry\n"
