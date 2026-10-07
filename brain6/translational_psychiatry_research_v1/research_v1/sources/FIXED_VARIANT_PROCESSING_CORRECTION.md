@@ -1,0 +1,11 @@
+# Identity parser correction
+
+The prospective manifest/protocol and acquisition code remain unchanged. Acquisition succeeded for all three exact biallelic keys. Initial analysis retained four NOT_ESTIMATED slots because it expected `variant.chrom` while the live API returns `variant.chr`. All three responses have exactly the frozen GRCh38 position, REF and ALT. Before inspecting target P or effects, the analyst inspected response identity field names and target row/count availability, documented this schema mismatch to the parent, and created `fixed_variant_reanalyze_v1.py`.
+
+The correction compares live `chr` with manifest chromosome and otherwise repeats the frozen identity/eligibility checks and calculations. It changes no source object, selected variant, ALT, phenotype, family size, test, threshold or missing-data rule. Initial conservative results are preserved as `fixed_variant_*.tsv`; corrected files explicitly end `_corrected.tsv`. Run the new script from the repository root with Python 3. Parent numerical validation is required before manuscript use. A successful parser correction is not evidence that a phenotype association is significant or that dense regional data are complete.
+
+## Source-method correction and observed browser censoring
+
+The frozen protocol's generic SAIGE reference was inaccurate for this release. Official R13 GWAS documentation states REGENIE v3.3, approximate Firth, LOCO relatedness, covariates sex, age, ten PCs, chip version and legacy genotyping batch. This documentary correction changes no native statistics or test. Manuscript Methods must cite REGENIE v3.3. Native P remains authoritative and approximate Wald reconstructions remain diagnostics.
+
+The published public backend explicitly appends phenotype placeholders with null beta/SE/P/AF for rows filtered from its long-format matrix. Among the three actual objects, maximum nonnull native P is approximately .04977–.04978; this is consistent with a .05 display-matrix cutoff, but the deployed setting is unverified and no missing P is bounded, imputed or treated as a null. A rs7105462 F5_ADHD is such a placeholder, with endpoint counts but missing native statistics; its planned slot remains NOT_ESTIMATED. These observations reinforce the prohibition on dense regional colocalization from this source.

@@ -1,0 +1,855 @@
+INSTALLING_EXACT_SOURCE  matrixStats_1.5.0.tar.gz 
+* installing *source* package ‘matrixStats’ ...
+** this is package ‘matrixStats’ version ‘1.5.0’
+** package ‘matrixStats’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c 000.init.c -o 000.init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c allocMatrix2.c -o allocMatrix2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c anyMissing.c -o anyMissing.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c binCounts.c -o binCounts.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c binMeans.c -o binMeans.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c colCounts.c -o colCounts.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c colOrderStats.c -o colOrderStats.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c colRanges.c -o colRanges.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c diff2.c -o diff2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c indexByRow.c -o indexByRow.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c logSumExp.c -o logSumExp.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c mean2.c -o mean2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c naming.c -o naming.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c productExpSumLog.c -o productExpSumLog.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c psortKM.c -o psortKM.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowCounts.c -o rowCounts.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowCummaxs.c -o rowCummaxs.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowCummins.c -o rowCummins.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowCumprods.c -o rowCumprods.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowCumsums.c -o rowCumsums.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowDiffs.c -o rowDiffs.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowLogSumExp.c -o rowLogSumExp.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowMads.c -o rowMads.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowMeans2.c -o rowMeans2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowMedians.c -o rowMedians.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowOrderStats.c -o rowOrderStats.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowRanges.c -o rowRanges.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowRanksWithTies.c -o rowRanksWithTies.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowSums2.c -o rowSums2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c rowVars.c -o rowVars.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c signTabulate.c -o signTabulate.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c sum2.c -o sum2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c validateIndices.c -o validateIndices.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c weightedMean.c -o weightedMean.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c weightedMedian.c -o weightedMedian.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c x_OP_y.c -o x_OP_y.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o matrixStats.so 000.init.o allocMatrix2.o anyMissing.o binCounts.o binMeans.o colCounts.o colOrderStats.o colRanges.o diff2.o indexByRow.o logSumExp.o mean2.o naming.o productExpSumLog.o psortKM.o rowCounts.o rowCummaxs.o rowCummins.o rowCumprods.o rowCumsums.o rowDiffs.o rowLogSumExp.o rowMads.o rowMeans2.o rowMedians.o rowOrderStats.o rowRanges.o rowRanksWithTies.o rowSums2.o rowVars.o signTabulate.o sum2.o validateIndices.o weightedMean.o weightedMedian.o x_OP_y.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-matrixStats/00new/matrixStats/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (matrixStats)
+INSTALLING_EXACT_SOURCE  irlba_2.4.1.tar.gz 
+* installing *source* package ‘irlba’ ...
+** this is package ‘irlba’ version ‘2.4.1’
+** package ‘irlba’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/opt/homebrew/Cellar/r/4.6.1/lib/R/library/Matrix/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c irlb.c -o irlb.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o irlba.so irlb.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lRlapack -L/opt/homebrew/opt/openblas/lib -lopenblas -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16 -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc -L/opt/homebrew/opt/gcc/lib/gcc/current -lemutls_w -lheapt_w -lgfortran -lquadmath -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-irlba/00new/irlba/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (irlba)
+INSTALLING_EXACT_SOURCE  Rcpp_1.1.2.tar.gz 
+* installing *source* package ‘Rcpp’ ...
+** this is package ‘Rcpp’ version ‘1.1.2’
+** package ‘Rcpp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c api.cpp -o api.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c attributes.cpp -o attributes.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c barrier.cpp -o barrier.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c date.cpp -o date.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c module.cpp -o module.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c rcpp_init.cpp -o rcpp_init.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o Rcpp.so api.o attributes.o barrier.o date.o module.o rcpp_init.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-Rcpp/00new/Rcpp/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (Rcpp)
+INSTALLING_EXACT_SOURCE  RcppArmadillo_15.6.0-1.tar.gz 
+* installing *source* package ‘RcppArmadillo’ ...
+** this is package ‘RcppArmadillo’ version ‘15.6.0-1’
+** package ‘RcppArmadillo’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking whether the C++ compiler works... yes
+checking for C++ compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C++... yes
+checking whether clang++ -std=gnu++20 accepts -g... yes
+checking for clang++ -std=gnu++20 option to enable C++11 features... -std=gnu++11
+checking how to run the C++ preprocessor... clang++ -std=gnu++20 -std=gnu++11 -E
+checking whether the compiler supports GNU C++... (cached) yes
+checking whether clang++ -std=gnu++20 -std=gnu++11 accepts -g... (cached) yes
+checking for clang++ -std=gnu++20 -std=gnu++11 option to enable C++11 features... (cached) -std=gnu++11
+checking what system we are on... running Darwin on arm64
+checking whether we have a suitable tempdir... /var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T
+checking whether on Linux... no
+checking whether on macOS... yes
+checking whether R CMD SHLIB can compile OpenMP programs using '-Xclang -fopenmp'... no
+checking whether R CMD SHLIB can compile OpenMP programs using '-fopenmp'... no
+checking whether R CMD SHLIB can use libomp at /opt/homebrew/opt/libomp... yes
+checking for OpenMP... found and suitable
+configure: creating ./config.status
+config.status: creating inst/include/RcppArmadillo/config/RcppArmadilloConfigGenerated.h
+config.status: creating src/Makevars
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include -DARMA_USE_CURRENT -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp  -fPIC  -g -O2   -c RcppArmadillo.cpp -o RcppArmadillo.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include -DARMA_USE_CURRENT -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp  -fPIC  -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include -DARMA_USE_CURRENT -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp  -fPIC  -g -O2   -c fastLm.cpp -o fastLm.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o RcppArmadillo.so RcppArmadillo.o RcppExports.o fastLm.o -L/opt/homebrew/opt/libomp/lib -lomp -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lRlapack -L/opt/homebrew/opt/openblas/lib -lopenblas -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16 -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc -L/opt/homebrew/opt/gcc/lib/gcc/current -lemutls_w -lheapt_w -lgfortran -lquadmath -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-RcppArmadillo/00new/RcppArmadillo/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (RcppArmadillo)
+INSTALLING_EXACT_SOURCE  mixsqp_0.3-54.tar.gz 
+* installing *source* package ‘mixsqp’ ...
+** this is package ‘mixsqp’ version ‘0.3-54’
+** package ‘mixsqp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_DONT_USE_OPENMP -DARMA_WARN_LEVEL=1 -fPIC  -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_DONT_USE_OPENMP -DARMA_WARN_LEVEL=1 -fPIC  -g -O2   -c misc.cpp -o misc.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_DONT_USE_OPENMP -DARMA_WARN_LEVEL=1 -fPIC  -g -O2   -c mixem.cpp -o mixem.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_DONT_USE_OPENMP -DARMA_WARN_LEVEL=1 -fPIC  -g -O2   -c mixsqp.cpp -o mixsqp.o
+mixsqp.cpp:3:9: warning: 'ARMA_DONT_PRINT_ERRORS' macro redefined [-Wmacro-redefined]
+    3 | #define ARMA_DONT_PRINT_ERRORS
+      |         ^
+<command line>:2:9: note: previous definition is here
+    2 | #define ARMA_DONT_PRINT_ERRORS 1
+      |         ^
+1 warning generated.
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -DARMA_DONT_PRINT_ERRORS -DARMA_NO_DEBUG -DARMA_USE_BLAS -DARMA_DONT_USE_OPENMP -DARMA_WARN_LEVEL=1 -fPIC  -g -O2   -c objective.cpp -o objective.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o mixsqp.so RcppExports.o misc.o mixem.o mixsqp.o objective.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lRlapack -L/opt/homebrew/opt/openblas/lib -lopenblas -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16 -L/opt/homebrew/opt/gcc/lib/gcc/current/gcc -L/opt/homebrew/opt/gcc/lib/gcc/current -lemutls_w -lheapt_w -lgfortran -lquadmath -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-mixsqp/00new/mixsqp/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (mixsqp)
+INSTALLING_EXACT_SOURCE  plyr_1.8.9.tar.gz 
+* installing *source* package ‘plyr’ ...
+** this is package ‘plyr’ version ‘1.8.9’
+** package ‘plyr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c loop_apply.c -o loop_apply.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/Rcpp/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c split-numeric.cpp -o split-numeric.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o plyr.so RcppExports.o loop_apply.o split-numeric.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-plyr/00new/plyr/libs
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (plyr)
+INSTALLING_EXACT_SOURCE  reshape_0.8.10.tar.gz 
+* installing *source* package ‘reshape’ ...
+** this is package ‘reshape’ version ‘0.8.10’
+** package ‘reshape’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (reshape)
+INSTALLING_EXACT_SOURCE  crayon_1.5.3.tar.gz 
+* installing *source* package ‘crayon’ ...
+** this is package ‘crayon’ version ‘1.5.3’
+** package ‘crayon’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (crayon)
+INSTALLING_EXACT_SOURCE  cli_3.6.6.tar.gz 
+* installing *source* package ‘cli’ ...
+** this is package ‘cli’ version ‘3.6.6’
+** package ‘cli’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c ansi.c -o ansi.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c cleancall.c -o cleancall.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c diff.c -o diff.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c errors.c -o errors.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c glue.c -o glue.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c init.c -o init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c inst.c -o inst.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c keypress-unix.c -o keypress-unix.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c keypress-win.c -o keypress-win.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c keypress.c -o keypress.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c md5.c -o md5.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c progress-altrep.c -o progress-altrep.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c progress.c -o progress.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c sha1.c -o sha1.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c sha256.c -o sha256.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c thread.c -o thread.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c tty.c -o tty.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c utf8.c -o utf8.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c utils.c -o utils.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c vt.c -o vt.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c vtparse.c -o vtparse.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c vtparse_table.c -o vtparse_table.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c win-utf8.c -o win-utf8.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c winfiles.c -o winfiles.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c xxhash.c -o xxhash.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I../inst/include  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c xxhash2.c -o xxhash2.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o cli.so ansi.o cleancall.o diff.o errors.o glue.o init.o inst.o keypress-unix.o keypress-win.o keypress.o md5.o progress-altrep.o progress.o sha1.o sha256.o thread.o tty.o utf8.o utils.o vt.o vtparse.o vtparse_table.o win-utf8.o winfiles.o xxhash.o xxhash2.o -lpthread -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-cli/00new/cli/libs
+** R
+** exec
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cli)
+INSTALLING_EXACT_SOURCE  glue_1.8.1.tar.gz 
+* installing *source* package ‘glue’ ...
+** this is package ‘glue’ version ‘1.8.1’
+** package ‘glue’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c glue.c -o glue.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c init.c -o init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c trim.c -o trim.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o glue.so glue.o init.o trim.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-glue/00new/glue/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (glue)
+INSTALLING_EXACT_SOURCE  rlang_1.3.0.tar.gz 
+* installing *source* package ‘rlang’ ...
+** this is package ‘rlang’ version ‘1.3.0’
+** package ‘rlang’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c capture.c -o capture.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c internal.c -o internal.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c rlang.c -o rlang.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang/  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c version.c -o version.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o rlang.so capture.o internal.o rlang.o version.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-rlang/00new/rlang/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (rlang)
+INSTALLING_EXACT_SOURCE  lifecycle_1.0.5.tar.gz 
+* installing *source* package ‘lifecycle’ ...
+** this is package ‘lifecycle’ version ‘1.0.5’
+** package ‘lifecycle’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (lifecycle)
+INSTALLING_EXACT_SOURCE  gtable_0.3.6.tar.gz 
+* installing *source* package ‘gtable’ ...
+** this is package ‘gtable’ version ‘0.3.6’
+** package ‘gtable’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (gtable)
+INSTALLING_EXACT_SOURCE  cpp11_0.5.5.tar.gz 
+* installing *source* package ‘cpp11’ ...
+** this is package ‘cpp11’ version ‘0.5.5’
+** package ‘cpp11’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (cpp11)
+INSTALLING_EXACT_SOURCE  isoband_0.3.0.tar.gz 
+* installing *source* package ‘isoband’ ...
+** this is package ‘isoband’ version ‘0.3.0’
+** package ‘isoband’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c clip-lines.cpp -o clip-lines.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c cpp11.cpp -o cpp11.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c isoband.cpp -o isoband.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c polygon.cpp -o polygon.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c separate-polygons.cpp -o separate-polygons.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c test-clip-lines.cpp -o test-clip-lines.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c test-runner.cpp -o test-runner.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/cpp11/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c test-separate-polygons.cpp -o test-separate-polygons.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o isoband.so clip-lines.o cpp11.o isoband.o polygon.o separate-polygons.o test-clip-lines.o test-runner.o test-separate-polygons.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-isoband/00new/isoband/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (isoband)
+INSTALLING_EXACT_SOURCE  S7_0.2.2.tar.gz 
+* installing *source* package ‘S7’ ...
+** this is package ‘S7’ version ‘0.2.2’
+** package ‘S7’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c init.c -o init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c method-dispatch.c -o method-dispatch.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2  -c prop.c -o prop.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o S7.so init.o method-dispatch.o prop.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-S7/00new/S7/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (S7)
+INSTALLING_EXACT_SOURCE  farver_2.1.2.tar.gz 
+* installing *source* package ‘farver’ ...
+** this is package ‘farver’ version ‘2.1.2’
+** package ‘farver’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c ColorSpace.cpp -o ColorSpace.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c Comparison.cpp -o Comparison.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c Conversion.cpp -o Conversion.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c encode.cpp -o encode.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c farver.cpp -o farver.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c init.cpp -o init.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o farver.so ColorSpace.o Comparison.o Conversion.o encode.o farver.o init.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-farver/00new/farver/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (farver)
+INSTALLING_EXACT_SOURCE  labeling_0.4.3.tar.gz 
+* installing *source* package ‘labeling’ ...
+** this is package ‘labeling’ version ‘0.4.3’
+** package ‘labeling’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (labeling)
+INSTALLING_EXACT_SOURCE  R6_2.6.1.tar.gz 
+* installing *source* package ‘R6’ ...
+** this is package ‘R6’ version ‘2.6.1’
+** package ‘R6’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6)
+INSTALLING_EXACT_SOURCE  RColorBrewer_1.1-3.tar.gz 
+* installing *source* package ‘RColorBrewer’ ...
+** this is package ‘RColorBrewer’ version ‘1.1-3’
+** package ‘RColorBrewer’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (RColorBrewer)
+INSTALLING_EXACT_SOURCE  viridisLite_0.4.3.tar.gz 
+* installing *source* package ‘viridisLite’ ...
+** this is package ‘viridisLite’ version ‘0.4.3’
+** package ‘viridisLite’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (viridisLite)
+INSTALLING_EXACT_SOURCE  scales_1.4.0.tar.gz 
+* installing *source* package ‘scales’ ...
+** this is package ‘scales’ version ‘1.4.0’
+** package ‘scales’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (scales)
+INSTALLING_EXACT_SOURCE  vctrs_0.7.3.tar.gz 
+* installing *source* package ‘vctrs’ ...
+** this is package ‘vctrs’ version ‘0.7.3’
+** package ‘vctrs’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c altrep-lazy-character.c -o altrep-lazy-character.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c altrep-rle.c -o altrep-rle.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c altrep.c -o altrep.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c arg-counter.c -o arg-counter.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c arg.c -o arg.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c assert.c -o assert.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c bind.c -o bind.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c c.c -o c.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c callables.c -o callables.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c case-when.c -o case-when.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c cast-bare.c -o cast-bare.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c cast-dispatch.c -o cast-dispatch.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c cast.c -o cast.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c compare.c -o compare.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c complete.c -o complete.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c conditions.c -o conditions.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c dictionary.c -o dictionary.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c dim.c -o dim.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c empty.c -o empty.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c encoding.c -o encoding.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c equal.c -o equal.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c expand.c -o expand.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c fields.c -o fields.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c fill.c -o fill.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c globals.c -o globals.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c group.c -o group.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c growable.c -o growable.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c hash.c -o hash.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c if-else.c -o if-else.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c init.c -o init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c interval.c -o interval.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c list-combine.c -o list-combine.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c list-unchop.c -o list-unchop.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c match-joint.c -o match-joint.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c match.c -o match.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c missing.c -o missing.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c names.c -o names.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c order-collate.c -o order-collate.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c order-groups.c -o order-groups.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c order-sortedness.c -o order-sortedness.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c order.c -o order.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c parallel.c -o parallel.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c poly-op.c -o poly-op.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c proxy-restore.c -o proxy-restore.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c proxy.c -o proxy.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c ptype-common.c -o ptype-common.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c ptype.c -o ptype.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c ptype2-dispatch.c -o ptype2-dispatch.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c ptype2.c -o ptype2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c rank.c -o rank.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c recode.c -o recode.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c rep.c -o rep.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c rlang-dev.c -o rlang-dev.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c rlang.c -o rlang.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c runs.c -o runs.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c set.c -o set.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c shape.c -o shape.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c size-common.c -o size-common.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c size.c -o size.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice-array.c -o slice-array.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice-assign-array.c -o slice-assign-array.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice-assign.c -o slice-assign.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice-chop.c -o slice-chop.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice-interleave.c -o slice-interleave.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c slice.c -o slice.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c split.c -o split.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c subscript-loc.c -o subscript-loc.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c subscript.c -o subscript.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-data-frame.c -o type-data-frame.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-date-time.c -o type-date-time.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-factor.c -o type-factor.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-info.c -o type-info.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-integer64.c -o type-integer64.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c type-tibble.c -o type-tibble.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c typeof2-s3.c -o typeof2-s3.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c typeof2.c -o typeof2.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c unspecified.c -o unspecified.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c utils-dispatch.c -o utils-dispatch.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c utils.c -o utils.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG -I./rlang  -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden -fPIC  -g -O2  -c version.c -o version.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o vctrs.so altrep-lazy-character.o altrep-rle.o altrep.o arg-counter.o arg.o assert.o bind.o c.o callables.o case-when.o cast-bare.o cast-dispatch.o cast.o compare.o complete.o conditions.o dictionary.o dim.o empty.o encoding.o equal.o expand.o fields.o fill.o globals.o group.o growable.o hash.o if-else.o init.o interval.o list-combine.o list-unchop.o match-joint.o match.o missing.o names.o order-collate.o order-groups.o order-sortedness.o order.o parallel.o poly-op.o proxy-restore.o proxy.o ptype-common.o ptype.o ptype2-dispatch.o ptype2.o rank.o recode.o rep.o rlang-dev.o rlang.o runs.o set.o shape.o size-common.o size.o slice-array.o slice-assign-array.o slice-assign.o slice-chop.o slice-interleave.o slice.o split.o subscript-loc.o subscript.o type-data-frame.o type-date-time.o type-factor.o type-info.o type-integer64.o type-tibble.o typeof2-s3.o typeof2.o unspecified.o utils-dispatch.o utils.o version.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-vctrs/00new/vctrs/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (vctrs)
+INSTALLING_EXACT_SOURCE  withr_3.0.3.tar.gz 
+* installing *source* package ‘withr’ ...
+** this is package ‘withr’ version ‘3.0.3’
+** package ‘withr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (withr)
+INSTALLING_EXACT_SOURCE  ggplot2_4.0.3.tar.gz 
+* installing *source* package ‘ggplot2’ ...
+** this is package ‘ggplot2’ version ‘4.0.3’
+** package ‘ggplot2’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (ggplot2)
+INSTALLING_EXACT_SOURCE  susieR_0.14.2.tar.gz 
+* installing *source* package ‘susieR’ ...
+** this is package ‘susieR’ version ‘0.14.2’
+** package ‘susieR’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (susieR)
+INSTALLING_EXACT_SOURCE  data.table_1.18.6.1.tar.gz 
+* installing *source* package ‘data.table’ ...
+** this is package ‘data.table’ version ‘1.18.6.1’
+** package ‘data.table’ successfully unpacked and MD5 sums checked
+** using staged installation
+zlib 1.2.12 is available ok
+* checking if R installation supports OpenMP with "-Xclang -fopenmp" ... no
+* checking if R installation supports OpenMP with "-fopenmp" ... no
+* checking if libomp installation at /opt/homebrew/opt/libomp can be used... yes
+** libs
+using C compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c assign.c -o assign.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c between.c -o between.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c bmerge.c -o bmerge.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c chmatch.c -o chmatch.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c cj.c -o cj.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c coalesce.c -o coalesce.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c deleterows.c -o deleterows.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c dogroups.c -o dogroups.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fastmean.c -o fastmean.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fcast.c -o fcast.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fifelse.c -o fifelse.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fmelt.c -o fmelt.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c forder.c -o forder.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c frank.c -o frank.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fread.c -o fread.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c freadR.c -o freadR.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c froll.c -o froll.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c frollR.c -o frollR.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c frolladaptive.c -o frolladaptive.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c frollapply.c -o frollapply.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fsort.c -o fsort.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fwrite.c -o fwrite.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c fwriteR.c -o fwriteR.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c gsumm.c -o gsumm.o
+gsumm.c:1178:38: warning: implicit conversion from 'long long' to 'long double' changes value from 9223372036854775807 to 9223372036854775808 [-Wimplicit-const-int-float-conversion]
+ 1178 |       ansd[i] = (ISNAN(s[i]) || s[i]>INT64_MAX || s[i]<=INT64_MIN) ? NA_INTEGER64 : (int64_t)s[i];
+      |                                     ~^~~~~~~~~
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h:94:26: note: expanded from macro 'INT64_MAX'
+   94 | #define INT64_MAX        9223372036854775807LL
+      |                          ^~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c hash.c -o hash.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c idatetime.c -o idatetime.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c ijoin.c -o ijoin.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c init.c -o init.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c inrange.c -o inrange.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c mergelist.c -o mergelist.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c nafill.c -o nafill.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c negate.c -o negate.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c nqrecreateindices.c -o nqrecreateindices.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c openmp-utils.c -o openmp-utils.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c programming.c -o programming.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c quickselect.c -o quickselect.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c rbindlist.c -o rbindlist.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c reorder.c -o reorder.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c shellsort.c -o shellsort.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c shift.c -o shift.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c snprintf.c -o snprintf.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c subset.c -o subset.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c transpose.c -o transpose.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c types.c -o types.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c uniqlist.c -o uniqlist.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c utils.c -o utils.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c vecseq.c -o vecseq.o
+clang -std=gnu23 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG   -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include   -fvisibility=hidden  -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp   -fPIC  -g -O2  -c wrappers.c -o wrappers.o
+clang -std=gnu23 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o data.table.so assign.o between.o bmerge.o chmatch.o cj.o coalesce.o deleterows.o dogroups.o fastmean.o fcast.o fifelse.o fmelt.o forder.o frank.o fread.o freadR.o froll.o frollR.o frolladaptive.o frollapply.o fsort.o fwrite.o fwriteR.o gsumm.o hash.o idatetime.o ijoin.o init.o inrange.o mergelist.o nafill.o negate.o nqrecreateindices.o openmp-utils.o programming.o quickselect.o rbindlist.o reorder.o shellsort.o shift.o snprintf.o subset.o transpose.o types.o uniqlist.o utils.o vecseq.o wrappers.o -fvisibility=hidden -L/opt/homebrew/opt/libomp/lib -lomp -lz -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+PKG_CFLAGS = -fvisibility=hidden -I/opt/homebrew/opt/libomp/include -Xclang -fopenmp
+PKG_LIBS = -fvisibility=hidden -L/opt/homebrew/opt/libomp/lib -lomp -lz
+if [ "data.table.so" != "data_table.so" ]; then mv data.table.so data_table.so; fi
+if [ "" != "Windows_NT" ] && [ `uname -s` = 'Darwin' ]; then install_name_tool -id data_table.so data_table.so; fi
+installing to /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R-scientific-lib/00LOCK-data.table/00new/data.table/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (data.table)
+INSTALLING_EXACT_SOURCE  gridExtra_2.3.1.tar.gz 
+* installing *source* package ‘gridExtra’ ...
+** this is package ‘gridExtra’ version ‘2.3.1’
+** package ‘gridExtra’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (gridExtra)
+INSTALLING_EXACT_SOURCE  viridis_0.6.5.tar.gz 
+* installing *source* package ‘viridis’ ...
+** this is package ‘viridis’ version ‘0.6.5’
+** package ‘viridis’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (viridis)
+INSTALLING_EXACT_SOURCE  coloc_5.2.3.tar.gz 
+* installing *source* package ‘coloc’ ...
+** this is package ‘coloc’ version ‘5.2.3’
+** package ‘coloc’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (coloc)

@@ -1,0 +1,128 @@
+{
+  "frozen_utc": "2026-10-07T23:04:02Z",
+  "run_id": "clinical_fixed_variant_finngen_r13_20261007_v1",
+  "access": "ORDINARY_ADVERTISED_PUBLIC_BROWSER_API",
+  "outcomes_seen_before_freeze": false,
+  "source_release": "FinnGen R13",
+  "genome_build": "GRCh38",
+  "effect_allele": "ALT",
+  "variants": [
+    {
+      "region": "A",
+      "rsid": "rs7105462",
+      "chrom": "11",
+      "pos37": 112912048,
+      "pos38": 113041326,
+      "ref": "G",
+      "alt": "A",
+      "source_a1": "G",
+      "source_a2": "A",
+      "key": "11-113041326-G-A",
+      "url": "https://r13.finngen.fi/api/variant/11-113041326-G-A",
+      "max_bytes": 5000000
+    },
+    {
+      "region": "B",
+      "rsid": "rs9485410",
+      "chrom": "6",
+      "pos37": 101261007,
+      "pos38": 100813131,
+      "ref": "T",
+      "alt": "C",
+      "source_a1": "T",
+      "source_a2": "C",
+      "key": "6-100813131-T-C",
+      "url": "https://r13.finngen.fi/api/variant/6-100813131-T-C",
+      "max_bytes": 5000000
+    },
+    {
+      "region": "C",
+      "rsid": "rs77960",
+      "chrom": "5",
+      "pos37": 103964585,
+      "pos38": 104628884,
+      "ref": "G",
+      "alt": "A",
+      "source_a1": "A",
+      "source_a2": "G",
+      "key": "5-104628884-G-A",
+      "url": "https://r13.finngen.fi/api/variant/5-104628884-G-A",
+      "max_bytes": 5000000
+    }
+  ],
+  "slots": [
+    {
+      "slot_id": "A_INS_ADHD",
+      "region": "A",
+      "sleep_code": "F5_INSOMNIA",
+      "outcome_code": "F5_ADHD"
+    },
+    {
+      "slot_id": "A_INS_MDD",
+      "region": "A",
+      "sleep_code": "F5_INSOMNIA",
+      "outcome_code": "F5_DEPRESSIO"
+    },
+    {
+      "slot_id": "B_INS_MDD",
+      "region": "B",
+      "sleep_code": "F5_INSOMNIA",
+      "outcome_code": "F5_DEPRESSIO"
+    },
+    {
+      "slot_id": "C_INS_ADHD",
+      "region": "C",
+      "sleep_code": "F5_INSOMNIA",
+      "outcome_code": "F5_ADHD"
+    }
+  ],
+  "family_size": 4,
+  "alpha_family": 0.05,
+  "alpha_per_slot": 0.0125,
+  "test": "intersection-union: max(native_P_sleep,native_P_outcome)",
+  "missing_rule": "NOT_ESTIMATED; retain all four planned slots",
+  "classification": "PHENOTYPE_SENSITIVITY; discovery_cohort_independence_UNVERIFIED",
+  "source_metadata": {
+    "F5_INSOMNIA": {
+      "phenocode": "F5_INSOMNIA",
+      "phenostring": "Insomnia",
+      "num_cases": 51643,
+      "num_controls": 446273
+    },
+    "F5_ADHD": {
+      "phenocode": "F5_ADHD",
+      "phenostring": "Disturbance of activity and attention",
+      "num_cases": 5559,
+      "num_controls": 489493
+    },
+    "F5_DEPRESSIO": {
+      "phenocode": "F5_DEPRESSIO",
+      "phenostring": "Depression",
+      "num_cases": 61203,
+      "num_controls": 432672
+    }
+  },
+  "source_and_code_sha256": {
+    "rs7105462_grch37.json": "719409afeeb30829ed4e693df2b068931be83c61c277e2cb0043b57e9b4fbf18",
+    "rs7105462_grch38.json": "f14eba5adda3ed309f8b3f687c8c2190f59e7e6b0a85a5e32437c4eb57cdd351",
+    "rs9485410_grch37.json": "84335b26b3ec62ff924f0d180d911bc15c14de2481c386e904907fe95bd96882",
+    "rs9485410_grch38.json": "cbf902071ce8fa28d1273d2a199f25058b3fe27fb8b0e39095be8e90102c287d",
+    "rs77960_grch37.json": "dc1787c245c6c1c5daafc49c5839fc71b1e0e05ed31c244acc9b5bb772513c92",
+    "rs77960_grch38.json": "0a4851d3145aaaddb543c5252f71ef22ba9856aa8fe5a163171340a78583c489",
+    "finngen_current_access.html": "c5c18e37b06b97a4ab783deccb7d0c83b7ca1b350b1861a6a145af93559c2ef7",
+    "finngen_r13_config.js": "21942e9e86f63393f09ebf84d26db12caf9be0e97a3536195ed7455c3cd06502",
+    "finngen_r13_phenotypes.json": "6cd3ec4714d93d19ca8f2460dcd7f06e4ef0ed1f9b5e978ad773f72ba179a900",
+    "finngen_public_server.py": "e0f889c8437de23217d5a68043607a6b1776dd8afd87a92164c85e07f1e02010",
+    "finngen_public_db.py": "98e6d3123bc4cf7360de3583c7469e631e457150771234d4f64e3f8af9112b3e",
+    "finngen_gwas.html": "d4f413cf8df72ce4693ae8a987538d73df0dbe50ea085d444bd9963a458b43c3",
+    "finngen_data_download.html": "94a552e6a91135720e9495c80dcadca76dd31405d2b682ff87ea72c2b09c0a95",
+    "FIXED_VARIANT_FINGEN_PROTOCOL.md": "5ffdc420f4fd99cd5d7e75e9e4a0f6fd4d7bcfb7b27386a3aecd7d318896aab7",
+    "fixed_variant_finngen.py": "209ee6555d1b2d73928b8defb050ed60b329da4da0ced213da1058a0f9a9a1cd"
+  },
+  "discovery_allele_evidence": {
+    "path": "work/research-discovery-raw/insomnia.txt.gz",
+    "sha256": "32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b",
+    "receipt": "discovery/acquisition_receipts.json",
+    "verified_by": "Parent agent prior to freeze; original source UNIQUE_ID/A1/A2, not an outcome-directed ALT choice"
+  }
+}

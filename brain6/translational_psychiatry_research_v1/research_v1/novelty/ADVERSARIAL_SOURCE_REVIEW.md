@@ -1,0 +1,27 @@
+# Adversarial statistical-genetics/source review
+
+This is an automated adversarial source-review perspective, not independent human peer review. It deliberately tries to invalidate the most tempting interpretations using newly acquired primary evidence.
+
+| Challenge | Actual evidence | Disposition/allowed claim |
+|---|---|---|
+| A/B/C are new shared regions | Jia directly reports A/B insomnia–MDD; Zu/Lin report C; Schipperv2 overlaps A | First shared-region discovery claim rejected; any distinct-signal claim requires allele/LD/multi-signal evidence |
+| Remaining protected candidates establish first discovery | 22/25 windows contain prior same-pair published leads; three long-sleep–PD still unresolved | No locus novelty from an unread paper or search omission |
+| C has a different Brain6 rsID so is distinct | Actual EUR genotype r²=.99548 with Zu lead, .99552 with Lin lead; Lin MDD lead and Zu lead r²1 | Different-rsID novelty argument rejected; LD signs are reference ALT dosage signs, not GWAS orientation |
+| Strong A regional covariance means shared causal variant | Schipper INS_DEP rg=.8712/P1.66e-7 but H4=.00643/H3=.44557/H1=.548; Jia A H4=.008 | Covariance and single-signal colocalization answer different questions; no causal conclusion from overlap |
+| A low H4 proves distinct causal signals | H1 dominates Schipper posterior and model is single-signal with source sensitivity | Neither low H4 nor high H3 alone validates distinct biology; power, alleles and model assumptions matter |
+| Gene DRD2/NCAM1/ASCC3 explains phenotype | Published nearest/predicted gene labels lack a validated Brain6 molecular colocalization/mechanism | Keep positional or model-predicted status; no causal-effector wording |
+| New FinnGen results are independent two-trait replication | Registry ascertainment differs; complete discovery–FinnGen participant/control linkage unavailable | PHENOTYPE_SENSITIVITY, independence UNVERIFIED |
+| No Finland in the ADHD roster proves disjointness | Two source manifests enumerate13 cohorts; exact names do not match10 FinnGen organisations, but naming units/legacy control aliases differ | The old missing-roster gap is resolved; participant independence still unverified |
+| NFBC variant-annotation labels prove R13 endpoint reuse | AF/INFO legacy labels are present; endpoint cohort membership is not provided | Annotation label is not participant-level overlap evidence |
+| FinnGen clinical A/C threshold success establishes shared causation | Intersection–union tests only two native associations at a fixed biallelic point | Two clinical associations at fixed point allowed; regional replication/coloc/causation wording rejected |
+| A–ADHD missing row is no association | Public backend inserts nulls for filtered phenotype rows; beta/SE/P/AF are absent | Retain NOT_ESTIMATED and the fourth test in multiplicity; no zero/null imputation |
+| A censored browser is adequate for dense regional fine-mapping | Source applies an unknown deployed threshold; live point maxnonnull P near.05; region metadata is not dense statistics | Dense-region coloc/fine-mapping held, even when point associations are usable |
+| Identity parser correction selected a favorable result | Frozen acquisition/protocol preserved; chr-vs-chrom correction documented before target P/effects inspected; same keys/rules | Retain initial hold outputs and explicit correction; parent independently checks raw objects |
+| Source P should be replaced by beta/SE P | R13 is REGENIEv3.3 with approximate Firth; native tests need not be exact Wald tests | Native P authoritative; Wald calculation only diagnostic |
+| Source release and sample N are interchangeable | Lin ADHD PMID/N mismatch; Schipper insomnia source/reference/count inconsistency; FinnGen annotation NS differs from GWAS endpoint N | Source bibliographic/QC contradictions recorded; no convenient constant N substituted |
+| A complete focused query proves comprehensive novelty | 488 unique indexed records across five complete queries; 23 priority titles with many unread full texts; Xue full supplement unresolved | Query completion is computationally reproducible but not absence-based proof of novelty |
+| Generic Figshare CC BY permits republishing ADHD raw results | Source-specific README/xlsx conditions prohibit public result-file redistribution | Preserve raw inputs/subsets outside Git; derived source facts/results only |
+
+Schipper v2 Methods describe580 bivariate analyses but a reported threshold8.59e-5 with a written .5/582 expression; .05/582 gives that threshold. This is a source arithmetic discrepancy, not a reason to recalibrate Brain6 thresholds retrospectively or treat the preprint as a gold-standard validation. Source-reported values are preserved exactly. Lin Table8's absent INS–ADHD rows are not assigned favorable colocalization posteriors. Jia unreported alleles remain unreported, despite exact Brain6 source/reference allele evidence.
+
+The credible next scientific action is completing already authorized genuine-LD/multi-signal analyses under a frozen eligible family and integrating these fixed-point clinical sensitivities conservatively. New external dense sources require access/coverage/cohort gates, not threshold adjustment. An independent statistical-genetics collaborator should review source N semantics, covariances/overlap, RSS assumptions and H3/H4 interpretation before any causal or high-impact novelty claim.

@@ -1,0 +1,81 @@
+{
+  "LD_full_sha256": "804f077a118a2f5f06c6b18d87343f56b06537f242d4c32f61df8e2fc872ee1f",
+  "independent_trait_replication": false,
+  "local_only_input_files": {
+    "LD": {
+      "byte_order": "little",
+      "matrix_order": "column_major",
+      "n_snps": 2185,
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/ld_genotypes_research_v1/C_finemap_inputs/shared_signed_LD.float64.bin",
+      "sha256": "e5ab6358259d9fd98fc3d7120329b84198f6f4e34ab116a0859663cd08ddffd0"
+    },
+    "adhd": {
+      "median_n_eff_shared": 128213.79504642317,
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/ld_genotypes_research_v1/C_finemap_inputs/adhd_C_shared.tsv",
+      "sha256": "df8adc2df9db90d964b139b52b46e5a99ab27c8e724787b4bf67a8dbeb3639fd"
+    },
+    "insomnia": {
+      "median_n_eff_shared": 312492.7078472081,
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/ld_genotypes_research_v1/C_finemap_inputs/insomnia_C_shared.tsv",
+      "sha256": "fbc70fb406fdf7f176205498e279ef38c22de0a8de857cbfa684ed9f7d4b5c03"
+    }
+  },
+  "protocol_sha256": "3b16a0c15cbc89004e667a9b78be14e7b68a98b87d7cd0f14ca5c9c73c3b84d6",
+  "shared_snps": 2185,
+  "sources_same_discovery_as_historical_ABF": true,
+  "status": "READY_FOR_RSS_CONSISTENCY_DIAGNOSTICS",
+  "trait_checks": [
+    {
+      "N_consistency_fraction": 1.0,
+      "N_eff_max": 313750.0359555329,
+      "N_eff_median": 312486.2142223749,
+      "N_eff_min": 298363.39191330865,
+      "after_N_gate": 2363,
+      "failed_gates": "",
+      "input_gate_status": "PASS",
+      "max_abs_Z_OR_SE_vs_sourceP_Z_discrepancy": 0.09581812779284604,
+      "median_abs_Z_OR_SE_vs_sourceP_Z_discrepancy": 0.005560064801508502,
+      "min_P_admitted": 1.658e-09,
+      "min_P_source_full_window": 1.658e-09,
+      "oriented_before_N_gate": 2363,
+      "protocol_sha256": "3b16a0c15cbc89004e667a9b78be14e7b68a98b87d7cd0f14ca5c9c73c3b84d6",
+      "reference_coverage": 0.8771343726800297,
+      "reference_eligible": 2694,
+      "region": "chr5:103447968-104447968",
+      "regional_raw_sha256": "4457cd54287491c53be005ce1808ae2fed7ef4e0e6aa35b7159b420de43a967e",
+      "source_N_approximation_limits": "Insomnia perSNP casefraction not supplied; published UKB casefraction109402/386533 assumed; binaryRSS is approximation. ADHD metaN pervariant may represent heterogeneous cohort weights.",
+      "source_N_semantics": "LITERAL_ANALYZED_N_X_GLOBAL_CASE_FRACTION_NEFF_APPROXIMATION",
+      "source_QC_coverage": 0.9590097402597403,
+      "source_rows": 4690,
+      "source_sha256": "32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b",
+      "trait": "insomnia",
+      "valid_source_QC_rows": 2464
+    },
+    {
+      "N_consistency_fraction": 0.9534683326152521,
+      "N_eff_max": 128213.79504642317,
+      "N_eff_median": 128213.79504642317,
+      "N_eff_min": 114383.80668555349,
+      "after_N_gate": 2213,
+      "failed_gates": "",
+      "input_gate_status": "PASS",
+      "max_abs_Z_OR_SE_vs_sourceP_Z_discrepancy": 0.037393043143163496,
+      "median_abs_Z_OR_SE_vs_sourceP_Z_discrepancy": 0.002548627790056268,
+      "min_P_admitted": 2.462e-13,
+      "min_P_source_full_window": 2.462e-13,
+      "oriented_before_N_gate": 2321,
+      "protocol_sha256": "3b16a0c15cbc89004e667a9b78be14e7b68a98b87d7cd0f14ca5c9c73c3b84d6",
+      "reference_coverage": 0.8214550853749072,
+      "reference_eligible": 2694,
+      "region": "chr5:103447968-104447968",
+      "regional_raw_sha256": "c8f04f9938710c13d661dc9449c4bcbc654ef13d731f67483012c78cadf5fdec",
+      "source_N_approximation_limits": "Insomnia perSNP casefraction not supplied; published UKB casefraction109402/386533 assumed; binaryRSS is approximation. ADHD metaN pervariant may represent heterogeneous cohort weights.",
+      "source_N_semantics": "PER_VARIANT_NCA_NCO_EFFECTIVE_N",
+      "source_QC_coverage": 0.932574799831437,
+      "source_rows": 2854,
+      "source_sha256": "c58a96031ec44b1edba81c91d603037a2efd03fcd946531424866e3f5f1d40c5",
+      "trait": "adhd",
+      "valid_source_QC_rows": 2373
+    }
+  ]
+}
