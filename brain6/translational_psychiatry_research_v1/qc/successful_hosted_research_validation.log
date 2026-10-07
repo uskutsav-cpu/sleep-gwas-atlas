@@ -1,0 +1,402 @@
+numerical-validation	Set up job	﻿2026-10-07T23:39:01.7871921Z Current runner version: '2.337.0'
+numerical-validation	Set up job	2026-10-07T23:39:01.7896960Z ##[group]Runner Image Provisioner
+numerical-validation	Set up job	2026-10-07T23:39:01.7897703Z Hosted Compute Agent
+numerical-validation	Set up job	2026-10-07T23:39:01.7898230Z Version: 20260901.588
+numerical-validation	Set up job	2026-10-07T23:39:01.7898832Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+numerical-validation	Set up job	2026-10-07T23:39:01.7899558Z Build Date: 2026-09-01T19:56:44Z
+numerical-validation	Set up job	2026-10-07T23:39:01.7900352Z Worker ID: {6b971890-fd42-4bc0-b5b1-b01c6bc7088d}
+numerical-validation	Set up job	2026-10-07T23:39:01.7900939Z Azure Region: westus3
+numerical-validation	Set up job	2026-10-07T23:39:01.7901494Z ##[endgroup]
+numerical-validation	Set up job	2026-10-07T23:39:01.7902850Z ##[group]Operating System
+numerical-validation	Set up job	2026-10-07T23:39:01.7903561Z Ubuntu
+numerical-validation	Set up job	2026-10-07T23:39:01.7904064Z 24.04.5
+numerical-validation	Set up job	2026-10-07T23:39:01.7904492Z LTS
+numerical-validation	Set up job	2026-10-07T23:39:01.7904908Z ##[endgroup]
+numerical-validation	Set up job	2026-10-07T23:39:01.7905489Z ##[group]Runner Image
+numerical-validation	Set up job	2026-10-07T23:39:01.7905999Z Image: ubuntu-24.04
+numerical-validation	Set up job	2026-10-07T23:39:01.7906511Z Version: 20260927.320.1
+numerical-validation	Set up job	2026-10-07T23:39:01.7907391Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+numerical-validation	Set up job	2026-10-07T23:39:01.7908867Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+numerical-validation	Set up job	2026-10-07T23:39:01.7909651Z ##[endgroup]
+numerical-validation	Set up job	2026-10-07T23:39:01.7910573Z ##[group]GITHUB_TOKEN Permissions
+numerical-validation	Set up job	2026-10-07T23:39:01.7912355Z Contents: read
+numerical-validation	Set up job	2026-10-07T23:39:01.7913485Z Metadata: read
+numerical-validation	Set up job	2026-10-07T23:39:01.7913954Z ##[endgroup]
+numerical-validation	Set up job	2026-10-07T23:39:01.7915667Z Secret source: Actions
+numerical-validation	Set up job	2026-10-07T23:39:01.7916617Z Cache mode: write
+numerical-validation	Set up job	2026-10-07T23:39:01.7917175Z Prepare workflow directory
+numerical-validation	Set up job	2026-10-07T23:39:01.8191105Z Prepare all required actions
+numerical-validation	Set up job	2026-10-07T23:39:01.8246077Z Getting action download info
+numerical-validation	Set up job	2026-10-07T23:39:02.1300149Z Download action repository 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+numerical-validation	Set up job	2026-10-07T23:39:02.2356599Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+numerical-validation	Set up job	2026-10-07T23:39:02.4160278Z Complete job name: numerical-validation
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	﻿2026-10-07T23:39:02.4758399Z ##[group]Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4759240Z with:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4759628Z   repository: uskutsav-cpu/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4762926Z   token: ***
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4763519Z   ssh-strict: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4763872Z   ssh-user: git
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4764229Z   persist-credentials: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4764633Z   clean: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4764992Z   sparse-checkout-cone-mode: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4765402Z   fetch-depth: 1
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4765745Z   fetch-tags: false
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4766091Z   show-progress: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4766437Z   lfs: false
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4766780Z   submodules: false
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4767134Z   set-safe-directory: true
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.4767712Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5572927Z Syncing repository: uskutsav-cpu/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5575140Z ##[group]Getting Git version info
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5576067Z Working directory is '/home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas'
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5577477Z [command]/usr/bin/git version
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5626967Z git version 2.55.0
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5645360Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5664518Z Temporarily overriding HOME='/home/runner/work/_temp/9db2b192-43e8-4b1a-8b0b-dabb830a421b' before making global git config changes
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5666450Z Adding repository directory to the temporary git global config as a safe directory
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5670768Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5724576Z Deleting the contents of '/home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas'
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5729026Z ##[group]Initializing the repository
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5733799Z [command]/usr/bin/git init /home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5844341Z hint: Using 'master' as the name for the initial branch. This default branch name
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5846015Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5848245Z hint: to use in all of your new repositories, which will suppress this warning,
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5849290Z hint: call:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5849641Z hint:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5850135Z hint: 	git config --global init.defaultBranch <name>
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5850682Z hint:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5851244Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5852060Z hint: 'development'. The just-created branch can be renamed via this command:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5852703Z hint:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5853214Z hint: 	git branch -m <name>
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5853604Z hint:
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5854174Z hint: Disable this message with "git config set advice.defaultBranchName false"
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5855192Z Initialized empty Git repository in /home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas/.git/
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5857587Z [command]/usr/bin/git remote add origin https://github.com/uskutsav-cpu/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5908076Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5908897Z ##[group]Disabling automatic garbage collection
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5909453Z [command]/usr/bin/git config --local gc.auto 0
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5934964Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5935682Z ##[group]Setting up auth
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5941039Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.5968088Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6294751Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6324920Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6517351Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6553795Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6554551Z ##[group]Fetching the repository
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:02.6561018Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4f9c5eadcb67381894b4738ec6f7f42eca83eb24:refs/remotes/origin/brain6/translational-psychiatry-research-v1
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8008534Z From https://github.com/uskutsav-cpu/sleep-gwas-atlas
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8010746Z  * [new ref]         4f9c5eadcb67381894b4738ec6f7f42eca83eb24 -> origin/brain6/translational-psychiatry-research-v1
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8014681Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8015673Z ##[group]Determining the checkout info
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8018769Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8019728Z [command]/usr/bin/git sparse-checkout disable
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8068107Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8097087Z ##[group]Checking out the ref
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:07.8102071Z [command]/usr/bin/git checkout --progress --force -B brain6/translational-psychiatry-research-v1 refs/remotes/origin/brain6/translational-psychiatry-research-v1
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:08.5750490Z Switched to a new branch 'brain6/translational-psychiatry-research-v1'
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:08.5754127Z branch 'brain6/translational-psychiatry-research-v1' set up to track 'origin/brain6/translational-psychiatry-research-v1'.
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:08.6121543Z ##[endgroup]
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:08.6169083Z [command]/usr/bin/git log -1 --format=%H
+numerical-validation	Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:08.6192318Z 4f9c5eadcb67381894b4738ec6f7f42eca83eb24
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-10-07T23:39:08.6419314Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6419736Z with:
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6419969Z   python-version: 3.13
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6420216Z   check-latest: false
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6422361Z   token: ***
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6422757Z   update-environment: true
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6423219Z   allow-prereleases: false
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6423471Z   freethreaded: false
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.6423699Z ##[endgroup]
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.7453418Z ##[group]Installed versions
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.7519596Z (node:2207) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.7520300Z (Use `node --trace-deprecation ...` to show where the warning was created)
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.7520893Z Successfully set up CPython (3.13.15)
+numerical-validation	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:08.7521452Z ##[endgroup]
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	﻿2026-10-07T23:39:08.7672124Z ##[group]Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.7672824Z ^[[36;1mpython -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1^[[0m
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8023370Z shell: /usr/bin/bash -e {0}
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8023790Z env:
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8024094Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8024560Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8024958Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8025315Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8025673Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8026034Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:08.8026355Z ##[endgroup]
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.3142070Z Collecting numpy==2.4.3
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.3752223Z   Downloading numpy-2.4.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.4628285Z Collecting scipy==1.18.1
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.4730291Z   Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.5765049Z Collecting pandas==3.0.5
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.5870501Z   Downloading pandas-3.0.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6268083Z Collecting pytest==9.1.1
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6368498Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6501273Z Collecting python-dateutil>=2.8.2 (from pandas==3.0.5)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6600584Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6701179Z Collecting iniconfig>=1.0.1 (from pytest==9.1.1)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6800721Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.6917495Z Collecting packaging>=22 (from pytest==9.1.1)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7017412Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7118369Z Collecting pluggy<2,>=1.5 (from pytest==9.1.1)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7219478Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7360677Z Collecting pygments>=2.7.2 (from pytest==9.1.1)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7459799Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7592641Z Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas==3.0.5)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7689627Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.7816517Z Downloading numpy-2.4.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.9715773Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 92.1 MB/s  0:00:00
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:11.9815828Z Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.2447201Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 134.3 MB/s  0:00:00
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.2551952Z Downloading pandas-3.0.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (10.9 MB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3296140Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.9/10.9 MB 147.5 MB/s  0:00:00
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3397084Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3520359Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3633487Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3750832Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3915773Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.3968949Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 288.6 MB/s  0:00:00
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.4070350Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.4194871Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:12.7069773Z Installing collected packages: six, pygments, pluggy, packaging, numpy, iniconfig, scipy, python-dateutil, pytest, pandas
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:22.5427770Z 
+numerical-validation	Run python -m pip install numpy==2.4.3 scipy==1.18.1 pandas==3.0.5 pytest==9.1.1	2026-10-07T23:39:22.5442898Z Successfully installed iniconfig-2.3.1 numpy-2.4.3 packaging-26.3 pandas-3.0.5 pluggy-1.6.0 pygments-2.21.0 pytest-9.1.1 python-dateutil-2.9.0.post0 scipy-1.18.1 six-1.17.0
+numerical-validation	Source-free mathematical and regression checks	﻿2026-10-07T23:39:22.6281521Z ##[group]Run python -m pytest -q -c brain6/translational_psychiatry_research_v1/research_v1/statistics/pytest.ini -m 'not integration' brain6/translational_psychiatry_research_v1/tests brain6/translational_psychiatry_research_v1/research_v1/statistics/test_statistics.py brain6/translational_psychiatry_research_v1/research_v1/statistics/test_parent_review.py brain6/translational_psychiatry_research_v1/research_v1/ld/test_ld_research.py
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6284130Z ^[[36;1mpython -m pytest -q -c brain6/translational_psychiatry_research_v1/research_v1/statistics/pytest.ini -m 'not integration' brain6/translational_psychiatry_research_v1/tests brain6/translational_psychiatry_research_v1/research_v1/statistics/test_statistics.py brain6/translational_psychiatry_research_v1/research_v1/statistics/test_parent_review.py brain6/translational_psychiatry_research_v1/research_v1/ld/test_ld_research.py^[[0m
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6343619Z shell: /usr/bin/bash -e {0}
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6343844Z env:
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6344125Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6344483Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6344812Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6345111Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6345407Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6345710Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:22.6345971Z ##[endgroup]
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:24.5336723Z ...............................                                          [100%]
+numerical-validation	Source-free mathematical and regression checks	2026-10-07T23:39:24.5343853Z 31 passed, 2 deselected in 1.46s
+numerical-validation	Verify inherited tracked scientific artifacts	﻿2026-10-07T23:39:24.6801803Z ##[group]Run python brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6802406Z ^[[36;1mpython brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py^[[0m
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6858317Z shell: /usr/bin/bash -e {0}
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6858551Z env:
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6858776Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6859144Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6859485Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6859793Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6860089Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6860381Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:24.6860640Z ##[endgroup]
+numerical-validation	Verify inherited tracked scientific artifacts	2026-10-07T23:39:25.0209220Z {"inherited_files_checked": 5666, "drift_count": 0, "drift": []}
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	﻿2026-10-07T23:39:25.0286927Z ##[group]Run python brain6/translational_psychiatry_research_v1/scripts/validate_isolated_replay.py
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0287534Z ^[[36;1mpython brain6/translational_psychiatry_research_v1/scripts/validate_isolated_replay.py^[[0m
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0344237Z shell: /usr/bin/bash -e {0}
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0344592Z env:
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0344818Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0345161Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0345495Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0345800Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0346095Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0346385Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.0346645Z ##[endgroup]
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8631084Z {
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8631950Z   "classification": "UNCHANGED_CODE_SOURCE_VERIFIED_ISOLATED_NUMERICAL_REPLAY",
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8632769Z   "relative_tolerance": 1e-12,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8633348Z   "absolute_tolerance": 0,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8633717Z   "all_frozen_claim_artifacts_byte_unchanged": true,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8634085Z   "tables": [
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8634345Z     {
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8634574Z       "table": "global_contrasts/contrasts.tsv",
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8634804Z       "rows": 72,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8634989Z       "numeric_fields_checked": 792,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8635269Z       "maximum_relative_error": 9.177847794903371e-16,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8635518Z       "bitwise_equal": false,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8635726Z       "status": "PASS"
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8635907Z     },
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8636058Z     {
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8636265Z       "table": "global_contrasts/covariance_sensitivity.tsv",
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8636531Z       "rows": 648,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8636716Z       "numeric_fields_checked": 1944,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8636953Z       "maximum_relative_error": 7.733941310637932e-15,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8637196Z       "bitwise_equal": false,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8637389Z       "status": "PASS"
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8637557Z     },
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8637702Z     {
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8637880Z       "table": "molecular/sensitivity_results.tsv",
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8638114Z       "rows": 60,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8638299Z       "numeric_fields_checked": 540,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8638539Z       "maximum_relative_error": 1.4383246949126408e-14,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8638783Z       "bitwise_equal": false,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8639145Z       "status": "PASS"
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8639354Z     },
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8639499Z     {
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8639699Z       "table": "molecular/independent_posterior_checks.tsv",
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8640081Z       "rows": 4,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8640326Z       "numeric_fields_checked": 4,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8640600Z       "maximum_relative_error": 0.0,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8640810Z       "bitwise_equal": true,
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8641011Z       "status": "PASS"
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8641180Z     }
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8641326Z   ]
+numerical-validation	Replay inherited-table contrasts and molecular posterior checks	2026-10-07T23:39:25.8641474Z }
+numerical-validation	State the native integration boundary	﻿2026-10-07T23:39:25.9731405Z ##[group]Run echo 'This job does not run native GWAS/LD/SuSiE analyses or certify scientific inference. See exact local integration logs and data access holds.'
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9732238Z ^[[36;1mecho 'This job does not run native GWAS/LD/SuSiE analyses or certify scientific inference. See exact local integration logs and data access holds.'^[[0m
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9787318Z shell: /usr/bin/bash -e {0}
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9787542Z env:
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9787765Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9788115Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9788463Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9788783Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9789078Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9789375Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9789632Z ##[endgroup]
+numerical-validation	State the native integration boundary	2026-10-07T23:39:25.9864176Z This job does not run native GWAS/LD/SuSiE analyses or certify scientific inference. See exact local integration logs and data access holds.
+numerical-validation	Validate derived numerical claims and source bindings	﻿2026-10-07T23:39:25.9891400Z ##[group]Run python brain6/translational_psychiatry_research_v1/scripts/validate_research_package.py
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9891989Z ^[[36;1mpython brain6/translational_psychiatry_research_v1/scripts/validate_research_package.py^[[0m
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9944918Z shell: /usr/bin/bash -e {0}
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9945147Z env:
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9945378Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9945756Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9946121Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9946437Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9946736Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9947041Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:25.9947319Z ##[endgroup]
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.2999639Z {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3000283Z   "classification": "DERIVED_ARTIFACT_AND_MANUSCRIPT_VALIDATION_NOT_SCIENTIFIC_APPROVAL",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3000837Z   "checks": [
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3001059Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3001313Z       "check": "Complete16claim_source_bindings",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3001636Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3002068Z       "detail": "Exact result artifact hashes, methods, limits and independent evidence fields"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3002530Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3002737Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3002966Z       "check": "Inherited72_35_original_family",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3003695Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3003908Z       "detail": "No subset FDR recomputation"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3004128Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3004278Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3004442Z       "check": "Immutable_LAVA_failure",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3004662Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3004896Z       "detail": "NOT_RUN3720 exceeds locked873; not biological null"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3005166Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3005314Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3005489Z       "check": "Candidate_count",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3005690Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3005934Z       "detail": "Pair-specific protected screening candidates"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3006204Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3006352Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3006518Z       "check": "Eight_actual_native_fits",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3006744Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3006995Z       "detail": "Same-discovery exploratory reference-qualified fits"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3007261Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3007407Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3007590Z       "check": "Native12posterior_conditions",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3007827Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3008045Z       "detail": "Every signal-pair/prior result retained"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3008281Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3008464Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3008626Z       "check": "Primary_H4_values",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3008832Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3009111Z       "detail": "Default and prespecified lower prior; no causal identity inference"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3009418Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3009560Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3009729Z       "check": "Four_slot_clinical_outcomes",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3009950Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3010195Z       "detail": "Two pass;one nonpass;one unestimated under Bonferroni4"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3010460Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3010599Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3010762Z       "check": "Clinical_scope_not_promoted",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3010977Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3011214Z       "detail": "No independent two-trait/shared-causal-variant claim"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3011482Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3011623Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3011794Z       "check": "Locked_truth_known_calibration",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3012016Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3012229Z       "detail": "Not empirical false-positive calibration"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3012782Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3012930Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3013439Z       "check": "Recorded_rejection_range",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3013660Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3013872Z       "detail": "Truth-null nominal5% scenario fractions"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3014110Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3014261Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3014447Z       "check": "All_historical_covariance_estimates",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3014686Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3014928Z       "detail": "Historical arithmetic, uncertified model calibration"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3015190Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3015330Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3015501Z       "check": "Conditional72contrast_family",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3015794Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3016040Z       "detail": "Retrospective same-source normal-model diagnostic"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3016296Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3016437Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3016614Z       "check": "All120molecular_conditions_negative",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3016849Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3017092Z       "detail": "No effector admitted; not proof of biological absence"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3017352Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3017673Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3017916Z       "check": "Novelty_protected25_known22",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3018250Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3018600Z       "detail": "Three PD unresolved rather than novel"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3018957Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3019175Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3019437Z       "check": "CandidateC_QTL_admission_hold",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3019780Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3020203Z       "detail": "Broader historical window contains new native C; no admitted strong QTL"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3020691Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3020913Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3021194Z       "check": "Fresh_sources_and_source_specific_terms",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3021577Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3022208Z       "detail": "Historical rows and fresh recovery/reference/FinnGen feasibility explicit; four molecular resources retained"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3022906Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3023292Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3023585Z       "check": "Abstracts_and_qualified_conclusions",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3023959Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3024246Z       "detail": "GM words=247;MP words=205"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3024579Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3024760Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3024934Z       "check": "Conservative_article_length",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3025160Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3025364Z       "detail": "Main body estimated words=2342"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3041224Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3041502Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3041728Z       "check": "Verified_reference_keys",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3042049Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3042449Z       "detail": "15 references;primary metadata/access limitations retained"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3042879Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3043203Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3043448Z       "check": "Public_figure_outputs",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3043678Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3043959Z       "detail": "Three vector figures with source tables and script/hash provenance"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3044263Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3044416Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3044650Z       "check": "No_restricted_native_or_filtered_artifacts_in_public_area",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3044938Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3045121Z       "detail": "[]"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3045297Z     },
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3045446Z     {
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3045614Z       "check": "Component_status_schema",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3045833Z       "status": "PASS",
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3046103Z       "detail": "Scientific evidence/software/human holds classified separately"
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3046391Z     }
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3046535Z   ],
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3046690Z   "passed": 23,
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3046857Z   "failed": 0
+numerical-validation	Validate derived numerical claims and source bindings	2026-10-07T23:39:26.3047021Z }
+numerical-validation	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-10-07T23:39:26.3604227Z Post job cleanup.
+numerical-validation	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:26.4631073Z (node:2272) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+numerical-validation	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-10-07T23:39:26.4632017Z (Use `node --trace-deprecation ...` to show where the warning was created)
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	﻿2026-10-07T23:39:26.4797153Z Post job cleanup.
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5493215Z [command]/usr/bin/git version
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5530129Z git version 2.55.0
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5563428Z Temporarily overriding HOME='/home/runner/work/_temp/7d4dcad7-df50-40d6-980d-b0c53044a3b3' before making global git config changes
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5564201Z Adding repository directory to the temporary git global config as a safe directory
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5569121Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sleep-gwas-atlas/sleep-gwas-atlas
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5603663Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5633587Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5856140Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5883708Z http.https://github.com/.extraheader
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5894226Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+numerical-validation	Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683	2026-10-07T23:39:26.5926673Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+numerical-validation	Complete job	﻿2026-10-07T23:39:26.6300581Z Cleaning up orphan processes
+numerical-validation	Complete job	2026-10-07T23:39:26.6555837Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

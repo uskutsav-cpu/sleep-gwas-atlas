@@ -1,0 +1,58 @@
+{
+  "source_commit": "4f9c5eadcb67381894b4738ec6f7f42eca83eb24",
+  "checkout_method": "exact local git clone with historical LFS pointers retained;shared existing object storage",
+  "commands": [
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-c",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/pytest.ini",
+        "-m",
+        "not integration",
+        "brain6/translational_psychiatry_research_v1/tests",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/test_statistics.py",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/test_parent_review.py",
+        "brain6/translational_psychiatry_research_v1/research_v1/ld/test_ld_research.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/final_clean_checkout_1.log",
+      "sha256": "5af3702c3a093000131c93692df596493fbfa784b1519669b2ed56f90af037b9"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/final_clean_checkout_2.log",
+      "sha256": "4d246babc3264ec3916798b3ead8722bd67113880fdf259f6c9a9c6b5877a840"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/validate_isolated_replay.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/final_clean_checkout_3.log",
+      "sha256": "93bc949e604e40b5253ae38c65590f9c59d5b552e6474e5ea79d8f864c5dbcdb"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/validate_research_package.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/final_clean_checkout_4.log",
+      "sha256": "a3c1d11bdd18c5b2dd290d2206aa82d9b68e4ce0b049a29087179998d788fb22"
+    }
+  ],
+  "native_private_inputs_absent": 13,
+  "native_private_input_count": 13,
+  "data_dependent_integration_status": "NOT_RUN_DATA_REQUIRED_IN_CLEAN_CHECKOUT",
+  "not_counted_as_pass": true,
+  "source_free_all_pass": true,
+  "tracked_checkout_status_after_read_only_checks": ""
+}
