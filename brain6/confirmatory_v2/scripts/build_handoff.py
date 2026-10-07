@@ -155,7 +155,7 @@ for n in ['significant_secondary_blocks.tsv','coloc_prior_replay.tsv']:shutil.co
 # Carry original exhaustive source fields, with explicit present availability and replication semantics.
 ledger=[]
 for r in rows(ROOT/'brain6/manifests/gwas_external_availability.tsv'):
- ledger.append({**r,'continuation_access':'ORIGINAL_ARCHIVE_UNAVAILABLE_IN_CURRENT_CHECKOUT','replication_class':'INELIGIBLE_AS_ITS_OWN_REPLICATION','current_hash_verification':'HISTORICAL_RECEIPT_ONLY_NOT_RAW_REHASHED'})
+ ledger.append({**r,'continuation_access':'ORIGINAL_ARCHIVE_UNAVAILABLE_IN_CURRENT_CHECKOUT','replication_class':'INDEPENDENT_ONE_TRAIT_ONLY' if r['trait']=='adhd_replication_finngen_r13' else 'INELIGIBLE_AS_ITS_OWN_REPLICATION','current_hash_verification':'HISTORICAL_RECEIPT_ONLY_NOT_RAW_REHASHED'})
 fields=list(ledger[0])
 extras=[('FinnGen ADHD R13','INDEPENDENT_ONE_TRAIT_ONLY','Official form/terms; reused original insomnia; full participant independence unverified','https://www.finngen.fi/en/access_results'),('PGC MDD2025 noUKB','PARTIAL_COHORT_OVERLAP','Nine named PGC cohort overlaps with Howard2019; reused sleep','https://pgc.unc.edu/for-researchers/download-results/'),('Fan2026 SleepChart long sleep','PHENOTYPE_SENSITIVITY','UKB >8 h vs6–8 h; Ncase25049/Ncontrol300420; not original phenotype','https://doi.org/10.1038/s43856-026-01656-w'),('Austin-Zimmerman2023 long sleep','PHENOTYPE_SENSITIVITY','UKB+MVP ≥10 h vs7–8 h; UKB overlap','https://sleep.hugeamp.org/downloads.html'),('HUNT/23andMe independent sleep candidate','UNVERIFIED','No authorized complete compatible summary source acquired; exact cohorts/license/power unresolved','https://cncr.nl/research/summary_statistics/')]
 for name,cl,notes,url in extras:
