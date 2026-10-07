@@ -18,6 +18,8 @@ def main():
  claim=list(csv.DictReader((AREA/'CLAIM_TO_EVIDENCE.tsv').open(),delimiter='\t'))
  for c in claim:
   if hashlib.sha256((ROOT/c['exact_input']).read_bytes()).hexdigest()!=c['input_sha256']:issues.append('CLAIM_SOURCE_DRIFT:'+c['claim_id'])
+  for path,expected in json.loads(c.get('additional_inputs_and_sha256') or '{}').items():
+   if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=expected:issues.append('CLAIM_ADDITIONAL_SOURCE_DRIFT:'+c['claim_id']+':'+path)
  refs=list(csv.DictReader((AREA/'MANUSCRIPT/REFERENCES_VERIFIED.tsv').open(),delimiter='\t'));keys={r['key'] for r in refs};used=set()
  for group in re.findall(r'\\cite\{([^}]+)\}',text):used.update(group.split(','))
  if used-keys:issues.append('UNVERIFIED_CITATIONS:'+','.join(used-keys))
