@@ -1,0 +1,11 @@
+# Publication-strength assessment
+
+**Track A: NO_GO** for a strong original biological discovery in Genome Medicine, Molecular Psychiatry or Translational Psychiatry. New LD and native fine-mapping materially strengthen a known chr5 shared-association model; clinical fixed-variant checks add qualified external phenotype evidence. They do not establish a new region, unique causal variant, molecular mechanism, phenotype-matched participant independence or clinical utility. Twenty-two protected intervals have prior regional evidence; three Parkinson intervals remain unresolved.
+
+**Methodological direction: PROMISING_BUT_INCOMPLETE.** The pinned-source estimator/variance counterexample is supported under its truth-known model. Its general novelty, empirical impact, exact tail calibration and a defensible correction need expert review and broader benchmarking. It does not automatically justify a high-impact paper.
+
+**Track B: BOUNDED_RESEARCH_COMPLETE, with a human submission hold.** The expanded secondary-validation study can accurately report the inherited map/candidates, failed LAVA gate, new reference-qualified known-locus model, clinical sensitivity and source-specific method limitations. Original provenance, permissions, author declarations and human statistical review remain outstanding. Specialist fallback BMC Medical Genomics is conditional on editorial assessment, not a guaranteed GO.
+
+[Genome Medicine research criteria](https://link.springer.com/journal/13073/submission-guidelines/research) require significant novel findings of broad interest. Its [Mental health and neuropsychiatric disorders collection](https://link.springer.com/collections/dbjjedaefg) is open until 12 May 2027 as checked 7 October 2026; topical fit does not close the evidence gap. [Molecular Psychiatry's current article guidance](https://www.nature.com/mp/authors-and-referees/preparation-of-articles) lists a 150–250-word unstructured abstract, 5,000 article words, six display items and 100 references; an older linked PDF differs. The package uses conservative limits pending investigator confirmation.
+
+Successful tests or a compiled PDF are not scientific approval. No acceptance probabilities or publication guarantees are asserted.

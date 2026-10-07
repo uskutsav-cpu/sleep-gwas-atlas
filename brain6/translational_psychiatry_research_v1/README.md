@@ -1,0 +1,11 @@
+# Brain6 research continuation — investigator handoff
+
+Start with [FINAL_HANDOFF.md](FINAL_HANDOFF.md), then [SCIENTIFIC_STATUS.md](SCIENTIFIC_STATUS.md), [PUBLICATION_READINESS.md](PUBLICATION_READINESS.md) and [BLOCKERS_AND_ACTIONS.md](BLOCKERS_AND_ACTIONS.md). The new study strengthens a previously reported chr5 insomnia–ADHD association model; it does not establish a new causal locus, molecular mechanism, independent two-trait replication or clinical utility.
+
+The editable manuscript and compiled PDF are in [MANUSCRIPT](MANUSCRIPT/brain6_reassessment.tex). Three vector figures, numerical source tables, supplement, alternative abstract, references, reporting checklist, draft cover letter and unverified human declaration fields accompany it. The historical bounded manuscript is preserved unchanged in the repository.
+
+The [source/access ledger](SOURCE_AND_ACCESS_LEDGER.tsv), [component inventory](COMPONENT_INVENTORY.tsv), [claim/evidence ledger](CLAIM_TO_EVIDENCE.tsv), [requirements audit](REQUIREMENTS_AUDIT.tsv) and [reproduction guide](REPRODUCE.md) distinguish actual research, synthetic checks, exploratory findings, failed gates and unavoidable outside requirements. [RESULTS_AND_VALIDATION.md](RESULTS_AND_VALIDATION.md), [NOVELTY_AUDIT.md](NOVELTY_AUDIT.md), [NEW_ANALYSIS_PROTOCOL.md](NEW_ANALYSIS_PROTOCOL.md) and [CRITICAL_REVIEW.md](CRITICAL_REVIEW.md) provide the required overview. The numbered 01–15 reports satisfy the earlier research-only handoff format.
+
+Detailed protocols, receipts, environment locks, all derived outcomes and independent numerical reviews are in `research_v1/`. GitHub/CI and output hashes appear in the final receipts. Run scripts from a repository checkout of the recorded branch; this review bundle does not contain restricted raw sources or substitute for authorized access. New raw ADHD/combined molecular source subsets, native input vectors and fitted RDS remain local-only.
+
+Track A original discovery is NO_GO for Genome Medicine, Molecular Psychiatry and Translational Psychiatry. Track B is technically complete for investigator review, with human scientific/author/ethics/permissions approval outstanding. No merge, third-party contact, access form, protected-data release or journal submission occurred.

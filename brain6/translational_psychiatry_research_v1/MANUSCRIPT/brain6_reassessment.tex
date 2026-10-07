@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,booktabs,longtable,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{Brain6: source-qualified reassessment}\fancyhead[R]{Investigator review}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}\setlength{\parskip}{5pt}\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+\title{A source-qualified reassessment of locus sharing in a sleep--brain disorder genetic atlas}
+\author{Authors, affiliations and correspondence: human completion required}
+\date{7 October 2026}
+\begin{document}\maketitle
+\textbf{Investigator review version; not submission-approved.} Author, ethics, funding and source-permission declarations are unverified. Historical analyses and thresholds are preserved. New native exploratory analyses, clinical phenotype sensitivities and truth-known method diagnostics are identified separately.
+
+\section*{Abstract}
+\textbf{Background:} Cross-trait genetic sharing does not establish shared causal variants or molecular mechanisms. We reassessed the evidence progression of a six-disorder sleep atlas using exact source identities, reconstructed genotype LD and explicit validation gates.
+
+\textbf{Methods:} We retained the inherited 72-comparison map, 25 pair-specific candidates and failed canonical LAVA family. Public regional genotypes supported signed-LD reconstruction and a separately locked native SuSiE/coloc-SuSiE experiment. Four fixed variant/pair hypotheses were tested using public FinnGen clinical results. Source-specific covariance inference was evaluated in 24 truth-known simulation scenarios; molecular priors and current primary supplements were independently checked.
+
+\textbf{Results:} Thirty-five global entries retained original-family significance. Canonical LAVA remained failed, with 3,720 unestimated of 17,465 planned cells against a ceiling of 873. Three newly reconstructed LD matrices passed their separate gates. At the previously reported chr5 insomnia--ADHD region, 2,185 shared variants supported convergent native fits and one qualifying credible set per trait; H4 was 0.9916 at the default prior and 0.9216 at the lower prior. Two clinical fixed-variant co-associations passed the four-slot family, one did not and one was unestimated. Twenty-two protected intervals had prior regional evidence. The pinned covariance implementation paired an unweighted moment estimate with weighted-regression uncertainty; illustrative null rejection ranged from 4.08\% to 52.16\% at nominal 5\%, without estimating empirical false-positive rates. No molecular effector was established.
+
+\textbf{Conclusions:} Genotype-backed analysis strengthens a known shared-association model, while source, calibration and replication limits preclude a new causal or mechanistic discovery claim. Clinical phenotype sensitivity and numerical reproducibility must remain distinct from independent replication.
+
+\textbf{Keywords:} sleep; psychiatric genetics; linkage disequilibrium; fine-mapping; colocalization; reproducibility
+
+\section*{Background}
+Global genetic correlation summarizes shared common-variant influences but does not localize their cause \cite{ldsc,lava}. Association screens, regional covariance, statistical colocalization and molecular annotation answer different questions. Their agreement can be informative, yet sequential analyses using the same discovery GWAS do not supply independent cohorts or experimental mechanism.
+
+Sleep--psychiatric sharing has substantial prior evidence. Jia analyzed multiple sleep and psychiatric phenotypes; Xue examined insomnia pleiotropy and brain cell contexts; Zu reported insomnia--ADHD loci and colocalization; Lin evaluated sleep-related psychiatric pleiotropy \cite{jia,xue,zu,lin}. Updated insomnia--depression preprint evidence further distinguishes regional sharing from shared-variant support \cite{schipper}. A meaningful follow-up therefore requires exact allele/build/source comparisons and a clear distinction between validation of a known model and discovery.
+
+Brain6 previously assembled six-disorder genetic correlations, pair-specific pleiotropic candidates and a canonical local-validation family that failed its frozen eligibility gate. Stored LD also prevented reliable multiple-signal fine-mapping. We tested whether legitimately accessible reference genotypes and exact discovery source recovery could resolve that methodological hold, while independently challenging covariance calibration, prior sensitivity, clinical source comparability and novelty. The study is a secondary reassessment; it does not claim a prospectively discovered locus.
+
+\section*{Methods}
+\subsection*{Historical evidence and immutable families}
+The global display contains 12 sleep traits and ADHD, MDD, schizophrenia, bipolar disorder, Parkinson's disease and Alzheimer's disease: 72 rows, with significance inherited from the original 396-test FDR family. Five PLACO screening tracks supplied 25 pair-specific candidates across 20 geographic display regions \cite{placo}. The locus rule was locked after initial screen outputs and before annotation, not prospectively before discovery. Geographic merging does not change pair identity.
+
+Canonical LAVA covered seven traits and 2,495 GRCh37 loci, totaling 17,465 eligibility evaluations. The maximum permitted NOT\_RUN count was 873. Failed QC, low heritability and source/reference ineligibility were retained; no result was promoted retrospectively. The recorded 88-locus insomnia source-N pilot did not satisfy its advancement alternatives and was not spliced into the original family.
+
+The secondary SUPERGNOVA family retained five pairs and 1,693 non-MHC blocks per pair, yielding alpha $0.05/8465$. Two insomnia pairs were source-eligible; three long-sleep pairs were prospectively inapplicable. These same-discovery estimates were not independent replication \cite{supergnova}. Recorded P-value arithmetic can be replayed, but this does not certify its statistical calibration.
+
+\subsection*{Public sources and signed genotype LD}
+Resource and acquisition manifests preceded downloads. We recovered the exact original insomnia and ADHD archives, verifying their frozen SHA256 values, then streamed six regional slices. ADHD's source-specific README restricts public redistribution of result files despite generic repository licensing metadata. New raw source subsets remain local; public artifacts contain derived analysis results and provenance.
+
+Public EBI 1000 Genomes phase-3 v5b GRCh37 VCF byte ranges and matching indexes supplied chr5, chr6 and chr11 reference data. Headers, pedigree corrections, sample panel, REF/ALT keys, ordering and frequency were checked. The selected 503 European samples had no documented selected-sample relatedness edges under the reviewed pedigree records. Biallelic nonpalindromic variants with MAF at least 0.01 were retained. Signed LD was computed as Pearson correlation of ALT dosages; no clipping, shrinkage or PSD projection was applied. Finite values, symmetry, diagonal, range, PSD, rank and 100 separate scalar/SciPy pair checks per matrix were recorded. Rank deficiency above the reference sample count was expected and permitted by the new PSD-based protocol; it does not retroactively repair the old Cholesky-based gate.
+
+\subsection*{Native multiple-signal experiment}
+A distinct protocol locked GRCh37 chr5:103447968--104447968 before new native consistency or fit outcomes. Exact discovery beta/SE were oriented to reference ALT keys. ADHD beta was log(OR) for A1, with per-variant $N_{\mathrm{eff}}=4/(1/N_{\mathrm{case}}+1/N_{\mathrm{control}})$. Insomnia used literal analyzed N with the documented study case fraction; this is an approximate effective-N conversion rather than observed per-variant case/control participation. Source/reference MAF, INFO, frequency, finite-statistic and duplicate gates were explicit. At least 500 shared variants, 80\% coverage and the frozen sample-size consistency rule were required; both traits needed P below $5\times10^{-8}$ in the admitted window.
+
+Native susieR 0.14.2 and coloc 5.2.3 were installed from verified source tarballs. RSS null-MLE consistency required $s\leq0.10$ and no suspected allele-switch marker with logLR above 2 and absolute Z above 2. The primary SuSiE-RSS fit used L=10, fixed residual variance, 95\% coverage, purity at least 0.5, maximum 1,000 iterations and tolerance $10^{-3}$ \cite{rss}. Fixed L=1, L=5 and large-N sensitivities were retained for both traits. Convergence, ELBO, credible sets and all PIPs were saved. Coloc-SuSiE reported every signal pair at $p_1=p_2=10^{-4}$ and $p_{12}=10^{-5},10^{-6},5\times10^{-5}$ \cite{colocsusie}. Same-universe single-signal ABF was a separate sensitivity \cite{colocabf}. Posteriors were descriptive model support, not causal proof or confirmatory P tests.
+
+\subsection*{Clinical fixed-variant sensitivity}
+Three exact biallelic markers were selected from historical/prior evidence before accessing FinnGen outcomes: rs7105462 for both chr11 slots, rs9485410 for chr6 insomnia--MDD and rs77960 for chr5 insomnia--ADHD. Ensembl strand/build records and original allele pairs defined GRCh38 keys. Four pair slots retained alpha 0.05/4; conjunction P was the maximum of the two native trait P values. Missing association fields were not imputed.
+
+Only the advertised public FinnGen R13 single-variant API was used. Bulk access conditions were not bypassed. R13 uses REGENIE v3.3, with release-specific covariates/model documentation; Wald intervals are approximate diagnostics. FinnGen provides registry-defined phenotypes \cite{finngen}: insomnia F51.0/G47.0, ADHD F90.0 and depression F32/F33 with documented exclusions. These differ from discovery self-report/consortium phenotypes. Thirteen ADHD discovery cohorts and 26 case/control counts agreed across two source manifests, but participant/control linkage to FinnGen could not be certified. Classification remained phenotype sensitivity with unverified cohort independence. Browser filtering also prevents interpreting an absent row as an exact null or using these objects as complete regional summary statistics.
+
+\subsection*{Covariance, global and molecular diagnostics}
+All six reconstructed historical SUPERGNOVA Python hashes matched their pinned provenance. Its returned covariance uses full unweighted Z-product moments, while reported variance is selected by adaptive weighted eigenspace regression. A locked Gaussian-summary experiment used 160 variants, four independent context blocks, study-total N, four AR(1) LD settings, three local h² settings, two overlap intercepts and true covariance zero: 24 scenarios of 10,000 draws. Twelve fixtures executed the unchanged upstream numerical function with synthetic exact LD. For mode variances A/B and cross-covariance C, independent Gaussian moments give
+\[\operatorname{Var}(\hat\rho_{\mathrm{moment}})=\frac{\sum_j(A_jB_j+C_j^2)}{N_1N_2\overline{LD}^{\,2}}.\]
+Separate oracle moment/GLS normal-Wald benchmarks, variance concentration and exact product cumulants were diagnostic, not certified empirical tails. Two post-result 100,000-draw reviews independently checked the dense Gaussian quadratic-form variance. No simulated inflation factor recalibrated historical P values.
+
+All 72 retrospective psychiatric contrasts were specified without selecting favorable sleep traits. With unknown sampling covariance, $\operatorname{SE}(\hat r_1-\hat r_2)\leq s_1+s_2$; maximum normal-Wald P and Bonferroni 72 provide a conservative diagnostic conditional on calibrated marginal normal estimates. Marginal h² Z at least 4 was required. This tests source-defined parameters, not causal disorder specificity.
+
+Four retained ADHD--brain-QTL inputs were independently recomputed across five shared-variant priors and three estimated-QTL-sdY scales, yielding 60 conditions. A separate prelocked nonpalindromic exclusion stress analysis added 60 conditions. Sixty retained coloc R-function checks supplied cross-language concordance. Component-only molecular evidence, positional/regulatory annotation and cell/pathway enrichment were kept separate. No gene was declared causal by proximity or expression.
+
+\subsection*{Literature and independent automated review}
+Five focused Europe PMC searches were fully paginated through 7 October 2026. Accessible primary supplements, genome builds, biallelic mappings and updated preprint records were inspected; unresolved access/alleles were recorded. Targeted searching is not worldwide novelty proof. Independent automated implementations reviewed contrast tails, molecular Bayes factors, Gaussian variance, raw clinical API fields and native genotype/fine-mapping outputs. STROBE/STREGA reporting was adapted to the secondary-summary setting \cite{strobe,strega}. Automated review was not independent human peer review.
+
+\section*{Results}
+\subsection*{Inherited map and failed primary validation}
+Thirty-five of the 72 display rows retain inherited significance: ADHD nine, MDD ten, schizophrenia seven, bipolar eight, Parkinson's disease one and Alzheimer's disease zero. Different detection counts do not establish architecture differences. The 25 screening candidates occupy 20 display regions.
+
+Canonical LAVA remained failed: 13,745 TESTED and 3,720 NOT\_RUN, with no numerical worker failures, among 17,465 planned cells. Non-estimation exceeded 873. Three historical secondary covariance blocks passed the recorded 8,465-slot threshold, but none supported a protected same-pair candidate. Of 2,199 numeric derived correlations, 723 lie outside [-1,1]; 1,105 others are missing. Chr11 insomnia--ADHD has derived r=1.1037. These remain recorded secondary candidates with uncertified calibration rather than validated local correlation claims.
+
+\subsection*{Genotype-backed validation of a known chr5 model}
+The new chr5/6/11 references contain 2,694/4,878/4,627 variants, respectively, each rank 502, and pass all separate numeric and identity gates. Chr5 rs2431108 T>C and rs77960 G>A have European r²=0.9954806; population checks retain strong tagging. Different lead identity does not establish distinct effects.
+
+Candidate C admits 2,185 shared variants, with source/reference coverage above the locked 80\% rule. RSS s is 0.0140861 for insomnia and 0.0091722 for ADHD, with zero predeclared allele-switch flags. All eight SuSiE fits converge. Primary insomnia and ADHD credible sets contain 70 and eight variants, with minimum absolute LD purity 0.6464 and 0.7279 and conditional posterior coverage 0.9511 and 0.9583. Maximum primary PIP is 0.1373 and 0.2947, respectively; a unique causal variant is unresolved.
+
+Primary coloc-SuSiE H4 is 0.991568 at the default prior, 0.921630 at the lower prior and 0.998302 at the higher prior. Fixed L and large-N models are concordant, with one qualifying set per trait under the examined models. This provides model-conditional shared-association support for a previously reported region. It does not establish that no additional causal effects exist outside the admitted universe. Candidate A/B insomnia association does not meet the locked strong-association gate for analogous fine-mapping.
+
+\subsection*{Clinical phenotype checks}
+Two of four fixed pair slots meet alpha 0.0125 (Table 1). Chr6 does not meet the threshold; chr11 ADHD is unestimated because the API supplies null association fields. The complete denominator remains four. These are fixed-variant clinical co-associations, not region-wide shared-causal replication.
+
+\begin{table}[htbp]\centering\small
+\caption{Locked FinnGen R13 clinical fixed-variant sensitivity. Native source P values; cohort independence unverified.}\begin{tabular}{llll}\toprule
+Pair/region & Marker & Conjunction P & Bonferroni-four P\\\midrule
+Insomnia--ADHD chr11 & rs7105462 & Not estimated & Not estimated\\
+Insomnia--MDD chr11 & rs7105462 & 0.00275816 & 0.01103265\\
+Insomnia--MDD chr6 & rs9485410 & 0.0316417 & 0.126567\\
+Insomnia--ADHD chr5 & rs77960 & 0.000346761 & 0.00138704\\\bottomrule
+\end{tabular}\end{table}
+
+\subsection*{Covariance inference counterexample and remaining limits}
+All 24 locked simulation scenarios completed, totaling 240,000 draws; 12 unchanged-source numerical fixtures were concordant. Synthetic nominal-5\% rejection ranged 4.08--52.16\%; the largest exact moment-variance/mean-reported-variance ratio was 19.047. The most severe settings intentionally stress the model and exceed historical candidate per-SNP point h². These are source-specific counterexamples, not estimates of Brain6 false positives.
+
+Moment variance concentration can be strong: effective mode counts 1.35--112.10 and excess kurtosis 0.054--4.456. Exact variance alone therefore does not establish normal tail calibration. The independent dense-matrix/eigen variance derivations agree to numerical precision; two additional Monte Carlo checks are within 0.54 variance-estimation Monte Carlo SE. Historical positives lose their original threshold at recorded SE multipliers 1.2371, 1.0538 and 1.4011, a fragility calculation without corrected empirical SEs. Scalar-N reparameterization leaves covariance Wald P and derived r invariant, so it cannot verify model semantics.
+
+\subsection*{Molecular, heterogeneity and prior evidence}
+Sixteen of 72 conservative covariance-bounded contrasts reject equality under the conditional marginal-normal model. They characterize inherited source-defined estimates; ascertainment/cohort explanations and independent validation remain unresolved.
+
+Four original molecular posterior vectors independently replay. No H4 reaches 0.8 in either 60-condition grid: maximum 0.617575 with all input variants and 0.455260 after nonpalindromic filtering. Existing candidate-C QTL contexts fail strong-QTL or coverage admission, so no effector mechanism is inferred. The historical 20-region enrichment failed its control gate; the separate 18-region positional sensitivity had no FDR-significant tissue or pathway.
+
+Accessible prior supplements supply regional evidence for 22 of 25 protected candidates. Three Parkinson intervals remain unresolved, not established as novel. Jia and Schipper separately report the chr11 insomnia--depression region with weak shared-variant H4, illustrating the distinction between regional and causal-identity evidence. This does not falsify true sharing in the presence of power/model limitations.
+
+\section*{Discussion}
+Actual public genotypes and exact source recovery changed the project's fine-mapping feasibility. A known insomnia--ADHD region now has convergent reference-qualified multiple-signal support, robust across the fixed prior/model sensitivities, alongside qualified clinical fixed-variant associations. This is stronger evidence than an invalid stored LD matrix or single-signal ABF alone. It remains a known region with diffuse variant uncertainty and no confirmed effector.
+
+The covariance reassessment changes the permissible interpretation of historical positives. A finite output and arithmetically reproducible P do not establish an estimator's uncertainty model. The pinned implementation returns a moment estimate with variance from a different regression path. Counterexamples under exact known LD demonstrate that blanket calibration cannot be assumed. Their scale and synthetic assumptions preclude applying numerical inflation factors to real GWAS; independent statistical review and full-family empirical validation remain necessary. Heavy-tail concentration further cautions against treating corrected variance as exact stringent-tail calibration.
+
+Clinical registry checks answer a different question from self-report insomnia replication. Within-FinnGen overlap, ascertainment and Finnish reference structure matter; identical variant co-association does not distinguish shared causality from linked or correlated liabilities. Missing API fields are not biological nulls. A disjoint dataset label also cannot certify participant independence. Similarly, source-defined global contrasts do not identify disorder-specific mechanisms, and weak QTL posterior support does not prove absent regulation.
+
+Limitations include an approximate single-N binary RSS likelihood, a 503-person reference, incomplete variant coverage, source meta-analysis participation, post-selection, unverified cohort linkage, restricted dense-data access, the missing historical canonical source and limited molecular contexts. No participant-level clinical utility or functional perturbation was tested. The targeted novelty audit cannot be exhaustive; some source alleles and accesses remain unresolved. Automated independent recomputation is not human peer review.
+
+The defensible contribution is an expanded secondary-validation case study with a known-locus model upgrade and a reproducible source-specific inference concern. A strong original biological discovery submission is not supported. A methodological publication would require broader benchmarks, a justified correction, empirical impact and independent expert review rather than a favorable journal assessment based on analysis count.
+
+\section*{Conclusions}
+Brain6's new genotype-backed analysis supports shared association in a previously reported chr5 region under the examined models. Clinical phenotype sensitivity and method diagnostics add qualified evidence while exposing unresolved inference limits. They do not establish a new causal variant, molecular mechanism, independent phenotype-matched replication or clinical utility. Historical QC failures remain immutable.
+
+\section*{Abbreviations}
+ABF, approximate Bayes factor; ADHD, attention-deficit/hyperactivity disorder; FDR, false discovery rate; FWER, family-wise error rate; GWAS, genome-wide association study; LD, linkage disequilibrium; MDD, major depressive disorder; QTL, quantitative trait locus; RSS, regression with summary statistics.
+
+\section*{Declarations}
+\textbf{Ethics approval and consent:} Human investigators must verify secondary-use permissions, original study consent/ethics and institutional requirements. No approval identifier is asserted.\par
+\textbf{Consent for publication:} Human determination of applicability required.\par
+\textbf{Data and code availability:} The separate research branch supplies protocols, derived posteriors, small public reference factors, validators, manifests and checksums. Restricted raw association inputs must be acquired from the providers under their terms; no new ADHD result-file subset is publicly redistributed. Full historical native reproduction remains held on specified original provenance. A permanent archive identifier requires investigator selection.\par
+\textbf{Competing interests, funding and contributions:} Unverified; human authors must complete the supplied templates.\par
+\textbf{Acknowledgments:} Consortium/reference acknowledgments require human verification.\par
+\textbf{AI use:} OpenAI Codex and automated agents assisted source/software audits, numerical analysis, literature screening, independent checks, drafting and figures. Human authors are responsible for verification and interpretation. AI is not an author. No author approval or submission has occurred.
+\begin{thebibliography}{99}
+\bibitem{colocsusie} Wallace C. A more accurate method for colocalisation analysis allowing for multiple causal variants. PLoS genetics. 2021. \href{https://doi.org/10.1371/journal.pgen.1009440}{doi: 10.1371/journal.pgen.1009440}.
+\bibitem{supergnova} Zhang Y, Lu Q, Ye Y, Huang K, Liu W, Wu Y, Zhong X, Li B, Yu Z, Travers BG, Werling DM, Li JJ, Zhao H. SUPERGNOVA: local genetic correlation analysis reveals heterogeneous etiologic sharing of complex traits. Genome biology. 2021. \href{https://doi.org/10.1186/s13059-021-02478-w}{doi: 10.1186/s13059-021-02478-w}.
+\bibitem{placo} Ray D, Chatterjee N. A powerful method for pleiotropic analysis under composite null hypothesis identifies novel shared loci between Type 2 Diabetes and Prostate Cancer. PLoS genetics. 2020. \href{https://doi.org/10.1371/journal.pgen.1009218}{doi: 10.1371/journal.pgen.1009218}.
+\bibitem{lava} Werme J, van der Sluis S, Posthuma D, de Leeuw CA. An integrated framework for local genetic correlation analysis. Nature genetics. 2022. \href{https://doi.org/10.1038/s41588-022-01017-y}{doi: 10.1038/s41588-022-01017-y}.
+\bibitem{ldsc} Bulik-Sullivan B, Finucane HK, Anttila V, Gusev A, Day FR, Loh PR, ReproGen Consortium, Psychiatric Genomics Consortium, Genetic Consortium for Anorexia Nervosa of the Wellcome Trust Case Control Consortium 3, Duncan L, Perry JR, Patterson N, Robinson EB, Daly MJ, Price AL, Neale BM. An atlas of genetic correlations across human diseases and traits. Nature genetics. 2015. \href{https://doi.org/10.1038/ng.3406}{doi: 10.1038/ng.3406}.
+\bibitem{colocabf} Giambartolomei C, Vukcevic D, Schadt EE, Franke L, Hingorani AD, Wallace C, Plagnol V. Bayesian test for colocalisation between pairs of genetic association studies using summary statistics. PLoS genetics. 2014. \href{https://doi.org/10.1371/journal.pgen.1004383}{doi: 10.1371/journal.pgen.1004383}.
+\bibitem{strega} Little J, Higgins JP, Ioannidis JP, Moher D, Gagnon F, von Elm E, Khoury MJ, Cohen B, Davey-Smith G, Grimshaw J, Scheet P, Gwinn M, Williamson RE, Zou GY, Hutchings K, Johnson CY, Tait V, Wiens M, Golding J, van Duijn C, McLaughlin J, Paterson A, Wells G, Fortier I, Freedman M, Zecevic M, King R, Infante-Rivard C, Stewart A, Birkett N. Strengthening the reporting of genetic association studies (STREGA): an extension of the STROBE statement. European journal of epidemiology. 2009. \href{https://doi.org/10.1007/s10654-008-9302-y}{doi: 10.1007/s10654-008-9302-y}.
+\bibitem{strobe} von Elm E, Altman DG, Egger M, Pocock SJ, Gøtzsche PC, Vandenbroucke JP, STROBE Initiative. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement: guidelines for reporting observational studies. PLoS medicine. 2007. \href{https://doi.org/10.1371/journal.pmed.0040296}{doi: 10.1371/journal.pmed.0040296}.
+\bibitem{xue} Xue B, Niu M, Sun Y, Wang L, Wu C, Ding Y, Wang B, Peng L, Li X, Song H, Yuan W, Shi W, Liu J, Gao C, Zhao X, Zhang Q, Li Z. Detection of pleiotropic genetic factors and critical brain cell types linking insomnia with psychiatric disorders. Sleep. 2026. \href{https://doi.org/10.1093/sleep/zsaf317}{doi: 10.1093/sleep/zsaf317}.
+\bibitem{zu} Zu Y, Pang T, Luo L, Liufu C, Xu Z, Lv L, Li W, Chang S. Dynamic relationship and pleiotropic loci of attention deficit hyperactivity disorder with sleep traits. Translational psychiatry. 2026. \href{https://doi.org/10.1038/s41398-026-04166-4}{doi: 10.1038/s41398-026-04166-4}.
+\bibitem{lin} Lin Y, Li W, Yang X, Li S, Liu J, Lin L, Zhang B. Neurodevelopment as a shared genetic etiology linking sleep-related phenotypes and psychiatric disorders: a genome-wide pleiotropic analysis. Mammalian genome : official journal of the International Mammalian Genome Society. 2026. \href{https://doi.org/10.1007/s00335-026-10232-5}{doi: 10.1007/s00335-026-10232-5}.
+\bibitem{schipper} Schipper M, Shadrin AA, Romero C, Friligkou E, Polimanti R, Posthuma D, Van Someren EJ, Tissink E. Shared effector genes of insomnia, anxiety and depression implicate synaptic processes as transdiagnostic drug targets. medRxiv preprint v2, 11 March 2026 (not peer reviewed). \href{https://doi.org/10.1101/2025.10.18.25338281}{doi: 10.1101/2025.10.18.25338281}.
+\bibitem{jia} Jia N, Zhu Z, Liu Y, Yin X, Man L, Hou W, Zhang H, Yu Q, Hui L. From single nucleotide variations to genes: identifying the genetic links between sleep and psychiatric disorders. Sleep. 2025. \href{https://doi.org/10.1093/sleep/zsae209}{doi: 10.1093/sleep/zsae209}.
+\bibitem{rss} Zou Y, Carbonetto P, Wang G, Stephens M. Fine-mapping from summary data with the Sum of Single Effects model. PLoS Genetics. 2022. \href{https://doi.org/10.1371/journal.pgen.1010299}{doi:10.1371/journal.pgen.1010299}.
+\bibitem{finngen} Kurki MI, Karjalainen J, Palta P, et al. FinnGen provides genetic insights from a well-phenotyped isolated population. Nature. 2023. \href{https://doi.org/10.1038/s41586-022-05473-8}{doi:10.1038/s41586-022-05473-8}.
+\end{thebibliography}
+\section*{Figure legends}
+Figure 1. Inherited global genetic correlation map. Asterisks retain significance from the original 396-test FDR family. Displaying 72 comparisons does not create a new correction family; differences in detection counts do not establish architectural differences.
+
+Figure 2. Native chr5 fine-mapping PIPs and coloc-SuSiE prior/model sensitivity. The analyses reuse the same discovery sources and provide reference-qualified exploratory model support. One qualifying credible set per trait and diffuse PIPs leave causal-variant identity unresolved. These are not independent replication.
+
+Figure 3. Source-specific covariance calibration counterexamples. Truth-known simulations use exact synthetic LD and zero genetic covariance. Error bars are Wilson intervals from 10,000 draws per scenario. Parameter scales do not identify true Brain6 local architectures; no empirical false-positive rate is inferred.
+
+\section*{Supplementary materials}
+Exact numerical tables, all native variants/credible sets/PIPs, protocols, source/code hashes, software locks, clinical source fields, negative/held results, independent checks and STROBE/STREGA reporting items accompany this investigator-review manuscript. Three figures are supplied separately as vector PDF/SVG and PNG; no third-party figure is reproduced.
+\end{document}
