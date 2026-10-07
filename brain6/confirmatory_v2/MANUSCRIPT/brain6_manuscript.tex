@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,booktabs,longtable,array,xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{Brain6: secondary validation}\fancyhead[R]{Investigator review}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\parskip}{5pt}\setlength{\parindent}{0pt}
+\newcommand{\held}{\textbf{Investigator review version: not submission-approved.}}
+\title{Limits of locus validation in a six-disorder sleep genetic atlas: a reproducible secondary analysis}
+\author{Authors, affiliations and corresponding author: human completion required}
+\date{7 October 2026}
+\begin{document}
+\maketitle
+\held\ No new participants were enrolled. Author, ethics, funding and conflict declarations remain unverified. This manuscript reports historical frozen analyses and new table-level numerical audits; full native-input reproduction remains incomplete.
+
+\section*{Abstract}
+\textbf{Background:} Genetic overlap between sleep traits and psychiatric disorders is established, but cross-trait screening does not itself validate a shared causal locus. We evaluated the progression of evidence in a six-disorder sleep atlas using frozen statistical families and explicit source, linkage-disequilibrium (LD), replication and molecular gates.
+
+\textbf{Methods:} We audited a 72-comparison global display, 25 pair-specific PLACO candidates and the complete canonical LAVA eligibility family. We independently checked available hashes, secondary SUPERGNOVA covariance statistics, candidate overlaps, single-signal colocalization prior sensitivity and matched positional-enrichment arithmetic. Primary literature and public metadata were reviewed through 7 October 2026. Historical native results were distinguished from new numerical checks.
+
+\textbf{Results:} Thirty-five global entries retained significance from the original 396-test false-discovery-rate family. The 25 candidates occupied 20 geographic display regions. Canonical LAVA had 13,745 tested and 3,720 unestimated cells among 17,465 planned evaluations, exceeding the frozen maximum of 873; it remained unpromoted. Three secondary covariance blocks passed the complete 8,465-slot family threshold, but none overlapped a protected candidate for the same pair. The significant insomnia--ADHD chr11 block had a derived correlation above 1, requiring covariance-specific interpretation. No assessed LD matrix passed the multi-signal gate. Three of six single-signal colocalization estimates had default-prior H4 support; one retained it at the lower prior. That chr5 shared region had already been reported. Four component-GWAS--QTL tests and an 18-region positional sensitivity established no molecular effector or false-discovery-rate-significant enrichment. Independent two-trait locus replication was not established.
+
+\textbf{Conclusions:} The atlas supports a descriptive genetic map and a bounded secondary-validation analysis. It does not establish a new shared causal variant or mechanism. Failed eligibility, unestimated outcomes and same-source methodological agreement must remain distinct from biological nulls and independent replication.
+
+\textbf{Keywords:} sleep; psychiatric genomics; genetic covariance; colocalization; reproducibility; validation
+
+\section*{Background}
+Genome-wide genetic correlations characterize shared common-variant influences between traits, but average genome-wide agreement does not determine where sharing occurs or which variant mediates it \cite{ldsc,lava}. Cross-trait association screens can identify regions for follow-up while remaining compatible with distinct causal signals, correlated phenotypes and complex sample composition. The inferential transition from screening to a validated locus therefore requires more than successive annotations of an associated interval.
+
+Sleep--psychiatric genetic sharing is an established research area. Jia and colleagues combined seven sleep phenotypes and three psychiatric disorders using global and cross-trait methods \cite{jia}. Xue and colleagues examined insomnia with 12 disorders using MiXeR, conjunctional false discovery rate, ASSET and cellular analyses \cite{xue}. Zu and colleagues reported ADHD--sleep pleiotropic loci and single-signal colocalization \cite{zu}. A recent broader analysis linked sleep--psychiatric sharing to neurodevelopment \cite{lin}. These studies make an inherited correlation map, additional positional genes or a familiar shared region insufficient evidence of a new mechanistic discovery.
+
+Brain6 selected six disorders---ADHD, major depressive disorder (MDD), schizophrenia, bipolar disorder, Parkinson's disease and Alzheimer's disease---from a sleep atlas. Its staged analyses included global correlation, five cross-trait screening tracks, canonical local eligibility, secondary covariance, exploratory fine-mapping and molecular follow-up. Earlier reports described partial work; a later frozen package integrated additional outcomes. The unresolved question is how far this evidence can advance when a primary eligibility family fails and later methods encounter source or LD limitations. We audited the completed package, independently checked feasible numerical claims, assessed current novelty and preserved all negative and unestimated outcomes. This is a secondary-validation case study, not a new method benchmark or prospective independent discovery experiment.
+
+\section*{Methods}
+\subsection*{Design, sources and provenance}
+The continuation began from public commit \texttt{303c905c229104b7bf623df6de7431abb87e0727} on a separate branch. Historical scientific files, protocols and checksums were retained. New audits used identity \texttt{brain6-continuation-20261007-v1}. Its frozen protocol labels existing outcomes as retrospective and admits no new confirmatory experiment without separately frozen source eligibility, controls and correction. The source and claim ledgers record exact releases, phenotype definitions, available hashes, cohort-overlap classes and permitted wording.
+
+Historical insomnia used the public Jansen UK Biobank release without 23andMe (109,402 cases and 277,131 controls); long sleep used the Dashti release with at least nine-hour cases and seven-to-eight-hour controls (34,184 and 305,742). ADHD used the Demontis European meta-analysis (38,691 cases and 186,843 controls). Other outcomes retain their original source cards and case/proxy or meta-analysis semantics. Sources cannot be treated as exchangeable because they share an ancestry label. Exact effect-allele, analyzed-N and model contracts remain incomplete for some native paths. The new checkout lacked the external archive, genotype reference and one original canonical source; available retained local archives were inventoried before declaring these gaps. Thus native GWAS/LD analyses were not rerun.
+
+\subsection*{Global display and candidate identities}
+The 72-row global display retains q values from the original 396-comparison atlas family, without recorrection in the selected subset. Five tracks entered the completed screen: insomnia--ADHD, insomnia--MDD, long sleep--bipolar, long sleep--Parkinson's disease and long sleep--schizophrenia. The lineage combines PLACO\_PLUS with the protected legacy insomnia--ADHD track; PLACO tests a composite null \cite{placo}. The fixed lead criterion was P$<10^{-8}$ (the conventional $5\times10^{-8}$ threshold divided across five tracks). Greedy clumping used exact reference-matched rsID/chromosome/position, European LAVA UK Biobank reference v1.1, $r^2=0.1$ and 500-kb windows. Lead flanks of 500 kb were merged within pair. Across-pair geographic merges are display units and do not change hypothesis identity. The locus rule was frozen after initial screen outputs and before annotation; it was not fully pre-discovery.
+
+\subsection*{Canonical LAVA and source rescue}
+Canonical LAVA covered seven traits and 2,495 GRCh37 loci, giving 17,465 intended trait--locus eligibility evaluations \cite{lava}. Family QC preceded bivariate local inference, with at most 873 \texttt{NOT\_RUN} cells. Insufficient local heritability or reference variants produced unestimated cells, not tested nulls. The complete status table and original immutable decision were checked. Source-rescue evidence included a prospectively fixed 88-locus insomnia per-variant-N pilot. Its advance alternatives were at least ten percentage points of tested gain or a 25\% relative reduction in low-heritability non-estimates, with zero worker failures. Arithmetic recovery projections were distinguished from achieved recovery; no pilot was spliced into the failed family.
+
+\subsection*{Secondary covariance}
+A separately frozen SUPERGNOVA analysis used signed Z scores and a 503-person 1000 Genomes European GRCh37 reference \cite{supergnova}. Reference variants were common, unique and nonpalindromic; the recorded implementation and map repair preceded the admitted outcomes. Only insomnia--ADHD and insomnia--MDD met its prospective source-eligibility gate. Published study-total N was accepted as a method-specific approximation with meta-analysis limitations, not a LAVA source admission. Three long-sleep pairs remained inapplicable because their export model/N mapping was unresolved. All five pairs and 1,693 non-MHC blocks per pair remained in the denominator: $\alpha=0.05/8{,}465=5.9066745\times10^{-6}$. Blocks with fewer than 120 shared SNPs or insufficient rank were unestimated. Candidate support required a corrected overlapping block for the same eligible pair and complete run QC.
+
+The continuation independently replayed two-sided covariance P values as $2\Phi(-|\rho|/\sqrt{\operatorname{var}(\rho)})$ and family-adjusted values. It also counted missing and out-of-range derived correlations. This retrospective diagnostic does not change the original covariance family or validate estimator calibration.
+
+\subsection*{LD, exploratory colocalization and molecular analyses}
+The historical LD gate assessed symmetry, unit diagonal, correlation range and positive semidefiniteness before SuSiE-RSS. Invalid matrices remained failed. Covariance normalization or a positive-semidefinite Gram diagnostic was not accepted as proof of genotype identity, allele orientation or source compatibility. No multi-signal SuSiE or coloc-SuSiE result was generated; multiple causal signals require an appropriate model \cite{colocsusie}.
+
+A separate historical approximate-Bayes-factor analysis estimated candidate--trait association posteriors and model-conditional 95\% credible sets under a single-causal-variant assumption. Six insomnia--ADHD intervals qualified for trait--trait \texttt{coloc.abf} 5.2.3 H0--H4 calculations \cite{colocabf}. The default $p_{12}=10^{-5}$ had prespecified sensitivities $10^{-6}$ and $5\times10^{-5}$, with $p_1=p_2=10^{-4}$. H4$\geq0.80$ was descriptive model support, not independent causal confirmation. We analytically reweighted H4 by the prior ratio and renormalized all five hypotheses, checking serialized posterior arithmetic without reconstructing raw Bayes factors.
+
+Molecular follow-up retained four official eQTL Catalogue release-7 GTEx brain contexts (cortex and frontal cortex eQTL/LeafCutter sQTL). GRCh37 windows were lifted to GRCh38; unique positions and unordered alleles were matched. Numerical admission required at least 500 shared variants and component-GWAS and QTL P$\leq5\times10^{-8}$. Estimated QTL variance/sample-size semantics and the one-signal assumption remain limitations. Component-only tests, published credible-set membership, regulatory overlap and nearest genes were separately labeled. No positional gene was declared an effector.
+
+\subsection*{Enrichment, replication, literature and numerical validation}
+The full 20-region positional enrichment required ten eligible matched control anchors per region. Its failed gate was retained. A separately frozen 18-region/21-candidate sensitivity used 10,000 accepted nonoverlapping matched null sets, testing all 54 GTEx v8 bulk tissues and 1,680 Reactome pathways. We replayed empirical P$=(\mathrm{extreme}+1)/10{,}001$ and Benjamini--Hochberg correction within each complete original family; we did not rerun permutations.
+
+Replication classes distinguish two-trait independence, outcome-only independence, partial cohort overlap, phenotype sensitivity and unresolved sources. Reusing the original sleep GWAS cannot yield independent two-trait replication. LDSC intercepts alone cannot establish participant independence. Public literature searches were bounded through 7 October 2026, with query truncation/access failures recorded. Primary Table 3 and the supplement of Zu et al. were inspected; all 14 published insomnia--ADHD lead positions were checked against Ensembl GRCh37. Catalog metadata were GRCh38.p14 and were not directly compared with GRCh37 windows. Unmatched or unindexed loci were not declared novel.
+
+Available output/source hashes, original audit failures, numerical residuals and software test partitions were retained. Synthetic tests exercise implementation only. Reporting follows a secondary-analysis adaptation of STROBE/STREGA, with unavailable original participant-level details identified \cite{strobe,strega}.
+
+\section*{Results}
+\subsection*{Global map, candidate screen and failed primary gate}
+The 72 global rows included 35 inherited significant entries: ADHD nine, MDD ten, schizophrenia seven, bipolar eight, Parkinson's disease one and Alzheimer's disease zero (Figure 1). This detection pattern is not a powered psychiatric-versus-neurodegenerative architecture contrast. The completed screen yielded 25 pair-specific candidates in 20 geographic regions.
+
+Canonical LAVA had 13,745 \texttt{TESTED} and 3,720 \texttt{NOT\_RUN} cells, with no numerical failures. The latter exceeded 873, retaining \texttt{FAILED\_QC\_NOT\_PROMOTED}. Non-estimation comprised 3,564 low-local-heritability cells, 154 with too few shared reference variants and two other minimum-K failures. At least 2,847 recoveries would be needed. Long sleep alone contributed 1,291 non-estimates, above the whole-family ceiling even under perfect repair of every other trait (Figure 2). The insomnia native-N pilot tested 47 of 88 loci rather than 44: a 3.41-percentage-point gain and 6.98\% low-heritability reduction, below both advancement alternatives. No full source replacement was admitted.
+
+\subsection*{Secondary local covariance and diagnostic limits}
+SUPERGNOVA retained 8,465 slots: 3,304 estimated, 61 low-SNP, 21 low-rank and 5,079 prospectively inapplicable. Three blocks passed the complete family threshold (Table 1; Figure 3). Insomnia--ADHD and insomnia--MDD shared chr11 block boundaries, while MDD had a separate chr6 block. None overlapped a protected candidate for the same pair; 12 candidates were not supported by this method and 13 were inapplicable. A geographically overlapping long-sleep--schizophrenia candidate is a different pair and cannot supply validation.
+
+All 3,304 covariance P values replayed with maximum absolute error $3.33\times10^{-16}$. Of 2,199 numeric derived correlations, 723 exceeded $[-1,1]$; 1,105 were missing. The significant chr11 insomnia--ADHD estimate had derived correlation 1.1037. We retain the covariance statistic with its source/model limitations and do not interpret it as a bounded population correlation. Matching chr11 boundaries do not resolve distinct causal effects or shared psychiatric liability.
+
+\begin{table}[htbp]\centering\small
+\caption{Family-significant secondary covariance blocks. Coordinates are GRCh37; estimates reuse discovery GWAS.}\label{tab:local}
+\begin{tabular}{@{}llrr@{}}\toprule
+Pair & Interval (Mb) & Covariance & Adjusted P\\\midrule
+Insomnia--ADHD & chr11:112.459--114.258 & $2.6913\times10^{-4}$ & $1.7753\times10^{-4}$\\
+Insomnia--MDD & chr6:100.630--102.637 & $1.1606\times10^{-4}$ & 0.01535\\
+Insomnia--MDD & chr11:112.459--114.258 & $2.2552\times10^{-4}$ & $1.8628\times10^{-6}$\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Exploratory posterior, molecular and replication evidence}
+None of 32 assessed LD matrices passed the multi-signal gate. Historical single-signal ABF estimated 28 of 50 candidate--trait units, producing 24 conditional credible sets; four estimated units lacked the required association posterior, nine had input-QC holds and 13 had long-sleep model holds. Conditional set sizes ranged from three to 1,445 SNPs (median 53).
+
+Three of six trait--trait estimates had H4$\geq0.80$ at the default prior: chr3 0.9207, chr5 0.9911 and chr7 0.8432. At the lower prior these were 0.5373, 0.9174 and 0.3496, respectively (Figure 4). Only chr5 retained descriptive support. Its shared region is already reported by Zu et al.: rs77960 at GRCh37-consistent chr5:103,964,585, PLACO P$=6.54\times10^{-15}$ and H4$=0.99$ \cite{zu}. Five of six Brain6 ADHD intervals contain a published lead position; two exact lead rsIDs recur. Different leads do not establish distinct discoveries. Prior chr11 insomnia--depression evidence also warrants caution \cite{schipper}; full build/allele equivalence remains unresolved.
+
+Four actual ADHD-component molecular tests (three eQTL, one sQTL) had maximum H4 0.0824. No pair-level molecular sharing or effector was established. Two regions failed the full enrichment control gate (four and seven anchors). The 18-region sensitivity had no significant tissue or pathway after its original FDR correction: minimum q 0.11339 and 0.24264. The full set has no enrichment P values.
+
+No source-verified independent two-trait locus replication was present. FinnGen supplied directional global ADHD context with original insomnia reused; MDD no-UKB sensitivity retained named PGC overlaps. Adjacent long-sleep definitions used overlapping UK Biobank sources. All 25 candidates therefore remained below the predefined positive validation tiers; this classification does not assert biological absence. Seventy-seven available provenance hashes matched, with one missing original canonical source and no mismatches. The original auditor correctly fails on that missing source.
+
+\section*{Discussion}
+The strongest defensible contribution is an explicit account of where locus validation stopped. The inherited global map and cross-trait candidates coexist with a failed primary local family, unestimated secondary slots, prior-sensitive single-signal posteriors and unavailable independent replication. These outcomes cannot be combined into a stronger causal claim simply by increasing the number of annotations.
+
+The failed LAVA gate concerns family eligibility. It neither refutes genetic sharing nor validates selected isolated loci. Source repair is constrained by phenotype and sample-size meaning: a software-accepted scalar is not automatically the analyzed N required by another model. The limited insomnia pilot did not meet its advancement criteria, and long-sleep non-estimates alone exceeded the entire ceiling. Changing sleep thresholds, excluding difficult loci or mixing historical sensitivity cells would answer a different question.
+
+Secondary covariance contributes information while preserving this failed endpoint. Its three corrected blocks were not validations of protected same-pair candidates, and methodological agreement on the same GWAS is not cohort replication. The out-of-range derived correlation demonstrates why a covariance estimate must not be casually reported as a bounded local correlation. Arithmetic agreement establishes correct transcription/computation of the recorded statistic, not validity of its reference, N/intercept approximation or sampling distribution. Independent statistical review is needed before substantive interpretation.
+
+Colocalization is similarly conditional. The chr5 interval is stable to the specified lower prior, but failed LD prevents a justified multi-signal analysis, and the region has already been reported \cite{zu}. Prior work has broader sleep--psychiatric and cellular analyses \cite{jia,xue,lin}; a chr11 insomnia--depression preprint presents a nearby regional result \cite{schipper}. Neither a different lead rsID nor an unavailable supplement supports novelty. No nearest-gene, expression or regulatory overlap can overcome the absent pair-level molecular evidence.
+
+The negative positional sensitivity is useful only within its admitted universe. Failure of full-set controls precludes extrapolation to all 20 regions. Unequal source power and phenotype definitions also prevent interpreting fewer neurodegenerative associations as a distinct architecture. We therefore did not launch a post hoc cross-disease contrast, causal analysis or new candidate family to pursue a favorable headline.
+
+Limitations include incomplete native-input reproduction, inaccessible original provenance, meta-analysis sample-size/overlap uncertainty, European reference emphasis, invalid stored LD, single-signal assumptions and limited QTL contexts. Literature review was targeted and partly truncated; restricted supplements and unindexed records remain gaps. The analysis does not estimate the power of an unperformed independent replication or benchmark general method failure. An automated adversarial audit is not independent human peer review. The paper's scientific merit as a bounded secondary-analysis case study requires investigator assessment, and strong original-discovery submission is not currently justified.
+
+\section*{Conclusions}
+Brain6 supports an inherited global genetic map and a transparent secondary-validation case study. Its failed primary eligibility gate, three secondary covariance blocks, conditional exploratory posteriors and negative subset results do not establish a new shared causal locus, independent two-trait replication or molecular mechanism. Future advancement requires verified source/model contracts, valid allele-aligned LD, a separately frozen experiment and genuinely independent evidence.
+
+\section*{Abbreviations}
+ABF, approximate Bayes factor; ADHD, attention-deficit/hyperactivity disorder; FDR, false discovery rate; FWER, family-wise error rate; GWAS, genome-wide association study; LD, linkage disequilibrium; MDD, major depressive disorder; QTL, quantitative trait locus.
+
+\section*{Declarations}
+\textbf{Ethics approval and consent:} Human investigators must verify the exact secondary-use permissions, original study ethics/consent and applicable institutional requirements. No approval identifier is asserted.\par
+\textbf{Consent for publication:} Human determination of applicability required.\par
+\textbf{Data and code availability:} The separate continuation branch contains protocols, derived source tables, numerical validators, code and provenance. Raw licensed data must be acquired from their providers under their terms. Full native reproduction remains on hold for missing original source/reference files. A permanent archival identifier requires investigator selection.\par
+\textbf{Competing interests, funding and contributions:} Unverified; all human authors must complete the supplied templates.\par
+\textbf{Acknowledgments:} Consortium/reference acknowledgments require investigator verification.\par
+\textbf{AI use:} OpenAI Codex assisted software/provenance audits, numerical checks, literature screening, drafting and figures. Human investigators are responsible for final verification and interpretation. AI is not an author; author approval and journal submission have not occurred.
+
+\begin{thebibliography}{99}
+\bibitem{colocsusie} Wallace C. A more accurate method for colocalisation analysis allowing for multiple causal variants. PLoS genetics. 2021. \href{https://doi.org/10.1371/journal.pgen.1009440}{doi: 10.1371/journal.pgen.1009440}.
+\bibitem{supergnova} Zhang Y, Lu Q, Ye Y, Huang K, Liu W, Wu Y, Zhong X, Li B, Yu Z, Travers BG, Werling DM, Li JJ, Zhao H. SUPERGNOVA: local genetic correlation analysis reveals heterogeneous etiologic sharing of complex traits. Genome biology. 2021. \href{https://doi.org/10.1186/s13059-021-02478-w}{doi: 10.1186/s13059-021-02478-w}.
+\bibitem{placo} Ray D, Chatterjee N. A powerful method for pleiotropic analysis under composite null hypothesis identifies novel shared loci between Type 2 Diabetes and Prostate Cancer. PLoS genetics. 2020. \href{https://doi.org/10.1371/journal.pgen.1009218}{doi: 10.1371/journal.pgen.1009218}.
+\bibitem{lava} Werme J, van der Sluis S, Posthuma D, de Leeuw CA. An integrated framework for local genetic correlation analysis. Nature genetics. 2022. \href{https://doi.org/10.1038/s41588-022-01017-y}{doi: 10.1038/s41588-022-01017-y}.
+\bibitem{ldsc} Bulik-Sullivan B, Finucane HK, Anttila V, Gusev A, Day FR, Loh PR, ReproGen Consortium, Psychiatric Genomics Consortium, Genetic Consortium for Anorexia Nervosa of the Wellcome Trust Case Control Consortium 3, Duncan L, Perry JR, Patterson N, Robinson EB, Daly MJ, Price AL, Neale BM. An atlas of genetic correlations across human diseases and traits. Nature genetics. 2015. \href{https://doi.org/10.1038/ng.3406}{doi: 10.1038/ng.3406}.
+\bibitem{colocabf} Giambartolomei C, Vukcevic D, Schadt EE, Franke L, Hingorani AD, Wallace C, Plagnol V. Bayesian test for colocalisation between pairs of genetic association studies using summary statistics. PLoS genetics. 2014. \href{https://doi.org/10.1371/journal.pgen.1004383}{doi: 10.1371/journal.pgen.1004383}.
+\bibitem{strega} Little J, Higgins JP, Ioannidis JP, Moher D, Gagnon F, von Elm E, Khoury MJ, Cohen B, Davey-Smith G, Grimshaw J, Scheet P, Gwinn M, Williamson RE, Zou GY, Hutchings K, Johnson CY, Tait V, Wiens M, Golding J, van Duijn C, McLaughlin J, Paterson A, Wells G, Fortier I, Freedman M, Zecevic M, King R, Infante-Rivard C, Stewart A, Birkett N. Strengthening the reporting of genetic association studies (STREGA): an extension of the STROBE statement. European journal of epidemiology. 2009. \href{https://doi.org/10.1007/s10654-008-9302-y}{doi: 10.1007/s10654-008-9302-y}.
+\bibitem{strobe} von Elm E, Altman DG, Egger M, Pocock SJ, Gøtzsche PC, Vandenbroucke JP, STROBE Initiative. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement: guidelines for reporting observational studies. PLoS medicine. 2007. \href{https://doi.org/10.1371/journal.pmed.0040296}{doi: 10.1371/journal.pmed.0040296}.
+\bibitem{xue} Xue B, Niu M, Sun Y, Wang L, Wu C, Ding Y, Wang B, Peng L, Li X, Song H, Yuan W, Shi W, Liu J, Gao C, Zhao X, Zhang Q, Li Z. Detection of pleiotropic genetic factors and critical brain cell types linking insomnia with psychiatric disorders. Sleep. 2026. \href{https://doi.org/10.1093/sleep/zsaf317}{doi: 10.1093/sleep/zsaf317}.
+\bibitem{zu} Zu Y, Pang T, Luo L, Liufu C, Xu Z, Lv L, Li W, Chang S. Dynamic relationship and pleiotropic loci of attention deficit hyperactivity disorder with sleep traits. Translational psychiatry. 2026. \href{https://doi.org/10.1038/s41398-026-04166-4}{doi: 10.1038/s41398-026-04166-4}.
+\bibitem{lin} Lin Y, Li W, Yang X, Li S, Liu J, Lin L, Zhang B. Neurodevelopment as a shared genetic etiology linking sleep-related phenotypes and psychiatric disorders: a genome-wide pleiotropic analysis. Mammalian genome : official journal of the International Mammalian Genome Society. 2026. \href{https://doi.org/10.1007/s00335-026-10232-5}{doi: 10.1007/s00335-026-10232-5}.
+\bibitem{schipper} Schipper M, Shadrin AA, Romero C, Friligkou E, Polimanti R, Posthuma D, Van Someren EJ, Tissink E. Multi-level genomic analysis identifies pleiotropic genetic liability for insomnia, anxiety and depression medRxiv preprint v1 (not peer reviewed). 2025. \href{https://doi.org/10.1101/2025.10.18.25338281}{doi: 10.1101/2025.10.18.25338281}.
+\bibitem{jia} Jia N, Zhu Z, Liu Y, Yin X, Man L, Hou W, Zhang H, Yu Q, Hui L. From single nucleotide variations to genes: identifying the genetic links between sleep and psychiatric disorders. Sleep. 2025. \href{https://doi.org/10.1093/sleep/zsae209}{doi: 10.1093/sleep/zsae209}.
+\end{thebibliography}
+
+\section*{Figure legends}
+\textbf{Figure 1. Global genetic-correlation display.} All 72 inherited estimates across six disorders and 12 sleep traits. Stars indicate significance from the original 396-test FDR family; the displayed subset is not a new correction family. Colour represents the recorded estimate, not a causal effect. Complete standard errors, intercepts, source definitions and q values accompany the figure.
+
+\textbf{Figure 2. Canonical LAVA non-estimation.} Counts for all seven traits; the dashed reference is the whole-family maximum of 873, not a per-trait allowance. Long sleep alone exceeds that ceiling. The family remains failed; NOT\_RUN is not a biological null.
+
+\textbf{Figure 3. Secondary local covariance.} Three corrected-significant blocks with normal-approximation 95\% intervals from recorded covariance variance. These same-source estimates are not independent replication. The chr11 ADHD derived correlation exceeds 1; covariance values are displayed without clipping. Selection of significant blocks is descriptive; the complete 8,465-slot numerical table retains every status.
+
+\textbf{Figure 4. Single-signal colocalization prior sensitivity.} All six estimated insomnia--ADHD intervals at default $p_{12}=10^{-5}$ and lower $10^{-6}$. The 0.80 line marks descriptive ABF-model support; it is not a replication or causal-validation threshold. Nineteen other pair candidates were unestimated and are retained in source tables. Chr5 is already a published shared region.
+
+\section*{Supplementary materials}
+The companion supplement supplies historical source methods, all numerical source tables, frozen provenance, claim/source ledgers, reporting checklist and new residual diagnostics. Figures are provided separately as vector PDF/SVG with numerical source files. The investigator-review PDF follows the separate-figure submission layout; no copyrighted third-party figure is reproduced.
+\end{document}

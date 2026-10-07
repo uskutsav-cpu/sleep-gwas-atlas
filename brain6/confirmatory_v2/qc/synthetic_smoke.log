@@ -1,0 +1,40 @@
+PANEL_LOCK_OK atlas-v1.0 45 traits manifest_sha256=38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80
+Wrote 45 h2 logs + 12 rg logs in results/_smoketest
+Every value in them is fabricated to test the locked 45-trait panel.
+wrote data/_test_raw/insomnia.txt.gz  (60,300 rows, style=beta)
+wrote data/_test_raw/bipolar.txt.gz  (60,300 rows, style=or)
+  delimiter detected: tab; read 60,300 rows and 11 columns
+  column map: {'SNP': 'SNP', 'CHR': 'CHR', 'BP': 'BP', 'A1': 'A1', 'A2': 'A2', 'FRQ': 'FRQ', 'BETA': 'BETA', 'SE': 'SE', 'P': 'P', 'N': 'N', 'INFO': 'INFO'}
+  kept 21,958 / 60,300 (36.4%)
+  wrote data/_test_harmonized/insomnia.harmonized.tsv.gz
+  wrote data/_test_harmonized/insomnia.qc.txt
+  delimiter detected: whitespace; read 60,300 rows and 11 columns
+  column map: {'SNP': 'MarkerName', 'CHR': 'CHR', 'BP': 'BP', 'A1': 'Effect_allele', 'A2': 'Other_allele', 'FRQ': 'EAF', 'OR': 'OR', 'SE': 'StdErr', 'P': 'P-value', 'INFO': 'INFO', 'N_EFF_HALF': 'NEFFDIV2'}
+  converted OR to log(OR)
+  kept 22,142 / 60,300 (36.7%)
+  wrote data/_test_harmonized/bipolar.harmonized.tsv.gz
+  wrote data/_test_harmonized/bipolar.qc.txt
+Parsed 45 h2 result rows
+wrote results/_smoketest/h2_summary.tsv
+Wrote SYNTHETIC readiness ledger: results/_smoketest/trait_readiness.tsv
+PANEL_LOCK_OK atlas-v1.0 45 traits manifest_sha256=38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80
+Wrote Phase 1 inclusion table: results/_smoketest/phase1_inclusion.tsv
+Included: 43 / 45
+Parsed 396 rg result rows
+wrote results/_smoketest/rg_matrix.tsv
+Matplotlib is building the font cache; this may take a moment.
+wrote results/_smoketest/fig2_smoketest.png  (12 sleep × 33 disease traits)
+  source: /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/results/_smoketest/rg_matrix.tsv  |  mtime: 2026-10-07 16:50  |  sha256:53aafd85227a
+  watermarked: SYNTHETIC - NOT REAL DATA
+Exported provenance-aware Phase 0 metadata table: results/_smoketest/gwas_metadata_table.tsv
+Registered traits: 45; rows with unsupplied PMID: 1
+Generated Phase 0/1 report: results/_smoketest/phase1_summary_report.md
+PANEL_LOCK_OK atlas-v1.0 45 traits manifest_sha256=38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80
+Wrote readiness ledger: results/_smoketest/source_readiness.tsv
+source_verified: 45 / 45
+harmonization_ready: 0 / 45
+ldsc_ready: 0 / 45
+liability_h2_ready: 0 / 45
+phase1_pass: 0 / 45
+SOURCE_VERIFIED declarations without evidence: 0
+Smoke test completed. All outputs are synthetic and confined to results/_smoketest/.

@@ -1,0 +1,19 @@
+# Final Brain6 handoff
+
+**Track A: NO-GO. Track B: complete submission-preparation package for human scientific review; not ready for submission approval.**
+
+Completed work includes the current repository, branch and local archive inventory; historical table, hash and numerical audits; source/access and claim ledgers; date-bounded literature searches and targeted primary paper/supplement checks through 7 October 2026; a candidate novelty crosswalk; explicit integration/source-free CI partitions; and a complete manuscript, vector figures, numerical sources, supplement and reporting/submission materials. The new branch is `brain6/continuation-2026-10-07`. Main and historical scientific outputs are preserved.
+
+Independent checks reproduce the 72/35 global counts, 25 candidates in 20 regions, failed 17,465-cell LAVA decision, complete 8,465-slot secondary family, zero same-pair candidate overlaps, six ABF prior reweightings, 54-tissue/1,680-pathway arithmetic and 77 available hashes. One original canonical source is missing, and the original auditor correctly fails. No native GWAS/LD replay or independent biological replication is claimed.
+
+New audit findings: the significant chr11 ADHD block has derived correlation 1.1037, requiring covariance-specific interpretation. Of 2,199 numeric correlations, 723 are outside bounds; 1,105 are missing. Zu 2026 reports the chr5 rs77960 shared region with PP4=0.99, defeating a first-region-discovery claim. Five of six ADHD intervals contain coordinate-consistent prior leads, and two exact Brain6 lead rsIDs recur. All 14 published lead positions match Ensembl GRCh37. A prior insomnia–depression preprint also has a closely overlapping chr11 regional signal, although full source context/build equivalence remains unresolved. These are validation and novelty audit findings, not new biological discoveries.
+
+LAVA remains `FAILED_QC_NOT_PROMOTED`; SuSiE remains held by invalid LD and absent reference provenance. Single-signal ABF remains conditional. No effector, independent two-trait locus replication or FDR-significant positional enrichment was established. Unestimated and inapplicable outcomes are not biological nulls.
+
+Supported wording describes an inherited global map, an explicit screening universe, a failed primary gate, three corrected secondary covariance blocks without same-pair candidate validation, prior-sensitive exploratory colocalization and bounded negative/subset results. No new shared causal variant, mechanism, cross-disease causal effect or general failure of these methods is supported.
+
+Genome Medicine and Molecular Psychiatry are NO-GO for a strong original discovery submission. The Genome Medicine mental-health collection is topically relevant but does not change that verdict. BMC Medical Genomics is a conditional specialist fallback for the bounded paper, after human assessment of its scientific contribution. Publication is not assured.
+
+Remaining priorities are: restore exact canonical source/raw/reference provenance and rerun full integration; obtain independent statistical-genetics review of covariance diagnostics and cohort/model assumptions; complete author/ethics/funding/COI/licensing fields; obtain authorized competing supplements and verify build/allele/LD equivalence; then consider independently sourced two-trait data under a new prospective native protocol. No third party was contacted, manuscript submitted or change merged to main.
+
+Start with [Scientific status](SCIENTIFIC_STATUS.md), [Publication readiness](PUBLICATION_READINESS.md) and [Manuscript PDF](MANUSCRIPT/brain6_manuscript.pdf). The numerical provenance and execution logs are in qc/ and review/. REPRODUCE.md separates arithmetic/software validation from blocked native scientific reproduction. qc/final_receipt.json records final commits, CI state, output hashes and immutable-file comparisons.

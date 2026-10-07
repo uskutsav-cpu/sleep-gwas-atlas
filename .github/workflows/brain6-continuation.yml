@@ -1,0 +1,27 @@
+name: Brain6 continuation arithmetic and source-free validation
+on:
+  push:
+    paths:
+      - 'brain6/confirmatory_v2/**'
+      - '.github/workflows/brain6-continuation.yml'
+  pull_request:
+    paths:
+      - 'brain6/confirmatory_v2/**'
+      - '.github/workflows/brain6-continuation.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.11'
+      - run: python -m pip install scipy==1.14.1 pytest==8.3.5
+      - name: Synthetic numerical tests
+        run: python -m pytest -q brain6/confirmatory_v2/tests
+      - name: Audit available frozen tables; missing native inputs remain explicit
+        run: python brain6/confirmatory_v2/scripts/audit_evidence.py
+      - name: Validate manuscript claims
+        run: python brain6/confirmatory_v2/scripts/validate_manuscript.py

@@ -1,0 +1,140 @@
+[
+  {
+    "gate": "locked_panel",
+    "status": "PASS",
+    "evidence": "config/analysis_panel.tsv + config/analysis_panel.lock.json",
+    "blocker": ""
+  },
+  {
+    "gate": "source_curation",
+    "status": "PASS",
+    "evidence": "45/45 SOURCE_VERIFIED in analysis_panel.tsv",
+    "blocker": ""
+  },
+  {
+    "gate": "source_schemas",
+    "status": "PASS",
+    "evidence": "45/45 selected source schemas verified",
+    "blocker": ""
+  },
+  {
+    "gate": "harmonization",
+    "status": "BLOCKED",
+    "evidence": "0/45 traits",
+    "blocker": "complete harmonization QC ledgers; missing or non-real: insomnia, sleepdur, shortsleep, longsleep, chronotype, sleepiness, napping, snoring, sleep_apnea, sleep_efficiency, accel_sleep_duration, sleep_timing, alz, parkinson, mdd, scz, bipolar, adhd, ibd, crohn, uc, ra, ms, asthma, bmi, t2d, ldl, hdl, triglycerides, cad, stroke, atrial_fibrillation, sbp, longevity, parental_lifespan, healthspan, frailty, telomere_length, grip_strength, breast_cancer, prostate_cancer, colorectal_cancer, lung_cancer, melanoma, ovarian_cancer"
+  },
+  {
+    "gate": "ldsc_inputs",
+    "status": "BLOCKED",
+    "evidence": "0/45 traits",
+    "blocker": "complete canonical HapMap3 inputs; missing or non-real: insomnia, sleepdur, shortsleep, longsleep, chronotype, sleepiness, napping, snoring, sleep_apnea, sleep_efficiency, accel_sleep_duration, sleep_timing, alz, parkinson, mdd, scz, bipolar, adhd, ibd, crohn, uc, ra, ms, asthma, bmi, t2d, ldl, hdl, triglycerides, cad, stroke, atrial_fibrillation, sbp, longevity, parental_lifespan, healthspan, frailty, telomere_length, grip_strength, breast_cancer, prostate_cancer, colorectal_cancer, lung_cancer, melanoma, ovarian_cancer"
+  },
+  {
+    "gate": "ldsc_h2",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "missing real non-empty artifact: results/tables/h2_summary.tsv"
+  },
+  {
+    "gate": "sleep_disease_rg",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "missing real non-empty artifact: results/tables/rg_matrix.tsv"
+  },
+  {
+    "gate": "full_covariance",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "estimate the complete 45-trait covariance structure; missing real non-empty artifact: results/tables/ldsc_covariance_45x45.tsv"
+  },
+  {
+    "gate": "lava",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "run complete local-univariate and eligible bivariate LAVA; missing real non-empty artifact(s): results/tables/lava_locus_status.tsv, results/tables/lava_univariate.tsv, results/tables/lava_bivariate.tsv, results/tables/lava_results.provenance.json"
+  },
+  {
+    "gate": "mixer",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "run complete 20-replicate univariate MiXeR then every eligible sleep-by-non-sleep pair; missing real non-empty artifact(s): results/tables/mixer_univariate.tsv, results/tables/mixer_bivariate.tsv"
+  },
+  {
+    "gate": "pleiotropic_loci",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete all 396 PLACO+/conjunction-FDR scans and cross-method collation; missing real non-empty artifact(s): results/atlas/shared_loci.tsv, results/atlas/shared_loci.provenance.json"
+  },
+  {
+    "gate": "fine_mapping",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "fine-map every primary cross-method shared locus with signal-specific credible sets and PIPs; missing real non-empty artifact(s): results/atlas/loci.tsv, results/atlas/variants.tsv, results/tables/fine_mapping_credible_sets.tsv, results/tables/fine_mapping_diagnostics.tsv, results/tables/trait_trait_colocalization.tsv, results/atlas/fine_mapping.provenance.json"
+  },
+  {
+    "gate": "colocalization",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete trait-trait and molecular-QTL signal-level colocalization; missing real non-empty artifact(s): results/tables/molecular_qtl_colocalization.tsv, results/tables/colocalization.tsv, results/tables/twas.tsv, results/tables/molecular_locus_coverage.tsv, results/tables/molecular_evidence.tsv, results/atlas/genes.tsv, results/atlas/molecular.provenance.json"
+  },
+  {
+    "gate": "molecular_integration",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "integrate corrected TWAS, sQTL, pQTL/PWAS, and convergent gene evidence; missing real non-empty artifact(s): results/tables/molecular_qtl_colocalization.tsv, results/tables/colocalization.tsv, results/tables/twas.tsv, results/tables/molecular_locus_coverage.tsv, results/tables/molecular_evidence.tsv, results/atlas/genes.tsv, results/atlas/molecular.provenance.json"
+  },
+  {
+    "gate": "factor_gwas",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "publish factor GWAS/Q_SNP or a validated not-applicable null; missing: results/tables/factor_gwas_summary.tsv, results/tables/q_snp.tsv, results/tables/factor_gwas.provenance.json"
+  },
+  {
+    "gate": "regulatory_mapping",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "map fine-mapped variants through all locked regulatory layers/domains; missing real non-empty artifact(s): results/tables/interpretation_task_manifest.tsv, results/tables/interpretation_task_manifest.lock.json, results/tables/interpretation_coverage.tsv, results/atlas/interpretation.provenance.json, results/atlas/regulatory_elements.tsv, results/atlas/cell_types.tsv, results/atlas/pathways.tsv, results/atlas/causal_tests.tsv"
+  },
+  {
+    "gate": "cell_types",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete all five cell-type strategies across four domains; missing real non-empty artifact(s): results/tables/interpretation_task_manifest.tsv, results/tables/interpretation_task_manifest.lock.json, results/tables/interpretation_coverage.tsv, results/atlas/interpretation.provenance.json, results/atlas/regulatory_elements.tsv, results/atlas/cell_types.tsv, results/atlas/pathways.tsv, results/atlas/causal_tests.tsv"
+  },
+  {
+    "gate": "pathways",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete all four frozen pathway resource families; missing real non-empty artifact(s): results/tables/interpretation_task_manifest.tsv, results/tables/interpretation_task_manifest.lock.json, results/tables/interpretation_coverage.tsv, results/atlas/interpretation.provenance.json, results/atlas/regulatory_elements.tsv, results/atlas/cell_types.tsv, results/atlas/pathways.tsv, results/atlas/causal_tests.tsv"
+  },
+  {
+    "gate": "causal_inference",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete both directions and all five estimator families for 396 pairs; missing real non-empty artifact(s): results/tables/interpretation_task_manifest.tsv, results/tables/interpretation_task_manifest.lock.json, results/tables/interpretation_coverage.tsv, results/atlas/interpretation.provenance.json, results/atlas/regulatory_elements.tsv, results/atlas/cell_types.tsv, results/atlas/pathways.tsv, results/atlas/causal_tests.tsv"
+  },
+  {
+    "gate": "integrated_atlas",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "assemble the canonical traceable evidence atlas; missing real non-empty artifact(s): results/atlas/loci.tsv, results/atlas/variants.tsv, results/atlas/genes.tsv, results/atlas/regulatory_elements.tsv, results/atlas/cell_types.tsv, results/atlas/pathways.tsv, results/atlas/causal_tests.tsv, results/atlas/edges.tsv, results/tables/interpretation_coverage.tsv, results/atlas/interpretation.provenance.json, results/tables/major_conclusions.tsv, results/atlas/edges.provenance.json"
+  },
+  {
+    "gate": "robustness",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete the predefined major robustness pass; missing real non-empty artifact(s): results/tables/robustness_summary.tsv, results/tables/robustness.provenance.json"
+  },
+  {
+    "gate": "genomic_sem",
+    "status": "BLOCKED",
+    "evidence": "",
+    "blocker": "complete EFA, validation, CFA, and model comparison; missing real non-empty artifact(s): results/tables/genomic_sem_model_fit.tsv, results/tables/genomic_sem_factor_loadings.tsv"
+  },
+  {
+    "gate": "atlas_v1_release",
+    "status": "BLOCKED",
+    "evidence": "releases/atlas-v1.0",
+    "blocker": "immutable release is incomplete; missing: analysis_panel.tsv, checksums.sha256, source_provenance.tsv, tool_versions.tsv, code_commit.txt, release_manifest.json"
+  }
+]

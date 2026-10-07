@@ -17,8 +17,14 @@ jobs:
         run: pip install -r requirements-pipeline.txt -r requirements-workflow.txt
       - name: Compile Python entry points
         run: python -m py_compile scripts/*.py
-      - name: Run manifest and contamination contract tests
-        run: python -m unittest discover -s tests -v
+      - name: Run source-free manifest and contamination contracts
+        run: python brain6/confirmatory_v2/scripts/run_contract_tests.py --suite source-free
+      - name: Record archived-data integration requirements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-test-partition
+          path: brain6/confirmatory_v2/qc/contract_test_partition.json
       - name: Check shell entry points
         run: for script in scripts/*.sh; do bash -n "$script"; done
       - name: Validate locked panel and declared sources

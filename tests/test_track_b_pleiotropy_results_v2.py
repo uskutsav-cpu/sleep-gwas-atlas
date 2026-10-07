@@ -579,8 +579,12 @@ class TrackBPleiotropyResultsV2Tests(unittest.TestCase):
                 mock.patch.object(COLLATOR, "match_eligible_to_bim", return_value=coverage),
                 mock.patch.object(COLLATOR, "load_official_blocks", return_value=blocks),
                 mock.patch.object(COLLATOR, "load_lava_diagnostic_index", return_value={}),
+                # Synthetic publication semantics must not depend on host disk
+                # occupancy. Production disk_preflight remains unchanged and
+                # its insufficient-space behavior has dedicated tests.
+                mock.patch.object(COLLATOR.shutil, "disk_usage", return_value=mock.Mock(total=2**40, used=0, free=2**40)),
             )
-            with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5]:
+            with patches[0], patches[1], patches[2], patches[3], patches[4], patches[5], patches[6]:
                 COLLATOR._build_package_from_verified_inputs(
                     root, contract, pairs, fingerprint, archive, conjfdr, {},
                     runner=lambda argv, cwd: subprocess.CompletedProcess(argv, 0, "", ""),

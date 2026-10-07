@@ -1,0 +1,562 @@
+.....................F.................F...............................F [ 13%]
+...............FF.............F.........F............................... [ 26%]
+...F..............................................F..................... [ 39%]
+.................F...................................................... [ 52%]
+........................................................................ [ 65%]
+........................................................................ [ 78%]
+........................................................................ [ 92%]
+...................................sss.....                              [100%]
+=================================== FAILURES ===================================
+_ FamilyFeasibilityAuditTests.test_sleep_replacements_cannot_pass_frozen_family_gate _
+
+self = <test_audit_power_optimized_family_feasibility_v1.FamilyFeasibilityAuditTests testMethod=test_sleep_replacements_cannot_pass_frozen_family_gate>
+
+    def test_sleep_replacements_cannot_pass_frozen_family_gate(self):
+        with tempfile.TemporaryDirectory() as temporary:
+>           result = MODULE.audit(Path(temporary) / "feasibility.json")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_audit_power_optimized_family_feasibility_v1.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/audit_power_optimized_family_feasibility_v1.py:38: in audit
+    decision = json.loads(CANONICAL_DECISION.read_text(encoding="utf-8"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+_ FinalPackageBuilderTest.test_complete_join_with_synthetic_secondary_statuses _
+
+self = <test_build_brain6_final_package_v1.FinalPackageBuilderTest testMethod=test_complete_join_with_synthetic_secondary_statuses>
+
+    def test_complete_join_with_synthetic_secondary_statuses(self) -> None:
+        spec = importlib.util.spec_from_file_location('brain6_final_builder_test', SCRIPT)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory(prefix='brain6_final_join_') as directory:
+            root = Path(directory)
+            alternative = root / 'alternative'
+            alternative.mkdir()
+            base = module.table(module.BOUNDED / 'candidate_evidence_25.tsv')
+            regions = module.table(module.BOUNDED / 'region_evidence_20.tsv')
+            with (alternative / 'candidate_crosswalk.tsv').open('w', newline='') as stream:
+                writer = csv.DictWriter(stream, delimiter='\t',
+                                        fieldnames=['candidate_locus_id', 'pair_id', 'status',
+                                                   'source_eligibility', 'best_p', 'covariance_sign'],
+                                        lineterminator='\n')
+                writer.writeheader()
+                for row in base:
+                    writer.writerow({'candidate_locus_id': row['candidate_locus_id'],
+                                     'pair_id': row['pair_id'],
+                                     'status': ('METHOD_INAPPLICABLE' if row['pair_id'].startswith('longsleep__')
+                                                else 'NOT_TESTED_INPUT_QC'),
+                                     'source_eligibility': ('METHOD_INAPPLICABLE' if row['pair_id'].startswith('longsleep__')
+                                                            else 'ELIGIBLE_SECONDARY'), 'best_p': 'NA',
+                                     'covariance_sign': 'NA'})
+            with (alternative / 'region_crosswalk.tsv').open('w', newline='') as stream:
+                writer = csv.DictWriter(stream, delimiter='\t', fieldnames=['region_group'], lineterminator='\n')
+                writer.writeheader()
+                for row in regions:
+                    writer.writerow({'region_group': row['geographic_region_grch37']})
+            pair_status = {pair: ('METHOD_INAPPLICABLE' if pair.startswith('longsleep__') else 'ELIGIBLE_SECONDARY')
+                           for pair in sorted({row['pair_id'] for row in base})}
+            (alternative / 'source_eligibility_lock_v1.json').write_text(json.dumps({
+                'pair_status': pair_status, 'family_denominator_pairs': 5,
+                'blocks_per_pair': 1693, 'alpha_block': 0.05 / 8465}))
+            (alternative / 'run_provenance.json').write_text('{}')
+            with (alternative / 'genome_wide_blocks.tsv').open('w', newline='') as stream:
+                writer = csv.DictWriter(stream, delimiter='\t',
+                                        fieldnames=['pair_id', 'analysis_status'], lineterminator='\n')
+                writer.writeheader()
+                for pair in pair_status:
+                    for _ in range(1693):
+                        writer.writerow({'pair_id': pair,
+                                         'analysis_status': ('METHOD_INAPPLICABLE' if pair.startswith('longsleep__')
+                                                             else 'NOT_TESTED_LOW_SNP')})
+            module.ALT = alternative
+            module.OUT = root / 'package'
+>           module.main()
+
+brain6/scripts/tests/test_build_brain6_final_package_v1.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def main() -> None:
+        if OUT.exists():
+            raise FileExistsError('Final package already exists; refuse overwrite')
+        source_paths = {
+            'bounded_candidates': BOUNDED / 'candidate_evidence_25.tsv',
+            'protected_candidates': ROOT / 'brain6/results/loci/placo_five_track_candidate_loci_v1/candidate_loci.tsv',
+            'canonical_lava_config': ROOT / 'brain6/config/lava_family_canonical_v3.json',
+            'shared_locus_rule': ROOT / 'brain6/config/shared_locus_rule_v1.json',
+            'placo_five_track_lock': ROOT / 'brain6/config/placo_family_v3/family_lock.json',
+            'bounded_regions': BOUNDED / 'region_evidence_20.tsv',
+            'bounded_replication': BOUNDED / 'replication_25.tsv',
+            'bounded_regulatory': BOUNDED / 'regulatory_gene_25.tsv',
+            'bounded_tissue': BOUNDED / 'tissue_context_25.tsv',
+            'bounded_pathways': BOUNDED / 'pathway_20.tsv',
+            'bounded_literature': BOUNDED / 'prior_literature_records.tsv',
+            'recent_literature_context': ROOT / 'brain6/results/novelty/literature_update_20260926.tsv',
+            'gwas_source_manifest': ROOT / 'brain6/manifests/gwas_external_availability.tsv',
+            'signed_directions': ROOT / 'brain6/results/brain6_candidate_signed_direction_v1/candidate_directions_25.tsv',
+            'signed_direction_receipt': ROOT / 'brain6/results/brain6_candidate_signed_direction_v1/receipt.json',
+            'canonical_lava': CANON,
+            'locked_global_map': ROOT / 'brain6/results/global/brain6_72_locked.tsv',
+            'family_projection': PROJECTION,
+            'insomnia_v4_audit': ROOT / 'brain6/results/confirmatory_source_rescue_20260927/other_traits/insomnia_native_n_pilot_v4_audit/summary.json',
+            'recovery_map_receipt': ROOT / 'brain6/results/confirmatory_source_rescue_20260927/phase2_recovery_map_v2/receipt.json',
+            'alternative_candidates': ALT / 'candidate_crosswalk.tsv',
+            'alternative_regions': ALT / 'region_crosswalk.tsv',
+            'alternative_blocks': ALT / 'genome_wide_blocks.tsv',
+            'alternative_provenance': ALT / 'run_provenance.json',
+            'alternative_source_eligibility': ALT / 'source_eligibility_lock_v1.json',
+            'fine_mapping': FM / 'fine_mapping_50.tsv',
+            'fine_mapping_credible_sets': FM / 'fine_mapping_credible_sets.tsv',
+            'fine_mapping_integrity': FM / 'integrity_provenance.json',
+            'trait_coloc': FM / 'trait_coloc_25.tsv',
+            'trait_coloc_prior_sensitivity': FM / 'trait_coloc_prior_sensitivity.tsv',
+            'functional_candidates': FUNCTION / 'candidate_functional_status_25.tsv',
+            'functional_regions': FUNCTION / 'geographic_region_status_20.tsv',
+            'functional_coloc': FUNCTION / 'coloc_results.tsv',
+            'functional_gate': FUNCTION / 'coloc_gate.tsv',
+            'functional_provenance': FUNCTION / 'provenance.json',
+            'functional_qtl_input_receipts': FUNCTION / 'coloc_input_receipts.json',
+            'enrichment_matching': ENRICH / 'matching_status_20.tsv',
+            'enrichment_tissues': ENRICH / 'tissue_bulk_gtex_v8_enrichment_18.tsv',
+            'enrichment_pathways': ENRICH / 'reactome_positional_enrichment_18.tsv',
+            'enrichment_provenance': ENRICH / 'run_summary.json',
+            'enrichment_file_provenance': ENRICH / 'provenance.json',
+            'enrichment_frozen_binding': ENRICH / 'frozen_binding.json',
+        }
+        for name, path in source_paths.items():
+            if not path.is_file():
+>               raise FileNotFoundError(f'Required completed source {name}: {path}')
+E               FileNotFoundError: Required completed source canonical_lava: /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/results/canonical_family_results.tsv
+
+brain6/scripts/build_brain6_final_package_v1.py:128: FileNotFoundError
+________ test_inventory_separates_technical_advancement_from_family_qc _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x127374e20>
+capsys = <_pytest.capture.CaptureFixture object at 0x1275c74d0>
+
+    def test_inventory_separates_technical_advancement_from_family_qc(monkeypatch, capsys):
+        with TemporaryDirectory(dir=ROOT) as temporary_directory:
+            output = Path(temporary_directory) / "inventory.json"
+            monkeypatch.setattr(sys, "argv", ["build_project_state_inventory.py", "--output", str(output)])
+>           inventory_builder.main()
+
+brain6/scripts/tests/test_build_project_state_inventory.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def main() -> None:
+        parser = argparse.ArgumentParser(description=__doc__)
+        parser.add_argument("--output", type=Path, required=True)
+        args = parser.parse_args()
+        output = args.output if args.output.is_absolute() else ROOT / args.output
+        if output.exists():
+            raise FileExistsError(f"Refusing to overwrite project-state inventory: {output}")
+    
+        screen_root = ROOT / "brain6/results/power_optimized_sensitivity_v1/lava_trait_screen_v1"
+        worker_configs = sorted(screen_root.glob("worker_*.config.json"))
+        worker_config_data = [read_json(path) for path in worker_configs]
+        worker_result_paths = [ROOT / item["output_tsv"] for item in worker_config_data]
+        worker_summary_paths = [ROOT / item["summary_json"] for item in worker_config_data]
+        durable_worker_results = [path for path in worker_result_paths if path.is_file()]
+        durable_worker_summaries = [path for path in worker_summary_paths if path.is_file()]
+        aggregate_config = read_json(screen_root / "config.json")
+        aggregate_tsv = ROOT / aggregate_config["output_tsv"]
+        aggregate_summary_path = ROOT / aggregate_config["summary_json"]
+        aggregate_provenance_path = screen_root / "aggregate.provenance.json"
+        aggregate_summary: dict[str, Any] | None = None
+        if any(path.exists() for path in
+               (aggregate_tsv, aggregate_summary_path, aggregate_provenance_path)):
+            if not all(path.is_file() for path in
+                       (aggregate_tsv, aggregate_summary_path, aggregate_provenance_path)):
+                raise ValueError("Candidate LAVA aggregate is only partially durable")
+            aggregate_provenance = read_json(aggregate_provenance_path)
+            aggregate_script = ROOT / "brain6/scripts/aggregate_power_optimized_sleep_screen_v1.py"
+            if (aggregate_provenance.get("status") != "COMPLETE_SCREEN_NO_FAILED_ROWS" or
+                    aggregate_provenance.get("base_config_sha256") != sha256(screen_root / "config.json") or
+                    aggregate_provenance.get("aggregator_sha256") != sha256(aggregate_script)):
+                raise ValueError("Candidate LAVA aggregate provenance/configuration mismatch")
+            # The aggregate is outcome-blind and binds upstream source/output hashes
+            # directly. Do not create a provenance cycle by making this aggregate
+            # sidecar hash the later top-level audit provenance that itself records
+            # the aggregate outputs.
+            for rel, expected_hash in aggregate_provenance.get("upstream_audit_inputs", {}).items():
+                path = ROOT / rel
+                if not path.is_file() or sha256(path) != expected_hash:
+>                   raise ValueError(f"Candidate aggregate upstream audit input changed: {rel}")
+E                   ValueError: Candidate aggregate upstream audit input changed: brain6/results/power_optimized_sensitivity_v1/lava_inputs_v1/materialization.provenance.json
+
+brain6/scripts/build_project_state_inventory.py:80: ValueError
+_________ test_primary_pair_table_preserves_partial_and_blocked_layers _________
+
+    def test_primary_pair_table_preserves_partial_and_blocked_layers():
+>       rows, inputs = builder.build_rows()
+                       ^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_cross_layer_evidence.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/build_cross_layer_evidence.py:105: in build_rows
+    lava_decision = read_json(lava_decision_path)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+brain6/scripts/build_cross_layer_evidence.py:45: in read_json
+    return json.loads(path.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+______________________ test_table_render_is_deterministic ______________________
+
+    def test_table_render_is_deterministic():
+>       rows, _ = builder.build_rows()
+                  ^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_cross_layer_evidence.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/build_cross_layer_evidence.py:105: in build_rows
+    lava_decision = read_json(lava_decision_path)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+brain6/scripts/build_cross_layer_evidence.py:45: in read_json
+    return json.loads(path.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/lava-canonical-v3-production/d730debf45266d298401564f3260bdecb14739d1c1f1835a5aebd615c83fa60b/canonical_family_decision.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+___ test_interim_sensitivity_matrix_traces_evidence_and_keeps_gaps_explicit ____
+
+tmp_path = PosixPath('/private/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/pytest-of-swethasunilkumar/pytest-1/test_interim_sensitivity_matri0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1275b9c50>
+
+    def test_interim_sensitivity_matrix_traces_evidence_and_keeps_gaps_explicit(tmp_path, monkeypatch):
+        monkeypatch.setattr(builder, "OUT", tmp_path / "headline_claim_sensitivity.tsv")
+>       builder.main()
+
+brain6/scripts/tests/test_headline_claim_sensitivity.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def main() -> None:
+        global_path = ROOT / "brain6/results/global/brain6_72_locked.tsv"
+        profile_path = ROOT / "brain6/results/global/disorder_profile_similarity.tsv"
+        replication_path = ROOT / "brain6/results/replication/replication_master.tsv"
+        placo_path = ROOT / "brain6/results/placo/placo_master.tsv"
+        locus_path = ROOT / "brain6/results/loci/placo_candidate_loci_partial.provenance.json"
+        context_source_path = ROOT / "brain6/manifests/published_context_literature.json"
+        context_table_path = ROOT / "brain6/results/supplement/table_S18_published_rg_context.tsv"
+        profile_loo_path = ROOT / "brain6/results/global/disorder_profile_leave_one_sleep_trait_out.tsv"
+        profile_loo_provenance_path = ROOT / "brain6/results/global/disorder_profile_leave_one_sleep_trait_out.provenance.json"
+        profile_loo_plan_path = ROOT / "brain6/config/brain6_profile_leave_one_out_v1.json"
+        mhc_plan_path = ROOT / "brain6/config/placo_candidate_mhc_exclusion_v1.json"
+        mhc_path = ROOT / "brain6/results/sensitivity/placo_candidate_mhc_exclusion.tsv"
+        mhc_provenance_path = ROOT / "brain6/results/sensitivity/placo_candidate_mhc_exclusion.provenance.json"
+        mhc_script_path = ROOT / "brain6/scripts/analyze_placo_candidate_mhc_exclusion.py"
+        lava_path = ROOT / "brain6/manifests/lava_family_v2_run.json"
+        for path in (global_path, profile_path, replication_path, placo_path, locus_path,
+                     context_source_path, context_table_path, lava_path, profile_loo_path,
+                     profile_loo_provenance_path, profile_loo_plan_path,
+                     mhc_plan_path, mhc_path, mhc_provenance_path, mhc_script_path):
+            if not path.is_file():
+                raise FileNotFoundError(path)
+    
+        global_rows = read_tsv(global_path)
+        profiles = read_tsv(profile_path)
+        reps = read_tsv(replication_path)
+        placo = read_tsv(placo_path)
+        overlap_rows = read_tsv(ROOT / "brain6/manifests/cohort_overlap.tsv")
+        overlap_by_pair = {r["pair"]: r for r in overlap_rows}
+        context_rows = read_tsv(context_table_path)
+        loci = json.loads(locus_path.read_text(encoding="utf-8"))
+        profile_loo = read_tsv(profile_loo_path)
+        profile_loo_provenance = json.loads(profile_loo_provenance_path.read_text(encoding="utf-8"))
+        profile_loo_plan = json.loads(profile_loo_plan_path.read_text(encoding="utf-8"))
+        mhc_plan = json.loads(mhc_plan_path.read_text(encoding="utf-8"))
+        mhc_provenance = json.loads(mhc_provenance_path.read_text(encoding="utf-8"))
+        profile_loo_plan_sha = profile_loo_plan_path.with_suffix(profile_loo_plan_path.suffix + ".sha256")
+        if profile_loo_provenance.get("status") != "PASS":
+            raise ValueError("Leave-one-sleep-trait-out profile sensitivity has not passed provenance checks")
+        if (digest(profile_loo_plan_path) != profile_loo_plan_sha.read_text(encoding="utf-8").split()[0] or
+                profile_loo_provenance.get("plan_sha256") != digest(profile_loo_plan_path) or
+                profile_loo_provenance.get("global_map_sha256") != digest(global_path) or
+                profile_loo_provenance.get("locked_family_config_sha256") != digest(ROOT / "brain6/config/brain6_locked_family.yaml") or
+                profile_loo_provenance.get("script_sha256") != digest(ROOT / "brain6/scripts/build_profile_leave_one_out.py") or
+                profile_loo_provenance.get("output_sha256") != digest(profile_loo_path)):
+            raise ValueError("Leave-one-sleep-trait-out profile sensitivity provenance is stale")
+        if (mhc_provenance.get("status") != "PASS_PARTIAL_FAMILY_DESCRIPTIVE_COUNTS" or
+                mhc_provenance.get("analysis_id") != mhc_plan.get("analysis_id") or
+                mhc_provenance.get("plan_sha256") != digest(mhc_plan_path) or
+                mhc_provenance.get("script_path") != str(mhc_script_path.relative_to(ROOT)) or
+                mhc_provenance.get("script_sha256") != digest(mhc_script_path) or
+                mhc_provenance.get("output_sha256") != digest(mhc_path) or
+                mhc_provenance.get("family_complete") is not False or
+                mhc_provenance.get("protected_track_b_present") is not False):
+            raise ValueError("Partial PLACO candidate MHC sensitivity provenance is missing or stale")
+        mhc_rows = read_tsv(mhc_path)
+        mhc_summary = mhc_rows[-1] if mhc_rows else {}
+        mhc_pair_rows = mhc_rows[:-1]
+        count_fields = ("candidate_variants_all", "candidate_variants_position_validated",
+                        "candidate_variants_inside_mhc", "candidate_variants_outside_mhc",
+                        "candidate_variants_unpositioned_or_mismatched", "candidate_intervals_all",
+                        "candidate_intervals_overlapping_mhc", "candidate_intervals_wholly_outside_mhc")
+        if (len(mhc_pair_rows) != len(mhc_plan["expected_pairs"]) or
+                {row["pair_id"] for row in mhc_pair_rows} != set(mhc_plan["expected_pairs"]) or
+                mhc_summary.get("pair_id") != "ALL_PARTIAL_PAIRS" or any(
+                    int(mhc_summary.get(field, -1)) != sum(int(row[field]) for row in mhc_pair_rows)
+                    for field in count_fields)):
+            raise ValueError("Partial PLACO candidate MHC sensitivity table is incomplete or inconsistent")
+        configured_profile_claims = {row["claim_id"] for row in profile_loo_plan["profiles"]}
+        observed_profile_claims = {row["claim_id"] for row in profile_loo}
+        expected_sleep_n = int(profile_loo_plan["method"]["expected_sleep_trait_count"])
+        profile_loo_summary: dict[str, dict[str, float]] = {}
+        for claim_id in configured_profile_claims:
+            rows_for_claim = [row for row in profile_loo if row["claim_id"] == claim_id]
+            if (len(rows_for_claim) != expected_sleep_n or
+                    len({row["omitted_sleep_trait"] for row in rows_for_claim}) != expected_sleep_n):
+                raise ValueError(f"Incomplete leave-one-out profile rows for {claim_id}")
+            minimum = min(float(row["leave_one_out_r"]) for row in rows_for_claim)
+            maximum = max(float(row["leave_one_out_r"]) for row in rows_for_claim)
+            if (abs(minimum - float(rows_for_claim[0]["leave_one_out_min_r"])) > 1e-10 or
+                    abs(maximum - float(rows_for_claim[0]["leave_one_out_max_r"])) > 1e-10):
+                raise ValueError(f"Leave-one-out profile summary disagrees with rows for {claim_id}")
+            profile_loo_summary[claim_id] = {"minimum": minimum, "maximum": maximum}
+        if observed_profile_claims != configured_profile_claims:
+            raise ValueError("Leave-one-out profile claims differ from the frozen plan")
+        for record in placo:
+            result_path = ROOT / record["output_path"]
+            if not result_path.is_file() or digest(result_path) != record["output_sha256"]:
+>               raise ValueError(f"Published PLACO result does not match its master checksum: {result_path}")
+E               ValueError: Published PLACO result does not match its master checksum: /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/brain6/results/placo/longsleep__bipolar/variants.tsv.gz
+
+brain6/scripts/build_headline_claim_sensitivity.py:158: ValueError
+__________ test_coordinator_does_not_start_r_when_every_pair_is_gated __________
+
+tmp_path = PosixPath('/private/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/pytest-of-swethasunilkumar/pytest-1/test_coordinator_does_not_star0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1275baa50>
+
+    def test_coordinator_does_not_start_r_when_every_pair_is_gated(tmp_path: Path, monkeypatch):
+        locus_id = "9"
+        canonical_root = tmp_path / "canonical"
+        canonical_root.mkdir()
+        cells_path = runner.canonical.result_path(canonical_root, locus_id)
+        cell_fields = list(runner.CANONICAL_AGGREGATE_FIELDS)
+        cells = [{"phen": trait, "locus_id": locus_id, "chromosome": "1", "status": "NOT_RUN",
+            "n_snps": "NA", "n_components": "NA", "h2.obs": "NA", "h2.latent": "NA",
+            "p": "NA", "reason": "MISSING_TEST"} for trait in runner.TRAITS]
+        cells_path.parent.mkdir(parents=True)
+        with cells_path.open("w", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=cell_fields, delimiter="\t", lineterminator="\n")
+            writer.writeheader(); writer.writerows(cells)
+        canonical_receipt_path = runner.canonical.receipt_path(canonical_root, locus_id)
+        runner.atomic_json(canonical_receipt_path, {"output": {"sha256": runner.sha256(cells_path)}})
+        lock, lock_sha = runner.validate_lock(runner.LOCK)
+        family = json.loads((ROOT / "brain6/config/lava_family_canonical_v3.json").read_text())
+        pair_lock = {pair["pair_id"]: pair for pair in json.loads(
+>           (ROOT / "extensions/brain6/work/overnight-v03/brain6-pairs.lock.json").read_text())["pairs"]}
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_lava_bivariate_canonical_v3.py:208: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/extensions/brain6/work/overnight-v03/brain6-pairs.lock.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/extensions/brain6/work/overnight-v03/brain6-pairs.lock.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+________________ test_locus_reader_verifies_locked_2495_family _________________
+
+    def test_locus_reader_verifies_locked_2495_family():
+        family = read_json(ROOT / "brain6/config/lava_family_v2.json")
+        path = ROOT / family["locus_definition"]["path"]
+>       loci = load_loci(path, family)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_lava_tools.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/materialize_lava_inputs.py:94: in load_loci
+    if sha256(path) != family["locus_definition"]["sha256"]:
+       ^^^^^^^^^^^^
+extensions/brain6/brain6/io.py:31: in sha256
+    with Path(path).open("rb") as f:
+         ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+___ test_current_report_matches_locked_global_replication_and_lava_evidence ____
+
+    def test_current_report_matches_locked_global_replication_and_lava_evidence():
+>       result = validator.validate_report()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+brain6/scripts/tests/test_validate_final_brain6_report.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/validate_final_brain6_report.py:80: in validate_report
+    if sha256(inventory) != provenance.get("inventory_sha256"):
+       ^^^^^^^^^^^^^^^^^
+brain6/scripts/validate_final_brain6_report.py:20: in sha256
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/brain6/results/project_state_inventory_20260926T2040Z.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/brain6/results/project_state_inventory_20260926T2040Z.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+_ test_power_screen_audit_is_outcome_blinded_and_rejects_unavailable_candidates _
+
+    def test_power_screen_audit_is_outcome_blinded_and_rejects_unavailable_candidates():
+>       result = validate()
+                 ^^^^^^^^^^
+
+brain6/scripts/tests/test_validate_power_optimized_sleep_audit.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+brain6/scripts/validate_power_optimized_sleep_audit.py:16: in validate
+    if sha(root/p)!=h: raise ValueError(f'input hash mismatch: {p}')
+       ^^^^^^^^^^^
+brain6/scripts/validate_power_optimized_sleep_audit.py:8: in sha
+    def sha(path: Path)->str: return hashlib.sha256(path.read_bytes()).hexdigest()
+                                                    ^^^^^^^^^^^^^^^^^
+/opt/miniconda3/lib/python3.13/pathlib/_abc.py:625: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/brain6/results/power_optimized_sensitivity_v1/lava_inputs_v1/materialization.provenance.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/brain6/results/power_optimized_sensitivity_v1/lava_inputs_v1/materialization.provenance.json'
+
+/opt/miniconda3/lib/python3.13/pathlib/_local.py:537: FileNotFoundError
+=========================== short test summary info ============================
+SKIPPED [2] extensions/brain6/tests/test_native_runtime.py:26: Native R package absent: data.table; NOT EXECUTED
+SKIPPED [1] extensions/brain6/tests/test_native_runtime.py:75: PLINK 1.9 absent: native LD/clumping NOT EXECUTED
+FAILED extensions/brain6/test_audit_power_optimized_family_feasibility_v1.py::FamilyFeasibilityAuditTests::test_sleep_replacements_cannot_pass_frozen_family_gate
+FAILED extensions/brain6/test_build_brain6_final_package_v1.py::FinalPackageBuilderTest::test_complete_join_with_synthetic_secondary_statuses
+FAILED extensions/brain6/test_build_project_state_inventory.py::test_inventory_separates_technical_advancement_from_family_qc
+FAILED extensions/brain6/test_cross_layer_evidence.py::test_primary_pair_table_preserves_partial_and_blocked_layers
+FAILED extensions/brain6/test_cross_layer_evidence.py::test_table_render_is_deterministic
+FAILED extensions/brain6/test_headline_claim_sensitivity.py::test_interim_sensitivity_matrix_traces_evidence_and_keeps_gaps_explicit
+FAILED extensions/brain6/test_lava_bivariate_canonical_v3.py::test_coordinator_does_not_start_r_when_every_pair_is_gated
+FAILED extensions/brain6/test_lava_tools.py::test_locus_reader_verifies_locked_2495_family
+FAILED extensions/brain6/test_validate_final_brain6_report.py::test_current_report_matches_locked_global_replication_and_lava_evidence
+FAILED extensions/brain6/test_validate_power_optimized_sleep_audit.py::test_power_screen_audit_is_outcome_blinded_and_rejects_unavailable_candidates
+10 failed, 534 passed, 3 skipped in 17.52s
