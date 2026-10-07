@@ -1,0 +1,92 @@
+{
+  "classification": "RETROSPECTIVE_SOURCE_DIAGNOSTICS",
+  "source_sha256": "b56c4fd2d2a93c34da6b057cf46c516d51f587a60bef9f0d7a236bc1492b0249",
+  "frozen_protocol_sha256": "d2451e56cd7ed26a89a92eb10747f9aabba5098ea4f2de0a24a77750cbea9655",
+  "family_denominator": 8465,
+  "alpha": 5.906674542232723e-06,
+  "critical_abs_z": 4.52970268913292,
+  "estimated_blocks": 3304,
+  "summary_by_pair": [
+    {
+      "pair_id": "insomnia__adhd",
+      "estimated": 1646,
+      "both_h2_positive": 1063,
+      "negative_h2_1": 356,
+      "negative_h2_2": 329,
+      "corr_missing": 583,
+      "corr_out_of_bounds": 358,
+      "source_family_significant": 1,
+      "significant_corr_out_of_bounds": 1
+    },
+    {
+      "pair_id": "insomnia__mdd",
+      "estimated": 1658,
+      "both_h2_positive": 1136,
+      "negative_h2_1": 366,
+      "negative_h2_2": 237,
+      "corr_missing": 522,
+      "corr_out_of_bounds": 365,
+      "source_family_significant": 2,
+      "significant_corr_out_of_bounds": 0
+    }
+  ],
+  "historical_source_reconstruction": [
+    {
+      "file": "calculate.py",
+      "public_pinned_sha256": "98eb8aa9384d880ded4965d3f920844a02f317304408dd884037d6256e0a90df",
+      "frozen_historical_sha256": "fb31e6c448e921547c571465c0413b45bd84dc8501da4503f1e845e673b1afe4",
+      "reconstructed_historical_sha256": "fb31e6c448e921547c571465c0413b45bd84dc8501da4503f1e845e673b1afe4",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "file": "heritability.py",
+      "public_pinned_sha256": "409fdacea55afe3d02a2a632a26a190fda220524d74813fbd95936544fcb78ff",
+      "frozen_historical_sha256": "409fdacea55afe3d02a2a632a26a190fda220524d74813fbd95936544fcb78ff",
+      "reconstructed_historical_sha256": "409fdacea55afe3d02a2a632a26a190fda220524d74813fbd95936544fcb78ff",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "file": "ldsc_thin.py",
+      "public_pinned_sha256": "c098fe26dbdd38adbb9452ec825f00e996e2d039bd5c079f6775595b7a8e897a",
+      "frozen_historical_sha256": "c098fe26dbdd38adbb9452ec825f00e996e2d039bd5c079f6775595b7a8e897a",
+      "reconstructed_historical_sha256": "c098fe26dbdd38adbb9452ec825f00e996e2d039bd5c079f6775595b7a8e897a",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "file": "pheno.py",
+      "public_pinned_sha256": "41b11584997874625b35aa40e7ebf34bad43557315460fb209fbbbd393a07177",
+      "frozen_historical_sha256": "41b11584997874625b35aa40e7ebf34bad43557315460fb209fbbbd393a07177",
+      "reconstructed_historical_sha256": "41b11584997874625b35aa40e7ebf34bad43557315460fb209fbbbd393a07177",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "file": "prep.py",
+      "public_pinned_sha256": "0b37eadd56e432265d25fc18fd194cb336841b043c9859891ecd5d6d951d5fec",
+      "frozen_historical_sha256": "58efe211b2a721609600948ee7f83dd1eed313764f69936ad2496e2ed79f310c",
+      "reconstructed_historical_sha256": "58efe211b2a721609600948ee7f83dd1eed313764f69936ad2496e2ed79f310c",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    },
+    {
+      "file": "supergnova.py",
+      "public_pinned_sha256": "1875441affa4484246211d664cac0a4f441e5d102028fe38f92ac6810d00af71",
+      "frozen_historical_sha256": "c2b4d8b57756bb9f5c3196d69afbee6b0ea8798ef4699e73fc7f725e49ba332f",
+      "reconstructed_historical_sha256": "c2b4d8b57756bb9f5c3196d69afbee6b0ea8798ef4699e73fc7f725e49ba332f",
+      "status": "EXACT_MATCH",
+      "patch_exit_code": 0,
+      "patch_sha256": "16eb1298ec24e89b024b91049fe32765eff9064b6b40c0383a071a5ba5715d71"
+    }
+  ],
+  "intercept_and_local_h2_uncertainty": "Original meanLD, LD eigenvalues, genome-wide intercept/variance and joint local-h2 uncertainty absent. No empirical recalibration or determinant significance test performed.",
+  "N_identity_interpretation": "For fixed Z and reference and scalar N changes, N*h products are invariant; covariance scales inverse sqrt(N1*N2), variance inverse N1*N2, while Wald P and derived correlation are invariant. This does not validate correct N semantics or variant-varying sample contributions.",
+  "completed_utc": "2026-10-07T22:51:06.645054+00:00"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "HARMONIZATION_STRESS_V1",
+  "classification": "POST_RESULT_HARMONIZATION_SENSITIVITY_NO_NEW_MECHANISM",
+  "frozen_utc": "2026-10-07T23:06:09.690563+00:00",
+  "original_outcomes_known": true,
+  "filtered_outcomes_not_accessed_before_freeze": true,
+  "input_files": {
+    "brain6/results/brain6_exploratory_functional_v1/coloc_inputs/adhd_QTD000171_chr5_87185500_88185500_ENSG00000271904.tsv.gz": "b5d7396cb53520ca75794325d6f2e01431f5fc15ca118046e47bb9d45825f051",
+    "brain6/results/brain6_exploratory_functional_v1/coloc_inputs/adhd_QTD000175_chr5_87185500_88185500_5_88270585_88436273_clu_38358_+.tsv.gz": "afdcdda68ccf5b0cdd30e498414b79ae5f368a9b9d39d80507744acc02fb6cd2",
+    "brain6/results/brain6_exploratory_functional_v1/coloc_inputs/adhd_QTD000176_chr5_87185500_88185500_ENSG00000250377.tsv.gz": "972773d46208befe5546534c80b46351242d844e2a89544ecf28a88a87489f39",
+    "brain6/results/brain6_exploratory_functional_v1/coloc_inputs/adhd_QTD000176_chr5_87185500_88185500_ENSG00000271904.tsv.gz": "90b91b95de299af8f581c0d823a8be84e5fc4a3d7b4a1122f22eb6aed33dad7e"
+  },
+  "analysis_code_sha256": "cb720ea750cd83bc6ff906c2c1e979858137774dddbc007e13cf7b31bc62ff44",
+  "dependency_code_sha256": {
+    "calibration.py": "27431a55c129363ff2c0b6f35770261bfff1145b29790459509b790b7639f585",
+    "review_parent_analyses.py": "852817db09835f51a1257791cb380a7e8c215c74c256b845e261923f2d431f36"
+  },
+  "parent_sensitivity_protocol_sha256": "35d7be8baf4846eddc4eb76f766b7f8056d6c4587eb1b71914517adb37199c96",
+  "historical_functional_protocol_sha256": "0228a363e1d1f811f29bf19ebb8e36729db5eab1a6eff21c1d42e14708e90ebb",
+  "exclusion_rule": "Parse GRCh38 chr_position_ref_alt SNP key. Exclude every A/T or T/A or C/G or G/C pair regardless of MAF; no other outcome-dependent exclusion. Any malformed, identical or non-ACGT allele key makes the whole context NOT_ESTIMATED_INPUT_QC.",
+  "family": "All4originally eligible ADHD molecular contexts\u00d7all5p12\u00d7all3sdY scales;60 conditions retained including gate failures",
+  "p1": 0.0001,
+  "p2": 0.0001,
+  "p12": [
+    1e-06,
+    5e-06,
+    1e-05,
+    5e-05,
+    0.0001
+  ],
+  "qtl_sdY_scale": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "sdy_handling": "Re-estimate homoscedastic sdY on each filtered slice via least-squares slope through origin; record full-slice baseline and filtered estimates",
+  "admission_rule": "Unique valid SNP keys; finite numeric fields;positiveGWAS/QTLSE,N;0<MAF<=.5;at least500sharednonpalindromic SNPs;minGWASP<=5e-8 andminQTLP<=5e-8. Failure yields15retainedNAposterior rows;not a null.",
+  "posterior_implementation": "Independent explicit all distinct i!=j ABF pair configurations in bounded blocks128;default priors reproduced from existing60 grid but no frozen parent files modified",
+  "report": "Counts and identities removed;filtered gzip slice hashes;source-association QC;all posterior conditions;default differences vs full inputs;no selection on H4",
+  "limitations": [
+    "Palindromic does not necessarily mean scientifically ambiguous when explicit build/REF/ALT identity is trustworthy",
+    "Historical ambiguous-allele wording does not by itself prove a literal all-palindromic-exclusion requirement",
+    "An ABF depends onbeta\u00b2 and cannot detect effect-allele sign/strand errors",
+    "Filtered sensitivity cannot validate exact reference identity or recover discarded original GWAS/QTL metadata",
+    "Same ADHD component and original brain QTL studies;zero independent two-trait replication",
+    "Single-causal-variant and molecular-sdY assumptions remain;no causal,gene,mechanism or direction promotion"
+  ],
+  "stopping_rule": "Run every60frozen condition once;preserve allfailures;no further allele/MAF filters selected from outcomes",
+  "compute": "Singleprocess;BLASthreads1;pairgrid128\u00d7<=1624;<10MBnumerical workspace"
+}

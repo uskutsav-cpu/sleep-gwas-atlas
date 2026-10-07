@@ -1,0 +1,66 @@
+"""Frozen all-context molecular stress test excluding every palindromic SNP key."""
+import datetime, gzip, hashlib, io, json, math, re, sys
+import numpy as np
+import pandas as pd
+from scipy.special import logsumexp
+from calibration import HERE, ROOT, sha
+from review_parent_analyses import exclusive_pair_logsum, separate_logabf
+
+OUT=HERE/'molecular_palindromic_diagnostic'
+MOL=HERE.parent/'molecular'
+OLD=ROOT/'brain6/results/brain6_exploratory_functional_v1'
+
+def output_tsv(name,rows):
+    pd.DataFrame(rows).to_csv(OUT/name,sep='\t',index=False,float_format='%.17g')
+
+def main():
+    OUT.mkdir(parents=True,exist_ok=True)
+    protocol=OUT/'protocol.json'
+    parent=json.loads((MOL/'sensitivity_protocol.json').read_text())
+    if sys.argv[1:]==['freeze']:
+        if protocol.exists():raise ValueError('Do not overwrite frozen protocol')
+        cfg={'id':'HARMONIZATION_STRESS_V1','classification':'POST_RESULT_HARMONIZATION_SENSITIVITY_NO_NEW_MECHANISM','frozen_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'original_outcomes_known':True,'filtered_outcomes_not_accessed_before_freeze':True,'input_files':parent['files'],'analysis_code_sha256':sha(__file__),'dependency_code_sha256':{'calibration.py':sha(HERE/'calibration.py'),'review_parent_analyses.py':sha(HERE/'review_parent_analyses.py')},'parent_sensitivity_protocol_sha256':sha(MOL/'sensitivity_protocol.json'),'historical_functional_protocol_sha256':sha(OLD/'PROTOCOL.md'),'exclusion_rule':'Parse GRCh38 chr_position_ref_alt SNP key. Exclude every A/T or T/A or C/G or G/C pair regardless of MAF; no other outcome-dependent exclusion. Any malformed, identical or non-ACGT allele key makes the whole context NOT_ESTIMATED_INPUT_QC.','family':'All4originally eligible ADHD molecular contexts×all5p12×all3sdY scales;60 conditions retained including gate failures','p1':parent['p1'],'p2':parent['p2'],'p12':parent['p12'],'qtl_sdY_scale':parent['qtl_sdY_scale'],'sdy_handling':'Re-estimate homoscedastic sdY on each filtered slice via least-squares slope through origin; record full-slice baseline and filtered estimates','admission_rule':'Unique valid SNP keys; finite numeric fields;positiveGWAS/QTLSE,N;0<MAF<=.5;at least500sharednonpalindromic SNPs;minGWASP<=5e-8 andminQTLP<=5e-8. Failure yields15retainedNAposterior rows;not a null.','posterior_implementation':'Independent explicit all distinct i!=j ABF pair configurations in bounded blocks128;default priors reproduced from existing60 grid but no frozen parent files modified','report':'Counts and identities removed;filtered gzip slice hashes;source-association QC;all posterior conditions;default differences vs full inputs;no selection on H4','limitations':['Palindromic does not necessarily mean scientifically ambiguous when explicit build/REF/ALT identity is trustworthy','Historical ambiguous-allele wording does not by itself prove a literal all-palindromic-exclusion requirement','An ABF depends onbeta² and cannot detect effect-allele sign/strand errors','Filtered sensitivity cannot validate exact reference identity or recover discarded original GWAS/QTL metadata','Same ADHD component and original brain QTL studies;zero independent two-trait replication','Single-causal-variant and molecular-sdY assumptions remain;no causal,gene,mechanism or direction promotion'],'stopping_rule':'Run every60frozen condition once;preserve allfailures;no further allele/MAF filters selected from outcomes','compute':'Singleprocess;BLASthreads1;pairgrid128×<=1624;<10MBnumerical workspace'}
+        protocol.write_text(json.dumps(cfg,indent=2)+'\n');return
+    if sys.argv[1:]!=['run']:raise SystemExit('freeze|run')
+    cfg=json.loads(protocol.read_text());assert cfg['analysis_code_sha256']==sha(__file__)
+    for p,digest in cfg['dependency_code_sha256'].items():assert sha(HERE/p)==digest
+    full_results=pd.read_csv(MOL/'sensitivity_results.tsv',sep='\t');results=[];removed=[];contexts=[];manifests=[]
+    for path,digest in cfg['input_files'].items():
+        assert sha(ROOT/path)==digest; d=pd.read_csv(ROOT/path,sep='\t')
+        keys=d.variant.str.extract(r'^chr([0-9XY]+)_(\d+)_([ACGT])_([ACGT])$')
+        malformed=keys.isna().any(axis=1)|(keys[2]==keys[3]);pal=((keys[2]=='A')&(keys[3]=='T'))|((keys[2]=='T')&(keys[3]=='A'))|((keys[2]=='C')&(keys[3]=='G'))|((keys[2]=='G')&(keys[3]=='C'))
+        for v in d.loc[pal,'variant']:removed.append({'input_path':path,'variant_GRCh38':v,'exclusion_reason':'ALL_PALINDROMIC_KEY_STRESS_RULE_NOT_PROVEN_MISIDENTITY'})
+        f=d.loc[~pal].copy(); count=len(f)
+        finite=np.isfinite(f.select_dtypes('number')).all().all()
+        basic=not malformed.any() and not f.variant.duplicated().any() and finite and (f.gwas_se>0).all() and (f.qtl_se>0).all() and (f.qtl_n>0).all() and ((f.qtl_maf>0)&(f.qtl_maf<=.5)).all()
+        gmin=float(f.gwas_p.min());qmin=float(f.qtl_p.min())
+        admitted=basic and count>=500 and gmin<=5e-8 and qmin<=5e-8
+        status='DIAGNOSTIC_SINGLE_SIGNAL_ADMITTED' if admitted else 'NOT_ESTIMATED_INPUT_QC'
+        def estimate(data):
+            x=(1/data.qtl_se.to_numpy()**2)[:,None];y=2*data.qtl_n.to_numpy()*data.qtl_maf.to_numpy()*(1-data.qtl_maf.to_numpy())
+            return float(math.sqrt(np.linalg.lstsq(x,y,rcond=None)[0][0]))
+        fullsdy=estimate(d); filtered_sdy=estimate(f)
+        filtered_name=path.split('/')[-1].replace('.tsv.gz','_nonpal.tsv.gz')
+        payload=f.to_csv(sep='\t',index=False,float_format='%.17g').encode()
+        with (OUT/filtered_name).open('wb') as stream:
+            with gzip.GzipFile(filename='',fileobj=stream,mode='wb',mtime=0) as gz:gz.write(payload)
+        manifests.append({'original_input':path,'original_sha256':digest,'filtered_file':filtered_name,'filtered_sha256':sha(OUT/filtered_name),'filtered_bytes':(OUT/filtered_name).stat().st_size,'original_variants':len(d),'retained_variants':count,'palindromic_removed':int(pal.sum()),'status':status})
+        contexts.append({'input_path':path,'original_shared':len(d),'palindromic_removed':int(pal.sum()),'retained_shared':count,'malformed_or_nonSNP':int(malformed.sum()),'min_GWAS_P_filtered':gmin,'min_QTL_P_filtered':qmin,'full_estimated_sdY':fullsdy,'filtered_estimated_sdY':filtered_sdy,'status':status})
+        l1=separate_logabf(f.gwas_beta.to_numpy(),f.gwas_se.to_numpy(),.2) if admitted else None
+        for scale in cfg['qtl_sdY_scale']:
+            if admitted:
+                l2=separate_logabf(f.qtl_beta.to_numpy(),f.qtl_se.to_numpy(),.15*filtered_sdy*scale)
+                logs=np.array([0,math.log(cfg['p1'])+logsumexp(l1),math.log(cfg['p2'])+logsumexp(l2),math.log(cfg['p1'])+math.log(cfg['p2'])+exclusive_pair_logsum(l1,l2),logsumexp(l1+l2)])
+            for p12 in cfg['p12']:
+                if admitted:
+                    t=logs.copy();t[4]+=math.log(p12);pp=np.exp(t-logsumexp(t))
+                else:pp=np.repeat(np.nan,5)
+                old=full_results[(full_results.input_path==path)&(full_results.sdY_scale==scale)&(full_results.p12==p12)].iloc[0]
+                results.append({'input_path':path,'shared_nonpalindromic':count,'palindromic_removed':int(pal.sum()),'sdY_scale':scale,'p12':p12,**{f'pp_h{i}':pp[i] for i in range(5)},'full_input_H4':old.pp_h4,'H4_change_after_filter':pp[4]-old.pp_h4,'status':status,'classification':cfg['classification'],'filtered_input_sha256':sha(OUT/filtered_name)})
+    output_tsv('contexts.tsv',contexts);output_tsv('removed_variants.tsv',removed);output_tsv('sensitivity_results.tsv',results);output_tsv('source_manifest.tsv',manifests)
+    defaults=[r for r in results if r['sdY_scale']==1 and r['p12']==1e-5];output_tsv('default_posterior_comparison.tsv',defaults)
+    valid=[r for r in results if r['status']=='DIAGNOSTIC_SINGLE_SIGNAL_ADMITTED']
+    summary={'protocol_id':cfg['id'],'classification':cfg['classification'],'planned_conditions':60,'actual_conditions':len(results),'admitted_conditions':len(valid),'not_estimated_conditions':len(results)-len(valid),'contexts':contexts,'maximum_admitted_H4':float(max(r['pp_h4'] for r in valid)) if valid else None,'admitted_H4_ge08':sum(bool(r['pp_h4']>=.8) for r in valid),'protocol_sha256':sha(protocol),'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'independent_replications':0}
+    (OUT/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
+
+if __name__=='__main__':main()

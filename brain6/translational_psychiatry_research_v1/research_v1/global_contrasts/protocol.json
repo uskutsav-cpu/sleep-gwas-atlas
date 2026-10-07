@@ -1,0 +1,36 @@
+{
+  "id": "RETROSPECTIVE_GLOBAL_RG_CONTRASTS_V1",
+  "classification": "RETROSPECTIVE_SAME_SOURCE_DIAGNOSTIC",
+  "input_sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d",
+  "code_sha256": "9ca226fb8a3b92c499a50ff558f6acc27fc2481d308eb6ce5dd78a6ce5b416b4",
+  "family_size": 72,
+  "alpha": 0.05,
+  "disorders": [
+    "adhd",
+    "mdd",
+    "scz",
+    "bipolar"
+  ],
+  "sleep_traits": "All12 inherited sleep traits; all6 psychiatric pairs each; no outcome selection",
+  "marginal_qc": "Finite bounded rg, positive SE/h2/h2SE and both h2 Z>=4; failed contrasts retained in72 denominator",
+  "primary_method": "Maximum two-sided asymptotic normal-Wald P over all admissible sampling covariances: Var(delta)<= (se1+se2)^2. Bonferroni72",
+  "sensitivity_correlation_grid": [
+    -1,
+    -0.75,
+    -0.5,
+    -0.25,
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "limitations": [
+    "Unknown joint estimator covariance",
+    "Marginal asymptotic normality and SE calibration assumed",
+    "Historical outcomes already known; not prospective discovery",
+    "Differences are source-defined genetic-correlation parameters, not psychiatric mechanisms",
+    "Ascertainment/cohort/phenotype/ancestry differences unresolved",
+    "Power bound assumes calibrated normal-Wald model, not actual cohort prediction power"
+  ]
+}
