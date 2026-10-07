@@ -11,12 +11,15 @@ Run from the repository root. These checks require no new external acquisition a
 ```sh
 python -m pytest -q -c brain6/translational_psychiatry_research_v1/research_v1/statistics/pytest.ini -m 'not integration' brain6/translational_psychiatry_research_v1/tests brain6/translational_psychiatry_research_v1/research_v1/statistics/test_statistics.py brain6/translational_psychiatry_research_v1/research_v1/statistics/test_parent_review.py brain6/translational_psychiatry_research_v1/research_v1/ld/test_ld_research.py
 python brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py
-python brain6/translational_psychiatry_research_v1/scripts/global_contrasts.py run
-python brain6/translational_psychiatry_research_v1/scripts/molecular_sensitivity.py run
+python brain6/translational_psychiatry_research_v1/scripts/validate_isolated_replay.py
 python brain6/translational_psychiatry_research_v1/scripts/validate_research_package.py
 ```
 
 Expected: 31 source-free tests pass, two local integration tests explicitly deselected; 5,666 historical files have zero drift; 72 contrasts/648 grid rows and 60 molecular posterior rows replay; 23 artifact/manuscript validation checks pass. Exact hosted results and commit are in the GitHub receipt. Test results are separate from scientific status.
+
+The replay wrapper executes unchanged frozen calculation code and source checks in a temporary output directory. Every result field is compared (numeric relative tolerance 1e-12, zero absolute tolerance; nonnumeric exact). The four floating-point replay residuals must satisfy their original frozen 1e-10 ceiling rather than relative equality to roundoff. All original claim-bound bytes must stay identical. The initial hosted run exposed cross-platform serialization drift when direct replay overwrote these artifacts; its failed log is retained. No original assertion, threshold, source hash or scientific model was removed or changed to repair this engineering issue.
+
+Historical Git LFS raw objects are not required for these source-free commands. A normal checkout with LFS smudging disabled retains their exact tracked pointers, as GitHub Actions does. Missing LFS objects remain a real raw-data reproduction hold, with the failed local checkout receipt preserved.
 
 ## Actual data-dependent integration and native runs
 

@@ -24,9 +24,7 @@ jobs:
       - name: Verify inherited tracked scientific artifacts
         run: python brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py
       - name: Replay inherited-table contrasts and molecular posterior checks
-        run: |
-          python brain6/translational_psychiatry_research_v1/scripts/global_contrasts.py run
-          python brain6/translational_psychiatry_research_v1/scripts/molecular_sensitivity.py run
+        run: python brain6/translational_psychiatry_research_v1/scripts/validate_isolated_replay.py
       - name: State the native integration boundary
         run: echo 'This job does not run native GWAS/LD/SuSiE analyses or certify scientific inference. See exact local integration logs and data access holds.'
       - name: Validate derived numerical claims and source bindings

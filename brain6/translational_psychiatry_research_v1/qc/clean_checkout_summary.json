@@ -1,0 +1,68 @@
+{
+  "source_commit": "a247b67ca39da24c9dd268a3f31e25fcac3743ef",
+  "checkout_method": "exact local git clone;historical LFS pointers retained without unavailable smudge;shared existing object storage",
+  "commands": [
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-c",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/pytest.ini",
+        "-m",
+        "not integration",
+        "brain6/translational_psychiatry_research_v1/tests",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/test_statistics.py",
+        "brain6/translational_psychiatry_research_v1/research_v1/statistics/test_parent_review.py",
+        "brain6/translational_psychiatry_research_v1/research_v1/ld/test_ld_research.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/clean_checkout_1.log",
+      "sha256": "119720c7cd9edf9b6eb4a98e303183f542e04ed6f378a2c2f97b7196d1d007d2"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/verify_historical_integrity.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/clean_checkout_2.log",
+      "sha256": "4d246babc3264ec3916798b3ead8722bd67113880fdf259f6c9a9c6b5877a840"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/global_contrasts.py",
+        "run"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/clean_checkout_3.log",
+      "sha256": "42de5b167859a5beb1b074d86eae2a1d4af95a7dfef4383908582e62d28cc527"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/molecular_sensitivity.py",
+        "run"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/clean_checkout_4.log",
+      "sha256": "e0c22b67665bfb4b9a8c104255578898990a0d59c23fdd1c5ed39a8795fbd696"
+    },
+    {
+      "command": [
+        "/opt/miniconda3/bin/python",
+        "brain6/translational_psychiatry_research_v1/scripts/validate_research_package.py"
+      ],
+      "returncode": 0,
+      "log": "brain6/translational_psychiatry_research_v1/qc/clean_checkout_5.log",
+      "sha256": "a3c1d11bdd18c5b2dd290d2206aa82d9b68e4ce0b049a29087179998d788fb22"
+    }
+  ],
+  "native_private_inputs_absent": 13,
+  "native_private_input_count": 13,
+  "data_dependent_integration_status": "NOT_RUN_DATA_REQUIRED_IN_CLEAN_CHECKOUT",
+  "not_counted_as_pass": true,
+  "source_free_all_pass": true
+}
