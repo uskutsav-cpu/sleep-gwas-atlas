@@ -13,9 +13,9 @@ figure_source_mappings	PASS	Six source exports;1200 atlas,23 forest,7 heterogene
 visual_and_editable_exports	PASS	Seven figure pages and six one-page numerical Word tables inspected;9-sheetXLSX verified	logs/visual_qa.json;logs/workbook_independent_validation.json
 public_branch_release_scope	PASS	Derived evidence only;no new raw GWAS,reference bodies,publisher cache,credentials or manuscript staged	16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md;logs/repository_release_scope.json
 license_and_archive_approval	BLOCKED	Investigator source-specific rights,project-code license and any archive/DOI require human decisions	16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md
-lint_and_compilation	PASS	Ruff correctness rules F,E9;Python compileall;Node syntax;git diff whitespace	logs/lint_final.log;logs/compilation.json
+lint_and_compilation	PASS	Ruff correctness rules F,E9;Python compileall;Node syntax;code-scoped git diff whitespace;original TSV bytes preserved	logs/lint_final.log;logs/compilation.json
 clean_checkout_reproduction	PASS	Clean archived checkout,25 tests,independent arithmetic,figure regeneration,canonical evidence and synthetic e2e	logs/clean_checkout_receipt.json
-actual_branch_github_actions	BLOCKED	Dedicated evidence workflow at recorded actual commit;legacy global workflow evaluated separately	Await first authorized push and actual run
+actual_branch_github_actions	PASS	Dedicated evidence workflow at recorded actual commit;legacy global workflow evaluated separately	logs/github_evidence_ci.json
 main_branch_unchanged	PASS	303c905c229104b7bf623df6de7431abb87e0727	logs/repository_release_scope.json
 no_manuscript_generated_or_modified	PASS	Six Word files are standalone editable numerical tables;no manuscript sections,significance or cover letter	logs/repository_release_scope.json
 current_remote_source_bodies	PASS	Two MVP complete-body SHA256/MD5 matches;raw retention0;other111 retain historical receipts	logs/provenance_remote_hash_gwas_catalog_GCST90479148.json;logs/provenance_remote_hash_gwas_catalog_GCST90479330.json
@@ -26,4 +26,4 @@ smoking_adiposity_conditional_analysis	BLOCKED	Valid joint covariance/source inp
 local_architecture_placo_finemapping_coloc	BLOCKED	Dense source-verified stats,matched LD,QTL/tooling absent;not automatic prerequisite to global paper	09_NEGATIVE_AND_BLOCKED_RESULTS.md
 mr_reporting_checklist	NOT_APPLICABLE	No MR conducted;literature MR comparisons do not constitute new MR	12_STROBE_STREGA_CHECKLIST.md
 investigator_human_approvals	BLOCKED	15 unsupplied author/ethics/rights/review decisions;no invented approvals	15_ETHICS_AUTHOR_APPROVAL_CHECKLIST.md
-sleep_editorial_novelty	FAIL	No adequately supported first-ever result;prior screens materially overlap;NO_GO as currently supported	17_SLEEP_EDITORIAL_READINESS.md
+sleep_editorial_novelty	FAIL	Insufficient demonstrated distinctive sleep-science contribution and material overlap with prior screens;no first-ever priority claim supported;NO_GO as currently supported	17_SLEEP_EDITORIAL_READINESS.md

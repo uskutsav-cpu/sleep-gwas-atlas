@@ -94,7 +94,7 @@ def main():
                      'C' if 'COMPARABLE' in r['phenotype_match_status'] else 'E',prob(r['heterogeneity_p'])])
     receipts.append(make('table4_outcome_side_pairs.docx','Table 4 Outcome side validated pairs',
         ['Sleep and external phenotype','Discovery rg (SE)','Validation rg (SE)','Validation P','Match','Nominal heterogeneity P'],rows,[2.2,1.0,1.0,.8,.7,1.1],
-        'Match: E = exact definition; C = comparable definition. All 23 reuse the sleep GWAS. None is fully independent two-trait replication. Threshold: 0.05/217. Heterogeneity assumes zero estimator covariance; seven nominal flags are not a family-corrected count. Full precision labels and 95% intervals remain in TSV.','replicated_23.tsv'))
+        'Match: E = exact definition; C = comparable definition. All 23 reuse the sleep GWAS. None is fully independent two-trait replication. Threshold: 0.05/217. Heterogeneity assumes zero estimator covariance; seven nominal flags are not a family-corrected count. Archived-precision qualifications and 95% intervals remain in TSV.','replicated_23.tsv'))
     x=read('main_phenotype_domains.tsv')
     receipts.append(make('table5_phenotype_domains.docx','Table 5 Phenotype domain results',['Domain','Phenotypes','Comparisons','BH positive pairs'],
         [[r['phenotype_domain'].replace('_',' '),r['distinct_phenotypes'],r['comparisons'],r['bh_significant']] for r in x],[3.2,1.1,1.2,1.3],

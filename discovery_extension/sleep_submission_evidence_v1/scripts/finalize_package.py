@@ -5,6 +5,7 @@ import collections
 import csv
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -48,10 +49,39 @@ def verify():
     print(json.dumps({'status': 'PASS_RELEASE_HASHES', 'files': len(manifest.read_text().splitlines())}))
 
 
+def validate_ci(ci, expected_sha):
+    """Bind a recorded run to the workflow, commit and unchanged scientific scope."""
+    if not (ci.get('conclusion') == 'success' and ci.get('status') == 'completed'
+            and ci.get('workflowName') == 'Sleep publication evidence'
+            and ci.get('headBranch') == 'publication/sleep-phenome-evidence-v1'
+            and re.fullmatch('[0-9a-f]{40}', expected_sha or '')
+            and ci.get('headSha') == expected_sha):
+        raise ValueError('CI evidence does not match the expected commit/workflow/branch')
+    subprocess.run(['git', '-C', str(R), 'merge-base', '--is-ancestor', expected_sha, 'HEAD'], check=True)
+    prefix = str(P.relative_to(R))
+    scope = ['.github/workflows/sleep-publication-evidence.yml',
+             'discovery_extension/synthetic/test_extension_ldsc_collation.py',
+             'config/analysis_panel.tsv', 'discovery_extension/config',
+             'discovery_extension/results', 'discovery_extension/provenance',
+             'discovery_extension/logs', prefix+'/tests', prefix+'/requirements/figures.txt',
+             prefix+'/requirements/tooling.txt', prefix+'/figures/source_data']
+    scope += [prefix+'/scripts/'+name+'.py' for name in ['verify_statistics', 'independent_statistics',
+              'build_figures', 'build_support', 'audit_literature', 'audit_provenance', 'validate_package']]
+    scope += [str(x.relative_to(R)) for x in (P/'tables').glob('*.tsv') if x.name not in
+              ['final_acceptance_gates.tsv', 'ai_use_activity_ledger.tsv', 'human_approval_checklist.tsv']]
+    changed = git('diff', expected_sha, '--name-only', '--', *scope)
+    if changed:
+        raise ValueError('Recorded CI predates scientific/code changes: '+changed)
+    ci['expected_head_sha'] = expected_sha
+    ci['scope_verification'] = 'Recorded actual commit; scientific code, canonical inputs/tables and workflow unchanged. Final-head run proof is supplied with delivery.'
+    return ci
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--verify', action='store_true')
     parser.add_argument('--ci-json', type=Path)
+    parser.add_argument('--expected-ci-sha')
     args = parser.parse_args()
     if args.verify:
         verify()
@@ -65,10 +95,11 @@ def main():
     assert read('package_consistency.json')['status'] == 'PASS_PACKAGE_CONSISTENCY'
     ci = json.loads(args.ci_json.read_text()) if args.ci_json else None
     if ci:
-        assert ci['conclusion'] == 'success' and ci['headBranch'] == 'publication/sleep-phenome-evidence-v1'
+        ci = validate_ci(ci, args.expected_ci_sha)
         (P / 'logs/github_evidence_ci.json').write_text(json.dumps(ci, indent=2) + '\n')
     elif (P / 'logs/github_evidence_ci.json').exists():
         ci = read('github_evidence_ci.json')
+        ci = validate_ci(ci, ci.get('expected_head_sha'))
     gates = []
 
     def gate(name, status, boundary, evidence):
@@ -89,7 +120,7 @@ def main():
     gate('visual_and_editable_exports', 'PASS', 'Seven figure pages and six one-page numerical Word tables inspected;9-sheetXLSX verified', 'logs/visual_qa.json;logs/workbook_independent_validation.json')
     gate('public_branch_release_scope', 'PASS', 'Derived evidence only;no new raw GWAS,reference bodies,publisher cache,credentials or manuscript staged', '16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md;logs/repository_release_scope.json')
     gate('license_and_archive_approval', 'BLOCKED', 'Investigator source-specific rights,project-code license and any archive/DOI require human decisions', '16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md')
-    gate('lint_and_compilation', 'PASS', 'Ruff correctness rules F,E9;Python compileall;Node syntax;git diff whitespace', 'logs/lint_final.log;logs/compilation.json')
+    gate('lint_and_compilation', 'PASS', 'Ruff correctness rules F,E9;Python compileall;Node syntax;code-scoped git diff whitespace;original TSV bytes preserved', 'logs/lint_final.log;logs/compilation.json')
     clean = read('clean_checkout_receipt.json') if (P / 'logs/clean_checkout_receipt.json').exists() else None
     gate('clean_checkout_reproduction', 'PASS' if clean and clean['status'] == 'PASS' else 'BLOCKED', 'Clean archived checkout,25 tests,independent arithmetic,figure regeneration,canonical evidence and synthetic e2e', 'logs/clean_checkout_receipt.json')
     gate('actual_branch_github_actions', 'PASS' if ci else 'BLOCKED', 'Dedicated evidence workflow at recorded actual commit;legacy global workflow evaluated separately', 'logs/github_evidence_ci.json' if ci else 'Await first authorized push and actual run')
@@ -103,7 +134,7 @@ def main():
     gate('local_architecture_placo_finemapping_coloc', 'BLOCKED', 'Dense source-verified stats,matched LD,QTL/tooling absent;not automatic prerequisite to global paper', '09_NEGATIVE_AND_BLOCKED_RESULTS.md')
     gate('mr_reporting_checklist', 'NOT_APPLICABLE', 'No MR conducted;literature MR comparisons do not constitute new MR', '12_STROBE_STREGA_CHECKLIST.md')
     gate('investigator_human_approvals', 'BLOCKED', '15 unsupplied author/ethics/rights/review decisions;no invented approvals', '15_ETHICS_AUTHOR_APPROVAL_CHECKLIST.md')
-    gate('sleep_editorial_novelty', 'FAIL', 'No adequately supported first-ever result;prior screens materially overlap;NO_GO as currently supported', '17_SLEEP_EDITORIAL_READINESS.md')
+    gate('sleep_editorial_novelty', 'FAIL', 'Insufficient demonstrated distinctive sleep-science contribution and material overlap with prior screens;no first-ever priority claim supported;NO_GO as currently supported', '17_SLEEP_EDITORIAL_READINESS.md')
     path = P / 'tables/final_acceptance_gates.tsv'
     with path.open('w', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=list(gates[0]), delimiter='\t', lineterminator='\n')
