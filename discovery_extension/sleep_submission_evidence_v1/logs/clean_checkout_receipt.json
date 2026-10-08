@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "snapshot_kind": "git archive of complete staged tracked tree;config/analysis_panel.tsv and discovery_extension only",
+  "ignored_inputs_or_publisher_caches_included": false,
+  "native_scientific_reproduction": false,
+  "tests": 25,
+  "commands": [
+    {
+      "name": "statistics",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/verify_statistics.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.166,
+      "log": "logs/clean_checkout_statistics.log"
+    },
+    {
+      "name": "figures",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/build_figures.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 3.02,
+      "log": "logs/clean_checkout_figures.log"
+    },
+    {
+      "name": "independent",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/independent_statistics.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.093,
+      "log": "logs/clean_checkout_independent.log"
+    },
+    {
+      "name": "support",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/build_support.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.087,
+      "log": "logs/clean_checkout_support.log"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "discovery_extension/sleep_submission_evidence_v1/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.167,
+      "log": "logs/clean_checkout_tests.log"
+    },
+    {
+      "name": "literature_canonical",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/audit_literature.py",
+        "--verify-canonical"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.042,
+      "log": "logs/clean_checkout_literature_canonical.log"
+    },
+    {
+      "name": "existing_synthetic",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/bin/python",
+        "discovery_extension/synthetic/test_extension_ldsc_collation.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 4.71,
+      "log": "logs/clean_checkout_existing_synthetic.log"
+    },
+    {
+      "name": "consistency",
+      "command": [
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/numerical-clean-env/bin/python",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/validate_package.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 0.087,
+      "log": "logs/clean_checkout_consistency.log"
+    }
+  ]
+}

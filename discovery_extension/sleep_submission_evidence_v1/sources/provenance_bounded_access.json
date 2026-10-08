@@ -1,0 +1,113 @@
+{
+  "access_date": "2026-10-08",
+  "protocol": "Retrospective access-feasibility pilot. At most 4096 bytes per original pinned object; no source-level integrity claim. No remote full body retained.",
+  "probes": [
+    {
+      "historical_receipt": "discovery_extension/provenance/streaming_receipts/panukbb_icd10__k21__both_sexes__na__na.json",
+      "url": "https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/icd10-K21-both_sexes.tsv.bgz?versionId=Ibmn6pfZsQ30XSVbPovcEYGlpGSsKrfP",
+      "limit_bytes": 4096,
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "native_reproduction": "NOT_PERFORMED",
+      "access": "BLOCKED_OR_UNAVAILABLE",
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "historical_receipt": "discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_REFLUX.json",
+      "url": "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_K11_REFLUX.gz?generation=1777990080605320",
+      "limit_bytes": 4096,
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "native_reproduction": "NOT_PERFORMED",
+      "access": "BLOCKED_OR_UNAVAILABLE",
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "historical_receipt": "discovery_extension/provenance/replication_streaming_receipts/gwas_catalog_GCST90479148.json",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90479001-GCST90480000/GCST90479148/GCST90479148.tsv.gz",
+      "limit_bytes": 4096,
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "native_reproduction": "NOT_PERFORMED",
+      "access": "BLOCKED_OR_UNAVAILABLE",
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    }
+  ],
+  "system_curl_followup": [
+    {
+      "url": "https://pan-ukb-us-east-1.s3.amazonaws.com/sumstats_flat_files/icd10-K21-both_sexes.tsv.bgz?versionId=Ibmn6pfZsQ30XSVbPovcEYGlpGSsKrfP",
+      "curl_exit": 0,
+      "http_status_line": "HTTP/1.1 206 Partial Content",
+      "headers": {
+        "x-amz-id-2": "Kn4KTOMGD7Y5nrrOSZMy0K8iPw2CyDxkiNN7ppUAD5tee8vQV+GSSalESRSyLgXrRWdtVW5i5YwWBU5q0UHletEjQeQe7UK+",
+        "x-amz-request-id": "JZ8KX04MATSTSHQ7",
+        "server": "AmazonS3",
+        "date": "Thu, 08 Oct 2026 17:23:36 GMT",
+        "last-modified": "Thu, 09 Feb 2023 16:52:43 GMT",
+        "etag": "\"64370608c7cfdc7dbbfdcb58a0dafa7f-80\"",
+        "x-amz-storage-class": "INTELLIGENT_TIERING",
+        "x-amz-server-side-encryption": "AES256",
+        "x-amz-version-id": "Ibmn6pfZsQ30XSVbPovcEYGlpGSsKrfP",
+        "accept-ranges": "bytes",
+        "content-range": "bytes 0-4095/2676247696",
+        "content-type": "binary/octet-stream",
+        "content-length": "4096"
+      },
+      "bytes_read": 4096,
+      "sample_only_sha256": "6f60b6d45fc4b301ed79674fb24a7f6cfd1fa01479ee14ad3e5e7d641e921a97",
+      "error": "",
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "body_retained": false
+    },
+    {
+      "url": "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_K11_REFLUX.gz?generation=1777990080605320",
+      "curl_exit": 0,
+      "http_status_line": "HTTP/2 206 ",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "x-guploader-uploadid": "AP6rU80TENtOkoD4M67b6PemM0QbHOWIybHp6CY-mRzbF7IKE9K3mgpRaiqxsPiytML8mcIj",
+        "expires": "Thu, 08 Oct 2026 18:23:36 GMT",
+        "date": "Thu, 08 Oct 2026 17:23:36 GMT",
+        "cache-control": "public, max-age=3600",
+        "last-modified": "Tue, 05 May 2026 14:08:00 GMT",
+        "etag": "\"13a70eeebc3c731fe4fa55b6b50844ff\"",
+        "x-goog-generation": "1777990080605320",
+        "x-goog-metageneration": "1",
+        "x-goog-stored-content-encoding": "identity",
+        "x-goog-stored-content-length": "808771849",
+        "x-goog-hash": "md5=E6cO7rw8cx/k+lW2tQhE/w==",
+        "x-goog-storage-class": "STANDARD",
+        "accept-ranges": "bytes",
+        "content-range": "bytes 0-4095/808771849",
+        "content-length": "4096",
+        "server": "UploadServer",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+      },
+      "bytes_read": 4096,
+      "sample_only_sha256": "65ef894e0270c69113f2fe761d6672831234c4aed59418aa74d60b5ce32df99f",
+      "error": "",
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "body_retained": false
+    },
+    {
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90479001-GCST90480000/GCST90479148/GCST90479148.tsv.gz",
+      "curl_exit": 0,
+      "http_status_line": "HTTP/1.1 206 Partial Content",
+      "headers": {
+        "date": "Thu, 08 Oct 2026 17:23:36 GMT",
+        "server": "Apache",
+        "last-modified": "Thu, 20 Mar 2025 16:43:19 GMT",
+        "etag": "\"22542450-630c8d5d30723\"",
+        "accept-ranges": "bytes",
+        "content-length": "4096",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET,OPTIONS",
+        "access-control-allow-headers": "Authorization,Origin,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Accept",
+        "content-range": "bytes 0-4095/575939664",
+        "content-type": "application/x-gzip"
+      },
+      "bytes_read": 4096,
+      "sample_only_sha256": "9c8140398a4dabab16a809f8a3d0875b20f4a117306f148908ec9b0c199238b6",
+      "error": "",
+      "full_source_hash_verification": "NOT_PERFORMED",
+      "body_retained": false
+    }
+  ]
+}

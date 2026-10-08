@@ -1,0 +1,17 @@
+PLEIOTROPY_QUEUE_OK pairs=1 result_free=true
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_pleiotropy_contract.py", line 139, in <module>
+    main()
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_pleiotropy_contract.py", line 76, in main
+    "placo_source_path": str(placo_source), "placo_source_sha256": sha256(placo_source),
+                                                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_pleiotropy_contract.py", line 29, in sha256
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/pathlib.py", line 1050, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/.r-env/share/placo/PLACO_v0.2.0.R'

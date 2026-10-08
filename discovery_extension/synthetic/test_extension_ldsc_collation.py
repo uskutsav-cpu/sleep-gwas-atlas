@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -31,6 +32,25 @@ def main() -> None:
         h2_logs, rg_logs = work / "h2", work / "rg"
         h2_logs.mkdir()
         rg_logs.mkdir()
+        # Explicitly synthetic, disposable gate fixture. No original h2 result
+        # is required or written. Trait identifiers come from the public panel.
+        core_h2 = work / "synthetic_core_sleep_h2.tsv"
+        core_h2_fields = ["trait", "h2", "se", "z", "intercept", "verdict", "analysis_status"]
+        core_h2_rows = [
+            {"trait": trait, "h2": 0.2, "se": 0.02, "z": 10,
+             "intercept": 1.0, "verdict": "PASS", "analysis_status": "SYNTHETIC_TEST_ONLY"}
+            for trait in sleeps
+        ]
+        if len(core_h2_rows) != 12 or len({row["trait"] for row in core_h2_rows}) != 12:
+            raise SystemExit("ERROR: synthetic core h2 fixture is not the exact 12-sleep family")
+
+        def write_core_h2(rows: list[dict[str, object]]) -> None:
+            with core_h2.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, delimiter="\t", fieldnames=core_h2_fields, lineterminator="\n")
+                writer.writeheader()
+                writer.writerows(rows)
+
+        write_core_h2(core_h2_rows)
         h2_out = work / "h2.tsv"
         h2_failed_out = work / "h2_failed.tsv"
         rg_out = work / "rg.tsv"
@@ -50,7 +70,7 @@ def main() -> None:
             )
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/13_collate_extension_ldsc.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/13_collate_extension_ldsc.py"),
                 "--mode", "h2", "--logdir", str(h2_logs), "--out", str(h2_out),
                 "--h2-failed-out", str(h2_failed_out),
                 "--provenance-out", str(work / "h2.json"),
@@ -93,7 +113,7 @@ def main() -> None:
 
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/13_collate_extension_ldsc.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/13_collate_extension_ldsc.py"),
                 "--mode", "rg", "--logdir", str(rg_logs), "--h2", str(h2_out),
                 "--out", str(rg_out), "--pair-universe-out", str(universe_out),
                 "--provenance-out", str(work / "rg.json"),
@@ -115,7 +135,7 @@ def main() -> None:
         domain_pairs_out, domain_summary_out = work / "domain_pairs.tsv", work / "domain_summary.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/19_build_extension_views.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/19_build_extension_views.py"),
                 "--rg", str(rg_out), "--positive-out", str(positive_out),
                 "--negative-out", str(negative_out), "--domain-pairs-out", str(domain_pairs_out),
                 "--domain-summary-out", str(domain_summary_out),
@@ -130,7 +150,7 @@ def main() -> None:
         figure = work / "screen.png"
         subprocess.run(
             [
-                str(ROOT / ".venv/bin/python"),
+                sys.executable,
                 str(ROOT / "discovery_extension/scripts/15_plot_extension.py"),
                 "--rg", str(rg_out), "--out", str(figure),
             ], check=True,
@@ -144,7 +164,7 @@ def main() -> None:
         audit = work / "novelty.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/17_prepare_pair_novelty_audit.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/17_prepare_pair_novelty_audit.py"),
                 "--rg", str(rg_out), "--out", str(audit),
                 "--panel", str(ROOT / "discovery_extension/config/candidate_traits.tsv"),
                 "--provenance-out", str(work / "novelty.json"),
@@ -155,7 +175,7 @@ def main() -> None:
             raise SystemExit(f"ERROR: unexpected synthetic novelty template: {audit_rows}")
         incomplete = subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
                 "--rg", str(rg_out), "--audit", str(audit),
             ], check=False, capture_output=True, text=True,
         )
@@ -187,16 +207,16 @@ def main() -> None:
             writer.writerow(completed)
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/18_validate_pair_novelty_audit.py"),
                 "--rg", str(rg_out), "--audit", str(audit),
             ], check=True,
         )
         priorities = work / "priorities.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
                 "--rg", str(rg_out), "--extension-h2", str(h2_out),
-                "--core-h2", str(ROOT / "results/tables/h2_summary.tsv"),
+                "--core-h2", str(core_h2),
                 "--novelty-audit", str(audit), "--out", str(priorities),
                 "--provenance-out", str(work / "priorities.json"),
             ], check=True,
@@ -205,10 +225,27 @@ def main() -> None:
         if len(priority_rows) != 1176 or sum(row["priority_tier"] == "A" for row in priority_rows) != 1:
             raise SystemExit("ERROR: synthetic pre-replication A/B/C prioritization family is incorrect")
 
+        # The sleep-side eligibility gate must matter: removing it should
+        # demote the sole otherwise-eligible discovery while other gates stay fixed.
+        failed_core_rows = [dict(row) for row in core_h2_rows]
+        failed_core_rows[0].update({"h2": 0.02, "se": 0.01, "z": 2, "verdict": "FAIL"})
+        write_core_h2(failed_core_rows)
+        failed_priorities = work / "synthetic_sleep_qc_failed_priorities.tsv"
+        subprocess.run(
+            [sys.executable, str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
+             "--rg", str(rg_out), "--extension-h2", str(h2_out), "--core-h2", str(core_h2),
+             "--novelty-audit", str(audit), "--out", str(failed_priorities),
+             "--provenance-out", str(work / "synthetic_sleep_qc_failed_priorities.json")], check=True,
+        )
+        demoted = next(row for row in read_tsv(failed_priorities) if row["pair_id"] == completed["pair_id"])
+        if demoted["priority_tier"] != "C" or "sleep_h2_failed" not in demoted["priority_rationale"]:
+            raise SystemExit("ERROR: failed synthetic sleep h2 gate did not demote the eligible discovery")
+        write_core_h2(core_h2_rows)
+
         local_queue = work / "local_queue.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/25_prepare_local_analysis_queue.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/25_prepare_local_analysis_queue.py"),
                 "--priority", str(priorities), "--out", str(local_queue),
                 "--provenance-out", str(work / "local_queue.json"),
             ], check=True,
@@ -225,7 +262,7 @@ def main() -> None:
         replication_candidate_lock = work / "replication_candidate_family.lock.json"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/21_prepare_replication_queue.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/21_prepare_replication_queue.py"),
                 "--priority", str(priorities), "--out", str(replication_queue),
                 "--panel", str(ROOT / "discovery_extension/config/candidate_traits.tsv"),
                 "--core", str(ROOT / "config/analysis_panel.tsv"),
@@ -271,7 +308,7 @@ def main() -> None:
         replication_manifest, replication_lock = work / "replication_manifest.tsv", work / "replication_manifest.lock.json"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/22_lock_replication_manifest.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/22_lock_replication_manifest.py"),
                 "--queue", str(replication_queue), "--out", str(replication_manifest),
                 "--candidate-lock", str(replication_candidate_lock), "--lock", str(replication_lock),
             ], check=True,
@@ -312,7 +349,7 @@ def main() -> None:
         replication_results = work / "replication_results.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/23_collate_replication.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/23_collate_replication.py"),
                 "--manifest", str(replication_manifest), "--lock", str(replication_lock),
                 "--h2", str(replication_h2), "--rg", str(replication_rg),
                 "--out", str(replication_results), "--provenance-out", str(work / "replication_results.json"),
@@ -323,16 +360,16 @@ def main() -> None:
         replicated_priorities = work / "replicated_priorities.tsv"
         subprocess.run(
             [
-                "python3", str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
+                sys.executable, str(ROOT / "discovery_extension/scripts/20_prioritize_extension_pairs.py"),
                 "--rg", str(rg_out), "--extension-h2", str(h2_out),
-                "--core-h2", str(ROOT / "results/tables/h2_summary.tsv"),
+                "--core-h2", str(core_h2),
                 "--novelty-audit", str(audit), "--replication", str(replication_results),
                 "--out", str(replicated_priorities), "--provenance-out", str(work / "replicated_priorities.json"),
             ], check=True,
         )
         if sum(row["priority_tier"] == "B" for row in read_tsv(replicated_priorities)) != 1:
             raise SystemExit("ERROR: synthetic replicated pair did not advance to Tier B")
-    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 ranked_views=true figures=true novelty_gate=true prioritization=true replication_lock=true local_queue=true isolated=true")
+    print("EXTENSION_LDSC_COLLATION_SYNTHETIC_OK h2=100 primary_pairs=1176 universe=1200 ranked_views=true figures=true novelty_gate=true prioritization=true replication_lock=true local_queue=true sleep_qc_fixture=true sleep_qc_failure_gate=true isolated=true")
 
 
 if __name__ == "__main__":

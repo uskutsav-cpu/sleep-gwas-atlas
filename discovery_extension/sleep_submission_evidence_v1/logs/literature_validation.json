@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-08",
+  "tests": [
+    {
+      "command": [
+        "/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/audit_literature.py",
+        "--acquire"
+      ],
+      "exit_code": 0,
+      "stdout": "Required official-source bytes verified. Historical extracted inventory TSVs remain repository prerequisites.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/audit_literature.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"access_date\": \"2026-10-08\",\n  \"universe\": 1200,\n  \"historical_searched_positive_pairs\": 603,\n  \"historical_unsearched_pairs\": 597,\n  \"replicated_pairs\": 23,\n  \"full_morrison_ldsc_rows_verified\": 8418,\n  \"sleepchart_sf5_block_counts\": {\n    \"a_original_sleepchart\": 1054,\n    \"b_Dashti_2019\": 309,\n    \"c_Austin_Zimmerman\": 361\n  },\n  \"multiorgan_sd11_rows\": 4046,\n  \"pair_class_counts\": {\n    \"PREVIOUSLY_PUBLISHED_SUBSTANTIALLY_SIMILAR\": 83,\n    \"PUBLISHED_ASSOCIATION_DIFFERENT_SLEEP_CONSTRUCT_OR_UNRESOLVED\": 586,\n    \"LITERATURE_COMPARISON_UNRESOLVED\": 521,\n    \"PUBLISHED_ASSOCIATION_SUBSTANTIALLY_SIMILAR_GENETIC_OR_MR_ONLY\": 10\n  },\n  \"replicated_class_counts\": {\n    \"PREVIOUSLY_PUBLISHED_SUBSTANTIALLY_SIMILAR\": 15,\n    \"PUBLISHED_ASSOCIATION_SUBSTANTIALLY_SIMILAR_GENETIC_OR_MR_ONLY\": 6,\n    \"LITERATURE_COMPARISON_UNRESOLVED\": 2\n  },\n  \"supported_novel_results\": 0,\n  \"crosswalk_rows\": 115,\n  \"qualified_limits\": \"Current complete-pair database searches not executed; exact source reuse unresolved except explicitly identified supplement labels.\"\n}\n",
+      "stderr": "/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Unknown extension is not supported and will be removed\n  warn(msg)\n/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/openpyxl/worksheet/_reader.py:329: UserWarning: Conditional Formatting extension is not supported and will be removed\n  warn(msg)\n"
+    },
+    {
+      "command": [
+        "/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "discovery_extension/sleep_submission_evidence_v1/scripts/audit_literature.py",
+        "--verify-canonical"
+      ],
+      "exit_code": 0,
+      "stdout": "Canonical source-free novelty verification passed:1200 pairs,23 positives,zero certified novel results.\n",
+      "stderr": ""
+    }
+  ],
+  "repeat_regeneration_hashes_identical": true,
+  "files": {
+    "discovery_extension/sleep_submission_evidence_v1/tables/NOVELTY_MASTER_1200.tsv": "eb4e6556a07a1ea7c4c79909388445ada0bb6594d2ce0469fc0438759db32f0f",
+    "discovery_extension/sleep_submission_evidence_v1/tables/NOVELTY_REPLICATED_23.tsv": "8f3822ca558ac4e662cfb924d78e839f9bdb53e7960cdc81102150657df42b27",
+    "discovery_extension/sleep_submission_evidence_v1/tables/novelty_crosswalk.tsv": "49540923bd7dcb3bd29f0911707d76a1de5957241afa8ddf51fbb79320f97a18",
+    "discovery_extension/sleep_submission_evidence_v1/sources/literature_source_hashes.tsv": "608055b16d43dd0a439fd048099ef4a4216d09ced68a1a6ba0fa21e798f5bb46"
+  }
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "command": [
+      "ruff",
+      "check",
+      "--select",
+      "F,E9",
+      "discovery_extension/sleep_submission_evidence_v1/scripts",
+      "discovery_extension/sleep_submission_evidence_v1/tests",
+      "discovery_extension/synthetic/test_extension_ldsc_collation.py"
+    ],
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": "",
+    "status": "PASS"
+  },
+  {
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "discovery_extension/sleep_submission_evidence_v1/scripts",
+      "discovery_extension/sleep_submission_evidence_v1/tests",
+      "discovery_extension/synthetic/test_extension_ldsc_collation.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "status": "PASS"
+  },
+  {
+    "command": [
+      "/Users/swethasunilkumar/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--check",
+      "discovery_extension/sleep_submission_evidence_v1/scripts/build_workbook.mjs"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "status": "PASS"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "status": "PASS"
+  }
+]

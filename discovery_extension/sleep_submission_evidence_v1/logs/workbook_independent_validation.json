@@ -1,0 +1,198 @@
+{
+  "date": "2026-10-08",
+  "status": "PASS",
+  "validation_scope": "ALL_EIGHT_TABS_ALL_VALUES_AND_CELL_TYPES_AGAINST_CANONICAL_TSV_AND_TYPED_INTERMEDIATE;CACHED_OVERVIEW_ONLY",
+  "native_Excel_recalculation_performed": false,
+  "workbook_writes": false,
+  "floating_tolerance": "8 IEEE754 ulps;no fixed absolute floor;all nonempty strings/booleans exact",
+  "empty_string_serialization": "Explicit OOXML t=str blank cells read as None by openpyxl;semantically empty,never converted to zero or a missing label",
+  "empty_strings_exported_as_typed_blank_cells": 2304,
+  "python_version": "3.12.14",
+  "openpyxl_version": "3.1.5",
+  "sheet_names": [
+    "Overview",
+    "Replicated pairs",
+    "Global correlations",
+    "Replication family",
+    "Heterogeneity",
+    "Sources",
+    "Sleep definitions",
+    "Novelty",
+    "Sensitivity"
+  ],
+  "table_sheets": [
+    {
+      "sheet": "Replicated pairs",
+      "source": "tables/replicated_23.tsv",
+      "data_rows": 23,
+      "columns": 84,
+      "checked_cells_including_headers": 2016,
+      "cell_types": {
+        "s": 797,
+        "n": 1081,
+        "b": 138
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 23
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Global correlations",
+      "source": "tables/global_1200.tsv",
+      "data_rows": 1200,
+      "columns": 48,
+      "checked_cells_including_headers": 57648,
+      "cell_types": {
+        "s": 19248,
+        "n": 32400,
+        "b": 6000
+      },
+      "preserved_missing_marker_counts": {},
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Replication family",
+      "source": "tables/replication_family_217.tsv",
+      "data_rows": 217,
+      "columns": 84,
+      "checked_cells_including_headers": 18312,
+      "cell_types": {
+        "s": 14470,
+        "n": 3227,
+        "b": 615
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 9551
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Heterogeneity",
+      "source": "tables/heterogeneity_7.tsv",
+      "data_rows": 7,
+      "columns": 84,
+      "checked_cells_including_headers": 672,
+      "cell_types": {
+        "s": 301,
+        "n": 329,
+        "b": 42
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 7
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Sources",
+      "source": "tables/phenotype_and_source_metadata.tsv",
+      "data_rows": 125,
+      "columns": 20,
+      "checked_cells_including_headers": 2520,
+      "cell_types": {
+        "s": 2106,
+        "n": 414
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 198,
+        "UNRESOLVED": 5
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Sleep definitions",
+      "source": "tables/sleep_trait_metadata.tsv",
+      "data_rows": 12,
+      "columns": 35,
+      "checked_cells_including_headers": 455,
+      "cell_types": {
+        "s": 413,
+        "n": 42
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 24,
+        "UNRESOLVED": 5
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Novelty",
+      "source": "tables/NOVELTY_MASTER_1200.tsv",
+      "data_rows": 1200,
+      "columns": 28,
+      "checked_cells_including_headers": 33628,
+      "cell_types": {
+        "s": 25324,
+        "n": 6000,
+        "str": 2304
+      },
+      "preserved_missing_marker_counts": {
+        "NOT_SEARCHED": 1194,
+        "": 2304
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    },
+    {
+      "sheet": "Sensitivity",
+      "source": "tables/sensitivity_results.tsv",
+      "data_rows": 281,
+      "columns": 8,
+      "checked_cells_including_headers": 2256,
+      "cell_types": {
+        "s": 1172,
+        "n": 803,
+        "b": 281
+      },
+      "preserved_missing_marker_counts": {
+        "NA": 40
+      },
+      "maximum_numeric_roundtrip_ulps": 0.0
+    }
+  ],
+  "total_checked_table_cells": 117507,
+  "total_data_rows": 3065,
+  "overview_cached_counts": [
+    1200,
+    603,
+    217,
+    23,
+    0,
+    7,
+    0
+  ],
+  "overview_formula_cells": {
+    "B5": "=COUNTA('Global correlations'!A2:A1201)",
+    "B6": "=COUNTIFS('Global correlations'!Q2:Q1201,\"<0.05\")",
+    "B7": "=COUNTA('Replication family'!A2:A218)",
+    "B8": "=COUNTIFS('Replication family'!BS2:BS218,\"EXTERNAL_OUTCOME_SIDE_REPLICATION\")",
+    "B10": "=COUNTA('Heterogeneity'!A2:A8)"
+  },
+  "novelty_classes": {
+    "PREVIOUSLY_PUBLISHED_SUBSTANTIALLY_SIMILAR": 83,
+    "PUBLISHED_ASSOCIATION_DIFFERENT_SLEEP_CONSTRUCT_OR_UNRESOLVED": 586,
+    "LITERATURE_COMPARISON_UNRESOLVED": 521,
+    "PUBLISHED_ASSOCIATION_SUBSTANTIALLY_SIMILAR_GENETIC_OR_MR_ONLY": 10
+  },
+  "novelty_direct_prior_comparators": 83,
+  "replicated_direct_prior_comparators": 15,
+  "preserved_missing_marker_counts": {
+    "NA": 9843,
+    "UNRESOLVED": 10,
+    "NOT_SEARCHED": 1194,
+    "": 2304
+  },
+  "source_hashes": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/supplementary_data.xlsx": "f34c27ed2edfcec8f6482047d8dca93baa6c0c94ca47c080329b8f4154d1c82a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/workbook_data.json": "6753ca045c0ea9ef951d8c3e4bf32c871907de46c22d861d583583e15a2dd9b0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/replicated_23.tsv": "ef92972e69a90779c22cf633dc588a9ed20355470754ec0c82b27cf6fa78fe40",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/global_1200.tsv": "9ae14ac5dbb86868ab9e55e522eb01cfca39f35d1e1d5803d99bf67b250c5484",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/replication_family_217.tsv": "1e7ad9009ad1d087efeb59b81f95a066cff54efddd720d45c11091143cd2132d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/heterogeneity_7.tsv": "900243199959a657a197e65a555ae62cec851504ccb5f512e29b80255867a363",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/phenotype_and_source_metadata.tsv": "3bf6da4fcfc12c50984cddd90d7a7bc1a237391e095b40afeda255bd825edc20",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/sleep_trait_metadata.tsv": "05569eef0a2bdbc301df1ff6cb1f192ff40ce7e354a9683737abae2c0f7e52f9",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/NOVELTY_MASTER_1200.tsv": "eb4e6556a07a1ea7c4c79909388445ada0bb6594d2ce0469fc0438759db32f0f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/sensitivity_results.tsv": "07f539b4d4ccf7ce156e910879d5d029721130ebd21c44b347d4c08fb25a1cb0"
+  },
+  "workbook_hash_unchanged_during_check": true,
+  "issues": []
+}

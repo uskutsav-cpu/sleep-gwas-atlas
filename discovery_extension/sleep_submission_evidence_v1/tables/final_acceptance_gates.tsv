@@ -1,0 +1,29 @@
+gate	status	scope_or_boundary	evidence
+all_applicable_existing_tests	FAIL	Full checkout:459 tests;12 failures,37 errors,3 skips; missing historical artifacts/R. Five extension scripts pass;two R-dependent scripts blocked.	logs/existing_tests_complete_checkout.log;logs/existing_extension_tests_final.json
+all_new_tests	PASS	25 source-free numerical/evidence tests, including failure modes;not native science	logs/final_tests.log
+independent_numerical_recalculation	PASS	1200 discovery rows,217 validation rows,41 printed-log estimates;archived precision	logs/numerical_execution.json;logs/numerical_independent.json
+frozen_extension_output_hashes	PASS	9/9 original frozen extension outputs exact	logs/provenance_frozen_nine_recheck.json
+complete_original_core_checkpoint	BLOCKED	One of ten formerly missing artifacts recovered;nine original files still missing;environment order policy fails	02_SOURCE_AND_PROVENANCE_AUDIT.md
+original_locked_outputs_unchanged	PASS	Only new evidence namespace,new workflow,and isolated synthetic test change from authoritative main	logs/repository_release_scope.json
+missing_values_not_zero	PASS	TSV original fields exact;all117507 workbook cells independently compared;typed blanks explicitly documented	logs/package_consistency.json;logs/workbook_independent_validation.json
+complete_test_universes	PASS	Exact1200 Cartesian and217 frozen candidate identities retained	logs/package_consistency.json
+novelty_classifications_consistent	PASS	1200 classifications reproduced;zero first-ever novelty promotions;this gate is consistency,not priority	logs/final_literature_canonical.log;06_NOVELTY_AND_PRIOR_ART.md
+exhaustive_current_pair_priority	BLOCKED	Current primary full tables reviewed;complete per-pair current database searches not executed;521 pairs unresolved	logs/literature_audit_receipt.json
+figure_source_mappings	PASS	Six source exports;1200 atlas,23 forest,7 heterogeneity,18 domain rows	logs/numerical_figure_source_audit.json
+visual_and_editable_exports	PASS	Seven figure pages and six one-page numerical Word tables inspected;9-sheetXLSX verified	logs/visual_qa.json;logs/workbook_independent_validation.json
+public_branch_release_scope	PASS	Derived evidence only;no new raw GWAS,reference bodies,publisher cache,credentials or manuscript staged	16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md;logs/repository_release_scope.json
+license_and_archive_approval	BLOCKED	Investigator source-specific rights,project-code license and any archive/DOI require human decisions	16_PUBLIC_RELEASE_AND_LICENSE_AUDIT.md
+lint_and_compilation	PASS	Ruff correctness rules F,E9;Python compileall;Node syntax;git diff whitespace	logs/lint_final.log;logs/compilation.json
+clean_checkout_reproduction	PASS	Clean archived checkout,25 tests,independent arithmetic,figure regeneration,canonical evidence and synthetic e2e	logs/clean_checkout_receipt.json
+actual_branch_github_actions	BLOCKED	Dedicated evidence workflow at recorded actual commit;legacy global workflow evaluated separately	Await first authorized push and actual run
+main_branch_unchanged	PASS	303c905c229104b7bf623df6de7431abb87e0727	logs/repository_release_scope.json
+no_manuscript_generated_or_modified	PASS	Six Word files are standalone editable numerical tables;no manuscript sections,significance or cover letter	logs/repository_release_scope.json
+current_remote_source_bodies	PASS	Two MVP complete-body SHA256/MD5 matches;raw retention0;other111 retain historical receipts	logs/provenance_remote_hash_gwas_catalog_GCST90479148.json;logs/provenance_remote_hash_gwas_catalog_GCST90479330.json
+native_gwas_ldsc_replay	BLOCKED	Native reruns0;original sleep/munged outcomes and EUR LD/weights missing	02_SOURCE_AND_PROVENANCE_AUDIT.md
+fully_independent_two_trait_replication	FAIL	All23 positives reuse sleep GWAS;qualified outcome-side validation survives	04_REPLICATION_INDEPENDENCE_AUDIT.md
+heterogeneity_calibrated_covariance	BLOCKED	Seven nominal positive-pair flags assume zero covariance;shared sleep estimator covariance unknown	05_HETEROGENEITY_VALIDATION.md
+smoking_adiposity_conditional_analysis	BLOCKED	Valid joint covariance/source inputs unavailable;no synthetic observed estimates	09_NEGATIVE_AND_BLOCKED_RESULTS.md
+local_architecture_placo_finemapping_coloc	BLOCKED	Dense source-verified stats,matched LD,QTL/tooling absent;not automatic prerequisite to global paper	09_NEGATIVE_AND_BLOCKED_RESULTS.md
+mr_reporting_checklist	NOT_APPLICABLE	No MR conducted;literature MR comparisons do not constitute new MR	12_STROBE_STREGA_CHECKLIST.md
+investigator_human_approvals	BLOCKED	15 unsupplied author/ethics/rights/review decisions;no invented approvals	15_ETHICS_AUTHOR_APPROVAL_CHECKLIST.md
+sleep_editorial_novelty	FAIL	No adequately supported first-ever result;prior screens materially overlap;NO_GO as currently supported	17_SLEEP_EDITORIAL_READINESS.md

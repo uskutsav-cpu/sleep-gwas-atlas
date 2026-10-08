@@ -1,0 +1,24 @@
+E
+======================================================================
+ERROR: test_end_to_end_contract (__main__.FineMappingColocalizationContractTest.test_end_to_end_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_finemapping_colocalization_contract.py", line 191, in test_end_to_end_contract
+    run_output = run([
+                 ^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_finemapping_colocalization_contract.py", line 44, in run
+    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/.r-env/bin/Rscript'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.286s
+
+FAILED (errors=1)

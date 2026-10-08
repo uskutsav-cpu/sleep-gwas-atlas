@@ -1,0 +1,90 @@
+{
+  "audit_type": "INDEPENDENT_SOURCE_CROSSWALK_AND_RECOVERY_CHECKS",
+  "checks": [
+    {
+      "name": "sleep_trait_panel_exact",
+      "status": "PASS"
+    },
+    {
+      "name": "source_role_composition",
+      "status": "PASS"
+    },
+    {
+      "name": "source_comparison_full_family",
+      "status": "PASS"
+    },
+    {
+      "name": "23_outcome_side_designs",
+      "status": "PASS"
+    },
+    {
+      "name": "historical_outcomes_preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "effective_n_independent",
+      "status": "PASS"
+    },
+    {
+      "name": "recovery_current_hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "tracked_historical_worktree_files_unchanged",
+      "status": "PASS",
+      "observed_tracked_changes": []
+    },
+    {
+      "name": "current_full_body_vs_original_receipt_identity",
+      "status": "PASS",
+      "sources": 2
+    },
+    {
+      "name": "no_raw_retention_or_native_rerun_from_hash_stream",
+      "status": "PASS"
+    },
+    {
+      "name": "complete_campaign_under_2GiB",
+      "status": "PASS",
+      "bytes": 1208754180
+    },
+    {
+      "name": "current_full_body_ledger_and_metadata",
+      "status": "PASS",
+      "ledger_rows": 814,
+      "current_body_records": 2
+    },
+    {
+      "name": "source_body_pass_status_does_not_mean_native_LDSC_pass",
+      "status": "PASS"
+    },
+    {
+      "name": "owned_receipts_no_credentials_no_raw_bodies",
+      "status": "PASS",
+      "files_scanned": 19
+    }
+  ],
+  "source_level_reruns": 0,
+  "reviewed": [
+    "03_GLOBAL_RESULTS_VERIFICATION.md",
+    "05_HETEROGENEITY_VALIDATION.md",
+    "07_SENSITIVITY_RESULTS.md"
+  ],
+  "unresolved_objections": [
+    "Original standalone 12-sleep h2 QC and native replay remain blocked",
+    "Outcome-side reuse cannot establish independent two-trait replication",
+    "Unknown repeated-estimator covariance prevents calibrated heterogeneity claim",
+    "Phenotype name matches do not certify equal ascertainment"
+  ],
+  "build_support_review": {
+    "current_script_sha256": "5976a08f851acb7ca01cc897e90be66e876af1ad616760f5c4650e1bd1063e61",
+    "actionable_source_crosswalk_gap": "RESOLVED_IN_CURRENT_CODE",
+    "actionable_regeneration_command_gap": "RESOLVED_IN_CURRENT_CODE",
+    "scientific_status_boundaries": "CONSISTENT_WITH_PROVENANCE_AND_NUMERICAL_REPORTS",
+    "native_reproduction_not_claimed": true,
+    "review_mode": "Separate provenance perspective; root authored support script"
+  },
+  "resolved_objections": {
+    "MVP current HTTP metadata change": "Both complete current compressed objects match original SHA256 and MD5; raw retention0, native reruns0"
+  }
+}

@@ -1,0 +1,45 @@
+name: Sleep publication evidence
+on:
+  push:
+    paths:
+      - 'discovery_extension/sleep_submission_evidence_v1/**'
+      - 'discovery_extension/synthetic/test_extension_ldsc_collation.py'
+      - '.github/workflows/sleep-publication-evidence.yml'
+  pull_request:
+    paths:
+      - 'discovery_extension/sleep_submission_evidence_v1/**'
+      - 'discovery_extension/synthetic/test_extension_ldsc_collation.py'
+      - '.github/workflows/sleep-publication-evidence.yml'
+permissions:
+  contents: read
+jobs:
+  source-free-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11.11'
+      - name: Verify released package bytes
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/finalize_package.py --verify
+      - name: Install figure dependencies
+        run: pip install -r discovery_extension/sleep_submission_evidence_v1/requirements/figures.txt -r discovery_extension/sleep_submission_evidence_v1/requirements/tooling.txt
+      - name: Recompute archived precision statistics
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/verify_statistics.py
+      - name: Regenerate observed-data figures
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/build_figures.py
+      - name: Independent arithmetic and figure source audit
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/independent_statistics.py
+      - name: Regenerate source-to-claim and support tables
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/build_support.py
+      - name: Test complete evidence families and failure modes
+        run: python -m unittest discover -s discovery_extension/sleep_submission_evidence_v1/tests -v
+      - name: Existing isolated synthetic collation test
+        run: python discovery_extension/synthetic/test_extension_ldsc_collation.py
+      - name: Verify canonical prior-art evidence
+        run: python discovery_extension/sleep_submission_evidence_v1/scripts/audit_literature.py --verify-canonical
+      - name: Compile and validate research package
+        run: |
+          ruff check --select F,E9 discovery_extension/sleep_submission_evidence_v1/scripts discovery_extension/sleep_submission_evidence_v1/tests discovery_extension/synthetic/test_extension_ldsc_collation.py
+          python -m compileall -q discovery_extension/sleep_submission_evidence_v1/scripts
+          python discovery_extension/sleep_submission_evidence_v1/scripts/validate_package.py

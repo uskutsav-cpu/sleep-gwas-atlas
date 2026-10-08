@@ -1,0 +1,28 @@
+EXTENSION_H2_COLLATED {'rows': 100, 'primary_pass': 98, 'sensitivity_only': 2}
+EXTENSION_RG_COLLATED {'primary_pairs': 1176, 'locked_pair_universe': 1200}
+EXTENSION_VIEWS_OK pairs=1176 positive=1175 negative=1 domains=17
+Matplotlib is building the font cache; this may take a moment.
+EXTENSION_FIGURE_OK pairs=1176 fdr_hits=1 threshold_hits=1 out=/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/screen.png network=/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/extension_discovery_network.png domains=/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/extension_domain_views.pdf
+PAIR_NOVELTY_AUDIT_TEMPLATE_OK pairs=1 pending=1
+PAIR_NOVELTY_AUDIT_VALID pairs=1 complete=1
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/scripts/20_prioritize_extension_pairs.py", line 184, in <module>
+    main()
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/scripts/20_prioritize_extension_pairs.py", line 87, in main
+    core_h2 = {row["trait"]: row for row in read_tsv(args.core_h2)}
+                                            ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/scripts/20_prioritize_extension_pairs.py", line 16, in read_tsv
+    with path.open(newline="", encoding="utf-8") as handle:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/results/tables/h2_summary.tsv'
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_extension_ldsc_collation.py", line 339, in <module>
+    main()
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/synthetic/test_extension_ldsc_collation.py", line 195, in main
+    subprocess.run(
+  File "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas/.venv/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/discovery_extension/scripts/20_prioritize_extension_pairs.py', '--rg', '/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/rg.tsv', '--extension-h2', '/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/h2.tsv', '--core-h2', '/Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas/results/tables/h2_summary.tsv', '--novelty-audit', '/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/novelty.tsv', '--out', '/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/priorities.tsv', '--provenance-out', '/var/folders/f4/8spnm17n3g9cvbpydqnw8m380000gn/T/synthetic_extension_ldsc_1asvkip8/priorities.json']' returned non-zero exit status 1.
