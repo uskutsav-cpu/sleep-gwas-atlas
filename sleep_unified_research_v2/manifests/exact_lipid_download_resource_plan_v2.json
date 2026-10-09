@@ -1,0 +1,81 @@
+{
+  "frozen_utc": "2026-10-09T05:13:34.120824+00:00",
+  "network_bytes_expected": 6844892917,
+  "maximum_retained_source_bytes": 6844892917,
+  "SSD_free_bytes_before": 1131610636288,
+  "SSD_reserve_bytes": 5368709120,
+  "destination": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/exact_lipid_sources_v2",
+  "workers": 1,
+  "streaming_hash_buffer_bytes": 4194304,
+  "maximum_seconds_per_download": 1200,
+  "body_retry_count": 0,
+  "curl_version": "curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.1",
+  "response_size_cap_per_source": "exact expected source byte count (--max-filesize)",
+  "accepted_search_coverage_gaps": [
+    {
+      "path": "/Volumes/Extreme SSD/.TemporaryItems",
+      "error": "[Errno 1] Operation not permitted: '/Volumes/Extreme SSD/.TemporaryItems'"
+    }
+  ],
+  "source_absence_scope": "readable SSD namespaces and named archive; OS temporary namespace inaccessible",
+  "internal_disk_source_bytes": 0,
+  "source_registry_sha256": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+  "HEAD_receipt_sha256": "a8f4a11447ff408af4c70ff326df959012a1ec1d09ce1d57a845fda2d618bd48",
+  "filename_search_receipt_sha256": "0f17c214bb255e191fcf8fcd8b2fe724f7b2edcacd44f90762a6541da38c4f7a",
+  "script_sha256": "8e627294ee22fdf5931c8b9ea8a78c0fb49999ebc534ef1dc4bae01e28c1bf8a",
+  "sources": [
+    {
+      "source_id": "graham_2021_hdl_eur",
+      "trait_ids": "hdl",
+      "source_page_url": "https://www.ebi.ac.uk/gwas/studies/GCST90239652",
+      "download_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90239001-GCST90240000/GCST90239652/HDL_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "access": "PUBLIC",
+      "archive_name": "HDL_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "archive_bytes": "2257306867",
+      "archive_sha256": "3711b6c62773e9685eb6a9d9b0ba7bb6551a5dcec5721c0718e7661f891d8055",
+      "archive_member": "DIRECT_GZIP",
+      "raw_files": "hdl.txt.gz",
+      "pmid": "34887591",
+      "ancestry_reported": "EUR",
+      "build_status": "HEADER_VALIDATED_HG19",
+      "acquisition_status": "SOURCE_VERIFIED_PUBLIC",
+      "notes": "Exact European GLGC file was fully downloaded, byte-counted, SHA-256 checked, and GRCh37 anchor-validated on experimental branch commit 8023d143f2bde431ce0f54fa827302cd9d37adcd. The source explicitly names inverse-normalized HDL and POS_b37."
+    },
+    {
+      "source_id": "graham_2021_ldl_eur",
+      "trait_ids": "ldl",
+      "source_page_url": "https://www.ebi.ac.uk/gwas/studies/GCST90239658",
+      "download_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90239001-GCST90240000/GCST90239658/LDL_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "access": "PUBLIC",
+      "archive_name": "LDL_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "archive_bytes": "2288565715",
+      "archive_sha256": "36b8d68476a00fcd5a599abe5877bcab3290becd55c3ef64e0dccf9b7c6f65ab",
+      "archive_member": "DIRECT_GZIP",
+      "raw_files": "ldl.txt.gz",
+      "pmid": "34887591",
+      "ancestry_reported": "EUR",
+      "build_status": "HEADER_VALIDATED_HG19",
+      "acquisition_status": "SOURCE_VERIFIED_PUBLIC",
+      "notes": "Exact European GLGC file was fully downloaded, byte-counted, SHA-256 checked, and GRCh37 anchor-validated on experimental branch commit 8023d143f2bde431ce0f54fa827302cd9d37adcd. The source explicitly names inverse-normalized LDL and POS_b37."
+    },
+    {
+      "source_id": "graham_2021_triglycerides_eur",
+      "trait_ids": "triglycerides",
+      "source_page_url": "https://www.ebi.ac.uk/gwas/studies/GCST90239664",
+      "download_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90239001-GCST90240000/GCST90239664/logTG_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "access": "PUBLIC",
+      "archive_name": "logTG_INV_EUR_HRC_1KGP3_others_ALL.meta.singlevar.results.gz",
+      "archive_bytes": "2299020335",
+      "archive_sha256": "d21a2822bdb6de5735ca741bd98978bcd91048f68087bf60175c671747557492",
+      "archive_member": "DIRECT_GZIP",
+      "raw_files": "triglycerides.txt.gz",
+      "pmid": "34887591",
+      "ancestry_reported": "EUR",
+      "build_status": "HEADER_VALIDATED_HG19",
+      "acquisition_status": "SOURCE_VERIFIED_PUBLIC",
+      "notes": "Exact European GLGC file was fully downloaded, byte-counted, SHA-256 checked, and GRCh37 anchor-validated on experimental branch commit 8023d143f2bde431ce0f54fa827302cd9d37adcd. HDL, LDL, and triglycerides are correlated and share cohorts."
+    }
+  ],
+  "original_SSD_and_sealed_v1_modified": false,
+  "no_preprocessing_estimation_or_new_pair_outcomes": true
+}

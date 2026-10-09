@@ -1,0 +1,114 @@
+{
+  "review_version": "v2",
+  "gwas_accession": "GCST90475826",
+  "dbgap_analysis": "pha010373.1",
+  "analysis_name": "Phe_327_4.EUR.GIA",
+  "publication_pmid": 39024449,
+  "cohort": "MVP",
+  "ancestry": "European GIA",
+  "n_cases": 78566,
+  "n_controls": 329572,
+  "n_total": 408138,
+  "ascertainment": "clinical EHR ICD-coded insomnia; related phenotype to core UKB frequent self-report insomnia",
+  "code_lists": {
+    "ICD9CM": [
+      "307.41",
+      "307.42",
+      "327.0",
+      "327.00",
+      "327.01",
+      "327.02",
+      "327.09",
+      "780.52"
+    ],
+    "ICD10CM": [
+      "F51.01",
+      "F51.02",
+      "F51.03",
+      "F51.04",
+      "F51.05",
+      "F51.09",
+      "G47.0",
+      "G47.00",
+      "G47.01",
+      "G47.09"
+    ]
+  },
+  "code_list_authority": "https://phenomics.va.ornl.gov/web/api/phenotype/14926",
+  "case_rule": {
+    "mapped_icd_instances_minimum": 2,
+    "status": "VERIFIED_PRIMARY_GIA_AND_CIPHER"
+  },
+  "control_rule": {
+    "mapped_icd_instances": 0,
+    "related_phecode_exclusions_applied": false,
+    "status": "VERIFIED_PRIMARY_GIA_AND_CIPHER"
+  },
+  "single_instance": {
+    "eligible_as_stated_case_or_control": false,
+    "status": "INFERRED_FROM_EXPLICIT_RULE"
+  },
+  "ehr_end_horizon": {
+    "value": "September 2020",
+    "status": "VERIFIED_FINAL_PUBLICATION",
+    "source": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12857194.1/NIHMS2091849-supplement-Supplemental_Text.pdf",
+    "pdf_page": 2
+  },
+  "unresolved": [
+    "distinct-date versus repeated-code instance counting",
+    "minimum interval between code instances",
+    "start lookback date and minimum observation duration",
+    "historical executable mapping/extraction artifact",
+    "accession MAC<30 versus final-publication GWAS MAC>40 discrepancy",
+    "effect SE scale and EBI conversion independent validation"
+  ],
+  "cipher_snapshot": {
+    "id": 14926,
+    "revision": 3,
+    "versionInfo": "1.2",
+    "created": "2023-11-03T14:26:44.153+00:00",
+    "lastModified": "2025-05-13T12:12:24.689+00:00",
+    "algorithmCreated": "2020-09-01T05:00:00.000+00:00",
+    "revisionComment": "Add KESER link and add VADC keyword",
+    "majorRevision": false,
+    "validated": false,
+    "dataUsedStart": null,
+    "dataUsedEnd": null
+  },
+  "source_linkage_type": "PRIMARY_RESOURCE_TRAIT_COUNT_CHAIN_NOT_PARTICIPANT_IMPLEMENTATION_AUDIT",
+  "source_linkage": [
+    "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90475826",
+    "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/analysis.cgi?study_id=phs002453.v1.p1&pha=10373",
+    "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/document.cgi?phd=8759&study_id=phs002453.v1.p1",
+    "https://pmc-oa-opendata.s3.amazonaws.com/PMC12857194.1/NIHMS2091849-supplement-Supplemental_Text.pdf",
+    "https://phenomics.va.ornl.gov/web/api/phenotype/14926"
+  ],
+  "effect_allele_contract": {
+    "rule": "Use explicit effect allele and matching tested allele pair; do not equate raw ALT with effect allele or genomic-reference ALT",
+    "evidence": "author clarification; no new body or independent allele audit",
+    "source": "https://zenodo.org/records/15595560/files/ady_response_huffman.v2.pdf?download=1"
+  },
+  "definition_gate_recommendation": "REPORTED_HARE_ONLY_DEFINITION_STOP_RESOLVED_AT_PUBLIC_DOCUMENTED_DEFINITION_LEVEL",
+  "hard_gate_caveat": "If frozen gate additionally requires distinct-day semantics, minimum lookback or historical executable phenotyping code, keep those specific requirements unresolved.",
+  "admission_scope": "Explicit clinical-insomnia transport; no exact symptom-phenotype substitution or replication claim",
+  "family_changes": false,
+  "threshold_changes": false,
+  "new_outcomes_examined": false,
+  "new_gwas_bodies_downloaded": false,
+  "native_gwas_compute_performed": false,
+  "supplement_pdf": {
+    "url": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12857194.1/NIHMS2091849-supplement-Supplemental_Text.pdf",
+    "local_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/source_definition_review_v2/gia_supplement.pdf",
+    "bytes": 2587868,
+    "md5": "afe2d8e36ab1a5213f3ec32a14c19a8a",
+    "sha256": "9b21e23c5a9a6e4df79df59ca3ac01ef1fdbf56c9daf868c48981e2e864edadb",
+    "official_md5_match": true,
+    "pages_rendered_and_visually_inspected": [
+      2,
+      3
+    ]
+  },
+  "summary_statistic_license": "https://www.ebi.ac.uk/about/terms-of-use/",
+  "article_metadata_license": "CC BY",
+  "individual_cohort_overlap": "No participant identifiers audited; no certificate of zero individual overlap inferred"
+}
