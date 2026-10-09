@@ -1,0 +1,8 @@
+# Preserve original TSV CRLF bytes and meaningful empty final fields.
+*.tsv whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+# Matplotlib SVG path serialization includes insignificant end-of-line spaces.
+*.svg whitespace=-blank-at-eol
+# Archived/native diagnostic text is retained byte-for-byte.
+sources/recovered/** whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+native/** whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+logs/** whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
