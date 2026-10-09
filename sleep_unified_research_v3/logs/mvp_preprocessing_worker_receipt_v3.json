@@ -1,0 +1,90 @@
+{
+  "status": "PREPROCESSING_ONLY_PASS",
+  "counts": {
+    "source_rows": 19703815,
+    "retained_chain_+": 826027,
+    "retained_orientation_sign_1": 200653,
+    "output_rows": 826027,
+    "retained_orientation_sign_-1": 625374
+  },
+  "exclusive_exclusions": {
+    "not_nonambiguous_HM3": 18525750,
+    "invalid_OR_P_CI_or_R2_le_0_9": 350425,
+    "invalid_AF_or_MAF_le_0_01": 1294,
+    "duplicate_eligible_HM3_rsID": 87,
+    "allele_mismatch_or_ambiguous": 230,
+    "chain_unmapped": 2
+  },
+  "source_row_reconciliation_pass": true,
+  "whole_file_diagnostics": {
+    "literal_missing_supplied_SE": 19703815,
+    "OR_outside_CI": 0,
+    "R2_gt_1": 89380
+  },
+  "whole_file_log_CI_centering_SE_unit_buckets": {
+    "0.001": 5627548,
+    "0.01": 8328777,
+    "0.05": 4937934,
+    "0.1": 797366,
+    "1": 12190
+  },
+  "retained_P_CI_relative_difference_buckets": {
+    "0.05": 315286,
+    "1": 91245,
+    "0.01": 246845,
+    "0.1": 129360,
+    "0.001": 40054,
+    "10": 3236,
+    "gt10": 1
+  },
+  "R2_range": [
+    0.3,
+    1.113
+  ],
+  "reference_nonambiguous_HM3_rows": 1181789,
+  "chain_receipt": {
+    "chain_path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz",
+    "chain_bytes": 1246411,
+    "chain_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+    "chain_count": 25374,
+    "block_count": 185795
+  },
+  "N_eff": 253768.61504687142,
+  "header": [
+    "chromosome",
+    "base_pair_location",
+    "effect_allele",
+    "other_allele",
+    "odds_ratio",
+    "standard_error",
+    "effect_allele_frequency",
+    "p_value",
+    "rsid",
+    "ci_upper",
+    "ci_lower",
+    "alt",
+    "n",
+    "case_af",
+    "num_cases",
+    "control_af",
+    "num_controls",
+    "r2",
+    "q_pval",
+    "i2",
+    "direction"
+  ],
+  "gzip_full_source_stream_crc_verified": true,
+  "output_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/mvp_hm3_preprocessing_v3/mvp_GIA_insomnia.hm3.sumstats.gz",
+  "output_sha256": "84b64bf6bd0348f7c4c455ce8f9976c2091fe8ef2f77df6fddca47d73a136176",
+  "output_bytes": 11263155,
+  "worker_code_sha256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+  "execution_plan_sha256": "e42c1bcc6488d73f4e505132b6bbf5607868f64b65ae1e940aec6bd8e2e06e75",
+  "elapsed_seconds": 171.3303623199463,
+  "h2_or_correlation_estimated": false,
+  "pair_tests_admitted": 0,
+  "limitations": [
+    "Historical-rule CI-derived Z assumes 95% log-scale Wald CI; supplied SE absent",
+    "Coordinate and allele concordance do not independently validate upstream effect semantics",
+    "h2, intercept, power and cohort-disjointness remain pending"
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  "review": "statistical_mvp_preprocessing_v3",
+  "completed_utc": "2026-10-09T06:07:58.528227+00:00",
+  "verdict": "ADMISSIBLE_FOR_V4_RESULT_FREE_PREPROCESSING_ONLY",
+  "necessary_prelaunch_fixes_remaining": [],
+  "resolved_prelaunch_fixes": [
+    "Exact header comparison against the pinned v1 schema receipt",
+    "Recognize GWAS-SSF #NA as literal missing SE",
+    "Unexpected nonmissing invalid/nonfinite supplied SE now fails closed, matching protocol"
+  ],
+  "reviewed_file_sha256": {
+    "sleep_unified_research_v3/FROZEN_MVP_PREPROCESSING_PROTOCOL_v4.md": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+    "sleep_unified_research_v3/scripts/19_materialize_mvp_hm3.py": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+    "sleep_unified_research_v3/scripts/20_run_mvp_preprocessing.py": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+    "scripts/liftover_chain.py": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+    "discovery_extension/scripts/47_stream_replication_sources.py": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+    "discovery_extension/scripts/streaming_io.py": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+    "sleep_unified_research_v1/logs/mvp_insomnia_acquisition_receipt_v1.json": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+    "sleep_unified_research_v1/logs/mvp_insomnia_source_schema_v1.json": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+    "sleep_unified_research_v1/scripts/06_audit_mvp_schema.py": "1026737c5f0085b6b2cad1945f5756026625821b348ffe4451a58437fc9afc5c",
+    "sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+    "sleep_unified_research_v2/source_definition_review/provenance_v2_source_definition_addendum.md": "cd194adcb6a30bf70833e93f181cf9d734e89e1ec060a98b2d6f22336e043522",
+    "sleep_unified_research_v2/manifests/protocol_amendment_v3_receipt.json": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8"
+  },
+  "amendment_bound_file_checks": [
+    {
+      "path": "sleep_unified_research_v2/FROZEN_NEW_ANALYSIS_PROTOCOL_v3.md",
+      "expected": "22c458ead71f7a214c9ab36526784b090da84b36fd53a22be8ebdedf54c76cb0",
+      "actual": "22c458ead71f7a214c9ab36526784b090da84b36fd53a22be8ebdedf54c76cb0",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json",
+      "expected": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "actual": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v2/source_definition_review/provenance_v2_mvp_insomnia_icd_mapping.tsv",
+      "expected": "e37a879052389201b70dbda0b5755450079e3748393b9c125eae84bfdd2aa50d",
+      "actual": "e37a879052389201b70dbda0b5755450079e3748393b9c125eae84bfdd2aa50d",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL.md",
+      "expected": "6e25d05b85bdc2a4baee4aa861fc33364cf86dd6768365f71b331a92a4aad05e",
+      "actual": "6e25d05b85bdc2a4baee4aa861fc33364cf86dd6768365f71b331a92a4aad05e",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL_v2.md",
+      "expected": "da0aaaa0ea1f75450371ca377b09a620528a23a4a420989286fa6f95b97a4987",
+      "actual": "da0aaaa0ea1f75450371ca377b09a620528a23a4a420989286fa6f95b97a4987",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_mvp_insomnia_217_admission.tsv",
+      "expected": "fd19063bd91114386a6b910aa355181f3a1c840e0af4246f9faede9587d9807a",
+      "actual": "fd19063bd91114386a6b910aa355181f3a1c840e0af4246f9faede9587d9807a",
+      "pass": true
+    }
+  ],
+  "receipt_consistency_checks": {
+    "six_amendment_bound_files_match": true,
+    "schema_acquisition_receipt_hash_match": true,
+    "schema_diagnostic_code_hash_match": true,
+    "source_sha_receipts_agree": true,
+    "descriptive_P_CI_buckets_reconcile": true
+  },
+  "source_identity_inherited_from_receipts": {
+    "accession": "GCST90475826",
+    "source_sha256": "46b62349ba0d98b22bf302be973bb54a80707cfb02ce953426f8224910761835",
+    "bytes": 575504178,
+    "MD5": "2e9c12624b653aac527444fc426e037b",
+    "source_rows": 19703815,
+    "all_source_rows_without_finite_supplied_SE": 19703815,
+    "constant_cases": 78566,
+    "constant_controls": 329572,
+    "N_eff_direct_formula": 253768.6150468714,
+    "N_eff_reciprocal_formula": 253768.61504687142,
+    "serialized_N_eff_12_significant_digits": "253768.615047",
+    "source_R2_range": [
+      0.3,
+      1.113
+    ]
+  },
+  "synthetic_chain_coordinate_checks": [
+    {
+      "case": "plus_start",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101",
+      "expected": [
+        "mapped",
+        [
+          2,
+          201,
+          "+"
+        ]
+      ],
+      "actual": [
+        "mapped",
+        [
+          2,
+          201,
+          "+"
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "case": "plus_end",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "110",
+      "expected": [
+        "mapped",
+        [
+          2,
+          210,
+          "+"
+        ]
+      ],
+      "actual": [
+        "mapped",
+        [
+          2,
+          210,
+          "+"
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "case": "outside_block",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "111",
+      "expected": [
+        "unmapped",
+        null
+      ],
+      "actual": [
+        "unmapped",
+        null
+      ],
+      "pass": true
+    },
+    {
+      "case": "minus_start",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "-",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101",
+      "expected": [
+        "mapped",
+        [
+          2,
+          800,
+          "-"
+        ]
+      ],
+      "actual": [
+        "mapped",
+        [
+          2,
+          800,
+          "-"
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "case": "minus_end",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "-",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "110",
+      "expected": [
+        "mapped",
+        [
+          2,
+          791,
+          "-"
+        ]
+      ],
+      "actual": [
+        "mapped",
+        [
+          2,
+          791,
+          "-"
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "case": "distinct_target_multimap",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ],
+        [
+          100,
+          110,
+          2,
+          300,
+          1000,
+          "+",
+          2
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101",
+      "expected": [
+        "ambiguous",
+        null
+      ],
+      "actual": [
+        "ambiguous",
+        null
+      ],
+      "pass": true
+    },
+    {
+      "case": "same_target_duplicate_chain",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ],
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          2
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101",
+      "expected": [
+        "mapped",
+        [
+          2,
+          201,
+          "+"
+        ]
+      ],
+      "actual": [
+        "mapped",
+        [
+          2,
+          201,
+          "+"
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "case": "nonautosome",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": "X",
+      "one_based_point": "101",
+      "expected": [
+        "invalid_source_coordinate",
+        null
+      ],
+      "actual": [
+        "invalid_source_coordinate",
+        null
+      ],
+      "pass": true
+    },
+    {
+      "case": "invalid_coordinate",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          2,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101.5",
+      "expected": [
+        "invalid_source_coordinate",
+        null
+      ],
+      "actual": [
+        "invalid_source_coordinate",
+        null
+      ],
+      "pass": true
+    },
+    {
+      "case": "nonautosome_target",
+      "synthetic_source_interval_blocks": [
+        [
+          100,
+          110,
+          null,
+          200,
+          1000,
+          "+",
+          1
+        ]
+      ],
+      "chromosome": 1,
+      "one_based_point": "101",
+      "expected": [
+        "non_autosomal_target",
+        null
+      ],
+      "actual": [
+        "non_autosomal_target",
+        null
+      ],
+      "pass": true
+    }
+  ],
+  "synthetic_CI_arithmetic_checks": [
+    {
+      "beta": 0.4,
+      "known_SE": 0.1,
+      "synthetic_OR": 1.4918246976412703,
+      "synthetic_CI_lower": 1.2263025700333667,
+      "synthetic_CI_upper": 1.8148383464872888,
+      "derived_SE": 0.09999999999999998,
+      "expected_Z": 4.0,
+      "derived_Z": 4.000000000000001,
+      "pass": true
+    },
+    {
+      "beta": -0.4,
+      "known_SE": 0.1,
+      "synthetic_OR": 0.6703200460356393,
+      "synthetic_CI_lower": 0.5510132634873792,
+      "synthetic_CI_upper": 0.8154594342673447,
+      "derived_SE": 0.1,
+      "expected_Z": -4.0,
+      "derived_Z": -3.9999999999999996,
+      "pass": true
+    },
+    {
+      "beta": 0,
+      "known_SE": 0.1,
+      "synthetic_OR": 1.0,
+      "synthetic_CI_lower": 0.8220151951983891,
+      "synthetic_CI_upper": 1.216522523964603,
+      "derived_SE": 0.10000000000000003,
+      "expected_Z": 0.0,
+      "derived_Z": 0.0,
+      "pass": true
+    }
+  ],
+  "isolated_pure_historical_orientation_checks": [
+    {
+      "source_EA_OA": [
+        "A",
+        "C"
+      ],
+      "target_A1_A2": [
+        "A",
+        "C"
+      ],
+      "expected_sign": 1,
+      "actual_sign": 1,
+      "pass": true
+    },
+    {
+      "source_EA_OA": [
+        "C",
+        "A"
+      ],
+      "target_A1_A2": [
+        "A",
+        "C"
+      ],
+      "expected_sign": -1,
+      "actual_sign": -1,
+      "pass": true
+    },
+    {
+      "source_EA_OA": [
+        "T",
+        "G"
+      ],
+      "target_A1_A2": [
+        "A",
+        "C"
+      ],
+      "expected_sign": 1,
+      "actual_sign": 1,
+      "pass": true
+    },
+    {
+      "source_EA_OA": [
+        "G",
+        "T"
+      ],
+      "target_A1_A2": [
+        "A",
+        "C"
+      ],
+      "expected_sign": -1,
+      "actual_sign": -1,
+      "pass": true
+    },
+    {
+      "source_EA_OA": [
+        "A",
+        "T"
+      ],
+      "target_A1_A2": [
+        "A",
+        "T"
+      ],
+      "expected_sign": null,
+      "actual_sign": null,
+      "pass": true
+    },
+    {
+      "source_EA_OA": [
+        "A",
+        "G"
+      ],
+      "target_A1_A2": [
+        "A",
+        "C"
+      ],
+      "expected_sign": null,
+      "actual_sign": null,
+      "pass": true
+    }
+  ],
+  "independent_diagnostic_tolerance": {
+    "CI_Z_relative": 1e-14,
+    "CI_Z_absolute": 1e-14,
+    "coordinate_and_sign_checks": "exact"
+  },
+  "checks_executed_without_raw_GWAS_body": true,
+  "raw_source_or_real_HM3_chain_inputs_rehashed_by_reviewer": false,
+  "source_h2_estimated": false,
+  "pair_outcomes_examined": false,
+  "native_preprocessing_executed_by_reviewer": false,
+  "downstream_gates_passed": false,
+  "plan_scope": [
+    "Retained locus and allele concordance with pinned references",
+    "Historical-rule CI-derived Z",
+    "No favorable P/CI or R2 upper-bound filter",
+    "First eligible duplicate rsID, matching registered historical rule"
+  ],
+  "unresolved": [
+    "95% log-scale Wald construction of upstream CI not independently established",
+    "Biological upstream EA semantics and EBI conversion not independently verified",
+    "CIPHER historical implementation, distinct-date/lookback semantics and accession MAC discrepancy",
+    "Actual full-source mapping/allele/exclusion/centering diagnostic receipt pending",
+    "h2/intercept, power, participant overlap and all pair admission pending"
+  ],
+  "primary_online_specs": [
+    {
+      "url": "https://genome.ucsc.edu/goldenPath/help/chain.html",
+      "claim": "Zero-based half-open chain coordinates and reverse-strand conversion"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gwas-catalog/summary-statistics-standard/main/gwas-ssf_v1.0.2.tex",
+      "claim": "CI fields lack specified confidence level/construction; effect allele field and #NA missing token"
+    }
+  ],
+  "final_prelaunch_check": "Worker invalid/nonfinite nonmissing SE branch raises UNEXPECTED_NONMISSING_INVALID_SUPPLIED_SE; no historical method or thresholds changed."
+}

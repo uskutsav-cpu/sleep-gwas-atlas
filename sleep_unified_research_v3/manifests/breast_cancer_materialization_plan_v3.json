@@ -1,0 +1,62 @@
+{
+  "frozen_utc": "2026-10-09T06:24:28.993716+00:00",
+  "trait_id": "breast_cancer",
+  "command": [
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/15_materialize_bcac_breast.py",
+    "--source",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/remaining_core_containers_v3/breast_cancer/icogs_onco_gwas_meta_overall_breast_cancer_summary_level_statistics.txt",
+    "--out",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/cancer_source_materialization_v3/breast_cancer/breast_cancer.txt.gz"
+  ],
+  "bound_paths": {
+    "original_container": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/remaining_core_containers_v3/breast_cancer/icogs_onco_gwas_meta_overall_breast_cancer_summary_level_statistics.txt",
+    "historical_raw": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/breast_cancer.txt.gz",
+    "native_script": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/15_materialize_bcac_breast.py",
+    "panel_guard": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/panel_guard.py",
+    "panel_validator": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/00_validate_panel.py",
+    "panel_manifest": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/analysis_panel.tsv",
+    "panel_lock": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/analysis_panel.lock.json",
+    "native_python_binary": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python3.9",
+    "acquisition_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/logs/breast_cancer_acquisition_receipt_v3.json",
+    "source_status_table": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/tables/CURRENT_CORE_SOURCE_STATUS.tsv",
+    "source_registry": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/public_gwas_sources.tsv",
+    "runner": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/scripts/23_reproduce_cancer_source_materialization.py"
+  },
+  "inputs_sha256_before": {
+    "original_container": "4f21dfc33d52753d496cd33756beed6e78e31fd6849fbd5755c406ad2c64e9c8",
+    "historical_raw": "900a1801455939e4bd170f3475f9f74a6fe78aab860d932da17da24391aeee0a",
+    "native_script": "5b62f26a6a110d7893bb60048be0c417aa99f8c0add830d50aa033963165fd71",
+    "panel_guard": "ec0883992f074c88e95af36191c209b6262a2fc5ffb9182b85b65dbd0ba7e3e2",
+    "panel_validator": "e3d978e8dba2c3f4d1b760b800de940bd5fb20b2c5b8d6e27ba87d1840658077",
+    "panel_manifest": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "panel_lock": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c",
+    "native_python_binary": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba",
+    "acquisition_receipt": "09279ff6c4792d1f108a80a7d6b6dfd0ba78c6fee353c369be59d24f12f2a5c3",
+    "source_status_table": "1380e493699742fd3b5c2c885038c1a82c6ccebb718aec41612aa3ec86963561",
+    "source_registry": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+    "runner": "227fa32366a24e477f80ef1a72aa4deca0a72a93503ff710008be25f52dc3b45"
+  },
+  "unchanged_original_main_helper_Git_blobs": {
+    "scripts/15_materialize_bcac_breast.py": "71488f5e3f4f6927bc20a475e0dc24f1bcec91af",
+    "scripts/panel_guard.py": "9181b38a2ecbb430397f50c5911840dedcfee0cf",
+    "scripts/00_validate_panel.py": "ed4f9d6ee0c6e197b922b466f2feefd377f3f1e1"
+  },
+  "workers": 1,
+  "network_bytes": 0,
+  "internal_minimum_before_bytes": 268435456,
+  "internal_free_before_bytes": 318504960,
+  "internal_emergency_floor_bytes": 134217728,
+  "SSD_minimum_before_bytes": 7516192768,
+  "SSD_runtime_floor_bytes": 5368709120,
+  "observed_worker_RSS_stop_bytes": 134217728,
+  "output_final_and_partial_limit_bytes": 2147483648,
+  "maximum_entire_stage_seconds": 3600,
+  "resource_basis": "Unchanged stdlib helpers retain one source row and counters; no HM3 dictionary, pandas or estimator loaded",
+  "source_id_from_frozen_registry": "bcac_2020_overall_breast_cancer",
+  "comparison": "Exact historical decompressed bytes and line count; gzip bytes may differ from temporary filename/time metadata",
+  "scope": "source-specific raw materialization only; no harmonization, munging, h2 or rg",
+  "full_native_LDSC_3GiB_internal_guard_unchanged": true,
+  "original_inputs_or_v1_v2_changed": false,
+  "native_python_version": "Python 3.9.23"
+}

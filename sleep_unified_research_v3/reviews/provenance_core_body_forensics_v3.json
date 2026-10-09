@@ -1,0 +1,68 @@
+{
+  "completed_utc": "2026-10-09T06:31:16.500762+00:00",
+  "scope": "byte-only independent breast and rejected-prostate review; historical raw gzip digest and tiny provenance sidecar only",
+  "plan_sha256": "ea49f19abf8421b60c7fc2481b4e1963e8daeceec84016fdd100767e58ce2a1c",
+  "sources": [
+    {
+      "trait_id": "breast_cancer",
+      "source_id": "bcac_2020_overall_breast_cancer",
+      "body_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/remaining_core_containers_v3/breast_cancer/icogs_onco_gwas_meta_overall_breast_cancer_summary_level_statistics.txt",
+      "bytes": 4764280363,
+      "frozen_expected_sha256": "4f21dfc33d52753d496cd33756beed6e78e31fd6849fbd5755c406ad2c64e9c8",
+      "independent_body_sha256": "4f21dfc33d52753d496cd33756beed6e78e31fd6849fbd5755c406ad2c64e9c8",
+      "independent_concatenated_chunk_sha256": "4f21dfc33d52753d496cd33756beed6e78e31fd6849fbd5755c406ad2c64e9c8",
+      "chunk_count": 71,
+      "all_chunk_ranges_and_bindings_pass": true,
+      "body_equals_chunk_concatenation": true,
+      "matches_frozen_historical_SHA": true,
+      "classification": "EXACT_HISTORICAL_SOURCE_REACQUIRED",
+      "receipt_sha256": "09279ff6c4792d1f108a80a7d6b6dfd0ba78c6fee353c369be59d24f12f2a5c3",
+      "HEAD_sha256": "2b105594b44a1c4280bfa06aa8b4175d1443247d63fe71dfca5715ac69865c18",
+      "independent_source_admission": true
+    },
+    {
+      "trait_id": "prostate_cancer",
+      "source_id": "schumacher_2018_prostate_cancer",
+      "body_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-09/remaining_core_containers_v3/prostate_cancer/meta_v3_onco_euro_overall_ChrAll_1_release.txt.assembling",
+      "bytes": 2534497125,
+      "frozen_expected_sha256": "649921348dcc20f22a86e17bf897a2f8ae93139613a393f492d97e006a923390",
+      "independent_body_sha256": "89fa72bc8e9beadb7b3a44af71b4e95694dc0d365ccb4c726b8b9cb0292d6f23",
+      "independent_concatenated_chunk_sha256": "89fa72bc8e9beadb7b3a44af71b4e95694dc0d365ccb4c726b8b9cb0292d6f23",
+      "chunk_count": 38,
+      "all_chunk_ranges_and_bindings_pass": true,
+      "body_equals_chunk_concatenation": true,
+      "matches_frozen_historical_SHA": false,
+      "classification": "SHA_MISMATCH_PRESERVED",
+      "receipt_sha256": "c3e76de7f84efcf96db9ff45675ee3caea059983868f1634f3d5f15f0dd9e571",
+      "HEAD_sha256": "dab9474cd08e7d0445eee704297f6736cdb4ff53d85912fd93b0096414dd04bd",
+      "independent_source_admission": false
+    }
+  ],
+  "historical_prostate_support": {
+    "historical_raw_path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/prostate_cancer.txt.gz",
+    "historical_raw_bytes": 282966964,
+    "independent_historical_raw_gzip_sha256": "95b92f95d8337336343b93cd511b3a407c15ba927bb20329ee56778a90bd3eb9",
+    "matches_sealed_historical_raw_sha256": true,
+    "provenance_sidecar_sha256": "b3989863becdea791d1a1473989bd6a197d8b37156620bb73e260d3bbdeb4c94",
+    "sidecar_source_sha256": "649921348dcc20f22a86e17bf897a2f8ae93139613a393f492d97e006a923390",
+    "sidecar_source_bytes": 2534497125,
+    "sidecar_output_sha256": "95b92f95d8337336343b93cd511b3a407c15ba927bb20329ee56778a90bd3eb9",
+    "sidecar_counts": {
+      "malformed_rows": 367,
+      "non_rsid_rows": 5887673,
+      "non_snp_rows": 1104805,
+      "nonautosomal_rows": 391229,
+      "retained_rows": 12681454,
+      "source_rows": 20065528
+    },
+    "historical_archive_currently_present": false,
+    "interpretation": "Corroborates the frozen historical source/materializer/raw contract; absent historical container prevents independent recomputation of its original SHA. Raw-output SHA cannot establish an invertible source hash."
+  },
+  "observed_reviewer_peak_RSS_bytes": 24379392,
+  "elapsed_seconds": 17.090650666999863,
+  "hash_buffer_bytes": 65536,
+  "network_bytes": 0,
+  "source_files_modified": false,
+  "association_values_or_h2_rg_parsed": false,
+  "prostate_cause": "UNRESOLVED: current range-valid source bytes differ from frozen historical digest; do not infer upstream change from HEAD or ETag alone."
+}

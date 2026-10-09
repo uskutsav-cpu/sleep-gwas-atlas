@@ -1,0 +1,86 @@
+{
+  "review_completed_utc": "2026-10-09T06:14:15.771246+00:00",
+  "reviewer_role": "independent_adversarial_genetic_source_provenance_reviewer",
+  "verdict": "PASS_EXACT_THREE_CORE_CONTAINER_ACQUISITION_ONLY",
+  "reviewed_script_sha256": "7fc3649b0a58f15e023ec08a8b8c084a33457be9d4f1c82a4ea61e5a1143c761",
+  "reviewed_registry_sha256": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+  "registry_identical_to_sealed_v1_commit": "c94ca550875b5ddeaae0b7f6eb99d861c4150d16",
+  "input_sha256": {
+    "sleep_unified_research_v3/scripts/21_recover_remaining_core_containers.py": "7fc3649b0a58f15e023ec08a8b8c084a33457be9d4f1c82a4ea61e5a1143c761",
+    "config/public_gwas_sources.tsv": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+    "sleep_unified_research_v3/logs/breast_public_HEAD_v3.txt": "2b105594b44a1c4280bfa06aa8b4175d1443247d63fe71dfca5715ac69865c18",
+    "sleep_unified_research_v3/logs/prostate_public_HEAD_v3.txt": "dab9474cd08e7d0445eee704297f6736cdb4ff53d85912fd93b0096414dd04bd",
+    "sleep_unified_research_v3/logs/ovarian_public_HEAD_v3.txt": "e4865d81365b7127a6f524ea85fb1d7529ae7f683702099ee2ae4021e41d19af"
+  },
+  "planned_response_body_bytes": 11073087177,
+  "planned_retention_bytes_chunks_and_final": 22146174354,
+  "minimum_initial_SSD_free_bytes": 27514883474,
+  "runtime_SSD_floor_bytes": 5905580032,
+  "workers": 8,
+  "max_pending_futures": 8,
+  "chunk_bytes": 67108864,
+  "ranges_by_trait": {
+    "breast_cancer": 71,
+    "prostate_cancer": 38,
+    "ovarian_cancer": 57
+  },
+  "range_count_total": 166,
+  "deadline_seconds": 5400,
+  "deadline_clock": "monotonic",
+  "deadline_semantics": "operational guard; roughly 1-second polling plus owned-process cleanup (up to 30-second TERM grace), bounded chunk hashing, and OS I/O",
+  "max_curl_seconds_per_chunk": 600,
+  "retries": 0,
+  "curl_version_verified": "8.7.1",
+  "initial_script_findings": {
+    "script_sha256": "2c1197883742ec0efed1f8452139ec84bad2817095b517d670137b50ef9a787c",
+    "first_failed_future_did_not_cancel_queued_transfers": true,
+    "deadline_guard_only_after_success": true,
+    "only_initial_SSD_reserve_check": true,
+    "no_network_executor_semantics_check": {
+      "workers": 1,
+      "queued": 3,
+      "simulated_first_failure": true,
+      "observed_started_tasks": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "resolved_in_final_revision": [
+    "bounded_max_8_dispatch",
+    "shared_stop_on_any_exception",
+    "terminate_only_owned_curl_then_escalate_after_30s",
+    "cancel_pending_futures",
+    "periodic_checks_while_waiting_and_assembly",
+    "monotonic_deadline",
+    "runtime_SSD_5GiB_plus_512MiB_allowance",
+    "exact_unique_traitset",
+    "HTTPS_only_initial_and_redirect_protocols",
+    "top_level_preserved_failure_receipt"
+  ],
+  "checks": {
+    "AST_syntax": "PASS",
+    "exact_unique_traitset": "PASS",
+    "all_three_saved_HEAD_identity_gates": "PASS",
+    "all_166_ranges_contiguous_exact_cover": "PASS",
+    "frozen_registry_matches_sealed_v1": "PASS",
+    "extracted_guard_healthy_case": "PASS",
+    "extracted_guard_internal_low_case": "PASS",
+    "extracted_guard_SSD_low_case": "PASS",
+    "extracted_guard_deadline_case": "PASS"
+  },
+  "prelaunch_resource_snapshot_UTC": "2026-10-09 approximately 06:12 UTC",
+  "SSD_free_snapshot_bytes": 1113193447424,
+  "internal_free_snapshot_bytes": 1410527232,
+  "download_started_by_reviewer": false,
+  "source_body_network_bytes_by_reviewer": 0,
+  "scientific_results_examined": false,
+  "native_analysis_run": false,
+  "original_inputs_modified": false,
+  "sealed_v1_modified": false,
+  "extension_acquisition_admitted": false,
+  "rights_scope": "registered_public sources only; no new license grant inferred from HTTP200",
+  "remaining_blocking_fixes": [],
+  "postdownload_admission_requirement": "Do not admit any container or downstream scientific analysis until exact frozen full SHA256 and acquisition receipts pass."
+}

@@ -1,0 +1,352 @@
+{
+  "review": "statistical_mvp_preprocessing_postexecution_v3",
+  "completed_utc": "2026-10-09T06:17:12.202161+00:00",
+  "verdict": "RECEIPT_CONCORDANT_RESULT_FREE_MATERIALIZATION_WITH_UNRESOLVED_CI_UNCERTAINTY",
+  "necessary_method_fixes_identified": [],
+  "receipt_and_prelaunch_review_SHA256": {
+    "sleep_unified_research_v3/manifests/mvp_preprocessing_execution_plan_v3.json": "e42c1bcc6488d73f4e505132b6bbf5607868f64b65ae1e940aec6bd8e2e06e75",
+    "sleep_unified_research_v3/logs/mvp_preprocessing_worker_receipt_v3.json": "eca1eb2bdc3a9cec553e1cd6712002b30315faacbd71e543778c365348846923",
+    "sleep_unified_research_v3/logs/mvp_preprocessing_execution_receipt_v3.json": "80182225ecee71f43faa3cf407d8d953d005b81583c75839f4110b39930c0e15",
+    "sleep_unified_research_v3/logs/mvp_preprocessing_native_v3.log": "a872f997a701f79da338fe06a4b75f6ab526db312d1b65c79a735661ad8bafad",
+    "sleep_unified_research_v3/reviews/statistical_mvp_preprocessing_v3.json": "1c779298607374acfe5d6ff9d6fcbd4d4ea38f576a69758f9aaca003b33e1372",
+    "sleep_unified_research_v3/reviews/statistical_mvp_preprocessing_v3.md": "1091509147a9c2a6f10e73cd87f9ae5ff1b4fc97d430c6c2bab7cb435a4849d2"
+  },
+  "binding_and_arithmetic_checks": {
+    "actual_plan_bound_to_both_receipts": true,
+    "actual_worker_receipt_hash_match": true,
+    "actual_log_hash_match": true,
+    "plan_before_and_run_before_after_ledgers_exact": true,
+    "all_expected_registered_input_hashes_match_plan": true,
+    "all_14_independently_rehashed_nonraw_dependencies_match": true,
+    "all_12_prelaunch_reviewed_files_unchanged": true,
+    "prelaunch_report_MD_unchanged": true,
+    "prelaunch_report_JSON_unchanged": true,
+    "worker_code_hash_match": true,
+    "worker_chain_hash_matches_pinned_plan": true,
+    "actual_output_hash_matches_both_receipts": true,
+    "actual_output_byte_count_match": true,
+    "combined_output_bytes_match": true,
+    "exact_source_row_reconciliation": true,
+    "whole_source_centering_buckets_reconcile": true,
+    "retained_P_CI_buckets_reconcile": true,
+    "retained_orientation_signs_reconcile": true,
+    "retained_chain_plus_count_reconciles": true,
+    "literal_missing_SE_count_reconciles": true,
+    "header_matches_pinned_schema": true,
+    "N_eff_matches_independent_formula": true,
+    "resource_and_process_reported_pass": true,
+    "registered_source_rows_and_minimum_output_pass": true,
+    "no_h2_rg_or_pair_admission_in_receipts": true
+  },
+  "dependency_checks": [
+    {
+      "dependency": "source",
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/new_validation_sources/GCST90475826.tsv.gz",
+      "expected_SHA256": "46b62349ba0d98b22bf302be973bb54a80707cfb02ce953426f8224910761835",
+      "after_execution_receipt_SHA256": "46b62349ba0d98b22bf302be973bb54a80707cfb02ce953426f8224910761835",
+      "reviewer_rehashed": false,
+      "verification": "Inherited raw-source before/after receipt and pinned acquisition/schema evidence; raw GWAS body not read."
+    },
+    {
+      "dependency": "hm3_reference",
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/reference/panukbb_hm3_variant_reference.tsv.gz",
+      "expected_SHA256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+      "after_execution_receipt_SHA256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+      "pass": true
+    },
+    {
+      "dependency": "hm3_alleles",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist",
+      "expected_SHA256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "after_execution_receipt_SHA256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "pass": true
+    },
+    {
+      "dependency": "chain",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz",
+      "expected_SHA256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "after_execution_receipt_SHA256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "pass": true
+    },
+    {
+      "dependency": "historical_47",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "expected_SHA256": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+      "after_execution_receipt_SHA256": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+      "pass": true
+    },
+    {
+      "dependency": "historical_streaming_helper",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "expected_SHA256": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+      "after_execution_receipt_SHA256": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+      "pass": true
+    },
+    {
+      "dependency": "chain_helper",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/liftover_chain.py",
+      "expected_SHA256": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+      "after_execution_receipt_SHA256": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+      "pass": true
+    },
+    {
+      "dependency": "worker",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/scripts/19_materialize_mvp_hm3.py",
+      "expected_SHA256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+      "after_execution_receipt_SHA256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+      "pass": true
+    },
+    {
+      "dependency": "runner",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/scripts/20_run_mvp_preprocessing.py",
+      "expected_SHA256": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+      "after_execution_receipt_SHA256": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+      "pass": true
+    },
+    {
+      "dependency": "python_binary",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python3.9",
+      "expected_SHA256": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba",
+      "after_execution_receipt_SHA256": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba",
+      "pass": true
+    },
+    {
+      "dependency": "protocol",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/FROZEN_MVP_PREPROCESSING_PROTOCOL_v4.md",
+      "expected_SHA256": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+      "after_execution_receipt_SHA256": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+      "pass": true
+    },
+    {
+      "dependency": "acquisition_receipt",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/logs/mvp_insomnia_acquisition_receipt_v1.json",
+      "expected_SHA256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+      "after_execution_receipt_SHA256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+      "pass": true
+    },
+    {
+      "dependency": "original_schema_receipt",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/logs/mvp_insomnia_source_schema_v1.json",
+      "expected_SHA256": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+      "after_execution_receipt_SHA256": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+      "pass": true
+    },
+    {
+      "dependency": "definition_contract",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json",
+      "expected_SHA256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "after_execution_receipt_SHA256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "pass": true
+    },
+    {
+      "dependency": "protocol_amendment",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/manifests/protocol_amendment_v3_receipt.json",
+      "expected_SHA256": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8",
+      "after_execution_receipt_SHA256": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8",
+      "reviewer_rehashed": true,
+      "actual_current_SHA256": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8",
+      "pass": true
+    }
+  ],
+  "prelaunch_reviewed_file_checks": [
+    {
+      "path": "sleep_unified_research_v3/FROZEN_MVP_PREPROCESSING_PROTOCOL_v4.md",
+      "expected_prelaunch_SHA256": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+      "actual_current_SHA256": "7d8b158a22f28615a3e04e18cc5efbc21348a749f3ca72a7b52094a27792ee18",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v3/scripts/19_materialize_mvp_hm3.py",
+      "expected_prelaunch_SHA256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+      "actual_current_SHA256": "7794f47d81f6712f33d233caa7920f283dbc4a20d7b222bf5ba9f4a45fb2bd3f",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v3/scripts/20_run_mvp_preprocessing.py",
+      "expected_prelaunch_SHA256": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+      "actual_current_SHA256": "2f8094d4eb33c8ebcb733bea7a09bb18a58fd05717a4732facaeb930f721ddd6",
+      "pass": true
+    },
+    {
+      "path": "scripts/liftover_chain.py",
+      "expected_prelaunch_SHA256": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+      "actual_current_SHA256": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064",
+      "pass": true
+    },
+    {
+      "path": "discovery_extension/scripts/47_stream_replication_sources.py",
+      "expected_prelaunch_SHA256": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+      "actual_current_SHA256": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+      "pass": true
+    },
+    {
+      "path": "discovery_extension/scripts/streaming_io.py",
+      "expected_prelaunch_SHA256": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+      "actual_current_SHA256": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/logs/mvp_insomnia_acquisition_receipt_v1.json",
+      "expected_prelaunch_SHA256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+      "actual_current_SHA256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/logs/mvp_insomnia_source_schema_v1.json",
+      "expected_prelaunch_SHA256": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+      "actual_current_SHA256": "cfd82623793d01ea82313ea7058d5cf7929562c3c3c4fc7814cf0a860ff6511f",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v1/scripts/06_audit_mvp_schema.py",
+      "expected_prelaunch_SHA256": "1026737c5f0085b6b2cad1945f5756026625821b348ffe4451a58437fc9afc5c",
+      "actual_current_SHA256": "1026737c5f0085b6b2cad1945f5756026625821b348ffe4451a58437fc9afc5c",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json",
+      "expected_prelaunch_SHA256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "actual_current_SHA256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v2/source_definition_review/provenance_v2_source_definition_addendum.md",
+      "expected_prelaunch_SHA256": "cd194adcb6a30bf70833e93f181cf9d734e89e1ec060a98b2d6f22336e043522",
+      "actual_current_SHA256": "cd194adcb6a30bf70833e93f181cf9d734e89e1ec060a98b2d6f22336e043522",
+      "pass": true
+    },
+    {
+      "path": "sleep_unified_research_v2/manifests/protocol_amendment_v3_receipt.json",
+      "expected_prelaunch_SHA256": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8",
+      "actual_current_SHA256": "c90999cee41a54e9964396864d4dbe0eb2b954a58e7db8c34847ad4323baedf8",
+      "pass": true
+    }
+  ],
+  "source_row_reconciliation": {
+    "source_rows": 19703815,
+    "mutually_exclusive_exclusions": 18877788,
+    "output_rows": 826027,
+    "exclusive_exclusions": {
+      "not_nonambiguous_HM3": 18525750,
+      "invalid_OR_P_CI_or_R2_le_0_9": 350425,
+      "invalid_AF_or_MAF_le_0_01": 1294,
+      "duplicate_eligible_HM3_rsID": 87,
+      "allele_mismatch_or_ambiguous": 230,
+      "chain_unmapped": 2
+    }
+  },
+  "diagnostic_percentages": [
+    {
+      "metric": "source_retained",
+      "numerator": 826027,
+      "denominator": 19703815,
+      "percent": 4.192218613502004
+    },
+    {
+      "metric": "whole_source_R2_gt_1",
+      "numerator": 89380,
+      "denominator": 19703815,
+      "percent": 0.45361773849378917
+    },
+    {
+      "metric": "whole_source_log_CI_centering_le_0_01_SE",
+      "numerator": 13956325,
+      "denominator": 19703815,
+      "percent": 70.83057265813753
+    },
+    {
+      "metric": "whole_source_log_CI_centering_gt_0_1_SE",
+      "numerator": 12190,
+      "denominator": 19703815,
+      "percent": 0.061866191902431075
+    },
+    {
+      "metric": "retained_P_CI_relative_error_le_0_01",
+      "numerator": 286899,
+      "denominator": 826027,
+      "percent": 34.73239978838464
+    },
+    {
+      "metric": "retained_P_CI_relative_error_gt_0_1",
+      "numerator": 94482,
+      "denominator": 826027,
+      "percent": 11.4381249039075
+    },
+    {
+      "metric": "retained_P_CI_relative_error_gt_1",
+      "numerator": 3237,
+      "denominator": 826027,
+      "percent": 0.39187581035486735
+    },
+    {
+      "metric": "retained_P_CI_relative_error_gt_10",
+      "numerator": 1,
+      "denominator": 826027,
+      "percent": 0.00012106141808923921
+    }
+  ],
+  "whole_source_centering_buckets_exclusive": {
+    "0.001": 5627548,
+    "0.01": 8328777,
+    "0.05": 4937934,
+    "0.1": 797366,
+    "1": 12190
+  },
+  "retained_P_CI_buckets_exclusive": {
+    "0.05": 315286,
+    "1": 91245,
+    "0.01": 246845,
+    "0.1": 129360,
+    "0.001": 40054,
+    "10": 3236,
+    "gt10": 1
+  },
+  "P_CI_relative_error_definition": "abs(P_from_CI_Z - source_P) / max(source_P, 1e-300)",
+  "current_output_SHA256": "84b64bf6bd0348f7c4c455ce8f9976c2091fe8ef2f77df6fddca47d73a136176",
+  "current_output_bytes": 11263155,
+  "worker_peak_observed_RSS_MiB": 602.234375,
+  "elapsed_execution_seconds": 179.58400988578796,
+  "internal_free_before_GiB": 1.3153533935546875,
+  "inherited_raw_source_hash_VERIFIED_by_runner_before_and_after": true,
+  "raw_GWAS_body_read_by_reviewer": false,
+  "processed_output_rehashed_but_not_variant_stream_reparsed_by_methods_reviewer": true,
+  "source_h2_or_new_pair_outcomes_examined": false,
+  "new_row_filters_or_thresholds_proposed": false,
+  "postexecution_mapping_numeric_independent_audit_scope": "This review independently validates bindings and receipt arithmetic. Full retained-row source/reference matching is separate numerical-review work.",
+  "uncertainty_interpretation": [
+    "No OR lies outside its reported CI in the worker diagnostics; centering discrepancies are not zero.",
+    "12,190 whole-source variants are in the (>0.1, <=1) SE-unit centering bin; retained-specific centering is not available in this receipt.",
+    "94,482 retained variants have P relative error >10%; this is not the same as a 10% error in Z or SE.",
+    "Relative error is sensitive to reported P rounding/underflow and asymmetric as a P-ratio metric; aggregate buckets do not establish the cause or bias direction.",
+    "95% log-scale Wald construction and upstream EA/EBI conversion have not been independently certified.",
+    "Keep all 826,027 retained rows under the frozen rule; no favorable P/CI or centering selection.",
+    "Source/outcome h2/intercept, prospective power, overlap and locked-family admission remain pending.",
+    "The initial 1.315 GiB internal headroom supports only the lighter preprocessing guard and does not pass the full 3 GiB native guard."
+  ]
+}

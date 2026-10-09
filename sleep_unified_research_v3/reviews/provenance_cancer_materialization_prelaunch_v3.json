@@ -1,0 +1,124 @@
+{
+  "review_completed_utc": "2026-10-09T06:25:29.667559+00:00",
+  "verdict": "PASS_PRELAUNCH_EXACT_ELIGIBLE_SOURCE_RAW_PROJECTION_ONLY",
+  "reviewed_wrapper_sha256": "227fa32366a24e477f80ef1a72aa4deca0a72a93503ff710008be25f52dc3b45",
+  "metadata_sha256": {
+    "config/public_gwas_sources.tsv": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93",
+    "config/analysis_panel.tsv": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+    "config/analysis_panel.lock.json": "4be67d7255235742d236e949c27e6e3b9eee6e6f5195c0b9d001be26c50d710c",
+    "sleep_unified_research_v2/tables/CURRENT_CORE_SOURCE_STATUS.tsv": "1380e493699742fd3b5c2c885038c1a82c6ccebb718aec41612aa3ec86963561"
+  },
+  "original_helper_bindings": [
+    {
+      "path": "scripts/15_materialize_bcac_breast.py",
+      "original_main_659d01cf_Git_blob": "71488f5e3f4f6927bc20a475e0dc24f1bcec91af",
+      "HEAD_Git_blob": "71488f5e3f4f6927bc20a475e0dc24f1bcec91af",
+      "disk_Git_blob": "71488f5e3f4f6927bc20a475e0dc24f1bcec91af",
+      "disk_sha256": "5b62f26a6a110d7893bb60048be0c417aa99f8c0add830d50aa033963165fd71",
+      "unchanged_original": true
+    },
+    {
+      "path": "scripts/20_materialize_practical_prostate.py",
+      "original_main_659d01cf_Git_blob": "5f21832d8e26bc22b13a4dad4c472cc5d2057cf7",
+      "HEAD_Git_blob": "5f21832d8e26bc22b13a4dad4c472cc5d2057cf7",
+      "disk_Git_blob": "5f21832d8e26bc22b13a4dad4c472cc5d2057cf7",
+      "disk_sha256": "9cde9f34d1f5ebf26e2ab160a6537a5c0bfdba626f59dabeb23635b926af2c59",
+      "unchanged_original": true
+    },
+    {
+      "path": "scripts/16_materialize_phelan_ovarian.py",
+      "original_main_659d01cf_Git_blob": "8c96c33a8e32fe0d5af650dc287bff84ff3a89d2",
+      "HEAD_Git_blob": "8c96c33a8e32fe0d5af650dc287bff84ff3a89d2",
+      "disk_Git_blob": "8c96c33a8e32fe0d5af650dc287bff84ff3a89d2",
+      "disk_sha256": "5c2326bf8afe2e95e7b64d27359ce1f48fd9aae183f0a4fb54074aff0634f9e0",
+      "unchanged_original": true
+    },
+    {
+      "path": "scripts/panel_guard.py",
+      "original_main_659d01cf_Git_blob": "9181b38a2ecbb430397f50c5911840dedcfee0cf",
+      "HEAD_Git_blob": "9181b38a2ecbb430397f50c5911840dedcfee0cf",
+      "disk_Git_blob": "9181b38a2ecbb430397f50c5911840dedcfee0cf",
+      "disk_sha256": "ec0883992f074c88e95af36191c209b6262a2fc5ffb9182b85b65dbd0ba7e3e2",
+      "unchanged_original": true
+    },
+    {
+      "path": "scripts/00_validate_panel.py",
+      "original_main_659d01cf_Git_blob": "ed4f9d6ee0c6e197b922b466f2feefd377f3f1e1",
+      "HEAD_Git_blob": "ed4f9d6ee0c6e197b922b466f2feefd377f3f1e1",
+      "disk_Git_blob": "ed4f9d6ee0c6e197b922b466f2feefd377f3f1e1",
+      "disk_sha256": "e3d978e8dba2c3f4d1b760b800de940bd5fb20b2c5b8d6e27ba87d1840658077",
+      "unchanged_original": true
+    }
+  ],
+  "eligible_source_condition": "status EXACT_HISTORICAL_SOURCE_REACQUIRED plus byte/SHA/URL equality to unique frozen registry row and source rehash",
+  "prostate_current_admission": "BLOCKED_SHA_MISMATCH_PRESERVED",
+  "one_worker_scope": "one invocation; eligible traits must be run sequentially",
+  "resource_basis": "unchanged stdlib helpers retain one source row and counters; no pandas, HM3 dictionary or estimator; all large inputs/outputs/TMPDIR on SSD",
+  "prospective_limits": {
+    "internal_launch_bytes": 268435456,
+    "internal_emergency_floor_bytes": 134217728,
+    "SSD_launch_bytes": 7516192768,
+    "SSD_runtime_floor_bytes": 5368709120,
+    "sampled_worker_RSS_stop_bytes": 134217728,
+    "output_final_and_partial_limit_bytes": 2147483648,
+    "entire_stage_deadline_seconds": 3600,
+    "clock": "monotonic",
+    "owned_child_TERM_grace_seconds": 30,
+    "monitor_sleep_seconds": 2
+  },
+  "resource_observation": {
+    "internal_free_bytes": 317370368,
+    "SSD_free_bytes": 1096890187776
+  },
+  "guard_net_free_tests": [
+    {
+      "scenario": "healthy",
+      "expected": null,
+      "observed": null,
+      "pass": true
+    },
+    {
+      "scenario": "internal_low",
+      "expected": "INTERNAL_EMERGENCY_FLOOR",
+      "observed": "INTERNAL_EMERGENCY_FLOOR",
+      "pass": true
+    },
+    {
+      "scenario": "SSD_low",
+      "expected": "SSD_RUNTIME_RESERVE",
+      "observed": "SSD_RUNTIME_RESERVE",
+      "pass": true
+    },
+    {
+      "scenario": "deadline",
+      "expected": "ENTIRE_STAGE_TIME_LIMIT",
+      "observed": "ENTIRE_STAGE_TIME_LIMIT",
+      "pass": true
+    }
+  ],
+  "synthetic_gzip_test": {
+    "gzip_bytes_different_due_to_mtime": true,
+    "decompressed_bytes_sha256_and_newlines_equal": true,
+    "source_data_read": false
+  },
+  "resolved_initial_findings": [
+    "guarded input/output hash and decode loops",
+    "full-stage clock starts before hashing",
+    "owned-child finally cleanup on unexpected exceptions",
+    "top-level failure receipt",
+    "registry identity binding including ovarian supplied hash",
+    "final after hashes follow decoded comparisons"
+  ],
+  "remaining_blocking_fixes": [],
+  "important_limits": [
+    "RSS is sampled main-worker RSS, not a hard kernel address-space cap or total-process-tree measurement",
+    "operational deadline includes polling and cleanup latency",
+    "exact decompressed equality must still be verified after execution; gzip header differences do not establish content differences",
+    "unchanged source helpers may remove their own failed temporary output; no original input may be modified"
+  ],
+  "original_estimator_and_QC_thresholds_changed": false,
+  "full_native_LDSC_3GiB_guard_unchanged": true,
+  "large_source_or_raw_bodies_read_in_prelaunch_review": false,
+  "native_helpers_executed_by_reviewer": false,
+  "h2_or_rg_accessed": false
+}
