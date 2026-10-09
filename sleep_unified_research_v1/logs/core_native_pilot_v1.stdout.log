@@ -1,0 +1,71 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi \
+--rg /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Thu Oct  8 23:10:43 2026
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz ...
+RuntimeWarning: compression has no effect when passing a non-binary object as input for file /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz
+Read summary statistics for 1133335 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1130007 SNPs remain.
+After merging with regression SNP LD, 1130007 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz ...
+RuntimeWarning: compression has no effect when passing a non-binary object as input for file /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1130007 SNPs remain.
+1006820 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0567 (0.0027)
+Lambda GC: 1.3101
+Mean Chi^2: 1.3657
+Intercept: 1.0113 (0.0093)
+Ratio: 0.0309 (0.0254)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.2113 (0.0066)
+Lambda GC: 2.7872
+Mean Chi^2: 3.9514
+Intercept: 1.0248 (0.0277)
+Ratio: 0.0084 (0.0094)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0189 (0.0025)
+Mean z1*z2: 0.2108
+Intercept: 0.0495 (0.0095)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1723 (0.023)
+Z-score: 7.4777
+P: 7.5635e-14
+
+Printing block jackknife delete values to sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                                                             p1                                                                                                         p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz 0.1723 0.0230 7.4777 0.0000  0.2113     0.0066  1.0248     0.0277    0.0495       0.0095
+
+Analysis finished at Thu Oct  8 23:11:51 2026
+Total time elapsed: 1.0m:8.260000000000005s

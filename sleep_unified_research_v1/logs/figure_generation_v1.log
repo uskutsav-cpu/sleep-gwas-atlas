@@ -1,0 +1,20 @@
+Matplotlib is building the font cache; this may take a moment.
+Cannot decode configuration file PosixPath('/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/mpl-data/stylelib/.__classic_test_patch.mplstyle') as utf-8.
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/scripts/08_make_evidence_figures.py", line 12, in <module>
+    import matplotlib.pyplot as plt
+  File "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/pyplot.py", line 62, in <module>
+    from matplotlib import style as style  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/style/__init__.py", line 1, in <module>
+    from .core import available, context, library, reload_library, use
+  File "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/style/core.py", line 225, in <module>
+    _base_library = read_style_directory(BASE_LIBRARY_PATH)
+  File "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/style/core.py", line 203, in read_style_directory
+    styles[path.stem] = _rc_params_in_file(path)
+                        ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/plotting_runtime/venv/lib/python3.13/site-packages/matplotlib/__init__.py", line 908, in _rc_params_in_file
+    for line_no, line in enumerate(fd, 1):
+                         ~~~~~~~~~^^^^^^^
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb0 in position 37: invalid start byte

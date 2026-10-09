@@ -1,0 +1,74 @@
+{
+  "recorded_utc": "2026-10-09T04:53:13.032253+00:00",
+  "authorized_action": "Dedicated research branch push only; user Phase12",
+  "branch": {
+    "args": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "code": 0,
+    "stdout": "research/sleep-unified-v1-2026-10-08\n",
+    "stderr": ""
+  },
+  "base_HEAD": {
+    "args": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "code": 0,
+    "stdout": "5a59987e9c7228190427660fb31d8bd980a2dfdc\n",
+    "stderr": ""
+  },
+  "remote": {
+    "args": [
+      "git",
+      "remote",
+      "-v"
+    ],
+    "code": 0,
+    "stdout": "origin\thttps://github.com/uskutsav-cpu/sleep-gwas-atlas.git (fetch)\norigin\thttps://github.com/uskutsav-cpu/sleep-gwas-atlas.git (push)\n",
+    "stderr": ""
+  },
+  "repository_permissions": {
+    "args": [
+      "gh",
+      "repo",
+      "view",
+      "uskutsav-cpu/sleep-gwas-atlas",
+      "--json",
+      "nameWithOwner,isPrivate,viewerPermission"
+    ],
+    "code": 0,
+    "stdout": "{\"isPrivate\":false,\"nameWithOwner\":\"uskutsav-cpu/sleep-gwas-atlas\",\"viewerPermission\":\"ADMIN\"}\n",
+    "stderr": ""
+  },
+  "remote_main_before": {
+    "args": [
+      "git",
+      "ls-remote",
+      "--heads",
+      "origin",
+      "main"
+    ],
+    "code": 0,
+    "stdout": "303c905c229104b7bf623df6de7431abb87e0727\trefs/heads/main\n",
+    "stderr": ""
+  },
+  "target_branch_before": {
+    "args": [
+      "git",
+      "ls-remote",
+      "--heads",
+      "origin",
+      "research/sleep-unified-v1-2026-10-08"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "existing_work_preserved": "Original checkout/worktrees never reset or edited; isolated shared-object sparse clone only",
+  "large_GWAS_source_bodies_in_package": false,
+  "internal_free_bytes": 189575168
+}

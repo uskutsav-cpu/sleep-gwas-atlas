@@ -1,0 +1,117 @@
+[
+  {
+    "command": [
+      "diskutil",
+      "info",
+      "/Volumes/Extreme SSD"
+    ],
+    "returncode": 0,
+    "stdout": "   Device Identifier:         disk4s1\n   Device Node:               /dev/disk4s1\n   Whole:                     No\n   Part of Whole:             disk4\n\n   Volume Name:               Extreme SSD\n   Mounted:                   Yes\n   Mount Point:               /Volumes/Extreme SSD\n\n   Partition Type:            Microsoft Basic Data\n   File System Personality:   ExFAT\n   Type (Bundle):             exfat\n   Name (User Visible):       ExFAT\n\n   OS Can Be Installed:       No\n   Media Type:                Generic\n   Protocol:                  USB\n   SMART Status:              Verified\n   Volume UUID:               77FD98CC-B09E-3DAA-ACC0-82FF2B776B28\n   Disk / Partition UUID:     810DE8A5-CE26-4C8B-A15E-229CAF9E7173\n   Partition Offset:          1048576 Bytes (2048 512-Byte-Device-Blocks)\n\n   Disk Size:                 4.0 TB (4000751370752 Bytes) (exactly 7813967521 512-Byte-Units)\n   Device Block Size:         512 Bytes\n\n   Volume Total Space:        4.0 TB (4000734773248 Bytes) (exactly 7813935104 512-Byte-Units)\n   Volume Used Space:         2.9 TB (2854988283904 Bytes) (exactly 5576148992 512-Byte-Units) (71.4%)\n   Volume Free Space:         1.1 TB (1145746489344 Bytes) (exactly 2237786112 512-Byte-Units) (28.6%)\n   Allocation Block Size:     1048576 Bytes\n\n   Media OS Use Only:         No\n   Media Read-Only:           No\n   Volume Read-Only:          No\n\n   Device Location:           External\n   Removable Media:           Fixed\n\n   Solid State:               Yes\n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "df",
+      "-k",
+      "/Volumes/Extreme SSD",
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas"
+    ],
+    "returncode": 0,
+    "stdout": "Filesystem   1024-blocks       Used  Available Capacity iused   ifree %iused  Mounted on\n/dev/disk4s1  3906967552 2788074496 1118893056    72%       1       0  100%   /Volumes/Extreme SSD\n/dev/disk3s1   239362496  209806412     772004   100% 1997580 7720040   21%   /System/Volumes/Data\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "sysctl",
+      "hw.memsize",
+      "hw.ncpu",
+      "vm.swapusage"
+    ],
+    "returncode": 0,
+    "stdout": "hw.memsize: 8589934592\nhw.ncpu: 8\nvm.swapusage: total = 3072.00M  used = 1894.56M  free = 1177.44M  (encrypted)\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "vm_stat"
+    ],
+    "returncode": 0,
+    "stdout": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     3966.\nPages active:                                 110404.\nPages inactive:                               100281.\nPages speculative:                              9354.\nPages throttled:                                   0.\nPages wired down:                             114380.\nPages purgeable:                                 431.\n\"Translation faults\":                     1712145721.\nPages copy-on-write:                        19624651.\nPages zero filled:                         796855650.\nPages reactivated:                         677811327.\nPages purged:                               30702506.\nFile-backed pages:                             83339.\nAnonymous pages:                              136700.\nPages stored in compressor:                   532607.\nPages occupied by compressor:                 149952.\nDecompressions:                            772200421.\nCompressions:                              869086773.\nPageins:                                    58269691.\nPageouts:                                     739646.\nSwapins:                                    16433233.\nSwapouts:                                   21582750.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-C",
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas",
+      "branch",
+      "-avv"
+    ],
+    "returncode": 0,
+    "stdout": "  publication/sleep-phenome-evidence-v1                      5a59987e [origin/publication/sleep-phenome-evidence-v1] Bind validated CI and finalize qualified author handoff\n* research/sleep-unified-v1-2026-10-08                       5a59987e Bind validated CI and finalize qualified author handoff\n  remotes/origin/HEAD                                        -> origin/publication/sleep-phenome-evidence-v1\n  remotes/origin/brain6/continuation-2026-10-07              20245f1b Bind multi-table manuscript claims to all supporting inputs\n  remotes/origin/brain6/translational-psychiatry-research-v1 0332afcf Record successful clean-checkout and hosted validation with final artifact checksums\n  remotes/origin/brain6/translational-research-completion-v2 0332afcf Record successful clean-checkout and hosted validation with final artifact checksums\n  remotes/origin/claude/neuro-immune-cardio                  8023d143 feat: acceptance program, ledger terminal states, first PLACO+ screen\n  remotes/origin/feature/brain6-computational-v03            660c9b59 Add audited Brain6 v0.3 computational audits and full-family analysis\n  remotes/origin/feature/brain6-deep-analysis-v02            8a5adc70 Integrate Track B deep analysis and Brain6 workflow\n  remotes/origin/frailty-paper-v1                            94c920ef Audit frailty diagnostic completion and submission inputs\n  remotes/origin/main                                        303c905c Merge pull request #2 from uskutsav-cpu/publish/frailty-status-2026-09-29\n  remotes/origin/publication/sleep-phenome-evidence-v1       5a59987e Bind validated CI and finalize qualified author handoff\n  remotes/origin/publish/frailty-manuscript-2026-10-01       f80591c8 Refresh Frailty evidence and prepare journal draft\n  remotes/origin/publish/frailty-paper-v1-snapshot           066f3309 Update munging contract fixture for storage guard\n  remotes/origin/publish/frailty-status-2026-09-29           6fae91ac Record current frailty LAVA status and audit figures\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-C",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas",
+      "worktree",
+      "list",
+      "--porcelain"
+    ],
+    "returncode": 0,
+    "stdout": "worktree /Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas\nHEAD 659d01cf5b10a6debf1841404e7e01ef4750f755\nbranch refs/heads/main\n\nworktree /Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03\nHEAD 94c920efceb3b238ec57da1d3d9395c9f66fcfd5\nbranch refs/heads/frailty-paper-v1\n\nworktree /Users/swethasunilkumar/Documents/Codex/2026-10-01/frailty-publish\nHEAD f80591c8c555a085f3d2b1791dd90ba63b47413f\nbranch refs/heads/publish/frailty-manuscript-2026-10-01\n\nworktree /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas\nHEAD 0332afcf235f1f98bc92f22393a96409e3bde1b6\nbranch refs/heads/brain6/translational-psychiatry-research-v1\n\nworktree /Users/swethasunilkumar/Documents/Codex/2026-10-08/goa-2/work/sleep-gwas-atlas\nHEAD 0332afcf235f1f98bc92f22393a96409e3bde1b6\nbranch refs/heads/brain6/translational-research-completion-v2\nlocked initializing\n\nworktree /Users/swethasunilkumar/Documents/Codex/2026-10-08/goa/work/sleep-gwas-atlas\nHEAD 5a59987e9c7228190427660fb31d8bd980a2dfdc\nbranch refs/heads/publication/sleep-phenome-evidence-v1\n\nworktree /Volumes/Extreme SSD/brain6-work/publish-snapshot\nHEAD 6fae91ac8c4ed06b4e1b19f12a2e6d2a03a2c22e\nbranch refs/heads/publish/frailty-status-2026-09-29\n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-C",
+      "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas",
+      "status",
+      "--short"
+    ],
+    "returncode": 0,
+    "stdout": " M tests/test_candidate_validation_manifest.py\n M tests/test_contracts.py\n M tests/test_track_b_blocker_ledger.py\n M tests/test_track_b_cell_class_execution_v4.py\n M tests/test_track_b_dense_qc.py\n M tests/test_track_b_finemapping_continuation_gate.py\n M tests/test_track_b_finemapping_contract.py\n M tests/test_track_b_freeze.py\n M tests/test_track_b_lava_continuation_v2.py\n M tests/test_track_b_lava_reference_archive_eviction.py\n M tests/test_track_b_lava_runner.py\n M tests/test_track_b_lava_supersession_lock.py\n M tests/test_track_b_local_inputs.py\n M tests/test_track_b_placo_runner.py\n M tests/test_track_b_placo_sequential_v2.py\n M tests/test_track_b_placo_terminal_gate_v2.py\n M tests/test_track_b_pleiotropy_contract.py\n M tests/test_track_b_ram_aware_execution.py\n M tests/test_track_b_replication_ldsc.py\n?? work/\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "git version 2.50.1 (Apple Git-155)\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "gh",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "gh version 2.95.0 (2026-06-17)\nhttps://github.com/cli/cli/releases/tag/v2.95.0\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "ps",
+      "-axo",
+      "pid,ppid,%cpu,%mem,etime,command"
+    ],
+    "returncode": 0,
+    "stdout": "90561 89434   0.0  0.0       00:26 /Library/Developer/CommandLineTools/usr/bin/git worktree add /Users/swethasunilkumar/Documents/Codex/2026-10-08/goa-2/work/sleep-gwas-atlas brain6/translational-research-completion-v2\n90634 89434   0.0  0.0       00:06 /bin/zsh -c find '/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS' -path '*/.ldsc-env' -prune -o -path '*/.molecular-env' -prune -o -path '*/.mr-env' -prune -o -path '*/LAVA-UKB-v1.1-repair' -prune -o -name '*l2.ldscore*' -print -o -name '*w_hm3*' -print -o -name '*eur_w*' -print -o -name '*hapmap3*' -print -o -name '*reference*manifest*' -print; find '/Volumes/Extreme SSD/brain6-work' -maxdepth 4 -type f -name '*l2.ldscore*' -print | head -10; rg -n 'ref_ld|w_ld|ldscore|hapmap3|ldsc-env|ref/' discovery_extension/provenance/stream* discovery_extension/config/streaming_acquisition_contract.json config/workflow.yaml scripts/00_setup.sh | head -80\n90641 90634   4.5  0.0       00:06 find /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS -path */.ldsc-env -prune -o -path */.molecular-env -prune -o -path */.mr-env -prune -o -path */LAVA-UKB-v1.1-repair -prune -o -name *l2.ldscore* -print -o -name *w_hm3* -print -o -name *eur_w* -print -o -name *hapmap3* -print -o -name *reference*manifest* -print\n90647 89434   0.0  0.0       00:04 /bin/zsh -c '/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/bin/python' -c 'import sys, numpy, scipy, pandas, bitarray; print(sys.version); print(numpy.__version__,scipy.__version__,pandas.__version__)'; /opt/miniconda3/bin/python -c 'import numpy, scipy, pandas, pytest; print(numpy.__version__,scipy.__version__,pandas.__version__)'; ls -la /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/ld_genotypes_research_v1; ls -la /Users/swethasunilkumar/Documents/Codex/2026-10-07/go-2/work/sleep-gwas-atlas/work/R*",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "lsof",
+      "-nP",
+      "/Volumes/Extreme SSD"
+    ],
+    "returncode": 0,
+    "stdout": "COMMAND   PID             USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME\nfind    90641 swethasunilkumar  cwd    DIR   1,21  1048576 1014928 /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/track_b/checkpoints/lava_continuations/runs/434cbca30b0ce073188b8d09def9d6bd509dccd867fd81d98b3ed647bb7b6551/conditional\nfind    90641 swethasunilkumar    5r   DIR   1,21  1048576 1014928 /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/track_b/checkpoints/lava_continuations/runs/434cbca30b0ce073188b8d09def9d6bd509dccd867fd81d98b3ed647bb7b6551/conditional\nPython  90649 swethasunilkumar  txt    REG   1,21   158976 1677224 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/.dylibs/libgcc_s.1.1.dylib\nPython  90649 swethasunilkumar  txt    REG   1,21   371440 1677218 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/.dylibs/libquadmath.0.dylib\nPython  90649 swethasunilkumar  txt    REG   1,21   148964 1675628 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/core/_multiarray_tests.cpython-310-darwin.so\nPython  90649 swethasunilkumar  txt    REG   1,21  3702944 1675436 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/core/_multiarray_umath.cpython-310-darwin.so\nPython  90649 swethasunilkumar  txt    REG   1,21  3700784 1677194 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/.dylibs/libgfortran.5.dylib\nPython  90649 swethasunilkumar  txt    REG   1,21 22672768 1677233 /Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/py310/lib/python3.10/site-packages/numpy/.dylibs/libopenblas64_.0.dylib\n",
+    "stderr": ""
+  }
+]

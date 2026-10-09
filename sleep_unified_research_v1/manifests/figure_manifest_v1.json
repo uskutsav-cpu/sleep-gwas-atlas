@@ -1,0 +1,165 @@
+{
+  "created_utc": "2026-10-09T04:45:21.474211+00:00",
+  "matplotlib_version": "3.10.7",
+  "numpy_version": "2.5.1",
+  "input_sha256": {
+    "tables/original_core_396.tsv": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+    "tables/original_extension_1200.tsv": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166",
+    "REPLICATION_RESULTS.tsv": "2b920792e70b322b8b798a401a09ada259fdcf8a343e144b27552acb3084ae67",
+    "tables/study_design_counts.tsv": "5d7485b6a8b58d58b050c15d6b3e550910ab66b04f4097f2154fcebbda593609",
+    "tables/phenotype_and_source_metadata.tsv": "1357715207a7a3779a4fdd8f5f700e42ce39239d8c1d449e99eef647f4173499",
+    "HYPOTHESIS_FEASIBILITY_MATRIX.tsv": "f1b9e58016e7cd3b0f9ae630331efd3f06a1478619bf2d11951c8184f5b97cf4",
+    "sources/recovered/results/tables/h2_summary.tsv": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67",
+    "tables/core_intercept_stage_diagnostic.tsv": "70bf63c102a3ec391faec2b97bcac26e28fb5fc22b5eddde6f5ad79ed11ecaca"
+  },
+  "figures": [
+    {
+      "figure": "01_unified_study_design",
+      "outputs": [
+        "figures/01_unified_study_design.pdf",
+        "figures/01_unified_study_design.svg",
+        "figures/01_unified_study_design.png"
+      ],
+      "source_tables": [
+        "tables/study_design_counts.tsv",
+        "REPLICATION_RESULTS.tsv"
+      ],
+      "claims": [
+        "Separate families396/1200/217",
+        "Native counts1/0/0",
+        "Independent completed count0"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "02_global_core_atlas",
+      "outputs": [
+        "figures/02_global_core_atlas.pdf",
+        "figures/02_global_core_atlas.svg",
+        "figures/02_global_core_atlas.png"
+      ],
+      "source_tables": [
+        "tables/original_core_396.tsv",
+        "tables/phenotype_and_source_metadata.tsv"
+      ],
+      "claims": [
+        "Historical global rg only",
+        "Separate frozen BH correction",
+        "No objective/self-report significance-count comparison"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "03_global_extension_atlas",
+      "outputs": [
+        "figures/03_global_extension_atlas.pdf",
+        "figures/03_global_extension_atlas.svg",
+        "figures/03_global_extension_atlas.png"
+      ],
+      "source_tables": [
+        "tables/original_extension_1200.tsv",
+        "tables/phenotype_and_source_metadata.tsv"
+      ],
+      "claims": [
+        "Historical global rg only",
+        "Separate frozen BH correction",
+        "No objective/self-report significance-count comparison"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "04_validation_evidence",
+      "outputs": [
+        "figures/04_validation_evidence.pdf",
+        "figures/04_validation_evidence.svg",
+        "figures/04_validation_evidence.png"
+      ],
+      "source_tables": [
+        "REPLICATION_RESULTS.tsv",
+        "tables/study_design_counts.tsv"
+      ],
+      "claims": [
+        "23positive18concordant17QC159absent",
+        "0 completed independent validations",
+        "MVP proposal metadata only"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "05_question_admission_audit",
+      "outputs": [
+        "figures/05_question_admission_audit.pdf",
+        "figures/05_question_admission_audit.svg",
+        "figures/05_question_admission_audit.png"
+      ],
+      "source_tables": [
+        "HYPOTHESIS_FEASIBILITY_MATRIX.tsv"
+      ],
+      "claims": [
+        "All five prospective hypotheses currentlyNO_GO",
+        "Scores ordinal not scientific estimates"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "06_covariance_heterogeneity_diagnostic",
+      "outputs": [
+        "figures/06_covariance_heterogeneity_diagnostic.pdf",
+        "figures/06_covariance_heterogeneity_diagnostic.svg",
+        "figures/06_covariance_heterogeneity_diagnostic.png"
+      ],
+      "source_tables": [
+        "REPLICATION_RESULTS.tsv"
+      ],
+      "claims": [
+        "Covariancezero only",
+        "16 nominal all41;7positive23",
+        "Marginal intervals not joint covariance-aware contrasts"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    },
+    {
+      "figure": "07_core_QC_intercept_diagnostic",
+      "outputs": [
+        "figures/07_core_QC_intercept_diagnostic.pdf",
+        "figures/07_core_QC_intercept_diagnostic.svg",
+        "figures/07_core_QC_intercept_diagnostic.png"
+      ],
+      "source_tables": [
+        "tables/core_intercept_stage_diagnostic.tsv",
+        "tables/original_core_396.tsv",
+        "sources/recovered/results/tables/h2_summary.tsv"
+      ],
+      "claims": [
+        "All36lipidpairwiseinterceptsabove1.2",
+        "Historicalclassificationpreserved"
+      ],
+      "evidence_level": "HISTORICAL_TABLES_AND_CURRENT_EXECUTION_STATUS; NOT_FULL_NATIVE_REPRODUCTION"
+    }
+  ],
+  "output_sha256": {
+    "figures/01_unified_study_design.pdf": "d668373959405405ca7632082285954b8bc3d9c55f8be6edf2849d8689ca963a",
+    "figures/01_unified_study_design.svg": "fe6534cd946db9ff661d8c82feebe284d20ada859faf1a9e7d278b488ee4757b",
+    "figures/01_unified_study_design.png": "59535aa7c024b3895a41bac331570b88399d31aba44520d8e31ebf880c1aa20f",
+    "figures/02_global_core_atlas.pdf": "adb81f2db1ed43fd5c8eb08bedad631f94d857f997c639c3cd780b1134bbe745",
+    "figures/02_global_core_atlas.svg": "c6218ef6c49b08cbbfa479c0ec54dce3ae5653bc419ec16670651c49267e13ba",
+    "figures/02_global_core_atlas.png": "c68f4542e35f30e9a2dfd717c54ae7905cb6a3dddebf38df1436cf9a33f41ed2",
+    "figures/03_global_extension_atlas.pdf": "a78347320990b58d8c6a029725d5a4826518b3efffb3bd934ac982a07949dd28",
+    "figures/03_global_extension_atlas.svg": "8e02b7247741469f2efdb96bdc927093058f67807cf1e244c0ce2862b6e26f28",
+    "figures/03_global_extension_atlas.png": "1293af67f561ace0393def95f741fddb538ee28ededd6f91a6276962b518b4a2",
+    "figures/04_validation_evidence.pdf": "f350e1df4a83b2f4bcef968e3149caf66d24eba172d7cbb54584fa3bad2af956",
+    "figures/04_validation_evidence.svg": "3dc3ed115dc3c41c76791094dba4c68fd0c6fd6099f8c4df9be0e0873efc7f96",
+    "figures/04_validation_evidence.png": "be60ec792abab93bfa8cf787eea0b47232aa632cd6c4a49b74cf405de71d003a",
+    "figures/05_question_admission_audit.pdf": "1ab02fc2a3e6607c28a40d9b3465ded056e4c6b323547111f2979755862d7389",
+    "figures/05_question_admission_audit.svg": "2599c64af5316cb487cf997b8eb05bebf5f443bb3bed7875b46b31ac003d6759",
+    "figures/05_question_admission_audit.png": "4d91b35a8626390ac201bc8fc3b7424a2d513604a66c260212595128bd0a0f49",
+    "figures/06_covariance_heterogeneity_diagnostic.pdf": "2c82dbff159a9088abf57ecce860f224b0adf4395ae796ac7c14933d7415d405",
+    "figures/06_covariance_heterogeneity_diagnostic.svg": "6e84df1207d886688a052b6efda1c2ea640bc019bf3305812307d0fdd7155d7f",
+    "figures/06_covariance_heterogeneity_diagnostic.png": "455ad7ba7981b4896dc3f6532d6ac4789164684c7595f38871fd9d95e7c42509",
+    "figures/07_core_QC_intercept_diagnostic.pdf": "baa5c7b5643d63bbee59f342dc63da19557c09d2bfa7dd78c47c49f92fa7d7c7",
+    "figures/07_core_QC_intercept_diagnostic.svg": "3f0382d13a08fc9b53447214450e22ed48a9fec48fe59fd21a6a80fcde0931e6",
+    "figures/07_core_QC_intercept_diagnostic.png": "1583eadd26f9049e46d14c24bdaa61fa5306f3bd7d9f9f8244d5d4832f44240a"
+  },
+  "new_biological_claims": false,
+  "mechanism_figure_admitted": false
+}

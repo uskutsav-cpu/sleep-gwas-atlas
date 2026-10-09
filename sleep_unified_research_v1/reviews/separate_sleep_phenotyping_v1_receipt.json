@@ -1,0 +1,389 @@
+{
+  "reviewer": "/root/separate_sleep_phenotyping_review",
+  "created_utc": "2026-10-09T04:39:51.733466+00:00",
+  "review_date_local": "2026-10-08",
+  "role": "separate sleep-phenotyping adversarial review",
+  "prior_sleep_phenotyping_report_read": false,
+  "prior_novelty_report_read": false,
+  "full_GWAS_body_downloaded": false,
+  "new_pair_outcomes_accessed": false,
+  "native_analysis_run": false,
+  "original_inputs_modified": false,
+  "input_artifacts": [
+    {
+      "path": "config/analysis_panel.tsv",
+      "bytes": 24571,
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "config/traits.tsv",
+      "bytes": 13016,
+      "sha256": "428237685c95a2a4f305e943267c6745cc10d76435e019ae2b78ea8eabfd569b"
+    },
+    {
+      "path": "config/gwas_schemas.tsv",
+      "bytes": 25377,
+      "sha256": "df2e56799a8cb07be849c96940d553710210725563e29e63baf62cc5a59dd51c"
+    },
+    {
+      "path": "config/sleep_measurement_modes.tsv",
+      "bytes": 3007,
+      "sha256": "5e013fa8c4190d21fc4873f33de3aa68ea9c560bdb6d8f249d25e4a71e35d852"
+    },
+    {
+      "path": "config/public_gwas_sources.tsv",
+      "bytes": 36130,
+      "sha256": "4b194d25641c2308a84428a7d127969e2eeec0b1884626ab0b8f5a49e1b7cc93"
+    },
+    {
+      "path": "sleep_unified_research_v1/sources/recovered/config/analysis_panel.tsv",
+      "bytes": 24571,
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_mvp_insomnia_source_contract.json",
+      "bytes": 1557,
+      "sha256": "2b83011eae4db96a3346ab42178493e8fe5f422b25dd536a8076f7db358a3d34"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_core_sleep_metadata.tsv",
+      "bytes": 7894,
+      "sha256": "4ba2a7dafcb0dac378a47161185fcb2ed78660cfc1b5f0f65e83475dc4797955"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_primary_definitions.json",
+      "bytes": 1316,
+      "sha256": "c2cd48ea6714ca2ef124d35e50fb36fe36e71fe23bd7707926deb0cc86657353"
+    }
+  ],
+  "primary_source_retrievals": [
+    {
+      "source_id": "napping",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7876146/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7876146/?report=xml",
+      "status": 200,
+      "bytes": 351239,
+      "sha256": "70e38d70dce04de92bf02542b5dcf87a6646ed9d35254076a3bdf5911ef4e65e",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/napping.html"
+    },
+    {
+      "source_id": "fg_codes",
+      "url": "https://r9.risteys.finngen.fi/table_case_counts/G6_SLEEPAPNO.html",
+      "final_url": "https://r9.risteys.finngen.fi/table_case_counts/G6_SLEEPAPNO.html",
+      "status": 200,
+      "bytes": 2248,
+      "sha256": "575709773aa82c095c9f1e807331c6b660aaba1d359b6f70f588fc2ce6a51086",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/fg_codes.html"
+    },
+    {
+      "source_id": "mvp_api",
+      "url": "https://www.ebi.ac.uk/gwas/rest/api/studies/GCST90475826",
+      "error": "curl: (56) The requested URL returned error: 410\n",
+      "returncode": 56
+    },
+    {
+      "source_id": "actigraphy",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6451011/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6451011/?report=xml",
+      "status": 200,
+      "bytes": 320920,
+      "sha256": "55284eab9e70a45a59deaac5e6b525de01c72c10823d594a11a1e0ba360c4c3b",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/actigraphy.html"
+    },
+    {
+      "source_id": "duration",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405943/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405943/?report=xml",
+      "status": 200,
+      "bytes": 301791,
+      "sha256": "15df4dc5b8d0ebcc7fc152a70f41fd1a0c703605de855c8a0b34de9212966106",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/duration.html"
+    },
+    {
+      "source_id": "sleepiness",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6692391/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6692391/?report=xml",
+      "status": 200,
+      "bytes": 315772,
+      "sha256": "a9f0f813b7f3bd41fb4ae60d93b62f09f38fb04363143b5bb4bf0942691ba7a7",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/sleepiness.html"
+    },
+    {
+      "source_id": "snoring",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7021827/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7021827/?report=xml",
+      "status": 200,
+      "bytes": 259730,
+      "sha256": "5061632b3570ff8b342a1745f8083e41c5e346baf7c03d61700dea47e7d81298",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/snoring.html"
+    },
+    {
+      "source_id": "chronotype",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351539/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351539/?report=xml",
+      "status": 200,
+      "bytes": 311996,
+      "sha256": "4a8607c8f63a7a880b8555548a08a0c897efa77fddf0a1d2f14c785b8b4c04a0",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/chronotype.html"
+    },
+    {
+      "source_id": "mvp",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12857194/?report=xml",
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12857194/?report=xml",
+      "status": 200,
+      "bytes": 309190,
+      "sha256": "9d82b3712c074bbe4b9753138494779b4b2163da1174ef5a1ee4cb0b228dd35c",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/mvp.html"
+    },
+    {
+      "source_id": "fg_r9",
+      "url": "https://r9.risteys.finngen.fi/endpoints/G6_SLEEPAPNO",
+      "final_url": "https://r9.risteys.finngen.fi/endpoints/G6_SLEEPAPNO",
+      "status": 200,
+      "bytes": 22450,
+      "sha256": "4accf6b146b3f4b410637f1a6d59eadafe474f94137f08a14230450c5b10f2e9",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/fg_r9.html"
+    },
+    {
+      "source_id": "mvp_yaml",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90475001-GCST90476000/GCST90475826/GCST90475826.tsv.gz-meta.yaml",
+      "final_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90475001-GCST90476000/GCST90475826/GCST90475826.tsv.gz-meta.yaml",
+      "status": 200,
+      "bytes": 728,
+      "sha256": "bcb4b9fb9e195e63c64b1fee067f8e96379ad18d502e4aa4f052424fce0eeecd",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/mvp_yaml.html"
+    },
+    {
+      "source_id": "ukb1200",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1200",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1200",
+      "status": 200,
+      "bytes": 7967,
+      "sha256": "eadfaf8ec93edba1865c16c9fcc65a52c05ea30f328bc6561b81a71e1fd98cd3",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1200.html"
+    },
+    {
+      "source_id": "ukb1160",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1160",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1160",
+      "status": 200,
+      "bytes": 12827,
+      "sha256": "318ba5c97d0b2e067ed9114b95e1468bca46f8c08245591e65eed58454f7f269",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1160.html"
+    },
+    {
+      "source_id": "ukb1180",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1180",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1180",
+      "status": 200,
+      "bytes": 8332,
+      "sha256": "ffcb77653879865d175df2e60881692df1365fe02014bdb1e34713bc15e4fd29",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1180.html"
+    },
+    {
+      "source_id": "ukb1220",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1220",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1220",
+      "status": 200,
+      "bytes": 9086,
+      "sha256": "6be7d6d50c5d06b590c1e355ceefc311c467ff3b2c19b65e7ddf2587c288be73",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1220.html"
+    },
+    {
+      "source_id": "ukb1190",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1190",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1190",
+      "status": 200,
+      "bytes": 8313,
+      "sha256": "133622104ecf0b08de2a5eba4ce43cdd3d5e66fe7e00816bc2ad79474bace6e0",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1190.html"
+    },
+    {
+      "source_id": "ukb1210",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1210",
+      "final_url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1210",
+      "status": 200,
+      "bytes": 8339,
+      "sha256": "cb4ca084e3a5ca0c5ef74d95238afa7dc8a1a70a46ca1eec6316e17a1679b927",
+      "captcha": false,
+      "body_cache": "work/separate_sleep_phenotyping_review/ukb1210.html"
+    },
+    {
+      "source_id": "ukb_coding100343",
+      "url": "https://biobank.ndph.ox.ac.uk/ukb/coding.cgi?id=100343",
+      "returncode": 0,
+      "stderr": "",
+      "bytes": 3904,
+      "sha256": "c2ad858acc21b54371a90c58f30609bfb0921c722cb711bae898d9089af39028",
+      "signature": "<!DOCTYP"
+    },
+    {
+      "source_id": "mvp_dbgap_basic",
+      "url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd008760.1",
+      "returncode": 0,
+      "stderr": "",
+      "bytes": 151113,
+      "sha256": "58cfc5fac569c6f55b8c1f4945d5c94e8fa9af92a502cf218ac8e669822e136a",
+      "signature": "%PDF-1.7"
+    },
+    {
+      "source_id": "mvp_api_v2",
+      "url": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90475826",
+      "status": 200,
+      "bytes": 1049,
+      "sha256": "47858a2cf85969f1a7aac4e71890e74b237f46d54c67266f5a1514ae488cb24d"
+    }
+  ],
+  "initial_python_tls_failures": [
+    {
+      "source_id": "actigraphy",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6451011/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "duration",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405943/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "sleepiness",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6692391/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "snoring",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7021827/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "chronotype",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6351539/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "mvp",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12857194/?report=xml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "fg_r9",
+      "url": "https://r9.risteys.finngen.fi/endpoints/G6_SLEEPAPNO",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "mvp_yaml",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90475001-GCST90476000/GCST90475826/GCST90475826.tsv.gz-meta.yaml",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1200",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1200",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1160",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1160",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1180",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1180",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1220",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1220",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1190",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1190",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    },
+    {
+      "source_id": "ukb1210",
+      "url": "https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=1210",
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1028)>"
+    }
+  ],
+  "supplement_failures": [
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/instance/12857194/bin/NIHMS2091849-supplement-Supplemental_Text.pdf",
+      "bytes": 1817,
+      "sha256": "ac9efa1bc81f2397d9baa876274eed51c9d5422d3f52d6f9313aed1b81652cd7",
+      "signature": "HTML challenge, not PDF; not inspected"
+    },
+    {
+      "url": "https://www.science.org/doi/suppl/10.1126/science.adj1182/suppl_file/science.adj1182_sm.pdf",
+      "http_status": 403,
+      "inspected": false
+    }
+  ],
+  "core_rows": 12,
+  "new_source_rows": 1,
+  "evidence_rows": 13,
+  "MVP_comparison_verdict": "RELATED_CLINICAL_PHENOTYPE_TRANSPORT_ONLY",
+  "exact_GIA_PheCode_ICD_mapping_verified": false,
+  "FinnGen_anomaly_status": "Official label discrepancy independently confirmed; unique-case contamination not established",
+  "sleepiness_measurement_version_flag": "Official field removed all-the-time response during initial assessment; source paper used four-level coding",
+  "provisional_vs_locked_metadata_differences": [
+    {
+      "trait_id": "chronotype",
+      "field": "pop_prev",
+      "locked": "0.63",
+      "provisional": "0.50"
+    },
+    {
+      "trait_id": "sleep_apnea",
+      "field": "ncase",
+      "locked": "38998",
+      "provisional": "43901"
+    },
+    {
+      "trait_id": "sleep_apnea",
+      "field": "ncontrol",
+      "locked": "336659",
+      "provisional": "174054"
+    },
+    {
+      "trait_id": "sleep_apnea",
+      "field": "n_total",
+      "locked": "375657",
+      "provisional": "217955"
+    },
+    {
+      "trait_id": "sleep_apnea",
+      "field": "pop_prev",
+      "locked": "0.05",
+      "provisional": "0.08"
+    }
+  ],
+  "full_primary_bodies_retained_in_public_package": false,
+  "outputs": [
+    {
+      "path": "sleep_unified_research_v1/reviews/separate_sleep_phenotyping_v1.md",
+      "bytes": 9126,
+      "sha256": "05a194521e1d8bf89064051c971eec2a50f1f027dc5967040db377835644560a"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/separate_sleep_phenotyping_v1_evidence.tsv",
+      "bytes": 9815,
+      "sha256": "1af8c859666f7ac36d201baa36c0051bf3902bb9a923f50db0d59d0bfad8f44a"
+    }
+  ]
+}

@@ -1,0 +1,1641 @@
+{
+  "absolute_tolerance": 0,
+  "all_numeric_check_counts": {
+    "bh_numeric_fields_checked": 1200,
+    "h2_negative_ratio_classifications_checked": 5,
+    "h2_numeric_fields_checked": 995,
+    "rg_fixed_width_p_representations_checked": 1200,
+    "rg_numeric_fields_checked": 12000,
+    "rg_snp_counts_numeric_fields_checked": 3600
+  },
+  "cross_stage_read_count_differences": 1200,
+  "fixed_width_summary_p_different_from_scalar_count": 359,
+  "fixed_width_summary_p_zero_count": 341,
+  "frozen_1200_bh_significant_count": 603,
+  "h2_log_read_count_range": [
+    1165648,
+    1166942
+  ],
+  "h2_qc_pass_count": 100,
+  "inputs": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/ldsc/extension_rg_matrix.tsv": {
+      "bytes": 428348,
+      "sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/ldsc/extension_trait_readiness.tsv": {
+      "bytes": 34690,
+      "sha256": "95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/logs/archived_extension_recovery_receipt_v1.json": {
+      "bytes": 810,
+      "sha256": "42d19befd6d14acdfc4dff927391dd813c719dc89cace096b2f9c3a48ea3ab1c"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/archived_extension_recovery.tsv": {
+      "bytes": 196466,
+      "sha256": "2ecf386b1accf8a756a9ef6679b99a82fafce23ca87e0804ba1d21992f3956c4"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_biomarkers__30890__both_sexes__na__irnt.log": {
+      "bytes": 1517,
+      "sha256": "0bf9dab28f10afa279c76906cd3f1d51664e397372a239f03cce9911b10e3572"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1418__both_sexes__1__na.log": {
+      "bytes": 1508,
+      "sha256": "451534e3ef80a8f66f1f70ae9b9d94d87ed0ff37dbed61d184197c578876fa9b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1468__both_sexes__4__na.log": {
+      "bytes": 1507,
+      "sha256": "5ca0cbf8abe4741cc8af984840b4e1925d2625126e67e0795b738efac59ec0b2"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1538__both_sexes__1__na.log": {
+      "bytes": 1503,
+      "sha256": "62d7874f9681c0c78be2e680bde950d581e68a0e27ce6150ab2cb2aede16e4e4"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1677__both_sexes__1677__na.log": {
+      "bytes": 1517,
+      "sha256": "677fecd309afe27ab3671ac380f07cef10b9f69d17d04e174cd880f8bbac6695"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1707__both_sexes__2__na.log": {
+      "bytes": 1507,
+      "sha256": "2cf1a820cf5733caf49737e6851a93cff6f72f851f3d2c6066505061477d4941"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20002__both_sexes__1226__na.log": {
+      "bytes": 1519,
+      "sha256": "427cc618566490050487033e035b95f9511aa425650764f874e7af66b642b11f"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140874420__na.log": {
+      "bytes": 1559,
+      "sha256": "48df46959b8d6ab7dd2f1808e408380f8c8a6e9ce5ba49773f6bec9383c6872d"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140881856__na.log": {
+      "bytes": 1559,
+      "sha256": "e3f6237365554bd48dc675f0bae526d968dd81d0ea1a371b5b53d461f39210b5"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1478__na.log": {
+      "bytes": 1519,
+      "sha256": "4cb15266b5e31b8badc3b7acacc6e575a16cf98790d1dc9e57c1289d02f15dac"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1480__na.log": {
+      "bytes": 1520,
+      "sha256": "66a3fdd5fd89e2a66a319c32f7d0a6c52d7034dbd78e372428255bdd1387209c"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1483__na.log": {
+      "bytes": 1541,
+      "sha256": "084a9d8c74e558d1c479887b462cd8d1ef1f362611e93e39d5af2e740c29b824"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20117__both_sexes__2__na.log": {
+      "bytes": 1511,
+      "sha256": "9db1453e1f29401cbd4d6b039f5de3ffd57dc1a15dd0c34d9d682b732ef36a90"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2020__both_sexes__2020__na.log": {
+      "bytes": 1517,
+      "sha256": "33440698e1e65212fa9e455cd3b295825bd64ad22c7507075ebfe25343c21bed"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2040__both_sexes__2040__na.log": {
+      "bytes": 1517,
+      "sha256": "60b92d6b7f383e2013fcab5077caf38cebb43c011f591eb885fb583d142ac72d"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2207__both_sexes__2207__na.log": {
+      "bytes": 1539,
+      "sha256": "ced31a68cdf2112c2373997dffddc84467972bb3211c3fa8fed9578219270270"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2257__both_sexes__2257__na.log": {
+      "bytes": 1517,
+      "sha256": "42b2b0ea36ccd2dae869a2ad9caaf41dc09d2a207bb4123802245fddac150497"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2316__both_sexes__2316__na.log": {
+      "bytes": 1515,
+      "sha256": "207613a75c1da3f339bab769ee0c16cf9ab5a9bae6a2222165e339b37ff81ab3"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__3393__both_sexes__3393__na.log": {
+      "bytes": 1515,
+      "sha256": "9a5d2226b0ee8c479b76d2009cc418b72e0f7d29df8835d5021b40d6738e43bf"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__3571__both_sexes__3571__na.log": {
+      "bytes": 1538,
+      "sha256": "9ad7f23a2de5914e7e8c299460aa25d5f82f036c6aaceda17998217b517933a3"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__41200__both_sexes__j183__na.log": {
+      "bytes": 1519,
+      "sha256": "3a520dc71e608c07955c3af815a3fc13dae0be81a90e1e111a3480635206cabd"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__4294__both_sexes__0__na.log": {
+      "bytes": 1508,
+      "sha256": "f6949ef88d05ebf810787dce485c4663027b7aefba5bf90a8ca74c3e9989f715"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__5001__both_sexes__5001__na.log": {
+      "bytes": 1517,
+      "sha256": "99ec65fb4b9b1aabc1f830879e88cdba0238e2ebf3c7e93a355f8b3681ec6b6e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6138__both_sexes__5__na.log": {
+      "bytes": 1507,
+      "sha256": "cb1dd90c9275c91441262e30db12a3a9cc4588227994fe19f36db504dd0ef2b7"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6142__both_sexes__6__na.log": {
+      "bytes": 1507,
+      "sha256": "826264f171a13cbeb4633b49b0a2a7819b7e3896bfe4a985893a4128f5dfaddd"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6145__both_sexes__6__na.log": {
+      "bytes": 1508,
+      "sha256": "108b54a5c580b94b4f8bd877397b8977c8a0efa9e580efb4f41bce336d7c50b2"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__3__na.log": {
+      "bytes": 1508,
+      "sha256": "d1101ec0b2211ee13534b9e7efc47ef6094ec529372c52811186b9545df30414"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__4__na.log": {
+      "bytes": 1507,
+      "sha256": "e4ae8ab87555f62ef719d06ece1451e02a39af803f371849339cb44cdf12f39f"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__6__na.log": {
+      "bytes": 1508,
+      "sha256": "36566089d69b4ca1e6eed665b4e34e1f5959d907601bf1e355606ad16cb79b28"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6151__both_sexes__7__na.log": {
+      "bytes": 1506,
+      "sha256": "ca5830b6542c671f8b1044eab3b1721c7e088fa1fac004d568b408b4b485669f"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__7__na.log": {
+      "bytes": 1506,
+      "sha256": "b78af1dec303fdfbeae275b3e654d3b09edd69342a2ecf3c9d2661d7d44beae5"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__8__na.log": {
+      "bytes": 1506,
+      "sha256": "a187c6111916c89eafe4efc3458400798134eda7a66ce47bd2eafd9484bc3814"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6164__both_sexes__5__na.log": {
+      "bytes": 1508,
+      "sha256": "206b8ac13987d0eef1ac638f275a8eb21231ccef639d722ad2dc96f291533fa4"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1140__both_sexes__na__na.log": {
+      "bytes": 1507,
+      "sha256": "fbe636e305a75a34b64a7b76433b7ea389520ab3aa6a34a6e21b9ff82b09290a"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1259__both_sexes__na__na.log": {
+      "bytes": 1508,
+      "sha256": "f4505bcff9516ba5a2bee6ba2832bcffcafe278f48778d2a358378dc700450b4"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1349__both_sexes__na__na.log": {
+      "bytes": 1508,
+      "sha256": "db150244ce5d374e650823f185b10856f14f328b68ed3b3c999624c079b3d544"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__135__both_sexes__na__na.log": {
+      "bytes": 1504,
+      "sha256": "e4382dcfcd706df99aa57b1595ae9d64d94672af1c005ac095445308f1c93ca6"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1548__both_sexes__na__na.log": {
+      "bytes": 1507,
+      "sha256": "00b58518955c2e041fc7510b37bc0326cafb34d57667407561f5d5b518719b27"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1588__both_sexes__na__na.log": {
+      "bytes": 1508,
+      "sha256": "102df0e2ba3220bc32246d1146d90f36041fe3d19f04f457a7bc1f9035fc33a6"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1757__both_sexes__na__na.log": {
+      "bytes": 1506,
+      "sha256": "288b7cc041cdd220dc531f421e0f1195d95313c8753cf07ae3bad61711f7ea0b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20022__both_sexes__na__irnt.log": {
+      "bytes": 1517,
+      "sha256": "c837300eaa42c3791e0d97d343adf82e923942e17be35e09b07df3020e3d5b38"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20023__both_sexes__na__irnt.log": {
+      "bytes": 1515,
+      "sha256": "52fc7f29ad4f00168eb2eb41b838582b21fc47ea6ff963a0072118e9242a2de1"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20409__both_sexes__na__na.log": {
+      "bytes": 1509,
+      "sha256": "0a09dfc2078b7813f33e51faf3345cdceb3d3cb878010b06e6f8eca1256e3ae8"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20485__both_sexes__na__na.log": {
+      "bytes": 1510,
+      "sha256": "c6c1f3113705080cfb9004e9a3b4fe129b5a5e6199861e23d95183955869ee19"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20498__both_sexes__na__na.log": {
+      "bytes": 1509,
+      "sha256": "613aa09a5dbd29c9c001723402b3489f39843d3079d76c79a86c5ca0046f095e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20515__both_sexes__na__na.log": {
+      "bytes": 1510,
+      "sha256": "7581d003d430e0b28748535e5c56f6f8cfe6173ba06408e4c8cdeb2fadc6ff16"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20520__both_sexes__na__na.log": {
+      "bytes": 1509,
+      "sha256": "9174e99185351a7474aa013aa0e8557b0baefcebb668fa8b8523fb1a150c486d"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2217__both_sexes__na__irnt.log": {
+      "bytes": 1513,
+      "sha256": "23f45e3c21acb0cdd4502edbe5e8d027e50c6025b8743d43f9efd61898e0c448"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2237__both_sexes__na__na.log": {
+      "bytes": 1508,
+      "sha256": "e70abfb110b565d68ef894b6949b7885dae7f6243731a42dac337f3541093da3"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2267__both_sexes__na__na.log": {
+      "bytes": 1508,
+      "sha256": "23c546136709884bf81568d1da30476a99c32f338f5037c81a3d378ac44b3e17"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30060__both_sexes__na__irnt.log": {
+      "bytes": 1516,
+      "sha256": "f23f2b556c74b76f6d19c92c6f359e697c9aacbe157b6bf9d8fba56a46bb2a13"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30510__both_sexes__na__irnt.log": {
+      "bytes": 1517,
+      "sha256": "edaf1d6315b4734a05a9b868ba61e4b0d5b0ff7d8bed7e63f2b6b5ea5c47386f"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30520__both_sexes__na__irnt.log": {
+      "bytes": 1516,
+      "sha256": "f2e57199550ee45542b70ed65e2777ab15f61cfadf59c7f49de5a8fd7837324d"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30530__both_sexes__na__irnt.log": {
+      "bytes": 1517,
+      "sha256": "f886f12b15d9021c3d34f7fa8a77e7e9cbfdf6948e958c505b22e77ba3f74b0b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__3064__both_sexes__na__irnt.log": {
+      "bytes": 1512,
+      "sha256": "f7f256d540c456473f31c12e7d93970d8ff8b5186b3f556fb1c846df89726872"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__398__both_sexes__na__na.log": {
+      "bytes": 1504,
+      "sha256": "a2bd86f8f713dc2972a5be1055349e65f9476f05bcb18a0e6e269f007146ceb0"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__400__both_sexes__na__irnt.log": {
+      "bytes": 1510,
+      "sha256": "18be626b40a04ed73e9241623fcd2eef93667d53b71a4e3db7768fcc3548dca6"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__4105__both_sexes__na__irnt.log": {
+      "bytes": 1512,
+      "sha256": "3368856a500338e1d69ef91f5127e85292515a8352b95b6d15ca859a326cb6df"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__4195__both_sexes__na__irnt.log": {
+      "bytes": 1512,
+      "sha256": "604db4b8a1a6face6d26ec61fb2a50c4c8afd1af33305e8eb36db9ee0c48c05a"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5096__both_sexes__na__irnt.log": {
+      "bytes": 1511,
+      "sha256": "d2d2c33d4c9be10bc349c9d396fd3776b711b48ecd0b808f57fe398c1f5fc119"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5116__both_sexes__na__irnt.log": {
+      "bytes": 1513,
+      "sha256": "7001ff951271761540a63128069f4851e1ee10e7ad5a999a8652ab6ad66e1d4e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5257__both_sexes__na__irnt.log": {
+      "bytes": 1514,
+      "sha256": "8f9fc54d396941a9689b50bbb2558c4c4ac9074f7df87af02e823b95a3f6560f"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__699__both_sexes__na__irnt.log": {
+      "bytes": 1511,
+      "sha256": "9224cc54f0507a76c03bd3f10e6137eb924dbe00779323a239bfd63f5658ff81"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__728__both_sexes__na__na.log": {
+      "bytes": 1505,
+      "sha256": "a9793f7f81bc14840d1724c48fbe645cf586363228d9642690d53b838fe44fee"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__816__both_sexes__na__na.log": {
+      "bytes": 1502,
+      "sha256": "fb1778f1d72020eeaca986e7284f3d50de515d1b5f51fd6fe723f07cdc80c1f5"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__874__both_sexes__na__irnt.log": {
+      "bytes": 1510,
+      "sha256": "54a49661ec691a749f87facf7d68bd025bbeefdb841452bc674ca1f5c7946a5a"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__904__both_sexes__na__na.log": {
+      "bytes": 1504,
+      "sha256": "80fd19097668f0b1283c589ae9c02b75e1317f39893d3cbbd9b1d32a8fa36a38"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__924__both_sexes__na__na.log": {
+      "bytes": 1504,
+      "sha256": "f6140f680350e4de4a931eefcb9c5e5bc86371647453be08b24badcaac27bf24"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__943__both_sexes__na__na.log": {
+      "bytes": 1504,
+      "sha256": "04abd434fb9a4ab19446bae88786b6455a9a2399998802cf48bc313d9c86ff23"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__i83__both_sexes__na__na.log": {
+      "bytes": 1489,
+      "sha256": "7167e17de466b9883de54a917299887ccab0fba8b7ab2f8e8098e17450bb3fe8"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__j44__both_sexes__na__na.log": {
+      "bytes": 1490,
+      "sha256": "f8a919acb871fc3b64e2cc300b936589ddb354ae5e7352e516727f3a972e782c"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__k21__both_sexes__na__na.log": {
+      "bytes": 1488,
+      "sha256": "10fea2d2c9e7f59b754e213ad8db742438e0a9189f8ad4aced7f4db6a2591e05"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__k80__both_sexes__na__na.log": {
+      "bytes": 1489,
+      "sha256": "fd2b7a33b4e86629aa36ac5d978e0619877bb6f9c36607ad9d06903f277ce285"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m16__both_sexes__na__na.log": {
+      "bytes": 1490,
+      "sha256": "d2037410e0c9616877956b05ff1418f10b8c4d85a31b2b68be095a8c880a59af"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m17__both_sexes__na__na.log": {
+      "bytes": 1490,
+      "sha256": "d96b5bb2f4d062adecb03a03208542bd4ec08d184489d05237013796452aaddb"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m51__both_sexes__na__na.log": {
+      "bytes": 1489,
+      "sha256": "61485131b758923b18732efaef4b54be71c6cc49cd60305b76d50fa057c592a9"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__z88__both_sexes__na__na.log": {
+      "bytes": 1490,
+      "sha256": "02f102f40421c51bdb0f182a208123921ea8c2bc1c8e98a6f01c0ef9d8bf56f1"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__z95__both_sexes__na__na.log": {
+      "bytes": 1489,
+      "sha256": "e31a30bfe039b777c8626c2cf95f2df1df28ed17c8ab2e2dbb692381043afa01"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__318__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "047b48a990be8d83fd7eb0ebbd1ca91a611459ae33922054d49aead9721c3a9e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__496_2__both_sexes__na__na.log": {
+      "bytes": 1500,
+      "sha256": "0e0bb294e938c7e4d7be3f8b84fb5ce698c8994ac75a656a5c6a7febe4abb266"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__550_2__both_sexes__na__na.log": {
+      "bytes": 1501,
+      "sha256": "9adf57b6ac1d729fc8e0fde81c0c4be34952e2a6eeaa7baf2acc87e2c35188a3"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__550_4__both_sexes__na__na.log": {
+      "bytes": 1502,
+      "sha256": "78716eb1a36f4cb86726ca2c1ae17f73c9e66fddb25f747daf70c41781296f19"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__558__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "e50d0bebf786ffc9ed1c96a0e6309349fe1fc37cdba4c4607658b629a058d6e9"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__594__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "470260c382d31c3079b9e1a6747c9a5374ba159de0eefc7311d4e6ddc824cc44"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__740__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "38674d1a6b2bab5be196c7f9e4577f4b78bd5f071821c7a15a2979610ea677bc"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__785__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "15e426c389d950911c4f40b3f72ce37cbc1703719fa0addd8a4a18afb2b00b36"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__835__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "e6f5c7656466a0768e3e3fbc6669c2afee7176e73e12e4d881aae4110c04042b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__960_2__both_sexes__na__na.log": {
+      "bytes": 1502,
+      "sha256": "8569784db7e54713592482e4ee71b2f4b1b27165264e713ca9a93dcf5e1d5171"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__960__both_sexes__na__na.log": {
+      "bytes": 1496,
+      "sha256": "bf7abe304b9505c1d9f45db059e42ed3e92c6702d76ae6cb8fcd48228750cf52"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__amlodipine__both_sexes__na__na.log": {
+      "bytes": 1534,
+      "sha256": "96983dbcdb6fb7cb0ae626dcf5599ccf5376f9af9bb8cad5fcde1872f239ecc6"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__amoxicillin_clavulanic_acid__both_sexes__na__na.log": {
+      "bytes": 1585,
+      "sha256": "0e40d26ea19f420bbd4b262e549767ae6a2ac9139510af4424b14403d4c7cc8e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__bendroflumethiazide__both_sexes__na__na.log": {
+      "bytes": 1562,
+      "sha256": "5218bdf34552cde6d4fce9ae7da8154aacf10d3cd0dace1abedaef727a374249"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__citalopram__both_sexes__na__na.log": {
+      "bytes": 1535,
+      "sha256": "2ba5a307628d13e300bd7030b1e1e303b2e2af381fef817a0b15c7fd7d6c7a76"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__clarithromycin__both_sexes__na__na.log": {
+      "bytes": 1547,
+      "sha256": "198b1c97b616ec5172aea75aaabe68cc4ac3eda311c1f2565ad802d7ef47f1f5"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__gabapentin__both_sexes__na__na.log": {
+      "bytes": 1535,
+      "sha256": "8c02172fea4494090410b309f40ac4aac594d713315414ef96a85cdbcc3360ba"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__latanoprost__both_sexes__na__na.log": {
+      "bytes": 1537,
+      "sha256": "8e5855235ab479d1ac764f7964d5caf552865c9518f72d29fa373a96bb07eab1"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__mebeverine__both_sexes__na__na.log": {
+      "bytes": 1535,
+      "sha256": "ab3d396732f2585c681726328eb763a25f7cb6c0aea05f8d7d61ef8f13319b94"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__orlistat__both_sexes__na__na.log": {
+      "bytes": 1529,
+      "sha256": "cfcb7ddab1c805e294dcb767aa1d5133897cb31f1aa0aa88f59015e114405f4d"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__paracetamol__both_sexes__na__na.log": {
+      "bytes": 1537,
+      "sha256": "38bd56e28676f3bb122719ba198e4734d5544f0b1cd940a1c5ce4a31446eb272"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__tramadol__both_sexes__na__na.log": {
+      "bytes": 1527,
+      "sha256": "ff03f166cfcc0dbb8b4fe532c45093736586ee1f096a9bd281c80d3b09596c7b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_accel_sleep_duration.log": {
+      "bytes": 108569,
+      "sha256": "e868e7d75b087418d713c131baa36f6d65782bb265a2e822355b1f67d751619b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_chronotype.log": {
+      "bytes": 107564,
+      "sha256": "2e4e122f03b060bb2643a45307d568349ddd9185866208342a3ce8c45a7e98d7"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_insomnia.log": {
+      "bytes": 107597,
+      "sha256": "ba955e35e8c6fccf3defe3c9fceb500e224de3ee6ed249dbe6181bc135d58c6a"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_longsleep.log": {
+      "bytes": 107538,
+      "sha256": "859b3e1606d1b855dae6b6465e53386c38fac0cf16b30925aec31584732a316b"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_napping.log": {
+      "bytes": 107185,
+      "sha256": "1799ba59d3a20776add33837d441f21f10f1b403edcd1d6a6fe9b5ea3b2c7c16"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_shortsleep.log": {
+      "bytes": 107767,
+      "sha256": "9b82499327417a6ecc4bc1884d73aad7a17426627dcad76e879beaebf535e350"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_apnea.log": {
+      "bytes": 107831,
+      "sha256": "e4cb0d243a33b293a33660b38e03388573eb5551df48b414f0cc1180d428889e"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_efficiency.log": {
+      "bytes": 108236,
+      "sha256": "ca9e3545381dccf279b37e389e5fc95966d0def7f3c3dea20ef07a1f77085901"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_timing.log": {
+      "bytes": 107717,
+      "sha256": "f72f91f92e7574b2555fc83093db8d7791f32539e90d68a8d8656b46eb802490"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleepdur.log": {
+      "bytes": 107500,
+      "sha256": "36eae53000b07894f2cb37080431eb1a78a607f824de25055f8df2f93d675820"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleepiness.log": {
+      "bytes": 107431,
+      "sha256": "872719fbefa24898be1d155448cbe44a10f2558e53d68a9ae1d20e5e3cea38a7"
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_snoring.log": {
+      "bytes": 107353,
+      "sha256": "567805cd73c92f9982d958231d3d9a61beca73ff6b20f850559e64afd6257cb4"
+    }
+  },
+  "log_hash_ledger_matches": 112,
+  "log_hash_status_counts": {
+    "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY": 112
+  },
+  "log_historical_expected_hash_count": 0,
+  "mismatches": [],
+  "original_h2_traits_checked": 100,
+  "original_rg_logs_checked": 12,
+  "original_rg_pairs_checked": 1200,
+  "recovered_log_hashes": [
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_biomarkers__30890__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 341,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_biomarkers__30890__both_sexes__na__irnt.log",
+      "sha256": "0bf9dab28f10afa279c76906cd3f1d51664e397372a239f03cce9911b10e3572",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__30060__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 323,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30060__both_sexes__na__irnt.log",
+      "sha256": "f23f2b556c74b76f6d19c92c6f359e697c9aacbe157b6bf9d8fba56a46bb2a13",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__30510__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 313,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30510__both_sexes__na__irnt.log",
+      "sha256": "edaf1d6315b4734a05a9b868ba61e4b0d5b0ff7d8bed7e63f2b6b5ea5c47386f",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__30520__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 275,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30520__both_sexes__na__irnt.log",
+      "sha256": "f2e57199550ee45542b70ed65e2777ab15f61cfadf59c7f49de5a8fd7837324d",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__30530__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 286,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__30530__both_sexes__na__irnt.log",
+      "sha256": "f886f12b15d9021c3d34f7fa8a77e7e9cbfdf6948e958c505b22e77ba3f74b0b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__594__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 318,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__594__both_sexes__na__na.log",
+      "sha256": "470260c382d31c3079b9e1a6747c9a5374ba159de0eefc7311d4e6ddc824cc44",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__j44__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 333,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__j44__both_sexes__na__na.log",
+      "sha256": "f8a919acb871fc3b64e2cc300b936589ddb354ae5e7352e516727f3a972e782c",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__3064__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 339,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__3064__both_sexes__na__irnt.log",
+      "sha256": "f7f256d540c456473f31c12e7d93970d8ff8b5186b3f556fb1c846df89726872",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__2316__both_sexes__2316__na.log",
+      "expected_sha256": "",
+      "ledger_line": 253,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2316__both_sexes__2316__na.log",
+      "sha256": "207613a75c1da3f339bab769ee0c16cf9ab5a9bae6a2222165e339b37ff81ab3",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__496_2__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 347,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__496_2__both_sexes__na__na.log",
+      "sha256": "0e0bb294e938c7e4d7be3f8b84fb5ce698c8994ac75a656a5c6a7febe4abb266",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__k21__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 301,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__k21__both_sexes__na__na.log",
+      "sha256": "10fea2d2c9e7f59b754e213ad8db742438e0a9189f8ad4aced7f4db6a2591e05",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__k80__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 255,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__k80__both_sexes__na__na.log",
+      "sha256": "fd2b7a33b4e86629aa36ac5d978e0619877bb6f9c36607ad9d06903f277ce285",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__550_2__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 292,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__550_2__both_sexes__na__na.log",
+      "sha256": "9adf57b6ac1d729fc8e0fde81c0c4be34952e2a6eeaa7baf2acc87e2c35188a3",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__550_4__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 307,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__550_4__both_sexes__na__na.log",
+      "sha256": "78716eb1a36f4cb86726ca2c1ae17f73c9e66fddb25f747daf70c41781296f19",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__558__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 335,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__558__both_sexes__na__na.log",
+      "sha256": "e50d0bebf786ffc9ed1c96a0e6309349fe1fc37cdba4c4607658b629a058d6e9",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__785__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 278,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__785__both_sexes__na__na.log",
+      "sha256": "15e426c389d950911c4f40b3f72ce37cbc1703719fa0addd8a4a18afb2b00b36",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__41200__both_sexes__j183__na.log",
+      "expected_sha256": "",
+      "ledger_line": 343,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__41200__both_sexes__j183__na.log",
+      "sha256": "3a520dc71e608c07955c3af815a3fc13dae0be81a90e1e111a3480635206cabd",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1483__na.log",
+      "expected_sha256": "",
+      "ledger_line": 310,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1483__na.log",
+      "sha256": "084a9d8c74e558d1c479887b462cd8d1ef1f362611e93e39d5af2e740c29b824",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__5116__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 314,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5116__both_sexes__na__irnt.log",
+      "sha256": "7001ff951271761540a63128069f4851e1ee10e7ad5a999a8652ab6ad66e1d4e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__5096__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 288,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5096__both_sexes__na__irnt.log",
+      "sha256": "d2d2c33d4c9be10bc349c9d396fd3776b711b48ecd0b808f57fe398c1f5fc119",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__5257__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 276,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__5257__both_sexes__na__irnt.log",
+      "sha256": "8f9fc54d396941a9689b50bbb2558c4c4ac9074f7df87af02e823b95a3f6560f",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__2217__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 268,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2217__both_sexes__na__irnt.log",
+      "sha256": "23f45e3c21acb0cdd4502edbe5e8d027e50c6025b8743d43f9efd61898e0c448",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__2207__both_sexes__2207__na.log",
+      "expected_sha256": "",
+      "ledger_line": 319,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2207__both_sexes__2207__na.log",
+      "sha256": "ced31a68cdf2112c2373997dffddc84467972bb3211c3fa8fed9578219270270",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__3393__both_sexes__3393__na.log",
+      "expected_sha256": "",
+      "ledger_line": 344,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__3393__both_sexes__3393__na.log",
+      "sha256": "9a5d2226b0ee8c479b76d2009cc418b72e0f7d29df8835d5021b40d6738e43bf",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__2257__both_sexes__2257__na.log",
+      "expected_sha256": "",
+      "ledger_line": 312,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2257__both_sexes__2257__na.log",
+      "sha256": "42b2b0ea36ccd2dae869a2ad9caaf41dc09d2a207bb4123802245fddac150497",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__latanoprost__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 272,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__latanoprost__both_sexes__na__na.log",
+      "sha256": "8e5855235ab479d1ac764f7964d5caf552865c9518f72d29fa373a96bb07eab1",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__m16__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 285,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m16__both_sexes__na__na.log",
+      "sha256": "d2037410e0c9616877956b05ff1418f10b8c4d85a31b2b68be095a8c880a59af",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__m17__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 342,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m17__both_sexes__na__na.log",
+      "sha256": "d96b5bb2f4d062adecb03a03208542bd4ec08d184489d05237013796452aaddb",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__m51__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 249,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__m51__both_sexes__na__na.log",
+      "sha256": "61485131b758923b18732efaef4b54be71c6cc49cd60305b76d50fa057c592a9",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__4105__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 308,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__4105__both_sexes__na__irnt.log",
+      "sha256": "3368856a500338e1d69ef91f5127e85292515a8352b95b6d15ca859a326cb6df",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6151__both_sexes__7__na.log",
+      "expected_sha256": "",
+      "ledger_line": 334,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6151__both_sexes__7__na.log",
+      "sha256": "ca5830b6542c671f8b1044eab3b1721c7e088fa1fac004d568b408b4b485669f",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__3571__both_sexes__3571__na.log",
+      "expected_sha256": "",
+      "ledger_line": 261,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__3571__both_sexes__3571__na.log",
+      "sha256": "9ad7f23a2de5914e7e8c299460aa25d5f82f036c6aaceda17998217b517933a3",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__7__na.log",
+      "expected_sha256": "",
+      "ledger_line": 305,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__7__na.log",
+      "sha256": "b78af1dec303fdfbeae275b3e654d3b09edd69342a2ecf3c9d2661d7d44beae5",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__8__na.log",
+      "expected_sha256": "",
+      "ledger_line": 273,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6159__both_sexes__8__na.log",
+      "sha256": "a187c6111916c89eafe4efc3458400798134eda7a66ce47bd2eafd9484bc3814",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__740__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 322,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__740__both_sexes__na__na.log",
+      "sha256": "38674d1a6b2bab5be196c7f9e4577f4b78bd5f071821c7a15a2979610ea677bc",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__835__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 316,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__835__both_sexes__na__na.log",
+      "sha256": "e6f5c7656466a0768e3e3fbc6669c2afee7176e73e12e4d881aae4110c04042b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__z88__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 251,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__z88__both_sexes__na__na.log",
+      "sha256": "02f102f40421c51bdb0f182a208123921ea8c2bc1c8e98a6f01c0ef9d8bf56f1",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__960_2__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 254,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__960_2__both_sexes__na__na.log",
+      "sha256": "8569784db7e54713592482e4ee71b2f4b1b27165264e713ca9a93dcf5e1d5171",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__960__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 315,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__960__both_sexes__na__na.log",
+      "sha256": "bf7abe304b9505c1d9f45db059e42ed3e92c6702d76ae6cb8fcd48228750cf52",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__amoxicillin_clavulanic_acid__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 329,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__amoxicillin_clavulanic_acid__both_sexes__na__na.log",
+      "sha256": "0e40d26ea19f420bbd4b262e549767ae6a2ac9139510af4424b14403d4c7cc8e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__clarithromycin__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 330,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__clarithromycin__both_sexes__na__na.log",
+      "sha256": "198b1c97b616ec5172aea75aaabe68cc4ac3eda311c1f2565ad802d7ef47f1f5",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1478__na.log",
+      "expected_sha256": "",
+      "ledger_line": 267,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1478__na.log",
+      "sha256": "4cb15266b5e31b8badc3b7acacc6e575a16cf98790d1dc9e57c1289d02f15dac",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__gabapentin__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 346,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__gabapentin__both_sexes__na__na.log",
+      "sha256": "8c02172fea4494090410b309f40ac4aac594d713315414ef96a85cdbcc3360ba",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__paracetamol__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 297,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__paracetamol__both_sexes__na__na.log",
+      "sha256": "38bd56e28676f3bb122719ba198e4734d5544f0b1cd940a1c5ce4a31446eb272",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__mebeverine__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 265,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__mebeverine__both_sexes__na__na.log",
+      "sha256": "ab3d396732f2585c681726328eb763a25f7cb6c0aea05f8d7d61ef8f13319b94",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__amlodipine__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 258,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__amlodipine__both_sexes__na__na.log",
+      "sha256": "96983dbcdb6fb7cb0ae626dcf5599ccf5376f9af9bb8cad5fcde1872f239ecc6",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__orlistat__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 345,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__orlistat__both_sexes__na__na.log",
+      "sha256": "cfcb7ddab1c805e294dcb767aa1d5133897cb31f1aa0aa88f59015e114405f4d",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__tramadol__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 328,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__tramadol__both_sexes__na__na.log",
+      "sha256": "ff03f166cfcc0dbb8b4fe532c45093736586ee1f096a9bd281c80d3b09596c7b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__citalopram__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 325,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__citalopram__both_sexes__na__na.log",
+      "sha256": "2ba5a307628d13e300bd7030b1e1e303b2e2af381fef817a0b15c7fd7d6c7a76",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_prescriptions__bendroflumethiazide__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 266,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_prescriptions__bendroflumethiazide__both_sexes__na__na.log",
+      "sha256": "5218bdf34552cde6d4fce9ae7da8154aacf10d3cd0dace1abedaef727a374249",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140874420__na.log",
+      "expected_sha256": "",
+      "ledger_line": 284,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140874420__na.log",
+      "sha256": "48df46959b8d6ab7dd2f1808e408380f8c8a6e9ce5ba49773f6bec9383c6872d",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140881856__na.log",
+      "expected_sha256": "",
+      "ledger_line": 327,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20003__both_sexes__1140881856__na.log",
+      "sha256": "e3f6237365554bd48dc675f0bae526d968dd81d0ea1a371b5b53d461f39210b5",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__3__na.log",
+      "expected_sha256": "",
+      "ledger_line": 348,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__3__na.log",
+      "sha256": "d1101ec0b2211ee13534b9e7efc47ef6094ec529372c52811186b9545df30414",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__4__na.log",
+      "expected_sha256": "",
+      "ledger_line": 289,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__4__na.log",
+      "sha256": "e4ae8ab87555f62ef719d06ece1451e02a39af803f371849339cb44cdf12f39f",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__6__na.log",
+      "expected_sha256": "",
+      "ledger_line": 250,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6149__both_sexes__6__na.log",
+      "sha256": "36566089d69b4ca1e6eed665b4e34e1f5959d907601bf1e355606ad16cb79b28",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1480__na.log",
+      "expected_sha256": "",
+      "ledger_line": 331,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20004__both_sexes__1480__na.log",
+      "sha256": "66a3fdd5fd89e2a66a319c32f7d0a6c52d7034dbd78e372428255bdd1387209c",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__398__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 287,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__398__both_sexes__na__na.log",
+      "sha256": "a2bd86f8f713dc2972a5be1055349e65f9476f05bcb18a0e6e269f007146ceb0",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__400__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 260,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__400__both_sexes__na__irnt.log",
+      "sha256": "18be626b40a04ed73e9241623fcd2eef93667d53b71a4e3db7768fcc3548dca6",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__4294__both_sexes__0__na.log",
+      "expected_sha256": "",
+      "ledger_line": 306,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__4294__both_sexes__0__na.log",
+      "sha256": "f6949ef88d05ebf810787dce485c4663027b7aefba5bf90a8ca74c3e9989f715",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20023__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 332,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20023__both_sexes__na__irnt.log",
+      "sha256": "52fc7f29ad4f00168eb2eb41b838582b21fc47ea6ff963a0072118e9242a2de1",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__5001__both_sexes__5001__na.log",
+      "expected_sha256": "",
+      "ledger_line": 256,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__5001__both_sexes__5001__na.log",
+      "sha256": "99ec65fb4b9b1aabc1f830879e88cdba0238e2ebf3c7e93a355f8b3681ec6b6e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20409__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 296,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20409__both_sexes__na__na.log",
+      "sha256": "0a09dfc2078b7813f33e51faf3345cdceb3d3cb878010b06e6f8eca1256e3ae8",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20515__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 309,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20515__both_sexes__na__na.log",
+      "sha256": "7581d003d430e0b28748535e5c56f6f8cfe6173ba06408e4c8cdeb2fadc6ff16",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20520__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 324,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20520__both_sexes__na__na.log",
+      "sha256": "9174e99185351a7474aa013aa0e8557b0baefcebb668fa8b8523fb1a150c486d",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20485__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 262,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20485__both_sexes__na__na.log",
+      "sha256": "c6c1f3113705080cfb9004e9a3b4fe129b5a5e6199861e23d95183955869ee19",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20498__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 326,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20498__both_sexes__na__na.log",
+      "sha256": "613aa09a5dbd29c9c001723402b3489f39843d3079d76c79a86c5ca0046f095e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6145__both_sexes__6__na.log",
+      "expected_sha256": "",
+      "ledger_line": 293,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6145__both_sexes__6__na.log",
+      "sha256": "108b54a5c580b94b4f8bd877397b8977c8a0efa9e580efb4f41bce336d7c50b2",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__2020__both_sexes__2020__na.log",
+      "expected_sha256": "",
+      "ledger_line": 280,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2020__both_sexes__2020__na.log",
+      "sha256": "33440698e1e65212fa9e455cd3b295825bd64ad22c7507075ebfe25343c21bed",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__2040__both_sexes__2040__na.log",
+      "expected_sha256": "",
+      "ledger_line": 299,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__2040__both_sexes__2040__na.log",
+      "sha256": "60b92d6b7f383e2013fcab5077caf38cebb43c011f591eb885fb583d142ac72d",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__1677__both_sexes__1677__na.log",
+      "expected_sha256": "",
+      "ledger_line": 337,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1677__both_sexes__1677__na.log",
+      "sha256": "677fecd309afe27ab3671ac380f07cef10b9f69d17d04e174cd880f8bbac6695",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__1707__both_sexes__2__na.log",
+      "expected_sha256": "",
+      "ledger_line": 271,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1707__both_sexes__2__na.log",
+      "sha256": "2cf1a820cf5733caf49737e6851a93cff6f72f851f3d2c6066505061477d4941",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__20022__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 277,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__20022__both_sexes__na__irnt.log",
+      "sha256": "c837300eaa42c3791e0d97d343adf82e923942e17be35e09b07df3020e3d5b38",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__1538__both_sexes__1__na.log",
+      "expected_sha256": "",
+      "ledger_line": 302,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1538__both_sexes__1__na.log",
+      "sha256": "62d7874f9681c0c78be2e680bde950d581e68a0e27ce6150ab2cb2aede16e4e4",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__1418__both_sexes__1__na.log",
+      "expected_sha256": "",
+      "ledger_line": 270,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1418__both_sexes__1__na.log",
+      "sha256": "451534e3ef80a8f66f1f70ae9b9d94d87ed0ff37dbed61d184197c578876fa9b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1548__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 274,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1548__both_sexes__na__na.log",
+      "sha256": "00b58518955c2e041fc7510b37bc0326cafb34d57667407561f5d5b518719b27",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1349__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 282,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1349__both_sexes__na__na.log",
+      "sha256": "db150244ce5d374e650823f185b10856f14f328b68ed3b3c999624c079b3d544",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__1468__both_sexes__4__na.log",
+      "expected_sha256": "",
+      "ledger_line": 303,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__1468__both_sexes__4__na.log",
+      "sha256": "5ca0cbf8abe4741cc8af984840b4e1925d2625126e67e0795b738efac59ec0b2",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1140__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 340,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1140__both_sexes__na__na.log",
+      "sha256": "fbe636e305a75a34b64a7b76433b7ea389520ab3aa6a34a6e21b9ff82b09290a",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__2237__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 264,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2237__both_sexes__na__na.log",
+      "sha256": "e70abfb110b565d68ef894b6949b7885dae7f6243731a42dac337f3541093da3",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1757__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 259,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1757__both_sexes__na__na.log",
+      "sha256": "288b7cc041cdd220dc531f421e0f1195d95313c8753cf07ae3bad61711f7ea0b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__2267__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 294,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__2267__both_sexes__na__na.log",
+      "sha256": "23c546136709884bf81568d1da30476a99c32f338f5037c81a3d378ac44b3e17",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__874__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 290,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__874__both_sexes__na__irnt.log",
+      "sha256": "54a49661ec691a749f87facf7d68bd025bbeefdb841452bc674ca1f5c7946a5a",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__943__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 281,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__943__both_sexes__na__na.log",
+      "sha256": "04abd434fb9a4ab19446bae88786b6455a9a2399998802cf48bc313d9c86ff23",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__904__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 263,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__904__both_sexes__na__na.log",
+      "sha256": "80fd19097668f0b1283c589ae9c02b75e1317f39893d3cbbd9b1d32a8fa36a38",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6164__both_sexes__5__na.log",
+      "expected_sha256": "",
+      "ledger_line": 304,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6164__both_sexes__5__na.log",
+      "sha256": "206b8ac13987d0eef1ac638f275a8eb21231ccef639d722ad2dc96f291533fa4",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__924__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 336,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__924__both_sexes__na__na.log",
+      "sha256": "f6140f680350e4de4a931eefcb9c5e5bc86371647453be08b24badcaac27bf24",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6138__both_sexes__5__na.log",
+      "expected_sha256": "",
+      "ledger_line": 295,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6138__both_sexes__5__na.log",
+      "sha256": "cb1dd90c9275c91441262e30db12a3a9cc4588227994fe19f36db504dd0ef2b7",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__6142__both_sexes__6__na.log",
+      "expected_sha256": "",
+      "ledger_line": 300,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__6142__both_sexes__6__na.log",
+      "sha256": "826264f171a13cbeb4633b49b0a2a7819b7e3896bfe4a985893a4128f5dfaddd",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__816__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 283,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__816__both_sexes__na__na.log",
+      "sha256": "fb1778f1d72020eeaca986e7284f3d50de515d1b5f51fd6fe723f07cdc80c1f5",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__728__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 298,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__728__both_sexes__na__na.log",
+      "sha256": "a9793f7f81bc14840d1724c48fbe645cf586363228d9642690d53b838fe44fee",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__699__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 320,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__699__both_sexes__na__irnt.log",
+      "sha256": "9224cc54f0507a76c03bd3f10e6137eb924dbe00779323a239bfd63f5658ff81",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__i83__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 279,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__i83__both_sexes__na__na.log",
+      "sha256": "7167e17de466b9883de54a917299887ccab0fba8b7ab2f8e8098e17450bb3fe8",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_icd10__z95__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 317,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_icd10__z95__both_sexes__na__na.log",
+      "sha256": "e31a30bfe039b777c8626c2cf95f2df1df28ed17c8ab2e2dbb692381043afa01",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20002__both_sexes__1226__na.log",
+      "expected_sha256": "",
+      "ledger_line": 311,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20002__both_sexes__1226__na.log",
+      "sha256": "427cc618566490050487033e035b95f9511aa425650764f874e7af66b642b11f",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__135__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 257,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__135__both_sexes__na__na.log",
+      "sha256": "e4382dcfcd706df99aa57b1595ae9d64d94672af1c005ac095445308f1c93ca6",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__4195__both_sexes__na__irnt.log",
+      "expected_sha256": "",
+      "ledger_line": 291,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__4195__both_sexes__na__irnt.log",
+      "sha256": "604db4b8a1a6face6d26ec61fb2a50c4c8afd1af33305e8eb36db9ee0c48c05a",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_categorical__20117__both_sexes__2__na.log",
+      "expected_sha256": "",
+      "ledger_line": 321,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_categorical__20117__both_sexes__2__na.log",
+      "sha256": "9db1453e1f29401cbd4d6b039f5de3ffd57dc1a15dd0c34d9d682b732ef36a90",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1588__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 269,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1588__both_sexes__na__na.log",
+      "sha256": "102df0e2ba3220bc32246d1146d90f36041fe3d19f04f457a7bc1f9035fc33a6",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_continuous__1259__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 338,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_continuous__1259__both_sexes__na__na.log",
+      "sha256": "f4505bcff9516ba5a2bee6ba2832bcffcafe278f48778d2a358378dc700450b4",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/h2/h2_panukbb_phecode__318__both_sexes__na__na.log",
+      "expected_sha256": "",
+      "ledger_line": 252,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/h2/h2_panukbb_phecode__318__both_sexes__na__na.log",
+      "sha256": "047b48a990be8d83fd7eb0ebbd1ca91a611459ae33922054d49aead9721c3a9e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_accel_sleep_duration.log",
+      "expected_sha256": "",
+      "ledger_line": 245,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_accel_sleep_duration.log",
+      "sha256": "e868e7d75b087418d713c131baa36f6d65782bb265a2e822355b1f67d751619b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_chronotype.log",
+      "expected_sha256": "",
+      "ledger_line": 247,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_chronotype.log",
+      "sha256": "2e4e122f03b060bb2643a45307d568349ddd9185866208342a3ce8c45a7e98d7",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_insomnia.log",
+      "expected_sha256": "",
+      "ledger_line": 237,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_insomnia.log",
+      "sha256": "ba955e35e8c6fccf3defe3c9fceb500e224de3ee6ed249dbe6181bc135d58c6a",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_longsleep.log",
+      "expected_sha256": "",
+      "ledger_line": 244,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_longsleep.log",
+      "sha256": "859b3e1606d1b855dae6b6465e53386c38fac0cf16b30925aec31584732a316b",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_napping.log",
+      "expected_sha256": "",
+      "ledger_line": 239,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_napping.log",
+      "sha256": "1799ba59d3a20776add33837d441f21f10f1b403edcd1d6a6fe9b5ea3b2c7c16",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_shortsleep.log",
+      "expected_sha256": "",
+      "ledger_line": 246,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_shortsleep.log",
+      "sha256": "9b82499327417a6ecc4bc1884d73aad7a17426627dcad76e879beaebf535e350",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_sleep_apnea.log",
+      "expected_sha256": "",
+      "ledger_line": 241,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_apnea.log",
+      "sha256": "e4cb0d243a33b293a33660b38e03388573eb5551df48b414f0cc1180d428889e",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_sleep_efficiency.log",
+      "expected_sha256": "",
+      "ledger_line": 248,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_efficiency.log",
+      "sha256": "ca9e3545381dccf279b37e389e5fc95966d0def7f3c3dea20ef07a1f77085901",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_sleep_timing.log",
+      "expected_sha256": "",
+      "ledger_line": 240,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleep_timing.log",
+      "sha256": "f72f91f92e7574b2555fc83093db8d7791f32539e90d68a8d8656b46eb802490",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_sleepdur.log",
+      "expected_sha256": "",
+      "ledger_line": 242,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleepdur.log",
+      "sha256": "36eae53000b07894f2cb37080431eb1a78a607f824de25055f8df2f93d675820",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_sleepiness.log",
+      "expected_sha256": "",
+      "ledger_line": 238,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_sleepiness.log",
+      "sha256": "872719fbefa24898be1d155448cbe44a10f2558e53d68a9ae1d20e5e3cea38a7",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    },
+    {
+      "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+      "archive_member": "2026-08-26/go/work/sleep-gwas-atlas/discovery_extension/logs/rg/rg_snoring.log",
+      "expected_sha256": "",
+      "ledger_line": 243,
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/logs/rg/rg_snoring.log",
+      "sha256": "567805cd73c92f9982d958231d3d9a61beca73ff6b20f850559e64afd6257cb4",
+      "status": "HISTORICAL_LOG_RECOVERED_CURRENT_HASH_ONLY"
+    }
+  ],
+  "recovery_receipt_snapshot": {
+    "archive": "/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz",
+    "archive_bytes": 56985877290,
+    "completed_utc": "2026-10-09T04:29:18.894933+00:00",
+    "destination": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs",
+    "disk_retention_plan": "Only ~1.2 GB of munged inputs/reference/logs/QC; no full dense raw extraction.",
+    "expected_receipt_pinned_artifacts": 227,
+    "extension_munged_sources": 100,
+    "large_data_in_git": false,
+    "missing_receipt_pinned_artifacts": [],
+    "network_transfer_bytes": 0,
+    "original_ssd_inputs_modified": false,
+    "reader_mode": "one sequential gzip/tar pass; one writer; <=4MB buffers",
+    "recovered_artifacts": 360,
+    "recovered_bytes": 1092642897,
+    "recovered_receipt_pinned_artifacts": 227,
+    "replication_munged_sources": 13
+  },
+  "relative_roundtrip_tolerance": 5e-14,
+  "rg_extension_read_count_counts": {
+    "1217311": 1200
+  },
+  "scope": "Additive independent recovery/hash and printed-statistic concordance; no native estimator run, no GWAS data read, no full-precision historical recovery.",
+  "sleep_first_pair_h2_evidence": [
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.1447,
+      "intercept": 1.0075,
+      "se": 0.01,
+      "sleep": "accel_sleep_duration",
+      "z": 14.469999999999999
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.11,
+      "intercept": 1.0382,
+      "se": 0.0039,
+      "sleep": "chronotype",
+      "z": 28.205128205128208
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0562,
+      "intercept": 1.0136,
+      "se": 0.0026,
+      "sleep": "insomnia",
+      "z": 21.615384615384617
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.08,
+      "intercept": 1.0157,
+      "se": 0.0058,
+      "sleep": "longsleep",
+      "z": 13.793103448275863
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0836,
+      "intercept": 1.0354,
+      "se": 0.0035,
+      "sleep": "napping",
+      "z": 23.885714285714283
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0653,
+      "intercept": 1.0244,
+      "se": 0.0029,
+      "sleep": "shortsleep",
+      "z": 22.517241379310345
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.1146,
+      "intercept": 1.1153,
+      "se": 0.0071,
+      "sleep": "sleep_apnea",
+      "z": 16.140845070422532
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.103,
+      "intercept": 1.0095,
+      "se": 0.0073,
+      "sleep": "sleep_efficiency",
+      "z": 14.109589041095889
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0687,
+      "intercept": 1.0193,
+      "se": 0.0071,
+      "sleep": "sleep_timing",
+      "z": 9.676056338028168
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0678,
+      "intercept": 1.0288,
+      "se": 0.003,
+      "sleep": "sleepdur",
+      "z": 22.599999999999998
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0483,
+      "intercept": 1.0196,
+      "se": 0.0023,
+      "sleep": "sleepiness",
+      "z": 21.0
+    },
+    {
+      "evidence": "FIRST_PAIR_H2_IN_ORIGINAL_EXTENSION_RG_LOG; NOT_STANDALONE_ALL_SNPS_H2",
+      "gate_pass": true,
+      "h2": 0.0652,
+      "intercept": 1.0282,
+      "se": 0.0027,
+      "sleep": "snoring",
+      "z": 24.148148148148145
+    }
+  ],
+  "source_content_stage_counts_independently_checked_by_this_reviewer": false,
+  "source_count_stage_note": "Pinned standalone h2 parses SNP,N,Z with dropna=True; external rg parses SNP,N,Z,A1,A2 with dropna=False before post-merge dropna. Counts are not the same stage; discrepancy alone does not imply source mismatch.",
+  "status": "PASS"
+}

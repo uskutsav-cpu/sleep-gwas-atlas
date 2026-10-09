@@ -1,0 +1,847 @@
+{
+  "all_raw_ledger_status_counts": {
+    "MATCH_EXPECTED_SHA256": 42,
+    "MISSING": 3
+  },
+  "all_raw_missing_traits": [
+    "ldl",
+    "hdl",
+    "triglycerides"
+  ],
+  "arithmetic_tolerance": {
+    "absolute_estimates": 1e-15,
+    "absolute_p": 1e-300,
+    "relative": 1e-12
+  },
+  "block_boundary_coordinates_captured": false,
+  "block_delete_counts": {
+    "gencov": 200,
+    "hsq1": 200,
+    "hsq2": 200
+  },
+  "code_independent_byte_comparison": [
+    {
+      "file": "ldsc.py",
+      "independent_byte_identity": true,
+      "sha256": "4236e817b1c7443131a9f078390072c38bee85112e891c29351e3e7d663b8a25"
+    },
+    {
+      "file": "ldscore/__init__.py",
+      "independent_byte_identity": true,
+      "sha256": "2e94cea154085cf70658e7fbe7257687bcf27da783a57dfd886f532eb23c21b6"
+    },
+    {
+      "file": "ldscore/irwls.py",
+      "independent_byte_identity": true,
+      "sha256": "e0a8e7712b4cd3958c96cb37b464675dc591926aeadbc8ac1c62dd6aef153867"
+    },
+    {
+      "file": "ldscore/jackknife.py",
+      "independent_byte_identity": true,
+      "sha256": "e41eaa7126f422ab7dccb6669efa112e658a1ea6f9d5b4522bf9daafe990bc0c"
+    },
+    {
+      "file": "ldscore/ldsc_utils.py",
+      "independent_byte_identity": true,
+      "sha256": "c45145b031478e5cd374cde281803117f72044a74d61a0a75d01b37da9f27e59"
+    },
+    {
+      "file": "ldscore/ldsc_utils_local.py",
+      "independent_byte_identity": true,
+      "sha256": "cc8feb1c4018342a3da142ef149cad38133c88821214a6d96b6295de604e0322"
+    },
+    {
+      "file": "ldscore/ldscore.py",
+      "independent_byte_identity": true,
+      "sha256": "df98f324ca775ece05a6e8f93e0584c88bde9535c360fda6ff96bb7f475e726b"
+    },
+    {
+      "file": "ldscore/parse.py",
+      "independent_byte_identity": true,
+      "sha256": "6135c9a287994669e472c49d109a2f8b302eab918f49c957ace2e9b53ca5f3bc"
+    },
+    {
+      "file": "ldscore/regressions.py",
+      "independent_byte_identity": true,
+      "sha256": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+    },
+    {
+      "file": "ldscore/sumstats.py",
+      "independent_byte_identity": true,
+      "sha256": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+    }
+  ],
+  "estimator_static_review": "capture wrappers call saved stock estimator once, inspect return values, write JSON and return the unchanged result; no estimator-object/argument mutation detected in wrapper",
+  "frozen_comparison": [
+    {
+      "frozen": 0.1723,
+      "historical_printed_log": 0.1723,
+      "historical_serialization_matches": true,
+      "native": 0.17229925855319342,
+      "native_minus_frozen": -7.414468065902735e-07,
+      "quantity": "rg"
+    },
+    {
+      "frozen": 0.023,
+      "historical_printed_log": 0.023,
+      "historical_serialization_matches": true,
+      "native": 0.023041746382148513,
+      "native_minus_frozen": 4.174638214851298e-05,
+      "quantity": "se"
+    },
+    {
+      "frozen": 7.478,
+      "historical_printed_log": 7.4777,
+      "historical_serialization_matches": true,
+      "native": 7.477699636807108,
+      "native_minus_frozen": -0.00030036319289195035,
+      "quantity": "z"
+    },
+    {
+      "frozen": 7.563e-14,
+      "historical_printed_log": 7.5635e-14,
+      "historical_serialization_matches": true,
+      "native": 7.563481978016354e-14,
+      "native_minus_frozen": 4.81978016354032e-18,
+      "quantity": "p"
+    }
+  ],
+  "frozen_table_line": 14,
+  "full_precision_archival_results_available": false,
+  "independent_arithmetic": [
+    {
+      "absolute_difference": 0.0,
+      "captured": 0.17229925855319342,
+      "independent": 0.17229925855319342,
+      "pass_tolerance": true,
+      "quantity": "rg_ratio",
+      "relative_difference": 0.0
+    },
+    {
+      "absolute_difference": 5.551115123125783e-17,
+      "captured": 0.1721569059188145,
+      "independent": 0.17215690591881455,
+      "pass_tolerance": true,
+      "quantity": "rg_jknife",
+      "relative_difference": 3.2244510282634667e-16
+    },
+    {
+      "absolute_difference": 4.5102810375396984e-17,
+      "captured": 0.023041746382148513,
+      "independent": 0.023041746382148558,
+      "pass_tolerance": true,
+      "quantity": "rg_se",
+      "relative_difference": 1.9574388862443247e-15
+    },
+    {
+      "absolute_difference": 1.509903313490213e-14,
+      "captured": 7.477699636807108,
+      "independent": 7.477699636807093,
+      "pass_tolerance": true,
+      "quantity": "z",
+      "relative_difference": 2.019208295099326e-15
+    },
+    {
+      "absolute_difference": 8.923594559860086e-27,
+      "captured": 7.563481978016354e-14,
+      "independent": 7.563481978017247e-14,
+      "pass_tolerance": true,
+      "quantity": "p",
+      "relative_difference": 1.1798262474607551e-13
+    }
+  ],
+  "independent_reference_member_hash_checks": [
+    {
+      "independent_expected_hash_match": true,
+      "line": 45,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz",
+      "sha256": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 40,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.M_5_50",
+      "sha256": "4d93a65a13d474494886b5a08d6f1353eb7d097199c1edd94e1c0063f1452043"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 25,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz",
+      "sha256": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 10,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.M_5_50",
+      "sha256": "873641ba1b1d1954f12de3efda9befac347b024f51e676947d229c46352b1680"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 31,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz",
+      "sha256": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 29,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.M_5_50",
+      "sha256": "cbebc916d828f2dc7bf6f41a318ea9386615ca18368103b3bf151b15697360de"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 30,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz",
+      "sha256": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 28,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.M_5_50",
+      "sha256": "10b50bfa353bcc6c715edd27bbc2575f11db162cfa32683d1436b4044e118269"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 17,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz",
+      "sha256": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 35,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.M_5_50",
+      "sha256": "3da70d571578cd8166044b9e28b1be8b05dca2466a6b2b6e005e929ce510a332"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 19,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz",
+      "sha256": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 22,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.M_5_50",
+      "sha256": "829d481f2f402abb3da05ff969d9083d14a2495a1339f882935aaff0a1f425d4"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 34,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz",
+      "sha256": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 16,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.M_5_50",
+      "sha256": "3d2ffe6200693fa2d94398a632bcd814c60d4deb4da11eeed80a2bb47737db02"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 4,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz",
+      "sha256": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 8,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.M_5_50",
+      "sha256": "549a32add09387bb75dd0a21af29786788d056d19530b713d2637b9a442e64f9"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 39,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz",
+      "sha256": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 48,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.M_5_50",
+      "sha256": "8aeb3b5dbe44176c244e5684b530330e114f4853112a2caa3737e3bb2afb268a"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 44,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz",
+      "sha256": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 50,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.M_5_50",
+      "sha256": "76e9eb09c8ebe87f41e738c499417df57b080cfb7f9c986258ce7ddc2684b026"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 14,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz",
+      "sha256": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 11,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.M_5_50",
+      "sha256": "47217613c248ed2c6459e57df484a5a294a0f844f08f09d0f4b216bc8bdce987"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 15,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz",
+      "sha256": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 12,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.M_5_50",
+      "sha256": "c382026b135bf5c44004d1421ae0599cab5404c25be31a1f1930bc30f8417b33"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 36,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz",
+      "sha256": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 49,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.M_5_50",
+      "sha256": "edf26a214f6db0cb87c65050ba59bed40d9bc46c4a7752fbc12997931dc33021"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 23,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz",
+      "sha256": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 21,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.M_5_50",
+      "sha256": "21ef47fed5ba0c0426161ad0ed6204995e1c7b919b094468be14542193411589"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 5,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz",
+      "sha256": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 46,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.M_5_50",
+      "sha256": "a6c64f1a5aaf49bfec1ec27ec4949945d597180a8dc1c4510348d8ac9868f7db"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 9,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz",
+      "sha256": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 27,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.M_5_50",
+      "sha256": "1964cc8ae26fd5f3e5b560a00f370036d07a9aa68c70dafe0108d48dceb5f054"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 43,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz",
+      "sha256": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 24,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.M_5_50",
+      "sha256": "f34d58135a64456148f6e48ea73f8e0e65e7e28d70783c22796294b60c522cb1"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 38,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz",
+      "sha256": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 33,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.M_5_50",
+      "sha256": "5134cfa8390c7aecccd89b5e808b62935257b27094f03330b2306ccd02840b28"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 13,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz",
+      "sha256": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 3,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.M_5_50",
+      "sha256": "cb6b0ba4e36b96d4cfbdac20202153baa70eb3633246d89172d7a7847e536fc7"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 20,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz",
+      "sha256": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 7,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.M_5_50",
+      "sha256": "aa2f7130a8e1e1b63719554bd801476dd39597742316febf68f7f8d1952725cb"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 47,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz",
+      "sha256": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 26,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.M_5_50",
+      "sha256": "0128dc6fab98f08718a84499eb384b03565f259ba016f40029d31f1ba874c9ae"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 37,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz",
+      "sha256": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06"
+    },
+    {
+      "independent_expected_hash_match": true,
+      "line": 32,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.M_5_50",
+      "sha256": "e5bf514d371a97ad95e75b5e7189e8b8654c01059da78891628e074445fdc1ee"
+    }
+  ],
+  "inputs": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldsc.py": {
+      "bytes": 30847,
+      "sha256": "4236e817b1c7443131a9f078390072c38bee85112e891c29351e3e7d663b8a25"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/__init__.py": {
+      "bytes": 40,
+      "sha256": "2e94cea154085cf70658e7fbe7257687bcf27da783a57dfd886f532eb23c21b6"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/irwls.py": {
+      "bytes": 6061,
+      "sha256": "e0a8e7712b4cd3958c96cb37b464675dc591926aeadbc8ac1c62dd6aef153867"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/jackknife.py": {
+      "bytes": 17694,
+      "sha256": "e41eaa7126f422ab7dccb6669efa112e658a1ea6f9d5b4522bf9daafe990bc0c"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldsc_utils.py": {
+      "bytes": 25409,
+      "sha256": "c45145b031478e5cd374cde281803117f72044a74d61a0a75d01b37da9f27e59"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldsc_utils_local.py": {
+      "bytes": 25525,
+      "sha256": "cc8feb1c4018342a3da142ef149cad38133c88821214a6d96b6295de604e0322"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldscore.py": {
+      "bytes": 14512,
+      "sha256": "df98f324ca775ece05a6e8f93e0584c88bde9535c360fda6ff96bb7f475e726b"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/parse.py": {
+      "bytes": 12465,
+      "sha256": "6135c9a287994669e472c49d109a2f8b302eab918f49c957ace2e9b53ca5f3bc"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py": {
+      "bytes": 29677,
+      "sha256": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py": {
+      "bytes": 23660,
+      "sha256": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/manifests/ldsc_native_code_comparison_v1.json": {
+      "bytes": 608,
+      "sha256": "686ba0953c36b83b6773402298e7590ca582d4efe5a2cff46b6d6e0d6e054c6e"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi.full_precision.json": {
+      "bytes": 3666,
+      "sha256": "a893a5638d0e650fdd99217a9ce2f1a4a72c9043dde021daf55d7e97cbe5134f"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi.log": {
+      "bytes": 4147,
+      "sha256": "077da31f6d03e2238949f845d7865f5c2f9efbb984eae69cb82a4b129320dd4d"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.gencov.delete": {
+      "bytes": 5000,
+      "sha256": "161cbdb399362bf6b092639bbdf804f53f5b08bfd79e3bfc3fca1ac9ec82d184"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.hsq1.delete": {
+      "bytes": 5000,
+      "sha256": "edcb326eff214189a96a47178d1e8ee98a5d94b05f9be36470b1ea0c981705dc"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmiinsomnia.sumstats.gz_bmi.sumstats.gz.hsq2.delete": {
+      "bytes": 5000,
+      "sha256": "8c81c2cf9944bc1bad345ef08594eb6bd91c18bbdb9986135fc41af76108d7f1"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/scripts/native_ldsc_capture.py": {
+      "bytes": 2790,
+      "sha256": "bd1b87e403fca2bad4c30b6a662a64f7c3d1a47f6aa9884f5157e370cb95707d"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/rg_matrix.tsv": {
+      "bytes": 79897,
+      "sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077"
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/native_input_hash_checks.tsv": {
+      "bytes": 86442,
+      "sha256": "7ce784dc1453f31b143eaae0b65bd64da5803201cf7f74080d2610380d8172b6"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldsc.py": {
+      "bytes": 30847,
+      "sha256": "4236e817b1c7443131a9f078390072c38bee85112e891c29351e3e7d663b8a25"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/__init__.py": {
+      "bytes": 40,
+      "sha256": "2e94cea154085cf70658e7fbe7257687bcf27da783a57dfd886f532eb23c21b6"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/irwls.py": {
+      "bytes": 6061,
+      "sha256": "e0a8e7712b4cd3958c96cb37b464675dc591926aeadbc8ac1c62dd6aef153867"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/jackknife.py": {
+      "bytes": 17694,
+      "sha256": "e41eaa7126f422ab7dccb6669efa112e658a1ea6f9d5b4522bf9daafe990bc0c"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/ldsc_utils.py": {
+      "bytes": 25409,
+      "sha256": "c45145b031478e5cd374cde281803117f72044a74d61a0a75d01b37da9f27e59"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/ldsc_utils_local.py": {
+      "bytes": 25525,
+      "sha256": "cc8feb1c4018342a3da142ef149cad38133c88821214a6d96b6295de604e0322"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/ldscore.py": {
+      "bytes": 14512,
+      "sha256": "df98f324ca775ece05a6e8f93e0584c88bde9535c360fda6ff96bb7f475e726b"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/parse.py": {
+      "bytes": 12465,
+      "sha256": "6135c9a287994669e472c49d109a2f8b302eab918f49c957ace2e9b53ca5f3bc"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/regressions.py": {
+      "bytes": 29677,
+      "sha256": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py": {
+      "bytes": 23660,
+      "sha256": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log": {
+      "bytes": 28510,
+      "sha256": "f146c839ba540467c9db31324fc01ca948d8eac3405833be4ea3898d64f288ed"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "4d93a65a13d474494886b5a08d6f1353eb7d097199c1edd94e1c0063f1452043"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz": {
+      "bytes": 2135584,
+      "sha256": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "76e9eb09c8ebe87f41e738c499417df57b080cfb7f9c986258ce7ddc2684b026"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz": {
+      "bytes": 1411676,
+      "sha256": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "47217613c248ed2c6459e57df484a5a294a0f844f08f09d0f4b216bc8bdce987"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz": {
+      "bytes": 1351364,
+      "sha256": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "c382026b135bf5c44004d1421ae0599cab5404c25be31a1f1930bc30f8417b33"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz": {
+      "bytes": 1314068,
+      "sha256": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "edf26a214f6db0cb87c65050ba59bed40d9bc46c4a7752fbc12997931dc33021"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz": {
+      "bytes": 1012467,
+      "sha256": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "21ef47fed5ba0c0426161ad0ed6204995e1c7b919b094468be14542193411589"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz": {
+      "bytes": 885137,
+      "sha256": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "a6c64f1a5aaf49bfec1ec27ec4949945d597180a8dc1c4510348d8ac9868f7db"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz": {
+      "bytes": 813558,
+      "sha256": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "1964cc8ae26fd5f3e5b560a00f370036d07a9aa68c70dafe0108d48dceb5f054"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz": {
+      "bytes": 857555,
+      "sha256": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "f34d58135a64456148f6e48ea73f8e0e65e7e28d70783c22796294b60c522cb1"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz": {
+      "bytes": 717215,
+      "sha256": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "5134cfa8390c7aecccd89b5e808b62935257b27094f03330b2306ccd02840b28"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz": {
+      "bytes": 800003,
+      "sha256": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "cb6b0ba4e36b96d4cfbdac20202153baa70eb3633246d89172d7a7847e536fc7"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz": {
+      "bytes": 500497,
+      "sha256": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "873641ba1b1d1954f12de3efda9befac347b024f51e676947d229c46352b1680"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz": {
+      "bytes": 2222117,
+      "sha256": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "aa2f7130a8e1e1b63719554bd801476dd39597742316febf68f7f8d1952725cb"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz": {
+      "bytes": 689106,
+      "sha256": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "0128dc6fab98f08718a84499eb384b03565f259ba016f40029d31f1ba874c9ae"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz": {
+      "bytes": 381900,
+      "sha256": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "e5bf514d371a97ad95e75b5e7189e8b8654c01059da78891628e074445fdc1ee"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz": {
+      "bytes": 388008,
+      "sha256": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "cbebc916d828f2dc7bf6f41a318ea9386615ca18368103b3bf151b15697360de"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz": {
+      "bytes": 1847002,
+      "sha256": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "10b50bfa353bcc6c715edd27bbc2575f11db162cfa32683d1436b4044e118269"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz": {
+      "bytes": 1659366,
+      "sha256": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "3da70d571578cd8166044b9e28b1be8b05dca2466a6b2b6e005e929ce510a332"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz": {
+      "bytes": 1701430,
+      "sha256": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "829d481f2f402abb3da05ff969d9083d14a2495a1339f882935aaff0a1f425d4"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz": {
+      "bytes": 1588764,
+      "sha256": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "3d2ffe6200693fa2d94398a632bcd814c60d4deb4da11eeed80a2bb47737db02"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz": {
+      "bytes": 1479136,
+      "sha256": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "549a32add09387bb75dd0a21af29786788d056d19530b713d2637b9a442e64f9"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz": {
+      "bytes": 1462963,
+      "sha256": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.M_5_50": {
+      "bytes": 6,
+      "sha256": "8aeb3b5dbe44176c244e5684b530330e114f4853112a2caa3737e3bb2afb268a"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz": {
+      "bytes": 1251946,
+      "sha256": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": {
+      "bytes": 10872216,
+      "sha256": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": {
+      "bytes": 8667629,
+      "sha256": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4"
+    }
+  },
+  "instrumented_vs_uninstrumented_native_comparison_performed": false,
+  "native_arguments": {
+    "M": null,
+    "annot": null,
+    "bfile": null,
+    "chisq_max": null,
+    "chunk_size": 50,
+    "cts_bin": null,
+    "cts_breaks": null,
+    "cts_names": null,
+    "extract": null,
+    "frqfile": null,
+    "frqfile_chr": null,
+    "h2": null,
+    "h2_cts": null,
+    "intercept_gencov": null,
+    "intercept_h2": null,
+    "invert_anyway": false,
+    "keep": null,
+    "l2": false,
+    "ld_wind_cm": null,
+    "ld_wind_kb": null,
+    "ld_wind_snps": null,
+    "maf": null,
+    "n_blocks": 200,
+    "no_check_alleles": false,
+    "no_intercept": false,
+    "no_print_annot": false,
+    "not_M_5_50": false,
+    "out": "sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi",
+    "overlap_annot": false,
+    "per_allele": false,
+    "pickle": false,
+    "pop_prev": null,
+    "pq_exp": null,
+    "print_all_cts": false,
+    "print_coefficients": false,
+    "print_cov": false,
+    "print_delete_vals": true,
+    "print_snps": null,
+    "ref_ld": null,
+    "ref_ld_chr": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+    "ref_ld_chr_cts": null,
+    "return_silly_things": false,
+    "rg": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+    "samp_prev": null,
+    "thin_annot": false,
+    "two_step": null,
+    "w_ld": null,
+    "w_ld_chr": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+    "yes_really": false
+  },
+  "native_log_summary_line": 66,
+  "native_ratio_minus_bias_corrected_jackknife": 0.00014235263437886725,
+  "original_log_summary_line": 854,
+  "pilot_libraries": {
+    "numpy": "1.21.5",
+    "pandas": "1.3.3",
+    "scipy": "1.7.3"
+  },
+  "pilot_processed_input_hash_checks": [
+    {
+      "actual_sha256": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+      "expected_sha256": "",
+      "independent_current_hash_match": true,
+      "ledger_line": 54,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+      "status": "HASH_RECORDED_NO_HISTORICAL_EXPECTED_HASH"
+    },
+    {
+      "actual_sha256": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078",
+      "expected_sha256": "",
+      "independent_current_hash_match": true,
+      "ledger_line": 128,
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+      "status": "HASH_RECORDED_NO_HISTORICAL_EXPECTED_HASH"
+    }
+  ],
+  "pilot_python": "3.9.23 | packaged by conda-forge | (main, Jun  4 2025, 18:02:02) \n[Clang 18.1.8 ]",
+  "pilot_raw_hash_ledger_records": [
+    {
+      "actual_sha256": "32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b",
+      "expected_sha256": "32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b",
+      "kind": "core_raw",
+      "line": 53,
+      "status": "MATCH_EXPECTED_SHA256",
+      "trait": "insomnia"
+    },
+    {
+      "actual_sha256": "0d6ed0ea97870916b830ccae349df94ca6f3cc68c025c79e784729af7f7136a4",
+      "expected_sha256": "0d6ed0ea97870916b830ccae349df94ca6f3cc68c025c79e784729af7f7136a4",
+      "kind": "core_raw",
+      "line": 127,
+      "status": "MATCH_EXPECTED_SHA256",
+      "trait": "bmi"
+    }
+  ],
+  "pilot_raw_sources_rehashed_by_this_reviewer": false,
+  "positive_delete_denominators": true,
+  "scope": "Independent processed-input native-pilot and stock-delete-array audit; no new LDSC execution or source-QC replay.",
+  "stock_printed_log_identity": true,
+  "stock_summary_numeric_field_count": 11,
+  "univariate_and_covariance_delete_se": [
+    {
+      "absolute_difference": 8.673617379884035e-19,
+      "captured": 0.0027210684999377857,
+      "independent": 0.002721068499937785,
+      "quantity": "hsq1.tot_se"
+    },
+    {
+      "absolute_difference": 0.0,
+      "captured": 0.006558367475088762,
+      "independent": 0.006558367475088762,
+      "quantity": "hsq2.tot_se"
+    },
+    {
+      "absolute_difference": 4.336808689942018e-19,
+      "captured": 0.00249947240410851,
+      "independent": 0.0024994724041085105,
+      "quantity": "gencov.tot_se"
+    }
+  ]
+}

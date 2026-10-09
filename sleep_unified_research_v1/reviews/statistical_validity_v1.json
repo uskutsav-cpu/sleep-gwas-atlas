@@ -1,0 +1,639 @@
+{
+  "checkpoint_recovered_exact_hash_match": {
+    "config/analysis_panel.lock.json": true,
+    "config/analysis_panel.tsv": true,
+    "config/gwas_schemas.tsv": true,
+    "config/liftover_plans.tsv": true,
+    "config/public_gwas_sources.tsv": true,
+    "config/variant_mapping_plans.tsv": true,
+    "environment/tool_versions.tsv": true,
+    "results/figures/fig2_rg_heatmap.png": true,
+    "results/tables/analysis_panel_provenance.tsv": true,
+    "results/tables/h2_summary.tsv": true,
+    "results/tables/phase0_readiness.tsv": true,
+    "results/tables/phase1_inclusion.tsv": true,
+    "results/tables/phase1_summary_report.md": true,
+    "results/tables/rg_matrix.tsv": true,
+    "results/tables/rg_primary_phase1.tsv": true,
+    "results/tables/rg_qc_failed_sensitivity.tsv": true,
+    "results/tables/source_readiness.tsv": true,
+    "results/tables/trait_readiness.tsv": true
+  },
+  "core": {
+    "bh_max_abs_error": 0.0,
+    "bh_significant_count": 161,
+    "distinct_pairs": 396,
+    "exact_cartesian": true,
+    "first_trait_count": 12,
+    "h2_fail_traits": [
+      "t2d",
+      "melanoma"
+    ],
+    "h2_log_mismatches": [],
+    "h2_pass_count": 43,
+    "h2_rows": 45,
+    "inclusion_mismatches": [],
+    "log_numeric_mismatches": [],
+    "log_rows": 396,
+    "nonphysical_liability_h2": [
+      {
+        "h2": 5.9823,
+        "se": 1.1958,
+        "trait": "ms",
+        "verdict": "PASS"
+      },
+      {
+        "h2": 3.731,
+        "se": 1.0456,
+        "trait": "melanoma",
+        "verdict": "DROP"
+      }
+    ],
+    "nonpositive_se_count": 0,
+    "primary_count": 372,
+    "primary_fdr_max_abs_error": 0.0,
+    "primary_pairwise_outcome_intercept_gt1p2_by_trait": {
+      "hdl": 12,
+      "ldl": 12,
+      "triglycerides": 12
+    },
+    "primary_significant_count_using_372": 155,
+    "primary_significant_count_using_frozen_396": 153,
+    "printed_rg_over_se_bh_label_changes": 0,
+    "printed_rg_over_se_bh_significant_count": 161,
+    "printed_z_bh_label_changes": 0,
+    "printed_z_bh_significant_count": 161,
+    "rows": 396,
+    "second_trait_count": 33,
+    "sensitivity_count": 24,
+    "sensitivity_significant_count_using_frozen_396": 8,
+    "zero_p_count": 0
+  },
+  "covariance_export": {
+    "all_diagonal_rg_one": true,
+    "covariance_z_equals_exported_correlation_z_max_abs_error": 1.021405182655144e-14,
+    "delta_method_se_over_fixed_scale_se_max": 1.3406249935008807,
+    "delta_method_se_over_fixed_scale_se_median": 1.0011278276680644,
+    "delta_method_se_over_fixed_scale_se_min": 0.17749633371619492,
+    "diagonal_exported_nonzero_correlation_se_count": 45,
+    "examples": [
+      {
+        "delta_method_se_conditional_archived_V": 0.013237046974174367,
+        "fixed_scale_se": 0.0745764529161461,
+        "line": 660,
+        "pair": "ibd__crohn",
+        "rg": 0.890558771839939,
+        "se_ratio_delta_over_fixed": 0.17749633371619492
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.014321313857551834,
+        "fixed_scale_se": 0.0701708464484127,
+        "line": 661,
+        "pair": "ibd__uc",
+        "rg": 0.874050924433665,
+        "se_ratio_delta_over_fixed": 0.20409207786997968
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.008695103842476369,
+        "fixed_scale_se": 0.035384678596439,
+        "line": 48,
+        "pair": "sleepdur__shortsleep",
+        "rg": -0.889872648683572,
+        "se_ratio_delta_over_fixed": 0.24573075656963625
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.02565724910120996,
+        "fixed_scale_se": 0.0541714053564247,
+        "line": 372,
+        "pair": "sleep_efficiency__accel_sleep_duration",
+        "rg": 0.724263995646033,
+        "se_ratio_delta_over_fixed": 0.47363085621272377
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.020543231238514283,
+        "fixed_scale_se": 0.038352662210104,
+        "line": 49,
+        "pair": "sleepdur__longsleep",
+        "rg": 0.686548964589896,
+        "se_ratio_delta_over_fixed": 0.5356402933901724
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.017605650599213894,
+        "fixed_scale_se": 0.0320862254898376,
+        "line": 218,
+        "pair": "sleepiness__napping",
+        "rg": 0.70135465917168,
+        "se_ratio_delta_over_fixed": 0.5486980886795172
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.03598299712694532,
+        "fixed_scale_se": 0.0611343489434015,
+        "line": 687,
+        "pair": "crohn__uc",
+        "rg": 0.608785250324667,
+        "se_ratio_delta_over_fixed": 0.588588866142315
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.01829834220281391,
+        "fixed_scale_se": 0.0256673261693357,
+        "line": 573,
+        "pair": "scz__bipolar",
+        "rg": 0.697389497907603,
+        "se_ratio_delta_over_fixed": 0.7129041054800097
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.08970802322602589,
+        "fixed_scale_se": 0.0669150759242256,
+        "line": 960,
+        "pair": "longevity__parental_lifespan",
+        "rg": 0.814628806764128,
+        "se_ratio_delta_over_fixed": 1.3406249935008807
+      },
+      {
+        "delta_method_se_conditional_archived_V": 0.02113878302813415,
+        "fixed_scale_se": 0.0170924838679883,
+        "line": 810,
+        "pair": "bmi__triglycerides",
+        "rg": 0.340685150186383,
+        "se_ratio_delta_over_fixed": 1.2367297340396481
+      }
+    ],
+    "fixed_scale_se_identity_max_relative_error": 6.328213596530013e-15,
+    "offdiagonal_count": 990,
+    "offdiagonal_se_different_over_20percent_count": 11,
+    "scope": "Delta-method ratio uncertainty conditional on archived 1082-block S,V; not a new jackknife, not an extension discovery/validation covariance estimator."
+  },
+  "extension": {
+    "bh_max_abs_error": 0.0,
+    "bh_significant_count": 603,
+    "distinct_pairs": 1200,
+    "exact_cartesian": true,
+    "first_trait_count": 12,
+    "h2_gate_pass_count": 100,
+    "h2_trait_count": 100,
+    "maximum_abs_cross_trait_intercept": 0.1386,
+    "minimum_valid_snp_overlap": 1128043,
+    "nonpositive_se_count": 0,
+    "pairwise_outcome_h2_z_lt4": 0,
+    "pairwise_outcome_intercept_gt1p2": 0,
+    "printed_rg_over_se_bh_label_changes": 0,
+    "printed_rg_over_se_bh_significant_count": 603,
+    "printed_z_bh_label_changes": 0,
+    "printed_z_bh_significant_count": 603,
+    "rg_log_present_count": 0,
+    "rows": 1200,
+    "second_trait_count": 100,
+    "standalone_h2_log_present_count": 0,
+    "zero_p_count": 0
+  },
+  "inputs": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/config/replication_candidate_family.lock.json": {
+      "sha256": "d613c6ab4ebb33814621a6cb2e2d4e88b680153e32d95683695435ee442d2711",
+      "size_bytes": 14480
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/config/replication_manifest.lock.json": {
+      "sha256": "7948da34dd977d48248abc4f30e8ae57fb62c8e11ac31dee677c1497af4a76e7",
+      "size_bytes": 34470
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/config/replication_manifest.tsv": {
+      "sha256": "222d2169fe6d05ef44096b1267d1962fb34de80130d7e934f509a0ba8e488749",
+      "size_bytes": 289319
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_J10_BRONCHNAS.log": {
+      "sha256": "26dc9bec1eac46ac19570ddccdcbd3234251c741142bb7c2fc1189cab68313e2",
+      "size_bytes": 1508
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_J10_COPD.log": {
+      "sha256": "156d86c6c21fcfa28d7401b8f5f0437526c2a13e58bd118c44f169241fbc3cfc",
+      "size_bytes": 1471
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_K11_CHOLELITH.log": {
+      "sha256": "e67202a7a2db43a2e12d59901924f70ec1dd3195577b78194c7dfcab4512081b",
+      "size_bytes": 1486
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_K11_DIAHER.log": {
+      "sha256": "a3b546f72975ab8114135b35a888bf94ea29e3c116aeb64db89f084b52f3bd1e",
+      "size_bytes": 1477
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_K11_OTHENTERCOL.log": {
+      "sha256": "dd094e17842c7494669d41d0cd7c0de959fa34aafc31495e00e89e3867a5121f",
+      "size_bytes": 1492
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_K11_REFLUX.log": {
+      "sha256": "f4483546b3442cbec84bc14dc1cd69cc66e80b164f6c0d48cb45ad2522cf1ee1",
+      "size_bytes": 1477
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_M13_ARTHROSIS.log": {
+      "sha256": "2e0271d6b68e697a365fce61aff72eb79129510ffc1d2aac9b0cad6fd3b86990",
+      "size_bytes": 1485
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_M13_ARTHROSIS_KNEE.log": {
+      "sha256": "945e70197ed7076dd59bfeb0d5804086edfb57d18ebe326d5bdfb2edd555b77f",
+      "size_bytes": 1502
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_M13_INTERVERTEB.log": {
+      "sha256": "80c39a0c5d5e7fae9efc3402814ba27682bacbab6125bd94eabfdb8f17138e90",
+      "size_bytes": 1489
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_N14_CALCUKIDUR.log": {
+      "sha256": "36e0f48f1ebbc9bf142e32f6c204099ceeff06db71d61e7b0ebfeca6b6736a26",
+      "size_bytes": 1489
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_finngen_r13_SMOKING_DEPEND.log": {
+      "sha256": "6eae325327fe806329982bc188a03b6c1d7fd5cc483098645afc3a9a83419661",
+      "size_bytes": 1488
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_gwas_catalog_GCST90479148.log": {
+      "sha256": "4bc54ba39edc584c8f342f83fd8ba47c9104c7f487ed3d5d368ecd80e58317e2",
+      "size_bytes": 1483
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/h2/h2_gwas_catalog_GCST90479330.log": {
+      "sha256": "d73ff0de6c85b2ddabc0bb1db634e4ebb85052897b3d45620db0d45832497181",
+      "size_bytes": 1506
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_insomnia.log": {
+      "sha256": "b5da641e7b8d79557165145f47c16dbabb1abdb48d819aa70221abc994518bd6",
+      "size_bytes": 9624
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_longsleep.log": {
+      "sha256": "2fad709fc07e1784cd45e436088ba555d1bab5fc69fef25ec0611e186602f008",
+      "size_bytes": 10653
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_napping.log": {
+      "sha256": "e26f221854d6f4cec82989c3b4d061ba2fff46d9be748ed1c9e9d7d7fb34ef26",
+      "size_bytes": 3626
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_shortsleep.log": {
+      "sha256": "3c25bde87946ca62d6a519855ce9f7e8544092e0ced5b62cd405ec043beec49b",
+      "size_bytes": 10677
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_sleep_apnea.log": {
+      "sha256": "041e693ad1ac06d78a0f79509680dca8553aa62864e630f5603b0a0c3fb01330",
+      "size_bytes": 2650
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_sleep_timing.log": {
+      "sha256": "6193ecb9975649f32d3af39c31f5e68a2c5f395bcc53f096bb5f7a3f434da86b",
+      "size_bytes": 2648
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_sleepdur.log": {
+      "sha256": "09a7c7c1039e783e042993c4928a95a7db08ba75efe3b68ee280939911ce6f9d",
+      "size_bytes": 7648
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/logs/replication/rg/rg_replication_snoring.log": {
+      "sha256": "42bb5dcba7b5c850417abc80eb833a8d02226ad38df217820cef704fa789bd6a",
+      "size_bytes": 6612
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/ldsc/extension_rg_matrix.tsv": {
+      "sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166",
+      "size_bytes": 428348
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/ldsc/extension_trait_readiness.tsv": {
+      "sha256": "95b22a7da9924945643f43660080b9773496421d4ca7c184eac03a03961a626c",
+      "size_bytes": 34690
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_results.tsv": {
+      "sha256": "c4b4da28640101102cc2784eeb772e8af0ab59f6fb3b3e3247015b9ae496cf84",
+      "size_bytes": 180140
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_source_h2.tsv": {
+      "sha256": "8ff5a14d9582acf66b9d3108a8155970fb93e241bcafa23dfecb62de09fbc591",
+      "size_bytes": 4043
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/config/analysis_panel.tsv": {
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+      "size_bytes": 24571
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/h2_summary.tsv": {
+      "sha256": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67",
+      "size_bytes": 6547
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/phase1_inclusion.tsv": {
+      "sha256": "0e4c27de6fd6afb8bd7f160f84ef3a97da9172f42439f86c1dc9e92370ef1cbb",
+      "size_bytes": 8915
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/rg_matrix.tsv": {
+      "sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+      "size_bytes": 79897
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_accel_sleep_duration.log": {
+      "sha256": "76be4b7eed9d3fe4fa2644db5c5c9132de21c21a5a97a8ad3551c8e3b1cd1700",
+      "size_bytes": 1380
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_adhd.log": {
+      "sha256": "bcbc9f9a85794a2cc64e6568f740934cdc08422d7cc3320137dd63feccca136d",
+      "size_bytes": 1375
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_alz.log": {
+      "sha256": "7deff4288a4401a0a343b4e0755dcd6ec1dccf5d1b78e55b19695cc19cacef2e",
+      "size_bytes": 1372
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_asthma.log": {
+      "sha256": "1ed3883909aa04dbc93a506f63a986c2c85530be73b0387c78c67fa396c39fd0",
+      "size_bytes": 1382
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_atrial_fibrillation.log": {
+      "sha256": "e6bca2c40c65f2bb5b1f69efbae7793f84bb9fbf3b1d048403c943ba9520a81e",
+      "size_bytes": 1418
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_bipolar.log": {
+      "sha256": "c0dd607b609b0f937cc426738848306f899456fb2a8ab3bf25a01d669873a103",
+      "size_bytes": 1381
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_bmi.log": {
+      "sha256": "e5af464855ac876ce9e8e6ac35bcf3211adcfb84ded23aa2b814355074ad408f",
+      "size_bytes": 1329
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_breast_cancer.log": {
+      "sha256": "c0cfa04773ef9e7bc38c203fa086c4d1dcdf0cbf582654bc6759c59870d25a24",
+      "size_bytes": 1400
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_cad.log": {
+      "sha256": "a1725da0f9727e654450d3cd1f76920653ffe81d217034ce67e2032ed5107823",
+      "size_bytes": 1372
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_chronotype.log": {
+      "sha256": "33ebae13094a6122fa186611170ef310ba4ab98f8cb3795805afa3db8ea9c0c2",
+      "size_bytes": 1392
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_colorectal_cancer.log": {
+      "sha256": "ea4fa0e1069422f3f7442632b63967752baaacc8e3e7d4a253c361a8e802043a",
+      "size_bytes": 1414
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_crohn.log": {
+      "sha256": "60cd7926904cafb055b384039ae5d44eb891fd8137966099d1396e74acee34b0",
+      "size_bytes": 1378
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_frailty.log": {
+      "sha256": "f3a6357c20b7148d69544a11356e7137f2b837dae7546c2ba279d1e842d12a7e",
+      "size_bytes": 1341
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_grip_strength.log": {
+      "sha256": "62239621947d67601162613bbc6d000dce823eb7cfa25b9e315445284e5d74d6",
+      "size_bytes": 1360
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log": {
+      "sha256": "2483d9f56bda33aad84d315852648e37c62188b82dd1745dfff4e54ae86ba41d",
+      "size_bytes": 1329
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_healthspan.log": {
+      "sha256": "5d525259c29f8946267a899974447a8463acb3eb46f73adb0b5d8c955519db13",
+      "size_bytes": 1350
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ibd.log": {
+      "sha256": "257205cde2a8bfdebbfca7a3d13cc553e3aa8b8194975c448476ad9be29249bb",
+      "size_bytes": 1372
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_insomnia.log": {
+      "sha256": "361ab329d6b042309081898a533725fe45799ca22d3d085e38aa1989d7126812",
+      "size_bytes": 1386
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log": {
+      "sha256": "72df5d58eeb61562d7ad93ec2231dbaeb37ff2292e0e6b437107a5e5dda020a5",
+      "size_bytes": 1327
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_longevity.log": {
+      "sha256": "2f0fbf0bda7ee7e3841533cc20ce4ecefb89cfc80cab7ead81df5e30b84f5448",
+      "size_bytes": 1390
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_longsleep.log": {
+      "sha256": "f1e495dffce70bca24ca2f38a3edc080e241f911ee00770d202d1422840df381",
+      "size_bytes": 1388
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_lung_cancer.log": {
+      "sha256": "e6972b1cbe93c27b036f791ac489a226e863411e028a3bcca124b5e10347b0d6",
+      "size_bytes": 1395
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_mdd.log": {
+      "sha256": "04a05ec1077a1e8a05516971ba470e05dccb018b046875f48f2492f2fc171797",
+      "size_bytes": 1371
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log": {
+      "sha256": "8622bfb96233aeb36c2dc8863786d37f836d3fc4a1034ece2b83d3eeaef6a1d2",
+      "size_bytes": 1387
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log": {
+      "sha256": "fd28d8aab44eb7c26b69a40f614d8ce00e23da29fdc7e729aa3b6b221f62bcb5",
+      "size_bytes": 1368
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_napping.log": {
+      "sha256": "ac080bcc8b4797b639240f83c3b84ef9a3c0beba29eed5429e97cf3e1460a2a2",
+      "size_bytes": 1342
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ovarian_cancer.log": {
+      "sha256": "2487e0571fe0bac34b29db41250c73b28dbfb4f04ddb3c0b8276d3ed4cba9dd4",
+      "size_bytes": 1404
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_parental_lifespan.log": {
+      "sha256": "34bc7f3dce7ffe3220c528d27fb64a237adb91b93e9bb82776a50a22311cc1ce",
+      "size_bytes": 1372
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_parkinson.log": {
+      "sha256": "bb76ab761e101ece4f84e3cfe96be4997ce0cf3221d6bdad96e95c07feca06d3",
+      "size_bytes": 1412
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_prostate_cancer.log": {
+      "sha256": "928e46449a7cb0606e1c02168a0022842d64bd802f611bd8d8c693c46dc96e2a",
+      "size_bytes": 1406
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ra.log": {
+      "sha256": "a01e45d3848de0ede272455339f347a0a7035b1b1a5776877eff002681b3190b",
+      "size_bytes": 1368
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sbp.log": {
+      "sha256": "4ccb585728a0aa047d27f22acedab143513cf4530313e39c1cd8f92a25801d78",
+      "size_bytes": 1327
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_scz.log": {
+      "sha256": "e1f72cb2faac8daf9457c0f4592088d6cc3c824e4191680a3312161ce0dcd157",
+      "size_bytes": 1372
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_shortsleep.log": {
+      "sha256": "d6d0642826b73406c18cefd62f75e6206845f3a7ecc69e86237f0e33ebec2c4d",
+      "size_bytes": 1393
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sleep_apnea.log": {
+      "sha256": "ecd27d3928a5e9ec59f9ab009e6cc9c50cdf1a1627b78ed347390f267ec6eacc",
+      "size_bytes": 1396
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sleep_efficiency.log": {
+      "sha256": "80c3e2b16906817ea2907871818bed0465c6f082a0dafff2397e97e726321c5c",
+      "size_bytes": 1368
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sleep_timing.log": {
+      "sha256": "09044b3deefffc7775b6c12c542075fb75ee974a3d2d0fc2cc20a0acf031d1f4",
+      "size_bytes": 1357
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sleepdur.log": {
+      "sha256": "e1eff0cfaf7ec8aec719c9b58a8ddacbf775ac35203e284510bd79a4adb4b9f5",
+      "size_bytes": 1345
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_sleepiness.log": {
+      "sha256": "884f4e4f4a6ec1144a4f05d9632d52f70bd9d57ad4517f4934de23ef0b238cce",
+      "size_bytes": 1349
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_snoring.log": {
+      "sha256": "b2e6eb9f99df6ce3b03bc57381a9b36d7e83d956c35fab8e3ea1c652a3b7a432",
+      "size_bytes": 1384
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_stroke.log": {
+      "sha256": "2de279ad1668809cf69004706a4b060a3c7966a41fe3978729ef4433bfa307d8",
+      "size_bytes": 1380
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_t2d.log": {
+      "sha256": "8948b10aaf12831711b25341c078ce995704b179c3fc90617b81e79dabb5c11f",
+      "size_bytes": 1371
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_telomere_length.log": {
+      "sha256": "e62666463e60c40d70cca0917620f28208856049d0dffa100681ee5a0c65ecb2",
+      "size_bytes": 1367
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log": {
+      "sha256": "797244587a380d67c06ff9e1ce6dcdd403fdd6b8ac78509aae4a84b1b00d9c55",
+      "size_bytes": 1359
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_uc.log": {
+      "sha256": "cf50ff025cfcdb33200527a8022a884f9c3ee8e0fb71ccd53c1a947ea98773de",
+      "size_bytes": 1370
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log": {
+      "sha256": "2dd1aac1a9eba9e2d01891a8a07c7c2be7595dd0de1c16dc61cc7907d4671575",
+      "size_bytes": 28870
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log": {
+      "sha256": "2ed4e27d74c060926fb4e4ec15048b289d3777a9c6dbc756c43b98ae9eede948",
+      "size_bytes": 28565
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log": {
+      "sha256": "f146c839ba540467c9db31324fc01ca948d8eac3405833be4ea3898d64f288ed",
+      "size_bytes": 28510
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log": {
+      "sha256": "0bf3dfe6820186f986ac86b66534f72d99f851a55da8835a6aa765debedd50c3",
+      "size_bytes": 28534
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log": {
+      "sha256": "98f5f73de2cda651b47681b6de9a516a92968f19e30ddd45701f700243ee0cfe",
+      "size_bytes": 28488
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log": {
+      "sha256": "b59916015e12d838a6a1409f087eaa49e251ae18c0d1ffa37a1eb7965e99c999",
+      "size_bytes": 3343
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log": {
+      "sha256": "5746c798f0de0f49e264919f06a8d247b401a54ce4f0b1859679fda9675c1c25",
+      "size_bytes": 3282
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log": {
+      "sha256": "2107a285efaafbe648dba762350fdec66f1e7673457a28793a4d2e2d141dfe36",
+      "size_bytes": 3277
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log": {
+      "sha256": "b159218411edc6665654ae308c0705ac436f08e83d3d008ec7e4ae7ddec33a6c",
+      "size_bytes": 3284
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log": {
+      "sha256": "1ac8915d3a23125581daefd1723ae13d8602990af261cd87717ddfa7e30f1112",
+      "size_bytes": 3274
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log": {
+      "sha256": "e4ccca9065acf700fca23503119c4f581a34eca74a0cab9abd81bd23796eae58",
+      "size_bytes": 3287
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log": {
+      "sha256": "c33ac46c41e09dc2327b8f7ab101b0799df3f8bee2cd8c814f8d84f533d7cc3e",
+      "size_bytes": 3297
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log": {
+      "sha256": "87221ba7141deeb5bb55a0f22c5c5ca5b7282a22a8d37e6b8fc929f3d6f79a6c",
+      "size_bytes": 3320
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log": {
+      "sha256": "cbce1b7529c303f3921b58dfee004985451f7c2aaa5acbe9811f6bb0905bfc5a",
+      "size_bytes": 3297
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log": {
+      "sha256": "51323eac30b5743c94b2fc26fcd820294edac4fe764347c8ec1482c7eb087376",
+      "size_bytes": 3276
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log": {
+      "sha256": "8bfd7f8cb7ed921f43019aaf3387a445d23ca496c0e38e20d0e200614bf0158e",
+      "size_bytes": 3289
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log": {
+      "sha256": "f119da33bb6412f1258f5c111201aea70824e1510aa5abf1508a0067ac51a5b8",
+      "size_bytes": 3269
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log": {
+      "sha256": "f9545c8519505601cf15d3cae4df05ed148d661c15c814226ace03a8c2543d7e",
+      "size_bytes": 28573
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log": {
+      "sha256": "b82b989e101ec70615ab4542cc3a6d68053dfd146f59a306ac59b9fa201a7b1c",
+      "size_bytes": 28627
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log": {
+      "sha256": "55d262f9b1ac4fcf9adfe57efc48f52e142b8b67ffde34f021c39361cceb3d81",
+      "size_bytes": 28758
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log": {
+      "sha256": "4d92b25f49d7f28bdcaf922d67ce7130b8c7edd9e33dbdde5028ae73f137b7ba",
+      "size_bytes": 28593
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log": {
+      "sha256": "6460a236d61e3e52d291f7339bf74d737063e32be4d63f76c02efbcad30dae26",
+      "size_bytes": 28502
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log": {
+      "sha256": "4a8a01a80574e5743acb499a6a4f9f9f74e9dcd8cace6292e332bead5c1f2f55",
+      "size_bytes": 28561
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log": {
+      "sha256": "88343e6007dc496f989e60f115a70280bd1f6c316ddad230f97a1eb510050c94",
+      "size_bytes": 28467
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_pairs.tsv": {
+      "sha256": "2be39639e0262c3b5a434e26d5339661715992a20e35fb0613323a042a953209",
+      "size_bytes": 292611
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_sampling_covariance_1035x1035.tsv.gz": {
+      "sha256": "f2ff988cdcf37328ffdf860c89c253438d413b254647d16a0c9ab84bd73f0d74",
+      "size_bytes": 9693527
+    }
+  },
+  "replication": {
+    "alpha_exact": 0.0002304147465437788,
+    "both_replication_lock_memberships_and_hashes_match": true,
+    "class_mismatches": [],
+    "classes": {
+      "DIRECTIONALLY_CONCORDANT": 18,
+      "NO_INDEPENDENT_DATASET": 159,
+      "REPLICATED": 23,
+      "UNDERPOWERED": 17
+    },
+    "estimated_pair_count": 41,
+    "heterogeneity_bh_41_count": 10,
+    "heterogeneity_bonferroni_41_count": 4,
+    "heterogeneity_nominal_count_all_41": 16,
+    "heterogeneity_nominal_count_positive_23": 7,
+    "log_numeric_mismatches": [],
+    "log_pair_count": 41,
+    "manifest_order_match": true,
+    "positive_phenotype_match_counts": {
+      "COMPARABLE_WITH_DOCUMENTED_DIFFERENCES": 5,
+      "EXACT": 18
+    },
+    "positive_unique_outcome_count": 8,
+    "positive_unique_sleep_count": 7,
+    "qc_excluded_pair_reason_counts": {
+      "h2_z": 9,
+      "intercept": 8
+    },
+    "rows": 217,
+    "source_fail_count": 4,
+    "source_h2_count": 13,
+    "source_h2_log_numeric_mismatches": [],
+    "source_pass_count": 9,
+    "unique_pair_ids": 217
+  },
+  "scope": "Independent standard-library frozen-table and printed-log audit only; no native LDSC rerun or source-level validation."
+}

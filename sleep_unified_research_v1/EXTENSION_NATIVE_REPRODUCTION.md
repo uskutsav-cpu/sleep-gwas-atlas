@@ -1,0 +1,13 @@
+# Extension native reproduction status
+
+Recovery completion addendum: `logs/archived_extension_recovery_receipt_v1.json` records 360 recovered assets (1,092,642,897 bytes), including all 227 receipt-pinned assets, 100 original extension munged sources and 13 original validation munged sources. No pinned asset remains missing. The source containers and dense harmonization chain have not been replayed.
+
+The separate additive reviewer matched all 100 h2 records and all 1,200 rg records to the newly recovered original logs, with zero numerical mismatches and 603 frozen BH positives (`reviews/extension_log_concordance_v1.*`). Log hashes are current hashes tied to recovery, not historical expected log hashes. The direct 100-source count audit independently confirms all full-template rg counts and all nonmissing-N/Z h2 counts (`tables/extension_processed_source_counts_v1.tsv`). The count stages differ legitimately; these checks are not native estimator reruns.
+
+The exact 100-phenotype/1,200-test frozen extension table is preserved in `tables/original_extension_1200.tsv`. Independent BH arithmetic confirms 603 positives. The 396-test core family is not combined with it.
+
+Original extension munged input candidates, the shared Pan-UKB HapMap3 reference, munging logs, native h2/rg logs and 13 validation sources were located inside `/Volumes/Extreme SSD/Codex-Archive/2026-08-26.tar.gz`. This archive's folder date does not establish when individual analyses ran. `scripts/02_recover_archived_extension.py` recovers only explicit receipt-pinned input paths and native logs into this task's new SSD directory. Current progress and exact hashes are in `tables/archived_extension_recovery.tsv`; only its completed receipt can certify final recovery cardinality.
+
+Historical complete compressed-body receipts identify exact versioned source objects and source MD5/SHA-256. A receipt's current hash does not reauthenticate a past download. Exact recovery of its pinned munged output enables a processed-input native estimator rerun, but does not itself reproduce the dense-source INFO/MAF/allele/build filtering. Re-execution of that complete source-harmonization chain remains separately pending. No newer source release was substituted.
+
+There are currently zero completed new native extension pair reruns in this package. The frozen sequential plan includes 100 observed-scale h2 jobs and 12 batches covering all 1,200 correlations, retaining intercepts, SE and native full-precision estimates. Internal swap headroom currently blocks launching the full plan. Preserve all null results, exclusions and failed source gates; no missing estimate is a numerical zero.

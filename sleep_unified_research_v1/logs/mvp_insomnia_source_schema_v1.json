@@ -1,0 +1,85 @@
+{
+  "completed_utc": "2026-10-09T04:44:59.690947+00:00",
+  "elapsed_seconds": 709.8990030288696,
+  "source": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/new_validation_sources/GCST90475826.tsv.gz",
+  "source_sha256": "46b62349ba0d98b22bf302be973bb54a80707cfb02ce953426f8224910761835",
+  "acquisition_receipt_sha256": "22732e4c97c45197b8d636288a73d9058af5f07063d51519aae714b6f7943d93",
+  "diagnostic_code_sha256": "1026737c5f0085b6b2cad1945f5756026625821b348ffe4451a58437fc9afc5c",
+  "protocol_sha256": "6e25d05b85bdc2a4baee4aa861fc33364cf86dd6768365f71b331a92a4aad05e",
+  "source_header": [
+    "chromosome",
+    "base_pair_location",
+    "effect_allele",
+    "other_allele",
+    "odds_ratio",
+    "standard_error",
+    "effect_allele_frequency",
+    "p_value",
+    "rsid",
+    "ci_upper",
+    "ci_lower",
+    "alt",
+    "n",
+    "case_af",
+    "num_cases",
+    "control_af",
+    "num_controls",
+    "r2",
+    "q_pval",
+    "i2",
+    "direction"
+  ],
+  "counts": {
+    "source_rows": 19703815,
+    "supplied_standard_error_missing": 19703815,
+    "noncanonical_alleles": 1018711,
+    "strand_ambiguous_alleles": 2822797,
+    "historical_MAF_gt_0_01": 9166349,
+    "historical_R2_gt_0_9": 6315818,
+    "invalid_OR_CI": 0,
+    "invalid_P": 0,
+    "CI_derived_logOR_SE_available": 19703815,
+    "pre_HM3_allele_mapping_eligible_rows": 4385192
+  },
+  "ranges": {
+    "n": [
+      408138.0,
+      408138.0
+    ],
+    "num_cases": [
+      78566.0,
+      78566.0
+    ],
+    "num_controls": [
+      329572.0,
+      329572.0
+    ],
+    "r2": [
+      0.3,
+      1.113
+    ],
+    "N_eff": [
+      253768.61504687142,
+      253768.61504687142
+    ]
+  },
+  "P_CI_descriptive_discrepancy_buckets": {
+    "P_relative_difference_le_0.01": 7696093,
+    "P_relative_difference_le_0.001": 5867368,
+    "P_relative_difference_le_1": 1345127,
+    "P_relative_difference_le_0.05": 3689825,
+    "P_relative_difference_le_0.1": 1053444,
+    "P_relative_difference_le_10": 51948,
+    "P_relative_difference_le_gt10": 10
+  },
+  "gzip_full_stream_crc_verified": true,
+  "genetic_correlation_outcomes_accessed": false,
+  "harmonization_or_h2_completed": false,
+  "pair_tests_admitted_by_this_diagnostic": false,
+  "limitations": [
+    "CI-derived SE follows historical MVP rule; missing supplied SE cannot be directly validated",
+    "P/CI buckets are descriptive and affected by upstream rounding; no new exclusion threshold",
+    "HM3 identity, signed allele orientation and GRCh38 mapping are not certified",
+    "Source h2/intercept, power and human phenotype/overlap review remain pending"
+  ]
+}

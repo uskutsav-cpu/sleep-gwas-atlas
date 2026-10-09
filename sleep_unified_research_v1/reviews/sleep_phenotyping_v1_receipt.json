@@ -1,0 +1,146 @@
+{
+  "review": "SEPARATE_SLEEP_PHENOTYPING_PHASE10",
+  "review_date": "2026-10-08",
+  "scope": "Fixed metadata and primary phenotyping methods only",
+  "decision": "QUALIFIED_DESCRIPTIVE_USE; NO_EXACT_CLINICAL_REPLICATION_CERTIFICATION",
+  "core_count": 12,
+  "validation_count": 217,
+  "validation_unique_pair_count": 217,
+  "external_sources": 13,
+  "historical_match_counts": {
+    "EXACT": 37,
+    "PENDING": 159,
+    "COMPARABLE_WITH_DOCUMENTED_DIFFERENCES": 21
+  },
+  "historical_sleep_reuse_counts": {
+    "YES_SAME_INPUT_PATH": 217
+  },
+  "proposed_mvp_insomnia_class": "CLINICAL_TO_SYMPTOM_RELATED_PHENOTYPE_TRANSPORT",
+  "apnea_code_anomaly": {
+    "source": "https://r9.risteys.finngen.fi/table_case_counts/G6_SLEEPAPNO.html",
+    "code": "INPAT_ICD9(3472A)",
+    "source_label": "Cataplexy and narcolepsy",
+    "code_table_case_entries": 1574,
+    "unique_misclassified_cases_established": false,
+    "review_requirement": "Human Finnish code-history/endpoint review"
+  },
+  "new_outcomes_inspected": false,
+  "new_association_analysis": false,
+  "large_downloads": false,
+  "frozen_outputs_modified": false,
+  "ssd_modified": false,
+  "inputs": [
+    {
+      "path": "discovery_extension/sleep_submission_evidence_v1/tables/sleep_trait_metadata.tsv",
+      "sha256": "05569eef0a2bdbc301df1ff6cb1f192ff40ce7e354a9683737abae2c0f7e52f9"
+    },
+    {
+      "path": "config/gwas_schemas.tsv",
+      "sha256": "df2e56799a8cb07be849c96940d553710210725563e29e63baf62cc5a59dd51c"
+    },
+    {
+      "path": "discovery_extension/sleep_submission_evidence_v1/tables/replication_source_comparison.tsv",
+      "sha256": "f487465618566d467e7319d44c9c2e86e517449c38f616a6c2240133f1822d2f"
+    },
+    {
+      "path": "config/analysis_panel.tsv",
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "docs/public_sleep_gwas_acquisition.md",
+      "sha256": "44917a2794c71f6d590659ed8f1a5941f887acffe3999e51d0cfc81e98522cbf"
+    },
+    {
+      "path": "discovery_extension/config/replication_finngen_r13_sources.tsv",
+      "sha256": "1136d39f696f88b43833f870ce542a068e861d764a10f5ae2b52a59fe475916b"
+    },
+    {
+      "path": "discovery_extension/config/replication_mvp_sources.tsv",
+      "sha256": "3b15908dd00f30ca9d3e32c661f1c1fc63d7308c03f5c730cdfd8381e9871d61"
+    },
+    {
+      "path": "discovery_extension/scripts/46_curate_replication_queue.py",
+      "sha256": "1a929ee2a08dd1c9021b4ed12c3884190f414498d8b8755c9fb8a06234f43dac"
+    },
+    {
+      "path": "discovery_extension/sleep_submission_evidence_v1/08_SLEEP_PHENOTYPE_AND_CLINICAL_INTERPRETATION.md",
+      "sha256": "59b3c5d669555b91ea1874f9de29849ddf786c1b0e496976c84835aba6b76690"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_mvp_insomnia_source_contract.json",
+      "sha256": "2b83011eae4db96a3346ab42178493e8fe5f422b25dd536a8076f7db358a3d34"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/provenance_v1_mvp_insomnia_priority.md",
+      "sha256": "c04d5b9f78b674d831e931b5079b11032f9ca4f18edded83d24f5a7a8fe2e19d"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "sleep_unified_research_v1/reviews/sleep_phenotyping_v1.md",
+      "sha256": "8478b4b57e185d83b324b45e5238751c054f73b92e28a7662c98a219fbf90e68"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/sleep_phenotyping_v1_core.tsv",
+      "sha256": "08f9af58db36698377a00a156d88088b5d0ba370f2050aef4b0b9a8cc7e3818c"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/sleep_phenotyping_v1_validation.tsv",
+      "sha256": "ae5a1be3b865bc3f07f2bdb74963747674d0d5fc13b31c0c1c7b223332da7efd"
+    },
+    {
+      "path": "sleep_unified_research_v1/reviews/sleep_phenotyping_v1_sources.tsv",
+      "sha256": "4dba3615c62f8a91a4b9f6f23e5b962bcf06e03386ac587422702a2fb8035617"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.nature.com/articles/s41588-018-0333-3",
+      "status": "Publisher abstract/public-release statement; full methods unavailable; exact coding from fixed metadata"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-019-08917-4",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-018-08259-7",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-019-09576-1",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-019-11456-7",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-020-20585-3",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41467-020-14625-1",
+      "status": "Full primary methods"
+    },
+    {
+      "url": "https://r9.risteys.finngen.fi/endpoints/G6_SLEEPAPNO",
+      "status": "Official indexed full endpoint definition; direct fetch timeout"
+    },
+    {
+      "url": "https://r9.risteys.finngen.fi/table_case_counts/G6_SLEEPAPNO.html",
+      "status": "Direct official case-code table"
+    },
+    {
+      "url": "https://www.med.upenn.edu/syspharmatt/assets/user-content/documents/science.adj1182.pdf",
+      "status": "Primary published author-hosted PDF; source-specific code/control details not certified"
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/document.cgi?phd=8759&study_id=phs002453.v1.p1",
+      "status": "Primary phenotype manifest recorded by source reviewer"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10327290/",
+      "status": "Parent-source-review primary methods for encounter threshold; fresh access challenged"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Novelty decision and source crosswalk
+
+**No new primary question currently passes the admission gates. No genuine new biological finding is established.** The independent review inspected 14,568 supplement records, rechecked 14,188 numerical comparisons, and matched four workbook hashes. The exact source ledger, supplement inspection, representative numerical comparators and decision matrix are in `reviews/novelty_v1*`. Cached third-party full-text/workbooks remain outside this package's public deliverables.
+
+Among the 23 historical threshold-positive outcome-side validation pairs, 15 have substantially similar direct prior rg comparators, six have related genetic/MR evidence, and two remain unresolved. An unresolved comparison or an absent selected supplementary row does not establish first-ever priority. Different FinnGen releases are not a new biological finding by themselves.
+
+Morrison 2024 SLEEP already includes close single-indicator insomnia/duration comparators alongside multivariate factors, and expressly compares objective/self-report duration architecture. Goodman 2025 provides a broad multivariate sleep-health screen. Sleep Chart 2026 includes prior sleep GWAS and FinnGen outcome comparisons. Earlier sleep-GERD analyses likewise limit reflux priority. The new review additionally considered 2026 multi-organ disease genetics, device-sleep GWAS, poor-sleep-quality and proteomic studies. Later objective-sleep GWAS based on UKB do not provide cohort-independent device validation.
+
+The ranked future lead is question B, an exactly specified joint smoking/adiposity conditional genetic-sharing contrast. It has not passed exact data, joint uncertainty, power, novelty and compatible independent-test gates. Questions A/D/E/C also fail one or more hard gates. `HYPOTHESIS_FEASIBILITY_MATRIX.tsv` records result-independent stopping rules and all failures. No retrospective significance pattern was promoted into a new confirmatory hypothesis.
+
+Clinical-insomnia transport validation using MVP is a separately frozen validation of the existing candidate family. It may strengthen source independence if executed successfully, but it does not by itself make the already studied disease relationships novel or establish a mechanism.
+
+The earlier complete 1,200-row novelty master and pair crosswalk are preserved byte-for-byte as `tables/historical_novelty_master_1200.tsv` and `tables/historical_novelty_crosswalk.tsv`, with a copy/hash receipt. Their historical absence-of-direct-evidence or replication labels do not establish current priority or two-trait independence. Read them alongside the new source/supplement review and its NO-GO decision. No first-ever result is established by the preserved master.
