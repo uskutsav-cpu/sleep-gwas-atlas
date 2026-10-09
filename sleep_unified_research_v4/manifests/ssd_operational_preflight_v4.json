@@ -1,0 +1,59 @@
+{
+  "recorded_utc": "2026-10-09T18:13:16.014014+00:00",
+  "ssd_root": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4",
+  "writable_probe_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/manifests/writable_probe.bin",
+  "probe_bytes": 65536,
+  "probe_sha256": "d49a3584e351bb8ec3d300051b7feba2e7a5b6505ab7e5137919541d1ac375c0",
+  "readback_pass": true,
+  "internal_free_bytes": 604614656,
+  "ssd_free_bytes": 1060846436352,
+  "internal_minimum_bytes": 3221225472,
+  "ssd_minimum_bytes": 5368709120,
+  "tmpdir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/tmp",
+  "cache_root": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache",
+  "native_root": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/native",
+  "full_native_launched": false,
+  "version_choice": "v4 because v1-v3 are existing sealed packages; no overwritten v2",
+  "ssd_volume": {
+    "command": [
+      "diskutil",
+      "info",
+      "/Volumes/Extreme SSD"
+    ],
+    "returncode": 0,
+    "stdout": "   Device Identifier:         disk4s1\n   Device Node:               /dev/disk4s1\n   Whole:                     No\n   Part of Whole:             disk4\n\n   Volume Name:               Extreme SSD\n   Mounted:                   Yes\n   Mount Point:               /Volumes/Extreme SSD\n\n   Partition Type:            Microsoft Basic Data\n   File System Personality:   ExFAT\n   Type (Bundle):             exfat\n   Name (User Visible):       ExFAT\n\n   OS Can Be Installed:       No\n   Media Type:                Generic\n   Protocol:                  USB\n   SMART Status:              Verified\n   Volume UUID:               77FD98CC-B09E-3DAA-ACC0-82FF2B776B28\n   Disk / Partition UUID:     810DE8A5-CE26-4C8B-A15E-229CAF9E7173\n   Partition Offset:          1048576 Bytes (2048 512-Byte-Device-Blocks)\n\n   Disk Size:                 4.0 TB (4000751370752 Bytes) (exactly 7813967521 512-Byte-Units)\n   Device Block Size:         512 Bytes\n\n   Volume Total Space:        4.0 TB (4000734773248 Bytes) (exactly 7813935104 512-Byte-Units)\n   Volume Used Space:         2.9 TB (2939888336896 Bytes) (exactly 5741969408 512-Byte-Units) (73.5%)\n   Volume Free Space:         1.1 TB (1060846436352 Bytes) (exactly 2071965696 512-Byte-Units) (26.5%)\n   Allocation Block Size:     1048576 Bytes\n\n   Media OS Use Only:         No\n   Media Read-Only:           No\n   Volume Read-Only:          No\n\n   Device Location:           External\n   Removable Media:           Fixed\n\n   Solid State:               Yes\n\n",
+    "stderr": ""
+  },
+  "ssd_physical_device": {
+    "command": [
+      "diskutil",
+      "info",
+      "disk4"
+    ],
+    "returncode": 0,
+    "stdout": "   Device Identifier:         disk4\n   Device Node:               /dev/disk4\n   Whole:                     Yes\n   Part of Whole:             disk4\n   Device / Media Name:       Extreme 55AE\n\n   Volume Name:               Not applicable (no file system)\n   Mounted:                   Not applicable (no file system)\n   File System:               None\n\n   Content (IOContent):       GUID_partition_scheme\n   OS Can Be Installed:       No\n   Media Type:                Generic\n   Protocol:                  USB\n   SMART Status:              Verified\n\n   Disk Size:                 4.0 TB (4000753467904 Bytes) (exactly 7813971617 512-Byte-Units)\n   Device Block Size:         512 Bytes\n\n   Media OS Use Only:         No\n   Media Read-Only:           No\n   Volume Read-Only:          Not applicable (no file system)\n\n   Device Location:           External\n   Removable Media:           Fixed\n\n   Solid State:               Yes\n   Virtual:                   No\n\n",
+    "stderr": ""
+  },
+  "memory_swap": {
+    "command": [
+      "sysctl",
+      "hw.memsize",
+      "vm.swapusage"
+    ],
+    "returncode": 0,
+    "stdout": "hw.memsize: 8589934592\nvm.swapusage: total = 3328.00M  used = 1729.12M  free = 1598.88M  (encrypted)\n",
+    "stderr": ""
+  },
+  "disk_free": {
+    "command": [
+      "df",
+      "-h",
+      "/",
+      "/Volumes/Extreme SSD"
+    ],
+    "returncode": 0,
+    "stdout": "Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s3s1   228Gi    12Gi   577Mi    96%    459k  5.9M    7%   /\n/dev/disk4s1     3.6Ti   2.7Ti   988Gi    74%       1     0  100%   /Volumes/Extreme SSD\n",
+    "stderr": ""
+  },
+  "full_native_resource_gate_pass": false
+}
