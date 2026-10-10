@@ -1,0 +1,40 @@
+{
+  "schema": "public_source_policy_followup_microfetch_plan_v4_1",
+  "prepared_utc": "2026-10-10T01:10:05.901254+00:00",
+  "scope": "OFFICIAL_POLICY_INDEX_AND_LICENSE_METADATA_ONLY_NO_DATA_BODIES",
+  "cache_namespace": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache/source_policy_followup_review_v4_1",
+  "per_response_body_cap_bytes": 524288,
+  "per_response_header_cap_bytes": 65536,
+  "total_retained_cap_bytes": 20971520,
+  "request_count": 4,
+  "prospective_response_and_header_ceiling_bytes": 2359296,
+  "previous_metadata_retained_bytes": 65418,
+  "previous_receipt_sha256": "e345c4f57e09ac50d484cb037daed272913fa0f222a0e38484c0e7f6c7c7a2ac",
+  "timeout_seconds_per_request": 30,
+  "workers": 1,
+  "automatic_retry": false,
+  "TLS_verification": true,
+  "HTTPS_only": true,
+  "requests": [
+    {
+      "id": "colorectal_index",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90255001-GCST90256000/GCST90255675/",
+      "purpose": "Official directory index identifies exception README without source body reads"
+    },
+    {
+      "id": "edinburgh_mdd_item_metadata",
+      "url": "https://datashare.ed.ac.uk/server/api/core/items/e8734c04-98d0-4a4d-87b7-058aedfdf822",
+      "purpose": "Exact DOI-resolved item JSON rights metadata after bounded HTML exceeded cap"
+    },
+    {
+      "id": "edinburgh_mdd_enduser_license",
+      "url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/8b3adf00-97c3-44e6-a53d-82ed53174e3a/content",
+      "purpose": "Official end-user license linked by exact record; plain text only"
+    },
+    {
+      "id": "ldsc_master_license",
+      "url": "https://raw.githubusercontent.com/bulik/ldsc/master/LICENSE",
+      "purpose": "Current official license after pinned URL returned404; compare local immutable pinned license"
+    }
+  ]
+}

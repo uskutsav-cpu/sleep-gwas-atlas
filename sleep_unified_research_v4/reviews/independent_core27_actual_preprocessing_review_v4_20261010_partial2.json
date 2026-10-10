@@ -1,0 +1,923 @@
+{
+  "schema": "independent_core27_actual_preprocessing_review_v4_20261010_partial2",
+  "recorded_utc": "2026-10-10T06:09:57.674710+00:00",
+  "status": "QUALIFIED_PARTIAL_2_OF_27_PASS",
+  "family_terminal_review_complete": false,
+  "plan_identity": {
+    "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/core_large35_checkpoint_continuation_plan_v2.json",
+    "bytes": 1298982,
+    "sha256": "8a839122ef7a9a0faefb6c3971f04abd8fa755ed630a6db1efe8f725ca54c6e3"
+  },
+  "admission_identity": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/core_large35_checkpoint_continuation_admission_v2.json",
+    "bytes": 2003,
+    "sha256": "11f00f5e7951da0a3d44e4587fff384d60e66b8f3122af0f0993bd92ab8cd136"
+  },
+  "scope": "TWO_NEW_COMPLETED_CORE_TRAITS_ONLY_COMPACT_ACTUAL_RESULT_REVIEW",
+  "reviewed_source_count": 2,
+  "reviewed_traits": [
+    "sleep_apnea",
+    "sleep_efficiency"
+  ],
+  "records": [
+    {
+      "trait_id": "sleep_apnea",
+      "reviewed_once_in_this_dated_batch": true,
+      "original_source_id": "finngen_r9_sleep_apnoea",
+      "original_release": "FinnGen_R9_G6_SLEEPAPNO_2023-05-04",
+      "original_source_eligibility_literal": "SOURCE_VERIFIED",
+      "source_eligibility_qualification": "Existing source identity classification is retained; no new statistical, clinical, INFO/N, LD, independence or primary scientific admission.",
+      "source_identity_from_executed_source_gate": {
+        "status": "EXACT_CORE_RAW_SOURCE_GATE_PASS",
+        "trait": "sleep_apnea",
+        "mode": "source",
+        "plan_sha256": "8a839122ef7a9a0faefb6c3971f04abd8fa755ed630a6db1efe8f725ca54c6e3",
+        "created_utc": "2026-10-10T05:47:23.444687+00:00",
+        "estimator_calls": 0,
+        "raw_sha256": "eb8cfc33febc044c3f608406f5f50c9be7f6973aba5effd89a0f94d1f58c1d4b",
+        "raw_bytes": 763490490,
+        "completed_utc": "2026-10-10T05:47:24.511233+00:00"
+      },
+      "comparison_receipt_status": "EXACT_CORE_HARMONIZED_MUNGED_CONTENT_AND_QC_REPLAY_PASS",
+      "harmonized_comparison_from_executed_validator": {
+        "status": "EXACT_ORDERED_DECOMPRESSED_HARMONIZED_MATCH",
+        "rows": [
+          6841149,
+          6841149
+        ],
+        "expected_rows": 6841149,
+        "unequal_rows": 0,
+        "decompressed_sha256": [
+          "46178665d42d57bc5b89cd4162c305983a75bc114d1262334009d66682441575",
+          "46178665d42d57bc5b89cd4162c305983a75bc114d1262334009d66682441575"
+        ],
+        "compressed_sha256": [
+          "a79ae59e3e6debf49f0277a64df2fa8bda4c903c9620bb6fd2ab2292e4358b71",
+          "bf203697fcdc4bdff209f8e49b5af6de54234af365a873b5504df119c43e5932"
+        ],
+        "compressed_byte_identity_required": false,
+        "literal_order_fields_missingness_and_numerical_serialization_compared": true,
+        "both_gzip_CRC_and_EOF_verified": true
+      },
+      "munged_comparison_from_executed_validator": {
+        "status": "EXACT_FULL_DECOMPRESSED_TEMPLATE_MATCH",
+        "header": "SNP\tA1\tA2\tZ\tN",
+        "rows_new": 1217311,
+        "rows_archived": 1217311,
+        "expected_template_rows": 1217311,
+        "unequal_rows": 0,
+        "first_mismatch_diagnostics": [],
+        "counts_new": {
+          "finite_N_Z": 1159122,
+          "missing_or_nonfinite_N_Z": 58189
+        },
+        "counts_archived": {
+          "finite_N_Z": 1159122,
+          "missing_or_nonfinite_N_Z": 58189
+        },
+        "decompressed_sha256_new": "8f56a4b9d734ccc8edc804805b2d14d9ab8cc3f3b9a41944941abf7734acd7d3",
+        "decompressed_sha256_archived": "8f56a4b9d734ccc8edc804805b2d14d9ab8cc3f3b9a41944941abf7734acd7d3",
+        "entire_ordered_SNP_allele_N_Z_and_literal_missingness_compared": true,
+        "both_gzip_CRC_and_EOF_verified": true,
+        "compressed_sha256_new": "51f9e05e62df06c538e711f3fc72d1b78a61df20313288f41104c8000fbbe6aa",
+        "compressed_sha256_archived": "592a398340db125e8b4ada0f21be7cc9d0e1e5239d00aa259ac4b0c05b7e6ae7",
+        "compressed_byte_identity_required": false,
+        "numerical_tolerance_for_munged_comparison": null
+      },
+      "new_QC_metadata": {
+        "trait": "sleep_apnea",
+        "source": "FinnGen R9 G6_SLEEPAPNO",
+        "configured_build": "hg38",
+        "output_build": "hg19",
+        "source_build_argument": "hg38",
+        "sample_size_schema_mapping": "CONSTANT_N_EFF_FROM_MANIFEST",
+        "variant_map": "not supplied",
+        "variant_map_strategy": "not supplied",
+        "variant_map_sha256": "not supplied",
+        "variant_map_scope": "not supplied",
+        "variant_map_schema_version": "not supplied",
+        "variant_map_bytes": "not supplied",
+        "variant_map_provenance_sha256": "not supplied",
+        "liftover_chain": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz",
+        "liftover_chain_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+        "infile": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/sleep_apnea.txt.gz",
+        "infile_sha256": "eb8cfc33febc044c3f608406f5f50c9be7f6973aba5effd89a0f94d1f58c1d4b",
+        "prefilter_strategy": "not supplied",
+        "rows_in": "20170208",
+        "rows_out": "6841149",
+        "pct_retained": "33.92"
+      },
+      "old_QC_metadata": {
+        "trait": "sleep_apnea",
+        "source": "FinnGen R9 G6_SLEEPAPNO",
+        "configured_build": "hg38",
+        "output_build": "hg19",
+        "source_build_argument": "hg38",
+        "sample_size_schema_mapping": "CONSTANT_N_EFF_FROM_MANIFEST",
+        "variant_map": "not supplied",
+        "variant_map_strategy": "not supplied",
+        "variant_map_sha256": "not supplied",
+        "liftover_chain": "/Users/swethasunilkumar/Documents/Codex/2026-08-26/go/work/sleep-gwas-atlas/ref/hg38ToHg19.over.chain.gz",
+        "liftover_chain_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+        "infile": "/Users/swethasunilkumar/Documents/Codex/2026-08-26/go/work/sleep-gwas-atlas/data/raw/sleep_apnea.txt.gz",
+        "infile_sha256": "eb8cfc33febc044c3f608406f5f50c9be7f6973aba5effd89a0f94d1f58c1d4b",
+        "rows_in": "20170208",
+        "rows_out": "6841149",
+        "pct_retained": "33.92"
+      },
+      "new_extra_metadata_absence_fields": {
+        "variant_map_scope": "not supplied",
+        "variant_map_schema_version": "not supplied",
+        "variant_map_bytes": "not supplied",
+        "variant_map_provenance_sha256": "not supplied",
+        "prefilter_strategy": "not supplied"
+      },
+      "path_only_fields_excluded_from_scientific_QC_equality": [
+        "infile",
+        "liftover_chain",
+        "variant_map"
+      ],
+      "original_ordered_QC_steps_preserved": [
+        {
+          "reason": "invalid source coordinate before hg38-to-hg19 liftover",
+          "dropped": 727860,
+          "remaining": 19442348
+        },
+        {
+          "reason": "not mapped by pinned UCSC hg38-to-hg19 chain",
+          "dropped": 102969,
+          "remaining": 19339379
+        },
+        {
+          "reason": "multiple target points in pinned UCSC hg38-to-hg19 chain",
+          "dropped": 0,
+          "remaining": 19339379
+        },
+        {
+          "reason": "liftover target is not an autosome",
+          "dropped": 8210,
+          "remaining": 19331169
+        },
+        {
+          "reason": "reverse-strand liftover mappings with allele complements: 54564",
+          "dropped": 0,
+          "remaining": 19331169
+        },
+        {
+          "reason": "coordinates lifted hg38 to hg19; chain_sha256=14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+          "dropped": 0,
+          "remaining": 19331169
+        },
+        {
+          "reason": "missing or non-rsID SNP (dbSNP resolution required)",
+          "dropped": 1002659,
+          "remaining": 18328510
+        },
+        {
+          "reason": "non-SNP / indel / multi-base allele",
+          "dropped": 1021287,
+          "remaining": 17307223
+        },
+        {
+          "reason": "A1 equals A2",
+          "dropped": 0,
+          "remaining": 17307223
+        },
+        {
+          "reason": "strand-ambiguous A/T or C/G [CDG3]",
+          "dropped": 2635077,
+          "remaining": 14672146
+        },
+        {
+          "reason": "P missing or outside (0, 1]",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "BETA missing or non-finite",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "SE missing, non-positive, or non-finite",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "missing or non-autosomal CHR (EUR LDSC panel is autosomal)",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "missing or invalid BP",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "INFO column absent - source-level INFO QC must be documented",
+          "dropped": 0,
+          "remaining": 14672146
+        },
+        {
+          "reason": "invalid FRQ or MAF <= 0.01 [CDG3]",
+          "dropped": 7785706,
+          "remaining": 6886440
+        },
+        {
+          "reason": "MHC chr6:25000000-34000000 [CDG3]",
+          "dropped": 40825,
+          "remaining": 6845615
+        },
+        {
+          "reason": "duplicate SNP ID",
+          "dropped": 4466,
+          "remaining": 6841149
+        },
+        {
+          "reason": "sample size below 50% of configured effective N (139,798.0) [CDG3]",
+          "dropped": 0,
+          "remaining": 6841149
+        },
+        {
+          "reason": "sample-size mode: constant N_eff derived from config ncase/ncontrol",
+          "dropped": 0,
+          "remaining": 6841149
+        }
+      ],
+      "independent_ordered_QC_comparison_and_step_arithmetic_PASS": true,
+      "input_rows": 20170208,
+      "harmonization_rejected_rows": 13329059,
+      "harmonized_retained_rows": 6841149,
+      "HM3_template_rows": 1217311,
+      "HM3_finite_N_Z_rows": 1159122,
+      "HM3_missing_or_nonfinite_N_Z_rows": 58189,
+      "stock_munge_accounting": {
+        "not_in_merge_alleles_rows": 5681802,
+        "allele_mismatch_rows": 225,
+        "finite_after_merge_rows": 1159122,
+        "harmonized_input_reconciles": true,
+        "scientific_count_log_lines_equal_excluding_output_path": true,
+        "new_log_scientific_count_lines": [
+          "Read 1217311 SNPs for allele merge.",
+          "Read 6841149 SNPs from --sumstats file.",
+          "Removed 5681802 SNPs not in --merge-alleles.",
+          "Removed 0 SNPs with missing values.",
+          "Removed 0 SNPs with INFO <= 0.9.",
+          "Removed 0 SNPs with MAF <= 0.01.",
+          "Removed 0 SNPs with out-of-bounds p-values.",
+          "Removed 0 variants that were not SNPs or were strand-ambiguous.",
+          "1159347 SNPs remain.",
+          "Removed 0 SNPs with duplicated rs numbers (1159347 SNPs remain).",
+          "Removed 0 SNPs with N < 93198.69052176143 (1159347 SNPs remain).",
+          "Removed 225 SNPs whose alleles did not match --merge-alleles (1159122 SNPs remain).",
+          "Writing summary statistics for 1217311 SNPs (1159122 with nonmissing beta)"
+        ]
+      },
+      "assigned_N_from_frozen_manifest": {
+        "mode": "constant N_eff derived from config ncase/ncontrol",
+        "cases": "38998",
+        "controls": "336659",
+        "n_total": "375657",
+        "recomputed_constant": 139798.03578264214,
+        "three_decimal_munge_serialization_expected_from_reviewed_pipeline": "139798.036",
+        "constant_not_verified_per_variant_enrollment": true,
+        "observed_output_N_Z_literals_equal_from_executed_comparator": true
+      },
+      "liftover_plan_preserved": {
+        "source_id": "finngen_r9_sleep_apnoea",
+        "trait_id": "sleep_apnea",
+        "strategy": "UCSC_CHAIN_POINT",
+        "chain_path": "ref/hg38ToHg19.over.chain.gz",
+        "chain_bytes": "1246411",
+        "chain_md5": "ff3031d93792f4cbb86af44055efd903",
+        "chain_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+        "source_build": "GRCh38/hg38",
+        "output_build": "GRCh37/hg19",
+        "notes": "Lift the 1-based source point through the exact UCSC chain; reject unmapped, non-autosomal, or multiply mapped points and complement alleles on reverse-strand mappings."
+      },
+      "source_schema_mapping_preserved": {
+        "source_id": "finngen_r9_sleep_apnoea",
+        "trait_id": "sleep_apnea",
+        "schema_status": "SCHEMA_VERIFIED",
+        "file_format": "bgzip_tsv",
+        "variant_id": "rsids",
+        "chromosome": "#chrom",
+        "position": "pos",
+        "effect_allele": "alt",
+        "other_allele": "ref",
+        "effect": "beta",
+        "effect_convention": "log_odds_per_alt_effect_allele",
+        "standard_error": "sebeta",
+        "p_value": "pval",
+        "eaf": "af_alt",
+        "info": "ABSENT",
+        "sample_size": "CONSTANT_N_EFF_FROM_MANIFEST",
+        "notes": "The complete 20,170,208-row file was decompressed and inspected. FinnGen R9 documentation defines alt as the effect allele, beta as log(OR) for alt, and the coordinates as GRCh38. No per-variant INFO or sample-size field is present; archive-level variant annotation is separate. Harmonization requires the registered, checksum-pinned UCSC point-liftover plan and its explicit loss ledger."
+      },
+      "compressed_archival_byte_identity": false,
+      "compression_difference_cause_not_inferred": true,
+      "declared_workflow_runtime_match_not_identical_historical_binary_attestation": true,
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:47:27.266136+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 32768,
+          "owned_cleanup_verified": true
+        },
+        "harmonize": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:54:12.703558+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 909246464,
+          "owned_cleanup_verified": true
+        },
+        "munge": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:54:43.810270+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 841269248,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:55:04.365813+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 27607040,
+          "owned_cleanup_verified": true
+        },
+        "scratch_cleanup": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:55:27.257978+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 46678016,
+          "owned_cleanup_verified": true
+        }
+      },
+      "disposal_receipt": {
+        "schema": "owned_core_ephemeral_spool_cleanup_v3",
+        "status": "OWN_GENERATED_SCRATCH_DISPOSED_AFTER_EXACT_FULL_CONTENT_QC_PASS",
+        "completed_utc": "2026-10-10T05:55:23.117522+00:00",
+        "plan_sha256": "8a839122ef7a9a0faefb6c3971f04abd8fa755ed630a6db1efe8f725ca54c6e3",
+        "trait": "sleep_apnea",
+        "deleted_files": 1625,
+        "deleted_bytes": 2097701046,
+        "spool_absent": true,
+        "inventory_sha256": "5eda484c36994ef89ca74208240ca2b67941e48ac9328622d53b3797849de373",
+        "scientific_success_proof_sha256": {
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/harmonized/sleep_apnea.harmonized.tsv.gz": "a79ae59e3e6debf49f0277a64df2fa8bda4c903c9620bb6fd2ab2292e4358b71",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/munged/sleep_apnea.sumstats.gz": "51f9e05e62df06c538e711f3fc72d1b78a61df20313288f41104c8000fbbe6aa",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/harmonized/sleep_apnea.qc.txt": "9d83e98fbb3e91a79fa14c6020cd0d35401658e2e791eabd8b0a692b6283cc38",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/receipts/source_gate.json": "d9961fc565d608bf0c32e6ac36ff9c0df784885d7caf7a15c8dd10786a60be19",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/receipts/full_content_QC_comparison.json": "1c3fe1e1236f46a9bcfd7fca9e08c9ec11436d7400d3e2b0771cb9374c6642e0"
+        },
+        "completed_comparison_worker_sha256": "55c8b219c6db48e3122ffd176586cef929f2e2a92307d3dc6e6beb791e0e3737",
+        "copied_candidate_receipt_sha256": "a84719819f19422bbcc4ad51cfabfcf77af89ec6a7507c94bef455c995caec01",
+        "copied_column_manifest_sha256": "7ba0b854a4aada2ebc5f138310f180cb485814203133980596c479eb6bc18ff4",
+        "original_input_or_output_files_deleted": 0,
+        "external_checkpoint_files_preserved": 3636
+      },
+      "compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/receipts/full_content_QC_comparison.json",
+          "bytes": 4181,
+          "sha256": "1c3fe1e1236f46a9bcfd7fca9e08c9ec11436d7400d3e2b0771cb9374c6642e0"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/receipts/source_gate.json",
+          "bytes": 423,
+          "sha256": "d9961fc565d608bf0c32e6ac36ff9c0df784885d7caf7a15c8dd10786a60be19"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/harmonized/sleep_apnea.qc.txt",
+          "bytes": 2218,
+          "sha256": "9d83e98fbb3e91a79fa14c6020cd0d35401658e2e791eabd8b0a692b6283cc38"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/receipts/ephemeral_spool_cleanup.json",
+          "bytes": 2293,
+          "sha256": "e0713e9e053b6614acf00d15eb3768d4dbc423f527b0966587d8f1ea52f39c96"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/sleep_apnea.qc.txt",
+          "bytes": 1968,
+          "sha256": "07ce880c6069d0cfef49be9bb29948e4702af48cafc042647abef5add00dfff3"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_apnea/munged/sleep_apnea.log",
+          "bytes": 2956,
+          "sha256": "7a22c1fcad2432df58ee27857eb99d30477558b389a02bc1a220178725721898"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/sleep_apnea.log",
+          "bytes": 1998,
+          "sha256": "affaeb89397491850f9ed5ee74a53a23686e17245d6db3bf0e9ba55f231a2c77"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_apnea__source.worker.json",
+          "bytes": 3574,
+          "sha256": "3bae3eb4d9d6c83d9ec086d18bff22c2f6a8c5242d0342cfb50fce7d4bc21d7a"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_apnea__harmonize.worker.json",
+          "bytes": 59610,
+          "sha256": "76a729a2222712c3b767ad0243ae24d690ab71abf0633c47db072cc349915391"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_apnea__munge.worker.json",
+          "bytes": 7340,
+          "sha256": "71343a672e02e930f50b00e719e7597f5c5d6bad1bdc846c2b9245506f18f65e"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_apnea__compare.worker.json",
+          "bytes": 5504,
+          "sha256": "55c8b219c6db48e3122ffd176586cef929f2e2a92307d3dc6e6beb791e0e3737"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_apnea__scratch_cleanup.worker.json",
+          "bytes": 5971,
+          "sha256": "9bff676248339cfa9d8c93585c465235ea470f34fa6032b215eaf2252d25d2a0"
+        }
+      ],
+      "new_source_or_discovery_or_replication_admitted": false
+    },
+    {
+      "trait_id": "sleep_efficiency",
+      "reviewed_once_in_this_dated_batch": true,
+      "original_source_id": "jones_2019_accelerometer_sleep",
+      "original_release": "GCST007803_sleep_efficiency",
+      "original_source_eligibility_literal": "SOURCE_VERIFIED",
+      "source_eligibility_qualification": "Existing source identity classification is retained; no new statistical, clinical, INFO/N, LD, independence or primary scientific admission.",
+      "source_identity_from_executed_source_gate": {
+        "status": "EXACT_CORE_RAW_SOURCE_GATE_PASS",
+        "trait": "sleep_efficiency",
+        "mode": "source",
+        "plan_sha256": "8a839122ef7a9a0faefb6c3971f04abd8fa755ed630a6db1efe8f725ca54c6e3",
+        "created_utc": "2026-10-10T05:55:31.708463+00:00",
+        "estimator_calls": 0,
+        "raw_sha256": "dabef64037a11cb0913168862965cde72f62fe041df648f345f45eed71765cc5",
+        "raw_bytes": 310070562,
+        "completed_utc": "2026-10-10T05:55:32.311399+00:00"
+      },
+      "comparison_receipt_status": "EXACT_CORE_HARMONIZED_MUNGED_CONTENT_AND_QC_REPLAY_PASS",
+      "harmonized_comparison_from_executed_validator": {
+        "status": "EXACT_ORDERED_DECOMPRESSED_HARMONIZED_MATCH",
+        "rows": [
+          6482540,
+          6482540
+        ],
+        "expected_rows": 6482540,
+        "unequal_rows": 0,
+        "decompressed_sha256": [
+          "fcf50534daeaa686af10c9f5f99446db6cabe3d925b2960a5612ca1eab1fbc57",
+          "fcf50534daeaa686af10c9f5f99446db6cabe3d925b2960a5612ca1eab1fbc57"
+        ],
+        "compressed_sha256": [
+          "68b406c7340f9fa161807868eee9adeaa3bae5d108b5c26ca0d1d87e9a8708b5",
+          "7ef7c98963c579635d31bcfd997cf02ccd996defe63a782279a6974642c38a0a"
+        ],
+        "compressed_byte_identity_required": false,
+        "literal_order_fields_missingness_and_numerical_serialization_compared": true,
+        "both_gzip_CRC_and_EOF_verified": true
+      },
+      "munged_comparison_from_executed_validator": {
+        "status": "EXACT_FULL_DECOMPRESSED_TEMPLATE_MATCH",
+        "header": "SNP\tA1\tA2\tZ\tN",
+        "rows_new": 1217311,
+        "rows_archived": 1217311,
+        "expected_template_rows": 1217311,
+        "unequal_rows": 0,
+        "first_mismatch_diagnostics": [],
+        "counts_new": {
+          "finite_N_Z": 1176759,
+          "missing_or_nonfinite_N_Z": 40552
+        },
+        "counts_archived": {
+          "finite_N_Z": 1176759,
+          "missing_or_nonfinite_N_Z": 40552
+        },
+        "decompressed_sha256_new": "b182f707090dfbb3bb199a5460173ad775f9d226f502f2e96ffba5ade1635d58",
+        "decompressed_sha256_archived": "b182f707090dfbb3bb199a5460173ad775f9d226f502f2e96ffba5ade1635d58",
+        "entire_ordered_SNP_allele_N_Z_and_literal_missingness_compared": true,
+        "both_gzip_CRC_and_EOF_verified": true,
+        "compressed_sha256_new": "d6ddae27f5da30f08525ac6d41df096852885a1fd1b9eb49a72f995146ab6f53",
+        "compressed_sha256_archived": "3ab67d6e36d7345ebf17689559cb1b5aee646cebc9c05fbb077351a21f84ab57",
+        "compressed_byte_identity_required": false,
+        "numerical_tolerance_for_munged_comparison": null
+      },
+      "new_QC_metadata": {
+        "trait": "sleep_efficiency",
+        "source": "Jones 2019 Nat Commun \u2014 GCST007803 European subset",
+        "configured_build": "hg19",
+        "output_build": "hg19",
+        "source_build_argument": "hg19",
+        "sample_size_schema_mapping": "CONSTANT_N_FROM_MANIFEST",
+        "variant_map": "not supplied",
+        "variant_map_strategy": "not supplied",
+        "variant_map_sha256": "not supplied",
+        "variant_map_scope": "not supplied",
+        "variant_map_schema_version": "not supplied",
+        "variant_map_bytes": "not supplied",
+        "variant_map_provenance_sha256": "not supplied",
+        "liftover_chain": "not supplied",
+        "liftover_chain_sha256": "not supplied",
+        "infile": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/sleep_efficiency.txt.gz",
+        "infile_sha256": "dabef64037a11cb0913168862965cde72f62fe041df648f345f45eed71765cc5",
+        "prefilter_strategy": "not supplied",
+        "rows_in": "11997351",
+        "rows_out": "6482540",
+        "pct_retained": "54.03"
+      },
+      "old_QC_metadata": {
+        "trait": "sleep_efficiency",
+        "source": "Jones 2019 Nat Commun \u2014 GCST007803 European subset",
+        "configured_build": "hg19",
+        "output_build": "hg19",
+        "source_build_argument": "hg19",
+        "sample_size_schema_mapping": "CONSTANT_N_FROM_MANIFEST",
+        "variant_map": "not supplied",
+        "variant_map_strategy": "not supplied",
+        "variant_map_sha256": "not supplied",
+        "liftover_chain": "not supplied",
+        "liftover_chain_sha256": "not supplied",
+        "infile": "/Users/swethasunilkumar/Documents/Codex/2026-08-26/go/work/sleep-gwas-atlas/data/raw/sleep_efficiency.txt.gz",
+        "infile_sha256": "dabef64037a11cb0913168862965cde72f62fe041df648f345f45eed71765cc5",
+        "rows_in": "11997351",
+        "rows_out": "6482540",
+        "pct_retained": "54.03"
+      },
+      "new_extra_metadata_absence_fields": {
+        "variant_map_scope": "not supplied",
+        "variant_map_schema_version": "not supplied",
+        "variant_map_bytes": "not supplied",
+        "variant_map_provenance_sha256": "not supplied",
+        "prefilter_strategy": "not supplied"
+      },
+      "path_only_fields_excluded_from_scientific_QC_equality": [
+        "infile",
+        "liftover_chain",
+        "variant_map"
+      ],
+      "original_ordered_QC_steps_preserved": [
+        {
+          "reason": "missing or non-rsID SNP (dbSNP resolution required)",
+          "dropped": 21309,
+          "remaining": 11976042
+        },
+        {
+          "reason": "non-SNP / indel / multi-base allele",
+          "dropped": 0,
+          "remaining": 11976042
+        },
+        {
+          "reason": "A1 equals A2",
+          "dropped": 0,
+          "remaining": 11976042
+        },
+        {
+          "reason": "strand-ambiguous A/T or C/G [CDG3]",
+          "dropped": 1800583,
+          "remaining": 10175459
+        },
+        {
+          "reason": "P missing or outside (0, 1]",
+          "dropped": 11223,
+          "remaining": 10164236
+        },
+        {
+          "reason": "BETA missing or non-finite",
+          "dropped": 0,
+          "remaining": 10164236
+        },
+        {
+          "reason": "SE missing, non-positive, or non-finite",
+          "dropped": 0,
+          "remaining": 10164236
+        },
+        {
+          "reason": "missing or non-autosomal CHR (EUR LDSC panel is autosomal)",
+          "dropped": 0,
+          "remaining": 10164236
+        },
+        {
+          "reason": "missing or invalid BP",
+          "dropped": 0,
+          "remaining": 10164236
+        },
+        {
+          "reason": "INFO outside (0.6, 1] [CDG3]",
+          "dropped": 122142,
+          "remaining": 10042094
+        },
+        {
+          "reason": "invalid FRQ or MAF <= 0.01 [CDG3]",
+          "dropped": 3519338,
+          "remaining": 6522756
+        },
+        {
+          "reason": "MHC chr6:25000000-34000000 [CDG3]",
+          "dropped": 38330,
+          "remaining": 6484426
+        },
+        {
+          "reason": "duplicate SNP ID",
+          "dropped": 1886,
+          "remaining": 6482540
+        },
+        {
+          "reason": "sample size below 50% of configured total N (84,810.0) [CDG3]",
+          "dropped": 0,
+          "remaining": 6482540
+        },
+        {
+          "reason": "sample-size mode: constant N from config n_total",
+          "dropped": 0,
+          "remaining": 6482540
+        }
+      ],
+      "independent_ordered_QC_comparison_and_step_arithmetic_PASS": true,
+      "input_rows": 11997351,
+      "harmonization_rejected_rows": 5514811,
+      "harmonized_retained_rows": 6482540,
+      "HM3_template_rows": 1217311,
+      "HM3_finite_N_Z_rows": 1176759,
+      "HM3_missing_or_nonfinite_N_Z_rows": 40552,
+      "stock_munge_accounting": {
+        "not_in_merge_alleles_rows": 5305546,
+        "allele_mismatch_rows": 235,
+        "finite_after_merge_rows": 1176759,
+        "harmonized_input_reconciles": true,
+        "scientific_count_log_lines_equal_excluding_output_path": true,
+        "new_log_scientific_count_lines": [
+          "Read 1217311 SNPs for allele merge.",
+          "Read 6482540 SNPs from --sumstats file.",
+          "Removed 5305546 SNPs not in --merge-alleles.",
+          "Removed 0 SNPs with missing values.",
+          "Removed 0 SNPs with INFO <= 0.9.",
+          "Removed 0 SNPs with MAF <= 0.01.",
+          "Removed 0 SNPs with out-of-bounds p-values.",
+          "Removed 0 variants that were not SNPs or were strand-ambiguous.",
+          "1176994 SNPs remain.",
+          "Removed 0 SNPs with duplicated rs numbers (1176994 SNPs remain).",
+          "Removed 0 SNPs with N < 56540.0 (1176994 SNPs remain).",
+          "Removed 235 SNPs whose alleles did not match --merge-alleles (1176759 SNPs remain).",
+          "Writing summary statistics for 1217311 SNPs (1176759 with nonmissing beta)"
+        ]
+      },
+      "assigned_N_from_frozen_manifest": {
+        "mode": "constant N from config n_total",
+        "cases": "NA",
+        "controls": "NA",
+        "n_total": "84810",
+        "recomputed_constant": 84810.0,
+        "three_decimal_munge_serialization_expected_from_reviewed_pipeline": "84810.000",
+        "constant_not_verified_per_variant_enrollment": true,
+        "observed_output_N_Z_literals_equal_from_executed_comparator": true
+      },
+      "liftover_plan_preserved": null,
+      "source_schema_mapping_preserved": {
+        "source_id": "jones_2019_accelerometer_sleep",
+        "trait_id": "sleep_efficiency",
+        "schema_status": "SCHEMA_VERIFIED",
+        "file_format": "gzip_wrapped_zip_tsv",
+        "variant_id": "SNP",
+        "chromosome": "CHR",
+        "position": "BP",
+        "effect_allele": "ALLELE1",
+        "other_allele": "ALLELE0",
+        "effect": "ACC_SLEEP_EFF_RAW_SIN_BETA",
+        "effect_convention": "beta_per_ALLELE1_for_rank_normalized_sleep_efficiency",
+        "standard_error": "ACC_SLEEP_EFF_RAW_SIN_SE",
+        "p_value": "ACC_SLEEP_EFF_RAW_SIN_P",
+        "eaf": "ACC_SLEEP_EFF_RAW_SIN_A1FREQ",
+        "info": "INFO",
+        "sample_size": "CONSTANT_N_FROM_MANIFEST",
+        "notes": "The source-specific materializer requires the complete 71-column member and this exact RAW_SIN column family, retains source alleles/coordinates unchanged, and refuses any missing header. The trait-specific key prevents the shared archive's other phenotypes from satisfying this mapping."
+      },
+      "compressed_archival_byte_identity": false,
+      "compression_difference_cause_not_inferred": true,
+      "declared_workflow_runtime_match_not_identical_historical_binary_attestation": true,
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:55:35.338440+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 114688,
+          "owned_cleanup_verified": true
+        },
+        "harmonize": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T06:01:32.703558+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 1114210304,
+          "owned_cleanup_verified": true
+        },
+        "munge": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T06:01:59.329991+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 741130240,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T06:02:20.711803+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 31850496,
+          "owned_cleanup_verified": true
+        },
+        "scratch_cleanup": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T06:02:46.762943+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 52854784,
+          "owned_cleanup_verified": true
+        }
+      },
+      "disposal_receipt": {
+        "schema": "owned_core_ephemeral_spool_cleanup_v3",
+        "status": "OWN_GENERATED_SCRATCH_DISPOSED_AFTER_EXACT_FULL_CONTENT_QC_PASS",
+        "completed_utc": "2026-10-10T06:02:43.680184+00:00",
+        "plan_sha256": "8a839122ef7a9a0faefb6c3971f04abd8fa755ed630a6db1efe8f725ca54c6e3",
+        "trait": "sleep_efficiency",
+        "deleted_files": 5769,
+        "deleted_bytes": 2587397414,
+        "spool_absent": true,
+        "inventory_sha256": "ed9cb76d4c3b9157209c2974c14af8334ccdafaa79f9f8bbaf43dca35eebd929",
+        "scientific_success_proof_sha256": {
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/harmonized/sleep_efficiency.harmonized.tsv.gz": "68b406c7340f9fa161807868eee9adeaa3bae5d108b5c26ca0d1d87e9a8708b5",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/munged/sleep_efficiency.sumstats.gz": "d6ddae27f5da30f08525ac6d41df096852885a1fd1b9eb49a72f995146ab6f53",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/harmonized/sleep_efficiency.qc.txt": "0ae63ca93f33ad35a086345885516d964c395eba792143783b2310a10fb28605",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/receipts/source_gate.json": "c227a97aaeb2db5c3fa089f93a94c2cd2909444c39c90d6b67ec17b40617adac",
+          "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/receipts/full_content_QC_comparison.json": "e9653cdf8d25a7f3b50df136e8399570524a8585163f1880b0c4a75be14d81bf"
+        },
+        "completed_comparison_worker_sha256": "fe50a755aa3d85f3a712b08ba4dbf2c9bc36532aa8c8953357524b6c6bc4073b",
+        "copied_candidate_receipt_sha256": "34a71ff092a4bc1027ae9ed63e0a7f0702205a19e4bab87d265a28faeaa68e8b",
+        "copied_column_manifest_sha256": "7829340b58dcfef08a97867c80ff34930b5dc2045ca1e67441af958127c82f85",
+        "original_input_or_output_files_deleted": 0,
+        "external_checkpoint_files_preserved": 0
+      },
+      "compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/receipts/full_content_QC_comparison.json",
+          "bytes": 4221,
+          "sha256": "e9653cdf8d25a7f3b50df136e8399570524a8585163f1880b0c4a75be14d81bf"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/receipts/source_gate.json",
+          "bytes": 428,
+          "sha256": "c227a97aaeb2db5c3fa089f93a94c2cd2909444c39c90d6b67ec17b40617adac"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/harmonized/sleep_efficiency.qc.txt",
+          "bytes": 1538,
+          "sha256": "0ae63ca93f33ad35a086345885516d964c395eba792143783b2310a10fb28605"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/receipts/ephemeral_spool_cleanup.json",
+          "bytes": 2335,
+          "sha256": "6813a217c5e2e3794c3b2db57eaa397131ba79b6e37f415b9838ce8560405000"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/sleep_efficiency.qc.txt",
+          "bytes": 1358,
+          "sha256": "b767da575dd8295b5df329425586cfb4c1805af641b51e2fac1987eac018f33e"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/sleep_efficiency/munged/sleep_efficiency.log",
+          "bytes": 2983,
+          "sha256": "1b34b2449258c032ec473c30ab991fe4c94d0396063c3893508b2ebdd8574884"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/sleep_efficiency.log",
+          "bytes": 2006,
+          "sha256": "190ec151170cf2a90b19e34d903a96bf55ebd8e4e97beeb443798e8be2b056c6"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_efficiency__source.worker.json",
+          "bytes": 3608,
+          "sha256": "5e71a5b40af3fde3e6d8ee855d04fdb85e345c2a754ce5f02c82217a41e19aec"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_efficiency__harmonize.worker.json",
+          "bytes": 52631,
+          "sha256": "78571bc524b093909ea028f7422aa0e43f104b48adedd666b0a0ec276583cb89"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_efficiency__munge.worker.json",
+          "bytes": 6641,
+          "sha256": "4f79e51d6223f694a93e33d4b0d61da53c0d0d0564c9e28ece0e1127e276bfa7"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_efficiency__compare.worker.json",
+          "bytes": 5542,
+          "sha256": "fe50a755aa3d85f3a712b08ba4dbf2c9bc36532aa8c8953357524b6c6bc4073b"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/receipts_v4/sleep_efficiency__scratch_cleanup.worker.json",
+          "bytes": 6391,
+          "sha256": "8a9f7da66e0c1c56f9785a2807255614ab7d8734c707691c6a3e77aa27b811e3"
+        }
+      ],
+      "new_source_or_discovery_or_replication_admitted": false
+    }
+  ],
+  "aggregate_reviewed_subset": {
+    "input_rows": 32167559,
+    "harmonization_rejected_rows": 18843870,
+    "harmonized_retained_rows": 13323689,
+    "HM3_template_rows": 2434622,
+    "HM3_finite_N_Z_rows": 2335881,
+    "HM3_missing_or_nonfinite_N_Z_rows": 98741,
+    "completed_workers": 10,
+    "peak_observed_owned_RSS_bytes": 1114210304,
+    "disposed_own_generated_scratch_files_from_receipts": 7394,
+    "disposed_own_generated_scratch_bytes_from_receipts": 4685098460,
+    "original_input_output_files_deleted_from_receipts": 0
+  },
+  "remaining_25_unconsumed_traits": [
+    "accel_sleep_duration",
+    "sleep_timing",
+    "alz",
+    "parkinson",
+    "mdd",
+    "scz",
+    "bipolar",
+    "adhd",
+    "ibd",
+    "crohn",
+    "uc",
+    "ra",
+    "stroke",
+    "atrial_fibrillation",
+    "sbp",
+    "longevity",
+    "parental_lifespan",
+    "healthspan",
+    "frailty",
+    "grip_strength",
+    "breast_cancer",
+    "prostate_cancer",
+    "colorectal_cancer",
+    "lung_cancer",
+    "ovarian_cancer"
+  ],
+  "terminal_snapshot": {
+    "exact_pending_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v2/core_large35_continuation_pending_v2.json",
+    "pending_exists": true,
+    "terminal_paths_observed": [],
+    "no_later_poll": true,
+    "scope_snapshot_not_family_completion_certificate": true
+  },
+  "reused_review_evidence": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_core_large35_checkpoint_continuation_prelaunch_v2.md",
+      "bytes": 3198,
+      "sha256": "6678a59c437a54f73ff86be5b67cebcabf7236f90bec9be5a2712803df4daf82"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_core_pipeline_replay_design_review_v4.md",
+      "bytes": 10941,
+      "sha256": "82162e52b5115cfe832002af6f6f3ecbfa6d7c1fba7413608b1ae162d33430a6"
+    }
+  ],
+  "scientific_qualifications": [
+    "Exact ordered harmonized and complete HM3 template content including missingness is reproducibility evidence, not new source validity.",
+    "Template row count is distinct from finite summary-statistic count; no missing N/Z is imputed or called finite.",
+    "FinnGen R9 INFO and per-variant N remain absent; constant effective N and Finnish-ancestry external EUR LD qualifications persist.",
+    "Apnea point-liftover, losses and reverse-strand allele complements reproduce the pinned chain; no new coordinate or allele-error accuracy claim.",
+    "FinnGen R9 ICD9 3472/3472A narcolepsy/cataplexy coding anomaly and clinical-OSA construct uncertainty remain unresolved; replay does not fix phenotype definitions.",
+    "Jones RAW_SIN rank-normalized actigraphy sleep efficiency and constant 84,810 are preserved; device sampling/clinical equivalence/reliability causes and independent device validation are not established.",
+    "Original harmonization INFO>.6 and omission from final schema mean stock munge zero INFO<=.9 removals cannot certify INFO>.9.",
+    "Source status SOURCE_VERIFIED is retained as the frozen source identity literal, not promoted to new clinical/statistical/independent source admission.",
+    "Scientific source eligibility and historical QC exclusions are unchanged; no completed estimator calculations were re-audited.",
+    "Compressed bytes differ; cause is not inferred. Declared workflow runtime match is not identical historical per-trait binary attestation."
+  ],
+  "operations": {
+    "raw_reference_GWAS_body_reads": 0,
+    "raw_reference_GWAS_body_rehashes": 0,
+    "unchanged_dependency_reads_or_rehashes": 0,
+    "old18_core_actual_trait_reaudits": 0,
+    "completed_estimator_calculation_reads_or_reaudits": 0,
+    "new_fits": 0,
+    "new_controls": 0,
+    "new_preprocessing": 0,
+    "SSD_writes": 0,
+    "protected_BIO_input_writes": 0,
+    "code_writes": 0,
+    "polling_or_wait_calls": 0,
+    "new_associations": 0,
+    "new_independent_replications": 0
+  },
+  "continuation_rule": "Preserve this dated partial2 result. On root follow-up review only newly supplied unconsumed traits once; reuse these two result records without re-audit. Family27 stays active with final terminal pending."
+}

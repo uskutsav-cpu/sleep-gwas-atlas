@@ -1,0 +1,328 @@
+{
+  "schema": "independent-large35-v3-narrow-controller-validator-correction-review",
+  "reviewed_utc": "2026-10-10T00:19:23.990214+00:00",
+  "status": "PASS_NARROW_V3_JOINT_PRELAUNCH_SOFTWARE_QUALIFICATION_NOT_EXECUTION_ADMISSION",
+  "execution_admitted": false,
+  "plan_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v3/core_large35_bounded_replay_plan_v3.json",
+  "plan_sha256": "3e8c3c7bca26b00ed337c816a723d8a42475473667d4a9c969348045fcc9a2f4",
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/83_prepare_core_large35_bounded_replay_v3.py": "23fcfd56a09fcfc6a845a6b7208ad95462d40e609c3e17927e25e3f9ec53c105",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/84_run_core_large35_bounded_replay_v3.py": "a2d0ca339b104efd49cf58f87519f0afc094de978ae54d991db0fd4a8e3caaf2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/85_validate_core_large35_bounded_replay_v3.py": "80b32902c1c82f38638706ce003e6babbd0172b2699bf24904959215d8a986b8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/86_cleanup_core_bounded_spool_v3.py": "c8fb42f4948293c0789290b11e851c79802650f6c4e1fe49e1cfd104bc715977"
+  },
+  "static_binding_checks": 25,
+  "before_after_plan_code_metadata_identities": 229,
+  "all_before_after_unchanged": true,
+  "plan_dependencies": 228,
+  "fresh_code_metadata_dependencies": 225,
+  "stat_only_reference_dependencies": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz": {
+      "expected_sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+      "bytes": 9948937,
+      "body_read": false
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz": {
+      "expected_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "bytes": 1246411,
+      "body_read": false
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist": {
+      "expected_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "bytes": 17264312,
+      "body_read": false
+    }
+  },
+  "actual_validator_cases": [
+    {
+      "case": "healthy",
+      "validator_accepts": true,
+      "current_QC_matches_original": true,
+      "error": null,
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/healthy/comparison.json",
+      "comparison_receipt_sha256": "ed6f8335d88cf630b34248015840863ddc9ccdd04afb376cc595136470f808ae",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/healthy/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/healthy/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/healthy/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/healthy/source_gate.json": "b908d3a8298a9dd3631646c7d9b1129115004dac3d0f1ff40ce7418880be93cf"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "QC_after_parse_before_capture",
+      "validator_accepts": false,
+      "current_QC_matches_original": false,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_parse_before_capture/comparison.json",
+      "comparison_receipt_sha256": "740389951bd52cdc263e875465d41fcfc8a02ce0c1c4e4b8c34dc98b94742b51",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_parse_before_capture/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_parse_before_capture/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_parse_before_capture/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_parse_before_capture/source_gate.json": "658dcbd7aee158398034a27da2fa1e8e356ee72c95326ad15dd43ef82bb54bf7"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "source_gate_after_parse",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_gate_after_parse/comparison.json",
+      "comparison_receipt_sha256": "78829e8f0692094bb0b48649767df1f1dda14e0e18c53d3ebd85cb842d5df2b9",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_gate_after_parse/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_gate_after_parse/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_gate_after_parse/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_gate_after_parse/source_gate.json": "6bcca27712205b425c408425e5d648b7989637929ef1f22fb91f2631d2bcbe9c"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "harmonized_after_comparison_before_capture",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/harmonized_after_comparison_before_capture/comparison.json",
+      "comparison_receipt_sha256": "c42060e3c3526102d71f53b71fe4530705ae26a67da35586d6607e3159345666",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/harmonized_after_comparison_before_capture/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/harmonized_after_comparison_before_capture/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/harmonized_after_comparison_before_capture/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/harmonized_after_comparison_before_capture/source_gate.json": "b07e1ed54e3232d0a1fe33c292494af25078c42193ac7891f231b9a0c0ca38a1"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "munged_after_comparison_before_capture",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/munged_after_comparison_before_capture/comparison.json",
+      "comparison_receipt_sha256": "cf337150bd13b9a6074881c83b0e3e30ea7893fb2ffe1354025bed9a02677763",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/munged_after_comparison_before_capture/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/munged_after_comparison_before_capture/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/munged_after_comparison_before_capture/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/munged_after_comparison_before_capture/source_gate.json": "8993a40da01f5cfad62e6eb4b9fece36ea36041462550f379f2495dc70a3b50f"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "baseline_harmonized_after_comparison",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_harmonized_after_comparison/comparison.json",
+      "comparison_receipt_sha256": "7455d46d9e8f64368ecc709479a65ccfba73bd0a1811da46cd012903a9b36cfd",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_harmonized_after_comparison/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_harmonized_after_comparison/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_harmonized_after_comparison/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_harmonized_after_comparison/source_gate.json": "9458af761f14e1e626de5798fb9698bbd499c5ba6b28a66892f757ce9b0f78f1"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "baseline_munged_after_comparison",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_after_comparison/comparison.json",
+      "comparison_receipt_sha256": "317f33d2bf5b96b5215f2752fe206752fca4cffa4343e3e16eba3f6e043332ed",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_after_comparison/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_after_comparison/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_after_comparison/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_after_comparison/source_gate.json": "2ec8ca26c5fbf08fa12c90575939a4b46ff3501a89e9ff056f28181b0be0f60b"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "current_munged_post_EOF_before_compressed_hash",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/current_munged_post_EOF_before_compressed_hash/comparison.json",
+      "comparison_receipt_sha256": "ab52e1bc5e6c027d943a5db3d8f84cd0a410bddf4bb83b8a0ab776718e24bceb",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/current_munged_post_EOF_before_compressed_hash/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/current_munged_post_EOF_before_compressed_hash/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/current_munged_post_EOF_before_compressed_hash/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/current_munged_post_EOF_before_compressed_hash/source_gate.json": "53587c149dfad4f9fc4e5c15f0c5b7fd6b9e0e1e7563a8e678d81656d4c1db59"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "baseline_munged_post_EOF_before_compressed_hash",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: CONSUMED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_post_EOF_before_compressed_hash/comparison.json",
+      "comparison_receipt_sha256": "8980a5c2cebfc0a86647c18cd1724d3a022368e477d15ff21779ccd5028f4c4b",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_post_EOF_before_compressed_hash/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_post_EOF_before_compressed_hash/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_post_EOF_before_compressed_hash/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_munged_post_EOF_before_compressed_hash/source_gate.json": "511e335e9d60d42366f5b5cc2e3bf824e5da4b7b1b5501694b2b0031c602f318"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "QC_after_capture",
+      "validator_accepts": false,
+      "current_QC_matches_original": false,
+      "error": "RuntimeError: COMPARED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED_AFTER_CONSUMPTION",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_capture/comparison.json",
+      "comparison_receipt_sha256": "8b3fcce18708e8913df71a526cf9a48a10fc5a2ec37904e19dd2a3a85d58e7c8",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_capture/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_capture/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_capture/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/QC_after_capture/source_gate.json": "6e0bc506bda5c0d0c8b0169305c17e007a9708e87facd62b792ac8ea819b0367"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "source_after_capture",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: COMPARED_OUTPUT_SOURCE_QC_OR_BASELINE_CHANGED_AFTER_CONSUMPTION",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_after_capture/comparison.json",
+      "comparison_receipt_sha256": "05b11371316c0ed6a003b4763eddc7fbd4c92b95eceec420d6463610331f2caa",
+      "observed_identity_map": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_after_capture/new.harmonized.gz": "78d732d2dfc71fc4ee67797d0b9f9d073cc3f090664010d7a629c6945e5ea058",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_after_capture/new.munged.gz": "60b76964edcfb387bc845611ff9d080e54f87a28d261fa3a540c8c25304d8b5e",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_after_capture/QC.txt": "136b020c4ed9debc346e218f2460a4c61fab8ebe63ad5e29fdb6fa2988276f18",
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/source_after_capture/source_gate.json": "e38dbc27daf622e1aa12674cc36ae900c9169b02003e99df7beefb2c51da4a48"
+      },
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "same_bytes_current_symlink",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: EXACT_REGULAR_COMPARISON_INPUT_REQUIRED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/same_bytes_current_symlink/comparison.json",
+      "comparison_receipt_sha256": "e9da803074f891d9cbb3c210e5fcb1093604872d60101449e03d511bd6c8279f",
+      "observed_identity_map": null,
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "same_bytes_current_parent_symlink",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: EXACT_REGULAR_COMPARISON_INPUT_REQUIRED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/same_bytes_current_parent_symlink/comparison.json",
+      "comparison_receipt_sha256": "24d3d8e4785db972d5b077a9bdd9548cd7714140b2bed00025925e0f33ab1ca1",
+      "observed_identity_map": null,
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "same_bytes_baseline_symlink",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: EXACT_REGULAR_COMPARISON_INPUT_REQUIRED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/same_bytes_baseline_symlink/comparison.json",
+      "comparison_receipt_sha256": "b21c012101c877e5ec5e38b139cfd4b60436bd11d35041693123146768ef1fcc",
+      "observed_identity_map": null,
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "missing_QC",
+      "validator_accepts": false,
+      "current_QC_matches_original": false,
+      "error": "RuntimeError: EXACT_REGULAR_COMPARISON_INPUT_REQUIRED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/missing_QC/comparison.json",
+      "comparison_receipt_sha256": "02f66459d387f260fc2435b656249fa0f84dae2f5e4ede19888fd77ff609778f",
+      "observed_identity_map": null,
+      "is_false_PASS_witness": false
+    },
+    {
+      "case": "baseline_before_consume_changed",
+      "validator_accepts": false,
+      "current_QC_matches_original": true,
+      "error": "RuntimeError: RECOVERED_CORE_BASELINE_CHANGED",
+      "comparison_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_validator_identity_edge_controls_v3/baseline_before_consume_changed/comparison.json",
+      "comparison_receipt_sha256": "3736f9c34378e0a6d8000bbaf9b725b9481f0947166e86085ecd0d61fe594aa5",
+      "observed_identity_map": null,
+      "is_false_PASS_witness": false
+    }
+  ],
+  "actual_validator_case_count": 16,
+  "actual_controller_partial_handoff_case_count": 4,
+  "actual_controller_partial_handoff_assertions": 72,
+  "actual_controller_partial_handoff_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_controller_handoff_receipt_v3.json",
+  "actual_controller_partial_handoff_receipt_sha256": "fed2c5cd906baa49ac275113b928c5a0e054135a671ac30a46a32e66f5d48960",
+  "controller_handoff_qualification": "Actual84 run on four tiny own35-member metadata plans, symbolic mutex/worker stubs. Each deliberately stops before any real disposal after verifying three immutable digest arguments. Delayed candidate,column,comparator mutations do not alter original digest arguments; PENDING remains. No complete v3 controller execution or helper86 disposal claimed.",
+  "inherited_controller_qualification": "Whole84 source equals78 after only exact namespace/85/86/terminal filename replacements; all175 command/count/postpersistence/resource/owned-worker logic preserved.22 v1 controller scenarios and186 v2 binding checks inherited without broad repeat.",
+  "validator_correction": "85 freezes four exact regular/nonsymlink leaf+parent current files includingQC/sourceproof before consumption;sealed original compressed baselines before comparisons;immutable map compared with after-comparison hashes/current-baseline hashes and repeated after final plan/dependency check before persistence. No compare_harmonized,qc or original scientific thresholds changed.",
+  "material_findings_remaining_in_review_scope": [],
+  "independent_disposal_PASS": {
+    "seal_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_seal_v3.json",
+    "seal_sha256": "020edbae707e1a45d1e563a29175298df8fed4c76cf2070af1077cf9565e5387",
+    "status": "SEALED_PASS_NARROW_V3_DISPOSAL_CORRECTION_NOT_EXECUTION_ADMISSION",
+    "helper_sha256": "c8fb42f4948293c0789290b11e851c79802650f6c4e1fe49e1cfd104bc715977",
+    "case_count": 21,
+    "check_count": 157,
+    "artifacts": {
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_review_v3.md": {
+        "bytes": 4119,
+        "sha256": "93c515ca8dccca440cdb8a37b13af116d6fbb60bcc24bfbad74b79cc30ecf932"
+      },
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_checker_v3_1.py": {
+        "bytes": 19643,
+        "sha256": "1665348cfdbbb5f8c0a01b4d9bfc991ebd138bada821e17288f32af92465cd43"
+      },
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_plan_v3_1.json": {
+        "bytes": 8696,
+        "sha256": "38a44ffe3917838a9af5d03847eb09ba2072a454ab42e89bb67e847287f3d962"
+      },
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_receipt_v3_1.json": {
+        "bytes": 52157,
+        "sha256": "7a73e4113168a1f135db31ef48ec1bcfd7470b42d76ba9049756c308afd04602"
+      },
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_fixture_map_v3_1.json": {
+        "bytes": 124875,
+        "sha256": "2a8ec9c847ec044c8abceac265c3b7c05f180571c4aec7a6ba69312d3d035b1e"
+      },
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_spool_disposal_stdout_v3_1.log": {
+        "bytes": 488,
+        "sha256": "e96ce74869deb9787d7178eddc2482c35f38ffd2f08ba803fb8ae4fb0866b2ff"
+      }
+    },
+    "all_six_artifacts_verified": true,
+    "no_duplicate_internal_audit": true,
+    "qualification": "Component-only controlled disposal, exact validator/controller contract now jointly qualified; failed cleanup worker invalidates provisional cleanup receipt and retains PENDING."
+  },
+  "source_command_contract": "All35 entire member objects equal v2 after private namespace relocation; original_design/scientific argv unchanged. Exact frozen original source flags/no abbreviation or additionalCLItokens. No arbitraryCLI/header closure claim.",
+  "baseline_190_and_runtime": "Copied exact original190 plan/maps,guard/runtime/component/seal identities verified; no new190 numerical adjudication or full runtime-tree hash.",
+  "resource_guards": "1 worker/1BLAS;3GiB internal/5GiB SSD floors;2GiB aggregateRSS;16GiB all-core derivative cap;300GiB campaign;2h worker/96h stage;shared mutex lifetime and all final resource/signal gates unchanged.",
+  "memory_qualification": "Production whole-column/global parse memory unmeasured. Tiny cases do not establish real-source2GiB eligibility. Root may separately admit source-specific supervised attempts under unchanged guards; exact full original output/QC equality mandatory.",
+  "preparation_harness_log": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/core_large35_preparation_harness_correction_v3.json",
+  "preparation_harness_log_sha256": "ad168c5236f50a4e9cae0ee1208089e5c76c8230f7f6476f5aba44a741b5bb6c",
+  "preserved_own_checker_setup_failures": [
+    {
+      "checker": "core_large35_bounded_successor_binding_checker_v3.py",
+      "log": "core_large35_bounded_successor_binding_check_v3.stdout.log",
+      "qualification": "Own filename-normalization oracle replaced generic namespace before exact script names; expected old79_v3 instead of85. Corrected only oracle ordering in distinct3_1;candidate sources unchanged."
+    },
+    {
+      "checker": "core_large35_controller_handoff_checker_v3.py",
+      "log": "core_large35_controller_handoff_check_v3.stdout.log",
+      "qualification": "Standalone inherited stub extraction omitted OUTPUTS constant;NameError during own metadata setup before controller execution. Distinct3_1 adds original constant;initial failure preserved."
+    }
+  ],
+  "fixture_map": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_bounded_controller_fixture_map_v3.json",
+  "fixture_map_sha256": "a097dff6af85bf05e6f68839af233f5bf31da8f98b409d2fa43073dd46532b82",
+  "fixture_regular_bytes": 813755,
+  "production_body_reads": 0,
+  "reference_body_reads": 0,
+  "runtime_tree_full_hashes": 0,
+  "real_mutex_operations": 0,
+  "production_workers_disposals_fits": 0,
+  "production_edits": 0,
+  "root_execution_admission_required": true,
+  "actual_source_scientific_release": "No35 production output/QC/memory results, biological inference, calibration or covariance admission supplied."
+}

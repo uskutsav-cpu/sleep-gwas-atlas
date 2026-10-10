@@ -1,0 +1,246 @@
+{
+  "schema": "independent-core-large35-controller-review-v1",
+  "reviewed_utc": "2026-10-10T00:02:20.910174+00:00",
+  "status": "BLOCKED_V1_DISPOSAL_PREREQUISITE_CONTROLLER_METADATA_CHECKS_PASS_NOT_EXECUTION_ADMISSION",
+  "execution_admitted": false,
+  "candidate_plan_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v1/core_large35_bounded_replay_plan_v1.json",
+  "candidate_plan_sha256": "eb84983bef57dfb21f06a95d9f30a3871652a7b2f3cccdca30fabf9097175ed7",
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/73_prepare_core_large35_bounded_replay_v1.py": "ed264e2a4cbeea54644f837653e13d4614458899da668fbd67f16a3e0b7a3cb3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/74_run_core_large35_bounded_replay_v1.py": "ad49afbefa0c3de53a0b772a90f23392812b93da25d8099f15fcb90a77e1c559",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/75_validate_core_large35_bounded_replay_v1.py": "953e200e477a11b6a3abf8e9adc2c6e92b4107aba27bab737833edf8208140c9",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/76_cleanup_core_bounded_spool_v1.py": "86d306d9816e230105116be596c263202cae05012ac16a7d82b0891d3f8d8b1f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_bounded_harmonizer_v3.py": "3b87e849e3001a2a2d30fc0971dd3bd97847736abb9bed0dff521d1b5e1d0210",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_column_reader_v4.py": "1e5a7f86ab51cd9cec2d705144ca7623bd8e57e218c3889cf1a94b4db7c5b375",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/sensitivity_executor_v4_4.py": "7ac802596f29adfacb017f406676e6a30ee00bf890904976afda7f88a3ffa9c5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd"
+  },
+  "controls_receipt": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_bounded_controller_controls_receipt_v1.json",
+  "controls_receipt_sha256": "0e08edf4f45b95594fc272f9b0b3b0d20987b17019e9f9edd2c061ff344c6ffd",
+  "fresh_checks": 6300,
+  "distinct_controller_cases": 22,
+  "check_count_qualification": "6300 includes repeated per-worker and per-trait identity assertions;22 distinct controller scenarios, not6300 independent scientific tests.",
+  "cases": [
+    {
+      "case": "success",
+      "returned_success": true,
+      "terminal_consumer_accepts": true,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "harmonize_failure_owned_cleanup",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 2,
+      "symbolic_locks": 1
+    },
+    {
+      "case": "compare_failure",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 4,
+      "symbolic_locks": 1
+    },
+    {
+      "case": "cleanup_failure",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 5,
+      "symbolic_locks": 1
+    },
+    {
+      "case": "RSS_over_2GiB",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 2,
+      "symbolic_locks": 1
+    },
+    {
+      "case": "worker_over_2h",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 2,
+      "symbolic_locks": 1
+    },
+    {
+      "case": "wrong_recorded_command",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "missing_old_worker",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "missing_old_output",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "same_bytes_output_symlink",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "same_bytes_worker_parent_symlink",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "residual_spool",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "cleanup_proof_tampered",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "receipt_count174",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "receipt_count176",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "completed_order_changed",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "postpersist_internal_floor",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "postpersist_core_cap",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "postpersist_campaign_cap",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "postpersist_stage_deadline",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "deferred_signal_postpersist",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    },
+    {
+      "case": "primary_persistence_failure",
+      "returned_success": false,
+      "terminal_consumer_accepts": false,
+      "stub_commands": 175,
+      "symbolic_locks": 35
+    }
+  ],
+  "production_mutations": 0,
+  "production_body_reads": 0,
+  "reference_body_reads": 0,
+  "runtime_tree_rehashes": 0,
+  "real_mutex_operations": 0,
+  "real_workers": 0,
+  "fits": 0,
+  "fixture_peak_rss_bytes": 78381056,
+  "fixture_elapsed_seconds": 241.42460333299823,
+  "fixture_identity_map": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/core_large35_bounded_controller_fixture_map_v1.json",
+  "fixture_identity_map_sha256": "e0f2654ae87fb9dbc9ea58bf9239bc2c9a0b29a2fa626f8d05ba3fa795a46827",
+  "fixture_regular_bytes": 20912833,
+  "metadata_code_plan_identity_count_before_after": 207,
+  "all_bound_identities_unchanged": true,
+  "declared_dependencies": 187,
+  "fresh_code_metadata_dependencies": 184,
+  "stat_only_unread_reference_dependencies": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz": {
+      "expected_sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+      "bytes": 9948937,
+      "body_opened": false
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz": {
+      "expected_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "bytes": 1246411,
+      "body_opened": false
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist": {
+      "expected_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "bytes": 17264312,
+      "body_opened": false
+    }
+  },
+  "exact_original_members": 35,
+  "exact_monitored_commands": 175,
+  "original45_manifest_sha256": "451ea6d16263a467b8ac587e2069d66dfc7f736c9e694e23801efb5ba307413b",
+  "source_command_contract": "Complete frozen original tokens after private output relocation and exact qualified runtime/munger substitution; exact single source flag; no arbitrary CLI or abbreviation support claimed.",
+  "reader4_seal_sha256": "c364c8102e2abe2ac318f5407d383d7fba6ce78f21c78c0fa943d5da5378b240",
+  "adapter3_seal_sha256": "1b2ce879da41c09cd0494cfa6b40fb7d16176c45c6b93ce918b3d84042798e50",
+  "joint_component_qualification": "Reader4 independent preparation PASS joins previously source-qualified adapter3 exact reader binding; no old pending review was edited.",
+  "validator75_byte_identical72v2": true,
+  "inherited41_small_controller_validator_controls_not_rerun": true,
+  "unchanged_six_controller_function_AST": [
+    "module",
+    "admission_gate",
+    "runtime_gate",
+    "namespace_bytes",
+    "acquire_mutex",
+    "main"
+  ],
+  "original190_baseline_plan_bindings_identical": "Verified exact copied baseline190 identity/maps, not a new re-adjudication or runtime launch.",
+  "resource_guard": "1 worker/1 BLAS;3GiB internal/5GiB SSD floors;2GiB aggregate RSS;16GiB all-core derivatives;300GiB global reservation;2h worker/96h stage.",
+  "terminal_contract": "Actual Terminal2 tiny private-owned immutable PENDING/seal writes; post-primary-persistence final regular-path/hashes/counts/cleanup/resource/deferred-signal queries veto terminal consumption. Catchable signal and private-marker contract inherited, no arbitrary external marker mutation or SIGKILL cleanup claim.",
+  "blockers": [
+    {
+      "priority": "P1",
+      "scope": "disposal prerequisite",
+      "finding": "Separately identified cleanup-v1 defects in exact expected scratch membership, scientific-consumption identity, durable directory removal proof, and ExFAT AppleDouble directory sidecars remain execution blockers. Controller stubs model an ideal disposal contract and do not test or resolve helper76 defects.",
+      "evidence_origin": "Root message to this independent reviewer; separate numerical review owns direct helper witnesses and will seal them separately.",
+      "helper_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/76_cleanup_core_bounded_spool_v1.py",
+      "helper_sha256": "86d306d9816e230105116be596c263202cae05012ac16a7d82b0891d3f8d8b1f",
+      "controller_observation": "Candidate and column metadata are copied/hashed only after cleanup; no immediately frozen harmonize candidate/column digests or immediately frozen comparator worker SHA are passed into cleanup-v1. Current v1 identities cannot establish the stricter consumption contract.",
+      "needed": "Distinct preserved successor with exact expected membership, frozen candidate/column and comparator identities, current scientific output hashes, durable scratch/sidecar removal proof and independent disposal review; root admission remains separate."
+    }
+  ],
+  "memory_qualification": "Full native whole-column/global sample conversion memory on35 real inputs remains unmeasured. Tiny fixture RSS is not real-source2GiB certification. Future guarded source-specific attempts must stop at unchanged limits and retain failures.",
+  "scientific_release_qualification": "No actual35 output/QC replay, memory certification, new estimator, calibration or covariance admission is provided. Exact original full content/QC equality and all root execution gates remain required."
+}

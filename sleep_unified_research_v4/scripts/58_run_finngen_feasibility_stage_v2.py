@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""Route one admitted diagnostic through the independently reviewed worker.
+
+The adapter changes only its private output root and passes the already-held
+mutex descriptor to its child. It does not invoke sensitivity fits or change
+the pinned worker, cleanup, signals, guards or estimator implementation.
+"""
+import argparse
+import importlib.util
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+import canonical_calibration_common_v4_3 as common
+
+
+def load(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class InheritedMutexSubprocess:
+    """Local module proxy; the original subprocess module is never modified."""
+    def __init__(self, fd):
+        self.fd = fd
+    def Popen(self, *args, **kwargs):
+        if 'pass_fds' in kwargs:
+            raise RuntimeError('UNEXPECTED_WORKER_DESCRIPTOR_OVERRIDE')
+        return subprocess.Popen(*args, **kwargs, pass_fds=(self.fd,))
+    def __getattr__(self, name):
+        return getattr(subprocess, name)
+
+
+def require_admission(plan_path, expected_hash):
+    if common.sha(plan_path) != expected_hash:
+        raise RuntimeError('FROZEN_FINNGEN_PLAN_CHANGED')
+    plan = json.loads(plan_path.read_text())
+    if plan['scope'] != 'FINNGEN_INSOMNIA_SOURCE_FEASIBILITY_ONLY' or plan['new_rg_commands'] != 0:
+        raise RuntimeError('FINNGEN_SCOPE_CHANGED')
+    if len(plan['jobs']) != 1 or plan['stage'] not in ('preprocessing', 'observed_h2'):
+        raise RuntimeError('ONE_FROZEN_DIAGNOSTIC_STAGE_REQUIRED')
+    namespace = Path(plan['namespace'])
+    approved = common.SHARED_LOCK.parent/'new_source_feasibility/finngen_R13_F5_INSOMNIA'
+    if namespace != approved or namespace.is_symlink() or plan['shared_heavy_worker_lock'] != str(common.SHARED_LOCK):
+        raise RuntimeError('PRIVATE_FEASIBILITY_NAMESPACE_OR_SHARED_LOCK_CHANGED')
+    guard = plan['guard']
+    if (guard['worker_count'], guard['BLAS_threads'], guard['internal_floor_bytes'], guard['SSD_floor_bytes'],
+        guard['observed_aggregate_worker_RSS_limit_bytes'], guard['new_output_limit_bytes'], guard['deadline_seconds']) != (1,1,3<<30,5<<30,2<<30,2<<30,7200):
+        raise RuntimeError('FROZEN_FEASIBILITY_RESOURCE_LIMITS_CHANGED')
+    admission_path = Path(plan['admission'])
+    a = json.loads(admission_path.read_text())
+    if a['execution_admitted'] is not True or a['plan_sha256'] != expected_hash or a['scope'] != plan['scope']:
+        raise RuntimeError('EXACT_FINNGEN_EXECUTION_ADMISSION_REQUIRED')
+    if a['independent_binding_review_pass'] is not True or a['resource_plan_review_pass'] is not True:
+        raise RuntimeError('INDEPENDENT_FINNGEN_REVIEW_NOT_CLEARED')
+    reviews = a.get('independent_review_sha256')
+    required = plan['required_independent_review_paths']
+    if len(required) != 4 or len(set(required)) != 4 or not isinstance(reviews, dict) or set(reviews) != set(required):
+        raise RuntimeError('EXACT_NONEMPTY_SCIENTIFIC_AND_OPERATIONAL_REVIEW_BINDINGS_REQUIRED')
+    if any(not isinstance(value,str) or len(value)!=64 for value in reviews.values()):
+        raise RuntimeError('INVALID_INDEPENDENT_REVIEW_DIGEST')
+    common.check_hashes(reviews)
+    common.check_hashes(plan['dependencies_sha256'])
+    gate_path = Path(plan['baseline_gate_plan'])
+    if common.sha(gate_path) != plan['baseline_gate_plan_sha256']:
+        raise RuntimeError('BASELINE_GATE_PLAN_CHANGED')
+    return plan, a, common.sha(admission_path)
+
+
+def result_gate(plan, plan_hash):
+    job = plan['jobs'][0]
+    path = Path(job['result_receipt'])
+    r = json.loads(path.read_text())
+    if r['plan_sha256'] != plan_hash:
+        raise RuntimeError('FINNGEN_RESULT_PLAN_BINDING_CHANGED')
+    if plan['stage'] == 'preprocessing':
+        if r['status'] != 'QUALIFIED_PREPROCESSING_DIAGNOSTIC_PASS' or not r['retained_minimum_diagnostic_pass']:
+            raise RuntimeError('FINNGEN_PREPROCESSING_FAILED_NO_FIT')
+        if r['source_before'] != plan['source_identity'] or r['source_after'] != plan['source_identity']:
+            raise RuntimeError('FINNGEN_SOURCE_IDENTITY_CHANGED')
+        if r['derivative'] != plan['derivative'] or common.sha(plan['derivative']) != r['derivative_sha256']:
+            raise RuntimeError('FINNGEN_DERIVATIVE_CHANGED')
+        if not r['full_source_gzip_CRC_and_EOF_verified'] or not r['derivative_full_gzip_CRC_and_EOF_verified']:
+            raise RuntimeError('FINNGEN_FULL_STREAM_VERIFICATION_ABSENT')
+        if r['scientific_source_admitted'] or r['independent_replication_established'] or r['verified_per_variant_N'] or r['verified_per_variant_INFO']:
+            raise RuntimeError('FINNGEN_QUALIFICATION_OVERRIDDEN')
+    else:
+        if len(r['estimates']) != 1 or len(r['final_intersections']) != 1:
+            raise RuntimeError('EXACTLY_ONE_STANDALONE_H2_REQUIRED')
+        expected = plan['jobs'][0]['ldsc_args']
+        if '--h2' not in expected or '--rg' in expected or '--pop-prev' in expected or '--samp-prev' in expected:
+            raise RuntimeError('ONLY_OBSERVED_SCALE_H2_DIAGNOSTIC_ADMITTED')
+        if r['input_sha256_before'] != plan['input_sha256'] or r['input_sha256_after'] != plan['input_sha256']:
+            raise RuntimeError('H2_INPUT_IDENTITY_CHANGED')
+    return {str(path):common.sha(path)}
+
+
+def execute(plan_path, plan_hash):
+    plan, admission, admission_hash = require_admission(plan_path, plan_hash)
+    supervisor = load('_reviewed_finngen_worker', plan['worker_code'])
+    monitor = load('_frozen_finngen_monitor', plan['monitor_code'])
+    # These assignments are private output routing and signal-list sharing;
+    # no code file, frozen helper or global subprocess module is changed.
+    supervisor.SSD = Path(plan['namespace'])
+    supervisor.TERMINATION_REQUEST = common.TERMINATION_REQUEST
+    baseline = json.loads(Path(plan['baseline_gate_plan']).read_text())
+    ownership = [True, []]
+    started = time.monotonic()
+    target = Path(plan['stage_receipt'])
+    if target.exists():
+        raise RuntimeError('PRIOR_FEASIBILITY_STAGE_PRESERVED_NO_RETRY')
+    record = dict(schema='supervised_finngen_source_feasibility_stage_v1', stage=plan['stage'], scope=plan['scope'],
+                  plan_sha256=plan_hash, started_utc=common.utc(), status='FAILED_PRESERVED', new_rg_commands=0)
+    with common.deferred_termination_signals():
+        with common.exclusive_heavy_lock(before_release=lambda:supervisor.await_owned_cleanup(monitor, ownership, plan_hash)) as fd:
+            supervisor.subprocess = InheritedMutexSubprocess(fd)
+            try:
+                common.assert_no_termination()
+                baseline_receipts = supervisor.baseline_gate(baseline)
+                supervisor.stage_resource_gate(plan, started, 'AFTER_COMPLETE_190_NUMERICAL_BASELINE_GATE')
+                job = plan['jobs'][0]
+                substitutions = {'{HEAVY_LOCK_FD}':str(fd), '{PLAN_SHA256}':plan_hash}
+                command = [substitutions.get(x,x) for x in job['command_template']]
+                supervisor.worker(command, Path(job['output_prefix']), Path(job['worker_receipt']),
+                                  plan, plan_path, plan_hash, started, monitor, ownership)
+                proofs = result_gate(plan, plan_hash)
+                supervisor.check_dependencies(plan)
+                supervisor.check_inputs(plan, list(plan['input_sha256']))
+                if common.sha(plan['admission']) != admission_hash or common.sha(plan_path) != plan_hash:
+                    raise RuntimeError('FINNGEN_ADMISSION_OR_PLAN_CHANGED')
+                if supervisor.baseline_gate(baseline) != baseline_receipts:
+                    raise RuntimeError('HISTORICAL_PROOFS_CHANGED_DURING_FEASIBILITY_STAGE')
+                for output in [Path(job['worker_receipt'])]:
+                    proofs[str(output)] = common.sha(output)
+                supervisor.await_owned_cleanup(monitor, ownership, plan_hash)
+                common.assert_no_termination()
+                resource = supervisor.stage_resource_gate(plan, started, 'AFTER_ALL_PROOF_HASHES_BEFORE_STAGE_SEAL')
+                record.update(status='QUALIFIED_FEASIBILITY_STAGE_COMPLETE_VERIFIED', result_sha256=proofs,
+                              historical_baseline_receipt_sha256=baseline_receipts, resource_final=resource,
+                              admission_sha256=admission_hash, biological_or_replication_claim_admitted=False)
+            except BaseException as error:
+                record['failure'] = type(error).__name__+': '+str(error)
+                raise
+            finally:
+                supervisor.await_owned_cleanup(monitor, ownership, plan_hash)
+                record.update(completed_utc=common.utc(), owned_cleanup_verified=ownership[0], elapsed_seconds=time.monotonic()-started)
+                common.write_new(target, record)
+    common.safe_diagnostic(lambda:json.dumps(dict(stage=plan['stage'], status=record['status'])))
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument('--plan', type=Path, required=True)
+    p.add_argument('--expected-plan-sha256', required=True)
+    p.add_argument('--execute', action='store_true')
+    args = p.parse_args()
+    if not args.execute:
+        p.error('Explicit --execute and independently bound admission required')
+    execute(args.plan, args.expected_plan_sha256)
+
+
+if __name__ == '__main__':
+    main()

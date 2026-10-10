@@ -1,0 +1,45 @@
+{
+  "schema": "proposed_core_replay_comparison_and_streaming_rules_v1",
+  "status": "DESIGN_ONLY_NOT_EXECUTION_ADMISSION",
+  "source_input_rules": [
+    "Use only the per-trait source-resolved original raw identity; do not substitute a current release or alter original INFO, frequency, N, permissions or phenotype decisions.",
+    "Before and after any replay, bind full compressed raw bytes/SHA, selected source and immutable panel/schema/code/reference/binary/library identities. This review did not perform those GWAS-body reads.",
+    "Reuse LDL/HDL/triglycerides prefilter outputs with the exact original-hash native receipts and provenance; freshly verify reused inputs at admitted execution, preserving their paths and original files."
+  ],
+  "full_stream_comparison_rules": [
+    "Read baseline and replay gzip streams to full EOF with bounded buffers, validating gzip CRC/trailers, counting bytes/newlines and reporting any trailing incomplete line; compute complete decompressed SHA-256.",
+    "Require exact ordered decompressed harmonized content, literal headers, columns, alleles, coordinates, numeric serialization and missing-value tokens; no approximate scientific PASS or row sorting is authorized.",
+    "Require exact ordered decompressed munged content, the original 1,217,311-row HapMap3 skeleton, source-order allele fields and matching original nonmissing/missing N/Z patterns; preserve stock three-decimal serialization.",
+    "Require archived harmonization rows_in/rows_out and every ordered drop count to reconcile exactly; compare scientifically meaningful QC metadata and source/reference hashes. New absolute output/input paths and additional provenance fields are reported as qualified metadata changes, not forced to equal historical paths.",
+    "Require original prefilter source_rows, retained_rows, raw/allowlist identities and deterministic compressed SHA. Compare all historical stock munging removal counts, N cutoff and nonmissing output count; retain warnings.",
+    "Report complete compressed SHA independently. A different gzip SHA alone is not a scientific mismatch; establish exact decompressed content before classifying serialization differences. Compare header, deflate and trailer bytes separately before making any causal statement about why compressed bytes differ.",
+    "If exact decompressed content or scientific counts differ, preserve both artifacts and a bounded typed row/field diagnostic on the SSD, mark FAIL/UNRESOLVED, and do not relax thresholds or invent a tolerance after seeing results."
+  ],
+  "original_method_rules": [
+    "Apply original source-column alias priority and preferred BETA over OR; OR inputs use log(OR). Preserve source effect allele/sign; reverse point liftover complements alleles but does not by itself negate BETA.",
+    "Preserve one-based UCSC point mapping and all ambiguity/nonautosomal/unmapped losses, exact pinned coordinate/rsID-allele map behavior and source-order identity decisions.",
+    "Preserve the original sequential QC order, INFO >0.6 behavior with missingness qualification, original floating-point MAF expression, inclusive chr6:25,000,000-34,000,000 exclusion and first surviving pre-N duplicate rule.",
+    "Preserve sample-size branch priority, explicit 2*Effective_N or 2*NEFFDIV2 conversions, per-SNP/global or configured N reference and 50% reference cutoff. Never rescue a later duplicate when the first surviving pre-N occurrence fails the final N gate.",
+    "Use unchanged pinned stock munge_sumstats.py, --merge-alleles and --chunksize 500000. Ignore FRQ only for the seven archived absence-proved traits; fabricate neither FRQ nor INFO.",
+    "Stock munge derives signed Z from sqrt(chi2.isf(P,1)) and effect direction, not BETA/SE. Preserve the post-merge-family global N 90th-percentile divided by 1.5 rule, median-sign check, full HapMap3 left join and three-decimal output."
+  ],
+  "proposed_bounded_streaming_alternative": [
+    "Prepare a separately versioned result-free implementation and freeze its method/resource plan before actual replay. Do not modify original scripts or claim this is the original full-DataFrame implementation.",
+    "Use small source chunks and new SSD spools/indexes. Determine global parser/coercion and column-presence/branch decisions; preserve pandas missingness, numeric parsing and serialization semantics rather than silently forcing different dtypes.",
+    "Pass one applies the exact ordered pre-N scientific filters, mapping/liftover and first-occurrence deduplication; store only the required surviving fields on the SSD and compute global N-mode/max information. Use a disk-backed exact membership index to avoid a multi-million-entry Python seen set.",
+    "Pass two applies the frozen global N decision/cutoff and emits the exact harmonized column schema in source order. Do not add an unregistered HapMap3 prefilter to traits whose historical harmonized output retained genome-wide variants.",
+    "Keep stock munging for final processing. Its original 500,000-row chunks and approximately 1.2-million-variant retained family still require real aggregate RSS supervision; chunked input is not a memory-quota guarantee.",
+    "Before admitting a real stream, independently test duplicates across chunk boundaries and a first low-N duplicate; global maxima/N quantiles; all-NA or invalid N branches; INFO/FRQ absence versus present missingness; P zero/invalid; OR versus BETA priority; reverse mapping; map ambiguity; literal MAF endpoints and numeric parser/dtype boundaries. Synthetic controls establish implementation behavior only.",
+    "If historical runtime/parser behavior cannot be reproduced exactly, record an explicit implementation/runtime qualification, retain exact full-content failures, and block claims of exact raw-to-harmonized reproduction until independently adjudicated."
+  ],
+  "operational_requirements_before_execution": [
+    "Hold the existing shared heavy-worker lock for all supervised heavy stages; one worker and one BLAS thread, no second estimator/process family.",
+    "Freeze a new private core_pipeline namespace and refuse any prior output, failed receipt or attempt rather than relying on original helpers' overwrite-capable behavior.",
+    "Bind the actual harmonization executable and pandas/numpy versions. Declared workflow pins are Python3.11.11/pandas2.2.3/numpy1.26.4; recovered LDSC3.9/pandas1.3.3/numpy1.21.5 is a distinct runtime.",
+    "Freeze resource footprints for final gzip plus uncompressed spools/indexes/temporary files, internal/SSD floors, deadlines, aggregate owned-group RSS, immutable failure journaling, catchable-signal deferral, verified group teardown and post-hash terminal gates.",
+    "Original historical harmonized+ munged gzip files total 5,178,384,793 bytes; that is only a compressed final-output baseline, not a complete new SSD footprint reservation.",
+    "Original shell02 still hardcodes data/raw; use the proposed explicit absolute-input/NEW-output command templates and preserve equivalent scientific argv. Do not invoke the original shell into the historical tree or silently redirect its locked panel."
+  ],
+  "remaining_source_blocker": "The original prostate source container remains unresolved (42/43 exact containers). Its exact original materialized raw is available, allowing a separately admitted raw-stage replay; this cannot establish complete original-container-to-raw reproduction.",
+  "scientific_claim_limits": "No GWAS body was read or decompressed, no replay or estimator was launched, and no raw-to-result or scientific validity claim is made by this design."
+}

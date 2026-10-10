@@ -1,0 +1,203 @@
+{
+  "status": "ACTUAL_EMPTY_CHUNK_CAUSE_CONFIRMED_ZERO_ROW_CORRECTION_FOCUSED_PASS",
+  "runtime": {
+    "pandas": "2.2.3",
+    "numpy": "1.26.4"
+  },
+  "cases": [
+    {
+      "case": "ACTUAL_NONEMPTY388_ORIGINAL_AND_CORRECTED_ROWS_DTYPES_BITS_QC_EQUAL",
+      "status": "PASS"
+    },
+    {
+      "case": "ACTUAL_ROW_SLICE_LATER_EMPTY_MASKS_ACCOUNT_ZERO",
+      "status": "PASS"
+    },
+    {
+      "case": "ACTUAL_EMPTY389_ORIGINAL_REDUCTION_FAILURE",
+      "status": "EXPECTED_FAILURE_PRESERVED",
+      "reason": "Cannot perform reduction 'sum' with string dtype"
+    },
+    {
+      "case": "ZERO_ROW_ONLY_DROP_REPAIR_ALL13_ORDERED_ORDINARY_STEPS",
+      "status": "PASS"
+    }
+  ],
+  "case_count": 4,
+  "actual_small_checkpoint_evidence": {
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v1/sleep_apnea/ephemeral_bounded_spool/post_liftover/00000388.pkl": {
+      "sha256": "620e718904f63573d2921e118e6e37d60fcd3b2f8ee893af9d8985b7c3860bc2",
+      "bytes": 3366559,
+      "rows": 42291,
+      "dtypes": {
+        "SNP": "string",
+        "CHR": "float64",
+        "BP": "float64",
+        "A1": "string",
+        "A2": "string",
+        "FRQ": "float64",
+        "BETA": "float64",
+        "SE": "float64",
+        "P": "float64"
+      }
+    },
+    "adjacent_nonempty_ordinary_steps": [
+      [
+        "missing or non-rsID SNP (dbSNP resolution required)",
+        1855,
+        40436
+      ],
+      [
+        "non-SNP / indel / multi-base allele",
+        2003,
+        38433
+      ],
+      [
+        "A1 equals A2",
+        0,
+        38433
+      ],
+      [
+        "strand-ambiguous A/T or C/G [CDG3]",
+        5144,
+        33289
+      ],
+      [
+        "P missing or outside (0, 1]",
+        0,
+        33289
+      ],
+      [
+        "BETA missing or non-finite",
+        0,
+        33289
+      ],
+      [
+        "SE missing, non-positive, or non-finite",
+        0,
+        33289
+      ],
+      [
+        "missing or non-autosomal CHR (EUR LDSC panel is autosomal)",
+        0,
+        33289
+      ],
+      [
+        "missing or invalid BP",
+        0,
+        33289
+      ],
+      [
+        "INFO column absent - source-level INFO QC must be documented",
+        0,
+        33289
+      ],
+      [
+        "invalid FRQ or MAF <= 0.01 [CDG3]",
+        16372,
+        16917
+      ],
+      [
+        "MHC chr6:25000000-34000000 [CDG3]",
+        0,
+        16917
+      ],
+      [
+        "duplicate SNP ID",
+        11,
+        16906
+      ]
+    ],
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_checkpoint_continuation_v1/sleep_apnea/ephemeral_bounded_spool/post_liftover/00000389.pkl": {
+      "sha256": "8211901671bfd06865c4f5c6fcfbcc4c7881f73d992e606030f5335ad387d7db",
+      "bytes": 1155,
+      "rows": 0,
+      "dtypes": {
+        "SNP": "string",
+        "CHR": "float64",
+        "BP": "float64",
+        "A1": "string",
+        "A2": "string",
+        "FRQ": "float64",
+        "BETA": "float64",
+        "SE": "float64",
+        "P": "float64"
+      }
+    },
+    "corrected_empty_ordinary_steps": [
+      [
+        "missing or non-rsID SNP (dbSNP resolution required)",
+        0,
+        0
+      ],
+      [
+        "non-SNP / indel / multi-base allele",
+        0,
+        0
+      ],
+      [
+        "A1 equals A2",
+        0,
+        0
+      ],
+      [
+        "strand-ambiguous A/T or C/G [CDG3]",
+        0,
+        0
+      ],
+      [
+        "P missing or outside (0, 1]",
+        0,
+        0
+      ],
+      [
+        "BETA missing or non-finite",
+        0,
+        0
+      ],
+      [
+        "SE missing, non-positive, or non-finite",
+        0,
+        0
+      ],
+      [
+        "missing or non-autosomal CHR (EUR LDSC panel is autosomal)",
+        0,
+        0
+      ],
+      [
+        "missing or invalid BP",
+        0,
+        0
+      ],
+      [
+        "INFO column absent - source-level INFO QC must be documented",
+        0,
+        0
+      ],
+      [
+        "invalid FRQ or MAF <= 0.01 [CDG3]",
+        0,
+        0
+      ],
+      [
+        "MHC chr6:25000000-34000000 [CDG3]",
+        0,
+        0
+      ],
+      [
+        "duplicate SNP ID",
+        0,
+        0
+      ]
+    ]
+  },
+  "original_code_sha256": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a",
+  "old_helper_sha256": "3b87e849e3001a2a2d30fc0971dd3bd97847736abb9bed0dff521d1b5e1d0210",
+  "corrected_helper_sha256": "d07c230a13597b3b444ceaf5535837cdab6e20a58dc5e0e756ba3194a1701d34",
+  "source_raw_body_reads": 0,
+  "source_reparsed": false,
+  "workers_launched": 0,
+  "production_mutex_operations": 0,
+  "old_suite_repeated": false
+}

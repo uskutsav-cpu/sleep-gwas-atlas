@@ -1,0 +1,95 @@
+{
+  "status": "PASS_V6_POST_PROVISIONAL_CONSUMED_FILE_FAULT_INTEGRATION",
+  "check_count": 12,
+  "checks": [
+    {
+      "control": "healthy_commits",
+      "pass": true
+    },
+    {
+      "control": "missing_old_worker_after_provisional_fault_after_primary_persistence",
+      "pass": true
+    },
+    {
+      "control": "missing_old_worker_after_provisional_durable_PENDING_veto",
+      "pass": true
+    },
+    {
+      "control": "missing_old_worker_after_provisional_failure_addendum",
+      "pass": true
+    },
+    {
+      "control": "missing_old_QC_after_provisional_fault_after_primary_persistence",
+      "pass": true
+    },
+    {
+      "control": "missing_old_QC_after_provisional_durable_PENDING_veto",
+      "pass": true
+    },
+    {
+      "control": "missing_old_QC_after_provisional_failure_addendum",
+      "pass": true
+    },
+    {
+      "control": "samebytes_QC_symlink_after_provisional_fault_after_primary_persistence",
+      "pass": true
+    },
+    {
+      "control": "samebytes_QC_symlink_after_provisional_durable_PENDING_veto",
+      "pass": true
+    },
+    {
+      "control": "samebytes_QC_symlink_after_provisional_failure_addendum",
+      "pass": true
+    },
+    {
+      "control": "all_invented_consumed_files_restored_exact_callback_pass",
+      "pass": true
+    },
+    {
+      "control": "production_callback_source_unchanged",
+      "pass": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "healthy",
+      "result_status": "ALL100_RAW_TO_MUNGED_TEMPLATE_REPLAY_PASS",
+      "pending_retained": false,
+      "failure_addendum_exists": false,
+      "primary_sha256": "5638a33d89a5ea15ffe8bb20a6bea89d096ef4f1d08a0d45ab3d85f3b77cec2a",
+      "no_real_workers": true
+    },
+    {
+      "case": "missing_old_worker_after_provisional",
+      "result_status": "FAILED_PRESERVED_NO_AUTOMATIC_RETRY",
+      "pending_retained": true,
+      "failure_addendum_exists": true,
+      "primary_sha256": "5638a33d89a5ea15ffe8bb20a6bea89d096ef4f1d08a0d45ab3d85f3b77cec2a",
+      "no_real_workers": true
+    },
+    {
+      "case": "missing_old_QC_after_provisional",
+      "result_status": "FAILED_PRESERVED_NO_AUTOMATIC_RETRY",
+      "pending_retained": true,
+      "failure_addendum_exists": true,
+      "primary_sha256": "5638a33d89a5ea15ffe8bb20a6bea89d096ef4f1d08a0d45ab3d85f3b77cec2a",
+      "no_real_workers": true
+    },
+    {
+      "case": "samebytes_QC_symlink_after_provisional",
+      "result_status": "FAILED_PRESERVED_NO_AUTOMATIC_RETRY",
+      "pending_retained": true,
+      "failure_addendum_exists": true,
+      "primary_sha256": "5638a33d89a5ea15ffe8bb20a6bea89d096ef4f1d08a0d45ab3d85f3b77cec2a",
+      "no_real_workers": true
+    }
+  ],
+  "exact_source_sha256": "35ae2a55ff3523442c28d097df018771cc505e52ca29c818fe6a67b37a53a701",
+  "fixture_scientific_identity_mount_resource_callbacks_mocked": true,
+  "real_worker_or_fit_operations": 0,
+  "production_raw_body_reads": 0,
+  "reference_body_reads": 0,
+  "production_mutex_operations": 0,
+  "execution_admitted": false
+}

@@ -1,0 +1,492 @@
+{
+  "recorded_utc": "2026-10-09T19:43:11.938079+00:00",
+  "verdict": "IDENTITY_AND_FINAL_GATES_PASS_SIGNAL_LIFETIME_AMENDMENT_REQUIRED",
+  "plan_sha256": "b992bd110f92c1a2d97e3bce30eaa529644e040c70a7a5bbdd689b8f568ede65",
+  "executor_sha256": "90e1f4586c3cc20958d3f4fabb29bc488449aacebeb93e1394363c82de2329da",
+  "bound_dependency_count": 115,
+  "all_dependency_hashes_match": true,
+  "original100_byte_MD5_SHA_version_ETag_binding_pass": true,
+  "source_snapshot_sha256": "90e1f4586c3cc20958d3f4fabb29bc488449aacebeb93e1394363c82de2329da",
+  "remediated_v2_gates": [
+    "Post-cleanup second whole-body MD5/SHA/byte equality before rename",
+    "Post-cleanup/hash source and family final resource/deadline/identity gates",
+    "Receipt-write path now enclosed by quarantine finally",
+    "Safe quarantine diagnostic output",
+    "SIGTERM/SIGHUP route to raised catchable exception",
+    "Nonempty at least2 review bindings including JSON and MD"
+  ],
+  "remaining_material_issue": "cleanup/status/receipt.update precede quarantine try/finally; asynchronous raised termination may escape there or between quarantine catch blocks, permitting premature family flock release. Defer catchable signals through critical lifecycle or block them until child registered and group disappearance guaranteed; encompass all cleanup in unconditional ownership finally.",
+  "signal_handling_note": "SIGINT still uses default KeyboardInterrupt; include it in critical lifecycle protection. Uncatchable destruction remains beyond in-process recovery; immutable attempt marker must remain.",
+  "current_v3_fault_controls_available": false,
+  "historical_v2_controls_do_not_validate_new_v3_signal_and_final_gates": true,
+  "source_body_read_or_network_launch": false,
+  "prefix_independent_content_rehash": false,
+  "scientific_claim_admitted": false,
+  "inputs": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/extension_raw_acquisition_plan_v4_3.json": {
+      "sha256": "b992bd110f92c1a2d97e3bce30eaa529644e040c70a7a5bbdd689b8f568ede65",
+      "bytes": 151733
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/config/candidate_traits.tsv": {
+      "sha256": "0a04a3074d798800f47671de39012cbfaf142b9173466e9a309400b7d5553329",
+      "bytes": 127465
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/panukbb/remote_object_snapshot.tsv": {
+      "sha256": "3c90917ff8f79e8265639fda62c89ed9607e6a4f9e84ef9f3b1247f7f95efbc8",
+      "bytes": 112934
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_EXTENSION_RAW_REPLAY_RESOURCE_PLAN_v1.md": {
+      "sha256": "61c881e3dc23a696494c8a4081a8d9cc5e1ac587421f674f05ea61720a5ae694",
+      "bytes": 3456
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/44_prepare_extension_raw_acquisition.py": {
+      "sha256": "8b83afc5b53093e97f335aa91922095d7524df4ce3dc7fd74137fc119157f3c0",
+      "bytes": 3781
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/extension_raw_acquisition_plan_v4.json": {
+      "sha256": "d8d294a6ff8d7b4f613db7e8b87853df975a32df972fed1999789b39a7f10788",
+      "bytes": 90521
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/extension_raw_acquisition_family_receipt_v4.json": {
+      "sha256": "470c7cd8c9651ffb512b298e77a4cbfce5b31c413e5d64bdfb8e87a2fe152425",
+      "bytes": 956
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/extension_raw_replay/receipts/panukbb_biomarkers__30890__both_sexes__na__irnt.json": {
+      "sha256": "a5f848c6069d19481ff7acd03a7046dfe24f7cf0cb7538e20e9be3e7193b9ecc",
+      "bytes": 69044
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/30_prepare_and_run_ssd_native_campaign.py": {
+      "sha256": "f0460a24750a6e0671f3bf1fb6109ac65d976969f62998b8b48bf68fe7a4c003",
+      "bytes": 13460
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/50_acquire_extension_raw_sources_v3.py": {
+      "sha256": "90e1f4586c3cc20958d3f4fabb29bc488449aacebeb93e1394363c82de2329da",
+      "bytes": 26367
+    },
+    "/usr/bin/curl": {
+      "sha256": "5ab042572ea0e068644e3b8f9e8dd1ad197bfcf33d199316615b46ddc4390a41",
+      "bytes": 552624
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/45_acquire_extension_raw_sources.py": {
+      "sha256": "5b451720184fbb4e8c4e0d902581d420e3070c3e6563783754c5c1c414475674",
+      "bytes": 9687
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/48_acquire_extension_raw_sources_v2.py": {
+      "sha256": "4b00b222a1f5607487caba6d4f47fb797d2fa3666b54cc7dee2f3d14c4a0fdf3",
+      "bytes": 22703
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/extension_raw_acquisition_plan_v4_2.json": {
+      "sha256": "b13346e198dc0d2f04d324aa0d1b76af33507ce72a299d9e3beccca8639ad544",
+      "bytes": 151281
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/extension_raw_acquisition_explicit_interruption_v4.json": {
+      "sha256": "0b34aa965a6dcd8331915e6ec9833a3d25a56228256052878728561584df9c06",
+      "bytes": 1112
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_EXTENSION_RAW_REPLAY_OPERATIONAL_AMENDMENT_v3.md": {
+      "sha256": "623e2d578415b546756c1fe0c0eb3d958026c176ac29d80bad45fce2192173d7",
+      "bytes": 2206
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_biomarkers__30890__both_sexes__na__irnt.json": {
+      "sha256": "f049c70f6ffaf01e4c889bfb4f57dec03ededf47abae562aed17555d89914241",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__30060__both_sexes__na__irnt.json": {
+      "sha256": "49c89933963704bfcac463c5c845ff8938fa807b9afe7049ba74beb5d8990a77",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__30510__both_sexes__na__irnt.json": {
+      "sha256": "2a540ef2fcee1d840de3ad1a957fef1b80f9a78222a4606ac510490007565f56",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__30520__both_sexes__na__irnt.json": {
+      "sha256": "bb2fda8acc43fb5b3a20f582d1b62fd223965370e89891ff15ee2d5df9bb70e5",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__30530__both_sexes__na__irnt.json": {
+      "sha256": "4db543d085d5547205f932ad842c738a110f847acce418c5d15a99dc6d5fff2a",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__594__both_sexes__na__na.json": {
+      "sha256": "d6b677adcec2dbb33623a0a9b021123c2e9e6bec6d8f905e103a56ab1e9574fc",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__j44__both_sexes__na__na.json": {
+      "sha256": "5cbdf4b2ff4012fb13dd60ea47638337537f379110946b5562416d1013545658",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__3064__both_sexes__na__irnt.json": {
+      "sha256": "fb89461f074d96c1b3752e3ae9c8995e1c79e5be0906f39ba7987db130146f82",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__2316__both_sexes__2316__na.json": {
+      "sha256": "7ac4bb3a07eefb89394acaf207695a56a6ed99f65b087486c7cf342a5e59e784",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__496_2__both_sexes__na__na.json": {
+      "sha256": "217669a3bce8434e2f4f490683894b8bd91a1381c3d52352e842d6037783dae0",
+      "bytes": 3220
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__k21__both_sexes__na__na.json": {
+      "sha256": "9da8500fe0b2464d3c069b07cd2c95652f176e59da60800063f78221e4554f1d",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__k80__both_sexes__na__na.json": {
+      "sha256": "6cbb34c27897bb0b64d0c23affa1b359ce00389159654233beb8d04b260a2c15",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__550_2__both_sexes__na__na.json": {
+      "sha256": "8c7df229707df7ffd18d32e08f73104710c84ce7eed7ccc2cdfe3000988ffec5",
+      "bytes": 3220
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__550_4__both_sexes__na__na.json": {
+      "sha256": "1b45bbfd5df9eb2a19f1a58e063e2d7ee6624b3f7f996ee9ad3d8b946abe8bb7",
+      "bytes": 3220
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__558__both_sexes__na__na.json": {
+      "sha256": "9ff95fc6bcd71c92ab3d5b6524e32d0eb09bcedccdd8fb14e5b352ec3411e7f0",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__785__both_sexes__na__na.json": {
+      "sha256": "bccea773a54c35c25cc86c0047c315d9833c3e365eb69ef366c30a9f0d6018ad",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__41200__both_sexes__j183__na.json": {
+      "sha256": "084708803fdd87d60c759365da868d945dc62dff76f6cd76073e23fdcff8868b",
+      "bytes": 3277
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20004__both_sexes__1483__na.json": {
+      "sha256": "d0f67d0f37d9beb3a75589d32a2ea8c93fb464c827240d95401e0e295f0bd560",
+      "bytes": 3277
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__5116__both_sexes__na__irnt.json": {
+      "sha256": "27ed86fb9857b77bebe06536e0d9326250532c89b8615f1bb9a842c39fc25fdd",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__5096__both_sexes__na__irnt.json": {
+      "sha256": "c602c5910f7313f2a65ba2b719b326600b794fffbb0d49c41a8ad14749306ac7",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__5257__both_sexes__na__irnt.json": {
+      "sha256": "c713700c87f74da7443994c2fa2de46ce069dbe266130f21bafe9a58e44d6572",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__2217__both_sexes__na__irnt.json": {
+      "sha256": "5710925bde1351aa5ed3523f25197d703cf486647aaae378cf6fea316130b9ac",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__2207__both_sexes__2207__na.json": {
+      "sha256": "3c904df103dee754f7ed18dd39f1fafca418599c8d3d15517dec89d1ff8392f0",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__3393__both_sexes__3393__na.json": {
+      "sha256": "5b0abec85fe1caa6b9938748bf4f9d2bfdd0ac48582317a8f5e048f8473850c6",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__2257__both_sexes__2257__na.json": {
+      "sha256": "0bd977319c65c470eab9e312ea3fac927825e325310e2949577a73537acecdca",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__latanoprost__both_sexes__na__na.json": {
+      "sha256": "ad3a5103618ee5d7d162afb963a5b51153c3442f2e8e11c15c1b914de329c536",
+      "bytes": 3316
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__m16__both_sexes__na__na.json": {
+      "sha256": "2da9846cbb6d0f48286d9c24d0d36b8a77383d8c8358482ffda3eb16ee85f6cd",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__m17__both_sexes__na__na.json": {
+      "sha256": "f95b403e265eaccb70d19329a0262bb3afaada671155a3e5883bcf0891ad61e6",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__m51__both_sexes__na__na.json": {
+      "sha256": "cc88109b385410a756baddd3cadd948ae8bd2d66cb67fca1babcd74e7f94f048",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__4105__both_sexes__na__irnt.json": {
+      "sha256": "eb4c5d35f18647e635114ed313e4dcc919dac51994b3e6c502225ee4c074ff33",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6151__both_sexes__7__na.json": {
+      "sha256": "ccd25b05fc707c4b4505368a209c465027df943fd84b7534fbabe784af3c5b4e",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__3571__both_sexes__3571__na.json": {
+      "sha256": "c985d39b83d2bdf3332d70f796eb9816dbd2bfaa9719a0bbe7ca2204bba31dc7",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6159__both_sexes__7__na.json": {
+      "sha256": "8d1b81db8f7aa96bf93e9c79791609edfe67e089b7315dfe46d30eb1c57bcc39",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6159__both_sexes__8__na.json": {
+      "sha256": "b71c025ce6f6095537744f06ddd8254b7a0000033771a36b916520abaf98b02b",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__740__both_sexes__na__na.json": {
+      "sha256": "3c3d528225e9edbe61533b077c26cb4cb94ada70e0286dec03d89377e54ccabc",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__835__both_sexes__na__na.json": {
+      "sha256": "a7143fa169970323b95b81d3fc9ab7d4e1ca1aab01955967bf0ff61f033c4bdc",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__z88__both_sexes__na__na.json": {
+      "sha256": "c5a85d8e483974aa295b430431de34f6b6ff6dc4c45cd2358f403da04bd1af6e",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__960_2__both_sexes__na__na.json": {
+      "sha256": "68f2cb9cbf54fbe0beea436e17e5111560788a8db0f1d57081ba6cbff53516c5",
+      "bytes": 3220
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__960__both_sexes__na__na.json": {
+      "sha256": "54df0b126ee960f1ae5383dbca04e5b5af80ade92104b2e2de51fec51441377f",
+      "bytes": 3204
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__amoxicillin_clavulanic_acid__both_sexes__na__na.json": {
+      "sha256": "2f6929d88b9dc13a7718051f50dd71be7623712ce8d13f866a396cef5a89db1f",
+      "bytes": 3444
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__clarithromycin__both_sexes__na__na.json": {
+      "sha256": "54853c691a2a2e1bf63266a89e2111a6e217e146a68101a2c8af697c169af75c",
+      "bytes": 3340
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20004__both_sexes__1478__na.json": {
+      "sha256": "e112ac443fd4b17014df49c84587173e00e7ca0611a4069be111ce97b5eabac5",
+      "bytes": 3277
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__gabapentin__both_sexes__na__na.json": {
+      "sha256": "49b45fa9686a782e73d3dda9aca9f7d7f96cfa4697972389eceaa34920051eb3",
+      "bytes": 3308
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__paracetamol__both_sexes__na__na.json": {
+      "sha256": "f1b3dd3253698df19dde10fa2053996e79ad643db4db3922e0c460262f791e83",
+      "bytes": 3316
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__mebeverine__both_sexes__na__na.json": {
+      "sha256": "29665857fce8529288fc0834cc22019d89dc8946fcf73a66c2e3bd289ccffade",
+      "bytes": 3308
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__amlodipine__both_sexes__na__na.json": {
+      "sha256": "7eeac5fd6d79a9739b784b55be6cea201dcd7cdf7fe938a749704ab263f91d28",
+      "bytes": 3308
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__orlistat__both_sexes__na__na.json": {
+      "sha256": "eac7bd32d1ba3cffd384ea005ba9000c02b8cd2ba2d2b7d97633d852afec3036",
+      "bytes": 3292
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__tramadol__both_sexes__na__na.json": {
+      "sha256": "cd1370abd088a2a04e5147e57c9b5780ec0e0823a100da713d06f4fabea0f043",
+      "bytes": 3292
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__citalopram__both_sexes__na__na.json": {
+      "sha256": "ea7f1859f8ea3433c211c12424d538967ae2647f4115e90e2eedc9ecde8d6f49",
+      "bytes": 3308
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_prescriptions__bendroflumethiazide__both_sexes__na__na.json": {
+      "sha256": "4e21a5dc1fb4a887fc0fd88dbd0e91baea6568257a8ca93d68a960292dec966a",
+      "bytes": 3380
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20003__both_sexes__1140874420__na.json": {
+      "sha256": "15ac1be7f79c39d2d0ef6add1507b15cc2bca8f8c265ac858db3e8d26813776f",
+      "bytes": 3325
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20003__both_sexes__1140881856__na.json": {
+      "sha256": "aaa845811793b62a1cccd88ad811148f6eabb3f87cf8b5698567db9339402cb8",
+      "bytes": 3325
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6149__both_sexes__3__na.json": {
+      "sha256": "f89fc4c225dc5e6914df743fcf9c1f1d4f3f2b877d1cda02afc8d5baf1f260a5",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6149__both_sexes__4__na.json": {
+      "sha256": "34fef677104badc27c3438997e041469737896806aa868528cadce452ad78477",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6149__both_sexes__6__na.json": {
+      "sha256": "74dbb7f9e4275faa2c48a2fa6167b76ea67648fdc6e2ad96c63b7ff92de749ec",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20004__both_sexes__1480__na.json": {
+      "sha256": "c171f472c51864393cdc6c680074e352d77214dfabad8ba3629af8e2ebdd2f88",
+      "bytes": 3277
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__398__both_sexes__na__na.json": {
+      "sha256": "7fd9693055e167f1a7d3d15476ace71f50bdbb5e5743d4b0bff420b555c319e6",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__400__both_sexes__na__irnt.json": {
+      "sha256": "814c26e80da6f82090687687cd97ac254e56ceaec6c556b8059fc96992bc95c5",
+      "bytes": 3253
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__4294__both_sexes__0__na.json": {
+      "sha256": "86ee0f7c8e4de30d14bab5091198728b434520f7c7bfad28f77909ee6d0a8ae4",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20023__both_sexes__na__irnt.json": {
+      "sha256": "d723223b1275bbb01676953b4770777aab907cbd995636446956756f7808ff8d",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__5001__both_sexes__5001__na.json": {
+      "sha256": "3a4aa32b6796fc07fb4839d31f70f0feb6a49df730b6f2e65b3fcb209cba435d",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20409__both_sexes__na__na.json": {
+      "sha256": "47ca4f8cb411bc4457e744c45e3c8af7c7bebff3e956d9ac39ae13ad54f63459",
+      "bytes": 3244
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20515__both_sexes__na__na.json": {
+      "sha256": "5b5275ceec3549686eafdf5216dc8084150c996c0a79ba809c18771e67528b35",
+      "bytes": 3244
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20520__both_sexes__na__na.json": {
+      "sha256": "c481cf0f32de015047f2d158a5e31e2931155abee5f85e3442a92a5c208c14cd",
+      "bytes": 3244
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20485__both_sexes__na__na.json": {
+      "sha256": "f80d019990c2419dfb2d4ad47790ad5ff2b79e170c4027c521e86f82ae78aa36",
+      "bytes": 3244
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20498__both_sexes__na__na.json": {
+      "sha256": "261dd28c48352aa7c2e5e389624efd26612863e40f6608c3eb7fffc45ea53fa2",
+      "bytes": 3244
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6145__both_sexes__6__na.json": {
+      "sha256": "cfd5d7b9765d1076ab3b3202f32736e4cd60c89a37ad03fd66b96d2db2e71266",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__2020__both_sexes__2020__na.json": {
+      "sha256": "00e5004144fde22d0ad9347641e61ae82fc2fb5faebfd287befe25aff54bec01",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__2040__both_sexes__2040__na.json": {
+      "sha256": "ae3bf3a9debfa40cfcee4eedb25e877b66fa70ca2bbd3cf6fb1a9aa521b55597",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__1677__both_sexes__1677__na.json": {
+      "sha256": "d4c9ef311f1badc8d8a0c3dd996eceea74fa6ac1d06a9461df3a8c9934bb3e9e",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__1707__both_sexes__2__na.json": {
+      "sha256": "b74b504790732be677066b8d0dc2370b179b06d1247e00ec440d6c780b4f8d97",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__20022__both_sexes__na__irnt.json": {
+      "sha256": "b70f21556cb3ec6f5d57928e4a6a0445c17e4affc11a23493764ae7f53f58422",
+      "bytes": 3269
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__1538__both_sexes__1__na.json": {
+      "sha256": "597687852b0c9460dc17a537e4bef3e2006af49b8acc750365f9e96c303a0cd8",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__1418__both_sexes__1__na.json": {
+      "sha256": "2e1be890c23bc2197e6a7e125600b78886c80d621f5c66be40cf703fc61ee536",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1548__both_sexes__na__na.json": {
+      "sha256": "8b05c9c49812c97773c81c8fa2da516efe4615be0c268b0eef8b36ea65efef09",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1349__both_sexes__na__na.json": {
+      "sha256": "89113fd92f5ae68c4fa295c14ee85ed25865700b7318d040e3ef205c6ad4c35f",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__1468__both_sexes__4__na.json": {
+      "sha256": "b8c7f27bdf8614f9f1cd54ebce60e9ce6c73d58cc421b49c7e2b52dda2ec77fc",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1140__both_sexes__na__na.json": {
+      "sha256": "b0640a9de7b1825e4f0102c4969bcc2a4b6b58a233237ad68955c820c9f57840",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__2237__both_sexes__na__na.json": {
+      "sha256": "6615f44287a8c7cbb35404f2666a3afc1c213fdd6fe401ddf7779eaf5f84841b",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1757__both_sexes__na__na.json": {
+      "sha256": "070b0f65070aca8eac8744b492090135ad3243ce02928d086d728414c95e06e4",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__2267__both_sexes__na__na.json": {
+      "sha256": "53fa744d2b90d3272f189d2f821f7ffd8d1fbc6a8c91bf74af2331e6e8448926",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__874__both_sexes__na__irnt.json": {
+      "sha256": "5bffd0cf13cf9fb2547ef929cdb4d439ef5986aedf8d39c6548a59a2375dbeb7",
+      "bytes": 3253
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__943__both_sexes__na__na.json": {
+      "sha256": "b1b4b7f18dd6645def987a5138c2a7f49f572571d89f4bc946162b1070b56cf9",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__904__both_sexes__na__na.json": {
+      "sha256": "e0d439b503100116ce120a75acbc5b0b7010464be1c9ff75fa9534dc467963fd",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6164__both_sexes__5__na.json": {
+      "sha256": "aaf0a7d8d9222758889097bf069d26fd4850c03cbf3864b0d9958f5033a13f41",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__924__both_sexes__na__na.json": {
+      "sha256": "aab1bd7ac9aec24b0b44fb95936197d85d99ab7cb0eb68e132654541ddff4d13",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6138__both_sexes__5__na.json": {
+      "sha256": "efcf9b1901eab2f5e863c0c51b27122c67576545ea1e05fb0226a9d06a99b836",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__6142__both_sexes__6__na.json": {
+      "sha256": "b79acf1cc75801b11689f6a12992070fe670130113acb3f7176294db29ce4b2f",
+      "bytes": 3245
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__816__both_sexes__na__na.json": {
+      "sha256": "357ae514609aab8f743a212e8827730bbf56361e7d272aedf73472ccf8e67455",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__728__both_sexes__na__na.json": {
+      "sha256": "5aa0e179992f5e332915cd13e04f8c9e01804f157de4985500252cd9660f6d71",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__699__both_sexes__na__irnt.json": {
+      "sha256": "c44c98440e9adf221826b042dcbd5a2aeb5946a286eff9776599805ca27ee290",
+      "bytes": 3253
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__i83__both_sexes__na__na.json": {
+      "sha256": "3ba2ca505b4c6c64cb9f2971baf684bfbe6f595cecb00a7edd3acd4585078dee",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_icd10__z95__both_sexes__na__na.json": {
+      "sha256": "30c53711929c809537123734f941514c21c3ea49c00c831ce3e3c8ea330665c4",
+      "bytes": 3188
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20002__both_sexes__1226__na.json": {
+      "sha256": "ee937cef85d05cf7af4e6ff63954382804b6c8dac71e1fec7d74f89257d3a912",
+      "bytes": 3277
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__135__both_sexes__na__na.json": {
+      "sha256": "c2fd168c5a2bc4f78c97d822373755cd34d804c5af822e10660b3a6b07882c57",
+      "bytes": 3228
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__4195__both_sexes__na__irnt.json": {
+      "sha256": "f764469b5416495e58237f8c66b4feb0755ec4a8f0b4e3b0d90d8af07f011354",
+      "bytes": 3261
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_categorical__20117__both_sexes__2__na.json": {
+      "sha256": "4fb1c287d0d5932ba0cb2b321111335ccf0a3ab6c9641157cf54795514709051",
+      "bytes": 3253
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1588__both_sexes__na__na.json": {
+      "sha256": "cb4311066a2c828bc3af90bed62306d2658bd23fa05d65d55ace1a1db3dbdde1",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_continuous__1259__both_sexes__na__na.json": {
+      "sha256": "75540dcc51dabd2b098f2ba41ad4776452ed5cd6fe35e07762c721da2ac9cc78",
+      "bytes": 3236
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/streaming_receipts/panukbb_phecode__318__both_sexes__na__na.json": {
+      "sha256": "dd555440bf1cb398e6edb1f328119506fc909169e93131ae8986bfd1040152a9",
+      "bytes": 3204
+    }
+  },
+  "all_consumed_hashes_unchanged_after": true
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "independent_review_harness_correction",
+  "initial_checker_preserved": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_canonical_v4_8_binding_checker.py",
+  "cause": "Own AST checker searched only top-level statements for the verify oracle; actual verify correctly calls it inside the native-job loop.",
+  "correction": "Traverse statement-list parents, require exactly one call following the postparse regular_hashes statement, remove only that call for exact inherited AST comparison. Also preserve50 entries in the wrong-identity tiny test.",
+  "candidate_changes": 0,
+  "actual_workers": 0,
+  "actual_mutex": 0
+}

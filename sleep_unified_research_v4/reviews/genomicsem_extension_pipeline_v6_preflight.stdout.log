@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_extension_pipeline_v6_preflight_checker.py", line 84, in <module>
+    check(ast.dump(oldrun['main'],include_attributes=False)==ast.dump(VersionOnly().visit(copy.deepcopy(newrun['main'])),include_attributes=False),'executor_default_plan_matches_v6')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_extension_pipeline_v6_preflight_checker.py", line 22, in check
+    checks.append({'control':label,'pass':bool(value),'detail':detail});assert value,label
+                                                                               ^^^^^
+AssertionError: executor_default_plan_matches_v6

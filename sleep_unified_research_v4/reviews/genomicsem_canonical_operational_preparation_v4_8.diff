@@ -1,0 +1,247 @@
+--- /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration_v4_7.py
++++ /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration_v4_8.py
+@@ -17,28 +17,45 @@
+ import sys
+ import time
+ 
+-from canonical_calibration_common_v4_7 import ADMISSION, PACKAGE, PLAN, ROOT, SHARED_LOCK, TERMINATION_REQUEST, admit, assert_no_termination, check_hashes, deferred_termination_signals, exclusive_heavy_lock, safe_diagnostic, sha, utc, write_new, regular_sha, intended_sha, write_intended_new, terminal_intended_sha, freeze_companions, regular_tree, canonical_epoch_bytes, global_campaign_bytes, preserved_failed_attempt
++from canonical_calibration_common_v4_8 import ADMISSION, PACKAGE, PLAN, ROOT, SHARED_LOCK, TERMINATION_REQUEST, admit, assert_no_termination, assert_monitor_error_fields_clear, check_hashes, deferred_termination_signals, exclusive_heavy_lock, safe_diagnostic, sha, utc, write_new, regular_sha, intended_sha, write_intended_new, terminal_intended_sha, freeze_companions, regular_tree, canonical_epoch_bytes, global_campaign_bytes, preserved_failed_attempt
+ 
+ from terminal_commit_common_v2 import TerminalCommit, require_committed
+ 
+ HISTORICAL = PACKAGE / 'manifests/ssd_native_execution_plan_v4_3.json'
+ BLOCKS = PACKAGE / 'manifests/canonical_200_interval_preparation_v4.json'
+ CONTROLS = PACKAGE / 'statistical_validation/genomicsem_native_calibration_controls_v4.tsv'
+-SSD = Path('/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4_7')
++SSD = Path('/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4_8')
+ ALLOWED = ['CORE_INSOMNIA_BMI_DUPLICATE', 'FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE']
++
++
++def preparation_dependency_hashes(plan, deferred):
++    # This preparation is expressly body-free. The exact sealed prior identities
++    # are inherited, never counted as fresh hashes. Future admit() is unchanged
++    # and must fully hash every live dependency before any worker.
++    if len(deferred) != 50 or any(plan['dependencies_sha256'].get(path) != digest for path, digest in deferred.items()):
++        raise RuntimeError('SEALED_PREPARATION_DEFERRED_IDENTITY_MAP_DIFFERS')
++    check_hashes({path: digest for path, digest in plan['dependencies_sha256'].items() if path not in deferred})
+ 
+ 
+ def prepare():
+     if PLAN.exists() or ADMISSION.exists():raise RuntimeError('EXISTING_FROZEN_PREPARATION_REQUIRES_REVIEW_NO_OVERWRITE')
+-    prior=PACKAGE/'manifests/native_canonical_calibration_plan_v4_6.json'
+-    prior_sha='3bbbaa75b5520e569c3386eb32cc28967cd5595ce1beb7dbea0cb7202c23b6ce'
+-    if regular_sha(prior)!=prior_sha:raise RuntimeError('PRESERVED_CANONICAL_V4_6_PLAN_CHANGED')
+-    plan=json.loads(prior.read_text());check_hashes(plan['dependencies_sha256'])
++    prior=PACKAGE/'manifests/native_canonical_calibration_plan_v4_7.json'
++    prior_sha='a72501b3daf01fd4102a0f002fd78ca232ff2429b6fe84fb5903109503ab19b9'
++    if regular_sha(prior)!=prior_sha:raise RuntimeError('PRESERVED_CANONICAL_V4_7_PLAN_CHANGED')
++    plan=json.loads(prior.read_text())
++    if regular_sha(prior)!=prior_sha:raise RuntimeError('PRESERVED_V4_7_PLAN_CHANGED_AFTER_PARSE')
++    addendum=PACKAGE/'reviews/independent_canonical_v4_7_native_code_dependency_addendum.json'
++    addendum_sha='fa02743dbba82390c7bb5fc15d9c479c5a9f0e7c16797bd603b8ed5dbfa4c0af'
++    if regular_sha(addendum)!=addendum_sha:raise RuntimeError('SEALED_V4_7_DEFERRED_IDENTITY_ADDENDUM_REQUIRED')
++    source_review=json.loads(addendum.read_text())
++    if regular_sha(addendum)!=addendum_sha:raise RuntimeError('SEALED_V4_7_DEFERRED_ADDENDUM_CHANGED_AFTER_PARSE')
++    deferred=source_review['remaining50_source_reference_runtime_dependency_sha256']
++    preparation_dependency_hashes(plan,deferred)
+     failed=PACKAGE/'logs/canonical_v4_6_failed_preserved_stop_inventory_v4_7.json'
+     failed_sha='c80990a119349b0deda5b4d1c6ee15ceb1d16f3c79d0f9f457894b8998674215'
+     if regular_sha(failed)!=failed_sha:raise RuntimeError('EXACT_PRESERVED_V4_6_FAILURE_REQUIRED')
+     failure=json.loads(failed.read_text())
+-    if failure['status']!='FAILED_PRESERVED' or failure['preserved_plan_sha256']!=prior_sha or failure['completed_native_controls_credited']!=0:raise RuntimeError('PRESERVED_FAILURE_SCOPE_CHANGED')
++    if failure['status']!='FAILED_PRESERVED' or failure['preserved_plan_sha256']!=plan['preserved_v4_6_plan_sha256'] or failure['completed_native_controls_credited']!=0:raise RuntimeError('PRESERVED_FAILURE_SCOPE_CHANGED')
+     preserved={path:item['sha256'] for path,item in failure['all_preserved_file_identity'].items()}
+     regular_hashes(preserved)
+     old_root=plan['ssd_output_root']
+@@ -46,12 +63,34 @@
+         job['output_dir']=job['output_dir'].replace(old_root+'/',str(SSD)+'/',1)
+         job['ldsc_args']=[arg.replace(old_root+'/',str(SSD)+'/',1) if arg.startswith(old_root+'/') else arg for arg in job['ldsc_args']]
+     files=[Path(__file__),prior,failed]
+-    files.extend(PACKAGE/'scripts'/n for n in ['canonical_calibration_common_v4_7.py','canonical_calibration_capture_v4_7.py','canonical_calibration_arithmetic_v4_7.py','terminal_commit_common_v2.py'])
++    files.extend(PACKAGE/'scripts'/n for n in ['canonical_calibration_common_v4_8.py','canonical_calibration_capture_v4_8.py','canonical_calibration_arithmetic_v4_8.py','terminal_commit_common_v2.py'])
+     files.append(PACKAGE/'reviews/independent_canonical_executor_prelaunch_review_v4_6_seal.json')
++    rejection=PACKAGE/'reviews/independent_canonical_executor_prelaunch_review_v4_7_complete_seal.json'
++    rejection_sha='dc310205bd6754708456fb7cdca56449f4995c5e8a6e3d38a7f0db777134c845'
++    if regular_sha(rejection)!=rejection_sha:raise RuntimeError('EXACT_PRESERVED_V4_7_COMPLETE_REJECTION_REQUIRED')
++    rejected=json.loads(rejection.read_text())
++    if regular_sha(rejection)!=rejection_sha or rejected['status']!='REJECT_PRESERVED_NO_EXECUTION_ADMISSION' or rejected['artifact_count']!=25 or rejected['frozen_plan_sha256']!=prior_sha or len(rejected['file_sha256'])!=25:raise RuntimeError('V4_7_REJECTION_SCOPE_OR_IDENTITY_CHANGED')
++    regular_hashes(rejected['file_sha256'])
++    author=PACKAGE/'reviews/genomicsem_canonical_operational_preparation_v4_7_seal.json'
++    author_sha='85b1957b4a63c554bbd1ad5a6605f4f87d559e5ac11b70d12f1845cc43cc93c8'
++    if regular_sha(author)!=author_sha:raise RuntimeError('EXACT_PRESERVED_V4_7_AUTHOR_SEAL_REQUIRED')
++    authored=json.loads(author.read_text())
++    if regular_sha(author)!=author_sha or authored['file_count']!=21 or len(authored['file_sha256'])!=21:raise RuntimeError('V4_7_AUTHOR_SCOPE_OR_IDENTITY_CHANGED')
++    regular_hashes(authored['file_sha256'])
++    files.extend([rejection,author])
++    plan['dependencies_sha256'].update(rejected['file_sha256'])
++    plan['dependencies_sha256'].update(authored['file_sha256'])
+     for file in files:plan['dependencies_sha256'][str(file)]=regular_sha(file)
+     plan['dependencies_sha256'].update(preserved)
+-    plan.update(self_path=str(PLAN),operational_revision='v4_7',prepared_utc=utc(),ssd_output_root=str(SSD),
+-                preserved_v4_6_plan=str(prior),preserved_v4_6_plan_sha256=prior_sha,preserved_failed_attempt_receipt=str(failed),preserved_failed_attempt_receipt_sha256=failed_sha,
++    plan.update(self_path=str(PLAN),operational_revision='v4_8',prepared_utc=utc(),ssd_output_root=str(SSD),
++                preserved_v4_7_plan=str(prior),preserved_v4_7_plan_sha256=prior_sha,
++                preserved_v4_7_complete_rejection_seal=str(rejection),preserved_v4_7_complete_rejection_seal_sha256=rejection_sha,preserved_v4_7_rejection_artifact_sha256=rejected['file_sha256'],
++                preserved_v4_7_author_seal=str(author),preserved_v4_7_author_seal_sha256=author_sha,preserved_v4_7_author_artifact_sha256=authored['file_sha256'],
++                preparation_deferred_dependency_sha256=deferred,preparation_deferred_dependency_count=50,
++                preparation_deferred_identity_addendum=str(addendum),preparation_deferred_identity_addendum_sha256=addendum_sha,
++                preparation_dependency_qualification='EXACT_SEALED50_PRIOR_IDENTITIES_INHERITED_NOT_FRESHLY_HASHED;NO_SOURCE_REFERENCE_RUNTIME_BODY_READ;FUTURE_ADMIT_MANDATORY_FULL_CURRENT_DEPENDENCY_HASHES_AND_ORIGINAL190_GATES_UNCHANGED',
++                monitor_consumer_correction='BOTH_INITIAL_FREEZE_AND_FINAL_VERIFY_VETO_CLEANUP_ERRORS_RUN_ERROR_TEARDOWN_CLEANUP_ERROR_FIRST_TEARDOWN_EXCEPTION;PRODUCER_STOP_GUARANTEES_UNCHANGED',
++                preserved_failed_attempt_receipt=str(failed),preserved_failed_attempt_receipt_sha256=failed_sha,
+                 preserved_v4_6_file_sha256=preserved,preserved_v4_6_review_artifact_sha256=failure['old_review_artifact_sha256'],
+                 global_reservation_bytes=300*(1<<30),all_retained_canonical_epochs_output_cap_bytes=plan['output_limit_bytes'],
+                 output_meter_policy='ALL_RETAINED_CANONICAL_EPOCHS_AND_CANONICAL_PENDING_TERMINAL_EXECUTION_METADATA_AND_APPLEDOUBLE;UNCHANGED8GIB',
+@@ -63,7 +102,7 @@
+     plan['resource_preflight']={'internal_free_bytes':shutil.disk_usage('/System/Volumes/Data').free,'ssd_free_bytes':shutil.disk_usage('/Volumes/Extreme SSD').free,
+                                'all_retained_canonical_epoch_bytes':canonical_epoch_bytes(SSD),'global_campaign_bytes':global_campaign_bytes(SSD)}
+     if plan['resource_preflight']['internal_free_bytes']<plan['internal_floor_bytes'] or plan['resource_preflight']['ssd_free_bytes']<plan['ssd_floor_bytes'] or plan['resource_preflight']['all_retained_canonical_epoch_bytes']>plan['output_limit_bytes'] or plan['resource_preflight']['global_campaign_bytes']>plan['global_reservation_bytes']:raise RuntimeError('UNCHANGED_CANONICAL_RESOURCE_GATES_NOT_MET')
+-    check_hashes(plan['dependencies_sha256']);regular_hashes(preserved);preserved_failed_attempt(plan)
++    preparation_dependency_hashes(plan,deferred);regular_hashes(preserved);preserved_failed_attempt(plan)
+     write_intended_new(PLAN,plan,intended_sha(plan))
+     print(json.dumps({'plan':str(PLAN),'sha256':sha(PLAN),'jobs':16,'arithmetic_workers_prespecified':1,'workers_launched':0,'scope':'METHOD_CALIBRATION_ONLY','execution_admitted':False}))
+ 
+@@ -302,6 +341,7 @@
+     if monitor_identity is None or monitor_identity.get('path')!=str(monitor_path):raise RuntimeError('INTENDED_MONITOR_IDENTITY_REQUIRED_BEFORE_PARSE')
+     monitor_map={str(monitor_path):monitor_identity['sha256']};regular_hashes(monitor_map)
+     r=json.loads(monitor_path.read_text());regular_hashes(monitor_map)
++    assert_monitor_error_fields_clear(r)
+     if r['returncode']!=0 or r['stop_reason'] is not None or r['process_group_teardown']['remaining_group_members']!=[]:raise RuntimeError('CANONICAL_WORKER_NOT_COMPLETE_AND_REAPED')
+     if r['job_id']!=job_id or r['plan_sha256']!=sha(PLAN) or r['admission_sha256']!=admission_sha or r['command']!=command or r['final_guard_violations'] or r['owned_group_disappearance_verified'] is not True or r['bulk_output_hashes_completed_before_final_guards'] is not True or r['output_hash_error'] is not None or r['deferred_termination_requests']:raise RuntimeError('CANONICAL_MONITOR_FIXED_IDENTITY_OR_FINAL_GUARD_DIFFERS')
+     mapping=dict(r['all_output_sha256']);regular_hashes(mapping)
+@@ -335,10 +375,10 @@
+         intent_path=out/'arithmetic_report_intent.json'
+         if str(intent_path) not in mapping or str(external[0]) not in mapping:raise RuntimeError('ARITHMETIC_REPORT_AND_INTENT_NOT_FROZEN')
+         intent=json.loads(intent_path.read_text());regular_hashes(mapping)
+-        if intent['schema']!='canonical_arithmetic_report_intent_v4_7' or intent['executor_sha256']!=sha(PACKAGE/'scripts/canonical_calibration_arithmetic_v4_7.py') or intent['plan_sha256']!=sha(PLAN) or intent['admission_sha256']!=admission_sha or intent['report_path']!=str(external[0]) or intent['intended_report_sha256']!=mapping[str(external[0])]:raise RuntimeError('ARITHMETIC_INTENDED_EXTERNAL_REPORT_DIFFERS')
++        if intent['schema']!='canonical_arithmetic_report_intent_v4_8' or intent['executor_sha256']!=sha(PACKAGE/'scripts/canonical_calibration_arithmetic_v4_8.py') or intent['plan_sha256']!=sha(PLAN) or intent['admission_sha256']!=admission_sha or intent['report_path']!=str(external[0]) or intent['intended_report_sha256']!=mapping[str(external[0])]:raise RuntimeError('ARITHMETIC_INTENDED_EXTERNAL_REPORT_DIFFERS')
+         native_sources={str(Path(j['output_dir'])/'native_capture_receipt.json'):evidence['all_output_sha256'][str(Path(j['output_dir'])/'native_capture_receipt.json')] for j in plan['jobs']}
+         if intent['capture_receipt_sha256']!=native_sources:raise RuntimeError('ARITHMETIC_CONSUMED_CAPTURE_RECEIPTS_DIFFERS')
+-        binding={'plan_sha256':sha(PLAN),'admission_sha256':admission_sha,'executor_sha256':sha(PACKAGE/'scripts/canonical_calibration_arithmetic_v4_7.py')}
++        binding={'plan_sha256':sha(PLAN),'admission_sha256':admission_sha,'executor_sha256':sha(PACKAGE/'scripts/canonical_calibration_arithmetic_v4_8.py')}
+         require_committed(out/'arithmetic_pending.json',out/'arithmetic_terminal_seal.json',binding,{str(external[0]):intent['intended_report_sha256']})
+         regular_hashes(mapping)
+     if job_id in evidence['workers'] or set(mapping)&set(evidence['all_output_sha256']):raise RuntimeError('CANONICAL_DUPLICATE_WORKER_OR_OUTPUT_EVIDENCE')
+@@ -395,7 +435,7 @@
+         admit()
+         out = Path(job['output_dir'])
+         out.mkdir(exist_ok=False)
+-        command = [plan['python'], '-B', str(PACKAGE / 'scripts/canonical_calibration_capture_v4_7.py'),
++        command = [plan['python'], '-B', str(PACKAGE / 'scripts/canonical_calibration_capture_v4_8.py'),
+                    '--plan', str(PLAN), '--admission', str(ADMISSION), '--plan-sha', sha(PLAN), '--job-id', job['job_id'], '--shared-lock-fd', str(lock_fd)]
+         monitor_identity=monitored_worker(plan, admission_sha, job['job_id'], command, out, lock_fd, ownership)
+         freeze_worker_evidence(plan,admission_sha,job['job_id'],command,out,evidence,job,monitor_identity)
+@@ -414,6 +454,7 @@
+         regular_hashes(evidence['workers'][job['job_id']]['sha256'])
+         r = json.loads((out / 'monitor_receipt.json').read_text())
+         regular_hashes(evidence['workers'][job['job_id']]['sha256'])
++        assert_monitor_error_fields_clear(r)
+         if r['returncode'] != 0 or r['stop_reason'] is not None or r['process_group_teardown']['remaining_group_members'] != []:
+             raise RuntimeError('ALL_16_NATIVE_CONTROLS_MUST_COMPLETE_BEFORE_ARITHMETIC')
+         if r['job_id'] != job['job_id'] or r['plan_sha256'] != sha(PLAN) or r['admission_sha256'] != sha(ADMISSION) or r['final_guard_violations'] or r['owned_group_disappearance_verified'] is not True or r['bulk_output_hashes_completed_before_final_guards'] is not True or r['output_hash_error'] is not None or r['deferred_termination_requests']:
+@@ -423,7 +464,7 @@
+             raise RuntimeError('MISSING_NATIVE_CAPTURE')
+     out = Path(plan['ssd_output_root']) / 'independent_arithmetic_worker'
+     out.mkdir(exist_ok=False)
+-    command = [plan['python'], '-B', str(PACKAGE / 'scripts/canonical_calibration_arithmetic_v4_7.py'), '--plan', str(PLAN), '--admission', str(ADMISSION), '--shared-lock-fd', str(lock_fd)]
++    command = [plan['python'], '-B', str(PACKAGE / 'scripts/canonical_calibration_arithmetic_v4_8.py'), '--plan', str(PLAN), '--admission', str(ADMISSION), '--shared-lock-fd', str(lock_fd)]
+     monitor_identity=monitored_worker(plan, sha(ADMISSION), 'INDEPENDENT_CAPTURED_ROW_ARITHMETIC', command, out, lock_fd, ownership)
+     freeze_worker_evidence(plan,sha(ADMISSION),'INDEPENDENT_CAPTURED_ROW_ARITHMETIC',command,out,evidence,monitor_identity=monitor_identity)
+     freeze_global_companions(plan,evidence)
+@@ -452,8 +493,8 @@
+         with deferred_termination_signals():
+             with exclusive_heavy_lock(before_release=before_release) as lock_fd:
+                 if args.mode!='execute':raise RuntimeError('NEW_TERMINAL_EPOCH_REQUIRES_SINGLE_COMPLETE_EXECUTE_ROUTE')
+-                pending=SSD.parent/'native_canonical_calibration_pending_v4_7.json'
+-                seal=SSD.parent/'native_canonical_calibration_terminal_seal_v4_7.json'
++                pending=SSD.parent/'native_canonical_calibration_pending_v4_8.json'
++                seal=SSD.parent/'native_canonical_calibration_terminal_seal_v4_8.json'
+                 initial_identity={'plan_sha256':sha(PLAN),'admission_sha256':sha(ADMISSION),'executor_sha256':sha(Path(__file__))}
+                 terminal=TerminalCommit(pending,seal,initial_identity)
+                 evidence={'workers':{},'all_output_sha256':{}}
+@@ -463,8 +504,8 @@
+                 freeze_global_companions(plan,evidence)
+                 final_evidence_inventory(plan,evidence)
+                 output_hashes=dict(evidence['all_output_sha256'])
+-                historical=__import__('canonical_calibration_common_v4_7').historical_completion(plan)
+-                result=SSD.parent/'native_canonical_calibration_execution_receipt_v4_7.json'
++                historical=__import__('canonical_calibration_common_v4_8').historical_completion(plan)
++                result=SSD.parent/'native_canonical_calibration_execution_receipt_v4_8.json'
+                 record={'status':'ALL16_CANONICAL_SOFTWARE_CONTROLS_AND_CAPTURED_ROW_ARITHMETIC_COMPLETE','plan_sha256':sha(PLAN),'admission_sha256':sha(ADMISSION),'all_output_sha256':output_hashes,'frozen_worker_evidence':evidence['workers'],'historical190_receipt_sha256':historical,'completed_utc':utc(),'biological_outcomes_computed':0,'calibrated_difference_p_values':False}
+                 result_sha=intended_sha(record)
+                 expected_seal_sha=terminal_intended_sha(terminal,{str(result):result_sha})
+@@ -477,7 +518,7 @@
+                     if sha(PLAN)!=initial_identity['plan_sha256'] or sha(ADMISSION)!=initial_identity['admission_sha256'] or sha(Path(__file__))!=initial_identity['executor_sha256']:raise RuntimeError('CANONICAL_TERMINAL_INITIAL_PLAN_OR_ADMISSION_OR_EXECUTOR_CHANGED')
+                     if ownership:raise RuntimeError('CANONICAL_OWNED_GROUPS_NOT_EMPTY')
+                     current,_=admit()
+-                    if current!=plan or __import__('canonical_calibration_common_v4_7').historical_completion(plan)!=historical:raise RuntimeError('CANONICAL_TERMINAL_HISTORY_OR_PLAN_CHANGED')
++                    if current!=plan or __import__('canonical_calibration_common_v4_8').historical_completion(plan)!=historical:raise RuntimeError('CANONICAL_TERMINAL_HISTORY_OR_PLAN_CHANGED')
+                     regular_hashes(output_hashes);regular_hashes({str(result):result_sha})
+                     terminal_transport_gate()
+                     freeze_global_companions(plan,evidence)
+--- /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_7.py
++++ /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_8.py
+@@ -15,8 +15,8 @@
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+ PACKAGE = ROOT / 'sleep_unified_research_v4'
+-PLAN = PACKAGE / 'manifests/native_canonical_calibration_plan_v4_7.json'
+-ADMISSION = PACKAGE / 'manifests/native_canonical_calibration_admission_v4_7.json'
++PLAN = PACKAGE / 'manifests/native_canonical_calibration_plan_v4_8.json'
++ADMISSION = PACKAGE / 'manifests/native_canonical_calibration_admission_v4_8.json'
+ SHARED_LOCK = Path('/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/native_heavy_worker.lock')
+ TERMINATION_REQUEST = []
+ 
+@@ -44,6 +44,22 @@
+ def assert_no_termination():
+     if TERMINATION_REQUEST:
+         raise RuntimeError('DEFERRED_TERMINATION_SIGNAL: ' + str(TERMINATION_REQUEST))
++
++
++def assert_monitor_error_fields_clear(record):
++    """Veto explicitly recorded failures even in a contradictory complete receipt."""
++    errors = []
++    if record.get('cleanup_errors'):
++        errors.append('cleanup_errors')
++    if record.get('run_error') is not None:
++        errors.append('run_error')
++    if record['process_group_teardown'].get('cleanup_error'):
++        errors.append('process_group_teardown.cleanup_error')
++    first = record.get('first_teardown_attempt')
++    if first is not None and 'exception' in first:
++        errors.append('first_teardown_attempt.exception')
++    if errors:
++        raise RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: ' + ','.join(errors))
+ 
+ 
+ def safe_diagnostic(value_factory):
+--- /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_capture_v4_7.py
++++ /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_capture_v4_8.py
+@@ -6,7 +6,7 @@
+ import runpy
+ import sys
+ 
+-from canonical_calibration_common_v4_7 import admit, check_hashes, clean, sha, utc, validate_inherited_lock, write_new
++from canonical_calibration_common_v4_8 import admit, check_hashes, clean, sha, utc, validate_inherited_lock, write_new
+ 
+ 
+ def main():
+--- /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_arithmetic_v4_7.py
++++ /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_arithmetic_v4_8.py
+@@ -12,7 +12,7 @@
+ import shutil
+ from pathlib import Path
+ 
+-from canonical_calibration_common_v4_7 import admit, sha, utc, validate_inherited_lock, regular_sha, intended_sha, write_intended_new, terminal_intended_sha, freeze_companions, canonical_epoch_bytes, global_campaign_bytes, deferred_termination_signals, assert_no_termination
++from canonical_calibration_common_v4_8 import admit, sha, utc, validate_inherited_lock, regular_sha, intended_sha, write_intended_new, terminal_intended_sha, freeze_companions, canonical_epoch_bytes, global_campaign_bytes, deferred_termination_signals, assert_no_termination
+ from terminal_commit_common_v2 import TerminalCommit
+ 
+ 
+@@ -222,7 +222,7 @@
+     report_sha=intended_sha(record)
+     result_map={str(report):report_sha}
+     expected_seal_sha=terminal_intended_sha(terminal,result_map)
+-    intent={'schema':'canonical_arithmetic_report_intent_v4_7','plan_sha256':initial['plan_sha256'],'admission_sha256':initial['admission_sha256'],
++    intent={'schema':'canonical_arithmetic_report_intent_v4_8','plan_sha256':initial['plan_sha256'],'admission_sha256':initial['admission_sha256'],
+             'executor_sha256':initial['executor_sha256'],'report_path':str(report),'intended_report_sha256':report_sha,'capture_receipt_sha256':sources}
+     proof_sha=intended_sha(intent)
+     write_intended_new(proof,intent,proof_sha)

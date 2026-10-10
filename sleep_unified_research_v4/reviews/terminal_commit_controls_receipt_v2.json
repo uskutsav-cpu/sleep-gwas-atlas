@@ -1,0 +1,1280 @@
+{
+  "GWAS_body_reads": 0,
+  "all_control_expectations_pass": true,
+  "control_count": 57,
+  "control_script_sha256": "f9e72fdb13811ee206fdce2491d97c7f138faaa584efd83b29928b0ed9a1ee30",
+  "controls": [
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 2,
+        "termination": 2
+      },
+      "case": "successful_commit_and_consumer",
+      "commit_success": true,
+      "consumer": {
+        "accepted": true,
+        "seal_sha256": "9263dd3cee2bc94bee3adfa4e19f6293d081d4e54dba8129f7c04d011ada88eb"
+      },
+      "consumer_accepts": true,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": true,
+        "consumer_accepts": true
+      },
+      "pending_present_or_symlink": false,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "empty_receipts",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "wrong_receipt_hash",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "missing_receipt",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "receipt_symlink",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "pending_changed",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "pending_symlink",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 0,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "pending_deleted_before",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": false,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "receipt_failure_regular",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_failure_regular",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "receipt_failure_dangling",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_failure_dangling",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": false
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_write_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_partial_write_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_directory_sync_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_file_fsync_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_hash_readback_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "receipt_hash_readback_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 0,
+        "termination": 0
+      },
+      "case": "identity_first_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "identity_post_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "resource_first_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 2,
+        "termination": 1
+      },
+      "case": "resource_post_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 1,
+        "resource": 0,
+        "termination": 1
+      },
+      "case": "signal_first_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": false,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 2,
+        "termination": 2
+      },
+      "case": "signal_post_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "receipt_post_changed",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_post_changed",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "pending_post_changed",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "receipt_post_symlink",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "seal_post_symlink",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "pending_post_symlink",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 2,
+        "termination": 2
+      },
+      "case": "unlink_before_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": false,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": false
+      },
+      "pending_present_or_symlink": true,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "case": "empty_stage_binding",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "RuntimeError: NONEMPTY_STAGE_IDENTITY_BINDING_REQUIRED",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": false
+    },
+    {
+      "case": "initial_pending_write_failure",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "OSError: INJECTED_INITIAL_WRITE_FAILURE",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": false
+    },
+    {
+      "case": "initial_directory_sync_failure",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "OSError: INJECTED_INITIAL_SYNC_FAILURE",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": true
+    },
+    {
+      "case": "initial_hash_read_failure",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "OSError: INJECTED_INITIAL_HASH_FAILURE",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": true
+    },
+    {
+      "case": "existing_pending",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "RuntimeError: PRIOR_TERMINAL_ATTEMPT_PRESERVED_NO_RETRY",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": true
+    },
+    {
+      "case": "existing_seal",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "RuntimeError: PRIOR_TERMINAL_ATTEMPT_PRESERVED_NO_RETRY",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": false
+    },
+    {
+      "case": "existing_pending_dangling",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "RuntimeError: PRIOR_TERMINAL_ATTEMPT_PRESERVED_NO_RETRY",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": true
+    },
+    {
+      "case": "existing_seal_dangling",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "created": false,
+      "error": "RuntimeError: PRIOR_TERMINAL_ATTEMPT_PRESERVED_NO_RETRY",
+      "expected": {
+        "consumer_accepts": false,
+        "created": false
+      },
+      "pending_present_or_symlink": false
+    },
+    {
+      "case": "consumer_receipt_mutated",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_RECEIPT_CHANGED_OR_INVALIDATED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_receipt_symlink",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_RECEIPT_CHANGED_OR_INVALIDATED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_symlink",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_pending_dangling",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_pending_regular",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_receipt_failure_regular",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_RECEIPT_CHANGED_OR_INVALIDATED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_receipt_failure_dangling",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_RECEIPT_CHANGED_OR_INVALIDATED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_failure_regular",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_COMMIT_CHANGED_DURING_CONSUMPTION"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_failure_dangling",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: STAGE_COMMIT_CHANGED_DURING_CONSUMPTION"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_status",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: EXACT_STAGE_TERMINAL_SEAL_BINDINGS_REQUIRED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_binding",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: EXACT_STAGE_TERMINAL_SEAL_BINDINGS_REQUIRED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_receipts",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: EXACT_STAGE_TERMINAL_SEAL_BINDINGS_REQUIRED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_seal_pending_path",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: EXACT_STAGE_TERMINAL_SEAL_BINDINGS_REQUIRED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "case": "consumer_binding_empty",
+      "consumer": {
+        "accepted": false,
+        "error": "RuntimeError: EXACT_STAGE_TERMINAL_SEAL_BINDINGS_REQUIRED"
+      },
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false
+      }
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 2,
+        "termination": 2
+      },
+      "case": "boundary_unlink_after_effect_failure",
+      "commit_success": false,
+      "consumer": {
+        "accepted": true,
+        "seal_sha256": "3c4094697e5174a383a30d3f5392aff6a592f7beb1c3df61403dd6d6233c9e9a"
+      },
+      "consumer_accepts": true,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": true,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": true
+      },
+      "pending_present_or_symlink": false,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "callback_counts": {
+        "identity": 2,
+        "resource": 1,
+        "termination": 1
+      },
+      "case": "boundary_pending_deleted_after_persistence",
+      "commit_success": false,
+      "consumer": {
+        "accepted": true,
+        "seal_sha256": "2f250850c4dc144bdbf22ef76d5d8e1c5bbf58be36e240df63c0483ebff7f634"
+      },
+      "consumer_accepts": true,
+      "control_pass": true,
+      "documented_ownership_boundary_violation": true,
+      "expected": {
+        "commit_success": false,
+        "consumer_accepts": true
+      },
+      "pending_present_or_symlink": false,
+      "seal_present_or_symlink": true,
+      "supplemental_write_failure_injected": true
+    },
+    {
+      "case": "second_copy_write_failure",
+      "consumer_accepts": false,
+      "control_pass": true,
+      "expected": {
+        "consumer_accepts": false,
+        "pending_present": true
+      },
+      "pending_present": true
+    },
+    {
+      "case": "initial_pending_durability",
+      "control_pass": true,
+      "durable_metadata_match": true,
+      "events": [
+        "save_new",
+        "sync_directory"
+      ],
+      "expected": {
+        "durable_metadata_match": true
+      }
+    }
+  ],
+  "decompressions": 0,
+  "execution_admission_granted": false,
+  "fits": 0,
+  "fixture_regular_file_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_pending_deleted_after_persistence/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_pending_deleted_after_persistence/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_pending_deleted_after_persistence/seal.json": "2f250850c4dc144bdbf22ef76d5d8e1c5bbf58be36e240df63c0483ebff7f634",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_unlink_after_effect_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_unlink_after_effect_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/boundary_unlink_after_effect_failure/seal.json": "3c4094697e5174a383a30d3f5392aff6a592f7beb1c3df61403dd6d6233c9e9a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_binding_empty/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_binding_empty/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_binding_empty/seal.json": "d99f039cd29d9b47b57ce53468a1b4d97e19966997db4ec005f25fa60a9b829f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_dangling/seal.json": "4860951d2c185f03bcfda3eb1c0368eceb85fb38a70a67d5604a4a06c73ec7fa",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_regular/PENDING": "f2dae05109238f38fd896e90c2983860f05b33c7ecca6e453951f094c86dc1d6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_regular/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_regular/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_regular/seal.json": "d35e376aa53110b29146155d40344f53749286123f38576b65a646b53474d904",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_dangling/seal.json": "aca692b1845da90736239efeceb78ddfebacae3480849a12018810b5854fb771",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_regular/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_regular/receipt_a.json.failure.json": "26d59ad4b96d48a490d3cf007f4ec37c99c60872a9695d5e11427da87fcde36d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_regular/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_regular/seal.json": "911e7f95cf529a1d2f9f88bc294d3cddeb62d59303b0e11c4cbf68061025af8c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_mutated/receipt_a.json": "f49e6a78b3333ca644957ea730bae9a649509909daadceb7c166f0875734aa21",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_mutated/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_mutated/seal.json": "c06d2d35ed43e14031fc2f4c701f049a67b01d3baa892e19ce6998d8debeb9ff",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_symlink/clone": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_symlink/seal.json": "16174962dfcfb7a8592056b55899d3346428997660e6f2f553ca6e21bf4bb54a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_binding/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_binding/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_binding/seal.json": "4596b77ce66e6dee6608a71bff5b54f5c0c8683165c08b901bd364b8e1c4039b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_dangling/seal.json": "576474f59f248c2b6dfe9a92761253b1e6107b8b44728fdb2d7b8fde3100ff75",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_regular/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_regular/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_regular/seal.json": "bf9d8deaf91604003e762a2dbe1bcaddfa9b10c8a859c0a1dcca55f84d8a4ed9",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_regular/seal.json.failure.json": "26d59ad4b96d48a490d3cf007f4ec37c99c60872a9695d5e11427da87fcde36d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_pending_path/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_pending_path/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_pending_path/seal.json": "166be612bec4ae9fa7ad418aba7a6e3a8fe0775e09c5aaddbac243fdc7e2f400",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_receipts/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_receipts/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_receipts/seal.json": "0f664d871848df4438206dd5bfde61d94d88b8b16d0113d9c4162c0c681af5fc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_status/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_status/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_status/seal.json": "1915c66c0914ae7782183be42412594591e56b6ba5fb3ee2a4121524517d3966",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_symlink/clone": "5385361152ba5c6b49a92be0bbe7995cfb33494e8eb0e99946beb161e2c55ddb",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_symlink/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_receipts/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_receipts/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_receipts/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_receipts/seal.json.failure.json": "0780f8049ccfead594b9a1b720c514751c860947ca3f20941ea90f0f47f0b085",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_stage_binding/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/empty_stage_binding/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending/PENDING": "a0b8f6f9070696aef97612795a0e3800bc660188111a4e1beb87080ce5de5cf8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal/seal.json": "a0b8f6f9070696aef97612795a0e3800bc660188111a4e1beb87080ce5de5cf8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_first_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_first_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_first_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_post_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_post_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_post_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/identity_post_failure/seal.json": "da8c13dfc433ffa486cb0e20a5c64c171e6805b85fa80fd806a843b8c214e10a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_directory_sync_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_directory_sync_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_directory_sync_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_hash_read_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_hash_read_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_hash_read_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_pending_durability/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_pending_durability/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_pending_durability/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_pending_write_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/initial_pending_write_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/missing_receipt/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/missing_receipt/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/missing_receipt/seal.json.failure.json": "0780f8049ccfead594b9a1b720c514751c860947ca3f20941ea90f0f47f0b085",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_changed/PENDING": "34cd4b2b763ac5fdeb63102b7d7375eb1647ba3b4c52b7b61e9566138d3f6f25",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_changed/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_changed/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_changed/seal.json.failure.json": "17cb2c141238160dc8872c70055fd48a890ee50fd3ac06fe2677b0ae6b1685cd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_deleted_before/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_deleted_before/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_deleted_before/seal.json.failure.json": "17cb2c141238160dc8872c70055fd48a890ee50fd3ac06fe2677b0ae6b1685cd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_changed/PENDING": "d2a67009719b484e4b0a6aceba30e166bb6742c0576f2f17dca9a6c6988c5285",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_changed/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_changed/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_changed/seal.json": "48f0c208338ea7f4fe12f809c785495c269491bdf1f366913d2bdec22153ecac",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/post_symlink_clone": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/seal.json": "3844bb71888ef1b098f842f2d3abe9d72cc64217d6fdafd2ded9cfe5e386b436",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/pending_clone": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/seal.json.failure.json": "17cb2c141238160dc8872c70055fd48a890ee50fd3ac06fe2677b0ae6b1685cd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/seal.json": "604f10455c1d53b2ae268e978433fc9eb3318437e2bdb1931be903cd29ce2060",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/seal.json.failure.json": "74807de1141c1785b8f47e25f623ac80ecf738ab2d0f11d78cb10a91020c3b9e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/receipt_a.json.failure.json": "26d59ad4b96d48a490d3cf007f4ec37c99c60872a9695d5e11427da87fcde36d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/seal.json": "0943901b91e63142f0dd7b773cf9e93102cffaf99835bf6aebbfd570ef745434",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_regular/seal.json.failure.json": "74807de1141c1785b8f47e25f623ac80ecf738ab2d0f11d78cb10a91020c3b9e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_hash_readback_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_hash_readback_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_hash_readback_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_hash_readback_failure/seal.json": "209c2871778c9dd64906e98f23bfad44e09969c6c462b3d88bfcdc84ab77a0c4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_changed/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_changed/receipt_a.json": "d2a67009719b484e4b0a6aceba30e166bb6742c0576f2f17dca9a6c6988c5285",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_changed/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_changed/seal.json": "5f002c50b2b833a0ce15f3d71483aeded5a50f8b9928aede3a14220cc0d91bf8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/post_symlink_clone": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/seal.json": "475125368fc11a6220fa0b6a03615a9a6655f2ab081a2960c1e0e640dc81ffc5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/receipt_clone.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/seal.json.failure.json": "0780f8049ccfead594b9a1b720c514751c860947ca3f20941ea90f0f47f0b085",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_first_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_first_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_first_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_post_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_post_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_post_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/resource_post_failure/seal.json": "70178a5c126f65f38cfda183371a90631fc1b2c245513580142b103ad6812338",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_directory_sync_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_directory_sync_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_directory_sync_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_directory_sync_failure/seal.json": "b6d5d30ecb34b5ac3b0c4d3b634fd731f3dca14466fdf38a63aad9588eb9d14e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/seal.json": "76311dfa606382d63d685b68972cea620477d932212bb9f4d047da8a27cd2964",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_regular/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_regular/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_regular/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_regular/seal.json": "40c12e408ab12a5d70bfbce0364c29af34285a70e7e8f5974b63f6ec674fcedd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_regular/seal.json.failure.json": "26d59ad4b96d48a490d3cf007f4ec37c99c60872a9695d5e11427da87fcde36d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_file_fsync_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_file_fsync_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_file_fsync_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_file_fsync_failure/seal.json": "1ee623040399fad7b11074cc29f2c81a609b6cb7c130b36a87fca8646cf9e43d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_hash_readback_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_hash_readback_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_hash_readback_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_hash_readback_failure/seal.json": "719f22dfb9e70af776ef75ab004d815317d0b777f982e57d09cdfb061315b3ee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_partial_write_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_partial_write_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_partial_write_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_partial_write_failure/seal.json": "875687fdaf12961b993bd559158bb56a6def15bc74d6b805ea88303818de659a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_changed/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_changed/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_changed/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_changed/seal.json": "d2a67009719b484e4b0a6aceba30e166bb6742c0576f2f17dca9a6c6988c5285",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/post_symlink_clone": "6e8e5c274ab283e6886779ddb1cb0249753fabd80eca53de03933e3c74922a5a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_write_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_write_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_write_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/second_copy_write_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/second_copy_write_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/second_copy_write_failure/receipt_b.json": "875687fdaf12961b993bd559158bb56a6def15bc74d6b805ea88303818de659a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_first_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_first_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_first_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_post_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_post_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_post_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/signal_post_failure/seal.json": "f611f68ecdc61570d737a7bdc3124fa98a1df5de4feffdeb1eb91a311cfed4bf",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/successful_commit_and_consumer/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/successful_commit_and_consumer/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/successful_commit_and_consumer/seal.json": "9263dd3cee2bc94bee3adfa4e19f6293d081d4e54dba8129f7c04d011ada88eb",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/unlink_before_failure/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/unlink_before_failure/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/unlink_before_failure/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/unlink_before_failure/seal.json": "86a0bb1ae5917d94820132f508a7b74edfa600802ea434e54be6ae7f91716d67",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/wrong_receipt_hash/PENDING": "be8ffd16b31853d6d3183c9a5f3a7395d206b508ba8c906cc93324f41fbe017a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/wrong_receipt_hash/receipt_a.json": "360ab5fdccfd4b89efef194414c9308ead9114bf55445dc2de178033ff15641e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/wrong_receipt_hash/receipt_b.json": "2b105e010e3a4b19af6a33ebe917262e8f656d558b2ca7fc421da211b0558e8e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/wrong_receipt_hash/seal.json.failure.json": "0780f8049ccfead594b9a1b720c514751c860947ca3f20941ea90f0f47f0b085"
+  },
+  "fixture_symlink_literal_targets": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_dangling/PENDING": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_pending_dangling/missing",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_dangling/receipt_a.json.failure.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_failure_dangling/missing",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_symlink/receipt_a.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_receipt_symlink/clone",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_dangling/seal.json.failure.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_failure_dangling/missing",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_symlink/seal.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/consumer_seal_symlink/clone",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending_dangling/PENDING": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_pending_dangling/missing",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal_dangling/seal.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/existing_seal_dangling/missing",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/PENDING": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_post_symlink/post_symlink_clone",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/PENDING": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/pending_symlink/pending_clone",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/receipt_a.json.failure.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_failure_dangling/absent_failure_target",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/receipt_a.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_post_symlink/post_symlink_clone",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/receipt_a.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/receipt_symlink/receipt_clone.json",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/seal.json.failure.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_failure_dangling/absent_failure_target",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/seal.json": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/terminal_commit_controls_v2/seal_post_symlink/post_symlink_clone"
+  },
+  "helper_sha256": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd",
+  "qualified_boundary_false_admission_witnesses": [
+    "boundary_unlink_after_effect_failure",
+    "boundary_pending_deleted_after_persistence"
+  ],
+  "reference_body_reads": 0,
+  "schema": "independent_terminal_commit_v2_metadata_controls",
+  "workers": 0
+}

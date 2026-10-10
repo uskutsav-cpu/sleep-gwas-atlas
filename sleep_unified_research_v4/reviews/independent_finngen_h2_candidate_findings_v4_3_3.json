@@ -1,0 +1,65 @@
+{
+  "schema": "independent_finngen_h2_candidate_findings_v4_3_3",
+  "completed_utc": "2026-10-10T00:33:40.584486+00:00",
+  "verdict": "POSTFIT_V2_NOT_CLEARED_SUCCESSOR_AND_ACTUAL_PLAN_REVIEW_REQUIRED",
+  "actual_plan_review_complete": false,
+  "execution_admitted": false,
+  "reviewed_input_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_3.py": "29e7cda9f8a061a3d068dd5eb4ca038397e9b274166d9c6b8b5b633d4f0e8c8c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/59_prepare_finngen_feasibility_stage_v3_3.py": "a054814624be3597aa34c9c335fd58d7db96fba582ca78203621f88c656d3bb4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/60_verify_finngen_h2_diagnostic_v2.py": "6d6391e5cfc9759fac7788eb887c639b63b739cffaebf1b65f5702f83fd11a0a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/38_sensitivity_ldsc_capture.py": "abedb6ecb99dc9c6bcc6bba9d0574f4b631f653d63be5e618d6bb36ea301805c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/sensitivity_capture_common.py": "b5acee24ecdd82821c6b750209f2bf09bfa1b47760a6fd79adbb56489ec4f0ba",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/sensitivity_executor_v4_4.py": "7ac802596f29adfacb017f406676e6a30ee00bf890904976afda7f88a3ffa9c5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_5.py": "29ec14d1c5e6628c1a25ffe53130c022bf51a69bae4bbd2901a071f6327a49fc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/native_stage_completion_v4_3.py": "ed3b4d7af808d004447c955bf1ebafe6f70951ce9a178cab000ba865e13d487c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/30_prepare_and_run_ssd_native_campaign.py": "f0460a24750a6e0671f3bf1fb6109ac65d976969f62998b8b48bf68fe7a4c003",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_FINNGEN_INSOMNIA_FEASIBILITY_PROTOCOL_v1.md": "a72baf0d79e5f4ab691e72e821e35c662e5352edf36e21105b713b6cac810e56",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_FINNGEN_PREPROCESSING_DETAIL_v1.md": "351339b26113ad6c22021f68a1ed0896339c5f23b9a0418b966581fb6fa85a52",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_preprocessing_science_review_v4.md": "30ad0cf0e763c303883f49a3e3aa9c6b7be32892fd91ca4853174e7b4ef256f2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_row_science_receipt_v4.json": "80acf313e4694cb17e3d830125ef5d356b930e5ebfc9735ff1ca6efe9461ceee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_row_controls_v4_2.json": "f1ccad78291ec1aeb4fbd7696aaabe1345215421ce5aeb02139783006cd63c38",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+  },
+  "producer_pure_gates": {
+    "controls": 11,
+    "all_expected_pass": true
+  },
+  "consumer_controls": {
+    "controls": 15,
+    "healthy_pass": true,
+    "expected_rejections": 8,
+    "unexpected_acceptances": 6,
+    "accepted_malformed_cases": [
+      "omit_capture",
+      "omit_stock",
+      "wrong_stock_hash",
+      "stock_vector_disagreement",
+      "two_jobs",
+      "output_post_arithmetic_symlink"
+    ]
+  },
+  "producer_versus_consumer_qualification": "Malformed committed-map/two-job fixtures are not evidence that genuine58 produced them. Final same-byte-symlink witness starts from a healthy complete map and preserves Terminal2 markers.",
+  "scientific_scope": {
+    "observed_h2_only": true,
+    "new_rg": 0,
+    "new_liability": 0,
+    "assumed_N": 185146.70377332723,
+    "INFO_verified": false,
+    "per_variant_N_verified": false,
+    "scientific_source_admitted": false,
+    "replication_admitted": false
+  },
+  "no_real_body_worker_fit_or_lock": true,
+  "artifact_md_sha256": "584f06d0b4ad868264f923fef77b8472f3199d505fd0c4d2d1d1a1cfc74ab354",
+  "control_receipt_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_receipt_v4_3_3.json": "78f99e890714b68f04e311a348969df334a9541911f5293919d8df9701bbc6f6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_admission_gate_controls_receipt_v4_3_3.json": "9fbd80ea693c6d5250e990651bf76d4cc3d27b2e4d9dbb189a488d25e661e43c"
+  },
+  "resource": {
+    "verifier_control_RSS_bytes": 27148288,
+    "verifier_control_elapsed_seconds": 0.15965879100258462
+  },
+  "final_prelaunch_review_seal_reserved_until_completed_preprocessing_plan": true
+}

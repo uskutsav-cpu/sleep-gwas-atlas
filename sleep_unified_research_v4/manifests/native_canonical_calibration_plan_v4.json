@@ -1,0 +1,643 @@
+{
+  "schema": "native_canonical_calibration_operational_plan_v1",
+  "prepared_utc": "2026-10-09T19:24:34.364068+00:00",
+  "self_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/native_canonical_calibration_plan_v4.json",
+  "scope": "METHOD_CALIBRATION_ONLY",
+  "allowed_control_ids": [
+    "CORE_INSOMNIA_BMI_DUPLICATE",
+    "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE"
+  ],
+  "jobs": [
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "one_step",
+      "partition": "stock_default200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "one_step",
+      "partition": "stock_default200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "one_step",
+      "partition": "canonical200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "one_step",
+      "partition": "canonical200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "two_step30",
+      "partition": "stock_default200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "two_step30",
+      "partition": "stock_default200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "two_step30",
+      "partition": "canonical200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B",
+      "control_id": "CORE_INSOMNIA_BMI_DUPLICATE",
+      "method": "two_step30",
+      "partition": "canonical200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "one_step",
+      "partition": "stock_default200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "one_step",
+      "partition": "stock_default200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "one_step",
+      "partition": "canonical200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "one_step",
+      "partition": "canonical200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/stock_ldsc"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "two_step30",
+      "partition": "stock_default200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "two_step30",
+      "partition": "stock_default200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "two_step30",
+      "partition": "canonical200",
+      "duplicate": "A",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    },
+    {
+      "job_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B",
+      "control_id": "FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE",
+      "method": "two_step30",
+      "partition": "canonical200",
+      "duplicate": "B",
+      "inputs": [
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+      ],
+      "input_sha256": {
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+      },
+      "output_dir": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B",
+      "ldsc_args": [
+        "--rg",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz,/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz",
+        "--ref-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--w-ld-chr",
+        "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/",
+        "--n-blocks",
+        "200",
+        "--print-delete-vals",
+        "--out",
+        "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/stock_ldsc",
+        "--two-step",
+        "30"
+      ]
+    }
+  ],
+  "historical_plan_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/ssd_native_execution_plan_v4_3.json",
+  "historical_plan_sha256": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+  "block_receipt_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/canonical_200_interval_preparation_v4.json",
+  "block_receipt_sha256": "b7bf9cd063b3c55485ff8db8d0e4a2107e413dd1e9f34003c8a8b95d4ac7214a",
+  "build": "GRCh37/hg19",
+  "interval_tsv_sha256": "349466ddb40ade5043e8f52799fdcd9e56abb6293a6874b34562160c9066411f",
+  "ordered_all_reference_records_sha256": "e6cf32aab27c1f33621fc61068c2edb18b2f1aea855a7075d767213b94e6a68e",
+  "ordered_construction_records_sha256": "e6cf32aab27c1f33621fc61068c2edb18b2f1aea855a7075d767213b94e6a68e",
+  "coordinate_map_path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz",
+  "coordinate_map_sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+  "partition_amendment": "Outcome-blind original extended MHC exclusion applied to reference construction counts to avoid intervals populated solely by scientifically excluded MHC SNPs; no GWAS retained sets used.",
+  "static_construction_exclusions": {},
+  "reference_sha256": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06"
+  },
+  "dependencies_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldsc.py": "4236e817b1c7443131a9f078390072c38bee85112e891c29351e3e7d663b8a25",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/__init__.py": "2e94cea154085cf70658e7fbe7257687bcf27da783a57dfd886f532eb23c21b6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/irwls.py": "e0a8e7712b4cd3958c96cb37b464675dc591926aeadbc8ac1c62dd6aef153867",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/jackknife.py": "e41eaa7126f422ab7dccb6669efa112e658a1ea6f9d5b4522bf9daafe990bc0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldsc_utils.py": "c45145b031478e5cd374cde281803117f72044a74d61a0a75d01b37da9f27e59",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldsc_utils_local.py": "cc8feb1c4018342a3da142ef149cad38133c88821214a6d96b6295de604e0322",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/ldscore.py": "df98f324ca775ece05a6e8f93e0584c88bde9535c360fda6ff96bb7f475e726b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/parse.py": "6135c9a287994669e472c49d109a2f8b302eab918f49c957ace2e9b53ca5f3bc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/scripts/native_ldsc_capture.py": "bd1b87e403fca2bad4c30b6a662a64f7c3d1a47f6aa9884f5157e370cb95707d",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.M_5_50": "4d93a65a13d474494886b5a08d6f1353eb7d097199c1edd94e1c0063f1452043",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.M_5_50": "873641ba1b1d1954f12de3efda9befac347b024f51e676947d229c46352b1680",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.M_5_50": "cbebc916d828f2dc7bf6f41a318ea9386615ca18368103b3bf151b15697360de",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.M_5_50": "10b50bfa353bcc6c715edd27bbc2575f11db162cfa32683d1436b4044e118269",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.M_5_50": "3da70d571578cd8166044b9e28b1be8b05dca2466a6b2b6e005e929ce510a332",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.M_5_50": "829d481f2f402abb3da05ff969d9083d14a2495a1339f882935aaff0a1f425d4",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.M_5_50": "3d2ffe6200693fa2d94398a632bcd814c60d4deb4da11eeed80a2bb47737db02",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.M_5_50": "549a32add09387bb75dd0a21af29786788d056d19530b713d2637b9a442e64f9",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.M_5_50": "8aeb3b5dbe44176c244e5684b530330e114f4853112a2caa3737e3bb2afb268a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.M_5_50": "76e9eb09c8ebe87f41e738c499417df57b080cfb7f9c986258ce7ddc2684b026",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.M_5_50": "47217613c248ed2c6459e57df484a5a294a0f844f08f09d0f4b216bc8bdce987",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.M_5_50": "c382026b135bf5c44004d1421ae0599cab5404c25be31a1f1930bc30f8417b33",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.M_5_50": "edf26a214f6db0cb87c65050ba59bed40d9bc46c4a7752fbc12997931dc33021",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.M_5_50": "21ef47fed5ba0c0426161ad0ed6204995e1c7b919b094468be14542193411589",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.M_5_50": "a6c64f1a5aaf49bfec1ec27ec4949945d597180a8dc1c4510348d8ac9868f7db",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.M_5_50": "1964cc8ae26fd5f3e5b560a00f370036d07a9aa68c70dafe0108d48dceb5f054",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.M_5_50": "f34d58135a64456148f6e48ea73f8e0e65e7e28d70783c22796294b60c522cb1",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.M_5_50": "5134cfa8390c7aecccd89b5e808b62935257b27094f03330b2306ccd02840b28",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.M_5_50": "cb6b0ba4e36b96d4cfbdac20202153baa70eb3633246d89172d7a7847e536fc7",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.M_5_50": "aa2f7130a8e1e1b63719554bd801476dd39597742316febf68f7f8d1952725cb",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.M_5_50": "0128dc6fab98f08718a84499eb384b03565f259ba016f40029d31f1ba874c9ae",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.M_5_50": "e5bf514d371a97ad95e75b5e7189e8b8654c01059da78891628e074445fdc1ee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration.py": "a870732ce3d249e32cce68f5be01efae15914e12faa3ee34cf6445064b94775e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/30_prepare_and_run_ssd_native_campaign.py": "f0460a24750a6e0671f3bf1fb6109ac65d976969f62998b8b48bf68fe7a4c003",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common.py": "299a75f018ca75f153f21d2c2d7a095277762ba6eab5ab4f7c6df8befe1aaf5d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_native_adapter.py": "d06c70d85673299d9357708a7f2cef800238c42dd4d648c120e263d06aaa8e44",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_capture.py": "5b229038d6789c784b5876bb348eb9fc2e759d91aeb76594cdeece77640e68ef",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_arithmetic.py": "bee8643f2b8ec965e92706ff2b44a8bff3333e468f8ad0b9d6f92cb86e6718f0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_fixture.py": "0a542a376cc78365e3d13eda45bdaf773ff84bb9233f2b5daa8435fe41235b98",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/41_prepare_canonical_blocks.py": "f6e7c89c3cbaae7e3bec9faa636c9604c9f5d8a52431128f6a0b0e24c0773a34",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/ssd_native_execution_plan_v4_3.json": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/canonical_200_interval_preparation_v4.json": "b7bf9cd063b3c55485ff8db8d0e4a2107e413dd1e9f34003c8a8b95d4ac7214a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_native_calibration_controls_v4.tsv": "1df79bfce8b811362834a80cd0dde5064f1b84bb659c608267e7640c499468c8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/common_boundary_adapter_prototype_v4.py": "942176a5e050f24bd44bd661ed2109d3b1a3768a63bdd1a30b158bafb33601a6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/canonical_native_calibration_fixture_receipt_v4_2.json": "737544308fcd2fbbe81ee21793673cac33ad00d565607cec670e28246315841f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/canonical_200_intervals_v4.tsv": "349466ddb40ade5043e8f52799fdcd9e56abb6293a6874b34562160c9066411f",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
+  },
+  "inputs_current_sha256": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/insomnia.sumstats.gz": "b4f66dde69d0c793f77b674dca45526659e69e6fbb31a5a4f3e57870077e6fc4",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bmi.sumstats.gz": "481bcfaf59fc6459853c6319414507d67cbf102dc77d93e527705ed23429b078",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525"
+  },
+  "python": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python",
+  "ldsc_dir": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code",
+  "ssd_output_root": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/statistical_validation/native_canonical_calibration_v4",
+  "environment": {
+    "python": "3.9.23 | packaged by conda-forge | (main, Jun  4 2025, 18:02:02) \n[Clang 18.1.8 ]",
+    "numpy": "1.21.5",
+    "pandas": "1.3.3",
+    "scipy": "1.7.3"
+  },
+  "worker_count": 1,
+  "blas_threads": 1,
+  "shared_lock_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/native_heavy_worker.lock",
+  "shared_lock_policy": "LOCK_EX|LOCK_NB for entire executor lifetime, inherited descriptor required by every native/arithmetic worker.",
+  "internal_floor_bytes": 3221225472,
+  "ssd_floor_bytes": 5368709120,
+  "worker_rss_limit_bytes": 2147483648,
+  "output_limit_bytes": 8589934592,
+  "per_worker_seconds_limit": 7200,
+  "runtime_poll_seconds": 2,
+  "resource_storage_assumption": "16 controls retain exact weighted arrays; 8 GiB total cap, plus 5 GiB SSD free floor; admission review must assess capacity before launch.",
+  "operational_resource_amendment": "Capture output cap raised from prototype 4 GiB to 8 GiB to retain all 16 prespecified control designs/deletes; this separate operational amendment requires root review before execution. Scientific thresholds/inputs/partition remain unchanged.",
+  "arithmetic": {
+    "point_delete_atol": 1e-10,
+    "point_delete_rtol": 1e-08,
+    "covariance_atol": 1e-14,
+    "covariance_rtol": 1e-06,
+    "duplicate_zero_delta_se_atol": 1e-12,
+    "independent_row_solves": "replicate A of all 8 control/arm/partition combinations",
+    "full_fit_weights_and_Nbar_frozen_for_deletion": true,
+    "no_calibrated_difference_p_values": true
+  },
+  "native_jobs_launched": 0,
+  "GWAS_outcome_columns_read": false,
+  "allow_41_covariance_outcomes": false,
+  "allow_calibrated_biological_p_values": false,
+  "realistic_LD_sampling_calibration_pass": false,
+  "remaining_method_gate": "Verified source-matched signed LD/genotype asset and frozen realistic-LD simulations; synthetic/duplicate arithmetic cannot establish real genomic correlation length, selection, or reference validity."
+}

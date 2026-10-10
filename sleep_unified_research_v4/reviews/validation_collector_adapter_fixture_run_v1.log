@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_checker_v1.py", line 291, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_checker_v1.py", line 275, in main
+    side=json.loads(Path(mp['adapter_receipt']).read_text());assert_(side['output_sha256'][mp['new_qc']]!=sha(mp['new_qc']),'post_sidecar_QC_stale_success_identity')
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_checker_v1.py", line 34, in assert_
+    if not condition:raise AssertionError(label)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: post_sidecar_QC_stale_success_identity

@@ -1,0 +1,128 @@
+{
+  "schema": "redacted_public_derivative_of_immutable_local_receipt_v1",
+  "recorded_utc": "2026-10-10T03:17:30.925456+00:00",
+  "immutable_local_original_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/source_policy_followup_microfetch_receipt_v4_2.json",
+  "immutable_local_original_sha256": "01b9cb364e0e3e66ca22abe2c8887518158065b1cc088e4cbe88fa109ffed4e7",
+  "derivative_is_original_execution_receipt": false,
+  "field_redactions": [
+    {
+      "json_field_path": [
+        "responses",
+        "2",
+        "curl_writeout"
+      ],
+      "URL_redactions": [
+        {
+          "host": "s3-eu-west-1.amazonaws.com",
+          "removed_query_parameter_names": [
+            "X-Amz-Algorithm",
+            "X-Amz-Credential",
+            "X-Amz-Date",
+            "X-Amz-Expires",
+            "X-Amz-Signature",
+            "X-Amz-SignedHeaders"
+          ]
+        }
+      ]
+    },
+    {
+      "json_field_path": [
+        "responses",
+        "3",
+        "curl_writeout"
+      ],
+      "URL_redactions": [
+        {
+          "host": "s3-eu-west-1.amazonaws.com",
+          "removed_query_parameter_names": [
+            "X-Amz-Algorithm",
+            "X-Amz-Credential",
+            "X-Amz-Date",
+            "X-Amz-Expires",
+            "X-Amz-Signature",
+            "X-Amz-SignedHeaders"
+          ]
+        }
+      ]
+    }
+  ],
+  "qualification": "Only presigned query parameters in curl writeout are removed from this derivative. The unchanged original receipt remains local and retains the historical review binding. This derivative does not replace or satisfy the original receipt SHA. No response-body, source-permission or scientific-result claim is added.",
+  "redacted_receipt": {
+    "schema": "bounded_public_source_policy_followup_microfetch_receipt_v4_2",
+    "completed_utc": "2026-10-10T01:11:48.334332+00:00",
+    "plan_sha256": "f27fa1daa1a7fd198966a44ab5a48bf54b7ca50c41701e4f05d5bfdd3996793e",
+    "script_sha256": "f01eb6d9afdb5f79577a1f680ec7f037bbee2b23acf997af5dcd3bcc418b3853",
+    "curl_sha256": "5ab042572ea0e068644e3b8f9e8dd1ad197bfcf33d199316615b46ddc4390a41",
+    "curl_version": "curl 8.7.1 (x86_64-apple-darwin25.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.68.1\nRelease-Date: 2024-03-27\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns ldap ldaps mqtt pop3 pop3s rtsp smb smbs smtp smtps telnet tftp\nFeatures: alt-svc AsynchDNS GSS-API HSTS HTTP2 HTTPS-proxy IPv6 Kerberos Largefile libz MultiSSL NTLM SPNEGO SSL threadsafe UnixSockets\n",
+    "actual_response_body_bytes_retained": 169372,
+    "maximum_response_bytes": 99229,
+    "request_count": 4,
+    "responses": [
+      {
+        "id": "colorectal_README",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90255001-GCST90256000/GCST90255675/README.txt",
+        "purpose": "Exact exception README link observed in official200 directory index",
+        "retrieved_utc": "2026-10-10T01:11:45.459930+00:00",
+        "returncode": 0,
+        "http_code": "200",
+        "curl_writeout": "200\t862\thttps://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90255001-GCST90256000/GCST90255675/README.txt\ttext/plain; charset=UTF-8",
+        "stderr": "",
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache/source_policy_followup_review_v4_2/colorectal_README.response.txt",
+        "bytes": 862,
+        "sha256": "df248b54161538c5423e486412b6e54058f0bfe4eb8fe7d19c0846d6878f1137",
+        "metadata_only": true,
+        "GWAS_or_reference_body": false
+      },
+      {
+        "id": "colorectal_metadata_yaml",
+        "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90255001-GCST90256000/GCST90255675/GCST90255675_buildGRCh37.tsv-meta.yaml",
+        "purpose": "Exact official index YAML author_notes policy only",
+        "retrieved_utc": "2026-10-10T01:11:46.059091+00:00",
+        "returncode": 0,
+        "http_code": "200",
+        "curl_writeout": "200\t1590\thttps://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90255001-GCST90256000/GCST90255675/GCST90255675_buildGRCh37.tsv-meta.yaml",
+        "stderr": "",
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache/source_policy_followup_review_v4_2/colorectal_metadata_yaml.response.txt",
+        "bytes": 1590,
+        "sha256": "f44f1e6425f6eff5ff4d00c16b9034f403557eaa9305602f566580a8cab436dc",
+        "metadata_only": true,
+        "GWAS_or_reference_body": false
+      },
+      {
+        "id": "PGC_ADHD_README",
+        "url": "https://ndownloader.figshare.com/files/40036699",
+        "purpose": "Exact version1 release README.pdf99,229bytes; policy documentation only, not GWAS body",
+        "retrieved_utc": "2026-10-10T01:11:47.309400+00:00",
+        "returncode": 0,
+        "http_code": "200",
+        "curl_writeout": "200\t99229\thttps://s3-eu-west-1.amazonaws.com/pfigshare-u-files/40036699/ADHD2022_README.pdf [presigned query removed from public derivative]\tapplication/pdf",
+        "stderr": "",
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache/source_policy_followup_review_v4_2/PGC_ADHD_README.response.txt",
+        "bytes": 99229,
+        "sha256": "0bb75994871fa9a3a80033fbcdc812570cd521b36b5a5beccae50f0d84153809",
+        "metadata_only": true,
+        "GWAS_or_reference_body": false
+      },
+      {
+        "id": "PGC_SCZ_README",
+        "url": "https://ndownloader.figshare.com/files/34865091",
+        "purpose": "Exact version7 release README.pdf67,691bytes; policy documentation only, not GWAS body",
+        "retrieved_utc": "2026-10-10T01:11:48.333935+00:00",
+        "returncode": 0,
+        "http_code": "200",
+        "curl_writeout": "200\t67691\thttps://s3-eu-west-1.amazonaws.com/pfigshare-u-files/34865091/PGC3_SCZ_sumstats_release_v3.2_README.pdf [presigned query removed from public derivative]\tapplication/pdf",
+        "stderr": "",
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/cache/source_policy_followup_review_v4_2/PGC_SCZ_README.response.txt",
+        "bytes": 67691,
+        "sha256": "120e82d75ca6f41909ed00d0b45e1d35159f2b33ee5e0faadc03f0b15783e20f",
+        "metadata_only": true,
+        "GWAS_or_reference_body": false
+      }
+    ],
+    "TLS_verification_not_disabled": true,
+    "automatic_retry": false,
+    "GWAS_or_reference_body_bytes": 0,
+    "form_submission_or_investigator_contact": false,
+    "copyrighted_fulltext_committed": false
+  }
+}

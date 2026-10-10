@@ -1,0 +1,17 @@
+# Native historical reproduction — SSD operational protocol v5
+
+Frozen before the v4 native estimator launch. This is technical execution documentation and admits no new primary, validation, local or molecular hypothesis. The original 396, 1,200 and 217 families, original inputs, pinned CBIIT revision and scientific thresholds are unchanged.
+
+The seven-file internal archive relocation was explicitly approved by the user. Every original byte was verified against the frozen source registry and preserved on the physical Extreme SSD. The original path is a symlink; all Git worktree status bytes remain unchanged. Only that exact relocation was approved. No system files, swap, unrelated personal data, other source datasets or Git worktrees were moved or deleted.
+
+The v1 `04_native_reproduction_runner.py` remains byte-identical (SHA256 `fa5ca8528caa1037cca55d5234e7e7721582abce479c95949bb81255e3428fa9`). The v4 invoker imports that exact file and explicitly changes only its `PACKAGE` operational destination to a new SSD support namespace. `ROOT`, all 190 jobs, source paths, statistical options, numerical implementation, reference files, historical protocol bytes, capture code and resource guards remain unchanged. All 158 unique processed inputs and 56 consumed dependencies were freshly verified. The final operation is bound by `manifests/ssd_native_execution_plan_v4_3.json`; earlier v4/v4_2 plans were prelaunch prototypes with no estimates and remain preserved.
+
+Execute core, extension, then validation sequentially: 45 h2 + 396 rg; 100 h2 + 1,200 rg; 13 h2 + 41 rg. One worker, BLAS/OpenMP threads 1. TMPDIR, XDG_CACHE_HOME and plotting cache paths are in the new SSD namespace. macOS swap and essential system paths remain internal.
+
+Keep the original >=3 GiB internal and >=5 GiB output-volume floors. The outer monitor additionally checks those floors during execution and after exit, tracks the isolated owned process group until empty, records observed aggregate worker RSS (limit 2 GiB), limits new native outputs to 4 GiB and stage runtime to 36 hours, and preserves all failed/unsealed outputs. Sampling every two seconds measures observed RSS rather than an instantaneous guaranteed peak. No failed result is automatically retried or overwritten; investigate before continuation.
+
+The native capture records observed-scale regression totals at full precision even when the stock h2 log presents a liability conversion. Native comparison must use the exact logged sample/population prevalence and pinned conversion, retaining both scales. An observed total must not be compared directly with a liability-scale historical number.
+
+Matching rounded historical logs establishes only PRINTED_PRECISION_CONCORDANT where no original unrounded object exists. Every native result must separately pass identity/cardinality checks, have all new outputs sealed, and be compared with frozen tables. Native full-precision BH is a separate audit from the historical serialized all-396 and all-1,200 corrections. Historical QC failures and new failures remain visible. Arithmetic diagnostics of two-step behavior or effective-N/liability conventions are separate sensitivity evidence and do not modify this campaign.
+
+The complete dense raw harmonization/munging chain remains a distinct unfinished requirement. Successful processed-input reproduction does not establish the raw chain, compatible phenotypes, participant independence, calibrated contrast covariance, new biological findings or manuscript readiness.

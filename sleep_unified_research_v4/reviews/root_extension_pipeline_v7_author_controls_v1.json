@@ -1,0 +1,97 @@
+{
+  "status": "AUTHOR_CONTROLS_PASS_SEPARATE_INDEPENDENT_REVIEW_REQUIRED",
+  "code_sha256": "6abd57c9d743ea1c33b7ccbed0f88c51a7af0972db24655284f3e279fa483f00",
+  "plan_sha256": "ad0c08bc0b0a62c8a1bc070221689f2733b0eefe8f25de8cc1bd8689a81b1ba5",
+  "helper_cases": [
+    {
+      "name": "healthy",
+      "accepted": true,
+      "expected_accepted": true,
+      "reason": null
+    },
+    {
+      "name": "metadata_errors",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "plan_unchanged_false",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "cleanup_error",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "wrong_command",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "returncode17",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "stop_reason_nonnull",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "missing_stop_reason",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "unreaped",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "owned_false",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_CONTRADICTORY_FAILURE_OR_IDENTITY_VETO"
+    },
+    {
+      "name": "postparse_receipt_mutation",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_RECEIPT_CHANGED_AFTER_PARSE_OR_CONSUMPTION"
+    },
+    {
+      "name": "failure_addendum",
+      "accepted": false,
+      "expected_accepted": false,
+      "reason": "WORKER_FAILURE_ADDENDUM_VETO"
+    }
+  ],
+  "helper_cases_count": 12,
+  "all100_member_values_identical_after_private_namespace_normalization": true,
+  "guard_identical": true,
+  "unchanged_top_level_function_AST": [
+    "load_protected",
+    "namespace_bytes",
+    "no_preserved_outputs_gate",
+    "admission_gate",
+    "wait_family_commit",
+    "wait_checkpoint",
+    "acquire_source_mutex"
+  ],
+  "original_validation_command_AST_identical": true,
+  "scientific_validator_sha256": "83cb1f22115b36ed363e42bdeafe055430986130a8bd461a82cf76e3e9cdbe78",
+  "workers_launched": 0,
+  "source_reference_runtime_payloads_read": 0,
+  "estimator_calls": 0,
+  "execution_admission_granted": false
+}

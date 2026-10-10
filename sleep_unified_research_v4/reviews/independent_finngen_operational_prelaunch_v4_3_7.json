@@ -1,0 +1,840 @@
+{
+  "schema": "independent_finngen_operational_prelaunch_review_v4_3_7",
+  "completed_utc": "2026-10-10T01:30:10.270514+00:00",
+  "verdict": "REJECTED_CURRENT_CONTROLLER_REQUIRES_ADDITIVE_CORRECTION",
+  "prelaunch_pass": false,
+  "execution_admission_granted": false,
+  "actual_prepared_plan": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_7.json",
+  "actual_prepared_plan_sha256": "d75fb3f96795f38080081be89da10be04c82d74aa67d11821a7eac0d6e7a8046",
+  "candidate_and_old_failure_receipt_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_7.json": "d75fb3f96795f38080081be89da10be04c82d74aa67d11821a7eac0d6e7a8046",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/56_preprocess_finngen_insomnia_feasibility_v3.py": "9ae9ec603d9b8558d30ec48c69e6658586853986c2c6e6a474b4fbdb20ce7302",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/57_verify_finngen_row_controls_v3.py": "35a969111c8dcdfca4e7f5bea619f936cbe2eda32b263dc13f359b8e4d199e12",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_7.py": "94183216b0db8e8be4c1d89b6b882b0b7453fdf97e3677fc7130c15e5760ef9c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/59_prepare_finngen_feasibility_stage_v3_7.py": "c8f1e6136257f56c00339e500fc0feeba9e90d323be8167855909e34a7f1b11a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_preprocessing_performance_stop_v4_3_2.json": "77e331f828d43669742b7d4b03320e2630acebffb30506a77791a843e38a185b"
+  },
+  "source_optimization_semantic_equivalence_pass": true,
+  "exact_only_scientific_code_change": "set(RSID.findall(value)).intersection(hm3) -> {rsid for rsid in RSID.findall(value) if rsid in hm3}",
+  "stable_ordinary_dict_token_cases": 514,
+  "original_row_controls_repeated_identically": 34,
+  "native_python": "3.9.23 | packaged by conda-forge | (main, Jun  4 2025, 18:02:02) \n[Clang 18.1.8 ]",
+  "native_probe_peak_RSS_bytes": 89702400,
+  "native_probe_seconds": 7.03530975,
+  "dictionary_timing_rows": [
+    {
+      "dictionary_keys": 1000,
+      "value": "",
+      "median_seconds_per_call": {
+        "old": 1.3883299999994936e-05,
+        "new": 4.771000000070025e-07
+      },
+      "old_over_new_ratio": 29.099350240601904,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 1000,
+      "value": "NA",
+      "median_seconds_per_call": {
+        "old": 1.3874999999996529e-05,
+        "new": 4.83299999998188e-07
+      },
+      "old_over_new_ratio": 28.70887647434006,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 1000,
+      "value": "rs9999999",
+      "median_seconds_per_call": {
+        "old": 1.8474999999995577e-05,
+        "new": 7.416500000023696e-07
+      },
+      "old_over_new_ratio": 24.9106721498504,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 1000,
+      "value": "rs1",
+      "median_seconds_per_call": {
+        "old": 1.8447899999995965e-05,
+        "new": 8.875000000019285e-07
+      },
+      "old_over_new_ratio": 20.786366197133386,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 1000,
+      "value": "rs1;rs1",
+      "median_seconds_per_call": {
+        "old": 1.8833299999998497e-05,
+        "new": 1.3187500000011455e-06
+      },
+      "old_over_new_ratio": 14.281175355436693,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 1000,
+      "value": "rs1,rs2",
+      "median_seconds_per_call": {
+        "old": 2.387914999999463e-05,
+        "new": 1.231250000000017e-06
+      },
+      "old_over_new_ratio": 19.394233502533442,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "",
+      "median_seconds_per_call": {
+        "old": 0.0017325166999999976,
+        "new": 5.666500000001129e-07
+      },
+      "old_over_new_ratio": 3057.4723374210757,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "NA",
+      "median_seconds_per_call": {
+        "old": 0.001749245850000003,
+        "new": 5.604499999978252e-07
+      },
+      "old_over_new_ratio": 3121.145240443913,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "rs9999999",
+      "median_seconds_per_call": {
+        "old": 0.002373666699999999,
+        "new": 9.146000000015419e-07
+      },
+      "old_over_new_ratio": 2595.3058167461154,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "rs1",
+      "median_seconds_per_call": {
+        "old": 0.002347183350000015,
+        "new": 1.010400000001077e-06
+      },
+      "old_over_new_ratio": 2323.023901422717,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "rs1;rs1",
+      "median_seconds_per_call": {
+        "old": 0.0022665624999999912,
+        "new": 1.514549999992454e-06
+      },
+      "old_over_new_ratio": 1496.5253705795676,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 100000,
+      "value": "rs1,rs2",
+      "median_seconds_per_call": {
+        "old": 0.0031799229500000027,
+        "new": 1.7854000000205872e-06
+      },
+      "old_over_new_ratio": 1781.0703203558505,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "",
+      "median_seconds_per_call": {
+        "old": 0.010369020800000017,
+        "new": 8.542000000000271e-07
+      },
+      "old_over_new_ratio": 12138.867712479148,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "NA",
+      "median_seconds_per_call": {
+        "old": 0.009649362500000013,
+        "new": 8.645999999945531e-07
+      },
+      "old_over_new_ratio": 11160.493291765908,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "rs9999999",
+      "median_seconds_per_call": {
+        "old": 0.011328402100000013,
+        "new": 1.047900000017421e-06
+      },
+      "old_over_new_ratio": 10810.575531836703,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "rs1",
+      "median_seconds_per_call": {
+        "old": 0.025418191649999988,
+        "new": 2.064599999984651e-06
+      },
+      "old_over_new_ratio": 12311.436428455369,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "rs1;rs1",
+      "median_seconds_per_call": {
+        "old": 0.014721625000000006,
+        "new": 4.222899999994923e-06
+      },
+      "old_over_new_ratio": 3486.141040521373,
+      "results_equal": true
+    },
+    {
+      "dictionary_keys": 400000,
+      "value": "rs1,rs2",
+      "median_seconds_per_call": {
+        "old": 0.014581877049999959,
+        "new": 1.3750000000811724e-06
+      },
+      "old_over_new_ratio": 10605.001490283,
+      "results_equal": true
+    }
+  ],
+  "initial_controller_controls_expected_results": [
+    {
+      "label": "healthy",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": true,
+      "passed": true,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "e9d82cd038f0de3bf2e38b3df9449592ca2263f229b25f6ed27d62ee5bbe41b0"
+    },
+    {
+      "label": "result_mutation_during_parse",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "1dadc2dcdd885d851a61fa8da94d4f2fdf560a60a0f58234f86708f48226b2b6"
+    },
+    {
+      "label": "result_changed_at_derivative_hash",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "4b49d132de6b27c73cc32a196265ecc1d11eb70892032c4f3eafaaf270551e30"
+    },
+    {
+      "label": "current_journal_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "47cb998e8c39ba84ffe1c2c11bb9f6a196ca08996f9577a0e0fc5f28df76f5eb"
+    },
+    {
+      "label": "current_worker_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "7dddd9ced4bb127d20ef4d30ea07fa51529e9078467be90fcf708099393e90b2"
+    },
+    {
+      "label": "source_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "f6254be04c2592d5fce42101f164b7e83510c66d2c769917a614b48356714b76"
+    },
+    {
+      "label": "stage_payload_on_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_controller_controls_v4_3_7/stage_payload_on_write/stage.json",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "5ec9674f05504329441866b7efde43bdfebd68425e8bc6fdd4317448e91de8eb"
+    },
+    {
+      "label": "terminal_seal_payload_on_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "a3d280ce967f28520857933aa8a7bf3095320bd89014d116c1dbef9f83b037d6"
+    },
+    {
+      "label": "postpersist_internal_guard",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "8d64bb571af2285573078c56f4d8ade59b0b12002cdff72d703f4a3bebf10dc4"
+    },
+    {
+      "label": "postpersist_deadline_guard",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "d54a088eabfa1519cb0009ceb28533800572e83436a436c15b673b37a2dd7364"
+    },
+    {
+      "label": "postpersist_signal",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "fd68ad86985420535ed1f35344de9efe08f071fac54ccd394cbbc8f496857c7b"
+    },
+    {
+      "label": "failed_supplemental_writes",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "f8f730b688d64a9dc4d412b60bdeee03b4cca4d72fcc340bc88d8d8cf1a0268c"
+    },
+    {
+      "label": "full_stream_false",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "f4c1094423a8e516f3304fba503c06b96d9850f207b2a366d6102cefc75b2859"
+    },
+    {
+      "label": "INFO_claim_true",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "41294035bf413090aacbe2c8616f4a71efe29e66361906472d8a94e93f8753d5"
+    },
+    {
+      "label": "no_retry",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": true,
+      "passed": true,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": true,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "1287d770cece9dd8ab8c648136a5065a6c3c8df151098c7fba1f862c1057a0ff"
+    }
+  ],
+  "additive_receipt_contradiction_controls": [
+    {
+      "label": "healthy",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": true,
+      "passed": true,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "4fb571c2fcbe50ed556c9331d1a5abc329f39a28c75132f62cbdc6ed55df5165"
+    },
+    {
+      "label": "metadata_errors_nonempty",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "b52f3b24d2625e5818dc6bf30c6250ed1b1e6d4d2440616606a8e7a648c3fe3b"
+    },
+    {
+      "label": "plan_unchanged_false",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "1bd5a9ef6844af1fc0b753f8fec7c040cdf557696233c4e4ddbf82de943c8a7a"
+    },
+    {
+      "label": "teardown_cleanup_error",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "1fc1057e190a3c3da32b61c398c7ddede4a94a191bff6f30462dbd468342f665"
+    },
+    {
+      "label": "wrong_command",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "25804970d30b2cb143a99c95b22622f8e2383b0fd40c41d0ae49e14e4d29cb00"
+    },
+    {
+      "label": "wrong_returncode",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "5ab78ad34860dcb6e05b7a76ea28797bd29f6ecea0144a8453e903af1c910ade"
+    },
+    {
+      "label": "stop_reason_nonempty",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "9e7e4b4c5eaae5df23b48da8bcb06f2cb59b5b75b30f4d44d6586007fd677bc6"
+    },
+    {
+      "label": "worker_mutation_after_parse",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": false,
+      "passed": false,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "6684b31bde047b0f71a0f5769ebd0374c6637b54779325d7051c7f471e415dbc"
+    }
+  ],
+  "material_accepted_witnesses": [
+    "metadata_errors_nonempty",
+    "plan_unchanged_false",
+    "teardown_cleanup_error",
+    "wrong_command",
+    "wrong_returncode",
+    "stop_reason_nonempty",
+    "worker_mutation_after_parse"
+  ],
+  "findings": [
+    {
+      "code": "WORKER_RECEIPT_ORACLE_INCOMPLETE",
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_7.py",
+      "lines": [
+        156,
+        157,
+        171,
+        172
+      ],
+      "observed": "Six independently malformed complete receipts were committed: metadata_errors nonempty, plan_unchanged false, teardown cleanup_error truthy, wrong command, nonzero returncode, nonempty stop_reason.",
+      "required_correction": "Require exact substituted intended command; returncode == 0; stop_reason is None; plan_unchanged is True; metadata_errors == []; owned cleanup is True; remaining group == []; no cleanup error. Reject missing or malformed required fields. Apply oracle at first consumption and each current-identity callback."
+    },
+    {
+      "code": "WORKER_HASH_SNAPSHOT_AFTER_PARSE",
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_7.py",
+      "lines": [
+        156,
+        171
+      ],
+      "observed": "Appending a byte immediately after initial worker JSON parse was accepted: the changed bytes, rather than the parsed snapshot, were subsequently frozen.",
+      "required_correction": "Require regular path/parents and freeze exact worker SHA before initial read/parse; compare after parse, before use, and against this frozen SHA before/after every later parse and terminal callback."
+    }
+  ],
+  "producer_versus_consumer_qualification": "Genuine owned-worker producer normally rejects these contradictions. Toy malformed receipts demonstrate defensive controller-consumption gaps; no genuine 3_7 worker was run or shown to emit contradictory metadata.",
+  "metadata_binding_checks_pass": true,
+  "fresh_small_metadata_code_runtime_dependencies": 123,
+  "reference_hash_bindings_without_body_reread": 47,
+  "raw_source_binding_not_fresh_rehash": {
+    "identity": {
+      "bytes": 809346932,
+      "md5": "f16c21acbf8b9ebfeb0f26a19f0ecfe3",
+      "sha256": "353129dc8252461a2a97087ce6de39548d0b0bf1e488a6ef36da75e9f4690049"
+    },
+    "generation": "1777989563097164",
+    "actual_file_regular_and_exact_size": true,
+    "acquisition_receipt_sha256": "4695eef749cb16fee201b3797b6ffc29000a1cb66d967108041444d0843bb072",
+    "raw_hash_not_recomputed_by_this_metadata_review": true,
+    "prospective_preparer_and_worker_full_hash_before_after_and_CRC_gates": true
+  },
+  "inherited_archival_symlink_identity_exceptions": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python": {
+      "literal_target": "python3.9",
+      "resolved_target": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python3.9",
+      "expected_sha256": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/w_hm3.snplist": {
+      "literal_target": "eur_w_ld_chr/w_hm3.snplist",
+      "resolved_target": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist",
+      "expected_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed"
+    }
+  },
+  "old_failed_attempt_hashes_current": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_2.json": "9d6bc2046194d030b3c87bd8b3b3708d90d942cc52c213e8b7919aac8ed4ca41",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_preprocessing_stage_receipt_v4_3_2.json": "2167a247f9eb6b264cb010a3ff82904e374ba2406512f5466f419886f33a8cad",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_2/receipts_v4/preprocessing.execution_receipt_v3_2.json": "ae988b97388519b7a6e284bdff457f9bd2babef6c9f669fa612132c12a95725a",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_2/preprocessing_pending_v3_2.json": "18bab62259e5905763b6f667cda2d81838eb405d6a59d5a385219f84758e292b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_admission_v4_3_2.json": "abdbcb90a89bbd85410e029524c7770a86bd71fe9c4deafc3eb4dd147352e457",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_dictionary_membership_performance_probe_v1.json": "0ac728e0a1a48c328fccee417d0197a1abf63070bd45f0dd8a2c09ecef1181e6",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_2/derived/insomnia.sumstats.gz": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_2/logs_v4/preprocessing.execution_receipt_v3_2.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_2/receipts_v4/preprocessing.execution_receipt_v3_2.json.failure_journal.jsonl": "b0df67069558e96181075078b0a23cd70c1fdac4e3fc9efe28bc58269dbe047f"
+  },
+  "old_FAILED_PENDING_group_cleanup_preserved": true,
+  "guard": {
+    "worker_count": 1,
+    "BLAS_threads": 1,
+    "internal_floor_bytes": 3221225472,
+    "SSD_floor_bytes": 5368709120,
+    "observed_aggregate_worker_RSS_limit_bytes": 2147483648,
+    "new_output_limit_bytes": 2147483648,
+    "deadline_seconds": 7200,
+    "poll_seconds": 2
+  },
+  "global_reservation_bytes": 322122547200,
+  "scope": {
+    "preprocessing_commands": 1,
+    "h2_fits": 0,
+    "rg_fits": 0,
+    "actual_scientific_workers": 0,
+    "actual_heavy_mutex_acquisitions": 0,
+    "source_reference_body_parses": 0,
+    "network_calls": 0
+  },
+  "scientific_admission": false,
+  "qualifications": [
+    "Stable ordinary dictionary with string keys only; not an arbitrary mutating custom mapping.",
+    "Toy dictionary timings establish elimination of reference-size scaling in membership lookup, not actual-source throughput or completion within the two-hour deadline.",
+    "No complete old preprocessing output exists for full-content comparison: old failure retains a zero-byte derivative and no completed source CRC/EOF proof.",
+    "Source SHA/MD5/generation/bytes and reference SHAs are frozen receipt bindings. This review does not freshly read or hash their biological bodies.",
+    "Inherited runtime and w_hm3 symlinks are admitted only at exact frozen literal/resolved targets; fresh runtime binary SHA checked, w_hm3 body SHA receipt-bound.",
+    "Controller tests exercise actual execute/Terminal2 logic with worker, monitor, lock, physical mount, baseline and disk/time replaced by metadata mocks; owned live-process cleanup and actual mutex exclusivity are inherited qualified controls.",
+    "Terminal2 requires its documented privately owned immutable marker, deferred-signal and POSIX unlink contract; uncontrolled marker loss is not certified.",
+    "Constant effective N and missing INFO/per-variant N remain assumptions. No source, clinical, independent-replication, population-h2, liability or biological inference is admitted.",
+    "Root must freeze an additive corrected controller/plan, independently recheck these witnesses, then separately issue operational admission before any real worker. No automatic retry or overwrite is authorized."
+  ]
+}

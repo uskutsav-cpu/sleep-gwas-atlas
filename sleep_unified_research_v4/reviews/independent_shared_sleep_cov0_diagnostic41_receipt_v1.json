@@ -1,0 +1,59 @@
+{
+  "schema": "independent_all41_cov0_aggregate_decimal_review_v1",
+  "all_checks_pass": true,
+  "exact_current_input_builder_table_receipt_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/extension_native_full_precision_rg_v4.tsv": "c7551a1d3e246234289865469729618e61bdb6c35c19cffd8b5946a61a06b85b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/validation_native_full_precision_rg_v4.tsv": "794dc2f951268d673d667e8e5d2cab1558fc9cf34e06673e5e2fe8e2979ee65b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/HETEROGENEITY_MASTER.tsv": "062cee7515f710da1003e6ab29b1b51b64bb23ce86e3c86b8135630073777810",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/sleep_submission_evidence_v1/tables/heterogeneity_7.tsv": "900243199959a657a197e65a555ae62cec851504ccb5f512e29b80255867a363",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/shared_sleep_cov0_diagnostic41_v4_1.tsv": "0698b9493637176c03b975bc36e9fbd6e2c5baf6dfdc545486c004df693149bb",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/shared_sleep_cov0_diagnostic41_build_receipt_v4_1.json": "c2f623a1f4759a68c8de4842b7a29f8ca524873048aaa5bab2e5c63c68c21ca4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/106_build_shared_sleep_zero_cov_diagnostic_v4_1.py": "72a8bb03b2cb10a774d3365a3d1c8f3e25cf896ecdb84868d79447bb3e823a1a"
+  },
+  "source_cardinalities": {
+    "native_discovery": 1200,
+    "native_validation": 41,
+    "historical_master": 41,
+    "historical7": 7,
+    "diagnostic": 41
+  },
+  "unique_complete_join_order_historical_membership_every_field_qualification": true,
+  "numeric_method": "80-digit Decimal from literal aggregate input strings; sqrt(sum of squares); independent erf power series/1-erf, not builder math.erfc/hypot;80digit context/1e-72 termination.",
+  "arithmetic_check_tolerance": "abs_error<=5e-14*abs(expected)+2e-15 (P uses1e-24 absolute term);presentation only,no scientific threshold changes.",
+  "max_absolute_error_by_field": {
+    "difference_external_minus_discovery": "4E-17",
+    "difference_SE_cov0_unvalidated": "8.83945041159091625662072031117723607912315015044502883390392272E-18",
+    "difference_CI95_low_cov0_unvalidated": "5.902261415541632135061203375395329020911474560709974720404146234E-17",
+    "difference_CI95_high_cov0_unvalidated": "4.424483659888871743378157127725466219857556035981419867019031696E-17",
+    "difference_Z_cov0_unvalidated": "8.755660212343196848195537552232231956832591167121307811672810484E-16",
+    "difference_P_cov0_unvalidated": "2.5930070400694226320096149167410899484105922288979288472546594995E-16",
+    "native_minus_historical_printed_difference": "3.9078E-17",
+    "native_minus_historical_printed_difference_SE_cov0": "9.37945041159091625662072031117723607912315015044502883390392272E-18"
+  },
+  "numerical_fields_per_row": 15,
+  "derived_decimal_fields_per_row": 8,
+  "qualified_count": 23,
+  "below_frozen_threshold_count": 18,
+  "nominal_cov0_all41": 16,
+  "nominal_cov0_qualified23": 7,
+  "original7_equals_current_qualified_nominal7": true,
+  "nominal_below_frozen_threshold18": 9,
+  "minimum_distance_to_nominal0p05": "0.001072003737818396",
+  "assumed_covariance_not_estimated": true,
+  "confirmed_heterogeneity": false,
+  "new_test_family_or_correction": false,
+  "native190_audits_or_old_suites_rerun": false,
+  "GWAS_nativevector_reference_runtime_body_reads": false,
+  "nativefit_network_transfer_mutex_operations": 0,
+  "builder_receipt_pending_flag_preserved_as_build_time_history": true,
+  "output_arithmetic_table": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_shared_sleep_cov0_diagnostic41_arithmetic_v1.tsv",
+  "output_arithmetic_table_sha256": "367f8768fdbbe3eb31dc288bcb87b09d815ccabce72cc46a460f46c2817a0d5d",
+  "elapsed_seconds": 0.21788083401042968,
+  "max_RSS_bytes": 35225600,
+  "resource_bounds": {
+    "seconds": 60,
+    "RSS_bytes": 67108864,
+    "workers": 0
+  },
+  "limitations": "Checks arithmetic, joins and exact qualification of marginal aggregate inputs only. Does not re-certify native190, source semantics, overlap, sampling covariance or estimator calibration. Shared sleep means zero cross-estimator covariance is unverified; no direction or magnitude of true covariance is inferred. Historical23 were outcome-side validations under the original217 family, not a newly selected confirmatory41-test family."
+}

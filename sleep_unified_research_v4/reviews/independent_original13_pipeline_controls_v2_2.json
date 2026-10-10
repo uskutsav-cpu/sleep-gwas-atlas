@@ -1,0 +1,4218 @@
+{
+  "schema": "independent_original13_pipeline_synthetic_controls_v2_2",
+  "status": "CONTROLS_COMPLETED_WITH_THREE_CONTRADICTORY_RECORD_ACCEPTANCES",
+  "candidate_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/97_validate_original_validation_replay_v2.py": "d80ec493c4221a7309be3467463c3d47dbcd66ae0159c0af78ea48e2cefd33a0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/98_prepare_original_validation_pipeline_v2.py": "eb80c1e2185490c921bb1e87d0e5ca45fe4cc788664e9042e90caec845b87a7c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/99_run_original_validation_pipeline_v2.py": "c47dccbaf3e353c28a5cec4b51e9a191b4d828c93d29c3c4837cb0f327eee416"
+  },
+  "checks": [
+    {
+      "name": "exact_three_reviewed_candidate_identities",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "validator_literal_and_CRC_positive",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "gzip_byte_difference_qualified",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "qc_changed_after_parse",
+      "pass": true,
+      "detail": "RuntimeError: FROZEN_VALIDATION_REPLAY_EVIDENCE_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/qc_changed_after_parse/ssd/validation_pipeline_replay_v2/workspace/discovery_extension/results/replication/qc/fixture1.tsv"
+    },
+    {
+      "name": "munged_changed_after_stream",
+      "pass": true,
+      "detail": "RuntimeError: FROZEN_VALIDATION_REPLAY_EVIDENCE_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/munged_changed_after_stream/ssd/validation_pipeline_replay_v2/workspace/discovery_extension/results/replication/munged/fixture1.sumstats.gz"
+    },
+    {
+      "name": "collector_changed_after_parse",
+      "pass": true,
+      "detail": "JSONDecodeError: Extra data: line 23 column 1 (char 1502)"
+    },
+    {
+      "name": "sidecar_changed_after_capture",
+      "pass": true,
+      "detail": "JSONDecodeError: Extra data: line 19 column 1 (char 1423)"
+    },
+    {
+      "name": "wrong_Z",
+      "pass": true,
+      "detail": "RuntimeError: LITERAL_VALIDATION_STREAM_DIFFERS_AT_ROW_1"
+    },
+    {
+      "name": "duplicate_SNP",
+      "pass": true,
+      "detail": "RuntimeError: INVALID_OR_DUPLICATED_LITERAL_VALIDATION_ROW"
+    },
+    {
+      "name": "ambiguous_alleles",
+      "pass": true,
+      "detail": "RuntimeError: INVALID_OR_DUPLICATED_LITERAL_VALIDATION_ROW"
+    },
+    {
+      "name": "nonfinite_N",
+      "pass": true,
+      "detail": "RuntimeError: NONFINITE_VALIDATION_ROW"
+    },
+    {
+      "name": "full_gzip_CRC_fault",
+      "pass": true,
+      "detail": "BadGzipFile: CRC check failed 0xd895c1d != 0xd895c1c"
+    },
+    {
+      "name": "two_family_and26_source_copies_positive",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "acquisition_pending",
+      "pass": true,
+      "detail": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+    },
+    {
+      "name": "acquisition_source_failure",
+      "pass": true,
+      "detail": "RuntimeError: SOURCE_FAILURE_VETOES_REPLAY"
+    },
+    {
+      "name": "acquisition_seal_failure",
+      "pass": true,
+      "detail": "RuntimeError: STAGE_COMMIT_CHANGED_DURING_CONSUMPTION"
+    },
+    {
+      "name": "acquisition_source_copy_changed",
+      "pass": true,
+      "detail": "RuntimeError: FROZEN_VALIDATION_INPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/acquisition_source_copy_changed/acquisition/1.mirror.json"
+    },
+    {
+      "name": "acquisition_family_copy_changed",
+      "pass": true,
+      "detail": "RuntimeError: FROZEN_VALIDATION_INPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/acquisition_family_copy_changed/acquisition/family.mirror.json"
+    },
+    {
+      "name": "acquisition_duplicate_path",
+      "pass": true,
+      "detail": "RuntimeError: ALL_THIRTEEN_DISTINCT_DOUBLE_RECEIPT_PATHS_REQUIRED"
+    },
+    {
+      "name": "acquisition_cleanup_error",
+      "pass": true,
+      "detail": "RuntimeError: EXACT_COMPLETE_REAPED_INDIVIDUAL_SOURCE_REQUIRED"
+    },
+    {
+      "name": "acquisition_missing_source_copy",
+      "pass": true,
+      "detail": "RuntimeError: REGULAR_FROZEN_VALIDATION_INPUT_REQUIRED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/acquisition_missing_source_copy/acquisition/1.mirror.json"
+    },
+    {
+      "name": "acquisition_changed_runtime_link",
+      "pass": true,
+      "detail": "RuntimeError: DECLARED_READ_ONLY_RUNTIME_IDENTITY_CHANGED"
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_valid_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_valid",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_valid",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "whole13_39_mock_controller_commits",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_wrong_command_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_wrong_command",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_wrong_command",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_wrong_command",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_stdout_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_missing_stdout",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_missing_stdout",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_missing_stdout",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_missing_journal_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_missing_journal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_missing_journal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_missing_journal",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_failure_addendum_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_failure_addendum",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_failure_addendum",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_failure_addendum",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_comparison_bad_consumed_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_comparison_bad_consumed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_comparison_bad_consumed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_comparison_bad_consumed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_master_mutation_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_master_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_master_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_master_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_mutation_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_plan_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_plan_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_plan_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_output_mutation_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_output_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_output_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_output_mutation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_post_persistence_resource_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_post_persistence_resource",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_post_persistence_resource",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_post_persistence_resource",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_signal_after_master_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_signal_after_master",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_signal_after_master",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "controller_rejects_signal_after_master",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_metadata_error_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_metadata_error",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_metadata_error",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "measured_contradictory_record_acceptance_metadata_error",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "error": null,
+        "mock_worker_count": 39,
+        "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_metadata_error",
+        "master_sha256": "84426cc4c8551c126de605620569773885f0ae143daa6fa4dd70aa40e7aed3b1",
+        "events": [
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "cleanup_no_fd"
+        ]
+      }
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_plan_unchanged_false_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_plan_unchanged_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_plan_unchanged_false",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "measured_contradictory_record_acceptance_plan_unchanged_false",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "error": null,
+        "mock_worker_count": 39,
+        "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_plan_unchanged_false",
+        "master_sha256": "4e148f24efe7986647bc57f370106f34c74a9bc61bb9dbe5147dbd1e0d2c5565",
+        "events": [
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "cleanup_no_fd"
+        ]
+      }
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_1",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_2",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_3",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_4",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_5",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_6",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_7",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_8",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_9",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_10",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_11",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_12",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_13",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_14",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_15",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_16",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_17",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_18",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_19",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_20",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_21",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_22",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_23",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_24",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_25",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_26",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_27",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_28",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_29",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_30",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_31",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_32",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_33",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_34",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_35",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_36",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_37",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_38",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "mock_science_runs_only_under_inherited_fd_teardown_cleanup_error_39",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all_mock_lock_fds_closed_teardown_cleanup_error",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cleanup_precedes_every_mock_fd_release_teardown_cleanup_error",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "measured_contradictory_record_acceptance_teardown_cleanup_error",
+      "pass": true,
+      "detail": {
+        "committed": true,
+        "error": null,
+        "mock_worker_count": 39,
+        "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_teardown_cleanup_error",
+        "master_sha256": "6ecc51823ca5cbd4cfa62e1aa33afd96c8d435126316db4ece3bc0c2ba914291",
+        "events": [
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "mock_lock_fd_open",
+          "mock_flock_no_real_mutex",
+          "cleanup_with_fd",
+          "mock_lock_fd_close",
+          "cleanup_no_fd"
+        ]
+      }
+    },
+    {
+      "name": "guard_baseline_positive",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "guard_rss",
+      "pass": true,
+      "detail": {
+        "internal_free_bytes": 35184372088832,
+        "SSD_free_bytes": 35184372088832,
+        "observed_worker_RSS_bytes": 2147483649,
+        "pipeline_namespace_bytes": 0,
+        "new_campaign_namespace_bytes": 0,
+        "elapsed_stage_seconds": 0.0,
+        "elapsed_worker_seconds": 0
+      }
+    },
+    {
+      "name": "guard_all_epochs",
+      "pass": true,
+      "detail": {
+        "internal_free_bytes": 35184372088832,
+        "SSD_free_bytes": 35184372088832,
+        "observed_worker_RSS_bytes": 0,
+        "pipeline_namespace_bytes": 2147483650,
+        "new_campaign_namespace_bytes": 0,
+        "elapsed_stage_seconds": 0.0,
+        "elapsed_worker_seconds": 0
+      }
+    },
+    {
+      "name": "guard_global",
+      "pass": true,
+      "detail": {
+        "internal_free_bytes": 35184372088832,
+        "SSD_free_bytes": 35184372088832,
+        "observed_worker_RSS_bytes": 0,
+        "pipeline_namespace_bytes": 0,
+        "new_campaign_namespace_bytes": 322122547201,
+        "elapsed_stage_seconds": 0.0,
+        "elapsed_worker_seconds": 0
+      }
+    },
+    {
+      "name": "guard_stage",
+      "pass": true,
+      "detail": {
+        "internal_free_bytes": 35184372088832,
+        "SSD_free_bytes": 35184372088832,
+        "observed_worker_RSS_bytes": 0,
+        "pipeline_namespace_bytes": 0,
+        "new_campaign_namespace_bytes": 0,
+        "elapsed_stage_seconds": 410000.0,
+        "elapsed_worker_seconds": 0
+      }
+    },
+    {
+      "name": "guard_worker",
+      "pass": true,
+      "detail": {
+        "internal_free_bytes": 35184372088832,
+        "SSD_free_bytes": 35184372088832,
+        "observed_worker_RSS_bytes": 0,
+        "pipeline_namespace_bytes": 0,
+        "new_campaign_namespace_bytes": 0,
+        "elapsed_stage_seconds": 0.0,
+        "elapsed_worker_seconds": 10000.0
+      }
+    },
+    {
+      "name": "guard_internal_floor",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "guard_SSD_floor",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "descriptor_proxy_no_process",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "descriptor_override_rejected",
+      "pass": true,
+      "detail": "RuntimeError: NO_WORKER_DESCRIPTOR_OVERRIDE"
+    },
+    {
+      "name": "candidate_files_unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "check_count": 621,
+  "mock_controller_cases": {
+    "valid": {
+      "committed": true,
+      "error": null,
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_valid",
+      "master_sha256": "2e2fc8311bc8daec2045b420c69d965aa4aeaf2e3a346c4784f95927f48f4825",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "wrong_command": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_wrong_command",
+      "master_sha256": "ceba3990411572686018ab827342138f2c275450345441f4e1703e5beacbb354",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "missing_stdout": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_missing_stdout",
+      "master_sha256": "28dc774c65886f3564f599f01511157efadaad8e10ba34a2761827feeb565c74",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "missing_journal": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_missing_journal",
+      "master_sha256": "c9b085d447ee8327d227bc97901cec719ddbb52f7229cfb68f95c46debed1436",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "failure_addendum": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_failure_addendum",
+      "master_sha256": "82a845011e1390b8f61b77c1b760f11803a3deeda67b70146b6a447561650fdb",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "comparison_bad_consumed": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_comparison_bad_consumed",
+      "master_sha256": "aac150d3d995b9547ea84c32baae861da2c0e49d20c1b2ad5fd7b8576f1ad088",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "master_mutation": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_master_mutation",
+      "master_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "plan_mutation": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_plan_mutation",
+      "master_sha256": "925853ba561f4df2a4a0eec063b1ef8d412965a365f5a465a875c0744659c392",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "output_mutation": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_output_mutation",
+      "master_sha256": "f4b8e0e9ca9841ec207414154b324586b2e125fef2105750e9a17cc513d46e32",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "post_persistence_resource": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_post_persistence_resource",
+      "master_sha256": "04564155380ddb4fcb3d9b064f1c5f41b13e36284b3b5cf170778e00ab59e656",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "signal_after_master": {
+      "committed": false,
+      "error": "SystemExit: VALIDATION_PIPELINE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_signal_after_master",
+      "master_sha256": "21234f6093c7608f6a3a5f30e80768d2426741f349bd722cd0543f97101848b9",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "metadata_error": {
+      "committed": true,
+      "error": null,
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_metadata_error",
+      "master_sha256": "84426cc4c8551c126de605620569773885f0ae143daa6fa4dd70aa40e7aed3b1",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "plan_unchanged_false": {
+      "committed": true,
+      "error": null,
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_plan_unchanged_false",
+      "master_sha256": "4e148f24efe7986647bc57f370106f34c74a9bc61bb9dbe5147dbd1e0d2c5565",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    },
+    "teardown_cleanup_error": {
+      "committed": true,
+      "error": null,
+      "mock_worker_count": 39,
+      "directory": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_original13_pipeline_fixture_v2_2/controller_teardown_cleanup_error",
+      "master_sha256": "6ecc51823ca5cbd4cfa62e1aa33afd96c8d435126316db4ece3bc0c2ba914291",
+      "events": [
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "mock_lock_fd_open",
+        "mock_flock_no_real_mutex",
+        "cleanup_with_fd",
+        "mock_lock_fd_close",
+        "cleanup_no_fd"
+      ]
+    }
+  },
+  "elapsed_seconds": 150.44966675000614,
+  "peak_RSS_bytes": 34783232,
+  "synthetic_fixture_bytes": 5683846,
+  "real_production_body_reads": 0,
+  "network_calls": 0,
+  "native_worker_launches": 0,
+  "real_heavy_mutex_operations": 0,
+  "qualification": "Controller uses shaped synthetic comparison records, mocked acquisition/runtime/baseline and separate actual resource-function controls. Actual adapter scientific execution, acquisition13 completion, actual preparation dependencies and plan/admission remain separate gates."
+}

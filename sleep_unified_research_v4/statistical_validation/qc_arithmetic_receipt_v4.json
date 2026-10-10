@@ -1,0 +1,3596 @@
+{
+  "schema": "independent_statistical_arithmetic_v4.1",
+  "started_utc": "2026-10-09T18:25:16.705483+00:00",
+  "completed_utc": "2026-10-09T18:25:22.938365+00:00",
+  "python": "3.13.5",
+  "git_branch": "research/sleep-unified-v1-2026-10-08",
+  "git_HEAD": "2ef91a5ebfce8bef8954fe90ebdaf2c6d4073400",
+  "status": "DIAGNOSTIC_ARITHMETIC_PASS_SCIENTIFIC_QC_UNRESOLVED",
+  "summary": {
+    "core_panel_rows": 45,
+    "core_h2_table_rows": 45,
+    "core_rg_rows": 396,
+    "primary_positive_under_frozen_396": 153,
+    "all_positive_under_frozen_396": 161,
+    "lipid_rows": 36,
+    "lipid_historical_fdr_positive": 20,
+    "lipid_positive_by_trait": {
+      "ldl": 4,
+      "hdl": 8,
+      "triglycerides": 8
+    },
+    "lipid_intercept_ranges": {
+      "ldl": [
+        1.2217,
+        1.2466
+      ],
+      "hdl": [
+        1.4076,
+        1.4233
+      ],
+      "triglycerides": [
+        1.2046,
+        1.2138
+      ]
+    },
+    "legacy_primary_positive_without_20_flagged_lipid_rows": 133,
+    "direct_processed_source_scans": 5,
+    "liability_traits": 2,
+    "liability_pair_rows": 24,
+    "original_GenomicSEM_elements": 1035,
+    "original_GenomicSEM_traits": 45
+  },
+  "control_flow": {
+    "pinned_sumstats_sha256": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e",
+    "pinned_regressions_sha256": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e",
+    "normalization_line": 380,
+    "rg_branch_line": 395,
+    "rg_branch_test": "n_annot == 1 and args.two_step is None and (args.intercept_h2 is None)",
+    "normalized_intercept_none_type": "list",
+    "default_rg_automatic_two_step_active": false,
+    "standalone_h2_automatic_two_step_active": true,
+    "h2_branch_line": 331,
+    "native_difference": "UNESTIMATED; no estimator launched or code patched"
+  },
+  "standalone_original_logs": [
+    {
+      "scale": "Liability",
+      "h2": 5.9823,
+      "h2_se": 1.1958,
+      "h2_token": "5.9823",
+      "h2_se_token": "1.1958",
+      "intercept": 1.0288,
+      "intercept_se": 0.0081,
+      "intercept_token": "1.0288",
+      "intercept_se_token": "0.0081",
+      "mean_chi2": 1.09,
+      "lambda_gc": 1.071,
+      "printed_ratio": 0.3197,
+      "trait": "ms",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log",
+      "two_step_message": true,
+      "input_rows": 1159114,
+      "merged_rows": 1154421,
+      "h2_log_line": 28,
+      "intercept_log_line": 31
+    },
+    {
+      "scale": "Liability",
+      "h2": 3.731,
+      "h2_se": 1.0456,
+      "h2_token": "3.731",
+      "h2_se_token": "1.0456",
+      "intercept": 1.0343,
+      "intercept_se": 0.0092,
+      "intercept_token": "1.0343",
+      "intercept_se_token": "0.0092",
+      "mean_chi2": 1.0903,
+      "lambda_gc": 1.0679,
+      "printed_ratio": 0.3797,
+      "trait": "melanoma",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log",
+      "two_step_message": true,
+      "input_rows": 1158991,
+      "merged_rows": 1154300,
+      "h2_log_line": 28,
+      "intercept_log_line": 31
+    },
+    {
+      "scale": "Observed",
+      "h2": 0.0815,
+      "h2_se": 0.009,
+      "h2_token": "0.0815",
+      "h2_se_token": "0.009",
+      "intercept": 1.141,
+      "intercept_se": 0.0245,
+      "intercept_token": "1.141",
+      "intercept_se_token": "0.0245",
+      "mean_chi2": 3.0749,
+      "lambda_gc": 1.5364,
+      "printed_ratio": 0.068,
+      "trait": "ldl",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log",
+      "two_step_message": true,
+      "input_rows": 1179406,
+      "merged_rows": 1175231,
+      "h2_log_line": 26,
+      "intercept_log_line": 29
+    },
+    {
+      "scale": "Observed",
+      "h2": 0.1222,
+      "h2_se": 0.012,
+      "h2_token": "0.1222",
+      "h2_se_token": "0.012",
+      "intercept": 1.1958,
+      "intercept_se": 0.0298,
+      "intercept_token": "1.1958",
+      "intercept_se_token": "0.0298",
+      "mean_chi2": 4.0167,
+      "lambda_gc": 2.1285,
+      "printed_ratio": 0.0649,
+      "trait": "hdl",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log",
+      "two_step_message": true,
+      "input_rows": 1180327,
+      "merged_rows": 1176150,
+      "h2_log_line": 26,
+      "intercept_log_line": 29
+    },
+    {
+      "scale": "Observed",
+      "h2": 0.0954,
+      "h2_se": 0.008,
+      "h2_token": "0.0954",
+      "h2_se_token": "0.008",
+      "intercept": 1.165,
+      "intercept_se": 0.0275,
+      "intercept_token": "1.165",
+      "intercept_se_token": "0.0275",
+      "mean_chi2": 3.5259,
+      "lambda_gc": 1.9756,
+      "printed_ratio": 0.0653,
+      "trait": "triglycerides",
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log",
+      "two_step_message": true,
+      "input_rows": 1179576,
+      "merged_rows": 1175399,
+      "h2_log_line": 26,
+      "intercept_log_line": 29
+    }
+  ],
+  "pairwise_log_modes": [
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log",
+      "two_step_message": false,
+      "two_step_cli": false,
+      "explicit_intercept_cli": false
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/qc_arithmetic_v4.py",
+      "bytes": 26727,
+      "sha256_before": "646bd7c42e9a1acfc489632dffaf9128bc619f04e39fd6e27915b5300ac4c922",
+      "sha256_after": "646bd7c42e9a1acfc489632dffaf9128bc619f04e39fd6e27915b5300ac4c922"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/config/analysis_panel.tsv",
+      "bytes": 24571,
+      "sha256_before": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80",
+      "sha256_after": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/h2_summary.tsv",
+      "bytes": 6547,
+      "sha256_before": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67",
+      "sha256_after": "1c5c2a2e0b1716fba8c907f7e57492db1cf24b1f0d0d052c2d4518fd3482be67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/rg_matrix.tsv",
+      "bytes": 79897,
+      "sha256_before": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077",
+      "sha256_after": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/native_input_hash_checks.tsv",
+      "bytes": 86442,
+      "sha256_before": "7ce784dc1453f31b143eaae0b65bd64da5803201cf7f74080d2610380d8172b6",
+      "sha256_after": "7ce784dc1453f31b143eaae0b65bd64da5803201cf7f74080d2610380d8172b6"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py",
+      "bytes": 23660,
+      "sha256_before": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e",
+      "sha256_after": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py",
+      "bytes": 23660,
+      "sha256_before": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e",
+      "sha256_after": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py",
+      "bytes": 29677,
+      "sha256_before": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e",
+      "sha256_after": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/regressions.py",
+      "bytes": 29677,
+      "sha256_before": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e",
+      "sha256_after": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/01_harmonize.py",
+      "bytes": 33857,
+      "sha256_before": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a",
+      "sha256_after": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/03_h2_qc.sh",
+      "bytes": 2864,
+      "sha256_before": "f3d0bd3d3d3561df1f3de2af9e4a1d737cb5254a845866caec3f142b1a15f2b0",
+      "sha256_after": "f3d0bd3d3d3561df1f3de2af9e4a1d737cb5254a845866caec3f142b1a15f2b0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/05_collate.py",
+      "bytes": 14111,
+      "sha256_before": "ef82371d8b74a4cd9827359075b9d0549d996ac6bf0d6b1bff866e6927aa6c67",
+      "sha256_after": "ef82371d8b74a4cd9827359075b9d0549d996ac6bf0d6b1bff866e6927aa6c67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/25_genomicsem_covariance.R",
+      "bytes": 11460,
+      "sha256_before": "7ccfc83d71e9adaf6f9adc3e848630f044ad837711578c5d31aca8ef1de6a942",
+      "sha256_after": "7ccfc83d71e9adaf6f9adc3e848630f044ad837711578c5d31aca8ef1de6a942"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/manifests/ldsc_native_code_comparison_v1.json",
+      "bytes": 608,
+      "sha256_before": "686ba0953c36b83b6773402298e7590ca582d4efe5a2cff46b6d6e0d6e054c6e",
+      "sha256_after": "686ba0953c36b83b6773402298e7590ca582d4efe5a2cff46b6d6e0d6e054c6e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ms.sumstats.gz",
+      "bytes": 8602200,
+      "sha256_before": "a32ac1969d0590aeff444c3bc37200e74ae2684811fb9e56840d34cee463dc98",
+      "sha256_after": "a32ac1969d0590aeff444c3bc37200e74ae2684811fb9e56840d34cee463dc98"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/melanoma.sumstats.gz",
+      "bytes": 8656269,
+      "sha256_before": "41727ede7efca6a354de960c2c29145852e4c1be082f5001f9c2e625524c659a",
+      "sha256_after": "41727ede7efca6a354de960c2c29145852e4c1be082f5001f9c2e625524c659a"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ldl.sumstats.gz",
+      "bytes": 11423992,
+      "sha256_before": "6c892e0f10454b8b41b03a359e744ec85a87b0d0a2465e89fedc4629520db933",
+      "sha256_after": "6c892e0f10454b8b41b03a359e744ec85a87b0d0a2465e89fedc4629520db933"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/hdl.sumstats.gz",
+      "bytes": 11586353,
+      "sha256_before": "64983e6dc17a8833a202f8809ef55eebb79ec26f5cbeff1bf9e9740e47467781",
+      "sha256_after": "64983e6dc17a8833a202f8809ef55eebb79ec26f5cbeff1bf9e9740e47467781"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/triglycerides.sumstats.gz",
+      "bytes": 11566621,
+      "sha256_before": "2c4ae34eef92e4386d540ccf8e24f85b2efccc1df6f200efea48c0ae1ac18f37",
+      "sha256_after": "2c4ae34eef92e4386d540ccf8e24f85b2efccc1df6f200efea48c0ae1ac18f37"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log",
+      "bytes": 1368,
+      "sha256_before": "fd28d8aab44eb7c26b69a40f614d8ce00e23da29fdc7e729aa3b6b221f62bcb5",
+      "sha256_after": "fd28d8aab44eb7c26b69a40f614d8ce00e23da29fdc7e729aa3b6b221f62bcb5"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log",
+      "bytes": 1387,
+      "sha256_before": "8622bfb96233aeb36c2dc8863786d37f836d3fc4a1034ece2b83d3eeaef6a1d2",
+      "sha256_after": "8622bfb96233aeb36c2dc8863786d37f836d3fc4a1034ece2b83d3eeaef6a1d2"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log",
+      "bytes": 1327,
+      "sha256_before": "72df5d58eeb61562d7ad93ec2231dbaeb37ff2292e0e6b437107a5e5dda020a5",
+      "sha256_after": "72df5d58eeb61562d7ad93ec2231dbaeb37ff2292e0e6b437107a5e5dda020a5"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log",
+      "bytes": 1329,
+      "sha256_before": "2483d9f56bda33aad84d315852648e37c62188b82dd1745dfff4e54ae86ba41d",
+      "sha256_after": "2483d9f56bda33aad84d315852648e37c62188b82dd1745dfff4e54ae86ba41d"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log",
+      "bytes": 1359,
+      "sha256_before": "797244587a380d67c06ff9e1ce6dcdd403fdd6b8ac78509aae4a84b1b00d9c55",
+      "sha256_after": "797244587a380d67c06ff9e1ce6dcdd403fdd6b8ac78509aae4a84b1b00d9c55"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log",
+      "bytes": 28510,
+      "sha256_before": "f146c839ba540467c9db31324fc01ca948d8eac3405833be4ea3898d64f288ed",
+      "sha256_after": "f146c839ba540467c9db31324fc01ca948d8eac3405833be4ea3898d64f288ed"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log",
+      "bytes": 3277,
+      "sha256_before": "2107a285efaafbe648dba762350fdec66f1e7673457a28793a4d2e2d141dfe36",
+      "sha256_after": "2107a285efaafbe648dba762350fdec66f1e7673457a28793a4d2e2d141dfe36"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log",
+      "bytes": 28502,
+      "sha256_before": "6460a236d61e3e52d291f7339bf74d737063e32be4d63f76c02efbcad30dae26",
+      "sha256_after": "6460a236d61e3e52d291f7339bf74d737063e32be4d63f76c02efbcad30dae26"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log",
+      "bytes": 3276,
+      "sha256_before": "51323eac30b5743c94b2fc26fcd820294edac4fe764347c8ec1482c7eb087376",
+      "sha256_after": "51323eac30b5743c94b2fc26fcd820294edac4fe764347c8ec1482c7eb087376"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log",
+      "bytes": 28573,
+      "sha256_before": "f9545c8519505601cf15d3cae4df05ed148d661c15c814226ace03a8c2543d7e",
+      "sha256_after": "f9545c8519505601cf15d3cae4df05ed148d661c15c814226ace03a8c2543d7e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log",
+      "bytes": 3287,
+      "sha256_before": "e4ccca9065acf700fca23503119c4f581a34eca74a0cab9abd81bd23796eae58",
+      "sha256_after": "e4ccca9065acf700fca23503119c4f581a34eca74a0cab9abd81bd23796eae58"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log",
+      "bytes": 28534,
+      "sha256_before": "0bf3dfe6820186f986ac86b66534f72d99f851a55da8835a6aa765debedd50c3",
+      "sha256_after": "0bf3dfe6820186f986ac86b66534f72d99f851a55da8835a6aa765debedd50c3"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log",
+      "bytes": 3284,
+      "sha256_before": "b159218411edc6665654ae308c0705ac436f08e83d3d008ec7e4ae7ddec33a6c",
+      "sha256_after": "b159218411edc6665654ae308c0705ac436f08e83d3d008ec7e4ae7ddec33a6c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log",
+      "bytes": 28565,
+      "sha256_before": "2ed4e27d74c060926fb4e4ec15048b289d3777a9c6dbc756c43b98ae9eede948",
+      "sha256_after": "2ed4e27d74c060926fb4e4ec15048b289d3777a9c6dbc756c43b98ae9eede948"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log",
+      "bytes": 3282,
+      "sha256_before": "5746c798f0de0f49e264919f06a8d247b401a54ce4f0b1859679fda9675c1c25",
+      "sha256_after": "5746c798f0de0f49e264919f06a8d247b401a54ce4f0b1859679fda9675c1c25"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log",
+      "bytes": 28561,
+      "sha256_before": "4a8a01a80574e5743acb499a6a4f9f9f74e9dcd8cace6292e332bead5c1f2f55",
+      "sha256_after": "4a8a01a80574e5743acb499a6a4f9f9f74e9dcd8cace6292e332bead5c1f2f55"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log",
+      "bytes": 3289,
+      "sha256_before": "8bfd7f8cb7ed921f43019aaf3387a445d23ca496c0e38e20d0e200614bf0158e",
+      "sha256_after": "8bfd7f8cb7ed921f43019aaf3387a445d23ca496c0e38e20d0e200614bf0158e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log",
+      "bytes": 28488,
+      "sha256_before": "98f5f73de2cda651b47681b6de9a516a92968f19e30ddd45701f700243ee0cfe",
+      "sha256_after": "98f5f73de2cda651b47681b6de9a516a92968f19e30ddd45701f700243ee0cfe"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log",
+      "bytes": 3274,
+      "sha256_before": "1ac8915d3a23125581daefd1723ae13d8602990af261cd87717ddfa7e30f1112",
+      "sha256_after": "1ac8915d3a23125581daefd1723ae13d8602990af261cd87717ddfa7e30f1112"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log",
+      "bytes": 28467,
+      "sha256_before": "88343e6007dc496f989e60f115a70280bd1f6c316ddad230f97a1eb510050c94",
+      "sha256_after": "88343e6007dc496f989e60f115a70280bd1f6c316ddad230f97a1eb510050c94"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log",
+      "bytes": 3269,
+      "sha256_before": "f119da33bb6412f1258f5c111201aea70824e1510aa5abf1508a0067ac51a5b8",
+      "sha256_after": "f119da33bb6412f1258f5c111201aea70824e1510aa5abf1508a0067ac51a5b8"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log",
+      "bytes": 28627,
+      "sha256_before": "b82b989e101ec70615ab4542cc3a6d68053dfd146f59a306ac59b9fa201a7b1c",
+      "sha256_after": "b82b989e101ec70615ab4542cc3a6d68053dfd146f59a306ac59b9fa201a7b1c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log",
+      "bytes": 3297,
+      "sha256_before": "c33ac46c41e09dc2327b8f7ab101b0799df3f8bee2cd8c814f8d84f533d7cc3e",
+      "sha256_after": "c33ac46c41e09dc2327b8f7ab101b0799df3f8bee2cd8c814f8d84f533d7cc3e"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log",
+      "bytes": 28758,
+      "sha256_before": "55d262f9b1ac4fcf9adfe57efc48f52e142b8b67ffde34f021c39361cceb3d81",
+      "sha256_after": "55d262f9b1ac4fcf9adfe57efc48f52e142b8b67ffde34f021c39361cceb3d81"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log",
+      "bytes": 3320,
+      "sha256_before": "87221ba7141deeb5bb55a0f22c5c5ca5b7282a22a8d37e6b8fc929f3d6f79a6c",
+      "sha256_after": "87221ba7141deeb5bb55a0f22c5c5ca5b7282a22a8d37e6b8fc929f3d6f79a6c"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log",
+      "bytes": 28870,
+      "sha256_before": "2dd1aac1a9eba9e2d01891a8a07c7c2be7595dd0de1c16dc61cc7907d4671575",
+      "sha256_after": "2dd1aac1a9eba9e2d01891a8a07c7c2be7595dd0de1c16dc61cc7907d4671575"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log",
+      "bytes": 3343,
+      "sha256_before": "b59916015e12d838a6a1409f087eaa49e251ae18c0d1ffa37a1eb7965e99c999",
+      "sha256_after": "b59916015e12d838a6a1409f087eaa49e251ae18c0d1ffa37a1eb7965e99c999"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log",
+      "bytes": 28593,
+      "sha256_before": "4d92b25f49d7f28bdcaf922d67ce7130b8c7edd9e33dbdde5028ae73f137b7ba",
+      "sha256_after": "4d92b25f49d7f28bdcaf922d67ce7130b8c7edd9e33dbdde5028ae73f137b7ba"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log",
+      "bytes": 3297,
+      "sha256_before": "cbce1b7529c303f3921b58dfee004985451f7c2aaa5acbe9811f6bb0905bfc5a",
+      "sha256_after": "cbce1b7529c303f3921b58dfee004985451f7c2aaa5acbe9811f6bb0905bfc5a"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_pairs.tsv",
+      "bytes": 292611,
+      "sha256_before": "2be39639e0262c3b5a434e26d5339661715992a20e35fb0613323a042a953209",
+      "sha256_after": "2be39639e0262c3b5a434e26d5339661715992a20e35fb0613323a042a953209"
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/genomicsem_trait_inclusion.tsv",
+      "bytes": 7355,
+      "sha256_before": "bc69a613e244a3b7103e7084d0cdc7a80b09b53c6ecbfd8dc385ca1d014990eb",
+      "sha256_after": "bc69a613e244a3b7103e7084d0cdc7a80b09b53c6ecbfd8dc385ca1d014990eb"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/official_lipid_readme_fetch_receipt_v4.json",
+      "bytes": 1468,
+      "sha256_before": "945ecbe393e1e548f2c1bc9fc0428f395422b616a353e49004212f455b83aca5",
+      "sha256_after": "945ecbe393e1e548f2c1bc9fc0428f395422b616a353e49004212f455b83aca5"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239658_official_README.txt",
+      "bytes": 923,
+      "sha256_before": "4fafbbcaeff8702a24bdd6115b3b46c37d9300252b37807df8a324c4573a231f",
+      "sha256_after": "4fafbbcaeff8702a24bdd6115b3b46c37d9300252b37807df8a324c4573a231f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239652_official_README.txt",
+      "bytes": 1038,
+      "sha256_before": "1a18b4f22c215966e9012e287f75a6407ed0e4750e3781f11296b5dab139b272",
+      "sha256_after": "1a18b4f22c215966e9012e287f75a6407ed0e4750e3781f11296b5dab139b272"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239664_official_README.txt",
+      "bytes": 923,
+      "sha256_before": "4fafbbcaeff8702a24bdd6115b3b46c37d9300252b37807df8a324c4573a231f",
+      "sha256_after": "4fafbbcaeff8702a24bdd6115b3b46c37d9300252b37807df8a324c4573a231f"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/lipid_intercept_diagnostics_v4.tsv",
+      "bytes": 22151,
+      "sha256": "10b9405fbfcef7b7fdfc2bbd5a48d1798d54e33ad96419d470fe574789eb66da",
+      "rows": 36
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/processed_N_coding_diagnostics_v4.tsv",
+      "bytes": 1791,
+      "sha256": "412be00c7ce13fa0a0c31181cf430b046dd6b2f62122360305a25ec46e34b18f",
+      "rows": 5
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/liability_input_sensitivity_v4.tsv",
+      "bytes": 2473,
+      "sha256": "1def34f04908337e533772a844d2d79d246866ff4174707886f10870be11b6cd",
+      "rows": 2
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/liability_pair_scale_sensitivity_v4.tsv",
+      "bytes": 6165,
+      "sha256": "c0ff496e85987a5f31a1428ee941e91c904b2212f88e9a51a339d6dfd728e269",
+      "rows": 24
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/legacy_GenomicSEM_diagonal_sensitivity_v4.tsv",
+      "bytes": 1343,
+      "sha256": "eb372ae0bfb9b62d0c049a77d5254591a69e06ea566060d3fd80916737a539b4",
+      "rows": 5
+    }
+  ],
+  "checks": [
+    {
+      "check": "frozen_cardinality",
+      "pass_": true,
+      "evidence": [
+        45,
+        45,
+        45,
+        396
+      ]
+    },
+    {
+      "check": "frozen_unique_pairs",
+      "pass_": true,
+      "evidence": "12 sleep by 33 outcomes"
+    },
+    {
+      "check": "pinned_control_flow_matches_archive",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py"
+    },
+    {
+      "check": "pinned_regression_matches_archive",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/regressions.py"
+    },
+    {
+      "check": "rg_default_branch_is_false",
+      "pass_": true,
+      "evidence": {
+        "normalization_line": 380,
+        "branch_line": 395,
+        "branch_test": "n_annot == 1 and args.two_step is None and (args.intercept_h2 is None)"
+      }
+    },
+    {
+      "check": "standalone_h2_default_branch_is_true",
+      "pass_": true,
+      "evidence": 331
+    },
+    {
+      "check": "current_munged_hash_ms",
+      "pass_": true,
+      "evidence": "v1 native_input_hash_checks current-file hash; not a historical munged hash"
+    },
+    {
+      "check": "munged_header_ms",
+      "pass_": true,
+      "evidence": [
+        "SNP",
+        "A1",
+        "A2",
+        "Z",
+        "N"
+      ]
+    },
+    {
+      "check": "current_munged_hash_melanoma",
+      "pass_": true,
+      "evidence": "v1 native_input_hash_checks current-file hash; not a historical munged hash"
+    },
+    {
+      "check": "munged_header_melanoma",
+      "pass_": true,
+      "evidence": [
+        "SNP",
+        "A1",
+        "A2",
+        "Z",
+        "N"
+      ]
+    },
+    {
+      "check": "current_munged_hash_ldl",
+      "pass_": true,
+      "evidence": "v1 native_input_hash_checks current-file hash; not a historical munged hash"
+    },
+    {
+      "check": "munged_header_ldl",
+      "pass_": true,
+      "evidence": [
+        "SNP",
+        "A1",
+        "A2",
+        "Z",
+        "N"
+      ]
+    },
+    {
+      "check": "current_munged_hash_hdl",
+      "pass_": true,
+      "evidence": "v1 native_input_hash_checks current-file hash; not a historical munged hash"
+    },
+    {
+      "check": "munged_header_hdl",
+      "pass_": true,
+      "evidence": [
+        "SNP",
+        "A1",
+        "A2",
+        "Z",
+        "N"
+      ]
+    },
+    {
+      "check": "current_munged_hash_triglycerides",
+      "pass_": true,
+      "evidence": "v1 native_input_hash_checks current-file hash; not a historical munged hash"
+    },
+    {
+      "check": "munged_header_triglycerides",
+      "pass_": true,
+      "evidence": [
+        "SNP",
+        "A1",
+        "A2",
+        "Z",
+        "N"
+      ]
+    },
+    {
+      "check": "h2_finite_source_count_ms",
+      "pass_": true,
+      "evidence": 1159114
+    },
+    {
+      "check": "standalone_two_step_ms",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log"
+    },
+    {
+      "check": "h2_finite_source_count_melanoma",
+      "pass_": true,
+      "evidence": 1158991
+    },
+    {
+      "check": "standalone_two_step_melanoma",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log"
+    },
+    {
+      "check": "h2_finite_source_count_ldl",
+      "pass_": true,
+      "evidence": 1179406
+    },
+    {
+      "check": "standalone_two_step_ldl",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log"
+    },
+    {
+      "check": "h2_finite_source_count_hdl",
+      "pass_": true,
+      "evidence": 1180327
+    },
+    {
+      "check": "standalone_two_step_hdl",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log"
+    },
+    {
+      "check": "h2_finite_source_count_triglycerides",
+      "pass_": true,
+      "evidence": 1179576
+    },
+    {
+      "check": "standalone_two_step_triglycerides",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log"
+    },
+    {
+      "check": "log_table_printed_12_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3578",
+        "log": 0.3578
+      }
+    },
+    {
+      "check": "log_table_printed_12_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0701",
+        "log": 0.0701
+      }
+    },
+    {
+      "check": "log_table_printed_12_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.027",
+        "log": 1.027
+      }
+    },
+    {
+      "check": "log_table_printed_12_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "pair_full_template_count_12",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_16_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0748",
+        "log": 0.0748
+      }
+    },
+    {
+      "check": "log_table_printed_16_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0081",
+        "log": 0.0081
+      }
+    },
+    {
+      "check": "log_table_printed_16_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.236",
+        "log": 1.2364
+      }
+    },
+    {
+      "check": "log_table_printed_16_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1288",
+        "log": 0.1288
+      }
+    },
+    {
+      "check": "pair_full_template_count_16",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_17_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1056",
+        "log": 0.1056
+      }
+    },
+    {
+      "check": "log_table_printed_17_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.008",
+        "log": 0.008
+      }
+    },
+    {
+      "check": "log_table_printed_17_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.408",
+        "log": 1.4076
+      }
+    },
+    {
+      "check": "log_table_printed_17_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1639",
+        "log": 0.1639
+      }
+    },
+    {
+      "check": "pair_full_template_count_17",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_18_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.092",
+        "log": 0.092
+      }
+    },
+    {
+      "check": "log_table_printed_18_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "log_table_printed_18_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.214",
+        "log": 1.2138
+      }
+    },
+    {
+      "check": "log_table_printed_18_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1046",
+        "log": 0.1046
+      }
+    },
+    {
+      "check": "pair_full_template_count_18",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_33_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2333",
+        "log": 0.2333
+      }
+    },
+    {
+      "check": "log_table_printed_33_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0721",
+        "log": 0.0721
+      }
+    },
+    {
+      "check": "log_table_printed_33_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.034",
+        "log": 1.0337
+      }
+    },
+    {
+      "check": "log_table_printed_33_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0101",
+        "log": 0.0101
+      }
+    },
+    {
+      "check": "pair_full_template_count_33",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_45_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3512",
+        "log": 0.3512
+      }
+    },
+    {
+      "check": "log_table_printed_45_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0686",
+        "log": 0.0686
+      }
+    },
+    {
+      "check": "log_table_printed_45_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0283
+      }
+    },
+    {
+      "check": "log_table_printed_45_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0083",
+        "log": 0.0083
+      }
+    },
+    {
+      "check": "pair_full_template_count_45",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_49_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0757",
+        "log": 0.0757
+      }
+    },
+    {
+      "check": "log_table_printed_49_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_49_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.224",
+        "log": 1.2236
+      }
+    },
+    {
+      "check": "log_table_printed_49_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1292",
+        "log": 0.1292
+      }
+    },
+    {
+      "check": "pair_full_template_count_49",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_50_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_50_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_50_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.416",
+        "log": 1.4163
+      }
+    },
+    {
+      "check": "log_table_printed_50_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1567",
+        "log": 0.1567
+      }
+    },
+    {
+      "check": "pair_full_template_count_50",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_51_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_51_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_51_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.205",
+        "log": 1.2049
+      }
+    },
+    {
+      "check": "log_table_printed_51_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1009",
+        "log": 0.1009
+      }
+    },
+    {
+      "check": "pair_full_template_count_51",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_66_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2371",
+        "log": 0.2371
+      }
+    },
+    {
+      "check": "log_table_printed_66_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0723",
+        "log": 0.0723
+      }
+    },
+    {
+      "check": "log_table_printed_66_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0326
+      }
+    },
+    {
+      "check": "log_table_printed_66_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_66",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_78_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3514",
+        "log": 0.3514
+      }
+    },
+    {
+      "check": "log_table_printed_78_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0686",
+        "log": 0.0686
+      }
+    },
+    {
+      "check": "log_table_printed_78_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0283
+      }
+    },
+    {
+      "check": "log_table_printed_78_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0083",
+        "log": 0.0083
+      }
+    },
+    {
+      "check": "pair_full_template_count_78",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_82_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0757",
+        "log": 0.0757
+      }
+    },
+    {
+      "check": "log_table_printed_82_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_82_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.224",
+        "log": 1.2235
+      }
+    },
+    {
+      "check": "log_table_printed_82_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1292",
+        "log": 0.1292
+      }
+    },
+    {
+      "check": "pair_full_template_count_82",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_83_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_83_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_83_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.416",
+        "log": 1.4163
+      }
+    },
+    {
+      "check": "log_table_printed_83_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1567",
+        "log": 0.1567
+      }
+    },
+    {
+      "check": "pair_full_template_count_83",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_84_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_84_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_84_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.205",
+        "log": 1.205
+      }
+    },
+    {
+      "check": "log_table_printed_84_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1011",
+        "log": 0.1011
+      }
+    },
+    {
+      "check": "pair_full_template_count_84",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_99_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2372",
+        "log": 0.2372
+      }
+    },
+    {
+      "check": "log_table_printed_99_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0724",
+        "log": 0.0724
+      }
+    },
+    {
+      "check": "log_table_printed_99_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0326
+      }
+    },
+    {
+      "check": "log_table_printed_99_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_99",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_111_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3515",
+        "log": 0.3515
+      }
+    },
+    {
+      "check": "log_table_printed_111_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0686",
+        "log": 0.0686
+      }
+    },
+    {
+      "check": "log_table_printed_111_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0282
+      }
+    },
+    {
+      "check": "log_table_printed_111_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0082",
+        "log": 0.0082
+      }
+    },
+    {
+      "check": "pair_full_template_count_111",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_115_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0757",
+        "log": 0.0757
+      }
+    },
+    {
+      "check": "log_table_printed_115_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_115_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.224",
+        "log": 1.2235
+      }
+    },
+    {
+      "check": "log_table_printed_115_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1292",
+        "log": 0.1292
+      }
+    },
+    {
+      "check": "pair_full_template_count_115",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_116_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_116_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_116_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.416",
+        "log": 1.4164
+      }
+    },
+    {
+      "check": "log_table_printed_116_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1567",
+        "log": 0.1567
+      }
+    },
+    {
+      "check": "pair_full_template_count_116",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_117_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_117_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_117_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.205",
+        "log": 1.2052
+      }
+    },
+    {
+      "check": "log_table_printed_117_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.101",
+        "log": 0.101
+      }
+    },
+    {
+      "check": "pair_full_template_count_117",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_132_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.237",
+        "log": 0.237
+      }
+    },
+    {
+      "check": "log_table_printed_132_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0723",
+        "log": 0.0723
+      }
+    },
+    {
+      "check": "log_table_printed_132_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0326
+      }
+    },
+    {
+      "check": "log_table_printed_132_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_132",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_144_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3511",
+        "log": 0.3511
+      }
+    },
+    {
+      "check": "log_table_printed_144_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0689",
+        "log": 0.0689
+      }
+    },
+    {
+      "check": "log_table_printed_144_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0283
+      }
+    },
+    {
+      "check": "log_table_printed_144_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "pair_full_template_count_144",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_148_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0758",
+        "log": 0.0758
+      }
+    },
+    {
+      "check": "log_table_printed_148_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_148_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.222",
+        "log": 1.222
+      }
+    },
+    {
+      "check": "log_table_printed_148_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1294",
+        "log": 0.1294
+      }
+    },
+    {
+      "check": "pair_full_template_count_148",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_149_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_149_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_149_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.417",
+        "log": 1.417
+      }
+    },
+    {
+      "check": "log_table_printed_149_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1573",
+        "log": 0.1573
+      }
+    },
+    {
+      "check": "pair_full_template_count_149",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_150_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_150_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_150_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.206",
+        "log": 1.2058
+      }
+    },
+    {
+      "check": "log_table_printed_150_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1013",
+        "log": 0.1013
+      }
+    },
+    {
+      "check": "pair_full_template_count_150",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_165_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2368",
+        "log": 0.2368
+      }
+    },
+    {
+      "check": "log_table_printed_165_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.073",
+        "log": 0.073
+      }
+    },
+    {
+      "check": "log_table_printed_165_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0326
+      }
+    },
+    {
+      "check": "log_table_printed_165_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0105",
+        "log": 0.0105
+      }
+    },
+    {
+      "check": "pair_full_template_count_165",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_177_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3512",
+        "log": 0.3512
+      }
+    },
+    {
+      "check": "log_table_printed_177_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0687",
+        "log": 0.0687
+      }
+    },
+    {
+      "check": "log_table_printed_177_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0283
+      }
+    },
+    {
+      "check": "log_table_printed_177_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0083",
+        "log": 0.0083
+      }
+    },
+    {
+      "check": "pair_full_template_count_177",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_181_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0757",
+        "log": 0.0757
+      }
+    },
+    {
+      "check": "log_table_printed_181_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_181_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.224",
+        "log": 1.2236
+      }
+    },
+    {
+      "check": "log_table_printed_181_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1292",
+        "log": 0.1292
+      }
+    },
+    {
+      "check": "pair_full_template_count_181",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_182_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_182_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_182_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.416",
+        "log": 1.4163
+      }
+    },
+    {
+      "check": "log_table_printed_182_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1567",
+        "log": 0.1567
+      }
+    },
+    {
+      "check": "pair_full_template_count_182",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_183_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_183_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_183_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.205",
+        "log": 1.2051
+      }
+    },
+    {
+      "check": "log_table_printed_183_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1011",
+        "log": 0.1011
+      }
+    },
+    {
+      "check": "pair_full_template_count_183",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_198_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.237",
+        "log": 0.237
+      }
+    },
+    {
+      "check": "log_table_printed_198_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0723",
+        "log": 0.0723
+      }
+    },
+    {
+      "check": "log_table_printed_198_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0327
+      }
+    },
+    {
+      "check": "log_table_printed_198_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_198",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_210_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3432",
+        "log": 0.3432
+      }
+    },
+    {
+      "check": "log_table_printed_210_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.07",
+        "log": 0.07
+      }
+    },
+    {
+      "check": "log_table_printed_210_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.03",
+        "log": 1.0297
+      }
+    },
+    {
+      "check": "log_table_printed_210_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "pair_full_template_count_210",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_214_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0755",
+        "log": 0.0755
+      }
+    },
+    {
+      "check": "log_table_printed_214_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_214_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.227",
+        "log": 1.2273
+      }
+    },
+    {
+      "check": "log_table_printed_214_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1313",
+        "log": 0.1313
+      }
+    },
+    {
+      "check": "pair_full_template_count_214",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_215_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.105",
+        "log": 0.105
+      }
+    },
+    {
+      "check": "log_table_printed_215_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_215_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.423",
+        "log": 1.4233
+      }
+    },
+    {
+      "check": "log_table_printed_215_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1598",
+        "log": 0.1598
+      }
+    },
+    {
+      "check": "pair_full_template_count_215",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_216_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0925",
+        "log": 0.0925
+      }
+    },
+    {
+      "check": "log_table_printed_216_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_216_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.208",
+        "log": 1.2076
+      }
+    },
+    {
+      "check": "log_table_printed_216_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1028",
+        "log": 0.1028
+      }
+    },
+    {
+      "check": "pair_full_template_count_216",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_231_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2343",
+        "log": 0.2343
+      }
+    },
+    {
+      "check": "log_table_printed_231_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0727",
+        "log": 0.0727
+      }
+    },
+    {
+      "check": "log_table_printed_231_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.034",
+        "log": 1.0335
+      }
+    },
+    {
+      "check": "log_table_printed_231_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0105",
+        "log": 0.0105
+      }
+    },
+    {
+      "check": "pair_full_template_count_231",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_243_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3489",
+        "log": 0.3489
+      }
+    },
+    {
+      "check": "log_table_printed_243_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0684",
+        "log": 0.0684
+      }
+    },
+    {
+      "check": "log_table_printed_243_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.029",
+        "log": 1.0287
+      }
+    },
+    {
+      "check": "log_table_printed_243_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0083",
+        "log": 0.0083
+      }
+    },
+    {
+      "check": "pair_full_template_count_243",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_247_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0757",
+        "log": 0.0757
+      }
+    },
+    {
+      "check": "log_table_printed_247_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_247_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.224",
+        "log": 1.2238
+      }
+    },
+    {
+      "check": "log_table_printed_247_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1295",
+        "log": 0.1295
+      }
+    },
+    {
+      "check": "pair_full_template_count_247",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_248_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1055",
+        "log": 0.1055
+      }
+    },
+    {
+      "check": "log_table_printed_248_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0075",
+        "log": 0.0075
+      }
+    },
+    {
+      "check": "log_table_printed_248_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.417",
+        "log": 1.4171
+      }
+    },
+    {
+      "check": "log_table_printed_248_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.157",
+        "log": 0.157
+      }
+    },
+    {
+      "check": "pair_full_template_count_248",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_249_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0927",
+        "log": 0.0927
+      }
+    },
+    {
+      "check": "log_table_printed_249_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_249_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.206",
+        "log": 1.2057
+      }
+    },
+    {
+      "check": "log_table_printed_249_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1012",
+        "log": 0.1012
+      }
+    },
+    {
+      "check": "pair_full_template_count_249",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_264_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2374",
+        "log": 0.2374
+      }
+    },
+    {
+      "check": "log_table_printed_264_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0722",
+        "log": 0.0722
+      }
+    },
+    {
+      "check": "log_table_printed_264_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0328
+      }
+    },
+    {
+      "check": "log_table_printed_264_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_264",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_276_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3484",
+        "log": 0.3484
+      }
+    },
+    {
+      "check": "log_table_printed_276_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0687",
+        "log": 0.0687
+      }
+    },
+    {
+      "check": "log_table_printed_276_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.029",
+        "log": 1.0287
+      }
+    },
+    {
+      "check": "log_table_printed_276_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0081",
+        "log": 0.0081
+      }
+    },
+    {
+      "check": "pair_full_template_count_276",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_280_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0742",
+        "log": 0.0742
+      }
+    },
+    {
+      "check": "log_table_printed_280_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0083",
+        "log": 0.0083
+      }
+    },
+    {
+      "check": "log_table_printed_280_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.247",
+        "log": 1.2466
+      }
+    },
+    {
+      "check": "log_table_printed_280_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.132",
+        "log": 0.132
+      }
+    },
+    {
+      "check": "pair_full_template_count_280",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_281_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1048",
+        "log": 0.1048
+      }
+    },
+    {
+      "check": "log_table_printed_281_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0078",
+        "log": 0.0078
+      }
+    },
+    {
+      "check": "log_table_printed_281_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.419",
+        "log": 1.4186
+      }
+    },
+    {
+      "check": "log_table_printed_281_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1612",
+        "log": 0.1612
+      }
+    },
+    {
+      "check": "pair_full_template_count_281",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_282_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0923",
+        "log": 0.0923
+      }
+    },
+    {
+      "check": "log_table_printed_282_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.009",
+        "log": 0.009
+      }
+    },
+    {
+      "check": "log_table_printed_282_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.205",
+        "log": 1.2046
+      }
+    },
+    {
+      "check": "log_table_printed_282_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1037",
+        "log": 0.1037
+      }
+    },
+    {
+      "check": "pair_full_template_count_282",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_297_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2341",
+        "log": 0.2341
+      }
+    },
+    {
+      "check": "log_table_printed_297_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0724",
+        "log": 0.0724
+      }
+    },
+    {
+      "check": "log_table_printed_297_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.034",
+        "log": 1.0339
+      }
+    },
+    {
+      "check": "log_table_printed_297_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0103",
+        "log": 0.0103
+      }
+    },
+    {
+      "check": "pair_full_template_count_297",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_309_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3519",
+        "log": 0.3519
+      }
+    },
+    {
+      "check": "log_table_printed_309_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0689",
+        "log": 0.0689
+      }
+    },
+    {
+      "check": "log_table_printed_309_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0281
+      }
+    },
+    {
+      "check": "log_table_printed_309_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "pair_full_template_count_309",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_313_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0758",
+        "log": 0.0758
+      }
+    },
+    {
+      "check": "log_table_printed_313_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_313_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.222",
+        "log": 1.2217
+      }
+    },
+    {
+      "check": "log_table_printed_313_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1294",
+        "log": 0.1294
+      }
+    },
+    {
+      "check": "pair_full_template_count_313",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_314_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1054",
+        "log": 0.1054
+      }
+    },
+    {
+      "check": "log_table_printed_314_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_314_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.417",
+        "log": 1.4171
+      }
+    },
+    {
+      "check": "log_table_printed_314_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1573",
+        "log": 0.1573
+      }
+    },
+    {
+      "check": "pair_full_template_count_314",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_315_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0926",
+        "log": 0.0926
+      }
+    },
+    {
+      "check": "log_table_printed_315_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_315_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.206",
+        "log": 1.2063
+      }
+    },
+    {
+      "check": "log_table_printed_315_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1013",
+        "log": 0.1013
+      }
+    },
+    {
+      "check": "pair_full_template_count_315",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_330_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2365",
+        "log": 0.2365
+      }
+    },
+    {
+      "check": "log_table_printed_330_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0729",
+        "log": 0.0729
+      }
+    },
+    {
+      "check": "log_table_printed_330_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0327
+      }
+    },
+    {
+      "check": "log_table_printed_330_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_330",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_342_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3519",
+        "log": 0.3519
+      }
+    },
+    {
+      "check": "log_table_printed_342_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0688",
+        "log": 0.0688
+      }
+    },
+    {
+      "check": "log_table_printed_342_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0281
+      }
+    },
+    {
+      "check": "log_table_printed_342_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "pair_full_template_count_342",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_346_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0758",
+        "log": 0.0758
+      }
+    },
+    {
+      "check": "log_table_printed_346_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_346_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.222",
+        "log": 1.2218
+      }
+    },
+    {
+      "check": "log_table_printed_346_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1294",
+        "log": 0.1294
+      }
+    },
+    {
+      "check": "pair_full_template_count_346",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_347_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1054",
+        "log": 0.1054
+      }
+    },
+    {
+      "check": "log_table_printed_347_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_347_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.417",
+        "log": 1.4172
+      }
+    },
+    {
+      "check": "log_table_printed_347_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1573",
+        "log": 0.1573
+      }
+    },
+    {
+      "check": "pair_full_template_count_347",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_348_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0926",
+        "log": 0.0926
+      }
+    },
+    {
+      "check": "log_table_printed_348_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_348_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.206",
+        "log": 1.2064
+      }
+    },
+    {
+      "check": "log_table_printed_348_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1013",
+        "log": 0.1013
+      }
+    },
+    {
+      "check": "pair_full_template_count_348",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_363_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2363",
+        "log": 0.2363
+      }
+    },
+    {
+      "check": "log_table_printed_363_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0729",
+        "log": 0.0729
+      }
+    },
+    {
+      "check": "log_table_printed_363_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0328
+      }
+    },
+    {
+      "check": "log_table_printed_363_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_363",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_375_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.3519",
+        "log": 0.3519
+      }
+    },
+    {
+      "check": "log_table_printed_375_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0689",
+        "log": 0.0689
+      }
+    },
+    {
+      "check": "log_table_printed_375_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.028",
+        "log": 1.0281
+      }
+    },
+    {
+      "check": "log_table_printed_375_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0084",
+        "log": 0.0084
+      }
+    },
+    {
+      "check": "pair_full_template_count_375",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_379_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0758",
+        "log": 0.0758
+      }
+    },
+    {
+      "check": "log_table_printed_379_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0077",
+        "log": 0.0077
+      }
+    },
+    {
+      "check": "log_table_printed_379_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.222",
+        "log": 1.2217
+      }
+    },
+    {
+      "check": "log_table_printed_379_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1294",
+        "log": 0.1294
+      }
+    },
+    {
+      "check": "pair_full_template_count_379",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_380_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1054",
+        "log": 0.1054
+      }
+    },
+    {
+      "check": "log_table_printed_380_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0076",
+        "log": 0.0076
+      }
+    },
+    {
+      "check": "log_table_printed_380_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.417",
+        "log": 1.4171
+      }
+    },
+    {
+      "check": "log_table_printed_380_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1573",
+        "log": 0.1573
+      }
+    },
+    {
+      "check": "pair_full_template_count_380",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_381_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0926",
+        "log": 0.0926
+      }
+    },
+    {
+      "check": "log_table_printed_381_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0088",
+        "log": 0.0088
+      }
+    },
+    {
+      "check": "log_table_printed_381_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.206",
+        "log": 1.2063
+      }
+    },
+    {
+      "check": "log_table_printed_381_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.1013",
+        "log": 0.1013
+      }
+    },
+    {
+      "check": "pair_full_template_count_381",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "log_table_printed_396_h2_obs",
+      "pass_": true,
+      "evidence": {
+        "table": "0.2365",
+        "log": 0.2365
+      }
+    },
+    {
+      "check": "log_table_printed_396_h2_obs_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0729",
+        "log": 0.0729
+      }
+    },
+    {
+      "check": "log_table_printed_396_h2_int",
+      "pass_": true,
+      "evidence": {
+        "table": "1.033",
+        "log": 1.0327
+      }
+    },
+    {
+      "check": "log_table_printed_396_h2_int_se",
+      "pass_": true,
+      "evidence": {
+        "table": "0.0104",
+        "log": 0.0104
+      }
+    },
+    {
+      "check": "pair_full_template_count_396",
+      "pass_": true,
+      "evidence": 1217311
+    },
+    {
+      "check": "target_pair_counts",
+      "pass_": true,
+      "evidence": {
+        "lipids": 36,
+        "targeted_all": 60
+      }
+    },
+    {
+      "check": "lipid_all_pair_intercepts_above_existing_boundary",
+      "pass_": true,
+      "evidence": "36/36"
+    },
+    {
+      "check": "default_pair_logs_no_two_step",
+      "pass_": true,
+      "evidence": [
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        },
+        {
+          "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log",
+          "two_step_message": false,
+          "two_step_cli": false,
+          "explicit_intercept_cli": false
+        }
+      ]
+    },
+    {
+      "check": "constant_effective_N_ms",
+      "pass_": true,
+      "evidence": {
+        "input_N": 8677.373,
+        "exact_Neff": 8677.372500126274
+      }
+    },
+    {
+      "check": "logged_prevalence_ms",
+      "pass_": true,
+      "evidence": [
+        0.005801,
+        0.002
+      ]
+    },
+    {
+      "check": "balanced_factor_cancels_K_ms",
+      "pass_": true,
+      "evidence": 0.023069393596
+    },
+    {
+      "check": "fixed_fit_Z_invariance_ms",
+      "pass_": true,
+      "evidence": 5.002759658805821
+    },
+    {
+      "check": "constant_effective_N_melanoma",
+      "pass_": true,
+      "evidence": {
+        "input_N": 11848.496,
+        "exact_Neff": 11848.496067280184
+      }
+    },
+    {
+      "check": "logged_prevalence_melanoma",
+      "pass_": true,
+      "evidence": [
+        0.010316,
+        0.02
+      ]
+    },
+    {
+      "check": "balanced_factor_cancels_K_melanoma",
+      "pass_": true,
+      "evidence": 0.04083832057600001
+    },
+    {
+      "check": "fixed_fit_Z_invariance_melanoma",
+      "pass_": true,
+      "evidence": 3.5682861514919657
+    },
+    {
+      "check": "historical_frozen_family_counts",
+      "pass_": true,
+      "evidence": {
+        "core_panel_rows": 45,
+        "core_h2_table_rows": 45,
+        "core_rg_rows": 396,
+        "primary_positive_under_frozen_396": 153,
+        "all_positive_under_frozen_396": 161,
+        "lipid_rows": 36,
+        "lipid_historical_fdr_positive": 20,
+        "lipid_positive_by_trait": {
+          "ldl": 4,
+          "hdl": 8,
+          "triglycerides": 8
+        },
+        "lipid_intercept_ranges": {
+          "ldl": [
+            1.2217,
+            1.2466
+          ],
+          "hdl": [
+            1.4076,
+            1.4233
+          ],
+          "triglycerides": [
+            1.2046,
+            1.2138
+          ]
+        },
+        "legacy_primary_positive_without_20_flagged_lipid_rows": 133,
+        "direct_processed_source_scans": 5,
+        "liability_traits": 2,
+        "liability_pair_rows": 24,
+        "original_GenomicSEM_elements": 1035,
+        "original_GenomicSEM_traits": 45
+      }
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/qc_arithmetic_v4.py",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/qc_arithmetic_v4.py"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/config/analysis_panel.tsv",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/config/analysis_panel.tsv"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/h2_summary.tsv",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/h2_summary.tsv"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/rg_matrix.tsv",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/sources/recovered/results/tables/rg_matrix.tsv"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/native_input_hash_checks.tsv",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/native_input_hash_checks.tsv"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/regressions.py",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/regressions.py"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/01_harmonize.py",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/01_harmonize.py"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/03_h2_qc.sh",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/03_h2_qc.sh"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/05_collate.py",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/05_collate.py"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/25_genomicsem_covariance.R",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/25_genomicsem_covariance.R"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/manifests/ldsc_native_code_comparison_v1.json",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/manifests/ldsc_native_code_comparison_v1.json"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ms.sumstats.gz",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ms.sumstats.gz"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/melanoma.sumstats.gz",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/melanoma.sumstats.gz"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ldl.sumstats.gz",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/ldl.sumstats.gz"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/hdl.sumstats.gz",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/hdl.sumstats.gz"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/triglycerides.sumstats.gz",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/triglycerides.sumstats.gz"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ms.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_melanoma.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_ldl.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_hdl.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/h2_triglycerides.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_insomnia.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_insomnia.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepdur.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepdur.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_shortsleep.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_shortsleep.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_longsleep.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_longsleep.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_chronotype.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_chronotype.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleepiness.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleepiness.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_napping.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_napping.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_snoring.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_snoring.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_apnea.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_apnea.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_efficiency.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_efficiency.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_accel_sleep_duration.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_accel_sleep_duration.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_sleep_timing.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/logs/rg_qc_failed_sensitivity/rg_sleep_timing.log"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_pairs.tsv",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_pairs.tsv"
+    },
+    {
+      "check": "input_unchanged_/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/genomicsem_trait_inclusion.tsv",
+      "pass_": true,
+      "evidence": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/genomicsem_trait_inclusion.tsv"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/official_lipid_readme_fetch_receipt_v4.json",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/official_lipid_readme_fetch_receipt_v4.json"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239658_official_README.txt",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239658_official_README.txt"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239652_official_README.txt",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239652_official_README.txt"
+    },
+    {
+      "check": "input_unchanged_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239664_official_README.txt",
+      "pass_": true,
+      "evidence": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/GCST90239664_official_README.txt"
+    }
+  ],
+  "no_native_estimator_called": true,
+  "no_dense_raw_source_read": true,
+  "no_QC_threshold_changed": true,
+  "original_testing_family_unchanged": true,
+  "prior_packages_unchanged": true,
+  "limitations": [
+    "Direct N audit covers only MS, melanoma, LDL, HDL, and triglycerides; other binary N modes may be variant-specific.",
+    "Current processed hashes match current ledger, not an unavailable historical processed-file hash.",
+    "All original h2/log arithmetic inherits printed precision; output digits do not recover original full precision.",
+    "P=.5 is an N_eff convention sensitivity, not an assertion of biological sample prevalence.",
+    "No alternative population prevalence selected or invented; legacy K is held fixed.",
+    "No native explicit two-step comparison or N recoding rerun; effect on native estimates unestimated.",
+    "Changing liability presentation rescales h2 and its SE after fit and leaves Z, intercept, and rg unchanged.",
+    "An N recoding rerun can change estimation through iterative weights/clipping/filtering; algebra is conditional on a fixed fit.",
+    "No calibrated GenomicSEM covariance matrix or shared-estimator heterogeneity covariance established."
+  ]
+}

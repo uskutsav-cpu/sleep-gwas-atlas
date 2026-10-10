@@ -1,0 +1,57 @@
+{
+  "recorded_utc": "2026-10-09T20:47:19.055885+00:00",
+  "status": "ACTUAL_INTERNAL_STORAGE_GUARD_STOP_BOTH_FAMILIES_PRESERVED",
+  "approved_relocation_complete": true,
+  "internal_free_bytes": 4272930816,
+  "internal_floor_bytes": 3221225472,
+  "SSD_free_bytes": 1019566096384,
+  "native": {
+    "stage": "extension",
+    "returncode": -15,
+    "stop_reason": "INTERNAL_FULL_NATIVE_FLOOR_REACHED",
+    "final_resource_snapshot": {
+      "recorded_utc": "2026-10-09T20:33:37.818153+00:00",
+      "internal_free_bytes": 3218309120,
+      "ssd_free_bytes": 1021551050752,
+      "internal_minimum_bytes": 3221225472,
+      "ssd_minimum_bytes": 5368709120
+    },
+    "process_group_teardown": {
+      "initial_group_members": [
+        {
+          "pid": 36258,
+          "state": "Ss"
+        },
+        {
+          "pid": 52344,
+          "state": "R"
+        }
+      ],
+      "signals": [
+        "SIGTERM"
+      ],
+      "remaining_group_members": []
+    },
+    "peak_observed_owned_rss_bytes": 1041055744
+  },
+  "acquisition": {
+    "status": "FAMILY_STOP_PRESERVED_REQUIRES_EXPLICIT_AUDIT",
+    "stop_reason": "RuntimeError: SOURCE_STOP_PRESERVED: INTERNAL_FULL_NATIVE_FLOOR_REACHED",
+    "completed_source_count": 2,
+    "resource_after": {
+      "recorded_utc": "2026-10-09T20:33:42.708771+00:00",
+      "internal_free_bytes": 3217145856,
+      "ssd_free_bytes": 1021546856448,
+      "internal_minimum_bytes": 3221225472,
+      "ssd_minimum_bytes": 5368709120
+    }
+  },
+  "known_completed_native_receipts": 164,
+  "original190_complete": false,
+  "raw_source_bodies_complete": 2,
+  "OS_swap_not_redirected": true,
+  "no_automatic_retry": true,
+  "resource_request_answer": "use the SSD mounted on",
+  "remaining_dependency": "SSD is already used for research. Native safety still requires internal free space; prepare audited continuation without bypassing floor.",
+  "current_human_authoring_status": "NOT_READY_FOR_HUMAN_MANUSCRIPT_AUTHORING"
+}

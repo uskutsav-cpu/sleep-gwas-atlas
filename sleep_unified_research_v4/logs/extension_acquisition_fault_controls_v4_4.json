@@ -1,0 +1,55 @@
+{
+  "completed_utc": "2026-10-09T19:45:33.921334+00:00",
+  "executor_sha256": "1406d93fe5318120bd6bff95b29e8a26edd9b32e285bae0d4bd1b7dbda2efa6a",
+  "plan_sha256": "c318a18bd4912dd15ba3ffcdbd8fe9bf5c97aa535591834a2c065238bd23bc9c",
+  "checks": [
+    {
+      "control": "real_second_process_mutex_contention",
+      "pass": true
+    },
+    {
+      "control": "mutex_release_after_owned_scope",
+      "pass": true
+    },
+    {
+      "control": "cleanup_exception_independent_owned_pgid_kill_and_reap",
+      "pass": true,
+      "proof": {
+        "cleanup_error": "RuntimeError: INJECTED_SHARED_TEARDOWN_FAILURE",
+        "teardown_verified": true,
+        "remaining_group_members": [],
+        "independent_fallback_signals": [
+          "SIGKILL"
+        ]
+      }
+    },
+    {
+      "control": "exclusive_receipt_write_refuses_overwrite",
+      "pass": true
+    },
+    {
+      "control": "worker_failure_plus_cleanup_exception_always_preserves_failure_receipts",
+      "pass": true,
+      "worker_returncode": 1,
+      "receipt_sha256": "0782010e8e6d3a57160f8a9cbadb648753da07485660896f1bc3e1b00e216649"
+    },
+    {
+      "control": "real_SIGTERM_SIGHUP_SIGINT_handlers_defer_without_raising",
+      "pass": true
+    },
+    {
+      "control": "receipt_write_failure_cannot_bypass_owned_quarantine_and_flock",
+      "pass": true,
+      "quarantine_calls": 2
+    },
+    {
+      "control": "early_cleanup_status_failure_still_enforces_outer_owned_quarantine",
+      "pass": true,
+      "quarantine_calls": 1
+    }
+  ],
+  "all_pass": true,
+  "network_requests": 0,
+  "native_estimators_launched": 0,
+  "test_script_sha256": "eecd8edebe93b23ede893daf5c804c3d28e852f6d9478e2ebcc778df215eb32d"
+}

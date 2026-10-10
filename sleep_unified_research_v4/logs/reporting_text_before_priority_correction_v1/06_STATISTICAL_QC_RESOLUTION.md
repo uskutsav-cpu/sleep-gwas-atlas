@@ -1,0 +1,13 @@
+# Statistical QC resolution
+
+The 190 original native jobs are complete. All 158 standalone h² and 1,637 rg estimates have captured full precision and independently checked stock arithmetic. Literal original raw-to-munged replay is complete for ten smaller core sources; the 35 larger core sources and extension/validation raw replay remain in progress. Numerical reproduction does not imply scientific admission.
+
+The frozen 62-estimate sensitivity campaign is complete. With fixed two-step 30, 35 of 36 lipid pairs pass the original both-trait intercept boundary; sleep apnea × HDL remains above 1.2 at 1.2066970994564596. All lipid pairs retain adequate h² Z. This narrows the estimator issue but does not validate the underlying ancestry/source/reference match. The original lipid estimates, historical q values and exclusions are preserved; no automatic promotion of lipid associations occurs.
+
+MS and melanoma total-N sensitivities reproduce the original rg and SE to floating-point precision. Observed and liability-scale presentations are retained under both original and actual-fraction conventions with original K values. MS Z remains approximately 5.0029 and melanoma Z approximately 3.5682. Melanoma remains DROP. Balanced-fraction corrections explain the previous nonphysical presentation, but population prevalence and ascertainment are not independently resolved.
+
+The complete original test families are retained: core 396, extension 1,200, and validation candidate classification 217. The core has 153 historical primary positives and eight sensitivity positives; the extension has 603 historical positives. Validation keeps 23 qualified one-sided historical positives, 18 directional results, 17 QC/power failures and 159 unavailable candidates; zero fully independent two-trait replications are established. No comparative P value assumes zero covariance.
+
+Shared-estimator covariance and heterogeneity remain uncalibrated pending the separately reviewed canonical software calibration and additional statistical admissibility. The historical indefinite S, ill-conditioned V and unproven cross-fit delete-index alignment do not support calibrated biological difference P values or latent-factor inference. Source limitations and marginal QC remain visible in every final evidence table.
+
+Evidence: native-stage reports 03–05; `12_SENSITIVITY_ANALYSES.md`; `11_COVARIANCE_AND_HETEROGENEITY.md`; full-precision native and sensitivity tables; `logs/native190_root_independent_completion_addendum_v4.json`; `logs/sensitivity_root_independent_adjudication_v4_6.json`. Scientific QC status remains PARTIAL. No manuscript text or new primary inference is authored.

@@ -1,0 +1,173 @@
+{
+  "status": "NARROW_SYNTHETIC_ACQUISITION_ORIGIN_AND_FAMILY_IDENTITY_PASS",
+  "source_sha256": "ca5eaf792eb4a06ef04d323249472452774eada0e54109b645d1b95df6d5bee4",
+  "helper_sha256": "6ed79efa1ab1f328e908f5b152c9d756d1ef4b492e2a558ec087fb9209d00dc6",
+  "checks": [
+    {
+      "case": "exact_origin_command_headers_index1",
+      "pass": true
+    },
+    {
+      "case": "wrong_origin_index1",
+      "pass": true,
+      "rejected": "RAW_SOURCE_NOT_EXACT_SUCCESSFUL_CHECKPOINT"
+    },
+    {
+      "case": "wrong_offset_index1",
+      "pass": true,
+      "rejected": "ACQUISITION_RESUME_OFFSET_DIFFERS"
+    },
+    {
+      "case": "exact_origin_command_headers_index2",
+      "pass": true
+    },
+    {
+      "case": "wrong_origin_index2",
+      "pass": true,
+      "rejected": "RAW_SOURCE_NOT_EXACT_SUCCESSFUL_CHECKPOINT"
+    },
+    {
+      "case": "wrong_offset_index2",
+      "pass": true,
+      "rejected": "ACQUISITION_RESUME_OFFSET_DIFFERS"
+    },
+    {
+      "case": "exact_origin_command_headers_index3",
+      "pass": true
+    },
+    {
+      "case": "wrong_origin_index3",
+      "pass": true,
+      "rejected": "RAW_SOURCE_NOT_EXACT_SUCCESSFUL_CHECKPOINT"
+    },
+    {
+      "case": "wrong_offset_index3",
+      "pass": true,
+      "rejected": "ACQUISITION_RESUME_OFFSET_DIFFERS"
+    },
+    {
+      "case": "source3_requires206",
+      "pass": true,
+      "rejected": "ACQUISITION_HTTP_IDENTITY_DIFFERS"
+    },
+    {
+      "case": "source3_exact_range_required",
+      "pass": true,
+      "rejected": "ACQUISITION_EXACT_RANGE_DIFFERS"
+    },
+    {
+      "case": "exact_origin_command_headers_index4",
+      "pass": true
+    },
+    {
+      "case": "wrong_origin_index4",
+      "pass": true,
+      "rejected": "RAW_SOURCE_NOT_EXACT_SUCCESSFUL_CHECKPOINT"
+    },
+    {
+      "case": "wrong_offset_index4",
+      "pass": true,
+      "rejected": "ACQUISITION_RESUME_OFFSET_DIFFERS"
+    },
+    {
+      "case": "exact100_two_identical_primary_copies_and_seal",
+      "pass": true
+    },
+    {
+      "case": "individual_checkpoint_credit_allowed_while_family_pending",
+      "pass": true
+    },
+    {
+      "case": "pending_vetoes_full_family",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TERMINAL_PENDING_OR_UNSEALED"
+    },
+    {
+      "case": "missing_seal",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TERMINAL_PENDING_OR_UNSEALED"
+    },
+    {
+      "case": "missing_second_copy",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TWO_EXACT_PRIMARY_COPIES_REQUIRED"
+    },
+    {
+      "case": "different_second_copy",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TWO_EXACT_PRIMARY_COPIES_REQUIRED"
+    },
+    {
+      "case": "wrong_seal_plan",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TERMINAL_BINDING_DIFFERS"
+    },
+    {
+      "case": "wrong_seal_executor",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_TERMINAL_BINDING_DIFFERS"
+    },
+    {
+      "case": "missing_source_entry",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_FULL100_RECEIPT_SET_DIFFERS"
+    },
+    {
+      "case": "duplicate_source_entry",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_FULL100_RECEIPT_SET_DIFFERS"
+    },
+    {
+      "case": "changed_expected_checkpoint_map",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_CHECKPOINT_HASH_MAP_DIFFERS"
+    },
+    {
+      "case": "changed_source_receipt",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_FINAL_CHECKPOINT_CHANGED"
+    },
+    {
+      "case": "wrong_full_count",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_PRIMARY_FULL100_BINDING_DIFFERS"
+    },
+    {
+      "case": "wrong_preserved_count",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_PRIMARY_FULL100_BINDING_DIFFERS"
+    },
+    {
+      "case": "wrong_new_count",
+      "pass": true,
+      "rejected": "SOURCE_FAMILY_PRIMARY_FULL100_BINDING_DIFFERS"
+    },
+    {
+      "case": "failed_family_primary",
+      "pass": true,
+      "rejected": "SOURCE_ACQUISITION_FAMILY_FAILED_PRESERVED"
+    },
+    {
+      "case": "primary_failure_addendum",
+      "pass": true,
+      "rejected": "SOURCE_ACQUISITION_FAMILY_FAILURE_ADDENDUM"
+    },
+    {
+      "case": "seal_failure_addendum",
+      "pass": true,
+      "rejected": "SOURCE_ACQUISITION_FAMILY_FAILURE_ADDENDUM"
+    },
+    {
+      "case": "dangling_failure_addendum",
+      "pass": true,
+      "rejected": "SOURCE_ACQUISITION_FAMILY_FAILURE_ADDENDUM"
+    }
+  ],
+  "check_count": 33,
+  "operational_acquisition_gate_mocked_only_in_family_fixtures": true,
+  "real_subprocesses": 0,
+  "production_body_reads": 0,
+  "real_fits": 0,
+  "synthetic_body_bytes_per_origin": 6,
+  "real_family_completion_claim": false
+}

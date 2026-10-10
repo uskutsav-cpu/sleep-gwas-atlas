@@ -1,0 +1,108 @@
+{
+  "schema": "independent_actual_finngen_h2_result_arithmetic_v4_3_9",
+  "status": "PASS",
+  "plan_sha256": "8167144ca070f30738d8671ce951d71078ae001926ba6c5abd89d3aaaa2a54a1",
+  "report_sha256": "6b5a10a4401b52075d38574a20e9ba6919d7b89ddaa0335f789c44a0840604a5",
+  "consumption": {
+    "report_pair_sha256": {
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.json": "6b5a10a4401b52075d38574a20e9ba6919d7b89ddaa0335f789c44a0840604a5",
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.tsv": "4bd60cc5d25e9fd1edf0b16f37b5c5d72bfdfe27184f43bb7bade986bd15a031"
+    },
+    "report_terminal_seal_sha256": "26075415f3c240f2f99eb71fb0a73f0b6812b364793e97c76bc291c42e353647",
+    "native_terminal_seal_sha256": "af042b3fd312ed66476dab972b17cda4a6c6c515290ed064cba6108b73debd8c"
+  },
+  "full_precision_capture_sha256": "451990f1b303f8d5f947771126f0242ee4cc9def163da4c6fcd2214e9d26c1c3",
+  "native_stage_sha256": "8252915faa04565c08ca5661810affed8e6e664f795152eed43c9d11924e9d94",
+  "independent_decimal_delete_checks": {
+    "tot_se": {
+      "native": 0.0040705198925973796,
+      "independent_decimal_SE": 0.0040705198925973865,
+      "independent_decimal_variance": 1.6569132196031042e-05,
+      "difference": 6.938893903907228e-18,
+      "fixed_tolerance_pass": true
+    },
+    "intercept_se": {
+      "native": 0.009015015588198625,
+      "independent_decimal_SE": 0.00901501558819857,
+      "independent_decimal_variance": 8.127050605546319e-05,
+      "difference": -5.551115123125783e-17,
+      "fixed_tolerance_pass": true
+    }
+  },
+  "independent_stock_delete_checks": {
+    "tot_delete_values": {
+      "rows": 200,
+      "maximum_absolute_difference": 0.0,
+      "stock_sha256": "dba9ae6c83be3c57124cfb6117816c43d5a054172b140a1ea708aceae06dd5ef",
+      "fixed_tolerance_pass": true
+    },
+    "part_delete_values": {
+      "rows": 200,
+      "maximum_absolute_difference": 0.0,
+      "stock_sha256": "2a961e21d0f154943f385687c9a2a030dbad6a80345f9d0a49c86a51c8c095e1",
+      "fixed_tolerance_pass": true
+    }
+  },
+  "captured_M": 1173569.0,
+  "serialized_assumed_N": 185146.703773,
+  "point_coefficient_M_identity_pass": true,
+  "total_partition_intercept_delete_transform_identity_pass": true,
+  "scalar_table_log_concordance_pass": true,
+  "diagnostic": {
+    "trait": "finngen_R13_F5_INSOMNIA",
+    "source": "R13_generation_1777989563097164",
+    "scale": "OBSERVED_ONLY_WITH_ASSUMED_CONSTANT_EFFECTIVE_N",
+    "h2": 0.05353575912413689,
+    "h2_SE": 0.0040705198925973796,
+    "h2_Z": 13.15206915497371,
+    "h2_CI_lower": 0.04555768673629218,
+    "h2_CI_upper": 0.0615138315119816,
+    "intercept": 1.077872498550233,
+    "intercept_SE": 0.009015015588198625,
+    "lambda_GC": 1.2387232869346392,
+    "mean_chi_square": 1.2705273128003078,
+    "native_SNP_count": 1156359,
+    "assumed_effective_N": 185146.70377332723,
+    "necessary_h2_Z_ge4": true,
+    "necessary_intercept_le1_2": true,
+    "source_INFO_gate_verified": false,
+    "per_variant_N_verified": false,
+    "scientific_source_admitted": false,
+    "fully_independent_two_trait_replication": false,
+    "new_rg_estimates": 0,
+    "diagnostic_scope": "Source feasibility only; threshold conditions do not resolve INFO/N, ascertainment, overlap, clinical construct or power."
+  },
+  "captured_ratio": 0.28785447851513357,
+  "captured_ratio_SE": 0.03332386476944433,
+  "final_intersection": {
+    "input": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/derived/insomnia.sumstats.gz",
+    "final_ordered_SNP_count": 1156359,
+    "final_ordered_SNP_sha256": "4620a5ae7cc9f524e2c7b020eb73e9e83c47de34287a838d94fa0ac6c6cf97d0",
+    "final_ordered_Z_float64_big_endian_sha256": "92d7b2ef3b50c00d586166df34452c33f67e5b22e6277d265b54396157337c1e",
+    "final_ordered_N_float64_big_endian_sha256": "92267a6dec4109bb2469d86a9e5a03ee7e0b0f1cdc189b4166decbfe71132ad4",
+    "final_chisq_max": null,
+    "final_Z_filter_removed": 0,
+    "effective_two_step": 30,
+    "n_blocks": 200,
+    "two_step_hsq_mask": {
+      "count": 1156315,
+      "total": 1156359,
+      "packed_big_endian_sha256": "3bea8703bd6b7dc126af0b4cf830ecc99b42d3bb25efdc19fe68e517a51cb96d",
+      "serialization": "np.packbits uint8 boolean vector, bitorder=big; total disambiguates terminal padding"
+    },
+    "allele_scope": "h2 does not use allele checking; source full-stream allele preservation proof is separate",
+    "source": "stock _read_ld_sumstats output; exact h2 final Z filter and automatic two-step branch replayed read-only"
+  },
+  "warning_lines": [],
+  "stock_delete_export_scope": "Total and partition available; intercept verified from captured native array only.",
+  "numerical_tolerances": {
+    "relative": 1e-12,
+    "absolute": 1e-15
+  },
+  "actual_fits_run_by_reviewer": 0,
+  "raw_reference_body_reads": 0,
+  "derivative_decompression_or_old_suites": 0,
+  "mandatory_consumer_current_compressed_derivative_hashes": "Executed unchanged read-only consumer, including its two prior preprocessing gates.",
+  "elapsed_seconds": 0.32932320798863657,
+  "max_RSS_bytes": 30998528
+}

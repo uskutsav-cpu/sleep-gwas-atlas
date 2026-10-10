@@ -1,0 +1,1071 @@
+{
+  "schema": "independent_original47_local_adapter_review_v1",
+  "review_status": "REJECT_MEASURED_WRAPPER_ROUTE_AND_CONSUMPTION_PERSISTENCE_GAPS",
+  "prepared_candidate_admissible": false,
+  "execution_admitted": false,
+  "reviewed_at_utc": "2026-10-10T00:55:21.297813+00:00",
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py": "15253ace8479334198f2bff06f33a9a5afd690f0c47d3f0ff31a4ad9f372e4fc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd"
+  },
+  "metadata_dependencies_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_source_queue.tsv": "222d2169fe6d05ef44096b1267d1962fb34de80130d7e934f509a0ba8e488749",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/validation_raw_replay_design_v1.json": "f5291abd8989e6444f9aabe9ce2b0dd15258412acaa850dac1c59e72d86c7403",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_original_collector_route_review_v1.md": "4137e3f67c6f4b5cc77eb6fcf484715182d95b4025c3f3edb0ce16db98ed3783",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_original_collector_route_review_v1.json": "2c563b7651a81598c2c05442dec4896731b927d8369c7fdaae18480b83fbad90",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_original_collector_route_review_seal_v1.json": "dff7bfeceb34fdc12e94401fd1bb3bfedd023e6e1b86c1547b9f3679d468f2d0"
+  },
+  "no_actual_producer_processing_plan": true,
+  "source_or_independent_replication_admitted": false,
+  "new_estimator_fits": 0,
+  "fixture_control_count": 202,
+  "fixture_case_count": 26,
+  "all_control_expectations_pass": true,
+  "method_gate": "Scoped Finn/MVP tiny branch comparisons match original47 full ordered decompressed SNP/A1/A2/Z/N strings and QC filter counters, preserving all original scientific code except expressly synthetic minimum-size constants.",
+  "fixture_thresholds": {
+    "original_nonambiguous_reference_minimum": 900000,
+    "original_surviving_output_minimum": 700000,
+    "synthetic_fixture_values": 1,
+    "exact_AST_delta_two_integer_constants": true,
+    "original_sources_unchanged": true
+  },
+  "runtime": {
+    "python": "3.11.11 | packaged by conda-forge | (main, Mar  3 2025, 20:44:07) [Clang 18.1.8 ]",
+    "executable": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-py311/bin/python3.11"
+  },
+  "original_declared_Python39_runtime_not_qualified_by_Python311_fixture": true,
+  "cases": [
+    {
+      "name": "healthy_finn",
+      "kind": "original_main_method_comparison",
+      "status": "PASS",
+      "rows": 11,
+      "error": null
+    },
+    {
+      "name": "healthy_mvp",
+      "kind": "original_main_method_comparison",
+      "status": "PASS",
+      "rows": 14,
+      "error": null
+    },
+    {
+      "name": "wrong_original_SHA",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_original_MD5",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_original_size",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_dependency",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FROZEN_VALIDATION_INPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_fixtures_v1_1/wrong_dependency/queue.tsv"
+    },
+    {
+      "name": "wrong_command",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FROZEN_COLLECTOR_ARGUMENTS_CHANGED"
+    },
+    {
+      "name": "wrong_route",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: EXACT_PRIVATE_ORIGINAL_QC_ROUTE_REQUIRED"
+    },
+    {
+      "name": "pending_producer",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+    },
+    {
+      "name": "failed_individual",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: SOURCE_FAILURE_VETOES_REPLAY"
+    },
+    {
+      "name": "wrong_receipt_count",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: ALL_THIRTEEN_DOUBLE_RECEIPT_PATHS_REQUIRED"
+    },
+    {
+      "name": "bad_CRC",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "BadGzipFile: CRC check failed 0x44422326 != 0x44422327"
+    },
+    {
+      "name": "truncated_gzip",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "EOFError: Compressed file ended before the end-of-stream marker was reached"
+    },
+    {
+      "name": "inner_EOF_SHA_mismatch",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_LOCAL_GZIP_EOF_IDENTITY_CHANGED"
+    },
+    {
+      "name": "source_after_initial_hash",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "BadGzipFile: Not a gzipped file (b'ex')"
+    },
+    {
+      "name": "unregistered_sidecar_route",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null,
+      "outside_private_workspace_file": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_fixtures_v1_1/unregistered_sidecar_route/outside_workspace_adapter.json"
+    },
+    {
+      "name": "post_sidecar_new_qc",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    },
+    {
+      "name": "post_sidecar_plan",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    },
+    {
+      "name": "duplicate_26_individual_paths",
+      "kind": "plan_schema_qualification",
+      "status": "FALSE_ACCEPT_UNIQUE_MAP_NOT_ENFORCED",
+      "error": null
+    },
+    {
+      "name": "prior_output",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: PRIOR_PRIVATE_VALIDATION_OUTPUT_PRESERVED_NO_RETRY"
+    },
+    {
+      "name": "prior_output_symlink",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: PRIOR_PRIVATE_VALIDATION_OUTPUT_PRESERVED_NO_RETRY"
+    },
+    {
+      "name": "inner_MD5_mismatch",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "ValueError: MD5 mismatch for /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_extra_fixtures_v1/inner_MD5_mismatch/body.tsv.gz: observed e9a02b92da4df98c830042705a92265c, expected 00000000000000000000000000000000"
+    },
+    {
+      "name": "missing_required_header",
+      "status": "PASS_REJECTION",
+      "error": "SystemExit: ERROR: finngen_r13_fixture_0 lacks required fields: ['sebeta']"
+    },
+    {
+      "name": "zero_survivors",
+      "status": "PASS_REJECTION",
+      "error": "SystemExit: ERROR: too few HM3 variants survived for finngen_r13_fixture_0: 0"
+    },
+    {
+      "name": "inner_EOF_before_promotion",
+      "status": "PASS",
+      "events": [
+        "verified_EOF_before_promotion"
+      ],
+      "error": null
+    },
+    {
+      "name": "receipt_after_parse_before_hash",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    }
+  ],
+  "checks": [
+    {
+      "label": "fresh_fixture_namespace",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_healthy_finn",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_adapter_pass",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_exact_original_ordered_literals",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_exact_original_QC_except_transport_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_actual_compressed_QC_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_harmonic_N",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_order_MHC_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_all_orientation_Z",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_first_matched_rsid",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_first_surviving_duplicate",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_strict_MAF_neighbor",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_legacy_retention_truth_qualification",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_no_fake_current_HTTP",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_routed_code_keys_recorded_absolute",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_sidecar_output_binding",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_healthy_mvp",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_adapter_pass",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_exact_original_ordered_literals",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_exact_original_QC_except_transport_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_actual_compressed_QC_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_harmonic_N",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_order_MHC_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_OR_CI_Z",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_strict_R2_neighbor",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_inclusive_P_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_OR_one_zero_Z_and_first_survivor",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_legacy_retention_truth_qualification",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_no_fake_current_HTTP",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_routed_code_keys_recorded_absolute",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_sidecar_output_binding",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_SHA",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_MD5",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_size",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_dependency",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_command",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_route",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_pending_producer",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_reject",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_failed_individual",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_reject",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_receipt_count",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_bad_CRC",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_reject",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_truncated_gzip",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_reject",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_EOF_SHA_mismatch",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_reject",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_source_after_initial_hash",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_reject",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_unregistered_sidecar_route",
+      "passed": true
+    },
+    {
+      "label": "unregistered_sidecar_ROUTE_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_post_sidecar_new_qc",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_new_qc_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_QC_stale_success_identity",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_post_sidecar_plan",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_plan_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_duplicate_26_individual_paths",
+      "passed": true
+    },
+    {
+      "label": "duplicate_26_receipt_paths_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    },
+    {
+      "label": "fresh_extra_fixture_namespace",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_prior_output",
+      "passed": true
+    },
+    {
+      "label": "prior_output_reject",
+      "passed": true
+    },
+    {
+      "label": "prior_output_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "prior_output_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_prior_output_symlink",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_reject",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_MD5_mismatch",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_reject",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_missing_required_header",
+      "passed": true
+    },
+    {
+      "label": "missing_required_header_reject",
+      "passed": true
+    },
+    {
+      "label": "missing_required_header_no_promotion",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_zero_survivors",
+      "passed": true
+    },
+    {
+      "label": "zero_survivors_reject",
+      "passed": true
+    },
+    {
+      "label": "zero_survivors_output_removed",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_EOF_before_promotion",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_PASS",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_full_SHA",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_precedes_promotion",
+      "passed": true
+    },
+    {
+      "label": "healthy_EOF_timing",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_receipt_after_parse_before_hash",
+      "passed": true
+    },
+    {
+      "label": "receipt_parse_before_hash_FALSE_ACCEPT",
+      "passed": true
+    },
+    {
+      "label": "consumed_original_receipt_status_not_bound",
+      "passed": true
+    },
+    {
+      "label": "sidecar_credits_changed_postparse_receipt",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    }
+  ],
+  "material_gaps": [
+    {
+      "id": "G1",
+      "candidate_lines": "64-68,137",
+      "witness": "unregistered_sidecar_route",
+      "finding": "adapter_receipt is not checked against workspace or exact private suffix before open(x); synthetic regular outside-workspace target is created and run returns success",
+      "minimum_fix": "Freeze exact private wrapper path before source parsing/writes; reject parent/leaf symlinks and prior target; require actual path equals registered plan route"
+    },
+    {
+      "id": "G2",
+      "candidate_lines": "116-127",
+      "witness": "receipt_after_parse_before_hash",
+      "finding": "Collector receipt is parsed before first immutable output SHA; changing pipeline_status after parsing is accepted and new changed receipt SHA is credited",
+      "minimum_fix": "Freeze exact regular/no-symlink hashes of all three original collector outputs before result parsing; verify those immutable hashes before and after wrapper persistence"
+    },
+    {
+      "id": "G3",
+      "candidate_lines": "127-140",
+      "witnesses": [
+        "post_sidecar_new_qc",
+        "post_sidecar_plan"
+      ],
+      "finding": "QC can change during wrapper write with stale sidecar output SHA; plan can change during write; run returns success because final gate omits plan and immutable outputs",
+      "minimum_fix": "After sidecar persistence recheck fixed plan SHA and all previously frozen output hashes alongside body/acquisition/dependency gates"
+    }
+  ],
+  "producer_map_qualification": {
+    "witness": "duplicate_26_individual_paths",
+    "finding": "Length26 alone accepts same path26times; existing Terminal2 validates only the caller-provided primary map",
+    "required_next_gate": "Exact26 distinct nonempty regular per-source receipt paths, associated13-source identities, both frozen producer primary copies and successful terminal contract; verify exact producer/member map in prepared controller; no real failed producer was credited here"
+  },
+  "preserved_harness_failure": {
+    "checker": "validation_collector_adapter_checker_v1.py",
+    "log": "validation_collector_adapter_fixture_run_v1.log",
+    "finding": "Reviewer fixture hardcoded input_rows33 although Finn fixture contains34; intended QC mutation did not occur and stale-hash assertion failed. Distinct checker_v1_1 corrects the literal; no source or method changed."
+  },
+  "scientific_qualifications": [
+    "No real13-source raw bodies or references read; actual900k/700k reference/output minima not demonstrated.",
+    "Fixture queue13 synthetic rows does not establish original217-row membership; future exact plan must bind complete frozen queue and original13 member/schema/cases-controls/build/URLs/rights metadata.",
+    "Original code uses reference rsID/alleles and reference-coordinate MHC filter, not raw-coordinate liftover; no new build, INFO, ancestry, independence or redistribution-rights claim.",
+    "Compressed-byte hashes differ under random temporary gzip filename/header; comparison uses exact ordered decompressed literals, identical QC except transport SHA, actual current compressed SHA and future CRC/EOF proof.",
+    "Candidate retains legacy false local-retention/remote text; wrapper truthfully qualifies retained local source and frozen offline HEAD metadata; current remote HTTP is not queried or claimed.",
+    "Original code-hash dictionary keys become routed absolute scientific source paths; preserved canonical route/provenance mapping is required.",
+    "Temporary Path admission is private output-parent plus original filename prefix/suffix; not a general arbitrary-file registrar. Exact pinned collector/mkstemp control flow supplies those paths.",
+    "Python3.11.11 stdlib tiny fixture success does not establish proposed dedicated3.9.23 runtime bytes or real-source memory feasibility.",
+    "No39-command controller, new processing plan, mutex/monitor/floor/reservation/deadline/disposal review or launch admission exists in this boundary review.",
+    "All217 classes and41 external estimates remain unchanged; no new biological evidence, covariance or estimator result."
+  ],
+  "scope": {
+    "no_network": true,
+    "no_production_raw_reference_processed_body_reads": true,
+    "no_runtime_tree_hash": true,
+    "no_production_worker": true,
+    "no_mutex": true,
+    "no_candidate_or_original_edits": true
+  },
+  "own_fixture_inventory": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_fixture_inventory_v1.json",
+    "sha256": "906ae88e6d24ff2835ca235b3664a3bdf1ad4f1e767d1cdd5b3837cf26cec9ea",
+    "file_count": 1579,
+    "bytes": 2379798
+  }
+}

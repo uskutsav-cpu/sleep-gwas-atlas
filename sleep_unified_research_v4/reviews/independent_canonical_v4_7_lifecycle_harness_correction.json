@@ -1,0 +1,8 @@
+{
+  "schema": "independent_review_harness_correction",
+  "initial_checker_preserved": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_canonical_v4_7_lifecycle_checker.py",
+  "cause": "Own assertion incorrectly expected dict signal record; actual pinned handler stores integer signums. First own SIGTERM was deferred and handlers restored; no worker or mutex.",
+  "correction": "Assert actual integer signal record in a fresh private v2 fixture namespace",
+  "actual_workers": 0,
+  "actual_mutex": 0
+}

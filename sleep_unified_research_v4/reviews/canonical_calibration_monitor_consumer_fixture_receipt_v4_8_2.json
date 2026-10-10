@@ -1,0 +1,403 @@
+{
+  "schema": "author_canonical_v4_8_monitor_consumer_fixture",
+  "status": "AUTHOR_NARROW_SANITY_PASS_NOT_INDEPENDENT_ADMISSION",
+  "cases": [
+    {
+      "path": "freeze_worker_evidence",
+      "case": "healthy",
+      "error": null,
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "registered_AppleDouble",
+      "error": null,
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "cleanup_errors",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: cleanup_errors')",
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "run_error",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: run_error')",
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "teardown_cleanup_error",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: process_group_teardown.cleanup_error')",
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "first_teardown_exception",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception')",
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "freeze_worker_evidence",
+      "case": "first_teardown_exception_null_present",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception')",
+      "pass": true,
+      "ordinary_producer_failure_claim": false
+    },
+    {
+      "path": "verify",
+      "case": "healthy",
+      "error": "HealthyReachedArithmeticWithoutLaunch('NO_PROCESS_LAUNCHED')",
+      "stub_calls": [
+        "arithmetic_boundary"
+      ],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": false,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "registered_AppleDouble",
+      "error": "HealthyReachedArithmeticWithoutLaunch('NO_PROCESS_LAUNCHED')",
+      "stub_calls": [
+        "arithmetic_boundary"
+      ],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": false,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "cleanup_errors",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: cleanup_errors')",
+      "stub_calls": [],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": true,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "run_error",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: run_error')",
+      "stub_calls": [],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": true,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "teardown_cleanup_error",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: process_group_teardown.cleanup_error')",
+      "stub_calls": [],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": true,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "first_teardown_exception",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception')",
+      "stub_calls": [],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": true,
+      "actual_workers": 0
+    },
+    {
+      "path": "verify",
+      "case": "first_teardown_exception_null_present",
+      "error": "RuntimeError('CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception')",
+      "stub_calls": [],
+      "pass": true,
+      "isolated_already_frozen_contradictory_metadata": true,
+      "actual_workers": 0
+    },
+    {
+      "case": "preparation_exact50_deferred",
+      "pass": true
+    },
+    {
+      "case": "preparation_map_mismatch",
+      "error": "RuntimeError('SEALED_PREPARATION_DEFERRED_IDENTITY_MAP_DIFFERS')",
+      "pass": true
+    }
+  ],
+  "case_count": 16,
+  "checks": [
+    {
+      "label": "fresh_owned_fixture_namespace",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_healthy",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_registered_AppleDouble",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_cleanup_errors",
+      "pass": true
+    },
+    {
+      "label": "initial_failure_oracle_cleanup_errors",
+      "pass": true
+    },
+    {
+      "label": "initial_no_evidence_credited_cleanup_errors",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_run_error",
+      "pass": true
+    },
+    {
+      "label": "initial_failure_oracle_run_error",
+      "pass": true
+    },
+    {
+      "label": "initial_no_evidence_credited_run_error",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_teardown_cleanup_error",
+      "pass": true
+    },
+    {
+      "label": "initial_failure_oracle_teardown_cleanup_error",
+      "pass": true
+    },
+    {
+      "label": "initial_no_evidence_credited_teardown_cleanup_error",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_first_teardown_exception",
+      "pass": true
+    },
+    {
+      "label": "initial_failure_oracle_first_teardown_exception",
+      "pass": true
+    },
+    {
+      "label": "initial_no_evidence_credited_first_teardown_exception",
+      "pass": true
+    },
+    {
+      "label": "initial_actual_consumer_first_teardown_exception_null_present",
+      "pass": true
+    },
+    {
+      "label": "initial_failure_oracle_first_teardown_exception_null_present",
+      "pass": true
+    },
+    {
+      "label": "initial_no_evidence_credited_first_teardown_exception_null_present",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_healthy",
+      "pass": true
+    },
+    {
+      "label": "final_healthy_no_worker_healthy",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_registered_AppleDouble",
+      "pass": true
+    },
+    {
+      "label": "final_healthy_no_worker_registered_AppleDouble",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_cleanup_errors",
+      "pass": true
+    },
+    {
+      "label": "final_failure_oracle_cleanup_errors",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_run_error",
+      "pass": true
+    },
+    {
+      "label": "final_failure_oracle_run_error",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_teardown_cleanup_error",
+      "pass": true
+    },
+    {
+      "label": "final_failure_oracle_teardown_cleanup_error",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_first_teardown_exception",
+      "pass": true
+    },
+    {
+      "label": "final_failure_oracle_first_teardown_exception",
+      "pass": true
+    },
+    {
+      "label": "final_actual_consumer_arithmetic_boundary_first_teardown_exception_null_present",
+      "pass": true
+    },
+    {
+      "label": "final_failure_oracle_first_teardown_exception_null_present",
+      "pass": true
+    },
+    {
+      "label": "capture_import_namespace_only",
+      "pass": true
+    },
+    {
+      "label": "independent_arithmetic_validate_exact_AST",
+      "pass": true
+    },
+    {
+      "label": "one_shared_failure_oracle_each_consumer_freeze_worker_evidence",
+      "pass": true
+    },
+    {
+      "label": "consumer_AST_only_shared_veto_and_namespace_freeze_worker_evidence",
+      "pass": true
+    },
+    {
+      "label": "one_shared_failure_oracle_each_consumer_verify",
+      "pass": true
+    },
+    {
+      "label": "consumer_AST_only_shared_veto_and_namespace_verify",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_monitored_worker",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_monitor_helpers",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_snapshot",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_output_bytes",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_owned_group_exists",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_await_owned_cleanup",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_final_violations",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_check_frozen_worker_evidence",
+      "pass": true
+    },
+    {
+      "label": "producer_ownership_resource_inventory_AST_unchanged_final_evidence_inventory",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_catchable_termination",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_deferred_termination_signals",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_safe_diagnostic",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_exclusive_heavy_lock",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_validate_inherited_lock",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_historical_completion",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_admit",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_intended_sha",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_write_intended_new",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_terminal_intended_sha",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_freeze_companions",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_canonical_epoch_bytes",
+      "pass": true
+    },
+    {
+      "label": "common_terminal_history_transport_guard_AST_unchanged_preserved_failed_attempt",
+      "pass": true
+    },
+    {
+      "label": "prep_exact50_deferred_not_fresh_hashed",
+      "pass": true
+    },
+    {
+      "label": "prep_deferred_map_mismatch_fails_before_any_hash",
+      "pass": true
+    },
+    {
+      "label": "old_and_new_sources_unchanged_by_checks",
+      "pass": true
+    }
+  ],
+  "check_count": 63,
+  "all_checks_pass": true,
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration_v4_7.py": "d93dab3e1e392003751b643ee58d3d092ab5ebf2f1927a5c14dc44a146cc1ca4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_7.py": "bfa7612f11c258d7ffb9c4478b2a9d565716b273396cbc5fc8d663e34461d8af",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_capture_v4_7.py": "9f85bed6e9d647967c31715fecdcbd1b0fdb4509de69bfe488736a92e4cea9f7",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_arithmetic_v4_7.py": "a3148d8f5de1c7666f6ebeaa28b236152158a220c5d5cefec29a5d985d707ab5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration_v4_8.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_8.py": "778ff2004b2dd06acdbc6eae05f960957187b37624c3bfc6dbf7bfb0e3c79379",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_capture_v4_8.py": "9a4b1823df56af6195c4990ac2193973bb4183d24e3442899cd89720f41784f0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_arithmetic_v4_8.py": "50dd6f7986184a7f88415a781837ebb831dc2186805865b83801e018ad7b98bd"
+  },
+  "workers_launched": 0,
+  "mutex_acquisitions": 0,
+  "GWAS_reference_runtime_body_reads": 0,
+  "ordinary_producer_false_success_demonstrated": false,
+  "qualification": "Both real consumer functions run on tiny metadata. Healthy final consumer stops at an explicit nonlaunch stub. Future full16+1 execution and independent review remain required."
+}

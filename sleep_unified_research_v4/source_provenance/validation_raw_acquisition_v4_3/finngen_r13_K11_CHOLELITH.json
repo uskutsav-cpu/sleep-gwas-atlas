@@ -1,0 +1,98 @@
+{
+  "member": {
+    "index": 12,
+    "source_id": "finngen_r13_K11_CHOLELITH",
+    "filename": "finngen_R13_K11_CHOLELITH.gz",
+    "body_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_K11_CHOLELITH.gz",
+    "url": "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_K11_CHOLELITH.gz?generation=1777990004571514",
+    "expected_bytes": 809815233,
+    "expected_md5": "29db68b6a610c94cb5b8d48b7b01ccb7",
+    "expected_sha256": "50af445a7edcd53129da6e4f21a461af62ae9dd53ad983f00525bb2f29a298e1",
+    "expected_transport_headers": {
+      "etag": "29db68b6a610c94cb5b8d48b7b01ccb7",
+      "last-modified": "Tue, 05 May 2026 14:06:44 GMT",
+      "x-goog-generation": "1777990004571514",
+      "x-goog-hash": "md5=KdtotqYQyUy1uNSLewHMtw==",
+      "x-goog-stored-content-length": "809815233"
+    },
+    "original_http_etag": "\"29db68b6a610c94cb5b8d48b7b01ccb7\"",
+    "transport_qualification": "Pinned GCS generation and original full SHA/MD5"
+  },
+  "started_utc": "2026-10-10T03:52:22.128375+00:00",
+  "command": [
+    "/usr/bin/curl",
+    "-q",
+    "--fail",
+    "--location",
+    "--max-redirs",
+    "5",
+    "--proto",
+    "=https",
+    "--proto-redir",
+    "=https",
+    "--tlsv1.2",
+    "--max-time",
+    "7200",
+    "--max-filesize",
+    "809815233",
+    "--dump-header",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/logs/finngen_r13_K11_CHOLELITH.headers.txt",
+    "--output",
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_K11_CHOLELITH.gz.partial",
+    "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_K11_CHOLELITH.gz?generation=1777990004571514"
+  ],
+  "plan_sha256": "8e93d548163bda284b6292b9780962060bbc3ff4afde44e5a916c80f3b69b708",
+  "resource_before": {
+    "recorded_utc": "2026-10-10T03:52:20.359497+00:00",
+    "internal_free_bytes": 17065623552,
+    "ssd_free_bytes": 736056311808,
+    "internal_minimum_bytes": 3221225472,
+    "ssd_minimum_bytes": 5368709120
+  },
+  "resume_offset": 0,
+  "status": "FAILED_PRESERVED_NO_AUTOMATIC_RETRY",
+  "original_source_sha256_required": "50af445a7edcd53129da6e4f21a461af62ae9dd53ad983f00525bb2f29a298e1",
+  "completed_utc": "2026-10-10T03:52:28.281124+00:00",
+  "elapsed_seconds": 6.152730041008908,
+  "returncode": -15,
+  "stop_reason": "FileNotFoundError: [Errno 2] No such file or directory: '/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v3/napping/ephemeral_bounded_spool/columns/typed_08_00450000.pkl'",
+  "teardown": {
+    "initial_group_members": [
+      {
+        "pid": 20956,
+        "state": "Rs"
+      }
+    ],
+    "signals": [
+      "SIGTERM"
+    ],
+    "remaining_group_members": [],
+    "teardown_verified": true
+  },
+  "peak_observed_owned_rss_bytes": 7602176,
+  "resource_after": {
+    "recorded_utc": "2026-10-10T03:52:28.281186+00:00",
+    "internal_free_bytes": 17031028736,
+    "ssd_free_bytes": 741010833408,
+    "internal_minimum_bytes": 3221225472,
+    "ssd_minimum_bytes": 5368709120
+  },
+  "samples": [
+    {
+      "recorded_utc": "2026-10-10T03:52:24.096472+00:00",
+      "internal_free_bytes": 17032110080,
+      "ssd_free_bytes": 738917875712,
+      "internal_minimum_bytes": 3221225472,
+      "ssd_minimum_bytes": 5368709120,
+      "source_bytes": 0,
+      "owned_rss_bytes": 7602176,
+      "owned_pids": [
+        20956
+      ]
+    }
+  ],
+  "headers_sha256": "cb30dc7397f00f4b1e1be523751ef8a253538211c47f9f6e1b3cb7255d14cac1",
+  "headers_bytes": 732,
+  "retained_partial_sha256": "3537a1b14c7e3560c43d38898dfadd6ba280738498ef5de4c21195c962a1a415",
+  "retained_partial_bytes": 57671680
+}

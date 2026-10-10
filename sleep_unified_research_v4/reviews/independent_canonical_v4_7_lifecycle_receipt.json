@@ -1,0 +1,253 @@
+{
+  "schema": "independent_canonical_v4_7_lifecycle_controls",
+  "case_count": 9,
+  "check_count": 38,
+  "checks": [
+    {
+      "label": "fresh_private_lifecycle_namespace",
+      "passed": true
+    },
+    {
+      "label": "real_own_signal_deferred:15",
+      "passed": true
+    },
+    {
+      "label": "protected_gate_rejects_signal:15",
+      "passed": true
+    },
+    {
+      "label": "handler_restored:15",
+      "passed": true
+    },
+    {
+      "label": "real_own_signal_deferred:1",
+      "passed": true
+    },
+    {
+      "label": "protected_gate_rejects_signal:1",
+      "passed": true
+    },
+    {
+      "label": "handler_restored:1",
+      "passed": true
+    },
+    {
+      "label": "real_own_signal_deferred:2",
+      "passed": true
+    },
+    {
+      "label": "protected_gate_rejects_signal:2",
+      "passed": true
+    },
+    {
+      "label": "handler_restored:2",
+      "passed": true
+    },
+    {
+      "label": "nonthrowing_diagnostic:BrokenPipeError",
+      "passed": true
+    },
+    {
+      "label": "nonthrowing_diagnostic:KeyboardInterrupt",
+      "passed": true
+    },
+    {
+      "label": "helper_exception_fallback:helper_exact_owned_fake_pid",
+      "passed": true
+    },
+    {
+      "label": "helper_exception_fallback:fallback_exact_owned_group",
+      "passed": true
+    },
+    {
+      "label": "helper_exception_fallback:wait_inside_ownership",
+      "passed": true
+    },
+    {
+      "label": "helper_exception_fallback:no_owned_group_before_release",
+      "passed": true
+    },
+    {
+      "label": "helper_exception_fallback:recovery_failure_recorded",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:helper_exact_owned_fake_pid",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:fallback_exact_owned_group",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:wait_inside_ownership",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:diagnostic_inside_retained_ownership",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:quarantine_retains_ownership_while_fake_group_live",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:helper_exact_owned_fake_pid",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:fallback_exact_owned_group",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:wait_inside_ownership",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:no_owned_group_before_release",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:recovery_failure_recorded",
+      "passed": true
+    },
+    {
+      "label": "failed_fallback_retains_ownership:failed_fallback_retry_remains_protected",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:helper_exact_owned_fake_pid",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:fallback_exact_owned_group",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:wait_inside_ownership",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:diagnostic_inside_retained_ownership",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:no_owned_group_before_release",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:recovery_failure_recorded",
+      "passed": true
+    },
+    {
+      "label": "cleanup_recovery_proof_failure:proof_failure_preserved_after_group_gone",
+      "passed": true
+    },
+    {
+      "label": "all_epochs_and_retained_metadata_byte_meter",
+      "passed": true
+    },
+    {
+      "label": "global_meter_complete_private_campaign",
+      "passed": true
+    },
+    {
+      "label": "epoch_meter_rejects_symlink",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "real_own_deferred_signal_15",
+      "real_signal_only_own_reviewer_process": true,
+      "actual_worker": false
+    },
+    {
+      "case": "real_own_deferred_signal_1",
+      "real_signal_only_own_reviewer_process": true,
+      "actual_worker": false
+    },
+    {
+      "case": "real_own_deferred_signal_2",
+      "real_signal_only_own_reviewer_process": true,
+      "actual_worker": false
+    },
+    {
+      "case": "safe_diagnostic_BrokenPipeError",
+      "actual_worker": false
+    },
+    {
+      "case": "safe_diagnostic_KeyboardInterrupt",
+      "actual_worker": false
+    },
+    {
+      "case": "helper_exception_fallback",
+      "fake_owned_pid": 777777777,
+      "real_process": false,
+      "real_mutex": false,
+      "helper_failure_retained": [
+        "RuntimeError('OWN_HELPER_ERROR')"
+      ],
+      "fallback_wait_count": 1,
+      "ownership_empty": true,
+      "group_gone": true,
+      "diagnostics": []
+    },
+    {
+      "case": "failed_fallback_retains_ownership",
+      "fake_owned_pid": 777777777,
+      "real_process": false,
+      "real_mutex": false,
+      "helper_failure_retained": [
+        "RuntimeError('OWN_HELPER_ERROR')",
+        "TimeoutError('OWN_FAKE_GROUP_STILL_LIVE')",
+        "RuntimeError('OWN_HELPER_ERROR')"
+      ],
+      "fallback_wait_count": 2,
+      "ownership_empty": true,
+      "group_gone": true,
+      "diagnostics": [
+        "SHARED_HEAVY_WORKER_LOCK_RETAINED: owned group 777777777: TimeoutError('OWN_FAKE_GROUP_STILL_LIVE')"
+      ]
+    },
+    {
+      "case": "cleanup_recovery_proof_failure",
+      "fake_owned_pid": 777777777,
+      "real_process": false,
+      "real_mutex": false,
+      "helper_failure_retained": [
+        "RuntimeError('OWN_HELPER_ERROR')",
+        "RECOVERY_PROOF_WRITE: OSError('OWN_RECOVERY_PROOF_ERROR')"
+      ],
+      "fallback_wait_count": 1,
+      "ownership_empty": true,
+      "group_gone": true,
+      "diagnostics": [
+        "OWNED_GROUP_GONE_RECOVERY_PROOF_WRITE_FAILED: OSError('OWN_RECOVERY_PROOF_ERROR')"
+      ]
+    },
+    {
+      "case": "all_epochs_meter_and_symlink",
+      "expected_regular_bytes": 114,
+      "symlink_rejected": true
+    }
+  ],
+  "checker_sha256": "86d483da28a77aa9e9772e1bd2e13f7e9863444d6421c4899817555dd4399fd4",
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/42_prepare_native_canonical_calibration_v4_7.py": "d93dab3e1e392003751b643ee58d3d092ab5ebf2f1927a5c14dc44a146cc1ca4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_7.py": "bfa7612f11c258d7ffb9c4478b2a9d565716b273396cbc5fc8d663e34461d8af"
+  },
+  "fixture_regular_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/helper_exception_fallback/owned_group_cleanup_recovery.json": "42a1df3b18f33e7f2ace0354bfa97fd227dfddcc6653fd06b15223b0f0b2901c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/failed_fallback_retains_ownership/owned_group_cleanup_recovery.json": "4b578d5aee69d78a35bf7818b269273f437a5eb8badef750a6d74d71d915a64c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/meter/campaign/statistical_validation/._native_canonical_calibration_pending_v4_6.json": "76f5b837ab5bf2f09c78658bf636acbf88ef29a317cd594f5248dd1dbcb42ea5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/meter/campaign/statistical_validation/native_canonical_calibration_pending_v4_6.json": "bf0e197ae5b73a5b4d019ec3abdb5528499fe40c66f7886b8731aca4b6429a85",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/meter/campaign/statistical_validation/native_canonical_calibration_v4_6/old": "b78244167af116f2b3597b4a81421bd2b28f3d8bf616025a5ae424f689fd7632",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_7_lifecycle_fixtures_v2/meter/campaign/statistical_validation/native_canonical_calibration_v4_7/new": "208640a3c2363b44a4afd1c5df6f87720c9a75fb06042241e4b7f6a74e14fd5d"
+  },
+  "actual_workers": 0,
+  "actual_mutex": 0,
+  "actual_fits": 0,
+  "source_reference_reads": 0,
+  "qualification": "Fallback cleanup exercised against explicitly fake owned process/group and held metadata context. Real self-signals only target the reviewer. Identical v6 cleanup/signal AST and previously sealed real controls supply inherited real-child evidence; no new production or hostile-writer guarantee."
+}

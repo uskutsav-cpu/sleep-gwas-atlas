@@ -1,0 +1,20 @@
+{
+  "status": "PASS_PROXY_CONTROLS_WITH_CONFIRMED_EMPTY_REVIEW_MAP_ADMISSION_FAULT",
+  "executor_sha256": "431d30b17de14aaae5abd19587f08708f4b3171f59732541986089095d4add36",
+  "checker_sha256": "b1728f093fe48c3736db476f3a6634b3621ca343c341ace255f4d008bc97f6d7",
+  "checks": [
+    "inherited descriptor exact device/inode and flock reacquisition",
+    "child alone retains mutex after parent descriptor closes",
+    "mutex available only after inherited helper exits",
+    "explicit pass_fds override rejected before child creation",
+    "global subprocess module unmodified"
+  ],
+  "empty_independent_review_hash_map_accepted": true,
+  "actual_helpers": 3,
+  "actual_GWAS_or_preprocessing_or_native_workers": 0,
+  "real_study_lock_used": false,
+  "GWAS_body_reads": 0,
+  "source_code_unchanged": true,
+  "elapsed_seconds": 1.0268859170028009,
+  "scope": "Temporary independent lock and tiny stdlib helpers only; synthetic admission metadata."
+}

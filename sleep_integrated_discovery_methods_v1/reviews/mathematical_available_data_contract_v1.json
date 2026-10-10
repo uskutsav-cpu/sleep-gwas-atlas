@@ -1,0 +1,174 @@
+{
+  "schema": "independent_mathematical_available_data_contract_v1",
+  "decision": "NO_GO_SUBSTANTIVE_NEW_METHOD_WITH_CURRENT_IDENTIFICATION_AND_PRIOR_ART",
+  "observed_estimand": "Delta=c_AD/sqrt(v_A*v_D)-c_BD/sqrt(v_B*v_D) for declared oriented phenotype/source/common-SNP targets",
+  "conditional_established_analysis_design": "GO_FEASIBILITY_ONLY_NO_EXECUTION_ADMISSION",
+  "latent_estimand": "rg of measurement-independent biological sleep with disease: not identified without external information and restrictive validated model",
+  "theta_order": [
+    "v_A",
+    "v_B",
+    "v_D",
+    "c_AD",
+    "c_BD"
+  ],
+  "gradient": [
+    "-r_AD/(2*v_A)",
+    "r_BD/(2*v_B)",
+    "-Delta/(2*v_D)",
+    "1/sqrt(v_A*v_D)",
+    "-1/sqrt(v_B*v_D)"
+  ],
+  "uncertainty": "g^T V g, including every variance/covariance cross term; or properly paired nonlinear joint deletions",
+  "pair_specific_denominators": "Augment theta with both disease variance estimates; a shared disease file does not imply one fitted denominator",
+  "current_evidence": {
+    "original_native_jobs": 190,
+    "original_standalone_h2": 158,
+    "original_rg": 1637,
+    "historical_validation_rg": 41,
+    "historical_fully_independent_two_trait_replications": 0,
+    "counts_scope": "inherited dated V4 reports; not a new census or outcome recomputation",
+    "cross_fit_alignment_from_existing_arrays_certified": false,
+    "actual_joint_covariance_from_optional_controls_certified": false,
+    "historical_V_Stand_full_denominator_uncertainty": false,
+    "old_45_trait_S_V_admitted_for_new_inference": false
+  },
+  "requirements": [
+    {
+      "id": "D01",
+      "needed": "Exact source/release, transformation, direction, covariates, ancestry, time window and disease endpoint for each primary variable",
+      "status": "PARTIAL_METADATA_AVAILABLE_PRIMARY_NOT_FROZEN",
+      "why": "A source-defined contrast is different from a measurement-only effect; rank-normalization/thresholds are not simple reliability changes"
+    },
+    {
+      "id": "D02",
+      "needed": "Compatible common-SNP/LD/population target and declared transport assumptions",
+      "status": "REFERENCE_AND_SOURCE_IDENTITIES_EXIST_COMPATIBILITY_NOT_A_NEW_CERTIFICATION",
+      "why": "A shared reference does not identify population transport or remove selection"
+    },
+    {
+      "id": "D03",
+      "needed": "A small coherent joint raw S and V, ordered entries and covariance units, or joint vector retaining all pair-specific denominators",
+      "status": "NOT_ESTABLISHED_FOR_NEW_PRIMARY",
+      "why": "Marginal rg tables and fixed-scale V_Stand lack required denominator/cross-fit uncertainty"
+    },
+    {
+      "id": "D04",
+      "needed": "Source-bound joint deletion events with per-fit SNP/mask/order mapping; declared intercept, weight and normalization treatment",
+      "status": "EXISTING_1_TO_200_ARRAYS_INSUFFICIENT_PREPARATION_ONLY_EVIDENCE",
+      "why": "Equal vector length and marginal SE identity do not prove alignment"
+    },
+    {
+      "id": "D05",
+      "needed": "Appropriate LD-block balance/dependence, matrix rank and marginal/joint uncertainty validation for selected estimator/data regime",
+      "status": "NOT_ESTABLISHED_FOR_NEW_PRIMARY",
+      "why": "Rank(V)<=B-1; controllers and invented fixtures are not empirical calibration"
+    },
+    {
+      "id": "D06",
+      "needed": "Prespecified handling of weak/nonpositive h2 and nonregular bounds; no favorable deletion or smoothing rescue",
+      "status": "PROTOCOL_NEEDED",
+      "why": "Near-zero genetic variances make correlation weakly identified or undefined; general confidence inversion is an established baseline"
+    },
+    {
+      "id": "D07",
+      "needed": "Consistent supplied N/N_eff/sample prevalence/population prevalence and observed/liability scale conventions",
+      "status": "KNOWN_HISTORICAL_QUALIFICATIONS_REMAIN",
+      "why": "Positive coherent rescaling leaves rg invariant but absolute liability h2 and ascertainment claims require further assumptions"
+    },
+    {
+      "id": "D08",
+      "needed": "Actual participant-overlap documentation or modeled sensitivity and all relevant source intersections",
+      "status": "NAMED_COHORT_AND_REUSE_MAP_PARTIAL_INDIVIDUAL_INTERSECTIONS_UNKNOWN",
+      "why": "An intercept identifies an overlap-correlation/confounding composite, not shared people or independent replication"
+    },
+    {
+      "id": "D09",
+      "needed": "Matched cohort-by-measurement bridge or explicit source-specific interpretation",
+      "status": "NO_VERIFIED_CROSSED_MEASUREMENT_DESIGN_SUPPLIED",
+      "why": "Measurement and cohort contrasts are confounded when only diagonal design cells exist"
+    },
+    {
+      "id": "D10",
+      "needed": "Gold-standard/genotyped calibration, informative repeated measures or justified latent loading/residual constraints",
+      "status": "NOT_SUPPLIED_FOR_LATENT_BIOLOGICAL_TARGET_NOT_NEEDED_FOR_OBSERVED_CONTRAST",
+      "why": "Classical error leaves rg invariant; unrestricted genetic errors admit observationally identical latent worlds"
+    },
+    {
+      "id": "D11",
+      "needed": "Frozen finite primary contrast family, selection accounting, effect/equivalence margin, power and negative controls",
+      "status": "NOT_YET_FROZEN",
+      "why": "Historical selected positives and unchanged old BH families do not control a new comparison family"
+    },
+    {
+      "id": "D12",
+      "needed": "Appropriately independent source/phenotype validation with power and explicit validation class",
+      "status": "HISTORICAL_OUTCOME_SIDE_ONLY_NO_FULLY_INDEPENDENT_TWO_TRAIT_RESULT",
+      "why": "Source reuse remains dependence even when an outcome cohort changes; feasibility h2 is not replication"
+    },
+    {
+      "id": "D13",
+      "needed": "Source rights and documented permissible access/reuse for actual primary inputs",
+      "status": "MUST_BE_CHECKED_FOR_SELECTED_PRIMARY_NO_NEW_ACCESS_GRANTED",
+      "why": "Statistical identifiability does not establish access or sharing rights"
+    },
+    {
+      "id": "D14",
+      "needed": "Null/coverage evidence at claimed tail range and distinct inferential improvement over strong existing baselines before any new-method campaign",
+      "status": "NO_SUBSTANTIVE_GAP_DEMONSTRATED",
+      "why": "Nominal calibration cannot certify extreme tails; delta/jackknife repair is not novelty"
+    }
+  ],
+  "claims": {
+    "potentially_testable": [
+      "source/definition-specific difference of common-SNP rg with valid joint uncertainty",
+      "prespecified equivalence margin if sufficiently precise",
+      "descriptive source-specific robustness with qualified validation"
+    ],
+    "not_identified_or_not_certified": [
+      "latent true biological sleep rg without anchors/constraints",
+      "measurement-only effect with confounded cohort design",
+      "actual overlap count or zero overlap from an LDSC intercept",
+      "causal mechanism from a correlation contrast",
+      "fully independent replication from historical sleep reuse",
+      "universal transportability from cohort names or reference identity",
+      "new discovery from historical associations"
+    ]
+  },
+  "candidate_decisions": [
+    {
+      "candidate": "covariance-aware correlated rg contrast",
+      "verdict": "NO_GO_NEW_METHOD",
+      "reason": "Established multivariable LDSC S,V plus full Jacobian/sandwich or aligned joint jackknife; actual input validity still gated"
+    },
+    {
+      "candidate": "latent reliability-corrected rg",
+      "verdict": "NO_GO_CURRENT_DATA",
+      "reason": "Classical error needs no rg correction; general genetic measurement error is unidentified; relative dilution prior art exists"
+    },
+    {
+      "candidate": "clinical/questionnaire/device cohort transport",
+      "verdict": "NO_GO_UNRESTRICTED_IDENTIFICATION",
+      "reason": "Missing crossed measurements/selection anchors; existing observed source contrasts are narrower"
+    },
+    {
+      "candidate": "weak-h2 calibrated rg contrast",
+      "verdict": "NO_GO_METHOD_CAMPAIGN_PENDING_DEMONSTRATED_GAP",
+      "reason": "Genuine nonregularity, established ratio/profile/confidence-projection principles and existing likelihood baselines; cannot overcome zero variance identification"
+    }
+  ],
+  "prohibited_credit": [
+    "V4 array indices as cross-fit genomic alignment",
+    "invented/reference/controller controls as actual GWAS covariance",
+    "V_Stand as full uncertain-denominator covariance",
+    "PSD or nonfinite fallback as scientific admission",
+    "source feasibility h2 as new rg or replication"
+  ],
+  "production_operations": {
+    "fits": 0,
+    "simulations": 0,
+    "source_or_runtime_censuses": 0,
+    "body_reads": 0,
+    "locks": 0,
+    "V4_edits": 0
+  }
+}

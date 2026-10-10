@@ -1,0 +1,9 @@
+{
+  "status": "PREPARATION_ORDER_FAILURE_PRESERVED",
+  "first_problem": "Non-escalated stop-receipt check could not open the owned SSD mutex for flock; no record was written.",
+  "second_problem": "Dependent59_3_7 prepare was started before stop receipt existed and failed closed on missing receipt.",
+  "new_worker_or_fit_launched": false,
+  "new_plan_or_namespace_created": false,
+  "correction": "Run the authorized mutex/failed-receipt check with SSD write permission, inspect its success, then prepare sequentially.",
+  "prior_scientific_attempt_failure_unchanged": true
+}

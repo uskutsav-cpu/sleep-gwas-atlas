@@ -1,0 +1,293 @@
+{
+  "schema": "signed_ld_source_authentication_QC_prelaunch_plan_v4_1",
+  "prepared_utc": "2026-10-10T02:10:51.404300+00:00",
+  "admitted": false,
+  "execution_authorized": false,
+  "body_worker_implemented_or_reviewed": false,
+  "source_only_metadata_checker_code": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/signed_ld_source_prelaunch_metadata_checker_v4_1.py",
+  "scope": "SOURCE_AUTHENTICATION_AND_REFERENCE_ONLY_QC_PRELAUNCH_DESIGN_NO_SIMULATION_OR_ESTIMATOR",
+  "current_local_source": {
+    "BED": {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/1000G_EUR.bed",
+      "bytes": 231387159,
+      "device": 16777237,
+      "inode": 1621777,
+      "mtime_ns": 1790624210000000000,
+      "header_read_bytes": 3,
+      "header_sha256": "61cdb600301c706145dff6bc4a927944d837b057b0d61ae069e6fbcd91e6e0a1",
+      "header_hex": "6c1b01",
+      "fresh_full_content_sha256": null
+    },
+    "BIM": {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/1000G_EUR.bim",
+      "bytes": 51537337,
+      "device": 16777237,
+      "inode": 1609420,
+      "mtime_ns": 1790624079390000000,
+      "header_read_bytes": 4096,
+      "header_sha256": "e507dc5dca3672108663e6799a76d0bd9816b68e3875ad1a22ad5b403d6ba0cf",
+      "fresh_full_content_sha256": null
+    },
+    "FAM": {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/1000G_EUR.fam",
+      "bytes": 9557,
+      "device": 16777237,
+      "inode": 1612695,
+      "mtime_ns": 1790624080050000000,
+      "fresh_full_content_sha256": "ccc5f19953f0f7debd096aaaf26aef11e49c8fad803abdfcd44f955ac9c5edc8"
+    },
+    "AFREQ": {
+      "path": "/Volumes/Extreme SSD/brain6-work/brain6-alternative-local-validation-v1/reference/1000G_EUR.afreq",
+      "bytes": 56496658,
+      "device": 16777237,
+      "inode": 1622059,
+      "mtime_ns": 1790624198120000000,
+      "header_read_bytes": 256,
+      "header_sha256": "cf7cbadc83f858215e81f0f5f2a57aae3324207a445d8c104ffb6401958974bf",
+      "fresh_full_content_sha256": null
+    },
+    "historical_expected_BED_sha256": "96da36833e797ceebcd5faf97bff4aa66cfdc0e3860a85a0d244e249f53a2463",
+    "raw_variant_count_from_prior_manifest": 1836406,
+    "upstream_genotype_content_authenticated": false,
+    "fresh_BED_or_BIM_full_hash": false
+  },
+  "unresolved_original_source_chain": "No exact raw-genotype transfer URL/release/checksum/archive-member/extraction receipt or reproducible official source-to-compact-subset derivation was found in the bounded inspected metadata. Local prep/split hashes and FAM match do not supply it.",
+  "separate_authenticated_candidate": {
+    "record_id": 8292725,
+    "record_doi": "10.5281/zenodo.8292725",
+    "creator": "Steven Gazal",
+    "metadata_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/canonical_ld_feasibility_sources_v4/zenodo_8292725_metadata.json",
+    "metadata_sha256": "77b4f5ea80e687ddabe9eb69c678daef46fefc85462dd8ef796c4dd9adcdf8c2",
+    "file_id": "33cf22ea-3969-4b7e-9b4a-5f8f5a9900b5",
+    "file_name": "1000G_Phase3_plinkfiles.tgz",
+    "content_url": "https://zenodo.org/api/records/8292725/files/1000G_Phase3_plinkfiles.tgz/content",
+    "bytes": 288277344,
+    "upstream_md5": "md5:a7773ab485827b533cb300c76356d76b",
+    "observed_record_license": "CC BY4.0",
+    "record_is_exact_version_not_latest_concept": true,
+    "payload_acquired": false,
+    "archive_member_identity_not_yet_known": true,
+    "no_EAS_GRCh38_or_mirror_substitution": true,
+    "fresh_local_SHA256_required_before_and_after_use": true
+  },
+  "archive_members": {
+    "regular_file_count": 66,
+    "chromosomes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "basenames": "1000G.EUR.QC.{1..22}.{bed,bim,fam}",
+    "allowed_uniform_prefixes": [
+      "",
+      "1000G_EUR_Phase3_plink/"
+    ],
+    "prefix_qualification": "Archive packaging unexamined: require exactly one uniform frozen prefix family; unexpected names/entries stop rather than silently changing scope.",
+    "directories": "Only root and matching single approved prefix; reject other directories.",
+    "reject": [
+      "duplicate names",
+      "absolute/traversal paths",
+      "symlinks",
+      "hardlinks",
+      "devices",
+      "FIFOs",
+      "sparse members",
+      "unbounded extended metadata",
+      "unexpected regular files",
+      "unverified trailing gzip payload"
+    ],
+    "extraction": "Manual owned-target regular file writes only; no extractall, owner/mode/xattr preservation or overwrite. Bind every member size/SHA and archive before/after SHA/MD5."
+  },
+  "strict_source_checks": [
+    "All22 FAM files byte-identical and503 unique IIDs/503 authoritative Phase3 EUR samples; preserve exact order and FID/IID digest.",
+    "Each BED6c1b01 and exact3+nvariant*126bytes; no truncation/trailing/padding violation.",
+    "Each BIM6fields, expected numeric chromosome, positive 1-based BP, nondecreasing position; source IDs globally unique or reject before choosing J.",
+    "Build cannot be proved by directory name: document primary Phase3/GRCh37 evidence and exact selected ID/CHR/BP comparison to verified GRCh37 map; any conflict is retained exclusion; unresolved full-source build remains qualified, not asserted.",
+    "No assumption new archive equals old compact BED or historical eur_w_ld_chr; prove exact content derivation separately if claiming equivalence."
+  ],
+  "resource_contract": {
+    "ledger_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/global_SSD_resource_reservation_v4_5.json",
+    "ledger_sha256": "7ce69095a6f67ae681d547476d1557afac2de0f97d083b12bc1b689d0788417f",
+    "global_ceiling_bytes": 322122547200,
+    "reserved_total_bytes": 319399338749,
+    "unallocated_margin_bytes": 2723208451,
+    "source_namespace": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/canonical_signed_reference_source_v1",
+    "source_aggregate_cap_bytes": 3221225472,
+    "archive_and_all_failed_partial_cap_bytes": 536870912,
+    "extracted_all_partial_and_failed_cap_bytes": 2147483648,
+    "QC_controls_metadata_and_all_failed_output_cap_bytes": 536870912,
+    "canonical16control8GiB_reused": false,
+    "closed_sensitivity_cap_bytes": 268435456,
+    "closed_sensitivity_reexecution_admitted": false,
+    "worker_count": 1,
+    "aggregate_RSS_stop_bytes": 2147483648,
+    "BLAS_threads": 1,
+    "decoded_chunk_max_SNPs": 2048,
+    "internal_floor_bytes": 3221225472,
+    "SSD_floor_bytes": 5368709120,
+    "shared_heavy_mutex": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/native_heavy_worker.lock",
+    "whole_stage_monotonic_deadline_seconds": 7200,
+    "current_whole_campaign_byte_meter_required_at_every_stage": true,
+    "meter_includes_regular_files_AppleDouble_failed_partials_and_pending_outputs": true,
+    "runtime_copy_installation": false,
+    "output_paths_SSD_only": true,
+    "lock_policy": "Existing exact shared heavy mutex nonblocking exclusive for owned worker lifetime; do not create a separate lock or wait indefinitely.",
+    "guard_policy": "Reviewed controller checks RSS/floors/deadline/component/subcaps/current300GiB meter and CLOSEDsens<=256MiB every1second during owned child/hash/extraction/QC and before persistence; stop only owned process/group, defer catchable signals during scoped cleanup, preserve failure/partial receipt. Current scanner/meter/runtime/controller code still requires independent freeze/review.",
+    "SSD_launch_free_required_bytes": 8589934592
+  },
+  "minimal_executable_future_stage_design": [
+    {
+      "stage": "G0",
+      "operation": "Freeze actual controller/runtime/decoder hashes and exact reviewed source plan/admission receipt. Recheck all dependencies, regular leaves/all parents, component/global current census, CLOSEDsens bindings/size and existing floors; acquire shared heavy mutex.",
+      "failure": "NO_SOURCE_EXECUTION_ADMISSION"
+    },
+    {
+      "stage": "G1",
+      "operation": "Optional separately admitted local-continuity check:64KiB streaming hash raw BED/BIM/FAM before/after plus stat/header. Compare expected local hashes.",
+      "qualification": "Even exact fresh96da\u2026 proves continuity only, not upstream content authentication."
+    },
+    {
+      "stage": "G2",
+      "operation": "If newly admitted: one TLS-verified HTTPS-only bounded owned curl fetch of exact record8292725 EUR archive, no automatic retry/resume/reuse; bind fresh official metadata/HEAD size, full exact288277344bytes/upstreamMD5/newSHA before publication to owned cache.",
+      "failure": "Retain failed partial under512MiB, no automatic replacement archive."
+    },
+    {
+      "stage": "G3",
+      "operation": "Guarded bounded tar/gzip header/member pass and manual66-file extraction to new owned subdirectory; exact allowlist; prove member hashes, gzip completion, FAM/BED/BIM strict checks and archive unchanged.",
+      "failure": "SOURCE_ARCHIVE_OR_MEMBER_IDENTITY_REJECTED"
+    },
+    {
+      "stage": "G4",
+      "operation": "Freeze static reference/coordinate intersections and whole master ranks, decode source-only QC in chunks<=2048, save every exclusion and exact J/sample/row/sign digest under512MiBQCcap.",
+      "failure": "SOURCE_QC_REJECTED_OR_INCOMPLETE_NO_UNIVERSE_SUBSTITUTION"
+    },
+    {
+      "stage": "G5",
+      "operation": "Execute frozen independent decoder/direct-window/sign/global-operator controls; persist fixed intended immutable source/QC seal with full input/output identity checks before/after each terminal write.",
+      "failure": "SOURCE_CONTROL_REJECTED_OR_INCOMPLETE"
+    }
+  ],
+  "reference_only_QC": {
+    "scope": "REFERENCE_ONLY_NO_GWAS_Z_P_RG_OR_NATIVE_FINAL_MASK_SELECTION",
+    "source_precondition": "AUTHENTICATED_UPSTREAM_ARCHIVE_OR_EXACT_REPRODUCIBLE_ORIGINAL_CONTENT_CHAIN_REQUIRED_FOR_SOURCE_ADMISSION",
+    "raw_source_only_not_prepared_MAF05_or_cm_interpolated_copies": true,
+    "reference_universe": "22 exact consumed LD-score ID/CHR/BP rows and exact coordinate/allele map; no score/weight/M substitution",
+    "master_rank": "Store rank0 and rank1 for every historical master reference row before MHC/static/source-QC exclusion; chromosome numeric1..22 and original row order. C03 future cycling uses original rank0, never subset renumbering; simulation admission remains false.",
+    "coordinate_map": {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz",
+      "sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4"
+    },
+    "reference_sha256": {
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1",
+      "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6"
+    },
+    "primary_interval": {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/canonical_200_intervals_v4.tsv",
+      "sha256": "349466ddb40ade5043e8f52799fdcd9e56abb6293a6874b34562160c9066411f"
+    },
+    "MHC": "Exclude chr6 BP25000000 through34000000 inclusive, exactly the existing canonical builder; retain master ranks and exclusion records.",
+    "static_eligibility": "Unique ID with exact CHR/BP and exact ordered or swapped A1/A2; both alleles distinct one-base ACGT; exclude A/T,C/G; no complement-strand rescue; missing allele-map/ID, coordinate/allele conflict and duplicate source IDs recorded/rejected.",
+    "dosage_A1": {
+      "00": 2,
+      "01": "MISSING",
+      "10": 1,
+      "11": 0
+    },
+    "samples": "Same503 in source FAM order; all22 FAM files byte-identical and authoritative Phase3 EUR sample-set match; do not drop/reorder samples to pass QC.",
+    "padding": "For503 samples every final variant byte high2 padding bits must be zero; wrong mode/size/truncation/trailing genotype bytes is fatal.",
+    "variant_missingness": "Retain only missing_count<=25 out503; >25/503 excluded before universe seal. All-missing is separately classified and excluded.",
+    "zero_variance": "Exclude if observed_nonmissing_count<2 or exact integer statistic nobs*sum_dose2-sum_dose**2<=0; no floor/jitter/clipping.",
+    "MAF": "Observed A1 frequency and MAF logged; no additional MAF threshold and no AFREQ-based selection. No HWE/outcome/power filter.",
+    "missing_imputation": "Impute each retained SNP to observed mean; center all503; scale by sqrt(sum(centered**2)/503). Require finite values, zero column mean and unit Gram diagonal.",
+    "allele_sign": "Map dosage-counted BIM A1 to target coordinate-map A1: +1 ordered match, -1 swapped match. Apply sign to centered standardized column; record both ordered allele pairs and sign. No assumption that A1 is minor/reference/effect allele.",
+    "source_order": "Record chromosome/member/BIM row0 and BED byte offset3+row0*ceil(503/4), full master rank0/rank1 and final J index; preserve ties and deterministic CHR/BP/ID order.",
+    "frozen_universe_output": "Ordered exact J and sample-order digests; every static and genotype-QC exclusion with reason; never repair a failed source by an outcome-informed subset."
+  },
+  "independent_controls": {
+    "tiny_format_controls": "Hand-encoded all4 genotype states,503-sample final-byte padding, truncated/trailing/sample-major inputs, wrong FAM order, A1/A2 swap, mean missingness, exact zero/all-missing and near-zero nonzero variance; discrete counts/alleles/offsets exact.",
+    "decoder_independence": "Before actual-source PASS, compare bit-shift decoderA to separately maintained pinned decoderB (e.g. independently reviewed PLINK allele-preserving export). Do not describe two wrappers around one decoder as independent. Executable/runtime/version/code hash and A1 export orientation still require freeze; PATH census found no plink/plink2.",
+    "source_windows": "After reference-only J freeze: for each chromosome select first64, middle64 and last64 eligible J rows, no overlaps; fewer192 is source-control INCOMPLETE. Also use fixed32/32/32 early/middle/late scatter to retain distant within-chromosome correlations; no favorable window substitution.",
+    "direct_operator": "For each selected source window, independently form float64 G and R=G.T@G/503; compare deterministic-vector direct Rv to two-pass G.T@(Gv/503), including distant rows, chunk sizes1/7/64/2048 and reversed chunk iteration with unchanged SNP/sample order.",
+    "sign_control": "Flip predetermined every-third selected target allele; require Gnew=G*D, Rnew=D*R*D and same sample-centered norm; squared-r agreement alone is insufficient.",
+    "global_operator": "Streaming full-chromosome deterministic probes, energy v.T R v=||Gv||**2/503 and bilinear symmetry; no dense global SNP matrix and no hard jackknife/storage-window boundary truncation.",
+    "tolerance": "Fixed protocol point/deletion tolerance abs_error<=1e-10+1e-8*abs(reference); discrete decode/count/sign checks exact; unit-column mean/norm absolute1e-10; no numerical repair to pass.",
+    "PSD": "Gram factor is PSD by construction; within-chromosome centered rank<=502. Dense-window numeric checks do not establish population LD/long-range adequacy.",
+    "controls_executed_here": 0
+  },
+  "finite_reference_truth_contract": {
+    "R": "G.T@G/503 within chromosome, zero between chromosomes; fixed503 samples/mean imputation/centering/scaling/allele signs; no block boundary factorization or eigenvalue clipping.",
+    "rank": "Each chromosome rank<=502; sample-induced long-range correlations remain present within chromosome.",
+    "meaning": "Conditional-on-authenticated-finite-reference Gaussian model, not250000 participant genotypes or population-LD validation.",
+    "future_integrated_truth": "If S later admitted, integrated random-effect Sigma_g ratios, signal covarianceR^2 tensorSigma_g/m_total and noiseR tensorSigma_e; no realized-effect normalization/target switch. Variant-N scaling does not establish real cohort-overlap laws.",
+    "historical_scores_weights_M": "All exact historical files retained; no reconstructed replacements. Finite R^2 need not match their L2/window/bias-correction interpretation.",
+    "not_established": [
+      "actual pair retained-set coverage",
+      "population LD",
+      "physical variant-N overlap",
+      "liability transforms",
+      "winner selection",
+      "full C calibration"
+    ]
+  },
+  "preserved_full_protocol": {
+    "base_seed": 20261009,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 202610095,
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/COMMON_BOUNDARY_METHOD_VALIDATION_PROTOCOL_v4.md",
+    "replicates_each": 2000,
+    "scenarios": 4,
+    "sha256": "4cc651a2b51b63cf9ea1e7535da48960c7d395967879e8bfe2fb781855542445",
+    "total": 8000,
+    "unchanged_thresholds_and_failed_replicate_accounting": true
+  },
+  "quota_or_acceptance_margin_reduction": false,
+  "S_simulations_run": 0,
+  "C_calibration_credit": 0,
+  "estimator_calls": 0,
+  "biological41Cov_release_admitted": false,
+  "source_stage_launch_prerequisites_remaining": [
+    "Independent actual acquisition/extraction/hash/QC/controller code review and fixed intent seals",
+    "Frozen existing runtime and independently maintained decoderB identity",
+    "Root explicit source-only admission after exact resource/current-meter preflight",
+    "Upstream/archive content authentication and selected-build compatibility before source admission"
+  ]
+}

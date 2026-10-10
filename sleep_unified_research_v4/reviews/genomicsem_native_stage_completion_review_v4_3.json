@@ -1,0 +1,209 @@
+{
+  "recorded_utc": "2026-10-09T21:49:04.267856+00:00",
+  "review_scope": "Independent bounded source/metadata and synthetic selector/collator review; no actual collator or worker execution.",
+  "status": "ORIGINAL_V4_3_COLLATOR_REQUIRES_NARROW_CORRECTION",
+  "selector_prepared_contract": "No additional material blocker found under the admitted-controller evidence contract.",
+  "findings": [
+    {
+      "id": "P1_FIRST_OBSERVATION_REBINDING",
+      "priority": 1,
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/33_compare_native_campaign_v4_3.py",
+      "lines": [
+        36,
+        38,
+        383,
+        384
+      ],
+      "description": "Final selector callback re-records monitor and native receipts, replacing their original INPUTS hash/size. Both gate calls and the final unchanged assertion accept changed metadata; sources_before aliases INPUTS.",
+      "witnesses": [
+        {
+          "case": "selected_monitor_first_observation_overwritten",
+          "witness_confirmed": true,
+          "initial_identity_changed": true,
+          "first_and_second_selector_gates_passed": true,
+          "original_final_unchanged_assertion_passed": true,
+          "real_campaign_evidence_consumed": false
+        },
+        {
+          "case": "native_job_receipt_first_observation_overwritten",
+          "witness_confirmed": true,
+          "initial_identity_changed": true,
+          "first_and_second_selector_gates_passed": true,
+          "original_final_unchanged_assertion_passed": true,
+          "real_campaign_evidence_consumed": false
+        }
+      ],
+      "required_correction": "Retain the first hash and size; reject a differing repeated observation before final output. Preserve the original source and this rejection."
+    }
+  ],
+  "static_bindings": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/native_stage_completion_v4_3.py": {
+      "sha256": "ed3b4d7af808d004447c955bf1ebafe6f70951ce9a178cab000ba865e13d487c",
+      "bytes": 7656
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/33_compare_native_campaign_v4_3.py": {
+      "sha256": "abf7799709309f86af415badb244f810145de511d91f99f231bdce0a0356c47f",
+      "bytes": 23743
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/native_extension_checkpoint_continuation_v4_3.json": {
+      "sha256": "f087b74e1ebaf6b543513d69948d8dbb2232e5190360dd6fce3acc16e68ed5b3",
+      "bytes": 1141915
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/native_extension_checkpoint_continuation_admission_v4_3.json": {
+      "sha256": "0d50eb33161c12bb7e6801bb7310c9a7e26fa75d78c842df6001e10bf3d11135",
+      "bytes": 2102
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/ssd_native_execution_plan_v4_3.json": {
+      "sha256": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+      "bytes": 424379
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/extension_native_monitor_receipt_v4.json": {
+      "sha256": "0e05b99fc6913168214e57abf7c4ba5ee2aa9b53e3af360b2114a1f4b3c3c264",
+      "bytes": 866723
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/61_native_checkpoint_continuation_v3.py": {
+      "sha256": "b1309c0bd97736d7282c636956b859290dbe5430a5997137d8be0776e3160283",
+      "bytes": 20542
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/33_compare_native_campaign.py": {
+      "sha256": "85d106cb15b39e57f2ff30b185fbd1889a701a90c78684b3614d899c91f42412",
+      "bytes": 23622
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/31_invoke_original_native_runner.py": {
+      "sha256": "70095b3f05c29902c6992ff99c54fb8455fccce9231a3637f2ee6ed8e862b3dd",
+      "bytes": 1534
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/30_prepare_and_run_ssd_native_campaign.py": {
+      "sha256": "f0460a24750a6e0671f3bf1fb6109ac65d976969f62998b8b48bf68fe7a4c003",
+      "bytes": 13460
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/sensitivity_executor_v4_3_1.py": {
+      "sha256": "dad16c6de646ce4090d7d753cf921872bd85606e96ff54229a15748a6e4ceee6",
+      "bytes": 34979
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/canonical_calibration_common_v4_3.py": {
+      "sha256": "8b9e0a4d4b7a9e9c8c487b8c5991f5fa232c4171429951183b8dc5d84aff80eb",
+      "bytes": 10178
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v2.py": {
+      "sha256": "6742f54971b508427586670bae309c0151614be5ffa83a17a23dac32a1988da0",
+      "bytes": 9492
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/extension_replay_common_v2.py": {
+      "sha256": "acbd0d2ff2cceaad5cd4146867d27d11f6569e1c79d78d0969bbc2b85d2c72e7",
+      "bytes": 10744
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_partial_extension_checkpoint_v4_2.tsv": {
+      "sha256": "1b609977b410be9dee16141b70b753cb2118161dd90683738da07253e726e550",
+      "bytes": 82015
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_partial_extension_checkpoint_receipt_v4_2.json": {
+      "sha256": "3373ad601b3e8d697b3204e64ccfd2d0c7a436d56aee4bb0536a4b58a9a9221e",
+      "bytes": 1997804
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_partial_extension_checkpoint_review_v4_2.md": {
+      "sha256": "ac68b07ae336943b631abefb45705b1b55ae22d3ff6c4ef966ba689d155c800c",
+      "bytes": 10138
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_partial_extension_checkpoint_checker_v4_2.py": {
+      "sha256": "c8b62fa83b0ddc2773ee650e3e839465d8d650cc8b3e68316b4ad7356dd1b588",
+      "bytes": 25213
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_partial_extension_checkpoint_v4_2.sha256": {
+      "sha256": "a584066cf0a8dbcb04e70e499ec955799187898f01c4cfc5d78d74642401c2bd",
+      "bytes": 961
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/61_native_checkpoint_continuation.py": {
+      "sha256": "53ba7ad9558a72dc1d1e9d9c7ccc357ed211a128bed6b2a898e406f5719b7a00",
+      "bytes": 17358
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/native_extension_checkpoint_continuation_v4_2.json": {
+      "sha256": "6f21b9192780cd0490f722439c2ee7c7b62c37b7f0cfe96aa4515558f1483a75",
+      "bytes": 853448
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/native_sidecar_rename_control_v2.json": {
+      "sha256": "e8285ac8f8d38f57ca4cddc52a6de8994f3152569db12fc9a55eeeba79cd0926",
+      "bytes": 1519
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/logs/extension_original_runner_stdout_v4.log": {
+      "sha256": "5bfa54f5e22e082081cb0d24ce92633cd7432829c9bed10eca346154185e6450",
+      "bytes": 18692
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_native_continuation_review_v4_3.md": {
+      "sha256": "d1e5a06ac3f7803325f8443ef231a20fd4e6f4c3886c6a8bffd375328a0f338e",
+      "bytes": 6942
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_native_continuation_review_v4_3.json": {
+      "sha256": "5d03b6009f9be52069516717b176a64b1dbb604ded84600511281e67c5c6561e",
+      "bytes": 8394
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_native_continuation_review_seal_v4_3.json": {
+      "sha256": "a1c04cb54a3c4f3a86a4f89539cdbddfd0f7390b72e475af64078e1324354503",
+      "bytes": 1635
+    },
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_native_continuation_transport_controls_receipt_v4_3.json": {
+      "sha256": "62f41a1d27e043cf3f81a7b1b7ceabdbe4a00a4848d61931995d24867a83ee56",
+      "bytes": 62297
+    }
+  },
+  "static_bindings_count": 27,
+  "unchanged_collator_functions_except_main": [
+    "sha",
+    "record",
+    "load",
+    "rows",
+    "name",
+    "output",
+    "summary",
+    "h2log",
+    "bh",
+    "close",
+    "delete",
+    "block_se",
+    "check_rg",
+    "archived_log"
+  ],
+  "scientific_scope_unchanged": [
+    "all arithmetic helpers",
+    "RTOL=1e-12",
+    "ATOL=1e-15",
+    "P_ATOL=1e-300",
+    "centered 200-deletion variance",
+    "ratio/contrast arithmetic",
+    "396/1200 frozen BH families",
+    "41 validation cardinality",
+    "cross_estimator_boundaries_certified=false"
+  ],
+  "selector_verified_contract": [
+    "extension selects monitor_v4_3; core/validation retain original_v4",
+    "exact historical plan and preserved predecessor hash",
+    "exact admitted continuation plan/controller and independent review/dependency hashes",
+    "107 reused +5 remaining jobs",
+    "paired preservation receipt identity and equality with frozen 284+284 maps",
+    "worker complete status and empty group",
+    "exact set of112 historical extension receipt paths and identities",
+    "cleanup true; no recorded termination/additional failure",
+    "recorded final3GiB internal/5GiB SSD floors",
+    "all consumed identities rechecked within each gate",
+    "initial and late failure addendum rejects"
+  ],
+  "limitations": [
+    "Synthetic gates qualify prepared code, not native numerical outcomes.",
+    "The selector consumes the reviewed controller preservation/worker proof; it does not rehash preserved 568 artifact bodies or284 literal backups.",
+    "Reviewed controller status and its exact code/admission bind resource/output/deadline enforcement; selector separately checks recorded floors.",
+    "Scientific job/full-precision/output validation remains with the collator and subsequent independent1200-row numerical/BH review.",
+    "No same-index stock200 cross-estimator covariance alignment is certified."
+  ],
+  "controls_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_native_stage_completion_review_controls_v4_3.json",
+  "controls_sha256": "2b212886ac01eb671b4b6fc3b76bd063143b5da81242b0598a844cb81f2bde14",
+  "passing_control_count": 36,
+  "helper_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_native_stage_completion_review_v4_3.py",
+  "helper_sha256": "3e5538fde469ebef72ebc5f165a14440f0ef2d41ab8e884c800d7fe0a0160294",
+  "real_workers_launched": 0,
+  "real_stage_monitor_consumed": false,
+  "actual_extension_completion_claim": false,
+  "GWAS_body_or_genotype_reads": 0,
+  "biological_or_covariance_outcomes_computed": false,
+  "static_bindings_unchanged_during_seal_preparation": true,
+  "historical_files_modified": false
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "mathematical_primary_sources_v1",
+  "retrieved_utc_date": "2026-10-10",
+  "source_scope": "Targeted niche-fact verification, not systematic literature-completeness certification; separate novelty reviewer evaluates broader prior art",
+  "sources": [
+    {
+      "id": "LDSC2015",
+      "title": "Bulik-Sullivan et al. An atlas of genetic correlations across human diseases and traits",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/4797329/",
+      "inspection": "Primary paper; retrieved searchable method sections",
+      "supported_scope": "LD-score slope/intercept, overlap model, rg normalization and case-control scale qualification"
+    },
+    {
+      "id": "GenomicSEM2019",
+      "title": "Grotzinger et al. Genomic structural equation modelling provides insights into the multivariate genetic architecture of complex traits",
+      "url": "https://www.nature.com/articles/s41562-019-0566-x",
+      "inspection": "Primary paper; author manuscript search excerpts; publisher abstract page",
+      "supported_scope": "Existing multivariable sampling covariance and SEM scope"
+    },
+    {
+      "id": "GenomicSEMdocs",
+      "title": "Official GenomicSEM genome-wide models tutorial",
+      "url": "https://github.com/GenomicSEM/GenomicSEM/wiki/3.-Genome%E2%80%90wide-Models",
+      "inspection": "Official documentation inspected relevant sections",
+      "supported_scope": "S,V creation, separate-LDSC-output warning, input conventions and model constraints"
+    },
+    {
+      "id": "GenomicSEMldsc",
+      "title": "Official current ldsc.R",
+      "url": "https://raw.githubusercontent.com/GenomicSEM/GenomicSEM/master/R/ldsc.R",
+      "inspection": "Official source inspected lines162-185,243-276,321-325,372-412,430-441,477-489",
+      "supported_scope": "Pair-specific retained-row cuts, stacked pseudovalues, liability congruence and fixed-scale V_Stand; mutable master, future version pin needed"
+    },
+    {
+      "id": "GenomicSEMmodel",
+      "title": "Official current usermodel.R",
+      "url": "https://raw.githubusercontent.com/GenomicSEM/GenomicSEM/master/R/usermodel.R",
+      "inspection": "Official source inspected lines156-217 and standardized branch",
+      "supported_scope": "Unstandardized DWLS sandwich and defined-parameter Jacobian; fallback not a validity waiver; mutable master"
+    },
+    {
+      "id": "ClassicalMeasurement",
+      "title": "The impact of self-report inaccuracy in the UK Biobank and its interplay with selective participation",
+      "url": "https://www.nature.com/articles/s41562-024-02061-w",
+      "inspection": "Primary study, online2024/volume2025; relevant methods/discussion inspected",
+      "supported_scope": "Repeated vs single measurement h2 covariance-aware jackknife and measurement/selection qualifications"
+    },
+    {
+      "id": "PheMED",
+      "title": "Burstein et al. Detecting and Adjusting for Hidden Biases due to Phenotype Misclassification in Genome-Wide Association Studies",
+      "url": "https://www.medrxiv.org/content/10.1101/2023.01.17.23284670v2",
+      "inspection": "Primary author preprint2023/revised2025; not represented as peer reviewed",
+      "supported_scope": "Relative effective dilution prior art, assumptions and biological attribution limits"
+    },
+    {
+      "id": "PheMEDsoftware",
+      "title": "Official PheMED author repository",
+      "url": "https://github.com/voloudakislab/PheMED",
+      "inspection": "Official documentation searched",
+      "supported_scope": "Author citation still references preprint; no installation/execution"
+    },
+    {
+      "id": "Ascertainment2011",
+      "title": "Lee et al. Estimating missing heritability for disease from genome-wide association studies",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21376301/",
+      "inspection": "Primary paper abstract and primary full-text search sections",
+      "supported_scope": "Liability/ascertainment scale conversion under model assumptions"
+    },
+    {
+      "id": "RatioConfidence2009",
+      "title": "von Luxburg and Franz. A geometric approach to confidence sets for ratios: Fieller theorem, generalizations and bootstrap",
+      "url": "https://www3.stat.sinica.edu.tw/sstest/j19n3/j19n312/j19n312.html",
+      "inspection": "Primary paper publisher page/abstract",
+      "supported_scope": "Established ratio-confidence geometry; no claim ordinary Fieller exact for nonlinear denominator"
+    },
+    {
+      "id": "HDL2020",
+      "title": "Ning, Pawitan and Shen. High-definition likelihood inference of genetic correlations across human complex traits",
+      "url": "https://www.nature.com/articles/s41588-020-0653-y",
+      "inspection": "Primary paper publisher/search abstract and official author repository",
+      "supported_scope": "Established likelihood-based global genetic correlation baseline; precision claims not assumed universal"
+    },
+    {
+      "id": "HDLL2025",
+      "title": "Li, Pawitan and Shen. An enhanced framework for local genetic correlation analysis",
+      "url": "https://github.com/YuyingLi-X/HDL-L",
+      "inspection": "Official author documentation; primary paper bibliographic DOI10.1038/s41588-025-02123-3 verified",
+      "supported_scope": "Established local likelihood baseline; no new local fits or assertion that it solves latent identity"
+    },
+    {
+      "id": "SUPERGNOVA2021",
+      "title": "Zhang et al. SUPERGNOVA: local genetic correlation analysis reveals heterogeneous etiologic sharing of complex traits",
+      "url": "https://link.springer.com/article/10.1186/s13059-021-02478-w",
+      "inspection": "Primary full paper inspected relevant methods/discussion",
+      "supported_scope": "Overlap modeling, noisy h2 denominator limitation and covariance alternative"
+    },
+    {
+      "id": "LAVA2022",
+      "title": "Werme et al. An integrated framework for local genetic correlation analysis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35288712/",
+      "inspection": "Primary paper abstract inspected",
+      "supported_scope": "Local multivariable conditional genetic relations; no global latent-error identification claim"
+    }
+  ],
+  "original_derivations": [
+    "five-entry full contrast gradient",
+    "permutation nonidentification of cross-fit alignment",
+    "classical measurement-error rg invariance",
+    "three observationally identical latent decompositions",
+    "cohort-by-measure confounding counterexample",
+    "overlap-correlation composite example",
+    "epsilon weak-variance nonidentification limit"
+  ]
+}

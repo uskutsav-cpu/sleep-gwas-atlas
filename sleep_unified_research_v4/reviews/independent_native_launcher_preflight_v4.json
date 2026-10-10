@@ -1,0 +1,68 @@
+{
+  "reviewed_utc": "2026-10-09T18:32:54.696690+00:00",
+  "verdict": "OPERATIONAL_PRELAUNCH_CLEARANCE_WITH_QUALIFICATIONS",
+  "execution_plan_sha256": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+  "binding_checks": {
+    "plan_sha256": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+    "expected_plan_sha_match": true,
+    "jobs190identical": true,
+    "launcher_hash_match": true,
+    "invoker_hash_match": true,
+    "original_runner_hash_match": true,
+    "original_plan_hash_match": true,
+    "support_hashes_match": true,
+    "SSD_plan_copy_hash_match": true,
+    "current_input_receipt_rows": 158,
+    "all158reported_input_hash_matches": true,
+    "dependency_entries": 56,
+    "resource_preflight": {
+      "recorded_utc": "2026-10-09T18:29:45.068790+00:00",
+      "internal_free_bytes": 4918284288,
+      "ssd_free_bytes": 1050479165440,
+      "internal_minimum_bytes": 3221225472,
+      "ssd_minimum_bytes": 5368709120
+    },
+    "environment": {
+      "python": "3.9.23 | packaged by conda-forge | (main, Jun  4 2025, 18:02:02) \n[Clang 18.1.8 ]",
+      "numpy": "1.21.5",
+      "pandas": "1.3.3",
+      "scipy": "1.7.3"
+    },
+    "internal_floor_bytes": 3221225472,
+    "ssd_support_package": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/native/original_runner_support_v4_2",
+    "launcher_sha256": "f0460a24750a6e0671f3bf1fb6109ac65d976969f62998b8b48bf68fe7a4c003",
+    "invoker_sha256": "70095b3f05c29902c6992ff99c54fb8455fccce9231a3637f2ee6ed8e862b3dd"
+  },
+  "original_faults": [
+    "Immediate-parent exit previously bypassed process-group liveness/kill verification",
+    "Prior monitor lacked post-exit resource/output/deadline checks"
+  ],
+  "repair_review": [
+    "Group liveness continues after immediate-parent exit, SIGKILL fallback and empty-group proof",
+    "Initial teardown proof retained and cleanup errors force stop reason",
+    "Final disk floor, output, elapsed and observed RSS bounds checked before success",
+    "Jobs, ROOT, LDSC options and3GiBinternal resource floor preserved; sole estimator relocation is PACKAGE"
+  ],
+  "control_test_receipt_path": "sleep_unified_research_v4/logs/native_monitor_tests_v4.json",
+  "control_test_receipt_sha256": "77c0dcf97a102ab2305915be5cd5c349ea338dada9d01bf82f02a0be054d2b23",
+  "control_test_receipt_inspected": {
+    "completed_utc": "2026-10-09T18:31:19.345842+00:00",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sleep_unified_research_v4/tests -v",
+    "tests": 3,
+    "passed": 3,
+    "elapsed_seconds": 10.445,
+    "scope": "Internal/SSD final limits and actual orphaned signal-ignoring descendant teardown; not biological validation",
+    "source_sha256": "86402c85f3f866a0b7be60467cdbfbb19e3d5ec1d9ac79bbe627e7e6ae9e87c0"
+  },
+  "independent_test_execution": false,
+  "large_inputs_independently_rehashed_by_this_pass": false,
+  "estimators_launched_by_reviewer": 0,
+  "limits": [
+    "This is operational clearance for the frozen processed-input campaign only",
+    "Recheck resource floors immediately at launch",
+    "Two-second polling measures observedRSS rather than a hard peak memory maximum",
+    "Package version checks do not hash the full installed numerical-library trees",
+    "Per-job/cardinality/identity receipts and independent numerical result review remain mandatory",
+    "Not a full raw-to-estimator certification, primary/replication admission or human scientific approval"
+  ]
+}

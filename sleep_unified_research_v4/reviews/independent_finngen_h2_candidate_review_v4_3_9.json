@@ -1,0 +1,343 @@
+{
+  "schema": "independent_finngen_h2_conditional_candidate_review_v4_3_9",
+  "completed_utc": "2026-10-10T01:45:30.452872+00:00",
+  "verdict": "CONDITIONAL_CANDIDATE_PASS",
+  "conditional_candidate_pass": true,
+  "actual_plan_prepared": false,
+  "actual_plan_prelaunch_review_complete": false,
+  "h2_execution_admission_granted": false,
+  "scientific_source_admitted": false,
+  "fixed_draft_producer_consumer_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_9.py": "b782d30e951fdde4c69c0c461e4f5e422332103446e6eb77a5d08ad4aa41710c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/59_prepare_finngen_feasibility_stage_v3_9.py": "32b921dff9228f061d777a76fffb6190f9bdd19f6e899f00d21bb1e3ab9f8c39",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/60_verify_finngen_h2_diagnostic_v5.py": "e9e85f9a79d6cc07da4da9b41b3a0d6bd9b95a969b4165d31a0217e0950719e2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_8.json": "78f0faea56024be8eca65421bf655c0f7c224afe6f029ed3ca0cea22491781b8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_admission_v4_3_8.json": "4c45bcdc31d23f9370c20dea7d6610894dc5fec57f229898a477befea039ab99"
+  },
+  "scope": "Prospective code/binding correction for one observed-scale standalone FinnGen R13 F5_INSOMNIA h2 diagnostic; no rg, liability conversion or new scientific/source admission.",
+  "all22_pure_helper_controls_expected_results": true,
+  "controls": [
+    {
+      "label": "healthy",
+      "accepted": true,
+      "expected_acceptance": true,
+      "passed": true,
+      "error": null,
+      "result_identity": {
+        "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/healthy/fixture_h2.full_precision.json": "6c43c89ddef740410cca72fe0b1722e7660f21e18803c7c8eb1dead95c877ba0"
+      },
+      "fixture_plan_sha256": "cbc9527776b0c5732010e7963e1cb878c6ca6cd6d8b68ab945bc581106d90884",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_pending",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE",
+      "result_identity": null,
+      "fixture_plan_sha256": "394ce6021e0155918eef8a12c890a64c7e44178345363bb35ea5e61de66f3c3e",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_failure",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: STAGE_COMMIT_CHANGED_DURING_CONSUMPTION",
+      "result_identity": null,
+      "fixture_plan_sha256": "8afb1aae2ce68da10e76769abf2d239b028aee235835dbc440816a702f3830ba",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_failed_status",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: EXACT_FROZEN_PREPROCESSING_PRODUCER_REQUIRED",
+      "result_identity": null,
+      "fixture_plan_sha256": "ee85b666c3dd24e3925ba020ffb98194f957685a928d4153df1e2dd6885e13c5",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_metadata_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/prior_metadata_drift/prior_plan.json",
+      "result_identity": null,
+      "fixture_plan_sha256": "f9322c849145aeaffb4f42a6f427d755ce9fc0908dbc9fe5329709c15cf2462e",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "dependency_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: BOUND_IDENTITY_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/dependency_drift/dependency.txt",
+      "result_identity": null,
+      "fixture_plan_sha256": "b3d88eed4a627e69addc328c7b13ac1611657a7b387b60692b88e890c22e0e53",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "review_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: BOUND_IDENTITY_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/review_drift/review_0.txt",
+      "result_identity": null,
+      "fixture_plan_sha256": "a12707d876f4bc7a8dc8db062df85e6d3f7c38a447011995ce9996cf89e1d0c8",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "executor_admission_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_EXACT_EXECUTOR_ADMISSION_REQUIRED",
+      "result_identity": null,
+      "fixture_plan_sha256": "50d550d9df6942cabbb481a859fdc796de526a0e5d7a611459340ca856ddfaef",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "plan_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FROZEN_FINNGEN_PLAN_CHANGED",
+      "result_identity": null,
+      "fixture_plan_sha256": "8f0dc2281c7165aa592d8500a34f0e230490e13ea3db63e22122be82a3366285",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "two_jobs",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: ONE_FROZEN_DIAGNOSTIC_STAGE_REQUIRED",
+      "result_identity": null,
+      "fixture_plan_sha256": "51f0930570498ac911bbf2cd760a6e6b5e722b3d8ca69b381af09ac284c94949",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "scope_rg",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_SCOPE_CHANGED",
+      "result_identity": null,
+      "fixture_plan_sha256": "ce281613807db2e3989b6d51361cbb999828778b927c55778c3defc9d015fab5",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "guard_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FROZEN_FEASIBILITY_RESOURCE_LIMITS_CHANGED",
+      "result_identity": null,
+      "fixture_plan_sha256": "5bdbddabde7d72e91d38fba831b4fc4f75bdd2828352bc6a875e832a5bf27793",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "two_estimates",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: EXACTLY_ONE_STANDALONE_H2_REQUIRED",
+      "result_identity": null,
+      "fixture_plan_sha256": "bcf9eed387b7132e5a4667756b88cc34e0b07584774a762dbb67ab108d9844d7",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "two_intersections",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: EXACTLY_ONE_STANDALONE_H2_REQUIRED",
+      "result_identity": null,
+      "fixture_plan_sha256": "4785b352a0ea355951413824a7ba4285b74995711475a8ea8e6ceabc56eadab2",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "input_before_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: H2_INPUT_IDENTITY_CHANGED",
+      "result_identity": null,
+      "fixture_plan_sha256": "84b765a657c55d602ee532e5ae56b822e7c494302fd3abde6e109829aac02c98",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "input_after_drift",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: H2_INPUT_IDENTITY_CHANGED",
+      "result_identity": null,
+      "fixture_plan_sha256": "6aaa227ad15f0f8fdea5e2a093e2d5b5d9834a0345efe353b6a83014eecc5e76",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "args_rg",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: ONLY_OBSERVED_SCALE_H2_DIAGNOSTIC_ADMITTED",
+      "result_identity": null,
+      "fixture_plan_sha256": "51ddfc8ca3f813076c99941dfdb85fc5501d6ae103049cf7f6d382b3735b4402",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "args_population_prev",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: ONLY_OBSERVED_SCALE_H2_DIAGNOSTIC_ADMITTED",
+      "result_identity": null,
+      "fixture_plan_sha256": "ea3c12ff6a929c186eea35f5b8a644e3649466a4496e860d6f2cb224a600359b",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "args_sample_prev",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: ONLY_OBSERVED_SCALE_H2_DIAGNOSTIC_ADMITTED",
+      "result_identity": null,
+      "fixture_plan_sha256": "b3d1703fb4b925e4ffa2eac8e7bb4822655a14ec06e25f0b8262b40fb6aeec2b",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "capture_mutation_after_parse",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/capture_mutation_after_parse/fixture_h2.full_precision.json",
+      "result_identity": null,
+      "fixture_plan_sha256": "f35612ae2e0727844535b8571622264908944c31c2703ddebdad526cac510d0e",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_derivative_drift_after_capture_parse",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/prior_derivative_drift_after_capture_parse/fixture_derivative.txt",
+      "result_identity": null,
+      "fixture_plan_sha256": "9c1759dfa706c94e3cc995bcce51143e91510d1327d1ba0c95fd793ff29eb07c",
+      "only_pure_helpers": true
+    },
+    {
+      "label": "prior_metadata_drift_after_capture_parse",
+      "accepted": false,
+      "expected_acceptance": false,
+      "passed": true,
+      "error": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_controls_v4_3_9/prior_metadata_drift_after_capture_parse/prior_plan.json",
+      "result_identity": null,
+      "fixture_plan_sha256": "a30060ed6279645fd8389105996057eadf8401f64cb87ea602ffc683454e0726",
+      "only_pure_helpers": true
+    }
+  ],
+  "code_and_producer_binding_checks": {
+    "exact_qualified3_8_worker_reader_AST": true,
+    "exact_qualified3_8_execute_AST": true,
+    "exact_prior_producer_gate3_6_AST": true,
+    "same_h2_science_job_update_AST": true,
+    "same_assumed_source_identity_and_effectiveN_AST": true,
+    "same_original_expected_source_AST": true,
+    "same_baseline_plan_and_SHA_AST": true,
+    "fixed_actual3_8_plan_SHA_before_prior_parse": true,
+    "fixed_prior_stage_result_snapshot_before_parse_and_after": true,
+    "only_observed_h2_CLI": true,
+    "active_prior_paths_point3_8": true
+  },
+  "prospective_prior_preprocessing": {
+    "plan_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_8.json",
+    "plan_sha256": "78f0faea56024be8eca65421bf655c0f7c224afe6f029ed3ca0cea22491781b8",
+    "stage_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_preprocessing_stage_receipt_v4_3_8.json",
+    "derivative_suffix": "pipeline_replay_v3_8/derived/insomnia.sumstats.gz",
+    "result_suffix": "pipeline_replay_v3_8/derived/insomnia.preprocessing.json",
+    "completed_stage_and_full_result_map_and_Terminal2_required": true,
+    "stage_result_identity_snapshots_before_parse_and_after": true,
+    "no_actual_producer_success_inferred_from_code_or_root_preprocessing_admission": true
+  },
+  "qualified_controls_inherited": {
+    "exact3_8_worker_reader_and_execute_AST": true,
+    "prior_producer_gate3_6_AST": true,
+    "worker_snapshot_before_parse_and_later_frozen_reads": true,
+    "exact_intended_argv_returncode_stop_metadata_plan_cleanup_oracle": true,
+    "original23_control_execution_receipt_not_rerun": true,
+    "original514_source_semantic_cases_and34_row_controls_not_rerun": true,
+    "native190_numerical_reproduction_not_reaudited": true,
+    "final_consumer60v5_unchanged_sha256": "e9e85f9a79d6cc07da4da9b41b3a0d6bd9b95a969b4165d31a0217e0950719e2"
+  },
+  "preserved_review_history": [
+    {
+      "seal": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_candidate_findings_seal_v4_3_3.json",
+      "seal_sha256": "a7e236c85b86d58c40b8612f37a4fd1d32790d7729854ccbbd968873a05a4c8f",
+      "artifact_count": 474,
+      "current_regular_artifact_hashes_match": true
+    },
+    {
+      "seal": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_corrected_candidate_findings_seal_v4_3_4.json",
+      "seal_sha256": "717aaff9ee2cb7e646dcf4ab492e222388ff2149958efc16d4b6689327f32bc3",
+      "artifact_count": 405,
+      "current_regular_artifact_hashes_match": true
+    },
+    {
+      "seal": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_report_commit_findings_seal_v4_3_5.json",
+      "seal_sha256": "8542d2fd6d2a3228941317a4c7920e2d1adc212fe23ca2bbce3e1dcad3126c35",
+      "artifact_count": 296,
+      "current_regular_artifact_hashes_match": true
+    },
+    {
+      "seal": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_h2_final_consumer_review_seal_v4_3_6.json",
+      "seal_sha256": "facb1f7253b036dddc07d69ed26c484871cafb6cbdf2a14188f3bc4105785b3f",
+      "artifact_count": 62,
+      "current_regular_artifact_hashes_match": true
+    },
+    {
+      "seal": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_operational_prelaunch_seal_v4_3_8.json",
+      "seal_sha256": "903b4d89868e19b6876311637ff7a8d37fc3383a57cded16abdf47cf96f8322f",
+      "artifact_count": 943,
+      "current_regular_artifact_hashes_match": true
+    }
+  ],
+  "captured_data_verification_required_after_fit": [
+    "Exactly one kind=h2 job/estimate/ordered intersection, original 200 blocks, pinned stock estimator and capture closure, matching actual argv and before/after input hashes.",
+    "Native Terminal2 and current preprocessing Terminal2, exact capture/log/.delete/.part_delete/worker membership and hashes in completed result maps, regular paths and parents before/after consumption.",
+    "Captured ordered SNP count and SNP/Z/N digests, one-annotation fields, finite full-precision h2/SE/intercept/lambda/mean-chi-square and current source qualifications.",
+    "Stock total and partition delete vectors agree with capture; centered h2/intercept SE arithmetic and fixed relative1e-12/absolute1e-15 tolerances. Intercept uses captured native delete array because stock exports no separate intercept-delete file.",
+    "Durable diagnostic JSON/TSV report pair and read-only require_verified_report veto for PENDING/failure/drift, including repeated current preprocessing gate after report-seal consumption."
+  ],
+  "actual_h2_plan_admission_stage_absent_at_review": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_observed_h2_plan_v4_3_9.json": true,
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_observed_h2_admission_v4_3_9.json": true,
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_observed_h2_stage_receipt_v4_3_9.json": true
+  },
+  "actual_scientific_workers": 0,
+  "fits": 0,
+  "raw_reference_body_reads": 0,
+  "network_calls": 0,
+  "actual_heavy_mutex_calls": 0,
+  "prospective_preparer_or_executor_calls": 0,
+  "arithmetic_verifier_calls": 0,
+  "qualifications": [
+    "Tiny prior producer/capture identities are invented fixtures. Only candidate require_admission/result_gate and private Terminal2 metadata helpers were exercised; no biological estimate or arithmetic calibration was produced.",
+    "The actual h2 plan and actual completed preprocessing producer do not yet exist as reviewed evidence. Candidate code cannot grant execution admission or substitute for a new exact producer-bound prelaunch review.",
+    "This review rehashes prior small review/control artifacts and exact drafts; it does not freshly hash/decompress the biological raw source/reference bodies or redo the190 estimators.",
+    "Stage completion gates enforce command/result scope and source bindings. Detailed stock-vector, final-intersection, scalar arithmetic and report-pair verification remains the unchanged postfit60v5 consumer duty; no such actual result exists yet.",
+    "Terminal2 relies on its documented private immutable-owned PENDING, deferred-signal and POSIX unlink contract; arbitrary concurrent replacement/uncontrolled marker deletion is outside the guarantee.",
+    "Effective N185146.70377332723 is assumed constant, with source INFO and per-variant N unverified. Computational/source h2 success cannot resolve clinical construct, chronicity/observation horizon, ascertainment, source independence or replication validity.",
+    "Necessary diagnostic h2 Z>=4/intercept<=1.2 thresholds remain unchanged and cannot certify population h2 or scientific source validity; no liability prevalence or novel rg/BH/outcome test is admitted.",
+    "One worker/BLAS1, inherited shared mutex, original3/5GiB floors,2GiB owned RSS/full Finn root, two-hour deadline,300GiB campaign meter and all190 prerequisites remain inherited safeguards, not a new live-process test."
+  ],
+  "remaining_root_actions": [
+    "Wait for genuine admitted3_8 preprocessing execution to finish successfully with exact Terminal2 and complete result/hash/CRC/ordered-output proofs; retain any failure without automatic retry.",
+    "Execute the new59 preparer only after that success, freezing actual producer metadata/terminal/input identities, all closure dependencies and the exact one observed-scale h2 command in the new namespace.",
+    "Request a separate independent exact actual-plan prelaunch review and root operational admission. Candidate review filenames deliberately do not satisfy actual required prelaunch filenames.",
+    "Queue exclusively under the shared heavy-worker mutex; after a fit, execute unchanged60v5 verification and require its verified durable report pair before consuming scientific diagnostics."
+  ]
+}

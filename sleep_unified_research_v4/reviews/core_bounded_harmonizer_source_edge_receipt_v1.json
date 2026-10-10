@@ -1,0 +1,46 @@
+{
+  "status": "MEASURED_FALSE_PASS_FULL_ADAPTER_PREFIX_HEADER_NOT_BOUND_TO_SEALED_RAW_IDENTITY",
+  "source_hash_expected": "0486396d6e35164ef0709b8e2753101d4662cbc435b9557ec4ff69f0b93ee076",
+  "source_before_after_expected_all_match": true,
+  "prefix_header_read_before_sealed_hash": [
+    [
+      "SNP",
+      "CHR",
+      "BP",
+      "A1",
+      "A2",
+      "b",
+      "SE",
+      "P",
+      "N"
+    ]
+  ],
+  "candidate_selected_columns": {
+    "SNP": "SNP",
+    "CHR": "CHR",
+    "BP": "BP",
+    "A1": "A1",
+    "A2": "A2",
+    "BETA": "b",
+    "SE": "SE",
+    "P": "P",
+    "N": "N"
+  },
+  "original_decompressed_output": "SNP\tCHR\tBP\tA1\tA2\tFRQ\tBETA\tSE\tP\tN\nrs1\t1\t42\tA\tC\tNA\t1\t1\t0.5\t1000\n",
+  "candidate_decompressed_output": "SNP\tCHR\tBP\tA1\tA2\tFRQ\tBETA\tSE\tP\tN\nrs1\t1\t42\tA\tC\tNA\t9\t1\t0.5\t1000\n",
+  "candidate_status": "CANDIDATE_GLOBAL_HARMONIZATION_PRODUCED_NOT_SCIENTIFICALLY_ADMITTED",
+  "scientific_effect": "Sealed source has beta1 and redundant b9; original alias preference chooses beta. Adapter reads earlier unsealed header lacking beta then restores sealed bytes before freeze, chooses b9 and produces a different BETA with all later source hashes equal to expected.",
+  "minimal_fix": "Require expected source digest before any sniff/header/schema prefix read, retain final equality; owned immutable-source lifetime and metadata/dependency gates remain caller responsibilities.",
+  "source_bindings_before": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/01_harmonize.py": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_bounded_harmonizer_v1.py": "9aa49e2239c52d16cd206b15058000f7e0b5842d6103f920abd1013ebc1703d4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_column_reader_v3.py": "6c0ecebce59af3f73986e059f0facd0329b9168f9fb89e2e78db39ca543709b0"
+  },
+  "source_bindings_after": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/01_harmonize.py": "487074007f8361e7de7f8f771dd0a912f926d4b7a0427cfa3c47b02be1421f7a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_bounded_harmonizer_v1.py": "9aa49e2239c52d16cd206b15058000f7e0b5842d6103f920abd1013ebc1703d4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/core_column_reader_v3.py": "6c0ecebce59af3f73986e059f0facd0329b9168f9fb89e2e78db39ca543709b0"
+  },
+  "production_body_reads": 0,
+  "production_mutex_or_workers_or_fits": 0
+}

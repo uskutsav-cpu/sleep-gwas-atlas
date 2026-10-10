@@ -1,0 +1,254 @@
+{
+  "schema": "result_free_finngen_row_controls_v1",
+  "completed_utc": "2026-10-10T01:17:53.680812+00:00",
+  "dependencies_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/57_verify_finngen_row_controls_v3.py": "35a969111c8dcdfca4e7f5bea619f936cbe2eda32b263dc13f359b8e4d199e12",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/56_preprocess_finngen_insomnia_feasibility_v3.py": "9ae9ec603d9b8558d30ec48c69e6658586853986c2c6e6a474b4fbdb20ce7302",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/liftover_chain.py": "2882671b87de638153ebf8de8e7716fdda943d3397484f313d981317a012e064"
+  },
+  "checks": [
+    {
+      "label": "forward_exact_coordinate_retained",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "forward_supplied_beta_se_Z",
+      "actual": 2.0,
+      "expected": 2.0,
+      "passed": true
+    },
+    {
+      "label": "effect_swap_signed_Z",
+      "actual": -2.0,
+      "expected": -2.0,
+      "passed": true
+    },
+    {
+      "label": "strand_complement_orientation",
+      "actual": 2.0,
+      "expected": 2.0,
+      "passed": true
+    },
+    {
+      "label": "reverse_chain_coordinate_retained",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "reverse_chain_orientation",
+      "actual": 2.0,
+      "expected": 2.0,
+      "passed": true
+    },
+    {
+      "label": "reverse_chain_flag",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "label": "chain_1_based_positive",
+      "actual": [
+        "mapped",
+        [
+          1,
+          201,
+          "+"
+        ]
+      ],
+      "expected": [
+        "mapped",
+        [
+          1,
+          201,
+          "+"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "label": "chain_1_based_negative",
+      "actual": [
+        "mapped",
+        [
+          1,
+          700,
+          "-"
+        ]
+      ],
+      "expected": [
+        "mapped",
+        [
+          1,
+          700,
+          "-"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "label": "exclusive_interval_end",
+      "actual": [
+        "unmapped",
+        null
+      ],
+      "expected": [
+        "unmapped",
+        null
+      ],
+      "passed": true
+    },
+    {
+      "label": "invalid_source_coordinate",
+      "actual": "liftover_invalid_source_coordinate",
+      "expected": "liftover_invalid_source_coordinate",
+      "passed": true
+    },
+    {
+      "label": "wrong_reference_coordinate",
+      "actual": "mapped_coordinate_rsid_reference_mismatch",
+      "expected": "mapped_coordinate_rsid_reference_mismatch",
+      "passed": true
+    },
+    {
+      "label": "ambiguous_multiple_hm3_ids",
+      "actual": "multiple_hm3_rsids",
+      "expected": "multiple_hm3_rsids",
+      "passed": true
+    },
+    {
+      "label": "duplicate_alias_same_identity",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "strict_rsid_token_boundary",
+      "actual": "not_nonambiguous_hm3",
+      "expected": "not_nonambiguous_hm3",
+      "passed": true
+    },
+    {
+      "label": "unknown_rsid",
+      "actual": "not_nonambiguous_hm3",
+      "expected": "not_nonambiguous_hm3",
+      "passed": true
+    },
+    {
+      "label": "retained_duplicate_rejected",
+      "actual": "duplicate_retained_hm3_rsid",
+      "expected": "duplicate_retained_hm3_rsid",
+      "passed": true
+    },
+    {
+      "label": "ambiguous_alleles_rejected",
+      "actual": "allele_mismatch_or_ambiguous",
+      "expected": "allele_mismatch_or_ambiguous",
+      "passed": true
+    },
+    {
+      "label": "indel_rejected",
+      "actual": "allele_mismatch_or_ambiguous",
+      "expected": "allele_mismatch_or_ambiguous",
+      "passed": true
+    },
+    {
+      "label": "maf_boundary_rejected",
+      "actual": "maf_at_or_below_0_01_or_invalid",
+      "expected": "maf_at_or_below_0_01_or_invalid",
+      "passed": true
+    },
+    {
+      "label": "maf_upper_boundary_rejected",
+      "actual": "maf_at_or_below_0_01_or_invalid",
+      "expected": "maf_at_or_below_0_01_or_invalid",
+      "passed": true
+    },
+    {
+      "label": "maf_inside_upper_boundary_retained",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "nonfinite_frequency_rejected",
+      "actual": "maf_at_or_below_0_01_or_invalid",
+      "expected": "maf_at_or_below_0_01_or_invalid",
+      "passed": true
+    },
+    {
+      "label": "zero_supplied_SE_rejected",
+      "actual": "invalid_beta_or_supplied_se",
+      "expected": "invalid_beta_or_supplied_se",
+      "passed": true
+    },
+    {
+      "label": "negative_supplied_SE_rejected",
+      "actual": "invalid_beta_or_supplied_se",
+      "expected": "invalid_beta_or_supplied_se",
+      "passed": true
+    },
+    {
+      "label": "nonfinite_beta_rejected",
+      "actual": "invalid_beta_or_supplied_se",
+      "expected": "invalid_beta_or_supplied_se",
+      "passed": true
+    },
+    {
+      "label": "nonfinite_Z_rejected",
+      "actual": "nonfinite_beta_over_se",
+      "expected": "nonfinite_beta_over_se",
+      "passed": true
+    },
+    {
+      "label": "missing_P_does_not_filter",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "inconsistent_P_does_not_filter",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "literal_zero_P_does_not_filter",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "MHC_coordinate_25000000",
+      "actual": "extended_MHC_GRCh37",
+      "expected": "extended_MHC_GRCh37",
+      "passed": true
+    },
+    {
+      "label": "MHC_coordinate_34000000",
+      "actual": "extended_MHC_GRCh37",
+      "expected": "extended_MHC_GRCh37",
+      "passed": true
+    },
+    {
+      "label": "MHC_coordinate_34000001",
+      "actual": "retained",
+      "expected": "retained",
+      "passed": true
+    },
+    {
+      "label": "ambiguous_chain_rejected",
+      "actual": "liftover_ambiguous",
+      "expected": "liftover_ambiguous",
+      "passed": true
+    }
+  ],
+  "all_pass": true,
+  "GWAS_body_reads": 0,
+  "estimator_calls": 0,
+  "reference_full_body_reads": 0,
+  "fixture_scope": "synthetic identity and supplied-statistic algebra controls only; no biological results or sampling calibration"
+}

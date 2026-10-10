@@ -1,0 +1,70 @@
+{
+  "schema": "single_observed_h2_arithmetic_stock_closure_v5",
+  "plan_sha256": "8167144ca070f30738d8671ce951d71078ae001926ba6c5abd89d3aaaa2a54a1",
+  "stage_receipt_sha256": "8252915faa04565c08ca5661810affed8e6e664f795152eed43c9d11924e9d94",
+  "full_precision_capture_sha256": "451990f1b303f8d5f947771126f0242ee4cc9def163da4c6fcd2214e9d26c1c3",
+  "verifier_sha256": "e9e85f9a79d6cc07da4da9b41b3a0d6bd9b95a969b4165d31a0217e0950719e2",
+  "fixed_tolerances": {
+    "relative": 1e-12,
+    "absolute": 1e-15
+  },
+  "arithmetic_checks": {
+    "tot_se": {
+      "independent": 0.0040705198925973865,
+      "native": 0.0040705198925973796,
+      "fixed_tolerance_pass": true
+    },
+    "intercept_se": {
+      "independent": 0.00901501558819857,
+      "native": 0.009015015588198625,
+      "fixed_tolerance_pass": true
+    }
+  },
+  "stock_delete_checks": {
+    "tot_delete_values": {
+      "rows": 200,
+      "fixed_tolerance_pass": true,
+      "stock_file_sha256": "dba9ae6c83be3c57124cfb6117816c43d5a054172b140a1ea708aceae06dd5ef"
+    },
+    "part_delete_values": {
+      "rows": 200,
+      "fixed_tolerance_pass": true,
+      "stock_file_sha256": "2a961e21d0f154943f385687c9a2a030dbad6a80345f9d0a49c86a51c8c095e1"
+    }
+  },
+  "arithmetic_pass": true,
+  "diagnostic": {
+    "trait": "finngen_R13_F5_INSOMNIA",
+    "source": "R13_generation_1777989563097164",
+    "scale": "OBSERVED_ONLY_WITH_ASSUMED_CONSTANT_EFFECTIVE_N",
+    "h2": 0.05353575912413689,
+    "h2_SE": 0.0040705198925973796,
+    "h2_Z": 13.15206915497371,
+    "h2_CI_lower": 0.04555768673629218,
+    "h2_CI_upper": 0.0615138315119816,
+    "intercept": 1.077872498550233,
+    "intercept_SE": 0.009015015588198625,
+    "lambda_GC": 1.2387232869346392,
+    "mean_chi_square": 1.2705273128003078,
+    "native_SNP_count": 1156359,
+    "assumed_effective_N": 185146.70377332723,
+    "necessary_h2_Z_ge4": true,
+    "necessary_intercept_le1_2": true,
+    "source_INFO_gate_verified": false,
+    "per_variant_N_verified": false,
+    "scientific_source_admitted": false,
+    "fully_independent_two_trait_replication": false,
+    "new_rg_estimates": 0,
+    "diagnostic_scope": "Source feasibility only; threshold conditions do not resolve INFO/N, ascertainment, overlap, clinical construct or power."
+  },
+  "warning_lines": [],
+  "intercept_delete_export_scope": "Intercept arithmetic uses captured native array; stock LDSC does not export a separate intercept-delete file.",
+  "all_200_deletions_preserved_in_capture": true,
+  "common_cross_trait_boundaries_established": false,
+  "original_families_changed": false,
+  "terminal_seal_sha256": "af042b3fd312ed66476dab972b17cda4a6c6c515290ed064cba6108b73debd8c",
+  "current_PENDING_or_failure_veto_checked": true,
+  "report_pending_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.json.pending.json",
+  "report_terminal_seal_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.json.terminal.json",
+  "report_is_provisional_until_private_PENDING_absent_and_exact_pair_terminal_verified": true
+}

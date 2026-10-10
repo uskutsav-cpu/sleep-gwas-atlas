@@ -1,0 +1,205 @@
+{
+  "utc": "2026-10-09T18:50:58.855946+00:00",
+  "scope": "Independent forensic arithmetic/code review; no native fit, empirical calibration, heterogeneity outcome, conditional GWAS result, S/V smoothing or manuscript",
+  "status": "COMMON_BOUNDARY_METHOD_IMPLEMENTABLE_BUT_NOT_CALIBRATED_OR_ADMITTED_FOR_INFERENCE",
+  "native_campaign_inputs": {
+    "count": 158,
+    "hash_match_count": 158,
+    "verification_scope": "inherited_v4_3_plan; only bounded reference headers reread, not 158 complete GWAS files"
+  },
+  "reference_headers_with_exact_chr_snp_bp": 22,
+  "existing_coordinate_map": {
+    "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz",
+    "bytes": 9948937,
+    "sha256": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+    "matches_archived_provenance": true,
+    "all22_map_source_reference_hashes_match_campaign": true,
+    "header": [
+      "SNP",
+      "CHR",
+      "BP",
+      "A1",
+      "A2"
+    ],
+    "genome_build": "GRCh37/hg19",
+    "mapped_hm3_ids_provenance_count": 1184461,
+    "unmapped_hm3_ids_provenance_count": 32850,
+    "row_count_scope": "provenance count; compressed bytes freshly verified, only header reread",
+    "actual_final_pair_snp_join_verified": false
+  },
+  "archived_export_arithmetic": {
+    "rows": 1035,
+    "fixed_denominator_se_max_relative_error": 6.328213596530013e-15,
+    "diagonal_rg_identically_one": true,
+    "diagonal_nonzero_exported_rg_se": 45
+  },
+  "archived_diagnostics_retrieved_not_reeigendecomposed": [
+    {
+      "matrix": "S_genetic_covariance",
+      "rows": "45",
+      "columns": "45",
+      "all_finite": "TRUE",
+      "max_symmetry_error": "0",
+      "min_eigenvalue": "-0.00561344619486166",
+      "max_eigenvalue": "5.99482934613383",
+      "negative_eigenvalues_below_minus_1e_10": "3",
+      "near_zero_eigenvalues_abs_below_1e_10": "0",
+      "absolute_condition_number": "9821.62337438051"
+    },
+    {
+      "matrix": "S_Stand_genetic_correlation",
+      "rows": "45",
+      "columns": "45",
+      "all_finite": "TRUE",
+      "max_symmetry_error": "0",
+      "min_eigenvalue": "-0.0952280265983113",
+      "max_eigenvalue": "7.24983747023337",
+      "negative_eigenvalues_below_minus_1e_10": "3",
+      "near_zero_eigenvalues_abs_below_1e_10": "0",
+      "absolute_condition_number": "1058.28573780397"
+    },
+    {
+      "matrix": "V_sampling_covariance",
+      "rows": "1035",
+      "columns": "1035",
+      "all_finite": "TRUE",
+      "max_symmetry_error": "0",
+      "min_eigenvalue": "8.41654092033112e-10",
+      "max_eigenvalue": "1.22669762656519",
+      "negative_eigenvalues_below_minus_1e_10": "0",
+      "near_zero_eigenvalues_abs_below_1e_10": "0",
+      "absolute_condition_number": "1457484301.65884"
+    },
+    {
+      "matrix": "V_Stand_sampling_covariance",
+      "rows": "1035",
+      "columns": "1035",
+      "all_finite": "TRUE",
+      "max_symmetry_error": "0",
+      "min_eigenvalue": "7.32417629123167e-08",
+      "max_eigenvalue": "0.0856642717660324",
+      "negative_eigenvalues_below_minus_1e_10": "0",
+      "near_zero_eigenvalues_abs_below_1e_10": "0",
+      "absolute_condition_number": "1169609.63744944"
+    }
+  ],
+  "archived_metadata": [
+    {
+      "field": "panel_version",
+      "value": "atlas-v1.0"
+    },
+    {
+      "field": "trait_count",
+      "value": "45"
+    },
+    {
+      "field": "covariance_elements",
+      "value": "1035"
+    },
+    {
+      "field": "jackknife_blocks",
+      "value": "1082"
+    },
+    {
+      "field": "ld_reference",
+      "value": "ref/eur_w_ld_chr"
+    },
+    {
+      "field": "r_version",
+      "value": "4.3.3"
+    },
+    {
+      "field": "genomicsem_version",
+      "value": "0.0.5"
+    },
+    {
+      "field": "genomicsem_commit",
+      "value": "6b65ca5db39fdade08b0d811477be1cdd57b5039"
+    },
+    {
+      "field": "started_at_utc",
+      "value": "2026-08-28 03:31:37 UTC"
+    },
+    {
+      "field": "finished_at_utc",
+      "value": "2026-08-28 04:10:25 UTC"
+    },
+    {
+      "field": "m_total",
+      "value": "1173569"
+    }
+  ],
+  "archived_heldout_models": {
+    "count": 10,
+    "validated_count": 0,
+    "negative_residual_model_count": 10,
+    "terminal_status": "NOT_APPLICABLE_NO_VALIDATED_MODEL"
+  },
+  "small_independent_checks": {
+    "pair_specific_index_blocks_misaligned": true,
+    "example_index_boundary_chr1_bp_end_A": [
+      199,
+      399,
+      599,
+      800
+    ],
+    "example_index_boundary_chr1_bp_end_B": [
+      274,
+      449,
+      624,
+      800
+    ],
+    "canonical_coordinate_intervals_respect_missingness": true,
+    "ratio_gradient_finite_difference_max_abs_error": 1.9216517266329447e-11,
+    "partial_correlation_two_formula_max_abs_error": 5.551115123125783e-17,
+    "nonpositive_residual_variance_rejected": true,
+    "contrast_variance_identity_max_abs_error": 0.0,
+    "pseudovalue_delete_covariance_identity_max_abs_error": 5.421010862427522e-20
+  },
+  "primary_pins": {
+    "partialLDSC": "v0.1.1 @ 18b743baf609ac3898b00ee92f37783dc3b61347",
+    "GenomicSEM": "0.0.5 @ 6b65ca5db39fdade08b0d811477be1cdd57b5039",
+    "CBIIT_LDSC": "6c673952cee74bd5c57aef1555a03b1c015399a0"
+  },
+  "empirical_calibration_achieved": false,
+  "joint_covariance_estimated": false,
+  "common_boundary_manifest_created": false,
+  "new_primary_hypothesis_admitted": false,
+  "read_input_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/ssd_native_execution_plan_v4_3.json": "f555dc441e8c93c528e153d2e8689edabb29ba17e4d8b0da68402ac4e4c98e88",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_pairs.tsv": "2be39639e0262c3b5a434e26d5339661715992a20e35fb0613323a042a953209",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/genomic_sem_model_fit.tsv": "56c1d0bd6eccd04e3a8e31e3583cdd4743ca9f4fd57d1c794fd98688f84d9b92",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/factor_gwas.provenance.json": "ef885f612160af8be304177bbe292e6c499da3ffeb47a0a4be9377ad8379e40a",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_diagnostics.tsv": "043b2b9c0003463d920c5c107c4a4d6601bcb18794e5ca6ef83dfaf46f548bd2",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/results/tables/ldsc_covariance_metadata.tsv": "4cbb760d3f1f87e662a9e1409070a2095b136c73c734b733ae0f323a3ac08c74",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz.provenance.json": "bb5bf419e7d570e859c8b59bb19476774cc3855d43dc33f8038d6b33dcb56fa7",
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hm3_grch37_variant_map.tsv.gz": "6775a7a0d3ca90dc74e472180b1d77103bc238129c4f969358f46307e5c306b4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/25_genomicsem_covariance.R": "7ccfc83d71e9adaf6f9adc3e848630f044ad837711578c5d31aca8ef1de6a942",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/28_chromosome_split_covariance.R": "022c05fedb1b3faaac0772be0692bdff0e7afe58abfe67457934763d409bd681",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/29_genomicsem_model.R": "506d6508f212837932763cf15ce6a030262042904c9c12f8c2b242ed8cc81ac4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/scripts/30_finalize_genomicsem.py": "ea6b26bd1de02bb527cc9a694c998f5316bc550326da51a99f35e8982069cfb1",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/scripts/native_ldsc_capture.py": "bd1b87e403fca2bad4c30b6a662a64f7c3d1a47f6aa9884f5157e370cb95707d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/SHARED_ESTIMATOR_COVARIANCE.md": "ec5ed9c09faf74f34ec8a4492f5480762ad4b29601914268aa6e04c4fd032c57",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/statistical_validity_v1.json": "f5e4e3a52d3d109bfbb33b8df766b8f1ff69aa0dcc2f27bc0b6e8b4478f86ead",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/statistical_geneticist_critical_review_v4.md": "eb9e05a3f9927e280199b0c6f649083073f1fc71ef010a3093112b4efda81277",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/liftover_plans.tsv": "dda87cffebe55fc3792ab75d08abbc61b5ff49d138a7410ad0480d36682b90e3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/environment/tool_versions.tsv": "f218910804301cbf6c5324e62438d1170bdfd9f35cd93046e674a6b71b56e3d7",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/jackknife.py": "e41eaa7126f422ab7dccb6669efa112e658a1ea6f9d5b4522bf9daafe990bc0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/irwls.py": "e0a8e7712b4cd3958c96cb37b464675dc591926aeadbc8ac1c62dd6aef153867",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/mounier_fulltext.xml": "60c89bcb91b2a4ee91366862d16a1b7040a3543b0a447d01f790c9d2c80a8404",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_R__other_functions.R": "4484a845321b4a4088cc58e01a650b0e1c3d298699313e2a9a8f8f0fc82772db",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_README.md": "6196c073486ada8b5857be73eeddaf0e603826182ada2ba8f24f4bc0191e7219",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/fetch_receipt_code_v4.json": "e888c5db15f9b1f031fd3ebd2c8d26db9748b8cf8208e3fcaea6e8e4be18b99f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_tags.json": "1c4b48246e23a5a76d741f8881eb9c41cef32c46f52dc80f6c8e5a5d9111fb5c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_tree_v011.json": "8a3724ad5fdf5543d40953e67660ddb651e9a70ea9320df4726acdbf0abc8e96",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_main.json": "3b28020c471656a5d01c965a7ed011c611cb5521c7f6ca84f9ab66ae7e2094dc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_DESCRIPTION": "2f31e13f76c89228522032d18b92a098c351163a7a7df0232ee06e121552ed07",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_R__utils-pipe.R": "a2f6e47e49d5c895032123031bc13318d61d8c8a02e5254ee58237cfd72b3531",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/fetch_receipt_initial.json": "971d546c4cef592070cd7dd448b9815097087baa9a548cdfb8d0374a5922431a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/partialldsc_R__partial_ldsc.R": "1b14359bf5bd7ad1fee17ae8b77375f4866264fb2459a76efb83e44f0356bfda",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genomicsem_specialist_sources_v4/genomicsem_ldsc.R": "9fddaee7d46d1faa06061ab023bbab4e3aa97d4365a902a40523221e09eac8e5"
+  },
+  "script_sha256": "79d1b7d63e82d9f33b0057c57cd916803d64399e584d14e18b3dac5cd724459e"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "PASS_BOUNDED_EDGE_GUARDS",
+  "checks": [
+    {
+      "control": "c_truncated_gzip_EOF",
+      "pass": true,
+      "error": "Compressed file ended before the end-of-stream marker was reached"
+    },
+    {
+      "control": "python_truncated_gzip_EOF",
+      "pass": true,
+      "error": "Compressed file ended before the end-of-stream marker was reached"
+    },
+    {
+      "control": "selected_column_order_guard",
+      "pass": true,
+      "error": "EXACT_ORIGINAL_SELECTED_COLUMN_ORDER_REQUIRED"
+    },
+    {
+      "control": "one_to_one_map_guard",
+      "pass": true,
+      "error": "ONE_TO_ONE_ORIGINAL_COLUMN_MAP_REQUIRED"
+    }
+  ],
+  "check_count": 4,
+  "source_sha256_before": "0b9ac982d1537ccee7f8572b98286d0ab00cc769ecbd401627f41cf6c0961e5e",
+  "source_sha256_after": "0b9ac982d1537ccee7f8572b98286d0ab00cc769ecbd401627f41cf6c0961e5e",
+  "production_raw_body_reads": 0,
+  "reference_body_reads": 0,
+  "real_worker_or_fit_operations": 0,
+  "production_mutex_operations": 0,
+  "fixture_only": true,
+  "execution_admitted": false,
+  "executable": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-py311/bin/python3.11"
+}

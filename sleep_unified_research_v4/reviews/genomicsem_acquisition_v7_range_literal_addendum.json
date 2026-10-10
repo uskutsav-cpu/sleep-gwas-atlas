@@ -1,0 +1,12 @@
+{
+  "recorded_utc": "2026-10-09T22:26:54.577374+00:00",
+  "status": "REVIEW_LITERAL_SPACING_CORRECTION_ONLY",
+  "original_seal_sha256": "6cefae07c446092393abd2d764db9a9be4b285a386b992cce3d9764258f477bc",
+  "field": "sources.required_source4_suffix_content_range",
+  "correct_exact_HTTP_content_range": "bytes 1126899820-2287347716/2287347717",
+  "correct_HTTP_content_length": "1160447897",
+  "explanation": "The original MD/JSON omitted the ASCII space after bytes in the displayed range literal. The reviewed frozen executor correctly checks f\"bytes {offset}-{expected_bytes-1}/{expected_bytes}\". This addendum corrects report transcription only; source/plan/verdict are unchanged.",
+  "frozen_executor_or_plan_modified": false,
+  "execution_admitted": false,
+  "workers_launched": 0
+}

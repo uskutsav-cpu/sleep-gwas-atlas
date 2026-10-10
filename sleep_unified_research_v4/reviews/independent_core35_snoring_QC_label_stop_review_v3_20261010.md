@@ -1,0 +1,23 @@
+# Independent snoring QC-label stop adjudication
+
+2026-10-10. **False comparator mismatch for the observed constant-effective-N replay; no scientific-content or count discrepancy.** The v3 receipt remains `FAILED_PRESERVED_NO_AUTOMATIC_RETRY`. This review recommends an additive correction and launches no retry. Only the preserved comparison receipt, new QC text and frozen historical QC within the plan were consumed; no analyses, bodies, code, controllers or data were changed.
+
+Ordered step 14 is the sole reason-string difference:
+
+- Historical: `N_eff below 50% of total (381,973.8) [CDG3]`
+- Replay: `sample size below 50% of configured effective N (381,973.8) [CDG3]`
+
+Both record **0 dropped / 7,168,629 remaining**. All **15** dropped/remaining pairs and the other **14** labels match. The following step is unchanged: `sample-size mode: constant N_eff derived from config ncase/ncontrol`. Thus “configured effective N” makes the reference quantity explicit; the percentage, stated numeric reference, constant-N branch and actual selection are unchanged. This result does not justify treating the two labels as equivalent for other sample-size branches or traits.
+
+Sequential QC arithmetic reconciles **11,010,158 input = 3,841,529 rejected + 7,168,629 retained harmonized rows**. The preserved receipt records exact complete ordered harmonized equality and exact entire HM3 SNP/allele/N/Z/missingness equality, zero unequal rows, matching decompressed hashes and gzip CRC/EOF on both outputs. The **1,217,311-row HM3 template has 1,179,075 finite N/Z rows and 38,236 missing/nonfinite rows**, identically in the archive and replay. These full-stream checks were already completed; no body scan was repeated. Compressed SHA-256 values differ, so byte restoration is not established and the cause is not inferred.
+
+Every original scientific QC metadata field agrees. The input path relocates; additive metadata explicitly reports `CONSTANT_N_EFF_FROM_MANIFEST` and absent map/prefilter fields. All 12 scalar checks in the receipt pass; only literal `ordered_filter_steps` fails. Missing source INFO remains qualified, and exact constant-N replay does not validate per-variant enrollment, source power, variance-fraction interpretation or UKB cohort independence.
+
+A narrowly corrected comparator would materially improve **completeness of original raw-to-processed reproducibility** by removing this false stop. It would add no association, novelty, source eligibility or independent validation. Under the stated priority to finish existing reproducibility work, a finite additive, independently reviewed continuation is warranted if it closes that original-family gate: recognize only this exact alias at step 14 for `snoring`, with the same 381,973.8 reference, zero drops, 7,168,629 remaining, unchanged constant-effective-N mode, plan/source identities and exact remaining metadata/count/content checks. Preserve both literal QC texts and the failed v3 receipt; retain every strict numeric, row-order, missingness and CRC requirement. Prefer rechecking retained completed outputs under that corrected comparison over rerunning harmonization solely for wording. A separately reviewed comparator/plan identity and explicit continuation admission must precede execution. No general “total N”/“effective N” alias, threshold relaxation, controller rewrite or new fit is justified.
+
+Evidence paths and identities:
+
+- Comparison: `/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v3/snoring/receipts/full_content_QC_comparison.json`; SHA-256 `db5055c6e57a1c4a932e6687577ddd222e886da6d109b312213a6b0ccca1e2d2`.
+- Replay QC: `/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v3/snoring/harmonized/snoring.qc.txt`; SHA-256 `9b8b276f042838e42b5f47bbbb5f302c7000ef35ef9c81db44c0c26a46b4aa6c`.
+- Frozen historical QC strings: member `snoring`, `original_design.historical_QC` in `/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/core_pipeline/large35_bounded_replay_v3/core_large35_bounded_replay_plan_v3.json`; plan SHA-256 `3e8c3c7bca26b00ed337c816a723d8a42475473667d4a9c969348045fcc9a2f4`.
+- Historical QC location/identity recorded by the plan: `/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/harmonized/snoring.qc.txt`; inherited SHA-256 `9422f51683459ad3f3c17ee2ac40d7168771eb9364d2817761220716cd5be3d4` (not freshly rehashed).

@@ -1,0 +1,41 @@
+{
+  "completed_utc": "2026-10-09T19:34:48.712323+00:00",
+  "executor_sha256": "4b00b222a1f5607487caba6d4f47fb797d2fa3666b54cc7dee2f3d14c4a0fdf3",
+  "plan_sha256": "b13346e198dc0d2f04d324aa0d1b76af33507ce72a299d9e3beccca8639ad544",
+  "checks": [
+    {
+      "control": "real_second_process_mutex_contention",
+      "pass": true
+    },
+    {
+      "control": "mutex_release_after_owned_scope",
+      "pass": true
+    },
+    {
+      "control": "cleanup_exception_independent_owned_pgid_kill_and_reap",
+      "pass": true,
+      "proof": {
+        "cleanup_error": "RuntimeError: INJECTED_SHARED_TEARDOWN_FAILURE",
+        "teardown_verified": true,
+        "remaining_group_members": [],
+        "independent_fallback_signals": [
+          "SIGKILL"
+        ]
+      }
+    },
+    {
+      "control": "exclusive_receipt_write_refuses_overwrite",
+      "pass": true
+    },
+    {
+      "control": "worker_failure_plus_cleanup_exception_always_preserves_failure_receipts",
+      "pass": true,
+      "worker_returncode": 1,
+      "receipt_sha256": "adbdae96d4b86a1bcb9d0e998b4acc0c7f68f318cbe472f37ab134be4c03fe9b"
+    }
+  ],
+  "all_pass": true,
+  "network_requests": 0,
+  "native_estimators_launched": 0,
+  "test_script_sha256": "9d77f65a4aee992574e6d2917db8a6da909850dc96a7362ba93b59e354bd264b"
+}

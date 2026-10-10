@@ -1,0 +1,906 @@
+{
+  "schema": "independent_finngen_operational_prelaunch_review_v4_3_8",
+  "completed_utc": "2026-10-10T01:36:41.461852+00:00",
+  "verdict": "QUALIFIED_PRELAUNCH_PASS_CORRECTED_SEVEN_WORKER_RECEIPT_WITNESSES",
+  "prelaunch_pass": true,
+  "execution_admission_granted": false,
+  "actual_prepared_plan": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_8.json",
+  "actual_prepared_plan_sha256": "78f0faea56024be8eca65421bf655c0f7c224afe6f029ed3ca0cea22491781b8",
+  "fixed_reviewed_identity_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_8.json": "78f0faea56024be8eca65421bf655c0f7c224afe6f029ed3ca0cea22491781b8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/58_run_finngen_feasibility_stage_v3_8.py": "b7167d99d50dc1ef97334a3a572fcb129e9eeaca07e4040a17c8a89defbf69c1",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/59_prepare_finngen_feasibility_stage_v3_8.py": "bce49437281170da5b70933082bd311a426e6ec36520cc21d42a628aa468f394",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_operational_prelaunch_seal_v4_3_7.json": "8e02e674783178c4765148cac16c00b114554b18c781af51276955c384e15af2"
+  },
+  "admitted_review_scope": "Exact result-free preprocessing plan/controller correction, dependency/command/resource closure and bounded metadata fixtures only.",
+  "source_optimization_proof_inherited_unchanged": {
+    "token_cases": 514,
+    "original_row_controls": 34,
+    "Python": "3.9.23",
+    "scientific_worker_sha256": "9ae9ec603d9b8558d30ec48c69e6658586853986c2c6e6a474b4fbdb20ce7302",
+    "row_control_sha256": "35a969111c8dcdfca4e7f5bea619f936cbe2eda32b263dc13f359b8e4d199e12",
+    "timing_not_actual_source_throughput": true
+  },
+  "measured_controls": [
+    {
+      "label": "healthy",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": true,
+      "passed": true,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "b2cb0dd74d8653bb8cbb7383433d3f4d7f32733d3258879131ba4644c8deacc3"
+    },
+    {
+      "label": "result_mutation_during_parse",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "90bbd3013c23acb269eb32c86795eb61a6fba8985b8edccee82f9ee43a74cdb6"
+    },
+    {
+      "label": "result_changed_at_derivative_hash",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "0a981330073a4628623fbf6bbe8f986aba216546ed89d8329c8e63e3aac3188b"
+    },
+    {
+      "label": "current_journal_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "5b8364e6e4ef1c51ec5449b8dce0edd3fb9a4c3bcf84da3f0da9a9c7512d7d89"
+    },
+    {
+      "label": "current_worker_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "4b76468d3c716a1432eb11d33f31f394c31f4ed9b330230c605e1c578fe83b6e"
+    },
+    {
+      "label": "source_after_stage_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "841f5216570afa2b057e96b4cf274ca5ba23df3955966517380a8fd3b15c8f44"
+    },
+    {
+      "label": "stage_payload_on_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "RuntimeError: FINNGEN_FROZEN_REGULAR_OUTPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_finngen_controller_contradiction_controls_v4_3_8/stage_payload_on_write/stage.json",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "b742dd78f1dbb4bd26c6d7d6837583362f6b9a337797cff4da229c7074ed6e4e"
+    },
+    {
+      "label": "terminal_seal_payload_on_write",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "21398bf20e90e4fa3604d0566a7891fb4c1136349bd6c5a4791a0bd07a7ece3e"
+    },
+    {
+      "label": "postpersist_internal_guard",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "87142a924dc181f9b06d00d9685ba8c060ec552fe4a4003e1193cb0008f7a5ed"
+    },
+    {
+      "label": "postpersist_deadline_guard",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "128b4ee1b475c9d0824091a18f89407f9b3e1fc13b91670b8e689b18490fa032"
+    },
+    {
+      "label": "postpersist_signal",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "7d23af8ab1d83c9f123aa352cf32e5111286a9da328fb0e7867a37d00b069699"
+    },
+    {
+      "label": "failed_supplemental_writes",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "2a698ac521e53206f8966bf7bceacd26df6998b17e6424087dec1fee2c470705"
+    },
+    {
+      "label": "full_stream_false",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "f17ddbd99bad8c4db85d618de5cffae956e8b25addd524a89d3e469fad928f16"
+    },
+    {
+      "label": "INFO_claim_true",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "f170fffcee11c1f76e61e2be5aa6984697e461417cf55d092cb37a8d2b460f33"
+    },
+    {
+      "label": "no_retry",
+      "execute_returned_success": true,
+      "consumer_accepts_stage": true,
+      "expected_success": true,
+      "passed": true,
+      "exception": null,
+      "PENDING_remains": false,
+      "retry_rejected": true,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 3,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "ab954acf53ab33f5c98776b4e4dc7d6aea018c1709c57873c188901fe3f3cf2a"
+    },
+    {
+      "label": "metadata_errors_nonempty",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "6a932b1b7d5e6481dead62d9c0e892caab32f9cf5cda3188063900c97e828e07"
+    },
+    {
+      "label": "plan_unchanged_false",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "ed8a57a5fbd1d8abb4b36331b1bba469cd9be56fb70c996d54270251c280d743"
+    },
+    {
+      "label": "teardown_cleanup_error",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "fec3329349428b0b4d76c980447ff04968d2782a39c17dfead2ca7f3ab03bf59"
+    },
+    {
+      "label": "wrong_command",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "e8e8e329230f99e931da68580df471f6014ebd1a5d5fbc9ef7aec1706ad0494c"
+    },
+    {
+      "label": "wrong_returncode",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "0d3c34e508600d38f99b074fa46cb1491aed1e3bf509cdb7d944ad90490ea6ac"
+    },
+    {
+      "label": "stop_reason_nonempty",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "190871bae1eb4042dbdbdd2c2176a2b60c3f46b78066a085624776357c705da4"
+    },
+    {
+      "label": "worker_mutation_after_parse",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "841255de236ac8f6c0d24dd3522428dc78bf09f87c35c53a90eeea1e0c487ef2"
+    },
+    {
+      "label": "worker_failure_addendum",
+      "execute_returned_success": false,
+      "consumer_accepts_stage": false,
+      "expected_success": false,
+      "passed": true,
+      "exception": "SystemExit: FINNGEN_STAGE_STOP_PRESERVED_REQUIRES_REVIEW",
+      "PENDING_remains": true,
+      "retry_rejected": null,
+      "mock_worker_calls": 1,
+      "cleanup_calls": 2,
+      "events": [
+        "MOCK_LOCK_ENTER",
+        "MOCK_METADATA_WORKER",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_OWNED_EMPTY_CLEANUP",
+        "MOCK_LOCK_EXIT"
+      ],
+      "actual_workers": 0,
+      "actual_locks": 0,
+      "fixture_plan_sha256": "88ebd1be5d88bbbbbe89fe6c020efa504154ae9f7f5d192b9ea66d853fb6cd13"
+    }
+  ],
+  "all23_controls_expected_results": true,
+  "corrected_prior_fault_labels": [
+    "metadata_errors_nonempty",
+    "plan_unchanged_false",
+    "teardown_cleanup_error",
+    "wrong_command",
+    "wrong_returncode",
+    "stop_reason_nonempty",
+    "worker_mutation_after_parse"
+  ],
+  "all21_negative_controls_reject_with_PENDING_preserved": true,
+  "worker_failure_addendum_control_rejected": true,
+  "exact_intended_command_and_full_receipt_oracle_reviewed": true,
+  "frozen_worker_SHA_before_first_parse_and_before_after_later_reads": true,
+  "hashes_after_output_consumption_checked": true,
+  "code_AST_unchanged_except_worker_read_correction_and_epoch": {
+    "schema": "independent_finngen_exact_additive_code_correction_v4_3_8",
+    "namespace_normalized_top_level_AST_unchanged": [
+      "load",
+      "require_admission",
+      "result_gate",
+      "regular_hashes",
+      "namespace_bytes",
+      "main"
+    ],
+    "changed_functions": [
+      "execute"
+    ],
+    "added_functions": [
+      "read_fixed_worker"
+    ],
+    "resource_meter_AST_unchanged": true,
+    "scientific_worker_SHA_unchanged": true,
+    "all170_donor_dependencies_retained": true,
+    "all_science_argv_equal_except_plan_epoch": true,
+    "executor_diff": "--- 58_3_7\n\n+++ 58_3_8\n\n@@ -50,7 +50,7 @@\n\n         raise RuntimeError('ONE_FROZEN_DIAGNOSTIC_STAGE_REQUIRED')\n     namespace = Path(plan['namespace'])\n     approved = common.SHARED_LOCK.parent/'new_source_feasibility/finngen_R13_F5_INSOMNIA'\n-    if namespace != approved/'pipeline_replay_v3_7' or namespace.is_symlink() or Path(plan['source_namespace'])!=approved or plan['shared_heavy_worker_lock'] != str(common.SHARED_LOCK):\n+    if namespace != approved/'pipeline_replay_v3_8' or namespace.is_symlink() or Path(plan['source_namespace'])!=approved or plan['shared_heavy_worker_lock'] != str(common.SHARED_LOCK):\n         raise RuntimeError('PRIVATE_FEASIBILITY_NAMESPACE_OR_SHARED_LOCK_CHANGED')\n     guard = plan['guard']\n     if (guard['worker_count'], guard['BLAS_threads'], guard['internal_floor_bytes'], guard['SSD_floor_bytes'],\n@@ -118,6 +118,19 @@\n\n \n def namespace_bytes(path):\n     return sum(p.stat().st_size for p in Path(path).rglob('*') if p.is_file() and not p.is_symlink())\n+\n+\n+def read_fixed_worker(path, expected_sha, command, plan_hash):\n+    regular_hashes({str(path):expected_sha})\n+    worker=json.loads(Path(path).read_text())\n+    regular_hashes({str(path):expected_sha})\n+    if worker['status']!='WORKER_COMPLETE_VERIFIED' or worker['command']!=command or worker['plan_sha256']!=plan_hash or worker['returncode']!=0 or worker['stop_reason'] is not None or worker['metadata_errors']!=[] or worker['plan_unchanged'] is not True or worker['process_group_teardown']['remaining_group_members']!=[] or worker['process_group_teardown'].get('cleanup_error') or worker['owned_cleanup_verified'] is not True:\n+        raise RuntimeError('EXACT_FINNGEN_COMMAND_AND_ALL_WORKER_FAILURE_FIELDS_REQUIRED')\n+    veto=Path(str(path)+'.failure.json')\n+    if veto.exists() or veto.is_symlink():raise RuntimeError('FINNGEN_WORKER_FAILURE_ADDENDUM_VETO')\n+    regular_hashes(worker['output_sha256'])\n+    regular_hashes({str(path):expected_sha})\n+    return worker\n \n \n def execute(plan_path, plan_hash):\n@@ -153,9 +166,8 @@\n\n                 if fixed_terminal_intent_sha is None:raise RuntimeError('UNEXPECTED_PRIVATE_SEAL_BEFORE_FROZEN_INTENT')\n                 regular_hashes({str(terminal.seal):fixed_terminal_intent_sha})\n         if result_gate(plan,plan_hash)!=result_identity:raise RuntimeError('FINNGEN_RESULT_CONSUMPTION_CHANGED')\n-        worker_path=Path(job['worker_receipt']);worker=json.loads(worker_path.read_text())\n-        if worker['status']!='WORKER_COMPLETE_VERIFIED' or worker['plan_sha256']!=plan_hash or worker['process_group_teardown']['remaining_group_members'] or not worker['owned_cleanup_verified']:raise RuntimeError('FINNGEN_WORKER_NOT_COMPLETE_OR_REAPED')\n-        regular_hashes(worker['output_sha256'])\n+        worker_path=Path(job['worker_receipt'])\n+        read_fixed_worker(worker_path,proofs[str(worker_path)],command,plan_hash)\n         if common.sha(plan['source'])!=plan['source_identity']['sha256']:raise RuntimeError('FINNGEN_RAW_CHANGED_AFTER_CONSUMPTION')\n     with common.deferred_termination_signals():\n         with common.exclusive_heavy_lock(before_release=lambda:supervisor.await_owned_cleanup(monitor,ownership,plan_hash)) as fd:\n@@ -168,7 +180,8 @@\n\n                 substitutions={'{HEAVY_LOCK_FD}':str(fd),'{PLAN_SHA256}':plan_hash};command=[substitutions.get(x,x) for x in job['command_template']]\n                 supervisor.worker(command,Path(job['output_prefix']),Path(job['worker_receipt']),plan,plan_path,plan_hash,started,monitor,ownership)\n                 result_identity=result_gate(plan,plan_hash);proofs.update(result_identity)\n-                worker_path=Path(job['worker_receipt']);worker=json.loads(worker_path.read_text());proofs[str(worker_path)]=common.sha(worker_path)\n+                worker_path=Path(job['worker_receipt']);worker_hash=common.sha(worker_path)\n+                worker=read_fixed_worker(worker_path,worker_hash,command,plan_hash);proofs[str(worker_path)]=worker_hash\n                 proofs.update(worker['output_sha256'])\n                 if plan['stage']=='preprocessing':proofs[plan['derivative']]=common.sha(plan['derivative'])\n                 regular_hashes(proofs);supervisor.await_owned_cleanup(monitor,ownership,plan_hash);identity()",
+    "checker_correction": "Initial unsaved inline probe used a relative worker key and failed KeyError before any artifact write. This saved checker uses exact absolute plan keys; no candidate defect or mutation occurred.",
+    "real_worker_fits_body_reads_network_lock": false
+  },
+  "actual_plan_closure": {
+    "dependencies": 641,
+    "all170_donor_dependencies_retained": true,
+    "all476_rejection_artifacts_in_dependencies": true,
+    "fresh_small_metadata_code_runtime": 594,
+    "receipt_bound_reference_bodies_not_reread": 47,
+    "science_inputs_argv_N_and_guards_unchanged": true,
+    "old9_failure_artifacts_current": true,
+    "old_FAILED_PENDING_empty_owned_group_preserved": true,
+    "current_outputs_and_root_admission_absent_at_binding_check": {
+      "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/derived/insomnia.sumstats.gz": true,
+      "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/derived/insomnia.preprocessing.json": true,
+      "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/receipts_v4/preprocessing.execution_receipt_v3_8.json": true,
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_preprocessing_stage_receipt_v4_3_8.json": true,
+      "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/preprocessing_pending_v3_8.json": true,
+      "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/new_source_feasibility/finngen_R13_F5_INSOMNIA/pipeline_replay_v3_8/preprocessing_terminal_seal_v3_8.json": true,
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_admission_v4_3_8.json": true
+    },
+    "original190_completion_addendum_sha256": "afaf006dfc2a4ca7870558442c2ea478e102f6597e7eefbb47e95dc359d5722b"
+  },
+  "source_identity_receipt_binding_only": {
+    "identity": {
+      "bytes": 809346932,
+      "md5": "f16c21acbf8b9ebfeb0f26a19f0ecfe3",
+      "sha256": "353129dc8252461a2a97087ce6de39548d0b0bf1e488a6ef36da75e9f4690049"
+    },
+    "generation": "1777989563097164",
+    "actual_file_regular_and_exact_size": true,
+    "acquisition_receipt_sha256": "4695eef749cb16fee201b3797b6ffc29000a1cb66d967108041444d0843bb072",
+    "raw_hash_not_recomputed_by_this_metadata_review": true,
+    "prospective_preparer_and_worker_full_hash_before_after_and_CRC_gates": true
+  },
+  "reference_body_hash_bindings_without_reread": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.ldscore.gz": {
+      "expected_sha256": "cac171317ab93347f0b692b1784452e471956a0d68d409345f4cf9e100452348",
+      "bytes": 2135584,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/1.l2.M_5_50": {
+      "expected_sha256": "4d93a65a13d474494886b5a08d6f1353eb7d097199c1edd94e1c0063f1452043",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.ldscore.gz": {
+      "expected_sha256": "956cf536da2a02da35f8e75544b6e0c1b777384469a11858b94ff166ba978320",
+      "bytes": 2222117,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/2.l2.M_5_50": {
+      "expected_sha256": "873641ba1b1d1954f12de3efda9befac347b024f51e676947d229c46352b1680",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.ldscore.gz": {
+      "expected_sha256": "cdaf43b8329936a95f2fd3497ebf607bb53a188798805459d6327b0aed0331aa",
+      "bytes": 1847002,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/3.l2.M_5_50": {
+      "expected_sha256": "cbebc916d828f2dc7bf6f41a318ea9386615ca18368103b3bf151b15697360de",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.ldscore.gz": {
+      "expected_sha256": "165db569080638532d126680afc9473933f70dfd376a698058c25ffbe3c5155b",
+      "bytes": 1659366,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/4.l2.M_5_50": {
+      "expected_sha256": "10b50bfa353bcc6c715edd27bbc2575f11db162cfa32683d1436b4044e118269",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.ldscore.gz": {
+      "expected_sha256": "9f8080896a435ec16e51ccc75c9ef3d08cce586c649c74da1e3fea7386521ddf",
+      "bytes": 1701430,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/5.l2.M_5_50": {
+      "expected_sha256": "3da70d571578cd8166044b9e28b1be8b05dca2466a6b2b6e005e929ce510a332",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.ldscore.gz": {
+      "expected_sha256": "ffc211ff03da2126e950ee1b1163b0c749e486f1f36daa0015c8d24d28652d31",
+      "bytes": 1588764,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/6.l2.M_5_50": {
+      "expected_sha256": "829d481f2f402abb3da05ff969d9083d14a2495a1339f882935aaff0a1f425d4",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.ldscore.gz": {
+      "expected_sha256": "576cff613856c32ab471a8b8250a18b472ab6a3601cf829b9aa3d9d2a3c1fada",
+      "bytes": 1479136,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/7.l2.M_5_50": {
+      "expected_sha256": "3d2ffe6200693fa2d94398a632bcd814c60d4deb4da11eeed80a2bb47737db02",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.ldscore.gz": {
+      "expected_sha256": "fa6e623a876529c91abcdadb7ab18318e0203f93c91cec9d3a49cc438c4be2e1",
+      "bytes": 1462963,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/8.l2.M_5_50": {
+      "expected_sha256": "549a32add09387bb75dd0a21af29786788d056d19530b713d2637b9a442e64f9",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.ldscore.gz": {
+      "expected_sha256": "010ddc1311840eb8cd0d3b06d4e2f7f93c803449ca5d1e9f36bd271513a0a4c6",
+      "bytes": 1251946,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/9.l2.M_5_50": {
+      "expected_sha256": "8aeb3b5dbe44176c244e5684b530330e114f4853112a2caa3737e3bb2afb268a",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.ldscore.gz": {
+      "expected_sha256": "198423513408539f4988f51fe0b85e7bee177f6d3bcc3ef97fa7f3b8e4743097",
+      "bytes": 1411676,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/10.l2.M_5_50": {
+      "expected_sha256": "76e9eb09c8ebe87f41e738c499417df57b080cfb7f9c986258ce7ddc2684b026",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.ldscore.gz": {
+      "expected_sha256": "370c609fb337499dadf294e64f55fe8fd99b7b26a32a9aabcb0995f0b7f8f318",
+      "bytes": 1351364,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/11.l2.M_5_50": {
+      "expected_sha256": "47217613c248ed2c6459e57df484a5a294a0f844f08f09d0f4b216bc8bdce987",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.ldscore.gz": {
+      "expected_sha256": "714ac1eb55c1854d4258e6aeaf9ffb368e17d34d2eb80ded502bbad287cc6a6f",
+      "bytes": 1314068,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/12.l2.M_5_50": {
+      "expected_sha256": "c382026b135bf5c44004d1421ae0599cab5404c25be31a1f1930bc30f8417b33",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.ldscore.gz": {
+      "expected_sha256": "59980b567f8f505e1d382beeab5e3a4a090d5c9392955d1fe4296f23303d3739",
+      "bytes": 1012467,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/13.l2.M_5_50": {
+      "expected_sha256": "edf26a214f6db0cb87c65050ba59bed40d9bc46c4a7752fbc12997931dc33021",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.ldscore.gz": {
+      "expected_sha256": "6bf8d3012cb139bd536d149248c116a64e7bce3d0415e9083cb6efa307fbc0b6",
+      "bytes": 885137,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/14.l2.M_5_50": {
+      "expected_sha256": "21ef47fed5ba0c0426161ad0ed6204995e1c7b919b094468be14542193411589",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.ldscore.gz": {
+      "expected_sha256": "928877c7144869fd66978a446d9d7a98cd46509f11a772833f6c381692697a4a",
+      "bytes": 813558,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/15.l2.M_5_50": {
+      "expected_sha256": "a6c64f1a5aaf49bfec1ec27ec4949945d597180a8dc1c4510348d8ac9868f7db",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.ldscore.gz": {
+      "expected_sha256": "733175753db174c21773feafc0ef85991426b6cd2e98f83a428fff0e25a1e66a",
+      "bytes": 857555,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/16.l2.M_5_50": {
+      "expected_sha256": "1964cc8ae26fd5f3e5b560a00f370036d07a9aa68c70dafe0108d48dceb5f054",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.ldscore.gz": {
+      "expected_sha256": "cc8b02af96567ea6bb84205d3da0b4709118c1c58eb13d3240f49178a933716e",
+      "bytes": 717215,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/17.l2.M_5_50": {
+      "expected_sha256": "f34d58135a64456148f6e48ea73f8e0e65e7e28d70783c22796294b60c522cb1",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.ldscore.gz": {
+      "expected_sha256": "10d4bb0697d980b4a2cc752b72c9b6881e33c6e6f7b238b76c6697fe56e793cf",
+      "bytes": 800003,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/18.l2.M_5_50": {
+      "expected_sha256": "5134cfa8390c7aecccd89b5e808b62935257b27094f03330b2306ccd02840b28",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.ldscore.gz": {
+      "expected_sha256": "71da5f97e7d3da46a173759ed468ad486333137918a308a77c09e67ec861f326",
+      "bytes": 500497,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/19.l2.M_5_50": {
+      "expected_sha256": "cb6b0ba4e36b96d4cfbdac20202153baa70eb3633246d89172d7a7847e536fc7",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.ldscore.gz": {
+      "expected_sha256": "362486d23bf12a34e84d466a65bbd2df1b6f881d8d1748bb64816e67003e09f5",
+      "bytes": 689106,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/20.l2.M_5_50": {
+      "expected_sha256": "aa2f7130a8e1e1b63719554bd801476dd39597742316febf68f7f8d1952725cb",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.ldscore.gz": {
+      "expected_sha256": "4b168d698b0104ec5b57bffb4e130358ec2577528f69ad46b40f32ff5a17f4b5",
+      "bytes": 381900,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/21.l2.M_5_50": {
+      "expected_sha256": "0128dc6fab98f08718a84499eb384b03565f259ba016f40029d31f1ba874c9ae",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.ldscore.gz": {
+      "expected_sha256": "63822b0c989daadb99243fe2913ffc9e18d569e1bb460f37e8e1b746e71ebe06",
+      "bytes": 388008,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/22.l2.M_5_50": {
+      "expected_sha256": "e5bf514d371a97ad95e75b5e7189e8b8654c01059da78891628e074445fdc1ee",
+      "bytes": 6,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/hg38ToHg19.over.chain.gz": {
+      "expected_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+      "bytes": 1246411,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/reference/panukbb_hm3_variant_reference.tsv.gz": {
+      "expected_sha256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+      "bytes": 13105072,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/w_hm3.snplist": {
+      "expected_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "bytes": 17264312,
+      "binding_method": "Exact pinned reference hash inherited from original baseline or frozen reference identity; no new reference-body read."
+    }
+  },
+  "inherited_archival_symlink_exceptions": {
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python": {
+      "literal_target": "python3.9",
+      "resolved_target": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python3.9",
+      "expected_sha256": "7dffb088cd3027e48f0127ced6f206e06111abed3b9457e580b6ebbf593c10ba"
+    },
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/w_hm3.snplist": {
+      "literal_target": "eur_w_ld_chr/w_hm3.snplist",
+      "resolved_target": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist",
+      "expected_sha256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed"
+    }
+  },
+  "guard": {
+    "worker_count": 1,
+    "BLAS_threads": 1,
+    "internal_floor_bytes": 3221225472,
+    "SSD_floor_bytes": 5368709120,
+    "observed_aggregate_worker_RSS_limit_bytes": 2147483648,
+    "new_output_limit_bytes": 2147483648,
+    "deadline_seconds": 7200,
+    "poll_seconds": 2
+  },
+  "global_reservation_bytes": 322122547200,
+  "exact_single_preprocessing_command": [
+    "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/bin/python",
+    "-B",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/56_preprocess_finngen_insomnia_feasibility_v3.py",
+    "--plan",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/manifests/finngen_preprocessing_plan_v4_3_8.json",
+    "--plan-sha256",
+    "{PLAN_SHA256}",
+    "--inherited-heavy-lock-fd",
+    "{HEAVY_LOCK_FD}"
+  ],
+  "source_or_replication_admission": false,
+  "actual_scientific_workers": 0,
+  "estimator_calls": 0,
+  "network_calls": 0,
+  "real_source_reference_body_parses": 0,
+  "actual_heavy_mutex_acquisitions": 0,
+  "root_admission_requirements": [
+    "Bind exact current prepared plan, executor/preparer, this review/report/seal, all required independent review files and all641 operational dependencies in a separate root admission.",
+    "Recheck all190 completion/current receipts, source/reference/runtime identities, physical SSD mount, current resource floors/caps and absence of prior result/PENDING/failure/seal in the new3_8 namespace.",
+    "Queue exclusively through the same inherited-FD shared heavy mutex; never overlap an owned heavy worker. Preserve deferred signals and fully verified owned cleanup before lock release.",
+    "Launch only the single frozen preprocessing command. Preserve old3_2 failure and all3_7 rejection artifacts; no automatic retry, overwrite, h2/rg fit or broader source/scientific admission follows from this review."
+  ],
+  "qualifications": [
+    "Actual execute/Terminal2 logic was exercised with worker, monitor, lock, physical-mount, baseline and disk/time operations replaced by metadata mocks. Real process lifecycle and mutex exclusivity are inherited qualified controls.",
+    "Receipt oracle checks were validated on the preserved seven counterexamples plus a genuine-schema healthy mock; this is not an exhaustive arbitrary malformed-JSON/type or concurrent-adversary certification.",
+    "The source/reference bodies were not read or independently rehashed. Their full hashes are frozen prior-receipt bindings; actual preprocessing must enforce complete before/after hashes, CRC/EOF and ordered-output diagnostics.",
+    "Native Python and w_hm3 inherited symlinks are allowed only at exact frozen literal/resolved targets. Runtime binary SHA was checked; reference-body SHA remained receipt-bound.",
+    "Terminal2 is qualified by its privately owned immutable marker, deferred-signal and POSIX unlink contract; uncontrolled marker loss/replacement is outside the sealed guarantee.",
+    "The exact stable-dictionary optimization proof and34 row controls remain valid, but toy lookup timings do not establish actual-source throughput or completion within two hours. No old complete derivative exists for direct content equivalence.",
+    "Missing per-variant INFO/N, assumed effective N185146.70377332723, clinical/overlap/ascertainment questions and human source decisions remain unresolved. Computational success cannot admit source validity, independent replication, liability/population h2 or biological-null claims."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "prospective_reviewer_recommendation_not_execution_protocol_v4.1",
+  "declared_utc": "2026-10-09T18:35:33.615025+00:00",
+  "status": "RECOMMENDATION_ONLY_NOT_EXECUTED_OR_HUMAN_APPROVED",
+  "new_native_core_outcomes_inspected": false,
+  "new_sensitivity_outcomes_inspected": false,
+  "historical_outcomes_known": true,
+  "baseline_campaign": "Parent reports resource guard independently cleared and original core campaign launched; reviewer has not inspected new estimates.",
+  "members": 60,
+  "lipid_members": 36,
+  "binary_rg_members": 24,
+  "binary_h2_traits": [
+    "ms",
+    "melanoma"
+  ],
+  "pinned_code_input": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/sumstats.py",
+    "bytes": 23660,
+    "sha256": "56d1fc8b76b26ff0f93257610c5c2f20298f261747ae6d1ca07e139b0fd4936e"
+  },
+  "pinned_regression_input": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/ldsc-code/ldscore/regressions.py",
+    "bytes": 29677,
+    "sha256": "676625e556d94dae08c8b31c9426e84ee74acd6d8689f87f76d898a551ed010e"
+  },
+  "inputs": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/qc_arithmetic_receipt_v4.json",
+      "bytes": 112120,
+      "sha256": "b636acd2983b42e88c5200d6631979d3138d1cafb7087ff19b6a669705d8a426"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/liability_input_sensitivity_v4.tsv",
+      "bytes": 2473,
+      "sha256": "1def34f04908337e533772a844d2d79d246866ff4174707886f10870be11b6cd"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/native_input_hash_checks.tsv",
+      "bytes": 86442,
+      "sha256": "7ce784dc1453f31b143eaae0b65bd64da5803201cf7f74080d2610380d8172b6"
+    }
+  ],
+  "member_manifest": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/recommended_sensitivity_members_v4.tsv",
+    "bytes": 42641,
+    "sha256": "61c8e7849cac46fcada2be02f0c5d6aebaa954ad45c58a5a5b0388bd1a8d3a5d"
+  },
+  "parameter_only_h2_identity_tolerance": {
+    "relative": 1e-12,
+    "absolute": 1e-12,
+    "purpose": "post-fit presentation/instrumentation identity, not scientific QC admission"
+  },
+  "new_total_N_or_two_step_fit_equivalence_tolerance": "NONE: report actual differences; do not presuppose native equivalence or scientific validity",
+  "jobs_not_authorized_by_this_recommendation": true,
+  "original_protocols_and_estimator_unchanged": true,
+  "resource_guard_unchanged": {
+    "internal_free_GiB": 3,
+    "output_free_GiB": 5,
+    "worker": 1
+  },
+  "limitations": [
+    "Retrospective sensitivity motivated by known historical anomalies; not a confirmatory new biological hypothesis.",
+    "No inference on differences without compatible covariance and block boundaries.",
+    "Passing a sensitivity intercept does not override historical QC or source/LD/prevalence gates."
+  ],
+  "recommendation_document": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/recommended_estimator_sensitivities_v4.md",
+    "bytes": 7948,
+    "sha256": "cb99a36f44db62739f0443c6b0053536a97a8d45d568304e953f2e26a906f1e3"
+  },
+  "balanced_P_presentation_requires_additional_fit": false,
+  "sensitivity_command_counts_if_single_pair_execution": {
+    "lipid_explicit_two_step": 36,
+    "binary_total_N_h2": 2,
+    "binary_total_N_rg": 24,
+    "total_additional_fits": 62,
+    "baseline_reused": true
+  }
+}

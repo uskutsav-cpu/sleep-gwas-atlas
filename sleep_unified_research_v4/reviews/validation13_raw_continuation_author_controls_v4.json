@@ -1,0 +1,174 @@
+{
+  "schema": "validation13_raw_v4_author_focused_delta_controls",
+  "control_count": 18,
+  "assertion_count": 83,
+  "controls": [
+    {
+      "case": "meter_healthy",
+      "status": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case": "meter_removal",
+      "status": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case": "meter_permission",
+      "status": "EXPECTED_REJECTION",
+      "error": "PermissionError: [Errno 13] INVENTED_PERMISSION"
+    },
+    {
+      "case": "meter_EIO",
+      "status": "EXPECTED_REJECTION",
+      "error": "OSError: [Errno 5] INVENTED_IO"
+    },
+    {
+      "case": "meter_cap",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: 300GIB_GLOBAL_NEW_CAMPAIGN_NAMESPACE_LIMIT"
+    },
+    {
+      "case": "meter_symlink",
+      "status": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case": "range_healthy206",
+      "status": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case": "range_wrong200",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_STOP_PRESERVED: AssertionError: "
+    },
+    {
+      "case": "range_wrong_range",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_STOP_PRESERVED: RuntimeError: EXACT_PINNED_RANGE_REQUIRED"
+    },
+    {
+      "case": "range_wrong_etag",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_STOP_PRESERVED: RuntimeError: FROZEN_TRANSPORT_HEADER_CHANGED: etag"
+    },
+    {
+      "case": "range_wrong_full_sha",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_STOP_PRESERVED: AssertionError: "
+    },
+    {
+      "case": "range_wrong_prefix",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_STOP_PRESERVED: AssertionError: "
+    },
+    {
+      "case": "reuse_healthy",
+      "status": "PASS",
+      "expected": "PASS"
+    },
+    {
+      "case": "reuse_wrong_origin_plan",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: EXACT_COMPLETED_REAPED_SOURCE_PRODUCER_REQUIRED"
+    },
+    {
+      "case": "reuse_cleanup_error",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: EXACT_COMPLETED_REAPED_SOURCE_PRODUCER_REQUIRED"
+    },
+    {
+      "case": "reuse_wrong_command",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: EXACT_ORIGIN_TRANSFER_COMMAND_REQUIRED"
+    },
+    {
+      "case": "reuse_failed_status",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: EXACT_COMPLETED_REAPED_SOURCE_PRODUCER_REQUIRED"
+    },
+    {
+      "case": "reuse_failure_marker",
+      "status": "EXPECTED_REJECTION",
+      "error": "RuntimeError: SOURCE_FAILURE_VETOES_FAMILY_SUCCESS"
+    }
+  ],
+  "unchanged_helper_AST": [
+    "utc",
+    "safe_print",
+    "catchable_termination",
+    "hashes",
+    "write_new",
+    "family_lock",
+    "load_monitor",
+    "physical_mount",
+    "assert_bindings",
+    "header_fields",
+    "safe_state",
+    "cleanup_proof",
+    "retain_lock_until_gone",
+    "regular"
+  ],
+  "code_sha256": "35c9627093aed1813d6dce6c07e08e0051d5d45c91a50b1f631abf1d0936d695",
+  "fixture_file_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/preserved.partial": "36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/preserved.partial": "36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_prefix/preserved.partial": "68a55e5b1e43c67f4ef34065a86c4c583f532ae8e3cda7e36cc79b611802ac07",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/meter_cap/one": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/meter_EIO/one": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/meter_symlink/one": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/meter_healthy/one": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/preserved.partial": "36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/meter_permission/one": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/body": "d9f2b94090c4d9849e3927a37e191a0279c1d3b7b05047a5ac9e946cdc104624",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/headers": "94d493f7c16809bfd5fd886f80483a9f229c3b2630c219e3203e162fb7ed9d25",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/preserved.partial": "36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/preserved.partial": "36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "d2f126a13dfb285e3e522e73e2f86f7bdbc86b833e900d42e4bb7ead00a1e78b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/new/receipts/invented_source12.json": "d2f126a13dfb285e3e522e73e2f86f7bdbc86b833e900d42e4bb7ead00a1e78b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/new/logs/invented_source12.headers.txt": "a9458ba1b368907e73c49f02b5c94706479b4110787b8f1b392521e08b30d942",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/new/logs/invented_source12.curl.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_healthy206/new/raw/invented.gz": "d9f2b94090c4d9849e3927a37e191a0279c1d3b7b05047a5ac9e946cdc104624",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "a8615f06d8535a77a2ae85bb94f8f5d8f852697b6cc2420e98fb170a0106e053",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/new/receipts/invented_source12.json": "a8615f06d8535a77a2ae85bb94f8f5d8f852697b6cc2420e98fb170a0106e053",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/new/logs/invented_source12.headers.txt": "73e70836486ecd9029696bbf957e06d39cdc072d25e1486ff85e2354cedfe242",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/new/logs/invented_source12.curl.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong200/new/raw/invented.gz.partial": "d9f2b94090c4d9849e3927a37e191a0279c1d3b7b05047a5ac9e946cdc104624",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/wrong_command/receipt": "91888c581148dcf8f0f8fe9817c4d8f3d7fd942f76fd9a4d9890f2ec60a436a6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/wrong_command/mirror": "91888c581148dcf8f0f8fe9817c4d8f3d7fd942f76fd9a4d9890f2ec60a436a6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/healthy/receipt": "6384b7146a7539e693e8ee062eb020aa94168dbf56d8f57e26848bafb6756148",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/healthy/mirror": "6384b7146a7539e693e8ee062eb020aa94168dbf56d8f57e26848bafb6756148",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/failure_marker/receipt.failure.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/failure_marker/receipt": "6384b7146a7539e693e8ee062eb020aa94168dbf56d8f57e26848bafb6756148",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/failure_marker/mirror": "6384b7146a7539e693e8ee062eb020aa94168dbf56d8f57e26848bafb6756148",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/cleanup_error/receipt": "9223c342c5d70725f414862a5880bad92a2e29b84c02d9bdaaf4ee74c63f4cfc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/cleanup_error/mirror": "9223c342c5d70725f414862a5880bad92a2e29b84c02d9bdaaf4ee74c63f4cfc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/failed_status/receipt": "7ab531f7fd434f46cc1c2e62424c25e21fb8a2b1bec874b29d0fa54769a168d2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/failed_status/mirror": "7ab531f7fd434f46cc1c2e62424c25e21fb8a2b1bec874b29d0fa54769a168d2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/wrong_origin_plan/receipt": "0bd9246c234c26eae91d4d937386ce4d910c0b52ed110b10d06dfb0af0115bfa",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/origin/wrong_origin_plan/mirror": "0bd9246c234c26eae91d4d937386ce4d910c0b52ed110b10d06dfb0af0115bfa",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "6ce628b1bc0cae47a109714206c00e6fa26cf965a59d587606fee1b63cbd40e3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/new/receipts/invented_source12.json": "6ce628b1bc0cae47a109714206c00e6fa26cf965a59d587606fee1b63cbd40e3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/new/logs/invented_source12.headers.txt": "a77ea028d3f3b87f7f765825b6192ceff8a9edd0cafbd77d6c3f3616f94d8f17",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/new/logs/invented_source12.curl.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_etag/new/raw/invented.gz.partial": "d9f2b94090c4d9849e3927a37e191a0279c1d3b7b05047a5ac9e946cdc104624",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_prefix/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "92ddbc027b2c81f731c02eb804158a5a86ec920b52a3e4b5449afe4fc6a9afee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_prefix/new/receipts/invented_source12.json": "92ddbc027b2c81f731c02eb804158a5a86ec920b52a3e4b5449afe4fc6a9afee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "0918beb12cbaa52cb17114d27526c2ac8392a938f21c0af4797968af61796e5b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/new/receipts/invented_source12.json": "0918beb12cbaa52cb17114d27526c2ac8392a938f21c0af4797968af61796e5b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/new/logs/invented_source12.headers.txt": "a9458ba1b368907e73c49f02b5c94706479b4110787b8f1b392521e08b30d942",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/new/logs/invented_source12.curl.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_full_sha/new/raw/invented.gz.partial": "3fb238a694f0fb202eefe545921db6f0f6bda1bcde4fbb5ec8a04edaa79b2f2d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/package/source_provenance/validation_raw_acquisition_v4_4/invented_source12.json": "403da1e17286d53316d6076a005e0421a38edee467b2da4497713cdf44368501",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/new/receipts/invented_source12.json": "403da1e17286d53316d6076a005e0421a38edee467b2da4497713cdf44368501",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/new/logs/invented_source12.headers.txt": "436d7fcc3c565702b490f8fcfafcf7da365aec5200d034a868b5c640352ec8d1",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/new/logs/invented_source12.curl.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation13_raw_continuation_author_fixtures_v4/range_wrong_range/new/raw/invented.gz.partial": "d9f2b94090c4d9849e3927a37e191a0279c1d3b7b05047a5ac9e946cdc104624"
+  },
+  "no_production_body_reads": true,
+  "no_network_or_actual_workers_or_locks": true,
+  "no_old_suites_rerun": true,
+  "elapsed_seconds": 1.058881666016532,
+  "max_RSS_bytes": 32194560
+}

@@ -1,0 +1,143 @@
+{
+  "status": "TOY_DICTIONARY_MEMBERSHIP_PROBE",
+  "scientific_data_used": false,
+  "production_worker_edited": false,
+  "cases": [
+    {
+      "dictionary_keys": 10000,
+      "tokens": [],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.00025520799681544304,
+      "candidate_median_seconds": 1.2500095181167126e-06
+    },
+    {
+      "dictionary_keys": 10000,
+      "tokens": [
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.0003300420066807419,
+      "candidate_median_seconds": 1.500011421740055e-06
+    },
+    {
+      "dictionary_keys": 10000,
+      "tokens": [
+        "probe9999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.00032333299168385565,
+      "candidate_median_seconds": 1.0420044418424368e-06
+    },
+    {
+      "dictionary_keys": 10000,
+      "tokens": [
+        "probe0",
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.00040379201527684927,
+      "candidate_median_seconds": 1.374981366097927e-06
+    },
+    {
+      "dictionary_keys": 10000,
+      "tokens": [
+        "probe0",
+        "probe9999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.0004059160128235817,
+      "candidate_median_seconds": 1.0829826351255178e-06
+    },
+    {
+      "dictionary_keys": 100000,
+      "tokens": [],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.00255108397686854,
+      "candidate_median_seconds": 1.3750104699283838e-06
+    },
+    {
+      "dictionary_keys": 100000,
+      "tokens": [
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.003259874996729195,
+      "candidate_median_seconds": 3.082997864112258e-06
+    },
+    {
+      "dictionary_keys": 100000,
+      "tokens": [
+        "probe99999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.003286499995738268,
+      "candidate_median_seconds": 1.7920101527124643e-06
+    },
+    {
+      "dictionary_keys": 100000,
+      "tokens": [
+        "probe0",
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.00417729199398309,
+      "candidate_median_seconds": 3.1669915188103914e-06
+    },
+    {
+      "dictionary_keys": 100000,
+      "tokens": [
+        "probe0",
+        "probe99999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.004124541999772191,
+      "candidate_median_seconds": 2.7500209398567677e-06
+    },
+    {
+      "dictionary_keys": 500000,
+      "tokens": [],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.010664292000001296,
+      "candidate_median_seconds": 3.749999450519681e-06
+    },
+    {
+      "dictionary_keys": 500000,
+      "tokens": [
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.01310120799462311,
+      "candidate_median_seconds": 3.541994374245405e-06
+    },
+    {
+      "dictionary_keys": 500000,
+      "tokens": [
+        "probe499999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.012943250010721385,
+      "candidate_median_seconds": 3.8330035749822855e-06
+    },
+    {
+      "dictionary_keys": 500000,
+      "tokens": [
+        "probe0",
+        "absent"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.01623645899235271,
+      "candidate_median_seconds": 4.125002305954695e-06
+    },
+    {
+      "dictionary_keys": 500000,
+      "tokens": [
+        "probe0",
+        "probe499999"
+      ],
+      "exact_result_equal": true,
+      "old_median_seconds": 0.016280083014862612,
+      "candidate_median_seconds": 4.375004209578037e-06
+    }
+  ],
+  "conclusion": "set.intersection(dict) traverses the dictionary on empty/absent tokens; direct key-membership comprehension has identical set results for these controls and avoids that traversal."
+}

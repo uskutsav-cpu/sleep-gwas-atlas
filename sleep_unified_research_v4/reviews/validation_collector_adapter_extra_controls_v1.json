@@ -1,0 +1,273 @@
+{
+  "scope": "TINY_ONLY_ADAPTER_BOUNDARY",
+  "case_count": 7,
+  "check_count": 52,
+  "cases": [
+    {
+      "name": "prior_output",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: PRIOR_PRIVATE_VALIDATION_OUTPUT_PRESERVED_NO_RETRY"
+    },
+    {
+      "name": "prior_output_symlink",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: PRIOR_PRIVATE_VALIDATION_OUTPUT_PRESERVED_NO_RETRY"
+    },
+    {
+      "name": "inner_MD5_mismatch",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "ValueError: MD5 mismatch for /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_extra_fixtures_v1/inner_MD5_mismatch/body.tsv.gz: observed e9a02b92da4df98c830042705a92265c, expected 00000000000000000000000000000000"
+    },
+    {
+      "name": "missing_required_header",
+      "status": "PASS_REJECTION",
+      "error": "SystemExit: ERROR: finngen_r13_fixture_0 lacks required fields: ['sebeta']"
+    },
+    {
+      "name": "zero_survivors",
+      "status": "PASS_REJECTION",
+      "error": "SystemExit: ERROR: too few HM3 variants survived for finngen_r13_fixture_0: 0"
+    },
+    {
+      "name": "inner_EOF_before_promotion",
+      "status": "PASS",
+      "events": [
+        "verified_EOF_before_promotion"
+      ],
+      "error": null
+    },
+    {
+      "name": "receipt_after_parse_before_hash",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    }
+  ],
+  "checks": [
+    {
+      "label": "fresh_extra_fixture_namespace",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_prior_output",
+      "passed": true
+    },
+    {
+      "label": "prior_output_reject",
+      "passed": true
+    },
+    {
+      "label": "prior_output_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "prior_output_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_prior_output_symlink",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_reject",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "prior_output_symlink_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_MD5_mismatch",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_reject",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "inner_MD5_mismatch_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_missing_required_header",
+      "passed": true
+    },
+    {
+      "label": "missing_required_header_reject",
+      "passed": true
+    },
+    {
+      "label": "missing_required_header_no_promotion",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_zero_survivors",
+      "passed": true
+    },
+    {
+      "label": "zero_survivors_reject",
+      "passed": true
+    },
+    {
+      "label": "zero_survivors_output_removed",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_EOF_before_promotion",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_PASS",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_full_SHA",
+      "passed": true
+    },
+    {
+      "label": "actual_inner_EOF_precedes_promotion",
+      "passed": true
+    },
+    {
+      "label": "healthy_EOF_timing",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_receipt_after_parse_before_hash",
+      "passed": true
+    },
+    {
+      "label": "receipt_parse_before_hash_FALSE_ACCEPT",
+      "passed": true
+    },
+    {
+      "label": "consumed_original_receipt_status_not_bound",
+      "passed": true
+    },
+    {
+      "label": "sidecar_credits_changed_postparse_receipt",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py": "15253ace8479334198f2bff06f33a9a5afd690f0c47d3f0ff31a4ad9f372e4fc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd"
+  },
+  "runtime": {
+    "python": "3.11.11 | packaged by conda-forge | (main, Mar  3 2025, 20:44:07) [Clang 18.1.8 ]",
+    "executable": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-py311/bin/python3.11"
+  },
+  "all_expectations_pass": true,
+  "no_network": true,
+  "no_production_bodies": true,
+  "no_mutex": true,
+  "status": "METHOD_EOF_CONTROLS_PASS_CONSUMED_RECEIPT_IDENTITY_FALSE_ACCEPT_MEASURED"
+}

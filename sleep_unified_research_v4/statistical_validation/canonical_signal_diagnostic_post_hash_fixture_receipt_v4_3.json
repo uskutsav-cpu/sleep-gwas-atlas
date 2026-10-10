@@ -1,0 +1,70 @@
+{
+  "diagnostic_lock_cases": [
+    {
+      "diagnostic_fault": "BrokenPipeError",
+      "lock_retained_until_second_cleanup": true,
+      "formatting_fault_contained": true
+    },
+    {
+      "diagnostic_fault": "KeyboardInterrupt",
+      "lock_retained_until_second_cleanup": true,
+      "formatting_fault_contained": true
+    }
+  ],
+  "signals": {
+    "real_signals_to_fixture_process": [
+      15,
+      1,
+      2
+    ],
+    "handler_requests_deferred_without_raising": true,
+    "original_handlers_restored": true
+  },
+  "guardian": {
+    "guardian_diagnostic_interrupt_contained": true,
+    "lock_retained_while_mock_group_alive": true,
+    "counts": {
+      "kills": 2,
+      "lock_observations": 1
+    }
+  },
+  "registration_and_hash_cases": [
+    {
+      "case": "signal_at_registration",
+      "failure_receipt_written": true,
+      "failure_gate_pass": true,
+      "actual_processes_launched": 0
+    },
+    {
+      "case": "floor_after_hash",
+      "failure_receipt_written": true,
+      "failure_gate_pass": true,
+      "actual_processes_launched": 0
+    },
+    {
+      "case": "deadline_after_hash",
+      "failure_receipt_written": true,
+      "failure_gate_pass": true,
+      "actual_processes_launched": 0
+    },
+    {
+      "case": "admission_after_hash",
+      "failure_receipt_written": true,
+      "failure_gate_pass": true,
+      "actual_processes_launched": 0
+    },
+    {
+      "case": "output_after_hash",
+      "failure_receipt_written": true,
+      "failure_gate_pass": true,
+      "actual_processes_launched": 0
+    }
+  ],
+  "schema": "canonical_signal_diagnostic_post_hash_fixture_v1",
+  "recorded_utc": "2026-10-09T20:00:19.374525+00:00",
+  "fixture_sha256": "85ad328135e83f1f8f96dbd615b11278593aa0ad7ef7861c1423eb10620dcded",
+  "status": "SIGNAL_DIAGNOSTIC_AND_POST_HASH_FAULT_CONTROLS_PASS_NO_NATIVE_CALIBRATION",
+  "native_fits_launched": 0,
+  "estimator_modules_imported": false,
+  "GWAS_rows_read": false
+}

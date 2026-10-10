@@ -1,0 +1,726 @@
+{
+  "schema": "independent_canonical_v4_8_terminal_controls",
+  "status": "PASS_CORRECTED_CONSUMER_AND_HEALTHY_FULL_PRIVATE_TERMINAL",
+  "cases": [
+    {
+      "case": "healthy",
+      "expected_and_observed_success": true,
+      "controller_success": true,
+      "consumer_accepts": true,
+      "error": null,
+      "pending_retained": false,
+      "stub_calls": 17,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": [],
+      "frozen_worker_count": 17,
+      "capture_count": 16,
+      "monitor_count": 17,
+      "external_arithmetic_report_bound": true
+    },
+    {
+      "case": "healthy_companions",
+      "expected_and_observed_success": true,
+      "controller_success": true,
+      "consumer_accepts": true,
+      "error": null,
+      "pending_retained": false,
+      "stub_calls": 17,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": [],
+      "frozen_worker_count": 17,
+      "capture_count": 16,
+      "monitor_count": 17,
+      "external_arithmetic_report_bound": true
+    },
+    {
+      "case": "contradictory_cleanup_errors",
+      "expected_and_observed_success": false,
+      "controller_success": false,
+      "consumer_accepts": false,
+      "error": "RuntimeError: CANONICAL_MONITOR_RECORDED_FAILURE: cleanup_errors",
+      "pending_retained": true,
+      "stub_calls": 1,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": []
+    },
+    {
+      "case": "contradictory_run_error",
+      "expected_and_observed_success": false,
+      "controller_success": false,
+      "consumer_accepts": false,
+      "error": "RuntimeError: CANONICAL_MONITOR_RECORDED_FAILURE: run_error",
+      "pending_retained": true,
+      "stub_calls": 1,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": []
+    },
+    {
+      "case": "contradictory_teardown_error",
+      "expected_and_observed_success": false,
+      "controller_success": false,
+      "consumer_accepts": false,
+      "error": "RuntimeError: CANONICAL_MONITOR_RECORDED_FAILURE: process_group_teardown.cleanup_error",
+      "pending_retained": true,
+      "stub_calls": 1,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": []
+    },
+    {
+      "case": "contradictory_first_exception",
+      "expected_and_observed_success": false,
+      "controller_success": false,
+      "consumer_accepts": false,
+      "error": "RuntimeError: CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception",
+      "pending_retained": true,
+      "stub_calls": 1,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": []
+    },
+    {
+      "case": "contradictory_null_exception",
+      "expected_and_observed_success": false,
+      "controller_success": false,
+      "consumer_accepts": false,
+      "error": "RuntimeError: CANONICAL_MONITOR_RECORDED_FAILURE: first_teardown_attempt.exception",
+      "pending_retained": true,
+      "stub_calls": 1,
+      "actual_workers": 0,
+      "actual_mutex_acquisitions": 0,
+      "actual_fits": 0,
+      "handlers_restored": true,
+      "metadata_ownership": [
+        "metadata_ownership_begin",
+        "metadata_ownership_end"
+      ],
+      "supplemental_failed_writes": []
+    }
+  ],
+  "case_count": 7,
+  "checks": [
+    {
+      "label": "initial_frozen_source_plan",
+      "passed": true
+    },
+    {
+      "label": "fresh_private_namespace",
+      "passed": true
+    },
+    {
+      "label": "healthy:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_1",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_2",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_3",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_4",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_5",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_6",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_7",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_8",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_9",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_10",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_11",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_12",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_13",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_14",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_15",
+      "passed": true
+    },
+    {
+      "label": "healthy:owned_stub_16",
+      "passed": true
+    },
+    {
+      "label": "healthy:arithmetic_private_commit",
+      "passed": true
+    },
+    {
+      "label": "healthy:arithmetic_seal_intent",
+      "passed": true
+    },
+    {
+      "label": "healthy:pending_and_ownership_at_seal",
+      "passed": true
+    },
+    {
+      "label": "healthy:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "healthy:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "healthy:exact16plus17th_closure",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:healthy",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:healthy",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_1",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_2",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_3",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_4",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_5",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_6",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_7",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_8",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_9",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_10",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_11",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_12",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_13",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_14",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_15",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:owned_stub_16",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:arithmetic_private_commit",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:arithmetic_seal_intent",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:pending_and_ownership_at_seal",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "healthy_companions:exact16plus17th_closure",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:healthy_companions",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:healthy_companions",
+      "passed": true
+    },
+    {
+      "label": "contradictory_cleanup_errors:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "contradictory_cleanup_errors:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "contradictory_cleanup_errors:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "contradictory_cleanup_errors:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:contradictory_cleanup_errors",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:contradictory_cleanup_errors",
+      "passed": true
+    },
+    {
+      "label": "contradictory_run_error:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "contradictory_run_error:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "contradictory_run_error:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "contradictory_run_error:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:contradictory_run_error",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:contradictory_run_error",
+      "passed": true
+    },
+    {
+      "label": "contradictory_teardown_error:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "contradictory_teardown_error:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "contradictory_teardown_error:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "contradictory_teardown_error:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:contradictory_teardown_error",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:contradictory_teardown_error",
+      "passed": true
+    },
+    {
+      "label": "contradictory_first_exception:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "contradictory_first_exception:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "contradictory_first_exception:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "contradictory_first_exception:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:contradictory_first_exception",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:contradictory_first_exception",
+      "passed": true
+    },
+    {
+      "label": "contradictory_null_exception:exact_executor",
+      "passed": true
+    },
+    {
+      "label": "contradictory_null_exception:owned_stub_0",
+      "passed": true
+    },
+    {
+      "label": "contradictory_null_exception:controller_and_terminal_expected",
+      "passed": true
+    },
+    {
+      "label": "contradictory_null_exception:ownership_and_handlers_restored",
+      "passed": true
+    },
+    {
+      "label": "bounded_deadline:contradictory_null_exception",
+      "passed": true
+    },
+    {
+      "label": "bounded_RSS:contradictory_null_exception",
+      "passed": true
+    },
+    {
+      "label": "final_frozen_source_plan",
+      "passed": true
+    },
+    {
+      "label": "private32MiB_output_cap",
+      "passed": true
+    }
+  ],
+  "check_count": 86,
+  "checker_sha256": "e8fe47e73fe68b5d8f92118e8b360c6da4ba91a9edbbf8f478edaaa4677cd1b7",
+  "frozen_executor_sha256": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+  "frozen_plan_sha256": "c9ad3842526a61ab24ff8fd39222c408fb611ba2bbf26e7ef0959f1e86d8de51",
+  "elapsed_seconds": 3.5132922919874545,
+  "peak_rss_bytes": 28622848,
+  "private_regular_bytes": 1406420,
+  "fixture_regular_file_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/plan.json": "27d6982a37584a8c3306dec42d43e4fd0d08bfb1c90778ef7524fc39d1e2261f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/plan.json": "6b811a13809659cbf40359daf91940e9deb38e8a7d9a72da51c342f9ac42dbf6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/plan.json": "2b47b2dc20260395eee0e007e3a948feb5af67abde8d47da6517359794684a0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/plan.json": "bcb8a4c6f141bee5f3fb1003f30c00076ad03e9ae0e32af51b13db61af439a3d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/plan.json": "f2caacde9e0fb8e7d834a7ce82d4fac5b88e266aaede5807614ce4782fbf1c3b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/plan.json": "4ac977911e9fce7f507641f9c3b4bae2e57e15c172a467d2c5bae81f298c973f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/exact_executor_copy.py": "c90c088b5557dbcc995914eea928453ec12662f80175fa52ee3b1c23a98676d0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/plan.json": "a241b97960a63e5ea2d6aa0c270676545d46eee7735e47e9a5dbc6e4fd1fd5b9",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/admission.json": "f5ea33e9f1ca1bf723e0e2bc119d5d3c0a2a68271c300bbde9089fee1cdc0f0c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/campaign/statistical_validation/native_canonical_calibration_pending_v4_8.json": "84b0cbddaf485b3592389d3551705f559abc9684108b25bda1abc633b412909b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "64b279fedf7af04acf54a60b1937dcf36d3a152ccff5889bf683dc308b5b5ce0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "5b54d09f8184fd4b981f274001f7483f388e5279f1375b74f708b2fbe3ff05d4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_teardown_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/campaign/statistical_validation/native_canonical_calibration_pending_v4_8.json": "f1c56023eaec4c9e5a623e472767e71a9306d58017a64564c635e3d9e7a711cd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "70f4a7b95d7f47ef9be6e3234896ac2f19982bd4868c6709873bc8354c2ab691",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "7a64894fcffaf2dc4786bc7f4d1039398103f3f72c8f132e47bb2d36b7c69e71",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_first_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_terminal_seal_v4_8.json": "8781f04b10932d3a22df885b0e38f74c2ec709c0ed9178e90966ab90b0adc740",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_execution_receipt_v4_8.json": "daf7c3347b629588ca1e4324bebae929fd88164adf7d4fdaa548076ddee3c421",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_control_arithmetic.json": "0465604c9c85a0423fcde8706da7bff9ed9c4c3a285622892a6b0a7b93fb03dd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/._independent_control_arithmetic.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/native_capture_receipt.json": "7ec4df71a8dd47a8335103ca16ae9d1b1890558c498f32f22501816a5073db40",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/monitor_receipt.json": "dc7baebb8c1004ac02544a9b212f8022d5b2c478aa25d1568c7de1e02067b4f6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/native_capture_receipt.json": "34d307750572b3de7780e13f302d5e1449730afa2a1648e0c0e8a084dc5d6f1f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/monitor_receipt.json": "5a43418cbe4ed3090dc770e6f29a81cdaba84d5d1d2ce88eb7c366832ae42622",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/native_capture_receipt.json": "f3c19213fcd87d312197b999b6407a1a0510bbea7f5b71f46dfeadb928afad66",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/monitor_receipt.json": "7d656aa19ca1b72e8c082ffb960c5c3e407d59008ba79ee0718f8e91a1978fa5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/native_capture_receipt.json": "7d8930c71bb528dcbce472121c122a0536d31ae0e9eefaf9e235f0d00c307ec2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/monitor_receipt.json": "4c7ee6a3d85ce796a79777a9b092c2e4ba31e6140919e9d90a984b98988e97bc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/native_capture_receipt.json": "c47bca164c8267419a6e5e51b689bb103e088ff1a481b8e4811129088b24454a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/monitor_receipt.json": "99eef82e3c35d05eff81af1e86b30475e7245bd9f2b8471aa0bfd193835c71a8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "500ff66e46a175f11a2dc4002d04e3d3682152936b46cdd5ec8ff2475c76aa04",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "2b22e6d0734eb2cd47ac60ab5d20a2a327bc2aba55467a25cf2d4a0483f24b46",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/native_capture_receipt.json": "c7e6eefccf6da9f64bd571a01fc9a71a8d2533ee318852fe03906ee85315be5a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/monitor_receipt.json": "224a30faf5ec3576219c1bac234687bc0695ddadc47737fc71ec1301cf7e984f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/native_capture_receipt.json": "811f02b19b2aeba8060dd0644e25802df1e60c895b163072e5dab24d81dd0bd1",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/monitor_receipt.json": "e2021097affb8752ac189bb082eeccfa14502985919bee1a44a79cd3183be7a6",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/native_capture_receipt.json": "dbb4a34132ee17a85d9248ad462a59f4d97f16f55fe591692870e44e485c4429",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/monitor_receipt.json": "3b8e82ff5abbc1f653886fee67c83e4c8a29601add71eda297e57089e0adb52a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/native_capture_receipt.json": "b1bb05ce727ec88a7168d5cd31264187b9c207c4c418ee0e95ac8956797c57a2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/monitor_receipt.json": "4c64b32303571d702269974568c9e3fb05123a18ee00759042f1a036e9de7ab3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/native_capture_receipt.json": "6c582171abf89ee5af3eaa3f48b0e2041b988e4ef27241f874640ecf99ef93b3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/monitor_receipt.json": "231e6281c9af9221da02060e74c28a6ae04dad35a0fcf1882d8de8b411056252",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/arithmetic_report_intent.json": "85cfc1d2c99d98d97b822e6a71e8757e69b773f7587adb1787446841b0041d94",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/._arithmetic_pending.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/arithmetic_terminal_seal.json": "87eb3a5368198061bedab9743a23706ad365dbea6739bc10f7069fe91dd9cf21",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/monitor_receipt.json": "745795f6de75cdf764c3d97762390ccd14d30fa354f8ddb81d3bc5dadba532a3",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/native_capture_receipt.json": "41f4c65815daaa1c4c99d3ec95cd06dd673faa192988f9618d75a3c7aa5ee8de",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/monitor_receipt.json": "8b66978baa5259c0e45ad1de59b3d366d64885e6fa22f12d47773f124ecc141b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/native_capture_receipt.json": "1b196e17772a621bc483f80d235d10d7bca7e4ab80ed7a36a6bcfc8bdaf96aad",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/monitor_receipt.json": "19b9c500aa07b260e8a241e14821e07adbd1a2143fa3ee909883c63e3792fe32",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "a6d8dfa126fb6363e0a3bf7e3faa0f96b391a69668bfab0806c1e644f3fa33ee",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "dd5be182f7692c05822f6132bb0e238808af0d70660a8eed013cf1e35bfb4a90",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/native_capture_receipt.json": "cd87e0a5220fc5a72a6b1c7163817778879bfe4997e6bee645135a8aaed6ccde",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/monitor_receipt.json": "52cb86b0be8de783d2897045c5ff240209ac26e432d3209e963b4dcecebb3ad8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/._weighted_capture": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/._monitor_receipt.json": "37a833e437b1e6ca0bd72425f1ae947ce14be14bcd08ab52b4ca1a6923b6c596",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/native_capture_receipt.json": "dedae903472b26c5c473cbc549420bae9a6e44fa29e142d2743770f2d222634f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/monitor_receipt.json": "4910cf007f3621952f5bb89c91ae136ba222d53d8b8435750618df46dfa566d7",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy_companions/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/campaign/statistical_validation/native_canonical_calibration_pending_v4_8.json": "f9d88b3d59d2080d21639ef6c6e2f7556d930910c0445efe49436a2161554d78",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "f4551f413c34af1d37d02d19d5167fcf8d950d471788f8d50d31373f302acfca",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "3e11a0dc336b30c03de06c90d5b6e1123ebf993352343100d04c68a242e9913b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_run_error/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_terminal_seal_v4_8.json": "f08ff46e730f9400141b5bc398b42b468690e8fd80312489038d77d6e4f7da67",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_execution_receipt_v4_8.json": "835cd31475c5f79505b142a915071fe898741aca90733bea2b84ab5347cfb57d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_control_arithmetic.json": "0465604c9c85a0423fcde8706da7bff9ed9c4c3a285622892a6b0a7b93fb03dd",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/native_capture_receipt.json": "156af4c1e11e48b06e1f7916967b23ebf24cca8ce9a517fa5f7f9be0feb3d191",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/monitor_receipt.json": "164540a9d77343e67428af59fa58a3316d637692278f03e292c2e6967d22ffbc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/native_capture_receipt.json": "2ab0ee34c558c5a47f4868479526cbdb150ad66c7b6bff3033241bcaa4c4ac07",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/monitor_receipt.json": "ee3cdc64830c8b35890270f78a21310501845de023ba7d2d9e5df5710b0f75f8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/native_capture_receipt.json": "196abbc00fd820efa7a92862ae14576ff81685259af8193065d6801b82be7fec",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/monitor_receipt.json": "d77720657c9ef033c2ace67f38f445bfabfb1a732ca58ca43a693c31c9c35dd4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/native_capture_receipt.json": "b4eeb5e7e6705744200a2040a2bd73dafbf1ef0a7da4bc9d31a22794a876ed56",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/monitor_receipt.json": "f445f799dee89551fbb024566a3bb2b183ceb14e83523d34b3deb504defd8799",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/native_capture_receipt.json": "898f03dbd64da0bcb612424f14247d2991d493f250f5080a926b028985369edf",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/monitor_receipt.json": "7c9ec5f4e093170d44490e92fe3796f18e35c915c32f33decc2d7cacd9db8973",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "283209c503bb59f954dbe17e7962cf487be71b6795c4d0d5df6e41fcec22cbcb",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "bc456bad49ec729362926926c69c1adaeea82ce770f55587f52fc5967dc9905e",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/native_capture_receipt.json": "9e26a1dc125fb899d75448108fc57a477733578d5e165e0f85016e1c9667a222",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/monitor_receipt.json": "d3e31da2f578ec81b17a9131ecf15ac1424dbe10e6097e3eaa42fd6ae7a4844a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/native_capture_receipt.json": "772038e54e89f83b80b53d944dd78e5209b881ff2b18d8317e8f7da05862bd9a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/monitor_receipt.json": "53eaf0b3c775b50befacc29be81883c2bd9bdbebaf25ea83c28d531769930073",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/native_capture_receipt.json": "ce7d1289f49500a570275310f553a72dad74c8bce8d7753c8f11f9ee2fec1569",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/monitor_receipt.json": "db8d87bf120f58ce03e120fd8cb75662903b5d6bb958028463cbe1c318faeb8b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/native_capture_receipt.json": "b519a58038a92bbfd390bb525d7413fe10490babec675dcf16a2739ecc951a71",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/monitor_receipt.json": "2f04ef83833d1b2c6eb01320185515bc3b022ba0b704ba28e231a439e52d7f1b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/native_capture_receipt.json": "ada3600a43626b007b46457461a9ab42767e7a23e74f5a27004a5ad8af8f9a4a",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/monitor_receipt.json": "dcbbdd46944c4837d5008bb1cb374a54e1a9d7024111b9ca9847c036abc129e2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/arithmetic_report_intent.json": "d916384acda6c31f573c772a6e2ff995c3b511ceb5e72a829499e64f692c788d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/arithmetic_terminal_seal.json": "1735986cfa7f5bf8cf4489b2917ba948dea98394a96e5b511d90601ea687cb12",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/monitor_receipt.json": "cec78c9caebeeab8c407b625dd03314fc117681a1debd4686d43abd6272f531c",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/independent_arithmetic_worker/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/native_capture_receipt.json": "cb62115367f17d85777785dec2371d780ebf1d091b993082bcbd67cba572589b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/monitor_receipt.json": "13c6b9cc82c304577d5562d8919f8ab26f55de955daa610069417748885d015f",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/native_capture_receipt.json": "764f4bcbf4670cc6083a72bc0cb459d153dd5412006b28a87778676f7e451f7b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/monitor_receipt.json": "766a9c6f15d5a780a9a11ccd7c0ce17adbbcfae586850db7515a43ad25cde2d2",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "49d7c79d8006af31d2206719c16b3e426fcc7b5caa18ea9a53ffb34b04c46cf8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "4a362c368657222da56b049c8c6c0ca0cf7bed9e17fe808756f8439d0d6d8c05",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/native_capture_receipt.json": "06cd86219be75a97b56742163cd1ae93a1878dd0c4c094a6afeecf4102aae6ad",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/monitor_receipt.json": "fb327c06a8d6bdcd2cff97bcf1a4c834ed8d6e2f39ba49c088b7d00fc9c19fc1",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/native_capture_receipt.json": "5dd821d9062382e28144f963c7a63a3dbd363fb79f23e3217e588a60fca3af2b",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/monitor_receipt.json": "cb10837fb7df5f3f6cfe3cd8fdd2729718cd4eb15e9e9ce229cb2b3122cafdc9",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__canonical200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__one_step__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__two_step30__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__stock_default200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/healthy/campaign/statistical_validation/native_canonical_calibration_v4_8/FIRST_FROZEN_VALIDATION_PAIR_DUPLICATE__two_step30__canonical200__B/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/campaign/statistical_validation/native_canonical_calibration_pending_v4_8.json": "995c10ccbe8d23181181bc2e532e15201b1c5dca4a38137c8f400e42061f2212",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "7f21db71b0d0e7cbb6559e1217d8c4d13d92c72085267abbaaca2ae8460ae229",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "62c943b0468e8b638f670c033b688d7f4aae3c849ea9a5a006c98ac28d218e8d",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_cleanup_errors/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/campaign/statistical_validation/native_canonical_calibration_pending_v4_8.json": "5ef54f553263a4fe2479eaaa5c9f9dcd0581592fcfe753adf9392e40bd1bdb81",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/native_capture_receipt.json": "677006a638b476910b7c755ce27334fc8ed8f6a3f3909f282d39b0aaeaf716a8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/monitor_receipt.json": "6e43fd335ef45c4d5c33eb9de6a1a3b9768b9c4308e2955b0e6f064512af9df4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/worker_stdout.log": "2e40c941d22c57d1a0f1b226e75af4b8f59fd40ca1b1f4a5429bea454fdbcfe4",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/independent_canonical_v4_8_terminal_fixtures/contradictory_null_exception/campaign/statistical_validation/native_canonical_calibration_v4_8/CORE_INSOMNIA_BMI_DUPLICATE__one_step__stock_default200__A/weighted_capture/tiny_fixture": "c9dd5b7a9c6d6bd1c5a5db7a6d278bd8df8052220e0360f13ee500671a7ef626"
+  },
+  "fixture_symlinks": {},
+  "actual_workers": 0,
+  "actual_fits": 0,
+  "actual_mutex": 0,
+  "GWAS_or_reference_body_reads": 0,
+  "execution_admission_granted": false,
+  "qualification": "Historical190 and scientific workers are explicit stubs. All five contradictory error/null-key fixtures reject before first native metadata stub is credited; both healthy fixtures complete exact16plus1 private terminal. Actual producer stop guarantees unchanged. Private/POSIX cooperative contract, not hostile writer or abrupt-kill durability."
+}

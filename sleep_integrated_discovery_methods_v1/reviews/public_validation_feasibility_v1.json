@@ -1,0 +1,390 @@
+{
+  "schema": "public_validation_feasibility_v1",
+  "review_date": "2026-10-10",
+  "workstream": "sleep_integrated_discovery_methods_v1",
+  "reviewer_role": "independent_cohort_and_public_source_feasibility",
+  "decision": "NO_GO_CURRENT_NEW_INDEPENDENTLY_VALIDATED_SUBJECTIVE_CLINICAL_DEVICE_PRIMARY",
+  "new_confirmatory_contrasts_admitted": 0,
+  "independent_both_trait_replications_current": 0,
+  "bounded_source_rows": 13,
+  "bounded_design_rows": 7,
+  "fixed_candidate_family": {
+    "sleep_constructs": [
+      "UKB_Dashti2019_questionnaire_continuous_sleep_duration",
+      "UKB_Jones2019_ACC_SLEEP_DUR_RAW_SIN"
+    ],
+    "disease_endpoints": [
+      "FinnGen_R13_K11_REFLUX",
+      "FinnGen_R13_J10_COPD"
+    ],
+    "status": "CANDIDATE_ONLY_NOT_SCIENTIFICALLY_ADMITTED_OR_FROZEN_BY_THIS_REVIEW",
+    "target": "Delta_D=rg(Q,D)-rg(M,D) for each exact fixed D",
+    "interpretation": "Source/observed-construct contrast under explicit model assumptions; no identified measurement reliability/modality/selection cause"
+  },
+  "decisive_unmet_gates": [
+    "No inspected public source satisfies a documented and powered cohort-disjoint dense full-summary device validation contract.",
+    "Exact reflux/COPD source identifiers and historical necessary precision are documented, but exact clinical rules, INFO/per-variant N decisions, selected LD reference adequacy, joint S/V/covariance, prospective contrast precision and biological novelty are not admitted.",
+    "Current assumed-N/missing-INFO policy admits qualified diagnostics and historical replay; it does not certify new confirmatory sources.",
+    "GERA can support a possible clinical transport source after exact accession/control/build certification; h2 alone cannot supply independent device or crossed modality/selection identification."
+  ],
+  "evidence_that_would_change_decision": [
+    "Exact public release-matched source metadata and literal source/derivative QC meet an independently reviewed finite primary contract, without substitute N/INFO/release.",
+    "A biologically justified, non-P-selected narrow contrast family demonstrates novelty beyond established prior sleep measurement findings.",
+    "Joint S/V or genuinely common genomic deletions propagate all nonlinear denominator/shared-source dependence and pass the intended calibration; minimum meaningful contrast precision/power is frozen.",
+    "An independently enrolled, phenotype-compatible device GWAS with dense full public summaries, documented build/effects/N/INFO and adequate precision is established alongside independent disease source(s); all four cross-stage and within-validation intersections/relatives/prior-wave reuse are documented.",
+    "Alternatively the primary is explicitly narrowed to qualified observed-construct robustness or related clinical transport, and that limited claim meets its own scientific/power/source contract; no tri-modality independence claim follows."
+  ],
+  "resolved_updates": {
+    "Finnish_ancestry": "Official current genotype QC excludes non-Finnish ancestry; current R13 GWAS method documented. Selected external LDSC reference suitability remains separate.",
+    "GERA_public_phenotype": {
+      "primary_url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+      "document_revision": "2013-03-26",
+      "code_list": [
+        "307.41",
+        "307.42",
+        "327.0",
+        "327.00",
+        "327.01",
+        "327.02",
+        "327.09",
+        "780.52"
+      ],
+      "event_rule": "At least two diagnoses within disease category on separate days",
+      "observation_window": [
+        "1995-01-01",
+        "2013-03-15"
+      ],
+      "pdf_text_pages": [
+        1,
+        23
+      ],
+      "screenshot_status": "CACHE_MISS",
+      "remaining": "Accession-variable/executable linkage and control/one-code/observation handling; exact deposited TSV build certification; source QC, h2/contrast power."
+    },
+    "GERA_Neff_arithmetic": {
+      "cases": 3972,
+      "controls": 52665,
+      "total": 56637,
+      "assumed_constant_effective_N": 14773.761322103925,
+      "formula": "4/(1/Ncase+1/Ncontrol)",
+      "scope": "Arithmetic planning quantity, not per-variant or population N"
+    },
+    "Risteys_endpoint_fetch_limits": "Reflux exceeds4MiB tool content bound and COPD times out. Definitions remain unverified, not declared scientifically unavailable."
+  },
+  "actual_FinnGen_insomnia_diagnostic": {
+    "h2": 0.05353575912413689,
+    "h2_SE": 0.0040705198925973796,
+    "h2_Z": 13.15206915497371,
+    "intercept": 1.077872498550233,
+    "assumed_effective_N": 185146.70377332723,
+    "SNP_count": 1156359,
+    "necessary_precision_pass": true,
+    "INFO_gate_verified": false,
+    "per_variant_N_verified": false,
+    "source_admitted": false,
+    "new_rg": 0,
+    "scope": "Completed observed-scale source feasibility diagnostic only"
+  },
+  "historical_validation_audit_reused": {
+    "candidate_family": 217,
+    "available_candidates": 58,
+    "estimated": 41,
+    "threshold_positive": 23,
+    "below_threshold_concordant": 18,
+    "QC_failure": 17,
+    "no_source": 159,
+    "all_estimates_reuse_discovery_sleep": true,
+    "fully_independent_two_trait_replication": 0,
+    "evidence": "sleep_unified_research_v1/reviews/cohort_independence_v1.json/.tsv; V4 independent classification"
+  },
+  "primary_evidence_ledger": [
+    {
+      "source_id": "P_DASHTI",
+      "url": "https://www.nature.com/articles/s41467-019-08917-4",
+      "status": "PRIMARY_FULL_TEXT_CHECKED",
+      "supports": "Questionnaire continuous duration definition and UKB cohort; exact source columns anchored by local original schema."
+    },
+    {
+      "source_id": "P_JONES",
+      "url": "https://www.nature.com/articles/s41467-019-09576-1",
+      "status": "PRIMARY_FULL_TEXT_CHECKED",
+      "supports": "UKB device GWAS and selected-variant external follow-up; no dense external public release established."
+    },
+    {
+      "source_id": "P_JANSEN",
+      "url": "https://www.nature.com/articles/s41588-018-0333-3",
+      "status": "CURRENT_WEB_FETCH_FAILED_PRIOR_PRIMARY_METADATA_REUSED",
+      "supports": "UKB-only source identity/definition from preserved metadata; failed current fetch is not absence of source."
+    },
+    {
+      "source_id": "P_FG_SCHEMA",
+      "url": "https://finngen.gitbook.io/documentation/data-description",
+      "status": "PRIMARY_CURRENT_TEXT_CHECKED",
+      "supports": "GRCh38 REF/ALT, ALT effect beta/sebeta, summary schema lacks INFO/N; no numeric quality threshold inferred."
+    },
+    {
+      "source_id": "P_FG_QC",
+      "url": "https://finngen.gitbook.io/documentation/methods/genotype-imputation/genotype-data",
+      "status": "PRIOR_PRIMARY_TEXT_READ_CACHED_HASH",
+      "supports": "Non-Finnish ancestry excluded; chip genotype QC. Does not validate external LD scores."
+    },
+    {
+      "source_id": "P_FG_GWAS",
+      "url": "https://finngen.gitbook.io/documentation/methods/phewas",
+      "status": "PRIOR_CURRENT_R13_TEXT_READ_CACHED_HASH",
+      "supports": "R13 regenie version3.3,500186 total samples, covariates; not endpoint-specific per-variant N."
+    },
+    {
+      "source_id": "P_FG_IMPUTATION",
+      "url": "https://finngen.gitbook.io/documentation/methods/genotype-imputation/genotype-imputation",
+      "status": "PRIOR_PRIMARY_TEXT_READ_CACHED_HASH",
+      "supports": "SISu4.2 and distributional post-imputation checks; INFO>0.9 not certified."
+    },
+    {
+      "source_id": "P_FG_RIGHTS",
+      "url": "https://finngen.gitbook.io/documentation/data-download",
+      "status": "PRIMARY_CURRENT_TEXT_CHECKED",
+      "supports": "Public research summary access/acknowledgement; no form submitted; no raw redistribution certificate inferred."
+    },
+    {
+      "source_id": "P_FG_REFLUX",
+      "url": "https://r13.risteys.finngen.fi/endpoints/K11_REFLUX",
+      "status": "TOOL_FETCH_LIMIT_CONTENT_EXCEEDS_4MiB",
+      "supports": "Exact endpoint rules remain unverified; no claim documentation/science is unavailable."
+    },
+    {
+      "source_id": "P_FG_COPD",
+      "url": "https://r13.risteys.finngen.fi/endpoints/J10_COPD",
+      "status": "TOOL_FETCH_TIMEOUT",
+      "supports": "Exact endpoint rules remain unverified; no claim documentation/science is unavailable."
+    },
+    {
+      "source_id": "P_FG_INSOMNIA",
+      "url": "https://r13.risteys.finngen.fi/endpoints/F5_INSOMNIA",
+      "status": "PRIOR_PRIMARY_EXCERPT_AND_RECEIPT_REUSED_CURRENT_FETCH_TIMEOUT",
+      "supports": "Exact codes/control endpoint in preserved clinical protocol; current h2 uses actual completion receipt."
+    },
+    {
+      "source_id": "P_MVP_GIA",
+      "url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/document.cgi?phd=8759&study_id=phs002453.v1.p1",
+      "status": "PRIMARY_CURRENT_TEXT_CHECKED",
+      "supports": "GIA clinical insomnia EUR78566/329572; HARE stratum differs; source-specific accession contract still needed."
+    },
+    {
+      "source_id": "P_GERA_PAPER",
+      "url": "https://www.nature.com/articles/s41467-021-21952-4",
+      "status": "PRIMARY_CURRENT_TEXT_CHECKED",
+      "supports": "European postQC56637, additive logistic testing, INFO>=.7, public summary availability; no exact raw TSV build certification."
+    },
+    {
+      "source_id": "P_GERA_PHENOTYPE",
+      "url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+      "status": "PRIMARY_LINKED_PDF_TEXT_CHECKED_PAGES1_AND23_SCREENSHOT_CACHE_MISS",
+      "supports": "INSOMNIA ICD9 code list; >=2 separate-day diagnoses;1995-01-01 to2013-03-15 window. Exact accession/control executable linkage unverified."
+    },
+    {
+      "source_id": "P_GERA_YAML",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv-meta.yaml",
+      "status": "PRIOR_LITERAL_PRIMARY_YAML_HASH_AND_HEADER_REUSED_CURRENT_WEB_FETCH_FAILED",
+      "supports": "FilenameGRCh37 but empty genome_assembly; unharmonised; no silently certified build."
+    },
+    {
+      "source_id": "P_PORTAS",
+      "url": "https://www.nature.com/articles/s41467-026-71252-y",
+      "status": "PRIMARY_INDEXED_TEXT_AND_PRIOR_SCREEN_REUSED_FULL_FETCH_FAILED",
+      "supports": "UKB source N80013, device/model sleep traits/public accessions; not independent cohort."
+    },
+    {
+      "source_id": "P_MVP_DURATION",
+      "url": "https://www.medrxiv.org/content/10.1101/2025.05.19.25327902v1",
+      "status": "PRIMARY_PREPRINT_TEXT_CHECKED",
+      "supports": "MVP subjective quantitative duration; reasonable request after peer review; no verified public MVP-only release."
+    },
+    {
+      "source_id": "P_YALE",
+      "url": "https://medicine.yale.edu/lab/gelernter/stats/",
+      "status": "PRIMARY_AUTHOR_PAGE_CHECKED",
+      "supports": "Accessible EUR short/long pooled UKB+MVP files; not MVP-only; no body acquired."
+    },
+    {
+      "source_id": "P_LDSC",
+      "url": "https://www.nature.com/articles/ng.3406",
+      "status": "PRIOR_PRIMARY_DERIVATION_REUSED",
+      "supports": "Overlap modeling under assumptions; intercept is not person overlap or covariance between two estimated correlations."
+    },
+    {
+      "source_id": "P_GENOMICSEM",
+      "url": "https://www.nature.com/articles/s41562-019-0566-x",
+      "status": "SEPARATE_PRIMARY_METHOD_REVIEW_REUSED",
+      "supports": "Established joint S/V approach; no new-method claim or automatic covariance admission."
+    }
+  ],
+  "operations": {
+    "GWAS_bodies_downloaded": 0,
+    "new_h2": 0,
+    "new_rg": 0,
+    "new_fits": 0,
+    "new_simulations": 0,
+    "heavy_compute": 0,
+    "contacts": 0,
+    "restricted_access_requests": 0,
+    "forms_submitted": 0,
+    "subagents_spawned": 0,
+    "V4_files_written": 0,
+    "SSD_files_written": 0,
+    "manuscripts_written": 0
+  },
+  "reporting_boundaries": {
+    "public_access_not_source_admission": true,
+    "cohort_names_not_individual_disjointness": true,
+    "precision_diagnostic_not_confirmatory_gate": true,
+    "clinical_transport_not_device_validation": true,
+    "tool_failure_not_worldwide_absence": true,
+    "raw_redistribution_not_certified": true
+  },
+  "qa_pending": false,
+  "local_input_identity_snapshot": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_source_queue.tsv",
+      "bytes": 289319,
+      "sha256": "222d2169fe6d05ef44096b1267d1962fb34de80130d7e934f509a0ba8e488749"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/gwas_schemas.tsv",
+      "bytes": 25377,
+      "sha256": "df2e56799a8cb07be849c96940d553710210725563e29e63baf62cc5a59dd51c"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/provenance_v1_source_admissibility.tsv",
+      "bytes": 13484,
+      "sha256": "f581b0d97bc30c615ecd15c52be43c73ea940468fdf5192e09454d16100fc55d"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/provenance_v1_core_sleep_metadata.tsv",
+      "bytes": 7894,
+      "sha256": "4ba2a7dafcb0dac378a47161185fcb2ed78660cfc1b5f0f65e83475dc4797955"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/provenance_v1_header_evidence.json",
+      "bytes": 3693,
+      "sha256": "ec8dbe6a946b8cb451933773fc94b7bbe1b0a33f03b022071e6089b6d4cf5337"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/provenance_v1_mvp_insomnia_source_contract.json",
+      "bytes": 1557,
+      "sha256": "2b83011eae4db96a3346ab42178493e8fe5f422b25dd536a8076f7db358a3d34"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.json",
+      "bytes": 11818,
+      "sha256": "aa023d7ec821f40cf3c2c35c5a6ac90f23564dd61fd0fe5d4b7c507f30aebe4b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.tsv",
+      "bytes": 250644,
+      "sha256": "bf962443ce3465170017087293c541e510a253c537cb6ee431d294ebd99b2478"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_FINNGEN_INSOMNIA_FEASIBILITY_PROTOCOL_v1.md",
+      "bytes": 4774,
+      "sha256": "a72baf0d79e5f4ab691e72e821e35c662e5352edf36e21105b713b6cac810e56"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/FROZEN_FINNGEN_PREPROCESSING_DETAIL_v1.md",
+      "bytes": 3665,
+      "sha256": "351339b26113ad6c22021f68a1ed0896339c5f23b9a0418b966581fb6fa85a52"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/core_native_full_precision_h2_v4.tsv",
+      "bytes": 55795,
+      "sha256": "ae0e316419410c705fbec99bb9c7aa1d69de8ef4433d6a9b5e605fea63a98492"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/validation_native_full_precision_h2_v4.tsv",
+      "bytes": 19621,
+      "sha256": "1cc17c98d80c2903724949fa59d026b28b5ac168e6c64a9a59a2c51a692cc425"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_human_source_questions_v4.tsv",
+      "bytes": 4153,
+      "sha256": "d2f1cf135ea8891cd413ef6b5196ff77c0ca5a358cba13b27f1795f31908e983"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_objective_source_screen_v4.tsv",
+      "bytes": 4820,
+      "sha256": "de41f4d0bba79d696569726d7d92c09a42a2cae23b7c9fb023521a422a8b25e9"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_finngen_MVP_admissibility_v4.tsv",
+      "bytes": 11450,
+      "sha256": "7f144770511594aea20e90701cca092706fa8d9581b3cb93f8e4ef6ba66232ed"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_GWAS_methods_primary_metadata_v4.txt",
+      "bytes": 1296,
+      "sha256": "aff49892575782af4b5e3a0e79caa7a7444a6b8def7f3f9ce1979c069c31f5f9"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_genotype_QC_primary_metadata_v4.txt",
+      "bytes": 1511,
+      "sha256": "0d9c62a32fe704df63dc5c946395db9e9e0bca449d013011f060d37e276edb73"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_imputation_QC_primary_metadata_v4.txt",
+      "bytes": 1578,
+      "sha256": "bce04c3a92cf04086c0f40778b31710a485e7d48c5ca7e45532ad8de6596f0cc"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/finngen_h2_actual_independent_scientific_review_root_consumed_v1.json",
+      "bytes": 1628,
+      "sha256": "64c9314c83bb647e5fba5fb2a7821bfbe172a5f1569f5ae5e57bb818eb23e3ab"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/logs/validation_raw13_v4_actual_recovery_root_receipt_v1.json",
+      "bytes": 5538,
+      "sha256": "ccb35a49b97caac1071d138c9751cfbdfb18a4b23940dbba1edab06a789b996f"
+    }
+  ],
+  "authority_input_identity": [
+    {
+      "path": "/Users/swethasunilkumar/.codex/attachments/47a50b7d-1a5b-48be-83df-5fc37a829f07/pasted-text-1.txt",
+      "bytes": 17401,
+      "sha256": "8732ce11abeaf80c2ebf1253422be79d4a618a61ba98c9af701172860e51bb6f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/.codex/attachments/d655dde0-66ae-4a50-8aa2-39d8f59d941a/Pasted text.txt",
+      "bytes": 12774,
+      "sha256": "8d0404b7be05e92e8278825e0a671aa2ec4ba8ff29ea9642b21c951faaf0883c"
+    }
+  ],
+  "output_identity": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_integrated_discovery_methods_v1/reviews/public_validation_feasibility_v1.md",
+      "bytes": 16279,
+      "sha256": "a5c39084915973ba1254316f3be55f152706c45e2d906da5504ed5cb60fe61ae"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_integrated_discovery_methods_v1/reviews/public_validation_source_matrix_v1.tsv",
+      "bytes": 15351,
+      "sha256": "5495492f74081b155e73f3c39cdc6fec1f5eb6b449cc1a8e5aef462f8987f68b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_integrated_discovery_methods_v1/reviews/public_validation_design_matrix_v1.tsv",
+      "bytes": 7048,
+      "sha256": "516c3108d63e810fc212463c8c3687c7c7fbdfcd41add9305abcc1e5050c8879"
+    }
+  ],
+  "recorded_utc": "2026-10-10T05:28:40.893227+00:00",
+  "qa": {
+    "status": "PASS",
+    "unique_source_rows": 13,
+    "unique_design_rows": 7,
+    "all_new_source_admissions_false": true,
+    "exact_R13_counts_MD5_match_original_queue": true,
+    "actual_FG_h2_numbers_match_completion_receipt": true,
+    "GERA_effective_N_arithmetic_verified": true,
+    "primary_evidence_links_present": true,
+    "input_identity_scope": "Snapshot of cited local evidence only; no fresh hashing of SSD bodies or assertion about all concurrent V4 files.",
+    "writer_scope": "Only four public_validation_* review files in new workstream."
+  }
+}

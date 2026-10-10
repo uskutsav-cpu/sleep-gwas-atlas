@@ -1,0 +1,119 @@
+{
+  "schema": "independent_actual_finngen_h2_scientific_result_review_v4_3_9",
+  "verdict": "QUALIFIED_ACTUAL_FEASIBILITY_RESULT_PASS",
+  "material_numerical_errors": [],
+  "actual_plan_sha256": "8167144ca070f30738d8671ce951d71078ae001926ba6c5abd89d3aaaa2a54a1",
+  "actual_report_sha256": "6b5a10a4401b52075d38574a20e9ba6919d7b89ddaa0335f789c44a0840604a5",
+  "arithmetic_receipt_sha256": "5897cabf7e7047e6ecc85a548ad671a60f82f42d6e3043ad4e0997daac2f5113",
+  "diagnostic": {
+    "trait": "finngen_R13_F5_INSOMNIA",
+    "source": "R13_generation_1777989563097164",
+    "scale": "OBSERVED_ONLY_WITH_ASSUMED_CONSTANT_EFFECTIVE_N",
+    "h2": 0.05353575912413689,
+    "h2_SE": 0.0040705198925973796,
+    "h2_Z": 13.15206915497371,
+    "h2_CI_lower": 0.04555768673629218,
+    "h2_CI_upper": 0.0615138315119816,
+    "intercept": 1.077872498550233,
+    "intercept_SE": 0.009015015588198625,
+    "lambda_GC": 1.2387232869346392,
+    "mean_chi_square": 1.2705273128003078,
+    "native_SNP_count": 1156359,
+    "assumed_effective_N": 185146.70377332723,
+    "necessary_h2_Z_ge4": true,
+    "necessary_intercept_le1_2": true,
+    "source_INFO_gate_verified": false,
+    "per_variant_N_verified": false,
+    "scientific_source_admitted": false,
+    "fully_independent_two_trait_replication": false,
+    "new_rg_estimates": 0,
+    "diagnostic_scope": "Source feasibility only; threshold conditions do not resolve INFO/N, ascertainment, overlap, clinical construct or power."
+  },
+  "report_consumption": {
+    "report_pair_sha256": {
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.json": "6b5a10a4401b52075d38574a20e9ba6919d7b89ddaa0335f789c44a0840604a5",
+      "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/finngen_observed_h2_actual_diagnostic_v4_3_9.tsv": "4bd60cc5d25e9fd1edf0b16f37b5c5d72bfdfe27184f43bb7bade986bd15a031"
+    },
+    "report_terminal_seal_sha256": "26075415f3c240f2f99eb71fb0a73f0b6812b364793e97c76bc291c42e353647",
+    "native_terminal_seal_sha256": "af042b3fd312ed66476dab972b17cda4a6c6c515290ed064cba6108b73debd8c"
+  },
+  "checks": {
+    "native_fit_executed": true,
+    "native_rerun_by_reviewer": false,
+    "current_native_and_prior_and_report_terminals_verified": true,
+    "exact_one_job_command_and_worker_oracle": true,
+    "stock_total_delete_rows": 200,
+    "stock_partition_delete_rows": 200,
+    "captured_intercept_delete_rows": 200,
+    "independent_decimal_centered_SE_checks": {
+      "tot_se": {
+        "native": 0.0040705198925973796,
+        "independent_decimal_SE": 0.0040705198925973865,
+        "independent_decimal_variance": 1.6569132196031042e-05,
+        "difference": 6.938893903907228e-18,
+        "fixed_tolerance_pass": true
+      },
+      "intercept_se": {
+        "native": 0.009015015588198625,
+        "independent_decimal_SE": 0.00901501558819857,
+        "independent_decimal_variance": 8.127050605546319e-05,
+        "difference": -5.551115123125783e-17,
+        "fixed_tolerance_pass": true
+      }
+    },
+    "independent_stock_vector_checks": {
+      "tot_delete_values": {
+        "rows": 200,
+        "maximum_absolute_difference": 0.0,
+        "stock_sha256": "dba9ae6c83be3c57124cfb6117816c43d5a054172b140a1ea708aceae06dd5ef",
+        "fixed_tolerance_pass": true
+      },
+      "part_delete_values": {
+        "rows": 200,
+        "maximum_absolute_difference": 0.0,
+        "stock_sha256": "2a961e21d0f154943f385687c9a2a030dbad6a80345f9d0a49c86a51c8c095e1",
+        "fixed_tolerance_pass": true
+      }
+    },
+    "scalar_JSON_TSV_log_concordance": true
+  },
+  "capture_optional_n_snp": null,
+  "native_SNP_count_source": "Actual ordered final intersection and stock log.",
+  "effective_two_step": 30,
+  "intercept_step_included_SNPs": 1156315,
+  "intercept_step_excluded_SNPs": 44,
+  "final_Z_filter_removed": 0,
+  "final_SNP_count": 1156359,
+  "ratio": 0.28785447851513357,
+  "ratio_SE": 0.03332386476944433,
+  "necessity_gate_result": {
+    "h2_Z_ge4": true,
+    "intercept_le1_2": true
+  },
+  "admitted_claim": "Executed source-feasibility estimate is numerically reproduced and passes the necessary precision/intercept conditions under the frozen assumed-N/LD model.",
+  "blocked_claims": [
+    "Verified per-variant INFO/N or scientific source eligibility.",
+    "Population/liability heritability or clinical phenotype equivalence.",
+    "Zero confounding/LD mismatch/ascertainment bias.",
+    "Pairwise genetic-correlation power or results.",
+    "No individual cohort overlap or fully independent two-trait replication.",
+    "New rg/test/correction family or alteration of historical217/41 scope.",
+    "Confirmed cross-trait covariance/heterogeneity from shared array indexes."
+  ],
+  "human_decision_required": "No further fit or source/pair admission is granted by this review; future work needs an explicit scientific source/method family decision with unresolved INFO/N, clinical, LD/ascertainment and intersection assumptions addressed.",
+  "raw_reference_body_reads": 0,
+  "derivative_decompressions": 0,
+  "old_suite_reruns": 0,
+  "reviewer_fits_network_locks_or_census": 0,
+  "current_compressed_derivative_hashes": "Mandatory unchanged60v5 report consumption only.",
+  "warnings": [],
+  "intercept_export_limitation": "No independent stock intercept-delete file; only captured native intercept vector.",
+  "method_tolerances": {
+    "relative": 1e-12,
+    "absolute": 1e-15
+  },
+  "source_admission": false,
+  "independent_replication": false,
+  "population_h2_certification": false,
+  "manuscript_or_protocol_changes": false
+}

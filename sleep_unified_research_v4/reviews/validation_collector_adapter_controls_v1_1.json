@@ -1,0 +1,744 @@
+{
+  "scope": "TINY_SYNTHETIC_ADAPTER_BOUNDARY_ONLY",
+  "runtime": {
+    "python": "3.11.11 | packaged by conda-forge | (main, Mar  3 2025, 20:44:07) [Clang 18.1.8 ]",
+    "executable": "/Users/swethasunilkumar/Documents/Codex/2026-09-19/can/work/sleep-gwas-atlas-v03/work/conda-envs/frailty-py311/bin/python3.11"
+  },
+  "source_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py": "15253ace8479334198f2bff06f33a9a5afd690f0c47d3f0ff31a4ad9f372e4fc",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py": "43d00fdf535a2e323f3cd1b9e93f49a29a1683452e67a40fed9e8916e2ffe4a5",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py": "28af3379171194ace67c2c09ffe8f3a46e83a54da1875be72a69535fbb566ac8",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py": "9ef14eda37d07b6a3442181820f8909bedd7764aae01fbcaafc966791dd5a7dd"
+  },
+  "cases": [
+    {
+      "name": "healthy_finn",
+      "kind": "original_main_method_comparison",
+      "status": "PASS",
+      "rows": 11,
+      "error": null
+    },
+    {
+      "name": "healthy_mvp",
+      "kind": "original_main_method_comparison",
+      "status": "PASS",
+      "rows": 14,
+      "error": null
+    },
+    {
+      "name": "wrong_original_SHA",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_original_MD5",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_original_size",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_ORIGINAL_VALIDATION_BODY_CHANGED"
+    },
+    {
+      "name": "wrong_dependency",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FROZEN_VALIDATION_INPUT_CHANGED: /Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_fixtures_v1_1/wrong_dependency/queue.tsv"
+    },
+    {
+      "name": "wrong_command",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FROZEN_COLLECTOR_ARGUMENTS_CHANGED"
+    },
+    {
+      "name": "wrong_route",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: EXACT_PRIVATE_ORIGINAL_QC_ROUTE_REQUIRED"
+    },
+    {
+      "name": "pending_producer",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: STAGE_TERMINAL_COMMIT_NOT_COMPLETE"
+    },
+    {
+      "name": "failed_individual",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: SOURCE_FAILURE_VETOES_REPLAY"
+    },
+    {
+      "name": "wrong_receipt_count",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: ALL_THIRTEEN_DOUBLE_RECEIPT_PATHS_REQUIRED"
+    },
+    {
+      "name": "bad_CRC",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "BadGzipFile: CRC check failed 0x44422326 != 0x44422327"
+    },
+    {
+      "name": "truncated_gzip",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "EOFError: Compressed file ended before the end-of-stream marker was reached"
+    },
+    {
+      "name": "inner_EOF_SHA_mismatch",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "RuntimeError: FULL_LOCAL_GZIP_EOF_IDENTITY_CHANGED"
+    },
+    {
+      "name": "source_after_initial_hash",
+      "kind": "negative_boundary",
+      "status": "PASS_REJECTION",
+      "error": "BadGzipFile: Not a gzipped file (b'ex')"
+    },
+    {
+      "name": "unregistered_sidecar_route",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null,
+      "outside_private_workspace_file": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/validation_collector_adapter_fixtures_v1_1/unregistered_sidecar_route/outside_workspace_adapter.json"
+    },
+    {
+      "name": "post_sidecar_new_qc",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    },
+    {
+      "name": "post_sidecar_plan",
+      "kind": "measured_gap",
+      "status": "FALSE_ACCEPT",
+      "error": null
+    },
+    {
+      "name": "duplicate_26_individual_paths",
+      "kind": "plan_schema_qualification",
+      "status": "FALSE_ACCEPT_UNIQUE_MAP_NOT_ENFORCED",
+      "error": null
+    }
+  ],
+  "checks": [
+    {
+      "label": "fresh_fixture_namespace",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_before_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_healthy_finn",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_adapter_pass",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_exact_original_ordered_literals",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_exact_original_QC_except_transport_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_actual_compressed_QC_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_harmonic_N",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_order_MHC_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_independent_all_orientation_Z",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_first_matched_rsid",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_first_surviving_duplicate",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_strict_MAF_neighbor",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_legacy_retention_truth_qualification",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_no_fake_current_HTTP",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_routed_code_keys_recorded_absolute",
+      "passed": true
+    },
+    {
+      "label": "healthy_finn_sidecar_output_binding",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_healthy_mvp",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_adapter_pass",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_exact_original_ordered_literals",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_exact_original_QC_except_transport_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_actual_compressed_QC_SHA",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_harmonic_N",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_order_MHC_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_independent_OR_CI_Z",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_strict_R2_neighbor",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_inclusive_P_boundaries",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_OR_one_zero_Z_and_first_survivor",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_legacy_retention_truth_qualification",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_no_fake_current_HTTP",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_routed_code_keys_recorded_absolute",
+      "passed": true
+    },
+    {
+      "label": "healthy_mvp_sidecar_output_binding",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_SHA",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_SHA_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_MD5",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_MD5_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_original_size",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_original_size_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_dependency",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_dependency_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_command",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_command_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_route",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_route_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_pending_producer",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_reject",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "pending_producer_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_failed_individual",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_reject",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "failed_individual_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_wrong_receipt_count",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_reject",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "wrong_receipt_count_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_bad_CRC",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_reject",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "bad_CRC_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_truncated_gzip",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_reject",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "truncated_gzip_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_inner_EOF_SHA_mismatch",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_reject",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_exact_rejection",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "inner_EOF_SHA_mismatch_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_source_after_initial_hash",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_reject",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_no_promoted_output",
+      "passed": true
+    },
+    {
+      "label": "source_after_initial_hash_no_success_sidecar",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_unregistered_sidecar_route",
+      "passed": true
+    },
+    {
+      "label": "unregistered_sidecar_ROUTE_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_post_sidecar_new_qc",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_new_qc_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_QC_stale_success_identity",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_post_sidecar_plan",
+      "passed": true
+    },
+    {
+      "label": "post_sidecar_plan_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "exactly_two_fixture_only_threshold_constants",
+      "passed": true
+    },
+    {
+      "label": "only_threshold_AST_delta",
+      "passed": true
+    },
+    {
+      "label": "synthetic_terminal_commit_duplicate_26_individual_paths",
+      "passed": true
+    },
+    {
+      "label": "duplicate_26_receipt_paths_FALSE_ACCEPT_WITNESS",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/92_replay_original_validation_collector_v1.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/streaming_io.py",
+      "passed": true
+    },
+    {
+      "label": "pinned_after_/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/scripts/terminal_commit_common_v2.py",
+      "passed": true
+    }
+  ],
+  "check_count": 150,
+  "case_count": 19,
+  "all_expectations_pass": true,
+  "fixture_threshold_amendment": "Only two in-memory/private-copy integer constants 900000 and700000 become1; production originals unchanged. All method blocks/other literals unchanged.",
+  "no_network": true,
+  "no_production_bodies": true,
+  "no_production_workers": true,
+  "no_mutex": true,
+  "no_new_estimator_fits": true,
+  "status": "REJECT_OPERATIONAL_BOUNDARY_WITH_MEASURED_FALSE_ACCEPTS_METHOD_BRANCHES_MATCH"
+}

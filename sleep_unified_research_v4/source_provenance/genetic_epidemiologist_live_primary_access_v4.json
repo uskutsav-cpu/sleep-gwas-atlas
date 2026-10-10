@@ -1,0 +1,58 @@
+{
+  "schema": "bounded_primary_source_access_v4",
+  "review_date": "2026-10-09",
+  "access_method": "web.run primary-page open and find; no GWAS body or supplement downloaded",
+  "remote_body_hashes": null,
+  "scope": "New epidemiologic design/method support only; completed project source and novelty audits were not repeated",
+  "sources": [
+    {
+      "url": "https://www.nature.com/articles/s41562-023-01579-9",
+      "title": "Participation bias in the UK Biobank distorts genetic associations and downstream analyses",
+      "type": "PRIMARY_RESEARCH",
+      "access": "Primary publisher abstract and main text returned; published 27 April 2023",
+      "supported_use": "Selective participation can change GWAS and genetic-correlation results; no quantitative bias correction for this project was inferred",
+      "project_inference": "UKB volunteer/device selection is a plausible design vulnerability, not a measured project bias"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12857194/",
+      "title": "Diversity and scale: Genetic architecture of 2068 traits in the VA Million Veteran Program",
+      "type": "PRIMARY_RESEARCH",
+      "access": "Primary archived article and demographic/method/limitation sections returned",
+      "supported_use": "Overall MVP sample is older and predominantly male, standardized EHR phenotyping limits specificity; exact candidate accession demographic distributions are not established",
+      "project_inference": "Transport differs in ascertainment/population context; no accession sex percentage or attributable heterogeneity was inferred"
+    },
+    {
+      "url": "https://github.com/GenomicSEM/GenomicSEM/wiki/2.1-Calculating-Sum-of-Effective-Sample-Size-and-Preparing-GWAS-Summary-Statistics",
+      "title": "Calculating Sum of Effective Sample Size and Preparing GWAS Summary Statistics",
+      "type": "OFFICIAL_METHOD_DOCUMENTATION",
+      "access": "Official wiki methods text returned, edited 2 September 2025",
+      "supported_use": "Single-cohort total-N/actual sample fraction versus effective-N/.5 convention; binary meta-analysis ascertainment needs cohort-specific effective-N reasoning",
+      "project_inference": "Derived pooled Neff is metadata arithmetic, not automatic validation of every per-SNP or meta-analysis N"
+    },
+    {
+      "url": "https://github.com/bulik/ldsc/wiki/FAQ",
+      "title": "LDSC FAQ",
+      "type": "OFFICIAL_METHOD_DOCUMENTATION",
+      "access": "Official FAQ genetic correlation and heritability sections returned",
+      "supported_use": "Low h2, sample size and SNP coverage can produce noisy rg; source N and scale errors can distort h2; ancestry and phenotype definition differences can affect comparisons",
+      "project_inference": "h2-Z QC is not achieved pair power; no favorable intercept constraint or method substitution was recommended"
+    },
+    {
+      "url": "https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation",
+      "title": "LDSC Heritability and Genetic Correlation",
+      "type": "OFFICIAL_METHOD_DOCUMENTATION",
+      "access": "Official wiki tutorial page returned",
+      "supported_use": "Cross-trait intercept models overlap-related covariance under method assumptions",
+      "project_inference": "This does not certify independent source membership or covariance between separately estimated genetic correlations"
+    }
+  ],
+  "retrieval_limits": [
+    {"url": "https://www.nature.com/articles/ng.3406", "status": "Publisher identity redirect inaccessible; no primary-paper full-text claim"},
+    {"url": "https://www.nature.com/articles/s41467-019-09576-1", "status": "Publisher identity redirect inaccessible; exact device definition remains sourced to existing pinned project phenotype review"},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4797329/", "status": "Recaptcha, content unavailable; not relied upon"},
+    {"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10373763/", "status": "Recaptcha, content unavailable; not relied upon"}
+  ],
+  "no_priority_or_exhaustive_search_certificate": true,
+  "no_new_biological_project_results": true,
+  "local_file_hash_is_receipt_integrity_not_remote_body_identity": true
+}

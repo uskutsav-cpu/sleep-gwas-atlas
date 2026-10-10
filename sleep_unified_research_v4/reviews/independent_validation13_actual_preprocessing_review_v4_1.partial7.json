@@ -1,0 +1,1379 @@
+{
+  "schema": "independent_validation13_actual_preprocessing_review_v4_1",
+  "recorded_utc": "2026-10-10T05:36:51.717916+00:00",
+  "status": "QUALIFIED_PARTIAL_PASS",
+  "all13_terminal_review_complete": false,
+  "plan_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/validation_pipeline_physical_reference_plan_v4_1.json",
+  "plan_sha256": "83004c6817d4231b44d6d0d73725b4f5e8350de2d90231cf46579aec4a3117e9",
+  "scope": "ORIGINAL13_RAW_FILTER_SERIALIZATION_QC_REPLAY_ONLY",
+  "frozen_member_count": 13,
+  "frozen_preprocessing_command_count": 39,
+  "reviewed_source_count": 7,
+  "reviewed_source_ids": [
+    "gwas_catalog_GCST90479148",
+    "finngen_r13_K11_REFLUX",
+    "finngen_r13_K11_DIAHER",
+    "finngen_r13_K11_OTHENTERCOL",
+    "gwas_catalog_GCST90479330",
+    "finngen_r13_J10_BRONCHNAS",
+    "finngen_r13_SMOKING_DEPEND"
+  ],
+  "reviewed_records": [
+    {
+      "index": 1,
+      "source_id": "gwas_catalog_GCST90479148",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/GCST90479148.tsv.gz",
+        "bytes": 575939664,
+        "md5": "0e9231f2bc828189805436f9aa4fd3c8",
+        "sha256": "ce3e5bcc9f30ba01fd4e1d2b6e65cd064bab88ac17943aebc4e727f92a58f906"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "ff67ddbbc2d236742487be609257700237f12061dae1e26ce7cfaf719b0a4093",
+          "ff67ddbbc2d236742487be609257700237f12061dae1e26ce7cfaf719b0a4093"
+        ],
+        "data_rows": 826029,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 826029,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 6.01833649535
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "139",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "821",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "19703221",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "invalid_or_p_ci_or_r2_le_0_9",
+          "value": "349827",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "1258",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "18525147",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "826029",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "274973.347782",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "e80466a4fdd420a67696460aa28055de38d096255e0d4b88ab29b38b2908ecd2",
+          "notes": "discovery_extension/data/replication/munged/gwas_catalog_GCST90479148.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 9,
+      "scientific_QC_row_count_excluding_output_identity": 8,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 19703221,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 139,
+        "duplicate_hm3_rsid": 821,
+        "invalid_or_p_ci_or_r2_le_0_9": 349827,
+        "maf_at_or_below_0_01_or_invalid": 1258,
+        "not_nonambiguous_hm3": 18525147
+      },
+      "terminal_rejection_count": 18877192,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 89262,
+        "controls": 299053,
+        "recomputed_Neff": 274973.3477820841,
+        "literal_12g": "274973.347782",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "07b1d16d2c9be8602048ad67940e7bc1866575581b44b81fd88d930fc0647525",
+      "new_compressed_SHA256_from_completed_validator": "e80466a4fdd420a67696460aa28055de38d096255e0d4b88ab29b38b2908ecd2",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:03:47Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.054710911106158965",
+        "h2_observed_se_full_precision": "0.003506309835863687",
+        "h2_z_full_precision": "15.603558632086026",
+        "intercept_full_precision": "1.132466986433778",
+        "original_primary_status": "PASS",
+        "original_qc_reason": "pass"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T04:58:54.286966+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 23822336,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:03:58.223755+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 223723520,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:04:20.007047+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 86245376,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148.comparison.json",
+          "bytes": 4105,
+          "sha256": "395be33b4e7968eb4ea59f046e11665aa46010c454751e4688a86187a04357b0"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148.adapter.json",
+          "bytes": 2094,
+          "sha256": "116726c06da495dff84cc73c0a7c7f21ee24996ea0cfcfa76f396eff913066a8"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148.source.json",
+          "bytes": 681,
+          "sha256": "f1244f5f5f9e459e3f2574d560f31dfc5459c75ecb16ef329b35ab653c957348"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/gwas_catalog_GCST90479148.json",
+          "bytes": 3131,
+          "sha256": "dab4df389d302c9457c610528187bcc14495cd8ffa40adbb168c9d68ec38c77d"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/gwas_catalog_GCST90479148.tsv",
+          "bytes": 724,
+          "sha256": "f1ed66844cfa230dd49150677adbe345bff70d896e456be3350de6b186a70ea3"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/gwas_catalog_GCST90479148.tsv",
+          "bytes": 724,
+          "sha256": "d0f56ade2c3a29ca22d58310071c649345e1f98fb712e1d050aeec339f68035c"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/gwas_catalog_GCST90479148.json",
+          "bytes": 2299,
+          "sha256": "236b65c7ef204125deb038f1c42f8a3709e1d9de7e1b4b3d0ce14921faf23eea"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148__source.worker.json",
+          "bytes": 4694,
+          "sha256": "b88b1185ea0682af20380f2e4e7e0fdf890ea9fd7a45683fd9d82b8f6c11e45e"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148__collector.worker.json",
+          "bytes": 31819,
+          "sha256": "eae8b6bce4134545723cc9199ec96c3a84ffa40111d6f2b00dc5a92e374be3cc"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479148__compare.worker.json",
+          "bytes": 5089,
+          "sha256": "d62091eefeee6b510eb2116fb08b20fe3da0bf8fc2fed93ffe334b248656b20e"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 2,
+      "source_id": "finngen_r13_K11_REFLUX",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_K11_REFLUX.gz",
+        "bytes": 808771849,
+        "md5": "13a70eeebc3c731fe4fa55b6b50844ff",
+        "sha256": "0ec7b883f2d2f1fadf0543422d02fe063059b1fc8985d3e3e9aad42f78c7fb63"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "13b3bde808b549af7df8fb1c38a9a98c5bddfeeff0f46cc91bbfe6c4a8057fc1",
+          "13b3bde808b549af7df8fb1c38a9a98c5bddfeeff0f46cc91bbfe6c4a8057fc1"
+        ],
+        "data_rows": 1156795,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 1156795,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 5.35188784625
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "382",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "1900",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "21326506",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "16049",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "20151380",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "1156795",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "138755.739075",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "8919f235fa5e6620a703a92c4880d93926baf453b32cb3167060b500732dae6d",
+          "notes": "discovery_extension/data/replication/munged/finngen_r13_K11_REFLUX.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 8,
+      "scientific_QC_row_count_excluding_output_identity": 7,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 21326506,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 382,
+        "duplicate_hm3_rsid": 1900,
+        "maf_at_or_below_0_01_or_invalid": 16049,
+        "not_nonambiguous_hm3": 20151380
+      },
+      "terminal_rejection_count": 20169711,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 37811,
+        "controls": 420114,
+        "recomputed_Neff": 138755.73907517607,
+        "literal_12g": "138755.739075",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "7666660f45c18b8425d91e2687a7d25604cb911cba9258d63d7965ba7ee5f7ba",
+      "new_compressed_SHA256_from_completed_validator": "8919f235fa5e6620a703a92c4880d93926baf453b32cb3167060b500732dae6d",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:09:55Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.07726360095119032",
+        "h2_observed_se_full_precision": "0.004998393006377995",
+        "h2_z_full_precision": "15.457688271530724",
+        "intercept_full_precision": "1.0684381182146878",
+        "original_primary_status": "PASS",
+        "original_qc_reason": "pass"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:04:55.602105+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 23232512,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:10:17.840118+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 283934720,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:10:48.936402+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 55738368,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX.comparison.json",
+          "bytes": 4086,
+          "sha256": "42bfccb47fcd3e1c4107bddf986d2cbc34ea17c9be741c10b77f0a40e3e20987"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX.adapter.json",
+          "bytes": 2082,
+          "sha256": "dde20cd8a657fd2b826e01cff95274f0b50919404f751f17a0136e490b808e72"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX.source.json",
+          "bytes": 684,
+          "sha256": "a6e7dc1e324dcdeb48197cfa7a801e68d16ce25e35f008dddafc0fede636c181"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_REFLUX.json",
+          "bytes": 3136,
+          "sha256": "fb9c58c49ec0d5583b6500894e71c2f8b5cf6b179b331d919f296c5b80aafc3a"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/finngen_r13_K11_REFLUX.tsv",
+          "bytes": 648,
+          "sha256": "78eeded25ae077ada737dc2720f324618a67fbdb134184b82ce30e9fb93c023a"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/finngen_r13_K11_REFLUX.tsv",
+          "bytes": 648,
+          "sha256": "f54d30f0d4669f1b4fb437709cfdad26422d63ed0f12d14b596d014980cee906"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_REFLUX.json",
+          "bytes": 2308,
+          "sha256": "f2eefc6d07feaed2778cf67c3c19802975b082294b4d8a300e7134f42002566b"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX__source.worker.json",
+          "bytes": 5441,
+          "sha256": "c76deb3646688b7619166ee63b2037d8c67e2537186d492fff1e27c02d9ed4ca"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX__collector.worker.json",
+          "bytes": 34117,
+          "sha256": "8bfa361105821f46a47f9a0cb4589db8e3e77491ae46d8baff204bd1708535a9"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_REFLUX__compare.worker.json",
+          "bytes": 5831,
+          "sha256": "ad53e447bc1ba28cac81fedcd56fc4e39a8d50d2dfd436a5f5febd1f2a3ee232"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 3,
+      "source_id": "finngen_r13_K11_DIAHER",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_K11_DIAHER.gz",
+        "bytes": 805565422,
+        "md5": "3d645fc459eada9347aad6c0f558ba18",
+        "sha256": "2b157b478a70a5c3f45b51d77f158e56edf9139bfae12f9834f5d3b12542d686"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "309efc1c2898ea1e0df48fa13b8e6f8ac2e35447e87035d4b114e1e040208025",
+          "309efc1c2898ea1e0df48fa13b8e6f8ac2e35447e87035d4b114e1e040208025"
+        ],
+        "data_rows": 1156832,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 1156832,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 12.2186023782
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "383",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "1900",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "21326252",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "16011",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "20151126",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "1156832",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "65341.5764931",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "bfca66f434e3a848fa63ff2fcf43f2077a9083aa7eddc3a4b011d93be942bf19",
+          "notes": "discovery_extension/data/replication/munged/finngen_r13_K11_DIAHER.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 8,
+      "scientific_QC_row_count_excluding_output_identity": 7,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 21326252,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 383,
+        "duplicate_hm3_rsid": 1900,
+        "maf_at_or_below_0_01_or_invalid": 16011,
+        "not_nonambiguous_hm3": 20151126
+      },
+      "terminal_rejection_count": 20169420,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 16991,
+        "controls": 423356,
+        "recomputed_Neff": 65341.57649308386,
+        "literal_12g": "65341.5764931",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "4117d98896e4818ae10fa5573ac4aca3a9ffaecd109c7d8440c84981d36553fb",
+      "new_compressed_SHA256_from_completed_validator": "bfca66f434e3a848fa63ff2fcf43f2077a9083aa7eddc3a4b011d93be942bf19",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:15:21Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.15894032506350733",
+        "h2_observed_se_full_precision": "0.013002492034539554",
+        "h2_z_full_precision": "12.223835603306004",
+        "intercept_full_precision": "1.0777911441162726",
+        "original_primary_status": "PASS",
+        "original_qc_reason": "pass"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:11:08.426266+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 21659648,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:15:40.715625+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 182304768,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:16:03.232430+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 103006208,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER.comparison.json",
+          "bytes": 4086,
+          "sha256": "1b7fa18079f4beff080eff69aa273c9d7bd9033c8e9168a0739b973d93368595"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER.adapter.json",
+          "bytes": 2082,
+          "sha256": "4b23089c5b086663d74ce99290949c1a669b149e6da895505daca003a525629c"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER.source.json",
+          "bytes": 684,
+          "sha256": "fea1b20f7fa0ca8e0a1d2a316a9d9068870a550e524c4c632e2c96838397df7a"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_DIAHER.json",
+          "bytes": 3136,
+          "sha256": "03502314f0cdc7a915525aa06f218e3bbe4e4d3c99bee8f7fab3338726e9fc25"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/finngen_r13_K11_DIAHER.tsv",
+          "bytes": 648,
+          "sha256": "c169e7b063a5a94dbb824f26202727f06e00c68817fac31a7527a94dd796d428"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/finngen_r13_K11_DIAHER.tsv",
+          "bytes": 648,
+          "sha256": "95fd2dbbdb775426290a020bbbd18df50bc303c52ee4d7b05d8d0e644019d0b7"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_DIAHER.json",
+          "bytes": 2308,
+          "sha256": "e0c2f55c4e653ee6ffaeeb761136bc08ec7faefbf267c6c91c764dbdc936afbe"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER__source.worker.json",
+          "bytes": 5056,
+          "sha256": "ec14d5edd957ec1ce2e00b9504e0adcbb2e36061d629bcc17140797292d3eedf"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER__collector.worker.json",
+          "bytes": 30322,
+          "sha256": "71781bb4aa9b294cdc6c6772e1da7f93dcc9b726ab3d9f090059f2aaf61045b5"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_DIAHER__compare.worker.json",
+          "bytes": 5457,
+          "sha256": "2b299cc32373db9ebbf1d50ce089d9c95c2656e9c8675778a700dae5eb23e9f7"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 4,
+      "source_id": "finngen_r13_K11_OTHENTERCOL",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_K11_OTHENTERCOL.gz",
+        "bytes": 804697379,
+        "md5": "2030856e91a4babd0ee7d6ebf2038a61",
+        "sha256": "e1ead816113e7e15becd42327b600e2546d2dc241bfecc85f5d83da48789e5b6"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "ee9946f7d41953c84bcc5aaaa6cac2d3a4b639b6025fa59716ec739b24701db4",
+          "ee9946f7d41953c84bcc5aaaa6cac2d3a4b639b6025fa59716ec739b24701db4"
+        ],
+        "data_rows": 1156827,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 1156827,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 5.71063584075
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "383",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "1900",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "21326919",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "16016",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "20151793",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "1156827",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "46410.9882519",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "26db0558ffbf498b2e32dc0ee5e7992d71e14d185e42e2d5f3e1e3a39793be2a",
+          "notes": "discovery_extension/data/replication/munged/finngen_r13_K11_OTHENTERCOL.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 8,
+      "scientific_QC_row_count_excluding_output_identity": 7,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 21326919,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 383,
+        "duplicate_hm3_rsid": 1900,
+        "maf_at_or_below_0_01_or_invalid": 16016,
+        "not_nonambiguous_hm3": 20151793
+      },
+      "terminal_rejection_count": 20170092,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 11893,
+        "controls": 475418,
+        "recomputed_Neff": 46410.9882518556,
+        "literal_12g": "46410.9882519",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "8f26a0f9bcff7d04c4626d50c5cd2be0f88826aae3fba886d2b2faaadcb03857",
+      "new_compressed_SHA256_from_completed_validator": "26db0558ffbf498b2e32dc0ee5e7992d71e14d185e42e2d5f3e1e3a39793be2a",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:20:50Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.07635187330664006",
+        "h2_observed_se_full_precision": "0.014727413745131908",
+        "h2_z_full_precision": "5.184336817581287",
+        "intercept_full_precision": "1.0183523363244147",
+        "original_primary_status": "PASS",
+        "original_qc_reason": "pass"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:16:24.992549+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 21020672,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:21:18.121359+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 411926528,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:22:06.068401+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 50774016,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL.comparison.json",
+          "bytes": 4136,
+          "sha256": "9d9ed5e6af4171f6cb028e630570f69c64cfab7343aab74ad0cf4e1abdc971a9"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL.adapter.json",
+          "bytes": 2102,
+          "sha256": "01f25ef347859b4e6b9b62f86cea4b52d7cd2638524466438da1a80885227d8d"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL.source.json",
+          "bytes": 694,
+          "sha256": "76d321d95764169209d90974fe4c0e17b4a5bb3d0c48a9379322ec664705d131"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_OTHENTERCOL.json",
+          "bytes": 3166,
+          "sha256": "a2174eda4549e282f108d287051a7343700501d6a1313f6defe85d456fb20832"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/finngen_r13_K11_OTHENTERCOL.tsv",
+          "bytes": 653,
+          "sha256": "96cadcf40145b80b497f21e5cb4edc71e75a35ca938a42af8ad39f5f73177633"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/finngen_r13_K11_OTHENTERCOL.tsv",
+          "bytes": 653,
+          "sha256": "1138598227c8819ff970e3511fa44c61bbfa2090c953b2fe3d96307e5a4c3762"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_K11_OTHENTERCOL.json",
+          "bytes": 2333,
+          "sha256": "657da0d485ae3509c6406799b9c8ca4b5427fc01ef33035569eac04e6537c962"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL__source.worker.json",
+          "bytes": 5092,
+          "sha256": "737ba57c04396aa511238caf43b0237c828022ad3c77533221aeedeab020ad76"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL__collector.worker.json",
+          "bytes": 30783,
+          "sha256": "ad7c310327987635a88bbd734304b5278963065f2f432d59237f6ca5726e4bf7"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_K11_OTHENTERCOL__compare.worker.json",
+          "bytes": 6618,
+          "sha256": "69957413acfff89bb5eaf120ea365273248dc91e2fb65dcfdab270636d8b7880"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 5,
+      "source_id": "gwas_catalog_GCST90479330",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/GCST90479330.tsv.gz",
+        "bytes": 612834482,
+        "md5": "1974273eb427ab582c37ebbd27be8aea",
+        "sha256": "92e6d6648fc48678371b01430116b9e111edb51531a1717f7cb5541ae2d2fe6a"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "8dd6147427cfb7de0fa59ff9ec03920ab18df3ff86cdd79eefcd9a40566dee72",
+          "8dd6147427cfb7de0fa59ff9ec03920ab18df3ff86cdd79eefcd9a40566dee72"
+        ],
+        "data_rows": 826031,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 826031,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 4.84255698668
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "139",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "819",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "19708506",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "invalid_or_p_ci_or_r2_le_0_9",
+          "value": "349824",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "1257",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "18530436",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "826031",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "2137.44946378",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "ad1d6638267ffdbc37728ef3de32e8a989ad9bde7530db3c8419135bd6009b59",
+          "notes": "discovery_extension/data/replication/munged/gwas_catalog_GCST90479330.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 9,
+      "scientific_QC_row_count_excluding_output_identity": 8,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 19708506,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 139,
+        "duplicate_hm3_rsid": 819,
+        "invalid_or_p_ci_or_r2_le_0_9": 349824,
+        "maf_at_or_below_0_01_or_invalid": 1257,
+        "not_nonambiguous_hm3": 18530436
+      },
+      "terminal_rejection_count": 18882475,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 535,
+        "controls": 448351,
+        "recomputed_Neff": 2137.449463783678,
+        "literal_12g": "2137.44946378",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "8c321ff5b3ff05a6cbe3093f61144ed32f2ffeb8723baa80cb0986966124a217",
+      "new_compressed_SHA256_from_completed_validator": "ad1d6638267ffdbc37728ef3de32e8a989ad9bde7530db3c8419135bd6009b59",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:27:15Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.14019400861615178",
+        "h2_observed_se_full_precision": "0.19848762042413426",
+        "h2_z_full_precision": "0.7063110954556312",
+        "intercept_full_precision": "0.999431679127723",
+        "original_primary_status": "FAIL",
+        "original_qc_reason": "h2_z_below_4_or_missing"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:22:38.040711+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 23298048,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:27:22.823647+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 346374144,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:27:36.397688+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 59473920,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330.comparison.json",
+          "bytes": 4105,
+          "sha256": "bb283ba5d91af38f94d1017fc59d503cf57d437b9a5f468cb35eb7b9f5f17413"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330.adapter.json",
+          "bytes": 2094,
+          "sha256": "24c32c343ae490a40fa1921365baa8896463597728300257ebbbb764ccca1fda"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330.source.json",
+          "bytes": 681,
+          "sha256": "e61a4b596aaf54120416cab903869bf7417d741f7609d3b533783167c2ad02fa"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/gwas_catalog_GCST90479330.json",
+          "bytes": 3131,
+          "sha256": "9790b0ce9349f627bdbc4cf6a084f3a084ee3374f724db5920e6f5838e38b9f7"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/gwas_catalog_GCST90479330.tsv",
+          "bytes": 724,
+          "sha256": "ad5df224e27c45fe3003146e6a0d488fab3966280b92f47461035b107dff6977"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/gwas_catalog_GCST90479330.tsv",
+          "bytes": 724,
+          "sha256": "4cb72381be882bf830e0a6170dc9303f354a67fd81719f6ba1c757f6d29dd0ab"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/gwas_catalog_GCST90479330.json",
+          "bytes": 2299,
+          "sha256": "e1d39e248e234867edee4aaeb1e6f3142b46e00e4689ab896fd8b38f10f99971"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330__source.worker.json",
+          "bytes": 4699,
+          "sha256": "e25d4a5118fef1f5b1a86ac0bc7d3c7dd7ce06189e00b2922860ee599d16b011"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330__collector.worker.json",
+          "bytes": 26977,
+          "sha256": "11e8bbf256af8d1665e7524fb76b06c6e1cd22c11f1f0e0a71c8e08cb79ca636"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/gwas_catalog_GCST90479330__compare.worker.json",
+          "bytes": 4713,
+          "sha256": "39890b5e9b0b03006fee468d1e7bdf3a61738a81970efef0d8d2c122e01f588c"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 6,
+      "source_id": "finngen_r13_J10_BRONCHNAS",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_J10_BRONCHNAS.gz",
+        "bytes": 796083307,
+        "md5": "a0ee032357777ddd3aec1c8fbee13993",
+        "sha256": "8af5c7ee3a599c93c75ef3ffefcfde810cccb1e9d12f047016f7fce0b2ea9776"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "4383ee496162e2416fb5615fe129b68fd9abc30ffbcdf71ecb1f861f10a00d75",
+          "4383ee496162e2416fb5615fe129b68fd9abc30ffbcdf71ecb1f861f10a00d75"
+        ],
+        "data_rows": 1156870,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 1156870,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 4.89775474091
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "383",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "1901",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "21325654",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "15972",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "20150528",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "1156870",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "6041.44054262",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "ea8b706f44162cf39d3ac62790782b998f8cd9d6ff82b1434e6b69c9d310d680",
+          "notes": "discovery_extension/data/replication/munged/finngen_r13_J10_BRONCHNAS.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 8,
+      "scientific_QC_row_count_excluding_output_identity": 7,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 21325654,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 383,
+        "duplicate_hm3_rsid": 1901,
+        "maf_at_or_below_0_01_or_invalid": 15972,
+        "not_nonambiguous_hm3": 20150528
+      },
+      "terminal_rejection_count": 20168784,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 1516,
+        "controls": 405986,
+        "recomputed_Neff": 6041.440542623104,
+        "literal_12g": "6041.44054262",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "074fbcd4cf9a6298be2acd94733ef0a869a238c232730a25ef168b6ad6c73314",
+      "new_compressed_SHA256_from_completed_validator": "ea8b706f44162cf39d3ac62790782b998f8cd9d6ff82b1434e6b69c9d310d680",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:29:25Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.12163570321344269",
+        "h2_observed_se_full_precision": "0.07862997115727606",
+        "h2_z_full_precision": "1.5469381639495499",
+        "intercept_full_precision": "0.993464450202774",
+        "original_primary_status": "FAIL",
+        "original_qc_reason": "h2_z_below_4_or_missing"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:27:47.723397+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 28049408,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:29:33.405831+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 504070144,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:29:47.298330+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 129761280,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS.comparison.json",
+          "bytes": 4116,
+          "sha256": "3ff657375f31b89754ecd3c684b93c0b047d8485b0485a92fa57215358bd51da"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS.adapter.json",
+          "bytes": 2094,
+          "sha256": "8f4a0e37195250428b80c621262c4ba9699375668f7869a939d10d4b5acad844"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS.source.json",
+          "bytes": 690,
+          "sha256": "45b1b3d479e3f10e2e5aff4b9ef0e95e0285d91d3dada78ecc48ad8681fee0e6"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_J10_BRONCHNAS.json",
+          "bytes": 3154,
+          "sha256": "6db14bdb24c2c509d898ec239f257c3330fe27e85c203d91dc21ce66673f1a66"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/finngen_r13_J10_BRONCHNAS.tsv",
+          "bytes": 651,
+          "sha256": "636dfe436ff07505edd2cacfc5fd6daa911d7d160175272303e602ea2841b199"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/finngen_r13_J10_BRONCHNAS.tsv",
+          "bytes": 651,
+          "sha256": "e9cf027f873faae7ffb3c10de2e30a8f4d76a46ce4bbb472c393706386f33825"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_J10_BRONCHNAS.json",
+          "bytes": 2323,
+          "sha256": "e3612fa65494d77f5b3d714db885fd2ccf97680fd7770e1ce0b3ebaf213f30b5"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS__source.worker.json",
+          "bytes": 4319,
+          "sha256": "81343656f9a0652c1d388c56a697d97d9fcb2e01eae6bb639d37d6d8b312214d"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS__collector.worker.json",
+          "bytes": 18237,
+          "sha256": "e0123f6287262f09690cb3d4308fd52455ded4ad771ad933d5d36ab743d48629"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_J10_BRONCHNAS__compare.worker.json",
+          "bytes": 4717,
+          "sha256": "9c42975d2d7b5408bd28665bb0a41f1079f103bbc0e412b72deca992de69bbc6"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    },
+    {
+      "index": 7,
+      "source_id": "finngen_r13_SMOKING_DEPEND",
+      "reviewed_result_once": true,
+      "comparison_status": "EXACT_ORIGINAL_VALIDATION_ORDERED_CONTENT_QC_REPLAY_PASS",
+      "source_body_identity_from_completed_producer": {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/finngen_R13_SMOKING_DEPEND.gz",
+        "bytes": 801721137,
+        "md5": "6c8ad4a80fec00b2d6b43f927293c75a",
+        "sha256": "6699004d19c46dd2865759cbc46e13c754d2e7872abb493790dfc34d40488bdf"
+      },
+      "source_full_CRC_EOF_documented": true,
+      "stream_comparison_from_reviewed_validator": {
+        "ordered_decompressed_SHA256": [
+          "d6789d3fedb796bb01acc4138c96f6798e14dcc236be01f11922319d344c9220",
+          "d6789d3fedb796bb01acc4138c96f6798e14dcc236be01f11922319d344c9220"
+        ],
+        "data_rows": 1156810,
+        "literal_header_SNP_allele_Z_N_order_equal": true,
+        "both_full_gzip_CRC_and_EOF_verified": true,
+        "finite_Z_N_rows": 1156810,
+        "literal_missing_Z_N_rows": 0,
+        "max_abs_Z": 6.7302802044
+      },
+      "new_QC_rows": [
+        {
+          "metric": "allele_mismatch_or_ambiguous",
+          "value": "382",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "duplicate_hm3_rsid",
+          "value": "1900",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "input_rows",
+          "value": "21327006",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "maf_at_or_below_0_01_or_invalid",
+          "value": "16034",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "not_nonambiguous_hm3",
+          "value": "20151880",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "output_rows",
+          "value": "1156810",
+          "notes": "frozen replication harmonization filter"
+        },
+        {
+          "metric": "effective_sample_size",
+          "value": "13933.2207752",
+          "notes": "4/(1/cases+1/controls)"
+        },
+        {
+          "metric": "munged_output_sha256",
+          "value": "e5c0aed84d46a5d359705c15505f325aa50cd8bec90b7d7a87b7eed8bf853b30",
+          "notes": "discovery_extension/data/replication/munged/finngen_r13_SMOKING_DEPEND.sumstats.gz"
+        }
+      ],
+      "original_QC_metric_rows": 8,
+      "scientific_QC_row_count_excluding_output_identity": 7,
+      "independently_compared_scientific_QC_values_notes_order_equal": true,
+      "input_rows": 21327006,
+      "terminal_rejection_dispositions": {
+        "allele_mismatch_or_ambiguous": 382,
+        "duplicate_hm3_rsid": 1900,
+        "maf_at_or_below_0_01_or_invalid": 16034,
+        "not_nonambiguous_hm3": 20151880
+      },
+      "terminal_rejection_count": 20170196,
+      "rejections_plus_retained_equal_input": true,
+      "assumed_N_from_cases_controls": {
+        "cases": 3508,
+        "controls": 494818,
+        "recomputed_Neff": 13933.22077515522,
+        "literal_12g": "13933.2207752",
+        "matches_frozen_literal": true,
+        "not_verified_per_variant_N": true
+      },
+      "compressed_byte_identity": false,
+      "original_compressed_SHA256": "f881f13f6ef1266e1859530d0b88e43775c86406aa83f119fd811a682af31270",
+      "new_compressed_SHA256_from_completed_validator": "e5c0aed84d46a5d359705c15505f325aa50cd8bec90b7d7a87b7eed8bf853b30",
+      "compressed_difference_cause_not_inferred": true,
+      "producer_sealed_utc": "2026-10-10T05:31:39Z",
+      "producer_and_adapter_record_local_source_transport_truthfully": true,
+      "historical_completed_native_h2_not_new_fit": {
+        "h2_observed_full_precision": "0.21610031071964525",
+        "h2_observed_se_full_precision": "0.039389855529721234",
+        "h2_z_full_precision": "5.4861920109503535",
+        "intercept_full_precision": "1.03144487018433",
+        "original_primary_status": "PASS",
+        "original_qc_reason": "pass"
+      },
+      "workers": {
+        "source": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:29:59.248652+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 26132480,
+          "owned_cleanup_verified": true
+        },
+        "collector": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:31:48.124287+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 421396480,
+          "owned_cleanup_verified": true
+        },
+        "compare": {
+          "status": "WORKER_COMPLETE_VERIFIED",
+          "returncode": 0,
+          "completed_utc": "2026-10-10T05:32:04.814468+00:00",
+          "plan_unchanged": true,
+          "peak_observed_owned_RSS_bytes": 82690048,
+          "owned_cleanup_verified": true
+        }
+      },
+      "consumed_compact_evidence_identity": [
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND.comparison.json",
+          "bytes": 4125,
+          "sha256": "2e467800c002eeefecabda8098ce1022a1d6a690511c4493ec606338b0f7c6a4"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND.adapter.json",
+          "bytes": 2098,
+          "sha256": "b4f15c2e7977ee9a9f2736d6ecd36f4b0291edbb972620ad0bc50454637a6b91"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND.source.json",
+          "bytes": 692,
+          "sha256": "93560896e8c4ddbe67f6ee0ef66f92427047838aa04666ffea7b07a5438ba094"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_SMOKING_DEPEND.json",
+          "bytes": 3160,
+          "sha256": "3e9a64b4d98f910357596c9acb5a44114d267289374da39475934b77aafacffe"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/workspace/discovery_extension/results/replication/qc/finngen_r13_SMOKING_DEPEND.tsv",
+          "bytes": 652,
+          "sha256": "477b0f3c5670a181246b617678f95163b45813a3b9d6e886eead3a710f748ffe"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/qc/finngen_r13_SMOKING_DEPEND.tsv",
+          "bytes": 652,
+          "sha256": "e8b3443ac0ebdfc000bacc4466d7539798c4701cb35737581d973555434ff353"
+        },
+        {
+          "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/provenance/replication_streaming_receipts/finngen_r13_SMOKING_DEPEND.json",
+          "bytes": 2328,
+          "sha256": "5be394e1f78d5fb81536d5eb642033377ad00fdf4904350daeabaef12cc25a0f"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND__source.worker.json",
+          "bytes": 4328,
+          "sha256": "5185d02e6f093b0481830a0a9d0f41a91daafaf2d2342a8603c2e4b9bbdbb07a"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND__collector.worker.json",
+          "bytes": 18210,
+          "sha256": "f70893c540d2049a9b65a45b86fc66986cccbffbb7721d272abd8f80b543f9d4"
+        },
+        {
+          "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_pipeline_replay_v4/receipts_v4/finngen_r13_SMOKING_DEPEND__compare.worker.json",
+          "bytes": 5101,
+          "sha256": "9fe96c8083534a2a96afd26bc8a8b4134f748511eae3cc958ed82210e3264348"
+        }
+      ],
+      "source_or_new_scientific_replication_admitted": false
+    }
+  ],
+  "aggregate_reviewed_subset": {
+    "input_rows": 146044064,
+    "terminal_rejection_dispositions": 138607870,
+    "retained_rows": 7436194,
+    "finite_Z_positive_finite_N_rows": 7436194,
+    "literal_missing_Z_N_rows": 0,
+    "all_terminal_counts_reconcile": true,
+    "ordered_native_content_equal_sources": 7,
+    "compressed_byte_identical_sources": 0,
+    "scientific_QC_values_equal_sources": 7,
+    "necessary_historical_h2_QC_PASS_sources": 5,
+    "necessary_historical_h2_QC_FAIL_sources": 2,
+    "peak_observed_owned_RSS_bytes_from_completed_worker_metadata": 504070144,
+    "completed_successful_worker_records": 21
+  },
+  "remaining_sources_unconsumed": [
+    {
+      "index": 8,
+      "source_id": "finngen_r13_J10_COPD",
+      "expected_output_rows": 1156879
+    },
+    {
+      "index": 9,
+      "source_id": "finngen_r13_M13_ARTHROSIS_KNEE",
+      "expected_output_rows": 1156824
+    },
+    {
+      "index": 10,
+      "source_id": "finngen_r13_M13_ARTHROSIS",
+      "expected_output_rows": 1156823
+    },
+    {
+      "index": 11,
+      "source_id": "finngen_r13_M13_INTERVERTEB",
+      "expected_output_rows": 1156836
+    },
+    {
+      "index": 12,
+      "source_id": "finngen_r13_K11_CHOLELITH",
+      "expected_output_rows": 1156802
+    },
+    {
+      "index": 13,
+      "source_id": "finngen_r13_N14_CALCUKIDUR",
+      "expected_output_rows": 1156822
+    }
+  ],
+  "remaining_frozen_expected_rows": 6940986,
+  "all13_frozen_expected_rows": 14377180,
+  "terminal_snapshot_from_initial_review": {
+    "PENDING_exists": true,
+    "terminal_seal_exists": false,
+    "primary_master_exists": false,
+    "no_later_poll_performed": true
+  },
+  "scientific_qualifications": [
+    "Ordered decompressed identity is not compressed archival byte identity; compression difference cause is not inferred.",
+    "FinnGen missing INFO and per-variant N remain missing; constant effective N is assigned and reproduced.",
+    "MVP r2 filtering and CI-derived Z are literally reproduced; accession-specific CI/effect/P/test semantics are not independently certified.",
+    "Historical rsID/reference-allele projection is preserved, not newly validated coordinate liftover.",
+    "Clinical ascertainment, phenotype equivalence, Finnish LD adequacy, overlap, rights and power are not cleared.",
+    "Drug-allergy history and unspecified bronchitis remain low-h2 QC failures despite successful preprocessing.",
+    "No new associations/estimator fits/independent replications; original217 classes and41 estimates unchanged."
+  ],
+  "reused_prior_review_evidence": [
+    "sleep_unified_research_v4/reviews/independent_original13_pipeline_physical_reference_prelaunch_v4_1.md",
+    "sleep_unified_research_v4/reviews/independent_original13_pipeline_physical_reference_prelaunch_v4_1.json",
+    "sleep_unified_research_v4/reviews/validation13_producer_profile_author_v1.md",
+    "sleep_unified_research_v4/reviews/validation13_producer_profile_delta_controls_receipt_v1.json"
+  ],
+  "review_method": "Read completed compact comparison/producer/QC/worker metadata; independently compare literal scientific QC rows, reconcile dispositions and N arithmetic, and check actual compact identity closure. Full stream equality/finite checks and CRC evidence are consumed from the reviewed executed comparator/collector; reviewer does not re-stream/rehash source or derivative GWAS bodies.",
+  "operations": {
+    "source_or_derivative_GWAS_body_reads": 0,
+    "source_or_derivative_GWAS_body_rehashes": 0,
+    "unchanged_library_rehashes": 0,
+    "new_fits": 0,
+    "new_controls": 0,
+    "new_preprocessing": 0,
+    "SSD_writes": 0,
+    "protected_BIO_input_writes": 0,
+    "new_associations": 0,
+    "new_independent_replications": 0
+  },
+  "continuation_rule": "Preserve these seven reviewed source records. On root follow-up append only newly completed frozen sources once; review all13 aggregate and terminal seal once at terminal. Do not poll indefinitely."
+}

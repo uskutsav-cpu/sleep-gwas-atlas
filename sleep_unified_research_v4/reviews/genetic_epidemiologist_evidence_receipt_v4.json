@@ -1,0 +1,533 @@
+{
+  "schema": "genetic_epidemiologist_review_v4.1",
+  "completed_utc": "2026-10-09T19:00:06.922251+00:00",
+  "verdict": "QUALIFIED_RESOURCE_AND_OUTCOME_SIDE_EVIDENCE_ONLY_NO_NEW_PRIMARY_OR_TWO_TRAIT_REPLICATION",
+  "inherited_historical_counts_not_reaudited": {
+    "core_family": 396,
+    "core_primary_positive": 153,
+    "core_sensitivity_positive": 8,
+    "extension_family": 1200,
+    "extension_FDR_positive": 603,
+    "validation_family": 217,
+    "validation_categories": [
+      23,
+      18,
+      17,
+      159
+    ],
+    "validation_pairs_estimated": 41,
+    "fully_independent_two_trait_replication": 0
+  },
+  "planning_only": {
+    "alpha": 0.0002304147465437788,
+    "abs_rg": 0.15,
+    "power": 0.8,
+    "zcrit": 3.6830999682216716,
+    "exact_normal_SE_ceiling": 0.03315121381191559,
+    "MDE_multiplier_80_normal_approx": 4.524721201794586,
+    "achieved_source_or_pair_power": null,
+    "clinical_meaningful_effect_certified": false
+  },
+  "inputs_before": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/analysis_panel.tsv",
+      "bytes": 24571,
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FINAL_EVIDENCE_HANDOFF.md",
+      "bytes": 6615,
+      "sha256": "1a867479b7e58b42a34605d4c664e90ec64a41ca1e1a660526bcf5bc7d47ba49"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL.md",
+      "bytes": 7711,
+      "sha256": "6e25d05b85bdc2a4baee4aa861fc33364cf86dd6768365f71b331a92a4aad05e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL_v2.md",
+      "bytes": 2911,
+      "sha256": "da0aaaa0ea1f75450371ca377b09a620528a23a4a420989286fa6f95b97a4987"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/SHARED_ESTIMATOR_COVARIANCE.md",
+      "bytes": 2479,
+      "sha256": "ec5ed9c09faf74f34ec8a4492f5480762ad4b29601914268aa6e04c4fd032c57"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.md",
+      "bytes": 22155,
+      "sha256": "5f47118f0cde6f8ade983f9e6c88e0e6e8fb9ca81e440c903a8b3784e6943e11"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.json",
+      "bytes": 11818,
+      "sha256": "aa023d7ec821f40cf3c2c35c5a6ac90f23564dd61fd0fe5d4b7c507f30aebe4b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi.full_precision.json",
+      "bytes": 3666,
+      "sha256": "a893a5638d0e650fdd99217a9ce2f1a4a72c9043dde021daf55d7e97cbe5134f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/original_core_396.tsv",
+      "bytes": 79897,
+      "sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/original_extension_1200.tsv",
+      "bytes": 428348,
+      "sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/REPLICATION_RESULTS.tsv",
+      "bytes": 275791,
+      "sha256": "2b920792e70b322b8b798a401a09ada259fdcf8a343e144b27552acb3084ae67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/FROZEN_NEW_ANALYSIS_PROTOCOL_v3.md",
+      "bytes": 3951,
+      "sha256": "22c458ead71f7a214c9ab36526784b090da84b36fd53a22be8ebdedf54c76cb0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json",
+      "bytes": 4553,
+      "sha256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_DOWNSTREAM_GATES_V3.tsv",
+      "bytes": 948,
+      "sha256": "324c466734a70a119cd17971418ec8786a2a7d71906bff9532373efddea7f10a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_RETAINED_P_CI_DIAGNOSTICS.tsv",
+      "bytes": 537,
+      "sha256": "5b45a9d54f4c180ba97132df1b1e7890d8fce3f97c8fd2e12f01369f2c54d938"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_WHOLE_SOURCE_CI_CENTERING.tsv",
+      "bytes": 237,
+      "sha256": "59f8d40a586a58936104eb720e600d4b0646b6f8f699de4a8250c708e71d4764"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_geneticist_hypothesis_assessment_v4.md",
+      "bytes": 17280,
+      "sha256": "ee77033496c12d4371fb020c0306b7987afdbefe716a3d6eeea72fae5fbc0d8d"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_geneticist_primary_admission_matrix_v4.tsv",
+      "bytes": 7630,
+      "sha256": "8a1aab4771322ca81c0434d3558044589fdc5136e288d11aaa825c0692631708"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/statistical_geneticist_critical_review_v4.md",
+      "bytes": 15984,
+      "sha256": "eb9e05a3f9927e280199b0c6f649083073f1fc71ef010a3093112b4efda81277"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/statistical_geneticist_critical_review_v4.json",
+      "bytes": 4095,
+      "sha256": "86d21e4099926284d2e44490d877e163823c7bf6e210d5a63ec7564918e5ff67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_specialist_independent_review_v4.md",
+      "bytes": 20218,
+      "sha256": "c33b25bf569a0f20795f1faf3ce88c38a8d289b8caac46d6cc8d28951ec0e0fe"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_reproducibility_audit_v4.md",
+      "bytes": 12177,
+      "sha256": "632bdcaa58244dd2e51d045a8127802e8b9533550d05fc3c56caf2bbb594f1d4"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/processed_N_coding_diagnostics_v4.tsv",
+      "bytes": 1791,
+      "sha256": "412be00c7ce13fa0a0c31181cf430b046dd6b2f62122360305a25ec46e34b18f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/liability_input_sensitivity_v4.tsv",
+      "bytes": 2473,
+      "sha256": "1def34f04908337e533772a844d2d79d246866ff4174707886f10870be11b6cd"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/statistical_claim_admission_v4.tsv",
+      "bytes": 6338,
+      "sha256": "1dc9f712750ee5fbe0362536582f9a6da33a6a7f3732ee7675b883aedb5a98a3"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_finngen_R13_manifest_selection_v4.json",
+      "bytes": 1904,
+      "sha256": "6d60b8107b54cb0713eb25ebffc0e6864782ed4cf9e15955726ccfb62468aa91"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_insomnia_primary_excerpt_v4.txt",
+      "bytes": 2662,
+      "sha256": "5f3b9a064d938a2e1aa5023b0d17295bdf451332f269fdb041d2013b7c256e75"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_sleep_exclusion_primary_excerpt_v4.txt",
+      "bytes": 2852,
+      "sha256": "8c49b83b7661e2e3fe079c7db99577aa456a7a5c714a75026e8ed2a263c60d19"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_data_schema_primary_excerpt_v4.txt",
+      "bytes": 2935,
+      "sha256": "a306b9db32decde92b1633bc62a23cf1556ebe311fd545d6f27fec995c23a846"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_GWAS_methods_primary_metadata_v4.txt",
+      "bytes": 1296,
+      "sha256": "aff49892575782af4b5e3a0e79caa7a7444a6b8def7f3f9ce1979c069c31f5f9"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_imputation_QC_primary_metadata_v4.txt",
+      "bytes": 1578,
+      "sha256": "bce04c3a92cf04086c0f40778b31710a485e7d48c5ca7e45532ad8de6596f0cc"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_finngen_R13_insomnia_HEAD_v4.json",
+      "bytes": 1023,
+      "sha256": "492171c0ff9e5bf4afe9fe8dc06991e642eb02d823df001f0a9ad79828e46b8f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479148_metadata_primary_metadata_v4.txt",
+      "bytes": 1056,
+      "sha256": "8039730cdc8647d8177a83b019a8962f333228b1d8a09181535e2ab768245f2a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479148_yaml_primary_metadata_v4.txt",
+      "bytes": 732,
+      "sha256": "b25820f7bf5597b3715a9b98963d9fc87b143002f101f03873bbde530d0e5bee"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479330_metadata_primary_metadata_v4.txt",
+      "bytes": 1087,
+      "sha256": "bac0e295f60b84f1920a47f02d2f21974831df830141a7888a4dc74eda4ad55b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479330_yaml_primary_metadata_v4.txt",
+      "bytes": 765,
+      "sha256": "b82beb54b1e43c97cf5cc044b3a8e5c71f8967d33c6b1a862e4023b6f7418c9e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_source_h2.tsv",
+      "bytes": 4043,
+      "sha256": "8ff5a14d9582acf66b9d3108a8155970fb93e241bcafa23dfecb62de09fbc591"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/genetic_epidemiologist_live_primary_access_v4.json",
+      "bytes": 4211,
+      "sha256": "80837020b3939fb2dc4f440e6fe796843a8b77741da1254e099099c73b4e7d58"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_clinician_review_v4.md",
+      "bytes": 12927,
+      "sha256": "4bf1f5d42deb68d3b9dca929f26c0447b5724a5efb7c9820a70650a5e8f5bd52"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_finngen_MVP_admissibility_v4.tsv",
+      "bytes": 11450,
+      "sha256": "7f144770511594aea20e90701cca092706fa8d9581b3cb93f8e4ef6ba66232ed"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_objective_source_screen_v4.tsv",
+      "bytes": 4820,
+      "sha256": "de41f4d0bba79d696569726d7d92c09a42a2cae23b7c9fb023521a422a8b25e9"
+    }
+  ],
+  "inputs_after": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/config/analysis_panel.tsv",
+      "bytes": 24571,
+      "sha256": "38d3d430507880e8623fc2b5dd3f4dcf963dcc346d99b14bb6c185a64e361a80"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FINAL_EVIDENCE_HANDOFF.md",
+      "bytes": 6615,
+      "sha256": "1a867479b7e58b42a34605d4c664e90ec64a41ca1e1a660526bcf5bc7d47ba49"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL.md",
+      "bytes": 7711,
+      "sha256": "6e25d05b85bdc2a4baee4aa861fc33364cf86dd6768365f71b331a92a4aad05e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/FROZEN_NEW_ANALYSIS_PROTOCOL_v2.md",
+      "bytes": 2911,
+      "sha256": "da0aaaa0ea1f75450371ca377b09a620528a23a4a420989286fa6f95b97a4987"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/SHARED_ESTIMATOR_COVARIANCE.md",
+      "bytes": 2479,
+      "sha256": "ec5ed9c09faf74f34ec8a4492f5480762ad4b29601914268aa6e04c4fd032c57"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.md",
+      "bytes": 22155,
+      "sha256": "5f47118f0cde6f8ade983f9e6c88e0e6e8fb9ca81e440c903a8b3784e6943e11"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/reviews/cohort_independence_v1.json",
+      "bytes": 11818,
+      "sha256": "aa023d7ec821f40cf3c2c35c5a6ac90f23564dd61fd0fe5d4b7c507f30aebe4b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/native/core_pilot_v1/rg_insomnia__bmi.full_precision.json",
+      "bytes": 3666,
+      "sha256": "a893a5638d0e650fdd99217a9ce2f1a4a72c9043dde021daf55d7e97cbe5134f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/original_core_396.tsv",
+      "bytes": 79897,
+      "sha256": "161756ac61775ad3393572cf5fbdf51690eb47ff010b8a50dbcc5fabf79bc077"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/tables/original_extension_1200.tsv",
+      "bytes": 428348,
+      "sha256": "5089bfff7b607f356104f90aba017ff35e1841f66056242b765f05c6e7ba1166"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v1/REPLICATION_RESULTS.tsv",
+      "bytes": 275791,
+      "sha256": "2b920792e70b322b8b798a401a09ada259fdcf8a343e144b27552acb3084ae67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/FROZEN_NEW_ANALYSIS_PROTOCOL_v3.md",
+      "bytes": 3951,
+      "sha256": "22c458ead71f7a214c9ab36526784b090da84b36fd53a22be8ebdedf54c76cb0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v2/source_definition_review/provenance_v2_definition_contract.json",
+      "bytes": 4553,
+      "sha256": "67bed6399079f7153a13530e036c2d3d7705f929d7baa22e826d2d73a91f3db1"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_DOWNSTREAM_GATES_V3.tsv",
+      "bytes": 948,
+      "sha256": "324c466734a70a119cd17971418ec8786a2a7d71906bff9532373efddea7f10a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_RETAINED_P_CI_DIAGNOSTICS.tsv",
+      "bytes": 537,
+      "sha256": "5b45a9d54f4c180ba97132df1b1e7890d8fce3f97c8fd2e12f01369f2c54d938"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v3/tables/MVP_WHOLE_SOURCE_CI_CENTERING.tsv",
+      "bytes": 237,
+      "sha256": "59f8d40a586a58936104eb720e600d4b0646b6f8f699de4a8250c708e71d4764"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_geneticist_hypothesis_assessment_v4.md",
+      "bytes": 17280,
+      "sha256": "ee77033496c12d4371fb020c0306b7987afdbefe716a3d6eeea72fae5fbc0d8d"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_geneticist_primary_admission_matrix_v4.tsv",
+      "bytes": 7630,
+      "sha256": "8a1aab4771322ca81c0434d3558044589fdc5136e288d11aaa825c0692631708"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/statistical_geneticist_critical_review_v4.md",
+      "bytes": 15984,
+      "sha256": "eb9e05a3f9927e280199b0c6f649083073f1fc71ef010a3093112b4efda81277"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/statistical_geneticist_critical_review_v4.json",
+      "bytes": 4095,
+      "sha256": "86d21e4099926284d2e44490d877e163823c7bf6e210d5a63ec7564918e5ff67"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genomicsem_specialist_independent_review_v4.md",
+      "bytes": 20218,
+      "sha256": "c33b25bf569a0f20795f1faf3ce88c38a8d289b8caac46d6cc8d28951ec0e0fe"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/independent_reproducibility_audit_v4.md",
+      "bytes": 12177,
+      "sha256": "632bdcaa58244dd2e51d045a8127802e8b9533550d05fc3c56caf2bbb594f1d4"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/processed_N_coding_diagnostics_v4.tsv",
+      "bytes": 1791,
+      "sha256": "412be00c7ce13fa0a0c31181cf430b046dd6b2f62122360305a25ec46e34b18f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/liability_input_sensitivity_v4.tsv",
+      "bytes": 2473,
+      "sha256": "1def34f04908337e533772a844d2d79d246866ff4174707886f10870be11b6cd"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/statistical_claim_admission_v4.tsv",
+      "bytes": 6338,
+      "sha256": "1dc9f712750ee5fbe0362536582f9a6da33a6a7f3732ee7675b883aedb5a98a3"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_finngen_R13_manifest_selection_v4.json",
+      "bytes": 1904,
+      "sha256": "6d60b8107b54cb0713eb25ebffc0e6864782ed4cf9e15955726ccfb62468aa91"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_insomnia_primary_excerpt_v4.txt",
+      "bytes": 2662,
+      "sha256": "5f3b9a064d938a2e1aa5023b0d17295bdf451332f269fdb041d2013b7c256e75"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_sleep_exclusion_primary_excerpt_v4.txt",
+      "bytes": 2852,
+      "sha256": "8c49b83b7661e2e3fe079c7db99577aa456a7a5c714a75026e8ed2a263c60d19"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_data_schema_primary_excerpt_v4.txt",
+      "bytes": 2935,
+      "sha256": "a306b9db32decde92b1633bc62a23cf1556ebe311fd545d6f27fec995c23a846"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_GWAS_methods_primary_metadata_v4.txt",
+      "bytes": 1296,
+      "sha256": "aff49892575782af4b5e3a0e79caa7a7444a6b8def7f3f9ce1979c069c31f5f9"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_R13_imputation_QC_primary_metadata_v4.txt",
+      "bytes": 1578,
+      "sha256": "bce04c3a92cf04086c0f40778b31710a485e7d48c5ca7e45532ad8de6596f0cc"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_finngen_R13_insomnia_HEAD_v4.json",
+      "bytes": 1023,
+      "sha256": "492171c0ff9e5bf4afe9fe8dc06991e642eb02d823df001f0a9ad79828e46b8f"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479148_metadata_primary_metadata_v4.txt",
+      "bytes": 1056,
+      "sha256": "8039730cdc8647d8177a83b019a8962f333228b1d8a09181535e2ab768245f2a"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479148_yaml_primary_metadata_v4.txt",
+      "bytes": 732,
+      "sha256": "b25820f7bf5597b3715a9b98963d9fc87b143002f101f03873bbde530d0e5bee"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479330_metadata_primary_metadata_v4.txt",
+      "bytes": 1087,
+      "sha256": "bac0e295f60b84f1920a47f02d2f21974831df830141a7888a4dc74eda4ad55b"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/sleep_clinician_GCST90479330_yaml_primary_metadata_v4.txt",
+      "bytes": 765,
+      "sha256": "b82beb54b1e43c97cf5cc044b3a8e5c71f8967d33c6b1a862e4023b6f7418c9e"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/results/replication/replication_source_h2.tsv",
+      "bytes": 4043,
+      "sha256": "8ff5a14d9582acf66b9d3108a8155970fb93e241bcafa23dfecb62de09fbc591"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/genetic_epidemiologist_live_primary_access_v4.json",
+      "bytes": 4211,
+      "sha256": "80837020b3939fb2dc4f440e6fe796843a8b77741da1254e099099c73b4e7d58"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/sleep_clinician_review_v4.md",
+      "bytes": 12927,
+      "sha256": "4bf1f5d42deb68d3b9dca929f26c0447b5724a5efb7c9820a70650a5e8f5bd52"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_finngen_MVP_admissibility_v4.tsv",
+      "bytes": 11450,
+      "sha256": "7f144770511594aea20e90701cca092706fa8d9581b3cb93f8e4ef6ba66232ed"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/tables/sleep_clinician_objective_source_screen_v4.tsv",
+      "bytes": 4820,
+      "sha256": "de41f4d0bba79d696569726d7d92c09a42a2cae23b7c9fb023521a422a8b25e9"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/statistical_validation/genetic_epidemiologist_prospective_precision_grid_v4.tsv",
+      "bytes": 1554,
+      "sha256": "ff3ba7501e3257f256a50fdf06e8adda172d97c1311412ddbbfdb252b00748c4"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/genetic_epidemiologist_metadata_N_semantics_v4.tsv",
+      "bytes": 7135,
+      "sha256": "7b6d78d351ac8667d4f54d61e8b84b89b031082c75d6ac6117548021d8c10f80"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genetic_epidemiologist_source_design_admission_v4.tsv",
+      "bytes": 2601,
+      "sha256": "66a4eff16b74444746552c681ed80af6be6a66be7c6b95baca986a392c1468f0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genetic_epidemiologist_claim_admission_matrix_v4.tsv",
+      "bytes": 4876,
+      "sha256": "9c520b48f89cc6f3e2bc720c2d4590e9a870731bc1d85e3cdcb5f8080f983747"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genetic_epidemiologist_human_questions_v4.tsv",
+      "bytes": 3571,
+      "sha256": "14f70b750aa75fa76422a3b04ae86accff7db4b1b396eea64c8062951d70b6c2"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genetic_epidemiologist_build_evidence_v4.py",
+      "bytes": 24548,
+      "sha256": "e0f2d5b7b10221322e4c7f26db6c58c09ba6af7c1492421eb175f34182ea7152"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/reviews/genetic_epidemiologist_critical_review_v4.md",
+      "bytes": 18402,
+      "sha256": "eedf2f3e17d28407ee367d7cfc572c4f39c7d7cd4faad7ff58da7b6cec62cc41"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_unified_research_v4/source_provenance/genetic_epidemiologist_live_primary_access_v4.json",
+      "bytes": 4211,
+      "sha256": "80837020b3939fb2dc4f440e6fe796843a8b77741da1254e099099c73b4e7d58"
+    }
+  ],
+  "checks": [
+    {
+      "name": "all_small_review_inputs_unchanged",
+      "pass": true
+    },
+    {
+      "name": "positive_Neff_not_above_total",
+      "pass": true
+    },
+    {
+      "name": "N_table_has_12_core_sleep_and_4_clinical_sources",
+      "pass": true
+    },
+    {
+      "name": "exact_normal_power_at_SE_ceiling",
+      "pass": true
+    },
+    {
+      "name": "power_decreases_with_SE",
+      "pass": true
+    },
+    {
+      "name": "approximate_and_exact_SE_ceiling_agree",
+      "pass": true
+    },
+    {
+      "name": "MVP_allergy_historical_h2_gate_fails",
+      "pass": true
+    },
+    {
+      "name": "MVP_abdominal_historical_QC_pass_not_new_source_admission",
+      "pass": true
+    },
+    {
+      "name": "all_source_designs_unadmitted",
+      "pass": true
+    }
+  ],
+  "no_GWAS_bodies_read_or_downloaded": true,
+  "no_native_estimators_launched": true,
+  "no_source_or_Git_mutations": true,
+  "no_new_pair_outcomes_read": true,
+  "new_review_arithmetic_only": true,
+  "automated_review_not_human_approval": true,
+  "no_test_family_amendment_implemented": true,
+  "campaign_status": "Live separately; this static perspective does not certify later native-job completion"
+}

@@ -1,0 +1,211 @@
+{
+  "tables": 150,
+  "figures": 8,
+  "checks": {
+    "core": {
+      "rows": 396,
+      "unique_pairs": 396,
+      "bh_positive_count": 161,
+      "reported_positive_count": 161,
+      "bh_max_abs_discrepancy": 0.0,
+      "rg_range": [
+        -0.2976,
+        0.6405
+      ],
+      "finite_rg_se_p": 396,
+      "primary_positive_count": 153,
+      "sensitivity_positive_count": 8,
+      "tier_counts": {
+        "PRIMARY_PHASE1": 372,
+        "QC_FAILED_SENSITIVITY": 24
+      }
+    },
+    "extension": {
+      "rows": 1200,
+      "unique_pairs": 1200,
+      "bh_positive_count": 603,
+      "reported_positive_count": 603,
+      "bh_max_abs_discrepancy": 0.0,
+      "rg_range": [
+        -0.4098,
+        0.5881
+      ],
+      "finite_rg_se_p": 1200
+    },
+    "validation": {
+      "locked_rows": 217,
+      "unique_pairs": 217,
+      "class_counts": {
+        "REPLICATED": 23,
+        "NO_INDEPENDENT_DATASET": 159,
+        "DIRECTIONALLY_CONCORDANT": 18,
+        "UNDERPOWERED": 17
+      },
+      "estimated_rows": 41,
+      "both_trait_independence_values": {
+        "false": 217
+      },
+      "sleep_independence_values": {
+        "false": 41
+      },
+      "heterogeneity_z_range": [
+        -4.48873635676049,
+        2.2905023820268577
+      ],
+      "histogram_outside_minus5_plus5": 0,
+      "nominal_heterogeneity_41": 16,
+      "nominal_heterogeneity_23": 7,
+      "alpha_expected": 0.0002304147465437788,
+      "alpha_max_abs_error": 2.2120434824135504e-16,
+      "cov0_z_max_abs_discrepancy": 8.881784197001252e-16
+    },
+    "extension_duplicate_display_labels": {
+      "Operation code": [
+        "panukbb_categorical__20004__both_sexes__1483__na",
+        "panukbb_categorical__20004__both_sexes__1478__na",
+        "panukbb_categorical__20004__both_sexes__1480__na"
+      ],
+      "Pain type(s) experienced in last month": [
+        "panukbb_categorical__6159__both_sexes__7__na",
+        "panukbb_categorical__6159__both_sexes__8__na"
+      ],
+      "Treatment/medication code": [
+        "panukbb_categorical__20003__both_sexes__1140874420__na",
+        "panukbb_categorical__20003__both_sexes__1140881856__na"
+      ],
+      "Mouth/teeth dental problems": [
+        "panukbb_categorical__6149__both_sexes__3__na",
+        "panukbb_categorical__6149__both_sexes__4__na",
+        "panukbb_categorical__6149__both_sexes__6__na"
+      ]
+    },
+    "lipid_pairwise_intercepts": {
+      "rows": 36,
+      "above_1p2": 36,
+      "per_trait": {
+        "ldl": {
+          "min": 1.222,
+          "max": 1.247
+        },
+        "hdl": {
+          "min": 1.408,
+          "max": 1.423
+        },
+        "triglycerides": {
+          "min": 1.205,
+          "max": 1.214
+        }
+      }
+    },
+    "native_campaign": {
+      "planned_jobs": 190,
+      "by_stage": {
+        "core": 57,
+        "extension": 112,
+        "validation": 21
+      },
+      "by_kind": {
+        "h2": 158,
+        "rg": 32
+      },
+      "campaign_execution_receipt_count": 0,
+      "campaign_execution_receipt_paths": [],
+      "processed_input_rg_pilot_full_precision_capture_count": 1,
+      "full_raw_to_estimator_core_pairs": 0,
+      "full_raw_to_estimator_extension_pairs": 0,
+      "full_raw_to_estimator_validation_pairs": 0,
+      "important_scope": "A single processed-input pilot is not a completed 33-pair core campaign job."
+    },
+    "successful_preprocessing_stage_units": [
+      {
+        "path": "sleep_unified_research_v2/logs/hdl_native_prefilter_receipt_v2.json",
+        "sha256": "9011b6e5b3ea9ac5e6ec451ce84f9c0de5ebc7cf449b0f3340b62e86754705ab",
+        "status": "NATIVE_PREFILTER_EXACT_HISTORICAL_BYTES_AND_COUNTS",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      },
+      {
+        "path": "sleep_unified_research_v2/logs/ldl_native_prefilter_receipt_v2.json",
+        "sha256": "ef9cf52680e547bb72bb708dec4cd31cc1ffb7aea71ab66d6c8c01683a60123f",
+        "status": "NATIVE_PREFILTER_EXACT_HISTORICAL_BYTES_AND_COUNTS",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      },
+      {
+        "path": "sleep_unified_research_v2/logs/triglycerides_native_prefilter_receipt_v2.json",
+        "sha256": "1e9fe8706b35653aa842b928b2a5cbea180673a63dc373357fe6c5c91e45622a",
+        "status": "NATIVE_PREFILTER_EXACT_HISTORICAL_BYTES_AND_COUNTS",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      },
+      {
+        "path": "sleep_unified_research_v3/logs/breast_cancer_materialization_receipt_v3.json",
+        "sha256": "3dfb56ded8b2dc01545643be7c5f75d5ff3ac605d345b5660e45c0177dbef7e4",
+        "status": "NATIVE_RAW_MATERIALIZATION_EXACT_CONTENT",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      },
+      {
+        "path": "sleep_unified_research_v3/logs/ovarian_cancer_materialization_receipt_v3.json",
+        "sha256": "dfd03c35cb92a7e2e071b1b90b1a211fc54d34ff3ce8e51c629ea75a2d57ee53",
+        "status": "NATIVE_RAW_MATERIALIZATION_EXACT_CONTENT",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      },
+      {
+        "path": "sleep_unified_research_v3/logs/mvp_preprocessing_execution_receipt_v3.json",
+        "sha256": "80182225ecee71f43faa3cf407d8d953d005b81583c75839f4110b39930c0e15",
+        "status": "RESULT_FREE_PREPROCESSING_PASS",
+        "exit_code": 0,
+        "scientific_scope": "preprocessing only",
+        "h2_or_rg_estimated": false,
+        "input_hashes_unchanged": true
+      }
+    ],
+    "portable_tests": {
+      "test_count": 24,
+      "scope": "portable artifact invariants; not native scientific validation",
+      "log_bindings": [
+        {
+          "package": "sleep_unified_research_v1",
+          "pass": true,
+          "expected_tests": 10,
+          "log_hash_pass": true
+        },
+        {
+          "package": "sleep_unified_research_v2",
+          "pass": true,
+          "expected_tests": 6,
+          "log_hash_pass": true
+        },
+        {
+          "package": "sleep_unified_research_v3",
+          "pass": true,
+          "expected_tests": 8,
+          "log_hash_pass": true
+        }
+      ]
+    },
+    "mvp_counts": {
+      "source_rows": 19703815,
+      "retained_chain_+": 826027,
+      "retained_orientation_sign_1": 200653,
+      "output_rows": 826027,
+      "retained_orientation_sign_-1": 625374
+    },
+    "input_hash_checks_all_pass": true,
+    "export_hash_checks_all_pass": true,
+    "reviewer_code_sha256": "519c5e884565581b62bb3b9e0cac4913e48152cee247bbf4ef488631d3ef6ad7",
+    "completed_utc": "2026-10-09T18:24:56.878171+00:00"
+  }
+}
