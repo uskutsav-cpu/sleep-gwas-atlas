@@ -17,6 +17,8 @@ python3 sleep_unified_research_v4/cell_genomics_readiness_v1/tests/test_candidat
 
 The builder uses Python 3 standard-library modules only. A clean-checkout run requires the listed committed result tables, `config/analysis_panel.tsv`, `discovery_extension/config/candidate_traits.tsv`, and the 12-row sleep construct dictionary. It does not require GWAS downloads, access credentials, R, PLINK, or an LDSC rerun. The candidate manifest gives input/output digests and builder digest. A different output location can be supplied with `--out`.
 
+The pushed commit `a5c955ae` was also tested from a fresh source archive on the external SSD containing only committed builder inputs and package files. The builder and integrity test passed there, and all 11 generated candidate files matched the committed release byte-for-byte. No ignored raw-source data or workspace scratch files were needed.
+
 ## Scientific interpretation
 
 The current evidence is a qualified association resource, not a new primary discovery or validated inference method. Independent result-level reviews found no newly generated association, locus, mechanism, calibrated contrast, or fully independent two-trait replication. Prior-art benchmarking bounds the novelty claim. Source-specific definition and harmonization limitations accompany the results. All correlation intervals are marginal within-fit intervals. The estimated discovery/validation pairs share the sleep GWAS and lack calibrated sampling covariance.
