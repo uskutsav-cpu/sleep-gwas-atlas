@@ -1,5 +1,9 @@
 # sleep-gwas-atlas
 
+## Current scientific interpretation notice (11 October 2026)
+
+The [V8 scientific handoff](sleep_unified_research_v8/reports/SCIENTIFIC_HANDOFF_V8.md) supersedes older signed interpretations for 36 core records using the de Lange IBD/Crohn/UC sources. Primary-paper risk controls conflict with the historical assumed effect convention; those disease-direction claims are on hold. Historical reproduction remains preserved and does not establish source validity. Use the separately generated V8 interpretation view and hold-aware lookup for current work. One new FinnGen-insomnia/MVP-abdominal-pain estimate is exploratory and reuses the historical outcome; it establishes neither a new discovery nor fully independent replication. Human review and source-specific release approval remain pending.
+
 An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
 - **Scope:** 12 sleep/circadian traits and 33 non-sleep traits.

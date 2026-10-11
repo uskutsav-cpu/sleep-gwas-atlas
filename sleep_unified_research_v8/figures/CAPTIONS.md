@@ -1,0 +1,19 @@
+# Scientific figure captions and use restrictions
+
+## Source-defined insomnia and abdominal pain
+
+`insomnia_abdominal_pain_source_transport.svg` and `.png`. Three source-defined genetic-correlation estimates with marginal normal 95% intervals. Rows are UKB frequent insomnia complaints/Pan-UKB abdominal pain (historical extension), the same sleep source/MVP GIA EUR abdominal pain (historical outcome-side validation), and FinnGen R13 registry-coded insomnia/the same MVP outcome (one new exploratory source/construct transport estimate). Exact values are in `../tables/insomnia_abdominal_pain_source_defined_estimates.tsv`; new native results and independent arithmetic review are in `../source_review/statistical_scientific_actual_result_review_v8.md` and its JSON. The first two estimates are historical, not rerun for this figure.
+
+The two MVP estimates share their outcome GWAS; the new sleep source does not make the pair fully independent replication. Prior results informed pair selection. Cohort, ascertainment and phenotype change together; no pure clinical-versus-questionnaire contrast is identified. All intervals are marginal and input-assumption conditional; their overlap/separation is not a difference test. The exploratory result uses assumed 95% log-Wald CI reconstruction for MVP, constant effective N, a source-specific HM3 fallback and approximate European LD for a Finnish source. Cross-enrollment and relatives are unverified. The unconstrained cross-trait intercept does not certify absence of overlap. No cause, mechanism, disease specificity, new-discovery or calibrated between-source difference is established. See `../source_review/qualified_native_input_contract.json` for the exact specification.
+
+## Core interpretation view
+
+`core_interpretive_quarantine.svg` and `.png`. All 396 historical core record positions, with 36 bowel-source records marked H and their signed values withheld because the assumed effect convention conflicts with 22 eligible primary-paper risk controls. The exact source-wide convention remains unresolved; the figure does not apply a presumed global sign reversal. Another 63 unheld records are marked x because at least one existing pairwise necessary QC condition fails (both h² Z >=4 and both h² intercept <=1.2 are required). These symbols are neither zero correlations nor evidence of biological absence.
+
+Colors display all 297 remaining QC-eligible point estimates, regardless of BH significance. The symmetric linear color scale spans -0.7 to +0.7; no significance symbols are drawn and no threshold-selected subset is displayed. The historical complete 396-pair BH family is preserved, including held records; no 360- or 297-pair BH recomputation occurred. Pairwise necessary QC does not eliminate source or model bias. Marginal intervals, original q-values and historical classifications are in `../release_candidate/core_rg.tsv`; held-record SE/P/q/classification fields are reproduction metadata only and are not cleared biological inference. Exact sleep/outcome identifiers join to the source dictionaries. No causal effect, independent replication or statistically calibrated between-trait contrast is claimed.
+
+The historical V4 core-point figure and any older atlas display that includes signed de Lange bowel relationships are superseded for current scientific interpretation by this held-record view. Historical assets remain preserved. Unaffected extension, outcome-side validation and sensitivity assets are not regenerated.
+
+## Visual and numerical verification
+
+Both new SVG/PNG figures were generated with base R from the identified small numerical tables and inspected as rendered PNGs. Axis labels, interval values, the hold/QC key and limiting captions are legible. Independent scientific review checks the displayed counts and actual source estimates. This is figure verification, not proof of source validity, journal readiness or human usability.

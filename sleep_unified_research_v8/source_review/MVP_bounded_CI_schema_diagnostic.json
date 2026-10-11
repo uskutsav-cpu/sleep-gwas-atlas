@@ -1,0 +1,52 @@
+{
+  "scope": "BOUNDED_SOURCE_SCHEMA_DIAGNOSTIC_NOT_FULL_RETAINED_INPUT_AUDIT",
+  "selection": "First up to1000 raw source rows passing finite OR/CI, source r2>0.9, MAF>0.01, nonambiguous alleles within first50000; not exact HM3 filter; no outcome or favorable-P selection",
+  "source_path": "/Volumes/Extreme SSD/sleep-unified-research-v1/research-completion-2026-10-09/sleep_unified_research_v4/validation_raw_replay_v3/raw/GCST90479148.tsv.gz",
+  "source_SHA256_from_existing_verified_receipt": "ce3e5bcc9f30ba01fd4e1d2b6e65cd064bab88ac17943aebc4e727f92a58f906",
+  "literal_header": [
+    "chromosome",
+    "base_pair_location",
+    "effect_allele",
+    "other_allele",
+    "odds_ratio",
+    "standard_error",
+    "effect_allele_frequency",
+    "p_value",
+    "rsid",
+    "ci_upper",
+    "ci_lower",
+    "alt",
+    "n",
+    "case_af",
+    "num_cases",
+    "control_af",
+    "num_controls",
+    "r2",
+    "q_pval",
+    "i2",
+    "direction"
+  ],
+  "examined_rows": 6966,
+  "sampled_rows": 1000,
+  "standard_error_values": {
+    "#NA": 1000
+  },
+  "unique_n": [
+    "388315"
+  ],
+  "unique_cases": [
+    "89262"
+  ],
+  "unique_controls": [
+    "299053"
+  ],
+  "max_relative_P_discrepancy": 0.7703258119709836,
+  "P_discrepancy_gt_0_1": 27,
+  "max_log_CI_symmetry_discrepancy": 0.0007158824489996544,
+  "interpretation": "CI width is close to log symmetric, but27/1000 bounded rows have >10% relative discrepancy between supplied P and normal CI-derived Z P; no semantics equivalence or whole-body per-variant N is certified. SAIGE score/SPA versus effect/SE tests and rounding are candidate causes, not established attribution.",
+  "P_discrepancy_gt0_1_suppliedP_min": 0.009586,
+  "P_discrepancy_gt0_1_suppliedP_max": 0.2762,
+  "P_discrepancy_gt0_1_at_P_ge0_05": 15,
+  "P_discrepancy_gt0_1_at_P_lt0_05": 12,
+  "all_sampled_CIs_near_log_symmetric": true
+}

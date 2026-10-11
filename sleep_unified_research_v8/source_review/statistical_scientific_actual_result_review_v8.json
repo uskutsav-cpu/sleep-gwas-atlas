@@ -1,0 +1,206 @@
+{
+  "scope": "Independent arithmetic and scientific review of ONE completed native fit; no estimator rerun",
+  "protocol_path": "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/protocols/exploratory_registry_insomnia_abdominal_pain.md",
+  "full_precision_path": "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_pain.full_precision.json",
+  "execution_receipt_path": "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/receipts/one_pair_execution.json",
+  "arithmetic": "80-digit Decimal from actual captured totals and 200 exported deletes; P independently math.erfc(z/sqrt(2)); 95% normal quantile from statistics.NormalDist. Native RG ratio and ratio-jackknife centered SE methods inspected.",
+  "formula_rg": "gencov/sqrt(hsq1*hsq2)",
+  "formula_delete_rg": "gencov_delete_b/sqrt(hsq1_delete_b*hsq2_delete_b)",
+  "formula_centered_SE": "sqrt((B-1)/B * sum((delete_rg_b-mean(delete_rg))^2))",
+  "formula_bias_corrected_rg": "B*point_rg-(B-1)*mean(delete_rg)",
+  "quantities": {
+    "rg": {
+      "recomputed": 0.3991207521785693,
+      "native": 0.39912075217856924,
+      "difference": 5.551115123125783e-17,
+      "within_rel1e-12_abs1e-15": true,
+      "relative_difference": 1.3908360045989736e-16
+    },
+    "rg_se": {
+      "recomputed": 0.05069593837487401,
+      "native": 0.050695938374874,
+      "difference": 6.938893903907228e-18,
+      "within_rel1e-12_abs1e-15": true,
+      "relative_difference": 1.368727777084859e-16
+    },
+    "rg_jknife_bias_corrected": {
+      "recomputed": 0.39826198290040615,
+      "native": 0.398261982900399,
+      "difference": 7.16093850883226e-15,
+      "within_rel1e-12_abs1e-15": true,
+      "relative_difference": 1.7980472192403894e-14
+    },
+    "z": {
+      "recomputed": 7.872834885257436,
+      "native": 7.872834885257436,
+      "difference": 0.0,
+      "within_rel1e-12_abs1e-15": true,
+      "relative_difference": 0.0
+    },
+    "p_two_sided_normal": {
+      "recomputed": 3.466940844878248e-15,
+      "native": 3.4669408448782324e-15,
+      "difference": 1.5777218104420236e-29,
+      "within_rel1e-12_abs1e-15": true,
+      "relative_difference": 4.5507606879789065e-15
+    },
+    "rg_CI95": [
+      0.2997585388013542,
+      0.49848296555578436
+    ],
+    "rg_CI95_width": 0.19872442675443014
+  },
+  "pair_diagnostics": {
+    "hsq1": {
+      "native_total": 0.05202247810759592,
+      "native_SE": 0.004556401352741753,
+      "delete_SE": {
+        "recomputed": 0.004556401352741756,
+        "native": 0.004556401352741753,
+        "difference": 2.6020852139652106e-18,
+        "within_rel1e-12_abs1e-15": true
+      },
+      "delete_min": 0.050176635367648055,
+      "delete_max": 0.05274822997774621,
+      "delete_finite": true,
+      "total_z": 11.417448569646327,
+      "total_CI95": [
+        0.043092095557112506,
+        0.06095286065807934
+      ],
+      "intercept": 1.084990267297004,
+      "intercept_SE": 0.010948801293037238,
+      "intercept_CI95": [
+        1.0635310110887655,
+        1.1064495235052425
+      ],
+      "inflation_ratio": {
+        "recomputed": 0.28850609404716093,
+        "native": 0.2885060940471608,
+        "difference": 1.1102230246251565e-16,
+        "within_rel1e-12_abs1e-15": true
+      }
+    },
+    "hsq2": {
+      "native_total": 0.05494454705381611,
+      "native_SE": 0.0034988122034778028,
+      "delete_SE": {
+        "recomputed": 0.003498812203477811,
+        "native": 0.0034988122034778028,
+        "difference": 8.239936510889834e-18,
+        "within_rel1e-12_abs1e-15": true
+      },
+      "delete_min": 0.053864985467691605,
+      "delete_max": 0.05549773753910968,
+      "delete_finite": true,
+      "total_z": 15.703771411109601,
+      "total_CI95": [
+        0.04808700114633039,
+        0.061802092961301826
+      ],
+      "intercept": 1.1316006496545958,
+      "intercept_SE": 0.011207934743943389,
+      "intercept_CI95": [
+        1.1096335012153917,
+        1.1535677980938
+      ],
+      "inflation_ratio": {
+        "recomputed": 0.28400515070860866,
+        "native": 0.28400515070860877,
+        "difference": -1.1102230246251565e-16,
+        "within_rel1e-12_abs1e-15": true
+      }
+    },
+    "gencov": {
+      "native_total": 0.021338413475760064,
+      "native_SE": 0.002789676715447691,
+      "delete_SE": {
+        "recomputed": 0.0027896767154476916,
+        "native": 0.002789676715447691,
+        "difference": 4.336808689942018e-19,
+        "within_rel1e-12_abs1e-15": true
+      },
+      "delete_min": 0.02082496991869667,
+      "delete_max": 0.021813500373460703,
+      "delete_finite": true,
+      "total_z": 7.649063189867019,
+      "total_CI95": [
+        0.0158707475849726,
+        0.02680607936654753
+      ],
+      "intercept": 0.014914689572365932,
+      "intercept_SE": 0.00786843457320914,
+      "intercept_CI95": [
+        -0.0005071588058337684,
+        0.030336537950565633
+      ]
+    }
+  },
+  "delete_stability": {
+    "n_blocks": 200,
+    "all_delete_ratios_finite": true,
+    "all_h2_deletes_positive": true,
+    "all_gencov_deletes_positive": true,
+    "rg_delete_min": 0.3906100120867539,
+    "rg_delete_max": 0.4102742736158114,
+    "rg_delete_mean": 0.3991250676020776,
+    "max_single_deletion_variance_fraction": 0.04812432256612888,
+    "max_abs_delete_minus_point": 0.011153521437242155,
+    "largest_centered_square_block_1based": 49,
+    "all_rg_deletes_within_minus1_plus1": true,
+    "between_job_block_alignment_assumed": false,
+    "note": "These are descriptive stability summaries, not a newly selected pass threshold or locus-specific sensitivity result."
+  },
+  "valid_allele_SNP_count": 815347,
+  "warning_error_lines": {
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_pain.log": [],
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/logs/one_pair_execution.stdout.log": []
+  },
+  "current_new_result_hash_checks": {
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_pain.full_precision.json": {
+      "sha256": "792dbaa55c4336e5b6247059dd161bba4d58c063d9bb1594838ee4e519bb7046",
+      "matches_execution_receipt": true
+    },
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_pain.log": {
+      "sha256": "95c1682078eaa82f35f97c22d5453cd26d73c8279b752d5eb70a89091c169a4c",
+      "matches_execution_receipt": true
+    },
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_paininsomnia.sumstats.gz_gwas_catalog_GCST90479148.sumstats.gz.hsq1.delete": {
+      "sha256": "174259a916759cfa3b5a34f56bef87a08f13c62636fe8333db1c79eb711751b6",
+      "matches_execution_receipt": true
+    },
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_paininsomnia.sumstats.gz_gwas_catalog_GCST90479148.sumstats.gz.hsq2.delete": {
+      "sha256": "53bc2dfa0d4c9c8f2ae741ecfa2c09145a2649f23aadae47e71fac85c4efb4a5",
+      "matches_execution_receipt": true
+    },
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/fits/finn_registry_insomnia_MVP_abdominal_paininsomnia.sumstats.gz_gwas_catalog_GCST90479148.sumstats.gz.gencov.delete": {
+      "sha256": "8e8dc9ee418476b24d5a66783c21ec6bea15d498664fc898df92bc7822796e8f",
+      "matches_execution_receipt": true
+    },
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/native_transport/logs/one_pair_execution.stdout.log": {
+      "sha256": "896a141f5aec6c35b969cfede5d17a92577c27f58b0b28cabcef37fd0f266ce6",
+      "matches_execution_receipt": true
+    }
+  },
+  "execution": {
+    "status": "WORKER_COMPLETE_VERIFIED",
+    "returncode": 0,
+    "stop_reason": null,
+    "plan_unchanged": true,
+    "peak_observed_owned_RSS_bytes": 763084800
+  },
+  "descriptive_historical_threshold": 0.0002304147465437788,
+  "passes_descriptive_historical_threshold": true,
+  "new_biological_association_claim": false,
+  "independent_two_trait_replication_claim": false,
+  "admission": "RETAIN_QUALIFIED_EXPLORATORY_SOURCE_CONSTRUCT_TRANSPORT_RESULT",
+  "limitations": [
+    "MVP outcome historically reused and selected",
+    "MVP CI95/log-Wald semantics assumed",
+    "Constant effective N not SNP-wise verified",
+    "Finnish versus 1000 Genomes EUR LD mismatch not eliminated",
+    "Participant overlap unknown; intercept unconstrained",
+    "No calibrated cross-source contrast",
+    "No mechanism or causal claim"
+  ]
+}

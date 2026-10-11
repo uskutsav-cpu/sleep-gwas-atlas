@@ -1,0 +1,41 @@
+{
+  "interpretation": "Three different source-defined marginal estimands. CIs are pointwise; rows are not independent comparisons; no test of differences. New row separate from frozen statistical families.",
+  "rows": [
+    {
+      "analysis_family": "extension",
+      "source_label": "UKB complaints / Pan-UKB abdominal pain",
+      "sleep_source_id": "jansen_2019_insomnia_ukb",
+      "outcome_source_id": "PANUKBB_2025_RELEASE",
+      "rg": "0.5590633274154724",
+      "se": "0.03589826913532245",
+      "ci_lower_95": "0.48870401280291453",
+      "ci_upper_95": "0.6294226420280302",
+      "P": "1.1012974342685768e-54",
+      "inference_scope": "Marginal genetic correlation; not a causal or between-phenotype contrast."
+    },
+    {
+      "analysis_family": "validation",
+      "source_label": "UKB complaints / MVP abdominal pain",
+      "sleep_source_id": "jansen_2019_insomnia_ukb",
+      "outcome_source_id": "gwas_catalog_GCST90479148",
+      "rg": "0.40982718740242974",
+      "se": "0.03322140564700223",
+      "ci_lower_95": "0.3447144288185098",
+      "ci_upper_95": "0.4749399459863497",
+      "P": "5.77932928850635e-35",
+      "inference_scope": "OUTCOME_SIDE_VALIDATION_ONLY"
+    },
+    {
+      "analysis_family": "V8_EXPLORATORY_SOURCE_CONSTRUCT_TRANSPORT",
+      "source_label": "FinnGen registry insomnia / MVP abdominal pain",
+      "sleep_source_id": "FINNGEN_R13_F5_INSOMNIA",
+      "outcome_source_id": "gwas_catalog_GCST90479148",
+      "rg": 0.39912075217856924,
+      "se": 0.050695938374874,
+      "ci_lower_95": 0.29975853880135417,
+      "ci_upper_95": 0.4984829655557843,
+      "P": 3.4669408448782324e-15,
+      "inference_scope": "Exploratory new sleep-source estimate; reused historical MVP outcome; CI95/log-Wald and constant-Neff assumptions; no independent replication or cross-source difference test"
+    }
+  ]
+}
