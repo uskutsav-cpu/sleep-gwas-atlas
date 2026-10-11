@@ -42,3 +42,10 @@ Cell Genomics fit remains an editorial judgment. Its official scope includes res
 ## Preservation and code status
 
 The analyzed public reporting code remains bb0168b499da88102984504052a0b8948da3550f on research/scientific-integration-v8-2026-10-11. The follow-up commit adds authored source/draft assessments only. The full unpublished draft and compact companion package are preserved locally and on the SSD; no journal submission or external reviewer message has been sent. The clean reporting rebuild passed at the analyzed checkpoint. Historical repository-wide CI was already failing on the preceding baseline and is not certified green. No tests were removed or weakened.
+
+
+## Primary methods supplement addendum
+
+The exact 46-page Verma et al. supplement was recovered from public BioStudies S-EPMC12857194 (2,587,868 bytes). PDF pp. 4–6 were visually inspected; an independent source specialist assessed the actual source and then the two added manuscript sentences. The published removal of missing-SE variants does not reconcile missing supplied SE in bounded inspected export rows, and the original study used MVP population-specific LD scores while our qualified exploratory route uses 1000 Genomes EUR. Exact exported CI construction remains unverified; no original-source defect is established. The estimate stays conditional exploratory evidence. The new evidence is methodological/provenance evidence, not a new biological finding.
+
+The updated draft has 13 pages with references beginning separately. Its seven unchanged rendered pages retain the prior visual review; pages 8–13 were visually checked at original resolution. No statistical fit, source preprocessing, GWAS download, controller or historical edit was performed for this addendum. The separate preserved original review ZIP remains unchanged. FINAL_SCIENTIFIC_PATHS_V8.md states the finite remaining tasks; human reviews, pilot responses and release approvals remain pending.
