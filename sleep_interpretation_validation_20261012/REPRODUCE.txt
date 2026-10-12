@@ -36,3 +36,22 @@ local for controlled review pending source-specific release clearance. No raw
 GWAS statistics, private gold, identities or unapproved human responses should
 be committed. The initial AI feasibility is distinct from the complete planned
 60-task benchmark, and all actual Codex variants belong to provider OpenAI.
+
+Post-execution reporting is separate from the frozen instrument. Original cells 36
+and 44 returned packet hashes inconsistent with registration. Preserve them, omit
+them without answer/hash correction using project_evaluable_responses.py, and
+record the traceable exclusion ledger. Run the frozen score_benchmark.py on the
+88 unchanged eligible envelopes with the original 90-cell registration, then:
+python3 benchmark/report_feasibility.py --scores PRIVATE_SCORE_DIRECTORY \
+  --registration benchmark/execution_registration.json \
+  --exclusion-ledger PRIVATE_PROJECTION/provenance_exclusion_ledger.json \
+  --out REPORT_DIRECTORY
+Rscript benchmark/plot_feasibility.R \
+  REPORT_DIRECTORY/model_condition_outcomes.tsv REPORT_DIRECTORY/feasibility
+The reporter reconciles 90 original definitive records with 88 eligible scores and
+2 provenance exclusions, publishes aggregate/per-cell correctness without answers,
+and refuses a ten-task confidence interval. R base graphics produces the actual-
+count SVG and PNG. These commands
+do not invoke models, repair answers, change the key or reconstruct missing cells.
+The private key, protected packets and raw answers remain in the controlled SSD
+benchmark directory. Human scientific adjudication remains a separate requirement.
