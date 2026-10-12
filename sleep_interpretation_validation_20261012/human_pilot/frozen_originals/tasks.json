@@ -1,0 +1,104 @@
+[
+  {
+    "task_id": "T01",
+    "prompt": "Retrieve core insomnia\u2013frailty and state exactly what the insomnia cases and controls represent, with the estimate and its inferential scope.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "sleep_constructs.tsv"
+    ]
+  },
+  {
+    "task_id": "T02",
+    "prompt": "Describe the source-defined continuous reported-duration phenotype: measurement window, inclusion of naps, response units, and positive effect direction.",
+    "shared_evidence": [
+      "sleep_constructs.tsv"
+    ]
+  },
+  {
+    "task_id": "T03",
+    "prompt": "Describe the short-duration and long-duration case/control definitions. Explain whether their comparison represents independent groups or an experimentally established dose-response.",
+    "shared_evidence": [
+      "sleep_constructs.tsv"
+    ]
+  },
+  {
+    "task_id": "T04",
+    "prompt": "Retrieve the external insomnia\u2013abdominal-pain estimate and its linked discovery record. Report both rg and SE values, both sleep and outcome source IDs, and characterize the independence of the evidence.",
+    "shared_evidence": [
+      "external_validation_rg.tsv",
+      "extension_rg.tsv",
+      "sleep_constructs.tsv",
+      "outcome_phenotypes.tsv"
+    ]
+  },
+  {
+    "task_id": "T05",
+    "prompt": "For the external insomnia\u2013cholelithiasis estimate, retrieve the source record and state its testing family, correction and threshold status. Explain whether a marginal interval excluding zero is sufficient for corrected support.",
+    "shared_evidence": [
+      "external_validation_rg.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T06",
+    "prompt": "Explain how core and extension q-values were calculated and whether their testing families may be pooled without changing the study.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "extension_rg.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T07",
+    "prompt": "Retrieve device-duration\u2013HDL and its estimator sensitivity. Report both marginal intervals and explain what comparison has actually been tested.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "sensitivities.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T08",
+    "prompt": "Retrieve long-duration\u2013melanoma. Report its h\u00b2 eligibility and threshold classification and explain whether a nominal marginal interval can rescue its primary eligibility.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "sensitivities.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T09",
+    "prompt": "Retrieve core insomnia\u2013Alzheimer disease. Report its uncertainty and threshold classification, then state what can be inferred about absence of genetic sharing.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T10",
+    "prompt": "Is a FinnGen R13 clinical-insomnia\u2013abdominal-pain estimate present in these candidate release tables? State what an absent lookup does and does not establish.",
+    "shared_evidence": [
+      "core_rg.tsv",
+      "extension_rg.tsv",
+      "external_validation_rg.tsv",
+      "sleep_constructs.tsv"
+    ]
+  },
+  {
+    "task_id": "T11",
+    "prompt": "Retrieve the three device-source sleep constructs. Can the shared source_id alone identify the measurement being estimated? Give the distinct measurement identities and the key needed for a safe lookup.",
+    "shared_evidence": [
+      "sleep_constructs.tsv",
+      "outcome_phenotypes.tsv",
+      "SCHEMA.md"
+    ]
+  },
+  {
+    "task_id": "T12",
+    "prompt": "For GCST90479148 in the candidate outcome catalog, report phenotype_type and whether build, sample_size, cases and controls are supplied. Explain whether missing metadata establish invalidity or verified equivalence.",
+    "shared_evidence": [
+      "outcome_phenotypes.tsv",
+      "SCHEMA.md"
+    ]
+  }
+]

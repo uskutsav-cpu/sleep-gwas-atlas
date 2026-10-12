@@ -1,0 +1,3905 @@
+[
+  {
+    "pair_cluster": "core|sleepdur|mdd",
+    "prompt": "For exact atlas record (core, sleepdur, mdd), sleep source dashti_2019_sleep_duration and outcome source howard_2019_mdd_no23andme, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "sleepdur",
+      "mdd"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_sleep_duration",
+      "howard_2019_mdd_no23andme"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN001"
+  },
+  {
+    "pair_cluster": "core|insomnia|ms",
+    "prompt": "For exact atlas record (core, insomnia, ms), sleep source jansen_2019_insomnia_ukb and outcome source finngen_r9_ms, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "insomnia",
+      "ms"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jansen_2019_insomnia_ukb",
+      "finngen_r9_ms"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN002"
+  },
+  {
+    "pair_cluster": "core|sleepiness|asthma",
+    "prompt": "For exact atlas record (core, sleepiness, asthma), sleep source wang_2019_daytime_sleepiness and outcome source finngen_r9_asthma_exmore, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "sleepiness",
+      "asthma"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "wang_2019_daytime_sleepiness",
+      "finngen_r9_asthma_exmore"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN003"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|cad",
+    "prompt": "For exact atlas record (core, sleep_timing, cad), sleep source jones_2019_accelerometer_sleep and outcome source finngen_r9_ihd, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "cad"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "finngen_r9_ihd"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN004"
+  },
+  {
+    "pair_cluster": "core|longsleep|bmi",
+    "prompt": "For exact atlas record (core, longsleep, bmi), sleep source dashti_2019_long_sleep and outcome source yengo_2018_bmi, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "longsleep",
+      "bmi"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "yengo_2018_bmi"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN005"
+  },
+  {
+    "pair_cluster": "core|accel_sleep_duration|adhd",
+    "prompt": "For exact atlas record (core, accel_sleep_duration, adhd), sleep source jones_2019_accelerometer_sleep and outcome source demontis_2023_adhd_eur, report rg, SE, the two marginal 95% bounds and whether these data establish zero shared genetic signal.",
+    "record_key": [
+      "core",
+      "accel_sleep_duration",
+      "adhd"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ci_lower_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ci_upper_95": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "se": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "zero_sharing_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "se",
+        "ci_lower_95",
+        "ci_upper_95",
+        "zero_sharing_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "demontis_2023_adhd_eur"
+    ],
+    "split": "final",
+    "stratum": "uncertainty",
+    "subtype": "standard",
+    "task_id": "FIN006"
+  },
+  {
+    "pair_cluster": "core|napping|ms",
+    "prompt": "For exact atlas record (core, napping, ms), sleep source dashti_2021_daytime_napping and outcome source finngen_r9_ms, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "napping",
+      "ms"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2021_daytime_napping",
+      "finngen_r9_ms"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN007"
+  },
+  {
+    "pair_cluster": "core|snoring|adhd",
+    "prompt": "For exact atlas record (core, snoring, adhd), sleep source campos_2020_snoring and outcome source demontis_2023_adhd_eur, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "snoring",
+      "adhd"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "campos_2020_snoring",
+      "demontis_2023_adhd_eur"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN008"
+  },
+  {
+    "pair_cluster": "core|snoring|parkinson",
+    "prompt": "For exact atlas record (core, snoring, parkinson), sleep source campos_2020_snoring and outcome source nalls_2019_parkinson_public_proxy, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "snoring",
+      "parkinson"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "campos_2020_snoring",
+      "nalls_2019_parkinson_public_proxy"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN009"
+  },
+  {
+    "pair_cluster": "core|napping|longevity",
+    "prompt": "For exact atlas record (core, napping, longevity), sleep source dashti_2021_daytime_napping and outcome source deelen_2019_longevity_90th, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "napping",
+      "longevity"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2021_daytime_napping",
+      "deelen_2019_longevity_90th"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN010"
+  },
+  {
+    "pair_cluster": "core|sleepiness|sbp",
+    "prompt": "For exact atlas record (core, sleepiness, sbp), sleep source wang_2019_daytime_sleepiness and outcome source evangelou_2018_sbp_opengwas, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "sleepiness",
+      "sbp"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "wang_2019_daytime_sleepiness",
+      "evangelou_2018_sbp_opengwas"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN011"
+  },
+  {
+    "pair_cluster": "core|chronotype|colorectal_cancer",
+    "prompt": "For exact atlas record (core, chronotype, colorectal_cancer), sleep source jones_2019_morning_person_ukb and outcome source fernandez_rozadilla_2023_colorectal_eur, retrieve the sleep construct effect allele and effect column, and state its phenotype measurement identity by copying construct exactly.",
+    "record_key": [
+      "core",
+      "chronotype",
+      "colorectal_cancer"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_allele": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "effect_column": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "construct",
+        "effect_allele",
+        "effect_column"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "fernandez_rozadilla_2023_colorectal_eur"
+    ],
+    "split": "final",
+    "stratum": "phenotype",
+    "subtype": "standard",
+    "task_id": "FIN012"
+  },
+  {
+    "pair_cluster": "core|accel_sleep_duration|triglycerides",
+    "prompt": "For exact atlas record (core, accel_sleep_duration, triglycerides), sleep source jones_2019_accelerometer_sleep and outcome source graham_2021_triglycerides_eur, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "accel_sleep_duration",
+      "triglycerides"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "graham_2021_triglycerides_eur"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN013"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|parental_lifespan",
+    "prompt": "For exact atlas record (core, sleep_timing, parental_lifespan), sleep source jones_2019_accelerometer_sleep and outcome source timmers_2019_parental_lifespan, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "parental_lifespan"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "timmers_2019_parental_lifespan"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN014"
+  },
+  {
+    "pair_cluster": "core|napping|cad",
+    "prompt": "For exact atlas record (core, napping, cad), sleep source dashti_2021_daytime_napping and outcome source finngen_r9_ihd, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "napping",
+      "cad"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2021_daytime_napping",
+      "finngen_r9_ihd"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN015"
+  },
+  {
+    "pair_cluster": "core|insomnia|atrial_fibrillation",
+    "prompt": "For exact atlas record (core, insomnia, atrial_fibrillation), sleep source jansen_2019_insomnia_ukb and outcome source nielsen_2018_atrial_fibrillation, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "insomnia",
+      "atrial_fibrillation"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jansen_2019_insomnia_ukb",
+      "nielsen_2018_atrial_fibrillation"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN016"
+  },
+  {
+    "pair_cluster": "core|sleep_apnea|telomere_length",
+    "prompt": "For exact atlas record (core, sleep_apnea, telomere_length), sleep source finngen_r9_sleep_apnoea and outcome source burren_2024_telomere_nfe, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "sleep_apnea",
+      "telomere_length"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "finngen_r9_sleep_apnoea",
+      "burren_2024_telomere_nfe"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN017"
+  },
+  {
+    "pair_cluster": "core|longsleep|parental_lifespan",
+    "prompt": "For exact atlas record (core, longsleep, parental_lifespan), sleep source dashti_2019_long_sleep and outcome source timmers_2019_parental_lifespan, state whether exact participant/relative intersections are quantified and whether an independent-samples claim is supported; copy the sleep source cohort.",
+    "record_key": [
+      "core",
+      "longsleep",
+      "parental_lifespan"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exact_intersections_quantified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "independent_samples_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "exact_intersections_quantified",
+        "independent_samples_supported",
+        "cohort"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "timmers_2019_parental_lifespan"
+    ],
+    "split": "final",
+    "stratum": "overlap",
+    "subtype": "standard",
+    "task_id": "FIN018"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|mdd",
+    "prompt": "For exact atlas record (core, sleep_timing, mdd), sleep source jones_2019_accelerometer_sleep and outcome source howard_2019_mdd_no23andme, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "mdd"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "howard_2019_mdd_no23andme"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN019"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|atrial_fibrillation",
+    "prompt": "For exact atlas record (core, sleep_timing, atrial_fibrillation), sleep source jones_2019_accelerometer_sleep and outcome source nielsen_2018_atrial_fibrillation, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "atrial_fibrillation"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "nielsen_2018_atrial_fibrillation"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN020"
+  },
+  {
+    "pair_cluster": "core|shortsleep|triglycerides",
+    "prompt": "For exact atlas record (core, shortsleep, triglycerides), sleep source dashti_2019_short_sleep and outcome source graham_2021_triglycerides_eur, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "shortsleep",
+      "triglycerides"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "graham_2021_triglycerides_eur"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN021"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|scz",
+    "prompt": "For exact atlas record (core, sleep_timing, scz), sleep source jones_2019_accelerometer_sleep and outcome source trubetskoy_2022_scz_eur, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "scz"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "trubetskoy_2022_scz_eur"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN022"
+  },
+  {
+    "pair_cluster": "core|shortsleep|parental_lifespan",
+    "prompt": "For exact atlas record (core, shortsleep, parental_lifespan), sleep source dashti_2019_short_sleep and outcome source timmers_2019_parental_lifespan, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "shortsleep",
+      "parental_lifespan"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "timmers_2019_parental_lifespan"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN023"
+  },
+  {
+    "pair_cluster": "core|sleep_efficiency|sbp",
+    "prompt": "For exact atlas record (core, sleep_efficiency, sbp), sleep source jones_2019_accelerometer_sleep and outcome source evangelou_2018_sbp_opengwas, retrieve the outcome release label, genome build and phenotype type; if a conventional related pair is supplied, copy id1/id2 and rg from the first displayed conventional GC row without substituting it for the atlas result.",
+    "record_key": [
+      "core",
+      "sleep_efficiency",
+      "sbp"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_id2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comparator_rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "phenotype_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_release_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source_release_label",
+        "build",
+        "phenotype_type",
+        "comparator_id1",
+        "comparator_id2",
+        "comparator_rg"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "evangelou_2018_sbp_opengwas"
+    ],
+    "split": "final",
+    "stratum": "provenance",
+    "subtype": "standard",
+    "task_id": "FIN024"
+  },
+  {
+    "pair_cluster": "core|sleep_apnea|bmi",
+    "prompt": "For exact atlas record (core, sleep_apnea, bmi), sleep source finngen_r9_sleep_apnoea and outcome source yengo_2018_bmi, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "core",
+      "sleep_apnea",
+      "bmi"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "finngen_r9_sleep_apnoea",
+      "yengo_2018_bmi"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN025"
+  },
+  {
+    "pair_cluster": "core|sleep_efficiency|scz",
+    "prompt": "For exact atlas record (core, sleep_efficiency, scz), sleep source jones_2019_accelerometer_sleep and outcome source trubetskoy_2022_scz_eur, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "core",
+      "sleep_efficiency",
+      "scz"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "trubetskoy_2022_scz_eur"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN026"
+  },
+  {
+    "pair_cluster": "extension|chronotype|panukbb_continuous__1140__both_sexes__na__na",
+    "prompt": "For exact atlas record (extension, chronotype, panukbb_continuous__1140__both_sexes__na__na), sleep source jones_2019_morning_person_ukb and outcome source PANUKBB_2025_RELEASE, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "extension",
+      "chronotype",
+      "panukbb_continuous__1140__both_sexes__na__na"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "PANUKBB_2025_RELEASE"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN027"
+  },
+  {
+    "pair_cluster": "extension|chronotype|panukbb_icd10__z95__both_sexes__na__na",
+    "prompt": "For exact atlas record (extension, chronotype, panukbb_icd10__z95__both_sexes__na__na), sleep source jones_2019_morning_person_ukb and outcome source PANUKBB_2025_RELEASE, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "extension",
+      "chronotype",
+      "panukbb_icd10__z95__both_sexes__na__na"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "PANUKBB_2025_RELEASE"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN028"
+  },
+  {
+    "pair_cluster": "validation|shortsleep|finngen_r13_M13_INTERVERTEB",
+    "prompt": "For exact atlas record (validation, shortsleep, finngen_r13_M13_INTERVERTEB), sleep source dashti_2019_short_sleep and outcome source finngen_r13_M13_INTERVERTEB, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "validation",
+      "shortsleep",
+      "finngen_r13_M13_INTERVERTEB"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "finngen_r13_M13_INTERVERTEB"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN029"
+  },
+  {
+    "pair_cluster": "validation|shortsleep|finngen_r13_K11_OTHENTERCOL",
+    "prompt": "For exact atlas record (validation, shortsleep, finngen_r13_K11_OTHENTERCOL), sleep source dashti_2019_short_sleep and outcome source finngen_r13_K11_OTHENTERCOL, copy the original family size, multiplicity method and historical threshold flag; state whether that flag by itself permits reliable biological inference.",
+    "record_key": [
+      "validation",
+      "shortsleep",
+      "finngen_r13_K11_OTHENTERCOL"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "adjustment_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "historical_threshold_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "threshold_flag_alone_clears_inference": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "family_size",
+        "adjustment_method",
+        "historical_threshold_pass",
+        "threshold_flag_alone_clears_inference"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "finngen_r13_K11_OTHENTERCOL"
+    ],
+    "split": "final",
+    "stratum": "testing_family",
+    "subtype": "standard",
+    "task_id": "FIN030"
+  },
+  {
+    "pair_cluster": "core|accel_sleep_duration|melanoma",
+    "prompt": "For exact atlas record (core, accel_sleep_duration, melanoma), sleep source jones_2019_accelerometer_sleep and outcome source finngen_r9_melanoma_skin_exallc, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "accel_sleep_duration",
+      "melanoma"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "finngen_r9_melanoma_skin_exallc"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "h2_failed",
+    "task_id": "FIN031"
+  },
+  {
+    "pair_cluster": "core|sleep_efficiency|melanoma",
+    "prompt": "For exact atlas record (core, sleep_efficiency, melanoma), sleep source jones_2019_accelerometer_sleep and outcome source finngen_r9_melanoma_skin_exallc, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "sleep_efficiency",
+      "melanoma"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "finngen_r9_melanoma_skin_exallc"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "h2_failed",
+    "task_id": "FIN032"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|hdl",
+    "prompt": "For exact atlas record (core, sleep_timing, hdl), sleep source jones_2019_accelerometer_sleep and outcome source graham_2021_hdl_eur, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "hdl"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "graham_2021_hdl_eur"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "intercept_failed",
+    "task_id": "FIN033"
+  },
+  {
+    "pair_cluster": "core|sleep_efficiency|ldl",
+    "prompt": "For exact atlas record (core, sleep_efficiency, ldl), sleep source jones_2019_accelerometer_sleep and outcome source graham_2021_ldl_eur, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "sleep_efficiency",
+      "ldl"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "graham_2021_ldl_eur"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "intercept_failed",
+    "task_id": "FIN034"
+  },
+  {
+    "pair_cluster": "core|sleep_apnea|cad",
+    "prompt": "For exact atlas record (core, sleep_apnea, cad), sleep source finngen_r9_sleep_apnoea and outcome source finngen_r9_ihd, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "sleep_apnea",
+      "cad"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "finngen_r9_sleep_apnoea",
+      "finngen_r9_ihd"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "both_pass",
+    "task_id": "FIN035"
+  },
+  {
+    "pair_cluster": "core|shortsleep|parkinson",
+    "prompt": "For exact atlas record (core, shortsleep, parkinson), sleep source dashti_2019_short_sleep and outcome source nalls_2019_parkinson_public_proxy, copy the pairwise h2-Z and intercept flags. Classify the observed gate state; do not let a nominal P value override the gate.",
+    "record_key": [
+      "core",
+      "shortsleep",
+      "parkinson"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "h2_z_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "intercept_gate_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "qc_state": {
+          "enum": [
+            "BOTH_PASS",
+            "H2_Z_FAIL",
+            "INTERCEPT_FAIL",
+            "BOTH_FAIL",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "h2_z_gate_pass",
+        "intercept_gate_pass",
+        "qc_state"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "nalls_2019_parkinson_public_proxy"
+    ],
+    "split": "final",
+    "stratum": "qc",
+    "subtype": "both_pass",
+    "task_id": "FIN036"
+  },
+  {
+    "pair_cluster": "core|sleep_timing|crohn",
+    "prompt": "For exact atlas record (core, sleep_timing, crohn), sleep source jones_2019_accelerometer_sleep and outcome source delange_2017_crohn, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "sleep_timing",
+      "crohn"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "delange_2017_crohn"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "held",
+    "task_id": "FIN037"
+  },
+  {
+    "pair_cluster": "core|napping|crohn",
+    "prompt": "For exact atlas record (core, napping, crohn), sleep source dashti_2021_daytime_napping and outcome source delange_2017_crohn, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "napping",
+      "crohn"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2021_daytime_napping",
+      "delange_2017_crohn"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "held",
+    "task_id": "FIN038"
+  },
+  {
+    "pair_cluster": "core|longsleep|crohn",
+    "prompt": "For exact atlas record (core, longsleep, crohn), sleep source dashti_2019_long_sleep and outcome source delange_2017_crohn, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "longsleep",
+      "crohn"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "delange_2017_crohn"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "held",
+    "task_id": "FIN039"
+  },
+  {
+    "pair_cluster": "core|snoring|hdl",
+    "prompt": "For exact atlas record (core, snoring, hdl), sleep source campos_2020_snoring and outcome source graham_2021_hdl_eur, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "snoring",
+      "hdl"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "campos_2020_snoring",
+      "graham_2021_hdl_eur"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "standard",
+    "task_id": "FIN040"
+  },
+  {
+    "pair_cluster": "core|sleepiness|longevity",
+    "prompt": "For exact atlas record (core, sleepiness, longevity), sleep source wang_2019_daytime_sleepiness and outcome source deelen_2019_longevity_90th, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "sleepiness",
+      "longevity"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "wang_2019_daytime_sleepiness",
+      "deelen_2019_longevity_90th"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "standard",
+    "task_id": "FIN041"
+  },
+  {
+    "pair_cluster": "core|sleepiness|cad",
+    "prompt": "For exact atlas record (core, sleepiness, cad), sleep source wang_2019_daytime_sleepiness and outcome source finngen_r9_ihd, copy directional_interpretation_status. State whether signed biological interpretation is withheld and whether a blank signed estimate establishes a null effect.",
+    "record_key": [
+      "core",
+      "sleepiness",
+      "cad"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "blank_signed_field_establishes_null": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "directional_interpretation_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signed_interpretation_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "directional_interpretation_status",
+        "signed_interpretation_withheld",
+        "blank_signed_field_establishes_null"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "wang_2019_daytime_sleepiness",
+      "finngen_r9_ihd"
+    ],
+    "split": "final",
+    "stratum": "direction",
+    "subtype": "standard",
+    "task_id": "FIN042"
+  },
+  {
+    "pair_cluster": "validation|longsleep|gwas_catalog_GCST90479148",
+    "prompt": "For exact atlas record (validation, longsleep, gwas_catalog_GCST90479148), sleep source dashti_2019_long_sleep and outcome source gwas_catalog_GCST90479148, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "longsleep",
+      "gwas_catalog_GCST90479148"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "gwas_catalog_GCST90479148"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "uncertainty_hold",
+    "task_id": "FIN043"
+  },
+  {
+    "pair_cluster": "validation|sleepdur|gwas_catalog_GCST90479148",
+    "prompt": "For exact atlas record (validation, sleepdur, gwas_catalog_GCST90479148), sleep source dashti_2019_sleep_duration and outcome source gwas_catalog_GCST90479148, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "sleepdur",
+      "gwas_catalog_GCST90479148"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_sleep_duration",
+      "gwas_catalog_GCST90479148"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "uncertainty_hold",
+    "task_id": "FIN044"
+  },
+  {
+    "pair_cluster": "validation|sleepdur|finngen_r13_K11_OTHENTERCOL",
+    "prompt": "For exact atlas record (validation, sleepdur, finngen_r13_K11_OTHENTERCOL), sleep source dashti_2019_sleep_duration and outcome source finngen_r13_K11_OTHENTERCOL, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "sleepdur",
+      "finngen_r13_K11_OTHENTERCOL"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_sleep_duration",
+      "finngen_r13_K11_OTHENTERCOL"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "standard",
+    "task_id": "FIN045"
+  },
+  {
+    "pair_cluster": "validation|longsleep|finngen_r13_N14_CALCUKIDUR",
+    "prompt": "For exact atlas record (validation, longsleep, finngen_r13_N14_CALCUKIDUR), sleep source dashti_2019_long_sleep and outcome source finngen_r13_N14_CALCUKIDUR, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "longsleep",
+      "finngen_r13_N14_CALCUKIDUR"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "finngen_r13_N14_CALCUKIDUR"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "standard",
+    "task_id": "FIN046"
+  },
+  {
+    "pair_cluster": "validation|sleepdur|finngen_r13_M13_INTERVERTEB",
+    "prompt": "For exact atlas record (validation, sleepdur, finngen_r13_M13_INTERVERTEB), sleep source dashti_2019_sleep_duration and outcome source finngen_r13_M13_INTERVERTEB, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "sleepdur",
+      "finngen_r13_M13_INTERVERTEB"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_sleep_duration",
+      "finngen_r13_M13_INTERVERTEB"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "standard",
+    "task_id": "FIN047"
+  },
+  {
+    "pair_cluster": "validation|shortsleep|finngen_r13_K11_CHOLELITH",
+    "prompt": "For exact atlas record (validation, shortsleep, finngen_r13_K11_CHOLELITH), sleep source dashti_2019_short_sleep and outcome source finngen_r13_K11_CHOLELITH, report both sleep source IDs for the historical validation and linked discovery rows, whether the sleep source is reused, whether this is fully independent two-trait replication, and whether reliable inference is currently withheld.",
+    "record_key": [
+      "validation",
+      "shortsleep",
+      "finngen_r13_K11_CHOLELITH"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "discovery_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fully_independent_two_trait_replication": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "reliable_inference_withheld": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "sleep_source_reused": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        },
+        "validation_sleep_source_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "validation_sleep_source_id",
+        "discovery_sleep_source_id",
+        "sleep_source_reused",
+        "fully_independent_two_trait_replication",
+        "reliable_inference_withheld"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "finngen_r13_K11_CHOLELITH"
+    ],
+    "split": "final",
+    "stratum": "validation",
+    "subtype": "standard",
+    "task_id": "FIN048"
+  },
+  {
+    "pair_cluster": "core|chronotype|breast_cancer",
+    "prompt": "For exact atlas record (core, chronotype, breast_cancer), sleep source jones_2019_morning_person_ukb and outcome source bcac_2020_overall_breast_cancer, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "chronotype",
+      "breast_cancer"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "bcac_2020_overall_breast_cancer"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN049"
+  },
+  {
+    "pair_cluster": "core|accel_sleep_duration|asthma",
+    "prompt": "For exact atlas record (core, accel_sleep_duration, asthma), sleep source jones_2019_accelerometer_sleep and outcome source finngen_r9_asthma_exmore, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "accel_sleep_duration",
+      "asthma"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_accelerometer_sleep",
+      "finngen_r9_asthma_exmore"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN050"
+  },
+  {
+    "pair_cluster": "core|chronotype|alz",
+    "prompt": "For exact atlas record (core, chronotype, alz), sleep source jones_2019_morning_person_ukb and outcome source bellenguez_2022_alzheimer_stage1, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "chronotype",
+      "alz"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "bellenguez_2022_alzheimer_stage1"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN051"
+  },
+  {
+    "pair_cluster": "core|sleepdur|adhd",
+    "prompt": "For exact atlas record (core, sleepdur, adhd), sleep source dashti_2019_sleep_duration and outcome source demontis_2023_adhd_eur, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "sleepdur",
+      "adhd"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_sleep_duration",
+      "demontis_2023_adhd_eur"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN052"
+  },
+  {
+    "pair_cluster": "core|chronotype|cad",
+    "prompt": "For exact atlas record (core, chronotype, cad), sleep source jones_2019_morning_person_ukb and outcome source finngen_r9_ihd, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "chronotype",
+      "cad"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jones_2019_morning_person_ukb",
+      "finngen_r9_ihd"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN053"
+  },
+  {
+    "pair_cluster": "core|sleep_apnea|alz",
+    "prompt": "For exact atlas record (core, sleep_apnea, alz), sleep source finngen_r9_sleep_apnoea and outcome source bellenguez_2022_alzheimer_stage1, report rg and classify what the correlation establishes about causal direction and a therapeutic intervention; use only the supplied scope.",
+    "record_key": [
+      "core",
+      "sleep_apnea",
+      "alz"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_direction": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_ESTABLISHED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intervention_effect_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rg": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "rg",
+        "causal_direction",
+        "intervention_effect_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "finngen_r9_sleep_apnoea",
+      "bellenguez_2022_alzheimer_stage1"
+    ],
+    "split": "final",
+    "stratum": "causal",
+    "subtype": "standard",
+    "task_id": "FIN054"
+  },
+  {
+    "pair_cluster": "core|insomnia|hdl",
+    "prompt": "For exact atlas record (core, insomnia, hdl), sleep source jansen_2019_insomnia_ukb and outcome source graham_2021_hdl_eur, copy descriptive_delta from the first displayed sensitivity row and classify its uncertainty. State whether a calibrated between-fit difference test is available.",
+    "record_key": [
+      "core",
+      "insomnia",
+      "hdl"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "calibrated_difference_test_available": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "descriptive_delta": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "difference_uncertainty": {
+          "enum": [
+            "CALIBRATED",
+            "NOT_CALIBRATED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "descriptive_delta",
+        "difference_uncertainty",
+        "calibrated_difference_test_available"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "jansen_2019_insomnia_ukb",
+      "graham_2021_hdl_eur"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "contrast",
+    "task_id": "FIN055"
+  },
+  {
+    "pair_cluster": "core|longsleep|ms",
+    "prompt": "For exact atlas record (core, longsleep, ms), sleep source dashti_2019_long_sleep and outcome source finngen_r9_ms, copy descriptive_delta from the first displayed sensitivity row and classify its uncertainty. State whether a calibrated between-fit difference test is available.",
+    "record_key": [
+      "core",
+      "longsleep",
+      "ms"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "calibrated_difference_test_available": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "descriptive_delta": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "difference_uncertainty": {
+          "enum": [
+            "CALIBRATED",
+            "NOT_CALIBRATED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "descriptive_delta",
+        "difference_uncertainty",
+        "calibrated_difference_test_available"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_long_sleep",
+      "finngen_r9_ms"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "contrast",
+    "task_id": "FIN056"
+  },
+  {
+    "pair_cluster": "core|shortsleep|hdl",
+    "prompt": "For exact atlas record (core, shortsleep, hdl), sleep source dashti_2019_short_sleep and outcome source graham_2021_hdl_eur, copy descriptive_delta from the first displayed sensitivity row and classify its uncertainty. State whether a calibrated between-fit difference test is available.",
+    "record_key": [
+      "core",
+      "shortsleep",
+      "hdl"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "calibrated_difference_test_available": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "descriptive_delta": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "difference_uncertainty": {
+          "enum": [
+            "CALIBRATED",
+            "NOT_CALIBRATED",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "descriptive_delta",
+        "difference_uncertainty",
+        "calibrated_difference_test_available"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "dashti_2019_short_sleep",
+      "graham_2021_hdl_eur"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "contrast",
+    "task_id": "FIN057"
+  },
+  {
+    "pair_cluster": "validation|chronotype|gwas_catalog_GCST90479148",
+    "prompt": "For exact atlas record (validation, chronotype, gwas_catalog_GCST90479148), state whether the exact estimate is present in this atlas validation table and whether table-specific absence establishes biological absence or global novelty.",
+    "record_key": [
+      "validation",
+      "chronotype",
+      "gwas_catalog_GCST90479148"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "biological_absence_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "estimate_present_in_requested_table": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "global_novelty_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "estimate_present_in_requested_table",
+        "biological_absence_established",
+        "global_novelty_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "chronotype",
+      "gwas_catalog_GCST90479148"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "absent",
+    "task_id": "FIN058"
+  },
+  {
+    "pair_cluster": "validation|napping|gwas_catalog_GCST90479148",
+    "prompt": "For exact atlas record (validation, napping, gwas_catalog_GCST90479148), state whether the exact estimate is present in this atlas validation table and whether table-specific absence establishes biological absence or global novelty.",
+    "record_key": [
+      "validation",
+      "napping",
+      "gwas_catalog_GCST90479148"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "biological_absence_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "estimate_present_in_requested_table": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "global_novelty_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "estimate_present_in_requested_table",
+        "biological_absence_established",
+        "global_novelty_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "napping",
+      "gwas_catalog_GCST90479148"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "absent",
+    "task_id": "FIN059"
+  },
+  {
+    "pair_cluster": "validation|snoring|gwas_catalog_GCST90479148",
+    "prompt": "For exact atlas record (validation, snoring, gwas_catalog_GCST90479148), state whether the exact estimate is present in this atlas validation table and whether table-specific absence establishes biological absence or global novelty.",
+    "record_key": [
+      "validation",
+      "snoring",
+      "gwas_catalog_GCST90479148"
+    ],
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "biological_absence_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "estimate_present_in_requested_table": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "global_novelty_established": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHHELD_DIRECTION",
+            "WITHHELD_UNCERTAINTY",
+            "NO_RELEASE_RECORD",
+            "INSUFFICIENT_TARGET_SOURCE_EVIDENCE"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "estimate_present_in_requested_table",
+        "biological_absence_established",
+        "global_novelty_established"
+      ],
+      "type": "object"
+    },
+    "selection_seed": 20261012,
+    "source_clusters": [
+      "snoring",
+      "gwas_catalog_GCST90479148"
+    ],
+    "split": "final",
+    "stratum": "missing_and_contrast",
+    "subtype": "absent",
+    "task_id": "FIN060"
+  }
+]

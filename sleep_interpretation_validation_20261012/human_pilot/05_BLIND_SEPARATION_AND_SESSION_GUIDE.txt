@@ -1,0 +1,24 @@
+BLIND SEPARATION AND SESSION GUIDE — PREPARATION ONLY
+
+Separation roles
+The investigator retains consent/contact records and the contact-to-study-code linkage in approved restricted storage outside Git. The allocation administrator retains study-code-to-original-planned-slot and workflow/order mappings separately. Scorers receive only a fresh response-bundle code, task ID, untouched answer and evidence references, plus the exact prompts and authorized local private key. They do not receive participant identity, planned slot, workflow labels, order, timestamps, elapsed time, allocator metadata, AI benchmark answers, other scorer judgments or the answer-bearing review. Final code linkage is held by a steward until both scorers lock independent scores.
+
+Preparing a scorer bundle
+Preserve the unedited response as restricted source record. Remove direct identifiers accidentally entered in an answer through documented minimal redaction, retaining the original and a redaction log. Do not paraphrase scientific wording or remove uncertainty/context. Strip interface headers/workflow names where feasible without changing content and log this operation. Assign unrelated bundle codes; no example codes represent actual participants. Randomize bundle order prospectively with a recorded seed separate from the frozen participant allocation. Scorer forms use unit IDs U01, U02 etc. in the exact order of each task's original private required_units array; definitions remain only in the private key. No key text is copied into these forms.
+
+Independence and scoring
+Scorers lock separate dated records before discussing them. Unit states are CORRECT / INCORRECT / NOT_ASSESSABLE; unanswered has no invented answer and does not pass. Required units and interpretation flags follow the unchanged key/protocol. Primary task credit requires both scorers to say all required units are correct and there is no material unsupported claim. Retain every disagreement and adjudicate separately after independent lock. Distinctive query phrasing may reveal workflow despite label removal; record observed/possible unblinding as an administrative limitation after independent scoring without adding a participant task. Do not claim perfect blinding.
+
+Session implementation reference
+Use the exact original allocation and twelve tasks; workflow assignment is supplied from the preserved plan, not inferred from answer quality. Equal files and links must match the original shared-evidence manifest in both workflows. Existing query CLI syntax is:
+python3 /Volumes/Extreme\ SSD/codex_sleep_gwas_atlas_v8_20261011/resource_tools/query_atlas.py --release /Volumes/Extreme\ SSD/codex_sleep_gwas_atlas_v8_20261011/release_candidate search 'SEARCH_TEXT'
+python3 /Volumes/Extreme\ SSD/codex_sleep_gwas_atlas_v8_20261011/resource_tools/query_atlas.py --release /Volumes/Extreme\ SSD/codex_sleep_gwas_atlas_v8_20261011/release_candidate estimate --family FAMILY --sleep EXACT_SLEEP_TRAIT --outcome EXACT_OUTCOME_TRAIT
+These placeholders describe navigation, contain no answers, and were not run as human sessions. A separate source-aware AI release is not the human freeze. Investigator assessment of unresolved MVP source/CI uncertainty and frozen CLI/input compatibility is required before execution.
+
+The original response template is byte-preserved. Additional administrative/scorer records are not participant questions. All blank forms remain NOT_STARTED until genuine consented collection begins. Never put identifiers, consent signatures, real linkage maps or identifiable responses in this repository or public packet.
+
+PREPARATION VERIFICATION FINDING — 2026-10-12
+The original evidence manifest verification passes 10 of 11 inventoried files. Original release_candidate/schema.json fails its declared size and SHA-256 checks. The existing original manifest and schema are left untouched; no equality claim or human execution clearance follows. Investigators must establish the provenance/disposition of this mismatch before any participant sees a packet. The original manifest was copied byte-for-byte rather than silently repaired. frozen_input_verification.json records the exact observed check.
+
+SEPARATE AI RELEASE
+/Volumes/Extreme SSD/sleep_interpretation_validation_20261012/source_qualified_candidate is a separate AI input with a mandatory MVP uncertainty hold. It is not substituted into this human pilot. The original twelve frozen questions, allocation and key are unchanged and do not establish reliable uncertainty for the MVP-linked historical estimate. Pre-enrollment investigator disposition of that caveat is required; no recruitment authorization is documented by this preparation.

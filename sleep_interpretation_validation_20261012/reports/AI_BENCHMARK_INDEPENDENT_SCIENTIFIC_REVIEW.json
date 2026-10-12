@@ -1,0 +1,180 @@
+{
+  "schema_version": "independent-ai-benchmark-scientific-review-v1",
+  "reviewed_at_utc": "2026-10-12T17:33:11.148752+00:00",
+  "reviewer": "independent Codex audit agent benchmark_independent_audit; no final model responses consulted",
+  "scope": "AI retrieval/admissibility benchmark only; not human-pilot scoring or raw GWAS source-validity certification",
+  "decision": "READY_FOR_JOINT_FREEZE_AND_REGISTERED_90_CELL_DESCRIPTIVE_FEASIBILITY",
+  "blocking_defects_remaining": [],
+  "approved_execution": {
+    "selected_task_ids": [
+      "FIN057",
+      "FIN032",
+      "FIN009",
+      "FIN038",
+      "FIN003",
+      "FIN030",
+      "FIN021",
+      "FIN043",
+      "FIN054",
+      "FIN014"
+    ],
+    "planned_cells": 90,
+    "models": [
+      {
+        "alias": "gpt-6.1-sol",
+        "exact_backend_version": "UNKNOWN",
+        "provider": "OpenAI",
+        "reasoning_effort_requested": "medium",
+        "sampling_seed": "UNKNOWN_UNCONTROLLABLE",
+        "temperature": "UNKNOWN_UNCONTROLLABLE"
+      },
+      {
+        "alias": "gpt-6-sol",
+        "exact_backend_version": "UNKNOWN",
+        "provider": "OpenAI",
+        "reasoning_effort_requested": "medium",
+        "sampling_seed": "UNKNOWN_UNCONTROLLABLE",
+        "temperature": "UNKNOWN_UNCONTROLLABLE"
+      },
+      {
+        "alias": "gpt-6-luna",
+        "exact_backend_version": "UNKNOWN",
+        "provider": "OpenAI",
+        "reasoning_effort_requested": "medium",
+        "sampling_seed": "UNKNOWN_UNCONTROLLABLE",
+        "temperature": "UNKNOWN_UNCONTROLLABLE"
+      }
+    ],
+    "fresh_agent_per_cell": true,
+    "instruction_only_isolation": true,
+    "technical_isolation": false,
+    "main_60_benchmark_executed": false
+  },
+  "verification": {
+    "checks": {
+      "canonical_packet_pairs": 66,
+      "source_rows_and_hashes": 200,
+      "whole_gold_objects_adjudicated": 198,
+      "gold_fields_adjudicated": 954
+    },
+    "errors": [],
+    "final_task_count": 60,
+    "development_task_count": 6,
+    "final_strata": {
+      "uncertainty": 6,
+      "phenotype": 6,
+      "overlap": 6,
+      "provenance": 6,
+      "testing_family": 6,
+      "qc": 6,
+      "direction": 6,
+      "validation": 6,
+      "causal": 6,
+      "missing_and_contrast": 6
+    },
+    "sleep_source_cluster_count": 13,
+    "outcome_source_cluster_count": 27,
+    "A_format_only_safe_abstention_baseline": {
+      "strict_tasks": 56,
+      "task_denominator": 60,
+      "correct_fields": 276,
+      "field_denominator": 288
+    },
+    "A_exact_target_source_authentication_coverage": {
+      "supported_tasks": 0,
+      "total_tasks": 60
+    },
+    "max_serialized_packet_characters": {
+      "A": 81665,
+      "B": 85623,
+      "C": 85576
+    },
+    "reviewed_hashes": {
+      "sleep_interpretation_validation_20261012/benchmark/execution_registration.json": "2ebc876695d076e86be47d22b3f047a87c845a481acd322302299ca57565223f",
+      "sleep_interpretation_validation_20261012/benchmark/final_tasks.json": "f0757a212d583889acd55f346f05e55fe68ec2d7be846d20f8c8707cedc35e20",
+      "sleep_interpretation_validation_20261012/benchmark/build_benchmark.py": "c1f5ba07e5045a1ecfefdd27a1428c427a270b5c8a49d82e14bb0814c717b2f8",
+      "sleep_interpretation_validation_20261012/benchmark/validate_benchmark.py": "9cb66ed1cccd5905c0c8778fb9e4ba8e0997546207acd5f4b3dfc214ce1e93d4",
+      "sleep_interpretation_validation_20261012/benchmark/PROTOCOL_AND_SAP.md": "3b06afba2a00225c5a0ad8e9d15e22b852bc02ec591aab7f0d34ae267bebb89a",
+      "sleep_interpretation_validation_20261012/benchmark/development_tasks.json": "c2282894bd3387e7921692e997fd6dc483d4c2bab61742742587bb6cb06c2278",
+      "sleep_interpretation_validation_20261012/benchmark/score_benchmark.py": "843b8c61fae6db9f0cf0f6e2cc4825377aa63e263823029dfa8dab4a3145d93a",
+      "sleep_interpretation_validation_20261012/benchmark/README.md": "3d49146466d95cf704680a0a0fa16523e78d101b0fd813fd3e8a24ffc33fb583",
+      "sleep_interpretation_validation_20261012/benchmark/construction_manifest.json": "5683c51c67e0bb86e15f44fd84bf4de3369eb3137b6a0e96849a5bcd02d4f3ab",
+      "sleep_interpretation_validation_20261012/benchmark/prepare_execution.py": "901525d5400f33ba344c2227fa51401abe37517b7f1f00f684de91fae0dc6f7e"
+    },
+    "private_hashes": {
+      "GOLD_NOT_FOR_SOLVERS.json": "c5bef24c3c2147c7ef08f5f8faa9f5c9201cc7245dc8c9947577e0bfda7900a3",
+      "condition_A_inputs.json": "f7723328c21520928c523e3f174c0f32ef734d5ce661bbaa77645c5ca5e38466",
+      "condition_B_inputs.json": "e22963eaeec2d679b028ed20b471daf80f4ef22ddb8c33c31c1a0aa8db4e6e5c",
+      "condition_C_inputs.json": "f1f1c2f0f0a1a58c966fd35c246322291de3b16823fcb40a79f15e28efb4f845"
+    }
+  },
+  "registration_checks": {
+    "independent_minimum_SHA_subset_match": true,
+    "one_task_per_stratum": true,
+    "unique_scheduled_cells": 90,
+    "complete_packet_object_hash_and_byte_checks": 90,
+    "all_six_condition_permutations_count_each": 5,
+    "selected_conventional_supported_factual_fields_per_model": 3,
+    "required_field_role_inventory_complete": true,
+    "targeted_scorer_safety_and_type_checks_passed": 5,
+    "response_packet_hash_provenance_guard_reviewed": true
+  },
+  "resolved_defects": [
+    {
+      "id": "A01",
+      "problem": "Blanket A-null gold incorrectly withheld logical non-establishment judgments",
+      "resolution": "Condition-specific false/NOT_ESTABLISHED policy; actual unavailable target facts remain null; field roles added and independently verified"
+    },
+    {
+      "id": "A02",
+      "problem": "Query source IDs could be taken as observed evidence while A expected null",
+      "resolution": "System explicitly defines query identifiers as unverified selectors requiring authenticated evidence rows"
+    },
+    {
+      "id": "A03",
+      "problem": "FIN019 unknown build sentinel conflicted with null-for-unavailable instruction",
+      "resolution": "UNRESOLVED/UNKNOWN/NA/blank metadata normalized to null"
+    },
+    {
+      "id": "A04",
+      "problem": "Status availability wording and scorer conflated wrong status with unsafe inference clearance",
+      "resolution": "Explicit record-state mapping; only requested claim fields trigger unsafe hold clearance, AVAILABLE alone does not"
+    },
+    {
+      "id": "A05",
+      "problem": "Nine cumulative sessions created carryover/context/session confounding",
+      "resolution": "Superseded by90fresh per-cell agents for10prespecified final items"
+    },
+    {
+      "id": "A06",
+      "problem": "Scorer initially hardcoded60/180 and emitted bootstrap intervals on tiny subsets",
+      "resolution": "Registration-driven90planned-cell accounting; no confidence interval for ten-item feasibility; A answerability/abstention metrics implemented"
+    }
+  ],
+  "remaining_scientific_limits": [
+    "The instrument measures exact-key retrieval and reproduction of supplied admissibility notes; it does not validate general scientific interpretation, resource discovery, or end-user utility.",
+    "A exact target-source support is0/60 by construction. A generic schema-aware safe-abstention policy matches56/60tasks and276/288fields. Pooling A/B/C accuracy would conflate support with representation.",
+    "B and C both receive the already selected record, same scope qualifications and same conventional candidate rows. B is a repackaged singleton-table packet, not realistic uncurated table search.",
+    "Human and development exact records are excluded, but source constructs and qualification facts recur. New record keys do not imply independent scientific knowledge.",
+    "Three aliases are OpenAI variants, not independent providers or confirmed independent model families; effective backend version, temperature and sampling seed are unknown/uncontrollable.",
+    "Instruction-only isolation cannot establish technical blinding. Actual packet reads/writes and tool traces must be preserved; self-report alone cannot certify isolation.",
+    "The ten-item feasibility subset cannot stand in for60tasks. Each stratum has onlyoneitem, no confirmatory significance claim or general interface-superiority claim is supported.",
+    "Full-benchmark source-weighted intervals are exploratory reweighting sensitivities with13sleep and27outcome source IDs, not validated population or provider confidence intervals.",
+    "Historical source values and hold qualifications were checked against frozen inputs; raw GWAS validity, redistribution rights and human scoring readiness are separate unresolved domains."
+  ],
+  "freeze_requirements": [
+    "Freeze the reviewed dataset/protocol/scorer/registry/packets/gold hashes together before any final response.",
+    "Execute only the registered90fresh cells with no private gold, other condition, sibling response, or outside evidence supplied.",
+    "Preserve first attempts, permitted transport/interruption retries, failures, packet completeness evidence and observable tool traces.",
+    "Report missing/unevaluable cells separately and keep the primary endpoint strict all-required-fields-correct task rate.",
+    "Any later substantive task/gold/scoring correction must preserve original hashes and analyses; no response-driven retuning."
+  ],
+  "confidentiality": {
+    "private_AI_gold_inspected": true,
+    "private_human_pilot_key_inspected": false,
+    "private_AI_gold_values_reproduced_in_report": false,
+    "final_model_responses_generated_by_auditor": 0,
+    "legacy_fits_inspected_or_rerun": false,
+    "new_source_downloads": false
+  }
+}
