@@ -1,0 +1,59 @@
+{
+  "schema": "bounded_GERA_source_acquisition/1",
+  "frozen_utc": "2026-10-13T22:26:00.916706+00:00",
+  "status": "FROZEN_PENDING_FOCUSED_REVIEW",
+  "scientific_uncertainty": "Whether exact GERA additive clinical-insomnia full statistics can support source-only h2 feasibility after result-free QC. No pair selected or examined.",
+  "outcome_that_changes_decision": "Complete exact source enables finite common-SNP/source-N/QC preprocessing admission; failure or unresolved contract preserves no native admission.",
+  "source": {
+    "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv",
+    "bytes": 2019290168,
+    "etag": "785bec38-62d824a0398bc",
+    "last_modified": "2025-02-07T00:17:51Z",
+    "md5_from_yaml": "6dfa12cf01f443e1115d25b83a77d703"
+  },
+  "assembly": {
+    "raw_yaml": "blank",
+    "primary_provider_README": "GRCh37 positionHg19",
+    "policy": "No inferred assembly from filename; no liftover/harmonised hm_code step admitted. Raw full coordinate/reference QC still required."
+  },
+  "destination": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv",
+  "checkpoint": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv.part",
+  "resource": {
+    "maximum_transfer_bytes": 2200000000,
+    "maximum_seconds": 1800,
+    "connections": 1,
+    "curl_max_rss_bytes": 134217728,
+    "maximum_retained_source_bytes": 2200000000,
+    "ssd_minimum_before_bytes": 5368709120,
+    "internal_minimum_before_bytes": 1073741824,
+    "internal_emergency_floor_bytes": 1073741824,
+    "native_3GiB_guard_unchanged": true,
+    "internal_free_at_freeze": 3329019904,
+    "ssd_free_at_freeze": 608450904064,
+    "scratch": "SSD only"
+  },
+  "transport": {
+    "TLS_verified": true,
+    "fail_HTTP_errors": true,
+    "identity_encoding": true,
+    "If_Match": "\"785bec38-62d824a0398bc\"",
+    "redirects": "not needed; do not silently follow another host",
+    "connect_timeout_seconds": 30,
+    "retry": "No automatic retries. Preserve partial on failure. Any later resume requires exact unchanged ETag/length and HTTP206 Content-Range start equal checkpoint length; otherwise preserve and stop.",
+    "existing_destination_or_checkpoint": "Stop and inspect original receipt; no overwrite or full redownload of verified source.",
+    "verification": "HTTP200; exact body size; streaming MD5 equals published raw YAML checksum; streaming SHA256 for local identity; fsync then atomic rename on SSD. No source numbers exported.",
+    "maximum_seconds_scope": "Transfer, verification and final publication share the same monotonic 1800-second deadline; verification observes the same internal floor.",
+    "publication": "Exclusive creation of own checkpoint; BSD mv -n non-clobbering publication only after verification. Existing final stays untouched and verified checkpoint retained if publication cannot occur."
+  },
+  "scientific_scope": {
+    "acquisition_only": true,
+    "preprocessing_admitted": false,
+    "h2_or_rg_admitted": false,
+    "source_pair_tests": 0,
+    "all_original_families_estimates_QC_holds_preserved": true,
+    "participant_or_private_key_access": false
+  },
+  "rights": "Exact Catalog accession CC0 metadata; retain source provenance; no protected body committed.",
+  "downstream_ID_rule": "rs_id_all is provider chromosome/position/alleles identifier, not guaranteed dbSNP rsID. Future GRCh37 HM3 coordinate/allele mapping requires separately admitted rules.",
+  "clarification_preserves_prior_plan_sha256": "13f311e4e2461ec734e49a2508dbddca51eacbbb9b420eed30290519650cf1a5"
+}

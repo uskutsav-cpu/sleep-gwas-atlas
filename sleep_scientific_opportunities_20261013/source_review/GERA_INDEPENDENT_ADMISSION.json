@@ -1,0 +1,291 @@
+{
+  "schema": "independent_genetic_epidemiology_source_admission/1.0",
+  "recorded_utc": "2026-10-13T22:07:07.546410+00:00",
+  "accession": "GCST90086097",
+  "decision": {
+    "metadata_review": "GO_JUSTIFIED",
+    "full_source_preprocessing": "CONDITIONAL_NOT_LAUNCHABLE_NOW",
+    "native_fit": "NO_GO_NOW",
+    "confirmatory_source_or_pair_admission": "NO_GO_NOW",
+    "reason": "Source-wide scientific QC, insomnia signal/precision, exact intersections/family and current internal storage guard unresolved."
+  },
+  "construct": {
+    "source_name": "GERA ICD9-coded INSOMNIA",
+    "catalog_label": "Frequent insomnia symptoms (additive model)",
+    "ICD9CM_codes": [
+      "307.41",
+      "307.42",
+      "327.0",
+      "327.00",
+      "327.01",
+      "327.02",
+      "327.09",
+      "780.52"
+    ],
+    "qualifying_event_count": "UNKNOWN",
+    "observation_window": "UNKNOWN",
+    "control_exclusions": "UNKNOWN",
+    "pure_chronic_primary_insomnia_certified": false,
+    "symptom_equivalence_certified": false
+  },
+  "effect_lineage": {
+    "data_model": "additive logistic",
+    "beta_supplied": true,
+    "SE_supplied": true,
+    "raw_provider_beta": "frequentist_add_beta_1",
+    "raw_provider_SE": "frequentist_add_se_1",
+    "raw_effect_allele": "alleleB",
+    "harmonised_beta": "beta",
+    "harmonised_SE": "standard_error",
+    "exact_harmonised_transform_full_file_certified": false,
+    "selected_by_effect_or_P": false
+  },
+  "N_design": {
+    "cases": 3972,
+    "controls": 52665,
+    "N_total": 56637,
+    "case_fraction": 0.07013083320091107,
+    "single_cohort_design_N_eff": 14773.761322103925,
+    "N_eff_over_total": 0.2608499977418282,
+    "source_selector": "1. GERA samples!A16:C16",
+    "per_variant_N_case_control_mapping": "UNKNOWN",
+    "power_inferred": false,
+    "population_prevalence": "UNKNOWN"
+  },
+  "assembly": {
+    "harmonised": "GRCh38",
+    "coordinate_system": "1-based",
+    "project_reference_workflow": "GRCh37",
+    "silent_liftover_admitted": false,
+    "compatible_reference_disposition": "UNRESOLVED"
+  },
+  "published_signal_search": {
+    "status": "NO_INSOMNIA_SPECIFIC_H2_OR_PAIR_POWER_IDENTIFIED_IN_INSPECTED_PRIMARY_MATERIAL",
+    "insomnia_h2": null,
+    "insomnia_h2_SE": null,
+    "insomnia_h2_Z": null,
+    "LDSC_intercept": null,
+    "rg_precision_or_power": null,
+    "primary_body_term_counts": {
+      "heritability": 2,
+      "ld score": 0,
+      "ldsc": 0,
+      "insomnia": 0
+    },
+    "workbook_scan": {
+      "1. GERA samples": {
+        "rows": 26,
+        "columns": 5,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": [
+          16
+        ]
+      },
+      "2. Power Comparison T2D": {
+        "rows": 234,
+        "columns": 30,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "3. Power Comparison Macular": {
+        "rows": 40,
+        "columns": 26,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "4. All associations": {
+        "rows": 105,
+        "columns": 16,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "5. Replication GWAS Catalog": {
+        "rows": 3391,
+        "columns": 24,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "6. Colocalization": {
+        "rows": 73,
+        "columns": 17,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "7. Imputation Evaluation": {
+        "rows": 48,
+        "columns": 23,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "8. Replication UK Biobank": {
+        "rows": 71,
+        "columns": 20,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "9. UK Biobank biomarkers": {
+        "rows": 46,
+        "columns": 15,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      },
+      "10. Cross-phenotype": {
+        "rows": 27,
+        "columns": 9,
+        "heritability_cell_matches": 0,
+        "insomnia_row_indices": []
+      }
+    },
+    "supplementary_information_pdf_fetched": false,
+    "supplementary_information_fetch_cap_bytes": 10000000,
+    "exhaustive_published_absence_claimed": false,
+    "other_cohort_or_twin_h2_substituted": false
+  },
+  "gates": {
+    "full_body_checksum_EOF": "UNKNOWN",
+    "finite_beta_positive_SE": "UNKNOWN",
+    "accepted_harmonisation_codes": "UNKNOWN",
+    "allele_orientation": "UNKNOWN",
+    "INFO_MAF_and_HapMap3_retention": "UNKNOWN",
+    "effective_N_semantics": "UNRESOLVED",
+    "h2_Z_gate": 4,
+    "h2_intercept_gate": 1.2,
+    "necessary_h2_gate_satisfied": "UNKNOWN_NOT_TESTED",
+    "current_internal_guard_satisfied": false,
+    "cohort_disjointness_certified": false,
+    "confirmatory_family_declared": false,
+    "native_h2_gate_evaluated": false
+  },
+  "inference_limits": [
+    "source-defined clinical transport only",
+    "sleep-source replacement alone not independent two-trait replication",
+    "shared outcome requires joint covariance for between-rg comparison",
+    "historical396/1200 BH and217 family unchanged",
+    "no clinical equivalence, causal or biological-null claim"
+  ],
+  "MVP_GCST90479148_CI_SE_hold": "PRESERVED",
+  "new_scientific_association_evidence": false,
+  "research_assistance_provider_independence_claimed": false,
+  "scope": {
+    "full_GWAS_body_downloads": 0,
+    "native_fits": 0,
+    "effect_based_selection": false,
+    "private_participant_key_searches": 0,
+    "manuscript_changes": 0,
+    "production_panel_changes": 0,
+    "Git_mutations": 0
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_guindo2021_primary.xml",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8065056/fullTextXML",
+      "selector": "Methods: The analysis of GERA cohort / Analyzing GERA cohort using GUIDANCE; complete main-body term review",
+      "SHA256": "2e7175e08b6b487bbfd0a91746dccafdc74799078a84a2544269d536acfb3116",
+      "bytes": 172352
+    },
+    {
+      "id": "S2",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_guindo2021_SupplementaryData1_10.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-021-21952-4/MediaObjects/41467_2021_21952_MOESM4_ESM.xlsx",
+      "selector": "1. GERA samples!A16:C16; all10 sheet headings/cells searched for heritability/insomnia; sheets2/3 power scope",
+      "SHA256": "43792842a9612d21b784a703c0c0e9caccd93f5140c0f89b1a964e987932b521",
+      "bytes": 587486
+    },
+    {
+      "id": "S3",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_dbGaP_DiseaseDefinitions.pdf",
+      "url": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+      "selector": "Printed page23, zero-based22: INSOMNIA rows; source document revised2013-03-26",
+      "SHA256": "15e4602e2d6ee04b012b9cbc29386c54f50620cbe0ddccf65ab11bad4030227e",
+      "bytes": 222134
+    },
+    {
+      "id": "S4",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_independent_provider_README.txt",
+      "url": "https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt",
+      "selector": "Autosome fields: alleleB, all_total, frequentist_add_beta_1, frequentist_add_se_1, frequentist_add_pvalue, info_all; X fields distinct",
+      "SHA256": "e26d052af7dc416913f6a6712341f773d41c911280164a49a98520397bf1e53a",
+      "bytes": 2387
+    },
+    {
+      "id": "S5",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_independent_harmonised_metadata.yaml",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.h.tsv.gz-meta.yaml",
+      "selector": "gwas_id; genome_assembly; coordinate_system; samples; data_file_md5sum; harmonisation status/reference",
+      "SHA256": "d6f5f276e4f528585266d031d2d60c8b8f5ac71adfbef13ecb4cab3dab052cb2",
+      "bytes": 815
+    },
+    {
+      "id": "S6",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PRIMARY_CONTRACT_METADATA_20261013.json",
+      "url": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097",
+      "selector": "Exact catalog record, bounded raw/harmonised headers and upstream harmonisation log from independent cohort review",
+      "SHA256": "2ecc5624e3126d5fd6e726ecb12b61f5f356ccc321196b83354f410b19ae8e85",
+      "bytes": 8426
+    },
+    {
+      "id": "S7",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_guindo2021_SupplementDescription.pdf",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-021-21952-4/MediaObjects/41467_2021_21952_MOESM3_ESM.pdf",
+      "selector": "Description of Supplementary Data1\u201310; one page",
+      "SHA256": "00aa8338513bfa2037eb475f300e0d72df5f369d2cf467a67f10e31da9f2b8e6",
+      "bytes": 15339
+    },
+    {
+      "id": "S8",
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_independent_ICD9_NLM_definitions.json",
+      "urls": [
+        "https://clinicaltables.nlm.nih.gov/api/icd9cm_dx/v3/search?terms=307.41",
+        "https://clinicaltables.nlm.nih.gov/api/icd9cm_dx/v3/search?terms=307.42",
+        "https://clinicaltables.nlm.nih.gov/api/icd9cm_dx/v3/search?terms=327.01",
+        "https://clinicaltables.nlm.nih.gov/api/icd9cm_dx/v3/search?terms=327.02"
+      ],
+      "SHA256": "e0df7b85a480452a92f01bed5c28199416aa74314a405972090eb57193fc4c73",
+      "bytes": 1534,
+      "selector": "Four code-label descriptions; event aggregation remains unknown"
+    }
+  ],
+  "report_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADMISSION.txt",
+  "report_SHA256": "9fe57881f1308891f1615e170158714256accb1ec4a9432900019cbabb7dd06a",
+  "resource_observation": {
+    "recorded_utc": "2026-10-13T22:08:34.597654+00:00",
+    "method": "df -k internal workspace and Extreme SSD",
+    "internal_available_bytes": 1229295616,
+    "SSD_available_bytes": 608530595840,
+    "internal_floor_bytes": 3221225472,
+    "internal_floor_cleared": false,
+    "native_launched": false
+  },
+  "MVP_source_roles": {
+    "GCST90479148": {
+      "role": "MVP abdominal-pain outcome",
+      "phecode": "785",
+      "CI_SE_hold_scope": "five analyses plus exploratory fit",
+      "hold_status": "PRESERVED"
+    },
+    "GCST90475826": {
+      "role": "MVP clinical-insomnia candidate",
+      "reassessed_in_this_erratum": false
+    }
+  },
+  "source_label_erratum": {
+    "recorded_utc": "2026-10-13T22:12:41.327407+00:00",
+    "ledger_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_ADMISSION_LABEL_ERRATUM_20261013.json",
+    "scope": "Label-only correction: GCST90479148 abdominal pain outcome, GCST90475826 clinical insomnia candidate; no gate/statistic/count/inference changes.",
+    "prior_authored_files": [
+      {
+        "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADMISSION_PROVISIONAL_PRIOR_BEFORE_MVP_LABEL_ERRATUM_20261013.txt",
+        "SHA256": "d770285d844d210bdae34e2969234d432f68200805e0ca457dc6877d448c7723",
+        "status": "PROVISIONAL_SUPERSEDED_SOURCE_LABEL_ERROR",
+        "error": "GCST90479148 was described as clinical insomnia; it is the MVP abdominal-pain outcome."
+      },
+      {
+        "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADMISSION_PROVISIONAL_PRIOR_BEFORE_MVP_LABEL_ERRATUM_20261013.json",
+        "SHA256": "2588a0073e5694e31f64feff2f32e1228438743c5413affc51ca299f11b19186",
+        "status": "PROVISIONAL_SUPERSEDED_SOURCE_LABEL_ERROR",
+        "error": "GCST90479148 was described as clinical insomnia; it is the MVP abdominal-pain outcome."
+      }
+    ]
+  }
+}

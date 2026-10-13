@@ -1,0 +1,38 @@
+Independent exact GERA raw acquisition review — 2026-10-13
+
+Decision: GO for exact source acquisition ONLY, bound to the plan and script hashes below. Preprocessing, native h2/rg, disease-pair tests and independent-replication admission remain NO GO / not admitted.
+
+Reviewed plan SHA256: 970ff530eda1117053829e6fc3fe3198b26af874a8d7d451e7cec59cdda620ce
+Reviewed script SHA256: f5742e58eeaf8233f84369c4ccc46c416eb20cf45a683c995270932ac9f41759
+
+Scientific materiality
+The raw GCST90086097 GRCh37 route is a useful first step toward source-only h2 feasibility. Provider README documents positionHg19, additive beta/SE and alleleB effects; raw YAML build is blank, so the filename alone was not used as build proof. This route avoids the unresolved GRCh38 coordinate/hm_code lineage in the Catalog harmonised route. The bounded first-1000-record diagnostic had zero exact rs_id_all intersections: neither a lineage pass nor evidence of a defect. Raw acquisition adds 1,431,793,894 bytes relative to the 587,496,274-byte harmonised delivery, within the declared SSD plan. No source-only h2 feasibility is established yet.
+
+Exact source
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv
+Expected bytes: 2,019,290,168; MD5: 6dfa12cf01f443e1115d25b83a77d703; strong ETag: "785bec38-62d824a0398bc"; last modified: 2025-02-07T00:17:51Z. Exact Catalog accession reports GERA-only European (U.S.) ancestry, 3,972 cases/52,665 controls and CC0. The coded clinical definition mixes insomnia subcategories; event counts, time windows and control exclusions remain UNKNOWN. These and SNP-wise case/control effective N constrain downstream interpretation/model admission; they do not block acquiring this exact public source. Named-cohort distinctness is not proof of disjoint enrollment or relatives.
+
+Focused executor findings
+The reviewed final script resolves all identified prelaunch defects: quoted wire If-Match; one monotonic 1800-second transfer/verification/publication deadline with per-1MiB digest floor checks; exclusive part creation and checked BSD mv -n publication; fixed /usr/bin/curl with --disable FIRST; case-preserving opaque ETag comparison; and owned-child finally cleanup on monitor exceptions. Curl configuration suppression is documented at https://curl.se/docs/manpage.html#-q; exact ETag comparison follows https://www.rfc-editor.org/rfc/rfc9110.html#section-8.8.3.2 . Header names may ignore case; ETag values may not.
+
+One URL/owned curl, verified HTTPS, identity encoding, no redirects or automatic retry, 2.2 billion byte cap, 128 MiB observed curl RSS guard, 30-minute common deadline, 5 GiB SSD preflight floor and 1 GiB internal acquisition floor are declared and checked. The original 3 GiB native floor is unchanged. Acceptance requires successful HTTP200, exact size/Content-Length/ETag, published MD5, local SHA256, unchanged plan and non-clobbering publication. Existing final/part/receipt/private transport artifacts cause refusal. Prior stat-only census in new/V8 source_review directories found no full/part GERA source; the executor checks again immediately before transfer. No all-SSD absence claim is made. Later resume is not admitted here and would need same-version/range review. Raw body and private transport evidence stay on SSD.
+
+Verification limits
+This was a static scientific/semantic review plus independent hashes, AST parse and installed curl 8.7.1 version/help. No transfer, fit or mirror-of-implementation test was run. Resource guards are software-observed: RSS is sampled every two seconds, so no sub-interval peak or hard real-time certificate is claimed. The acceptance path, not successful invocation alone, determines exact-source receipt status.
+
+Downstream gates
+Full-source row/finite beta-SE/INFO-MAF/allele/coordinate QC, ancestry/reference compatibility, source total-N versus binary effective-N semantics and usable common-SNP coverage require a separately frozen preprocessing review. rs_id_all is a coordinate/allele provider identifier, not a guaranteed dbSNP rsID. GRCh37 HM3 mapping rules therefore require explicit admission. Published clinical case/control counts are design metadata, not silently substituted variant N. h2, SE, intercept and precision remain UNKNOWN_NOT_TESTED. Event-window/control semantics and enrollment intersections must qualify any later transport or validation claim. No disease pair is selected or inspected by this acquisition decision.
+
+All original estimates, thresholds and QC holds remain preserved. GCST90479148 is MVP abdominal pain (PheCode785), with its CI/SE hold unchanged; GCST90475826 is the unresolved MVP clinical-insomnia candidate. Existing bowel holds remain unchanged. This review creates zero associations and zero independent replications.
+
+Evidence reused (no body rereads)
+/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PRIMARY_CONTRACT_METADATA_20261013.json
+SHA256 2ecc5624e3126d5fd6e726ecb12b61f5f356ccc321196b83354f410b19ae8e85
+/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_BOUNDED_LINEAGE_DIAGNOSTIC.json
+SHA256 51514f508c34bd011649397f3f17a2d409ab269519865dd6265d0910afb05aa0
+/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADMISSION.json
+SHA256 e003fb7383c62c76c03b05ebd4734c6e4b46b6ec5836f11d2f5af5f8bf4bd769
+/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_FULL_SUPPLEMENT_ASSESSMENT.json
+SHA256 83faaea9500e8d5e4b08fef859524467ee13b4aaf98e37093dfed5a19bac1ec9
+
+Primary source links: https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097, https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv-meta.yaml, https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt, https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308, https://www.nature.com/articles/s41467-021-21952-4

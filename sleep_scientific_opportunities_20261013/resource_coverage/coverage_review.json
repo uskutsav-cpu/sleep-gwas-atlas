@@ -1,0 +1,147 @@
+{
+  "schema_version": "sleepchart-coverage-independent-review-v1",
+  "reviewed_at_utc": "2026-10-13T22:21:42.023069+00:00",
+  "decision": "ACCEPT_CORRECTED_V3_BOUNDED_RETROSPECTIVE_FIFTH_SNAPSHOT_EXTENSION",
+  "reviewed_output_version": "results_corrected_v3",
+  "blocking_defects_remaining_under_declared_scope": [],
+  "independent_checks": {
+    "summary_reconstruction": {
+      "original_record_count": 1637,
+      "original_annotation_rows": 6548,
+      "new_annotation_rows": 1637,
+      "combined_annotation_rows": 8185,
+      "source_block_counts": {
+        "original": 1054,
+        "Dashti": 309,
+        "Austin": 361
+      },
+      "original_populated": 1050,
+      "sleepchart_class_counts": {
+        "B": 110,
+        "C": 8,
+        "D": 1519
+      },
+      "before_four_class_counts": {
+        "B": 1183,
+        "D": 366,
+        "E": 88
+      },
+      "after_five_class_counts": {
+        "B": 1193,
+        "D": 362,
+        "E": 82
+      },
+      "transitions": {
+        "B->B": 1183,
+        "D->D": 362,
+        "D->B": 4,
+        "E->E": 82,
+        "E->B": 6
+      },
+      "qualified_absent_before": 361,
+      "qualified_absent_after": 357,
+      "qualified_absent_after_outside_hold": 354,
+      "after_qualified_outside_hold_by_stage": {
+        "core": 78,
+        "extension": 276
+      }
+    },
+    "record_stages": {
+      "core": 396,
+      "extension": 1200,
+      "validation": 41
+    },
+    "exact_annotation_source_ref_checks": 1637,
+    "exact_union_row_checks": 1637,
+    "errors": [],
+    "changed_record_ids": [
+      "core|sleepdur|colorectal_cancer",
+      "core|shortsleep|colorectal_cancer",
+      "core|longsleep|colorectal_cancer",
+      "core|accel_sleep_duration|colorectal_cancer",
+      "validation|shortsleep|finngen_r13_K11_OTHENTERCOL",
+      "validation|shortsleep|finngen_r13_M13_INTERVERTEB",
+      "validation|longsleep|finngen_r13_K11_OTHENTERCOL",
+      "validation|longsleep|finngen_r13_M13_INTERVERTEB",
+      "validation|sleepdur|finngen_r13_K11_OTHENTERCOL",
+      "validation|sleepdur|finngen_r13_M13_INTERVERTEB"
+    ],
+    "remaining_direction_held_qualified_absent": [
+      "core|sleep_apnea|ibd",
+      "core|sleep_apnea|crohn",
+      "core|sleep_apnea|uc"
+    ],
+    "direction_hold_keys_checked": 36,
+    "uncertainty_hold_keys_preserved": 5,
+    "MVP_held_records_outside_qualified_core_extension_population": true,
+    "original_four_annotation_sha256": "25cf551b75a397eff0e653cc38138dfebbb25d6c441f6681fa9fa30f45ab3e72",
+    "workbook_sha256": "3488344573bf588d0ad748c83b5a86f5fbd487d711390b6a601661de56587dd7",
+    "official_FinnGenR9_manifest_sha256": "13f3866a224e35471abc0290cba5ed151aad7a4e270ae70b3eacf3a92cf124a2",
+    "reviewed_artifact_hashes": {
+      "extend_sleepchart_coverage.py": "30d9e422513313a884b68a52e26fc61720c4f021bf8c65c1a079eb289c358beb",
+      "results_corrected_v3/coverage_summary.json": "7cc3669bc9fb4b466fcfca22ed0a6c07cceea37dec93bec4ac7304e42a59eb71",
+      "results_corrected_v3/sleepchart_annotations.tsv": "4090ad1799a08b4912b89f45347cb1edc5ce93c216051b13d4921d172f327240",
+      "results_corrected_v3/five_snapshot_union.tsv": "eb6882d5a0a8f6d3a4e9d2061da12b2058acaa41ef4bdf0160350b2ad8ea8aa2"
+    },
+    "original_complete_four_semantics_reaudited": false,
+    "new_full_HGA_reads": 0,
+    "new_native_fits": 0
+  },
+  "original_four_target_metadata_consistent_groups": 1637,
+  "source_hold_hashes_unchanged": {
+    "source_direction_hold.json": "7cbdf0d49af034ff1665f5a75aa25d634bb914fc281e4133daf8beba562823c2",
+    "source_uncertainty_holds.json": "f9ca0fd31ef936acfaeceb7bceed1cfc54176243076510a68ac1aded60c58401"
+  },
+  "scientific_corrections_verified": [
+    {
+      "issue": "Literal ADHD code was omitted from known PGC mapping",
+      "resolution": "ADHD is recognized as related ADHD; AD remains unresolved and stored separately from authenticated related references."
+    },
+    {
+      "issue": "Non-melanoma was accepted via melanoma substring",
+      "resolution": "All four affected duration records classifyC with incompatible references; explicit disease exclusion is not target disease coverage."
+    },
+    {
+      "issue": "Heart-failure plus overweight composite accepted as standalone continuousBMI",
+      "resolution": "All four affected duration records classifyC; a composite condition/threshold is not the target quantitativeBMI measure."
+    },
+    {
+      "issue": "Official malignant-neoplasm labels missed breast/lung/prostatecancer aliases",
+      "resolution": "Three explicit clinical endpoint codes yield12duration record D->B corrections in fifth annotation; these records already have B among oldfour so union unchanged."
+    }
+  ],
+  "actual_new_union_information": {
+    "core_colorectal_duration_records_changed_D_to_B": 4,
+    "historical_validation_records_changed_E_to_B": 6,
+    "total_changed_union_records": 10,
+    "five_snapshot_B_D_E": [
+      1193,
+      362,
+      82
+    ],
+    "qualified_absence_after": 357,
+    "qualified_absence_after_outside_direction_hold": 354,
+    "outside_hold_core_extension": [
+      78,
+      276
+    ]
+  },
+  "qualification_scope": [
+    "Historical source/QC eligibility and bounded mapped-snapshot absence; not an association/FDR discovery count.",
+    "Population is396core+1200extension+41historical validation keys, not all217candidate validation records.",
+    "Complete original527endpoint\u00d72tail slot scope is distinguished from selected309Dashti and361Austin displayed rows.",
+    "D is dated scope/alias-specific absence; E is required when a declared slot/coding/applicable scope remains unresolved. No global absence or novelty follows.",
+    "B is related source/construct context. It includes qualified disease definitions, medication proxies and categorical duration; it does not establish exact estimand identity, independent replication or direct transportability.",
+    "SF5 original short/long categories and atlas continuous/device duration are different constructs. Legacy short/long row titles alone do not certify exact source release/coding/estimator identity.",
+    "Existingfour-resource semantics were reused unchanged, not comprehensively re-adjudicated by this review.",
+    "Clinical code/alias mapping is not a comprehensive ontology or complete literature search; additional relevant synonyms/subtypes may exist beyond the declared mapping.",
+    "The four initial blank slots and unresolvedAD are retained as metadata uncertainty, not invented estimates.",
+    "Thirty-six bowel-source direction holds and fiveMVPuncertainty holds remain intact. Core/extension-only qualified counts exclude validation entirely.",
+    "No protectedsource row or numeric estimate was published; no newfullHGAread, download, nativefit or modelcall was performed."
+  ],
+  "protected_source_redistribution_clearance": false,
+  "raw_source_scientific_validity_cleared": false,
+  "global_novelty_cleared": false,
+  "private_human_key_accessed": false,
+  "original_artifacts_modified_by_reviewer": false
+}

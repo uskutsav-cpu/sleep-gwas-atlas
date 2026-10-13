@@ -1,0 +1,184 @@
+{
+  "schema": "source_aware_gap_assessment/1.0",
+  "date": "2026-10-13",
+  "reviewer": "independent cohort/source-route reviewer",
+  "baseline_files": [
+    "sleep_interpretation_validation_20261012/reports/FINAL_CRITICAL_PATH.json",
+    "sleep_unified_research_v1/reviews/provenance_v1_source_admissibility.tsv",
+    "/Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/source_review/source_admission_review_v8.md"
+  ],
+  "decision": "NO_NEWLY_RELEASED_INDEPENDENT_SLEEP_GWAS_ADMITTED; ONE_NEW_TO_PROJECT_GERA_DELIVERY_ROUTE_MERITS_SOURCE_ONLY_FEASIBILITY",
+  "novelty_boundary": "GERA harmonised delivery dates2024–2025; source was in the prior screen. This is a newly verified usable route/contract delta, not a newly released GWAS, association or replication.",
+  "sources": [
+    {
+      "candidate_id": "GCST90086097_harmonised_GERA_additive",
+      "exact_download_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.h.tsv.gz",
+      "access": "Current official Catalog API full_summary_stats=true; pooled=false; cohort GERA; accession CC0",
+      "phenotype": "Clinical ICD9-CM insomnia category:307.41,307.42,327.0/.00/.01/.02/.09,780.52; independently verified primarydbGaP p23. Do not use Catalog frequent-symptom label as equivalence.",
+      "case_control_N": {
+        "cases": 3972,
+        "controls": 52665,
+        "total": 56637,
+        "effective_N": "14773.761 previously derived; endpoint totals are not SNP-wise effective N"
+      },
+      "ancestry": "European US",
+      "build": "GRCh38;1-based;official exact harmonised YAML",
+      "uncertainty": "Supplied beta and standard_error; no CI-width reconstruction needed for proposed route. Finite values/source lineage still require validation.",
+      "INFO_N_columns": [
+        "info_all",
+        "all_total"
+      ],
+      "genome_scope": "Genome-wide source; mapping report carries15067951 sites including harmonisation failures. Not an HM3-only or lead-SNP result.",
+      "published_power": "No insomnia-specific h2/SE or pair-power evidence found in main article and ten publisher tables; large SupplementaryInformation PDF not searched. No exhaustive absence claim.",
+      "cohort_intersections": "GERA is distinct named source from UKB/FinnGen. Participant and relative intersections with UKB/MVP/FinnGen UNKNOWN. Exact Catalog study is GERA-only, not publication follow-up meta.",
+      "changed_gate": [
+        "Compressed public delivery587496274 bytes vs raw2019290168",
+        "Exact target-build YAML",
+        "Direct effect-SE route verified",
+        "INFO/total-N/quality-code columns preserved",
+        "Independent primary README/dbGaP/supplement closure of additive-model/raw-build and published case count/ICD bridge"
+      ],
+      "unchanged_gate": [
+        "Full checksum/CRC/EOF and retained finite alleles/Z/N unverified",
+        "SNP-wise effective N not established",
+        "Clinical-vs-symptom transport not exact phenotype replication",
+        "No source h2/pair power result",
+        "No individual independence certification"
+      ],
+      "primary_urls": [
+        "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097",
+        "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.h.tsv.gz-meta.yaml",
+        "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.running.log",
+        "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/md5sum.txt",
+        "https://www.nature.com/articles/s41467-021-21952-4",
+        "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+        "https://kp4cd.org/node/404",
+        "https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt"
+      ],
+      "status": "CONDITIONAL_SOURCE_ONLY_FEASIBILITY_CANDIDATE_NOT_ADMITTED"
+    },
+    {
+      "candidate_id": "GCST90086097_raw_GERA_additive",
+      "exact_download_url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv",
+      "bytes": 2019290168,
+      "build": "GRCh37 explicitly supported by primary README (independent specialist); raw YAML remains blank. Prefer harmonicGRCh38 route to reduce transfer and fix delivery coordinate contract.",
+      "uncertainty": "Header directly supplies beta/standard_error/info_all/all_total",
+      "status": "RAW_DELIVERY_AVAILABLE_BUT_LARGER; PREFER_EXPLICIT_HARMONISED_ROUTE",
+      "primary_urls": [
+        "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv-meta.yaml",
+        "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097"
+      ]
+    },
+    {
+      "candidate_id": "AustinZimmerman2025_quantitative_duration_MVP_component",
+      "accession": "UNKNOWN",
+      "exact_download_url": "UNKNOWN",
+      "phenotype": "Self-reported typical sleep hours per24h; paper648125 pooled UKB+MVP participants, not MVP-only N",
+      "cohort": "MVP-only component would be source-distinct; pooled source containsUKB",
+      "ancestry_build_N_uncertainty": "Exact public MVP-only file/N/build/effects/SE/license UNKNOWN",
+      "public_access_fact": "Primary v1 text inspected through EuropePMC; no exact cohort-only download URL identified. Current author summary page lists2023 pooled ancestry/meta tails, not a verifiable2025 MVP-only duration file.",
+      "changed_gate": "None",
+      "published_power": "Pooled power and loci do not certify MVP-only precision or independent validation.",
+      "primary_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12140527/",
+        "https://doi.org/10.1101/2025.05.19.25327902",
+        "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12140527/fullTextXML",
+        "https://medicine.yale.edu/lab/gelernter/stats/"
+      ],
+      "status": "EXACT_PUBLIC_COMPONENT_UNVERIFIED; DO_NOT_SUBSTITUTE_POOLED_META"
+    },
+    {
+      "candidate_id": "AustinZimmerman2023_EUR_sleep_tails",
+      "exact_download_url": "https://hugesumstats.yale.edu/dl/eur_meta_short_dbgap.txt.gz",
+      "other_download_url": "https://hugesumstats.yale.edu/dl/eur_meta_long_dbgap.txt.gz",
+      "phenotype": "<=5h or>=10h versus7-8h, differs from historical <=6h/>=9h tails",
+      "cohort": "UKB+MVP",
+      "changed_gate": "No independently sampled European MVP-only route added on inspected current Yale listing.",
+      "primary_urls": [
+        "https://medicine.yale.edu/lab/gelernter/stats/",
+        "https://www.nature.com/articles/s41467-023-41249-y"
+      ],
+      "status": "PRIOR_OVERLAP_REJECTION_PRESERVED"
+    },
+    {
+      "candidate_id": "HUNT_Lane2019_insomnia_component",
+      "accession": "UNKNOWN",
+      "exact_download_url": "UNKNOWN",
+      "phenotype": "Self-reported insomnia symptoms; source-specific full definition/control/source schema not admitted here",
+      "case_control_N": {
+        "cases": 14923,
+        "controls": 47610,
+        "total": 62533
+      },
+      "cohort": "HUNT; named Norwegian cohort distinct from UKB; individual intersections UNKNOWN",
+      "access_rights": "Primary publication points to Sleep Disorders Knowledge Portal generically. Inspected current sleep portal identifies UKB subjects; exact dense HUNT-only body not verified. General HUNT individual-level application route is not a public full-GWAS source.",
+      "changed_gate": "No exact HUNT component accession or direct full-body URL established",
+      "published_power": "Primary publication's selected-locus/PRS follow-up is evidence for its own claims, not source-LDSC h2/pair power proof",
+      "primary_urls": [
+        "https://www.nature.com/articles/s41588-019-0361-7",
+        "https://kp4cd.org/node/235",
+        "https://www.ntnu.edu/hunt/data"
+      ],
+      "status": "EXACT_FREE_FULL_COMPONENT_UNVERIFIED; NO_CONTACT_OR_APPLICATION"
+    },
+    {
+      "candidate_id": "Lifelines_adult_sleep_component",
+      "accession": "UNKNOWN",
+      "exact_download_url": "UNKNOWN",
+      "phenotype_N_build_uncertainty": "UNKNOWN exact sleep GWAS release/phenotype/N/build/effects/SE",
+      "cohort": "Lifelines named cohort; individual intersections UNKNOWN",
+      "access_rights": "Official2025 approved project describes use of existing sleep PRS/GWAS, not release of a Lifelines sleep GWAS. No exact free full genome source verified in this finite check.",
+      "changed_gate": "None; absence not proven",
+      "primary_urls": [
+        "https://www.lifelines-biobank.com/researchers/explore/applications/gene-environment-interactions-in-economics"
+      ],
+      "status": "NO_EXACT_RELEASE_IDENTIFIED_NOT_AN_ABSENCE_CLAIM"
+    },
+    {
+      "candidate_id": "FinnGenR13_F5_INSOMNIA_existing_V8",
+      "exact_download_url": "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_F5_INSOMNIA.gz?generation=1777989563097164",
+      "cohort": "FinnGen; overlaps priorFinnGenR9 and otherR13 outcomes",
+      "changed_gate": "Not re-audited; preserve11OctV8 qualified source/construct transport decision and executed-source h2 evidence",
+      "uncertainty_N_INFO": "Direct beta/sebeta; assumed constant effectiveN; noINFO/HM3fallback; Finnish/EUR LD limitation",
+      "independence": "Does not make FGsleep×FGoutcomes independent; reused MVP outcome/selection remains",
+      "status": "EXISTING_CONDITIONAL_ROUTE_NOT_NEW; V4_STRICT_HOLDS_REMAIN",
+      "primary_urls": [
+        "https://finngen.gitbook.io/documentation/data-description",
+        "https://r13.risteys.finngen.fi/endpoints/F5_INSOMNIA"
+      ]
+    }
+  ],
+  "recommended_next_step": {
+    "immediate": "Reuse independent primary README/dbGaP/case-count closure; next material bounded inspection is a very small paired original-versus-harmonised allele/beta/SE/INFO/all_total/hm_code diagnostic, frozen independently of P. Existing header/metadata probes need no repeat.",
+    "why_material": "Direct beta/SE avoids the MVP CI semantics hold; known harmonised build and compressed size make one new sleep-side source-only feasibility experiment concrete. Exact phenotype and N semantics determine whether that experiment can be interpreted.",
+    "prospective_experiment": "If exact additive phenotype/allele/SE/N/QC contract is admitted and unchanged resource guards pass, freeze ONE source-only GERA full-body acquisition/preprocessing/h2 feasibility experiment. Verify official MD5, CRC/EOF and Catalog hm_code losses, nonambiguous autosomal HM3, source INFO/MAF/N conventions, standard_error finite>0, signed Z=beta/SE and complete QC. Report all diagnostics regardless of result; no pair rg until source h2/precision and cohort-intersection gates reviewed.",
+    "resource_boundary": "No execution in this review. User-reported internal free1.3GiB is below unchanged3GiB floor; external SSD storage does not waive that guard.",
+    "power": "Do not infer power from raw N, h2ofotherdiseases or pooledMVP+UKB. A successful source-only h2 diagnostic can change the feasibility decision; no guaranteed pair power.",
+    "potential_narrow_estimand": "Related clinical insomnia source/ascertainment transport using GERA sleep and a separately prespecified nonGERA outcome; with audited four discovery/validation source intersections. No exact symptom/clinical equivalence or calibrated effect-difference claim.",
+    "no_new_inference": true
+  },
+  "remaining_critical_path": "Source inspection cannot replace accountable human semantic adjudication, independently registered validation, human utility data/consent decisions or source-specific deposition clearance in FINAL_CRITICAL_PATH.",
+  "known_network_limit": "Web tool failed some EBI/PMC/medRxiv URLs and local Python TLS trust failed. System curl with certificate verification succeeded on EBI primary metadata; failures are not evidence that science/data are unavailable.",
+  "artifacts": "GERA_PRIMARY_CONTRACT_METADATA_20261013.json contains only headers/public metadata and mapping summaries, no variant rows.",
+  "independent_specialist_reuse": {
+    "reviewer": "/root/genetic_epidemiologist_v4",
+    "primary_README_url": "https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt",
+    "primary_portal_url": "https://kp4cd.org/node/404",
+    "raw_build_documentation": "Reviewer confirms README explicitlyGRCh37; raw YAML itself remains blank, so filename was not used as proof.",
+    "exact_phenotype_document": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+    "phenotype_document_page_1_based": 23,
+    "insomnia_ICD9_CM_codes": [
+      "307.41",
+      "307.42",
+      "327.0",
+      "327.00",
+      "327.01",
+      "327.02",
+      "327.09",
+      "780.52"
+    ],
+    "published_case_count_bridge": "Publisher SupplementaryData1–10.xlsx sheet1. GERA samples A16:C16: Insomnia3972/52665; total56637.",
+    "published_power_search_scope": "Main article XML and ten-table SupplementaryData workbook; no insomnia-specific h2 or pair-power established. Large SupplementaryInformation PDF not inspected; no exhaustive absence assertion.",
+    "evidence_status": "Direct primary-source verification reported by independent specialist; no duplicate download or primary numeric workbook copied by this reviewer."
+  }
+}

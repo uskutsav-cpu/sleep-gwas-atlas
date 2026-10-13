@@ -1,0 +1,133 @@
+{
+  "schema": "draft_source_preprocessing_scientific_disposition/1.0",
+  "recorded_utc": "2026-10-13T22:42:12.903918+00:00",
+  "status": "DRAFT_PENDING_COMPLETE_SOURCE_CENSUS_AND_IMPLEMENTATION_ADMISSION",
+  "accession": "GCST90086097",
+  "objective": "single-source observed-scale h2 feasibility preparation only",
+  "launch_or_implementation_admitted": false,
+  "source_fields": {
+    "CHR": "chromosome",
+    "BP": "base_pair_location",
+    "effect": "effect_allele, original provider alleleB",
+    "other": "other_allele",
+    "beta": "beta, additive",
+    "SE": "standard_error, supplied",
+    "Z": "orientation*(beta/standard_error)",
+    "N": "all_total, per-variant total analysed subjects if actual census confirms",
+    "INFO": "info_all",
+    "MAF": "all_maf",
+    "source_ID": "rs_id_all, coordinate/allele provenance only",
+    "source_P": "diagnostic only"
+  },
+  "sample_convention": {
+    "target_N": "PER_VARIANT_ANALYSED_TOTAL_N",
+    "conditional_support_for_source_sample_observed_h2": true,
+    "actual_N_census": "UNKNOWN",
+    "N_eff_constant_substituted": false,
+    "cohort_total_constant_substituted": false,
+    "per_variant_case_fraction": "UNKNOWN",
+    "population_prevalence": "UNKNOWN",
+    "liability_scale_admitted": false,
+    "power_inferred_from_N": false,
+    "design_N_eff_for_distinction_only": 14773.761322103925
+  },
+  "source_filter_contract": {
+    "autosomes": [
+      1,
+      22
+    ],
+    "single_base_distinct_ACGT_only": true,
+    "palindromes_removed": true,
+    "INFO_strictly_greater_than": 0.9,
+    "MAF_strictly_greater_than": 0.01,
+    "finite_beta_required": true,
+    "strict_positive_finite_SE_required": true,
+    "strict_positive_finite_N_required": true,
+    "invalid_or_missing_N_imputed": false,
+    "sample_N_missingness_proposal": "N_j>=q90(N)/1.5 in fixed nonduplicate eligible subset, exact population/interpolation pending adapter admission",
+    "MHC": "Preserve reviewed GRCh37 historical convention if this path is used; no GRCh38 substitution",
+    "source_P_or_SE_discordance_used_for_selection": false
+  },
+  "identity_contract": {
+    "build": "GRCh37 supported by provider Hg19 positional contract; raw YAML assembly remains empty",
+    "method": "unique compatible coordinate+allele to authenticated reference rsID",
+    "coordinate_reference_candidate_multimap": true,
+    "first_regex_rsID_rescue": false,
+    "first_match_rescue": false,
+    "reference_collision": "HOLD_ENTIRE_AMBIGUOUS_GROUP",
+    "orientation": "reviewed +1/-1/None direct/swap/complement, with nonACGT/equal/palindrome rejection",
+    "duplicates": "collapse only proven exact identical records with counts; conflicting records mapping same SNP are all held/excluded without row-order/statistic selection",
+    "systematic_build_or_allele_conflicts": "HOLD_NO_REPAIR_OR_THRESHOLD_RELAXATION"
+  },
+  "native_input_contract": {
+    "columns": [
+      "SNP",
+      "A1",
+      "A2",
+      "Z",
+      "N"
+    ],
+    "Z_magnitude": "supplied additive beta/SE, preserved directly",
+    "generic_P_derived_munge_is_not_equivalent": true,
+    "MVP_worker19_reused_unchanged": false,
+    "CI_derived_Z": false,
+    "native_fit_now": false,
+    "native_intercept_future": "UNCONSTRAINED",
+    "future_h2_Z_gate": 4,
+    "future_intercept_gate": 1.2,
+    "gate_evaluated": false,
+    "disease_pair_family": null
+  },
+  "reviewed_helper_interface": {
+    "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+    "lines": [
+      58,
+      93
+    ],
+    "extracted_interface_text_SHA256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+    "functions": [
+      "load_hm3",
+      "orientation"
+    ],
+    "source_rsid_reused": false
+  },
+  "references": [
+    {
+      "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/reference/panukbb_hm3_variant_reference.tsv.gz",
+      "prior_authenticated_SHA256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+      "reread_or_rehashed_now": false
+    },
+    {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist",
+      "prior_authenticated_SHA256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+      "reread_or_rehashed_now": false
+    }
+  ],
+  "primary_documentation": [
+    "https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation",
+    "https://github.com/bulik/ldsc/wiki/Summary-Statistics-File-Format",
+    "https://github.com/bulik/ldsc/blob/master/munge_sumstats.py"
+  ],
+  "actual_census_required": [
+    "verified complete source identity/schema",
+    "finite beta/positive SE/N and N distribution",
+    "declared autosome/SNP/palindrome/INFO/MAF/N dispositions",
+    "unique exact coordinate/allele reference mapping",
+    "orientation and duplicate/collision outcomes",
+    "reconciled input/retained/reject counts",
+    "retained HM3/LD-reference intersections",
+    "native-ready artifact and implementation independent review"
+  ],
+  "actual_counts": "UNKNOWN_NOT_RUN",
+  "scope": {
+    "unfinished_source_body_reads": 0,
+    "whole_reference_reads": 0,
+    "old_metadata_or_result_audits": 0,
+    "controller_or_adapter_code_written": 0,
+    "native_fits": 0,
+    "disease_pair_or_significance_selection": false,
+    "prior_artifacts_or_holds_changed": false
+  },
+  "report_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/DRAFT_GERA_PREPROCESSING_SCIENTIFIC_DISPOSITION.txt",
+  "report_SHA256": "8f8473346a6661412aab5017170d4e3ee60946cf5a9fb5d881476c4fd0a58873"
+}

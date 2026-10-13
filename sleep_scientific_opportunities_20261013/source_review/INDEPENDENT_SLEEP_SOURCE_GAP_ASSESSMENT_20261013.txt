@@ -1,0 +1,81 @@
+Independent sleep-source gap assessment — 13 October 2026
+
+Decision: no newly released independent full-genome sleep GWAS was admitted. One newly verified delivery route makes the previously screened GERA clinical-insomnia candidate materially more concrete for a source-only feasibility experiment. It is not a new GWAS, new association, power result, or proof of participant independence.
+
+Baseline reused:
+- sleep_interpretation_validation_20261012/reports/FINAL_CRITICAL_PATH.json.
+- sleep_unified_research_v1/reviews/provenance_v1_source_admissibility.tsv.
+- /Volumes/Extreme SSD/codex_sleep_gwas_atlas_v8_20261011/source_review/source_admission_review_v8.md.
+Existing FinnGen–MVP qualified transport permission and stricter historical source holds are preserved. This source review cannot supply the human semantic adjudication, independently registered validation, utility data or release clearance still required in FINAL_CRITICAL_PATH.
+
+GERA: useful new-to-project route, not newly published data
+
+Exact accession: GCST90086097.
+Preferred delivery: GCST90086097.h.tsv.gz
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.h.tsv.gz
+Current HEAD reports 587,496,274 bytes, ETag "23047b52-62371e4908aa8", last modified 1 October 2024. Published MD5 is 66e3c3b915b65006ab2027c8e2279f79, independently agreeing between exact YAML and directory checksum listing. This review did not fetch the complete body or compute its MD5/SHA-256.
+Metadata:
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.h.tsv.gz-meta.yaml
+Checksum list:
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/md5sum.txt
+
+The official harmonised YAML explicitly identifies GRCh38, 1-based coordinates, harmonised/sorted status and Ensembl release95 reference. A bounded 65,536-byte compressed prefix confirms direct beta, standard_error, effect/other alleles, p_value and effect_allele_frequency, plus preserved info_all, all_maf, all_total and hm_code. Numeric variant rows were neither saved nor made public. Header availability is not validation of finite SE, source-N semantics or whole-file integrity.
+The public Catalog record identifies an additive, non-pooled GERA-only European-US study: 3,972 cases, 52,665 controls, total56,637; full summary statistics true; accession CC0. Publication follow-up in UKB/FinnGen does not make this exact GERA accession a pooled release.
+Source: exact GWAS Catalog study record
+https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097
+
+The older raw filename GCST90086097_buildGRCh37.tsv remains available at 2,019,290,168 bytes; published MD5 6dfa12cf01f443e1115d25b83a77d703. Its YAML has a blank assembly. The independent genetic epidemiology specialist verified GRCh37 in the primary README; it is not inferred merely from that filename. Both raw and harmonised bounded headers carry supplied beta and SE. The compressed delivery avoids the MVP CI-width reconstruction route and reduces transfer compared with this raw file.
+Raw:
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv
+Primary README:
+https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt
+Primary source portal:
+https://kp4cd.org/node/404
+
+The source paper documents SNPTEST additive logistic regression with age, sex and seven PCs, source INFO>=0.7 and MAF>=0.001. These are source-specific rules; do not invent INFO>0.9, relabel a total-N field as SNP-wise effective N, import another release's QC, or apply non-additive model outputs to ordinary additive LDSC. The supplied SE route is usable in principle, while finite values and effect/allele lineage remain to be checked.
+Primary paper:
+https://www.nature.com/articles/s41467-021-21952-4
+Primary full-text mirror:
+https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8065056/fullTextXML
+
+The independent specialist resolved the source clinical definition from dbGaP p23: ICD9-CM307.41,307.42,327.0/.00/.01/.02/.09 and780.52. The publisher's SupplementaryData1–10, sheet "1. GERA samples", A16:C16, bridges Insomnia3972/52665 to the exact Catalog counts. This is a coded clinical category, not the UKB symptom question or proof of chronic diagnostic equivalence. That primary metadata review is reused rather than redownloaded here.
+Phenotype document:
+https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308
+Publisher supplement filename:41467_2021_21952_MOESM4_ESM.xlsx.
+The specialist found no insomnia-specific h² or pair-power evidence in the main article or ten-table workbook; power examples concern diabetes/macular degeneration. The large SupplementaryInformation PDF was not fully searched, so this is not an exhaustive absence claim. Counts alone cannot establish LDSC power. The prior derived effective-N convention14773.761 is an assumption from case/control totals, not measured SNP-wise information.
+
+Catalog harmonisation is documented, not silently treated as identical to native GERA. Its running log reports15,514,618 input sites;446,667 unmapped;15,067,951 carried forward;14,403,471 successfully harmonised and664,480 failed. It assumes forward palindromes from a consensus; these cannot bypass a separately frozen nonambiguous-HM3 policy. These counters are published mapping summaries, not fresh full-file/finite-statistic counts.
+https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/harmonised/GCST90086097.running.log
+
+Other bounded component gaps: unchanged
+
+1. The 2025 quantitative-duration preprint includes UKB+MVP; its pooled N648,125 is not MVP-only N. No exact freely accessible MVP-only full-file URL was located in its primary v1 text or the current author listing. The paper is not an independently sampled source by virtue of a newer date. Published pooled loci or heritability cannot certify component power.
+https://doi.org/10.1101/2025.05.19.25327902
+https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12140527/fullTextXML
+https://medicine.yale.edu/lab/gelernter/stats/
+
+2. The author listing, updated13October2026, still links the 2023 European short/long-sleep meta-analyses, which contain UKB. The prior overlap rejection stands; do not substitute them for a hypothetical MVP-only file. Exact previously listed short-sleep route:
+https://hugesumstats.yale.edu/dl/eur_meta_short_dbgap.txt.gz
+https://www.nature.com/articles/s41467-023-41249-y
+
+3. Lane2019 reports HUNT14,923 symptom cases/47,610 controls, but the publication's generic download statement does not establish a dense HUNT-only release. The inspected current sleep portal identifies UKB participants; no exact HUNT accession/body/schema was verified. Selected-locus/PRS validation and a general HUNT application page are not a full public GWAS contract. No requests were sent.
+https://www.nature.com/articles/s41588-019-0361-7
+https://kp4cd.org/node/235
+https://www.ntnu.edu/hunt/data
+
+4. The finite Lifelines check found an official2025 project using existing sleeplessness GWAS/PRS, not an exact public Lifelines sleep-GWAS release. Exact accession, whole-genome body, N, effects/SE, build and rights remain unknown. This does not prove that no such dataset exists.
+https://www.lifelines-biobank.com/researchers/explore/applications/gene-environment-interactions-in-economics
+
+5. Existing FinnGenR13F5_INSOMNIA remains the conditional V8 source-and-construct transport route. Its existing h² evidence and INFO/N/Finnish-LD qualifications need no repeat. FinnGen sleep with FinnGen outcomes shares source cohorts; newer versions cannot repair independent both-trait validation. Reused MVP outcome data and historical selection remain qualified.
+https://finngen.gitbook.io/documentation/data-description
+https://r13.risteys.finngen.fi/endpoints/F5_INSOMNIA
+
+Meaningful next step; no execution here
+
+The immediate material check is a very small, outcome-blind paired raw-versus-harmonised allele/beta/SE/INFO/all_total/hm_code diagnostic, using the resolved primary README and phenotype bridge. Header probes already completed need no repetition. Confirm that ordinary additive log-odds and supplied SE survive the documented allele changes, that total-N semantics are recorded honestly, and that the harmonisation flag policy is frozen before data outcomes.
+
+If that contract is admitted, a single separately registered GERA source-only acquisition/preprocessing/h² feasibility experiment could materially answer the remaining power question. Prefer the exact587,496,274-byte delivery, verify published MD5/CRC/EOF, preserve all filters/losses, and report the source result regardless of success. No pair rg follows automatically. Adequate source h², precision, phenotype transport and all four discovery/validation source intersections need review first. The user-reported1.3GiB internal free space is below the unchanged3GiB floor; SSD space does not waive it.
+
+The potential estimand is clinical-insomnia source/ascertainment transport using GERA sleep and a separately fixed non-GERA outcome. Named-source distinctness is not a certificate of zero individual or relative overlap. Neither source availability, a h² diagnostic, a favorable future correlation nor a point-estimate change would establish independent two-trait replication, a calibrated between-construct difference or new biology.
+
+Network/tool failures were not classified as unavailable science. The web reader failed some EBI/PMC/medRxiv URLs, and the local Python trust store rejected TLS chains; certificate-verifying system curl retrieved the relevant EBI primary metadata successfully. No restricted application/contact, full GWAS acquisition, native fit, old-file change or protected numeric-data release was performed. Companion JSON files contain contract facts/headers and the finite source screen only.

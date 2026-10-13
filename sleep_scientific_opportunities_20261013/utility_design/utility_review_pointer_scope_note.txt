@@ -1,0 +1,10 @@
+UTILITY REVIEW POINTER-COUNT SCOPE CLARIFICATION
+13 October 2026
+
+The counts 74 and 75 refer to different scopes, not deduplication or a contradictory result. The independent review counted 74 projections/hashes from the six frozen release TSVs: 16 core estimates, three extension estimates, three external-validation estimates, 12 sleep-construct rows, 15 outcome-phenotype rows and 25 heritability rows.
+
+The construction validator counts those same 74 pointers plus one D04 pointer to config/public_gwas_sources.tsv, line 36, for the sleep-source publication registry. That registry lies outside the independent review's six-release-file projection loop. The review checked D04 publication/count gold against the supplied packet metadata, but did not include this original registry pointer in its 74 source-row count. The validator checks the registry file hash and indexed row availability; the separate registry pointer has no row_key test in that validator.
+
+Both counts exclude the 15 compressed HGA pointers (nine metadata and six correlation pointers). Packet-level HGA equality/gold matching is distinct from an original compressed-source pointer audit. No complete HGA reread or new source-body inspection was performed for this clarification.
+
+Report 74 independently checked release-source row projections, and 75 construction-validator TSV pointers. Do not describe all 75 as independently projected/adjudicated by this reviewer. The original mechanical receipt and independent review remain unchanged. This note adds no task execution, gold change or broader audit.

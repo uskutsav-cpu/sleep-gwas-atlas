@@ -1,0 +1,676 @@
+[
+  {
+    "candidate_estimate_count": 4,
+    "candidate_order_seed": 20261013,
+    "operation": "construct_role_resolution",
+    "prompt": "A researcher asks for the marginal genetic association between unintended daytime dozing and breast-cancer case status. Which candidate estimates that requested sleep construct? Which supplied candidate is the reported daytime-nap-frequency alternative rather than an interchangeable measurement? Select both evidence IDs and state whether the packet establishes construct equivalence.",
+    "response_contract": {
+      "alternative_napping_evidence_id": "evidence_id",
+      "construct_equivalence": [
+        "ESTABLISHED",
+        "NOT_IDENTIFIED_FROM_PACKET"
+      ],
+      "requested_measure_evidence_id": "evidence_id"
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "alternative_napping_evidence_id": {
+          "enum": [
+            "D01-R01",
+            "D01-R02",
+            "D01-R03",
+            "D01-R04"
+          ],
+          "type": "string"
+        },
+        "construct_equivalence": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_IDENTIFIED_FROM_PACKET"
+          ],
+          "type": "string"
+        },
+        "requested_measure_evidence_id": {
+          "enum": [
+            "D01-R01",
+            "D01-R02",
+            "D01-R03",
+            "D01-R04"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested_measure_evidence_id",
+        "alternative_napping_evidence_id",
+        "construct_equivalence"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D01"
+  },
+  {
+    "candidate_estimate_count": 5,
+    "candidate_order_seed": 20261013,
+    "operation": "joint_admissibility_screen",
+    "prompt": "A figure would highlight primary marginal associations for partner/relative/friend-reported snoring across these five outcomes. Apply the preserved family, exact-source h2/intercept and unresolved-contract requirements together. For each candidate give all applicable blocking reasons; list every admissible evidence ID. Treat empty signed fields as unavailable, not zero.",
+    "response_contract": {
+      "admissible_evidence_ids": "evidence_id_set",
+      "blocking_reasons_by_evidence": {
+        "D02-R01": [
+          "FROZEN_ADJUSTMENT_NOT_PASS",
+          "H2_Z_GATE_FAIL",
+          "INTERCEPT_GATE_FAIL",
+          "UNRESOLVED_SOURCE_CONTRACT"
+        ],
+        "D02-R02": [
+          "FROZEN_ADJUSTMENT_NOT_PASS",
+          "H2_Z_GATE_FAIL",
+          "INTERCEPT_GATE_FAIL",
+          "UNRESOLVED_SOURCE_CONTRACT"
+        ],
+        "D02-R03": [
+          "FROZEN_ADJUSTMENT_NOT_PASS",
+          "H2_Z_GATE_FAIL",
+          "INTERCEPT_GATE_FAIL",
+          "UNRESOLVED_SOURCE_CONTRACT"
+        ],
+        "D02-R04": [
+          "FROZEN_ADJUSTMENT_NOT_PASS",
+          "H2_Z_GATE_FAIL",
+          "INTERCEPT_GATE_FAIL",
+          "UNRESOLVED_SOURCE_CONTRACT"
+        ],
+        "D02-R05": [
+          "FROZEN_ADJUSTMENT_NOT_PASS",
+          "H2_Z_GATE_FAIL",
+          "INTERCEPT_GATE_FAIL",
+          "UNRESOLVED_SOURCE_CONTRACT"
+        ]
+      }
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "admissible_evidence_ids": {
+          "items": {
+            "enum": [
+              "D02-R01",
+              "D02-R02",
+              "D02-R03",
+              "D02-R04",
+              "D02-R05"
+            ],
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "blocking_reasons_by_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "D02-R01": {
+              "items": {
+                "enum": [
+                  "FROZEN_ADJUSTMENT_NOT_PASS",
+                  "H2_Z_GATE_FAIL",
+                  "INTERCEPT_GATE_FAIL",
+                  "UNRESOLVED_SOURCE_CONTRACT"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "D02-R02": {
+              "items": {
+                "enum": [
+                  "FROZEN_ADJUSTMENT_NOT_PASS",
+                  "H2_Z_GATE_FAIL",
+                  "INTERCEPT_GATE_FAIL",
+                  "UNRESOLVED_SOURCE_CONTRACT"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "D02-R03": {
+              "items": {
+                "enum": [
+                  "FROZEN_ADJUSTMENT_NOT_PASS",
+                  "H2_Z_GATE_FAIL",
+                  "INTERCEPT_GATE_FAIL",
+                  "UNRESOLVED_SOURCE_CONTRACT"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "D02-R04": {
+              "items": {
+                "enum": [
+                  "FROZEN_ADJUSTMENT_NOT_PASS",
+                  "H2_Z_GATE_FAIL",
+                  "INTERCEPT_GATE_FAIL",
+                  "UNRESOLVED_SOURCE_CONTRACT"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "D02-R05": {
+              "items": {
+                "enum": [
+                  "FROZEN_ADJUSTMENT_NOT_PASS",
+                  "H2_Z_GATE_FAIL",
+                  "INTERCEPT_GATE_FAIL",
+                  "UNRESOLVED_SOURCE_CONTRACT"
+                ],
+                "type": "string"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "D02-R01",
+            "D02-R02",
+            "D02-R03",
+            "D02-R04",
+            "D02-R05"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "admissible_evidence_ids",
+        "blocking_reasons_by_evidence"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D02"
+  },
+  {
+    "candidate_estimate_count": 3,
+    "candidate_order_seed": 20261013,
+    "operation": "descriptive_recomposition_and_contrast_scope",
+    "prompt": "For lung cancer, compare the 24-hour self-reported duration measure including naps with the device measure of detected sleep episodes inside the main sleep-period window. Identify both estimate rows, compute device minus reported rg descriptively, order those two rg values from smaller to larger, and decide whether the supplied evidence establishes a calibrated between-measurement difference.",
+    "response_contract": {
+      "ascending_rg_evidence_ids": "ordered_evidence_ids",
+      "calibrated_difference": [
+        "ESTABLISHED",
+        "NOT_IDENTIFIED_FROM_PACKET"
+      ],
+      "descriptive_device_minus_reported_rg": "number",
+      "device_duration_evidence_id": "evidence_id",
+      "reported_duration_evidence_id": "evidence_id"
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "ascending_rg_evidence_ids": {
+          "items": {
+            "enum": [
+              "D03-R01",
+              "D03-R02",
+              "D03-R03"
+            ],
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "calibrated_difference": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_IDENTIFIED_FROM_PACKET"
+          ],
+          "type": "string"
+        },
+        "descriptive_device_minus_reported_rg": {
+          "type": "number"
+        },
+        "device_duration_evidence_id": {
+          "enum": [
+            "D03-R01",
+            "D03-R02",
+            "D03-R03"
+          ],
+          "type": "string"
+        },
+        "reported_duration_evidence_id": {
+          "enum": [
+            "D03-R01",
+            "D03-R02",
+            "D03-R03"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "reported_duration_evidence_id",
+        "device_duration_evidence_id",
+        "descriptive_device_minus_reported_rg",
+        "ascending_rg_evidence_ids",
+        "calibrated_difference"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D03"
+  },
+  {
+    "candidate_estimate_count": 1,
+    "candidate_order_seed": 20261013,
+    "operation": "cross_resource_identity_binding",
+    "prompt": "A reviewer asks whether the Jansen public UKB-only insomnia versus Howard public depression result is simply the same analysis already in Human GWAS ATLAS. Among the six conventional candidate pairs, identify every pair whose two publications and exact public sample totals match the atlas sources. Then state whether those matched facts authenticate identical source release, phenotype/coding and estimator/reference contracts.",
+    "response_contract": {
+      "bibliographic_and_N_match_evidence_ids": "evidence_id_set",
+      "exact_estimand_equivalence": [
+        "ESTABLISHED",
+        "NOT_IDENTIFIED_FROM_PACKET"
+      ],
+      "identity_checks_by_evidence": {
+        "D04-H01": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        },
+        "D04-H02": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        },
+        "D04-H03": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        },
+        "D04-H04": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        },
+        "D04-H05": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        },
+        "D04-H06": {
+          "both_pmids_match": "boolean",
+          "both_public_N_match": "boolean"
+        }
+      }
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "bibliographic_and_N_match_evidence_ids": {
+          "items": {
+            "enum": [
+              "D04-R01",
+              "D04-H01",
+              "D04-H02",
+              "D04-H03",
+              "D04-H04",
+              "D04-H05",
+              "D04-H06"
+            ],
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "exact_estimand_equivalence": {
+          "enum": [
+            "ESTABLISHED",
+            "NOT_IDENTIFIED_FROM_PACKET"
+          ],
+          "type": "string"
+        },
+        "identity_checks_by_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "D04-H01": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            },
+            "D04-H02": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            },
+            "D04-H03": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            },
+            "D04-H04": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            },
+            "D04-H05": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            },
+            "D04-H06": {
+              "additionalProperties": false,
+              "properties": {
+                "both_pmids_match": {
+                  "type": "boolean"
+                },
+                "both_public_N_match": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "both_pmids_match",
+                "both_public_N_match"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "D04-H01",
+            "D04-H02",
+            "D04-H03",
+            "D04-H04",
+            "D04-H05",
+            "D04-H06"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "bibliographic_and_N_match_evidence_ids",
+        "identity_checks_by_evidence",
+        "exact_estimand_equivalence"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D04"
+  },
+  {
+    "candidate_estimate_count": 6,
+    "candidate_order_seed": 20261013,
+    "operation": "discovery_validation_role_and_source_dependence",
+    "prompt": "For snoring reported through a partner/relative/friend complaint and gastroesophageal reflux, find the discovery estimate and its Finnish-register outcome-side check among these records. Identify which additional validation row reuses that reflux outcome source for a different sleep construct. From the actual source identities, classify whether the target check reuses the sleep GWAS or documents independent remeasurement of both traits.",
+    "response_contract": {
+      "different_sleep_same_reflux_source_evidence_id": "evidence_id",
+      "discovery_evidence_id": "evidence_id",
+      "outcome_check_evidence_id": "evidence_id",
+      "two_trait_confirmation_state": [
+        "REUSED_SLEEP_SOURCE",
+        "INDEPENDENT_REMEASUREMENT_DOCUMENTED",
+        "NOT_IDENTIFIED_FROM_PACKET"
+      ]
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "different_sleep_same_reflux_source_evidence_id": {
+          "enum": [
+            "D05-R01",
+            "D05-R02",
+            "D05-R03",
+            "D05-R04",
+            "D05-R05",
+            "D05-R06"
+          ],
+          "type": "string"
+        },
+        "discovery_evidence_id": {
+          "enum": [
+            "D05-R01",
+            "D05-R02",
+            "D05-R03",
+            "D05-R04",
+            "D05-R05",
+            "D05-R06"
+          ],
+          "type": "string"
+        },
+        "outcome_check_evidence_id": {
+          "enum": [
+            "D05-R01",
+            "D05-R02",
+            "D05-R03",
+            "D05-R04",
+            "D05-R05",
+            "D05-R06"
+          ],
+          "type": "string"
+        },
+        "two_trait_confirmation_state": {
+          "enum": [
+            "REUSED_SLEEP_SOURCE",
+            "INDEPENDENT_REMEASUREMENT_DOCUMENTED",
+            "NOT_IDENTIFIED_FROM_PACKET"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "discovery_evidence_id",
+        "outcome_check_evidence_id",
+        "different_sleep_same_reflux_source_evidence_id",
+        "two_trait_confirmation_state"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D05"
+  },
+  {
+    "candidate_estimate_count": 3,
+    "candidate_order_seed": 20261013,
+    "operation": "scale_specific_numeric_QC_reasoning",
+    "prompt": "A colleague proposes that using the reported h2 scale instead of the observed scale could rescue every chronotype–outcome candidate for the numerical primary QC gate. Match each outcome to its exact h2 record, calculate h2/SE on both supplied scales, and classify the pairwise gate state using BOTH traits. Do not call a high intercept a proven causal diagnosis of confounding.",
+    "response_contract": {
+      "numerical_checks_by_evidence": {
+        "D06-R01": {
+          "outcome_Z_observed": "number",
+          "outcome_Z_reported": "number",
+          "pairwise_gate_state": [
+            "BOTH_PASS",
+            "H2_Z_GATE_FAIL",
+            "INTERCEPT_GATE_FAIL",
+            "BOTH_FAIL"
+          ]
+        },
+        "D06-R02": {
+          "outcome_Z_observed": "number",
+          "outcome_Z_reported": "number",
+          "pairwise_gate_state": [
+            "BOTH_PASS",
+            "H2_Z_GATE_FAIL",
+            "INTERCEPT_GATE_FAIL",
+            "BOTH_FAIL"
+          ]
+        },
+        "D06-R03": {
+          "outcome_Z_observed": "number",
+          "outcome_Z_reported": "number",
+          "pairwise_gate_state": [
+            "BOTH_PASS",
+            "H2_Z_GATE_FAIL",
+            "INTERCEPT_GATE_FAIL",
+            "BOTH_FAIL"
+          ]
+        }
+      },
+      "scale_change_rescues_all": [
+        "SUPPORTED_BY_NUMERICAL_CHECKS",
+        "NOT_SUPPORTED_BY_NUMERICAL_CHECKS"
+      ]
+    },
+    "response_schema": {
+      "additionalProperties": false,
+      "properties": {
+        "numerical_checks_by_evidence": {
+          "additionalProperties": false,
+          "properties": {
+            "D06-R01": {
+              "additionalProperties": false,
+              "properties": {
+                "outcome_Z_observed": {
+                  "type": "number"
+                },
+                "outcome_Z_reported": {
+                  "type": "number"
+                },
+                "pairwise_gate_state": {
+                  "enum": [
+                    "BOTH_PASS",
+                    "H2_Z_GATE_FAIL",
+                    "INTERCEPT_GATE_FAIL",
+                    "BOTH_FAIL"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "outcome_Z_observed",
+                "outcome_Z_reported",
+                "pairwise_gate_state"
+              ],
+              "type": "object"
+            },
+            "D06-R02": {
+              "additionalProperties": false,
+              "properties": {
+                "outcome_Z_observed": {
+                  "type": "number"
+                },
+                "outcome_Z_reported": {
+                  "type": "number"
+                },
+                "pairwise_gate_state": {
+                  "enum": [
+                    "BOTH_PASS",
+                    "H2_Z_GATE_FAIL",
+                    "INTERCEPT_GATE_FAIL",
+                    "BOTH_FAIL"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "outcome_Z_observed",
+                "outcome_Z_reported",
+                "pairwise_gate_state"
+              ],
+              "type": "object"
+            },
+            "D06-R03": {
+              "additionalProperties": false,
+              "properties": {
+                "outcome_Z_observed": {
+                  "type": "number"
+                },
+                "outcome_Z_reported": {
+                  "type": "number"
+                },
+                "pairwise_gate_state": {
+                  "enum": [
+                    "BOTH_PASS",
+                    "H2_Z_GATE_FAIL",
+                    "INTERCEPT_GATE_FAIL",
+                    "BOTH_FAIL"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "outcome_Z_observed",
+                "outcome_Z_reported",
+                "pairwise_gate_state"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "D06-R01",
+            "D06-R02",
+            "D06-R03"
+          ],
+          "type": "object"
+        },
+        "scale_change_rescues_all": {
+          "enum": [
+            "SUPPORTED_BY_NUMERICAL_CHECKS",
+            "NOT_SUPPORTED_BY_NUMERICAL_CHECKS"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "numerical_checks_by_evidence",
+        "scale_change_rescues_all"
+      ],
+      "type": "object"
+    },
+    "status": "DRAFT_NOT_FOR_EXECUTION",
+    "task_id": "D06"
+  }
+]

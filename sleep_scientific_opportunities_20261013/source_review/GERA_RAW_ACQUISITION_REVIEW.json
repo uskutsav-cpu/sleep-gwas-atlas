@@ -1,0 +1,116 @@
+{
+  "schema": "independent_GERA_raw_acquisition_review/1",
+  "reviewed_utc": "2026-10-13T22:33:22.176841+00:00",
+  "reviewer": "/root/cohort_independence_review",
+  "reviewed_plan_sha256": "970ff530eda1117053829e6fc3fe3198b26af874a8d7d451e7cec59cdda620ce",
+  "reviewed_script_sha256": "f5742e58eeaf8233f84369c4ccc46c416eb20cf45a683c995270932ac9f41759",
+  "acquisition_admitted": true,
+  "decision": "GO_EXACT_SOURCE_ACQUISITION_ONLY",
+  "scope": "Focused static review of the frozen plan and final one-curl executor. No acquisition, source-body reread, preprocessing, estimator, controller, or source modification performed by this reviewer.",
+  "source": {
+    "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv",
+    "bytes": 2019290168,
+    "etag": "785bec38-62d824a0398bc",
+    "last_modified": "2025-02-07T00:17:51Z",
+    "md5_from_yaml": "6dfa12cf01f443e1115d25b83a77d703"
+  },
+  "scientific_materiality": {
+    "material": true,
+    "reason": "The exact raw source supplies provider-documented GRCh37 additive beta/SE and alleleB coding. It avoids the Catalog GRCh38 coordinate/hm_code lineage currently untested by the unmatched prefixes; a complete verified raw source permits a separately reviewed result-free full-source/common-SNP QC decision.",
+    "transfer_tradeoff_bytes_vs_harmonised": 1431793894,
+    "not_a_new_release": "Known Catalog delivery metadata are dated 2025; newly useful to this project, not a newly released independent study.",
+    "source_only_h2_feasibility": "Potential next scientific question; UNKNOWN_NOT_TESTED and not admitted by this review.",
+    "clinical_event_window_and_controls": "UNKNOWN. These constrain construct interpretation and transport; they do not prevent acquisition of this exact existing clinical ICD-coded source.",
+    "per_variant_N": "all_total is supplied total N, not certified per-variant case/control effective N. Exact semantics and any allowed approximation are downstream preprocessing/model gates; no population-total substitution admitted.",
+    "cohort_independence": "GERA-only source identity is documented. Individual enrollment/relative intersections with discovery and any future outcome cohort are not certified. No independent both-trait replication follows."
+  },
+  "transport_and_resource_checks": {
+    "fixed_binary": "/usr/bin/curl 8.7.1, local --version inspected; --disable is first argument",
+    "TLS": "Verified HTTPS only; no insecure option or redirect/retry option; default curl configuration disabled",
+    "one_request": "One source URL and one owned curl process; no automatic retry, second request, or resume launched",
+    "identity_encoding": "Accept-Encoding: identity",
+    "If_Match_wire": "\"785bec38-62d824a0398bc\"",
+    "etag_verification": "Header-name case ignored; opaque ETag value retained and matched exactly. No weak ETag matches the expected strong value.",
+    "source_acceptance": "Successful curl exit, HTTP200, exact 2019290168 bytes, exact ETag and Content-Length, published MD5 match, local SHA256, unchanged plan, fsync, and verified non-clobbering publication",
+    "maximum_transfer_and_retained_bytes": 2200000000,
+    "maximum_seconds": 1800,
+    "deadline_scope": "One monotonic deadline covers transfer, per-1MiB digest verification and pre-publication guard. These are software-observed guards, not a hard real-time or kernel memory certificate.",
+    "curl_RSS_limit_bytes": 134217728,
+    "monitor_interval_seconds": 2,
+    "curl_RSS_qualification": "Observed ps samples, with owned-child termination on a sampled guard breach; sub-interval peak RSS is not certified.",
+    "SSD_preflight_floor_bytes": 5368709120,
+    "internal_acquisition_floor_bytes": 1073741824,
+    "native_floor_bytes": 3221225472,
+    "native_floor_policy": "3 GiB unchanged and not waived. Acquisition-only internal floor is distinct from native admission.",
+    "checkpoint_protection": "Refuse existing final, part, receipt or private transport evidence; reserve own part with exclusive xb; mv -n publication verified by absence of owned part and presence of final",
+    "failure_protection": "Stop monitored owned curl in finally on monitor exception or guard; keep its checkpoint and failure evidence. No automatic resume or overwrite.",
+    "later_resume": "NOT_ADMITTED. Requires separately checked same source ETag/length and HTTP206 Content-Range beginning at exact checkpoint length.",
+    "raw_body_destination": "SSD private source directory only; no variant rows exported to review, repository or public artifact"
+  },
+  "corrected_findings": [
+    {
+      "prior_script_sha256": "4d3ed16d775271b904b2710dc3c7f80ab50a1232cad47c528118fc31eb090aac",
+      "correction": "Quoted If-Match, common transfer/verification deadline, exclusive checkpoint and non-clobbering publication are present in reviewed final script."
+    },
+    {
+      "prior_script_sha256": "f1e982afa5d2595f0f765355478c3c4915320754b0b01ffae5041afdebdf50cd",
+      "correction": "Fixed curl executable with first-argument --disable; ETag value case preserved; monitored owned-child try/except/finally cleanup now present."
+    }
+  ],
+  "verification_performed": {
+    "plan_hash": true,
+    "script_hash": true,
+    "static_AST_parse": true,
+    "focused_semantic_code_review": true,
+    "local_curl_version_help": true,
+    "acquisition_or_dynamic_worker_run": false,
+    "implementation_mirroring_tests": false
+  },
+  "checkpoint_census": "Prior metadata-only census of the new and V8 SSD source_review directories found no GERA full/part/checkpoint. Scope is those directories, not all SSD. The executor repeats refusal checks immediately before transfer.",
+  "unclosed_downstream_gates": [
+    "Full-source row counts, parse/completeness, finite supplied beta/SE, INFO/MAF, allele and chromosome/coordinate validity remain NOT_TESTED.",
+    "rs_id_all is provider coordinate/allele identifier, not guaranteed dbSNP rsID; GRCh37 HM3 coordinate/allele mapping and reference eligibility require separate admission.",
+    "Total-N versus case/control effective-N semantics and allowed source-specific assumptions require separate model review; cases3972/controls52665 are design metadata only.",
+    "Clinical event count/window/control exclusion and phenotype transport remain unresolved; no UKB symptom/chronic insomnia equivalence is inferred.",
+    "Ancestry-appropriate LD/reference, retained common-SNP coverage, h2/SE/intercept and estimator precision remain untested.",
+    "No participant independence, new association, disease pair, biology or replication certificate is created."
+  ],
+  "holds_preserved": {
+    "all_original_results_and_QC": true,
+    "MVP_GCST90479148_abdominal_pain_CI_SE_hold": true,
+    "MVP_GCST90475826_clinical_insomnia_unresolved_contract": true,
+    "bowel_holds": true
+  },
+  "preprocessing_admitted": false,
+  "h2_or_rg_admitted": false,
+  "disease_pair_tests_admitted": 0,
+  "source_QC_status": "NOT_TESTED",
+  "independent_replications_created": 0,
+  "evidence": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PRIMARY_CONTRACT_METADATA_20261013.json",
+      "sha256": "2ecc5624e3126d5fd6e726ecb12b61f5f356ccc321196b83354f410b19ae8e85"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_BOUNDED_LINEAGE_DIAGNOSTIC.json",
+      "sha256": "51514f508c34bd011649397f3f17a2d409ab269519865dd6265d0910afb05aa0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADMISSION.json",
+      "sha256": "e003fb7383c62c76c03b05ebd4734c6e4b46b6ec5836f11d2f5af5f8bf4bd769"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_FULL_SUPPLEMENT_ASSESSMENT.json",
+      "sha256": "83faaea9500e8d5e4b08fef859524467ee13b4aaf98e37093dfed5a19bac1ec9"
+    }
+  ],
+  "primary_URLs": {
+    "accession": "https://www.ebi.ac.uk/gwas/rest/api/v2/studies/GCST90086097",
+    "raw_checksum_metadata": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv-meta.yaml",
+    "provider_README": "https://kp4cd.org/sites/default/files/READMEs/GERA_README.txt",
+    "phenotype_ICD_codes": "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/GetPdf.cgi?id=phd004308",
+    "primary_paper": "https://www.nature.com/articles/s41467-021-21952-4",
+    "curl_config_contract": "https://curl.se/docs/manpage.html#-q",
+    "HTTP_ETag_comparison": "https://www.rfc-editor.org/rfc/rfc9110.html#section-8.8.3.2"
+  }
+}
