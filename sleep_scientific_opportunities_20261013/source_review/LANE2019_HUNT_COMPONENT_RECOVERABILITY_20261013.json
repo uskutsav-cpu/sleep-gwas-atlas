@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "assessment_date": "2026-10-13",
+  "status": "NOT_ADMISSIBLE_FROM_AUTHENTICATED_PUBLIC_INPUTS_IN_FINITE_SCREEN",
+  "first_indispensable_missing_contract": "Exact publicly permitted dense meta artifact and fixed release/component/schema identity; known meta supplement is 57 selected loci only.",
+  "stop_after_scope_failure": true,
+  "global_absence_claim": false,
+  "new_dataset_admitted": false,
+  "reconstruction_performed": false,
+  "estimates_or_simulations_performed": false,
+  "primary_method": {
+    "software": "METAL",
+    "model": "fixed-effects",
+    "scheme": "standard-error",
+    "inverse_variance": true,
+    "sample_size_weighted_Z": false,
+    "locator": "Primary Methods / Genome-wide association analysis"
+  },
+  "reported_meta_cohorts": [
+    "UK Biobank",
+    "HUNT",
+    "Partners Biobank"
+  ],
+  "subtract_UKB_alone_identifies": "HUNT+Partners pooled residual, conditional on exact authenticated inputs; not HUNT alone",
+  "public_metadata_observations": [
+    {
+      "source": "Publisher Table S2",
+      "scope": "genome-wide significant loci",
+      "unique_rsID_rows": 57,
+      "direct_dense_beta_SE": false,
+      "display": "rounded OR[95%CI] and P",
+      "locators": [
+        "Table S2 A1",
+        "Table S2 A3:R4"
+      ]
+    },
+    {
+      "source": "Publisher Table S7",
+      "scope": "selected-locus HUNT replication",
+      "release_qualification": "updated phenotype explicitly labeled",
+      "build_scope": "hg19 selected-position footnote, not dense-input authentication",
+      "locators": [
+        "Table S7 A1:P3",
+        "Table S7 A64"
+      ]
+    },
+    {
+      "source": "Table S6a",
+      "cases": 14923,
+      "controls": 47610,
+      "role": "sample ascertainment totals, not per-variant weights",
+      "locator": "Table S6a A1:C10"
+    },
+    {
+      "source": "Primary UKB methods",
+      "role": "BOLT-LMM discovery and PLINK logistic effects, distinct analyses; frequent/any coding differs",
+      "exact_matched_dense_component_authenticated": false
+    },
+    {
+      "source": "Official inspected portal",
+      "dataset": "GWAS_UKBB_eu",
+      "participants": "UK Biobank",
+      "HUNT_or_dense_meta_artifact_authenticated": false
+    }
+  ],
+  "HUNT_source_defined_QC": {
+    "ancestry": "European",
+    "method": "SAIGE generalized mixed effects",
+    "covariates": [
+      "sex",
+      "birth year",
+      "genotyping batch",
+      "four PCs"
+    ],
+    "MAC_min": 5,
+    "imputation_r2_min": 0.3,
+    "phenotype": "HUNT1-3 symptom case/control rules; frequent criteria vary by survey",
+    "sample_count_role": "not per-variant effective information"
+  },
+  "unverified_required_inputs": [
+    "dense meta exact URL/version/hash/schema/rights/component list",
+    "exact matched dense UKB input and statistic scale",
+    "exact Partners input or proof of Partners exclusion for HUNT-only",
+    "per-variant component SE/precision/inclusion and allele mapping",
+    "all input/output genomic-control or other transforms and factors",
+    "dense build/variant identity contract",
+    "HUNT SNP-wise analyzed/effective N for downstream LDSC",
+    "rounding/conditioning/error propagation and recomposition proof"
+  ],
+  "prohibited_substitutions": [
+    "core Neale UKB",
+    "Jansen UKB",
+    "other UKB releases",
+    "BOLT substituted for logistic effect input",
+    "frequent versus any or sensitivity/sex-stratified results",
+    "cohort total N used as inverse-variance weights",
+    "selected loci treated as dense genome-wide summary statistics"
+  ],
+  "conditional_mathematical_statement": "An exact independent-cohort fixed-effect inverse-variance contribution is removable through weighted-numerator and precision subtraction on a common scale after known transforms. The method statement alone does not identify the missing empirical files. No values reconstructed.",
+  "source_inputs": [
+    {
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41588-019-0361-7/MediaObjects/41588_2019_361_MOESM1_ESM.pdf",
+      "bytes": 2558692,
+      "sha256": "23331b0b9c3a81d594fff44970ac5e0188ef27ccc4a3c5e0c70a02d025bcb707",
+      "inspection": "methods/phenotype/QC; in-memory publication bytes; no repository snapshot"
+    },
+    {
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41588-019-0361-7/MediaObjects/41588_2019_361_MOESM3_ESM.xlsx",
+      "bytes": 1802364,
+      "sha256": "13a3ff2a11f6fe93787717ec13a3180360ac3006037e85a0afafae8cdbcf00b0",
+      "inspection": "table scope/header/cell locators; no dense GWAS body"
+    }
+  ],
+  "primary_urls": {
+    "paper": "https://www.nature.com/articles/s41588-019-0361-7",
+    "primary_author_manuscript": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6415688/",
+    "author_lab_manuscript": "https://saxena.mgh.harvard.edu/wp-content/uploads/2022/05/nihms-1519714.pdf",
+    "supplementary_note": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41588-019-0361-7/MediaObjects/41588_2019_361_MOESM1_ESM.pdf",
+    "supplementary_tables": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41588-019-0361-7/MediaObjects/41588_2019_361_MOESM3_ESM.xlsx",
+    "inspected_portal": "https://kp4cd.org/node/235",
+    "legacy_download_statement": "http://sleepdisordergenetics.org/informational/data/"
+  },
+  "reused_existing_report": "INDEPENDENT_SLEEP_SOURCE_GAP_ASSESSMENT_20261013.txt",
+  "finite_transport_notes": [
+    "EuropePMC XML returned HTTP500",
+    "web reader PMC captcha and supplement access failures",
+    "certificate-verifying curl -q retrieved primary PMC HTML and exact publisher supplements",
+    "legacy portal route failed; not a global source-unavailability claim"
+  ],
+  "preserved": [
+    "all genetic estimates",
+    "testing families",
+    "source/uncertainty/independence holds",
+    "prior gap report",
+    "all original and candidate pipelines"
+  ],
+  "activities_absent": [
+    "raw GWAS body acquisition",
+    "restricted access/contact",
+    "new genetic fitting",
+    "covariance simulations",
+    "controller creation",
+    "participant data",
+    "data-rights override"
+  ],
+  "repository_report_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/LANE2019_HUNT_COMPONENT_RECOVERABILITY_20261013.txt",
+  "SSD_report_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/LANE2019_HUNT_COMPONENT_RECOVERABILITY_20261013.txt"
+}

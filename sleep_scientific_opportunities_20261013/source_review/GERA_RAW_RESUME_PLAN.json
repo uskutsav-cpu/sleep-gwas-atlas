@@ -1,0 +1,49 @@
+{
+  "schema": "exact_source_checkpoint_resume/1",
+  "frozen_utc": "2026-10-13T23:07:37.330591+00:00",
+  "source": {
+    "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv",
+    "bytes": 2019290168,
+    "etag": "785bec38-62d824a0398bc",
+    "last_modified": "2025-02-07T00:17:51Z",
+    "md5_from_yaml": "6dfa12cf01f443e1115d25b83a77d703"
+  },
+  "prefix": {
+    "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv.part",
+    "bytes": 164671738,
+    "sha256": "80c916d2b7204a4a5d7d46539e2872e2bbea5a10943ba684167c9a1039b22b46",
+    "md5": "40e3178eefe1319952b965404012718a",
+    "meaning": "Transport checkpoint hash only; not a verified complete GWAS source."
+  },
+  "suffix": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_20261013/suffix.part",
+  "assembled": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_20261013/assembled_source.part",
+  "destination": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv",
+  "receipt": "GERA_RAW_RESUME_RECEIPT.json",
+  "review": "GERA_RAW_RESUME_REVIEW.json",
+  "resource": {
+    "maximum_seconds": 28800,
+    "connections": 1,
+    "curl_max_rss_bytes": 134217728,
+    "internal_minimum_before_bytes": 1073741824,
+    "internal_emergency_floor_bytes": 1073741824,
+    "ssd_minimum_before_bytes": 8589934592,
+    "maximum_transfer_bytes": 2200000000,
+    "maximum_owned_staging_bytes": 5500000000,
+    "native_3GiB_guard_unchanged": true,
+    "internal_free_at_freeze": 4580339712,
+    "ssd_free_at_freeze": 605049323520
+  },
+  "transport": {
+    "first_request": "Exact Range bytes=prefix.bytes-(source.bytes-1); quoted If-Match; identity encoding; fixed /usr/bin/curl --disable; no retries, redirects or TLS bypass",
+    "required_response": "HTTP206, exact case-sensitive ETag, Content-Length remaining bytes, exact Content-Range bytes offset-(total-1)/total; reject before continuing once response headers are present",
+    "preservation": "Original prefix stays byte-identical. Download suffix separately; full candidate assembled exclusively onSSD and checksum verified before mv-n publication. No existing checkpoint, source or receipt overwritten.",
+    "wall_deadline_scope": "Transfer, assembly/verification and publication share8h monotonic deadline; one active request."
+  },
+  "scientific_scope": {
+    "source_acquisition_only": true,
+    "GWAS_rows_interpreted": false,
+    "preprocessing_or_h2_or_rg_admitted": false,
+    "no_source_or_outcome_selection": true
+  },
+  "rationale": "Initial30-minute bounded transfer authoritatively timed out with164671738-byte prefix. Observed mean~91KB/s implies remaining transfer needs~5.6hours. Extend bounded acquisition time, preserving data and every other guard; no nativecontroller or statistical change."
+}

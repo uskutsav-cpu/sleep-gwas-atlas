@@ -1,0 +1,1159 @@
+{
+  "recorded_utc": "2026-10-13T23:12:48.009388+00:00",
+  "status": "INDEPENDENT_ACTUAL_SYNTHETIC_OUTCOMES_PASS",
+  "adapter_SHA256": "66e4f0d2a27604fb1d1b1778451b4de1ebddfff564b2cfd2b2d4528acd09ced4",
+  "existing_test_SHA256": "772c814053c2d2d5b25714cfe18231da5e263b386e18b487a99d88179cb78fb3",
+  "existing_test_methods_rerun": 6,
+  "existing_successful_fixture_outcomes": 7,
+  "additional_successful_adversarial_fixtures": 1,
+  "additional_negative_identity_cases": [
+    {
+      "case": "source_SHA256_mismatch",
+      "exception": "PROCESSED_SOURCE_IDENTITY_MISMATCH_NO_OUTPUT_ADMITTED",
+      "native_input_emitted": false,
+      "all_inputs_synthetic": true
+    },
+    {
+      "case": "literal_header_mismatch",
+      "exception": "LITERAL_GERA_HEADER_MISMATCH",
+      "output_directory_created": false,
+      "all_inputs_synthetic": true
+    }
+  ],
+  "outcomes": [
+    {
+      "test": "test_invalid_SE_or_N_counterpart_still_excludes_complete_SNP_group",
+      "fixture": "out",
+      "QC": {
+        "input_rows": 7,
+        "exclusive_exclusions": {
+          "N_above_56637": 1
+        },
+        "duplicate_copies": 1,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 6,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416,
+          "SE_not_positive": 1,
+          "N_fractional": 1,
+          "N_above_56637": 1
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 7
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 1081,
+          "md5": "0157c996456af363847cfe0d9e5722fc",
+          "sha256": "d8d41e90195a5c8a62709d010942cb01195ad04df282fe0269fb4af591725565"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 5,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 2,
+        "conflicting_unique_records": 4,
+        "conflicting_source_rows_diagnostic": 5,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 1,
+        "R7_exact_m_j_r_Q": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 1,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 1,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 7,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 4,
+          "reference_rows": 4,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 4,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_4az4b9dv/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_4az4b9dv/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_4az4b9dv/out"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "3621c71ac65f1a0508780e965f8c9d1cfffd53b8c095a61cb227d8aec1b4a584",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_4az4b9dv/out/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:44.640035+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs3",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_multiple_compatible_rsids_hold_no_native_input",
+      "fixture": "out",
+      "QC": {
+        "input_rows": 1,
+        "exclusive_exclusions": {
+          "multiple_compatible_rsids": 1
+        },
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 1,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416
+        },
+        "orientation_counts_mapped_input_rows": {},
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 623,
+          "md5": "3ad56c56a6eae8befc9e9c7a4e7cf81a",
+          "sha256": "b5c1ba92d9c5d8480ed805c0122686d3015723e47a80575cb36bd15f5736b960"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 1,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 0,
+        "R7_exact_m_j_r_Q": {
+          "m": 0,
+          "j": null,
+          "r": null,
+          "Q": null
+        },
+        "q90_R7": null,
+        "q90_exact_fraction": null,
+        "N_cutoff_q90_div_1.5": null,
+        "minimum_retained_integer_N": null,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 0,
+        "retained_N_min": null,
+        "retained_N_max": null,
+        "retained_rows": 0,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": null,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "HOLD_NO_NATIVE_INPUT",
+        "input_reconciled": true,
+        "reconciled_rows": 1,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 2,
+          "reference_rows": 2,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 2,
+          "coordinate_collision_groups": 1
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_rymuvc9u/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_rymuvc9u/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_rymuvc9u/out"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": null,
+        "sumstats_path": null,
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:44.984825+00:00"
+      },
+      "actual_sumstats_rows": [],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_quantile_copy_weights_excluded_and_equality_retained",
+      "fixture": "out",
+      "QC": {
+        "input_rows": 25,
+        "exclusive_exclusions": {},
+        "duplicate_copies": 20,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 25,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 25
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 2304,
+          "md5": "049dc2b4c14f7d7e8c23d6664f759c77",
+          "sha256": "b103853072be563e24ec41bffaaab8f8abaa86fb4fb48881b075fa9ec21a537f"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 25,
+          "distinct_values": 3,
+          "min": 99,
+          "max": 150,
+          "R7_quantiles": {
+            "1/10": 99.0,
+            "1/2": 99.0,
+            "9/10": 130.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 5,
+        "R7_exact_m_j_r_Q": {
+          "m": 5,
+          "j": 3,
+          "r": 6,
+          "Q": 1500
+        },
+        "q90_R7": 150.0,
+        "q90_exact_fraction": "150",
+        "N_cutoff_q90_div_1.5": 100.0,
+        "minimum_retained_integer_N": 100,
+        "N_filtered_unique_records": 1,
+        "N_below_threshold": 1,
+        "N_equal_threshold": 1,
+        "N_above_threshold": 3,
+        "retained_N_min": 100,
+        "retained_N_max": 150,
+        "retained_rows": 4,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 25,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 5,
+          "reference_rows": 5,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 5,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_zom643fu/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_zom643fu/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_zom643fu/out"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "237fb21167797895f379928fd2e903801b8b884ff35789596c1fd586f2ea4ed0",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_zom643fu/out/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:45.404260+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs2",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "100"
+        },
+        {
+          "SNP": "rs3",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "150"
+        },
+        {
+          "SNP": "rs4",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "150"
+        },
+        {
+          "SNP": "rs5",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "150"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_reference_duplicate_keys_collapse_identical_and_taint_all_conflicting_coordinates",
+      "fixture": "ref_duplicate",
+      "QC": {
+        "input_rows": 3,
+        "exclusive_exclusions": {
+          "tainted_reference_coordinate": 2
+        },
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 3,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 1
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 769,
+          "md5": "868ff7e50ba810f175bd54c1b6ad4e01",
+          "sha256": "125173e381ea5f56e4b6d99a02bbda74ea79efc3f965b3890ac923ff99b2296c"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 3,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 1,
+        "R7_exact_m_j_r_Q": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 1,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 1,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 3,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 3,
+          "identical_allele_definition_copies": 1,
+          "reference_rows": 4,
+          "identical_reference_definition_copies": 1,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 1,
+          "tainted_SNPs": 1,
+          "tainted_coordinate_groups": 2,
+          "eligible_reference_rsids": 1,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/ref_duplicate"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "3621c71ac65f1a0508780e965f8c9d1cfffd53b8c095a61cb227d8aec1b4a584",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/ref_duplicate/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:45.836526+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs3",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_reference_duplicate_keys_collapse_identical_and_taint_all_conflicting_coordinates",
+      "fixture": "allele_duplicate",
+      "QC": {
+        "input_rows": 2,
+        "exclusive_exclusions": {
+          "tainted_reference_coordinate": 1
+        },
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 2,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 1
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 696,
+          "md5": "fa81cfc015dd07b65c467b67c29be9e4",
+          "sha256": "669fb7d94dd66241f20512dbbbe92369878d3737630595ff893ab78a781f30fd"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 2,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 1,
+        "R7_exact_m_j_r_Q": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 1,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 1,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 2,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 3,
+          "reference_rows": 2,
+          "conflicting_allele_SNP_groups": 1,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 1,
+          "tainted_coordinate_groups": 1,
+          "eligible_reference_rsids": 1,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/allele_duplicate"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "45e374c09b7e428468ed238782b3bbe8ee71c5eaf9ba020e0c2de9e67858a9ba",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_worzi_z8/allele_duplicate/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:46.226013+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs4",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_strict_filters_MHC_boundaries_and_unclipped_INFO_anomaly",
+      "fixture": "out",
+      "QC": {
+        "input_rows": 7,
+        "exclusive_exclusions": {
+          "extended_MHC37": 2,
+          "INFO_not_gt_0.9": 1,
+          "MAF_not_in_0.01_0.5": 1
+        },
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.9,
+          "max_finite_INFO": 1.2,
+          "min_finite_MAF": 0.01,
+          "max_finite_MAF": 0.5,
+          "INFO_not_gt_0.9": 1,
+          "source_P_Wald_diagnostic_rows": 7,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416,
+          "MAF_not_in_0.01_0.5": 1,
+          "INFO_outside_0_1": 1
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 5
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 1080,
+          "md5": "3f568c48415c40d7712cab7bb6cf4eb7",
+          "sha256": "f5b2ab30a4836cc2a16e2e16877c8e2ed0ac428a37f4acc407dadc4f5d1fa0ea"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 7,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 3,
+        "R7_exact_m_j_r_Q": {
+          "m": 3,
+          "j": 1,
+          "r": 8,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 3,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 3,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 7,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 7,
+          "reference_rows": 7,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 7,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_vdrianwl/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_vdrianwl/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_vdrianwl/out"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "2d708547303093b68f31e03eda7c0d036ed68b660f1e3e7815dc3afb490a0d3c",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_vdrianwl/out/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:46.582095+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs3",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        },
+        {
+          "SNP": "rs6",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        },
+        {
+          "SNP": "rs7",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "test_unique_coordinate_all_orientations_and_total_N_not_Neff",
+      "fixture": "out",
+      "QC": {
+        "input_rows": 4,
+        "exclusive_exclusions": {},
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 4,
+          "max_abs_source_P_minus_Wald_P": 0.8544997361036416
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 1,
+          "swap": 1,
+          "complement": 1,
+          "complement_swap": 1
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 843,
+          "md5": "76f2e22a1728ca5808b5e7d3bd282ca6",
+          "sha256": "b7ea8da62f6453584d43a06b35dbbcc8841df017c2c491c3177dce4fe330ec1e"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 4,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 0,
+        "conflicting_unique_records": 0,
+        "conflicting_source_rows_diagnostic": 0,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 4,
+        "R7_exact_m_j_r_Q": {
+          "m": 4,
+          "j": 2,
+          "r": 7,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 4,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 4,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 4,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 5,
+          "reference_rows": 5,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 5,
+          "coordinate_collision_groups": 1
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_qggjh47_/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_qggjh47_/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_qggjh47_/out"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "54fdcb312d97107b7fadcfe09898c85c033dd03aea6b4fac53596190b50ab4c4",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_qggjh47_/out/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:46.950888+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs9",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        },
+        {
+          "SNP": "rs2",
+          "A1": "A",
+          "A2": "C",
+          "Z": "-2",
+          "N": "56637"
+        },
+        {
+          "SNP": "rs3",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        },
+        {
+          "SNP": "rs4",
+          "A1": "A",
+          "A2": "C",
+          "Z": "-2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    },
+    {
+      "test": "ADVERSARIAL_forced_digest_collision",
+      "QC": {
+        "input_rows": 3,
+        "exclusive_exclusions": {},
+        "duplicate_copies": 0,
+        "diagnostic_flags": {
+          "min_finite_INFO": 0.95,
+          "max_finite_INFO": 0.95,
+          "min_finite_MAF": 0.2,
+          "max_finite_MAF": 0.2,
+          "source_P_Wald_diagnostic_rows": 3,
+          "max_abs_source_P_minus_Wald_P": 0.8973002039367398
+        },
+        "orientation_counts_mapped_input_rows": {
+          "same": 3
+        },
+        "source_header_sha256": "558d0c3955466ddcf41383f68cbb196d86e44f61b7f87fb32e0eb732e92ad81c",
+        "source_identity": {
+          "bytes": 769,
+          "md5": "7ca93e48867914a78eaf360281d21c9e",
+          "sha256": "b8cdc815943d1fdb2b6bbd8130487289b9efc636ee13623235fa71b39f015263"
+        },
+        "valid_source_total_N_summary": {
+          "rows": 3,
+          "distinct_values": 1,
+          "min": 56637,
+          "max": 56637,
+          "R7_quantiles": {
+            "1/10": 56637.0,
+            "1/2": 56637.0,
+            "9/10": 56637.0
+          }
+        },
+        "conflicting_groups": 1,
+        "conflicting_unique_records": 2,
+        "conflicting_source_rows_diagnostic": 2,
+        "N_quantile_population_unique_nonconflicting_eligible_mapped": 1,
+        "R7_exact_m_j_r_Q": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "q90_R7": 56637.0,
+        "q90_exact_fraction": "56637",
+        "N_cutoff_q90_div_1.5": 37758.0,
+        "minimum_retained_integer_N": 37758,
+        "N_filtered_unique_records": 0,
+        "N_below_threshold": 0,
+        "N_equal_threshold": 0,
+        "N_above_threshold": 1,
+        "retained_N_min": 56637,
+        "retained_N_max": 56637,
+        "retained_rows": 1,
+        "nonfinite_chi_square_diagnostic_rows": 0,
+        "mean_chi_square_diagnostic": 4.0,
+        "schema": "GERA_raw37_preprocessing_QC/1",
+        "status": "PREPROCESSING_COMPLETE_PENDING_INDEPENDENT_ACTUAL_OUTPUT_REVIEW",
+        "input_reconciled": true,
+        "reconciled_rows": 3,
+        "exclusive_precedence": [
+          "malformed_record",
+          "coordinate/autosome",
+          "MHC37",
+          "distinct_ACGT",
+          "palindrome",
+          "reference_compatibility",
+          "structurally_mapped_duplicate_copies",
+          "conflicting_unique_records",
+          "beta/SE/Z",
+          "INFO",
+          "MAF",
+          "N",
+          "N_missingness",
+          "retained"
+        ],
+        "duplicate_policy": "Group ALL structurally valid uniquely mapped rows BEFORE statistical filters. SHA matches require source-offset full-byte proof. Different records exclude the whole SNP group.",
+        "reference_counts": {
+          "allele_list_rows": 2,
+          "reference_rows": 2,
+          "conflicting_allele_SNP_groups": 0,
+          "conflicting_reference_SNP_groups": 0,
+          "tainted_SNPs": 0,
+          "tainted_coordinate_groups": 0,
+          "eligible_reference_rsids": 2,
+          "coordinate_collision_groups": 0
+        },
+        "MHC37_inclusive": [
+          6,
+          25000000,
+          34000000
+        ],
+        "N_convention": "PER_VARIANT_ANALYSED_TOTAL_all_total; never Neff or a constant",
+        "Z_convention": "reference_orientation*(supplied_additive_beta/supplied_SE)",
+        "source_P_used_for_selection_or_Z": false,
+        "reference_provenance": {
+          "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_q2q6nyl3/synthetic_reference.tsv.gz",
+          "prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "alleles": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_q2q6nyl3/synthetic_alleles.tsv",
+          "alleles_prior_authenticated_sha256": "SYNTHETIC_FIXTURE",
+          "rehash_performed": false
+        },
+        "reference_duplicate_policy": "Exact full parsed-field duplicate definitions collapse and count. Different reference or allele-list definitions taint their SNP and ALL associated coordinates; affected source coordinates are held, with no first/last winner.",
+        "SQLite_staging": {
+          "VFS": "unix-dotfile",
+          "temp_store": "FILE",
+          "cache_KiB": 8192,
+          "raw_payloads_stored": false,
+          "scratch_directory": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_q2q6nyl3/forced_digest_collision"
+        },
+        "source_ID_coordinate_consistency": "UNKNOWN_FORMAT_NOT_DOCUMENTED; generic provider ID description does not specify a parsing grammar; no guessed repair.",
+        "orientation_interface_sha256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+        "sumstats_sha256": "2a320a0b06a2d3f8a11bed55ff080dcbffed0343c795b58f2653224225c00697",
+        "sumstats_path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_SYNTHETIC_ONLY_q2q6nyl3/forced_digest_collision/GERA_GCST90086097.supplied_Z.total_N.sumstats.gz",
+        "native_fits": 0,
+        "disease_pair_tests": 0,
+        "replication_claims": 0,
+        "h2_or_power": "UNKNOWN_NOT_TESTED",
+        "recorded_utc": "2026-10-13T23:12:47.320056+00:00"
+      },
+      "actual_sumstats_rows": [
+        {
+          "SNP": "rs2",
+          "A1": "A",
+          "A2": "C",
+          "Z": "2",
+          "N": "56637"
+        }
+      ],
+      "all_rows_invented_synthetic": true
+    }
+  ],
+  "scope": "Invented fixtures only; no actual source/reference body or estimator; fixture directories removed.",
+  "actual_source_QC_certified": false
+}

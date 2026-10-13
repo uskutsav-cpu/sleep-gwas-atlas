@@ -1,0 +1,7 @@
+GERA preprocessing protocol clarification before production data processing
+
+The original frozen protocol and its hashes remain preserved. This clarification resolves review R1 only: reference definitions may be collapsed when all ordered parsed fields are identical, including any additional fields. Different CSV quoting or line terminators alone do not create a scientific difference in reference definitions. Such copies are counted. Any difference in a parsed field continues to taint all affected SNPs and coordinates; no first winner is selected.
+
+This applies only to the two authenticated reference inputs. Full physical source rows must still be byte-identical, including delimiters and line terminators, to be collapsed; matching hashes alone remain insufficient. Direct supplied beta/SE, exact total N, collision handling, filtering, q90 population, R7 arithmetic and all native admission guards are unchanged.
+
+This clarification is result-free and precedes production preprocessing. No complete GERA source census, QC result, heritability fit or new association has been examined or generated.

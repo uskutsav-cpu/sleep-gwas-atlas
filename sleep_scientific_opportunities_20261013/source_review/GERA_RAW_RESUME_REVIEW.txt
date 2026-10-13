@@ -1,0 +1,24 @@
+FOCUSED INDEPENDENT GERA CHECKPOINT-RESUME REVIEW
+13 October 2026
+
+Decision: Admit one bounded exact-source checkpoint resume under the reviewed plan and helper hashes. This is acquisition-only approval. The preserved prefix is not a verified complete GWAS source, and no preprocessing, h2, rg, native controller or scientific source-clearance step is admitted.
+
+Reviewed plan SHA256: 136479c02cded6ea35390fba907df41b9053a388b7f89feeb0614f19f885791c
+Reviewed helper SHA256: 1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa
+
+The previous transfer is terminal exit28 and the prior writer PIDs are absent according to authoritative parent execution evidence. Its 164,671,738-byte prefix and original failed receipt remain preserved. The new plan freezes the prefix transport hash before a separate suffix request. The requested range must be bytes 164671738-2019290167/2019290168, with a 1,854,618,430-byte suffix and the exact quoted strong ETag. I made no remote request, did not inspect real GERA source rows, and did not rerun the previous transfer.
+
+Actual code correctness review
+The added resume mode retains the original acquisition helper and uses fixed /usr/bin/curl with --disable first, HTTPS only, quoted If-Match, identity encoding, exact finite Range, CONNECT-header suppression and no retry/redirect/TLS-bypass flags. Complete final response headers must be 206 with the exact single ETag, Content-Range and Content-Length. Missing, contradictory/duplicate, weak or wrong validators and nonidentity Content-Encoding are rejected. Informational header blocks do not serve as successful final evidence. Invalid response headers reject continuation before assembly; actual suffix size must equal the remaining length.
+
+The prefix is opened read-only. Suffix and candidate are exclusively created in a new owned staging directory. The helper verifies prefix SHA before requesting bytes, hashes the copied prefix against the frozen identity, streams full MD5/SHA while assembling, checks complete file length and the known published full MD5, fsyncs, confirms plan immutability and only then attempts nonclobbering publication. Range metadata alone cannot promote a source. An existing destination stays untouched; if publication does not complete, the candidate remains and the operation fails rather than claiming success.
+
+One concrete defect was discovered and corrected before admission: a malformed complete HTTP status line could raise IndexError before the failure receipt was written. The reviewed helper guards status tokens and treats the malformed block as invalid, retaining the failure-receipt path. No source or scientific protocol changed for this repair.
+
+Actual focused tests
+Thirty independent synthetic checks passed against the reviewed helper: 18 header cases and 12 local resume_main cases. These directly exercised the actual code with synthetic 64-byte data and an intercepted curl launch, not a mirror implementation. Header cases included wrong200, offset, end, total, version/case/weakETag, Content-Length, gzip, duplicate validators, incomplete and malformed headers, informational and multiple final blocks. Local cases covered correct assembly/publication, wrong200/offset/version, truncated suffix, full-checksum failure, changed plan, staging cap, wrong pre-request prefix, existing destination and a publication race. Actual BSD mv-n behavior was exercised; all rejected cases retained their prefix and never promoted an unverified source. The malformed-header case produced a preserved failure receipt. No real remote/source data were used in these tests.
+
+Resource and checkpoint bounds
+Transfer, assembly/verification and publication share the 8-hour monotonic deadline. The 128 MiB observed curlRSS limit, 1 GiB internal emergency floor, 8 GiB initial SSD free-space requirement and 5.5 GB aggregate owned staging cap are retained in the new plan; the separate native 3 GiB guard is unchanged. Prefix plus complete suffix plus full candidate total 4,038,580,336 bytes, below the staging cap. Assembly/hash buffers are 1 MiB. The wider time bound is justified by the observed transfer rate, but neither these tests nor the plan guarantee that the server will complete within it.
+
+Any real result must still satisfy exact response/length/checksum gates and preserve transport and attempt receipts. A failure keeps the prefix and owned recovery artifacts and stops; it does not authorize silent full redownload, automatic retry, an incomplete-source analysis or statistical fallback. Full published-MD5 verification admits complete artifact identity only; downstream scientific/QC admission remains separate. This review contains hashes and transport metadata only and no protected source rows, model output or private human-key material.

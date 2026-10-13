@@ -1,0 +1,218 @@
+{
+  "schema": "focused_exact_source_checkpoint_resume_review/1",
+  "reviewed_utc": "2026-10-13T23:15:23.897455+00:00",
+  "reviewed_plan_sha256": "136479c02cded6ea35390fba907df41b9053a388b7f89feeb0614f19f885791c",
+  "reviewed_script_sha256": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa",
+  "resume_admitted": true,
+  "scope": "One exact ETag/range checkpoint-recovery acquisition only; not complete source or preprocessing/native admission.",
+  "observed_correction": {
+    "defect": "Malformed complete HTTP status could raise IndexError outside the receipt-producing verification branch.",
+    "resolution": "Status tokens guarded; malformed block returns invalid verdict and actual local resume writes preserved failure receipt.",
+    "verified_by_actual_test": true
+  },
+  "exact_transfer_requirements": {
+    "prefix_bytes": 164671738,
+    "prefix_sha256": "80c916d2b7204a4a5d7d46539e2872e2bbea5a10943ba684167c9a1039b22b46",
+    "required_content_range": "bytes 164671738-2019290167/2019290168",
+    "expected_suffix_bytes": 1854618430,
+    "required_http_code": 206,
+    "required_etag": "\"785bec38-62d824a0398bc\"",
+    "content_encoding": "absent or exactly identity",
+    "strong_validator_and_case_sensitive_etag": true,
+    "expected_assembled_bytes": 2019290168,
+    "published_md5_required": "6dfa12cf01f443e1115d25b83a77d703",
+    "streaming_sha256_recorded": true
+  },
+  "resource_review": {
+    "shared_transfer_assembly_verification_publication_seconds": 28800,
+    "one_active_curl_connection": true,
+    "curl_max_rss_bytes": 134217728,
+    "internal_emergency_floor_bytes": 1073741824,
+    "ssd_minimum_before_bytes": 8589934592,
+    "maximum_owned_staging_bytes": 5500000000,
+    "expected_prefix_suffix_candidate_bytes": 4038580336,
+    "native_3GiB_guard_unchanged": true,
+    "streaming_buffer_bytes": 1048576,
+    "no_automatic_retry_or_redirect_or_TLS_bypass": true
+  },
+  "checkpoint_preservation_review": {
+    "original_prefix_opened_read_only_by_helper": true,
+    "prefix_hash_verified_before_request": true,
+    "copied_prefix_SHA256_rechecked_during_assembly": true,
+    "suffix_separate_and_exclusively_created": true,
+    "candidate_exclusively_created": true,
+    "full_size_and_published_MD5_before_promotion": true,
+    "plan_immutability_check_before_promotion": true,
+    "nonclobber_publication_verified_by_actual_local_collision_test": true,
+    "original_30minute_plan_receipt_and_transport_evidence_preserved": true,
+    "terminal_prior_transfer_and_no_writer_basis": "Trusted parent evidence: session68373 terminal exit28; initial receipt FAILED_CHECKPOINT_PRESERVED; prior PIDs67187/67199 absent. Not independently re-launched or source-body inspected."
+  },
+  "actual_tests": {
+    "tested_actual_helper_sha256": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa",
+    "synthetic_tests_passed": 30,
+    "header_cases": 18,
+    "actual_resume_main_local_synthetic_cases": 12,
+    "tests": [
+      {
+        "case": "header_valid",
+        "passed": true
+      },
+      {
+        "case": "header_incomplete_header",
+        "passed": true
+      },
+      {
+        "case": "header_informational_then_final",
+        "passed": true
+      },
+      {
+        "case": "header_old200_final206",
+        "passed": true
+      },
+      {
+        "case": "header_old206_final200",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_200",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_offset",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_end",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_total",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_etag",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_etag_case",
+        "passed": true
+      },
+      {
+        "case": "header_weak_etag",
+        "passed": true
+      },
+      {
+        "case": "header_wrong_content_length",
+        "passed": true
+      },
+      {
+        "case": "header_gzip_encoding",
+        "passed": true
+      },
+      {
+        "case": "header_duplicate_etag",
+        "passed": true
+      },
+      {
+        "case": "header_duplicate_range",
+        "passed": true
+      },
+      {
+        "case": "header_malformed_status",
+        "passed": true
+      },
+      {
+        "case": "header_mixed_case_fields",
+        "passed": true
+      },
+      {
+        "case": "pipeline_valid_complete",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_wrong200",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_wrongoffset",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_wrongversion",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_truncatedsuffix",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_malformedheader",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_bad_full_checksum",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_nonclobber_publication_race",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_plan_changed_after_request",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_staging_cap",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_wrong_prefix_before_request",
+        "passed": true,
+        "real_remote_request": false
+      },
+      {
+        "case": "pipeline_preexisting_destination",
+        "passed": true,
+        "real_remote_request": false
+      }
+    ],
+    "real_remote_requests": 0,
+    "real_GERA_source_bytes_read_or_interpreted": 0,
+    "synthetic_payload_only": true,
+    "actual_BSD_mv_nonclobber_path_exercised": true
+  },
+  "findings": [
+    "Strict final complete header-block matching rejects wrong200, offset/end/total, ETag/weakETag/case, gzip encoding, duplicate validator fields and malformed HTTP status.",
+    "Actual resume_main rejects invalid range metadata or truncated suffix before candidate assembly.",
+    "A metadata-valid but corrupt synthetic suffix fails full assembled checksum and is never promoted.",
+    "BSD mv-n destination race leaves existing destination and verified candidate intact and emits failure; no clobber.",
+    "Wrong frozen prefix or prior destination stops before transfer; changed plan and exceeded owned staging cap reject publication.",
+    "Matching range metadata is not complete-source certification. Only successful exact full-size/published-MD5 verification may promote."
+  ],
+  "remaining_limits": [
+    "Synthetic tests do not assert how the remote server will answer or guarantee completion within8hours.",
+    "No real resume was executed by reviewer; prefix not interpreted and no raw GWAS validity/sourceQC/estimate readiness inferred.",
+    "Resource monitoring samples curlRSS; streaming assembly bounds Python buffers. Final pass must still preserve actual transport/checksum/attempt receipts.",
+    "On any actual failure retain prefix and owned suffix/candidate artifacts and stop; no statistical fallback, silent full redownload or unregistered retry."
+  ],
+  "scientific_scope": {
+    "GWAS_rows_interpreted": false,
+    "preprocessing_admitted": false,
+    "h2_or_rg_admitted": false,
+    "native_controller_added": false,
+    "models_called": 0,
+    "remote_requests_by_reviewer": 0,
+    "private_human_key_accessed": false,
+    "original_scientific_protocol_or_holds_changed": false
+  }
+}

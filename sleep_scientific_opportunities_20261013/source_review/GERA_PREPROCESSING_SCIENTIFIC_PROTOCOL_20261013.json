@@ -1,0 +1,194 @@
+{
+  "schema": "frozen_result_free_source_adapter_scientific_protocol/1.0",
+  "recorded_utc": "2026-10-13T22:53:29.689739+00:00",
+  "status": "SCIENTIFIC_SPECIFICATION_FROZEN_PENDING_COMPLETE_SOURCE_AND_IMPLEMENTATION_ADMISSION",
+  "accession": "GCST90086097",
+  "expected_raw_source": {
+    "filename": "GCST90086097_buildGRCh37.tsv",
+    "bytes": 2019290168,
+    "MD5": "6dfa12cf01f443e1115d25b83a77d703",
+    "ordered_header_columns": [
+      "chromosome",
+      "base_pair_location",
+      "rs_id_all",
+      "info_all",
+      "other_allele",
+      "effect_allele",
+      "all_maf",
+      "all_total",
+      "standard_error",
+      "beta",
+      "p_value",
+      "freq_effect_allele",
+      "chr_X_freq_alleleB_all",
+      "chr_X_freq_alleleB_males",
+      "chr_X_freq_alleleB_females",
+      "chr_X_all_total",
+      "chr_X_frequentist_add_pvalue_males",
+      "chr_X_frequentist_add_beta_1.genotype.sex.1_males",
+      "chr_X_frequentist_add_se_1.genotype.sex.1_males",
+      "chr_X_all_total_males",
+      "chr_X_frequentist_add_pvalue_females",
+      "chr_X_frequentist_add_beta_1.genotype.sex.2_females",
+      "chr_X_frequentist_add_se_1.genotype.sex.2_females",
+      "chr_X_all_total_females"
+    ],
+    "checksum_schema_EOF_before_execution": true,
+    "unfinished_body_inspected": false,
+    "per_row_field_count_failure": "discovered during later census; explicit disposition and native-promotion HOLD"
+  },
+  "source_statistic": {
+    "Z": "orientation*(supplied_additive_beta/standard_error)",
+    "SE_strictly_positive_finite": true,
+    "P": "diagnostic only, never magnitude/selection/uncertainty repair",
+    "generic_P_to_Z_munge_equivalent": false,
+    "CI_derived_Z": false
+  },
+  "N_protocol": {
+    "column": "all_total",
+    "convention": "per-variant total analysed subjects, conditional on actual census",
+    "integer_valued_finite_range_inclusive": [
+      1,
+      56637
+    ],
+    "missing_fractional_outside_range": "REJECT_SEPARATE_REASONS_AND_HOLD_ANOMALOUS_CENSUS_FOR_REVIEW",
+    "round_clip_fill_or_constant_override": false,
+    "effective_N_override": false,
+    "liability_or_population_h2_admitted": false,
+    "power_assumption": false,
+    "integer_valuedness": "exact decimal source text including exponent notation; no float rounding tolerance"
+  },
+  "fixed_filters": {
+    "autosomes": [
+      1,
+      22
+    ],
+    "1_based_positive_integer_BP": true,
+    "distinct_single_ACGT_alleles_only": true,
+    "palindromes_removed": true,
+    "MHC_GRCh37_inclusive": {
+      "CHR": 6,
+      "BP_min": 25000000,
+      "BP_max": 34000000
+    },
+    "INFO": {
+      "finite": true,
+      "strict_greater_than": 0.9,
+      "gt1": "FLAG_MANDATORY_POSTRUN_REVIEW_NO_CAP; meets numeric threshold provisionally"
+    },
+    "MAF": {
+      "source": "all_maf",
+      "strict_greater_than": 0.01,
+      "maximum_inclusive": 0.5
+    },
+    "finite_beta_SE_Z_N": true
+  },
+  "identity_protocol": {
+    "reference_multimap": "(GRCh37CHR,BP)->all rsIDs/allele pairs",
+    "reference_duplicates_not_overwritten": true,
+    "reference_conflicts": "HOLD_TAINTED_GROUP",
+    "compatible_rsID_count_required": 1,
+    "source_rsid_regex_first_match": false,
+    "source_ID_is_provenance_not_output_rsID": true,
+    "orientation_helper": "reuse unchanged",
+    "helper_reference_evidence": {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/discovery_extension/scripts/47_stream_replication_sources.py",
+      "lines": [
+        58,
+        93
+      ],
+      "extracted_interface_text_SHA256": "aee2ef31ca1d6fb7c0e956c14e7553db39993f9878981e2a0117658c78e8d256",
+      "functions": [
+        "load_hm3",
+        "orientation"
+      ],
+      "source_rsid_reused": false
+    },
+    "references": [
+      {
+        "path": "/Volumes/Extreme SSD/sleep-unified-research-v1/recovery-2026-10-08/native_inputs/discovery_extension/data/reference/panukbb_hm3_variant_reference.tsv.gz",
+        "prior_authenticated_SHA256": "e6e4814d99a1eff91875014fe70c61f760182efdc1711ba6e155963cf5aa11f8",
+        "reread_or_rehashed_now": false
+      },
+      {
+        "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/work/track_b_completion/local_dependency_copies/ref/eur_w_ld_chr/w_hm3.snplist",
+        "prior_authenticated_SHA256": "ec73fca0b696e8beba465b51e52911676fcade375bcc9475d99c0ec30509d3ed",
+        "reread_or_rehashed_now": false
+      }
+    ]
+  },
+  "duplicate_protocol": {
+    "grouping_population": "all uniquely mappable structural source rows BEFORE statistic/INFO/MAF/N eligibility",
+    "key": "final unique compatible reference SNP",
+    "differing_raw_row_bytes_same_SNP": "EXCLUDE_COMPLETE_GROUP",
+    "byte_identical_full_physical_row_copies": "collapse once and count copies; include delimiters/line terminator in byte identity",
+    "digest_match_alone_sufficient": false,
+    "select_first_or_best_statistical_row": false
+  },
+  "q90_protocol": {
+    "population": "one unique nonconflicting otherwise eligible uniquely mapped autosomal representative with valid documented integer total N, after MHC and all preceding filters, before N cut",
+    "duplicate_copy_weights": false,
+    "significance_selection": false,
+    "definition": "R7 u=0.9*(m-1),j=floor(u),g=u-j,q90=(1-g)*n[j]+g*n[min(j+1,m-1)]",
+    "threshold": "q90/1.5",
+    "comparison": "N_j>=threshold inclusive",
+    "m_zero": "HOLD_NO_NATIVE_INPUT",
+    "m_one": "q90=n[0]",
+    "exact_integer_form": "a=9*(m-1);j=a div10;r=a mod10;Q=(10-r)*n[j]+r*n[min(j+1,m-1)];q90=Q/10;T=Q/15;retain iff15*N_j>=Q",
+    "recompute_after_cut": false,
+    "actual_m_q90_T": "UNKNOWN_NOT_EXECUTED"
+  },
+  "implementation": {
+    "bounded_SQLite_on_SSD_permitted": true,
+    "actual_adapter_authored_here": false,
+    "implementation_admitted": false,
+    "new_native_controller": false,
+    "reuse_old_MVP19_or_fixed_source_adapter_unchanged": false,
+    "independent_review_required": [
+      "reference collision preservation",
+      "grouping before statistical/QC filters",
+      "exact byte duplicate verification",
+      "fixed R7 population and exact arithmetic",
+      "source total-N and direct beta/SE retention",
+      "exhaustive physical-row count conservation"
+    ]
+  },
+  "mandatory_postrun_review": [
+    "N missingness/distribution and ascertainment meaning",
+    "noninteger or above-cohort N",
+    "INFO>1 or invalid score patterns",
+    "source-ID/coordinate inconsistencies",
+    "reference collisions/allele mismatches versus outside-HM3 positions",
+    "structured/substantial losses and final reference intersections"
+  ],
+  "native_gate": {
+    "fit_admitted_now": false,
+    "actual_source_QC_claimed": false,
+    "actual_h2_or_power_claimed": false,
+    "future_source_only_observed_h2": "separate admission after implementation/actual census review",
+    "future_intercept": "UNCONSTRAINED",
+    "future_h2_Z_min": 4,
+    "future_intercept_max": 1.2,
+    "disease_pair_family": null
+  },
+  "preserved_draft": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/DRAFT_GERA_PREPROCESSING_SCIENTIFIC_DISPOSITION.txt",
+      "SHA256": "8f8473346a6661412aab5017170d4e3ee60946cf5a9fb5d881476c4fd0a58873"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/DRAFT_GERA_PREPROCESSING_SCIENTIFIC_DISPOSITION.json",
+      "SHA256": "88f795b951bf2d680f325bf3f26bb3cbdfc368c53778b50639061dcec24841f6"
+    }
+  ],
+  "scope": {
+    "unfinished_source_reads": 0,
+    "reference_rereads_or_rehashes": 0,
+    "native_fits": 0,
+    "new_adapter_or_controller_code": 0,
+    "prior_result_or_hold_changes": false,
+    "outcome_data_or_significance_selection": false
+  },
+  "report_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PREPROCESSING_SCIENTIFIC_PROTOCOL_20261013.txt",
+  "report_SHA256": "1d9aa47f10751f892691a4d17b38899d0ee9be5674938be40aa8c0c076ea77fd"
+}

@@ -1,0 +1,320 @@
+{
+  "schema": "independent_actual_source_adapter_review/1.0",
+  "recorded_utc": "2026-10-13T23:17:36.710305+00:00",
+  "reviewed_script_sha256": "66e4f0d2a27604fb1d1b1778451b4de1ebddfff564b2cfd2b2d4528acd09ced4",
+  "reviewed_protocol_sha256": "df1372bb01c683dcaae2a74e6b59ef44b69d4ed9b73ddc32a4908248deb962ed",
+  "core_scientific_correctness": "PASS_INSPECTED_AND_SYNTHETIC_INVARIANTS",
+  "exact_protocol_conformance": "QUALIFIED_REFERENCE_EQUALITY_DEFINITION_CLOSURE_REQUIRED",
+  "implementation_unconditionally_admitted": false,
+  "preprocessing_admitted": false,
+  "actual_source_execution_admission": "NOT_ADMITTED_NOW_COMPLETE_ACQUISITION_AND_RUNTIME_GATES_PENDING",
+  "actual_source_census": "UNKNOWN_NOT_EXECUTED",
+  "actual_h2_or_power": "UNKNOWN_NOT_TESTED",
+  "required_closure": [
+    {
+      "id": "R1",
+      "code_selector": "load_reference lines118-134; signatures from parsed full-field JSON",
+      "issue": "Reference equality is exact parsed fields, while frozen protocolTXT says byte-identical reference copies.",
+      "actual_synthetic_evidence_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADAPTER_REFERENCE_EQUALITY_DIAGNOSTIC_20261013.json",
+      "actual_synthetic_evidence_SHA256": "3d7e9e870990ae4038b9aa1bd7ed28a64443ee89c92c3d71182d96eef2f25dc1",
+      "severity": "bounded scientific-contract discrepancy; no differing biological field lost or first winner observed",
+      "acceptable_closure": "explicit recorded scientific clarification allowing full parsed-field identical reference definitions, or byte-identity implementation; do not relax source byte duplicate contract"
+    }
+  ],
+  "scientific_checks": {
+    "direct_supplied_beta_SE_Z": true,
+    "P_diagnostic_no_replacement_selection": true,
+    "exact_Decimal_total_N_1_56637": true,
+    "Neff_or_cohort_N_override": false,
+    "invalid_statistical_counterparts_grouped_before_filters": true,
+    "Q15_quantile_population_and_equality": true,
+    "unweighted_duplicate_copies": true,
+    "reference_conflicts_localized_without_first_winner": true,
+    "source_full_bytes_compared_after_digest": true,
+    "physical_row_conservation": true,
+    "strict_INFO_MAF_MHC_rules": true,
+    "source_identity_failure_prevents_emission": true,
+    "wrong_header_prevents_output_directory": true
+  },
+  "independent_synthetic_run": {
+    "existing_methods": 6,
+    "existing_methods_pass": 6,
+    "existing_successful_fixture_outputs": 7,
+    "elapsed_seconds": 2.787,
+    "additional_forced_digest_collision_pass": true,
+    "negative_source_identity_cases_pass": 2,
+    "reference_equality_diagnostic": true,
+    "actual_outputs": [
+      {
+        "test": "test_invalid_SE_or_N_counterpart_still_excludes_complete_SNP_group",
+        "fixture": "out",
+        "input_rows": 7,
+        "retained_rows": 1,
+        "duplicate_copies": 1,
+        "conflicting_groups": 2,
+        "R7": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs3"
+        ],
+        "actual_output_Z": [
+          "2"
+        ],
+        "actual_output_N": [
+          "56637"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "test_multiple_compatible_rsids_hold_no_native_input",
+        "fixture": "out",
+        "input_rows": 1,
+        "retained_rows": 0,
+        "duplicate_copies": 0,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 0,
+          "j": null,
+          "r": null,
+          "Q": null
+        },
+        "actual_output_SNPs": [],
+        "actual_output_Z": [],
+        "actual_output_N": [],
+        "input_conservation": true
+      },
+      {
+        "test": "test_quantile_copy_weights_excluded_and_equality_retained",
+        "fixture": "out",
+        "input_rows": 25,
+        "retained_rows": 4,
+        "duplicate_copies": 20,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 5,
+          "j": 3,
+          "r": 6,
+          "Q": 1500
+        },
+        "actual_output_SNPs": [
+          "rs2",
+          "rs3",
+          "rs4",
+          "rs5"
+        ],
+        "actual_output_Z": [
+          "2",
+          "2",
+          "2",
+          "2"
+        ],
+        "actual_output_N": [
+          "100",
+          "150",
+          "150",
+          "150"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "test_reference_duplicate_keys_collapse_identical_and_taint_all_conflicting_coordinates",
+        "fixture": "ref_duplicate",
+        "input_rows": 3,
+        "retained_rows": 1,
+        "duplicate_copies": 0,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs3"
+        ],
+        "actual_output_Z": [
+          "2"
+        ],
+        "actual_output_N": [
+          "56637"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "test_reference_duplicate_keys_collapse_identical_and_taint_all_conflicting_coordinates",
+        "fixture": "allele_duplicate",
+        "input_rows": 2,
+        "retained_rows": 1,
+        "duplicate_copies": 0,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs4"
+        ],
+        "actual_output_Z": [
+          "2"
+        ],
+        "actual_output_N": [
+          "56637"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "test_strict_filters_MHC_boundaries_and_unclipped_INFO_anomaly",
+        "fixture": "out",
+        "input_rows": 7,
+        "retained_rows": 3,
+        "duplicate_copies": 0,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 3,
+          "j": 1,
+          "r": 8,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs3",
+          "rs6",
+          "rs7"
+        ],
+        "actual_output_Z": [
+          "2",
+          "2",
+          "2"
+        ],
+        "actual_output_N": [
+          "56637",
+          "56637",
+          "56637"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "test_unique_coordinate_all_orientations_and_total_N_not_Neff",
+        "fixture": "out",
+        "input_rows": 4,
+        "retained_rows": 4,
+        "duplicate_copies": 0,
+        "conflicting_groups": 0,
+        "R7": {
+          "m": 4,
+          "j": 2,
+          "r": 7,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs9",
+          "rs2",
+          "rs3",
+          "rs4"
+        ],
+        "actual_output_Z": [
+          "2",
+          "-2",
+          "2",
+          "-2"
+        ],
+        "actual_output_N": [
+          "56637",
+          "56637",
+          "56637",
+          "56637"
+        ],
+        "input_conservation": true
+      },
+      {
+        "test": "ADVERSARIAL_forced_digest_collision",
+        "fixture": null,
+        "input_rows": 3,
+        "retained_rows": 1,
+        "duplicate_copies": 0,
+        "conflicting_groups": 1,
+        "R7": {
+          "m": 1,
+          "j": 0,
+          "r": 0,
+          "Q": 566370
+        },
+        "actual_output_SNPs": [
+          "rs2"
+        ],
+        "actual_output_Z": [
+          "2"
+        ],
+        "actual_output_N": [
+          "56637"
+        ],
+        "input_conservation": true
+      }
+    ],
+    "evidence_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADAPTER_SYNTHETIC_OUTCOMES_20261013.json",
+    "evidence_SHA256": "735de7b240403375a95c2946f3be1242a0a716de21f63835d4090bb2b31dfd28",
+    "all_fixture_data_invented": true,
+    "temporary_fixture_directories_removed": true
+  },
+  "production_gate_static_review": {
+    "reviewed_code_and_protocol_hashes_required": true,
+    "actual_exact_source_acquisition_receipt_required": true,
+    "source_rehashed_before_emission": true,
+    "authenticated_reference_identity_required": true,
+    "SSD_source_and_output_required": true,
+    "resource_guards_preserved": true,
+    "new_output_directory_required": true,
+    "no_automatic_native_fit": true,
+    "production_CLI_run": false
+  },
+  "evidence": [
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/materialize_gera_raw.py",
+      "SHA256": "66e4f0d2a27604fb1d1b1778451b4de1ebddfff564b2cfd2b2d4528acd09ced4"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/test_materialize_gera_raw.py",
+      "SHA256": "772c814053c2d2d5b25714cfe18231da5e263b386e18b487a99d88179cb78fb3"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PREPROCESSING_SCIENTIFIC_PROTOCOL_20261013.json",
+      "SHA256": "df1372bb01c683dcaae2a74e6b59ef44b69d4ed9b73ddc32a4908248deb962ed"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_PREPROCESSING_SCIENTIFIC_PROTOCOL_20261013.txt",
+      "SHA256": "1d9aa47f10751f892691a4d17b38899d0ee9be5674938be40aa8c0c076ea77fd"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_ADAPTER_IMPLEMENTATION_HANDOFF.txt",
+      "SHA256": "aaa1a218810209f8438ca67067239ba6cc40c2046c7622a53f8d1f54f3a6ebe0"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_ADAPTER_SYNTHETIC_TEST_RECEIPT.json",
+      "SHA256": "a9d06cf543770f4034bf4a29271e0043d3312a4cd408942a6d287ea52f81a6e7"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADAPTER_SYNTHETIC_OUTCOMES_20261013.json",
+      "SHA256": "735de7b240403375a95c2946f3be1242a0a716de21f63835d4090bb2b31dfd28"
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_INDEPENDENT_ADAPTER_REFERENCE_EQUALITY_DIAGNOSTIC_20261013.json",
+      "SHA256": "3d7e9e870990ae4038b9aa1bd7ed28a64443ee89c92c3d71182d96eef2f25dc1"
+    }
+  ],
+  "scope": {
+    "actual_source_or_reference_body_reads": 0,
+    "estimator_fits": 0,
+    "actual_source_QC_claims": 0,
+    "existing_code_protocol_or_acquisition_files_changed": false,
+    "new_controller": false,
+    "prior_scientific_holds_changed": false,
+    "new_association_evidence": false
+  },
+  "report_path": "/Users/swethasunilkumar/Documents/Codex/2026-10-08/go/work/sleep-gwas-atlas/sleep_scientific_opportunities_20261013/source_review/GERA_ADAPTER_INDEPENDENT_REVIEW_20261013.txt",
+  "report_SHA256": "7d77e71f3f6e488b8e2f05ccbf70d7bee13269fec36fa7c085a3941799157c32"
+}
