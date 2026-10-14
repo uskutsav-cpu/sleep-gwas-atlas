@@ -1,0 +1,19 @@
+GERA segmented continuation: focused independent AI review
+
+Decision: SEGMENTED_RECOVERY_DESIGN_ACCEPTED_EXECUTION_NOT_ADMITTED. No remaining blocking code defect was found within the final reviewed design and its declared inventory scope. This is an AI review. It grants no acquisition, source QC, preprocessing or native launch admission. Observed internal free was 221,708,288 bytes, below the unchanged 1,073,741,824-byte acquisition floor.
+
+Exact plan SHA256: 79b22949139d767186427fae538f09e01fe5d03d43287c7b2cf79fd863fbd099
+Final worker SHA256: 9b7d55283dd7f9508fb5361cd43870ee66918d0bdfcc7bac29b51fb78b6d5983
+Final focused test SHA256: df984b98de0f538fb93eb942c93f0bd95d57d4e13e9a933208dc2f09b7f41d7c
+
+Segments 0–834,711,801 and 834,711,802–938,520,825 are contiguous. Final request 938,520,826–2,019,290,167 contains 1,080,769,342 bytes. Ordered segment hashing avoids a copied concatenated prefix and rechecks segment identities during assembly. The second segment lacks a frozen SHA in the plan: run-start hashing pins current bytes but is not independent authentication of that partial piece. Complete length and published full-source MD5 remain mandatory before nonclobber publication. Existing exact HTTP206, ETag, length, Content-Range and identity gates receive the new offset.
+
+Independent peak arithmetic: retained data 1,773,232,628 + final suffix 1,080,769,342 + full candidate 2,019,290,168 + 1 MiB metadata = 4,874,340,714 bytes, below 5,500,000,000. An additional copied 938,520,826-byte prefix would yield 5,812,861,540 including metadata. The earlier 5,811,812,964 figure excludes that reserve.
+
+The final worker compares the expected retained total against data-only manifest lengths, validated against actual stat lengths/mtimes. Companion bytes are included separately in actual budget and metadata usage. The fresh stage cannot preexist; unexpected entries fail closed; allowed AppleDouble companions are counted; metadata exceeding reserve fails closed. The guard includes destination and now runs after mv before verified=True. This resolves the initial post-publication gap and the companion-file failures found using tiny synthetic SSD files.
+
+Accounting is scoped to the frozen inventory and fresh stage. Unknown files outside that stage, historical logs/receipts, and a possible destination companion outside it are not dynamically enumerated. The global bound assumes all unenumerated historical/publication metadata fits the 1 MiB reserve and no outside writer. It is not an exhaustive filesystem quota guarantee. This scope must be satisfied for any future exact-plan admission.
+
+Only the six new segmented unittest methods were independently executed against the final hashes: 6/6 pass, exit 0. They cover ordered hashes, equal-length identity mutation, listed inventory/cap/mtime/duplicate checks, fresh-stage unknown files, actual metadata and companion accounting. No old tests were rerun; independent 10/10 is not claimed. Full transfer/publication and the separate different-length digest branch were not exercised.
+
+No GWAS piece was read or hashed; no remote source, gold or human key was accessed; no controller/code or old plan/review was edited; no transfer, preprocessing or native fit was launched. Existing reviews remain historical. Any future launch needs separate exact-plan admission and resource-gate passage; resume_admitted is false.
