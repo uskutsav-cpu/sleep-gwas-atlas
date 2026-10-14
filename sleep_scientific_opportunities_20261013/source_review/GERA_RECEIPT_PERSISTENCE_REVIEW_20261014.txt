@@ -1,0 +1,17 @@
+GERA receipt-persistence correction: focused independent AI review
+
+Decision: ACCEPT_RECEIPT_PERSISTENCE_CORRECTION_ONLY. No blocking defect was found in the reviewed correction for internal ENOSPC. This is an AI review, not human peer review.
+
+Reviewed worker SHA256: 81566d71823b25876ebc3bedf25204e37195e47f449e839089056e63af59b029
+Reviewed regression-test SHA256: a93f94f0cbf443bd3ac526e82b4f16803096212f4c4101f13ead54f28a4f5815
+Historical worker SHA256: 1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa
+
+The exact diff adds SSD-first receipt persistence and SSD receipt existence gates at both acquisition entry points. Exclusive SSD creation is followed by write, flush and fsync before any internal mirror operation. The internal mirror catches only errno.ENOSPC; other IO failures still propagate. The complete SSD receipt therefore survives the observed internal-storage failure, and existing receipt content is not overwritten.
+
+Failure is not falsely cleared: receipt status construction, verified state, and the callers' failure raises are unchanged. The helper's false return means only that the optional internal mirror failed. A failed acquisition still prints its failed receipt and raises after SSD persistence. There is no new transfer, identity, guard, checksum, promotion or analysis behavior in this diff.
+
+Independent execution of the four new focused unittest methods passed (exit 0): normal identical mirrors; internal ENOSPC at open and write; preservation of existing SSD and internal receipts; and propagation of an unrelated internal IO error while preserving SSD evidence. These tests use synthetic receipt content and temporary files only. Code inspection also confirms internal flush/fsync and context-close ENOSPC are inside the guarded operation.
+
+An internal mirror may be absent, empty or partial after ENOSPC. Consumers must use the complete SSD JSON as authoritative and must not interpret the presence of an internal receipt file as success. SSD write/fsync failures remain fatal and may leave an incomplete exclusive SSD file; this review makes no durability claim for SSD failure. The correction does not retroactively recover the missing terminal receipt for the already failed session 44131.
+
+No acquisition plan, resume, source QC, preprocessing or native launch is admitted. Old plans binding the historical worker hash remain historical. Any future run requires focused admission of its exact plan against the new worker hash. The reviewer did not read or hash GWAS pieces, inspect gold or human keys, reread old source-QC material, edit code, contact a remote source, or launch a transfer/model.

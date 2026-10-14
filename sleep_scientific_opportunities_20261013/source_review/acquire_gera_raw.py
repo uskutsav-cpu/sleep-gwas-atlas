@@ -1,5 +1,6 @@
 """One reviewed source-only curl acquisition. No preprocessing or estimator."""
 from datetime import datetime, timezone
+import errno
 import hashlib
 import json
 import os
@@ -11,6 +12,24 @@ import time
 
 ROOT = Path(__file__).resolve().parent
 PLAN = ROOT / 'GERA_RAW_ACQUISITION_PLAN.json'
+
+def persist_receipt(receipt, internal_path, ssd_path):
+    """Persist terminal evidence on SSD before the optional internal mirror."""
+    payload = json.dumps(receipt, indent=2) + '\n'
+    with ssd_path.open('x') as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    try:
+        with internal_path.open('x') as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+    except OSError as error:
+        if error.errno != errno.ENOSPC:
+            raise
+        return False
+    return True
 
 def digest(path, deadline, internal_floor):
     md5, sha = hashlib.md5(), hashlib.sha256()
@@ -35,7 +54,8 @@ def main():
         raise RuntimeError('FOCUSED_PLAN_ADMISSION_REQUIRED')
     out, part = Path(plan['destination']), Path(plan['checkpoint'])
     receipt_path = ROOT / 'GERA_RAW_ACQUISITION_RECEIPT.json'
-    if out.exists() or part.exists() or receipt_path.exists():
+    ssd_receipt_path = part.parent / receipt_path.name
+    if any(p.exists() for p in [out, part, receipt_path, ssd_receipt_path]):
         raise RuntimeError('EXISTING_SOURCE_CHECKPOINT_OR_RECEIPT_PRESERVED')
     resource, source = plan['resource'], plan['source']
     if shutil.disk_usage('/Volumes/Extreme SSD').free < resource['ssd_minimum_before_bytes']:
@@ -132,9 +152,7 @@ def main():
                'native_3GiB_guard_unchanged': True, 'source_only_acquisition': True,
                'original_sources_modified': False, 'h2_or_rg_runs': 0,
                'preprocessing_admitted': False, 'downstream_source_QC_status': 'NOT_TESTED'}
-    with receipt_path.open('x') as stream:
-        json.dump(receipt, stream, indent=2)
-        stream.write('\n')
+    persist_receipt(receipt, receipt_path, ssd_receipt_path)
     print(json.dumps(receipt), flush=True)
     if not verified:
         raise RuntimeError('ACQUISITION_NOT_VERIFIED_CHECKPOINT_PRESERVED')
@@ -184,7 +202,8 @@ def resume_main(plan_path):
     prefix, suffix = Path(saved['path']), Path(plan['suffix'])
     assembled, out = Path(plan['assembled']), Path(plan['destination'])
     receipt_path = ROOT / plan['receipt']
-    if any(p.exists() for p in [suffix, assembled, out, receipt_path]):
+    ssd_receipt_path = suffix.parent / receipt_path.name
+    if any(p.exists() for p in [suffix, assembled, out, receipt_path, ssd_receipt_path]):
         raise RuntimeError('PRIOR_PREFIX_SUFFIX_SOURCE_OR_RECEIPT_PRESERVED')
     started = time.monotonic()
     deadline = started + limits['maximum_seconds']
@@ -288,8 +307,7 @@ def resume_main(plan_path):
                'native_3GiB_guard_unchanged': True, 'source_only_acquisition': True,
                'original_sources_modified': False, 'h2_or_rg_runs': 0,
                'preprocessing_admitted': False, 'downstream_source_QC_status': 'NOT_TESTED'}
-    with receipt_path.open('x') as stream:
-        json.dump(receipt, stream, indent=2); stream.write('\n')
+    persist_receipt(receipt, receipt_path, ssd_receipt_path)
     print(json.dumps(receipt), flush=True)
     if not verified:
         raise RuntimeError('RESUME_NOT_VERIFIED_CHECKPOINTS_PRESERVED')

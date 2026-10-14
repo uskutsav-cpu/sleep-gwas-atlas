@@ -1,0 +1,94 @@
+{
+  "schema": "authoritative_terminal_observation_not_worker_receipt/1",
+  "observed_utc": "2026-10-14T00:53:40.724480+00:00",
+  "unified_session_id": 44131,
+  "authoritative_session_exit_code": 1,
+  "terminal_error": "OSError: [Errno 28] No space left on device at receipt_path.open('x') while saving GERA_RAW_CONTINUATION_RECEIPT_20261014.json",
+  "worker_receipt_available": false,
+  "worker_receipt_bytes": null,
+  "source_transport_stop_reason": "UNKNOWN_NOT_RECOVERABLE_FROM_MISSING_WORKER_RECEIPT",
+  "curl_exit_code": null,
+  "curl_peak_RSS": null,
+  "curl_status_bytes": 0,
+  "curl_stderr_bytes": 0,
+  "final_source_exists": false,
+  "assembly_candidate_exists": false,
+  "source_total_bytes_expected": 2019290168,
+  "preserved_contiguous_range_bytes_by_length": 938520826,
+  "remaining_bytes_by_length": 1080769342,
+  "range_response": {
+    "valid": true,
+    "status_line": "HTTP/1.1 206 Partial Content",
+    "fields": {
+      "date": [
+        "Wed, 14 Oct 2026 00:41:56 GMT"
+      ],
+      "server": [
+        "Apache"
+      ],
+      "last-modified": [
+        "Fri, 07 Feb 2025 00:17:51 GMT"
+      ],
+      "etag": [
+        "\"785bec38-62d824a0398bc\""
+      ],
+      "accept-ranges": [
+        "bytes"
+      ],
+      "content-length": [
+        "1184578366"
+      ],
+      "access-control-allow-origin": [
+        "*"
+      ],
+      "access-control-allow-methods": [
+        "GET,OPTIONS"
+      ],
+      "access-control-allow-headers": [
+        "Authorization,Origin,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Accept"
+      ],
+      "content-range": [
+        "bytes 834711802-2019290167/2019290168"
+      ],
+      "content-type": [
+        "text/tab-separated-values"
+      ]
+    }
+  },
+  "header_sha256": "e1f0b97d506bd29e61aa29b90c189db44936634a8840a5db441931cc88ac0cf5",
+  "retained_owned_pieces": [
+    {
+      "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv.part",
+      "bytes": 164671738,
+      "mtime_ns": 1791932638880000000
+    },
+    {
+      "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_20261013/suffix.part",
+      "bytes": 670040064,
+      "mtime_ns": 1791937568670000000
+    },
+    {
+      "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097.contiguous_834711802.checkpoint.part",
+      "bytes": 834711802,
+      "mtime_ns": 1791937910820000000
+    },
+    {
+      "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_continuation_20261014/suffix.part",
+      "bytes": 103809024,
+      "mtime_ns": 1791938961850000000
+    }
+  ],
+  "retained_owned_piece_bytes": 1773232628,
+  "new_suffix_sha256": "NOT_COMPUTED_UNDER_CURRENT_RESOURCE_HOLD",
+  "full_source_checksum_verified": false,
+  "preprocessing_runs": 0,
+  "native_h2_or_rg_runs": 0,
+  "internal_free_observed_bytes": 337313792,
+  "SSD_free_observed_bytes": 603025571840,
+  "acquisition_floor_bytes": 1073741824,
+  "preprocessing_native_floor_bytes": 3221225472,
+  "prior_plan_sha256": "b53a2b39d28da78937823d8cc76927332d55d0bec619db2587ed6bd7e5d1e0f3",
+  "executed_worker_sha256_from_frozen_review": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa",
+  "next_action": "Preserve existing pieces; no restart or new acquisition plan below guard. Focused SSD-first receipt persistence fix and independent review only. Any future continuation must separately reconcile aggregate retained/staging bytes without waiving the existing cap.",
+  "scientific_interpretation": "Technical noncompletion and missing terminal receipt; not failed GWAS QC or negative biological evidence."
+}

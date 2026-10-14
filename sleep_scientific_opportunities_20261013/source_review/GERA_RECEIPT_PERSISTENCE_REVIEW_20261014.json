@@ -1,0 +1,62 @@
+{
+  "review_type": "Independent AI review of receipt-persistence correction only",
+  "authored_at_utc": "2026-10-14T00:56:02.292441+00:00",
+  "decision": "ACCEPT_RECEIPT_PERSISTENCE_CORRECTION_ONLY",
+  "reviewed_script_sha256": "81566d71823b25876ebc3bedf25204e37195e47f449e839089056e63af59b029",
+  "reviewed_test_sha256": "a93f94f0cbf443bd3ac526e82b4f16803096212f4c4101f13ead54f28a4f5815",
+  "historical_script_sha256": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa",
+  "scope": "Exact helper diff and four focused receipt-persistence regression tests; no source-piece, gold, old source-QC or statistical re-audit.",
+  "independent_test_execution": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_gera_receipt_persistence.py",
+    "tests": 4,
+    "exit_code": 0,
+    "result": "PASS",
+    "synthetic_receipts_only": true
+  },
+  "findings": [
+    {
+      "severity": "pass",
+      "finding": "SSD receipt uses exclusive creation and is fully written, flushed and fsynced before the optional internal mirror."
+    },
+    {
+      "severity": "pass",
+      "finding": "Only internal ENOSPC is suppressed; the SSD receipt remains complete. Other internal IO errors propagate after SSD evidence is preserved."
+    },
+    {
+      "severity": "pass",
+      "finding": "Both entry gates now refuse an existing SSD receipt. Exclusive receipt creation also preserves existing SSD or internal content."
+    },
+    {
+      "severity": "pass",
+      "finding": "Receipt status construction, verified state, and both post-receipt failure raises are unchanged. A false return describes mirror failure only and cannot turn a failed acquisition into a verified success."
+    },
+    {
+      "severity": "scope_limit",
+      "finding": "Internal ENOSPC can leave an absent, empty or partial internal mirror; use the complete SSD JSON as authoritative. An internal file alone is not success evidence."
+    },
+    {
+      "severity": "scope_limit",
+      "finding": "SSD write or fsync errors remain fatal and may leave an incomplete exclusive file; this correction does not claim persistence under SSD failure."
+    },
+    {
+      "severity": "scope_limit",
+      "finding": "The correction does not retroactively recover terminal receipt evidence for session 44131. Its terminal failure and preserved checkpoint remain the reported existing state."
+    }
+  ],
+  "blocking_defects_within_reviewed_scope": [],
+  "can_falsely_clear_failed_acquisition_under_internal_ENOSPC": false,
+  "can_lose_completed_SSD_receipt_due_to_internal_ENOSPC": false,
+  "resume_admitted": false,
+  "new_acquisition_plan_admitted": false,
+  "source_QC_admitted": false,
+  "native_launch_admitted": false,
+  "future_execution_requirement": "Any future acquisition requires a concrete exact-plan focused admission binding the new script hash. Historical old-hash plans and reviews remain historical.",
+  "reviewer_actions": {
+    "code_edits": 0,
+    "transfer_launches": 0,
+    "network_calls": 0,
+    "source_piece_reads_or_hashes": 0,
+    "model_calls": 0,
+    "private_gold_or_human_key_reads": 0
+  }
+}
