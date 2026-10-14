@@ -1,0 +1,69 @@
+{
+  "schema": "exact_source_checkpoint_resume/1",
+  "frozen_utc": "2026-10-14T00:34:21.158210+00:00",
+  "source": {
+    "url": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90086001-GCST90087000/GCST90086097/GCST90086097_buildGRCh37.tsv",
+    "bytes": 2019290168,
+    "etag": "785bec38-62d824a0398bc",
+    "last_modified": "2025-02-07T00:17:51Z",
+    "md5_from_yaml": "6dfa12cf01f443e1115d25b83a77d703"
+  },
+  "prefix": {
+    "path": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097.contiguous_834711802.checkpoint.part",
+    "bytes": 834711802,
+    "sha256": "5adc051465aaf521d32854084eaaac750f1ace635f9dbd143486b00fc9598015",
+    "md5": "1faf7deab72c1b68846c359252dd2a5e",
+    "meaning": "Contiguous partial transport checkpoint composed from preserved exact-offset segments; not complete source authentication."
+  },
+  "suffix": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_continuation_20261014/suffix.part",
+  "assembled": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/resume_continuation_20261014/assembled_source.part",
+  "destination": "/Volumes/Extreme SSD/sleep_scientific_opportunities_20261013/source_review/GERA_raw_source_acquisition/GCST90086097_buildGRCh37.tsv",
+  "receipt": "GERA_RAW_CONTINUATION_RECEIPT_20261014.json",
+  "review": "GERA_RAW_CONTINUATION_REVIEW_20261014.json",
+  "resource": {
+    "maximum_seconds": 21600,
+    "connections": 1,
+    "curl_max_rss_bytes": 134217728,
+    "internal_minimum_before_bytes": 1073741824,
+    "internal_emergency_floor_bytes": 1073741824,
+    "ssd_minimum_before_bytes": 8589934592,
+    "maximum_transfer_bytes": 1184578366,
+    "maximum_owned_staging_bytes": 4664239622,
+    "native_3GiB_guard_unchanged": true,
+    "internal_free_at_freeze": 1537495040,
+    "ssd_free_at_freeze": 603147206656
+  },
+  "transport": {
+    "first_request": "Exact Range bytes=prefix.bytes-(source.bytes-1); quoted If-Match; identity encoding; fixed /usr/bin/curl --disable; no retries, redirects or TLS bypass",
+    "required_response": "HTTP206, exact case-sensitive ETag, Content-Length remaining bytes, exact Content-Range bytes offset-(total-1)/total; reject before continuing once response headers are present",
+    "preservation": "Original prefix stays byte-identical. Download suffix separately; full candidate assembled exclusively onSSD and checksum verified before mv-n publication. No existing checkpoint, source or receipt overwritten.",
+    "wall_deadline_scope": "Transfer, assembly/verification and publication share one 6h monotonic deadline; one active request, no retries. This tightens the preceding 8h attempt bound."
+  },
+  "scientific_scope": {
+    "source_acquisition_only": true,
+    "GWAS_rows_interpreted": false,
+    "preprocessing_or_h2_or_rg_admitted": false,
+    "no_source_or_outcome_selection": true
+  },
+  "rationale": "Previous resume authoritatively terminated on internal acquisition floor. Its separate 670040064-byte suffix and original164671738-byte prefix are preserved and composed into a verified contiguous834711802-byte transport checkpoint. The unchanged worker can request only remaining1184578366bytes using fresh staging paths. Original source metadata/MD5 are unchanged; active staging cap is tightened to reserve all earlier pieces within the same5.5GB global raw staging cap. No source rows, native fit or scientific outcome reviewed.",
+  "checkpoint_chain": {
+    "composition_receipt": "GERA_CHECKPOINT_COMPOSITION_RECEIPT_20261014.json",
+    "composition_receipt_sha256": "98444a8a687f683576188898035540a68ed0cc903abc928647808eb9be5d787b",
+    "parent_terminal_receipt": "GERA_RAW_RESUME_RECEIPT.json",
+    "preserved_earlier_pieces_bytes": 834711802,
+    "global_owned_raw_staging_cap_bytes": 5500000000,
+    "reserved_metadata_bytes": 1048576,
+    "expected_active_peak_bytes": 4038580336,
+    "expected_global_raw_peak_bytes": 4873292138,
+    "new_controller_or_worker_version": false,
+    "current_worker_sha256": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa"
+  },
+  "continuation_HEAD_evidence": {
+    "recorded_utc": "2026-10-14T00:34:21.177514+00:00",
+    "HTTP_status": 200,
+    "ETag": "\"785bec38-62d824a0398bc\"",
+    "Content_Length": 2019290168,
+    "Last_Modified": "Fri, 07 Feb 2025 00:17:51 GMT",
+    "header_SHA256": "6ef3837865ba1c5fc77aa770867ab0518271bc388165632dc5d32669b027e312"
+  }
+}

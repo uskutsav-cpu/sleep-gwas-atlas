@@ -1,0 +1,81 @@
+{
+  "schema": "focused_checkpoint_continuation_admission/1",
+  "reviewed_utc": "2026-10-14T00:38:24.817031+00:00",
+  "reviewed_plan_sha256": "b53a2b39d28da78937823d8cc76927332d55d0bec619db2587ed6bd7e5d1e0f3",
+  "reviewed_script_sha256": "1fe803f17c28c77e061b1ec026916b079181176c39d720c7a09eba52c95283aa",
+  "resume_admitted": true,
+  "decision": "ADMIT_ONE_EXACT_REMAINING_RANGE_CONTINUATION_ONLY",
+  "scope": "New checkpoint identity, offset, fresh paths and aggregate budgets with reuse of the unchanged admitted worker; no controller/code change, repeated tests, source-row/QC review or launch.",
+  "checkpoint_chain": {
+    "parent_session_terminal_basis": "Authoritative parent session23118 terminal exit1; preserved worker receipt records curl-15 and RESUME_INTERNAL_FLOOR.",
+    "parent_receipt_sha256": "5baccb652f98219f6a516514256a291c4ccb004912dcb3f88e3179685ab5702d",
+    "composition_receipt_sha256": "98444a8a687f683576188898035540a68ed0cc903abc928647808eb9be5d787b",
+    "parent_range_response_valid_same_version": true,
+    "old_prefix_bytes": 164671738,
+    "old_suffix_bytes": 670040064,
+    "new_contiguous_prefix_bytes": 834711802,
+    "new_prefix_sha256_frozen_and_independently_matched_once": "5adc051465aaf521d32854084eaaac750f1ace635f9dbd143486b00fc9598015",
+    "old_pieces_and_new_checkpoint_regular_file_sizes_inode_mtime_unchanged_during_review": true,
+    "checkpoint_not_complete_source_authenticated": true
+  },
+  "exact_next_transfer": {
+    "range_start": 834711802,
+    "range_end": 2019290167,
+    "remaining_and_max_transfer_bytes": 1184578366,
+    "source_total_bytes": 2019290168,
+    "required_content_range": "bytes 834711802-2019290167/2019290168",
+    "quoted_if_match": "\"785bec38-62d824a0398bc\"",
+    "required_http": 206,
+    "identity_encoding": true,
+    "published_full_MD5_still_required": "6dfa12cf01f443e1115d25b83a77d703"
+  },
+  "path_admission": {
+    "new_suffix_assembled_destination_and_receipt_nonexistent_at_review": true,
+    "prefix_suffix_candidate_destination_distinct": true,
+    "original_piece_paths_and_receipts_preserved": true,
+    "new_suffix_and_candidate_exclusive_creation_in_unchanged_worker": true,
+    "no_automatic_retry_or_redownload": true
+  },
+  "budget_reconciliation": {
+    "shared_deadline_seconds": 21600,
+    "one_connection": true,
+    "observed_curl_RSS_limit_bytes": 134217728,
+    "internal_acquisition_floor_bytes": 1073741824,
+    "SSD_initial_floor_bytes": 8589934592,
+    "active_owned_staging_cap_bytes": 4664239622,
+    "reserved_earlier_pieces_bytes": 834711802,
+    "reserved_metadata_bytes": 1048576,
+    "global_owned_staging_cap_bytes": 5500000000,
+    "expected_active_raw_peak_bytes": 4038580336,
+    "expected_global_raw_peak_bytes": 4873292138,
+    "expected_global_with_reserved_metadata_bytes": 4874340714,
+    "capacity_identity": "4664239622+834711802+1048576=5500000000",
+    "global_peak_with_metadata_below_cap": true,
+    "separate_native_3GiB_guard_unchanged": true,
+    "current_internal_floor_pass_observed_bytes": 1446260736,
+    "current_SSD_free_observed_bytes": 603145109504
+  },
+  "unchanged_worker_review_reused": {
+    "prior_review_sha256": "0e6a50a23f239f0ca8820d5780b6b4e097b7eea465352ffc8f5ee4813c21315f",
+    "prior_focused_tests_not_repeated": true,
+    "strict_final_range_version_length_gates_retained": true,
+    "streaming_complete_size_published_MD5_SHA256_and_nonclobber_publication_retained": true,
+    "floor_deadline_and_staging_checks_retained": true
+  },
+  "fresh_HEAD_scope": "Recorded authenticated-TLS HEAD metadata in new plan matches same ETag/length/Last-Modified; reviewer made no remote request. HEAD agreement is version metadata, not complete source authentication.",
+  "limits": [
+    "Admission does not guarantee the six-hour transfer completes; the internal floor may stop it again and preserved checkpoints must remain.",
+    "Byte-composition identity and partial-range metadata do not authenticate a complete GWAS source.",
+    "Only complete final length and published MD5 verification under unchanged worker may promote the artifact.",
+    "No preprocessing, h2/rg fit, native admission, raw-source scientific validity or statistical conclusion follows."
+  ],
+  "source_acquisition_only": true,
+  "complete_source_admitted": false,
+  "preprocessing_admitted": false,
+  "native_or_h2_or_rg_admitted": false,
+  "source_rows_parsed": 0,
+  "remote_requests_or_launches_by_reviewer": 0,
+  "new_worker_tests_or_code_changes": 0,
+  "old_reviews_or_receipts_modified": false,
+  "private_human_key_accessed": false
+}
