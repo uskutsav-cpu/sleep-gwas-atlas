@@ -1,0 +1,54 @@
+# Study meta-data
+gwas_id: GCST90824104
+author_notes: Genome-wide association study of accelerometer-derived night-time sleep
+  duration in 80,013 European ancestry participants from UK Biobank. Sleep traits
+  were derived using a self-supervised deep learning model trained on polysomnography
+  data to classify REM and NREM sleep from wrist-worn accelerometer recordings. Association
+  analyses were performed using REGENIE under an additive linear mixed model, adjusted
+  for age at accelerometry, sex, study centre, season of wear, genotyping array, and
+  10 principal components. Variants with MAF < 0.01 or imputation INFO < 0.3 were
+  excluded. Genome build GRCh37.
+gwas_catalog_api: https://www.ebi.ac.uk/gwas/rest/api/studies/GCST90824104
+date_metadata_last_modified: 2026-04-16
+
+# Trait Information
+trait_description:
+  - Sleep duration
+ontology_mapping:
+  - OBA_2040171
+
+# Genotyping Information
+genome_assembly: GRCh37
+coordinate_system: 1-based
+genotyping_technology:
+  - Genome-wide genotyping array
+imputation_panel: HRC | UK10K + 1000 Genomes Phase 3
+imputation_software: SHAPEIT3 | IMPUTE4 (UK Biobank central imputation)
+
+# Sample Information
+samples:
+  - sample_ancestry_category:
+      - European
+    sample_size: 80013
+    ancestry_method:
+      - Genetically determined
+    case_control_study: false
+sex: combined
+
+# Summary Statistic information
+data_file_name: GCST90824104.tsv.gz
+file_type: GWAS-SSF v1.0
+data_file_md5sum: 445dc180e3545392d171ba368a00e31a
+analysis_software: REGENIE v3.1.2
+adjusted_covariates:
+  - 'age '
+  - ' sex '
+  - ' study centre '
+  - ' season of wear '
+  - ' genotyping array '
+  - ' 10 principal components'
+minor_allele_freq_lower_limit: 0.01
+
+# Harmonization status
+is_harmonised: false
+is_sorted: false
