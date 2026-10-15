@@ -41,3 +41,17 @@ Public access does not establish unrestricted redistribution. Goodman, SleepChar
 ## Verification boundary
 
 Primary articles/official pages were checked live on the assessment date; the CTG-VL page and LD Hub primary paper/current OpenGWAS description were added to the comparison. Public supplement workbooks previously acquired from their publishers were inspected directly for schemas and coverage (Morrison S10–S15, Goodman SD24, SleepChart SF5, Fan SD2/SD4/SD11). Local table schemas and fixed-family counts were read directly. Cached supplement inspection is not a checksum certification of today's publisher binary. No SNP-body downloads, new estimates, access requests, manuscript changes or frozen-output edits were made. Current CTG-VL/LD Hub pair-level availability and cross-resource query concordance were not measured; those remain benchmark limits. The adjacent TSV records releases, scope, uncertainty, access, reuse and limits separately.
+
+**Coverage:** What source-specific information does your atlas provide that alternatives don't?
+
+**Reliability:** Can your atlas prevent researchers from making incorrect genetic interpretations?
+
+**Usability:** Can researchers answer scientific questions more accurately or efficiently using it?
+
+| **Question**                                                        | **Existing resources** | **Your atlas** |
+| ------------------------------------------------------------------- | ---------------------- | -------------- |
+| Can they find the correct insomnia–frailty correlation?             | Test                   | Test           |
+| Can they identify unreliable genetic-effect directions?             | Test                   | Test           |
+| Can they distinguish clinical insomnia from self-reported insomnia? | Test                   | Test           |
+| Can they recognize that a validation analysis isn't independent?    | Test                   | Test           |
+| How accurately and quickly can they interpret the evidence?         | Measure                | Measure        |
