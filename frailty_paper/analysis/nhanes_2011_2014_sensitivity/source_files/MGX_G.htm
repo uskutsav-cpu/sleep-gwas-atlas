@@ -1,0 +1,1693 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>MGX_G</title>
+    <meta name="title" content="NHANES 2011-2012: Muscle Strength - Grip Test Data Documentation, Codebook, and Frequencies" />
+    <link rel="stylesheet" href="https://wwwn.cdc.gov/nchs/nhanes/css/documentation.css" />
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Protocol_and_Procedure">Protocol and Procedure</a>
+          </li>
+          <li>
+            <a href="#Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#MGDEXSTS">MGDEXSTS - Grip test status</a>
+              </li>
+              <li>
+                <a href="#MGD050">MGD050 - Ever had surgery on hands or wrists</a>
+              </li>
+              <li>
+                <a href="#MGD060">MGD060 - Which hand or wrist had surgery</a>
+              </li>
+              <li>
+                <a href="#MGQ070">MGQ070 - Recent pain/aching/stiffness-right hand</a>
+              </li>
+              <li>
+                <a href="#MGQ080">MGQ080 - Cause of recent pain in right hand</a>
+              </li>
+              <li>
+                <a href="#MGQ090">MGQ090 - Pain in right hand gotten worse recently</a>
+              </li>
+              <li>
+                <a href="#MGQ100">MGQ100 - Recent pain/aching/stiffness-left hand</a>
+              </li>
+              <li>
+                <a href="#MGQ110">MGQ110 - Cause of recent pain in left hand</a>
+              </li>
+              <li>
+                <a href="#MGQ120">MGQ120 - Pain in left hand gotten worse recently</a>
+              </li>
+              <li>
+                <a href="#MGD130">MGD130 - Dominant hand</a>
+              </li>
+              <li>
+                <a href="#MGQ90DG">MGQ90DG - 90 degree angle with index finger</a>
+              </li>
+              <li>
+                <a href="#MGDSEAT">MGDSEAT - Testing position</a>
+              </li>
+              <li>
+                <a href="#MGAPHAND">MGAPHAND - Hand assigned for practice trial</a>
+              </li>
+              <li>
+                <a href="#MGATHAND">MGATHAND - Begin the test with this hand.</a>
+              </li>
+              <li>
+                <a href="#MGXH1T1">MGXH1T1 - Grip strength (kg), hand 1, test 1</a>
+              </li>
+              <li>
+                <a href="#MGXH1T1E">MGXH1T1E - Grip strength, hand 1, test 1 effort</a>
+              </li>
+              <li>
+                <a href="#MGXH2T1">MGXH2T1 - Grip strength (kg), hand 2, test 1</a>
+              </li>
+              <li>
+                <a href="#MGXH2T1E">MGXH2T1E - Grip strength, hand 2, test 1 effort</a>
+              </li>
+              <li>
+                <a href="#MGXH1T2">MGXH1T2 - Grip strength (kg), hand 1, test 2</a>
+              </li>
+              <li>
+                <a href="#MGXH1T2E">MGXH1T2E - Grip strength, hand 1, test 2 effort</a>
+              </li>
+              <li>
+                <a href="#MGXH2T2">MGXH2T2 - Grip strength (kg), hand 2, test 2</a>
+              </li>
+              <li>
+                <a href="#MGXH2T2E">MGXH2T2E - Grip strength, hand 2, test 2 effort</a>
+              </li>
+              <li>
+                <a href="#MGXH1T3">MGXH1T3 - Grip strength (kg), hand 1, test 3</a>
+              </li>
+              <li>
+                <a href="#MGXH1T3E">MGXH1T3E - Grip strength, hand 1, test 3 effort</a>
+              </li>
+              <li>
+                <a href="#MGXH2T3">MGXH2T3 - Grip strength (kg), hand 2, test 3</a>
+              </li>
+              <li>
+                <a href="#MGXH2T3E">MGXH2T3E - Grip strength, hand 2, test 3 effort</a>
+              </li>
+              <li>
+                <a href="#MGDCGSZ">MGDCGSZ - Combined grip strength (kg)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2011-2012 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Muscle Strength - Grip Test (MGX_G)</h3>
+        <h4> Data File: MGX_G.xpt</h4>
+        <h5 class="left">First Published: December 2014</h5>
+        <h5 class="right">Last Revised: NA</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The muscle strength/grip test component measured the isometric grip strength using a handgrip dynamometer. The goals of this component were to provide: 1) nationally representative data on muscle strength; 2) prevalence estimates of children with poor muscle strength; and 3) data to study the association between muscle strength and other health conditions and risk factors, such as obesity, physical activity and dietary patterns.</p>
+<p>&nbsp;</p><h2 id="Eligible_Sample">Eligible Sample</h2><p>Participants aged 6 years and older, who did not meet any of the exclusion criteria, were eligible for this component. <br />
+<br />
+Participants were excluded from this component if they were unable to hold the dynamometer with both hands (e.g., missing both arms, both hands, thumbs on both hands, or paralyzed in both hands). Participants who were able to grip the dynamometer with one hand still performed the component. Participants who had surgery on either hand or wrist in the last three months were not tested on that particular hand.</p>
+<p>&nbsp;</p><h2 id="Protocol_and_Procedure">Protocol and Procedure</h2><p>In this component, muscle strength was measured through a grip test using a handgrip dynamometer. A trained examiner explained and demonstrated the protocol to the participant. The examiner then adjusted the grip size of the dynamometer to the participant&rsquo;s hand size and asked the participant to squeeze the dynamometer for a practice trial. The practice trial was to determine if the procedure was understood by the participant and the grip size properly adjusted. <br />
+<br />
+After the practice, the participant was asked to use one of the hands to squeeze the dynamometer as hard as possible, exhaling while squeezing to avoid build-up of intra-thoracic pressure. The test was then repeated for the other hand. Each hand was tested three times, alternating hands between trials with a 60-second rest between measurements on the same hand. <br />
+<br />
+The grip test was performed in the standing position unless the participant was physically limited. In 2011-2012, among those who were tested, less than 0.2% of the participants younger than 20 years old were tested in a seated position. Therefore information on testing position was not released for participants younger than 20 years due to disclosure concern. Researchers who are interested can access this information through the NCHS <span style="color: #0000ff;"><a href="https://www.cdc.gov/rdc/">Research Data Center</a></span>.&nbsp;Information on testing position for participants 20 years and older is included in the present dataset. <br />
+<br />
+Prior conditions may affect a person&rsquo;s grip strength; therefore, we collected data on whether the participant has ever had surgery on his/her hands or wrists for arthritis or carpal tunnel syndrome. In 2011-2012, among those who were tested, less than 0.1% of the participants younger than 20 years old reported ever had hand/wrist surgery for arthritis or carpal tunnel syndrome. Due to potential disclosure risk, this prior surgery information is only released for participants 20 years and over in the present dataset. Information on younger participants is only available through the <span style="color: #0000ff;"><a href="https://www.cdc.gov/rdc/">Research Data Center</a></span>. <br />
+<br />
+The participant was randomly assigned to start the test with his/her dominant or non-dominant hand. The practice trial was usually proformed with the opposite hand that was assigned to be tested first, unless the participant was physically limited and only had one hand that was eligible for the test. <br />
+<br />
+Detailed descriptions of the protocol are provided in the&nbsp;<span style="color: #0000ff;"><a href="https://wwwn.cdc.gov/nchs/data/nhanes/public/2011/manuals/muscle_strength_proc_manual.pdf">NHANES Muscle Strength/Grip Test Procedure Manual</a></span> available on the NHANES website.</p>
+<p>&nbsp;</p><h2 id="Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</h2><p>Examiners were regularly monitored by NCHS staff and field supervisors. Retraining sessions were conducted periodically with the examiners to reinforce the proper protocols and techniques. Inspection, calibration, and maintenance of the equipment and supplies were performed on a regular basis. <br />
+<br />
+As part of on-going quality control practices, all data were reviewed systematically for logical or operational inconsistencies and examiner errors.</p>
+<p>&nbsp;</p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p>During the data processing, edits were made to ensure the logical consistency and analytic usefulness of the data. Extreme values were reviewed and cross-checked with other available data. <br />
+<br />
+<strong>Grip test status code (MGDEXSTS):</strong> <br />
+This derived variable indicates the following for each participant: </p>
+<ol>
+    <ol>1 = Completed test on both hands - the participant performed the test on both hands. <br />
+        <br />
+        2 = Completed test on only one hand - due to physical limitations, the participant only performed test on one of the hands. <br />
+        <br />
+        3 = Did not perform test - Grip test did not take place due to various reasons (such as no time, arrived late/left early, refusal, illness, emergency, or equipment failure). <br />
+        <br />
+    </ol>
+</ol>
+<br />
+<p><strong>Combined grip strength (MGDCGSZ):</strong> <br />
+The combined grip strength was calculated as the sum of the largest reading from each hand, and expressed in kilogram. This variable was not calculated for participants who only performed the test on one hand. </p>
+<p>&nbsp;</p><h2 id="Analytic_Notes">Analytic Notes</h2><p>The NHANES examination sample weights should be used to analyze the muscle strength/grip test data. Please refer to the&nbsp;<span style="color: #0000ff;"><a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx">NHANES Analytic Guidelines</a></span>&nbsp;and the on-line&nbsp;<span style="color: #0000ff;"><a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/">NHANES Tutorial</a></span> for further details on the use of sample weights and other analytic issues.</p>
+<p>&nbsp;</p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGDEXSTS">MGDEXSTS - Grip test status</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGDEXSTS</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip test status</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip test status</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Completed test on both hands</td>
+                <td class="values" align="right">7064</td>
+                <td class="values" align="right">7064</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Completed test on only one hand</td>
+                <td class="values" align="right">113</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Did not perform test</td>
+                <td class="values" align="right">644</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGD050">MGD050 - Ever had surgery on hands or wrists</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGD050</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ever had surgery on hands or wrists</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Have you ever had surgery on your hands or wrists for arthritis or carpal tunnel syndrome?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">158</td>
+                <td class="values" align="right">158</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4620</td>
+                <td class="values" align="right">4778</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">4781</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">4783</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3038</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGD060">MGD060 - Which hand or wrist had surgery</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGD060</dd>
+            <dt>SAS Label: </dt>
+            <dd>Which hand or wrist had surgery</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Which hand or wrist was the surgery on?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Right hand/wrist</td>
+                <td class="values" align="right">60</td>
+                <td class="values" align="right">60</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Left hand/wrist</td>
+                <td class="values" align="right">36</td>
+                <td class="values" align="right">96</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Both hands/wrists</td>
+                <td class="values" align="right">62</td>
+                <td class="values" align="right">158</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">158</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">158</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7663</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ070">MGQ070 - Recent pain/aching/stiffness-right hand</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ070</dd>
+            <dt>SAS Label: </dt>
+            <dd>Recent pain/aching/stiffness-right hand</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Have you had any pain, aching or stiffness in your right hand in the past 7 days?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">812</td>
+                <td class="values" align="right">812</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">6313</td>
+                <td class="values" align="right">7125</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">7126</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">7130</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">691</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ080">MGQ080 - Cause of recent pain in right hand</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ080</dd>
+            <dt>SAS Label: </dt>
+            <dd>Cause of recent pain in right hand</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Is the pain, aching or stiffness in your right hand caused by arthritis, tendonitis, or carpal tunnel syndrome?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">437</td>
+                <td class="values" align="right">437</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">157</td>
+                <td class="values" align="right">594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">218</td>
+                <td class="values" align="right">812</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7009</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ090">MGQ090 - Pain in right hand gotten worse recently</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ090</dd>
+            <dt>SAS Label: </dt>
+            <dd>Pain in right hand gotten worse recently</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Has the pain, aching or stiffness in your right hand gotten worse in the past 7 days?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">77</td>
+                <td class="values" align="right">77</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">735</td>
+                <td class="values" align="right">812</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">812</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">812</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7009</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ100">MGQ100 - Recent pain/aching/stiffness-left hand</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ100</dd>
+            <dt>SAS Label: </dt>
+            <dd>Recent pain/aching/stiffness-left hand</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Have you had any pain, aching or stiffness in your left hand in the past 7 days?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">675</td>
+                <td class="values" align="right">675</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">6451</td>
+                <td class="values" align="right">7126</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">7128</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">7131</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">690</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ110">MGQ110 - Cause of recent pain in left hand</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ110</dd>
+            <dt>SAS Label: </dt>
+            <dd>Cause of recent pain in left hand</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Is the pain, aching or stiffness in your left hand caused by arthritis, tendonitis, or carpal tunnel syndrome?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">385</td>
+                <td class="values" align="right">385</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">136</td>
+                <td class="values" align="right">521</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">521</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">154</td>
+                <td class="values" align="right">675</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7146</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ120">MGQ120 - Pain in left hand gotten worse recently</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ120</dd>
+            <dt>SAS Label: </dt>
+            <dd>Pain in left hand gotten worse recently</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Has the pain, aching or stiffness in your left hand gotten worse in the past 7 days?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">76</td>
+                <td class="values" align="right">76</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">598</td>
+                <td class="values" align="right">674</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">674</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">675</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7146</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGD130">MGD130 - Dominant hand</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGD130</dd>
+            <dt>SAS Label: </dt>
+            <dd>Dominant hand</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Are you right-handed, left-handed, or do you use both hands equally?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Right-handed</td>
+                <td class="values" align="right">6320</td>
+                <td class="values" align="right">6320</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Left-handed</td>
+                <td class="values" align="right">617</td>
+                <td class="values" align="right">6937</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Use both hands equally</td>
+                <td class="values" align="right">240</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">644</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGQ90DG">MGQ90DG - 90 degree angle with index finger</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGQ90DG</dd>
+            <dt>SAS Label: </dt>
+            <dd>90 degree angle with index finger</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Was the participant able to achieve a 90 degree angle with the index finger on the eligible hand(s)?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">7122</td>
+                <td class="values" align="right">7122</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No - Not right hand</td>
+                <td class="values" align="right">29</td>
+                <td class="values" align="right">7151</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">No - Not left hand</td>
+                <td class="values" align="right">14</td>
+                <td class="values" align="right">7165</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">No - Not either hand</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">644</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGDSEAT">MGDSEAT - Testing position</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGDSEAT</dd>
+            <dt>SAS Label: </dt>
+            <dd>Testing position</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Testing position</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Standing</td>
+                <td class="values" align="right">4611</td>
+                <td class="values" align="right">4611</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Seated</td>
+                <td class="values" align="right">172</td>
+                <td class="values" align="right">4783</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3038</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGAPHAND">MGAPHAND - Hand assigned for practice trial</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGAPHAND</dd>
+            <dt>SAS Label: </dt>
+            <dd>Hand assigned for practice trial</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The hand assigned for the practice trial</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Right</td>
+                <td class="values" align="right">3563</td>
+                <td class="values" align="right">3563</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Left</td>
+                <td class="values" align="right">3614</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">644</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGATHAND">MGATHAND - Begin the test with this hand.</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGATHAND</dd>
+            <dt>SAS Label: </dt>
+            <dd>Begin the test with this hand.</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Begin the test with this hand.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Right</td>
+                <td class="values" align="right">3614</td>
+                <td class="values" align="right">3614</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Left</td>
+                <td class="values" align="right">3563</td>
+                <td class="values" align="right">7177</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">644</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T1">MGXH1T1 - Grip strength (kg), hand 1, test 1</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T1</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 1, test 1</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 1, test 1</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">5 to 79.2</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7170</td>
+                <td class="values" align="right">7170</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">651</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T1E">MGXH1T1E - Grip strength, hand 1, test 1 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T1E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 1, test 1 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 1 on hand 1, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">6911</td>
+                <td class="values" align="right">6911</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">259</td>
+                <td class="values" align="right">7170</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">651</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T1">MGXH2T1 - Grip strength (kg), hand 2, test 1</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T1</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 2, test 1</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 2, test 1</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">0 to 77.3</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7071</td>
+                <td class="values" align="right">7071</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">750</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T1E">MGXH2T1E - Grip strength, hand 2, test 1 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T1E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 2, test 1 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 1 on hand 2, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">6892</td>
+                <td class="values" align="right">6892</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">179</td>
+                <td class="values" align="right">7071</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">750</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T2">MGXH1T2 - Grip strength (kg), hand 1, test 2</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T2</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 1, test 2</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 1, test 2</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">5.2 to 83.7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7161</td>
+                <td class="values" align="right">7161</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">660</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T2E">MGXH1T2E - Grip strength, hand 1, test 2 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T2E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 1, test 2 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 2 on hand 1, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">7050</td>
+                <td class="values" align="right">7050</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">111</td>
+                <td class="values" align="right">7161</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">660</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T2">MGXH2T2 - Grip strength (kg), hand 2, test 2</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T2</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 2, test 2</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 2, test 2</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">5 to 83.8</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7066</td>
+                <td class="values" align="right">7066</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">755</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T2E">MGXH2T2E - Grip strength, hand 2, test 2 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T2E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 2, test 2 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 2 on hand 2, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">6955</td>
+                <td class="values" align="right">6955</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">111</td>
+                <td class="values" align="right">7066</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">755</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T3">MGXH1T3 - Grip strength (kg), hand 1, test 3</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T3</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 1, test 3</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 1, test 3</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">5 to 85.8</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7159</td>
+                <td class="values" align="right">7159</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">662</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH1T3E">MGXH1T3E - Grip strength, hand 1, test 3 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH1T3E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 1, test 3 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 3 on hand 1, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">7055</td>
+                <td class="values" align="right">7055</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">104</td>
+                <td class="values" align="right">7159</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">662</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T3">MGXH2T3 - Grip strength (kg), hand 2, test 3</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T3</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength (kg), hand 2, test 3</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Grip strength (kg), hand 2, test 3</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">5.1 to 82.9</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7059</td>
+                <td class="values" align="right">7059</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">762</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGXH2T3E">MGXH2T3E - Grip strength, hand 2, test 3 effort</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGXH2T3E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grip strength, hand 2, test 3 effort</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Whether the participant exerted a maximal or questionable effort during the test 3 on hand 2, as assessed by the technician.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Maximal</td>
+                <td class="values" align="right">6943</td>
+                <td class="values" align="right">6943</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Questionable</td>
+                <td class="values" align="right">116</td>
+                <td class="values" align="right">7059</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">762</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="MGDCGSZ">MGDCGSZ - Combined grip strength (kg)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">MGDCGSZ</dd>
+            <dt>SAS Label: </dt>
+            <dd>Combined grip strength (kg)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Combined grip strength (kg): the sum of the largest reading from each hand.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 6 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">11.4 to 169.6</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">7064</td>
+                <td class="values" align="right">7064</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">757</td>
+                <td class="values" align="right">7821</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

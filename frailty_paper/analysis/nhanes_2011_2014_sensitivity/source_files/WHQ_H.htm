@@ -1,0 +1,1977 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>WHQ_H</title>
+    <meta name="title" content="NHANES 2013-2014: Weight History Data Documentation, Codebook, and Frequencies" />
+    <link rel="stylesheet" href="https://wwwn.cdc.gov/nchs/nhanes/css/documentation.css" />
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</a>
+          </li>
+          <li>
+            <a href="#Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#WHD010">WHD010 - Current self-reported height (inches)</a>
+              </li>
+              <li>
+                <a href="#WHD020">WHD020 - Current self-reported weight (pounds)</a>
+              </li>
+              <li>
+                <a href="#WHQ030">WHQ030 - How do you consider your weight</a>
+              </li>
+              <li>
+                <a href="#WHQ040">WHQ040 - Like to weigh more, less or same</a>
+              </li>
+              <li>
+                <a href="#WHD050">WHD050 - Self-reported weight - 1 yr ago (pounds)</a>
+              </li>
+              <li>
+                <a href="#WHQ055">WHQ055 - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#WHQ060">WHQ060 - Weight change intentional</a>
+              </li>
+              <li>
+                <a href="#WHQ070">WHQ070 - Tried to lose weight in past year</a>
+              </li>
+              <li>
+                <a href="#WHD080A">WHD080A - Ate less to lose weight</a>
+              </li>
+              <li>
+                <a href="#WHD080B">WHD080B - Switched to foods with lower calories</a>
+              </li>
+              <li>
+                <a href="#WHD080C">WHD080C - Ate less fat to lose weight</a>
+              </li>
+              <li>
+                <a href="#WHD080D">WHD080D - Exercised to lose weight</a>
+              </li>
+              <li>
+                <a href="#WHD080E">WHD080E - Skipped meals</a>
+              </li>
+              <li>
+                <a href="#WHD080F">WHD080F - Ate diet foods or products</a>
+              </li>
+              <li>
+                <a href="#WHD080G">WHD080G - Used a liquid diet formula</a>
+              </li>
+              <li>
+                <a href="#WHD080H">WHD080H - Joined a weight loss program</a>
+              </li>
+              <li>
+                <a href="#WHD080I">WHD080I - Took prescription diet pills</a>
+              </li>
+              <li>
+                <a href="#WHD080J">WHD080J - Took non-RX suppl. to lose weight</a>
+              </li>
+              <li>
+                <a href="#WHD080K">WHD080K - Took laxatives or vomited</a>
+              </li>
+              <li>
+                <a href="#WHD080M">WHD080M - Drank a lot of water</a>
+              </li>
+              <li>
+                <a href="#WHD080N">WHD080N - Followed a special diet</a>
+              </li>
+              <li>
+                <a href="#WHD080O">WHD080O - Ate fewer carbohydrates</a>
+              </li>
+              <li>
+                <a href="#WHD080P">WHD080P - Started to smoke or began to smoke again</a>
+              </li>
+              <li>
+                <a href="#WHD080Q">WHD080Q - Ate more fruits, vegetables, salads</a>
+              </li>
+              <li>
+                <a href="#WHD080R">WHD080R - Changed eating habits</a>
+              </li>
+              <li>
+                <a href="#WHD080S">WHD080S - Ate less sugar, candy, sweets</a>
+              </li>
+              <li>
+                <a href="#WHD080T">WHD080T - Ate less junk food or fast food</a>
+              </li>
+              <li>
+                <a href="#WHD080u">WHD080u - Had weight loss to lose weight</a>
+              </li>
+              <li>
+                <a href="#WHD080L">WHD080L - Other</a>
+              </li>
+              <li>
+                <a href="#WHQ105">WHQ105 - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#WHD110">WHD110 - Self-reported weight-10 yrs ago (pounds)</a>
+              </li>
+              <li>
+                <a href="#WHQ115a">WHQ115a - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#WHD120">WHD120 - Self-reported weight-age 25 (pounds)</a>
+              </li>
+              <li>
+                <a href="#WHQ125">WHQ125 - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#WHD130">WHD130 - Self-reported height - age 25 (inches)</a>
+              </li>
+              <li>
+                <a href="#WHD140">WHD140 - Self-reported greatest weight (pounds)</a>
+              </li>
+              <li>
+                <a href="#WHQ150">WHQ150 - Age when heaviest weight</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2013-2014 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Weight History (WHQ_H)</h3>
+        <h4> Data File: WHQ_H.xpt</h4>
+        <h5 class="left">First Published: March 2016</h5>
+        <h5 class="right">Last Revised: NA</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The Weight History section of the Sample Person Questionnaire (variable name prefix WHQ) provides personal interview data on several topics related to body weight, including self-perception of weight, self-reported weight over the participant&rsquo;s lifetime, attempted weight loss during the past 12 months, and methods used to try to lose weight and to keep from gaining weight.</p><h2 id="Eligible_Sample">Eligible Sample</h2><p>Participants aged 16 years and older were eligible. However, age to participate for some questions in this section vary. Please review the codebook carefully. Frequency counts were verified during the preparation of the file.</p><h2 id="Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</h2><p>Trained interviewers asked these questions, in the home, using the Computer-Assisted Personal Interview (CAPI) system.</p>
+<p>For details on the administration of the Weight History (WHQ_H) section, please refer to the Weight History Sample Person Questionnaire on the <a href="https://wwwn.cdc.gov/nchs/data/nhanes/public/2013/questionnaires/whq_h.pdf" target="_blank">NHANES website</a>.</p><h2 id="Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</h2><p>The CAPI system is programmed with built-in consistency checks to reduce data entry errors. CAPI also uses online help screens to assist interviewers in defining key terms used in the questionnaire.</p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p>Edits were made to some variables to ensure the completeness, consistency, and analytic usefulness of the data. Edits were also made, when necessary, to address data disclosure concerns. When a variable was modified globally, as part of the editing process, the third letter in the variable name was changed from a Q (i.e., WHQ) to a D (i.e., WHD). For example, height data were collected as feet and inches, but standardized to inches using the conversion factors 0.3937 inches per centimeter and 12 inches per foot. Current and past self-reported weights were standardized to weight in pounds using the conversion factor 2.2046 pounds per kilogram.</p>
+<p>Reported heights and weights, considered being physiologically implausible or the result of interviewer data entry error, were coded as &ldquo;missing.&rdquo; </p>
+<p>If maximum weight (WHQ150) extended over more than one year, the interviewer recorded the most recent age at which the survey participant reported that weight. </p>
+<p>All responses to WHQ150 (age when weighed the most) of 80 years and older were coded as &lsquo;80&rsquo; to be consistent with the way age of the survey participant was coded in the demographic file.</p><h2 id="Analytic_Notes">Analytic Notes</h2><p>Although data in this file were collected as part of the household interview, if they are merged with the MEC exam data, exam sample weights should be used for analyses.</p>
+<p>Please refer to the <a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx" target="_blank">NHANES Analytic Guidelines</a> and the on-line <a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/">NHANES Tutorial</a> for further details on the use of sample weights and other analytic issues. </p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD010">WHD010 - Current self-reported height (inches)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD010</dd>
+            <dt>SAS Label: </dt>
+            <dd>Current self-reported height (inches)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">These next questions ask about {your/SP's} height and weight at different times in {your/his/her} life.  How tall {are you/is SP} without shoes?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER HEIGHT IN FEET AND INCHES OR METERS AND CENTIMETERS.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">48 to 81</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">6376</td>
+                <td class="values" align="right">6376</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6377</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">62</td>
+                <td class="values" align="right">6439</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">25</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD020">WHD020 - Current self-reported weight (pounds)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD020</dd>
+            <dt>SAS Label: </dt>
+            <dd>Current self-reported weight (pounds)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much {do you/does SP} weigh without clothes or shoes?
+</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">RECORD CURRENT WEIGHT. IF PREGNANT, ASK FOR WEIGHT BEFORE PREGNANCY. ENTER WEIGHT IN POUNDS OR KILOGRAMS. 
+</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">75 to 493</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">6377</td>
+                <td class="values" align="right">6377</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">6384</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">46</td>
+                <td class="values" align="right">6430</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">34</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ030">WHQ030 - How do you consider your weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ030</dd>
+            <dt>SAS Label: </dt>
+            <dd>How do you consider your weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} consider {your/his/her}self now to be . . . [If {you are/she is} currently pregnant, what did {you/she} consider {your/her}self to be before {you were/she was} pregnant?]</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">CAPI INSTRUCTION: DISPLAY OPTIONAL SENTENCE [If {you are/she is} currently pregnant...] ONLY IF SP IS FEMALE AND AGE IS 16 THROUGH 59.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Overweight,</td>
+                <td class="values" align="right">3218</td>
+                <td class="values" align="right">3218</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Underweight, or</td>
+                <td class="values" align="right">369</td>
+                <td class="values" align="right">3587</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">About the right weight?</td>
+                <td class="values" align="right">2865</td>
+                <td class="values" align="right">6452</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6452</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ040">WHQ040 - Like to weigh more, less or same</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ040</dd>
+            <dt>SAS Label: </dt>
+            <dd>Like to weigh more, less or same</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Would {you/SP} like to weigh . . .</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">More,</td>
+                <td class="values" align="right">581</td>
+                <td class="values" align="right">581</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Less, or</td>
+                <td class="values" align="right">3806</td>
+                <td class="values" align="right">4387</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Stay about the same?</td>
+                <td class="values" align="right">2070</td>
+                <td class="values" align="right">6457</td>
+                <td class="values">WHD050</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6458</td>
+                <td class="values">WHD050</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">6</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">WHD050</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD050">WHD050 - Self-reported weight - 1 yr ago (pounds)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD050</dd>
+            <dt>SAS Label: </dt>
+            <dd>Self-reported weight - 1 yr ago (pounds)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much did {you/SP} weigh a year ago?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER WEIGHT IN POUNDS OR KILOGRAMS.  IF PREGNANT, ASK FOR WEIGHT BEFORE PREGNANCY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">75 to 559</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">6330</td>
+                <td class="values" align="right">6330</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">10</td>
+                <td class="values" align="right">6340</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">82</td>
+                <td class="values" align="right">6422</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">42</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ055">WHQ055 - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ055</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1.  CHECK ITEM WHQ055:  IF WEIGHT IN WHD050 IS 10 POUNDS OR MORE THAN WEIGHT IN WHD020 (E.G., WHD050 = 150 LBS WHD020 = 135 LBS), CONTINUE.  OTHERWISE, GO TO WHQ070.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ060">WHQ060 - Weight change intentional</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ060</dd>
+            <dt>SAS Label: </dt>
+            <dd>Weight change intentional</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Was the change between {your/SP's} current weight and {your/his/her} weight a year ago intentional?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">788</td>
+                <td class="values" align="right">788</td>
+                <td class="values">WHD080A</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">450</td>
+                <td class="values" align="right">1238</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1238</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">1239</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5225</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ070">WHQ070 - Tried to lose weight in past year</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ070</dd>
+            <dt>SAS Label: </dt>
+            <dd>Tried to lose weight in past year</dd>
+            <dt>English Text: </dt>
+            <dd class="info">During the past 12 months, {have you/has SP} tried to lose weight?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">2049</td>
+                <td class="values" align="right">2049</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">3623</td>
+                <td class="values" align="right">5672</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5672</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">5674</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">790</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080A">WHD080A - Ate less to lose weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080A</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate less to lose weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Ate less food (amount)</td>
+                <td class="values" align="right">1693</td>
+                <td class="values" align="right">1693</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1693</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1693</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">4771</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080B">WHD080B - Switched to foods with lower calories</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080B</dd>
+            <dt>SAS Label: </dt>
+            <dd>Switched to foods with lower calories</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Switched to foods with lower calories</td>
+                <td class="values" align="right">883</td>
+                <td class="values" align="right">883</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5581</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080C">WHD080C - Ate less fat to lose weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080C</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate less fat to lose weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Ate less fat</td>
+                <td class="values" align="right">802</td>
+                <td class="values" align="right">802</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5662</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080D">WHD080D - Exercised to lose weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080D</dd>
+            <dt>SAS Label: </dt>
+            <dd>Exercised to lose weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Exercised</td>
+                <td class="values" align="right">1830</td>
+                <td class="values" align="right">1830</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">4634</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080E">WHD080E - Skipped meals</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Skipped meals</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Skipped meals</td>
+                <td class="values" align="right">399</td>
+                <td class="values" align="right">399</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6065</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080F">WHD080F - Ate diet foods or products</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080F</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate diet foods or products</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Ate 'diet' foods or products</td>
+                <td class="values" align="right">233</td>
+                <td class="values" align="right">233</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6231</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080G">WHD080G - Used a liquid diet formula</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080G</dd>
+            <dt>SAS Label: </dt>
+            <dd>Used a liquid diet formula</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Used a liquid diet formula such as slimfast or optifast</td>
+                <td class="values" align="right">115</td>
+                <td class="values" align="right">115</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6349</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080H">WHD080H - Joined a weight loss program</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080H</dd>
+            <dt>SAS Label: </dt>
+            <dd>Joined a weight loss program</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Joined a weight loss program such as Weight Watchers, Jenny Craig, Tops, or Overeaters Anonymous</td>
+                <td class="values" align="right">114</td>
+                <td class="values" align="right">114</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6350</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080I">WHD080I - Took prescription diet pills</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080I</dd>
+            <dt>SAS Label: </dt>
+            <dd>Took prescription diet pills</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">31</td>
+                <td class="values">Took diet pills prescribed by a doctor</td>
+                <td class="values" align="right">84</td>
+                <td class="values" align="right">84</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6380</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080J">WHD080J - Took non-RX suppl. to lose weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080J</dd>
+            <dt>SAS Label: </dt>
+            <dd>Took non-RX suppl. to lose weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">32</td>
+                <td class="values">Took other pills, medicines, herbs, or supplements not needing a prescription</td>
+                <td class="values" align="right">200</td>
+                <td class="values" align="right">200</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6264</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080K">WHD080K - Took laxatives or vomited</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080K</dd>
+            <dt>SAS Label: </dt>
+            <dd>Took laxatives or vomited</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">33</td>
+                <td class="values">Took laxatives or vomited</td>
+                <td class="values" align="right">26</td>
+                <td class="values" align="right">26</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6438</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080M">WHD080M - Drank a lot of water</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080M</dd>
+            <dt>SAS Label: </dt>
+            <dd>Drank a lot of water</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">34</td>
+                <td class="values">Drank a lot of water</td>
+                <td class="values" align="right">1033</td>
+                <td class="values" align="right">1033</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5431</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080N">WHD080N - Followed a special diet</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080N</dd>
+            <dt>SAS Label: </dt>
+            <dd>Followed a special diet</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">30</td>
+                <td class="values">Followed a special diet</td>
+                <td class="values" align="right">175</td>
+                <td class="values" align="right">175</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6289</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080O">WHD080O - Ate fewer carbohydrates</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080O</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate fewer carbohydrates</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight? </dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">41</td>
+                <td class="values">Ate fewer carbohydrates</td>
+                <td class="values" align="right">689</td>
+                <td class="values" align="right">689</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5775</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080P">WHD080P - Started to smoke or began to smoke again</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080P</dd>
+            <dt>SAS Label: </dt>
+            <dd>Started to smoke or began to smoke again</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight? </dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">42</td>
+                <td class="values">Started to smoke or began to smoke again</td>
+                <td class="values" align="right">19</td>
+                <td class="values" align="right">19</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6445</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080Q">WHD080Q - Ate more fruits, vegetables, salads</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080Q</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate more fruits, vegetables, salads</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight? </dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">43</td>
+                <td class="values">Ate more fruits, vegetables, salads</td>
+                <td class="values" align="right">1121</td>
+                <td class="values" align="right">1121</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5343</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080R">WHD080R - Changed eating habits</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080R</dd>
+            <dt>SAS Label: </dt>
+            <dd>Changed eating habits</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">44</td>
+                <td class="values">Changed eating habits</td>
+                <td class="values" align="right">1022</td>
+                <td class="values" align="right">1022</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5442</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080S">WHD080S - Ate less sugar, candy, sweets</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080S</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate less sugar, candy, sweets</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1. CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">45</td>
+                <td class="values">Ate less sugar, candy, sweets</td>
+                <td class="values" align="right">943</td>
+                <td class="values" align="right">943</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5521</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080T">WHD080T - Ate less junk food or fast food</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080T</dd>
+            <dt>SAS Label: </dt>
+            <dd>Ate less junk food or fast food</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">46</td>
+                <td class="values">Ate less junk food or fast food</td>
+                <td class="values" align="right">996</td>
+                <td class="values" align="right">996</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5468</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080u">WHD080u - Had weight loss to lose weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080u</dd>
+            <dt>SAS Label: </dt>
+            <dd>Had weight loss to lose weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">35</td>
+                <td class="values">Had weight loss surgery</td>
+                <td class="values" align="right">15</td>
+                <td class="values" align="right">15</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6449</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD080L">WHD080L - Other</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD080L</dd>
+            <dt>SAS Label: </dt>
+            <dd>Other</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How did {you/SP} try to lose weight?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD WHQ1.  CODE ALL THAT APPLY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">40</td>
+                <td class="values">Other</td>
+                <td class="values" align="right">29</td>
+                <td class="values" align="right">29</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6435</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ105">WHQ105 - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ105</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 3.  CHECK ITEM WHQ105:  IF SP's AGE &gt;= 36, CONTINUE.  OTHERWISE, GO TO BOX 4.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD110">WHD110 - Self-reported weight-10 yrs ago (pounds)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD110</dd>
+            <dt>SAS Label: </dt>
+            <dd>Self-reported weight-10 yrs ago (pounds)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much did {you/SP} weigh 10 years ago?  [If you don't know {your/his/her} exact weight, please make your best guess.]</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER WEIGHT IN POUNDS OR KILOGRAMS.  IF PREGNANT, ASK FOR WEIGHT BEFORE PREGNANCY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 36 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">75 to 600</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">4075</td>
+                <td class="values" align="right">4075</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">8</td>
+                <td class="values" align="right">4083</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">96</td>
+                <td class="values" align="right">4179</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2285</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ115a">WHQ115a - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ115a</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 4.  CHECK ITEM WHQ115a:  IF SP's AGE &gt;= 27, CONTINUE. OTHERWISE, GO TO WHD140.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD120">WHD120 - Self-reported weight-age 25 (pounds)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD120</dd>
+            <dt>SAS Label: </dt>
+            <dd>Self-reported weight-age 25 (pounds)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much did {you/SP} weigh at age 25?  [If you don't know {your/his/her} exact weight, please make your best guess.]  If ( you were/she was) pregnant, how much did (you/she) weigh before (your/her) pregnancy?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER WEIGHT IN POUNDS OR KILOGRAMS.  IF PREGNANT, ASK FOR WEIGHT BEFORE PREGNANCY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 27 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">55 to 600</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">4811</td>
+                <td class="values" align="right">4811</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">4815</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">209</td>
+                <td class="values" align="right">5024</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">1440</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ125">WHQ125 - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ125</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 5.  CHECK ITEM WHQ125:  IF SP's AGE &gt;= 50, CONTINUE. OTHERWISE, GO TO WHD140.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD130">WHD130 - Self-reported height - age 25 (inches)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD130</dd>
+            <dt>SAS Label: </dt>
+            <dd>Self-reported height - age 25 (inches)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How tall {were you/was SP} at age 25?  [If you don't know {your/his/her} exact height, please make your best guess.]</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER HEIGHT IN FEET AND INCHES OR METERS AND CENTIMETERS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 50 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">50 to 81</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2678</td>
+                <td class="values" align="right">2678</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">2680</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">85</td>
+                <td class="values" align="right">2765</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3699</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHD140">WHD140 - Self-reported greatest weight (pounds)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHD140</dd>
+            <dt>SAS Label: </dt>
+            <dd>Self-reported greatest weight (pounds)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Up to the present time, what is the most {you have/SP has} ever weighed?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER WEIGHT IN POUNDS OR KILOGRAMS.  DO NOT INCLUDE WEIGHT DURING PREGNANCY.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 18 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">85 to 600</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">6025</td>
+                <td class="values" align="right">6025</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">9</td>
+                <td class="values" align="right">6034</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">69</td>
+                <td class="values" align="right">6103</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">361</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="WHQ150">WHQ150 - Age when heaviest weight</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">WHQ150</dd>
+            <dt>SAS Label: </dt>
+            <dd>Age when heaviest weight</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How old {were you/was SP} then?  [If you don't know {your/his/her} exact age, please make your best guess.]</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER AGE IN YEARS.  Response cannot be greater than the age of the SP.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 18 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 79</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">5887</td>
+                <td class="values" align="right">5887</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">80</td>
+                <td class="values">80 years or older</td>
+                <td class="values" align="right">101</td>
+                <td class="values" align="right">5988</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5988</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">32</td>
+                <td class="values" align="right">6020</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">444</td>
+                <td class="values" align="right">6464</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# Results — proposed manuscript text
+
+## Participants and primary analysis
+
+Among 3,632 interviewed adults aged at least 60 years, 3,472 had positive MEC weights; 3,336 had observed sleep disclosure and met the ≥80% rule for all four compared FI versions. Their weighted mean age was 69.5 years; 969 reported that they had ever told a health professional about trouble sleeping. The weighted proportion reporting such disclosure was 31.2% (95% CI 28.8–33.7%).
+
+The weighted, age-, sex- and cycle-adjusted difference in FI was 0.0736 (95% CI 0.0566–0.0907) for the full 49-item FI and 0.0698 (0.0528–0.0869; p=1.54×10⁻⁹; Holm p=3.89×10⁻⁹) for the 47-item index excluding direct sleep and fatigue items. Regressing the participant-level difference between those FIs on the same exposure and covariates gave 0.00382 (0.00290–0.00474; p=1.12×10⁻⁹; Holm p=3.89×10⁻⁹). Both the component set and denominator change on item removal; the paired difference is not an estimate of a causal contribution from overlapping definitions. Figure 1 and Supplementary Table `supplement_survey_models.csv` contain all comparisons.
+
+## Robustness and negative findings
+
+The sleep/fatigue-excluded FI association was 0.0623 (95% CI 0.0411–0.0835) in 2011–2012 and 0.0761 (0.0489–0.1033) in 2013–2014. The fitted cycle interaction was 0.0127 (−0.0190 to 0.0445; p=0.420), providing no clear evidence of a cycle difference. In a common complete-covariate sample (n=3,035), the minimally adjusted and further-adjusted differences were 0.0725 and 0.0677 (further-adjusted CI 0.0512–0.0843), respectively. Omitting all mood and care/general-health items gave 0.0670 (0.0491–0.0850; n=3,315); complete-item cases gave 0.0577 (0.0392–0.0761; n=1,779). With recent DPQ030 symptoms as exposure and both sleep and fatigue omitted from the outcome, the difference for symptoms at least more than half the days was 0.1035 (0.0792–0.1279; n=3,198). This question includes excessive sleep, so it is not an insomnia-specific estimate.
+
+The sex interaction was −0.0271 (95% CI −0.0533 to −0.0009; unadjusted p=0.043; exploratory-family Holm p=0.259); this is an exploratory, multiplicity-sensitive finding rather than established effect modification. In the same 2,699 people with both FI and previous physical-four score, the respective differences were 0.0659 and 0.0485, with a paired difference of 0.0173 (−0.0025 to 0.0372; p=0.085; exploratory-family Holm p=0.425). The data do not establish a difference between these differently constructed score associations.
+
+The primary sleep/fatigue-excluded FI was scorable in 3,393/3,472 older MEC participants. In a complete-covariate missingness model, the odds ratio for an unavailable FI comparing sleep-disclosure groups was 0.95 (0.39–2.35; n=3,141); the interval is wide and does not rule out selection. The inverse-response-weighted fully adjusted estimate was 0.0679 (0.0513–0.0844), with propensity and outcome models refitted in each survey jackknife replicate. This sensitivity is conditional on observed-variable and model assumptions and does not resolve missing-not-at-random bias.
+
+## Construct check against mortality
+
+Of 3,389 linkage-eligible older MEC participants with a sleep/fatigue-excluded FI, 765 were recorded as deceased through 2019. Per 0.1-unit higher FI, the survey-weighted age-, sex- and cycle-adjusted odds of being recorded deceased were 1.74 times as high (95% CI 1.60–1.89). The unadjusted weighted proportion recorded deceased was 9.2% for FI ≤0.21 and 35.3% for FI >0.21 (Figure 2). These groups differ in age and other characteristics, and follow-up duration varied; the comparison is a descriptive construct check, not a causal effect or a clinically validated threshold. The source mortality status was not perturbed, although CDC altered some other public-use mortality fields, which were not used. The check uses the same NHANES cycles as the published index and is not external validation.
+
+## Genetic-score provenance
+
+All 15 and all 22 unique prototype entries matched their respective project summary-statistic rows by rsID and reported position; FI, FFS and insomnia weights matched the signed source coefficients after the documented allele alignment. Across the two score files there were 37 score rows representing 33 unique rsIDs. Ensembl GRCh37 reference records returned the specified coordinate and both listed alleles for all 37 rows; nine of 15 and 14 of 22 rows had additional alleles in those reference records. Source-build certainty, A1 interpretation for FFS, and the biological meaning of a reversed coefficient at a multiallelic site remain unresolved. No linked NHANES genotypes were accessed and no genetic score validation or new genetic correlation was performed.

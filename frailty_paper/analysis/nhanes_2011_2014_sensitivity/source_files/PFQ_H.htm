@@ -1,0 +1,3805 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>PFQ_H</title>
+    <meta name="title" content="NHANES 2013-2014: Physical Functioning Data Documentation, Codebook, and Frequencies" />
+    <link rel="stylesheet" href="https://wwwn.cdc.gov/nchs/nhanes/css/documentation.css" />
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#PFQ020">PFQ020 - Crawl, walk, run, play limitations</a>
+              </li>
+              <li>
+                <a href="#PFQ030">PFQ030 - Long term impairment/health problem</a>
+              </li>
+              <li>
+                <a href="#PFQ032">PFQ032 - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#PFQ033">PFQ033 - Impairment requiring special equipment</a>
+              </li>
+              <li>
+                <a href="#PFQ035A">PFQ035A - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#PFQ041">PFQ041 - Receive Special Ed or Early Intervention</a>
+              </li>
+              <li>
+                <a href="#PFQ049">PFQ049 - Limitations keeping you from working</a>
+              </li>
+              <li>
+                <a href="#PFQ051">PFQ051 - Limited in amount of work you can do</a>
+              </li>
+              <li>
+                <a href="#PFQ054">PFQ054 - Need special equipment to walk</a>
+              </li>
+              <li>
+                <a href="#PFQ057">PFQ057 - Experience confusion/memory problems</a>
+              </li>
+              <li>
+                <a href="#PFQ058">PFQ058 - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#PFQ059">PFQ059 - Physical, mental, emotional limitations</a>
+              </li>
+              <li>
+                <a href="#PFQ059A">PFQ059A - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#PFQ061A">PFQ061A - Managing money difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061B">PFQ061B - Walking for a quarter mile difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061C">PFQ061C - Walking up ten steps difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061D">PFQ061D - Stooping, crouching, kneeling difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061E">PFQ061E - Lifting or carrying difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061F">PFQ061F - House chore difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061G">PFQ061G - Preparing meals difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061H">PFQ061H - Walking between rooms on same floor</a>
+              </li>
+              <li>
+                <a href="#PFQ061I">PFQ061I - Standingup from armless chair difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061J">PFQ061J - Getting in and out of bed difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061K">PFQ061K - Using fork, knife, drinking from cup</a>
+              </li>
+              <li>
+                <a href="#PFQ061L">PFQ061L - Dressing yourself difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061M">PFQ061M - Standing for long periods difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061N">PFQ061N - Sitting for long periods difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061O">PFQ061O - Reaching up over head difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061P">PFQ061P - Grasp/holding small objects difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061Q">PFQ061Q - Going out to movies, events difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061R">PFQ061R - Attending social event difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061S">PFQ061S - Leisure activity at home difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ061T">PFQ061T - Push or pull large objects difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ066A">PFQ066A - CHECK ITEM</a>
+              </li>
+              <li>
+                <a href="#PFQ063A">PFQ063A - Health problems causing difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ063B">PFQ063B - Health problems causing difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ063C">PFQ063C - Health problems causing difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ063D">PFQ063D - Health problems causing difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ063E">PFQ063E - Health problems causing difficulty</a>
+              </li>
+              <li>
+                <a href="#PFQ090">PFQ090 - Require special healthcare equipment</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2013-2014 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Physical Functioning (PFQ_H)</h3>
+        <h4> Data File: PFQ_H.xpt</h4>
+        <h5 class="left">First Published: October 2015</h5>
+        <h5 class="right">Last Revised: November 2016</h5>
+        <h5 class="specialnote">Note: The file has been updated to include participants 3 to 4 years of age and an additional question (PFQ033) on use of special equipment.</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The physical functioning section (variable name prefix PFQ) provides self-reported data on functional limitations caused by long-term physical, mental, and emotional problems or illness. It can be used to assess an individual&rsquo;s level of disability.</p><h2 id="Eligible_Sample">Eligible Sample</h2><p>All survey participants aged 3 and over were eligible.  Those less than 18 years of age were asked about receiving Special Education or Early Intervention Services. Respondents 3 to 19 years of age were asked about mobility and those 20 or more years of age were asked about their ability to work.&nbsp; </p><h2 id="Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</h2><p>The questions were asked in the household interview as a part of a Computer-Assisted Personal Interview (CAPI) system.</p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p>The data were reviewed for completeness, consistency, and illogical values. </p><h2 id="Analytic_Notes">Analytic Notes</h2><p>Since the questions were asked in the home interview, the interview sample weights may be used in their analysis. However, if the data is joined with data from the Mobile Examination Center (MEC), the MEC sample weights should be used. </p>
+<p>Please refer to the <a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx" target="_blank">NHANES Analytic Guidelines</a> and the on-line&nbsp;<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/" target="_blank">NHANES Tutorial</a> for further details on the use of sample weights and other analytic issues.</p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ020">PFQ020 - Crawl, walk, run, play limitations</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ020</dd>
+            <dt>SAS Label: </dt>
+            <dd>Crawl, walk, run, play limitations</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} have an impairment or health problem that limits {your/his/her} ability to {walk, run or play} {walk or run}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">CAPI INSTRUCTION:  IF CHILD'S AGE = 3-15, DISPLAY "WALK, RUN OR PLAY".  IF SP'S AGE = 16-19, DISPLAY "WALK OR RUN".</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			19 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">128</td>
+                <td class="values" align="right">128</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">3332</td>
+                <td class="values" align="right">3460</td>
+                <td class="values">PFQ035a</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">3460</td>
+                <td class="values">PFQ035a</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">3461</td>
+                <td class="values">PFQ035a</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5769</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ030">PFQ030 - Long term impairment/health problem</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ030</dd>
+            <dt>SAS Label: </dt>
+            <dd>Long term impairment/health problem</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Is this an impairment or health problem that has lasted, or is expected to last 12 months or longer?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			19 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">108</td>
+                <td class="values" align="right">108</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">19</td>
+                <td class="values" align="right">127</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">127</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">128</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">9102</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ032">PFQ032 - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ032</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1AA.  CHECK ITEM PFQ032:  IF SP AGE 3-15, CONTINUE. OTHERWISE, GO TO BOX 1BB.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			19 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ033">PFQ033 - Impairment requiring special equipment</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ033</dd>
+            <dt>SAS Label: </dt>
+            <dd>Impairment requiring special equipment</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} have any impairment or health problem that requires {you/him/her} to use special equipment, such as a brace, a wheelchair, or a hearing aid (excluding ordinary eyeglasses or corrective shoes)?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			15 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">23</td>
+                <td class="values" align="right">23</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">82</td>
+                <td class="values" align="right">105</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">105</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">105</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">9125</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ035A">PFQ035A - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ035A</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1BB.  CHECK ITEM PFQ.035A:  IF SP AGE &lt;= 17, CONTINUE.  OTHERWISE, GO TO END OF SECTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			19 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ041">PFQ041 - Receive Special Ed or Early Intervention</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ041</dd>
+            <dt>SAS Label: </dt>
+            <dd>Receive Special Ed or Early Intervention</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Does {SP} receive Special Education or Early Intervention Services?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 3 YEARS -
+			17 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">321</td>
+                <td class="values" align="right">321</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">2792</td>
+                <td class="values" align="right">3113</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">3113</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">3117</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6113</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ049">PFQ049 - Limitations keeping you from working</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ049</dd>
+            <dt>SAS Label: </dt>
+            <dd>Limitations keeping you from working</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The next set of questions is about limitations caused by any long-term physical, mental or emotional problem or illness.  Please do not include temporary conditions, such as a cold [or pregnancy].  Does a physical, mental or emotional problem now keep {you/SP} from working at a job or business?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">868</td>
+                <td class="values" align="right">868</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4898</td>
+                <td class="values" align="right">5766</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">5767</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3461</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ051">PFQ051 - Limited in amount of work you can do</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ051</dd>
+            <dt>SAS Label: </dt>
+            <dd>Limited in amount of work you can do</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Are you/Is SP} limited in the kind or amount of work {you/s/he} can do because of a physical, mental or emotional problem?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">1250</td>
+                <td class="values" align="right">1250</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4515</td>
+                <td class="values" align="right">5765</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5765</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3461</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ054">PFQ054 - Need special equipment to walk</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ054</dd>
+            <dt>SAS Label: </dt>
+            <dd>Need special equipment to walk</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Because of a health problem, {do you/does SP} have difficulty walking without using any special equipment?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">592</td>
+                <td class="values" align="right">592</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">5177</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3461</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ057">PFQ057 - Experience confusion/memory problems</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ057</dd>
+            <dt>SAS Label: </dt>
+            <dd>Experience confusion/memory problems</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Are you/Is SP} limited in any way because of difficulty remembering or because {you/s/he} experience{s} periods of confusion?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">498</td>
+                <td class="values" align="right">498</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">5268</td>
+                <td class="values" align="right">5766</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5766</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3461</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ058">PFQ058 - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ058</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1D.   CHECK ITEM PFQ.058:  IF 'YES' (CODE 1) IN PFQ.049, PFQ.051, PFQ.054, OR PFQ.057, GO TO PFQ.061. OTHERWISE, CONTINUE.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ059">PFQ059 - Physical, mental, emotional limitations</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ059</dd>
+            <dt>SAS Label: </dt>
+            <dd>Physical, mental, emotional limitations</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Are you/Is SP} limited in any way in any activity because of a physical, mental or emotional problem?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">119</td>
+                <td class="values" align="right">119</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4150</td>
+                <td class="values" align="right">4269</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">4269</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">4270</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">4960</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ059A">PFQ059A - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ059A</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1E  CHECK ITEM PFQ.059A:  IF SP AGE IS &lt;=59 AND 'NO' (CODE 2) ENTERED IN PFQ.049, PFQ.057 AND PFQ.059, GO TO PFQ.090.  OTHERWISE, CONTINUE.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061A">PFQ061A - Managing money difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061A</dd>
+            <dt>SAS Label: </dt>
+            <dd>Managing money difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The next questions ask about difficulties {you/SP} may have doing certain activities because of a health problem.  By "health problem" we mean any long-term physical, mental or emotional problem or illness {not including pregnancy}.   By {yourself/himself /herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .managing {your/his/her} money [such as keeping track of {your/his/her} expenses or paying bills]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2137</td>
+                <td class="values" align="right">2137</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">233</td>
+                <td class="values" align="right">2370</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">43</td>
+                <td class="values" align="right">2413</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">49</td>
+                <td class="values" align="right">2462</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">131</td>
+                <td class="values" align="right">2593</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2593</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061B">PFQ061B - Walking for a quarter mile difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061B</dd>
+            <dt>SAS Label: </dt>
+            <dd>Walking for a quarter mile difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .walking for a quarter of a mile [that is about 2 or 3 blocks]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1518</td>
+                <td class="values" align="right">1518</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">335</td>
+                <td class="values" align="right">1853</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">84</td>
+                <td class="values" align="right">1937</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">50</td>
+                <td class="values" align="right">1987</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">15</td>
+                <td class="values" align="right">2002</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2002</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2003</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7227</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061C">PFQ061C - Walking up ten steps difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061C</dd>
+            <dt>SAS Label: </dt>
+            <dd>Walking up ten steps difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .walking up 10 steps without resting?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1654</td>
+                <td class="values" align="right">1654</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">262</td>
+                <td class="values" align="right">1916</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">54</td>
+                <td class="values" align="right">1970</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">17</td>
+                <td class="values" align="right">1987</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">13</td>
+                <td class="values" align="right">2000</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2000</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">2003</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7227</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061D">PFQ061D - Stooping, crouching, kneeling difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061D</dd>
+            <dt>SAS Label: </dt>
+            <dd>Stooping, crouching, kneeling difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .stooping, crouching, or kneeling?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1260</td>
+                <td class="values" align="right">1260</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">720</td>
+                <td class="values" align="right">1980</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">364</td>
+                <td class="values" align="right">2344</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">211</td>
+                <td class="values" align="right">2555</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">40</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061E">PFQ061E - Lifting or carrying difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Lifting or carrying difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .lifting or carrying something as heavy as 10 pounds [like a sack of potatoes or rice]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1796</td>
+                <td class="values" align="right">1796</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">400</td>
+                <td class="values" align="right">2196</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">162</td>
+                <td class="values" align="right">2358</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">182</td>
+                <td class="values" align="right">2540</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">55</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061F">PFQ061F - House chore difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061F</dd>
+            <dt>SAS Label: </dt>
+            <dd>House chore difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .doing chores around the house [like vacuuming, sweeping, dusting, or straightening up]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1808</td>
+                <td class="values" align="right">1808</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">437</td>
+                <td class="values" align="right">2245</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">140</td>
+                <td class="values" align="right">2385</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">113</td>
+                <td class="values" align="right">2498</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">97</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061G">PFQ061G - Preparing meals difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061G</dd>
+            <dt>SAS Label: </dt>
+            <dd>Preparing meals difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .preparing {your/his/her} own meals?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2145</td>
+                <td class="values" align="right">2145</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">197</td>
+                <td class="values" align="right">2342</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">49</td>
+                <td class="values" align="right">2391</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">70</td>
+                <td class="values" align="right">2461</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">134</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061H">PFQ061H - Walking between rooms on same floor</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061H</dd>
+            <dt>SAS Label: </dt>
+            <dd>Walking between rooms on same floor</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .walking from one room to another on the same level?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2245</td>
+                <td class="values" align="right">2245</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">230</td>
+                <td class="values" align="right">2475</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">72</td>
+                <td class="values" align="right">2547</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">40</td>
+                <td class="values" align="right">2587</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">8</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061I">PFQ061I - Standingup from armless chair difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061I</dd>
+            <dt>SAS Label: </dt>
+            <dd>Standingup from armless chair difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .standing up from an armless straight chair?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1884</td>
+                <td class="values" align="right">1884</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">504</td>
+                <td class="values" align="right">2388</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">139</td>
+                <td class="values" align="right">2527</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">62</td>
+                <td class="values" align="right">2589</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">5</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061J">PFQ061J - Getting in and out of bed difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061J</dd>
+            <dt>SAS Label: </dt>
+            <dd>Getting in and out of bed difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .getting in or out of bed?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2061</td>
+                <td class="values" align="right">2061</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">402</td>
+                <td class="values" align="right">2463</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">110</td>
+                <td class="values" align="right">2573</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">2585</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">10</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061K">PFQ061K - Using fork, knife, drinking from cup</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061K</dd>
+            <dt>SAS Label: </dt>
+            <dd>Using fork, knife, drinking from cup</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .eating, like holding a fork, cutting food or drinking from a glass?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2403</td>
+                <td class="values" align="right">2403</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">159</td>
+                <td class="values" align="right">2562</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">27</td>
+                <td class="values" align="right">2589</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">6</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061L">PFQ061L - Dressing yourself difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061L</dd>
+            <dt>SAS Label: </dt>
+            <dd>Dressing yourself difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .dressing {yourself/himself/herself}, including tying shoes, working zippers, and doing buttons?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2178</td>
+                <td class="values" align="right">2178</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">322</td>
+                <td class="values" align="right">2500</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">76</td>
+                <td class="values" align="right">2576</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">17</td>
+                <td class="values" align="right">2593</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061M">PFQ061M - Standing for long periods difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061M</dd>
+            <dt>SAS Label: </dt>
+            <dd>Standing for long periods difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .standing or being on {your/his/her} feet for about 2 hours?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1359</td>
+                <td class="values" align="right">1359</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">545</td>
+                <td class="values" align="right">1904</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">306</td>
+                <td class="values" align="right">2210</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">328</td>
+                <td class="values" align="right">2538</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">55</td>
+                <td class="values" align="right">2593</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2593</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061N">PFQ061N - Sitting for long periods difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061N</dd>
+            <dt>SAS Label: </dt>
+            <dd>Sitting for long periods difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .sitting for about 2 hours?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1909</td>
+                <td class="values" align="right">1909</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">468</td>
+                <td class="values" align="right">2377</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">155</td>
+                <td class="values" align="right">2532</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">54</td>
+                <td class="values" align="right">2586</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">9</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061O">PFQ061O - Reaching up over head difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061O</dd>
+            <dt>SAS Label: </dt>
+            <dd>Reaching up over head difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .reaching up over {your/his/her} head?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2051</td>
+                <td class="values" align="right">2051</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">369</td>
+                <td class="values" align="right">2420</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">117</td>
+                <td class="values" align="right">2537</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">51</td>
+                <td class="values" align="right">2588</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061P">PFQ061P - Grasp/holding small objects difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061P</dd>
+            <dt>SAS Label: </dt>
+            <dd>Grasp/holding small objects difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .using {your/his/her} fingers to grasp or handle small objects?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2124</td>
+                <td class="values" align="right">2124</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">359</td>
+                <td class="values" align="right">2483</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">87</td>
+                <td class="values" align="right">2570</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">22</td>
+                <td class="values" align="right">2592</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061Q">PFQ061Q - Going out to movies, events difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061Q</dd>
+            <dt>SAS Label: </dt>
+            <dd>Going out to movies, events difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .going out to things like shopping, movies, or sporting events?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1893</td>
+                <td class="values" align="right">1893</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">390</td>
+                <td class="values" align="right">2283</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">135</td>
+                <td class="values" align="right">2418</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">68</td>
+                <td class="values" align="right">2486</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">108</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061R">PFQ061R - Attending social event difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061R</dd>
+            <dt>SAS Label: </dt>
+            <dd>Attending social event difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .participating in social activities [visiting friends, attending clubs or meetings or going to parties]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1966</td>
+                <td class="values" align="right">1966</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">340</td>
+                <td class="values" align="right">2306</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">94</td>
+                <td class="values" align="right">2400</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">55</td>
+                <td class="values" align="right">2455</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">139</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061S">PFQ061S - Leisure activity at home difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061S</dd>
+            <dt>SAS Label: </dt>
+            <dd>Leisure activity at home difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .doing things to relax at home or for leisure [reading, watching TV, sewing, listening to music]?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">2335</td>
+                <td class="values" align="right">2335</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">208</td>
+                <td class="values" align="right">2543</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">34</td>
+                <td class="values" align="right">2577</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">8</td>
+                <td class="values" align="right">2585</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">9</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ061T">PFQ061T - Push or pull large objects difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ061T</dd>
+            <dt>SAS Label: </dt>
+            <dd>Push or pull large objects difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">By {yourself/himself/herself} and without using any special equipment, how much difficulty {do you/does SP} have . . .pushing or pulling large objects like a living room chair?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ1.  DO NOT INCLUDE TEMPORARY CONDITIONS LIKE PREGNANCY OR BROKEN LIMBS.  CAPI INSTRUCTION:  IF PFQ.054 = '1' (YES), DO NOT DISPLAY 'B' OR 'C'.  IF SP FEMALE, DISPLAY 'NOT INCLUDING PREGNANCY'.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">No difficulty</td>
+                <td class="values" align="right">1476</td>
+                <td class="values" align="right">1476</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Some difficulty</td>
+                <td class="values" align="right">466</td>
+                <td class="values" align="right">1942</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Much difficulty</td>
+                <td class="values" align="right">217</td>
+                <td class="values" align="right">2159</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to do</td>
+                <td class="values" align="right">300</td>
+                <td class="values" align="right">2459</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Do not do this activity</td>
+                <td class="values" align="right">135</td>
+                <td class="values" align="right">2594</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2595</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6635</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ066A">PFQ066A - CHECK ITEM</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ066A</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">BOX 1F.  CHECK ITEM PFQ.066A:  IF 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T, CONTINUE.  OTHERWISE, GO TO PFQ.090.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ063A">PFQ063A - Health problems causing difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ063A</dd>
+            <dt>SAS Label: </dt>
+            <dd>Health problems causing difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">What condition or health problem causes {you/SP} to have difficulty with or need help with {NAME OF UP TO 3 ACTIVITIES/these activities}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ2.  ENTER ALL THAT APPLY UP TO 5 BUT DO NOT PROBE.  DO NOT ENTER 'OLD AGE' AS CONDITION -- IF OLD AGE IS REPORTED, PROBE FOR ANY OTHER CONDITION.  CAPI INSTRUCTION:    IF THE TOTAL NUMBER OF ITEMS CODED 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T &lt;=3, DISPLAY EACH ITEM NAME IN THE TEXT OF QUESTION.  IF MORE THAN 3 ITEMS ARE CODED IN THIS MANNER DISPLAY "THESE ACTIVITIES" IN THE TEXT OF QUESTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Arthritis/rheumatism</td>
+                <td class="values" align="right">653</td>
+                <td class="values" align="right">653</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Back or neck problem</td>
+                <td class="values" align="right">374</td>
+                <td class="values" align="right">1027</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Birth defect</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">1030</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Cancer</td>
+                <td class="values" align="right">14</td>
+                <td class="values" align="right">1044</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Depression/anxiety/emotional problem</td>
+                <td class="values" align="right">78</td>
+                <td class="values" align="right">1122</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Other developmental problem (such as cerebral palsy)</td>
+                <td class="values" align="right">8</td>
+                <td class="values" align="right">1130</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Diabetes</td>
+                <td class="values" align="right">56</td>
+                <td class="values" align="right">1186</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Fractures, bone/joint injury</td>
+                <td class="values" align="right">140</td>
+                <td class="values" align="right">1326</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">18</td>
+                <td class="values">Hearing problem</td>
+                <td class="values" align="right">24</td>
+                <td class="values" align="right">1350</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">19</td>
+                <td class="values">Heart problem</td>
+                <td class="values" align="right">45</td>
+                <td class="values" align="right">1395</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">20</td>
+                <td class="values">Hypertension/high blood pressure</td>
+                <td class="values" align="right">45</td>
+                <td class="values" align="right">1440</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">21</td>
+                <td class="values">Lung/breathing problem</td>
+                <td class="values" align="right">40</td>
+                <td class="values" align="right">1480</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">22</td>
+                <td class="values">Mental retardation</td>
+                <td class="values" align="right">8</td>
+                <td class="values" align="right">1488</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">23</td>
+                <td class="values">Other injury</td>
+                <td class="values" align="right">29</td>
+                <td class="values" align="right">1517</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">24</td>
+                <td class="values">Senility</td>
+                <td class="values" align="right">5</td>
+                <td class="values" align="right">1522</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">25</td>
+                <td class="values">Stroke problem</td>
+                <td class="values" align="right">24</td>
+                <td class="values" align="right">1546</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">26</td>
+                <td class="values">Vision/problem seeing</td>
+                <td class="values" align="right">22</td>
+                <td class="values" align="right">1568</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">27</td>
+                <td class="values">Weight problem</td>
+                <td class="values" align="right">32</td>
+                <td class="values" align="right">1600</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">28</td>
+                <td class="values">Other impairment/problem</td>
+                <td class="values" align="right">214</td>
+                <td class="values" align="right">1814</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">1815</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">9</td>
+                <td class="values" align="right">1824</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7406</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ063B">PFQ063B - Health problems causing difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ063B</dd>
+            <dt>SAS Label: </dt>
+            <dd>Health problems causing difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">What condition or health problem causes {you/SP} to have difficulty with or need help with {NAME OF UP TO 3 ACTIVITIES/these activities}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ2.  ENTER ALL THAT APPLY UP TO 5 BUT DO NOT PROBE.  DO NOT ENTER 'OLD AGE' AS CONDITION -- IF OLD AGE IS REPORTED, PROBE FOR ANY OTHER CONDITION.  CAPI INSTRUCTION:    IF THE TOTAL NUMBER OF ITEMS CODED 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T &lt;=3, DISPLAY EACH ITEM NAME IN THE TEXT OF QUESTION.  IF MORE THAN 3 ITEMS ARE CODED IN THIS MANNER DISPLAY "THESE ACTIVITIES" IN THE TEXT OF QUESTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Arthritis/rheumatism</td>
+                <td class="values" align="right">70</td>
+                <td class="values" align="right">70</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Back or neck problem</td>
+                <td class="values" align="right">314</td>
+                <td class="values" align="right">384</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Birth defect</td>
+                <td class="values" align="right">11</td>
+                <td class="values" align="right">395</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Cancer</td>
+                <td class="values" align="right">14</td>
+                <td class="values" align="right">409</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Depression/anxiety/emotional problem</td>
+                <td class="values" align="right">97</td>
+                <td class="values" align="right">506</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Other developmental problem (such as cerebral palsy)</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">509</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Diabetes</td>
+                <td class="values" align="right">87</td>
+                <td class="values" align="right">596</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Fractures, bone/joint injury</td>
+                <td class="values" align="right">77</td>
+                <td class="values" align="right">673</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">18</td>
+                <td class="values">Hearing problem</td>
+                <td class="values" align="right">41</td>
+                <td class="values" align="right">714</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">19</td>
+                <td class="values">Heart problem</td>
+                <td class="values" align="right">37</td>
+                <td class="values" align="right">751</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">20</td>
+                <td class="values">Hypertension/high blood pressure</td>
+                <td class="values" align="right">87</td>
+                <td class="values" align="right">838</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">21</td>
+                <td class="values">Lung/breathing problem</td>
+                <td class="values" align="right">36</td>
+                <td class="values" align="right">874</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">22</td>
+                <td class="values">Mental retardation</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">878</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">23</td>
+                <td class="values">Other injury</td>
+                <td class="values" align="right">20</td>
+                <td class="values" align="right">898</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">24</td>
+                <td class="values">Senility</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">902</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">25</td>
+                <td class="values">Stroke problem</td>
+                <td class="values" align="right">11</td>
+                <td class="values" align="right">913</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">26</td>
+                <td class="values">Vision/problem seeing</td>
+                <td class="values" align="right">43</td>
+                <td class="values" align="right">956</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">27</td>
+                <td class="values">Weight problem</td>
+                <td class="values" align="right">34</td>
+                <td class="values" align="right">990</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">28</td>
+                <td class="values">Other impairment/problem</td>
+                <td class="values" align="right">125</td>
+                <td class="values" align="right">1115</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1115</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1115</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8115</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ063C">PFQ063C - Health problems causing difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ063C</dd>
+            <dt>SAS Label: </dt>
+            <dd>Health problems causing difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">What condition or health problem causes {you/SP} to have difficulty with or need help with {NAME OF UP TO 3 ACTIVITIES/these activities}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ2.  ENTER ALL THAT APPLY UP TO 5 BUT DO NOT PROBE.  DO NOT ENTER 'OLD AGE' AS CONDITION -- IF OLD AGE IS REPORTED, PROBE FOR ANY OTHER CONDITION.  CAPI INSTRUCTION:    IF THE TOTAL NUMBER OF ITEMS CODED 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T &lt;=3, DISPLAY EACH ITEM NAME IN THE TEXT OF QUESTION.  IF MORE THAN 3 ITEMS ARE CODED IN THIS MANNER DISPLAY "THESE ACTIVITIES" IN THE TEXT OF QUESTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Arthritis/rheumatism</td>
+                <td class="values" align="right">27</td>
+                <td class="values" align="right">27</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Back or neck problem</td>
+                <td class="values" align="right">21</td>
+                <td class="values" align="right">48</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Birth defect</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">52</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Cancer</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">64</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Depression/anxiety/emotional problem</td>
+                <td class="values" align="right">95</td>
+                <td class="values" align="right">159</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Other developmental problem (such as cerebral palsy)</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">163</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Diabetes</td>
+                <td class="values" align="right">67</td>
+                <td class="values" align="right">230</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Fractures, bone/joint injury</td>
+                <td class="values" align="right">81</td>
+                <td class="values" align="right">311</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">18</td>
+                <td class="values">Hearing problem</td>
+                <td class="values" align="right">47</td>
+                <td class="values" align="right">358</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">19</td>
+                <td class="values">Heart problem</td>
+                <td class="values" align="right">43</td>
+                <td class="values" align="right">401</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">20</td>
+                <td class="values">Hypertension/high blood pressure</td>
+                <td class="values" align="right">90</td>
+                <td class="values" align="right">491</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">21</td>
+                <td class="values">Lung/breathing problem</td>
+                <td class="values" align="right">32</td>
+                <td class="values" align="right">523</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">22</td>
+                <td class="values">Mental retardation</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">527</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">23</td>
+                <td class="values">Other injury</td>
+                <td class="values" align="right">16</td>
+                <td class="values" align="right">543</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">24</td>
+                <td class="values">Senility</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">545</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">25</td>
+                <td class="values">Stroke problem</td>
+                <td class="values" align="right">16</td>
+                <td class="values" align="right">561</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">26</td>
+                <td class="values">Vision/problem seeing</td>
+                <td class="values" align="right">48</td>
+                <td class="values" align="right">609</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">27</td>
+                <td class="values">Weight problem</td>
+                <td class="values" align="right">31</td>
+                <td class="values" align="right">640</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">28</td>
+                <td class="values">Other impairment/problem</td>
+                <td class="values" align="right">58</td>
+                <td class="values" align="right">698</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">698</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">698</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8532</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ063D">PFQ063D - Health problems causing difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ063D</dd>
+            <dt>SAS Label: </dt>
+            <dd>Health problems causing difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">What condition or health problem causes {you/SP} to have difficulty with or need help with {NAME OF UP TO 3 ACTIVITIES/these activities}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ2.  ENTER ALL THAT APPLY UP TO 5 BUT DO NOT PROBE.  DO NOT ENTER 'OLD AGE' AS CONDITION -- IF OLD AGE IS REPORTED, PROBE FOR ANY OTHER CONDITION.  CAPI INSTRUCTION:    IF THE TOTAL NUMBER OF ITEMS CODED 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T &lt;=3, DISPLAY EACH ITEM NAME IN THE TEXT OF QUESTION.  IF MORE THAN 3 ITEMS ARE CODED IN THIS MANNER DISPLAY "THESE ACTIVITIES" IN THE TEXT OF QUESTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Arthritis/rheumatism</td>
+                <td class="values" align="right">6</td>
+                <td class="values" align="right">6</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Back or neck problem</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">13</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Birth defect</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">13</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Cancer</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">13</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Depression/anxiety/emotional problem</td>
+                <td class="values" align="right">15</td>
+                <td class="values" align="right">28</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Other developmental problem (such as cerebral palsy)</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">28</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Diabetes</td>
+                <td class="values" align="right">22</td>
+                <td class="values" align="right">50</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Fractures, bone/joint injury</td>
+                <td class="values" align="right">39</td>
+                <td class="values" align="right">89</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">18</td>
+                <td class="values">Hearing problem</td>
+                <td class="values" align="right">34</td>
+                <td class="values" align="right">123</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">19</td>
+                <td class="values">Heart problem</td>
+                <td class="values" align="right">40</td>
+                <td class="values" align="right">163</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">20</td>
+                <td class="values">Hypertension/high blood pressure</td>
+                <td class="values" align="right">87</td>
+                <td class="values" align="right">250</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">21</td>
+                <td class="values">Lung/breathing problem</td>
+                <td class="values" align="right">36</td>
+                <td class="values" align="right">286</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">22</td>
+                <td class="values">Mental retardation</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">286</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">23</td>
+                <td class="values">Other injury</td>
+                <td class="values" align="right">13</td>
+                <td class="values" align="right">299</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">24</td>
+                <td class="values">Senility</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">301</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">25</td>
+                <td class="values">Stroke problem</td>
+                <td class="values" align="right">13</td>
+                <td class="values" align="right">314</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">26</td>
+                <td class="values">Vision/problem seeing</td>
+                <td class="values" align="right">59</td>
+                <td class="values" align="right">373</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">27</td>
+                <td class="values">Weight problem</td>
+                <td class="values" align="right">43</td>
+                <td class="values" align="right">416</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">28</td>
+                <td class="values">Other impairment/problem</td>
+                <td class="values" align="right">33</td>
+                <td class="values" align="right">449</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">449</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">449</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8781</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ063E">PFQ063E - Health problems causing difficulty</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ063E</dd>
+            <dt>SAS Label: </dt>
+            <dd>Health problems causing difficulty</dd>
+            <dt>English Text: </dt>
+            <dd class="info">What condition or health problem causes {you/SP} to have difficulty with or need help with {NAME OF UP TO 3 ACTIVITIES/these activities}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">HAND CARD PFQ2.  ENTER ALL THAT APPLY UP TO 5 BUT DO NOT PROBE.  DO NOT ENTER 'OLD AGE' AS CONDITION -- IF OLD AGE IS REPORTED, PROBE FOR ANY OTHER CONDITION.  CAPI INSTRUCTION:    IF THE TOTAL NUMBER OF ITEMS CODED 'SOME DIFFICULTY' (CODE 2), 'MUCH DIFFICULTY' (CODE 3), OR 'UNABLE TO DO' (CODE 4) IN PFQ.061 A THROUGH T &lt;=3, DISPLAY EACH ITEM NAME IN THE TEXT OF QUESTION.  IF MORE THAN 3 ITEMS ARE CODED IN THIS MANNER DISPLAY "THESE ACTIVITIES" IN THE TEXT OF QUESTION.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10</td>
+                <td class="values">Arthritis/rheumatism</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">4</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">11</td>
+                <td class="values">Back or neck problem</td>
+                <td class="values" align="right">5</td>
+                <td class="values" align="right">9</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">12</td>
+                <td class="values">Birth defect</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">9</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">13</td>
+                <td class="values">Cancer</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">10</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">14</td>
+                <td class="values">Depression/anxiety/emotional problem</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">17</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">15</td>
+                <td class="values">Other developmental problem (such as cerebral palsy)</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">19</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">16</td>
+                <td class="values">Diabetes</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">22</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">17</td>
+                <td class="values">Fractures, bone/joint injury</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">34</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">18</td>
+                <td class="values">Hearing problem</td>
+                <td class="values" align="right">18</td>
+                <td class="values" align="right">52</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">19</td>
+                <td class="values">Heart problem</td>
+                <td class="values" align="right">20</td>
+                <td class="values" align="right">72</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">20</td>
+                <td class="values">Hypertension/high blood pressure</td>
+                <td class="values" align="right">36</td>
+                <td class="values" align="right">108</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">21</td>
+                <td class="values">Lung/breathing problem</td>
+                <td class="values" align="right">30</td>
+                <td class="values" align="right">138</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">22</td>
+                <td class="values">Mental retardation</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">139</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">23</td>
+                <td class="values">Other injury</td>
+                <td class="values" align="right">5</td>
+                <td class="values" align="right">144</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">24</td>
+                <td class="values">Senility</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">144</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">25</td>
+                <td class="values">Stroke problem</td>
+                <td class="values" align="right">11</td>
+                <td class="values" align="right">155</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">26</td>
+                <td class="values">Vision/problem seeing</td>
+                <td class="values" align="right">36</td>
+                <td class="values" align="right">191</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">27</td>
+                <td class="values">Weight problem</td>
+                <td class="values" align="right">45</td>
+                <td class="values" align="right">236</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">28</td>
+                <td class="values">Other impairment/problem</td>
+                <td class="values" align="right">26</td>
+                <td class="values" align="right">262</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">262</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">262</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8968</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PFQ090">PFQ090 - Require special healthcare equipment</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PFQ090</dd>
+            <dt>SAS Label: </dt>
+            <dd>Require special healthcare equipment</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} now have any health problem that requires {you/him/her} to use special equipment, such as a cane, a wheelchair, a special bed, or a special telephone?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 20 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">562</td>
+                <td class="values" align="right">562</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">5207</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">5769</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3461</td>
+                <td class="values" align="right">9230</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
