@@ -1,0 +1,1946 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>PAQ_G</title>
+    <meta name="title" content="NHANES 2011-2012: Physical Activity Data Documentation, Codebook, and Frequencies" />
+    <link rel="stylesheet" href="https://wwwn.cdc.gov/nchs/nhanes/css/documentation.css" />
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#PAQ706">PAQ706 - Days physically active at least 60 min</a>
+              </li>
+              <li>
+                <a href="#PAQ605">PAQ605 - Vigorous work activity</a>
+              </li>
+              <li>
+                <a href="#PAQ610">PAQ610 - Days vigorous work</a>
+              </li>
+              <li>
+                <a href="#PAD615">PAD615 - Minutes vigorous-intensity work</a>
+              </li>
+              <li>
+                <a href="#PAQ620">PAQ620 - Moderate work activity</a>
+              </li>
+              <li>
+                <a href="#PAQ625">PAQ625 - Number of days moderate work</a>
+              </li>
+              <li>
+                <a href="#PAD630">PAD630 - Minutes moderate-intensity work</a>
+              </li>
+              <li>
+                <a href="#PAQ635">PAQ635 - Walk or bicycle</a>
+              </li>
+              <li>
+                <a href="#PAQ640">PAQ640 - Number of days walk or bicycle</a>
+              </li>
+              <li>
+                <a href="#PAD645">PAD645 - Minutes walk/bicycle for transportation</a>
+              </li>
+              <li>
+                <a href="#PAQ650">PAQ650 - Vigorous recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAQ655">PAQ655 - Days vigorous recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAD660">PAD660 - Minutes vigorous recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAQ665">PAQ665 - Moderate recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAQ670">PAQ670 - Days moderate recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAD675">PAD675 - Minutes moderate recreational activities</a>
+              </li>
+              <li>
+                <a href="#PAD680">PAD680 - Minutes sedentary activity</a>
+              </li>
+              <li>
+                <a href="#PAQ710">PAQ710 - Hours watch TV or videos past 30 days</a>
+              </li>
+              <li>
+                <a href="#PAQ715">PAQ715 - Hours use computer past 30 days</a>
+              </li>
+              <li>
+                <a href="#PAAQUEX">PAAQUEX - Questionnaire source flag for weighting</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#Appendix_1.__Suggested_MET_Scores">Appendix 1.  Suggested MET Scores</a>
+          </li>
+          <li>
+            <a href="#Appendix_2.__Variable_names_by_Survey_period_for_PAQ">Appendix 2.  Variable names by Survey period for PAQ</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2011-2012 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Physical Activity (PAQ_G)</h3>
+        <h4> Data File: PAQ_G.xpt</h4>
+        <h5 class="left">First Published: September 2013</h5>
+        <h5 class="right">Last Revised: March 2017</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The physical activity questionnaire (variable name prefix PAQ) is based on the Global Physical Activity Questionnaire (GPAQ) and includes questions related to daily activities, leisure time activities, and sedentary activities. Additional information about the GPAQ can be obtained at the World Health Organization website.</p><h2 id="Eligible_Sample">Eligible Sample</h2><p>All survey participants aged 2 years and older were eligible. Proxy respondents answered the questions for participants aged 2-11 years. The questions asked varied by age group. The target group in the codebook indicates which age groups were asked which questions</p><h2 id="Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</h2><p>For participants aged 2 to 11 years and 16 years and older, the questions were asked before the physical examination in the home using the Computer-Assisted Personal Interviewing (CAPI) (interviewer administered) system. <br />
+<br />
+For participants aged 12 to 15 years, the questions were asked at the mobile examination center (MEC), by trained interviewers, using the CAPI system as part of the MEC interview. </p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p>Limited editing was done on the data. Participants who reported an average of 24 hours or more per day of activity had their time variables (PAD615, PAD630, PAD645, PAD660, PAD675, PAD680) set to missing. Users should carefully inspect the data for other values they may consider too high. </p><h2 id="Analytic_Notes">Analytic Notes</h2><p>Since the PAQ questions for participants aged 2 to 11 years and 16 years and older were asked in the household interview, the interview sample weights should be used in their analysis. However, if the data is joined with data from the MEC, the MEC sample weights should be used. Analysis of the PAQ questions for participants aged 12 to 15 years should use the MEC sample weights as the questions were asked in the MEC. <br />
+<br />
+Suggested metabolic equivalent (MET) scores for the activities listed in this file are included in Appendix 1. <br />
+<br />
+Midway through the 2011-2012 survey cycle an additional probe was added to the question on sedentary behavior (PAD680) querying times less than 8 hours. This additional probe may partially explain any observed differences in sedentary behavior between the current data and previous survey cycles. There are also instances in which participants reported less sedentary time in a typical day (PAD680) than the amount of time they reported watching TV over the past 30 days (PAQ710). </p>
+<p>Please refer to the <a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx" target="_blank">NHANES Analytic Guidelines</a> and the on-line&nbsp;<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/" target="_blank">NHANES Tutorial</a> for further details on the use of sample weights and other analytic issues. A list of variable names by survey period is presented in Appendix 2.</p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 2 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ706">PAQ706 - Days physically active at least 60 min</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ706</dd>
+            <dt>SAS Label: </dt>
+            <dd>Days physically active at least 60 min</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Now I'd like to ask you some questions about {SP's} activities. During the past 7 days, on how many days was {SP} physically active for a total of at least 60 minutes per day? Add up all the time {SP} spent in any kind of physical activity that increased {his/her} heart rate and made {him/her} breathe hard some of the time.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 2 YEARS -
+			11 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">0 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2299</td>
+                <td class="values" align="right">2299</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2299</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2300</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6807</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ605">PAQ605 - Vigorous work activity</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ605</dd>
+            <dt>SAS Label: </dt>
+            <dd>Vigorous work activity</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Next I am going to ask you about the time {you spend/SP spends} doing different types of physical activity in a typical week.  Please answer these questions even if {you do not consider yourself/SP does not consider himself/herself} to be a physically active person.  Think first about the time {you spend/SP spends} doing work.  Think of work as the things that {you have/SP has} to do such as paid or unpaid work, studying or training, household chores, and yard work.  In answering the following questions, 'vigorous-intensity activities' are activities that require hard physical effort and cause large increases in breathing or heart rate, and 'moderate-intensity activities' are activities that require moderate physical effort and cause small increases in breathing or heart rate.  Does {your/SP's} work involve vigorous-intensity activity that causes large increases in breathing or heart rate like carrying or lifting heavy loads, digging or construction work for at least 10 minutes continuously?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">947</td>
+                <td class="values" align="right">947</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">5830</td>
+                <td class="values" align="right">6777</td>
+                <td class="values">PAQ620</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6778</td>
+                <td class="values">PAQ620</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAQ620</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2328</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ610">PAQ610 - Days vigorous work</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ610</dd>
+            <dt>SAS Label: </dt>
+            <dd>Days vigorous work</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In a typical week, on how many days {do you/does SP} do vigorous-intensity activities as part of your work?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Vigorous-intensity activity causes large increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version) HARD EDIT:  1-7. (MEC interview version) HARD EDIT:  Less than 1 day or more than 7 days. Error Message:  The number of days should be between 1 and 7. ENTER NUMBER OF DAYS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+            <dt>Hard Edits: </dt>
+            <dd class="info">1 to 7</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">947</td>
+                <td class="values" align="right">947</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">947</td>
+                <td class="values">PAQ620</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">947</td>
+                <td class="values">PAQ620</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8160</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD615">PAD615 - Minutes vigorous-intensity work</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD615</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes vigorous-intensity work</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much time {do you/does SP} spend doing vigorous-intensity activities at work on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Think about a typical day when you do vigorous-intensity activities during your work. PROBE IF NEEDED:  Vigorous-intensity activity causes large increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version) SOFT EDIT:  &gt;4 HOURS.  SOFT EDIT WORDING:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING VIGOROUS-INTENSITY ACTIVITIES AT WORK ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  &gt;24 HOURS. HARD EDIT:  &lt;10 MINUTES.
+ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  &gt;4 hours. Error Message:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING VIGOROUS-INTENSITY ACTIVITIES AT WORK ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  Less than 10 minutes or 24 hours or more. Error Message: The time should be 10 minutes or more, but less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 780</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">941</td>
+                <td class="values" align="right">941</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">941</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">943</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">8164</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ620">PAQ620 - Moderate work activity</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ620</dd>
+            <dt>SAS Label: </dt>
+            <dd>Moderate work activity</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Does {your/SP's} work involve moderate-intensity activity that causes small increases in breathing or heart rate such as brisk walking or carrying light loads for at least 10 minutes continuously?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">2065</td>
+                <td class="values" align="right">2065</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4712</td>
+                <td class="values" align="right">6777</td>
+                <td class="values">PAQ635</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6778</td>
+                <td class="values">PAQ635</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAQ635</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2328</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ625">PAQ625 - Number of days moderate work</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ625</dd>
+            <dt>SAS Label: </dt>
+            <dd>Number of days moderate work</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In a typical week, on how many days {do you/does SP} do moderate-intensity activities as part of {your/his/her} work?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Moderate-intensity activity causes small increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version) HARD EDIT: 1-7. ENTER NUMBER OF DAYS. (MEC interview version) HARD EDIT:  Less than 1 day or more than 7 days Error Message:  The number of days should be between 1 and 7. ENTER NUMBER OF DAYS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+            <dt>Hard Edits: </dt>
+            <dd class="info">1 to 7</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2063</td>
+                <td class="values" align="right">2063</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2063</td>
+                <td class="values">PAQ635</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">2065</td>
+                <td class="values">PAQ635</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7042</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD630">PAD630 - Minutes moderate-intensity work</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD630</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes moderate-intensity work</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much time {do you/does SP} spend doing moderate-intensity activities at work on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Think about a typical day when you do moderate-intensity activities during your work. PROBE IF NEEDED:  Moderate-intensity activity causes small increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version)
+SOFT EDIT:  &gt;4 HOURS.  SOFT EDIT WORDING:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING MODERATE-INTENSITY ACTIVITIES AT WORK ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  &gt;24 HOURS. HARD EDIT:  &lt;10 MINUTES. ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  &gt;4 hours. Error Message:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING MODERATE-INTENSITY ACTIVITIES AT WORK ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  Less than 10 minutes or 24 hours or more. Error Message:  The time should be 10 minutes or more, but less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 960</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2054</td>
+                <td class="values" align="right">2054</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2054</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">5</td>
+                <td class="values" align="right">2059</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7048</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ635">PAQ635 - Walk or bicycle</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ635</dd>
+            <dt>SAS Label: </dt>
+            <dd>Walk or bicycle</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The next questions exclude the physical activity of work that you have already mentioned.  Now I would like to ask you about the usual way {you travel/SP travels} to and from places.  For example to work, for shopping, to school.  {Do you/Does SP} walk or use a bicycle for at least 10 minutes continuously to get to and from places?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">2344</td>
+                <td class="values" align="right">2344</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4434</td>
+                <td class="values" align="right">6778</td>
+                <td class="values">PAQ650</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAQ650</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAQ650</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2328</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ640">PAQ640 - Number of days walk or bicycle</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ640</dd>
+            <dt>SAS Label: </dt>
+            <dd>Number of days walk or bicycle</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In a typical week, on how many days {do you/does SP} walk or bicycle for at least 10 minutes continuously to get to and from places?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">(SP interview version) HARD EDIT:  1-7. ENTER NUMBER OF DAYS (MEC interview version) HARD EDIT:  Less than 1 day or more than 7 days Error Message:  The number of days should be between 1 and 7. ENTER NUMBER OF DAYS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+            <dt>Hard Edits: </dt>
+            <dd class="info">1 to 7</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2343</td>
+                <td class="values" align="right">2343</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2343</td>
+                <td class="values">PAQ650</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2344</td>
+                <td class="values">PAQ650</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6763</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD645">PAD645 - Minutes walk/bicycle for transportation</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD645</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes walk/bicycle for transportation</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much time {do you/does SP} spend walking or bicycling for travel on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Think about a typical day when you walk or bicycle for travel. (SP interview version) SOFT EDIT:  &gt;4 HOURS.  SOFT EDIT WORDING:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS WALKING OR BICYCLING TO GET TO AND FROM PLACES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  &gt;24 HOURS. HARD EDIT:  &lt;10 MINUTES.  
+ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  &gt;4 hours. Error Message:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS WALKING OR BICYCLING TO GET TO AND FROM PLACES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  Less than 10 minutes or 24 hours or more. Error Message:  The time should be 10 minutes or more, but less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 720</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2336</td>
+                <td class="values" align="right">2336</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2336</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">2340</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6767</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ650">PAQ650 - Vigorous recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ650</dd>
+            <dt>SAS Label: </dt>
+            <dd>Vigorous recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The next questions exclude the work and transportation activities that you have already mentioned.  Now I would like to ask you about sports, fitness and recreational activities.  {Do you/Does SP} do any vigorous-intensity sports, fitness, or recreational activities that cause large increases in breathing or heart rate like running or basketball for at least 10 minutes continuously?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">1909</td>
+                <td class="values" align="right">1909</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">4868</td>
+                <td class="values" align="right">6777</td>
+                <td class="values">PAQ665</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6778</td>
+                <td class="values">PAQ665</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAQ665</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2328</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ655">PAQ655 - Days vigorous recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ655</dd>
+            <dt>SAS Label: </dt>
+            <dd>Days vigorous recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In a typical week, on how many days {do you/does SP} do vigorous-intensity sports, fitness or recreational activities?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Vigorous-intensity activity causes large increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version)
+HARD EDIT:  1-7. ENTER NUMBER OF DAYS (MEC interview version) HARD EDIT:  Less than 1 day or more than 7 days Error Message:  The number of days should be between 1 and 7. ENTER NUMBER OF DAYS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+            <dt>Hard Edits: </dt>
+            <dd class="info">1 to 7</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">1909</td>
+                <td class="values" align="right">1909</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1909</td>
+                <td class="values">PAQ665</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">DON'T KNOW</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1909</td>
+                <td class="values">PAQ665</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7198</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD660">PAD660 - Minutes vigorous recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD660</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes vigorous recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much time {do you/does SP} spend doing vigorous-intensity sports, fitness or recreational activities on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Think about a typical day when you do vigorous-intensity sports, fitness or recreational activities. (SP interview version)  SOFT EDIT:  &gt;4 HOURS.  SOFT EDIT WORDING:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING VIGOROUS-INTENSITY RECREATIONAL ACTIVITIES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  &gt;24 HOURS. HARD EDIT:  &lt;10 MINUTES.
+ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  &gt;4 hours. Error Message:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING VIGOROUS-INTENSITY RECREATIONAL ACTIVITIES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  Less than 10 minutes or 24 hours or more. Error Message: The time should be 10 minutes or more, but less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 720</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">1906</td>
+                <td class="values" align="right">1906</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1906</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1906</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">7201</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ665">PAQ665 - Moderate recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ665</dd>
+            <dt>SAS Label: </dt>
+            <dd>Moderate recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} do any moderate-intensity sports, fitness, or recreational activities that cause a small increase in breathing or heart rate such as brisk walking, bicycling, swimming, or golf for at least 10 minutes continuously?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">2892</td>
+                <td class="values" align="right">2892</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">3886</td>
+                <td class="values" align="right">6778</td>
+                <td class="values">PAD680</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAD680</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6779</td>
+                <td class="values">PAD680</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2328</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ670">PAQ670 - Days moderate recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ670</dd>
+            <dt>SAS Label: </dt>
+            <dd>Days moderate recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In a typical week, on how many days {do you/does SP} do moderate-intensity sports, fitness or recreational activities?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Moderate-intensity sports, fitness or recreational activities cause small increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version) HARD EDIT:  1-7.
+ENTER NUMBER OF DAYS (MEC interview version) HARD EDIT:  Less than 1 day or more than 7 days Error Message:  The number of days should be between 1 and 7. ENTER NUMBER OF DAYS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+            <dt>Hard Edits: </dt>
+            <dd class="info">1 to 7</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 7</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2891</td>
+                <td class="values" align="right">2891</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2891</td>
+                <td class="values">PAD680</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2892</td>
+                <td class="values">PAD680</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6215</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD675">PAD675 - Minutes moderate recreational activities</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD675</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes moderate recreational activities</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How much time {do you/does SP} spend doing moderate-intensity sports, fitness or recreational activities on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">PROBE IF NEEDED:  Think about a typical day when you do moderate-intensity sports, fitness or recreational activities. PROBE IF NEEDED:  Moderate-intensity sports, fitness or recreational activities cause small increases in breathing or heart rate and is done for at least 10 minutes continuously. (SP interview version)
+SOFT EDIT:  &gt;4 HOURS.  SOFT EDIT WORDING:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING MODERATE-INTENSITY RECREATIONAL ACTIVITIES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  &gt;24 HOURS. HARD EDIT:  &lt;10 MINUTES.
+ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  &gt;4 hours. Error Message:  INTERVIEWER, YOU HAVE RECORDED THAT THE SP SPENDS MORE THAN 4 HOURS DOING MODERATE-INTENSITY RECREATIONAL ACTIVITIES ON A TYPICAL DAY.  PLEASE CONFIRM WITH SP THAT OVER 4 HOURS IS CORRECT. HARD EDIT:  Less than 10 minutes or 24 hours or more. Error Message; The time should be 10 minutes or more, but less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">10 to 600</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">2887</td>
+                <td class="values" align="right">2887</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2887</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2887</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">6220</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAD680">PAD680 - Minutes sedentary activity</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAD680</dd>
+            <dt>SAS Label: </dt>
+            <dd>Minutes sedentary activity</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The following question is about sitting at work, at home, getting to and from places, or with friends, including time spent sitting at a desk, traveling in a car or bus, reading, playing cards, watching television, or using a computer.  Do not include time spent sleeping. How much time {do you/does SP} usually spend sitting on a typical day?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">(SP interview version) SOFT EDIT:  &gt;17 HOURS.  HARD EDIT:  &gt;24 HOURS.  ENTER NUMBER OF MINUTES OR HOURS (MEC interview version) SOFT EDIT:  18 hours or more. Error Message:  Please verify times of 18 hours or more. HARD EDIT:  24 hours or more. Error Message:  The time should be less than 24 hours. ENTER NUMBER (OF MINUTES OR HOURS)</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 12 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">0 to 1380</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">6742</td>
+                <td class="values" align="right">6742</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">6743</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">30</td>
+                <td class="values" align="right">6773</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2334</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ710">PAQ710 - Hours watch TV or videos past 30 days</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ710</dd>
+            <dt>SAS Label: </dt>
+            <dd>Hours watch TV or videos past 30 days</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Now I will ask you first about TV watching and then about computer use.  Over the past 30 days, on average how many hours per day did {you/SP} sit and watch TV or videos?  Would you say . . .</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 2 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">0</td>
+                <td class="values">Less than 1 hour,</td>
+                <td class="values" align="right">1175</td>
+                <td class="values" align="right">1175</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">1 hour,</td>
+                <td class="values" align="right">1616</td>
+                <td class="values" align="right">2791</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">2 hours,</td>
+                <td class="values" align="right">2389</td>
+                <td class="values" align="right">5180</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">3 hours,</td>
+                <td class="values" align="right">1533</td>
+                <td class="values" align="right">6713</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">4 hours,</td>
+                <td class="values" align="right">884</td>
+                <td class="values" align="right">7597</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">5 hours or more, or</td>
+                <td class="values" align="right">1275</td>
+                <td class="values" align="right">8872</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">8</td>
+                <td class="values">{You do/SP does} not watch TV or videos</td>
+                <td class="values" align="right">193</td>
+                <td class="values" align="right">9065</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">REFUSED</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">9066</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">DON'T KNOW</td>
+                <td class="values" align="right">12</td>
+                <td class="values" align="right">9078</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">29</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAQ715">PAQ715 - Hours use computer past 30 days</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAQ715</dd>
+            <dt>SAS Label: </dt>
+            <dd>Hours use computer past 30 days</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Over the past 30 days, on average how many hours per day did {you/SP} use a computer or play computer games outside of work or school? Include Playstation, Nintendo DS, or other portable video games. Would you say . . .</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 2 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">0</td>
+                <td class="values">Less than 1 hour,</td>
+                <td class="values" align="right">2354</td>
+                <td class="values" align="right">2354</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">1 hour,</td>
+                <td class="values" align="right">1646</td>
+                <td class="values" align="right">4000</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">2 hours,</td>
+                <td class="values" align="right">1129</td>
+                <td class="values" align="right">5129</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">3 hours,</td>
+                <td class="values" align="right">562</td>
+                <td class="values" align="right">5691</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">4 hours,</td>
+                <td class="values" align="right">289</td>
+                <td class="values" align="right">5980</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">5 hours or more, or</td>
+                <td class="values" align="right">508</td>
+                <td class="values" align="right">6488</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">8</td>
+                <td class="values">{You do/SP does} not use a computer 
+outside of work or school
+</td>
+                <td class="values" align="right">2586</td>
+                <td class="values" align="right">9074</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">REFUSED</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">9075</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">DON'T KNOW</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">9078</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">29</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="PAAQUEX">PAAQUEX - Questionnaire source flag for weighting</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">PAAQUEX</dd>
+            <dt>SAS Label: </dt>
+            <dd>Questionnaire source flag for weighting</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Questionnaire source flag for weighting</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 2 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Sample Person Interview Questionnaire Targets (B(2-11) and (B(16-150))</td>
+                <td class="values" align="right">8477</td>
+                <td class="values" align="right">8477</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">MEC CAPI Questionnaire Targets (B(12-15))</td>
+                <td class="values" align="right">630</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">9107</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="Appendices">
+        <div id="Appendix">
+          <h2 id="Appendix_1.__Suggested_MET_Scores">Appendix 1.  Suggested MET Scores</h2><table>
+    <thead>
+        <tr>
+            <th>Variable</th>
+            <th>Label</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PAD605</td>
+            <td>Vigorous work-related activity</td>
+            <td style="text-align: right; vertical-align: middle;">8.0</td>
+        </tr>
+        <tr>
+            <td>PAD630</td>
+            <td>Moderate work-related activity</td>
+            <td style="text-align: right; vertical-align: middle;">4.0</td>
+        </tr>
+        <tr>
+            <td>PAD645</td>
+            <td>Walking or bicycling for transportation</td>
+            <td style="text-align: right; vertical-align: middle;">4.0</td>
+        </tr>
+        <tr>
+            <td>PAD660</td>
+            <td>Vigorous leisure-time physical activity</td>
+            <td style="text-align: right; vertical-align: middle;">8.0</td>
+        </tr>
+        <tr>
+            <td>PAD675</td>
+            <td>Moderate leisure-time physical activity</td>
+            <td style="text-align: right; vertical-align: middle;">4.0</td>
+        </tr>
+    </tbody>
+</table></div>
+        <div id="Appendix">
+          <h2 id="Appendix_2.__Variable_names_by_Survey_period_for_PAQ">Appendix 2.  Variable names by Survey period for PAQ</h2><p>
+<table border="1" bordercolor="#000000">
+    <caption valign="top" align="left">Variable Names by Survey Period for PAQ</caption>
+    <thead>
+        <tr>
+            <th>1999-2000</th>
+            <th>2001-2002</th>
+            <th>2003-2004</th>
+            <th>2005-2006</th>
+            <th>2007-2008</th>
+            <th>2009-2010</th>
+            <th>2011-2012</th>
+            <th>Label</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PAD020</td>
+            <td>PAD020</td>
+            <td>PAD020</td>
+            <td>PAD020</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Walked or bicycled over past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAQ050Q</td>
+            <td>PAQ050Q</td>
+            <td>PAQ050Q</td>
+            <td>PAQ050Q</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td># times walked or bicycled</td>
+        </tr>
+        <tr>
+            <td>PAQ050U</td>
+            <td>PAQ050U</td>
+            <td>PAQ050U</td>
+            <td>PAQ050U</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Unit of measure (day/week/month)</td>
+        </tr>
+        <tr>
+            <td>PAD080</td>
+            <td>PAD080</td>
+            <td>PAD080</td>
+            <td>PAD080</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>How long per day (minutes)</td>
+        </tr>
+        <tr>
+            <td>PAQ100</td>
+            <td>PAQ100</td>
+            <td>PAQ100</td>
+            <td>PAQ100</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Tasks around home/yard past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAD120</td>
+            <td>PAD120</td>
+            <td>PAD120</td>
+            <td>PAD120</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td># of times past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAD160</td>
+            <td>PAD160</td>
+            <td>PAD160</td>
+            <td>PAD160</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>How long each time (minutes)</td>
+        </tr>
+        <tr>
+            <td>PAQ180</td>
+            <td>PAQ180</td>
+            <td>PAQ180</td>
+            <td>PAQ180</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Avg level of physical activity each day</td>
+        </tr>
+        <tr>
+            <td>PAD200</td>
+            <td>PAD200</td>
+            <td>PAD200</td>
+            <td>PAD200</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Vigorous activity over past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAD320</td>
+            <td>PAD320</td>
+            <td>PAD320</td>
+            <td>PAD320</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Moderate activity over past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAD440</td>
+            <td>PAD440</td>
+            <td>PAD440</td>
+            <td>PAD440</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Muscle strengthening activities</td>
+        </tr>
+        <tr>
+            <td>PAD460</td>
+            <td>PAD460</td>
+            <td>PAD460</td>
+            <td>PAD460</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Number of times past 30 days</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>PAD480</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Daily hours of TV, video or computer use</td>
+        </tr>
+        <tr>
+            <td>PAQ480</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Daily hours of TV, video or computer use</td>
+        </tr>
+        <tr>
+            <td>PAQ500</td>
+            <td>PAQ500</td>
+            <td>PAQ500</td>
+            <td>PAQ500</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Activity comparison last mo - last yr</td>
+        </tr>
+        <tr>
+            <td>PAQ520</td>
+            <td>PAQ520</td>
+            <td>PAQ520</td>
+            <td>PAQ520</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Compare activity w/others same age</td>
+        </tr>
+        <tr>
+            <td>PAQ540</td>
+            <td>PAQ540</td>
+            <td>PAQ540</td>
+            <td>PAQ540</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Compare activity with 10 years ago</td>
+        </tr>
+        <tr>
+            <td>PAQ560</td>
+            <td>PAQ560</td>
+            <td>PAQ560</td>
+            <td>PAQ560</td>
+            <td>PAQ560</td>
+            <td></td>
+            <td></td>
+            <td>Times per week play or exercise hard</td>
+        </tr>
+        <tr>
+            <td>PAD570</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td># of hours watch TV or videos yesterday</td>
+        </tr>
+        <tr>
+            <td>PAQ580</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td># hours use computer/games yesterday</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>PAD590</td>
+            <td>PAD590</td>
+            <td>PAD590</td>
+            <td>PAD590</td>
+            <td>PAD590</td>
+            <td></td>
+            <td>Hours watch TV or videos past 30 days</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>PAD600</td>
+            <td>PAD600</td>
+            <td>PAD600</td>
+            <td>PAD600</td>
+            <td>PAD600</td>
+            <td></td>
+            <td>Hours use computer past 30 days</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ605</td>
+            <td>PAQ605</td>
+            <td>PAQ605</td>
+            <td>Vigorous work activity</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ610</td>
+            <td>PAQ610</td>
+            <td>PAQ610</td>
+            <td>Days vigorous work</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD615</td>
+            <td>PAD615</td>
+            <td>PAD615</td>
+            <td>Minutes vigorous-intensity work</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ620</td>
+            <td>PAQ620</td>
+            <td>PAQ620</td>
+            <td>Moderate work activity</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ625</td>
+            <td>PAQ625</td>
+            <td>PAQ625</td>
+            <td>Number of days moderate work</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD630</td>
+            <td>PAD630</td>
+            <td>PAD630</td>
+            <td>Minutes moderate-intensity work</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ635</td>
+            <td>PAQ635</td>
+            <td>PAQ635</td>
+            <td>Walk or bicycle</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ640</td>
+            <td>PAQ640</td>
+            <td>PAQ640</td>
+            <td>Number of days walk or bicycle</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD645</td>
+            <td>PAD645</td>
+            <td>PAD645</td>
+            <td>Minutes walk/bicycle for transportation</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ650</td>
+            <td>PAQ650</td>
+            <td>PAQ650</td>
+            <td>Vigorous recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ655</td>
+            <td>PAQ655</td>
+            <td>PAQ655</td>
+            <td>Days vigorous recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD660</td>
+            <td>PAD660</td>
+            <td>PAD660</td>
+            <td>Minutes vigorous recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ665</td>
+            <td>PAQ665</td>
+            <td>PAQ665</td>
+            <td>Moderate recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ670</td>
+            <td>PAQ670</td>
+            <td>PAQ670</td>
+            <td>Days moderate recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD675</td>
+            <td>PAD675</td>
+            <td>PAD675</td>
+            <td>Minutes moderate recreational activities</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAD680</td>
+            <td>PAD680</td>
+            <td>PAD680</td>
+            <td>Minutes sedentary activity</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ706</td>
+            <td>PAQ706</td>
+            <td>Days physically active at least 60 min</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ710</td>
+            <td>Hours watch TV or videos past 30 days</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>PAQ715</td>
+            <td>Hours use computer past 30 days</td>
+        </tr>
+        <tr>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>PAAQUEX</td>
+            <td>Questionnaire source flag for weighting</td>
+        </tr>
+    </tbody>
+</table>
+</p></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>RXQ_RX_G</title>
+    <meta name="title" content="NHANES 2011-2012: Prescription Medications Data Documentation, Codebook, and Frequencies" />
+    <link rel="stylesheet" href="https://wwwn.cdc.gov/nchs/nhanes/css/documentation.css" />
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</a>
+          </li>
+          <li>
+            <a href="#Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#RXDUSE">RXDUSE - Taken prescription medicine, past month</a>
+              </li>
+              <li>
+                <a href="#RXDDRUG">RXDDRUG - Generic drug name</a>
+              </li>
+              <li>
+                <a href="#RXDDRGID">RXDDRGID - Generic drug code</a>
+              </li>
+              <li>
+                <a href="#RXQSEEN">RXQSEEN - Medicine container seen by interviewer</a>
+              </li>
+              <li>
+                <a href="#RXDDAYS">RXDDAYS - Number of days taken medicine</a>
+              </li>
+              <li>
+                <a href="#RXDCOUNT">RXDCOUNT - Number of prescription medicines taken</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2011-2012 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Prescription Medications (RXQ_RX_G)</h3>
+        <h4> Data File: RXQ_RX_G.xpt</h4>
+        <h5 class="left">First Published: July 2014</h5>
+        <h5 class="right">Last Revised: NA</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The Dietary Supplement and Prescription Medication Section (DSQ) of the Sample Person (SP) Questionnaire collects information on: 1) dietary supplements, 2) nonprescription antacids, 3) prescription medications, and 4) preventive aspirin use. </p>
+<p>The Prescription Medications subsection provides personal interview data on use of prescription medications during a one-month period prior to the survey date. The NHANES 2011&ndash;2012 prescription medication questions are similar to the NHANES 1999&ndash;2010 and NHANES III (1988&ndash;1994) questions. </p><h2 id="Eligible_Sample">Eligible Sample</h2><p>All survey participants are eligible for the prescription medications questions. </p><h2 id="Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</h2><p>The Prescription Medications subsection was asked, in the home, by trained interviewers using the Computer-Assisted Personal Interviewing (CAPI) system. Participants over 16 years of age answered for themselves; a proxy provided information for survey participants who were under 16 years of age and for those who could not answer themselves.</p>
+<p>The Interviewer Procedure Manuals and Survey Questionnaires can be found on the NHANES website at: <a href="https://wwwn.cdc.gov/nchs/data/nhanes/public/2011/questionnaires/dsq.pdf" target="_blank">https://wwwn.cdc.gov/nchs/data/nhanes/public/2011/questionnaires/dsq.pdf</a>.</p><h2 id="Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</h2><p>Data were routinely examined for discrepancies and erroneous entries. All drug names entered by the interviewer were compared to the medication name selected from the database. Review of the 2011&ndash;2012 data found that 92% of all reported drugs were automatically matched to the data collection drug database. The 8%, which were not matched to the drug database, were edited after data collection at NCHS. The most common reasons for a non-match were incorrect spelling of the drug, insufficient detail to identify the drug, or reporting of a nonprescription product that was not in the drug database. Details of the editing process are described below.</p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p><span style="text-decoration: underline;"><strong>Data Collection Methods</strong></span> </p>
+<p>During the household SP interview, survey participants are asked if they have taken medications in the past 30 days for which they needed a prescription. Those who answer &ldquo;yes&rdquo; are asked to show the interviewer the medication containers of all the products used. For each medication reported, the interviewer enters the product&rsquo;s complete name from the container into a computer. If no container is available, the interviewer asks the participant to verbally report the name of the medication. </p>
+<p>When the interviewer enters the medication name into the computer, the name is automatically matched to a prescription drug database on the computer to identify an exact match or similar text matches (refer below for details on the prescription medication database). The interviewer then selects the best match from a list of possible matches. The original product entered by the interviewer and the product selected from the computer list are saved as separate variables for quality control purposes. If an exact match of the medication cannot be found, the interviewer is instructed to select &ldquo;drug not found on list&rdquo;. Interviewers can record up to 20 prescription medications. Participants are also asked how long they had been taking the medication and the main reason for use. </p>
+<p>The NHANES 2011&ndash;2012 prescription medications questions can be accessed in the Dietary Supplements and Prescription Medications section of the SP Questionnaire <a href="https://wwwn.cdc.gov/nchs/data/nhanes/public/2011/questionnaires/dsq.pdf" target="_blank">https://wwwn.cdc.gov/nchs/data/nhanes/public/2011/questionnaires/dsq.pdf</a>. </p>
+<p><strong>Prescription Medication Questions Included in this Data Release</strong> </p>
+<ul>
+    <li>Was any prescription medication taken in the past 30 days? </li>
+    <li>Medication name </li>
+    <li>Was medication container seen by interviewer? </li>
+    <li>How long was medication taken? </li>
+    <li>Number of prescription medications taken? </li>
+</ul>
+<p><strong>Prescription Medication Database for Data Collection</strong> </p>
+<p>NCHS used the Lexicon Plus&reg;, a proprietary database of Cerner Multum, Inc. to assist in data collection. The Lexicon Plus&reg; is a comprehensive database of all prescription and some nonprescription drug products available in the U.S. drug market. For NHANES, the Lexicon Plus&reg; files were modified and uploaded to a laptop computer and incorporated into a search engine for use by interviewers in the field. The computer file is updated at the beginning of each survey year to incorporate changes to the Lexicon Plus&reg; and include products approved and available to the U.S. public in the prior year. </p>
+<p><strong><span style="text-decoration: underline;">Data Editing</span></strong> </p>
+<p><strong>General editing of data:</strong> </p>
+<p>When a variable was modified globally, as part of the editing process, the third letter in the variable name was changed from a Q (i.e., RXQ) to a D (i.e., RXD). For example, variables that were obtained from an external drug database will have the letter &ldquo;D&rdquo; in the third position of the variable name.</p>
+<p><strong>Prescription medications incorrectly reported in other subsections of questionnaire:</strong> </p>
+<p><em><strong>Prescription antacids</strong></em> that were incorrectly reported in the nonprescription antacid section of the questionnaire were removed from the antacid file and added to the prescription medication file. </p>
+<p><strong><em>Prescription supplements</em></strong> are released in the Dietary Supplements Data File. Some prescription medications were mistakenly recorded in the dietary supplement section. These were removed from that file and added to the prescription medication file. Any prescription dietary supplement that was incorrectly reported in the prescription medication section was removed from the prescription medication section and moved to the dietary supplement section. The following products were moved to the dietary supplements files: </p>
+<ul>
+    <li>All calcium products except calcium acetate </li>
+    <li>All fluoride products except those in topical gel or cream forms (e.g., stannous fluoride) </li>
+    <li>All vitamins except the injection form of vitamins </li>
+    <li>Over-the-counter niacin, niacinamide, nicotinic acid, and fish oil </li>
+</ul>
+<p>All prescription niacin, fish oil, potassium, and sodium products were retained in the prescription medication file. </p>
+<p>Products reported in the prescription medication section that were only available as an <strong><em>over-the-counter product</em></strong> during 2011&ndash;2012 were removed from the prescription medication file, except over-the-counter insulin, and products containing pseudoephedrine. </p>
+<p><strong>Specific variables and edits:</strong> </p>
+<p><span style="text-decoration: underline;"><strong>RXDUSE:</strong> Have you taken or used any prescription medicines in the past 30 days?</span> </p>
+<p>This variable was the lead-in question to the series of questions on prescription medication use. It accounts for all prescription medications except prescription dietary supplements which are included in the dietary supplement files (DSQ). A small number of persons refused to answer this question (coded 7) or did not know whether they used a prescription medication in the past month (coded 9). </p>
+<p>This variable was edited and takes into account prescription medications reported in this section as well as prescription medications moved into this file from the dietary supplements or nonprescription antacids sections of the questionnaire. </p>
+<p><span style="text-decoration: underline;"><strong>RXDCOUNT:</strong> The number of prescription medicines taken?</span> </p>
+<p>This variable was computed at NCHS and represents the total number of prescription medications reported by the participant, including those drugs identified as unknown (RXDDRUG = 55555). The count has been adjusted for all prescription medications moved into and those moved out of the prescription medication section. However, the count is not a comprehensive count of all prescription products used by a participant because prescription dietary supplements are part of the dietary supplement section. There were also participants who reported the use of a prescription medication in the past month (RXDUSE = 1) but did not know the name of the medication (RXDDRUG = 99999) or refused to report the name of the medication (RXDDRUG = 77777). Each product reported as &ldquo;refused&rdquo; or &ldquo;don&rsquo;t know&rdquo; is still included in the total count of prescription medications used under RXDCOUNT.</p>
+<p><span style="text-decoration: underline;"><strong>RXQSEEN:</strong> Medicine container seen by interviewer?</span> </p>
+<p>There was no editing of this variable.</p>
+<p><span style="text-decoration: underline;"><strong>RXDDAYS:</strong> For how long have you been taking this medicine?</span> </p>
+<p>This variable was created from a two-part (number and unit) question and indicates how long the participant reported taking each prescription medication. Responses were recorded in days, weeks, months, and years. To facilitate analysis, all answers were converted to days using conversion factors of 7 days per week, 30.4 days per month, and 365 days per year. There were persons who reported the use of a prescription medication but did not know how long they had been using the medication (RXDDAYS = 99999) or refused to report the length of use (RXDDAYS = 77777). There were also persons who reported the use of a prescription medication but did not report the length of use. RXDDAYS is missing for those persons. </p>
+<p><strong>Drug Database for Data Release:</strong> </p>
+<p>NCHS used the Lexicon Plus&reg;, a proprietary database of Cerner Multum, Inc. to assist with data editing and release. The December 2012 Multum Lexicon database was used for creating the RXQ_RX_G data release file. For additional information, refer to the RXQ_DRUG documentation.</p>
+<p>In accordance with the license agreement, NCHS publications, tabulations, and software applications should cite the Multum Lexicon as the source and basis for the coding and classification of the NHANES drug data. </p>
+<p><strong>Creation of additional data release variables:</strong> </p>
+<p><span style="text-decoration: underline;"><strong>RXDDRUG:</strong> Generic drug name</span> </p>
+<p>All reported drug names were converted to a standard generic drug name for data release. For multi-ingredient products, the ingredients are listed in alphabetical order (i.e., Acetaminophen; Codeine). </p>
+<p>There were participants who reported the use of a prescription medication but did not know the name of the drug or refused to report the name. These entries were coded as don&rsquo;t know (99999) and refused (77777), respectively. There were also medications reported with insufficient detail to accurately identify the exact product, but there was some information about the therapeutic class of the drug. These products have been released with Multum&rsquo;s therapeutic category name followed by &ldquo;- unspecified&rdquo; (e.g., anti-infective - unspecified; hormones/hormone modifiers - unspecified). The names of a limited number of reported drugs could not be identified by NCHS as a known prescription product. These entries are counted as prescription medications, since there is no evidence that they are not, and have been coded as 55555, unknown drug. </p>
+<p><span style="text-decoration: underline;"><strong>RXDDRGID:</strong> Generic drug code</span> </p>
+<p>Each generic drug name is associated with a unique generic drug code from Multum&rsquo;s Lexicon Drug Database. Multum's generic drug code is always beginning with a "d". There were some drug names reported by NHANES&rsquo; participants that were not found in the Lexicon Drug Database. These have been assigned unique drug codes beginning with an &ldquo;a&rdquo; or &ldquo;h&rdquo;. Unspecified products with known therapeutic action have drug codes beginning with a &ldquo;c&rdquo; and are followed by their respective Multum therapeutic category code. RXDDRGID is missing for unknown drugs (55555), refused (77777), or don&rsquo;t know (99999) RXDDRUG entries. </p>
+<p>Therapeutic class codes associated with a drug are found in a separate data release file, RXQ_DRUG. </p>
+<p>There are two files related to the prescription drug data. The contents of each file are described below. The files can be linked by the variable RXDDRGID. <br />
+<br />
+The file named RXQ_RX_G contains data on all survey participants and their use of a prescription drug. Participants who reported the use of multiple prescription drugs will have multiple records, that is, a record for each drug. </p>
+<p>The file named RXQ_DRUG contains therapeutic drug class information on all drugs reported by NHANES participants from 1988&ndash;1994 through 2011&ndash;2012. It contains drug (up to 4) and ingredient (up to 6) therapeutic category codes for each drug. It also has a variable that identifies if the drug is made up of a single or multiple ingredients. </p>
+<p>
+<table border="1" bordercolor="#000000">
+    <caption valign="top" align="left"><strong>RXQ_RX_G: Participant's Use of Prescription Drug(s)</strong></caption>
+    <thead>
+        <tr>
+            <th>Variable Name</th>
+            <th>Label</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SEQN</td>
+            <td>Respondent sequence number</td>
+        </tr>
+        <tr>
+            <td>RXDUSE</td>
+            <td>Taken prescription medicine, past month</td>
+        </tr>
+        <tr>
+            <td>RXDDRUG</td>
+            <td>Generic drug name</td>
+        </tr>
+        <tr>
+            <td>RXDDRGID</td>
+            <td>Generic drug code</td>
+        </tr>
+        <tr>
+            <td>RXQSEEN</td>
+            <td>Medicine container seen by interviewer</td>
+        </tr>
+        <tr>
+            <td>RXDDAYS</td>
+            <td>Number of days taken medicine</td>
+        </tr>
+        <tr>
+            <td>RXDCOUNT</td>
+            <td>Number of prescription medicines taken</td>
+        </tr>
+    </tbody>
+</table>
+</p>
+<p>
+<table border="1" bordercolor="#000000">
+    <caption valign="top" align="left"><strong>RXQ_DRUG: Drug Information</strong></caption>
+    <thead>
+        <tr>
+            <th>Variable Name</th>
+            <th>Label</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>RXDDRGID</td>
+            <td>Generic drug code</td>
+        </tr>
+        <tr>
+            <td>RXDDRUG</td>
+            <td>Generic drug name</td>
+        </tr>
+        <tr>
+            <td>RXDINGFL</td>
+            <td>SINGLE/MULTIPLE INGREDIENT DRUG</td>
+        </tr>
+        <tr>
+            <td>RXDDCI1A</td>
+            <td>DRUG CATEGORY ID - CATEGORY 1, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCI1B</td>
+            <td>DRUG CATEGORY ID - CATEGORY 1, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCI1C</td>
+            <td>DRUG CATEGORY ID - CATEGORY 1, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCI2A</td>
+            <td>DRUG CATEGORY ID - CATEGORY 2, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCI2B</td>
+            <td>DRUG CATEGORY ID - CATEGORY 2, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCI2C</td>
+            <td>DRUG CATEGORY ID - CATEGORY 2, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCI3A</td>
+            <td>DRUG CATEGORY ID - CATEGORY 3, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCI3B</td>
+            <td>DRUG CATEGORY ID - CATEGORY 3, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCI3C</td>
+            <td>DRUG CATEGORY ID - CATEGORY 3, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCI4A</td>
+            <td>DRUG CATEGORY ID - CATEGORY 4, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCI4B</td>
+            <td>DRUG CATEGORY ID - CATEGORY 4, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCI4C</td>
+            <td>DRUG CATEGORY ID - CATEGORY 4, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCN1A</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 1, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCN1B</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 1, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCN1C</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 1, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCN2A</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 2, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCN2B</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 2, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCN2C</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 2, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCN3A</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 3, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCN3B</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 3, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCN3C</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 3, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDDCN4A</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 4, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDDCN4B</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 4, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDDCN4C</td>
+            <td>DRUG CATEGORY NAME - CATEGORY 4, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI1A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 1, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI1B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 1, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI1C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 1, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI2A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 2, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI2B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 2, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI2C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 2, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI3A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 3, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI3B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 3, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI3C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 3, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI4A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 4, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI4B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 4, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI4C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 4, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI5A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 5, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI5B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 5, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI5C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 5, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICI6A</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 6, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICI6B</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 6, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICI6C</td>
+            <td>INGREDIENT CATEGORY ID - CATEGORY 6, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN1A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 1, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN1B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 1, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN1C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 1, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN2A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 2, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN2B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 2, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN2C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 2, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN3A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 3, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN3B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 3, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN3C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 3, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN4A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 4, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN4B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 4, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN4C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 4, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN5A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 5, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN5B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 5, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN5C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 5, LEVEL 3</td>
+        </tr>
+        <tr>
+            <td>RXDICN6A</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 6, LEVEL 1</td>
+        </tr>
+        <tr>
+            <td>RXDICN6B</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 6, LEVEL 2</td>
+        </tr>
+        <tr>
+            <td>RXDICN6C</td>
+            <td>INGREDIENT CATEGORY NAME - CATEGORY 6, LEVEL 3</td>
+        </tr>
+    </tbody>
+</table>
+</p><h2 id="Analytic_Notes">Analytic Notes</h2><p>The variable RXDCOUNT provides a count of all prescription products reported in the prescription medication section adjusting for products moved into or out of the final file. The count includes products reported as &ldquo;refused&rdquo; or &ldquo;don&rsquo;t know&rdquo; by participants who reported they had taken a prescription medication but did not know the name of the medication or refused to report the name of the medication. Drugs released as &ldquo;unknown drug&rdquo; are also included in the count. However, prescription supplements in the Dietary Supplements File are not included in the total count. Therefore, this variable does not provide a comprehensive count of all prescription products used by the survey participant. </p>
+<p>In some cases, it may appear as though participants reported the same prescription drug more than once. That is, the same generic ingredient name and product code may be listed more than once. There are a several reasons for these duplications. Participants may have reported different brand name medications which had the same generic ingredient name (e.g., &ldquo;Oxycontin&rdquo; vs. &ldquo;Roxicodone&rdquo;), the medications may have been different forms or dosages of the same product (e.g., Albuterol &ldquo;oral tablet&rdquo; vs. &ldquo;inhalation solution&rdquo;, or Furosemide &ldquo;20 mg&rdquo; vs. &ldquo;40 mg&rdquo;), or participants may have reported different lengths of use or reasons for use of the products.</p>
+<p>During the data editing process, outlier values were examined. When there was insufficient information to conclude that values were invalid, they were left in the data set. Analysts should examine the distribution of the data and consider whether or not it is appropriate to include or exclude extreme values in a given analysis.</p>
+<p>Respondent sequence number (SEQN) in the prescription medication data is not a unique identifier. Participants who reported the use of multiple prescription drugs will have multiple records, that is, a record for each drug. Analysts should convert a drug level data to a personal level data, that is, a record for each person, before merging it with NHANES demographic and other data files by using SEQN. </p>
+<p>Please refer to the&nbsp;<a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx" target="_blank">NHANES Analytic Guidelines</a> and the on-line&nbsp;<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/" target="_blank">NHANES Tutorial</a> for further details on the use of sample weights and other analytic issues. </p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXDUSE">RXDUSE - Taken prescription medicine, past month</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXDUSE</dd>
+            <dt>SAS Label: </dt>
+            <dd>Taken prescription medicine, past month</dd>
+            <dt>English Text: </dt>
+            <dd class="info">In the past 30 days, have you used or taken medication for which a prescription is needed?  Do not include prescription vitamins or minerals you may have already told me about.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">12957</td>
+                <td class="values" align="right">12957</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">5744</td>
+                <td class="values" align="right">18701</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">18703</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXDDRUG">RXDDRUG - Generic drug name</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXDDRUG</dd>
+            <dt>SAS Label: </dt>
+            <dd>Generic drug name</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Generic drug name</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">Generic drug name</td>
+                <td class="values">Value was recorded</td>
+                <td class="values" align="right">12867</td>
+                <td class="values" align="right">12867</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">55555</td>
+                <td class="values">Unknown</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">12871</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">13</td>
+                <td class="values" align="right">12884</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">73</td>
+                <td class="values" align="right">12957</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">&lt; blank &gt;</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5747</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXDDRGID">RXDDRGID - Generic drug code</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXDDRGID</dd>
+            <dt>SAS Label: </dt>
+            <dd>Generic drug code</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Generic drug code</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">Generic drug code</td>
+                <td class="values">Value was recorded</td>
+                <td class="values" align="right">12867</td>
+                <td class="values" align="right">12867</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">&lt; blank &gt;</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5837</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXQSEEN">RXQSEEN - Medicine container seen by interviewer</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXQSEEN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Medicine container seen by interviewer</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Was prescription container seen by interviewer?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">10608</td>
+                <td class="values" align="right">10608</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">2277</td>
+                <td class="values" align="right">12885</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5819</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXDDAYS">RXDDAYS - Number of days taken medicine</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXDDAYS</dd>
+            <dt>SAS Label: </dt>
+            <dd>Number of days taken medicine</dd>
+            <dt>English Text: </dt>
+            <dd class="info">For how long have you been using or taking {PRODUCT NAME}?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 22995</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">12660</td>
+                <td class="values" align="right">12660</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">12661</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">221</td>
+                <td class="values" align="right">12882</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5822</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="RXDCOUNT">RXDCOUNT - Number of prescription medicines taken</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">RXDCOUNT</dd>
+            <dt>SAS Label: </dt>
+            <dd>Number of prescription medicines taken</dd>
+            <dt>English Text: </dt>
+            <dd class="info">The number of prescription medicines reported</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 0 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 19</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">12957</td>
+                <td class="values" align="right">12957</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5747</td>
+                <td class="values" align="right">18704</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

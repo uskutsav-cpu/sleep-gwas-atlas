@@ -1,0 +1,6 @@
+# Preserve source records byte-for-byte so the published SHA-256 checks remain valid.
+source_files/** -text -diff
+# Matplotlib emits whitespace in SVG path data.
+*.svg whitespace=-blank-at-eol,-blank-at-eof
+prototype_sources/** -text
+*.csv -text whitespace=cr-at-eol
