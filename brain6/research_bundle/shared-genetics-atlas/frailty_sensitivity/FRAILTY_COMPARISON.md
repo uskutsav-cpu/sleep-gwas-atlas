@@ -1,0 +1,17 @@
+# Comparing FI, FFS and HFRS: two paired genetic sensitivities
+
+These results were generated in the separate insomnia–frailty project and are copied here with their original native LDSC records. This audit independently recomputes the 200-block jackknife standard errors and paired differences, checks identical SNP order, shared-trait heritability deletions and block boundaries, and hashes the copied inputs. It does not rerun LDSC or independently verify cohort independence, the underlying GWAS or an ancestry-specific LD reference.
+
+## R13 clinical insomnia and UKB-only FI
+
+Using 1,134,953 common SNPs, R13 FinnGen clinical insomnia has r_g=0.4189 (SE 0.0368) with UK Biobank-only FI, 0.4263 (0.0389) with the FI meta-analysis, and 0.2445 (0.0371) with FFS. UKB-only FI minus meta-analysis FI is −0.0074 (paired SE 0.0072, 95% CI −0.0215 to 0.0066). The confidence interval is narrower than the observed FI-versus-FFS difference on this support; this argues against a large effect of adding TwinGene *in this specific comparison*, but does not prove equivalence or explain the phenotype difference. FFS minus UKB-only FI is −0.1744 (paired SE 0.0385, 95% CI −0.2497 to −0.0990; unadjusted p=5.77×10⁻⁶). Both contrasts were post hoc; no correction for this wider project’s exploration is asserted. UKB FI is a component of meta-analysis FI; neither is independent replication. This support was additionally restricted by HFRS availability, though HFRS was not an outcome in these three fits.
+
+This comparison changes sample composition, not the FI items. The FI contains insomnia and tiredness-related components, and FFS includes exhaustion. It cannot establish whether the result persists after removing them. The general-European LD reference may imperfectly match Finnish data; per-variant N was not verified and total N was used in these inputs. SNP and shared-trait jackknife checks do not eliminate these limitations.
+
+## Three frailty definitions on shared support
+
+On another common set of 1,137,927 SNPs, FI–FFS r_g=0.7570 (SE 0.0212), FI–HFRS r_g=0.6403 (0.0257), and FFS–HFRS r_g=0.5499 (0.0230). The paired contrast `(FFS–HFRS) − (FI–HFRS)` is −0.0904 (SE 0.0265, 95% CI −0.1423 to −0.0384, unadjusted p=0.000648). This post-hoc observation is not an insomnia result and does not mean FFS is clinically inferior. This support originated from FI/FFS/FinnGen-insomnia common availability and was intersected with HFRS; those selection steps can affect comparisons.
+
+HFRS's univariate LDSC intercept was elevated (~1.188) with the available general-European LD reference, and per-variant N was unavailable. These are material reasons for caution about the point estimates and their paired contrast; precision alone does not establish lack of bias. HFRS reflects hospital diagnoses, FI deficit accumulation and FFS a physical phenotype, in different source cohorts with exact overlap not verified. None of these results is an individual risk prediction or causal estimate.
+
+`check_sensitivity.py` and `check_hfrs_matrix.py` reconstruct the numbers from six named `*.exact.json` source snapshots. Their receipts contain SHA-256 hashes; the historical sources reside in `/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/`. See the separate project's `ukb_fi_finngen_insomnia_sensitivity.md` and `frailty_three_way_common_support_ldsc.md` for original analyses and limitations.

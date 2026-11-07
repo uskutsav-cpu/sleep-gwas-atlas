@@ -1,0 +1,7 @@
+# Regional physical-function summary-statistic diagnostic
+
+For all 2,359 common markers, p-values reconstructed using the normal approximation from physical beta/SE closely matched the reported p-values: the maximum absolute difference in −log10(p) was 0.000039 (median 0.00000095). This supports internal numeric consistency for these selected rows; it does not establish correct phenotype coding, source independence or model validity.
+
+As a **post-hoc diagnostic**, the per-variant quantity SE × √(2Nf(1−f)), using the reported N=405,979 and effect-allele frequency f, had median 0.475 and range 0.470–0.497. This expression would approximate residual outcome SD under a simplified linear-regression model with the relevant assumptions. REGENIE conditioning, covariates, imputation and other differences mean this is not a measured or validated composite SD. It does suggest that treating the composite as automatically having SD 1 is not warranted, consistent with the authors' description of averaging individually standardized components. No prior was tuned from this diagnostic. The parent analysis already reports the broad fixed-effect [prior sensitivity](../prior_sensitivity.tsv), which remains inconclusive.
+
+The [script](audit.py), [receipt](receipt.json), and [protocol](PROTOCOL.md) document the calculation. The public physical data are a partial indexed source read; earlier source-orientation checks apply only to retained regional rows. No individual-level data or AlphaGenome outputs were used.

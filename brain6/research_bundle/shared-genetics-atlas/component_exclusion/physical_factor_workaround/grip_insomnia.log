@@ -1,0 +1,69 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/grip_insomnia \
+--rg /Volumes/Extreme SSD/brain6-physical-factor-20261101/grip.common.sumstats.gz,/Volumes/Extreme SSD/brain6-physical-factor-20261101/insomnia.common.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Sun Nov  1 13:03:22 2026
+Reading summary statistics from /Volumes/Extreme SSD/brain6-physical-factor-20261101/grip.common.sumstats.gz ...
+Read summary statistics for 1053614 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1053614 SNPs remain.
+After merging with regression SNP LD, 1053614 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/brain6-physical-factor-20261101/insomnia.common.sumstats.gz ...
+Read summary statistics for 1053614 SNPs.
+After merging with summary statistics, 1053614 SNPs remain.
+1053614 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.1145 (0.0043)
+Lambda GC: 1.6354
+Mean Chi^2: 1.8642
+Intercept: 1.0414 (0.0132)
+Ratio: 0.0479 (0.0153)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.02 (0.0015)
+Lambda GC: 1.2398
+Mean Chi^2: 1.2731
+Intercept: 1.0778 (0.0096)
+Ratio: 0.285 (0.0353)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0043 (0.0017)
+Mean z1*z2: -0.0414
+Intercept: -0.0069 (0.0067)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0896 (0.0352)
+Z-score: -2.5414
+P: 0.011
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/grip_insomniagrip.common.sumstats.gz_insomnia.common.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/grip_insomniagrip.common.sumstats.gz_insomnia.common.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/grip_insomniagrip.common.sumstats.gz_insomnia.common.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                          p1                                                                               p2      rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/brain6-physical-factor-20261101/grip.common.sumstats.gz /Volumes/Extreme SSD/brain6-physical-factor-20261101/insomnia.common.sumstats.gz -0.0896 0.0352 -2.5414 0.0110  0.0200     0.0015  1.0778     0.0096   -0.0069       0.0067
+
+Analysis finished at Sun Nov  1 13:03:34 2026
+Total time elapsed: 11.95s

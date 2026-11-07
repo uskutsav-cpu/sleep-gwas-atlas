@@ -1,0 +1,23 @@
+.libPaths(c('/Volumes/Brain6Work/lib','/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib',.libPaths()))
+library(hyprcoloc)
+out <- 'outputs/shared-genetics-atlas/variant_context/chr5_dense_qtl/hyprcoloc_pilot'
+p <- 'outputs/shared-genetics-atlas/variant_context/chr5_dense_qtl'
+cat('R:',R.version.string,'\nHyPrColoc:',as.character(packageVersion('hyprcoloc')),'\n')
+smoke <- hyprcoloc(hyprcoloc::test.betas,hyprcoloc::test.ses,trait.names=paste0('T',1:ncol(hyprcoloc::test.betas)),snp.id=rownames(hyprcoloc::test.betas),ind.traits=TRUE)
+stopifnot(!is.null(smoke));cat('Documented test dataset smoke result:\n');print(smoke);saveRDS(smoke,file.path(out,'smoke_test.rds'))
+a<-read.delim(file.path(p,'Testis_ENSG00000251574_insomnia_matched.tsv'),stringsAsFactors=FALSE)
+b<-read.delim(file.path(p,'Testis_ENSG00000251574_adhd_matched.tsv'),stringsAsFactors=FALSE)
+stopifnot(!anyDuplicated(a$variant),!anyDuplicated(b$variant))
+x<-merge(a,b,by='variant',suffixes=c('_i','_a'))
+stopifnot(nrow(x)==1633,all(x$ref_i==x$ref_a),all(x$alt_i==x$alt_a),all(x$qtl_beta_i==x$qtl_beta_a),all(x$qtl_se_i==x$qtl_se_a))
+beta<-cbind(expression=x$qtl_beta_i,insomnia=x$gwas_beta_alt_i,adhd=x$gwas_beta_alt_a)
+se<-cbind(expression=x$qtl_se_i,insomnia=x$gwas_se_i,adhd=x$gwas_se_a)
+stopifnot(all(is.finite(beta)),all(is.finite(se)),all(se>0))
+settings<-data.frame(name=c('default','prior_001','prior_0005','strict_threshold'),prior_c=c(.02,.01,.005,.02),threshold=c(.5,.5,.5,.9))
+results<-list()
+for(k in seq_len(nrow(settings))){s<-settings[k,];cat('\nSETTING:',s$name,'prior.c',s$prior_c,'threshold',s$threshold,'\n')
+ result<-hyprcoloc(beta,se,binary.outcomes=c(0,1,1),trait.names=colnames(beta),snp.id=x$variant,prior.1=1e-4,prior.c=s$prior_c,reg.thresh=s$threshold,align.thresh=s$threshold,ind.traits=TRUE,bb.alg=TRUE,snpscores=TRUE)
+ print(result);results[[s$name]]<-result}
+saveRDS(results,file.path(out,'pilot_results.rds'))
+write.table(settings,file.path(out,'settings.tsv'),sep='\t',row.names=FALSE,quote=FALSE)
+writeLines(capture.output(sessionInfo()),file.path(out,'session_info.txt'))

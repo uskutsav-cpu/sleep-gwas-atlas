@@ -1,0 +1,7 @@
+# Allelic direction check for the chr7 follow-up
+
+The two FI diagnostic anchors and the two highest conditional-H4 variants form four selected pairs. After verifying their original FI–insomnia association allele pairs against the counted alleles in the 503-person EUR reference LD analysis, the sign of beta₁×beta₂ agrees with the sign of reference r for all four pairs for FI and all four pairs for registry insomnia.
+
+For example, rs2396766 A and rs10953765 A have reference r=+0.845; the A-allele FI effects are +0.0201 and +0.0194, and the A-allele registry-insomnia effects are +0.02432 and +0.03140. For rs2396766 A and rs1456031 T, reference r=−0.864; the corresponding FI and insomnia point estimates have opposite signs across the pair. `aligned_signs.tsv` retains all counted and original alleles, estimates, standard errors, p-values and sign checks.
+
+This is a post-hoc heuristic consistency check in a small reference panel. Both analyses reuse the same FI and registry-insomnia GWAS, and their reference LD may differ from study LD. Compatible signs do not establish a single causal signal, prove effect magnitudes are consistent, validate PLACO calibration, identify a target gene, or provide independent two-trait replication. The FI contains sleep items and the coloc remains prior-sensitive. [Protocol](PROTOCOL.md), `check.py` and `receipt.json` preserve rules and source hashes; the [parent LD analysis](../RESULTS.md) contains all pairwise estimates and bootstrap intervals.

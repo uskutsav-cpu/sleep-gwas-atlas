@@ -1,0 +1,5 @@
+# Post-hoc QTL p-value distribution diagnosis
+
+The preceding analysis observed a QTL p versus beta/SE discrepancy and one exploratory t-distribution check suggested approximately 673 degrees of freedom. Using the fixed selected 2,441 matched records, infer a t-distribution degrees-of-freedom value from the row with largest |beta/SE| by solving against its reported two-sided p-value. Round this fitted value to the nearest integer and, without refitting, compare its two-sided t p-values to the other 2,440 reported QTL p-values on a log10 scale. Compare with normal-approximation p-values, report median, 95th percentile and maximum absolute discrepancies. Retain top variant, fitted and rounded df, source hash and code.
+
+This is a post-hoc consistency diagnostic, not an independent sample or proof of the original df, sample count, number of covariates or source computation. The variants are highly correlated. The study's reported TensorQTL method and TensorQTL implementation will be separately cited; model assumptions, gene causality, true colocalization calibration and LAVA gates remain unresolved.

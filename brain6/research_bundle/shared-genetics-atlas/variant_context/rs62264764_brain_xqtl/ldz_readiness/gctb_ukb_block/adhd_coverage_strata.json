@@ -1,0 +1,49 @@
+{
+  "threshold_selection": "80,000 selected post hoc after inspecting top outlier effective Ns",
+  "residual_cutoff": "absolute standardized residual >5, descriptive and post hoc",
+  "strata": {
+    "eigenclip": {
+      "markers": 1547,
+      "median_n_audit": 128213.79504642317,
+      "strata": {
+        "below_80000": {
+          "residual_gt5": 10,
+          "residual_le5": 48
+        },
+        "at_least_80000": {
+          "residual_gt5": 0,
+          "residual_le5": 1489
+        }
+      }
+    },
+    "ridge_0p001": {
+      "markers": 1547,
+      "median_n_audit": 128213.79504642317,
+      "strata": {
+        "below_80000": {
+          "residual_gt5": 10,
+          "residual_le5": 48
+        },
+        "at_least_80000": {
+          "residual_gt5": 0,
+          "residual_le5": 1489
+        }
+      }
+    },
+    "1000g_eur": {
+      "markers": 1547,
+      "median_n_audit": 128213.79504642317,
+      "strata": {
+        "below_80000": {
+          "residual_gt5": 5,
+          "residual_le5": 53
+        },
+        "at_least_80000": {
+          "residual_gt5": 1,
+          "residual_le5": 1488
+        }
+      }
+    }
+  },
+  "limitations": "Counts are correlated variants, not independent observations. N_AUDIT is computed from reported case/control counts and does not capture pairwise sample overlap. The grouping cannot establish cause or a calibrated association."
+}

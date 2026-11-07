@@ -1,0 +1,15 @@
+# Exploratory insomnia–frailty genetic correlations conditional on ADHD
+
+We estimated ADHD–frailty correlations on the same 991,707 markers used for the earlier clinical-insomnia analysis, then calculated a partial genetic correlation between MVP insomnia and each frailty measure after linearly projecting out the ADHD genetic component. Uncertainty uses paired 200-block LDSC delete estimates across all three correlations in each calculation.
+
+| Frailty measure | Insomnia–frailty r_g | ADHD–frailty r_g | Partial genetic r_g given ADHD | Paired SE | Approximate 95% interval | Bonferroni p, three outcomes |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| FI | 0.5425 | 0.5482 | 0.378 | 0.051 | 0.278–0.478 | 4.51×10⁻¹³ |
+| FFS | 0.3949 | 0.5692 | 0.165 | 0.049 | 0.069–0.260 | 0.0021 |
+| HFRS | 0.5766 | 0.5444 | 0.426 | 0.046 | 0.335–0.517 | 1.49×10⁻¹⁹ |
+
+The common-marker insomnia–ADHD r_g was 0.4857. These positive partial correlations pass the **post-hoc three-outcome** correction, not an atlas-wide correction. They are associations among linearly projected genetic effects; they do **not** adjust an individual's phenotype for ADHD diagnosis and are not a gene-by-sleep interaction, causal effect, mediation analysis, or proof of a shared causal variant. Comparison with the raw correlations is descriptive: no separate test of attenuation or difference between partial correlations was performed. The individual GWAS, matched source markers and outcome values had already been inspected, and confidence intervals use a normal approximation with point estimates rounded in the LDSC logs.
+
+The scores have different clinical content and ascertainment: FI includes insomnia and tiredness, FFS includes exhaustion, and HFRS includes a somnolence-related category. The resulting residual genetic correlations therefore do not demonstrate sleep- or exhaustion-independent physical frailty. Participant and family overlap is unknown, the ADHD and frailty studies are reused, and LD-reference suitability and effective sample-size approximations are uncertain. MVP and HFRS intercepts are elevated; these diagnostics do not identify a cause, but limit confidence in calibration. Prior local-correlation gates remain failed, and these results are not independent locus replication.
+
+The [protocol](PROTOCOL.md) was recorded before the new ADHD–frailty fits. The [full pairwise log](ldsc-20261029T061213-3703.log), [runner](run.sh), [calculation](analyze.py), [results](results.tsv), [receipt](receipt.json) and [reference check](ld_reference_verification.json) document the run. All per-pair fits retained 991,707 valid SNPs, the corresponding insomnia, ADHD and frailty heritability delete vectors matched exactly across the two runs, and reconstructed individual SEs matched their logs to rounding. Every point and delete-block three-trait correlation matrix passed the positive-semidefinite check; the smallest eigenvalue was 0.401. These checks support numerical and block alignment, not original GWAS validity or causal interpretation. No AlphaGenome output was used as a model-training feature.

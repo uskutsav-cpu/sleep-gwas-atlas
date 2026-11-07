@@ -1,0 +1,62 @@
+{
+  "n_snps": 1099360,
+  "all_insomnia_hsq_delete_vectors_identical": true,
+  "num_blocks": 200,
+  "correlations": [
+    {
+      "trait": "FI",
+      "rg": 0.6404,
+      "se_jackknife": 0.02357434965403883,
+      "p": 1.6506e-162,
+      "bonferroni_p_3": 4.9518e-162
+    },
+    {
+      "trait": "FFS",
+      "rg": 0.484,
+      "se_jackknife": 0.026947874021235545,
+      "p": 4.0731e-72,
+      "bonferroni_p_3": 1.22193e-71
+    },
+    {
+      "trait": "HFRS",
+      "rg": 0.4355,
+      "se_jackknife": 0.025479542297478803,
+      "p": 1.7528e-65,
+      "bonferroni_p_3": 5.2584e-65
+    }
+  ],
+  "contrasts": [
+    {
+      "contrast": "HFRS minus FI",
+      "difference": -0.20489999999999997,
+      "se_paired": 0.03278626482850412,
+      "ci95_unadjusted_low": -0.2691598982514586,
+      "ci95_unadjusted_high": -0.14064010174854136,
+      "z": -6.24956825889668,
+      "p_unadjusted": 4.115888343910166e-10,
+      "bonferroni_p_3": 1.23476650317305e-09
+    },
+    {
+      "contrast": "HFRS minus FFS",
+      "difference": -0.04849999999999999,
+      "se_paired": 0.03347125220168745,
+      "ci95_unadjusted_low": -0.11410244883276258,
+      "ci95_unadjusted_high": 0.0171024488327626,
+      "z": -1.4490046475630471,
+      "p_unadjusted": 0.1473362846774582,
+      "bonferroni_p_3": 0.44200885403237467
+    },
+    {
+      "contrast": "FI minus FFS",
+      "difference": 0.15639999999999998,
+      "se_paired": 0.028098010209738143,
+      "ci95_unadjusted_low": 0.10132891195167601,
+      "ci95_unadjusted_high": 0.21147108804832396,
+      "z": 5.566230449506892,
+      "p_unadjusted": 2.6030894104045212e-08,
+      "bonferroni_p_3": 7.809268231213563e-08
+    }
+  ],
+  "p_family": "3 post-hoc correlations and 3 post-hoc contrasts each corrected separately; not atlas-wide",
+  "limitation": "Point differences use four-decimal log r_g values; results subject to support, phenotype, ancestry, overlap and source-model assumptions."
+}

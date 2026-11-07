@@ -1,0 +1,13 @@
+{
+  "inputs_and_outputs_sha256": {
+    "/Volumes/Extreme SSD/brain6-work/PLACO-v0.2.0/PLACO_v0.2.0.R": "fb684a8ed88f27dd138f5c2e8613b092904e84f364030d036058f17db95b7124",
+    "outputs/shared-genetics-atlas/placo_diagnostic/diagnostic_parameters.json": "7d935e558efc78f3c844df717f587df86c6ffc037564af3aacb1bce8466bb868",
+    "outputs/shared-genetics-atlas/placo_diagnostic/simulated_null.tsv": "5d87448c73f237a5fb1487d18b26de802c70860409f22862748211051227c6f4",
+    "outputs/shared-genetics-atlas/placo_diagnostic/tail_stress/calculate.R": "08808e274ca586d77894c49ad3f89def9af8785adf65310266b8dffad08b7000",
+    "outputs/shared-genetics-atlas/placo_diagnostic/tail_stress/tail_probabilities.tsv": "393ff3b6d209c3694d7e0b715892d1c37071006a2b916c811a4228fab360ecab"
+  },
+  "parameters": "frozen PLACO+ FI and FFS parameters; fixed unit-variance correlated Gaussian stress, not estimated from real samples",
+  "model": "one trait mean mu in [0..6], other mean zero; both marginal variances 1; sample correlation fixed to fitted CorZ; exclude |Z| > sqrt(80) for either trait",
+  "method": "product cutoff root via pinned official function; conditional 1D normal integration with both X and Y conditioning independently; symmetry and existing Monte Carlo comparison",
+  "limitation": "per-marker stress probabilities, not empirical calibration, familywise error, real-data adjusted p-values, or estimates of true noncentrality"
+}

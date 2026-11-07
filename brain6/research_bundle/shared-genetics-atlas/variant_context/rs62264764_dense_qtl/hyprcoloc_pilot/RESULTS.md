@@ -1,0 +1,18 @@
+# rs62264764 region: exploratory three-trait HyPrColoc pilot
+
+The pilot did **not** return a cluster containing adrenal LSAMP expression, insomnia and ADHD under any of the four tested settings. Under the default setting it returned an insomnia–ADHD cluster with model-conditional posterior **0.8582**; a stricter threshold returned no cluster. These results are sensitive to the priors and model assumptions, and the absence of an expression cluster does **not** establish that LSAMP is irrelevant or rule out a secondary shared signal.
+
+| Setting | Returned cluster | Reported cluster posterior | Candidate marker |
+|---|---|---:|---|
+| Conditional prior 0.02; thresholds 0.5 | Insomnia, ADHD | 0.8582 | rs62264767 |
+| Conditional prior 0.01; thresholds 0.5 | Insomnia, ADHD | 0.7504 | rs62264767 |
+| Conditional prior 0.005; thresholds 0.5 | Insomnia, ADHD | 0.5973 | rs62264767 |
+| Conditional prior 0.02; thresholds 0.9 | None | Not reported | None |
+
+The package's branch-and-bound procedure dropped the expression trait from the candidate cluster. The regional association probability for all three under the default setting was 0.1571; the returned insomnia–ADHD cluster had a separate regional probability of 0.9929. These are probabilities under the chosen model, not p-values or direct evidence of a causal pathway. The stricter analysis also returned no two-trait cluster, which reflects its thresholds and assumptions rather than proving no association. All results are post-selected and uncorrected.
+
+The default insomnia–ADHD candidate is **rs62264767**, not the nearby AlphaGenome-prioritized **rs62264764**. The former accounts for 0.1209 of the default cluster's conditional SNP score; rs62264764 accounts for 0.1075. Those scores are conditional on the selected two-trait cluster and tested support, not unconditional probabilities that either variant is causal. The input table and the package score order were checked. The largest predicted frontal-cortex DNase change for rs62264764 remains a model prediction, and it was not used in this analysis.
+
+The 1,548 variants were drawn from the previously studied region's overlap with GTEx and a 503-person EUR reference, not all regional variants. The model assumes at most one causal variant per trait and treats study statistics as independent; actual sample overlap is not verified. This method's independent-trait mode does not use study-matched LD and cannot resolve the previously observed LD–Z inconsistency. The earlier multi-signal pilot was not admitted as validated and returned no qualifying ADHD credible set; neither method excludes secondary shared effects. Adrenal tissue is not brain, and its exact-variant eQTL does not establish disease mediation. Population differences, incomplete molecular coverage, source model and per-variant sample-size uncertainty, region selection and prior assumptions remain. The run is not independent replication, local genetic correlation, a LAVA QC rescue, or proof of a gene mechanism.
+
+[Protocol](PROTOCOL.md), [cluster results](clusters.tsv), [selected SNP scores](selected_snp_scores.tsv), [full serialized outputs](pilot_results.rds), [run log](run.log), [code](run.R), [source hashes](receipt.json) and [verification](verify.R) record the analysis. HyPrColoc commit `0348bbdd977be731d82e4efda115a9bed63cd44f` was installed on the SSD using the [documented compiler compatibility patch](../../chr5_dense_qtl/hyprcoloc_pilot/eigen-compatibility.patch). The package example reproduced its documented lead markers; score normalization and input order were checked. These are software checks, not statistical calibration. For the method and assumptions, see [Foley et al.](https://doi.org/10.1038/s41467-020-20885-8).

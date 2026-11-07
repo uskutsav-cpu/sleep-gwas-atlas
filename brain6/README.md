@@ -1,5 +1,9 @@
 # Brain6 analysis artifacts
 
+The [6 November research overview](research_bundle/shared-genetics-atlas/START_HERE.md), [sleep–frailty report](research_bundle/shared-genetics-atlas/RESEARCH_REPORT.md) and [manuscript draft](research_bundle/shared-genetics-atlas/MANUSCRIPT_DRAFT.md) contain the newer exploratory work. Its [publication notes](research_bundle/shared-genetics-atlas/PUBLICATION.md) distinguish included results from external data dependencies and unresolved validation. The [AlphaGenome pilot](alphagenome_pilot/README.md) includes prediction provenance and its [binding output terms](alphagenome_pilot/TERMS_OF_USE.md). Historical reports below remain dated snapshots, not a claim that the full research programme is complete.
+
+An [exploratory sleep–frailty predictor](research_prototypes/frailty_prediction/README.md) provides a reproducible bounded-ridge prototype using existing genetic-correlation inputs and baseline comparisons. It is research software, not an individual or clinical prediction model; its README links to the local research bundle and documents limitations.
+
 This directory contains the checked global-map extraction and its current evidence/coverage package. It does not replace or mutate the atlas or the protected Track B analyses.
 
 The current integrated scientific snapshot and evidence-linked readiness assessment is [`FINAL_BRAIN6_REPORT.md`](FINAL_BRAIN6_REPORT.md); its report provenance is recorded in `FINAL_BRAIN6_REPORT.provenance.json`. The report is explicitly provisional while the separate roundoff LAVA family continues.

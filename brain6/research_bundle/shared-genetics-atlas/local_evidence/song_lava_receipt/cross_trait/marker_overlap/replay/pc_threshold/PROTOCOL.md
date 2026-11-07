@@ -1,0 +1,5 @@
+# Fixed-marker LD truncation sensitivity
+
+Written before running this diagnostic. Use the same 2,741-marker FI–insomnia locus 464 input and pinned runtime as the retained-failure replay. Hold the summary statistics, sample sizes, reference, overlap input, marker support, locus and seed fixed; rerun with `prune.thresh` values 95, 97, 98, 99 and 99.5, setting `drop.failed=FALSE`. This parameter controls retained LD-variance percentage in the inspected implementation; verify the actual component counts and retained markers. Record all results and independently check that the 99 setting reproduces the earlier replay. Do not calculate bivariate correlation.
+
+This is a post-selected, one-locus numerical sensitivity, not a prespecified family-level test. The thresholds were chosen to inspect the LD truncation effect after observing support instability; a positive variance or stable result does not establish valid calibration or justify changing the frozen analysis. No individual markers, underlying biological cause, local overlap or original QC gate can be resolved by this exercise alone.

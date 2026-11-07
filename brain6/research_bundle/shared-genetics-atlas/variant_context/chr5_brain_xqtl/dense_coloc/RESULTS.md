@@ -1,0 +1,24 @@
+# Chromosome 5 brain-cell expression–GWAS colocalization pilot
+
+In this **post-selected single-signal model**, the dominant ADHD association at the rs4916723 region appears distinct from the selected brain-cell expression signals. For both tested genes, the model favors H3 (both traits associated, distinct dominant variants) over H4 (shared dominant variant). The insomnia comparisons are prior-sensitive and do not establish a shared causal gene. This is a different region from Brain6's stronger insomnia–ADHD chromosome 5 colocalization at 103.45–104.48 Mb.
+
+| Cell and expression target | GWAS | Matched SNPs | H3, distinct, p12=10⁻⁵ | H4, shared, p12=10⁻⁵ | H4, p12=10⁻⁶ |
+|---|---|---:|---:|---:|---:|
+| Astrocytes, LINC02060 | ADHD | 1,414 | 0.9969 | 0.00308 | 0.000309 |
+| Oligodendrocyte progenitors, TMEM161B-AS1 | ADHD | 1,414 | 0.9985 | 0.00150 | 0.000151 |
+| Astrocytes, LINC02060 | insomnia | 1,541 | 0.0933 | 0.8649 | 0.3903 |
+| Oligodendrocyte progenitors, TMEM161B-AS1 | insomnia | 1,541 | 0.0566 | 0.9178 | 0.5276 |
+
+These are posterior probabilities conditional on the model, chosen variants and priors, **not corrected p-values, estimates of gene mediation, or posterior probabilities that an individual SNP is causal**. The stronger-prior insomnia results fall substantially under the stricter prior. The ADHD results do not exclude a shared secondary signal: a one-signal model can mask multiple genetic or expression signals. Conversely, high insomnia H4 under one prior does not establish that a gene causes insomnia or that the same gene connects insomnia and ADHD. The two expression comparisons share aging-brain donor data and are not independent replications. No AlphaGenome prediction was used in the coloc model.
+
+## Inputs and checks
+
+From the open [NIAGADS ADSP FunGen xQTL Atlas NG00184.v1](https://dss.niagads.org/datasets/NG00184/), we retrieved the two complete chromosome 5 SNP association files and tabix indexes for the combined ROSMAP single-nucleus astrocyte and progenitor datasets. HTTP byte ranges allowed extraction of those files from the publisher's uncompressed archive without downloading the entire archive. All four retrieved files matched the publisher's MD5; the complete archive was not downloaded or hashed. The index timestamps preceded the data file because of download order; the downloaded index bytes matched the publisher MD5 and indexed lookups succeeded.
+
+The original GRCh37 region chr5:87185500–88185500 maps to GRCh38 chr5:87889683–88889683 at its endpoints; each GWAS marker was lifted individually. We excluded palindromic or invalid alleles and required a unique allele-and-position match. For LINC02060, 2,899 QTL rows were in the selected window, 2,439 had valid nonpalindromic statistics, and 1,541 insomnia or 1,414 ADHD records matched. For TMEM161B-AS1 the corresponding numbers were 2,898, 2,438, 1,541 and 1,414. These are incomplete subsets, not full gene cis or TAD coverage. The two exact rs4916723 cell-specific QTL records matched the earlier portal results; no source GWAS allele frequencies were available for an independent frequency check.
+
+The [protocol](PROTOCOL.md), [matching script](prepare.py), [matching and source receipt](matching_receipt.json), [posterior table](posteriors.tsv), [conditional top SNPs](top_conditional.tsv), [R model code](run.R), and [independent arithmetic check](verification.json) preserve the calculation. A separate Python implementation reproduced all eight posterior vectors within 5.9×10⁻¹⁵. That is an arithmetic check, not biological or statistical calibration. The target source files and matched GWAS-derived rows were kept on the SSD; at the latest check the SSD and its mounted work image were unavailable, so a rerun requires reconnecting the drive and remounting the image. The [publisher archive manifest](publisher_archive_manifest.csv), [file manifest](publisher_snuc_manifest.tsv), hashes and [range receipt](archive_ranges.tsv) document the retrieval.
+
+This post-hoc work uses two cell contexts from aging donors, a truncated regional window, single-signal effect and prior assumptions, and discovery GWAS with uncertain cohort overlap. Its associations may reflect LD tagging rather than function. Appropriate next steps are sample/ancestry and allele-frequency review, study-matched LD and multi-signal methods with LD–Z diagnostics, independent cohorts, and allele-specific experiments in relevant cells. It does not repair the failed LAVA quality-control gates.
+
+Data for this study were prepared, archived, and distributed by the National Institute on Aging Alzheimer's Disease Data Storage Site (NIAGADS) at the University of Pennsylvania (U24-AG041689), funded by the National Institute on Aging. We acknowledge the ADSP FunGen xQTL Atlas contributors and research participants; accession **NG00184**.

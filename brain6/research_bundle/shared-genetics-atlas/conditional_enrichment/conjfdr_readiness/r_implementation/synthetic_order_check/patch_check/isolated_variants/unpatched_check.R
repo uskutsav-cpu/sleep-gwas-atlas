@@ -1,0 +1,5 @@
+.libPaths(c('/Volumes/Brain6Work/cfdr-patched-lib','/Volumes/Brain6Work/lib','/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib',.libPaths()))
+library(cfdr.pleio);library(Matrix)
+m<-as(Matrix(matrix(c(0,0,0,0,0,1,0,1,0),3),sparse=TRUE),'generalMatrix')
+stopifnot(inherits(m,'dgCMatrix'),length(m[,1]@x)==0)
+answer<-which_col(m,1);stopifnot(length(answer)>0);cat('Unpatched which_col for empty column 1 returns:',answer,'; expected integer(0).\n')

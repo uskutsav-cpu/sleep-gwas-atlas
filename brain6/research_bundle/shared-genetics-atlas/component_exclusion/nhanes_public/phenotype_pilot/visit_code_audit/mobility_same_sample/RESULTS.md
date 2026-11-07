@@ -1,0 +1,18 @@
+# Mobility-skip assumptions on the same NHANES respondents
+
+**The working FI–adapted-Fried correlation is sensitive to how skipped walking questions are scored.** Among the same 2,986 eligible respondents aged 60 or older, assigning zero to two skipped walking items gives weighted r=**0.626**, while assigning one gives r=**0.715**. The paired difference is **0.089** (95% survey interval 0.082–0.097). Eligibility, respondents and survey design were identical across the two calculations.
+
+| Comparison | Assign skipped items 0 | Assign skipped items 1 | Paired difference, 1 minus 0 |
+|---|---:|---:|---:|
+| Working FI vs adapted Fried score | 0.626 | 0.715 | 0.089 |
+| Working FI vs sleep symptom | 0.357 | 0.352 | −0.0041 |
+| FI without sleep/fatigue vs sleep symptom | 0.296 | 0.295 | −0.00042 |
+| Modified FI vs adapted score without quarter-mile proxy | 0.590 | 0.603 | 0.0128 |
+
+The skipped questions occur for respondents reporting difficulty walking without equipment. Assigning zero is an intentionally extreme hypothetical and may be implausible; assigning one was the previous mobility sensitivity. Both hypotheses alter the working FI, and the quarter-mile item is also used in the adapted Fried score, so a change in their correlation can arise mechanically from shared scoring. These are not formal bounds: mixtures of individual assignments, other missing values and excluded respondents could produce results outside the two endpoints. Survey intervals quantify sampling uncertainty **conditional on the chosen scoring assumption**, not uncertainty about the missing answers. Neither score is a validated reconstruction of the project's FI or FFS, and this observational result does not measure genetic correlation, isolate a biological effect, or establish a sleep-excluded frailty GWAS.
+
+## Post-hoc FI–sleep contrast
+
+The difference `corr(full FI, sleep) − corr(FI without sleep and fatigue, sleep)` is **0.0606** under zero assignment and **0.0570** under one assignment. Using the same respondents and joint survey covariance, the change in this contrast is **−0.00367** (95% survey interval −0.00411 to −0.00322). The contrast changes less than the FI–adapted-Fried correlation, but this is not an equivalence test or a formal sensitivity bound. The full FI includes the sleep item being correlated with it, and removing two components changes the score and its denominator, so the difference is not a causal estimate or an isolated sleep-item effect. Both estimates are conditional on provisional scoring and this sample; they do not establish persistence of a genetic association after item exclusion. [Joint contrast results](paired_sleep_contrast_change.tsv) and the [two original paired contrasts](paired_contrasts.tsv) preserve the calculation.
+
+The [protocol](PROTOCOL.md), [correlations](correlations.tsv), [paired contrasts](paired_mobility.tsv), [counts](counts.tsv), [builder](build_run.py), [generated R code](run_generated.R), [build receipt](build_receipt.json), [run log](run.log) and [verification](verification.json) preserve the comparison. All 32 CDC input files matched saved SHA-256 receipts; the one-assignment reproduced the corrected earlier mobility results. Direct weighted calculations and finite-difference checks of the paired survey standard errors passed. An initial run encountered a coefficient-name collision before the paired output; its [error log](first_run_error.log) is retained and the corrected run completed. No participant-level rows were exported. These checks do not validate the scoring assumptions or represent causal or genetic evidence.

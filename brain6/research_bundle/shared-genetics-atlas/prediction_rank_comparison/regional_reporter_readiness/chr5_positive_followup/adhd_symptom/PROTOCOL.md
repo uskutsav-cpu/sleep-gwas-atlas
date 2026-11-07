@@ -1,0 +1,5 @@
+# rs12659965: childhood ADHD-symptom lookup
+
+Before querying the result, request the previously used GWAS Catalog harmonized childhood ADHD-symptom file GCST90568440 at GRCh38 chr5:104568698. Retain all returned rows, match rsID plus the exact G/A allele pair uniquely, and report the source p, beta, SE and effect allele only if valid. Additional alleles, duplicates, absent matches or invalid values remain explicit. Record metadata and output hashes, source URL, and exact indexed query; no participant-level data or AlphaGenome values are used.
+
+This is a post-selected related-phenotype follow-up of a reporter candidate, not an independent clinical-diagnosis replication. The original discovery ADHD effect is unavailable for this candidate, so no discovery-direction agreement can be claimed. Do not treat a nonsignificant result as proof of no association or apply a single-test correction as if the wider search were prospectively frozen. Two-trait max-p is descriptive only, with valid inputs and unresolved source overlap, and does not establish a shared causal variant or gene. The full remote file and index are not verified by a bounded query.

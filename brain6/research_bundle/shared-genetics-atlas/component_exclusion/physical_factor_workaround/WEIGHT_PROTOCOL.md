@@ -1,0 +1,5 @@
+# Descriptive weight sensitivity
+
+Specified 6 November 2026 after the equal-weight index results. Keep that index unchanged. For a descriptive sensitivity, calculate the possible point-estimate correlations for all nonnegative weights on the same three standardized physical genetic components. Normalize weights to sum to one; the correlation is w'r/sqrt(w'Rw). Enumerate all nonempty supports and eligible interior stationary directions ±R_support⁻¹r_support, including singleton vertices. Validate the extrema against a 0.01-step simplex grid. These extrema optimize on observed insomnia correlations, so report them only as conditional mathematical ranges without p values or confidence claims; do not select either optimized weighting as a new preferred index.
+
+Also illustrate a fixed path: activity weight t and equal walking/grip weights (1−t)/2, at t=0,0.25,1/3,0.5,0.75,1. Report all path values for both sources. This is a post-hoc definition sensitivity, not independent validation, clinical weight selection, a latent factor, or a sleep/exhaustion-deleted frailty GWAS.

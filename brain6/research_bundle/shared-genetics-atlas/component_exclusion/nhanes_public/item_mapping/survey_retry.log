@@ -1,0 +1,32 @@
+trying URL 'https://cloud.r-project.org/src/contrib/survey_4.5.tar.gz'
+Content type 'application/x-gzip' length 2417046 bytes (2.3 MB)
+==================================================
+downloaded 2.3 MB
+
+* installing *source* package ‘survey’ ...
+** this is package ‘survey’ version ‘4.5’
+** package ‘survey’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 21.0.0 (clang-2100.1.1.101)’
+using SDK: ‘MacOSX26.5.sdk’
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Volumes/Brain6NHANES/Rlib/Rcpp/include' -I'/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++20 -I"/opt/homebrew/Cellar/r/4.6.1/lib/R/include" -DNDEBUG  -I'/Volumes/Brain6NHANES/Rlib/Rcpp/include' -I'/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib/RcppArmadillo/include' -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/include    -fPIC  -g -O2   -c arma_multistage.cpp -o arma_multistage.o
+clang++ -std=gnu++20 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -L/opt/homebrew/opt/gettext/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/lib -o survey.so RcppExports.o arma_multistage.o -L/opt/homebrew/Cellar/r/4.6.1/lib/R/lib -lR
+installing to /Volumes/Brain6NHANES/Rlib/00LOCK-survey/00new/survey/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (survey)
+
+The downloaded source packages are in
+	‘/Volumes/Brain6Sim/Rtmph0LQSF/downloaded_packages’

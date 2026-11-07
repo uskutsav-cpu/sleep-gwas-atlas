@@ -1,0 +1,9 @@
+# Synthetic test of a local ordering correction
+
+A separate copy of `cfdr.pleio` commit `76d5085e6d3f3ca9576d5d7564d2acf11bcfd021` was patched to use a genomic sorting permutation in place of rank values. The unmodified source and installation were retained. The [one-line patch](order.patch) and patched installation are local research work, not an upstream release.
+
+A synthetic test with **44 variants across 22 chromosomes** checked three different input permutations and 10 pruning iterations. In each run, the trait rows, saved reference variant rows and concatenated chromosome-matrix identifiers matched genomic order; effect values stayed paired with the correct IDs. With a fixed seed, the pruning indices were identical across permutations, and each synthetic linked pair retained exactly one variant per iteration. The [test code](check.R) and [log with session details](run.log) reproduce these assertions. Source file SHA-256: original `2c4c0c3444902b915cb3c1821333a1f1635f2d979520f0cc268849b8d547e289`; patched `58316845b29f2a01266e303ccf992c34bc5c8ae9316b0e08edbb1d99fbb838cf`.
+
+This fixes the specific failure demonstrated in the [previous synthetic example](../RESULTS.md) for this test design. It is not a full code review or production validation: the example has simple linked pairs, no real reference, no ambiguous alleles or missing markers, and no complete conditional/conjunctional FDR calculation. It does not validate calibration, handling of sample overlap, or memory use. In particular, the package's sample-overlap correction remains unimplemented. No real GWAS data or AlphaGenome outputs were used in these tests.
+
+A [subsequent isolated-variant test](isolated_variants/RESULTS.md) found an additional empty-column issue and notes that this earlier fixture used symmetric matrix storage. A separate two-patch copy passes the later general-sparse-matrix test; full validation remains open.

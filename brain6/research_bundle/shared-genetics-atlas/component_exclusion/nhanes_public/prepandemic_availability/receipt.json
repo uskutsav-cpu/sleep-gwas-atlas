@@ -1,0 +1,77 @@
+{
+  "files": {
+    "P_DEMO": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_DEMO.xpt",
+      "sha256": "2e46c6c26bf77cd8989f64011ace12cbf42c0f3e03414eb59acc5328c8f87913",
+      "bytes": 3614720,
+      "rows": 15560,
+      "columns_used": [
+        "SEQN",
+        "RIDAGEYR",
+        "WTMECPRP",
+        "SDMVSTRA",
+        "SDMVPSU"
+      ]
+    },
+    "P_SLQ": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_SLQ.xpt",
+      "sha256": "6eb2495efaefddbebe9b39cf2f1fe8d8ce904d80addc1c5da62540921461ae2b",
+      "bytes": 777200,
+      "rows": 10195,
+      "columns_used": [
+        "SEQN",
+        "SLD012"
+      ]
+    },
+    "P_WHQ": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_WHQ.xpt",
+      "sha256": "aa7085172b874231faa710b1d611c38e4c9bcae4a4bd21cfc428b787f5ea51dd",
+      "bytes": 2860320,
+      "rows": 10195,
+      "columns_used": [
+        "SEQN",
+        "WHD020",
+        "WHD050",
+        "WHQ060"
+      ]
+    },
+    "P_PAQ": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_PAQ.xpt",
+      "sha256": "d0e13cebf96181949e983ab58d14c58689e801e8711d366d2b5daab3c7b9ee65",
+      "bytes": 1321440,
+      "rows": 9693,
+      "columns_used": [
+        "SEQN",
+        "PAQ650",
+        "PAQ665"
+      ]
+    },
+    "P_DPQ": {
+      "url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_DPQ.xpt",
+      "sha256": "b20ee66082eaea3d6d05c2699c142e9c49cf7737587364a477b82351cb8b9866",
+      "bytes": 791280,
+      "rows": 8965,
+      "columns_used": [
+        "SEQN",
+        "DPQ040"
+      ]
+    }
+  },
+  "counts": {
+    "age_60_plus": 3422,
+    "weight_pair_usable": 3333,
+    "recreational_activity_pair_usable": 3420,
+    "energy_item_usable": 2870,
+    "weekday_sleep_usable": 3382,
+    "at_least_5pct_loss": 804,
+    "5pct_loss_and_10lb_or_more": 749,
+    "5pct_loss_and_less_than_10lb": 55,
+    "5pct_loss_with_intentionality_answer": 749,
+    "5pct_loss_without_intentionality_answer": 55,
+    "5pct_loss_unintentional_answer": 344,
+    "5pct_loss_intentional_answer": 405
+  },
+  "pandas_version": "3.0.5",
+  "sas_zero_handling": "Finite near-zero values smaller than 1e-60 were normalized to zero after SAS XPT decoding; CDC DPQ040 code 0 otherwise appeared approximately 5.4e-79.",
+  "limitation": "Unweighted descriptive counts; input bytes held in memory; no person-level data saved."
+}

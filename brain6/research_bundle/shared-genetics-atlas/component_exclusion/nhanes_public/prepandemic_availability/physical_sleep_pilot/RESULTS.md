@@ -1,0 +1,15 @@
+# Sleep duration versus partial physical scores in later NHANES data
+
+In a survey-weighted exploratory analysis of **2,744 adults aged 60 or older**, usual weekday sleep duration had a correlation of **−0.033** (95% interval −0.126 to +0.060) with a two-item working score of unintentional weight loss and recreational inactivity. Adding the low-energy item gave **−0.043** (−0.135 to +0.050). The same-person difference in correlations was **−0.010** (−0.042 to +0.023). These imprecise estimates do not establish equivalence or show that exhaustion is irrelevant.
+
+| Handling of people with ≥5% loss but unknown intentionality | Complete-case n | Two-item r | Three-item r | Three minus two |
+| --- | ---: | ---: | ---: | ---: |
+| Exclude them | 2,744 | −0.033 | −0.043 | −0.010 |
+| Assume no unintentional loss | 2,784 | −0.029 | −0.040 | −0.010 |
+| Assume unintentional loss | 2,784 | −0.022 | −0.034 | −0.012 |
+
+The second and third rows are hypothetical coding sensitivities, not observed intentionality. The sample changes from the primary row, so comparisons between rows are descriptive. Both scores are **partial working constructs**, not a validated Fried phenotype; grip strength and walking speed are absent. The two scores differ in content and scale, and the paired correlation difference is not a causal or isolated contribution of exhaustion. The sample requires complete sleep, energy, activity and score data, so selection and residual differences in health or demographics can affect results. The outcome is weekday main-sleep-period duration, not insomnia, and a Pearson correlation can miss nonlinear relationships. The wide intervals and sample restrictions make a null biological conclusion inappropriate.
+
+The analysis uses the CDC's pre-pandemic exam weights and stratified, clustered survey design with 25 design degrees of freedom. Confidence intervals use t critical values and survey linearization. It is **phenotypic**, cross-sectional and unadjusted; it cannot produce a genetic correlation, item-excluded GWAS, causal effect or independent validation of the UKB findings. It also does not reproduce the [Zhang et al. study](https://doi.org/10.3390/healthcare14213580), whose outcome and analysis population differ. The [parent audit](../RESULTS.md) describes the intentionality skip and source-file availability.
+
+The [pre-run protocol](PROTOCOL.md), [memory-only input preparation](prepare.py), [survey analysis](analyze.R), [all estimates](results.tsv), and [independent weighted-point-estimate check](verify.R) document the calculation. The independently calculated weighted correlations and sample counts matched all reported scenarios; this verifies point-estimate arithmetic, not survey SE calibration or phenotype validity. Source file SHA-256 values were checked against the parent receipt on each run. The first attempted sensitivity run failed because logical flags were read as character values; it produced no accepted result. The flag was converted to numeric and the analysis rerun. No person-level derived data were saved.

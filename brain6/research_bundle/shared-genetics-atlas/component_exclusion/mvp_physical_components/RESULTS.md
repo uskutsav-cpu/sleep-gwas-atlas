@@ -1,0 +1,14 @@
+# Clinical insomnia and physical function: exploratory genetic correlations
+
+The MVP European-ancestry clinical-insomnia GWAS was compared by LDSC with two public UK Biobank physical-function GWAS. Both comparisons used **1,030,168 matched, valid-allele SNPs**.
+
+| Physical outcome | Genetic correlation (SE) | p | Physical-trait observed h² (SE) | h² intercept (SE) | Cross-trait intercept (SE) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Usual walking pace | −0.2169 (0.0308) | 1.829×10⁻¹² | 0.0813 (0.0032) | 1.0219 (0.0109) | −0.0147 (0.0071) |
+| Left grip strength, rank normalized | −0.1174 (0.0335) | 0.0005 | 0.1152 (0.0043) | 1.0394 (0.0123) | −0.0038 (0.0083) |
+
+Both p-values pass the prespecified 0.025 threshold for this two-test exploratory family; it does not correct for the wider atlas search. Assuming the source traits and allele conventions have their documented increasing directions, negative estimates are consistent with genetic effects toward more insomnia aligning with lower pace or grip. The original physical-source processing has not been independently reconstructed from raw phenotypes. Correlations do not establish causation, an individual-level effect, specific shared variants, or independent replication. We did not formally test differences between outcomes or compare them statistically with [earlier questionnaire and registry-insomnia results](../physical_function_ldsc/insomnia_source_sensitivity/RESULTS.md), whose source cohorts and matched support differ.
+
+The MVP observed-scale h² was 0.0496 (SE 0.0032), with elevated intercept 1.1338 (0.0095). The intercept may reflect multiple sources of model mismatch and cannot identify a particular cause. Participant and relative overlap between MVP and UK Biobank is not established, nor is independence from the other atlas studies. MVP Z values were reconstructed from reported p-values and rounded odds-ratio direction; missing direction and duplicate eligible rsIDs were excluded, and a constant effective sample size was approximated. See the [MVP audit](../../replication/mvp_finngen_genomewide/RESULTS.md). The walking and grip sample sizes are study-level constants, not independently verified per-variant counts. The walking question excludes participants unable to walk; these measures are not the full Fried components or an exhaustion-excluded frailty score.
+
+The two input files each contained 1,096,648 rows in identical SNP order and allele orientation; their compressed SHA-256 hashes matched the earlier [input audit](../physical_function_ldsc/input_receipt.json). This establishes identical marker support here, not identical participants. The complete MVP [stream receipt](stream-20261029T052345-99912.json) exactly matched the previously audited receipt. The [protocol](PROTOCOL.md), [script](run.sh), and [LDSC log](ldsc-20261029T052345-99912.log) preserve the procedure and diagnostics. No AlphaGenome output was used for model training.

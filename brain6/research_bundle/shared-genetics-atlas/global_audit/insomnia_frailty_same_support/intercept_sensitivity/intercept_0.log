@@ -1,0 +1,68 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/intercept_sensitivity/intercept_0 \
+--rg /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz,/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--intercept-gencov 0,0 
+
+Beginning analysis at Tue Oct 27 16:09:30 2026
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1134953 SNPs remain.
+After merging with regression SNP LD, 1134953 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+After merging with summary statistics, 1134953 SNPs remain.
+1134953 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.054 (0.0025)
+Lambda GC: 1.6259
+Mean Chi^2: 1.7194
+Intercept: 1.1877 (0.0144)
+Ratio: 0.261 (0.0201)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.02 (0.0015)
+Lambda GC: 1.2398
+Mean Chi^2: 1.2721
+Intercept: 1.0769 (0.0094)
+Ratio: 0.2828 (0.0346)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0435 (0.0012)
+Mean z1*z2: 0.3807
+Intercept: constrained to 0.
+
+Genetic Correlation
+-------------------
+Genetic Correlation: nan (nan) (rg out of bounds) 
+Z-score: nan (nan) (rg out of bounds)
+P: nan (nan) (rg out of bounds)
+WARNING: rg was out of bounds.
+This often means that you have constrained the intercepts to the wrong values.
+
+
+Summary of Genetic Correlation Results
+                                                                      p1                                                                    p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int gcov_int_se
+/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz 1.3239 0.0552 23.9947 0.0000  0.0200     0.0015  1.0769     0.0094    0.0000          NA
+
+Analysis finished at Tue Oct 27 16:09:42 2026
+Total time elapsed: 11.76s

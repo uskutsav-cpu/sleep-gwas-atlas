@@ -1,0 +1,12 @@
+# Effect of source-statistic representation on PLACO+
+
+For each trait pair, the same hash-selected sample of 2,191 common-support SNPs was evaluated three ways using the official PLACO+ function and the same nuisance parameters estimated from the full rounded-Z support: rounded p-derived Z, unrounded signed Z reconstructed from the source-reported marginal p-value, and aligned beta/SE (Wald Z). All 13,146 integrations returned finite in-range values; no extreme inputs were encountered. This is a sensitivity analysis, not a new association discovery or null-calibration test.
+
+| Pair | Median absolute log₁₀-p difference: rounded vs source-p Z | 95th percentile | Median absolute log₁₀-p difference: source-p vs Wald Z | 95th percentile | Source-p vs Wald classifications differing at nominal p<0.05 |
+|---|---:|---:|---:|---:|---:|
+| Insomnia–FI | 0.000144 | 0.000456 | 0.00207 | 0.01151 | 2 / 2,191 |
+| Insomnia–FFS | 0.000149 | 0.000441 | 0.00632 | 0.03622 | 6 / 2,191 |
+
+The maximum absolute log₁₀ differences were 0.00096 and 0.00114 for rounding, versus 0.0317 and 0.0989 for source-p vs Wald in FI and FFS respectively. FI had 130 SNPs below 0.05 for source-p Z and 132 for Wald Z; FFS had 108 for both, despite six individual changes. These are descriptive counts in a sample that can contain true associations; they are not type-I error rates. Their 0.05 threshold does not validate behavior at the approximately 2.2×10⁻⁸ genome-wide screening threshold.
+
+The different Z constructions may reflect different source models or input precision. The FFS BOLT-LMM association p and beta/SE can derive from different modeling approximations, but the exact column mapping remains unverified. The Wald sensitivity reuses nuisance parameters estimated from the rounded p-derived Z, instead of estimating them for Wald Z; therefore it is not a complete alternative calibrated scan and does not demonstrate which representation is correct. At identified candidates, repeat the comparison using source-specific documentation, full precision data, justified nuisance estimates, and independent cohorts. See `PRECISION_AUDIT.md` for source provenance and statistical context, `PRECISION_SENSITIVITY_PROTOCOL.md` for the pre-full-run plan, and `precision_sensitivity.tsv` and `precision_sensitivity.R` for all numerical results and code. The 30-SNP-per-pair smoke test preceded the full plan and is retained separately.

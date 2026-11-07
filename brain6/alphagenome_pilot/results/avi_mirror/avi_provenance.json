@@ -1,0 +1,63 @@
+{
+  "mirror_revision": "04820dafc5af625d1d941e080b5ae7d2b17dae87",
+  "source_url": "https://huggingface.co/datasets/just-dna-seq/alphagenome_avi/resolve/04820dafc5af625d1d941e080b5ae7d2b17dae87/",
+  "source_dataset": "third-party re-encoding of AlphaGenome AVI SNV static download",
+  "source_artifact_sha256_claimed_by_mirror": "sha256:46434eab0ddc73ef9c8020df56b9ae2e43d815ce7ce7faa47eab988f25084336",
+  "source_artifact_not_independently_downloaded": true,
+  "evidence_sha256": "901472a7e3235a3f08fd375b9b6327be74a9f4209cc002f501f69f7fe0975c22",
+  "output_sha256": "f3db7c3eb4211151b044dbab4c778dba5a8abf4d4bb98a4c6719cb858684baa5",
+  "n_rows": 425,
+  "counts": {
+    "SCORED_MIRROR_EXPLORATORY": 425
+  },
+  "duckdb_version": "2.0.0",
+  "layout_discrepancy": "Mirror README describes long-format alt and raw_score_e5; pinned parquet contains alt0/alt1/alt2. Ordering inferred as A,C,G,T excluding reference and checked against cited examples for all four reference bases.",
+  "validation_anchors": [
+    [
+      "chr1",
+      10001,
+      "T",
+      [
+        -3868,
+        -3200,
+        -3720
+      ]
+    ],
+    [
+      "chr1",
+      10002,
+      "A",
+      [
+        -3583,
+        -3301,
+        -3668
+      ]
+    ],
+    [
+      "chr5",
+      104565723,
+      "C",
+      [
+        -5408,
+        -5977,
+        -5709
+      ]
+    ],
+    [
+      "chr5",
+      104628884,
+      "G",
+      [
+        -41460,
+        -42840,
+        -42260
+      ]
+    ]
+  ],
+  "independent_anchor_sources": [
+    "https://switzerlandomics.ch/blog/2026-09-09-alphagenome-atlas/",
+    "https://github.com/broadinstitute/SpliceAI-lookup/tree/main/google_cloud_run_services/score_lookup",
+    "https://www.medrxiv.org/content/10.64898/2026.09.16.26363192v1.full"
+  ],
+  "limitations": "Unverified mirror, row-group responses not source-file hash verified; PHRED is interval reconstructed from knots; scores not tissue-specific or causal; do not train genetic variant effect models."
+}

@@ -1,0 +1,44 @@
+{
+  "rows_streamed_before_read_error": 1117155,
+  "structural_mismatch_counts": {
+    "malformed_columns": 64460,
+    "invalid_status": 67551,
+    "input_key_mismatch": 67631,
+    "input_z_mismatch": 20011,
+    "marginal_p_mismatch": 10106,
+    "unparseable_numeric": 64801,
+    "invalid_placo_p": 2
+  },
+  "first_mismatch": {
+    "malformed_columns": {
+      "row_1based": 1049524,
+      "detail": "{'SNP': 'rs842824', 'A1': 'A', 'A2': 'G', 'Z_insomnia': '-0.451', 'Z_frailty': '-1.015', 'P_insomnia': '0.651989548983852', 'P_frailty': '0.310105827504899', 'P_PLACO_plus': '0.528"
+    },
+    "invalid_status": {
+      "row_1based": 1049524,
+      "detail": "None"
+    },
+    "input_key_mismatch": {
+      "row_1based": 1049525,
+      "detail": "258206201832"
+    },
+    "input_z_mismatch": {
+      "row_1based": 1049525,
+      "detail": "258206201832"
+    },
+    "marginal_p_mismatch": {
+      "row_1based": 1049525,
+      "detail": "('258206201832', 'P_insomnia')"
+    },
+    "unparseable_numeric": {
+      "row_1based": 1049526,
+      "detail": "rs1.44"
+    },
+    "invalid_placo_p": {
+      "row_1based": 1049968,
+      "detail": "28"
+    }
+  },
+  "terminal_read_error": "BadGzipFile: CRC check failed 0x6cc7c9cb != 0x2d61b62f",
+  "interpretation": "Structural checks do not validate PLACO p-values even where fields appear plausible. CRC failure invalidates the complete file; retain it only as forensic evidence and use the full rerun."
+}

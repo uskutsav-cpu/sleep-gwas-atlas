@@ -1,0 +1,15 @@
+#!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) != 1) stop('Usage: Rscript plot.R RESULTS_DIR')
+d <- read.delim(file.path(args[1], 'variant_evidence.tsv'), check.names=FALSE, stringsAsFactors=FALSE)
+x <- d[d$candidate_locus_id == 'placo_insomnia__adhd_chr5_103447968_104447968', ]
+stopifnot(nrow(x)==71)
+svg(file.path(args[1], 'chr5_pip.svg'), width=10, height=4.8, pointsize=10)
+par(mar=c(4.6, 4.5, 3.2, 1.5), las=1)
+plot(NA, xlim=c(103.447968,104.447968), ylim=c(0,0.32), xlab='GRCh37 position on chromosome 5 (Mb)', ylab='Conditional ABF posterior probability', main='Chromosome 5: exploratory single-signal ABF posteriors', xaxt='n', bty='l')
+axis(1,at=seq(103.5,104.4,by=.1),labels=seq(103.5,104.4,by=.1),cex.axis=.75)
+grid(col='#e6ebf2')
+points(x$pos_grch37_1based/1e6, x$insomnia_conditional_abf_pip, pch=16, col=adjustcolor('#1963a6',alpha.f=.75))
+points(x$pos_grch37_1based/1e6, x$adhd_conditional_abf_pip, pch=17, col=adjustcolor('#d66a32',alpha.f=.75))
+legend('topright',legend=c('Insomnia','ADHD'),pch=c(16,17),col=c('#1963a6','#d66a32'),bty='n',horiz=TRUE)
+dev.off()

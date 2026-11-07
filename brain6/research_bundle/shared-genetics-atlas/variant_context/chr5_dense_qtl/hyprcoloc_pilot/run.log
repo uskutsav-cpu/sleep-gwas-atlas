@@ -1,0 +1,65 @@
+R: R version 4.6.1 (2026-06-24) 
+HyPrColoc: 0.0.2 
+Documented test dataset smoke result:
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration             traits posterior_prob regional_prob candidate_snp
+1         1 T1, T2, T3, T4, T5         1.0000             1    rs11591147
+2         2         T6, T7, T8         0.9164             1    rs12117612
+3         3            T9, T10         0.9018             1     rs7524677
+  posterior_explained_by_snp dropped_trait
+1                     1.0000            NA
+2                     0.4197            NA
+3                     0.0763            NA
+
+
+SETTING: default prior.c 0.02 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration                     traits posterior_prob regional_prob
+1         1 expression, insomnia, adhd         0.7312        0.9999
+       candidate_snp posterior_explained_by_snp dropped_trait
+1 chr5_104655775_C_A                      0.889            NA
+
+
+SETTING: prior_001 prior.c 0.01 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration                     traits posterior_prob regional_prob
+1         1 expression, insomnia, adhd         0.5775        0.9998
+       candidate_snp posterior_explained_by_snp dropped_trait
+1 chr5_104655775_C_A                      0.889            NA
+
+
+SETTING: prior_0005 prior.c 0.005 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration         traits posterior_prob regional_prob      candidate_snp
+1         1 insomnia, adhd         0.9174        0.9999 chr5_104628884_G_A
+  posterior_explained_by_snp dropped_trait
+1                     0.3303            NA
+
+
+SETTING: strict_threshold prior.c 0.02 threshold 0.9 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration         traits posterior_prob regional_prob      candidate_snp
+1         1 insomnia, adhd          0.978             1 chr5_104628884_G_A
+  posterior_explained_by_snp dropped_trait
+1                     0.3303            NA
+

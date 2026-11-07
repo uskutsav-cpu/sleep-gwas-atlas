@@ -1,0 +1,18 @@
+# UKB hospital frailty with two insomnia definitions: conjunction screen
+
+On 1,020,621 previously harmonized HapMap3 markers, **no SNP–pair passed Bonferroni, BH or BY correction** across the combined 2,041,242 questionnaire-insomnia/HFRS and registry-insomnia/HFRS tests. The smallest BH-adjusted value was 0.624; the Bonferroni threshold was 2.45×10⁻⁸. This limited-support screen is conservative and does not show that sleep and hospital frailty lack shared genetics.
+
+| Insomnia source | Smallest max-p | Marker | HFRS p | Insomnia p | Bonferroni-adjusted |
+| --- | ---: | --- | ---: | ---: | ---: |
+| Questionnaire | 3.30×10⁻⁷ | rs1476535, chr7 | 3.94×10⁻⁹ | 3.30×10⁻⁷ | 0.673 |
+| Registry | 8.42×10⁻⁵ | rs7714971 | 8.42×10⁻⁵ | 2.12×10⁻⁵ | 1 |
+
+All p-values in the table are reconstructed from the stored Z scores with the small rounding guards described below. rs1476535 lies in a region [already selected in Brain6](../../pathway_hypotheses/GENE_PATHWAY_REVIEW.md); its appearance is not independent replication or evidence that FOXP2 is causal. Different smallest p-values or threshold outcomes are not a test of whether the two insomnia phenotypes differ in their genetic effects.
+
+The max-p is an intersection–union test for marginal association with both traits when both source tests are valid, including under sample overlap. It does not require independent SNPs for Bonferroni, but neither it nor the BH/BY correction establishes a common causal variant, local genetic correlation, mediation or direction of causation. This is not PLACO+ or enrichment-based conjunctional FDR. BH's dependence conditions were not verified; BY permits arbitrary dependence given valid p-values. FI includes sleep and fatigue items, FFS includes exhaustion, while HFRS is hospital-ascertained and is not an item-excluded FI or FFS. The questionnaire and UKB HFRS studies share the UK Biobank source; actual overlap is unknown. Finnish and UKB phenotype and reference differences also limit cross-source comparisons. UKB HFRS reports N=407,643 per row, whereas the publication and release description state 407,463. Source-model calibration and exact allele/build provenance are not established by this scan.
+
+## Reproducibility and checks
+
+The [pre-result protocol](PROTOCOL.md) fixes the two-pair family and uses the existing ordered common-support inputs from the [UKB HFRS audit](../../global_audit/ukb_hfrs_public/RESULTS.md). All source checksums matched, all 1,020,621 rsIDs were unique and aligned in order, and no allele-pair mismatches or invalid test slots were recorded. The stored insomnia Z values have three decimals; we subtract 0.0005 from their absolute values before calculating two-sided normal tails. We subtract 10⁻⁹ from the absolute HFRS Z values as a guard for their displayed precision. These adjustments do not address upstream GWAS calibration. The results use normal-tail p-values from saved Z, which need not reproduce a source model's full-precision p-value.
+
+The [screen](screen.py), [summary](summary.json), [top 100 per source](top100_per_source.tsv), and [Bonferroni hits file](bonferroni_hits.tsv) preserve results and checksums. An [independent scan](independent_check.py) rechecked all 200 retained ranked records and their aligned signs; even without the conservative Z guards it obtained no Bonferroni or BH crossings and the same leading markers ([receipt](independent_check.json)). This arithmetic check is not a statistical calibration test. The family was selected after earlier analyses and is separate from the [FinnGen HFRS screen](../RESULTS.md) and [FI/FFS conjunction screen](../../conjunction_screen/RESULTS.md); it does not provide project-wide multiplicity control.

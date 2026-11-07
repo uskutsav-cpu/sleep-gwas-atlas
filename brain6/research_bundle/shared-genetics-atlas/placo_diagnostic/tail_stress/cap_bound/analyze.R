@@ -1,0 +1,5 @@
+args<-commandArgs(TRUE);stopifnot(length(args)==1);root<-args[1]
+x<-read.delim(file.path(root,'completed_audit','candidate_source_matches.tsv')); stopifnot(nrow(x)==82,all(x$sensitivity_eligible=='YES'),all(is.finite(x$sleep_z_p)),all(is.finite(x$frailty_z_p)),!anyDuplicated(x[c('pair','SNP')]))
+cap<-sqrt(80);alpha<-.05/(2*1138262);z1<-abs(x$sleep_z_p);z2<-abs(x$frailty_z_p);stopifnot(all(z1<=cap),all(z2<=cap));t<-z1*z2;bound<-2*pnorm(-t/cap);maxp<-pmax(2*pnorm(-z1),2*pnorm(-z2));stopifnot(all(bound+1e-15>=maxp),all(abs(maxp-pmax(x$sleep_p,x$frailty_p))<1e-12))
+y<-data.frame(pair=x$pair,SNP=x$SNP,product=t,cap_bound=bound,maxp=maxp,cap_pass=bound<=alpha,maxp_pass=maxp<=alpha); write.table(y,file.path(root,'tail_stress','cap_bound','candidates.tsv'),sep='\t',quote=FALSE,row.names=FALSE)
+cat('alpha',alpha,'product_cutoff',cap*qnorm(alpha/2,lower.tail=FALSE),'minimum cap bound',min(bound),'minimum max-p',min(maxp),'cap passes',sum(bound<=alpha),'maxp passes',sum(maxp<=alpha),'\n');print(y[which.min(bound),]);cat('R version',R.version.string,'\n')

@@ -1,0 +1,2 @@
+a<-commandArgs(trailingOnly=TRUE);d<-read.csv(a[1],stringsAsFactors=FALSE);d$fp<-match(d$fried_category,c('robust','prefrail','frail'));d$fi<-match(d$fi_category,c('robust','mild','moderate_severe'));stopifnot(nrow(d)==9L,!anyNA(d$fp),!anyNA(d$fi),sum(d$n)==383845L)
+x<-rep(d$fp,d$n);y<-rep(d$fi,d$n);rho<-cor(x,y,method='spearman');stopifnot(abs(rho-0.28447194444596086)<1e-12);print(data.frame(n=length(x),spearman_rho=unname(rho),fried_frail_n=sum(d$n[d$fp==3]),fi_moderate_or_severe_n=sum(d$n[d$fi==3]),both_n=sum(d$n[d$fp==3 & d$fi==3])))

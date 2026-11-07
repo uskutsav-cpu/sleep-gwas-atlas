@@ -1,0 +1,69 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/ukb_hfrs_public/ukb_registry \
+--rg /Volumes/Brain6Work/ukb_hfrs_public_20261028.sumstats.gz,/Volumes/Brain6Work/ukb-hfrs-comparison-20261028/registry.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Wed Oct 28 12:40:33 2026
+Reading summary statistics from /Volumes/Brain6Work/ukb_hfrs_public_20261028.sumstats.gz ...
+Read summary statistics for 1020621 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1020621 SNPs remain.
+After merging with regression SNP LD, 1020621 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Brain6Work/ukb-hfrs-comparison-20261028/registry.sumstats.gz ...
+Read summary statistics for 1020621 SNPs.
+After merging with summary statistics, 1020621 SNPs remain.
+1020621 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.033 (0.0017)
+Lambda GC: 1.2869
+Mean Chi^2: 1.3121
+Intercept: 1.0422 (0.0099)
+Ratio: 0.1353 (0.0316)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0201 (0.0016)
+Lambda GC: 1.2431
+Mean Chi^2: 1.2758
+Intercept: 1.0769 (0.0097)
+Ratio: 0.279 (0.0351)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0097 (0.0011)
+Mean z1*z2: 0.0902
+Intercept: 0.0013 (0.0055)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3755 (0.0416)
+Z-score: 9.02
+P: 1.8811e-19
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/ukb_hfrs_public/ukb_registryukb_hfrs_public_20261028.sumstats.gz_registry.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/ukb_hfrs_public/ukb_registryukb_hfrs_public_20261028.sumstats.gz_registry.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/ukb_hfrs_public/ukb_registryukb_hfrs_public_20261028.sumstats.gz_registry.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                      p1                                                                    p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Brain6Work/ukb_hfrs_public_20261028.sumstats.gz /Volumes/Brain6Work/ukb-hfrs-comparison-20261028/registry.sumstats.gz 0.3755 0.0416 9.0200 0.0000  0.0201     0.0016  1.0769     0.0097    0.0013       0.0055
+
+Analysis finished at Wed Oct 28 12:40:40 2026
+Total time elapsed: 7.07s

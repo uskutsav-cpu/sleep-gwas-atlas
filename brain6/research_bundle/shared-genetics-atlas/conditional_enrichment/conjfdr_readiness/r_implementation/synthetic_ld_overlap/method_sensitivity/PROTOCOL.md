@@ -1,0 +1,5 @@
+# Post-hoc conditional-FDR mechanism diagnostic
+
+For seed 69001 with uncorrelated study errors, independently reconstruct the previously tested synthetic input and five-pruning index. Evaluate four configurations on the same initialized object: default; no monotonic adjustment; no smoothing; and no genomic correction. For each, attempt both conditional directions and retain finite/nonfinite counts, threshold crossings, minimum conjunction value and full raw p-values plus directional FDR at any default threshold crossing. Capture errors and warnings rather than silently replacing failed values. Compare the default result with its previous saved run before interpreting any sensitivity.
+
+This explores one selected simulated dataset and related algorithm options; differences do not prove which part is erroneous, provide a calibrated correction, or generalize to real GWAS. No real data are used. The reference and sample-overlap limitations of the parent test remain. The initializer must use a new SSD destination.

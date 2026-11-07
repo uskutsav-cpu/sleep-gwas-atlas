@@ -1,0 +1,64 @@
+
+SETTING: default prior.c 0.02 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration       traits posterior_prob regional_prob candidate_snp
+1         1 FI, insomnia         0.8822        0.9845    rs12671330
+  posterior_explained_by_snp dropped_trait
+1                     0.0811            NA
+
+
+SETTING: prior_001 prior.c 0.01 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration       traits posterior_prob regional_prob candidate_snp
+1         1 FI, insomnia          0.787        0.9696    rs12671330
+  posterior_explained_by_snp dropped_trait
+1                     0.0811            NA
+
+
+SETTING: prior_0005 prior.c 0.005 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration       traits posterior_prob regional_prob candidate_snp
+1         1 FI, insomnia         0.6428        0.9409    rs12671330
+  posterior_explained_by_snp dropped_trait
+1                     0.0811            NA
+
+
+SETTING: strict_threshold prior.c 0.02 threshold 0.9 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration traits posterior_prob regional_prob candidate_snp
+1         1   None             NA        0.9845            NA
+2         2   None             NA        0.9461            NA
+  posterior_explained_by_snp dropped_trait
+1                         NA            FI
+2                         NA          ADHD
+
+           pair    n   p12           H0           H1           H2         H3
+1   FI_insomnia 1055 1e-05 5.983711e-07 2.982467e-03 9.057226e-06 0.04419122
+2   FI_insomnia 1055 1e-06 4.200127e-06 2.093474e-02 6.357510e-05 0.31018997
+3       FI_ADHD 1055 1e-05 9.682068e-10 4.825844e-06 1.917439e-04 0.95566697
+4       FI_ADHD 1055 1e-06 1.008258e-09 5.025470e-06 1.996756e-04 0.99519908
+5 insomnia_ADHD 1055 1e-05 4.864814e-08 7.363612e-07 9.634288e-03 0.14498375
+6 insomnia_ADHD 1055 1e-06 2.034151e-07 3.078987e-06 4.028438e-02 0.60622848
+           H4
+1 0.952816662
+2 0.668807520
+3 0.044136459
+4 0.004596221
+5 0.845381181
+6 0.353483864

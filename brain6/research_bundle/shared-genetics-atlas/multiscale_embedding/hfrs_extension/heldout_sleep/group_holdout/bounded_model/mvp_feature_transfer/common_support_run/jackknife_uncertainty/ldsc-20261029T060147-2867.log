@@ -1,0 +1,309 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867 \
+--rg /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/mdd.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/scz.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/bipolar.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/alz.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/parkinson.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Thu Oct 29 01:01:48 2026
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 991707 SNPs remain.
+After merging with regression SNP LD, 991707 SNPs remain.
+Computing rg for phenotype 2/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0492 (0.0036)
+Lambda GC: 1.4094
+Mean Chi^2: 1.3927
+Intercept: 1.1358 (0.0109)
+Ratio: 0.3458 (0.0277)
+
+Heritability of phenotype 2/10
+------------------------------
+Total Observed scale h2: 0.1645 (0.008)
+Lambda GC: 1.3719
+Mean Chi^2: 1.4659
+Intercept: 1.0392 (0.0108)
+Ratio: 0.0841 (0.0232)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0437 (0.0033)
+Mean z1*z2: 0.1694
+Intercept: 0.0105 (0.007)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.4857 (0.0359)
+Z-score: 13.5227
+P: 1.1491e-41
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_adhd.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_adhd.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_adhd.sumstats.gz.gencov.delete.
+Computing rg for phenotype 3/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/mdd.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 3/10
+------------------------------
+Total Observed scale h2: 0.0681 (0.003)
+Lambda GC: 1.4745
+Mean Chi^2: 1.6202
+Intercept: 0.9961 (0.0128)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0325 (0.0023)
+Mean z1*z2: 0.2249
+Intercept: 0.0013 (0.0081)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5623 (0.0345)
+Z-score: 16.2813
+P: 1.3399e-59
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_mdd.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_mdd.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_mdd.sumstats.gz.gencov.delete.
+Computing rg for phenotype 4/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/scz.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 4/10
+------------------------------
+Total Observed scale h2: 0.3991 (0.0155)
+Lambda GC: 1.7965
+Mean Chi^2: 2.0822
+Intercept: 1.0967 (0.0176)
+Ratio: 0.0894 (0.0163)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0244 (0.0045)
+Mean z1*z2: 0.0907
+Intercept: 0.0039 (0.0083)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1743 (0.0319)
+Z-score: 5.4598
+P: 4.767e-08
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_scz.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_scz.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_scz.sumstats.gz.gencov.delete.
+Computing rg for phenotype 5/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/bipolar.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 5/10
+------------------------------
+Total Observed scale h2: 0.2818 (0.0117)
+Lambda GC: 1.4781
+Mean Chi^2: 1.625
+Intercept: 1.0397 (0.0118)
+Ratio: 0.0636 (0.0188)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0295 (0.004)
+Mean z1*z2: 0.1058
+Intercept: 0.0096 (0.0073)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.2507 (0.0333)
+Z-score: 7.5272
+P: 5.1829e-14
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_bipolar.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_bipolar.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_bipolar.sumstats.gz.gencov.delete.
+Computing rg for phenotype 6/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/alz.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 6/10
+------------------------------
+Total Observed scale h2: 0.0326 (0.0064)
+Lambda GC: 1.2103
+Mean Chi^2: 1.2817
+Intercept: 1.0873 (0.0346)
+Ratio: 0.3098 (0.123)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0003 (0.0021)
+Mean z1*z2: 1.4848e-05
+Intercept: 0.0024 (0.0073)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0063 (0.0513)
+Z-score: -0.1225
+P: 0.9025
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_alz.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_alz.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_alz.sumstats.gz.gencov.delete.
+Computing rg for phenotype 7/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/parkinson.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 7/10
+------------------------------
+Total Observed scale h2: 0.0734 (0.0074)
+Lambda GC: 1.0957
+Mean Chi^2: 1.1403
+Intercept: 0.9786 (0.0083)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0012 (0.003)
+Mean z1*z2: -0.0006
+Intercept: 0.0027 (0.0064)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.02 (0.0498)
+Z-score: -0.4015
+P: 0.6881
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_parkinson.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_parkinson.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_parkinson.sumstats.gz.gencov.delete.
+Computing rg for phenotype 8/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 8/10
+------------------------------
+Total Observed scale h2: 0.1097 (0.0055)
+Lambda GC: 1.3409
+Mean Chi^2: 1.4179
+Intercept: 1.0202 (0.0103)
+Ratio: 0.0482 (0.0247)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0398 (0.0032)
+Mean z1*z2: 0.1739
+Intercept: 0.0011 (0.008)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5425 (0.0378)
+Z-score: 14.3474
+P: 1.1066e-46
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FI.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FI.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FI.sumstats.gz.gencov.delete.
+Computing rg for phenotype 9/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 9/10
+------------------------------
+Total Observed scale h2: 0.0626 (0.0029)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5188
+Intercept: 1.0236 (0.0116)
+Ratio: 0.0454 (0.0223)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0219 (0.0022)
+Mean z1*z2: 0.1581
+Intercept: 0.019 (0.0079)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3949 (0.0349)
+Z-score: 11.3063
+P: 1.2217e-29
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FFS.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FFS.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_FFS.sumstats.gz.gencov.delete.
+Computing rg for phenotype 10/10
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 10/10
+-------------------------------
+Total Observed scale h2: 0.0538 (0.0025)
+Lambda GC: 1.641
+Mean Chi^2: 1.7387
+Intercept: 1.1895 (0.0149)
+Ratio: 0.2566 (0.0202)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0297 (0.0022)
+Mean z1*z2: 0.2172
+Intercept: -0.0008 (0.0093)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5766 (0.0346)
+Z-score: 16.6614
+P: 2.5008e-62
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_HFRS.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_HFRS.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/jackknife_uncertainty/ldsc-20261029T060147-2867MVP.sumstats.gz_HFRS.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                                                                                                                                                                           p1                                                                                                                                                                                                                                  p2      rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz      /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz  0.4857 0.0359 13.5227 0.0000  0.1645     0.0080  1.0392     0.0108    0.0105       0.0070
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz       /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/mdd.sumstats.gz  0.5623 0.0345 16.2813 0.0000  0.0681     0.0030  0.9961     0.0128    0.0013       0.0081
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz       /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/scz.sumstats.gz  0.1743 0.0319  5.4598 0.0000  0.3991     0.0155  1.0967     0.0176    0.0039       0.0083
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz   /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/bipolar.sumstats.gz  0.2507 0.0333  7.5272 0.0000  0.2818     0.0117  1.0397     0.0118    0.0096       0.0073
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz       /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/alz.sumstats.gz -0.0063 0.0513 -0.1225 0.9025  0.0326     0.0064  1.0873     0.0346    0.0024       0.0073
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/parkinson.sumstats.gz -0.0200 0.0498 -0.4015 0.6881  0.0734     0.0074  0.9786     0.0083    0.0027       0.0064
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz        /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz  0.5425 0.0378 14.3474 0.0000  0.1097     0.0055  1.0202     0.0103    0.0011       0.0080
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz       /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz  0.3949 0.0349 11.3063 0.0000  0.0626     0.0029  1.0236     0.0116    0.0190       0.0079
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz      /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz  0.5766 0.0346 16.6614 0.0000  0.0538     0.0025  1.1895     0.0149   -0.0008       0.0093
+
+Analysis finished at Thu Oct 29 01:02:25 2026
+Total time elapsed: 37.29s

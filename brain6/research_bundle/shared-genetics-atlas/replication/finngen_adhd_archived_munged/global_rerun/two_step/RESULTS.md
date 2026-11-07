@@ -1,0 +1,9 @@
+# Cross-trait LDSC estimator sensitivity
+
+On the same **1,108,865** allele-compatible markers, explicitly setting `--two-step 30` gives **r_g=0.3796 (SE 0.0522), p=3.5442×10⁻¹³**, versus the default cross-trait rerun's 0.3817 (0.0521), p=2.3282×10⁻¹³. The change is 0.0021 in the printed r_g, and the estimates are highly dependent because they use the same data. The two-step cross-trait ADHD h² output, dependent on the input N convention, is 0.1904 (SE 0.0254), versus 0.1904 (0.0250) under the default cross-trait run. The [standalone h² run](../single_trait/RESULTS.md), which uses more SNPs and logs the two-step estimator, reproduced the historical h²=0.1892 (0.0238). These comparisons support sensitivity to run configuration and support, but do not isolate the exact cause of the historical difference.
+
+The archived implementation's cross-trait source checks `args.intercept_h2 is None` after converting the intercept arguments to a list. The default log does not report a two-step setting; the explicit run does. This is an implementation observation, not a general statement about all LDSC versions or proof of a software defect. The analyses are post hoc and do not determine which setting is best. The ADHD raw source and ingestion remain unverified, the insomnia input is reused, and reference fit and overlap are unresolved. Neither estimator validates an independent two-trait result or changes the failed LAVA gates.
+
+[Protocol](PROTOCOL.md), [run script](run.sh), [LDSC log](insomnia_adhd.log), [console](console.log) and [receipt](receipt.json) document the sensitivity and same-input checks.
+
+A [sample-size sensitivity](../n_scale/RESULTS.md) shows the h² output is scale-dependent; neither the archived nor synthetic N result is established as a valid disease-scale heritability.

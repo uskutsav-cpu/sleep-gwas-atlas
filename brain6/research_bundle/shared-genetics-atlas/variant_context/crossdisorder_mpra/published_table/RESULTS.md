@@ -1,0 +1,22 @@
+# Published neural-progenitor MPRA results for Brain6 candidates
+
+**Two chromosome 5 candidates have published reporter evidence.** The publisher-hosted [Table S1 workbook](https://ars.els-cdn.com/content/image/1-s2.0-S0092867424014351-mmc2.xlsx) for [Lee et al. (2025)](https://doi.org/10.1016/j.cell.2024.12.022) was accessible and contains the authors' element- and allele-level results. It supersedes the earlier inability to inspect that table. Of the 42 Brain6 candidates previously matched to released count matrices, **27** uniquely matched both published tables by rsID, GRCh37 position and allele pair; their GRCh38 positions also matched the allele-level table. The other 15 rsIDs were absent from both tables. Their absence is not proof of no effect or proof of a particular QC failure.
+
+Seven of the 27 have published allele-level FDR below 0.05. Two, **rs325485** and **rs6874138**, are labeled `emVar` in the published table, meaning the authors classified them as having both allele-dependent activity and an active reporter element. Both lie in the chromosome 5 region containing the previously reported insomnia–ADHD lead rs77960.
+
+| Variant | GRCh38 | Published allele FDR | Published element FDR | Haplotype r² with rs77960 |
+|---|---:|---:|---:|---:|
+| rs325485 | chr5:104659667 A>G | 2.21×10⁻¹³ | 9.04×10⁻¹² | 0.606 |
+| rs6874138 | chr5:104563895 T>C | 3.85×10⁻¹³ | 2.49×10⁻⁶ | 0.518 |
+
+The post-hoc r² estimates use 503 European-labeled 1000 Genomes participants, not the GWAS cohorts or the MPRA donor. They show moderate tagging, not identification of a causal base. The authors' reporter assay used neural progenitors from one fetal donor; reporter activity is not an endogenous chromatin measurement, and the GWAS–reporter link does not establish a target gene or mediation of either phenotype. The MPRA effect sign is not oriented to the Brain6 ALT allele here. A prior [barcode audit](../barcode_audit/RESULTS.md) could not reconcile rs325485's released mapping labels with the inspected raw files; the published table remains the authors' result, but independent reconstruction of that candidate remains unresolved.
+
+In the existing [Brain6 ranking](../../../prediction_rank_comparison/variant_ranks.tsv), the stored insomnia/ADHD PIPs are approximately 0.0020/0.0257 for rs325485 and 0.0016/0.000125 for rs6874138. These are prior model-dependent values, not probabilities that reporter activity mediates either condition. A strong assay FDR does not override the limited trait-specific fine-mapping evidence or prove shared causality.
+
+The authors' companion gene-mapping table links rs6874138 to [NUDT12 by an ABC model](GENE_LINK_RESULTS.md). NUDT12 has RNA-processing and circadian-transcript biology, providing a hypothesis rather than evidence that this variant mediates sleep or ADHD through the gene.
+
+For rs4916723 in the other chromosome 5 region, the authors report allele FDR **0.146** and label the element inactive; its allele class is `NA`. This does not establish absence of activity in other contexts. Across all 27 matched candidates, the earlier v1.24-like provisional model agrees with the published FDR<0.05 status for all 27, while the v1.34-like model disagrees for **5**. Agreement on this selected subset is not a full reproduction of the authors' pipeline. In particular, rs4916723's v1.34-like significance was provisional and should not be presented as the published result.
+
+The workbook has **15,902** S1A data rows and **13,261** S1B data rows, whereas the article text reports 13,311 variants passing allele QC. We have not resolved the 50-row difference and do not substitute one count for the other. `NA` and blank classes are retained as published, not recoded as negative. The original rs62264764 was not among the 42 count-matrix matches and is not validated by these two different candidates.
+
+The [candidate table](candidate_comparison.tsv), [protocol](PROTOCOL.md), [workbook receipt](receipt.json), [reference LD table](pairwise_ld.tsv), [LD receipt](ld_receipt.json), [analysis code](compare.py), and [verification](verification.json) document provenance and checks. The workbook's ZIP integrity was tested and SHA-256 recorded; no publisher-supplied cryptographic digest was available. A full study- and allele-specific analysis, independent disease replication, matched molecular data and perturbation experiments are still needed. Failed LAVA gates remain failed.

@@ -1,0 +1,31 @@
+{
+  "source_sha256": "0aa63e5fe446c6828b473069a2c75317131f76cb8f0f1fb19d83cd330b68e28d",
+  "n_sleep": 12,
+  "n_disease": 6,
+  "n_observed": 72,
+  "svd_singular_values": [
+    1.1786031065595493,
+    0.44644928930454564,
+    0.1997112215013041,
+    0.12862568300895516,
+    0.0943922038476854,
+    0.029500556221183354
+  ],
+  "rank2_in_sample_squared_frobenius_fraction": 0.9599854669231346,
+  "rank2_in_sample_rmse": 0.030324474275841718,
+  "masked_cell_test": {
+    "repeats": 10,
+    "folds": 5,
+    "n_predictions": 720,
+    "seed": 20261027,
+    "model": "2-component unweighted ridge ALS, lambda 0.02, 100 alternating steps, one fixed initialization per fold; no tuning",
+    "baseline": "mean of observed training rows in the same disease column",
+    "baseline_pooled_rmse": 0.1441680141277942,
+    "rank2_pooled_rmse": 0.11331892343131539,
+    "rank1_pooled_rmse": 0.16361770773560147,
+    "additive_pooled_rmse": 0.13624321211621465,
+    "warning": "same 72 observed source estimates reused; repeated folds correlated; this is a missing-cell reconstruction diagnostic, not independent-cohort replication or risk prediction"
+  },
+  "python": "3.9.23",
+  "numpy": "1.21.5"
+}

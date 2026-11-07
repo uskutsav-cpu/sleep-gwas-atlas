@@ -1,0 +1,5 @@
+# Selected simulated marker: conditional tail counts
+
+Before this diagnostic, recreate seed 69001 with zero cross-study correlation, matching the prior test and fixed five LD-pruning iterations. For the previously identified simulated false crossing `s021341`, record its raw and genomic-corrected p-values, its two conditional-FDR values with and without smoothing, and—in each pruning iteration—the number of retained markers at least as significant on the conditioning trait and the number meeting both target thresholds. Check that each pruning iteration retains exactly one marker per synthetic LD block and that the default result matches its previously recorded value. Use a fresh SSD output directory and do not modify existing outputs.
+
+These are counts at the target's exact thresholds, not the package's binned grid counts; bins, smoothing, interpolation and correction can differ. This is a post-hoc diagnostic of a selected false crossing, not an independent simulation, validated causal diagnosis, p-value or evidence on real sleep–frailty data. No change in settings is promoted for use on real data.

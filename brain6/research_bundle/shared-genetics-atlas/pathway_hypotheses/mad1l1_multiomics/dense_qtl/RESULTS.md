@@ -1,0 +1,5 @@
+# Dense regional GTEx data for MAD1L1 follow-up
+
+The eQTL Catalogue's indexed imported GTEx v8 data yielded 5,027 nominal association rows for AC110781.3 in nucleus accumbens and 5,027 for MRM2 in caudate over the selected 1-Mb GRCh38 interval, including nonsignificant variants. Five and four rows, respectively, have zero minor frequency and non-finite standard errors; they are retained but excluded from downstream fits. The eQTL p-values and betas for both previously checked variants exactly reproduce the GTEx Portal values at displayed precision. The complete output files, [protocol](PROTOCOL.md), [extraction code](extract.py), and [receipt](receipt.json) preserve the data and provenance. The remotely indexed source files and indices were not fully downloaded or hashed.
+
+The [four disease–eQTL single-signal analyses](coloc/RESULTS.md) found low H4 under the selected priors, with important coverage, model and cohort caveats. This does not establish local genetic correlation or disprove secondary sharing.

@@ -1,0 +1,7 @@
+# Siraj chromosome 3 candidates: reference LD
+
+Before inspecting the new LD results, compare rs62264764 with all three chromosome 3 candidates in the saved Siraj design-match table: rs73187947, rs9815484 and rs1456193. Match source GRCh37 coordinates, rsIDs and allele pairs in the 1000 Genomes Phase 3 European-labeled reference, compute phased pairwise r² and 2,000 individual-bootstrap intervals, and independently verify the aggregate haplotype arithmetic. The previously checked rs1456193 pair serves as a positive reproducibility control. Preserve counts, mapping, source hashes and failures, but no individual genotypes.
+
+This selected, finite reference lookup neither proves that a marker is a causal variant nor establishes linkage in the discovery cohorts. Only rs9815484 and rs1456193 have previously matched neural-derived SK-N-SH assay rows; design presence alone for rs73187947 is not an allelic measurement. Source reporter FDR, activity criteria, biological context, cross-cell multiple testing and AlphaGenome prediction limitations remain separate. No result is an independent sleep–ADHD replication, and no gene is assigned by LD alone.
+
+After finding rs9815484 in strong reference LD and before examining additional results, query its exact GRCh37 chr3:117637295 A>G in the four non-neural OL33 processed-result members already identified in the rs1456193 audit. Verify ZIP CRCs, gzip completion and exact allele match. Record all source rows, FDR and activity outputs; make no cross-cell replication or brain-specific causal claim.

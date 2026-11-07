@@ -1,0 +1,22 @@
+# NHANES frailty-item mapping: additional source checks
+
+The 24 additional CDC files were downloaded to an SSD-backed image and successfully parsed. They supply candidate variables for the remaining FI and adapted-Fried components, but **a complete 49-item scoring crosswalk has not yet been validated**, and no FI–Fried correlations are reported. The initial download pass stopped because the header check read too few bytes; the [corrected fetch](fetch.py) verified file sizes and headers, reused valid files and did not overwrite them. Source hashes and URLs are in the [receipt](download_receipt.json). The [file](file_inventory.tsv) and [variable](variable_inventory.tsv) inventories are aggregate metadata, not participant records.
+
+Two coding issues materially affect a future comparison:
+
+1. The FI scoring table specifies healthcare use as none, 1–5, or more than 5 visits. In 2011–2012, [HUQ050](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/HUQ_G.htm) groups **4–9 visits** into one category, which straddles the 5-visit boundary. Among 1,791 respondents aged 60+, **612** selected that category, so the exact FI category cannot be determined from that field alone. In 2013–2014, [HUQ051](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2013/DataFiles/HUQ_H.htm) separates 4–5 and 6–7, but its question excludes emergency-room and home visits that the earlier wording included. Assigning all 4–9 responses to either FI category would be an assumption, not exact reproduction.
+2. The adapted Fried paper defines a weight-loss component using BMI ≤22.5 or at least 5% **unintentional** loss. [NHANES asks about intentionality](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/WHQ_G.htm) after a 10-pound loss check. In the downloaded files, **9** older participants in 2011–2012 and **12** in 2013–2014 had valid reported weights, measured BMI >22.5, at least 5% but less than 10 pounds of loss, and no intentionality response. Their status under that specific rule is unresolved; neither intentional nor unintentional loss should be assumed. Other missing-weight and eligibility patterns also need review.
+
+These are unweighted, post-hoc file counts, not population estimates. The [frozen diagnostic rules](PROTOCOL.md), [calculation](ambiguity.R), [counts](ambiguity_counts.tsv), and [independent check](verify_ambiguity.R) document their derivation. Earlier walking-question skips add a separate selection issue. The 2011 and 2013 healthcare visit-category counts are not directly comparable because both category boundaries and question wording changed.
+
+| Item or component | Candidate source variables | Remaining issue |
+| --- | --- | --- |
+| Sleep and low energy in FI | DPQ030, DPQ040 | Sleep item includes sleeping too much; neither is a diagnostic insomnia phenotype. |
+| Shared physical items | PFQ061B, PFQ061E | The quarter-mile item is skipped for some people needing walking equipment; the FI and adapted score reuse questions. |
+| FI healthcare visits | HUQ050 / HUQ051 | Threshold and wording differ by cycle, as above. |
+| FI medication count | RXDUSE, RXDCOUNT | Prescription files contain multiple rows per person; RXDCOUNT itself is a count and must not be summed across drug rows. Verify non-use and missing cases using [CDC documentation](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2011/DataFiles/RXQ_RX_G.htm). |
+| Adapted-Fried weight | BMXBMI, WHD020, WHD050, WHQ060 | Confirm units, special codes, skip rules and 5%/10-pound sensitivity. |
+| Adapted-Fried activity | PAQ605/610/PAD615 through PAQ665/670/PAD675 | Reconstruct domain-specific frequency, duration, MET weights and skip rules from cycle-specific CDC documentation. |
+| FI lab, conditions and grip | CBC, GHB, MCQ, BPQ, DIQ, KIQ_U, MGX | Validate the full 49-item crosswalk and each threshold against original scoring and cycle codebooks before constructing scores. |
+
+The additional files are in `/Volumes/Brain6NHANES/source`, mounted from `/Volumes/Extreme SSD/brain6-nhanes-data-20261028.dmg`. The original sleep/physical-function files remain in `/Volumes/Brain6Sim/nhanes-public-2011-14-20261028`. The 24 new XPT files match the current server-reported sizes and parse successfully; a publisher checksum was not independently supplied. The earlier mobility skip and the two issues above must be resolved with transparent assumptions and sensitivity analyses before a defensible within-person estimate. NHANES observational results, if obtained, would not be item-excluded UKB GWAS results.

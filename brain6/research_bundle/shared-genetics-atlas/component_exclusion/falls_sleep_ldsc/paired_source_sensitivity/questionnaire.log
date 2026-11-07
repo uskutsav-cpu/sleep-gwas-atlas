@@ -1,0 +1,69 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/falls_sleep_ldsc/paired_source_sensitivity/questionnaire \
+--rg /Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz,/Volumes/Brain6Work/physical-function-source-sensitivity-20261028/questionnaire.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Wed Oct 28 18:27:18 2026
+Reading summary statistics from /Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz ...
+Read summary statistics for 1096648 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1078769 SNPs remain.
+After merging with regression SNP LD, 1078769 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Brain6Work/physical-function-source-sensitivity-20261028/questionnaire.sumstats.gz ...
+Read summary statistics for 1020637 SNPs.
+After merging with summary statistics, 1020637 SNPs remain.
+1020637 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0331 (0.0021)
+Lambda GC: 1.212
+Mean Chi^2: 1.2423
+Intercept: 1.0025 (0.0081)
+Ratio: 0.0103 (0.0334)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0569 (0.0026)
+Lambda GC: 1.3135
+Mean Chi^2: 1.3716
+Intercept: 1.0125 (0.0088)
+Ratio: 0.0336 (0.0236)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0187 (0.0017)
+Mean z1*z2: 0.2009
+Intercept: 0.0756 (0.0062)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.4302 (0.0346)
+Z-score: 12.4443
+P: 1.5027e-35
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/falls_sleep_ldsc/paired_source_sensitivity/questionnairefalls.ldsc.bgz_questionnaire.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/falls_sleep_ldsc/paired_source_sensitivity/questionnairefalls.ldsc.bgz_questionnaire.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/falls_sleep_ldsc/paired_source_sensitivity/questionnairefalls.ldsc.bgz_questionnaire.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                       p1                                                                                          p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz /Volumes/Brain6Work/physical-function-source-sensitivity-20261028/questionnaire.sumstats.gz 0.4302 0.0346 12.4443 0.0000  0.0569     0.0026  1.0125     0.0088    0.0756       0.0062
+
+Analysis finished at Wed Oct 28 18:27:29 2026
+Total time elapsed: 10.7s

@@ -1,0 +1,119 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/replication/mvp_frailty_genomewide/ldsc-20261029T052003-99497 \
+--rg /dev/fd/63,/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FI.sumstats.gz,/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FFS.sumstats.gz,/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Thu Oct 29 00:20:05 2026
+Reading summary statistics from /dev/fd/63 ...
+Read summary statistics for 1124041 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1124041 SNPs remain.
+After merging with regression SNP LD, 1124041 SNPs remain.
+Computing rg for phenotype 2/4
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FI.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+After merging with summary statistics, 1103239 SNPs remain.
+1103239 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0489 (0.0033)
+Lambda GC: 1.3997
+Mean Chi^2: 1.3833
+Intercept: 1.1366 (0.0093)
+Ratio: 0.3564 (0.0242)
+
+Heritability of phenotype 2/4
+-----------------------------
+Total Observed scale h2: 0.1088 (0.0051)
+Lambda GC: 1.3306
+Mean Chi^2: 1.4049
+Intercept: 1.0235 (0.0091)
+Ratio: 0.0581 (0.0224)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0403 (0.0032)
+Mean z1*z2: 0.1671
+Intercept: -0.0018 (0.007)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5531 (0.039)
+Z-score: 14.1899
+P: 1.0587e-45
+
+Computing rg for phenotype 3/4
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FFS.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+After merging with summary statistics, 1103239 SNPs remain.
+1103239 SNPs with valid alleles.
+
+Heritability of phenotype 3/4
+-----------------------------
+Total Observed scale h2: 0.0623 (0.0027)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5024
+Intercept: 1.0265 (0.0105)
+Ratio: 0.0527 (0.0209)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0221 (0.0022)
+Mean z1*z2: 0.1531
+Intercept: 0.018 (0.0076)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3997 (0.0352)
+Z-score: 11.3412
+P: 8.205e-30
+
+Computing rg for phenotype 4/4
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+After merging with summary statistics, 1103239 SNPs remain.
+1103239 SNPs with valid alleles.
+
+Heritability of phenotype 4/4
+-----------------------------
+Total Observed scale h2: 0.0542 (0.0024)
+Lambda GC: 1.6259
+Mean Chi^2: 1.7215
+Intercept: 1.1882 (0.0141)
+Ratio: 0.2609 (0.0195)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0293 (0.002)
+Mean z1*z2: 0.2097
+Intercept: 0.0013 (0.0074)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5697 (0.0314)
+Z-score: 18.1389
+P: 1.5712e-73
+
+
+Summary of Genetic Correlation Results
+        p1                                                                       p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/dev/fd/63   /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FI.sumstats.gz 0.5531 0.0390 14.1899 0.0000  0.1088     0.0051  1.0235     0.0091   -0.0018       0.0070
+/dev/fd/63  /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/FFS.sumstats.gz 0.3997 0.0352 11.3412 0.0000  0.0623     0.0027  1.0265     0.0105    0.0180       0.0076
+/dev/fd/63 /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/HFRS.sumstats.gz 0.5697 0.0314 18.1389 0.0000  0.0542     0.0024  1.1882     0.0141    0.0013       0.0074
+
+Analysis finished at Thu Oct 29 00:22:11 2026
+Total time elapsed: 2.0m:6.049999999999997s

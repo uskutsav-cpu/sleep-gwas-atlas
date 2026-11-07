@@ -1,0 +1,11 @@
+# Locus 464: shared frailty input across sleep-trait runs
+
+We inspected all 12 archived sleep–FI receipts and logs for locus 464, the LAVA window that numerically contains the published chromosome 3 interval. All 12 chromosome-3 input descriptors point to the **same FI summary-statistics file**. Eleven logs warn that frailty had a negative variance estimate and their receipts say frailty was dropped. The exception is sleep apnea: its receipt reports FI was tested, but the bivariate test was still **not eligible** and no local correlation was calculated.
+
+The sleep-apnea run reports 2,452 local SNPs and 185 retained components; the other 11 report 2,741 or 2,742 SNPs and 216 components. The retained sleep-apnea FI univariate estimate has p=0.201774 in its receipt; it is not a validated local result. Changes in the shared SNP intersection and LD decomposition could affect the calculation, but the saved counts alone do not establish exactly which SNPs were used, the causal reason for the variance difference, or whether a model or input error occurred. Other differences between runs may also matter. The comparison does not establish that the smaller support is more accurate or that reusing it would repair the insomnia analysis.
+
+A [marker-intersection follow-up](marker_overlap/RESULTS.md) reconstructs nested reference-compatible FI–sleep-apnea and FI–insomnia sets with counts matching these receipts; the insomnia set has 289 additional markers. Exact historical internal order and the cause of the difference remain unverified.
+
+The frozen 1% quality gate still fails for all 12 families. No results from this comparison are promoted as local genetic correlations, replications, or discoveries; the original published result and its interpretation remain as described in the [parent audit](../RESULTS.md). Full input and ancestry/LD review, overlap handling, a frozen new family and independent calibration remain necessary for a new local analysis.
+
+[Code](audit.py) checks all 12 receipts, logs, chromosome-3 input descriptors and the shared FI input's hash. The [receipt](receipt.json) retains file hashes and the original recorded status and counts; it does not hash the sleep inputs or reference files and is not a complete reproducibility audit of the archived run. No source files were changed.

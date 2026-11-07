@@ -1,0 +1,69 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/walking_activity \
+--rg /Volumes/Extreme SSD/brain6-physical-factor-20261101/walking.common.sumstats.gz,/Volumes/Extreme SSD/brain6-physical-factor-20261101/activity.common.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Sun Nov  1 13:02:40 2026
+Reading summary statistics from /Volumes/Extreme SSD/brain6-physical-factor-20261101/walking.common.sumstats.gz ...
+Read summary statistics for 1053614 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1053614 SNPs remain.
+After merging with regression SNP LD, 1053614 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/brain6-physical-factor-20261101/activity.common.sumstats.gz ...
+Read summary statistics for 1053614 SNPs.
+After merging with summary statistics, 1053614 SNPs remain.
+1053614 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0808 (0.0032)
+Lambda GC: 1.4681
+Mean Chi^2: 1.595
+Intercept: 1.0237 (0.0109)
+Ratio: 0.0399 (0.0183)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0402 (0.0023)
+Lambda GC: 1.2519
+Mean Chi^2: 1.2894
+Intercept: 1.0128 (0.0077)
+Ratio: 0.0444 (0.0265)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0074 (0.0017)
+Mean z1*z2: 0.1614
+Intercept: 0.1074 (0.0061)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1306 (0.0298)
+Z-score: 4.378
+P: 1.198e-05
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/walking_activitywalking.common.sumstats.gz_activity.common.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/walking_activitywalking.common.sumstats.gz_activity.common.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/physical_factor_workaround/walking_activitywalking.common.sumstats.gz_activity.common.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                             p1                                                                               p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/brain6-physical-factor-20261101/walking.common.sumstats.gz /Volumes/Extreme SSD/brain6-physical-factor-20261101/activity.common.sumstats.gz 0.1306 0.0298 4.3780 0.0000  0.0402     0.0023  1.0128     0.0077    0.1074       0.0061
+
+Analysis finished at Sun Nov  1 13:02:52 2026
+Total time elapsed: 11.54s

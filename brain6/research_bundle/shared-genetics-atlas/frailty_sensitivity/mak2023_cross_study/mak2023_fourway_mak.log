@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out work/mak2023_fourway_mak \
+--rg /Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FI.sumstats.gz,/Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FP.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Tue Oct 27 13:42:22 2026
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FI.sumstats.gz ...
+Read summary statistics for 1129146 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1129146 SNPs remain.
+After merging with regression SNP LD, 1129146 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FP.sumstats.gz ...
+Read summary statistics for 1129146 SNPs.
+After merging with summary statistics, 1129146 SNPs remain.
+1129146 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.1371 (0.0043)
+Lambda GC: 1.8724
+Mean Chi^2: 2.1547
+Intercept: 1.0641 (0.0137)
+Ratio: 0.0555 (0.0118)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0663 (0.0027)
+Lambda GC: 1.4579
+Mean Chi^2: 1.5663
+Intercept: 1.0417 (0.0101)
+Ratio: 0.0737 (0.0179)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0761 (0.003)
+Mean z1*z2: 1.0681
+Intercept: 0.4675 (0.0102)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.798 (0.0119)
+Z-score: 67.0543
+P: 0.
+
+
+Summary of Genetic Correlation Results
+                                                                               p1                                                                                p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FI.sumstats.gz /Volumes/Extreme SSD/Codex Archive/mak2023_same_cohort/fourway/mak_FP.sumstats.gz 0.7980 0.0119 67.0543 0.0000  0.0663     0.0027  1.0417     0.0101    0.4675       0.0102
+
+Analysis finished at Tue Oct 27 13:42:43 2026
+Total time elapsed: 21.01s

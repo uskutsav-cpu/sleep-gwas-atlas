@@ -1,0 +1,15 @@
+# Sleep–frailty genetic correlations after projecting out ADHD and depression
+
+On the same 991,707 SNPs, we estimated the genetic correlations needed to project out the ADHD and depression (MDD) genetic components from clinical insomnia and each frailty measure. Joint 200-block LDSC deletions were propagated through the four-trait calculation.
+
+| Frailty measure | Partial genetic r_g given ADHD and MDD | Paired SE | Approximate 95% interval | Bonferroni p, three outcomes |
+| --- | ---: | ---: | ---: | ---: |
+| FI | 0.200 | 0.064 | 0.074 to 0.326 | 0.0058 |
+| FFS | 0.073 | 0.052 | −0.030 to 0.175 | 0.496 |
+| HFRS | 0.328 | 0.052 | 0.225 to 0.430 | 9.91×10⁻¹⁰ |
+
+The FI and HFRS estimates pass the three-outcome correction; FFS does not, and its interval includes both directions. The FFS result does **not** prove no genetic association. This is a post-hoc family and its correction does not cover the wider project search. The previous [ADHD-only projection](../mvp_adhd_frailty_partial/RESULTS.md) yielded 0.378, 0.165 and 0.426 for FI, FFS and HFRS. A later [paired contrast](paired_projection_change/RESULTS.md) found lower estimates for all three scores under the two-component projection; this compares different genetic estimands and cannot establish mediation or the reason for the change.
+
+These are partial correlations of genetic effects, not individual-level adjustment for diagnoses, gene-by-sleep interactions, causal effects, or a test of a common causal variant. The FI contains insomnia and tiredness, FFS contains exhaustion, and HFRS includes a somnolence-related code, so the analysis does not establish sleep-independent physical frailty. The clinical-insomnia and frailty sources and their overlapping psychiatric data have already been inspected. Unknown participant or relative overlap, approximate effective N, phenotype and ancestry differences, and elevated MVP/HFRS LDSC intercepts limit interpretation. The MDD GWAS may itself reflect sleep-related symptoms; projecting it out does not identify a pure depression or frailty pathway. Prior local-correlation gates remain failed.
+
+The new MDD–ADHD r_g was 0.5165; MDD–FI, –FFS and –HFRS were 0.6703, 0.4645 and 0.5353, respectively. These estimates are on the matched support, not necessarily comparable with other analyses using other SNPs. The [pre-result protocol](PROTOCOL.md), [runner](run.sh), [full log](ldsc-20261029T061350-3791.log), [calculation](analyze.py), [results table](results.tsv) and [receipt](receipt.json) retain all estimates and checks. The four new pairs retained the same valid SNP count; hashes of five inputs and all 22 LD-score files matched prior receipts. Corresponding heritability delete vectors matched exactly across runs; individual jackknife SEs matched logs to rounding, and every point and block four-trait genetic-correlation matrix was positive definite (smallest eigenvalue 0.320). These verify the numerical computation and support alignment, not the validity of the original GWAS or causal assumptions. No AlphaGenome output was used for model training.

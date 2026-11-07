@@ -1,0 +1,9 @@
+# Regional input provenance
+
+`raw_source_hashes.json` records hashes of the FI harmonized and FinnGen R13 insomnia files currently on the external volume. The local FinnGen MD5 matches the MD5 in the current [official object metadata](https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_F5_INSOMNIA.gz), as does the object size. Matching a public object identifies the downloaded file; it does not validate the phenotype or analysis.
+
+The current FI compressed file's SHA-256 is `241ed294ccc367b22787a0c051f8d377c020e16089e82920a555286f3148e6de`, not the `2b18346e024040ee8cbebade0888292cc971e5f1656591351c1698af88626e3c` recorded for the legacy frozen-atlas FI file. This difference was already identified in the repository's `frailty_paper/analysis/frozen_atlas_frailty_audit.md`. A compressed-file mismatch alone does not establish whether the decompressed rows differ; the legacy bytes are unavailable, so this is not an exact replay of the frozen atlas. The present file hash agrees with the repository's later local-sharing readiness audit.
+
+`verify_regional_extracts.py` repeats the two region-extraction specifications for a trait in one pass over the currently observed file. Its JSON checks compare the re-extracted row counts and TSV bytes with the stored regional extraction receipts. A match shows that the currently observed source reproduces those saved regional extracts; it does not prove that the entire historical input was identical at the time of extraction. Run with `python3 outputs/shared-genetics-atlas/source_provenance/verify_regional_extracts.py FI` and then `... R13` from the workspace, with the original external volumes mounted.
+
+Both FI and R13 repeat extractions passed for both regional analysis sets: all four recomputed TSV hashes and all source and extracted row counts match the saved receipts. The stored TSV files also match their receipts.

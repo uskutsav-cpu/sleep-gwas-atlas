@@ -1,0 +1,15 @@
+{
+  "source_sha256": "4f7326aec186998fd8f7cf07374eb262d4a27ccb3453c1f3b0c3f7665b208294",
+  "script_sha256": "05bd2b40c0295077da86a458f78ca05b80fd9110c9bc121f53c3ed6d3b1472cc",
+  "n": 383845,
+  "bootstrap_seed": 20261027,
+  "bootstrap_replicates": 10000,
+  "rng": "numpy default_rng PCG64",
+  "numpy": "2.5.1",
+  "weight_definitions": {
+    "unweighted": "1 if equal else 0",
+    "linear": "1 - |i-j|/2",
+    "quadratic": "1 - ((i-j)/2)^2"
+  },
+  "caveat": "Categories differ; weights arbitrary; independent multinomial bootstrap is descriptive"
+}

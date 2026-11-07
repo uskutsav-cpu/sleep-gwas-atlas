@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/falls_sleep_ldsc/registry \
+--rg /Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz,/Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Wed Oct 28 17:51:01 2026
+Reading summary statistics from /Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz ...
+Read summary statistics for 1096648 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1078769 SNPs remain.
+After merging with regression SNP LD, 1078769 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz ...
+Read summary statistics for 1134953 SNPs.
+After merging with summary statistics, 1053614 SNPs remain.
+1053614 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0329 (0.0021)
+Lambda GC: 1.2103
+Mean Chi^2: 1.2392
+Intercept: 1.0044 (0.0081)
+Ratio: 0.0185 (0.0338)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.02 (0.0015)
+Lambda GC: 1.2398
+Mean Chi^2: 1.2731
+Intercept: 1.0778 (0.0096)
+Ratio: 0.285 (0.0353)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0063 (0.0011)
+Mean z1*z2: 0.042
+Intercept: -0.0105 (0.0056)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.2458 (0.0414)
+Z-score: 5.9357
+P: 2.9259e-09
+
+
+Summary of Genetic Correlation Results
+                                                       p1                                                                    p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Volumes/Brain6NHANES/neale-falls-20261028/falls.ldsc.bgz /Volumes/Extreme SSD/Codex Archive/hfrs_ukb_sensitivity/S.sumstats.gz 0.2458 0.0414 5.9357 0.0000  0.0200     0.0015  1.0778     0.0096   -0.0105       0.0056
+
+Analysis finished at Wed Oct 28 17:51:08 2026
+Total time elapsed: 7.07s

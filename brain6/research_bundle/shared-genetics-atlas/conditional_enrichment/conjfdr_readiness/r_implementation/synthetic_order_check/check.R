@@ -1,0 +1,12 @@
+.libPaths(c('/Volumes/Brain6Work/lib','/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib',.libPaths()))
+library(cfdr.pleio);library(data.table);library(Matrix)
+args<-commandArgs(trailingOnly=TRUE);stopifnot(length(args)==1,!dir.exists(args[1]));dir.create(args[1]);source_dir<-file.path(args[1],'ref');dir.create(source_dir)
+x<-data.table(SNP=paste0('rs',1:6),CHR=c(2,1,2,1,2,1),BP=c(2,1,1,3,3,2),A1='A',A2='C',MAF=.2,INTERGENIC=1)
+saveRDS(x,file.path(source_dir,'all_chr_perVariant.rds'))
+for(chr in 1:2){ids<-x[CHR==chr,SNP];m<-Diagonal(length(ids));dimnames(m)<-list(ids,ids);saveRDS(m,file.path(source_dir,sprintf('chr%02d_LDpairs.rds',chr)))}
+trait<-data.table(SNP=x$SNP,BETA=seq(.1,.6,.1),PVAL=seq(.1,.6,.1));ref<-refdata_location(source_dir,chr_order=1:2)
+obj<-cfdr_pleio$new();obj$init_data(trait,trait,refdat=ref,local_refdat_path=file.path(args[1],'local'),verbose=FALSE)
+y<-readRDS(get_variants(obj$refdat_local));actual<-y$SNP;expected<-x[order(CHR,BP,SNP),SNP];matrix_order<-unlist(lapply(1:2,function(i)colnames(readRDS(get_chrmat(obj$refdat_local,i)))),use.names=FALSE)
+stopifnot(identical(actual,obj$trait_data$SNP),!identical(actual,expected),!identical(actual,matrix_order))
+cat('actual=',paste(actual,collapse=','),'\nexpected=',paste(expected,collapse=','),'\nchromosome_matrix=',paste(matrix_order,collapse=','),'\n',sep='')
+print(data.table(SNP=actual,CHR=y$CHR,BP=y$BP));cat('package=',as.character(packageVersion('cfdr.pleio')),'\n')

@@ -1,0 +1,5 @@
+# Whole-locus reference spectrum diagnostic
+
+Written before the run. Reconstruct the archived FI–insomnia locus 464 input with the pinned R/LAVA runtime, and extract the UKB reference LD matrix for the exact 2,741 replay markers. Check marker identity, dimensions, symmetry, diagonal, extreme off-diagonal values and the matrix eigenvalues. Apply the same cumulative-eigenvalue formula used by LAVA to determine the 99% retained component count and compare it with the 216-component replay. Record the full eigenvalue vector and counts below stated numerical tolerances. Check whether the retained eigenvalues are positive; do not alter the matrix, calculate a bivariate local correlation or choose a new truncation threshold.
+
+The matrix is the approximate stored reference, not the original participant genotype correlation matrix. A non-positive eigenvalue establishes a numerical property of the extracted matrix but does not establish its origin, or whether it caused negative FI variance. This is a selected locus and cannot characterize the entire reference or rescue family-wide quality gates. Independent matching and numerical calibration remain necessary.

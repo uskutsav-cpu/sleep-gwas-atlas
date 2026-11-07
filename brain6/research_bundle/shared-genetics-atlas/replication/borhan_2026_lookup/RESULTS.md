@@ -1,0 +1,16 @@
+# Published Canadian frailty lead: post-selected source comparison
+
+[Borhan et al. 2026](https://www.nature.com/articles/s41514-026-00363-z) reported rs147311617 for their three-category frailty phenotype (p=4.98×10⁻⁸; effect allele C). After reading that report, we looked up the lead and an author-described highly linked marker in the project's larger available files. This is a retrospective **single-trait consistency check**, not a prespecified independent replication or sleep–frailty shared-locus test.
+
+| Marker | Project source and observed row | Source p | Qualification |
+|---|---|---:|---|
+| rs147311617 | Ye UKB Fried score, GRCh37 12:94666601, C/T | 0.45 | The published CLSA article gives C as effect allele, but the other allele and effect size were not identified in the inspected article/supplement. Full allele orientation and source effect convention require confirmation. |
+| rs77006600 | Ye UKB Fried score, GRCh37 12:94670582, C/T | 0.17 | The paper describes high LD with its lead; this is not an independent signal or a verified proxy for its specific allelic contrast. |
+| rs77006600 | Atkins FI meta-analysis at the same GRCh37 position, T/C | 0.7789 | FI is a different phenotype; the lead coordinate had no row in the scanned FI file. |
+| rs147311617 | FinnGen R13 registry insomnia, GRCh38 12:94272825, REF C / ALT T | 0.456153 | Different sleep measure; the matched record does not show a nominal association. The other marker was not queried in this full R13 file. |
+
+These are weak marginal associations, not proof of no effect. The Canadian phenotype uses three categories and different covariates, while Ye uses a 0–5 score; exact overlap and relatives across cohorts have not been audited. The low-frequency lead can be subject to frequency, imputation, power and winner's-curse differences. The project source beta signs are not used to infer replication direction. The comparison does not establish whether the CLSA and UK records represent exactly the same tested allelic contrast.
+
+Ensembl's [current GRCh38 record](https://rest.ensembl.org/variation/human/rs147311617?content-type=application/json) lists C/G/T at 12:94272825; its [GRCh37 record](https://grch37.rest.ensembl.org/variation/human/rs147311617?content-type=application/json) lists 12:94666601. Thus an rsID alone is insufficient for allele alignment, and the reference mappings do not prove the Canadian study's other allele. The location supports the paper's 12q22 title/results over the conflicting 12p22 abstract label, but no coordinate-based interpretation should assume a single biallelic site. No causal gene assignment follows from the nearby PLXNC1 annotation.
+
+The [receipt](receipt.json) contains every source row at each queried position, scanned row counts, source paths and SHA-256 hashes. [Code](lookup.py) re-reads the full three local source files and verifies the R13 source against its previously recorded hash. FI and FFS were matched to the named rsIDs and coordinates from the Ensembl GRCh37 record for the lead and the FI/FFS sources for the second marker; reference verification of the second marker and a full cross-build/allele audit remain pending. The preliminary common-HapMap3 lookup did not contain either marker; that absence is not a negative association. No participant-level data or AlphaGenome prediction were used.
