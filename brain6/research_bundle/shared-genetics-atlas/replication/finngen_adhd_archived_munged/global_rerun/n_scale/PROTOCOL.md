@@ -1,0 +1,5 @@
+# Archived ADHD sample-size scale audit
+
+Before scanning the N column, compute 4*n_case*n_control/(n_case+n_control) using the historical source lock's stated 5,559 cases and 489,493 controls and compare it with every N value in the archived munged file. Record distinct values, counts and full gzip hash. Agreement is evidence of a possible effective-sample-size convention, not verification of input source, true per-variant sample sizes or preprocessing.
+
+If N is constant, create an explicitly synthetic copy changing N only to the historical total 495,052, with all SNPs, alleles and Z values unchanged. Re-run the same standalone and cross-trait LDSC commands as the parent, compare h2, SE, rg and intercept, and verify source and transformed rows. Treat this as an algebraic software-scale sensitivity, not a replacement dataset, corrected h2, prevalence transformation or an inference about actual sample sizes. Do not infer liability-scale h2. The historical sample counts and file provenance are not independently authenticated; one case/control N formula is not universally appropriate for all GWAS. Source integrity, study overlap and LAVA gates remain unresolved.

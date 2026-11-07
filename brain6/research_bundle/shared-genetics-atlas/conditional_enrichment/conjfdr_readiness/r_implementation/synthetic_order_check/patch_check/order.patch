@@ -1,0 +1,13 @@
+diff --git a/R/cfdr_pleio.R b/R/cfdr_pleio.R
+index a360d45..b414319 100644
+--- a/R/cfdr_pleio.R
++++ b/R/cfdr_pleio.R
+@@ -224,7 +224,7 @@ cfdr_pleio <- R6::R6Class("cfdr_pleio", public = list(
+ 
+     ## Sort both trait data and reference data by location: CHR, BP (SNP as tie breaker)
+     ## This is absolutely crucial, do NOT mess this up
+-    rnk <- frank(reftab, CHR, BP, SNP, ties.method = "first")
++    rnk <- order(reftab$CHR, reftab$BP, reftab$SNP)
+     self$trait_data <- self$trait_data[rnk]
+     reftab <- reftab[rnk]
+ 

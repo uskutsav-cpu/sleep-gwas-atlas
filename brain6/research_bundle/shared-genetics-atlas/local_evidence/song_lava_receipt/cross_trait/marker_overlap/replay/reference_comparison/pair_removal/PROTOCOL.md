@@ -1,0 +1,5 @@
+# One-marker removal around the out-of-range reference pair
+
+Written before running. Reconstruct the same FI–insomnia input and locus 464 with the pinned LAVA runtime. Using the original 99% LD-retention setting and `drop.failed=FALSE`, remove rs62262671 alone, then independently remove rs55754265 alone, from the original 2,741-marker support. Keep all other input statistics, sample sizes, overlap file, reference, and seed fixed. Record the marker set, component count, FI variance, sampling term, and capped heritability for both cases; compare to the saved full-support replay. Do not calculate bivariate correlations.
+
+The pair was selected because a 60-marker matrix inspection produced a reconstructed LD entry greater than one. Removing one marker also changes support, LD and component selection, so a change in outcome would not prove the out-of-range entry caused the failure. An unchanged failure would not prove the entry has no effect on the computation or that the other unsampled reference entries are valid. This is not a recommended repair or a family-wide validation; no original gate status will be altered.

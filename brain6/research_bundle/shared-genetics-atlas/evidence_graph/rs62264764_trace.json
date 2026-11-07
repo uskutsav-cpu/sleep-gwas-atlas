@@ -1,0 +1,224 @@
+{
+  "query": {
+    "id": "variant:rs62264764",
+    "type": "variant",
+    "label": "rs62264764 chr3:117920728:G>A"
+  },
+  "direct_edges": [
+    {
+      "source": "variant:rs62264764",
+      "target": "region:placo_insomnia__adhd_chr3_117142005_118142005",
+      "relation": "in_selected_region",
+      "value": "",
+      "detail": "GRCh37 region; variant representation GRCh38",
+      "provenance": "variants",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "placo_insomnia__adhd_chr3_117142005_118142005"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "trait:insomnia",
+      "relation": "conditional_abf_credible_set_member",
+      "value": "0.0402033382366513",
+      "detail": "PIP conditional on single-signal model; source A1=A",
+      "provenance": "variants",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "insomnia (Brain6 GWAS source)"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "trait:adhd",
+      "relation": "conditional_abf_credible_set_member",
+      "value": "0.0311642893861194",
+      "detail": "PIP conditional on single-signal model; source A1=A",
+      "provenance": "variants",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "adhd (Brain6 GWAS source)"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "gene:ENSG00000239268",
+      "relation": "positional_gene_overlap",
+      "value": "",
+      "detail": "Ensembl GRCh38 overlap; not causal gene assignment",
+      "provenance": "context",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "LINC03051 ENSG00000239268"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "gene:ENSG00000185565",
+      "relation": "positional_gene_overlap",
+      "value": "",
+      "detail": "Ensembl GRCh38 overlap; not causal gene assignment",
+      "provenance": "context",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "LSAMP ENSG00000185565"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "gene:ENSG00000185565",
+      "relation": "gtex_v8_significant_eqtl",
+      "value": "6.86156e-07",
+      "detail": "tissue=Adrenal_Gland; GTEx_gene_symbol=LSAMP; GTEx_gencode_id=ENSG00000185565.11; NES_ALT=0.48277; GTEx significant-pair selection; query_sha256=d675ecd7ed5a9574bd9242f9b45b5db5e3319570c9009d9c854d633f1b418d81",
+      "provenance": "gtex",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "LSAMP ENSG00000185565"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "gene:ENSG00000239268",
+      "relation": "gtex_v8_significant_eqtl",
+      "value": "1.0875e-05",
+      "detail": "tissue=Adrenal_Gland; GTEx_gene_symbol=RP11-384F7.2; GTEx_gencode_id=ENSG00000239268.2; NES_ALT=0.423847; GTEx significant-pair selection; query_sha256=d675ecd7ed5a9574bd9242f9b45b5db5e3319570c9009d9c854d633f1b418d81",
+      "provenance": "gtex",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "LINC03051 ENSG00000239268"
+    },
+    {
+      "source": "variant:rs62264764",
+      "target": "variant:rs817509",
+      "relation": "reference_ld_r2_undirected",
+      "value": "0.7034279446044156",
+      "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+      "provenance": "ld",
+      "source_label": "rs62264764 chr3:117920728:G>A",
+      "target_label": "rs817509 chr3:118032014:A>G"
+    }
+  ],
+  "one_ld_hop_paths": [
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "trait:insomnia",
+        "relation": "conditional_abf_credible_set_member",
+        "value": "0.00473699442266806",
+        "detail": "PIP conditional on single-signal model; source A1=A",
+        "provenance": "variants",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "insomnia (Brain6 GWAS source)"
+      }
+    },
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "trait:adhd",
+        "relation": "conditional_abf_credible_set_member",
+        "value": "0.000950902361488408",
+        "detail": "PIP conditional on single-signal model; source A1=A",
+        "provenance": "variants",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "adhd (Brain6 GWAS source)"
+      }
+    },
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "trait:insomnia_MVP",
+        "relation": "postselected_marginal_association",
+        "value": "2.858e-05",
+        "detail": "source_effect_allele=A; source_other_allele=G; GRCh37 mapping assumed; multiallelic representation and source overlap require review",
+        "provenance": "frailty_joint",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "MVP insomnia"
+      }
+    },
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "trait:HFRS_FinnGen",
+        "relation": "postselected_marginal_association",
+        "value": "1.20612e-07",
+        "detail": "source_effect_allele=G; source_other_allele=A; GRCh37 mapping assumed; multiallelic representation and source overlap require review",
+        "provenance": "frailty_joint",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "FinnGen HFRS"
+      }
+    },
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "trait:FFS_Ye",
+        "relation": "postselected_marginal_association",
+        "value": "0.0099",
+        "detail": "effect allele convention inferred; not independent replication; source p is not multiplicity-corrected",
+        "provenance": "frailty_candidates",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "Ye Fried frailty score"
+      }
+    },
+    {
+      "ld_edge": {
+        "source": "variant:rs62264764",
+        "target": "variant:rs817509",
+        "relation": "reference_ld_r2_undirected",
+        "value": "0.7034279446044156",
+        "detail": "1000 Genomes EUR n=503; allele1=A; allele2=G; r=-0.8387061133701218",
+        "provenance": "ld",
+        "source_label": "rs62264764 chr3:117920728:G>A",
+        "target_label": "rs817509 chr3:118032014:A>G"
+      },
+      "neighbor_evidence": {
+        "source": "variant:rs817509",
+        "target": "gene:ENSG00000243276",
+        "relation": "nearest_positional_gene",
+        "value": "0",
+        "detail": "distance in bp; source gene label=RP11-384F7.1; selection is post hoc; not gene assignment",
+        "provenance": "frailty_candidates",
+        "source_label": "rs817509 chr3:118032014:A>G",
+        "target_label": "RP11-384F7.1 ENSG00000243276"
+      }
+    }
+  ],
+  "interpretation": "Descriptive, selected evidence only. Paths are not proof of shared causality, mediation, replication, or a direct effect on the query variant."
+}

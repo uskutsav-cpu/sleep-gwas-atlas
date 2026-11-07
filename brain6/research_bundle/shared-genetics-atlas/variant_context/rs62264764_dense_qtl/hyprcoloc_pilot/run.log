@@ -1,0 +1,72 @@
+R: R version 4.6.1 (2026-06-24) 
+HyPrColoc: 0.0.2 
+Documented example:
+Call: 
+hyprcoloc
+
+Results:
+  iteration             traits posterior_prob regional_prob candidate_snp
+1         1 T1, T2, T3, T4, T5         1.0000             1    rs11591147
+2         2         T6, T7, T8         0.9164             1    rs12117612
+3         3            T9, T10         0.9018             1     rs7524677
+  posterior_explained_by_snp dropped_trait
+1                     1.0000            NA
+2                     0.4197            NA
+3                     0.0763            NA
+
+
+SETTING: default prior.c 0.02 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration         traits posterior_prob regional_prob      candidate_snp
+1         1           None             NA        0.1571               <NA>
+2         2 insomnia, adhd         0.8582        0.9929 chr3_117923158_A_C
+  posterior_explained_by_snp dropped_trait
+1                         NA    expression
+2                     0.1209          <NA>
+
+
+SETTING: prior_001 prior.c 0.01 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration         traits posterior_prob regional_prob      candidate_snp
+1         1           None             NA        0.0853               <NA>
+2         2 insomnia, adhd         0.7504        0.9860 chr3_117923158_A_C
+  posterior_explained_by_snp dropped_trait
+1                         NA    expression
+2                     0.1209          <NA>
+
+
+SETTING: prior_0005 prior.c 0.005 threshold 0.5 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration         traits posterior_prob regional_prob      candidate_snp
+1         1           None             NA        0.0445               <NA>
+2         2 insomnia, adhd         0.5973        0.9723 chr3_117923158_A_C
+  posterior_explained_by_snp dropped_trait
+1                         NA    expression
+2                     0.1209          <NA>
+
+
+SETTING: strict_threshold prior.c 0.02 threshold 0.9 
+
+Call: 
+hyprcoloc
+
+Results:
+  iteration traits posterior_prob regional_prob candidate_snp
+1         1   None             NA        0.1571            NA
+2         2   None             NA        0.9929            NA
+  posterior_explained_by_snp dropped_trait
+1                         NA    expression
+2                         NA          adhd
+

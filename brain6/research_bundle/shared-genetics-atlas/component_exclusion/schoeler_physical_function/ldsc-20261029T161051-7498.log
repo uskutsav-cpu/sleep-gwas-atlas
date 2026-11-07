@@ -1,0 +1,146 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/schoeler_physical_function/ldsc-20261029T161051-7498 \
+--rg /dev/fd/63,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Thu Oct 29 11:10:54 2026
+Reading summary statistics from /dev/fd/63 ...
+Read summary statistics for 991705 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 991705 SNPs remain.
+After merging with regression SNP LD, 991705 SNPs remain.
+Computing rg for phenotype 2/5
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991705 SNPs remain.
+991705 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.3233 (0.0171)
+Lambda GC: 2.4545
+Mean Chi^2: 4.0042
+Intercept: 1.1924 (0.0523)
+Ratio: 0.0641 (0.0174)
+
+Heritability of phenotype 2/5
+-----------------------------
+Total Observed scale h2: 0.0492 (0.0036)
+Lambda GC: 1.4094
+Mean Chi^2: 1.3927
+Intercept: 1.1358 (0.0109)
+Ratio: 0.3458 (0.0277)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0113 (0.0035)
+Mean z1*z2: -0.0728
+Intercept: -0.0017 (0.0111)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.09 (0.0274)
+Z-score: -3.2862
+P: 0.001
+
+Computing rg for phenotype 3/5
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991705 SNPs remain.
+991705 SNPs with valid alleles.
+
+Heritability of phenotype 3/5
+-----------------------------
+Total Observed scale h2: 0.1097 (0.0055)
+Lambda GC: 1.3409
+Mean Chi^2: 1.4179
+Intercept: 1.0202 (0.0103)
+Ratio: 0.0483 (0.0247)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.036 (0.0047)
+Mean z1*z2: -0.3172
+Intercept: -0.1056 (0.0111)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.1909 (0.0232)
+Z-score: -8.2442
+P: 1.6631e-16
+
+Computing rg for phenotype 4/5
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991705 SNPs remain.
+991705 SNPs with valid alleles.
+
+Heritability of phenotype 4/5
+-----------------------------
+Total Observed scale h2: 0.0626 (0.0029)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5188
+Intercept: 1.0236 (0.0116)
+Ratio: 0.0455 (0.0223)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0587 (0.0038)
+Mean z1*z2: -0.7931
+Intercept: -0.2927 (0.0128)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.4123 (0.0189)
+Z-score: -21.7928
+P: 2.7126e-105
+
+Computing rg for phenotype 5/5
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991705 SNPs remain.
+991705 SNPs with valid alleles.
+
+Heritability of phenotype 5/5
+-----------------------------
+Total Observed scale h2: 0.0538 (0.0025)
+Lambda GC: 1.641
+Mean Chi^2: 1.7387
+Intercept: 1.1895 (0.0149)
+Ratio: 0.2566 (0.0202)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0129 (0.0025)
+Mean z1*z2: -0.1326
+Intercept: 0.0053 (0.0105)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.0979 (0.0189)
+Z-score: -5.1879
+P: 2.1272e-07
+
+
+Summary of Genetic Correlation Results
+        p1                                                                                                                                                                                                                             p2      rg     se        z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/dev/fd/63  /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz -0.0900 0.0274  -3.2862 0.0010  0.0492     0.0036  1.1358     0.0109   -0.0017       0.0111
+/dev/fd/63   /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz -0.1909 0.0232  -8.2442 0.0000  0.1097     0.0055  1.0202     0.0103   -0.1056       0.0111
+/dev/fd/63  /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz -0.4123 0.0189 -21.7928 0.0000  0.0626     0.0029  1.0236     0.0116   -0.2927       0.0128
+/dev/fd/63 /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz -0.0979 0.0189  -5.1879 0.0000  0.0538     0.0025  1.1895     0.0149    0.0053       0.0105
+
+Analysis finished at Thu Oct 29 12:45:01 2026
+Total time elapsed: 1.0h:34.0m:6.859999999999673s

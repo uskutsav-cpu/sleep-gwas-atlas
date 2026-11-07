@@ -1,0 +1,74 @@
+{
+  "correlations": [
+    {
+      "physical": "walking",
+      "sleep": "questionnaire",
+      "rg": -0.29,
+      "se": 0.0264,
+      "logged_p": 5.071e-28,
+      "bonferroni_four_from_rounded_p": 2.0284e-27,
+      "retained": 1020637,
+      "log_sha256": "fd66df6fde641101c5a8be3c1e9eaa9922c730a3ea6987ad52a588fc48b14e1f"
+    },
+    {
+      "physical": "walking",
+      "sleep": "registry",
+      "rg": -0.0608,
+      "se": 0.0319,
+      "logged_p": 0.0566,
+      "bonferroni_four_from_rounded_p": 0.2264,
+      "retained": 1020637,
+      "log_sha256": "c0ee974d5327fc5dd3f7122e029f67e526cc8987fbc002caf279238a421e6bd3"
+    },
+    {
+      "physical": "grip",
+      "sleep": "questionnaire",
+      "rg": -0.168,
+      "se": 0.0251,
+      "logged_p": 2.2765e-11,
+      "bonferroni_four_from_rounded_p": 9.106e-11,
+      "retained": 1020637,
+      "log_sha256": "efc93acdaf8cfce724fdde3d916494269d9d65435aa857a05cbcd89564eebcf0"
+    },
+    {
+      "physical": "grip",
+      "sleep": "registry",
+      "rg": -0.0947,
+      "se": 0.0345,
+      "logged_p": 0.006,
+      "bonferroni_four_from_rounded_p": 0.024,
+      "retained": 1020637,
+      "log_sha256": "ff551c54f39503c9cee4f85d790e687d8aab5262a51c78aa2a4d2e04a67e7d42"
+    }
+  ],
+  "contrasts": [
+    {
+      "physical": "walking",
+      "difference_questionnaire_minus_registry": -0.2292,
+      "paired_jackknife_se": 0.037438584541227574,
+      "ci95_unadjusted": [
+        -0.30257827733296205,
+        -0.15582172266703792
+      ],
+      "p": 9.239275602358816e-10,
+      "bonferroni_two": 1.8478551204717633e-09,
+      "identical_physical_heritability_deletes": true
+    },
+    {
+      "physical": "grip",
+      "difference_questionnaire_minus_registry": -0.0733,
+      "paired_jackknife_se": 0.03279396863993253,
+      "ci95_unadjusted": [
+        -0.137574997444402,
+        -0.00902500255559803
+      ],
+      "p": 0.02540638009090598,
+      "bonferroni_two": 0.05081276018181196,
+      "identical_physical_heritability_deletes": true
+    }
+  ],
+  "source_prepare_receipt_sha256": "b73fe7a662558f5ecdddb8195ab72a342199906372f13605963146a6d56dab3d",
+  "common_markers": 1020637,
+  "deletion_blocks": 200,
+  "note": "Point rg and p are read from rounded log output; selection, phenotype and source differences limit inference."
+}

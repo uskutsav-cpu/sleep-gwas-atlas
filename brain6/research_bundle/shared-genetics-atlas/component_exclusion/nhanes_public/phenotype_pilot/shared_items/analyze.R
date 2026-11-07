@@ -1,0 +1,22 @@
+#!/usr/bin/env Rscript
+source('outputs/shared-genetics-atlas/component_exclusion/nhanes_public/phenotype_pilot/score_and_analyze.R')
+out<-'outputs/shared-genetics-atlas/component_exclusion/nhanes_public/phenotype_pilot/shared_items'
+a<-do.call(rbind,data_all[grep(' primary$',names(data_all))]);stopifnot(!anyDuplicated(a$SEQN))
+a$eligible<-!is.na(a$age)&a$age>=60 & complete.cases(a[,c('fi','fi48','fi47','ffs','ffs4','sleep','fatigue')])
+stopifnot(sum(a$eligible)==2433,all(complete.cases(a[a$eligible,c('fi_noshared','fi47_noshared','fi43','ffs3','ffs2')])))
+design<-svydesign(id=~SDMVPSU,strata=~STRATUM,weights=~weight,nest=TRUE,data=a);sub<-subset(design,eligible)
+sets<-list(c('fi','ffs'),c('fi_noshared','ffs3'),c('fi47_noshared','ffs3'),c('fi43','ffs2'))
+rows<-lapply(sets,function(pair){v<-correlate(sub,pair[1],pair[2]);q<-a[a$eligible,];x<-q[[pair[1]]];y<-q[[pair[2]]];w<-q$weight
+ mx<-sum(w*x)/sum(w);my<-sum(w*y)/sum(w);direct<-sum(w*(x-mx)*(y-my))/sqrt(sum(w*(x-mx)^2)*sum(w*(y-my)^2))
+ stopifnot(abs(direct-v['estimate'])<1e-12);data.frame(fi=pair[1],fried=pair[2],t(v))})
+m<-svymean(~fi+ffs+fi43+ffs2+I(fi^2)+I(ffs^2)+I(fi*ffs)+I(fi43^2)+I(ffs2^2)+I(fi43*ffs2),sub)
+names(m)<-c('a','b','p','q','aa','bb','ab','pp','qq','pq');dimnames(attr(m,'var'))<-list(names(m),names(m))
+test<-svycontrast(m,quote((ab-a*b)/sqrt((aa-a*a)*(bb-b*b))-(pq-p*q)/sqrt((pp-p*p)*(qq-q*q))))
+est<-unname(coef(test));se<-unname(SE(test));crit<-qt(.975,df=degf(sub))
+z<-as.numeric(m);fn<-function(t)(t[7]-t[1]*t[2])/sqrt((t[5]-t[1]^2)*(t[6]-t[2]^2))-(t[10]-t[3]*t[4])/sqrt((t[8]-t[3]^2)*(t[9]-t[4]^2))
+g<-vapply(seq_along(z),function(j){h<-rep(0,length(z));h[j]<-1e-6;(fn(z+h)-fn(z-h))/(2e-6)},numeric(1))
+stopifnot(abs(sqrt(drop(t(g)%*%vcov(m)%*%g))-se)<1e-7)
+write.table(do.call(rbind,rows),file.path(out,'correlations.tsv'),sep='\t',row.names=FALSE,quote=FALSE)
+write.table(data.frame(comparison='full minus reduced both',estimate=est,se=se,low=est-crit*se,high=est+crit*se),file.path(out,'contrast.tsv'),sep='\t',row.names=FALSE,quote=FALSE)
+write.table(data.frame(n=sum(a$eligible),df=degf(sub)),file.path(out,'counts.tsv'),sep='\t',row.names=FALSE,quote=FALSE)
+cat('PASS: same sample, direct correlation and finite-difference SE checks. No individual rows exported.\n')

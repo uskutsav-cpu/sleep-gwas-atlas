@@ -1,0 +1,50 @@
+# Study meta-data
+gwas_id: GCST90624053
+author_notes: "GWAS summary statistics for a meta-analysis of pneumonia cases and
+  healthy controls from PanUKB and FinnGen release 10 as reported in Foote et al.
+  (2025) Uncovering the multivariate genetic architecture of frailty with genomic
+  structural equation modelling, in press at Nature Genetics (Preprint available:
+  https://doi.org/10.1101/2024.07.24.24310923). Total sample size was 832,234 individuals
+  (77,431 pneumonia cases and 754,803 healthy controls). \n\nColumns: chromosome;
+  base_pair_location (build 37/hg19); effect_allele; other_allele (non-effect allele);
+  beta; standard_error; effect_allele_frequency; p_value; rs_id; n (total number of
+  cases and controls in sample)"
+gwas_catalog_api: https://www.ebi.ac.uk/gwas/rest/api/studies/GCST90624053
+date_metadata_last_modified: 2025-08-21
+
+# Trait Information
+trait_description:
+  - Pneumonia
+ontology_mapping:
+  - EFO_0003106
+
+# Genotyping Information
+genome_assembly: GRCh37
+coordinate_system: 1-based
+genotyping_technology:
+  - Genome-wide genotyping array
+imputation_panel: HRC and UK10K haplotype resource (UKBB) | Reference panel of WGS
+  data from 8700 Finnish individuals (FinnGen)
+imputation_software: IMPUTE2 (UKBB) | Not reported for FinnGen
+
+# Sample Information
+samples:
+  - sample_ancestry_category:
+      - European
+    sample_size: 832234
+    case_control_study: true
+sex: combined
+
+# Summary Statistic information
+data_file_name: GCST90624053.tsv
+file_type: GWAS-SSF v1.0
+data_file_md5sum: dd2ae33c14a8ca94385421c7ce72834e
+analysis_software: METAL
+adjusted_covariates:
+  - Covariates were adjusted for in the original univariate studies but generally
+    included age sex and PCs
+minor_allele_freq_lower_limit: 0.0
+
+# Harmonization status
+is_harmonised: false
+is_sorted: false

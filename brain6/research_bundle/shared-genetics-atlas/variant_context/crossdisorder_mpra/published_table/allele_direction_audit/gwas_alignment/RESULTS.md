@@ -1,0 +1,12 @@
+# Selected reporter candidates: allele-aligned GWAS effects
+
+For two post-selected chromosome 5 candidates, the saved Brain6 source effect allele is the GRCh37 and GRCh38 reference allele, while the saved alternate allele is the other allele. Reversing the signed source coefficient therefore aligns the reported GWAS association to the GRCh38 alternate allele. The [earlier reporter audit](../RESULTS.md) supports ALT-relative-to-REF orientation **conditional on the count-matrix and construct labels**.
+
+| Variant, GRCh38 REF>ALT | Insomnia beta for ALT (SE) | ADHD beta for ALT (SE) | Conditional reporter ALT–REF log₂ effect |
+| --- | ---: | ---: | ---: |
+| rs325485, A>G | −0.0276 (0.0053) | −0.0671 (0.0096) | +0.875 |
+| rs6874138, T>C | −0.0266 (0.0051) | −0.0575 (0.0093) | +0.581 |
+
+The beta values are source-scale marginal association coefficients, not effects of the reporter construct or within-person clinical outcomes. Their signs depend on the original GWAS phenotype and effect-allele conventions, which must be checked if the underlying inputs are replaced. For both candidates, the conditionally oriented ALT reporter effect is positive while the ALT-aligned GWAS coefficients are negative. This is a descriptive allele alignment, **not** evidence that the reporter activity protects against either phenotype, mediates a trait, or identifies a causal variant. The two variants tag the same region and were chosen after viewing prior results. Their saved conditional single-signal PIPs are approximately 0.0020/0.0257 (insomnia/ADHD) for rs325485 and 0.0016/0.000125 for rs6874138; these model-dependent numbers do not establish or rule out causality. Their original barcode/construct mapping and reporter direction remain incompletely resolved, and native neuronal effects are unmeasured.
+
+The [alignment table](alignment.tsv), [code](analyze.py), and [input hashes](receipt.json) preserve the source and arithmetic. The source evidence file's preparation checked that the sleep and ADHD inputs used the same A1/A2 pair for each variant and recorded reference-verified build mapping. The script separately requires the reported source A1 to equal the recorded reference and A2 to equal ALT; it then negates beta without altering SE. It checks this narrow arithmetic, not original GWAS calibration, cohort independence, construct provenance, or multi-signal colocalization. This is post-hoc and had no pre-result protocol. AlphaGenome values were not used as training data.

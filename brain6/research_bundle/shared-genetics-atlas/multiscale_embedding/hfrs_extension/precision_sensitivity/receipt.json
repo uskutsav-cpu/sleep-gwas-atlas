@@ -1,0 +1,10 @@
+{
+  "source_matrix_sha256": "89fba2a2be2acb54b2cc6db614de2fd3e9a9028b95478c49f75e34fff8bafbff",
+  "source_masks_sha256": "9b3cc6807343f98a7f2dae0d1c9df968371fa1d482be6fa7217f880ba9b59641",
+  "n_predictions": 1080,
+  "folds": 50,
+  "fits": 250,
+  "weights": "clip((median_training_SE/SE)^2,0.25,4)",
+  "selection": "minimum weighted training SSE + 0.02 ridge",
+  "caveat": "SE-scaled errors are descriptive; covariance and external validation missing"
+}

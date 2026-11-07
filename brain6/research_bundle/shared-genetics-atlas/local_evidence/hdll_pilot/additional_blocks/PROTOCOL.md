@@ -1,0 +1,7 @@
+# Additional selected-region HDL-L sensitivity
+
+Specified before downloading reference blocks or examining their results. Extend the existing FI–insomnia pilot to the author reference blocks containing rs62264767, rs2431108 and rs1476535, previously selected insomnia–ADHD lead variants on chromosomes 3, 5 and 7. Selection is based on prior analyses and is not independent of them. If a lead is absent from the reference, report the failure rather than replacing it after looking at results. The HDL-L block is a broad local region, not a test of the lead variant.
+
+Use the same pinned HDL-L source, UK Biobank reference, FI and original insomnia inputs as the first pilot, with N0=0, 50,000 and 100,000 as hypothetical overlap sensitivity settings, not estimated overlap. Match alleles and report coverage, warnings, errors, estimates and local heritability tests. Record reference member checksums and selection; do not download the whole 1.83 GB archive. Process one reference block at a time and do not delete files. Keep disk usage modest. Summarize all attempted blocks, including failures.
+
+Interpret all tests as exploratory and post-selected; a correction for these three regions cannot account for the wider selection process. Different HDL-L and LAVA targets and partitions mean a result does not repair the failed LAVA quality gates. FI contains sleep-related items, sample overlap is unknown, and independent confirmation is required before any claim of a true local correlation or mechanism.

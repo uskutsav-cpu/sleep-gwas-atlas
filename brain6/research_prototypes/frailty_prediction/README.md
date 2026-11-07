@@ -1,0 +1,21 @@
+# Exploratory sleep–frailty correlation predictor
+
+This standalone research prototype reproduces the project's bounded-ridge, group-held-out approach. It uses six existing sleep–brain-disorder genetic correlations to predict correlations with FI, FFS and HFRS. It does **not** predict a person's health, diagnose disease, prove causality or estimate an interaction. The 12 training measures reuse overlapping cohorts, contain different phenotype definitions, and have not undergone independent validation. Training-group deletion and source-transfer tests show substantial instability. FI and FFS include sleep/tiredness or exhaustion, and HFRS includes a somnolence-related code. Source and method limitations are documented in the companion workspace report.
+
+The input matrix contains derived genetic-correlation estimates and does not contain AlphaGenome output. The caller must supply six independently characterized genetic correlations; matching names alone does not validate their ancestry, marker support, sample overlap, intercepts or phenotype direction. No calibrated confidence or prediction interval is returned. The excluded group is mandatory to prevent accidental evaluation on its own training rows, but it does not remove cohort overlap across the other rows.
+
+Each output also compares each feature with its observed minimum and maximum among the remaining training rows, after removing the excluded group. A flag identifies marginal extrapolation. Falling inside every marginal range does not imply that the combination is represented in training, and these tiny dependent training samples cannot define a reliable applicability domain. The diagnostic does not change predictions or establish accuracy.
+
+From this directory, with Python 3 and NumPy installed:
+
+```sh
+python predict.py --exclude-group insomnia --features example_features.json
+```
+
+The example represents the saved questionnaire-insomnia row solely to reproduce its held-out computation. For the separate clinical-insomnia example, use `--features mvp_common_support_features.json` with the same `--exclude-group insomnia`. Its six inputs were estimated on 991,707 common markers; the source uses p-derived Z values and approximate sample sizes, and its earlier transfer evaluation reused disease and frailty sources. This example is not independent validation. Results are written as JSON to standard output; redirect to a new file if desired. The lambda is chosen separately for each target by inner group-held-out mean squared error on the correlation scale; exact ties favor the larger lambda. Feature normalization is fitted only on each training fold. The group labels are `dashti_2019_duration`, `jones_accelerometer`, or the individual sleep-trait name for other rows. This is not a general-purpose trained model or an independently validated pipeline.
+
+The originating workspace contains the [research report](../../research_bundle/shared-genetics-atlas/RESEARCH_REPORT.md), [manuscript draft](../../research_bundle/shared-genetics-atlas/MANUSCRIPT_DRAFT.md), and [full analysis and validation](../../research_bundle/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/RESULTS.md). These links point to the research snapshot distributed in this repository. GWAS inputs, reference panels and their terms remain documented in that bundle and on the external volume.
+
+To check all 36 stored group-held-out predictions, the clinical-insomnia example, and the input-box calculation against all 64 corners, run `python -m unittest discover -s . -p test_predict.py` in this directory. `heldout_reference.tsv` is a numerical regression fixture, not independent validation.
+
+To inspect fixed-model input sensitivity for the clinical-insomnia example, add `--feature-ses mvp_common_support_ses.json` to the command. The reported one-SE box varies all six features simultaneously within estimate ± SE, without changing the fitted model. Its endpoints are mathematical extremes, **not confidence intervals, prediction intervals or probabilities**: the input estimates can be correlated, and training, outcome, and model-selection uncertainty are omitted. The command rejects boxes that leave the valid correlation range.

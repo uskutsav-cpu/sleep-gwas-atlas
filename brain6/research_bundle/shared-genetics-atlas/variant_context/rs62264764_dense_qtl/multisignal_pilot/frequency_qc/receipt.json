@@ -1,0 +1,68 @@
+{
+  "sources": {
+    "insomnia": {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/insomnia.txt.gz",
+      "sha256": "32848cd92a6324c9048cad4a804cf1546299af1d0281981c6ca43c2046a9065b",
+      "rows": 10862567
+    },
+    "adhd": {
+      "path": "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/raw/adhd.txt.gz",
+      "sha256": "c58a96031ec44b1edba81c91d603037a2efd03fcd946531424866e3f5f1d40c5",
+      "rows": 6774224
+    }
+  },
+  "pilot_variants_sha256": "95528ff28a373914da92b387fa4c5e3e216ba7e2a645c6acad5e29380e7f2da3",
+  "kriging_sha256": "c42e7e95406eab26bb12d7cd272c0c2b8f227577e746cc2505b3ecb91559e913",
+  "summary": {
+    "adhd": {
+      "counts": {
+        "matched": 1548,
+        "difference_gt_005": 1
+      },
+      "frequency_stats": {
+        "n": 1548,
+        "median_abs_diff": 0.0027932405566600538,
+        "maximum_abs_diff": 0.05643538767395628
+      },
+      "groups": {
+        "kriging_abs_le3": {
+          "n": 1526,
+          "median_abs_diff": 0.0027932405566600538,
+          "maximum_abs_diff": 0.05643538767395628
+        },
+        "kriging_abs_gt3": {
+          "n": 22,
+          "median_abs_diff": 0.005204771371769345,
+          "maximum_abs_diff": 0.04366600397614312
+        }
+      },
+      "max_effective_n_difference": 1.4551915228366852e-11
+    },
+    "insomnia": {
+      "counts": {
+        "matched": 1548,
+        "difference_gt_005": 3
+      },
+      "frequency_stats": {
+        "n": 1548,
+        "median_abs_diff": 0.01025082504970181,
+        "maximum_abs_diff": 0.05308966202783302
+      },
+      "groups": {
+        "kriging_abs_le3": {
+          "n": 1513,
+          "median_abs_diff": 0.010477733598409533,
+          "maximum_abs_diff": 0.05308966202783302
+        },
+        "kriging_abs_gt3": {
+          "n": 35,
+          "median_abs_diff": 0.00637942345924454,
+          "maximum_abs_diff": 0.029564433399602387
+        }
+      },
+      "max_effective_n_difference": null
+    }
+  },
+  "flags_sha256": "aa70674605aaeff1de71c48cfa0cbfb2f80cb8b28a9bc820b9b0fe3c43065790",
+  "caveat": "descriptive source and reference comparison, not evidence for or against allele coding, independent data or clinical use"
+}

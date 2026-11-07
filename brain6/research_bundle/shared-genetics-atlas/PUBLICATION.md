@@ -1,0 +1,15 @@
+# Repository research snapshot — 6 November 2026
+
+Start with [the research overview](START_HERE.md), [report](RESEARCH_REPORT.md), and [manuscript draft](MANUSCRIPT_DRAFT.md). This snapshot publishes the exploratory sleep–frailty and Brain6 research, its producing scripts, figures, compact derived results and verification records. It does not replace the locked production atlas, its historical reports or its failed quality gates. The matched item-excluded frailty analysis, independent ML validation and causal gene/cell assignments remain unresolved.
+
+The [ML prototype](../../research_prototypes/frailty_prediction/README.md) and [AlphaGenome pilot](../../alphagenome_pilot/README.md) are separate runnable research components. The sibling `brain6-alphagenome-pilot` link points to that pilot without duplicating its data. AlphaGenome predictions and derivatives remain subject to the pilot's [binding use notice](../../alphagenome_pilot/TERMS_OF_USE.md); they are predictions rather than measurements and were not used to train the frailty model.
+
+## External dependencies
+
+The repository policy keeps downloaded GWAS/reference inputs and large intermediates outside Git. [external_files.tsv](external_files.tsv) records the 50 source documents, reference/input files and large regenerable intermediates retained in the local delivery, with sizes and SHA-256 checksums. No local original was deleted. Dataset access and reuse remain subject to the originating publisher or service's terms. Individual reference data are not redistributed.
+
+[external_links.tsv](external_links.tsv) records report links that originally pointed to omitted files or paths outside this repository. Those links now lead here, with their original target shown beside them. Follow the associated study's SOURCE/REVIEW/RESULTS report, download URL and provenance receipt to locate the actual dependency; a link to this guide is not evidence that its source file is included. Reproduction scripts preserve original execution paths where recorded, so adjust documented external paths for a new host. Author requests are drafts only and have not been sent.
+
+The repository snapshot makes navigation edits to report copies. Source-level provenance receipts retain their original generating-workspace hashes and paths; the publication [bundle inventory](bundle_manifest.tsv) separately binds the distributed files. The [original workspace inventory](workspace_snapshot_manifest.tsv) is retained for comparison. Run `python3 bundle_integrity.py` for the publication inventory and `python3 verify_local_links.py` for local report navigation. Neither proves source authenticity or scientific validation.
+
+The [saved-summary reproduction](component_exclusion/physical_factor_workaround/REPRODUCE.md) requires Python/NumPy and base R. The optional retained-input LDSC replay additionally needs the externally retained munged inputs, original LDSC environment and LD reference. Source downloads, experimental data collection and external emails are not triggered by the checks.

@@ -1,0 +1,5 @@
+# Sleep follow-up of two prior FI variants
+
+Written after reading Mekli 2018 but before viewing these records in the MVP source. Query the two variants highlighted in its abstract: rs6765037 (discovery FI genome-wide hit, not supported in ELSA) and rs7134291 (suggestive HRS FI and nominal ELSA follow-up). Stream the entire archived MVP insomnia gzip, verify its compressed SHA-256 against the prior receipt and require a complete gzip read. Match on rsID; report all matching records, coordinates, alleles, odds ratios and p-values. Check consistency with the published A effect allele but do not claim full strand harmonization or variant identity unless the original genome build and the second allele are independently verified.
+
+This is an exploratory historical-locus cross-phenotype lookup after candidate selection, not a prespecified replication, a genome-wide joint test, corrected discovery, colocalization or proof of causal effect. It cannot make the FI sleep-item-excluded: both original cohorts' indices include restless sleep. Preserve missing/duplicate rows and do not equate a nonsignificant result with no effect. No AlphaGenome scores are used.

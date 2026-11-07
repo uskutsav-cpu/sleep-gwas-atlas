@@ -1,0 +1,16 @@
+diff --git a/R/utils.R b/R/utils.R
+index 981ced7..eab6e59 100644
+--- a/R/utils.R
++++ b/R/utils.R
+@@ -21,7 +21,10 @@
+ #' @export
+ which_col <- function(x, j)
+ {
+-  x@i[(x@p[j]+1):x@p[j+1]] + 1
++  start <- x@p[j]
++  end <- x@p[j + 1L]
++  if (start == end) return(integer(0))
++  x@i[seq.int(start + 1L, end)] + 1L
+ }
+ 
+ 

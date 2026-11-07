@@ -1,0 +1,164 @@
+diff --git a/src/align2.cpp b/src/align2.cpp
+index 295f47f..369ec81 100644
+--- a/src/align2.cpp
++++ b/src/align2.cpp
+@@ -1,20 +1,20 @@
+ //Includes/namespaces
+ #include <Rcpp.h>
+-#include <RcppEigen.h>
+-#include <iostream>
++#include <RcppEigen.h>
++#include <iostream>
+ #include <Eigen/Core>
+ // [[Rcpp::depends(RcppEigen)]]
+ 
+ using namespace Rcpp;
+-using namespace RcppEigen;
+-using Eigen::Map;
+-using Eigen::MatrixXd;
+-using Eigen::VectorXd;
+-using Rcpp::as;
+-// [[Rcpp::export]]
++using namespace RcppEigen;
++using Eigen::Map;
++using Eigen::MatrixXd;
++using Eigen::VectorXd;
++using Rcpp::as;
++// [[Rcpp::export]]
+ 
+ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1, NumericVector traitsCo, NumericVector traitNo, NumericMatrix rho, NumericMatrix trait_cor, NumericVector EPS){
+-
++
+  // map Z-scores and prior ratios W by co-loc (1) and no co-loc (2)
+  const Map<MatrixXd> matZ(as<Map<MatrixXd> >(Zmatrix));
+  const Map<MatrixXd> matW(as<Map<MatrixXd> >(Wmatrix));
+@@ -177,7 +177,7 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1,
+   VectorXd Wco(Map<VectorXd>(W1.data(), n_cv*ncolZco));
+ 
+   for (int m = 0; m < ncolZco; m++){
+-   tmp_rho(i) = RHO(snps1(1 , i)-1, snps1(0 , i)-1);
++   tmp_rho(i) = RHO(static_cast<Eigen::Index>(snps1(1, i)) - 1, static_cast<Eigen::Index>(snps1(0, i)) - 1);
+    tmp_rho_11(2*m+1) = tmp_rho(i);
+    tmp_rho_12(2*m) = tmp_rho(i);
+    tmp_rho_21(2*m+1) = tmp_rho(i);
+@@ -210,8 +210,8 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1,
+     Wdiag_1 = W_1cv.row(iter_1).asDiagonal();
+ 
+     for (int m = 0; m < ncolZco; m++){
+-     snp_cor_1cv(2*m) = RHO(snps1(0,i)-1, j2)*tet_1cv(2*m);
+-     snp_cor_1cv(2*m+1) = RHO(snps1(1,i)-1, j2)*tet_1cv(2*m+1);
++     snp_cor_1cv(2*m) = RHO(static_cast<Eigen::Index>(snps1(0, i)) - 1, j2)*tet_1cv(2*m);
++     snp_cor_1cv(2*m+1) = RHO(static_cast<Eigen::Index>(snps1(1, i)) - 1, j2)*tet_1cv(2*m+1);
+     }
+ 
+     snp_cor_1cv(sigZdim - n_cv) = sigZ1_new(sigZdim - n_cv,sigZdim - n_cv);
+@@ -262,10 +262,10 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1,
+     Wdiag_2 = W_2cv.row(iter_2).asDiagonal();
+ 
+     for (int m = 0; m < ncolZco; m++){
+-     snp_cor_2cv(2*m) = RHO(snps1(0,i)-1, snps1(0,j2)-1)*tet_2cv(2*m);
+-     snp_cor_2cv(2*m+1) = RHO(snps1(1,i)-1, snps1(0,j2)-1)*tet_2cv(2*m+1);
+-     snp_cor_2cv_1(2*m) = RHO(snps1(0,i)-1, snps1(1,j2)-1)*tet_2cv(2*m);
+-     snp_cor_2cv_1(2*m+1) = RHO(snps1(1,i)-1, snps1(1,j2)-1)*tet_2cv(2*m+1);
++     snp_cor_2cv(2*m) = RHO(static_cast<Eigen::Index>(snps1(0, i)) - 1, static_cast<Eigen::Index>(snps1(0, j2)) - 1)*tet_2cv(2*m);
++     snp_cor_2cv(2*m+1) = RHO(static_cast<Eigen::Index>(snps1(1, i)) - 1, static_cast<Eigen::Index>(snps1(0, j2)) - 1)*tet_2cv(2*m+1);
++     snp_cor_2cv_1(2*m) = RHO(static_cast<Eigen::Index>(snps1(0, i)) - 1, static_cast<Eigen::Index>(snps1(1, j2)) - 1)*tet_2cv(2*m);
++     snp_cor_2cv_1(2*m+1) = RHO(static_cast<Eigen::Index>(snps1(1, i)) - 1, static_cast<Eigen::Index>(snps1(1, j2)) - 1)*tet_2cv(2*m+1);
+     }
+ 
+     snp_cor_2cv(sigZdim - n_cv) = sigZ2_new(sigZdim - n_cv, sigZdim - n_cv);
+@@ -274,8 +274,8 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1,
+     sigZ2.col(sigZdim - n_cv) = snp_cor_2cv;
+     sigZ2.row(sigZdim - 1) = snp_cor_2cv_1;
+     sigZ2.col(sigZdim - 1) = snp_cor_2cv_1;
+-    sigZ2(2*ncolZco+1, 2*ncolZco) = RHO(snps1(1 , j2)-1, snps1(0 , j2)-1);
+-    sigZ2(2*ncolZco, 2*ncolZco+1) = RHO(snps1(1 , j2)-1, snps1(0 , j2)-1);
++    sigZ2(2*ncolZco+1, 2*ncolZco) = RHO(static_cast<Eigen::Index>(snps1(1, j2)) - 1, static_cast<Eigen::Index>(snps1(0, j2)) - 1);
++    sigZ2(2*ncolZco, 2*ncolZco+1) = RHO(static_cast<Eigen::Index>(snps1(1, j2)) - 1, static_cast<Eigen::Index>(snps1(0, j2)) - 1);
+ 
+     adjZ_2 = Wdiag_2*sigZ2*Wdiag_2;
+ 
+@@ -329,7 +329,7 @@ List align2(NumericMatrix Zmatrix, NumericMatrix Wmatrix, NumericMatrix sTemp1,
+  out2_co(1) = ((out_co_2.row(0).transpose()) - (out2_co(0)*VectorXd::Ones(iter_co_2))).array().exp().sum();
+  out2_co(2) = out_co_2(1,maxIndex);
+  out2_co(3) = out_co_2(2,maxIndex);
+-
+- return List::create(Named("out_no_1") = out1_no, Named("out_no_2") = out2_no, Named("out_co_1") = out1_co, Named("out_co_2") = out2_co);
++
++ return List::create(Named("out_no_1") = out1_no, Named("out_no_2") = out2_no, Named("out_co_1") = out1_co, Named("out_co_2") = out2_co);
+ 
+ }
+diff --git a/src/regional2.cpp b/src/regional2.cpp
+index fd6e9fb..6b1a0ad 100644
+--- a/src/regional2.cpp
++++ b/src/regional2.cpp
+@@ -1,22 +1,22 @@
+ //Includes/namespaces
+ #include <Rcpp.h>
+ #include <RcppEigen.h>
+-#include <Eigen/Dense>
+-#include <iostream>
++#include <Eigen/Dense>
++#include <iostream>
+ #include <Eigen/Core>
+-// [[Rcpp::depends(RcppEigen)]]
++// [[Rcpp::depends(RcppEigen)]]
+ 
+ using namespace Rcpp;
+-using namespace RcppEigen;
+-using Eigen::Map;
+-using Eigen::MatrixXd;
+-using Eigen::VectorXd;
+-using Eigen::ArrayXd;
+-using Rcpp::as;
++using namespace RcppEigen;
++using Eigen::Map;
++using Eigen::MatrixXd;
++using Eigen::VectorXd;
++using Eigen::ArrayXd;
++using Rcpp::as;
+ // [[Rcpp::export]]
+ 
+ List regional2(NumericMatrix zTemp1, NumericMatrix wTemp1, NumericMatrix sTemp1, NumericVector traitsCo, NumericMatrix rho, NumericMatrix trait_cor, NumericVector EPS){
+-
++
+  // map Z-scores and prior ratios W by co-loc (1) and no co-loc (2)
+  const Map<MatrixXd> matZ(as<Map<MatrixXd> >(zTemp1));
+  const Map<MatrixXd> matW(as<Map<MatrixXd> >(wTemp1));
+@@ -128,7 +128,7 @@ List regional2(NumericMatrix zTemp1, NumericMatrix wTemp1, NumericMatrix sTemp1,
+ 
+   // compute the subseted correlation matrix for co and no-co Z-scores
+   for (int k = 0; k < m; k++){
+-   tmp_rho(i) = RHO(snps(0 , i)-1, snps(1 , i)-1);
++   tmp_rho(i) = RHO(static_cast<Eigen::Index>(snps(0, i)) - 1, static_cast<Eigen::Index>(snps(1, i)) - 1);
+    tmp_rho_21(2*k+1) = tmp_rho(i);
+    tmp_rho_22(2*k) = tmp_rho(i);
+   }
+@@ -169,7 +169,7 @@ for (int i = Q; i < ncol; i++){
+ 
+   // compute the subseted correlation matrix for coloc Z-scores
+   for (int k = 0; k < m; k++){
+-   tmp_rho(i) = RHO(snps(0 , i)-1, snps(1 , i)-1);
++   tmp_rho(i) = RHO(static_cast<Eigen::Index>(snps(0, i)) - 1, static_cast<Eigen::Index>(snps(1, i)) - 1);
+    tmp_rho_21(2*k+1) = tmp_rho(i);
+    tmp_rho_22(2*k) = tmp_rho(i);
+   }
+@@ -208,11 +208,11 @@ for (int i = Q; i < ncol; i++){
+  out_exp2 = (out2 - (out2_co(0)*VectorXd::Ones(ncol))).array().exp();
+  out2_co(1) = out_exp2.sum();
+  out2_co(2) = maxIndex + 1;
+-
+- if (trtCo.size() == m){
+-  return List::create(Named("out_co_1") = out1_co, Named("out_co_2") = out2_co, Named("out_snp_scores_1") = out_exp1/out1_co(1), Named("out_snp_scores_2") = out_exp2/out2_co(1));
+- }
+- else {
+-  return List::create(Named("out_co_1") = out1_co, Named("out_co_2") = out2_co);
+- }
++
++ if (trtCo.size() == m){
++  return List::create(Named("out_co_1") = out1_co, Named("out_co_2") = out2_co, Named("out_snp_scores_1") = out_exp1/out1_co(1), Named("out_snp_scores_2") = out_exp2/out2_co(1));
++ }
++ else {
++  return List::create(Named("out_co_1") = out1_co, Named("out_co_2") = out2_co);
++ }
+ }

@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/coordinate_sensitivity/FFS_insomnia \
+--rg /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/FFS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Tue Oct 27 16:04:18 2026
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/FFS.sumstats.gz ...
+Read summary statistics for 1134416 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1134416 SNPs remain.
+After merging with regression SNP LD, 1134416 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz ...
+Read summary statistics for 1134416 SNPs.
+After merging with summary statistics, 1134416 SNPs remain.
+1134416 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.062 (0.0027)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5011
+Intercept: 1.0272 (0.0101)
+Ratio: 0.0542 (0.0202)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.02 (0.0015)
+Lambda GC: 1.2398
+Mean Chi^2: 1.2722
+Intercept: 1.0769 (0.0095)
+Ratio: 0.2825 (0.0349)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0086 (0.0013)
+Mean z1*z2: 0.0782
+Intercept: 0.0038 (0.0064)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.2444 (0.0369)
+Z-score: 6.6255
+P: 3.4602e-11
+
+
+Summary of Genetic Correlation Results
+                                                                                                   p1                                                                                                  p2     rg     se      z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/FFS.sumstats.gz /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz 0.2444 0.0369 6.6255 0.0000  0.0200     0.0015  1.0769     0.0095    0.0038       0.0064
+
+Analysis finished at Tue Oct 27 16:04:43 2026
+Total time elapsed: 24.21s

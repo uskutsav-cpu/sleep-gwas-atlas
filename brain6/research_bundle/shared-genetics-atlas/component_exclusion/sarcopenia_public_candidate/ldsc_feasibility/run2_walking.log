@@ -1,0 +1,65 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/sarcopenia_public_candidate/ldsc_feasibility/run2_walking \
+--rg /dev/fd/63,/Volumes/Brain6Work/physical-function-source-sensitivity-20261028/walking.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Wed Oct 28 18:39:21 2026
+Reading summary statistics from /dev/fd/63 ...
+Read summary statistics for 984470 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 984470 SNPs remain.
+After merging with regression SNP LD, 984470 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Volumes/Brain6Work/physical-function-source-sensitivity-20261028/walking.sumstats.gz ...
+Read summary statistics for 1020637 SNPs.
+After merging with summary statistics, 984470 SNPs remain.
+984470 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.1817 (0.0084)
+Lambda GC: 1.9382
+Mean Chi^2: 2.9492
+Intercept: 0.9635 (0.0301)
+Ratio < 0 (usually indicates GC correction).
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.0815 (0.0031)
+Lambda GC: 1.4851
+Mean Chi^2: 1.6111
+Intercept: 1.0255 (0.0111)
+Ratio: 0.0418 (0.0182)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.041 (0.0029)
+Mean z1*z2: 0.6459
+Intercept: 0.2753 (0.0101)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.3369 (0.019)
+Z-score: 17.7133
+P: 3.3132e-70
+
+
+Summary of Genetic Correlation Results
+        p1                                                                                    p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/dev/fd/63 /Volumes/Brain6Work/physical-function-source-sensitivity-20261028/walking.sumstats.gz 0.3369 0.0190 17.7133 0.0000  0.0815     0.0031  1.0255     0.0111    0.2753       0.0101
+
+Analysis finished at Wed Oct 28 18:45:12 2026
+Total time elapsed: 5.0m:50.68000000000001s

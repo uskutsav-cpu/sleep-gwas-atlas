@@ -1,0 +1,92 @@
+{
+  "markers": 1020621,
+  "correlations": [
+    {
+      "hfrs": "ukb",
+      "sleep": "questionnaire",
+      "rg": 0.5288,
+      "se": 0.0334,
+      "p": 2.0129e-56,
+      "p_bonferroni_4": 8.0516e-56,
+      "log_sha256": "d8b0027515955e9ebd694af7ed4b7b53b6799514370b5dd807644a8b9737ae7c"
+    },
+    {
+      "hfrs": "ukb",
+      "sleep": "registry",
+      "rg": 0.3755,
+      "se": 0.0416,
+      "p": 1.8811e-19,
+      "p_bonferroni_4": 7.5244e-19,
+      "log_sha256": "ca46932ef63a3698c563af91ec0aef904938da5e0e1d3f80bd250de5da6acb33"
+    },
+    {
+      "hfrs": "finngen",
+      "sleep": "questionnaire",
+      "rg": 0.4363,
+      "se": 0.0253,
+      "p": 1.4181e-66,
+      "p_bonferroni_4": 5.6724e-66,
+      "log_sha256": "2757338e2afae36ea10b4a712471d4643dbfed85027035a7131982a4d160c2f3"
+    },
+    {
+      "hfrs": "finngen",
+      "sleep": "registry",
+      "rg": 0.6132,
+      "se": 0.0326,
+      "p": 8.2588e-79,
+      "p_bonferroni_4": 3.30352e-78,
+      "log_sha256": "742654397ed208662e8a1dc6e245faa1c86feffe2ac5fe1f78ef6fc20107d498"
+    }
+  ],
+  "contrasts": [
+    {
+      "contrast": "ukb_questionnaire minus finngen_questionnaire",
+      "difference": 0.09250000000000003,
+      "paired_se": 0.03548958483306257,
+      "p": 0.00914999433865299,
+      "p_bonferroni_4": 0.03659997735461196,
+      "ci95_unadjusted": [
+        0.022941691900920366,
+        0.16205830809907967
+      ]
+    },
+    {
+      "contrast": "ukb_registry minus finngen_registry",
+      "difference": -0.23769999999999997,
+      "paired_se": 0.0426324801572921,
+      "p": 2.4673321826992874e-08,
+      "p_bonferroni_4": 9.86932873079715e-08,
+      "ci95_unadjusted": [
+        -0.3212581256799087,
+        -0.15414187432009124
+      ]
+    },
+    {
+      "contrast": "ukb_questionnaire minus ukb_registry",
+      "difference": 0.15330000000000005,
+      "paired_se": 0.04771249882128781,
+      "p": 0.0013135876949673909,
+      "p_bonferroni_4": 0.0052543507798695635,
+      "ci95_unadjusted": [
+        0.059785220697868735,
+        0.24681477930213136
+      ]
+    },
+    {
+      "contrast": "finngen_questionnaire minus finngen_registry",
+      "difference": -0.17689999999999995,
+      "paired_se": 0.03968339845247167,
+      "p": 8.281146551373146e-06,
+      "p_bonferroni_4": 3.3124586205492585e-05,
+      "ci95_unadjusted": [
+        -0.2546780317509948,
+        -0.0991219682490051
+      ]
+    }
+  ],
+  "blocks": 200,
+  "shared_trait_heritability_deletes_match": true,
+  "prepare_receipt_sha256": "bcfbbbb0a156ddd5c380eea748b08b6462e48b7176c489eadf8a303427f69033",
+  "stream_receipt_sha256": "2bf828a18c78ddc36ee776f8d63debd6f73553466ff7d0b32b685eae404264f4",
+  "note": "Post-hoc families; rounded LDSC points; cohort, phenotype, N discrepancy and reference limitations remain."
+}

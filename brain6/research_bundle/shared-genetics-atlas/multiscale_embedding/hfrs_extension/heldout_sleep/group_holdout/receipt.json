@@ -1,0 +1,30 @@
+{
+  "input_sha256": {
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/source_matrix.tsv": "89fba2a2be2acb54b2cc6db614de2fd3e9a9028b95478c49f75e34fff8bafbff",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/sleep_source_crosswalk.tsv": "9fdeeec0522374312dcfb84957d74a6feeec04e38b1651e3bd60907d7161a7c0",
+    "/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/predictions.tsv": "4997feb8cbd721f90e4b85f2df53c10784a64a26be6456ed2db068db4fb13d1f"
+  },
+  "groups": {
+    "insomnia": "insomnia",
+    "sleepdur": "dashti_2019_duration",
+    "shortsleep": "dashti_2019_duration",
+    "longsleep": "dashti_2019_duration",
+    "chronotype": "chronotype",
+    "sleepiness": "sleepiness",
+    "napping": "napping",
+    "snoring": "snoring",
+    "sleep_apnea": "sleep_apnea",
+    "sleep_efficiency": "jones_accelerometer",
+    "accel_sleep_duration": "jones_accelerometer",
+    "sleep_timing": "jones_accelerometer"
+  },
+  "nested_cv": "inner leave-one-group-out; outer leave-one-group-out",
+  "lambda_grid": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "rows": 36,
+  "warning": "same-cohort leakage between groups is possible; six known r_g features required; post-hoc grouping"
+}

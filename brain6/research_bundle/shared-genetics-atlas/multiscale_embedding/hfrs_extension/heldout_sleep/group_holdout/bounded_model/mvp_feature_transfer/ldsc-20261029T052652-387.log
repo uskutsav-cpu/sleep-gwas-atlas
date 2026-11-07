@@ -1,0 +1,200 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/ldsc-20261029T052652-387 \
+--rg /dev/fd/63,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/adhd.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/mdd.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/scz.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bipolar.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/alz.sumstats.gz,/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/parkinson.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Thu Oct 29 00:26:54 2026
+Reading summary statistics from /dev/fd/63 ...
+Read summary statistics for 1124041 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1124041 SNPs remain.
+After merging with regression SNP LD, 1124041 SNPs remain.
+Computing rg for phenotype 2/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/adhd.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1043509 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.049 (0.0033)
+Lambda GC: 1.4082
+Mean Chi^2: 1.3908
+Intercept: 1.1361 (0.0102)
+Ratio: 0.3483 (0.0261)
+
+Heritability of phenotype 2/7
+-----------------------------
+Total Observed scale h2: 0.1635 (0.0081)
+Lambda GC: 1.365
+Mean Chi^2: 1.4615
+Intercept: 1.0395 (0.0106)
+Ratio: 0.0856 (0.023)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0435 (0.0033)
+Mean z1*z2: 0.1674
+Intercept: 0.0107 (0.007)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.4854 (0.0362)
+Z-score: 13.3993
+P: 6.1042e-41
+
+Computing rg for phenotype 3/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/mdd.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1104563 SNPs with valid alleles.
+
+Heritability of phenotype 3/7
+-----------------------------
+Total Observed scale h2: 0.0684 (0.0028)
+Lambda GC: 1.4566
+Mean Chi^2: 1.5974
+Intercept: 0.9928 (0.0105)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0324 (0.002)
+Mean z1*z2: 0.2159
+Intercept: 0.0006 (0.0068)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5609 (0.0307)
+Z-score: 18.2695
+P: 1.4464e-74
+
+Computing rg for phenotype 4/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/scz.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1107294 SNPs with valid alleles.
+
+Heritability of phenotype 4/7
+-----------------------------
+Total Observed scale h2: 0.4145 (0.0146)
+Lambda GC: 1.753
+Mean Chi^2: 2.0302
+Intercept: 1.0591 (0.0136)
+Ratio: 0.0574 (0.0132)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0244 (0.0041)
+Mean z1*z2: 0.0857
+Intercept: 0.0032 (0.0069)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.1724 (0.0287)
+Z-score: 6.0135
+P: 1.8159e-09
+
+Computing rg for phenotype 5/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bipolar.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1111775 SNPs with valid alleles.
+
+Heritability of phenotype 5/7
+-----------------------------
+Total Observed scale h2: 0.2926 (0.0111)
+Lambda GC: 1.4566
+Mean Chi^2: 1.5968
+Intercept: 1.019 (0.009)
+Ratio: 0.0318 (0.0151)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0295 (0.0039)
+Mean z1*z2: 0.1018
+Intercept: 0.0098 (0.006)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.2474 (0.0326)
+Z-score: 7.6002
+P: 2.9563e-14
+
+Computing rg for phenotype 6/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/alz.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1112104 SNPs with valid alleles.
+
+Heritability of phenotype 6/7
+-----------------------------
+Total Observed scale h2: 0.033 (0.0055)
+Lambda GC: 1.2038
+Mean Chi^2: 1.274
+Intercept: 1.085 (0.028)
+Ratio: 0.3104 (0.1023)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0006 (0.0019)
+Mean z1*z2: -0.0011
+Intercept: -0.0031 (0.0062)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.0161 (0.0469)
+Z-score: 0.3426
+P: 0.7319
+
+Computing rg for phenotype 7/7
+Reading summary statistics from /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/parkinson.sumstats.gz ...
+Read summary statistics for 1217311 SNPs.
+After merging with summary statistics, 1124041 SNPs remain.
+1079802 SNPs with valid alleles.
+
+Heritability of phenotype 7/7
+-----------------------------
+Total Observed scale h2: 0.0735 (0.0075)
+Lambda GC: 1.0926
+Mean Chi^2: 1.1378
+Intercept: 0.9793 (0.0078)
+Ratio < 0 (usually indicates GC correction).
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: -0.0016 (0.0028)
+Mean z1*z2: 6.4884e-05
+Intercept: 0.0045 (0.0057)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: -0.026 (0.0462)
+Z-score: -0.5625
+P: 0.5738
+
+
+Summary of Genetic Correlation Results
+        p1                                                                                                               p2      rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/dev/fd/63      /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/adhd.sumstats.gz  0.4854 0.0362 13.3993 0.0000  0.1635     0.0081  1.0395     0.0106    0.0107       0.0070
+/dev/fd/63       /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/mdd.sumstats.gz  0.5609 0.0307 18.2695 0.0000  0.0684     0.0028  0.9928     0.0105    0.0006       0.0068
+/dev/fd/63       /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/scz.sumstats.gz  0.1724 0.0287  6.0135 0.0000  0.4145     0.0146  1.0591     0.0136    0.0032       0.0069
+/dev/fd/63   /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/bipolar.sumstats.gz  0.2474 0.0326  7.6002 0.0000  0.2926     0.0111  1.0190     0.0090    0.0098       0.0060
+/dev/fd/63       /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/alz.sumstats.gz  0.0161 0.0469  0.3426 0.7319  0.0330     0.0055  1.0850     0.0280   -0.0031       0.0062
+/dev/fd/63 /Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/Sep1-local-dependencies/data/munged/parkinson.sumstats.gz -0.0260 0.0462 -0.5625 0.5738  0.0735     0.0075  0.9793     0.0078    0.0045       0.0057
+
+Analysis finished at Thu Oct 29 00:29:13 2026
+Total time elapsed: 2.0m:18.53s

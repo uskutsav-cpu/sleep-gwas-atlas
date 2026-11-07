@@ -1,0 +1,9 @@
+# Falls: paired comparison of insomnia sources
+
+On 1,020,637 common markers, the Neale Lab falls GWAS has genetic correlation r_g **0.4302 (SE 0.0346)** with questionnaire insomnia and **0.2401 (SE 0.0412)** with FinnGen registry insomnia. A paired 200-block jackknife gives questionnaire minus registry **0.1901 (SE 0.0464; unadjusted 95% interval 0.0991–0.2811; p=4.20×10⁻⁵)**. This post-hoc contrast is not corrected for the wider atlas's phenotype and source searches. Its point difference uses four-decimal LDSC outputs.
+
+The source contrast is not an experiment in which only the questionnaire changed. UK Biobank falls and questionnaire insomnia share cohort participants, while FinnGen registry insomnia differs in case definition, population, sample size and LD-reference fit. Common SNPs and LDSC intercepts do not establish participant overlap or remove systematic differences. The calculation does not identify why the estimates differ, establish a causal connection, or provide independent replication.
+
+Falls are a physical-outcome sensitivity without a sleep or exhaustion question, but remain distinct from a matched frailty score with those items removed. They do not prove that a sleep–frailty genetic association remains after deleting sleep or fatigue from a frailty instrument. The [parent falls results](../RESULTS.md) document phenotype coding, prior literature, source checks and sample-size limitations.
+
+The [protocol](PROTOCOL.md), [run script](run.sh), [calculation](summarize.py), [numerical receipt](results.json), [delete vectors](rg_deletes.tsv) and per-source logs document the analysis. The 200 falls-heritability deletion estimates matched across fits, reconstructed individual jackknife SEs matched LDSC's printed values, and previously recorded input hashes were rechecked. These are computational checks, not validation of model assumptions or independence.

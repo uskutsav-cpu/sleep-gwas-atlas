@@ -2,6 +2,8 @@
 
 An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
+The [Brain6 sleep–frailty research snapshot](brain6/research_bundle/shared-genetics-atlas/START_HERE.md) adds the November 2026 exploratory report, genetic physical-function analyses, gene/cell evidence review, AlphaGenome pilot and ML prototype. It preserves the production atlas and reports unresolved data and validation requirements explicitly.
+
 - **Scope:** 12 sleep/circadian traits and 33 non-sleep traits.
 - **Phase 0:** source verification, ancestry/build checks, harmonization, QC ledgers, and HapMap3 munging.
 - **Phase 1:** LDSC SNP heritability, predefined QC, 396 sleep-by-disease genetic correlations, FDR, and a provenance-stamped heatmap.

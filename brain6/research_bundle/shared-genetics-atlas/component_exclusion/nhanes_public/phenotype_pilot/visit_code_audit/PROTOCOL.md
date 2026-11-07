@@ -1,0 +1,5 @@
+# Healthcare-visit code audit
+
+Written before rerunning. The primary working FI maps the 2013–14 HUQ051 responses 0–7 but omits valid code 8, which the CDC documents as 16 or more visits. In a preserved separate copy of the scoring script, map code 8 to deficit 1 and leave all other rules unchanged. Recompute the original primary and existing scenarios without overwriting original estimates. Compare sample counts and correlations against the saved original outputs; explicitly record that changes may affect both FI scores and complete-score sample membership. Independently count, by cycle and primary eligibility, eligible respondents with HUQ051 code 8, and those missing the original visit item where possible. Check input hashes; save only aggregate output.
+
+The 2013–14 code 3 spans 4–5 visits, crossing the working five-visit threshold, and the two cycles differ in visit definitions; this correction does not resolve either issue. No claim of faithful original-instrument reproduction or a sleep-excluded GWAS follows. Do not silently replace the old results or present an unpaired comparison of different eligible samples as a causal effect.

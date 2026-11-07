@@ -1,0 +1,5 @@
+# LD metric sensitivity for selected pairs
+
+Before computing this comparison, retain the three pairs selected after observing the largest ADSP versus 1000 Genomes r² differences. Retrieve the same 503 European-labeled 1000 Genomes individuals and unique GRCh37 position/rsID/allele matches as the prior matrix. Require phased diploid genotypes. Compute both squared Pearson correlation of 503 individual ALT dosages and squared Pearson correlation across 1,006 aligned ALT haplotypes; require the dosage estimate to reproduce the prior matrix. Compare each value to the published ADSP r², retaining actual pair directions and no tests. Record sample and genotype-source limitations and source hashes.
+
+This is a post-selected, within-panel metric sensitivity. It cannot determine which metric the publisher used on its actual input, establish equivalence of samples or phase, or identify why panels differ. A difference between metrics or between reference panels is not a causal effect, a study-matched LD matrix or a local-QC repair. Do not use AlphaGenome scores.

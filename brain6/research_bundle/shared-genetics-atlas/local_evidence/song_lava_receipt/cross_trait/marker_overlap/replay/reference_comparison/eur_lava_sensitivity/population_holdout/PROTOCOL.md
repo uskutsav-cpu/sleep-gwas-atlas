@@ -1,0 +1,5 @@
+# European-reference population holdout diagnostic
+
+Written before running. Reconstruct the same 503-person, 2,738-marker 1000 Genomes European dosage matrix and check that the original 99%-threshold FI result is reproduced. For each of the five populations listed in the public panel, exclude that population and recompute the remaining people's LD decomposition and FI univariate variance. Recenter and rescale the retained genotypes; exclude and report any markers that become invariant. Keep the FI GWAS statistics, 99% rule and locus fixed, and report the sample sizes, marker counts, retained components and estimates for every holdout. Do not save individual genotypes or sample identifiers.
+
+The five panels overlap heavily and have fewer people than the full 503-person panel, so differences conflate reference composition and sample size and are not independent replications or calibrated tests of ancestry effects. Their labels are the source panel's categories, not clinical or biological classifications. This selected-locus sensitivity does not establish the correct LD for the GWAS, fix the original LAVA gates, or support a bivariate correlation.

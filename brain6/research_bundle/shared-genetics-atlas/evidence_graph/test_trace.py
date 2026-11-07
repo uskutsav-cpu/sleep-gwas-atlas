@@ -1,0 +1,3 @@
+import pathlib,subprocess,json
+p=pathlib.Path('outputs/shared-genetics-atlas/evidence_graph');cmd=['python3',str(p/'trace_variant.py')];d=json.loads(subprocess.check_output(cmd+['rs62264764'],text=True));assert d['query']['id']=='variant:rs62264764';paths=d['one_ld_hop_paths'];assert any(x['neighbor_evidence']['source']=='variant:rs817509' and x['neighbor_evidence']['target']=='trait:HFRS_FinnGen' and abs(float(x['ld_edge']['value'])-.7034279446044156)<1e-12 for x in paths);assert all(x['ld_edge']['relation']=='reference_ld_r2_undirected' for x in paths);assert subprocess.run(cmd+['rs_not_a_variant'],capture_output=True).returncode!=0
+print('PASS: exact variant lookup, labeled LD path, association context and missing-node handling')

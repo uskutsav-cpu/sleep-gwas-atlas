@@ -1,0 +1,3 @@
+# Within-cluster reference LD for chr18 and chr22
+
+After inspecting the FI diagnostic threshold crossings, compare each selected chr18 or chr22 SNP with the smallest-PLACO-p marker on its chromosome (rs11876458 and rs926914 respectively). Use the same 1000 Genomes Phase 3 GRCh37 EUR phased reference and exact rsID, coordinate, allele-contrast and pairwise sample checks as the chr7 follow-up, and 1,000 individual bootstrap replicates. Preserve absent or mismatching records as missing. Pairwise reference LD does not define a locus, prove shared causality, validate the diagnostic p-values or independent replication, or substitute for study-matched LD. The EUR reference includes FIN and other EUR populations; it is not the study LD.

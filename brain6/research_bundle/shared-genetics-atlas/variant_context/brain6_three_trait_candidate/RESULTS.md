@@ -1,0 +1,23 @@
+# Selected Brain6 variants: insomnia, hospital frailty and childhood ADHD symptoms
+
+Of the 425 previously ranked Brain6 variants, **423** matched the public childhood ADHD-symptom GWAS, and **418** matched all three sources: MVP insomnia, Finnish hospital frailty and childhood symptoms. **None** met the exploratory three-phenotype benchmark `425 × max(p_insomnia, p_HFRS, p_symptoms) < 0.05`. This is a post-selected screen, not proof that no shared biology exists or a test of one common causal variant.
+
+| Candidate | MVP insomnia p | Finnish HFRS p | Childhood ADHD-symptom p | Three-trait max-p × 425 |
+| --- | ---: | ---: | ---: | ---: |
+| rs62264764 | 4.918×10⁻⁵ | 4.522×10⁻⁷ | 0.437 | 1.000 |
+| rs1476535 | 1.201×10⁻⁷ | 1.456×10⁻⁸ | 0.660 | 1.000 |
+| rs2431108 | 0.0895 | 0.00110 | 0.00600 | 1.000 |
+| rs77960 | 0.0860 | 0.000967 | 0.00606 | 1.000 |
+| rs4916723 | 3.345×10⁻⁵ | 0.00919 | 0.00881 | 1.000 |
+
+The smallest observed three-trait max-p was **0.00370** at rs11030391 in the chromosome 11 candidate region; its 425-fold benchmark is capped at 1. This candidate was selected after previous analyses and is not a validated three-trait locus. The [prior two-phenotype screen](../brain6_mvp_finngen_hfrs/RESULTS.md) identified 155 correlated variants with a lower sleep–HFRS benchmark; adding a third phenotype changes the hypothesis and generally reduces power. Its results do not become 155 three-trait findings.
+
+At rs4916723 the ALT-aligned childhood-symptom estimate is positive, whereas MVP insomnia and HFRS estimates are negative. The symptom p=0.00881 is nominal and does not pass the 425-candidate threshold; the estimates have different units and weak evidence cannot establish a direction difference. Chromosome 5 rs2431108 and rs77960 have nominal symptom support but weaker MVP insomnia results. The chromosome 3 and 7 leads have weak symptom follow-up. None of these observations validates a gene assignment, AlphaGenome prediction, independent clinical ADHD replication or a failed local-correlation gate.
+
+For valid marginal p-values, the maximum p is a conservative intersection–union test of association with **all three** traits, regardless of dependence between the source tests. The factor of 425 includes all original candidate slots, including missing matches. Because the candidate regions and several source findings were already selected and inspected, it does not provide confirmatory error control for the broader project. A shared marginal association can still reflect different causal variants in LD; the method does not test causation, a shared effector or a gene–environment interaction. Childhood symptom counts are a related phenotype, not a clinical ADHD diagnosis. The symptom paper reports no participant overlap with the diagnostic ADHD discovery study, but exact participant and relative overlap across all sources has not been independently verified.
+
+## Reproducibility
+
+Six GRCh38 interval queries against the [public harmonized symptom GWAS](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90568001-GCST90569000/GCST90568440/harmonised/) completed without reported query errors. Matching required a unique rsID, position and allele pair with valid beta, SE, p and frequency. rs40465 and rs6891820 had no exact symptom match and were not treated as negative results; five other candidates lacked at least one MVP/HFRS match. All 425 remain in the correction denominator. Maximum absolute discrepancy between symptom source p and the two-sided normal p reconstructed from beta/SE was 1.84×10⁻¹⁵ among matched rows. This checks arithmetic, not source model calibration. MVP effect directions use rounded odds ratios; HFRS uses its source beta, and symptom effects use the published regression coefficient.
+
+The [pre-query protocol](PROTOCOL.md) specifies the test. The [425-row table](../../PUBLICATION.md#external-dependencies) (external target: `/Volumes/Extreme SSD/brain6-three-trait-candidates-results-20261028.tsv`), [script](../../PUBLICATION.md#external-dependencies) (external target: `/Volumes/Extreme SSD/brain6-three-trait-candidates-20261028.py`) and [receipt with candidate source rows and interval hashes](../../PUBLICATION.md#external-dependencies) (external target: `/Volumes/Extreme SSD/brain6-three-trait-candidates-receipt-20261028.json`) are on the SSD. Indexed remote queries do not verify the complete symptom file or tabix index hashes. The source metadata reports N=73,483; the paper reports 70,953 unique participants, and the difference remains unresolved. An independent check verified output and script hashes, 418 matched rows, the max-p arithmetic and zero crossings.

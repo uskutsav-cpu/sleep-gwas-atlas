@@ -1,0 +1,25 @@
+# Exploratory joint sleep–brain–frailty embedding
+
+The existing trait embedding was extended to a 12×8 matrix: 72 sleep–brain-disorder correlations plus 12 sleep–FI and 12 sleep–FFS estimates. **This first joint embedding is not ready for prediction.** The original inputs were joined by sleep-trait label; full source-version identity and harmonization across the two projects have not been independently established. Variant supports and GWAS samples vary by pair, several sources overlap, and long-sleep model semantics remain unresolved. HFRS was not included in this original fit. A later [12×9 extension](hfrs_extension/RESULTS.md) includes all 12 available HFRS correlations, after matching sleep-source version and sample-size metadata; input bytes and pairwise support remain incompletely established. Source estimates and uncertainties are in `source_matrix.tsv`; no AlphaGenome output was used for training.
+
+A subsequent [source crosswalk](sleep_source_crosswalk.tsv) found that all 12 Brain6 sleep source identifiers and sample sizes match the frozen core-atlas trait records. The core trait table and the original FI extract match the hashes in the frailty project's frozen manifest. This is metadata-level consistency, not proof of identical input bytes for each archived paired FI–FFS run; the corresponding paired-input hashes have not been established. The paired FI correlations differ from the rounded original FI estimates by at most 0.00349, consistent with but not proof of shared sources or the effect of different SNP supports. `check_sleep_sources.py` reproduces this audit with the local repository and its receipt records file hashes.
+
+
+
+A rank-two SVD accounts for 97.15% of the observed matrix's squared numerical magnitude in sample, with reconstruction RMSE 0.0342. This is not the fraction of disease or frailty risk explained. A more informative diagnostic repeatedly masked matrix cells, trained on the rest and predicted the withheld cells:
+
+| Predictor | Pooled masked-cell RMSE (lower is better) |
+|---|---:|
+| Outcome-column training mean | 0.18828 |
+| Two-component ridge factorization | 0.18836 |
+| Additive sleep-plus-outcome model | 0.15227 |
+
+In this post-hoc comparison, the rank-two method was effectively tied with the column-mean baseline and performed worse than the additive baseline. The FI/FFS masked RMSEs were approximately 0.355/0.331 for rank two and 0.194/0.174 for the additive model. Four of the 960 rank-two masked-cell predictions lay outside [−1, 1], the range of a true correlation. The algorithm was not constrained to that range. Applying a bound would require re-evaluating it as a new model; it would not resolve mixed sources, uncertainty, cohort overlap or validation.
+
+A subsequent [stability audit](STABILITY_REVIEW.md) found that one split dominated the original factorization's squared error. On the same masks, a post-hoc five-initialization version selected by training objective reduced pooled RMSE to 0.0661. This is encouraging optimization evidence, not independent validation; the model family and masks were already inspected.
+
+A further [registry-insomnia source-shift check](REGISTRY_TRANSFER.md) compared the existing masked predictions with R13 sleep-side sensitivity estimates. Multi-start predictions for FFS were substantially higher than the R13 registry-insomnia–FFS estimate. This is a stress test across different phenotypes with reused frailty GWAS, not independent two-trait validation.
+
+The 960 predictions reuse the same 96 source estimates across 10 repetitions, and each fold retains other cells involving the same traits. These are dependent reconstruction diagnostics, not 960 independent tests, external validation, evidence for a causal sleep–disease interaction, or individual-level risk predictions. The apparent improvement in the earlier 72-cell, brain-only experiment did not carry over to this joint experiment. The experiments use different matrices and folds, so their RMSEs are not a direct head-to-head causal comparison. Neither factorization incorporates measurement-error covariance or weighted standard errors, and the axis signs and rotations are arbitrary. Do not interpret coordinate proximity as a specific biological pathway or a within-outcome genetic correlation.
+
+Reproduce from the workspace root with `OPENBLAS_NUM_THREADS=1 python3 outputs/shared-genetics-atlas/multiscale_embedding/fit.py`. `PROTOCOL.md` records the pre-fit design, `summary.json` gives input hashes and settings, `coordinates.tsv` gives the in-sample coordinates, `reconstruction.tsv` contains all source estimates and residuals, and `masked_predictions.tsv` records the 960 predictions. The ALS and SVD fits are distinct. Before further model development, confirm the underlying source identities and QC, use matched SNP support and block-jackknife covariance where feasible, evaluate bounded/covariance-aware models against prespecified baselines, and validate with genuinely independent cohorts or held-out phenotypes.

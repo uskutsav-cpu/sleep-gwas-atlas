@@ -1,0 +1,70 @@
+{
+  "source": {
+    "insomnia": {
+      "path": "/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v2/inputs/placo_insomnia__adhd_chr3_117142005_118142005__insomnia.tsv",
+      "sha256": "223b64b14616d7d9635f0d673b4e797fa14f352d427272aa3e23123f55038d67",
+      "counts": {
+        "total": 2458,
+        "eligible": 2458
+      }
+    },
+    "adhd": {
+      "path": "/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v2/inputs/placo_insomnia__adhd_chr3_117142005_118142005__adhd.tsv",
+      "sha256": "7232cf47ad844e7fb7d069653e57cf0dec66143cd9f2e1bb4a33d1c6a560bf56",
+      "counts": {
+        "total": 2340,
+        "eligible": 2340
+      }
+    }
+  },
+  "chain_sha256": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+  "qtl_source": {
+    "dataset": "NG00184.v1",
+    "file_md5": {
+      "exc.bed.gz.tbi": "1575ac67da022cead166bc28eaf3ca0d"
+    },
+    "regional_extract_sha256": "b0ea2f6924b0aa7a6eb40d3a4742e80bf3621deaa8e25eca2c43bbbe3dd50914",
+    "full_member_not_hashed": true,
+    "file_sha256": {
+      "exc.bed.gz.tbi": "418bf66e25cb4687c798af5e3eb3b52915e5a4a5cc50ce62a28ddd7195b269e9"
+    },
+    "context": "ROSMAP_CUIMC1_2_MIT",
+    "window_grch38": [
+      117423158,
+      118423158
+    ]
+  },
+  "pairs": {
+    "exc_insomnia": {
+      "gene": "ENSG00000239268",
+      "qtl_counts": {
+        "target_rows": 4020,
+        "eligible": 3402,
+        "invalid": 618
+      },
+      "match_counts": {
+        "matched": 2458,
+        "gwas_no_unique_key": 944
+      },
+      "file": "/Volumes/Brain6Work/xqtl-chr3/exc_matched/exc_insomnia.tsv",
+      "sha256": "37b54ea85a2465af5f2539fd8e5f0bcd69d2ac52837e679ed7a93af275464deb",
+      "portal_exact_match": true
+    },
+    "exc_adhd": {
+      "gene": "ENSG00000239268",
+      "qtl_counts": {
+        "target_rows": 4020,
+        "eligible": 3402,
+        "invalid": 618
+      },
+      "match_counts": {
+        "matched": 2340,
+        "gwas_no_unique_key": 1062
+      },
+      "file": "/Volumes/Brain6Work/xqtl-chr3/exc_matched/exc_adhd.tsv",
+      "sha256": "0d12df7524a90280427a6a7a23edf6fa51c562e0419dd9f73b961ab1cd9e126f",
+      "portal_exact_match": true
+    }
+  },
+  "note": "No GWAS source frequencies; selected region and incomplete cis/TAD support; matches do not prove phenotype causality."
+}

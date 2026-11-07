@@ -1,0 +1,129 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703 \
+--rg /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Thu Oct 29 01:12:19 2026
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 991707 SNPs remain.
+After merging with regression SNP LD, 991707 SNPs remain.
+Computing rg for phenotype 2/4
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.1645 (0.008)
+Lambda GC: 1.3719
+Mean Chi^2: 1.4659
+Intercept: 1.0392 (0.0108)
+Ratio: 0.0841 (0.0232)
+
+Heritability of phenotype 2/4
+-----------------------------
+Total Observed scale h2: 0.1097 (0.0055)
+Lambda GC: 1.3409
+Mean Chi^2: 1.4179
+Intercept: 1.0202 (0.0103)
+Ratio: 0.0482 (0.0247)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0737 (0.0043)
+Mean z1*z2: 0.229
+Intercept: 0.0072 (0.0072)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5482 (0.0287)
+Z-score: 19.0843
+P: 3.4115e-81
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FI.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FI.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FI.sumstats.gz.gencov.delete.
+Computing rg for phenotype 3/4
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 3/4
+-----------------------------
+Total Observed scale h2: 0.0626 (0.0029)
+Lambda GC: 1.4281
+Mean Chi^2: 1.5188
+Intercept: 1.0236 (0.0116)
+Ratio: 0.0454 (0.0223)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0578 (0.003)
+Mean z1*z2: 0.2824
+Intercept: 0.0185 (0.0068)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5692 (0.0253)
+Z-score: 22.4673
+P: 8.6744e-112
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FFS.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FFS.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_FFS.sumstats.gz.gencov.delete.
+Computing rg for phenotype 4/4
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz ...
+Read summary statistics for 991707 SNPs.
+After merging with summary statistics, 991707 SNPs remain.
+991707 SNPs with valid alleles.
+
+Heritability of phenotype 4/4
+-----------------------------
+Total Observed scale h2: 0.0538 (0.0025)
+Lambda GC: 1.641
+Mean Chi^2: 1.7387
+Intercept: 1.1895 (0.0149)
+Ratio: 0.2566 (0.0202)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0512 (0.003)
+Mean z1*z2: 0.2645
+Intercept: -0.0005 (0.0074)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.5444 (0.0264)
+Z-score: 20.6269
+P: 1.5729e-94
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_HFRS.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_HFRS.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/mvp_adhd_frailty_partial/ldsc-20261029T061213-3703adhd.sumstats.gz_HFRS.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                                                                                                                                                                            p1                                                                                                                                                                                                                             p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz   /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz 0.5482 0.0287 19.0843 0.0000  0.1097     0.0055  1.0202     0.0103    0.0072       0.0072
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz  /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz 0.5692 0.0253 22.4673 0.0000  0.0626     0.0029  1.0236     0.0116    0.0185       0.0068
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/adhd.sumstats.gz /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz 0.5444 0.0264 20.6269 0.0000  0.0538     0.0025  1.1895     0.0149   -0.0005       0.0074
+
+Analysis finished at Thu Oct 29 01:12:34 2026
+Total time elapsed: 15.2s

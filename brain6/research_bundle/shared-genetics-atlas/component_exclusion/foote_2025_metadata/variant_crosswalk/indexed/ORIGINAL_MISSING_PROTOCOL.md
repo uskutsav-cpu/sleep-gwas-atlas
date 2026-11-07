@@ -1,0 +1,3 @@
+# Original-file check of isolated missing markers
+
+For the five selected markers missing from the general-factor harmonized release but with nearby released variants, use partial HTTP range search of the original GRCh37 table to seek a positive exact rsID, coordinate and allele match. A found row confirms that the targeted source row exists, subject to unverified full-file checksum and successful HTTP delivery. The original metadata do not guarantee sorting, so absence from the sampled ranges is never proof of absence in the source. Capture other sampled records at the same coordinate where present, byte ranges and source ETag. This test cannot assign the reason for any harmonized omission and does not estimate an association or trait specificity from a non-find.

@@ -1,0 +1,153 @@
+{
+  "alpha_genome_model_release": "unknown; not provided by proxy",
+  "coordinates": "model interval 0-based half-open; output positions 1-based GRCh38",
+  "limitations": "predicted signals not measurements, not evidence of shared trait causality; API outputs for noncommercial research; no model training",
+  "manifest_created_epoch": 1793118973,
+  "output_sha256": {
+    "track_summary.tsv": "39016fc5c43938c4c59578a68495fb418a0423173761b3c34ae64b40aaac5340",
+    "track_window.tsv": "bfa8080b730a7602d5df357684f1053d386cc5b7973a3f03bd1f501fb229d036"
+  },
+  "range_sha256": [
+    {
+      "output_type": "dnase",
+      "range_bytes": "2093152-2101155",
+      "sha256": "a4f7c1d44833cfd8a8c0a6680de36f60b5b1c63d6b945be0a82afff5272281ae",
+      "track_ordinal": 0,
+      "variant_type": "reference"
+    },
+    {
+      "output_type": "dnase",
+      "range_bytes": "2093152-2101155",
+      "sha256": "1cc7140863b04a734389e29dfafa1813fb73d51f0abc6ecea767f0648975fe09",
+      "track_ordinal": 0,
+      "variant_type": "alternate"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "2093152-2101155",
+      "sha256": "285f06ae5092a3eb3c379fa605f74853c5ad7fa1c447862b7438e9e7d7811e4b",
+      "track_ordinal": 0,
+      "variant_type": "reference"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "2093152-2101155",
+      "sha256": "3ad86da7ebdec40fb98e2af9f7a3009378a8c9630e6f45349a54f1142caa5f2e",
+      "track_ordinal": 0,
+      "variant_type": "alternate"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "6287456-6295459",
+      "sha256": "2c62829368f4910feb55ce179804af25af1de13529d0126114b3d48c76964ab6",
+      "track_ordinal": 1,
+      "variant_type": "reference"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "6287456-6295459",
+      "sha256": "a79315d5bddd5612becd16c264aab9e3867b5a7cc919a4bb7cc06d95096aac4f",
+      "track_ordinal": 1,
+      "variant_type": "alternate"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "10481760-10489763",
+      "sha256": "3c4eb33d6321601ab8513979607a3ab77675015258f4946a826ea65ac056e741",
+      "track_ordinal": 2,
+      "variant_type": "reference"
+    },
+    {
+      "output_type": "rna_seq",
+      "range_bytes": "10481760-10489763",
+      "sha256": "544df6dbf728bda4f6263935ec37e78913a01d5ac79d4b99f5c80876473c102e",
+      "track_ordinal": 2,
+      "variant_type": "alternate"
+    }
+  ],
+  "request": {
+    "interval": {
+      "chromosome": "chr14",
+      "end": 98687203,
+      "start": 97638627,
+      "strand": "."
+    },
+    "mode": "variant",
+    "ontology_terms": [
+      "UBERON:0001870"
+    ],
+    "organism": "human",
+    "output_types": [
+      "dnase",
+      "rna_seq"
+    ],
+    "sequence_length": 1048576,
+    "variant": {
+      "alternate_bases": "T",
+      "chromosome": "chr14",
+      "name": "rs76247422",
+      "position": 98162916,
+      "reference_bases": "C"
+    }
+  },
+  "source": "JBrowse public AlphaGenome prediction service",
+  "source_documentation": "https://www.jbrowse.org/jb2/docs/tutorials/alphagenome/",
+  "tracks": [
+    {
+      "Assay title": "DNase-seq",
+      "biosample_life_stage": "adult",
+      "biosample_name": "frontal cortex",
+      "biosample_type": "tissue",
+      "data_source": "encode",
+      "index": 0,
+      "name": "UBERON:0001870 DNase-seq",
+      "ontology_curie": "UBERON:0001870",
+      "output_type": "dnase",
+      "strand": ".",
+      "track_ordinal": 0
+    },
+    {
+      "Assay title": "total RNA-seq",
+      "biosample_life_stage": "embryonic",
+      "biosample_name": "frontal cortex",
+      "biosample_type": "tissue",
+      "data_source": "encode",
+      "gtex_tissue": "",
+      "index": 0,
+      "name": "UBERON:0001870 total RNA-seq",
+      "ontology_curie": "UBERON:0001870",
+      "output_type": "rna_seq",
+      "strand": "+",
+      "track_ordinal": 0
+    },
+    {
+      "Assay title": "total RNA-seq",
+      "biosample_life_stage": "embryonic",
+      "biosample_name": "frontal cortex",
+      "biosample_type": "tissue",
+      "data_source": "encode",
+      "gtex_tissue": "",
+      "index": 1,
+      "name": "UBERON:0001870 total RNA-seq",
+      "ontology_curie": "UBERON:0001870",
+      "output_type": "rna_seq",
+      "strand": "-",
+      "track_ordinal": 1
+    },
+    {
+      "Assay title": "polyA plus RNA-seq",
+      "biosample_life_stage": "adult",
+      "biosample_name": "frontal cortex",
+      "biosample_type": "tissue",
+      "data_source": "gtex",
+      "gtex_tissue": "Brain_Cortex",
+      "index": 2,
+      "name": "UBERON:0001870 gtex Brain_Cortex polyA plus RNA-seq",
+      "ontology_curie": "UBERON:0001870",
+      "output_type": "rna_seq",
+      "strand": ".",
+      "track_ordinal": 2
+    }
+  ],
+  "window": "variant \u00b11000bp; 501-bp summary \u00b1250bp"
+}

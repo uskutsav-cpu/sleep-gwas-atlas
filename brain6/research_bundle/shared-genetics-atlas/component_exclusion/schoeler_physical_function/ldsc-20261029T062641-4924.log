@@ -1,0 +1,53 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/component_exclusion/schoeler_physical_function/ldsc-20261029T062641-4924 \
+--rg /dev/fd/63,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/MVP.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FI.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/FFS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/multiscale_embedding/hfrs_extension/heldout_sleep/group_holdout/bounded_model/mvp_feature_transfer/common_support_run/HFRS.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ 
+
+Beginning analysis at Thu Oct 29 01:26:43 2026
+Reading summary statistics from /dev/fd/63 ...
+Traceback (most recent call last):
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/parse.py", line 108, in sumstats
+    x = read_csv(fh, usecols=usecols, dtype=dtype_dict, compression=compression)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/parse.py", line 45, in read_csv
+    return pd.read_csv(fh,  sep='\s+', na_values='.', **kwargs)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 586, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 482, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 811, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1040, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/.ldsc-env/lib/python3.9/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 69, in __init__
+    self._reader = parsers.TextReader(self.handles.handle, **kwds)
+  File "pandas/_libs/parsers.pyx", line 549, in pandas._libs.parsers.TextReader.__cinit__
+pandas.errors.EmptyDataError: No columns to parse from file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldsc.py", line 638, in <module>
+    sumstats.estimate_rg(args, log)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py", line 391, in estimate_rg
+    M_annot, w_ld_cname, ref_ld_cnames, sumstats, _ = _read_ld_sumstats(args, log, p1,
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py", line 237, in _read_ld_sumstats
+    sumstats = _read_sumstats(args, log, fh, alleles=alleles, dropna=dropna)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/sumstats.py", line 158, in _read_sumstats
+    sumstats = ps.sumstats(fh, alleles=alleles, dropna=dropna)
+  File "/Volumes/Extreme SSD/Utsav-Research-Archive/Sleep-GWAS/FAILED-PARTIAL-2026-09-01-sleep_gwas_atlas/ldsc/ldscore/parse.py", line 110, in sumstats
+    raise ValueError('Improperly formatted sumstats file: ' + str(e.args))
+ValueError: Improperly formatted sumstats file: ('No columns to parse from file',)
+
+Analysis finished at Thu Oct 29 03:48:35 2026
+Total time elapsed: 2.0h:21.0m:51.659999999999854s

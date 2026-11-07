@@ -1,0 +1,5 @@
+# Category-level FI–Fried correlation uncertainty
+
+Written before this bootstrap calculation. Use the nine published UK Biobank category counts already recorded in `ukb_cross_tab.csv` and reproduce the average-rank Spearman correlation computed in `calculate.R`. Treat the observed 3×3 table as an empirical distribution and draw 10,000 multinomial samples of the same N=383,845 with deterministic NumPy seed 20261027. Recompute average ranks from each bootstrap table and report the percentile 2.5%–97.5% interval. This corresponds to nonparametric resampling of individuals' paired categories under an independent-sampling assumption, not reusing genetic data.
+
+This interval applies only to these coarse, differently defined categories and this study sample. It does not recover individual continuous scores, participant covariates, missingness, genetic overlap, population selection, familial clustering or measurement uncertainty, and must not be compared as if interchangeable with an LDSC standard error. No new continuous FI–FFS phenotype association is estimated. Retain the raw count table, all simulated rho values, code, software version, seed and checksum.

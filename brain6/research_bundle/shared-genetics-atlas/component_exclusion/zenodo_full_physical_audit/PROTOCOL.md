@@ -1,0 +1,5 @@
+# Full physical-component file checks
+
+Four public [Zenodo component archives](https://zenodo.org/records/14011550) are being downloaded to the SSD: low grip strength, low physical activity, slow walking speed and weight loss. Each local file will be checked against the depositor's compressed-file MD5 and gzip completion, then compared row-by-row with the project's GRCh37 HapMap coordinate and unordered-allele map using the same procedure as the completed [exhaustion audit](../zenodo_full_exhaustion_audit/RESULTS.md). Each component has its own script, receipt and chromosome table; a result is valid only after its audit completes successfully.
+
+This is an integrity and coordinate diagnostic. It cannot establish the component definitions, cohort ancestry, effect direction, regression model, sample overlap, per-variant N, or an exhaustion-excluded frailty score. The inference hold remains until source metadata are established. Downloading full files does not itself justify genetic-correlation analysis. No files will be deleted as part of this work.

@@ -1,0 +1,5 @@
+# Projected-signal bands within a fixed LAVA decomposition
+
+Before running, repeat the fixed 2,741-marker calculation at 99.5% retention with the same inputs, reference, seed and runtime as the prior threshold sensitivity. Save the ordered FI projected squared statistics, but no individual-level information. Compare cumulative sums at 73, 107, 142, 216 and 306 components with the five previously saved threshold runs. Only if these sums agree within numerical tolerance may the differences be described as the additional components' contribution in this replay. Check each band's mean squared projection against the approximately 5.7×10⁻⁶ sampling variance; the latter is recalculated with K, so the comparison is descriptive.
+
+This is a post-selected diagnostic in one locus, not an independent sample or a formal test. The component directions are LD eigenvectors, not individual SNPs; small eigenvalues, overlapping component bands and uncertain reference fit prevent causal or calibration claims. Do not choose a new truncation threshold or perform bivariate inference from this diagnostic.

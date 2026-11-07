@@ -1,0 +1,11 @@
+# FI–FFS genetic correlation: fresh same-data LDSC re-execution
+
+The new standard LDSC run on the two files named in the archived native FI–FFS record yields **r_g = 0.7534 (SE 0.0199)** using 1,157,249 valid-allele SNPs. Its printed z=37.8187 matches the saved native record's 37.8187317 to the displayed precision; the prior exact r_g=0.7534111 and SE=0.0199216 round to the new values. This provides a direct numerical rerun in addition to the earlier independent recomputation of the 200-block jackknife SE.
+
+The new log prints p=0 because its numerical tail calculation underflows; it is not literally zero. Using the original exact z in a two-sided standard-normal tail gives log₁₀(p)≈−312.25 as an approximation. The log reports a cross-trait intercept 0.2222 (SE 0.0069), consistent with a substantial shared contribution to the test-statistic intercept; it does not identify a precise number of shared participants or uniquely attribute its sources. The FI and FFS GWAS both use UK Biobank, and their precise sample overlap is unknown. Observed-scale h² values were 0.1092 (SE 0.0052) for FI and 0.0622 (SE 0.0026) for FFS; these are model- and sample-dependent and are not liability-scale estimates.
+
+The paths match those named in the saved native record and the current file bytes and LD-reference files are hashed in `receipt.json`, but the historical record did not independently authenticate those input bytes. The code and reference may differ from the original execution. The run emits a compression warning yet reads both files and completes. This is a same-data computational check, **not** independent cohort replication, evidence of a causal effect or a within-person FI–FFS phenotype correlation. FI sleep/fatigue content and FFS exhaustion remain part of the phenotypes. See the separate [phenotypic comparison](../../phenotype_comparison/PHENOTYPIC_VS_GENETIC.md).
+
+The [protocol](PROTOCOL.md), `run.sh`, `verify.py`, `fi_ffs.log` and receipt preserve the computation and its inputs. The normal-tail approximation was calculated with R's `pnorm(z, lower.tail=FALSE, log.p=TRUE)` plus log(2), divided by log(10), using the archived exact z.
+
+A later [input N audit](../input_n_audit/RESULTS.md) records constant supplied Ns matching reported FI and FFS study totals, while per-variant sample size and full preparation provenance remain unverified.

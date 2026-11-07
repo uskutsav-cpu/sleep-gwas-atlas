@@ -1,0 +1,28 @@
+{
+  "matrix_sha256": "89fba2a2be2acb54b2cc6db614de2fd3e9a9028b95478c49f75e34fff8bafbff",
+  "n_sleep_traits": 12,
+  "features": [
+    "adhd",
+    "mdd",
+    "scz",
+    "bipolar",
+    "alz",
+    "parkinson"
+  ],
+  "targets": [
+    "FI",
+    "FFS",
+    "HFRS"
+  ],
+  "heldout_predictions": 36,
+  "additional_posthoc_baseline": "3 nearest sleep traits by standardized brain-correlation features, equal weights",
+  "lambda_grid": [
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "normalization": "training-fold mean and population SD; zero SD -> 1",
+  "selection": "inner leave-one-training-row-out MSE, ties select larger lambda",
+  "caveat": "six observed brain correlations required for held-out sleep; source cohorts reused; not external-cohort validation"
+}

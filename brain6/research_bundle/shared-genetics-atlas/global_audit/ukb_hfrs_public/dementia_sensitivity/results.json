@@ -1,0 +1,70 @@
+{
+  "markers": 1020621,
+  "correlations": [
+    {
+      "score": "original",
+      "sleep": "questionnaire",
+      "rg": 0.5288,
+      "se": 0.0334,
+      "p": 2.0129e-56,
+      "bonferroni_4": 8.0516e-56,
+      "log_sha256": "d8b0027515955e9ebd694af7ed4b7b53b6799514370b5dd807644a8b9737ae7c"
+    },
+    {
+      "score": "without",
+      "sleep": "questionnaire",
+      "rg": 0.5281,
+      "se": 0.0323,
+      "p": 3.7605e-60,
+      "bonferroni_4": 1.5042e-59,
+      "log_sha256": "daf121e6fc0750d65bd0cc31a4fea8c1e4580d4b43a1453cf8c40339085948f0"
+    },
+    {
+      "score": "original",
+      "sleep": "registry",
+      "rg": 0.3755,
+      "se": 0.0416,
+      "p": 1.8811e-19,
+      "bonferroni_4": 7.5244e-19,
+      "log_sha256": "ca46932ef63a3698c563af91ec0aef904938da5e0e1d3f80bd250de5da6acb33"
+    },
+    {
+      "score": "without",
+      "sleep": "registry",
+      "rg": 0.3718,
+      "se": 0.041,
+      "p": 1.1903e-19,
+      "bonferroni_4": 4.7612e-19,
+      "log_sha256": "91c5bd090cd59fb5b8d7b0ee3c4e8f55933999f1f4421b725f9f969932df4861"
+    }
+  ],
+  "contrasts": [
+    {
+      "sleep": "questionnaire",
+      "original_minus_without": 0.0007000000000000339,
+      "paired_se": 0.0033394096258699438,
+      "p": 0.8339659155526297,
+      "bonferroni_2": 1,
+      "ci95_unadjusted": [
+        -0.005845122596331252,
+        0.00724512259633132
+      ]
+    },
+    {
+      "sleep": "registry",
+      "original_minus_without": 0.003699999999999981,
+      "paired_se": 0.0033636757272901877,
+      "p": 0.2713377306797025,
+      "bonferroni_2": 0.542675461359405,
+      "ci95_unadjusted": [
+        -0.0028926832811601777,
+        0.01029268328116014
+      ]
+    }
+  ],
+  "blocks": 200,
+  "shared_insomnia_delete_vectors_match": true,
+  "modified_source_sha256": "8174fac2f512cf8129f1f745fe4d12f087f0e792083d1b5b20a15037a570c9c5",
+  "parent_prepare_sha256": "bcfbbbb0a156ddd5c380eea748b08b6462e48b7176c489eadf8a303427f69033",
+  "note": "Same cohort; rounded LDSC point estimates; per-file N discrepancy and overlap remain unresolved."
+}

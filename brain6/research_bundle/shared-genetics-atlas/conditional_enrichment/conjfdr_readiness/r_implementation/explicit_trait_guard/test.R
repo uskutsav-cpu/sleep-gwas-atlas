@@ -1,0 +1,15 @@
+.libPaths(c('/Volumes/Brain6Work/cfdr-order-empty-lib', '/Volumes/Brain6Work/lib', '/Volumes/Extreme SSD/brain6-work/exploratory-finemap-coloc-v1/Rlib', .libPaths()))
+suppressPackageStartupMessages(library(cfdr.pleio))
+obj <- cfdr_pleio$new()
+probe <- function(a, b) tryCatch({
+  obj$calculate_cond_fdr(fdr_trait = a, cond_trait = b, verbose = FALSE)
+  'completed'
+}, error = function(e) conditionMessage(e))
+res <- data.frame(fdr_trait = c(1L, 2L, 1L, 2L), cond_trait = c(2L, 1L, 1L, 2L))
+res$error <- mapply(probe, res$fdr_trait, res$cond_trait)
+res$guard_rejected <- grepl('cond_trait \\+ fdr_trait != 3 is not TRUE', res$error)
+stopifnot(identical(res$guard_rejected, c(TRUE, TRUE, FALSE, FALSE)))
+write.table(res, 'outputs/shared-genetics-atlas/conditional_enrichment/conjfdr_readiness/r_implementation/explicit_trait_guard/results.tsv', sep = '\t', row.names = FALSE, quote = FALSE)
+print(res, row.names = FALSE)
+cat('R version:', R.version.string, '\n')
+cat('package version:', as.character(packageVersion('cfdr.pleio')), '\n')

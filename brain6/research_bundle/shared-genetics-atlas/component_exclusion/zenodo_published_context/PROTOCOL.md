@@ -1,0 +1,3 @@
+# Published context for Zenodo frailty-component GWAS
+
+Before examining source metadata, compare the open Zenodo 14011550 record, its README, the publication identified by that README, and the publication's linked public repository. Record the publication's operational exhaustion definition and study population; determine whether the article or associated repository documents the separate component GWAS or matches its case/control totals and model. Distinguish matching authors, broad shared terminology and exact source provenance. Do not assume that an observational phenotype definition or cohort applies to a separate released GWAS without direct evidence. No LDSC or component-excluded frailty analysis is performed.

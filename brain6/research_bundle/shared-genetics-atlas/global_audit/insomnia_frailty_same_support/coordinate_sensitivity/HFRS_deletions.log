@@ -1,0 +1,69 @@
+*********************************************************************
+* LD Score Regression (LDSC)
+* Version 3.0.1
+* (C) 2014-2019 Brendan Bulik-Sullivan and Hilary Finucane
+* Broad Institute of MIT and Harvard / MIT Department of Mathematics
+* GNU General Public License v3
+*********************************************************************
+Call: 
+./ldsc.py \
+--out /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/coordinate_sensitivity/HFRS_deletions \
+--rg /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/HFRS.sumstats.gz,/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz \
+--ref-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--w-ld-chr /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/ \
+--print-delete-vals  
+
+Beginning analysis at Tue Oct 27 16:07:04 2026
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/HFRS.sumstats.gz ...
+Read summary statistics for 1134416 SNPs.
+Reading reference panel LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read reference panel LD Scores for 1290028 SNPs.
+Removing partitioned LD Scores with zero variance.
+Reading regression weight LD Score from /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/reference/eur_w_ld_chr/[1-22] ... (ldscore_fromlist)
+Read regression weight LD Scores for 1290028 SNPs.
+After merging with reference panel LD, 1134416 SNPs remain.
+After merging with regression SNP LD, 1134416 SNPs remain.
+Computing rg for phenotype 2/2
+Reading summary statistics from /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz ...
+Read summary statistics for 1134416 SNPs.
+After merging with summary statistics, 1134416 SNPs remain.
+1134416 SNPs with valid alleles.
+
+Heritability of phenotype 1
+---------------------------
+Total Observed scale h2: 0.0541 (0.0025)
+Lambda GC: 1.6259
+Mean Chi^2: 1.7194
+Intercept: 1.1876 (0.0144)
+Ratio: 0.2608 (0.02)
+
+Heritability of phenotype 2/2
+-----------------------------
+Total Observed scale h2: 0.02 (0.0015)
+Lambda GC: 1.2398
+Mean Chi^2: 1.2722
+Intercept: 1.0769 (0.0095)
+Ratio: 0.2825 (0.0349)
+
+Genetic Covariance
+------------------
+Total Observed scale gencov: 0.0203 (0.0014)
+Mean z1*z2: 0.3807
+Intercept: 0.179 (0.0072)
+
+Genetic Correlation
+-------------------
+Genetic Correlation: 0.6168 (0.0324)
+Z-score: 19.0337
+P: 8.9628e-81
+
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/coordinate_sensitivity/HFRS_deletionsHFRS.sumstats.gz_S.sumstats.gz.hsq1.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/coordinate_sensitivity/HFRS_deletionsHFRS.sumstats.gz_S.sumstats.gz.hsq2.delete.
+Printing block jackknife delete values to /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/outputs/shared-genetics-atlas/global_audit/insomnia_frailty_same_support/coordinate_sensitivity/HFRS_deletionsHFRS.sumstats.gz_S.sumstats.gz.gencov.delete.
+
+Summary of Genetic Correlation Results
+                                                                                                    p1                                                                                                  p2     rg     se       z      p  h2_obs  h2_obs_se  h2_int  h2_int_se  gcov_int  gcov_int_se
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/HFRS.sumstats.gz /Users/swethasunilkumar/Documents/Codex/2026-10-27/brain6/work/coordinate_ldsc_inputs/S.sumstats.gz 0.6168 0.0324 19.0337 0.0000  0.0200     0.0015  1.0769     0.0095    0.1790       0.0072
+
+Analysis finished at Tue Oct 27 16:07:30 2026
+Total time elapsed: 25.47s

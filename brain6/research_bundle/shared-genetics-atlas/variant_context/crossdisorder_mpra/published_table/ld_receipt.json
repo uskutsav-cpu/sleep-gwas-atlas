@@ -1,0 +1,69 @@
+{
+  "reference_url": "https://hgdownload.soe.ucsc.edu/gbdb/hg19/1000Genomes/phase3/ALL.chr5.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
+  "panel_sha256": "b4023dc6ee2d62ee89c8d4d347db4d348e65518d66d346574cdae7a4bbd76858",
+  "records": {
+    "rs325485": {
+      "pos37": 103995368,
+      "reference_alleles": [
+        "A",
+        "G"
+      ],
+      "n_phased": 503
+    },
+    "rs6874138": {
+      "pos37": 103899596,
+      "reference_alleles": [
+        "T",
+        "C"
+      ],
+      "n_phased": 503
+    },
+    "rs77960": {
+      "pos37": 103964585,
+      "reference_alleles": [
+        "G",
+        "A"
+      ],
+      "n_phased": 503
+    },
+    "rs2431108": {
+      "pos37": 103947968,
+      "reference_alleles": [
+        "T",
+        "C"
+      ],
+      "n_phased": 503
+    }
+  },
+  "pairwise": [
+    {
+      "reporter_variant": "rs325485",
+      "trait_lead": "rs77960",
+      "n_individuals": 503,
+      "r": -0.7783889157695476,
+      "r2": 0.6058893041928919
+    },
+    {
+      "reporter_variant": "rs325485",
+      "trait_lead": "rs2431108",
+      "n_individuals": 503,
+      "r": -0.7804983792981645,
+      "r2": 0.6091777200870614
+    },
+    {
+      "reporter_variant": "rs6874138",
+      "trait_lead": "rs77960",
+      "n_individuals": 503,
+      "r": -0.719393316598053,
+      "r2": 0.5175267439659464
+    },
+    {
+      "reporter_variant": "rs6874138",
+      "trait_lead": "rs2431108",
+      "n_individuals": 503,
+      "r": -0.7211287057601032,
+      "r2": 0.5200266102712415
+    }
+  ],
+  "limitations": "Post-selected comparisons, 503 European-labeled samples, phased haplotype correlation; remote indexed VCF not whole-file authenticated, reference not matched to GWAS or MPRA donor."
+}

@@ -1,0 +1,6 @@
+p<-'outputs/shared-genetics-atlas/variant_context/rs62264764_dense_qtl/hyprcoloc_pilot';source<-'outputs/shared-genetics-atlas/variant_context/rs62264764_dense_qtl/multisignal_pilot/variants.tsv'
+x<-read.delim(source,stringsAsFactors=FALSE);smoke<-readRDS(file.path(p,'smoke_test.rds'));stopifnot(identical(as.character(smoke$results$candidate_snp),c('rs11591147','rs12117612','rs7524677')))
+r<-readRDS(file.path(p,'pilot_results.rds'));settings<-read.delim(file.path(p,'settings.tsv'));stopifnot(identical(names(r),settings$name),nrow(x)==1548,!anyDuplicated(x$variant))
+for(v in r){d<-v$results;prob<-d$posterior_prob[!is.na(d$posterior_prob)];stopifnot(all(prob>=0 & prob<=1));for(i in seq_along(v$snpscores)){z<-v$snpscores[[i]];if(!is.null(z)){stopifnot(length(z)==nrow(x),abs(sum(z)-1)<1e-8, x$variant[which.max(z)]==d$candidate_snp[i])}}}
+z<-r$default$snpscores[[2]];w<-x$rsid %in% c('rs62264764','rs62264767');write.table(data.frame(variant=x$variant[w],rsid=x$rsid[w],conditional_cluster_score=z[w]),file.path(p,'selected_snp_scores.tsv'),sep='\t',quote=FALSE,row.names=FALSE)
+cat('Example matched; four settings checked, nonempty SNP scores normalized and leading SNPs matched to input order. Not model validation.\n')

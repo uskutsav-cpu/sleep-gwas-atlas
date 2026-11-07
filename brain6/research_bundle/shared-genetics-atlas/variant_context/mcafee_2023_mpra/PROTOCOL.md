@@ -1,0 +1,7 @@
+# Neural-progenitor schizophrenia MPRA candidate lookup
+
+Before examining candidate matches, retrieve the complete public GSE211045 `cre_sequences.tsv.gz` member. Verify gzip integrity, record URL, byte length and SHA-256, and scan all construct names. Compare exact rsIDs from the existing 425-row AlphaGenome rank table plus the nearby rs62264767. Report candidate intersection and allele labels; retain distinct candidates when duplicate rows occur. Presence means a named construct exists, not that an allelic effect was significant or passed all assay QC. Absence is not a negative biological result. rsID matching alone does not establish genome build, alleles or sequence orientation.
+
+If any candidates match, seek the published allelic-effect table and verify build, allele contrast, cell model and multiple-testing family before interpreting it. This schizophrenia-selected, reporter-based human neural-progenitor assay cannot independently replicate sleep or ADHD GWAS, measure endogenous chromatin, prove gene mediation or validate an AlphaGenome track. It is not the earlier cross-disorder Lee or Siraj screen. Do not treat samples, constructs or related screens as independent replications without evidence.
+
+After observing no ranked-candidate matches, an exploratory extension also checks the existing 1,548-marker rs62264764 regional pilot by rsID. This is an exact-name coverage check only, not a genome-wide LD-proxy search.

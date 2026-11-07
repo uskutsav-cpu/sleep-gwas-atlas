@@ -1,0 +1,11 @@
+# Whole-locus LD matrix quality diagnostic
+
+We extracted the saved UKB LAVA reference matrix for all **2,741 markers** in the original FI–insomnia replay at locus 464. The matrix is symmetric with unit diagonal. Among its 3,755,170 distinct off-diagonal pairs, **2,629** have an absolute entry greater than 1; the largest is 1.01213. Its smallest eigenvalue is **−0.11336**, and 484 eigenvalues are below −10⁻⁸ (416 below −10⁻⁴). A true correlation matrix is positive semidefinite and cannot contain off-diagonal correlations outside [−1, 1]. These results establish that this **extracted approximate LD matrix** does not satisfy those mathematical properties.
+
+Using the LAVA source's cumulative-eigenvalue rule on this matrix reproduces the original **216 retained components** at the 99% setting; the smallest retained eigenvalue is positive (0.22771). Thus, the negative eigenvalues themselves were outside the retained set. That observation does **not** establish that the retained eigenvectors or estimated variance are unaffected by approximation, and it does not explain the negative FI variance. The reference documentation describes eigen compression and truncation, but the precise cause of the out-of-range entries and negative spectrum has not been established.
+
+This is one post-selected locus, not a census or an independent evaluation of all 12 failed families. We did not clip entries, change eigenvalues, choose a different threshold, or calculate a local correlation. The finding strengthens the case for checking reference reconstruction and study-matched LD before inference; it does not validate any replacement or resolve the original quality gates. The previously tested [one-marker removals](../pair_removal/RESULTS.md) left the FI variance negative and cannot isolate the effect of matrix approximation.
+
+## Reproducibility
+
+The [pre-run protocol](PROTOCOL.md), [R extraction and spectrum code](run.R), [full eigenvalue output](spectrum.json), and [independent arithmetic verification](verify.py) document the calculation. The verifier checks the saved spectrum and component count, not the reference extraction or statistical calibration. The full 2,741×2,741 matrix was not saved; the source reference hash and historical replay limitations are in the [parent evidence](../../RESULTS.md). No individual genotypes were accessed or saved.

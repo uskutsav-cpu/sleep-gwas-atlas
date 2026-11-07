@@ -1,0 +1,22 @@
+# Chromosome 5: FI–registry-insomnia follow-up
+
+This post-selected analysis does **not** establish a shared causal variant. In the Brain6 insomnia–ADHD region chr5:103447968–104447968 GRCh37, 2,337 of 2,477 eligible FI variants (94.35%) matched the FinnGen R13 insomnia source under the [pre-result protocol](PROTOCOL.md). This percentage is coverage of eligible FI source variants, not all variants in the region. The rs2431108 coordinate lifted as expected. The FI includes sleep items, the two populations and ascertainments differ, exact participant overlap is not known, and both GWAS input precision and single-signal assumptions matter.
+
+| Prior on a shared variant | H0: neither trait | H1: FI only | H2: insomnia only | H3: distinct signals | H4: shared signal |
+|---|---:|---:|---:|---:|---:|
+| p12=10⁻⁵ | 0.0055 | 0.2247 | 0.0062 | 0.2512 | 0.5124 |
+| p12=10⁻⁶ | 0.0102 | 0.4171 | 0.0114 | 0.4662 | 0.0951 |
+
+Both use p1=p2=10⁻⁴ and standard effect-prior SD 0.15 for FI and 0.2 for insomnia. This result is **prior-sensitive** and less compelling for FI–insomnia than the previously computed Brain6 insomnia–ADHD single-signal PP4 of 0.9911 / 0.9174 at the same two p12 values. They are different trait pairs, sleep sources and data analyses. Pairwise results cannot be chained into proof of a three-trait shared causal variant. The FFS source was not analyzed in this regional coloc. A separate [FFS readiness audit](ffs_readiness/RESULTS.md) documents matching and model-scale uncertainties, while retaining marginal associations.
+
+Conditional on H4 being true in the FI–R13 model, rs1363103 (chr5:103917837 GRCh37) and rs13164188 (chr5:103914523) have the highest conditional probabilities, 0.1745 and 0.1457 respectively. The conditional 95% set contains 56 variants. The previously prioritized rs2431108 has conditional probability 0.00834 in this FI–R13 model; its insomnia–ADHD PIPs are a different calculation. The FI and R13 minimum p-values among matched variants are 2.23×10⁻⁸ and 2.42×10⁻⁵, respectively. rs1363103 was already a reported FI lead in Atkins et al.; the observed FI statistic reuses that same study, not independent replication. See the [prior-discovery check](PRIOR_DISCOVERY_CHECK.md). FI beta and SE are rounded: the maximum absolute discrepancy between log10 source p and the p recomputed from beta/SE is 0.155 in this region. This is a precision diagnostic, not a formal recalibration.
+
+## Reference LD between selected markers
+
+Post hoc, we queried the [1000 Genomes Phase 3 GRCh37 reference](https://hgdownload.soe.ucsc.edu/gbdb/hg19/1000Genomes/phase3/) for phased T alleles at the exact three rsIDs and coordinates. In 503 EUR-labeled individuals, rs2431108 T has r²=0.303 (r=−0.550) with rs1363103 T and r²=0.309 (r=−0.556) with rs13164188 T; the latter two have r²=0.988. In the 99 FIN-labeled individuals, who are a **subset of those 503**, the corresponding r² values are 0.225, 0.225 and approximately 1.0. The sign of the reported FI and insomnia effects is compatible with negative LD between the selected rs2431108 and the two leading markers, but this is not evidence that they share a causal effect. Small reference panels, phase estimation and ascertainment limit inference, and FIN is not identical to the study's participant LD. These pairwise LD checks do not resolve multiple signals or validate colocalization. Bootstrap intervals, counted alleles and reproducibility receipts are in `pairwise_ld.tsv`, `pairwise_ld_FIN.tsv`, `reference_receipt.json` and `reference_receipt_FIN.json`.
+
+`posteriors.tsv`, `conditional_variant_posteriors.tsv`, `matched.tsv`, extraction records and matching counts retain the full computation. The original coloc 5.2.3 function source and checksum are recorded in the [two-region analysis](../frailty_coloc/RESULTS.md); `extract.py`, `match.py`, `run.R` and the LD scripts reproduce this window from the workspace root with the documented external volumes, chain and reference sample panel. Variant ranking and LD pairs were chosen post hoc; no independent two-trait replication was performed.
+
+Input provenance and the distinction between the current FI file and the unavailable frozen-atlas FI bytes are documented in [Regional input provenance](../source_provenance/README.md).
+
+A [two-marker LD residual sensitivity](two_marker_sensitivity/RESULTS.md) compares the selected FI, FFS and insomnia signals under EUR and FIN reference estimates. It is not validated conditional fine-mapping, colocalization, or independent replication.

@@ -1,0 +1,5 @@
+# Post-selection full-file checks
+
+Written before the full-file lookups. Stream the archived project frailty index raw summary statistics, record its compressed SHA-256 and count, and retain all rows matching rs12659965 or chromosome 5 position 103904399 (GRCh37); check the G/A allele contrast. Also inspect the archived Brain6 LDSC-munged ADHD file by rsID, hash and count. The munged file is filtered for LDSC and cannot establish whether the original unfiltered ADHD GWAS tested this variant. This candidate was chosen after prior reporter and association results; any association is descriptive and uncorrected, not replication or evidence of a causal shared mechanism. No source files are modified.
+
+An archived raw ADHD file was subsequently located. Before examining its candidate rows, scan it in full for the same rsID or GRCh37 position, recording hash, row count and all matches. The archived file's provenance and effect-allele convention require separate verification; this is the same discovery study, not replication.

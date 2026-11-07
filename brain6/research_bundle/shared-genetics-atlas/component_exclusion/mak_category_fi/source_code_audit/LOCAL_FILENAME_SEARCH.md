@@ -1,0 +1,11 @@
+# Local filename and release check
+
+On 28 October 2026, the Figshare API for [article 24591573](https://api.figshare.com/v2/articles/24591573) reported version 1, last modified 20 November 2023, with 19 files. Its listed names do not include `fi_nomental.fastGWA`, `fi_nomental_no_metabolomics.fastGWA`, or `fi_nomental_random50.fastGWA`; the 19 names and prior snapshot are documented in the [parent review](../RESULTS.md). A filename match alone would not establish the contents or whether samples and models are appropriate.
+
+A read-only `rg --files` filename search across `/Users/swethasunilkumar/Documents/Codex` and `/Volumes/Extreme SSD` used the patterns `*nomental*`, `*FI47*`, `*FI48*`, `*FFS4*`, `*no_sleep*`, `*nosleep*` and `*noinsomnia*`. It completed with eight results, all C++ header files named `nanosleep.h` or AppleDouble sidecars, and no recognizable item-excluded GWAS. The search did not follow all symlinks or scan hidden and ignored files, and filenames could differ; permission errors were suppressed. It does not prove these data do not exist on disk or elsewhere.
+
+The closest published `nomental` phenotype removes eight items, including insomnia and fatigue, rather than just those two. Even if obtained, it would address a broader item-deletion sensitivity and would require source, ancestry, exact sample, allele and model checks against a matched full FI. The proposed targeted [data request](../DATA_REQUEST_DRAFT.md) remains unsent.
+
+## Additional public-index checks
+
+A further check on 28 October 2026 queried the [Zenodo records API](https://zenodo.org/api/records?q=fi_nomental&size=10) for `fi_nomental`; it returned zero hits. An exact-name web search for `fi_nomental.fastGWA`, `fi_nomental_no_metabolomics`, and `fi_nomental_random50` did not surface a downloadable file. The [NLM Dataset Catalog entry](https://datasetcatalog.nlm.nih.gov/dataset?q=0002640161) points to the same Mak Figshare release already inventoried, not an independently identified category-excluded GWAS. These searches do not index all repository file contents and cannot demonstrate that the files do not exist elsewhere. The most specific current lead remains the three filenames in the author code; acquisition and metadata validation are still required before any modified-FI analysis.

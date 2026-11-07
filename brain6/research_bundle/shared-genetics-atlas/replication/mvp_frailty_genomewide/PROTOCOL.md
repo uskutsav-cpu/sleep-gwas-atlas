@@ -1,0 +1,5 @@
+# MVP insomnia and frailty: post-hoc LDSC sensitivity protocol
+
+Run genome-wide LDSC for MVP European insomnia against the existing FI, FFS and HFRS summary statistics. The MVP stream is the previously audited, signed-p-derived Z stream anchored to the archived ADHD and HapMap reference SNP set. Verify the three frailty files against their recorded hashes before execution and require a new stream completion receipt. Report each genetic correlation, standard error, p-value, heritability and intercept diagnostics. These are exploratory analyses; three-pair Bonferroni threshold is 0.0167, without adjustment for the wider project search. No formal differences between correlations will be inferred from their individual standard errors.
+
+Phenotypes are not sleep-independent physical frailty: the FI includes sleep and tiredness items, FFS includes exhaustion and HFRS includes somnolence. Unknown participant overlap, per-variant sample size approximations, population/reference mismatch and MVP rounded odds ratios constrain interpretation. Source data and prior outputs are preserved.
