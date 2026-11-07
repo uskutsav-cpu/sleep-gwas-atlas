@@ -66,6 +66,12 @@ for f in retained:
         except OSError:
             inside = False
         if inside and dest.exists():
+            if 'brain6-alphagenome-pilot' in dest.parts:
+                # GitHub's file browser does not traverse directory symlinks.
+                canonical = Path(__import__('os').path.relpath(dest.resolve(),f.parent)).as_posix()
+                if u.fragment:
+                    canonical += '#'+u.fragment
+                return f'[{label}]({canonical})'
             return match.group(0)
         outside.append((str(f.relative_to(target)),raw))
         guide = Path(__import__('os').path.relpath(target/'PUBLICATION.md',f.parent)).as_posix()

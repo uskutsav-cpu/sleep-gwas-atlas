@@ -15,7 +15,7 @@ We queried Ensembl's GRCh38 REST gene-overlap endpoint for each ±100 kb interva
 | rs2189015 | chr7:114508188 A>G | +0.0499 | Overlaps FOXP2 | yes / no |
 | rs324886 | chr5:88600784 C>T | −0.0139 | Overlaps MIR9-2HG | no / yes |
 
-The sign compares the model's ALT and REF local predicted DNase signal; it is not the direction of the GWAS effect. The score is log₂((sum ALT + 1)/(sum REF + 1)) in a 501-bp window. It is not a p-value, an assay measurement, or a causal-variant probability. Both the full 1 Mb input and the 2,001-bp extracted windows were used as documented in the [expanded pilot](../../brain6-alphagenome-pilot/results/jbrowse_expanded/EXPANDED_REPORT.md). Different per-region sample sizes and selected credible sets make maxima unsuitable for cross-region significance comparisons. One-trait credible-set membership alone is not evidence that the same variant causes both traits.
+The sign compares the model's ALT and REF local predicted DNase signal; it is not the direction of the GWAS effect. The score is log₂((sum ALT + 1)/(sum REF + 1)) in a 501-bp window. It is not a p-value, an assay measurement, or a causal-variant probability. Both the full 1 Mb input and the 2,001-bp extracted windows were used as documented in the [expanded pilot](../../../alphagenome_pilot/results/jbrowse_expanded/EXPANDED_REPORT.md). Different per-region sample sizes and selected credible sets make maxima unsuitable for cross-region significance comparisons. One-trait credible-set membership alone is not evidence that the same variant causes both traits.
 
 ## What the other selection methods highlight
 
