@@ -1,0 +1,24 @@
+{
+  "recipes": [
+    "three_readers",
+    "WTC11_only"
+  ],
+  "held_studies": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "epochs": 8,
+  "seed": 42,
+  "comparison": "Identical small head, shared initial weights, rows, losses, seeds and batch schedule. WTC11-only zeros the two added-reader features/readouts. Both use full actual source DNA and physical-length metadata.",
+  "selection": "One common recipe and epoch by mean whole-source-omission raw magnitude MAE improvement over training-only cell/culture median. Report all source results and paired differences; no per-source selected epochs represented as validation.",
+  "primary_priority": "Measured effect magnitude regression; paired nearby/cell difference and measured activity auxiliaries use the same previously audited losses. No detection labels or new-study outcomes.",
+  "source_data": "Exactly the previously revealed V9 primary data; new blood and unused Siraj library outcomes are not included.",
+  "scope": "Development only. Source eligibility, confidence transfer, matched AVI and a newly frozen external evaluation still required.",
+  "stopping_rule": "Complete this finite feature comparison before selecting a follow-up. A good training/development result cannot authorize new-source predictions. Any outside evaluation requires a fresh settings, confidence and prediction lock."
+}

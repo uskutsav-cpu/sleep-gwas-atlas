@@ -1,0 +1,936 @@
+[
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_s42",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect",
+      "seed": 42,
+      "best_epoch": 1,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5694174842173373,
+          "average_precision": 0.041168071416638294,
+          "AP_skill_over_prevalence": 0.014054572150784877,
+          "brier_uncalibrated": 0.026710757315220154
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7492491395067078,
+          "average_precision": 0.23408376437440387,
+          "AP_skill_over_prevalence": 0.17014245375288328,
+          "brier_uncalibrated": 0.06526724483038918
+        }
+      },
+      "macro_AP_skill": 0.09209851295183408
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5694174842173373,
+            "average_precision": 0.041168071416638294,
+            "AP_skill_over_prevalence": 0.014054572150784877,
+            "brier_uncalibrated": 0.026710757315220154
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7492491395067078,
+            "average_precision": 0.23408376437440387,
+            "AP_skill_over_prevalence": 0.17014245375288328,
+            "brier_uncalibrated": 0.06526724483038918
+          }
+        },
+        "macro_AP_skill": 0.09209851295183408
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5445751175082403,
+          "average_precision": 0.15712868180529319,
+          "AP_skill_over_prevalence": 0.049273110282747765,
+          "brier_uncalibrated": 0.10151145485347689
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5997334443981674,
+          "average_precision": 0.42084750736836435,
+          "AP_skill_over_prevalence": 0.14532836038826585,
+          "brier_uncalibrated": 0.21442118961000053
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5775359350925439,
+          "average_precision": 0.15718051697069538,
+          "AP_skill_over_prevalence": 0.04933157838400711,
+          "brier_uncalibrated": 0.1082770781774949
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5395302119262605,
+          "average_precision": 0.3702180853739244,
+          "AP_skill_over_prevalence": 0.07061309686249041,
+          "brier_uncalibrated": 0.25385779695710353
+        }
+      },
+      "macro_conditional_AP_skill": 0.09730073533550682,
+      "joint_selection_skill": 0.09469962414367045
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_s42.npz",
+    "parameter_change_norms": {
+      "context.w1": 12.31621265411377,
+      "context.b1": 0.2966371774673462,
+      "context.w2": 1.1994327306747437,
+      "context.b2": 0.16278214752674103,
+      "variant.w1": 5.302698135375977,
+      "variant.w2": 0.7150002717971802,
+      "modulation.w": 0.4868242144584656,
+      "modulation.b": 0.08480902016162872,
+      "gate.w": 0.14130261540412903,
+      "gate.b": 0.04066340625286102,
+      "conditional.w": 0.08655499666929245,
+      "conditional.b": 0.014782991260290146,
+      "activity.w": 0.08827953040599823,
+      "activity.b": 0.08538700640201569,
+      "effect.w": 0.12587441504001617,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_s73",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect",
+      "seed": 73,
+      "best_epoch": 1,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5554474496817501,
+          "average_precision": 0.041464542153645055,
+          "AP_skill_over_prevalence": 0.014359426379069465,
+          "brier_uncalibrated": 0.026737744600494537
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7473314099459158,
+          "average_precision": 0.23499673507782598,
+          "AP_skill_over_prevalence": 0.17113164237756173,
+          "brier_uncalibrated": 0.06619021535954504
+        }
+      },
+      "macro_AP_skill": 0.09274553437831559
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5554474496817501,
+            "average_precision": 0.041464542153645055,
+            "AP_skill_over_prevalence": 0.014359426379069465,
+            "brier_uncalibrated": 0.026737744600494537
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7473314099459158,
+            "average_precision": 0.23499673507782598,
+            "AP_skill_over_prevalence": 0.17113164237756173,
+            "brier_uncalibrated": 0.06619021535954504
+          }
+        },
+        "macro_AP_skill": 0.09274553437831559
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5867220564429622,
+          "average_precision": 0.15463265264924791,
+          "AP_skill_over_prevalence": 0.046457684030905236,
+          "brier_uncalibrated": 0.10121600782518614
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.6000703590332508,
+          "average_precision": 0.4142642863330932,
+          "AP_skill_over_prevalence": 0.13561331575369096,
+          "brier_uncalibrated": 0.21742768699942286
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5726795779455074,
+          "average_precision": 0.16465828862377435,
+          "AP_skill_over_prevalence": 0.05776622129127155,
+          "brier_uncalibrated": 0.10565918142517268
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5483718353598622,
+          "average_precision": 0.3802019112032694,
+          "AP_skill_over_prevalence": 0.08534650973686358,
+          "brier_uncalibrated": 0.24406186338817798
+        }
+      },
+      "macro_conditional_AP_skill": 0.09103549989229809,
+      "joint_selection_skill": 0.09189051713530684
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_s73.npz",
+    "parameter_change_norms": {
+      "context.w1": 12.32462215423584,
+      "context.b1": 0.3134685158729553,
+      "context.w2": 1.1455507278442383,
+      "context.b2": 0.19955997169017792,
+      "variant.w1": 5.231074810028076,
+      "variant.w2": 0.6893976926803589,
+      "modulation.w": 0.5512998700141907,
+      "modulation.b": 0.08928748965263367,
+      "gate.w": 0.14475776255130768,
+      "gate.b": 0.05007574334740639,
+      "conditional.w": 0.0866379514336586,
+      "conditional.b": 0.010455824434757233,
+      "activity.w": 0.06839937716722488,
+      "activity.b": 0.08115433156490326,
+      "effect.w": 0.11340361088514328,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_s101",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect",
+      "seed": 101,
+      "best_epoch": 2,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5806363832438015,
+          "average_precision": 0.0403528547918698,
+          "AP_skill_over_prevalence": 0.013216303127886683,
+          "brier_uncalibrated": 0.026695105982156717
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7509806565166801,
+          "average_precision": 0.23450011430265125,
+          "AP_skill_over_prevalence": 0.1705935619991438,
+          "brier_uncalibrated": 0.06520593561014992
+        }
+      },
+      "macro_AP_skill": 0.09190493256351524
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5806363832438015,
+            "average_precision": 0.0403528547918698,
+            "AP_skill_over_prevalence": 0.013216303127886683,
+            "brier_uncalibrated": 0.026695105982156717
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7509806565166801,
+            "average_precision": 0.23450011430265125,
+            "AP_skill_over_prevalence": 0.1705935619991438,
+            "brier_uncalibrated": 0.06520593561014992
+          }
+        },
+        "macro_AP_skill": 0.09190493256351524
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5821387474889319,
+          "average_precision": 0.1640042593210234,
+          "AP_skill_over_prevalence": 0.057028501035088,
+          "brier_uncalibrated": 0.10019413820699363
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5930177959830654,
+          "average_precision": 0.4031027096626756,
+          "AP_skill_over_prevalence": 0.11914186280317174,
+          "brier_uncalibrated": 0.2146041660442657
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.6019152380395139,
+          "average_precision": 0.16296315598834277,
+          "AP_skill_over_prevalence": 0.055854175948936394,
+          "brier_uncalibrated": 0.1059418759655081
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5427145647242452,
+          "average_precision": 0.37304413580771467,
+          "AP_skill_over_prevalence": 0.07478357905604495,
+          "brier_uncalibrated": 0.251222515858747
+        }
+      },
+      "macro_conditional_AP_skill": 0.08808518191912987,
+      "joint_selection_skill": 0.08999505724132256
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_s101.npz",
+    "parameter_change_norms": {
+      "context.w1": 14.982816696166992,
+      "context.b1": 0.3047696352005005,
+      "context.w2": 1.4366716146469116,
+      "context.b2": 0.18026067316532135,
+      "variant.w1": 5.531780242919922,
+      "variant.w2": 0.7174342274665833,
+      "modulation.w": 0.5759351253509521,
+      "modulation.b": 0.08585862070322037,
+      "gate.w": 0.19571378827095032,
+      "gate.b": 0.026735452935099602,
+      "conditional.w": 0.12253956496715546,
+      "conditional.b": 0.021981505677103996,
+      "activity.w": 0.09817008674144745,
+      "activity.b": 0.08760189265012741,
+      "effect.w": 0.14604122936725616,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect",
+    "family": "context_variant_ensemble",
+    "features": "context_variant_biological",
+    "config": {
+      "members": [
+        "contrast_full_val16-17-18-19-20-21-22_effect_s42",
+        "contrast_full_val16-17-18-19-20-21-22_effect_s73",
+        "contrast_full_val16-17-18-19-20-21-22_effect_s101"
+      ],
+      "rule": "Mean outputs across the fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5697052366167313,
+          "average_precision": 0.04237399382035911,
+          "AP_skill_over_prevalence": 0.015294595188029935,
+          "brier_uncalibrated": 0.02666909774888849
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7534588970670778,
+          "average_precision": 0.2402915622556704,
+          "AP_skill_over_prevalence": 0.17686849986305367,
+          "brier_uncalibrated": 0.06506702890063842
+        }
+      },
+      "macro_AP_skill": 0.09608154752554181
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5697052366167313,
+            "average_precision": 0.04237399382035911,
+            "AP_skill_over_prevalence": 0.015294595188029935,
+            "brier_uncalibrated": 0.02666909774888849
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7534588970670778,
+            "average_precision": 0.2402915622556704,
+            "AP_skill_over_prevalence": 0.17686849986305367,
+            "brier_uncalibrated": 0.06506702890063842
+          }
+        },
+        "macro_AP_skill": 0.09608154752554181
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.58488873286135,
+          "average_precision": 0.16749041107250928,
+          "AP_skill_over_prevalence": 0.06096074803439436,
+          "brier_uncalibrated": 0.09970897922338486
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.6020837595985492,
+          "average_precision": 0.418182582336347,
+          "AP_skill_over_prevalence": 0.14139565548664798,
+          "brier_uncalibrated": 0.21445551027453083
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5878922629844167,
+          "average_precision": 0.16357198393327113,
+          "AP_skill_over_prevalence": 0.056540910787291614,
+          "brier_uncalibrated": 0.10655758351756184
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5450293769181935,
+          "average_precision": 0.37631012876049413,
+          "AP_skill_over_prevalence": 0.079603296811603,
+          "brier_uncalibrated": 0.24878166327701115
+        }
+      },
+      "macro_conditional_AP_skill": 0.10117820176052117,
+      "joint_selection_skill": 0.0986298746430315
+    },
+    "artifact": null
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_avi_s42",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect_avi",
+      "seed": 42,
+      "best_epoch": 1,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5705578951998344,
+          "average_precision": 0.040677744573086594,
+          "AP_skill_over_prevalence": 0.013550380023739428,
+          "brier_uncalibrated": 0.02671045470456976
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7480537233356358,
+          "average_precision": 0.2303880964343194,
+          "AP_skill_over_prevalence": 0.16613825879545738,
+          "brier_uncalibrated": 0.06540395135964976
+        }
+      },
+      "macro_AP_skill": 0.0898443194095984
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5705578951998344,
+            "average_precision": 0.040677744573086594,
+            "AP_skill_over_prevalence": 0.013550380023739428,
+            "brier_uncalibrated": 0.02671045470456976
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7480537233356358,
+            "average_precision": 0.2303880964343194,
+            "AP_skill_over_prevalence": 0.16613825879545738,
+            "brier_uncalibrated": 0.06540395135964976
+          }
+        },
+        "macro_AP_skill": 0.0898443194095984
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5688959101281377,
+          "average_precision": 0.16589559791602826,
+          "AP_skill_over_prevalence": 0.0591618592607333,
+          "brier_uncalibrated": 0.10111478601523997
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5931900543058515,
+          "average_precision": 0.4122437366642461,
+          "AP_skill_over_prevalence": 0.1326315337181107,
+          "brier_uncalibrated": 0.21389503089624726
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5718604333664892,
+          "average_precision": 0.14800919784704236,
+          "AP_skill_over_prevalence": 0.038986678140265796,
+          "brier_uncalibrated": 0.10825090984006078
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5465908622216471,
+          "average_precision": 0.3722245319601436,
+          "AP_skill_over_prevalence": 0.07357406658195949,
+          "brier_uncalibrated": 0.2574448189019402
+        }
+      },
+      "macro_conditional_AP_skill": 0.095896696489422,
+      "joint_selection_skill": 0.09287050794951021
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_avi_s42.npz",
+    "parameter_change_norms": {
+      "context.w1": 12.327438354492188,
+      "context.b1": 0.28917503356933594,
+      "context.w2": 1.175581932067871,
+      "context.b2": 0.15970422327518463,
+      "variant.w1": 5.126020908355713,
+      "variant.w2": 0.7082730531692505,
+      "modulation.w": 0.49206677079200745,
+      "modulation.b": 0.09152156859636307,
+      "gate.w": 0.14008206129074097,
+      "gate.b": 0.04088403284549713,
+      "conditional.w": 0.09051749855279922,
+      "conditional.b": 0.015939639881253242,
+      "activity.w": 0.09155810624361038,
+      "activity.b": 0.08360353112220764,
+      "effect.w": 0.1280612200498581,
+      "avi.w": 0.061743419617414474,
+      "avi.b": 0.013325348496437073
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_avi_s73",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect_avi",
+      "seed": 73,
+      "best_epoch": 1,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5592809687558127,
+          "average_precision": 0.039102200757632016,
+          "AP_skill_over_prevalence": 0.011930283555405671,
+          "brier_uncalibrated": 0.02674705965465466
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7459275708252717,
+          "average_precision": 0.2335013758714935,
+          "AP_skill_over_prevalence": 0.16951144546306296,
+          "brier_uncalibrated": 0.06614083105395908
+        }
+      },
+      "macro_AP_skill": 0.09072086450923432
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5592809687558127,
+            "average_precision": 0.039102200757632016,
+            "AP_skill_over_prevalence": 0.011930283555405671,
+            "brier_uncalibrated": 0.02674705965465466
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7459275708252717,
+            "average_precision": 0.2335013758714935,
+            "AP_skill_over_prevalence": 0.16951144546306296,
+            "brier_uncalibrated": 0.06614083105395908
+          }
+        },
+        "macro_AP_skill": 0.09072086450923432
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5934507440563259,
+          "average_precision": 0.16110739113720607,
+          "AP_skill_over_prevalence": 0.05376094355760685,
+          "brier_uncalibrated": 0.1008456486281679
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.6023964124980287,
+          "average_precision": 0.4166830037911468,
+          "AP_skill_over_prevalence": 0.13918268520635257,
+          "brier_uncalibrated": 0.2165580927502562
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5862929807110955,
+          "average_precision": 0.1573582433366741,
+          "AP_skill_over_prevalence": 0.04953204698639068,
+          "brier_uncalibrated": 0.10570800706922437
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5488704948989701,
+          "average_precision": 0.38164148855267704,
+          "AP_skill_over_prevalence": 0.0874709345631739,
+          "brier_uncalibrated": 0.24465891634404638
+        }
+      },
+      "macro_conditional_AP_skill": 0.09647181438197971,
+      "joint_selection_skill": 0.09359633944560702
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_avi_s73.npz",
+    "parameter_change_norms": {
+      "context.w1": 12.340559959411621,
+      "context.b1": 0.3243629038333893,
+      "context.w2": 1.1529977321624756,
+      "context.b2": 0.20095717906951904,
+      "variant.w1": 5.338818073272705,
+      "variant.w2": 0.7052024006843567,
+      "modulation.w": 0.5642482042312622,
+      "modulation.b": 0.0815943107008934,
+      "gate.w": 0.14399194717407227,
+      "gate.b": 0.0510009229183197,
+      "conditional.w": 0.09327030926942825,
+      "conditional.b": 0.010692811571061611,
+      "activity.w": 0.07297968864440918,
+      "activity.b": 0.08141281455755234,
+      "effect.w": 0.11705750226974487,
+      "avi.w": 0.08437719941139221,
+      "avi.b": 0.007273650728166103
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_effect_avi_s101",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect_avi",
+      "seed": 101,
+      "best_epoch": 2,
+      "locked_config": "contrast_full_val16-17-18-19-20-21-22_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5825878532452164,
+          "average_precision": 0.04209369829451984,
+          "AP_skill_over_prevalence": 0.015006373567629653,
+          "brier_uncalibrated": 0.026669189651173656
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.7498065282677351,
+          "average_precision": 0.23429105964934382,
+          "AP_skill_over_prevalence": 0.1703670547473638,
+          "brier_uncalibrated": 0.06526715382895719
+        }
+      },
+      "macro_AP_skill": 0.09268671415749673
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5825878532452164,
+            "average_precision": 0.04209369829451984,
+            "AP_skill_over_prevalence": 0.015006373567629653,
+            "brier_uncalibrated": 0.026669189651173656
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.7498065282677351,
+            "average_precision": 0.23429105964934382,
+            "AP_skill_over_prevalence": 0.1703670547473638,
+            "brier_uncalibrated": 0.06526715382895719
+          }
+        },
+        "macro_AP_skill": 0.09268671415749673
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5908957931074834,
+          "average_precision": 0.17516125837293822,
+          "AP_skill_over_prevalence": 0.06961317295146587,
+          "brier_uncalibrated": 0.10004847805391745
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.594151870377634,
+          "average_precision": 0.40955910672984797,
+          "AP_skill_over_prevalence": 0.12866974973725137,
+          "brier_uncalibrated": 0.21356597035300473
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.6088974704035262,
+          "average_precision": 0.16942059832342937,
+          "AP_skill_over_prevalence": 0.06313792607097721,
+          "brier_uncalibrated": 0.10589270999601284
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5455118619668988,
+          "average_precision": 0.3761941950598071,
+          "AP_skill_over_prevalence": 0.07943221018534642,
+          "brier_uncalibrated": 0.25161299016131194
+        }
+      },
+      "macro_conditional_AP_skill": 0.09914146134435861,
+      "joint_selection_skill": 0.09591408775092766
+    },
+    "artifact": "models/contrast_full_val16-17-18-19-20-21-22_effect_avi_s101.npz",
+    "parameter_change_norms": {
+      "context.w1": 14.99935245513916,
+      "context.b1": 0.30740970373153687,
+      "context.w2": 1.4113808870315552,
+      "context.b2": 0.17976993322372437,
+      "variant.w1": 5.461592197418213,
+      "variant.w2": 0.7340239882469177,
+      "modulation.w": 0.5391082167625427,
+      "modulation.b": 0.08218861371278763,
+      "gate.w": 0.20792850852012634,
+      "gate.b": 0.031841058284044266,
+      "conditional.w": 0.11364782601594925,
+      "conditional.b": 0.02014688402414322,
+      "activity.w": 0.1017564907670021,
+      "activity.b": 0.09023165702819824,
+      "effect.w": 0.14149080216884613,
+      "avi.w": 0.08538170903921127,
+      "avi.b": 0.009660309180617332
+    }
+  },
+  {
+    "name": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect_avi",
+    "family": "context_variant_ensemble",
+    "features": "context_variant_biological",
+    "config": {
+      "members": [
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s42",
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s73",
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s101"
+      ],
+      "rule": "Mean outputs across the fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 8400,
+          "detected_calls": 231,
+          "prevalence": 0.0275,
+          "auroc": 0.5731765480204702,
+          "average_precision": 0.04223079696413802,
+          "AP_skill_over_prevalence": 0.015147349063380998,
+          "brier_uncalibrated": 0.0266667453447787
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 22258,
+          "detected_calls": 1715,
+          "prevalence": 0.07705094797376225,
+          "auroc": 0.752699414965324,
+          "average_precision": 0.23889467310742402,
+          "AP_skill_over_prevalence": 0.17535499362435106,
+          "brier_uncalibrated": 0.06501057159275175
+        }
+      },
+      "macro_AP_skill": 0.09525117134386603
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 8400,
+            "detected_calls": 231,
+            "prevalence": 0.0275,
+            "auroc": 0.5731765480204702,
+            "average_precision": 0.04223079696413802,
+            "AP_skill_over_prevalence": 0.015147349063380998,
+            "brier_uncalibrated": 0.0266667453447787
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 22258,
+            "detected_calls": 1715,
+            "prevalence": 0.07705094797376225,
+            "auroc": 0.752699414965324,
+            "average_precision": 0.23889467310742402,
+            "AP_skill_over_prevalence": 0.17535499362435106,
+            "brier_uncalibrated": 0.06501057159275175
+          }
+        },
+        "macro_AP_skill": 0.09525117134386603
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.594367405847132,
+          "average_precision": 0.17608122068930251,
+          "AP_skill_over_prevalence": 0.07065085556423696,
+          "brier_uncalibrated": 0.09947600715230964
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.6018113811801717,
+          "average_precision": 0.42021274392108693,
+          "AP_skill_over_prevalence": 0.144391622097138,
+          "brier_uncalibrated": 0.21348420538461269
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 714,
+          "detected_calls": 81,
+          "prevalence": 0.1134453781512605,
+          "auroc": 0.5962007294287441,
+          "average_precision": 0.1639859278595447,
+          "AP_skill_over_prevalence": 0.057007823841571735,
+          "brier_uncalibrated": 0.10655150399130148
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 5320,
+          "detected_calls": 1715,
+          "prevalence": 0.3223684210526316,
+          "auroc": 0.5483881715951686,
+          "average_precision": 0.3784066596960847,
+          "AP_skill_over_prevalence": 0.08269720654179494,
+          "brier_uncalibrated": 0.2500588043105516
+        }
+      },
+      "macro_conditional_AP_skill": 0.10752123883068748,
+      "joint_selection_skill": 0.10138620508727675
+    },
+    "artifact": null
+  }
+]

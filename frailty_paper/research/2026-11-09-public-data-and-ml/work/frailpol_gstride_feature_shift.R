@@ -1,0 +1,8 @@
+a<-read.csv('work/frailpol_gait_three_class.csv',check.names=FALSE)
+b<-read.csv2('work/gstride_register.csv',skip=3,header=FALSE,fileEncoding='CP1252',stringsAsFactors=FALSE,fill=TRUE)
+num<-function(x)as.numeric(gsub(',','.',as.character(x),fixed=TRUE))
+x<-data.frame(stride=(a[['temporal_left_stride time [s]']]+a[['temporal_right_stride time [s]']])/2,speed=(a[['spatial_left_gait velocity [m/s]']]+a[['spatial_right_gait velocity [m/s]']])/2,length=(a[['spatial_left_stride length [m]']]+a[['spatial_right_stride length [m]']])/2)
+y<-data.frame(stride=num(b[[35]]),speed=num(b[[51]]),length=num(b[[53]]))
+stopifnot(nrow(x)==668,nrow(y)==163,all(is.finite(as.matrix(x))),all(is.finite(as.matrix(y))))
+s<-sapply(x,sd);z<-data.frame(feature=names(x),training_mean=unname(colMeans(x)),training_sd=unname(s),test_mean=unname(colMeans(y)),test_sd=unname(sapply(y,sd)),mean_difference_in_training_sd=unname((colMeans(y)-colMeans(x))/s))
+write.csv(z,'outputs/stage6_gstride_feature_shift.csv',row.names=FALSE);print(z)

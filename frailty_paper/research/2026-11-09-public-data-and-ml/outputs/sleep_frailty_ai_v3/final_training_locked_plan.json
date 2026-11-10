@@ -1,0 +1,526 @@
+{
+  "roles": {
+    "overall_assay_call_detector": "biological_avi_input",
+    "within_active_variant_ranker": "stacked_contrast_no_avi"
+  },
+  "controls": {
+    "full_avi_direct": "baseline_full_avi_direct",
+    "pattern_boost_none_depth3": "baseline_pattern_boost_none_depth3",
+    "full_chromatin_boost_sqrt_d3": "baseline_full_chromatin_boost_sqrt_d3",
+    "full_dna_chromatin_avi_boost_sqrt_d5": "baseline_full_dna_chromatin_avi_boost_sqrt_d5"
+  },
+  "matched_neural_ablations": {
+    "ablation_contrast_no_avi": "contrast_no_avi",
+    "ablation_contrast_avi_teacher": "contrast_avi_teacher",
+    "ablation_motif_chromatin_no_avi": "motif_chromatin_no_avi",
+    "ablation_motif_chromatin_avi_teacher": "motif_chromatin_avi_teacher",
+    "ablation_biological_avi_input": "biological_avi_input"
+  },
+  "conditional_stacking_controls": {
+    "combination_stacked_contrast_no_avi": "stacked_contrast_no_avi",
+    "combination_stacked_contrast_avi_teacher": "stacked_contrast_avi_teacher",
+    "combination_conditional_avi_only": "conditional_avi_only"
+  },
+  "recipes": [
+    {
+      "family_id": "baseline_full_avi_direct",
+      "source_record": {
+        "name": "full_avi_direct",
+        "family": "direct_avi",
+        "features": "avi",
+        "config": {
+          "imputation_raw_training_median": 0.01310999970883131,
+          "scope": "Monotonic ranking, not calibrated probability"
+        },
+        "validation": {
+          "studies": {
+            "Salomon_NGN2": {
+              "n": 2814,
+              "detected_calls": 65,
+              "prevalence": 0.023098791755508174,
+              "auroc": 0.5917704340039734,
+              "average_precision": 0.029114230521098922,
+              "AP_skill_over_prevalence": 0.006157673585439202,
+              "brier_uncalibrated": 0.28837613322072386
+            },
+            "Siraj_OL42_SKNSH": {
+              "n": 8350,
+              "detected_calls": 579,
+              "prevalence": 0.06934131736526947,
+              "auroc": 0.6317394128873369,
+              "average_precision": 0.14272412198084636,
+              "AP_skill_over_prevalence": 0.07885039487068164,
+              "brier_uncalibrated": 0.25166795090280986
+            }
+          },
+          "macro_AP_skill": 0.04250403422806042
+        },
+        "artifact": null
+      },
+      "kind": "classical"
+    },
+    {
+      "family_id": "baseline_full_chromatin_boost_sqrt_d3",
+      "source_record": {
+        "name": "full_chromatin_boost_sqrt_d3",
+        "family": "study_hist_boosting",
+        "features": "chromatin",
+        "config": {
+          "depth": 3,
+          "weighting": "sqrt",
+          "trees": 300,
+          "learning_rate": 0.05,
+          "l2": 1.0,
+          "min_leaf": 40,
+          "max_bins": 64
+        },
+        "validation": {
+          "studies": {
+            "Salomon_NGN2": {
+              "n": 2814,
+              "detected_calls": 65,
+              "prevalence": 0.023098791755508174,
+              "auroc": 0.49311637798360247,
+              "average_precision": 0.024149222985459698,
+              "AP_skill_over_prevalence": 0.0010752686362617639,
+              "brier_uncalibrated": 0.03896755990806004
+            },
+            "Siraj_OL42_SKNSH": {
+              "n": 8350,
+              "detected_calls": 579,
+              "prevalence": 0.06934131736526947,
+              "auroc": 0.5926230533832333,
+              "average_precision": 0.13191839937718586,
+              "AP_skill_over_prevalence": 0.06723956180665318,
+              "brier_uncalibrated": 0.08285518590572835
+            }
+          },
+          "macro_AP_skill": 0.034157415221457474
+        },
+        "artifact": "models/full_chromatin_boost_sqrt_d3.pkl"
+      },
+      "kind": "classical"
+    },
+    {
+      "family_id": "baseline_full_dna_chromatin_avi_boost_sqrt_d5",
+      "source_record": {
+        "name": "full_dna_chromatin_avi_boost_sqrt_d5",
+        "family": "study_hist_boosting",
+        "features": "dna_chromatin_avi",
+        "config": {
+          "depth": 5,
+          "weighting": "sqrt",
+          "trees": 300,
+          "learning_rate": 0.05,
+          "l2": 1.0,
+          "min_leaf": 40,
+          "max_bins": 64
+        },
+        "validation": {
+          "studies": {
+            "Salomon_NGN2": {
+              "n": 2814,
+              "detected_calls": 65,
+              "prevalence": 0.023098791755508174,
+              "auroc": 0.60059881915102,
+              "average_precision": 0.03161066147155721,
+              "AP_skill_over_prevalence": 0.008713132550368128,
+              "brier_uncalibrated": 0.0315661089155686
+            },
+            "Siraj_OL42_SKNSH": {
+              "n": 8350,
+              "detected_calls": 579,
+              "prevalence": 0.06934131736526947,
+              "auroc": 0.7314822902296724,
+              "average_precision": 0.2307672041512984,
+              "AP_skill_over_prevalence": 0.17345337210955367,
+              "brier_uncalibrated": 0.07149650713826222
+            }
+          },
+          "macro_AP_skill": 0.0910832523299609
+        },
+        "artifact": "models/full_dna_chromatin_avi_boost_sqrt_d5.pkl"
+      },
+      "kind": "classical"
+    },
+    {
+      "family_id": "baseline_pattern_boost_none_depth3",
+      "source_record": {
+        "name": "pattern_boost_none_depth3",
+        "family": "study_hist_boosting",
+        "features": "dna_pattern",
+        "config": {
+          "depth": 3,
+          "weighting": "none",
+          "learning_rate": 0.05,
+          "trees": 300,
+          "l2": 1.0,
+          "min_leaf": 40,
+          "max_bins": 64
+        },
+        "validation": {
+          "studies": {
+            "Salomon_NGN2": {
+              "n": 2814,
+              "detected_calls": 65,
+              "prevalence": 0.023098791755508174,
+              "auroc": 0.5296247586534963,
+              "average_precision": 0.028342474384353868,
+              "AP_skill_over_prevalence": 0.005367669304318583,
+              "brier_uncalibrated": 0.022675071714345473
+            },
+            "Siraj_OL42_SKNSH": {
+              "n": 8350,
+              "detected_calls": 579,
+              "prevalence": 0.06934131736526947,
+              "auroc": 0.6971357793879152,
+              "average_precision": 0.1521496152606163,
+              "AP_skill_over_prevalence": 0.08897816078061331,
+              "brier_uncalibrated": 0.06221388841256631
+            }
+          },
+          "macro_AP_skill": 0.04717291504246594
+        },
+        "artifact": "models/pattern_boost_none_depth3.pkl"
+      },
+      "kind": "classical"
+    },
+    {
+      "family_id": "biological_avi_input",
+      "kind": "neural",
+      "network_family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "task": "activity_effect",
+      "AVI_as_input": true,
+      "teacher": "full",
+      "seeds": [
+        42,
+        73,
+        101
+      ],
+      "fixed_epochs_by_seed": {
+        "42": 3,
+        "73": 2,
+        "101": 3
+      },
+      "source_member_names": [
+        "motif_chromatin_full_avi_input_val4-5-6-7-8-9_activity_effect_s42",
+        "motif_chromatin_full_avi_input_val4-5-6-7-8-9_activity_effect_s73",
+        "motif_chromatin_full_avi_input_val4-5-6-7-8-9_activity_effect_s101",
+        "motif_chromatin_full_avi_input_val10-11-12-13-14-15_activity_effect_s42",
+        "motif_chromatin_full_avi_input_val10-11-12-13-14-15_activity_effect_s73",
+        "motif_chromatin_full_avi_input_val10-11-12-13-14-15_activity_effect_s101",
+        "motif_chromatin_full_avi_input_val16-17-18-19-20-21-22_activity_effect_s42",
+        "motif_chromatin_full_avi_input_val16-17-18-19-20-21-22_activity_effect_s73",
+        "motif_chromatin_full_avi_input_val16-17-18-19-20-21-22_activity_effect_s101"
+      ],
+      "original_locked_config": "motif_chromatin_full_avi_input_val4-5-6-7-8-9_locked_config.json"
+    },
+    {
+      "family_id": "conditional_avi_only",
+      "kind": "conditional_stack",
+      "source": {
+        "artifact": "models/conditional_stacking_development_full_conditional_avi_only.pkl",
+        "sha256": "e4c28749f661d2770b13d0dfb66331411b91c82918547ba4b9f6401efba738ba",
+        "base_family": "baseline_full_avi_direct",
+        "include_DNA_expert": false,
+        "training_rows": 17260,
+        "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+        "base_validation_records": {
+          "0": "development_baselines_val4-5-6-7-8-9_full_avi_direct",
+          "1": "development_baselines_val10-11-12-13-14-15_full_avi_direct",
+          "2": "development_baselines_val16-17-18-19-20-21-22_full_avi_direct"
+        },
+        "study_fits": {
+          "Salomon_NGN2": {
+            "n": 2507,
+            "calls": 259,
+            "coefficients": [
+              [
+                0.38806601302042754,
+                0.007050162494066817
+              ]
+            ],
+            "intercept": [
+              -2.2271818276771844
+            ]
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 14753,
+            "calls": 4922,
+            "coefficients": [
+              [
+                0.3192407955537421,
+                -0.02659306859950859
+              ]
+            ],
+            "intercept": [
+              -0.6819860019658529
+            ]
+          }
+        }
+      },
+      "base_family": "baseline_full_avi_direct",
+      "include_DNA_expert": false
+    },
+    {
+      "family_id": "contrast_avi_teacher",
+      "kind": "neural",
+      "network_family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "task": "effect_avi",
+      "AVI_as_input": false,
+      "teacher": "full",
+      "seeds": [
+        42,
+        73,
+        101
+      ],
+      "fixed_epochs_by_seed": {
+        "42": 1,
+        "73": 2,
+        "101": 2
+      },
+      "source_member_names": [
+        "contrast_full_val4-5-6-7-8-9_effect_avi_s42",
+        "contrast_full_val4-5-6-7-8-9_effect_avi_s73",
+        "contrast_full_val4-5-6-7-8-9_effect_avi_s101",
+        "contrast_full_val10-11-12-13-14-15_effect_avi_s42",
+        "contrast_full_val10-11-12-13-14-15_effect_avi_s73",
+        "contrast_full_val10-11-12-13-14-15_effect_avi_s101",
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s42",
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s73",
+        "contrast_full_val16-17-18-19-20-21-22_effect_avi_s101"
+      ],
+      "original_locked_config": "contrast_full_val4-5-6-7-8-9_locked_config.json"
+    },
+    {
+      "family_id": "contrast_no_avi",
+      "kind": "neural",
+      "network_family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "task": "effect",
+      "AVI_as_input": false,
+      "teacher": "full",
+      "seeds": [
+        42,
+        73,
+        101
+      ],
+      "fixed_epochs_by_seed": {
+        "42": 2,
+        "73": 2,
+        "101": 2
+      },
+      "source_member_names": [
+        "contrast_full_val4-5-6-7-8-9_effect_s42",
+        "contrast_full_val4-5-6-7-8-9_effect_s73",
+        "contrast_full_val4-5-6-7-8-9_effect_s101",
+        "contrast_full_val10-11-12-13-14-15_effect_s42",
+        "contrast_full_val10-11-12-13-14-15_effect_s73",
+        "contrast_full_val10-11-12-13-14-15_effect_s101",
+        "contrast_full_val16-17-18-19-20-21-22_effect_s42",
+        "contrast_full_val16-17-18-19-20-21-22_effect_s73",
+        "contrast_full_val16-17-18-19-20-21-22_effect_s101"
+      ],
+      "original_locked_config": "contrast_full_val4-5-6-7-8-9_locked_config.json"
+    },
+    {
+      "family_id": "motif_chromatin_avi_teacher",
+      "kind": "neural",
+      "network_family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "task": "activity_avi",
+      "AVI_as_input": false,
+      "teacher": "full",
+      "seeds": [
+        42,
+        73,
+        101
+      ],
+      "fixed_epochs_by_seed": {
+        "42": 3,
+        "73": 2,
+        "101": 2
+      },
+      "source_member_names": [
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_avi_s42",
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_avi_s73",
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_avi_s101",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s42",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s73",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s101",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_avi_s42",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_avi_s73",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_avi_s101"
+      ],
+      "original_locked_config": "motif_chromatin_full_val4-5-6-7-8-9_locked_config.json"
+    },
+    {
+      "family_id": "motif_chromatin_no_avi",
+      "kind": "neural",
+      "network_family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "task": "activity_effect",
+      "AVI_as_input": false,
+      "teacher": "full",
+      "seeds": [
+        42,
+        73,
+        101
+      ],
+      "fixed_epochs_by_seed": {
+        "42": 3,
+        "73": 2,
+        "101": 3
+      },
+      "source_member_names": [
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_effect_s42",
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_effect_s73",
+        "motif_chromatin_full_val4-5-6-7-8-9_activity_effect_s101",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_effect_s42",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_effect_s73",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_effect_s101",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_effect_s42",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_effect_s73",
+        "motif_chromatin_full_val16-17-18-19-20-21-22_activity_effect_s101"
+      ],
+      "original_locked_config": "motif_chromatin_full_val4-5-6-7-8-9_locked_config.json"
+    },
+    {
+      "family_id": "stacked_contrast_avi_teacher",
+      "kind": "conditional_stack",
+      "source": {
+        "artifact": "models/conditional_stacking_development_full_stacked_contrast_avi_teacher.pkl",
+        "sha256": "49c3f827e5b24ba79e81544bc4cd09bf2bc8a86e27468eb63198acb1bcb36da6",
+        "base_family": "contrast_avi_teacher",
+        "include_DNA_expert": true,
+        "training_rows": 17260,
+        "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+        "base_validation_records": {
+          "0": "contrast_full_val4-5-6-7-8-9_ensemble_effect_avi",
+          "1": "contrast_full_val10-11-12-13-14-15_ensemble_effect_avi",
+          "2": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect_avi"
+        },
+        "study_fits": {
+          "Salomon_NGN2": {
+            "n": 2507,
+            "calls": 259,
+            "coefficients": [
+              [
+                0.26935150761540355,
+                0.32527116030588293,
+                0.025757961988627776
+              ]
+            ],
+            "intercept": [
+              -2.2739319376419256
+            ]
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 14753,
+            "calls": 4922,
+            "coefficients": [
+              [
+                0.3534382232783417,
+                0.27963189169935,
+                0.010498586093763215
+              ]
+            ],
+            "intercept": [
+              -0.737265610575207
+            ]
+          }
+        }
+      },
+      "base_family": "contrast_avi_teacher",
+      "include_DNA_expert": true
+    },
+    {
+      "family_id": "stacked_contrast_no_avi",
+      "kind": "conditional_stack",
+      "source": {
+        "artifact": "models/conditional_stacking_development_full_stacked_contrast_no_avi.pkl",
+        "sha256": "99b60df0a4e8a5706f814e7006e6b3fdc88cc510ce17d8dbe0d6378e5ed9560e",
+        "base_family": "contrast_no_avi",
+        "include_DNA_expert": true,
+        "training_rows": 17260,
+        "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+        "base_validation_records": {
+          "0": "contrast_full_val4-5-6-7-8-9_ensemble_effect",
+          "1": "contrast_full_val10-11-12-13-14-15_ensemble_effect",
+          "2": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect"
+        },
+        "study_fits": {
+          "Salomon_NGN2": {
+            "n": 2507,
+            "calls": 259,
+            "coefficients": [
+              [
+                0.2649276082832122,
+                0.33551018641774877,
+                0.019239950256348077
+              ]
+            ],
+            "intercept": [
+              -2.2667154434586823
+            ]
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 14753,
+            "calls": 4922,
+            "coefficients": [
+              [
+                0.359436100815737,
+                0.2896794578437178,
+                -0.0011054485144221297
+              ]
+            ],
+            "intercept": [
+              -0.726878469042105
+            ]
+          }
+        }
+      },
+      "base_family": "contrast_no_avi",
+      "include_DNA_expert": true
+    }
+  ],
+  "training_chromosomes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "reserved_test_chromosomes": [
+    1,
+    2,
+    3
+  ],
+  "protocol_sha256": "393f73328c3553a693ca799ae40e9ed92389c871c1c68acf75775482c91adcde",
+  "development_comparison_sha256": "6a145af8fedf30a24749d41679d4d347a5a9a55380af8644c4db1903b082903b",
+  "conditional_stacking_specification_sha256": "bd1930ffbf44240c54d0e88efb6d27c1ffb5497bc04680f40ce6faf867c07082",
+  "data_audit_sha256": "03260609cf1eb4029cad32dc67cfb221d37e1fbdde8a84066a8ff007a51e7a91",
+  "AVI_audit_sha256": "6a1c97b24dffa96ce0a721b1b6958b7f9314bebabd889fcc941dd06918dbffde",
+  "source_sequence_sha256": {
+    "salomon": "56808751213c7023b2d2345320a59e3a9a4f2c9b4dc421154d001cbe066ef66c",
+    "siraj": "b24a4a81b90e44e3f6042c7a0ec0ac405bf3af1001e332026eece7af63e1fcdf"
+  },
+  "scope": "Final research ranking models, classical controls, matched neural AVI/no-AVI ablations and conditional combination models. No reserved-test predictions made or used for selection.",
+  "blind_test_evaluated": false
+}

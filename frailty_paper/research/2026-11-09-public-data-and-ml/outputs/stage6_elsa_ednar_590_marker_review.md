@@ -1,0 +1,13 @@
+# ELSA candidate-panel frailty table: score-marker coverage
+
+A published ELSA physical-frailty analysis reports a candidate panel with 620 SNPs and provides a [supplementary spreadsheet of 590 analyzed SNPs](https://static-content.springer.com/esm/art%3A10.1007%2Fs40520-015-0419-z/MediaObjects/40520_2015_419_MOESM2_ESM.xlsx). The study used an adapted five-domain physical-frailty phenotype, rather than this project's discovery FFS; see [Mekli et al.](https://doi.org/10.1007/s40520-015-0419-z).
+
+The supplementary table contains 590 unique `rs` identifiers. An exact identifier intersection found **0 of 15** markers in the weighted prototype and **0 of 22** in the shared-direction count. Therefore the published association table cannot directly evaluate the specified score variants, much less the complete scores.
+
+This result concerns the **590 analyzed records**, not the entire historical panel, later ELSA genotypes or imputed datasets. Exact rsID matching does not search alternate identifiers, coordinates or LD proxies and does not establish the true genotyped marker coverage. An LD proxy, even if identified, would not be an exact test of the original score. The table contains summary associations, not linked participant genotypes or the project's scored outcomes; sample overlap, coding and ability to combine sleep with frailty were not assessed. Access conditions for historical genotype data remain distinct from access to the published supplementary table.
+
+The reproducible script `work/elsa_ednar_panel_overlap.py` checks table headers, 590 unique identifiers and the score-file inputs; the [aggregate receipt](stage6_elsa_590_marker_overlap.json) records source and input hashes. The supplement hash records the downloaded file, not an independently verified publisher checksum. No individual data were used.
+
+## Provisional nearby-position check
+
+A subsequent descriptive comparison of the table's reported chromosome and base-pair positions with the project positions found no same-chromosome pairs within 500 kb for either score. Within 1 Mb it found no pairs for the 15-marker list, and 12 table–score pairs involving two of the 22 count variants; the nearest numerical distance was about 873 kb. The supplementary-table coordinate build has not been confirmed, so these distances are provisional and should not be used as verified genomic intervals. No LD was estimated; proximity alone does not identify a proxy, independent signal or functional gene. This screen does not rule out alternate coordinates, long-range LD or coverage outside the 590 published records. Reproduce with `work/elsa_ednar_reported_position_proximity.py`; [aggregate receipt](stage6_elsa_590_proximity_check.json).

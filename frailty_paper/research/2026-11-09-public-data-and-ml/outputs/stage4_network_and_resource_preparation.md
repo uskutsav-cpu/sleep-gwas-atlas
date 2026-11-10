@@ -1,0 +1,49 @@
+# Single-cell investigation: resources and initial evidence network
+
+The [network scaffold](stage4_variant_gene_phenotype_network_scaffold.csv) separates 182 GWAS marginal-association edges, 795 **bulk-tissue** GTEx v10 QTL edges, 116 exploratory bulk-tissue region-level colocalization records, three exploratory CD4-cell regional colocalization records, two cell-type molecular credible-set edges, five previously curated published gene-level TWAS edges, nine candidate-matched published FI supplement TWAS edges, one published SMAD5 whole-blood SMR edge, seven exploratory mouse-cell insomnia scDRS group-association edges, four human muscle stem-cell insomnia scDRS group-association edges, one bulk testis splicing-QTL credible-set edge, twelve related-release bulk expression-QTL edges, 498 descriptive human muscle stem-cell gene-expression edges, 2,549 descriptive HPA human muscle cluster gene-expression edges, 10,445 descriptive gene-expression edges from seven FUMA matrices, 612 insomnia, FFS and FI MAGMA cell-type gene-property records (including one untestable regression), 60 secondary adult prefrontal-cortex and 100 secondary human muscle property records, 882 insomnia, FFS and FI MAGMA gene-association edges for matched candidate IDs, two exact-marker ABC predicted regulatory-target edges, 726 nonself reference-LD proxy edges, 379 selected nominal proxy molecular-QTL records, 1,531 proxy ABC prediction records, and two non-significant nominal positional QTL-evaluation edges. Each edge identifies its source, trait or molecular phenotype, tissue, p-value or posterior, and key limitation. An eQTL edge is a variant–gene association in the named bulk tissue; it is not evidence of a specific cell type or a causal gene–phenotype link. Four rs323509 testis-splicing and four FOXP2 pituitary colocalization records have the limitations described in their [testis](stage3_rs323509_testis_colocalization.md) and [FOXP2](stage3_foxp2_pituitary_colocalization.md) reviews. Four INKA1 skeletal-muscle colocalization records cover a separate 2-Mb region and have the limitations described in the [INKA1 report](stage3_inka1_muscle_colocalization.md). The three SMIM32 expression and three SMAD5 splicing colocalization records refer to a 1 Mb region and cannot assign causality to rs7734045. The two molecular credible-set edges are naïve-CD4-T-cell eQTL evidence, not GWAS colocalization or enrichment; see the [initial cell-QTL review](stage4_onek1k_cell_qtl_first_results.md). The three CD4-cell colocalization records are highly qualified as described in the [CD4 report](stage4_cd4_smad5_colocalization_review.md), and the [published SMAD5 SMR report](stage4_smad5_published_insomnia_smr.md) is a separate whole-blood gene-level association. It is a research evidence network; paths through its edges are hypotheses, not confirmed mechanisms.
+
+## Public resources selected for preparation
+
+| System | Source and accessible material | What it can support; what remains to check |
+|---|---|---|
+| Brain | [Human Brain Cell Atlas v1.0](https://data.humancellatlas.dev.clevercanary.com/hca-bio-networks/nervous-system/atlases/brain-v1-0) | Human single-nucleus atlas across many brain regions from three donors. Check exact downloaded partitions and annotations for hypothalamic, excitatory, inhibitory, astrocyte and microglial populations; three donors limit generalization. |
+| Skeletal muscle | [Multimodal ageing muscle atlas](https://www.nature.com/articles/s41586-024-07348-6) and its [data portal](https://db.genomics.cn/cell/hlma/) | The study reports >387,000 cells/nuclei across modalities and ages with different fitness/frailty levels. Processed-data portal is public, but exact downloadable files, license, phenotype fields, and usable donor-level metadata need checking. The total is not the number of independent donors or necessarily RNA profiles alone. |
+| Skeletal muscle, additional resource | [Kedlian et al. human skeletal muscle ageing atlas](https://www.muscleageingcellatlas.org/) | A separate atlas with processed h5ad files, including muscle stem-cell and endothelial/smooth-muscle subsets. Its site describes eight younger and nine older human donors; it is **not the same study** as the >387,000-cell multimodal atlas. A processed muscle stem-cell file is being acquired for feasibility checking. |
+| Immune | [OneK1K](https://onek1k.org/) and [cross-tissue immune atlas](https://www.tissueimmunecellatlas.org/) | OneK1K reports 1.27 million PBMCs from 982 donors, but its eQTL browser says temporarily unavailable. Confirm public file availability and donor and cell labels; PBMCs do not represent all tissue macrophages. The separate cross-tissue atlas provides downloadable expression data. |
+| Vascular | [Human Vascular Cell Atlas](https://www.vascularcellatlas.org/) | Public atlas describes 66,623 vascular cells from 62 donors across 19 organs and offers endothelial and mural datasets. Check annotations for pericytes and smooth-muscle subtypes, organ representation, download integrity and license. |
+
+These resource descriptions are source claims, not newly calculated genetic enrichments. For each analysis, document actual dataset version, sample/donor counts, cell labels, QC and expression representation. Test cell-type enrichment using GWAS-derived gene statistics or regulatory annotations and suitable matched backgrounds, ancestry-matched LD and an explicitly defined multiple-testing family. Controls should address gene expression, gene size, LD and donor/cell composition as appropriate to the chosen method. scDRS scores disease-associated gene programs in cells; a high score or a gene's expression does not establish a particular variant's mechanism. Bulk QTL, accessibility, expression and genetic enrichment edges must retain distinct evidence labels.
+
+The specific [Stage 3 candidate and gene table](stage3_initial_variant_gene_table.csv) and [locus work queue](stage3_provisional_locus_triage.csv) remain provisional. Limited [mouse-brain](stage4_mouse_brain_insomnia_scdrs.md) and [human muscle stem-cell](stage4_human_musc_insomnia_scdrs.md) insomnia scDRS analyses are complete; neither tests frailty or shared risk. FFS and FI MAGMA gene-property results are available, including the [standard-model cell-type comparison](stage4_standard_fi_ffs_cell_type_comparison.md) and [FI–FFS candidate gene comparison](stage4_candidate_fi_ffs_gene_comparison.md). No stratified LDSC, scATAC enrichment, donor-aware cell-type enrichment or shared-trait cell-type test is represented as completed here. Processed atlas files require verification before being used.
+
+The published TWAS edges report gene-model associations with FI or insomnia; [the source comparison](stage3_published_fi_insomnia_twas_review.md) explains overlapping data, distinct FDR thresholds, and why these do not establish a shared causal variant.
+
+The [human muscle candidate-expression review](stage4_human_musc_candidate_expression_review.md) explains donor-weighted summaries and why expression edges do not imply genetic effects or disease causality.
+
+The [four-system expression review](stage4_four_system_candidate_expression_review.md) describes human versus mouse sources and why aggregate expression alone is not enrichment or causal evidence.
+
+The [original GWAS comparison](stage3_original_gwas_coloc_review.md) includes eight additional pairwise regional records, with overlapping FI and insomnia samples and phenotype content.
+
+The [ADARB1 muscle-splicing review](stage3_adarb1_muscle_splice_colocalization.md) records four additional model- and coverage-limited comparisons.
+
+The [remaining-region batch review](stage3_remaining_molecular_batch_review.md) documents 66 additional exploratory pairwise records; missing or multiple molecular credible sets limit interpretation.
+
+A separately selected [NEGR1 caudate fallback](stage3_negr1_brain_colocalization.md) adds six highly qualified region-level comparisons; no molecular credible set was reported for it.
+
+The [FFS MAGMA review](stage4_ye_ffs_magma_cell_type_review.md) documents the separate gene and cell-type tests, their multiple-testing families and a validated metadata overflow correction.
+
+The [Mak FI Brown-approximation review](stage4_mak_fi_brown_magma_cell_type_review.md) describes the separate model and why it cannot yet be directly compared with the completed FFS Imhof results.
+
+The [ABC regulatory-link review](stage3_abc_regulatory_links_review.md) explains the two exact-position model predictions and the limits of the 131-biosample resource.
+
+The two no-exact-QTL regions use [positional fallback tests](stage3_positional_fallback_colocalization.md); their candidate cortex associations are not significant, and their regional models lack molecular credible sets.
+
+Two additional [SMIM32 comparisons](stage3_smim32_original_gwas_colocalization.md) use the original Atkins FI and Jansen insomnia inputs and have incomplete molecular credible-set coverage.
+
+The [LD proxy and ABC review](stage3_abc_ld_proxy_regulatory_review.md) describes the evidence and limitations of the added proxy and predicted-target edges. Each proxy node retains its GRCh37 position and BIM alleles; paths through LD and ABC predictions are hypotheses rather than causal links.
+
+The [FFS model-sensitivity review](stage4_ye_ffs_magma_model_sensitivity.md) compares the default and Brown approximations; both sets of cell-property associations are labeled by model.
+
+The [matched-model cell comparison](stage4_matched_brown_cell_type_comparison.md) includes original insomnia and FI sources; one Atkins PBMC regression was untestable and remains a missing result.
+
+The [human muscle cluster analysis](stage4_hpa_human_muscle_cell_type_review.md) adds FAP, myosatellite-cell and myonuclear coverage from a peripheral-artery-disease study and its controls; it does not test donor-level frailty.

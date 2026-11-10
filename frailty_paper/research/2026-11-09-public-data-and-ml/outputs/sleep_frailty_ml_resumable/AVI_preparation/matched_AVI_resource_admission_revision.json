@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T04:57:26.256213+00:00",
+  "revision": "Preparation-only resource admission; before any AVI plan or fit",
+  "launch_reserve_bytes": 805306368,
+  "previous_launch_reserve_bytes": 5368709120,
+  "live_saved_state_reserve_bytes": 314572800,
+  "exact_source_reversal_to_preserved_previous_policy": true,
+  "declared_source_changes": [
+    {
+      "original": "SYSTEM_RESERVE = 5 * 1024**3",
+      "replacement": "SYSTEM_RESERVE = 768 * 1024**2",
+      "occurrences": 1
+    },
+    {
+      "original": "The system volume has less than the 5 GiB launch reserve; training previously exhausted its disk reserve.",
+      "replacement": "The system volume has less than the recorded 768 MiB launch reserve; preserve partial work and recover storage before admission.",
+      "occurrences": 1
+    },
+    {
+      "original": "    return {'time_UTC': datetime.datetime.now(datetime.timezone.utc).isoformat(),",
+      "replacement": "    resource_path = AVI / 'matched_AVI_resource_admission_revision.json'\n    resource_hash = None\n    if not resource_path.exists():\n        blockers.append('The revised resource admission needs its source derivation and measured native-runtime evidence.')\n    else:\n        resource_proof = check_audit(resource_path)\n        assert resource_proof['launch_reserve_bytes'] == SYSTEM_RESERVE\n        assert resource_proof['live_saved_state_reserve_bytes'] == 300 * 1024**2\n        for relative_path, digest in resource_proof['evidence_sha256'].items():\n            assert sha(ROOT / relative_path) == digest, relative_path\n        resource_hash = sha(resource_path)\n    return {'time_UTC': datetime.datetime.now(datetime.timezone.utc).isoformat(),",
+      "occurrences": 1
+    },
+    {
+      "original": "            'free_system_volume_bytes': free, 'launch_reserve_bytes': SYSTEM_RESERVE,",
+      "replacement": "            'free_system_volume_bytes': free, 'launch_reserve_bytes': SYSTEM_RESERVE,\n            'resource_admission_revision_sha256': resource_hash,",
+      "occurrences": 1
+    },
+    {
+      "original": "        'launch_system_reserve_bytes': SYSTEM_RESERVE,",
+      "replacement": "        'launch_system_reserve_bytes': SYSTEM_RESERVE,\n        'resource_admission_revision_sha256': status['resource_admission_revision_sha256'],",
+      "occurrences": 1
+    }
+  ],
+  "measured_native_adapted_full_fit": {
+    "updates": 4554,
+    "recorded_peak_RSS_bytes": 755269632,
+    "initial_free_bytes": 1041563648,
+    "minimum_recorded_free_bytes": 409751552
+  },
+  "actual_AVI_runtime_training_qualified": false,
+  "actual_AVI_sustained_resource_and_full_validation_audit_required_before_scientific_launch": true,
+  "resource_audit_may_fail_and_must_be_preserved": true,
+  "scientific_model_loss_targets_schedule_epochs_or_acceptance_criteria_changed": false,
+  "external_outcomes_read": false,
+  "engineering_or_scientific_AVI_fit_exists": false,
+  "rationale": "Same audited read-only native runtime with three additional head inputs and a memory-mapped 3498812-byte score bank; peak-memory and exact numerical model-input audits support attempting the bounded engineering audit. This receipt does not qualify AVI training resources or assert that 768 MiB will guarantee completion. The new trainer must pass its real continuation and two 1000-update/full-validation probes; 300 MiB saved-state checks remain mandatory.",
+  "evidence_sha256": {
+    "outputs/sleep_frailty_ml_resumable/readonly_native_sustained_resource_audit.json": "725e3e6625677f5668b7ce489bd7b899efdd1750db05b32c18c19f2108466516",
+    "outputs/sleep_frailty_ml_resumable/native_comparison_independent_decision_audit.json": "c47ee6b54e3675c79ee3758f85ac82335d20247e0647a0d64d1cb7afa4af0f8c",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Retallick2026_42_completed_recovery_audit.json": "0fa9d96c6ea1abdb10c304e9069a6a0869f169017fcdf8168f55c71ddf526faf",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/permitted_AVI_native_runtime_audit.json": "30269cbda75ffbf7b8477de5efe84cf3c8edaa1ead815f7099470040fe612cb7",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/readonly_native_input_equivalence_audit.json": "13855d15d221bd15f72997a204edaca721ae0fc7883e1e6f5a1c27ed90a9c9d5",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/matched_AVI_trainer_resource_guard_derivation.json": "726868e845d535e224b2ed2f2e820a9bd606a4d758118e64ad75205e9e2d4cd6",
+    "outputs/sleep_frailty_ml_resumable/development/adapt_last_stage_Retallick2026_42_readonly_resource_history.json": "dc946a7a7502f5c2d2fee54a07cc4bb4793e7cf409e2cce26d43dfa223429583",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/permitted_AVI_experiment_initial_5GiB_policy.py": "9e04b3adfe9a6670c7ba557f6ba25dded465b16ea13c968cb016465187939125",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/train_permitted_AVI_development_initial_17_changes.py": "9abff10417656694b929f276b64f71243c6889edc4c042253c5957b7ad9ba035",
+    "outputs/sleep_frailty_ml_resumable/lossless_additional_assets_filesystem_compression_20261109.json": "5860587b684959a929261315a06b0af0e27799da7127d3bccd2deda7f5ab725a",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/audit_permitted_AVI_training_initial_parent_Torch.py": "7e850db4c0acc331acb46dbe7160f1c7d205ca01aa5957bb58f1f90807964cdb",
+    "outputs/sleep_frailty_ml_resumable/AVI_preparation/matched_AVI_resource_admission_revision_initial_parent_Torch.json": "188086c84d652f7c4fdedb4ab047d0dee7937329cded15264262d45e88630ebe"
+  },
+  "code_sha256": {
+    "permitted_AVI_experiment.py": "3cfe335be263ef88d439dad998e1de290bee7db96af30dde066b776da5e9655a",
+    "train_permitted_AVI_development.py": "8f5f5a5b416937778d41dfee55b797a63df5616114582039d209cd756e55ab0f",
+    "audit_permitted_AVI_training.py": "07a1b53801339ecc05f692a4c1f0a499ec06303e3706d366abaf44f7ba44cdb1",
+    "bench_permitted_AVI_resources.py": "b9a648be8cb92731389f015d5b0f553e9add0872d03ddca2a6618c19a544087f",
+    "verify_permitted_AVI_execution_states.py": "cc6358a189a7a84ab879afa2dbbca23a92125207e1061f5f428409d1371416e7"
+  },
+  "prior_resource_admission_revision_sha256": "188086c84d652f7c4fdedb4ab047d0dee7937329cded15264262d45e88630ebe",
+  "coordinator_allocation_change": "Move existing CPU tensor/state comparisons to a separate process after all fitting workers terminate; no resident coordinator Torch import during fitting.",
+  "coordinator_previous_source_sha256": "7e850db4c0acc331acb46dbe7160f1c7d205ca01aa5957bb58f1f90807964cdb"
+}

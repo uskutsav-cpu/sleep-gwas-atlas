@@ -1,0 +1,5 @@
+# Published SMAD5–insomnia molecular association
+
+A 2025 published multi-omics analysis reports a **whole-blood eQTLGen SMR association** between SMAD5 expression and sleeplessness/insomnia (P = 3.25 × 10⁻¹¹). The paper describes this as Bonferroni-significant. This is a gene-level association from a published analysis; it is not an association computed here. Source: [Genetic Evidence Prioritizes Neurocognitive Decline as a Causal Driver of Sleep Disturbances](https://pmc.ncbi.nlm.nih.gov/articles/PMC12651937/).
+
+This provides external biological context for studying SMAD5, but does **not** independently establish a shared causal variant across insomnia and frailty, identify rs7734045 as the causal allele, demonstrate a CD4-specific effect, or prove that expression mediates disease risk. The exact insomnia GWAS, sample overlap with the present inputs, and the SMAD5-specific HEIDI result have not been independently verified from the supplement. SMR, colocalization, and TWAS test different questions and should not be treated as interchangeable. A labeled published-SMR edge is recorded in the network; the network edge does not claim a frailty connection.

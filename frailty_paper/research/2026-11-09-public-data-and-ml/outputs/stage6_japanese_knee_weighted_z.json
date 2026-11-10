@@ -1,0 +1,53 @@
+{
+  "source_md5": "0fc2688cf786984fb5f147f6eb52628a",
+  "candidate_table_sha256": "5bda8d64d6d41bebdc86c3cd349e259ce6d85deac6ce014afb32ce00cbc50b75",
+  "reference": "1000 Genomes phase 3 JPT n=104; within-chromosome dosage LD, cross-chromosome zero",
+  "method": "a=weight*sqrt(2*target_EAF*(1-target_EAF)); z = negative counted-allele beta / SE; statistic a.T z/sqrt(a.T R a)",
+  "results": [
+    {
+      "score": "prototype15",
+      "weight": "FI_beta_weight",
+      "n_used": 12,
+      "n_total": 15,
+      "lower_strength_weighted_z": -0.5234329973943493,
+      "nominal_two_sided_p": 0.6006729664579673,
+      "leave_one_out_min": -0.9973355251330265,
+      "leave_one_out_max": -0.13736742123307963,
+      "jpt_full_vs_partial_score_r": 0.9557981674442043
+    },
+    {
+      "score": "prototype15",
+      "weight": "FFS_beta_weight_inferred",
+      "n_used": 12,
+      "n_total": 15,
+      "lower_strength_weighted_z": -0.6081812991878472,
+      "nominal_two_sided_p": 0.5430672362495627,
+      "leave_one_out_min": -0.9517884631269856,
+      "leave_one_out_max": 0.11046040401442916,
+      "jpt_full_vs_partial_score_r": 0.9976796671824057
+    },
+    {
+      "score": "prototype15",
+      "weight": "insomnia_beta_weight",
+      "n_used": 12,
+      "n_total": 15,
+      "lower_strength_weighted_z": -0.6942399523512839,
+      "nominal_two_sided_p": 0.4875317413258593,
+      "leave_one_out_min": -1.0064260461371217,
+      "leave_one_out_max": -0.3076200740502148,
+      "jpt_full_vs_partial_score_r": 0.967320141244327
+    },
+    {
+      "score": "shared22",
+      "weight": "weight",
+      "n_used": 14,
+      "n_total": 22,
+      "lower_strength_weighted_z": -0.38392576292987396,
+      "nominal_two_sided_p": 0.7010334708969186,
+      "leave_one_out_min": -1.1207334980168762,
+      "leave_one_out_max": 0.180468094346286,
+      "jpt_full_vs_partial_score_r": 0.9699116042060427
+    }
+  ],
+  "limitations": "Partial scores, postselected, unharmonized source/strand and multiallelic caveats, FFS direction inferred, small external LD panel, source sample overlap not exhaustively verified; not score regression or individual prediction."
+}

@@ -1,0 +1,39 @@
+# NSHAP: sleep, frailty and genome-wide genotype lead
+
+Checked 28 October 2026. The National Social Life, Health, and Aging Project (NSHAP) is a U.S. population-based cohort. A [published sleep study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8271128/) used actigraphy and a five-component physical-frailty phenotype in rounds 2 and 3. That published phenotype and its sample are not identical to the project's discovery FFS; the selected study's overlap with genotyped individuals has not been verified.
+
+A separate [NSHAP genotyping paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC10558172/) reports Global Screening Array v1.0 genotyping and TOPMed imputation. It states 1,876 people supplied samples for genotyping and 1,830 had usable APOE information; those are not the number with usable sleep, frailty, and every project variant. Genome-wide dosages for our 15/22-marker sets, quality metrics, participant/relative overlap with discovery sources, and actual access to those dosages remain unverified. The paper's 2023 data availability statement discusses public nongenetic data and APOE data being submitted or available by request; it does not establish a public download of full genotypes. [NACDA](https://www.icpsr.umich.edu/sites/nacda/nshap) describes both public-use and restricted-use NSHAP releases; restricted data have application, IRB and data-protection requirements. No particular genotype file, no-fee access or allowed linkage has been established and no application was made.
+
+**Important use condition for this AI-assisted project:** NORC's [NSHAP AI policy dated April 1, 2026](https://www.norc.org/content/dam/norc-org/pdf2026/NSHAP-AI-policy%20statement2.pdf) prohibits uploading NSHAP data to public AI platforms, and says some institutionally licensed or isolated AI uses require case-by-case review. The source documents above and publicly available aggregate reports were reviewed; no NSHAP participant data were downloaded or uploaded. Any future NSHAP work must follow the policy and dataset agreement, including determining what constitutes uploading and where computation takes place. Do not send a request or use the data until the appropriate route is established.
+
+This is a promising *potential* source for a score evaluation if access and permissions can be established, rather than a free dataset already available for analysis. Check exact target marker dosage, alleles, imputation and per-marker QC; whether measured frailty and sleep are linked to the genetic samples; event counts and timings; data-use conditions, cost and cohort nonoverlap. The study used sample selection and the sleep phenotype is not necessarily insomnia; appropriate sampling and interpretation matter. A single APOE genotype is not sufficient to compute either current score.
+
+## Array-manifest feasibility check
+
+The NSHAP genotyping paper specifies Illumina Global Screening Array v1.0 but does not identify the exact manifest revision in the text inspected. We downloaded the manufacturer's [GSA v1.0 C1 GRCh37 manifest](https://emea.support.illumina.com/downloads/infinium-global-screening-array-v1-0-product-files.html), scanned 618,540 assay rows and compared its positions and alleles with the current 15- and 22-marker definitions. No candidate had a matching GRCh37 coordinate in this generic C1 manifest (0/15 and 0/22); an APOE rs7412 coordinate positive control was present. This is a product-file coverage screen, **not NSHAP participant data**. It does not prove the actual study used C1, that individual genotypes passed QC, or that a different array revision has identical content.
+
+Crucially, the NSHAP paper describes imputation using a TOPMed reference panel. Variants missing from direct array assays can be imputed, and this manifest cannot establish whether any candidate was present, well imputed or usable in the actual NSHAP release. Exact source allele, study-imputation INFO, call quality, ploidy and multiallelic representation remain required for scoring. The result narrows the next question to obtaining the actual per-variant imputation/QC inventory through the appropriate permitted route; it does not show that validation is impossible.
+
+Reproduce with `python3 work/nshap_gsa_v1_manifest_check.py`; [per-candidate output](stage6_nshap_gsa_v1_coverage.csv) and [receipt](stage6_nshap_gsa_v1_coverage.json). Archive SHA-256 `5ebca5d1081b859a9ccde310829011d818c1f68756361714a6540a5f4cfbb29d`. No NSHAP study data were downloaded or uploaded to AI tools.
+
+## Nearby array markers in a reference panel
+
+A further non-NSHAP feasibility screen compared the generic GSA v1.0 C1 manifest with 503 European-labeled 1000 Genomes reference individuals. For each distinct project candidate, it searched within 100 kb for a manufacturer-listed SNP with matching GRCh37 coordinate and inferred plus-strand allele pair in the reference, then calculated pairwise dosage r² using at least 400 paired reference calls. All 33 distinct candidates had one reference anchor and at least one evaluable nearby marker. The strongest nearby marker reached r² ≥ 0.8 for 7/15 weighted-prototype candidates and 7/22 count-prototype candidates; the lists overlap and these counts are not additive. This threshold is descriptive, not an imputation-quality standard.
+
+These are single-marker reference LD summaries, not NSHAP data. The exact NSHAP array revision, ancestry composition, imputation output and quality remain unknown, and the European panel may poorly represent some participants. Multimarker imputation can work when no single tag reaches the threshold, while a strong tag does not guarantee accurate imputation. The result cannot establish target SNP coverage, correct allele coding, phenotype association or score performance. No NSHAP participant data were accessed or uploaded to an AI platform.
+
+Reproduce using `python3 work/stage6_nshap_gsa_v1_reference_tags.py`; [candidate results](stage6_nshap_gsa_v1_reference_tags.csv) and [receipt](stage6_nshap_gsa_v1_reference_tags.json). The manifest SHA-256 is recorded in the preceding section and the receipt. This analysis adapts the existing [reference-tag workflow](stage6_gsa_reference_tag_screen_review.md) to the version-1 manifest rather than assuming the earlier version-3 array was used.
+
+## Subgroup sensitivity for the same selected marker pairs
+
+We recalculated r² for each of the **same markers chosen as best in the pooled European panel**, separately in its British (GBR, n=91) and Finnish (FIN, n=99) samples. All 33 pairs had at least 80 paired calls and variable dosage in both groups. Of the 33, 13 pairs reached r² ≥ 0.8 in GBR and 14 in FIN; three candidates crossed the illustrative threshold in at least one subgroup relative to the pooled result:
+
+| Candidate | Pooled EUR r² | GBR r² | FIN r² |
+|---|---:|---:|---:|
+| rs1909650 | 0.710 | 0.649 | 0.894 |
+| rs1942262 | 0.797 | 0.792 | 0.855 |
+| rs10865954 | 0.879 | 0.889 | 0.778 |
+
+These are small subsets of the pooled reference, not independent replications or study-matched estimates; the tag was selected using all 503 participants, including these subsets. Differences can reflect sampling, ancestry-related LD differences, or other reference properties. The threshold is arbitrary, and these figures cannot assess non-European groups, NSHAP imputation quality or genetic-score performance. No target or NSHAP participant data were used.
+
+Reproduction: `python3 work/stage6_nshap_selected_tag_eur_subgroups.py`; [all selected-pair results](stage6_nshap_selected_tag_eur_subgroups.csv). Sample-group assignment uses the cached 1000 Genomes phase-3 panel `work/1kg_phase3_panel.tsv`; dosages come from the same MAGMA EUR reference as the pooled analysis. The calculation retains the pooled-selected tag rather than choosing a new best tag separately in each subset.

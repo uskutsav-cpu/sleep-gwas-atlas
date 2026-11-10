@@ -1,0 +1,11 @@
+# Comparing rs11636381 methylation results across GENOA and GoDMC
+
+The [GoDMC API](https://github.com/MRCIEU/godmc-api) returned 29 selected rs11636381–CpG associations for GRCh37 chromosome 15:74134883 and the C/T allele pair. We compared their CpG IDs with all 38 rs11636381 rows extracted from the checksum-verified GENOA chromosome-15 summary file. There were no exact CpG-ID overlaps. The GENOA leading candidate site cg03789871 returned HTTP 404 from the GoDMC CpG endpoint; positive-control sites cg12594244 and cg17242362 returned HTTP 200 in the same check.
+
+This is **not a failed replication**. GoDMC releases a preselected set of results following a two-stage procedure, while GENOA uses a 50-kb cis window, a different population, and different methylation measurements and filtering. An empty intersection or 404 does not establish whether a particular pair was measured, analysed, excluded or simply not selected. This cross-study check cannot determine whether either association has the same causal mechanism. It does not validate the sleep–frailty score or link the GENOA CpG to frailty.
+
+GoDMC is described as European-ancestry whole-blood methylation data; GENOA used whole blood from 961 African American participants. Actual cohort overlap/relatedness is unverified. The GoDMC API used here responded over HTTP, without authenticated transport, so the returned values are provisional until verified through a secure source. See [GoDMC methods and access](https://mqtldb.godmc.org.uk/about) and [GENOA data and study](https://doi.org/10.5281/zenodo.7697509).
+
+The previous [GENOA review](stage6_genoa_rs11636381_mqtl_review.md) remains the more informative finding: association with cg03789871 needs an independent full mQTL dataset that measures the same CpG and exact variant, with documented effect allele, and an appropriate regional or pairwise comparison. Whole-blood association does not assign a cell type or prove a regulatory gene.
+
+Reproducibility: `work/stage6_genoa_godmc_rs11636381_compare.py`; [receipt](stage6_genoa_godmc_rs11636381_compare.json); raw GoDMC HTTP response `work/godmc_rs11636381.json`, SHA-256 `5d6c6397128a5f66100024cce899a0edc1dd1051b0ce030aa946380c7e059e1f`. The endpoint and control responses were checked on 29 October 2026 UTC.

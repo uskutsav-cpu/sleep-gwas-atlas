@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "actual_new_signed_rows_checked": 8,
+  "new_signed_training_rows_used_in_actual_fit": 232285,
+  "NumPy_forward_errors": {
+    "magnitude": 1.9454715616262774e-11,
+    "signed_effect": 8.326672684688674e-17,
+    "activity_reference": 4.440892098500626e-16,
+    "activity_alternate": 4.440892098500626e-16,
+    "assay_SD_component": 5.551115123125783e-17,
+    "latent_absolute_component": 8.326672684688674e-17
+  },
+  "NumPy_loss_error": 5.166200800488241e-12,
+  "fitted_gradients": [
+    {
+      "parameter": "delta_hidden.weight",
+      "relative_gradient_error": 2.4241137868144657e-11
+    },
+    {
+      "parameter": "delta_hidden2.weight",
+      "relative_gradient_error": 2.48993448559853e-10
+    },
+    {
+      "parameter": "delta_output.weight",
+      "relative_gradient_error": 1.981290771978296e-11
+    },
+    {
+      "parameter": "noise_hidden.weight",
+      "relative_gradient_error": 3.5524452017689674e-10
+    },
+    {
+      "parameter": "noise_output.weight",
+      "relative_gradient_error": 1.76385210611896e-11
+    }
+  ],
+  "maximum_parameter_disagreement_vs_control": {
+    "cell_activity_bias": 0.0111536905169487,
+    "cell_activity_weight": 0.08011730015277863,
+    "cell_noise_bias": 0.005771160125732422,
+    "delta_hidden.bias": 0.08894161134958267,
+    "delta_hidden.weight": 0.3429885506629944,
+    "delta_hidden2.bias": 0.05649887025356293,
+    "delta_hidden2.weight": 0.17828979343175888,
+    "delta_output.bias": 0.0,
+    "delta_output.weight": 0.12142891809344292,
+    "line_activity_bias": 0.011153683066368103,
+    "line_activity_weight": 0.06386290490627289,
+    "line_noise_offset": 0.010919421911239624,
+    "mean_hidden.bias": 0.022117018699645996,
+    "mean_hidden.weight": 0.16794833540916443,
+    "mean_output.bias": 0.0020468980073928833,
+    "mean_output.weight": 0.012670934200286865,
+    "noise_hidden.bias": 0.030749792465940118,
+    "noise_hidden.weight": 0.20922128856182098,
+    "noise_output.bias": 0.011066911625675857,
+    "noise_output.weight": 0.06274671852588654
+  },
+  "checkpoint_sha256": "9f2d82ae83d0d8d9f1955fab656efed85277cae12f6da95af06409e008a680be",
+  "saved_weights_changed_by_audit": false,
+  "gradient_scope": "Signed and noise branches only; predicted activity is intentionally detached as a noise conditioner.",
+  "new_independent_prediction_success_established": false,
+  "reserved_study_outcomes_read": false
+}

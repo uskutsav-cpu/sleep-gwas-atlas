@@ -1,0 +1,55 @@
+Waiting for verified development job 15492
+RUN summarize_development.py
+Development comparisons saved 27 fold/family results; 108 independent R metric replays
+RUN train_conditional_stackers.py
+CONDITIONAL COMBINATION stacked_contrast_no_avi [4, 5, 6, 7, 8, 9] skill 0.13918078814963877
+CONDITIONAL COMBINATION stacked_contrast_no_avi [10, 11, 12, 13, 14, 15] skill 0.16405651778009012
+CONDITIONAL COMBINATION stacked_contrast_no_avi [16, 17, 18, 19, 20, 21, 22] skill 0.1428039882602193
+CONDITIONAL COMBINATION stacked_contrast_avi_teacher [4, 5, 6, 7, 8, 9] skill 0.13391356531118337
+CONDITIONAL COMBINATION stacked_contrast_avi_teacher [10, 11, 12, 13, 14, 15] skill 0.1632788883784391
+CONDITIONAL COMBINATION stacked_contrast_avi_teacher [16, 17, 18, 19, 20, 21, 22] skill 0.13918226549326917
+CONDITIONAL COMBINATION conditional_avi_only [4, 5, 6, 7, 8, 9] skill 0.1004588416305155
+CONDITIONAL COMBINATION conditional_avi_only [10, 11, 12, 13, 14, 15] skill 0.10714388654016026
+CONDITIONAL COMBINATION conditional_avi_only [16, 17, 18, 19, 20, 21, 22] skill 0.09451774940562965
+LEARNED CONDITIONAL COMBINATIONS COMPLETE; RESERVED TEST UNTOUCHED
+RUN select_final_recipes.py
+Locked final model roles {'overall_assay_call_detector': 'biological_avi_input', 'within_active_variant_ranker': 'stacked_contrast_no_avi'} and 12 refit recipes
+RUN final_fit.py
+FINAL FIT final_biological_avi_input_s42 fixed epoch 1 loss 0.6212344079736679
+FINAL FIT final_biological_avi_input_s42 fixed epoch 2 loss 0.5324919597497062
+FINAL FIT final_biological_avi_input_s42 fixed epoch 3 loss 0.4596038465462034
+FINAL FIT final_biological_avi_input_s73 fixed epoch 1 loss 0.6206838725105165
+FINAL FIT final_biological_avi_input_s73 fixed epoch 2 loss 0.5344511139645147
+FINAL FIT final_biological_avi_input_s101 fixed epoch 1 loss 0.6146639733718186
+FINAL FIT final_biological_avi_input_s101 fixed epoch 2 loss 0.5292260929074868
+FINAL FIT final_biological_avi_input_s101 fixed epoch 3 loss 0.45443117571255515
+FINAL FIT final_contrast_avi_teacher_s42 fixed epoch 1 loss 1.0156023934404685
+FINAL FIT final_contrast_avi_teacher_s73 fixed epoch 1 loss 1.01343029642862
+FINAL FIT final_contrast_avi_teacher_s73 fixed epoch 2 loss 0.9712408588676856
+FINAL FIT final_contrast_avi_teacher_s101 fixed epoch 1 loss 1.01593705522951
+FINAL FIT final_contrast_avi_teacher_s101 fixed epoch 2 loss 0.9775333016637772
+FINAL FIT final_contrast_no_avi_s42 fixed epoch 1 loss 0.9962797839805563
+FINAL FIT final_contrast_no_avi_s42 fixed epoch 2 loss 0.9582492195109211
+FINAL FIT final_contrast_no_avi_s73 fixed epoch 1 loss 0.995232845424975
+FINAL FIT final_contrast_no_avi_s73 fixed epoch 2 loss 0.9556691179830561
+FINAL FIT final_contrast_no_avi_s101 fixed epoch 1 loss 0.9979108628772554
+FINAL FIT final_contrast_no_avi_s101 fixed epoch 2 loss 0.9623397434199298
+FINAL FIT final_motif_chromatin_avi_teacher_s42 fixed epoch 1 loss 0.6052744161515009
+FINAL FIT final_motif_chromatin_avi_teacher_s42 fixed epoch 2 loss 0.5143249113723715
+FINAL FIT final_motif_chromatin_avi_teacher_s42 fixed epoch 3 loss 0.4413536299788763
+FINAL FIT final_motif_chromatin_avi_teacher_s73 fixed epoch 1 loss 0.6054643476135516
+FINAL FIT final_motif_chromatin_avi_teacher_s73 fixed epoch 2 loss 0.5232758077364119
+FINAL FIT final_motif_chromatin_avi_teacher_s101 fixed epoch 1 loss 0.5992212238765898
+FINAL FIT final_motif_chromatin_avi_teacher_s101 fixed epoch 2 loss 0.5167611417946992
+FINAL FIT final_motif_chromatin_no_avi_s42 fixed epoch 1 loss 0.6233217279431681
+FINAL FIT final_motif_chromatin_no_avi_s42 fixed epoch 2 loss 0.536035446735917
+FINAL FIT final_motif_chromatin_no_avi_s42 fixed epoch 3 loss 0.4641143244410318
+FINAL FIT final_motif_chromatin_no_avi_s73 fixed epoch 1 loss 0.6228540834611055
+FINAL FIT final_motif_chromatin_no_avi_s73 fixed epoch 2 loss 0.5392639517153381
+FINAL FIT final_motif_chromatin_no_avi_s101 fixed epoch 1 loss 0.6169951452464654
+FINAL FIT final_motif_chromatin_no_avi_s101 fixed epoch 2 loss 0.5337490360572855
+FINAL FIT final_motif_chromatin_no_avi_s101 fixed epoch 3 loss 0.46005560859801276
+FINAL REFITS COMPLETE; VERIFICATION AND BLIND EVALUATION REMAIN
+RUN verify_final_fits.py
+FINAL CHECKPOINT AND RAW INPUT VERIFICATION PASSED 27
+FINAL ARTIFACTS LOCKED; RESERVED EVALUATION PENDING

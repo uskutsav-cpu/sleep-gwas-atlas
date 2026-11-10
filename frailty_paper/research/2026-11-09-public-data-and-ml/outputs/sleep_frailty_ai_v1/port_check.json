@@ -1,0 +1,39 @@
+{
+  "encoder_forward_max_error": 3.5762786865234375e-06,
+  "convolution_direct_max_error": 5.7220458984375e-06,
+  "convolution_parameter_gradient_max_error": 0.00012596029887390614,
+  "parameter_gradient_checks": [
+    {
+      "parameter": "layers.1.mixer.in_proj.weight",
+      "autograd": 7.4724299590237565e-06,
+      "finite_difference": 7.472429897070754e-06,
+      "mlx": 7.472457127732923e-06
+    },
+    {
+      "parameter": "layers.1.mixer.filter_fn.implicit_filter.0.weight",
+      "autograd": -4.001056868027585e-11,
+      "finite_difference": -3.9968028886505635e-11,
+      "mlx": 1.1807396206597875e-11
+    },
+    {
+      "parameter": "layers.1.mlp.fc2.bias",
+      "autograd": 1.4753192577072134,
+      "finite_difference": 1.4753192574279428,
+      "mlx": 1.4753190279006958
+    },
+    {
+      "parameter": "ln_f.weight",
+      "autograd": -0.5297965407371521,
+      "finite_difference": -0.5297965407369265,
+      "mlx": -0.5297967195510864
+    }
+  ],
+  "complex_fft_identity_gradient_max_error": 4.76837158203125e-07,
+  "unused_real_fft_identity_gradient_max_error": 109.99999237060547,
+  "allele_swap_max_error": 0.0,
+  "reverse_complement_max_error": 0.0,
+  "batch16_pair_feature_seconds": 1.0166621208190918,
+  "feature_dim": 512,
+  "device": "Device(gpu, 0)",
+  "official_pytorch_executable_parity": "Not tested; source-formula NumPy/Autograd port and independent convolution/gradient checks used instead"
+}

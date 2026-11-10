@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "total_rows": 16557800,
+    "sampled_rows": 258781,
+    "invalid_or_ambiguous": 156726,
+    "duplicate_sampled_rsid_excluded": 260,
+    "unique_valid": 101233
+  },
+  "all_valid": {
+    "n": 101233,
+    "mean_abs_diff_reported": 0.6566964301091295,
+    "mean_abs_diff_flipped": 0.011591871273571858,
+    "median_abs_diff_reported": 0.750771,
+    "median_abs_diff_flipped": 0.00808780000000009,
+    "reported_closer": 1059,
+    "flipped_closer": 100174,
+    "equal": 0
+  },
+  "ukb_eaf_outside_0.4_0.6": {
+    "n": 89805,
+    "mean_abs_diff_reported": 0.7272514212687211,
+    "mean_abs_diff_flipped": 0.010718402321001057,
+    "median_abs_diff_reported": 0.802347,
+    "median_abs_diff_flipped": 0.007504500000000025,
+    "reported_closer": 8,
+    "flipped_closer": 89797,
+    "equal": 0
+  },
+  "method": "Deterministic rsID-only hash 1/64; source cohort file non-palindromic SNPs with finite 0..1 frequencies; exclude eligible duplicate sampled rsIDs; compare |EAF_UKB-EAF_TG| to |EAF_UKB-(1-EAF_TG)|. Descriptive, no causal or probabilistic inference.",
+  "source_sha256_from_existing_archive_audit": "c7ddc6e463a212c4d10ccd938970e83c9f18ecf88b4882c56f686f272a757895",
+  "limitations": "UKB and TwinGene are different populations with differing frequencies; rare variants, sample QC and selection influence results. Frequencies may themselves be processed or inverted and do not independently prove beta sign or effect allele. LD means markers not independent."
+}

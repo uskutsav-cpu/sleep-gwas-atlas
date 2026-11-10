@@ -1,0 +1,50 @@
+{
+  "source_workbook_sha256": "6a11d273e8cdaef65624bc80b0430495fd425d51165601fc6d0995730bfa4063",
+  "heldout_chromosomes": [
+    1,
+    2
+  ],
+  "same_assay_donors_not_independent": true,
+  "transfer": {
+    "IL6": {
+      "baseline_same_variants": {
+        "n": 136,
+        "detected": 24,
+        "auroc": 0.5515252976190477,
+        "average_precision": 0.24799684802102748,
+        "prevalence": 0.17647058823529413
+      },
+      "cue_same_variants": {
+        "n": 136,
+        "detected": 24,
+        "auroc": 0.515625,
+        "average_precision": 0.2309768860646238,
+        "prevalence": 0.17647058823529413
+      },
+      "label_disagreement_count": 14
+    },
+    "IFNa": {
+      "baseline_same_variants": {
+        "n": 138,
+        "detected": 25,
+        "auroc": 0.5426548672566371,
+        "average_precision": 0.3235201278376927,
+        "prevalence": 0.18115942028985507
+      },
+      "cue_same_variants": {
+        "n": 138,
+        "detected": 14,
+        "auroc": 0.5092165898617511,
+        "average_precision": 0.10763378665570696,
+        "prevalence": 0.10144927536231885
+      },
+      "label_disagreement_count": 17
+    }
+  },
+  "caveats": [
+    "Post hoc after baseline model result; no model retraining.",
+    "Assay detection labels are not biological negatives; changes in detection do not establish genotype-by-environment interaction.",
+    "Same study and variants, not external validation.",
+    "No AlphaGenome outputs or derivatives used."
+  ]
+}

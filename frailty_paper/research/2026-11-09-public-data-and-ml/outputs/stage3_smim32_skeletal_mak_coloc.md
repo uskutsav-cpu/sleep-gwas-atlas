@@ -1,0 +1,22 @@
+# Exploratory SMIM32 skeletal-muscle eQTL versus FI and physical frailty
+
+**Subsequent QC finding:** The [molecular credible-set audit](stage3_skeletal_molecular_finemapping_review.md) found incomplete credible-set coverage, including zero of 18 SMAD5 L2 variants in the filtered FinnGen input, and two SMAD5 molecular signals. The single-signal H3/H4 estimates below are not a reliable conclusion of shared or distinct signals.
+
+I compared the same release-7 eQTL Catalogue SMIM32 skeletal-muscle gene-expression data with Mak et al.'s FI and modified Fried physical-phenotype (FP) GWAS in the 1 Mb rs7734045-centered region. Each comparison used 2,404 exactly aligned nonpalindromic common SNPs. These are separate two-trait tests; they do **not** test a three-way insomnia–frailty–expression signal.
+
+| Comparison | H1: eQTL only | H3: two distinct signals | H4: one shared signal | H3 + H4 |
+|---|---:|---:|---:|---:|
+| SMIM32 eQTL vs Mak FI | 0.0027 | 0.9964 | 0.0010 | 0.9973 |
+| SMIM32 eQTL vs Mak physical phenotype | 0.9688 | 0.0202 | 0.0109 | 0.0312 |
+
+At the stated illustrative priors, the **FI result favors different signals under the single-causal-variant model**, while the physical-phenotype result is dominated by the eQTL-only hypothesis. Neither proves biological independence, absence of association or causality. For FP, H3 + H4 is only 0.031, so a conditional H4/(H3+H4) percentage would overstate how informative the comparison is. The [nine-prior sensitivity results per trait](stage3_smim32_mak_coloc_abf_sensitivity.csv) vary the shared prior and the FI/FP effect-size prior; FI H4 ranges approximately 0.000095–0.0048 and FP H4 0.00056–0.098. They do not cover uncertainty about sample overlap, LD, missing causal variants or multiple independent signals.
+
+## Scale, priors and inputs
+
+A prior effect SD of 0.15 was used for inverse-normalized expression, with shared-variant prior p12 = 10⁻⁵ and trait-specific priors p1 = p2 = 10⁻⁴ for the table above. The GWAS prior effect SD was 0.15 times an estimated phenotype SD. Rather than treating the much larger FI beta numbers as equivalent to the physical-score scale, I estimated SD using the no-intercept regression of `2 × N × allele_frequency × (1 − allele_frequency)` on `1 / SE²` across matched SNPs. The derived values were approximately **7.336 FI units** and **0.822 FP units**, giving prior effect SDs 1.100 and 0.123. The exact source phenotype transformation remains unverified; these are data-derived scale approximations, not confirmed phenotype distributions. Approximation can be affected by imputation, covariate adjustment, per-variant sample size, relatedness and LD. Source N ranged 364,611–403,041 for the extracted variants. [Sample-size receipt](stage3_mak_variant_sample_sizes.json); [colocalization receipt](stage3_smim32_mak_coloc_receipt.json).
+
+QTL input is eQTL Catalogue release-7 metadata, GTEx muscle QTD000281; GWAS sources are Mak's [public release](https://doi.org/10.6084/m9.figshare.24591573.v1). Each SNP was matched using rsID, allele pair and assumed positive-strand GRCh37→GRCh38 coordinate conversion; the original build and multiallelic representations are not independently authenticated for every source variant. The region and extraction conditions are identical to those described in the [insomnia comparison](stage3_smim32_skeletal_finngen_coloc.md), but the SNP support differs from the 2,212-SNP FinnGen analysis. QTL/GWAS donor overlap has not been verified.
+
+These are custom approximate Bayes-factor calculations whose H3 algebra was verified against an explicit small example, subsequently checked against the unmodified coloc 5.2.3 `approx.bf.estimates` and `combine.abf` functions on these inputs; the full package workflow was not run. The model assumes at most one causal variant per trait in the region. An eQTL with multiple signals or a causal variant outside the window or missing from either dataset can bias H3/H4. Prior values and estimated scales materially affect results. Further dense-variant, ancestry-matched LD and multi-signal fine-mapping are needed before treating this as gene-level evidence. The tests are exploratory and post-selection; no multiplicity or clinical interpretation is implied.
+
+[Reference-formula validation](stage3_coloc_reference_formula_review.md) checks arithmetic only; credible-set coverage and single-signal model limitations still govern interpretation.

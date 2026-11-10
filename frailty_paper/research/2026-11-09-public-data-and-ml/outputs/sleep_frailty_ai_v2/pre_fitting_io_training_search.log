@@ -1,0 +1,24 @@
+Waiting for verified AVI retrieval PID 8094
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_v2/train_search.py", line 38, in <module>
+    vr=[{'variant':str(i),'reference_sequence':''.join(alphabet[data['ref'][i]-7]),'alternate_sequence':''.join(alphabet[data['alt'][i]-7])} for i in va]
+                                                                                                                         ~~~~^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/site-packages/numpy/lib/_npyio_impl.py", line 257, in __getitem__
+    return format.read_array(
+           ~~~~~~~~~~~~~~~~~^
+        bytes,
+        ^^^^^^
+    ...<2 lines>...
+        max_header_size=self.max_header_size
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/miniconda3/lib/python3.13/site-packages/numpy/lib/_format_impl.py", line 869, in read_array
+    data = _read_bytes(fp, read_size, "array data")
+  File "/opt/miniconda3/lib/python3.13/site-packages/numpy/lib/_format_impl.py", line 1013, in _read_bytes
+    r = fp.read(size - len(data))
+  File "/opt/miniconda3/lib/python3.13/zipfile/__init__.py", line 1031, in read
+    data = self._read1(n)
+  File "/opt/miniconda3/lib/python3.13/zipfile/__init__.py", line 1107, in _read1
+    data = self._decompressor.decompress(data, n)
+KeyboardInterrupt

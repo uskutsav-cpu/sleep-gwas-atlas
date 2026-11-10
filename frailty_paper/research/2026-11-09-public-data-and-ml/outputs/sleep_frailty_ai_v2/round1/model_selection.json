@@ -1,0 +1,36 @@
+{
+  "selected_model": "logistic_kmer_C10",
+  "rule": "Largest validation average precision across documented candidates; benchmark not evaluated by this selector",
+  "selected_record": {
+    "name": "logistic_kmer_C10",
+    "family": "logistic",
+    "features": "kmer",
+    "config": {
+      "C": 10.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5988988057018108,
+      "average_precision": 0.05358667610520716,
+      "brier_uncalibrated": 0.03044203492483669
+    },
+    "artifact": "models/logistic_kmer_C10.pkl"
+  },
+  "candidate_count": 42,
+  "training_seconds": 60.379929065704346,
+  "development_limitations": [
+    "Validation reused for a finite multi-model search with only 78 positive calls; optimism likely",
+    "Benchmark chromosomes 19-22 were already observed in v1; external assay validation remains required",
+    "Only permissible downloaded AVI scores used; their training/benchmark overlap is unresolved",
+    "Not genetic-score validation, disease causality or patient risk prediction"
+  ],
+  "input_hashes": {
+    "prepared": "f8417d037bbd11d96d440cf7714e711e1672f4b225b630dae05c662db1b1462f",
+    "sequence_features": "b007e4bcaaa8c483963e94d3e19d749bf4c9481086b1c3964358c25b1dd8dbbc",
+    "avi_table": "57222b2d8bd181058d3b52476689d5ca33de79cfd2c90c4f83c4976f4ce2e17e",
+    "plan": "294cb1628237768982fac6f9425180c2ed907b45a74c605f462a3802bcb4a1c0"
+  }
+}

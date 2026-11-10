@@ -1,0 +1,37 @@
+{
+  "recipe": "frozen",
+  "epochs": 5,
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "held_studies": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "source_data_sha256": "a2ca537f9194d545e644308fa98f0ebaecca07a8f0eca0125800660b70ae8c52",
+  "selection_sha256": "acc1627dfa21ffb344e4d69717de92ccc5f0653e7a8608a37b6b0dfeca3eff3d",
+  "development_plan_sha256": "94a6491696e8dcba0d04bcfb20eaee18b2e70523779de39fb734795e5bd545fe",
+  "code_sha256": {
+    "line_aware_network.py": "429f039196ab259f200e8105440ff3acf520b227eb5f7e2566433e76135860b3",
+    "training_utilities.py": "7e2d8bbd8c671094347f3776591ef1c91a388ddabb0b22805d15ba3b811eca21"
+  },
+  "training_roles": [
+    0,
+    1
+  ],
+  "calibration_role": 2,
+  "fresh_model_performance_read": false,
+  "stopping_rule": "No further architecture/source/epoch changes before fresh evaluation. Any later change makes this test revealed development.",
+  "matched_comparison": "Sequence and AVI arms use identical rows, seeds, epochs, batches and shared initial weights; appended AVI weights start at zero.",
+  "external_protocol_sha256": "b6fab46a070e2bbe4e3b1e334cd0b45ac10b34c1fd674d681caf38da218fa44a",
+  "baseline_amendment": "Also require comparison with the training-only culture-line median; unknown line falls back to cell median. No unknown-line release.",
+  "output_location": "Internal disk to avoid EXFAT allocation overhead; prior external outputs remain unchanged."
+}

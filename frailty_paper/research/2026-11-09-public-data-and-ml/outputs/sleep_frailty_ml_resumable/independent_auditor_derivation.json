@@ -1,0 +1,29 @@
+{
+  "scope": "Reuse independent numerical audits on new resumable checkpoints; only destination directory/common loader changed. No scientific fit, labels, outcome use or model selection changed. Auditors have not yet been run against a completed resumable epoch.",
+  "files": [
+    {
+      "source": "work/sleep_frailty_ml_bounded/audit_saved_effect_size_metrics.py",
+      "source_sha256": "2bd5bd4a17fb7894ea130f702eb12437bded2ebdb9d93fb69aae8e472d2111f9",
+      "derived": "work/sleep_frailty_ml_resumable/audit_saved_effect_size_metrics.py",
+      "derived_sha256": "5ce29e86982c68448d86adbc6cb2b8cf2a6c269618d6f3cb17650a9085420ba4",
+      "substitutions": [
+        [
+          "outputs/sleep_frailty_ml_bounded",
+          "outputs/sleep_frailty_ml_resumable"
+        ]
+      ]
+    },
+    {
+      "source": "work/sleep_frailty_ml_bounded/audit_fitted_stable.py",
+      "source_sha256": "35358ea95d116b88eb47ceb1f674a2519601c5e5efd005b01057d663ca222065",
+      "derived": "work/sleep_frailty_ml_resumable/audit_fitted_stable.py",
+      "derived_sha256": "a5198917b2efc37fbd52feea24a2170234d6a141466814008054c5cace09f1f9",
+      "substitutions": [
+        [
+          "from bounded_common import *",
+          "from resumable_common import *"
+        ]
+      ]
+    }
+  ]
+}

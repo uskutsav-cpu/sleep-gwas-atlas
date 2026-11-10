@@ -1,0 +1,54 @@
+{
+  "selected_record": {
+    "name": "motif_chromatin_full_activity_avi_s42",
+    "family": "biological_feature_head",
+    "features": "motif_chromatin",
+    "config": {
+      "task": "activity_avi",
+      "seed": 42,
+      "best_epoch": 2,
+      "locked_config": "motif_chromatin_full_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.6038167725326693,
+          "average_precision": 0.05684361720809611,
+          "AP_skill_over_prevalence": 0.03454272056150689,
+          "brier_uncalibrated": 0.04190482545644306
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.7555370049710973,
+          "average_precision": 0.24587290546182852,
+          "AP_skill_over_prevalence": 0.18968456577097775,
+          "brier_uncalibrated": 0.07395812387645626
+        }
+      },
+      "macro_AP_skill": 0.11211364316624232
+    },
+    "artifact": "models/motif_chromatin_full_activity_avi_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 16.228200912475586,
+      "shared.b1": 0.251044899225235,
+      "shared.w2": 1.3843603134155273,
+      "shared.b2": 0.1656470149755478,
+      "class.w": 0.19762158393859863,
+      "class.b": 0.0748865008354187,
+      "activity.w": 0.09261555224657059,
+      "activity.b": 0.13125689327716827,
+      "effect.w": 7.97398024587892e-05,
+      "effect.b": 0.0,
+      "avi.w": 0.09432674199342728,
+      "avi.b": 0.09783124178647995
+    }
+  },
+  "candidate_count": 4,
+  "test_evaluated": false,
+  "stage": "Additional biological-feature validation search, final combined selection pending"
+}

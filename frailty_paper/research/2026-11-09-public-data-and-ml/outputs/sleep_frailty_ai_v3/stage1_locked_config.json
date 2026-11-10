@@ -1,0 +1,88 @@
+{
+  "split": "train 6-22, validation4-5, blind test1-3",
+  "selection": "Mean per-study normalized validation AP skill; no test evaluation",
+  "studies": [
+    "Salomon_NGN2",
+    "Siraj_OL42_SKNSH"
+  ],
+  "classical_configs": {
+    "logistic_C": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "positive_weighting": [
+      "none",
+      "sqrt_negative_over_positive"
+    ],
+    "boost_depth": [
+      3,
+      5
+    ],
+    "boost_learning_rate": 0.05,
+    "boost_trees": 300,
+    "boost_l2": 1.0,
+    "boost_min_leaf": 40,
+    "boost_max_bins": 64
+  },
+  "neural_configs": {
+    "widths": [
+      128,
+      32
+    ],
+    "activation": "GELU",
+    "dropout": 0.1,
+    "seeds": [
+      42,
+      73,
+      101
+    ],
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "batch": 512,
+    "max_epochs": 60,
+    "patience": 8,
+    "task_weights": {
+      "assay_only": [
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        0.2,
+        0,
+        0
+      ],
+      "activity_effect": [
+        0.2,
+        0.1,
+        0
+      ],
+      "activity_avi": [
+        0.2,
+        0,
+        0.05
+      ]
+    },
+    "study_outputs": "Separate study-specific class, activity and effect heads, shared DNA trunk; AVI head shared and has no AVI input",
+    "encoder": "Original frozen HyenaDNA; assay-fitted v1/v2 encoders are not used"
+  },
+  "teacher_sources": [
+    {
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v2/avi_exact_allele_scores.csv",
+      "sha256": "57222b2d8bd181058d3b52476689d5ca33de79cfd2c90c4f83c4976f4ce2e17e"
+    },
+    {
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v2/external_avi_exact_allele_scores.csv",
+      "sha256": "8ed50dfe41554d9b45c946349979cece4ee032d140e0c3b15e0942b636662216"
+    }
+  ],
+  "teacher_available_training": {
+    "Salomon_NGN2": 25359,
+    "Siraj_OL42_SKNSH": 176
+  },
+  "teacher_scope": "Fixed prior permitted AVI score snapshot. Broader AVI retrieval is still independent; no opportunistic changing teacher labels within this search.",
+  "input_features": "DNA-pattern counts/frequencies or original pretrained paired DNA features only. Actual activity/effect/AVI target values are not inference inputs.",
+  "preparation_audit_sha256": "03260609cf1eb4029cad32dc67cfb221d37e1fbdde8a84066a8ff007a51e7a91",
+  "plan_sha256": "5419b6dad2038ab76d06dfd2de9ba9904c581e43faca1c70729940310b2448df"
+}

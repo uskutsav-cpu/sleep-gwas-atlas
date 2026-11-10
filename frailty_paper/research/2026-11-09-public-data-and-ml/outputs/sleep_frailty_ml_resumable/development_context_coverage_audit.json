@@ -1,0 +1,320 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T01:05:51.620586+00:00",
+  "actual_active_observations": 654612,
+  "actual_active_contexts": [
+    "IGVF240K|hepatocyte_tumor|absolute_log2_effect",
+    "IGVF240K|kidney_derived|absolute_log2_effect",
+    "Koesterich2023|neural_progenitor|absolute_log2_effect",
+    "Kosicki2025|induced_excitatory_neuron|absolute_log2_effect",
+    "Salomon|induced_excitatory_neuron|absolute_log2_effect",
+    "Siraj|colon_tumor|absolute_log2_effect",
+    "Siraj|hematopoietic|absolute_log2_effect",
+    "Siraj|hepatocyte_tumor|absolute_log2_effect",
+    "Siraj|neuronal_tumor|absolute_log2_effect",
+    "McAfee2023|neural_progenitor|absolute_log2_effect",
+    "McAfee2023|kidney_derived|absolute_log2_effect",
+    "Retallick2026|induced_excitatory_neuron|absolute_log2_effect"
+  ],
+  "all_active_primary_targets_have_explicit_log2_effect_unit": true,
+  "old_saturation_context_names_retained_but_no_saturation_observations_active": true,
+  "same_nominal_unit_does_not_prove_identical_assay_scale_or_measurement_process": true,
+  "roles": {
+    "Salomon": {
+      "training_rows": 361671,
+      "noncalibration_source_rows": 29485,
+      "exact_line_supported_fraction": 1.0,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "d2f8ada94726d03a259d15ec5504ba680eaf0a6316a4d2861baafab37786f21e",
+      "prediction_index_sha256": "e5be6e61ddf86a9ad5f7080a087674f89a6e75d1ed3e9fdf9057aa0d45dbd491",
+      "current_fit_metadata_identities_matched": [
+        "frozen_reader_Salomon_42_started.json",
+        "adapt_last_stage_Salomon_42_started.json"
+      ],
+      "cell_line_details": [
+        {
+          "exact_line_name": "WTC11_NGN2",
+          "broad_cell_group": "induced_excitatory_neuron",
+          "noncalibration_source_rows": 29485,
+          "other_source_training_rows_same_exact_line": 12556,
+          "other_source_training_rows_same_broad_cell": 13161,
+          "other_training_sources_same_exact_line": [
+            "Kosicki2025"
+          ],
+          "other_training_sources_same_broad_cell": [
+            "Kosicki2025",
+            "Retallick2026"
+          ],
+          "paired_measured_activity_rows": 29485,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.09395530074834824,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.2678847014904022,
+          "train_only_line_or_parent_magnitude_median": 0.072943776845932
+        }
+      ]
+    },
+    "Kosicki2025": {
+      "training_rows": 377766,
+      "noncalibration_source_rows": 16540,
+      "exact_line_supported_fraction": 1.0,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "9772a398bca09fb96d9b81394ef0d81008456c9ad7075a9adf53d1c42460f83f",
+      "prediction_index_sha256": "4d43aaa8a9a23f1932363026d6bdf3fc70596e4b524a821eab7987f0d146ac74",
+      "current_fit_metadata_identities_matched": [
+        "frozen_reader_Kosicki2025_42_started.json"
+      ],
+      "cell_line_details": [
+        {
+          "exact_line_name": "WTC11_NGN2",
+          "broad_cell_group": "induced_excitatory_neuron",
+          "noncalibration_source_rows": 16540,
+          "other_source_training_rows_same_exact_line": 21577,
+          "other_source_training_rows_same_broad_cell": 22196,
+          "other_training_sources_same_exact_line": [
+            "Salomon"
+          ],
+          "other_training_sources_same_broad_cell": [
+            "Salomon",
+            "Retallick2026"
+          ],
+          "paired_measured_activity_rows": 16540,
+          "known_positive_measurement_SE_rows": 16540,
+          "source_noncalibration_magnitude_median_for_description_only": 0.07332547008991241,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.2010055035352707,
+          "train_only_line_or_parent_magnitude_median": 0.09341836720705032
+        }
+      ]
+    },
+    "Retallick2026": {
+      "training_rows": 388347,
+      "noncalibration_source_rows": 838,
+      "exact_line_supported_fraction": 0.0,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "925509b57d290fb688a84f97babdb7e1f939b83922aaf7dab56f88dd7a396c73",
+      "prediction_index_sha256": "e765914b6f35f1e1e7bb47fa8fdc5859739593cf7ac6741477356afae73b3eb3",
+      "current_fit_metadata_identities_matched": [],
+      "cell_line_details": [
+        {
+          "exact_line_name": "Retallick_NGN2_two_donors",
+          "broad_cell_group": "induced_excitatory_neuron",
+          "noncalibration_source_rows": 838,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 34047,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [
+            "Kosicki2025",
+            "Salomon"
+          ],
+          "paired_measured_activity_rows": 838,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.08050903677940369,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.2426108717918396,
+          "train_only_line_or_parent_magnitude_median": 0.08531554788351059
+        }
+      ]
+    },
+    "Siraj": {
+      "training_rows": 140009,
+      "noncalibration_source_rows": 311072,
+      "exact_line_supported_fraction": 0.2590397078489867,
+      "broad_cell_supported_fraction": 0.2590397078489867,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "3552e496f77e6beb0b073b45a4f541cfe4fc9ee12845b77e5ff4c35826c9c4eb",
+      "prediction_index_sha256": "ec087775f20670dccf62918ae63c17cc195578a62184bda2a84a448d6d2fbafc",
+      "current_fit_metadata_identities_matched": [],
+      "cell_line_details": [
+        {
+          "exact_line_name": "HCT116",
+          "broad_cell_group": "colon_tumor",
+          "noncalibration_source_rows": 69405,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 0,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [],
+          "paired_measured_activity_rows": 69405,
+          "known_positive_measurement_SE_rows": 69405,
+          "source_noncalibration_magnitude_median_for_description_only": 0.16917723417282104,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.5608065724372864,
+          "train_only_line_or_parent_magnitude_median": null
+        },
+        {
+          "exact_line_name": "HepG2",
+          "broad_cell_group": "hepatocyte_tumor",
+          "noncalibration_source_rows": 80580,
+          "other_source_training_rows_same_exact_line": 53919,
+          "other_source_training_rows_same_broad_cell": 53919,
+          "other_training_sources_same_exact_line": [
+            "IGVF240K"
+          ],
+          "other_training_sources_same_broad_cell": [
+            "IGVF240K"
+          ],
+          "paired_measured_activity_rows": 69406,
+          "known_positive_measurement_SE_rows": 80580,
+          "source_noncalibration_magnitude_median_for_description_only": 0.17114898562431335,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.5841636657714844,
+          "train_only_line_or_parent_magnitude_median": 0.16189999878406525
+        },
+        {
+          "exact_line_name": "K562",
+          "broad_cell_group": "hematopoietic",
+          "noncalibration_source_rows": 80506,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 0,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [],
+          "paired_measured_activity_rows": 69332,
+          "known_positive_measurement_SE_rows": 80506,
+          "source_noncalibration_magnitude_median_for_description_only": 0.215641587972641,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.7845386266708374,
+          "train_only_line_or_parent_magnitude_median": null
+        },
+        {
+          "exact_line_name": "SK-N-SH",
+          "broad_cell_group": "neuronal_tumor",
+          "noncalibration_source_rows": 80581,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 0,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [],
+          "paired_measured_activity_rows": 69407,
+          "known_positive_measurement_SE_rows": 80581,
+          "source_noncalibration_magnitude_median_for_description_only": 0.2574205994606018,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.9573732018470764,
+          "train_only_line_or_parent_magnitude_median": null
+        }
+      ]
+    },
+    "IGVF240K": {
+      "training_rows": 256192,
+      "noncalibration_source_rows": 156154,
+      "exact_line_supported_fraction": 0.5224137710209152,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "5b8db2cdc7176b4f497d58fa58fd99f2b1b653087a0537c7d376b89366d58b32",
+      "prediction_index_sha256": "09698070c59f54179721dfaff0e5c42bf52a49cd721b679b8a34857803c4b827",
+      "current_fit_metadata_identities_matched": [],
+      "cell_line_details": [
+        {
+          "exact_line_name": "HEK293T",
+          "broad_cell_group": "kidney_derived",
+          "noncalibration_source_rows": 74577,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 2730,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [
+            "McAfee2023"
+          ],
+          "paired_measured_activity_rows": 0,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.15770000219345093,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.4724999964237213,
+          "train_only_line_or_parent_magnitude_median": 0.09323063492774963
+        },
+        {
+          "exact_line_name": "HepG2",
+          "broad_cell_group": "hepatocyte_tumor",
+          "noncalibration_source_rows": 81577,
+          "other_source_training_rows_same_exact_line": 56372,
+          "other_source_training_rows_same_broad_cell": 56372,
+          "other_training_sources_same_exact_line": [
+            "Siraj"
+          ],
+          "other_training_sources_same_broad_cell": [
+            "Siraj"
+          ],
+          "paired_measured_activity_rows": 0,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.16189999878406525,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.44773998856544495,
+          "train_only_line_or_parent_magnitude_median": 0.16975653171539307
+        }
+      ]
+    },
+    "Koesterich2023": {
+      "training_rows": 378908,
+      "noncalibration_source_rows": 2466,
+      "exact_line_supported_fraction": 0.0,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "e14f038a167f44cfc8fc8f63e746e10b2a495e9e805d7ae901489e5854d72188",
+      "prediction_index_sha256": "9c3a3fb0a81f95070f02c621659fbf3bb51b0c7200f6c95b8741214cd7985052",
+      "current_fit_metadata_identities_matched": [],
+      "cell_line_details": [
+        {
+          "exact_line_name": "H1_N2_NPC",
+          "broad_cell_group": "neural_progenitor",
+          "noncalibration_source_rows": 2466,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 2750,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [
+            "McAfee2023"
+          ],
+          "paired_measured_activity_rows": 0,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.06644999980926514,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.18854999542236328,
+          "train_only_line_or_parent_magnitude_median": 0.08828151226043701
+        }
+      ]
+    },
+    "McAfee2023": {
+      "training_rows": 384939,
+      "noncalibration_source_rows": 7595,
+      "exact_line_supported_fraction": 0.0,
+      "broad_cell_supported_fraction": 1.0,
+      "source_absent_and_all_its_region_groups_excluded_from_training": true,
+      "training_index_sha256": "e2becb48dacbbe2f32ae3f8b48d0ede772fd393f251c8df85fbff610188e93b7",
+      "prediction_index_sha256": "7781772c552d884fe9cbcaf0ec4fc81ef888a249b7cd5608a334584315a19b84",
+      "current_fit_metadata_identities_matched": [],
+      "cell_line_details": [
+        {
+          "exact_line_name": "HNP_primary",
+          "broad_cell_group": "neural_progenitor",
+          "noncalibration_source_rows": 3810,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 1831,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [
+            "Koesterich2023"
+          ],
+          "paired_measured_activity_rows": 0,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.08914995938539505,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.24110600352287292,
+          "train_only_line_or_parent_magnitude_median": 0.0658000037074089
+        },
+        {
+          "exact_line_name": "HEK293",
+          "broad_cell_group": "kidney_derived",
+          "noncalibration_source_rows": 3785,
+          "other_source_training_rows_same_exact_line": 0,
+          "other_source_training_rows_same_broad_cell": 55544,
+          "other_training_sources_same_exact_line": [],
+          "other_training_sources_same_broad_cell": [
+            "IGVF240K"
+          ],
+          "paired_measured_activity_rows": 0,
+          "known_positive_measurement_SE_rows": 0,
+          "source_noncalibration_magnitude_median_for_description_only": 0.09363672137260437,
+          "source_noncalibration_magnitude_q90_for_description_only": 0.2607862651348114,
+          "train_only_line_or_parent_magnitude_median": 0.15764999389648438
+        }
+      ]
+    }
+  },
+  "current_model_cell_context": "Supported broad-cell and exact-line categorical flags, plus three reader activity outputs in the activity/direction readout. Magnitude also uses the existing 236 DNA/physical features, including projected channels. There is no measured transcriptome representation of a new cell state in this model.",
+  "interpretation": "This describes actual coverage and possible experiment/cell-state transfer limitations. It does not show that adding expression features will help, that source shifts caused the poor performance, or that nominal log2 units make experiments interchangeable.",
+  "source_label_summaries_used_as_inference_inputs": false,
+  "target_source_median_fitted_as_test_prediction": false,
+  "calibration_outcomes_used_for_target_summaries": false,
+  "reserved_new_study_outcomes_read": false,
+  "models_fitted_or_selected": false,
+  "current_training_targets_weights_partitions_or_code_changed": false,
+  "data_sha256": "2912b381b5e5640d69e9983735ab09ccad3f592f236dc70b2eea4839519b745c",
+  "code_sha256": "96ee54cbaf39cb7670298e3fe05434c450c5f9d0bd962b12d578ba2fac1b5e80"
+}

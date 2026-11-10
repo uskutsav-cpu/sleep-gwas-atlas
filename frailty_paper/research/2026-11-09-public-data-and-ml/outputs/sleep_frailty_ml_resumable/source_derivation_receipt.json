@@ -1,0 +1,20 @@
+{
+  "previous_code_sha256": {
+    "work/sleep_frailty_ml_bounded/train_stable_development.py": "b31b5f94567d24171b46bae7434fac268e4f6a12048e6ea3ab190fcdb12c198f",
+    "work/sleep_frailty_ml_bounded/bounded_network.py": "38a16f80f5fd594252d145fd901eac050cdc0bc26a895b5de0d6c15ea3935600",
+    "work/sleep_frailty_ml_bounded/bounded_common.py": "c10ef5f28ac454b95e7b6942a537593d54fded35a1a38d25967af116625d48fb",
+    "work/sleep_frailty_ml_bounded/run_stable_comparison.py": "e06dfb80bac2ddc679c19ce086aad063ffa2bbc161a5540fe58e4fe1a41a44cc"
+  },
+  "new_code_sha256": {
+    "process_control.py": "126dac03ccdec61a8c050eeab7548b3fa027d6390e511839080b615b7769c80a",
+    "run_resumable_comparison.py": "9af053f2dc4b49991aff6bc94efb4bed22b1a2b48af99ffd2511eeeedd6c9e95",
+    "audit_recovery_state.py": "1decf54e827bc059e54546c7d488908484a2a1037ffe0af058d6655c2919d2aa",
+    "resumable_common.py": "2e3f34474215eb2a0552378cb2c1a811be470783db646042f8b3e99804d59b19",
+    "train_resumable_development.py": "7af8528ef4dc00d86c12baf3ec25a663ff400ac4eccfb7314fedd7db36933318",
+    "resumption.py": "659b7c3f2293b4bb623235dea4b51ab50a19f65535fc6e4ac02092a45f3969d3"
+  },
+  "changes": "Only recovery state persistence, explicit resume, schedule replay and preservation of uncommitted artifacts. Same model, losses, actual DNA, labels, batches, three epochs, seeds, optimization and finite neural gate.",
+  "scientific_fit_started": false,
+  "new_test_outcomes_used": false,
+  "prelaunch_recovery_validation_scope": "Exact loaded parameters, optimizer and random states; post-update replay within eight float32 representable increments over four updates, with an extra uninterrupted repeat. No change to scientific gates."
+}

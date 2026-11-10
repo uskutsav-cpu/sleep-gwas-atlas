@@ -1,0 +1,82 @@
+{
+  "repository": "https://github.com/thewonlab/crossdisorder-MPRA",
+  "commit": "0d6a07b5925031a543b49733d2f9aed17ee69c42",
+  "commit_tree": {
+    "sha": "0d6a07b5925031a543b49733d2f9aed17ee69c42",
+    "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/trees/0d6a07b5925031a543b49733d2f9aed17ee69c42",
+    "tree": [
+      {
+        "path": "README.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "7cd7b843351cc64cd72e8b43a9cd606bdeed49b1",
+        "size": 1218,
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/blobs/7cd7b843351cc64cd72e8b43a9cd606bdeed49b1"
+      },
+      {
+        "path": "files",
+        "mode": "040000",
+        "type": "tree",
+        "sha": "ffe71932b0336d795291ef6143ef7b7e9e03edc8",
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/trees/ffe71932b0336d795291ef6143ef7b7e9e03edc8"
+      },
+      {
+        "path": "files/config_CD.yml",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "97bd60e6107fb8f1fa638d76615ecb3ed6b08004",
+        "size": 697,
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/blobs/97bd60e6107fb8f1fa638d76615ecb3ed6b08004"
+      },
+      {
+        "path": "scripts",
+        "mode": "040000",
+        "type": "tree",
+        "sha": "a8a3ea235e1b3353fc60a7bf0783d6809dfb5cad",
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/trees/a8a3ea235e1b3353fc60a7bf0783d6809dfb5cad"
+      },
+      {
+        "path": "scripts/create_count_matrix_functions.R",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "be9511ac20513142613fd3e8b42828ce1def9a60",
+        "size": 738,
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/blobs/be9511ac20513142613fd3e8b42828ce1def9a60"
+      },
+      {
+        "path": "scripts/generate_mpra_result_from_count_matrix.R",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "511e9fd4e8da3f332b498186f3215b8511477c98",
+        "size": 1622,
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/blobs/511e9fd4e8da3f332b498186f3215b8511477c98"
+      },
+      {
+        "path": "scripts/reading_functions.R",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "915983487e14033dad6dc6f08b9c5e363c86ecd6",
+        "size": 2127,
+        "url": "https://api.github.com/repos/thewonlab/crossdisorder-MPRA/git/blobs/915983487e14033dad6dc6f08b9c5e363c86ecd6"
+      }
+    ],
+    "truncated": false
+  },
+  "reviewed_files": [
+    {
+      "path": "files/config_CD.yml",
+      "git_blob_sha": "97bd60e6107fb8f1fa638d76615ecb3ed6b08004",
+      "content": "default:\n  script_dir: \"where_the_scripts_from_github_are_stored/\"\n  cd_file_foldername: \"where_the_files_from_GEO_are_stored/\"\n  output_file_dir: \"where_you_want_your_result_file/\"\n  cd_variant_statistics_filename: \"variant_statistics.txt.gz\"\n  cd_dna_count_filepath: \"MPRA_CD_DNA_bcreads.txt.gz\" \n  read_file_function_scriptname: \"reading_functions.R\"\n  reproducibility_function_scriptname: \"reproducibility_plot_functions.R\"\n  create_count_matrix_functions_scriptname: \"create_count_matrix_functions.R\"\n  cd_barcode_rda_filename: \"GSE244011_RAW.tar\"\n  cd_mpra_output_file: \"cd_mpra_result.tsv\"\n  cd_dna_count_file: \"GSE244011_dnaMatrix.csv.gz\"\n  cd_rna_count_file: \"GSE244011_rnaMatrix.csv.gz\"\n"
+    },
+    {
+      "path": "scripts/generate_mpra_result_from_count_matrix.R",
+      "git_blob_sha": "511e9fd4e8da3f332b498186f3215b8511477c98",
+      "content": "library(data.table)\nlibrary(tidyverse)\nlibrary(mpra)\nlibrary(magrittr)\nlibrary(config)\n\n#######################\n# LOADING ENV & FUNCS #\n#######################\n# loading config and getting wd\nconfig <- config::get(file = \"where_the_config_file_is_stored/config_CD.yml\")\ncurrent_wd <- str_c(config$cd_file_foldername)\n\nsetwd(current_wd)\n\n# CREATE MATRICES AND VARIANT INFO\n###################\ndna_count_matrix <- fread(config$cd_dna_count_file)\nrna_count_matrix <- fread(config$cd_rna_count_file)\n\nvariant_ids <- rownames(dna_count_matrix)\n\ndna_count_matrix %<>% .[, -1]\nrna_count_matrix %<>% .[, -1]\n\nrepnum = 22\n\n# CREATE DESIGN MATRIX\n###################\nbatch <- as.factor(c(rep(c(rep(1,10),rep(2,12)),2))) \nalt <- c(rep(FALSE,repnum),rep(TRUE,repnum))\n\ndesign_matrix <- model.matrix(~alt+batch)\n\nsamples <- rep(1:repnum,2)\n\ncolnames(dna_count_matrix) <- c(paste0(\"Replicate \", 1:repnum, \" REF\"), paste0(\"Replicate \", 1:repnum, \" ALT\"))\ncolnames(rna_count_matrix) <- c(paste0(\"Replicate \", 1:repnum, \" REF\"), paste0(\"Replicate \", 1:repnum, \" ALT\"))\n\n# RUN MPRA\n###################\nmpra_set <- MPRASet(DNA=dna_count_matrix, RNA=rna_count_matrix, eid=variant_ids, eseq=NULL, barcode=NULL)\n\nmpra_lm <- mpralm(\n      object=mpra_set, \n      design=design_matrix, \n      plot=T,\n      aggregate=\"none\",\n      normalize=T, \n      block=samples,\n      model_type=\"corr_groups\"\n)\n\nmpra_result <- topTable(mpra_lm, coef = 2, number = Inf)\nmpra_result$variant <- rownames(mpra_result)\nMPRAsig <- mpra_result[mpra_result$adj.P.Val<0.05,]\n\nsetwd(config$output_file_dir)\n\nfwrite(mpra_result, config$cd_mpra_output_file, sep = \"\\t\")\n"
+    },
+    {
+      "path": "scripts/reading_functions.R",
+      "git_blob_sha": "915983487e14033dad6dc6f08b9c5e363c86ecd6",
+      "content": "#author: sool_lee@unc.edu \n\nread_bc_count_file_in_list <- function(list_input, filename_input) {\n  for (i in 1:length(filename_input)) {\n    list_input[[i]] <- fread(filename_input[i])\n  }\n\n  return(list_input)\n}\n\nmerging_batch <- function(set1, set2) {\n  merged_data <- base::merge(set1, set2, by = \"barcode\", all = T)\n  merged_data[is.na(merged_data)] <- 0\n  merged_data$num_reads <- rowSums(merged_data[, -1])\n  merged_data %<>% dplyr::select(barcode, num_reads)\n  return(merged_data)\n}\n\nmerge_count_files_in_list <- function(pooled_data_input, batch_list_input, pool_num_input, rep_num_input) {\n  for (i in 0:(rep_num_input - 1)) {\n    merged_data <- merging_batch(\n      batch_list_input[[i * pool_num_input + 1]],\n      batch_list_input[[i * pool_num_input + 2]]\n    )\n\n    if (pool_num > 2) {\n      for (j in 3:pool_num) {\n        if (!is.null(batch_list_input[i * pool_num + j][[1]])) {\n          merged_data %<>% merging_batch(batch_list_input[[i * pool_num + j]])\n        } else {}\n      }\n    }\n\n    pooled_data_input[[i + 1]] <- merged_data\n  }\n\n  return(pooled_data_input)\n}\n\nmerge_dna_and_rna_bc_counts <- function(combined_counts_input, pooled_data_list_input, rep_num_input) {\n  for (i in 1:rep_num_input) {\n    combined_counts_input <- left_join(combined_counts_input, pooled_data_list_input[[i]], by = \"barcode\")\n  }\n\n  return(combined_counts_input)\n}\n\nfilter_by_individual_barcode <- function(data_input, rep_num_input) {\n  for (i in 1:rep_num_input) {\n    rna_num <- i + 2\n    data_subset <- data_input[, c(1:2, rna_num, ncol(data_input))] %>%\n      set_colnames(c(\"barcode\", \"dna\", \"rna\", \"variant\"))\n    data_subset %<>% filter(rna > 1)\n    data_subset_by_batch <- data_subset %>%\n      group_by(variant) %>%\n      summarise(\n        rna_sum = sum(rna), dna_sum = sum(dna),\n        rna_to_dna = sum(rna) / sum(dna),\n        log_rna_to_dna = log(sum(rna) / sum(dna))\n      )\n\n    if (i > 1) {\n      filtered_data %<>% base::merge(data_subset_by_batch, by = \"variant\", all = TRUE)\n    } else {\n      filtered_data <- data_subset_by_batch\n    }\n  }\n\n  filtered_data %<>% na.omit()\n\n  return(filtered_data)\n}\n"
+    }
+  ]
+}

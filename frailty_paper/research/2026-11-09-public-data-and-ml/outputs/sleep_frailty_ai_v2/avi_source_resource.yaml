@@ -1,0 +1,75 @@
+---
+
+type: allele_score
+allele_score_mode: substitutions
+
+table:
+  filename: alphagenome_variant_impact_score_snvs.tsv.gz
+  format: tabix
+  zero_based: false
+
+  # defined by score_type
+  chrom:
+    column_name: CHROM
+  pos_begin:
+    column_name: POS
+  reference:
+    column_name: REF
+  alternative:
+    column_name: ALT
+
+# score values
+scores:
+  - id: avi_raw
+    type: float
+    column_name: raw_score
+    desc: |
+      AVI raw score
+    large_values_desc: "more damaging"
+    small_values_desc: "less damaging"
+    histogram:
+      type: number
+      number_of_bins: 100
+      y_log_scale: True
+      view_range:
+        min: -1.3
+        max: 6.1
+
+  - id: avi_phred
+    type: float
+    column_name: PHRED
+    desc: |
+      AVI phred-like score.
+    large_values_desc: "more damaging"
+    small_values_desc: "less damaging"
+    histogram:
+      type: number
+      number_of_bins: 100
+      y_log_scale: True
+      view_range:
+        min: 0
+        max: 90
+
+default_annotation:
+  - source: avi_raw
+    name: avi_raw
+
+  - source: avi_phred
+    name: avi_phred
+
+meta:
+  summary: |
+    AlphaGenome Variant Impact (AVI) scores for single-nucleotide variants     
+  description: |
+    [AVI](https://example.com/avi) (AlphaGenome Variant Impact) score predicts the potential impact of single nucleotide variants by integrating diverse annotations into a single metric. Unlike tools limited to specific information types or variant categories, AVI combines naturally selected and simulated mutations for a comprehensive assessment. AVI scores correlate with allelic diversity, coding and non-coding pathogenicity, and regulatory effects, effectively prioritizing causal variants across varied functional categories and genetic architectures. Additionally, AVI scores for complex trait-associated variants from GWAS correlate with study sample size, making it a valuable tool in research and clinical settings.
+
+    [AlphaGenome Variant Impact](https://example.com/avi) (AVI) scores estimate the functional impact of single-nucleotide variants by combining AlphaGenome regulatory predictions with AlphaMissense, sequence conservation, and other functional annotations. AVI scores have been calculated for all possible single-nucleotide substitutions across the human genome. 
+
+    Scores are PHRED-scaled, with higher scores indicating greater predicted functional impact. A score of 10 corresponds to approximately the top 10% of variants, 20 to the top 1%, and 30 to the top 0.1%. 
+
+    [Cheng et al. AlphaGenome Atlas: in silico mutagenesis of the entire human genome improves prioritization and interpretation of non-coding variants. medRxiv, 2026.](https://www.medrxiv.org/content/10.64898/2026.09.16.26363192v1) 
+
+    Downloaded on: 9/21/2026
+
+  labels:
+    reference_genome: hg38/genomes/ucsc-hg38

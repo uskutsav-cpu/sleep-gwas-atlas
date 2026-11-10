@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import pandas as pd,numpy as np,json
+root=Path(__file__).resolve().parents[1];o=root/'outputs';w=root/'work';idx=pd.read_csv(o/'stage6_foxp2_gnomad_narrow_variants.csv');g=pd.read_csv(w/'stage6_foxp2_susie_aligned.csv');q=pd.read_csv(w/'stage3_QTD000301_FOXP2_2mb.tsv',sep='\t');d=idx.drop(columns=['anchor_effect_allele','anchor_other_allele']).merge(g,on='rs',validate='one_to_one');q['pair']=q.apply(lambda r:''.join(sorted([str(r.ref),str(r.alt)])),axis=1);d['pair']=d.apply(lambda r:''.join(sorted([r.anchor_effect_allele,r.anchor_other_allele])),axis=1);x=d.merge(q,left_on=['pos','pair'],right_on=['position','pair'],how='left',validate='one_to_many',indicator=True);x=x[x._merge=='both'].copy();x=x[(x.type=='SNP')&x.maf.ge(.01)&x.beta.notna()&x.se.gt(0)].copy();x['qtl_beta_anchor']=np.where(x.alt==x.anchor_effect_allele,x.beta,-x.beta);keys=['rs','pos','pair'];dup=x.duplicated(keys,keep=False);dup_rows=int(dup.sum());conflicts=[]
+for k,gx in x[dup].groupby(keys):
+ if len(gx[['qtl_beta_anchor','se','pvalue']].drop_duplicates())>1:conflicts.append(k)
+if conflicts:raise ValueError('conflicting QTL duplicates')
+x=x.drop_duplicates(keys);x['qtl_z_anchor']=x.qtl_beta_anchor/x.se;assert x.rs.is_unique;x.to_csv(o/'stage6_foxp2_pituitary_gnomad_aligned.csv',index=False)
+cs=pd.read_csv(o/'stage3_foxp2_pituitary_susie_credible_set.csv').drop_duplicates('variant');sets={r.variant:(r.pip,r.rsid) for r in cs.itertuples()};matched=set(x.variant);count={'model_window_snps':len(d),'qtl_matched_snps':len(x),'qtl_duplicate_rows_identical_removed':dup_rows,'original_credible_set':[{'variant':k,'rsid':v[1],'pip':v[0],'in_analysis':k in matched} for k,v in sets.items()],'original_credible_pip_covered':sum(v[0] for k,v in sets.items() if k in matched)};(o/'stage6_foxp2_pituitary_gnomad_harmonization.json').write_text(json.dumps(count,indent=2)+'\n');print(json.dumps(count,indent=2))

@@ -1,0 +1,81 @@
+{
+  "time_UTC": "2026-11-09T02:40:11.074406+00:00",
+  "candidate": "Lee et al., Cell 2025; DOI 10.1016/j.cell.2024.12.022",
+  "sources": {
+    "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11890967/",
+    "GEO": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE244011",
+    "author_repository": "https://github.com/thewonlab/crossdisorder-MPRA",
+    "author_commit": "0d6a07b5925031a543b49733d2f9aed17ee69c42"
+  },
+  "public_access_verified_without_login": [
+    {
+      "type": "dna",
+      "URL": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE244nnn/GSE244011/suppl/GSE244011_dnaMatrix.csv.gz",
+      "HTTP_HEAD_status": 200,
+      "compressed_bytes": 1224554,
+      "body_downloaded": false
+    },
+    {
+      "type": "rna",
+      "URL": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE244nnn/GSE244011/suppl/GSE244011_rnaMatrix.csv.gz",
+      "HTTP_HEAD_status": 200,
+      "compressed_bytes": 1284800,
+      "body_downloaded": false
+    }
+  ],
+  "total_compressed_processed_count_bytes": 2509354,
+  "published_design_metadata": {
+    "candidate_variants_before_our_QC": 17841,
+    "biological_DNA_sequence_length_bp": 150,
+    "source_sequence_build": "GRCh37/hg19",
+    "assay_cell": "Human neural progenitors",
+    "HNP_donor": "Donor 88; one donor, not 22 independent people"
+  },
+  "author_analysis_metadata": {
+    "paired_replicates_per_allele_in_code": 22,
+    "two_batches_in_code": [
+      10,
+      12
+    ],
+    "contrast": "alt + batch with replicate blocking",
+    "estimator": "mpralm with normalization and corr_groups; full output requested, not just significant rows"
+  },
+  "potential_value": "Additional neural experimental effect-size validation with multiple repeats; an external experiment candidate, not patient genetic-score validation.",
+  "independence_limitations": [
+    "HNP culture and donor provenance overlaps the McAfee laboratory context. A different paper is not proof of donor independence.",
+    "Shared variants, 2-kb neighborhoods, full DNA cores and pretrained-reader exposure have not been scanned. No eligible sample size is established.",
+    "The existing primary reserved Ulirsch study and all current finite model gates remain unchanged. This is an additional candidate, not a replacement test chosen from prediction performance."
+  ],
+  "source_audit_concerns": [
+    "Author script calls rownames on a fread table before removing its first column. Verify actual identifier columns and preserve variant mapping; do not assume numeric row labels are variant IDs.",
+    "The purpose and selection rules of the published exclusion list require inspection before it can be used.",
+    "Full actual inserted sequences, allele orientation and hg19-to-hg38 mappings still require verification."
+  ],
+  "published_example_exposure_ledger": [
+    {
+      "variant": "rs301804",
+      "exposure": "A search excerpt disclosed its example allelic effect and significance. Reserve/exclude its entire connected genomic component from a future strictly unseen-outcome test; do not train on it or select a model using it."
+    }
+  ],
+  "reservation": {
+    "training_or_model_selection_authorized": false,
+    "per_variant_count_bodies_downloaded": false,
+    "model_predictions_made": false,
+    "prediction_outcome_join_made": false,
+    "validation_eligibility_established": false,
+    "current_scientific_fit_changed": false
+  },
+  "next_actions_in_order": [
+    "After current scientific training is stopped, inspect design and count schemas without computing effect outcomes.",
+    "Reconcile study aliases and complete source DNA/region/pretraining exclusion guards using metadata alone, including the disclosed example component.",
+    "Fix count reconstruction, QC, paired-input scope and grouped test rules before effect computation or model prediction.",
+    "If enough independent eligible groups remain, retain as an additional reserved neural test; otherwise report insufficient eligible data."
+  ],
+  "evidence_sha256": {
+    "GSE244011_dnaMatrix_HTTP_headers.txt": "2051b4b7d1c1be7477d1bb55fc4d4734d01a7fb2911e1d2b239ce887ce36e1cb",
+    "author_code_metadata_snapshot.json": "690cb412656c0113c603def535374441ff796542c7e3ae887636cbe37589628a",
+    "GSE244011_public_directory.html": "979b665963f99bbc39617361cd7f8385d2d3821ff6c56f613aa1bb4c99cc70c6",
+    "GSE244011_public_archive_filelist.txt": "13c3a52aa3b34a6d9c2f34e893016c4b6cddae0d877636a0f97cb135a7a9c148",
+    "GSE244011_rnaMatrix_HTTP_headers.txt": "6be759985993d432e9d6aa56c8bfdd39384b87d9a014f2d6c3b1987394e2880f"
+  }
+}

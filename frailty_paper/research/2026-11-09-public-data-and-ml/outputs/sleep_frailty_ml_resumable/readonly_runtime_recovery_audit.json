@@ -1,0 +1,1478 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T02:30:04.989438+00:00",
+  "execution_revision_sha256": "0192038ca4a26e3dddf058c4a8fda6bf4690f37168850c76d4eaa266e9c99755",
+  "comparisons": {
+    "reference_four_steps_vs_repeat_reference_four_steps": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.6645352591003757e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_native_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_native_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.7763568394002505e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_runtime_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.7053025658242404e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.7763568394002505e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_runtime_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.4210854715202004e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.7763568394002505e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "reference_four_steps_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_native_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_native_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 8.881784197001252e-16
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_runtime_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.9895196601282805e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 8.881784197001252e-16
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_runtime_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1368683772161603e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 8.881784197001252e-16
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.4210854715202004e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "repeat_reference_four_steps_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.3655745685100555e-11
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_native_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.820766091346741e-11
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_runtime_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1368683772161603e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_runtime_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1368683772161603e-13
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.4210854715202004e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_runtime_adapt_direct4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1368683772161603e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_runtime_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.656612873077393e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.4210854715202004e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_runtime_adapt_continued4": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 8.526512829121202e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.7462298274040222e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1368683772161603e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.7462298274040222e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 9.313225746154785e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.5579538487363607e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.4210854715202004e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_runtime_adapt_continued4_vs_readonly_wrapper_original_control1": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_runtime_adapt_continued4_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.7053025658242404e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.842170943040401e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 7.105427357601002e-15
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    },
+    "readonly_wrapper_original_control1_vs_readonly_wrapper_original_control2": {
+      "scalar_counts": {
+        "parameters": 310237,
+        "optimizer": 620502
+      },
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "maximum_absolute_difference": 1.1641532182693481e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "maximum_absolute_difference": 6.984919309616089e-10
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "maximum_absolute_difference": 1.4210854715202004e-13
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 4.263256414560601e-14
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "maximum_absolute_difference": 2.3283064365386963e-10
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "maximum_absolute_difference": 5.684341886080802e-14
+        }
+      ],
+      "CPU_MPS_NumPy_RNG_and_schedule_exact": true
+    }
+  },
+  "additional_uniform_float32_tolerance": {
+    "absolute": 1e-09,
+    "relative": 1e-06
+  },
+  "all_pair_legacy_eight_ULP_results": {
+    "reference_four_steps_vs_repeat_reference_four_steps": {
+      "eight_ULP_passed": true
+    },
+    "reference_four_steps_vs_readonly_native_adapt_direct4": {
+      "eight_ULP_passed": true
+    },
+    "reference_four_steps_vs_readonly_native_adapt_continued4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 1.1641532182693481e-10)"
+    },
+    "reference_four_steps_vs_readonly_runtime_adapt_direct4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "reference_four_steps_vs_readonly_runtime_adapt_continued4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "reference_four_steps_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": true
+    },
+    "reference_four_steps_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "repeat_reference_four_steps_vs_readonly_native_adapt_direct4": {
+      "eight_ULP_passed": true
+    },
+    "repeat_reference_four_steps_vs_readonly_native_adapt_continued4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 1.1641532182693481e-10)"
+    },
+    "repeat_reference_four_steps_vs_readonly_runtime_adapt_direct4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "repeat_reference_four_steps_vs_readonly_runtime_adapt_continued4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "repeat_reference_four_steps_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": true
+    },
+    "repeat_reference_four_steps_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 4.3655745685100555e-11)"
+    },
+    "readonly_native_adapt_direct4_vs_readonly_native_adapt_continued4": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_runtime_adapt_direct4": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_runtime_adapt_continued4": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_direct4_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_runtime_adapt_direct4": {
+      "eight_ULP_passed": true
+    },
+    "readonly_native_adapt_continued4_vs_readonly_runtime_adapt_continued4": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/0/exp_avg_sq', 5.684341886080802e-14)"
+    },
+    "readonly_native_adapt_continued4_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 2.3283064365386963e-10)"
+    },
+    "readonly_native_adapt_continued4_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": true
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_runtime_adapt_continued4": {
+      "eight_ULP_passed": true
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 2.3283064365386963e-10)"
+    },
+    "readonly_runtime_adapt_direct4_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/0/exp_avg_sq', 2.5579538487363607e-13)"
+    },
+    "readonly_runtime_adapt_continued4_vs_readonly_wrapper_original_control1": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 2.3283064365386963e-10)"
+    },
+    "readonly_runtime_adapt_continued4_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/0/exp_avg_sq', 1.7053025658242404e-13)"
+    },
+    "readonly_wrapper_original_control1_vs_readonly_wrapper_original_control2": {
+      "eight_ULP_passed": false,
+      "first_failing_check": "('optimizer/state/4/exp_avg', 2.3283064365386963e-10)"
+    }
+  },
+  "same_wrapper_continuation_within_legacy_eight_ULP": {
+    "reference_sha256": "8358b73c16a28ae4c9c1a6549901c4ae5ca8d131a0af7eb14e027cfd7b037eba",
+    "compared_sha256": "0d349d18174a7c9997742f9148d1a9e05f537905c272ba8839a904c586ca9527",
+    "parameter_scalars": 310237,
+    "optimizer_scalars": 620502,
+    "CPU_and_MPS_RNG_exact": true,
+    "NumPy_and_batch_schedule_exact": true,
+    "numeric_bound": "Existing eight-float32-ULP four-update bound; initial restore is checked exactly.",
+    "differences": [
+      {
+        "tensor": "parameters/head.cell_activity_weight",
+        "maximum_absolute_difference": 1.1641532182693481e-10,
+        "maximum_float32_ULP": 1.0
+      },
+      {
+        "tensor": "parameters/head.cell_activity_bias",
+        "maximum_absolute_difference": 1.1641532182693481e-10,
+        "maximum_float32_ULP": 1.0
+      },
+      {
+        "tensor": "optimizer/state/0/exp_avg",
+        "maximum_absolute_difference": 2.3283064365386963e-10,
+        "maximum_float32_ULP": 2.0
+      },
+      {
+        "tensor": "optimizer/state/0/exp_avg_sq",
+        "maximum_absolute_difference": 8.526512829121202e-14,
+        "maximum_float32_ULP": 4.0
+      },
+      {
+        "tensor": "optimizer/state/2/exp_avg",
+        "maximum_absolute_difference": 2.3283064365386963e-10,
+        "maximum_float32_ULP": 1.0
+      },
+      {
+        "tensor": "optimizer/state/2/exp_avg_sq",
+        "maximum_absolute_difference": 2.842170943040401e-14,
+        "maximum_float32_ULP": 2.0
+      }
+    ]
+  },
+  "initial_wrapper_vs_archived_reference_eight_ULP_check_failed": true,
+  "initial_strict_failure_diagnostic_sha256": "f664297465b196c703dfde7cb209cf4f7249003fabe1a5d9f28aadb6a9a7d95e",
+  "control_protocol_sha256": "fcd96cf84e2ab7b4e54f93cca03889a0f3c3f35e576696c21d91a7598871228b",
+  "all_original_and_wrapper_recovery_states_sha256": {
+    "reference_four_steps": "2e56f599be89e0973b802b2360867821018a0401264aa5631a21eb8cf3a96eda",
+    "repeat_reference_four_steps": "79688ee3d5021e981949e06758b62359750302df915281a35ab883cdbbb17c08",
+    "readonly_native_adapt_direct4": "56f5347e518a73dd1dc7d1b35163a3a46039a5341f7c45030acf96015849943f",
+    "readonly_native_adapt_continued4": "9008d441f85d85919377e353fd72955b840cbf4a07ee41be8f274463379a6c94",
+    "readonly_runtime_adapt_direct4": "8358b73c16a28ae4c9c1a6549901c4ae5ca8d131a0af7eb14e027cfd7b037eba",
+    "readonly_runtime_adapt_continued4": "0d349d18174a7c9997742f9148d1a9e05f537905c272ba8839a904c586ca9527",
+    "readonly_wrapper_original_control1": "3436dad6968e401f29aac600eb7a2f4225e2d2d613e702175d0d345322edd251",
+    "readonly_wrapper_original_control2": "2215e822155eb17c2111ee0b3e53f0dd7525686989f2d6dcf73c479254b4d29b"
+  },
+  "full_original_identity_retained_with_additional_execution_binding": true,
+  "initial_parameter_optimizer_and_CPU_MPS_RNG_restoration_exact": true,
+  "recovery_history_sha256": "c95b5b562c671c8744e370160db059dc6b00302bc86de89d7a0983d7e88d1f9e",
+  "code_sha256": {
+    "work/sleep_frailty_ml_resumable/audit_readonly_runtime_recovery.py": "63666d87476e5a1c74e0b17447763fafbf86dfb7328ea01b77467a1da7d781ca",
+    "work/sleep_frailty_ml_resumable/audit_readonly_native_training.py": "8178ef351f6dca55008083d0c25fcaedd9bc605b08763e17d541d2fa9f71ddc1"
+  },
+  "scope": "Actual attested execution: four updates and two plus two resumed, plus exactly two fresh unchanged-trainer controls. Report the original eight-ULP failure; all 28 state pairs must pass the uniform float32 comparison fixed before the two new controls. This is not bitwise full-trajectory identity or predictive validation. Scientific checkpoint migration still needs execution verification.",
+  "scientific_predictive_success_established": false,
+  "engineering_weights_used_for_scientific_initialization": false
+}

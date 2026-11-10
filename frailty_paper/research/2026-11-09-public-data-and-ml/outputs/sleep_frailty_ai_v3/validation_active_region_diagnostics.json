@@ -1,0 +1,1609 @@
+{
+  "scope": "Validation chromosomes4-5 only; no test predictions read or model refitting",
+  "reason": "Assess variant-specific ranking within measured active regions, alongside all-variant detection performance",
+  "activity_flags": "Source Salomon significant reference/alternate region versus control; Siraj predefined source-row activity screen. Criteria differ and are not biological inactive/active truth.",
+  "activity_flag_used_as_feature": false,
+  "models": {
+    "pattern_logistic_none_C0.1": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4925130208333333,
+          "average_precision": 0.0824083588361626,
+          "AP_skill_over_prevalence": -0.0036158575229471588,
+          "brier_uncalibrated": 0.08205004381600652
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5078789603856904,
+          "average_precision": 0.34572621101096424,
+          "AP_skill_over_prevalence": -0.006996809309940514,
+          "brier_uncalibrated": 0.29952383689845935
+        }
+      }
+    },
+    "pattern_logistic_none_C1": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.48681640625,
+          "average_precision": 0.08346141888407929,
+          "AP_skill_over_prevalence": -0.002464073095538276,
+          "brier_uncalibrated": 0.08202376629852774
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5064919610321527,
+          "average_precision": 0.345730412127913,
+          "AP_skill_over_prevalence": -0.006990343345027749,
+          "brier_uncalibrated": 0.29961537176741443
+        }
+      }
+    },
+    "pattern_logistic_none_C10": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4845377604166667,
+          "average_precision": 0.08446382666932425,
+          "AP_skill_over_prevalence": -0.0013676895804265975,
+          "brier_uncalibrated": 0.08201049917397531
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.506239486946929,
+          "average_precision": 0.34569771398576865,
+          "AP_skill_over_prevalence": -0.007040669256540421,
+          "brier_uncalibrated": 0.29974542681881544
+        }
+      }
+    },
+    "pattern_boost_none_depth3": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.46126302083333337,
+          "average_precision": 0.09053173559313163,
+          "AP_skill_over_prevalence": 0.005269085804987719,
+          "brier_uncalibrated": 0.08205340525001154
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5223318956783513,
+          "average_precision": 0.36693612224861605,
+          "AP_skill_over_prevalence": 0.025647495416166045,
+          "brier_uncalibrated": 0.2963418001693505
+        }
+      }
+    },
+    "pattern_boost_none_depth5": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.47249348958333337,
+          "average_precision": 0.07781777304727136,
+          "AP_skill_over_prevalence": -0.00863681072954695,
+          "brier_uncalibrated": 0.08285559761241036
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5271948360204939,
+          "average_precision": 0.376298634947864,
+          "AP_skill_over_prevalence": 0.04005739624657277,
+          "brier_uncalibrated": 0.2957642790435589
+        }
+      }
+    },
+    "pattern_logistic_sqrt_C0.1": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.48583984375,
+          "average_precision": 0.08202333352211505,
+          "AP_skill_over_prevalence": -0.0040369789601866655,
+          "brier_uncalibrated": 0.08488330764421351
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5061960678367312,
+          "average_precision": 0.34356856110045086,
+          "AP_skill_over_prevalence": -0.010317661546512768,
+          "brier_uncalibrated": 0.25505377300545884
+        }
+      }
+    },
+    "pattern_logistic_sqrt_C1": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.47623697916666663,
+          "average_precision": 0.08255167933058002,
+          "AP_skill_over_prevalence": -0.003459100732178099,
+          "brier_uncalibrated": 0.08566080694987972
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5058921340653474,
+          "average_precision": 0.3432141076000418,
+          "AP_skill_over_prevalence": -0.010863203107198252,
+          "brier_uncalibrated": 0.25531027531705125
+        }
+      }
+    },
+    "pattern_logistic_sqrt_C10": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.47477213541666663,
+          "average_precision": 0.0821969481330258,
+          "AP_skill_over_prevalence": -0.003847087979503027,
+          "brier_uncalibrated": 0.08580155069953335
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5057988633841819,
+          "average_precision": 0.3432984548704098,
+          "AP_skill_over_prevalence": -0.010733383705039696,
+          "brier_uncalibrated": 0.2552400616180001
+        }
+      }
+    },
+    "pattern_boost_sqrt_depth3": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5128580729166667,
+          "average_precision": 0.0869949174246723,
+          "AP_skill_over_prevalence": 0.0014006909332353297,
+          "brier_uncalibrated": 0.08227334213315292
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5231745480392251,
+          "average_precision": 0.3658594407201601,
+          "AP_skill_over_prevalence": 0.023990368259240797,
+          "brier_uncalibrated": 0.25038097336174026
+        }
+      }
+    },
+    "pattern_boost_sqrt_depth5": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.53369140625,
+          "average_precision": 0.08839902473744297,
+          "AP_skill_over_prevalence": 0.0029364333065782524,
+          "brier_uncalibrated": 0.083204906397317
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5292676965036359,
+          "average_precision": 0.3750611767032134,
+          "AP_skill_over_prevalence": 0.03815281665773902,
+          "brier_uncalibrated": 0.2520940005915034
+        }
+      }
+    },
+    "multitask_assay_only_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5030924479166666,
+          "average_precision": 0.09021583887750982,
+          "AP_skill_over_prevalence": 0.004923573772276367,
+          "brier_uncalibrated": 0.08923471987722689
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5198537901666972,
+          "average_precision": 0.37965571702632295,
+          "AP_skill_over_prevalence": 0.0452243019036423,
+          "brier_uncalibrated": 0.2570926282485357
+        }
+      }
+    },
+    "multitask_assay_only_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5543619791666665,
+          "average_precision": 0.14927080265136206,
+          "AP_skill_over_prevalence": 0.06951494039992726,
+          "brier_uncalibrated": 0.08226385249866662
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5129019081894874,
+          "average_precision": 0.3718823920466312,
+          "AP_skill_over_prevalence": 0.03326032965836256,
+          "brier_uncalibrated": 0.25393531307712963
+        }
+      }
+    },
+    "multitask_assay_only_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.599609375,
+          "average_precision": 0.1734010971533527,
+          "AP_skill_over_prevalence": 0.09590745001147952,
+          "brier_uncalibrated": 0.08315967189480493
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.49949987617513014,
+          "average_precision": 0.34538024308838045,
+          "AP_skill_over_prevalence": -0.007529290665649084,
+          "brier_uncalibrated": 0.25440074649088246
+        }
+      }
+    },
+    "ensemble_assay_only": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5419921875,
+          "average_precision": 0.1330010243541915,
+          "AP_skill_over_prevalence": 0.051719870387396956,
+          "brier_uncalibrated": 0.08188675630126611
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5132573016470315,
+          "average_precision": 0.36988999250672727,
+          "AP_skill_over_prevalence": 0.03019381528270036,
+          "brier_uncalibrated": 0.25309902128817535
+        }
+      }
+    },
+    "multitask_activity_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.49169921875000006,
+          "average_precision": 0.08517405369272181,
+          "AP_skill_over_prevalence": -0.0005908787735855211,
+          "brier_uncalibrated": 0.10070404700428798
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5210470116395378,
+          "average_precision": 0.3748276924709055,
+          "AP_skill_over_prevalence": 0.03779345964097471,
+          "brier_uncalibrated": 0.26075678784068773
+        }
+      }
+    },
+    "multitask_activity_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5432942708333334,
+          "average_precision": 0.10936818892569676,
+          "AP_skill_over_prevalence": 0.025871456637480833,
+          "brier_uncalibrated": 0.09158337524906543
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5060706348517157,
+          "average_precision": 0.3706827814506013,
+          "AP_skill_over_prevalence": 0.03141400161810423,
+          "brier_uncalibrated": 0.2609154856647928
+        }
+      }
+    },
+    "multitask_activity_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5919596354166667,
+          "average_precision": 0.1737528281121104,
+          "AP_skill_over_prevalence": 0.09629215574762076,
+          "brier_uncalibrated": 0.08303893666819984
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5014071007934441,
+          "average_precision": 0.34825086348287915,
+          "AP_skill_over_prevalence": -0.003111101175792144,
+          "brier_uncalibrated": 0.2536548553006098
+        }
+      }
+    },
+    "ensemble_activity": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.52490234375,
+          "average_precision": 0.10151633938863296,
+          "AP_skill_over_prevalence": 0.017283496206317295,
+          "brier_uncalibrated": 0.08733419966890243
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5125625958838684,
+          "average_precision": 0.3689601521829229,
+          "AP_skill_over_prevalence": 0.028762692326230476,
+          "brier_uncalibrated": 0.25500806648440805
+        }
+      }
+    },
+    "multitask_activity_effect_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.49365234375000006,
+          "average_precision": 0.09188952767013064,
+          "AP_skill_over_prevalence": 0.006754170889205391,
+          "brier_uncalibrated": 0.08851736717713006
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5165137349118593,
+          "average_precision": 0.37333121633966015,
+          "AP_skill_over_prevalence": 0.03549022403115292,
+          "brier_uncalibrated": 0.25973267114609777
+        }
+      }
+    },
+    "multitask_activity_effect_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.52783203125,
+          "average_precision": 0.10949035895105433,
+          "AP_skill_over_prevalence": 0.026005080102715673,
+          "brier_uncalibrated": 0.090412697217772
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5054145238531726,
+          "average_precision": 0.37036995173886145,
+          "AP_skill_over_prevalence": 0.030932523486348208,
+          "brier_uncalibrated": 0.25991232037191536
+        }
+      }
+    },
+    "multitask_activity_effect_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.611328125,
+          "average_precision": 0.17035553885978177,
+          "AP_skill_over_prevalence": 0.09257637062788632,
+          "brier_uncalibrated": 0.08315323100006634
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.501736764407908,
+          "average_precision": 0.34817285468867426,
+          "AP_skill_over_prevalence": -0.0032311649903365366,
+          "brier_uncalibrated": 0.2543389855792997
+        }
+      }
+    },
+    "ensemble_activity_effect": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5325520833333334,
+          "average_precision": 0.11319147153617432,
+          "AP_skill_over_prevalence": 0.03005317199269066,
+          "brier_uncalibrated": 0.08422838021642473
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5097869890616005,
+          "average_precision": 0.36812804232751495,
+          "AP_skill_over_prevalence": 0.02748198693424787,
+          "brier_uncalibrated": 0.25541726124123376
+        }
+      }
+    },
+    "multitask_activity_avi_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4951171875,
+          "average_precision": 0.08814095161604268,
+          "AP_skill_over_prevalence": 0.002654165830046685,
+          "brier_uncalibrated": 0.0887482678497278
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5189339482765829,
+          "average_precision": 0.3753055008373558,
+          "AP_skill_over_prevalence": 0.03852885743403087,
+          "brier_uncalibrated": 0.2590860007590055
+        }
+      }
+    },
+    "multitask_activity_avi_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.53955078125,
+          "average_precision": 0.10944334822517252,
+          "AP_skill_over_prevalence": 0.025953662121282438,
+          "brier_uncalibrated": 0.09119309664471911
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5055753353724235,
+          "average_precision": 0.3738449837991697,
+          "AP_skill_over_prevalence": 0.036280966685314255,
+          "brier_uncalibrated": 0.26055359936330574
+        }
+      }
+    },
+    "multitask_activity_avi_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5984700520833333,
+          "average_precision": 0.17431233446890904,
+          "AP_skill_over_prevalence": 0.09690411582536926,
+          "brier_uncalibrated": 0.08261477107262852
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5005950026212277,
+          "average_precision": 0.3473179300824963,
+          "AP_skill_over_prevalence": -0.004546984705431689,
+          "brier_uncalibrated": 0.25417356770034244
+        }
+      }
+    },
+    "ensemble_activity_avi": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5309244791666667,
+          "average_precision": 0.10590868993849448,
+          "AP_skill_over_prevalence": 0.022087629620228335,
+          "brier_uncalibrated": 0.08424270660552914
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.511097602943494,
+          "average_precision": 0.3691792808378438,
+          "AP_skill_over_prevalence": 0.029099954585619918,
+          "brier_uncalibrated": 0.2552743739034161
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_effect_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.49365234374999994,
+          "average_precision": 0.08891973439374952,
+          "AP_skill_over_prevalence": 0.003505959493163536,
+          "brier_uncalibrated": 0.0984554548935476
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5205066849348552,
+          "average_precision": 0.3816677291345322,
+          "AP_skill_over_prevalence": 0.04832100210370734,
+          "brier_uncalibrated": 0.25753509120316226
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_effect_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5198567708333334,
+          "average_precision": 0.10256474623120433,
+          "AP_skill_over_prevalence": 0.01843019119037974,
+          "brier_uncalibrated": 0.09466383267518762
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.515727366582723,
+          "average_precision": 0.37288754012023373,
+          "AP_skill_over_prevalence": 0.034807359235331806,
+          "brier_uncalibrated": 0.25885628634734636
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_effect_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.580078125,
+          "average_precision": 0.1291600688887882,
+          "AP_skill_over_prevalence": 0.04751882534711209,
+          "brier_uncalibrated": 0.09892279229402781
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5269986459670079,
+          "average_precision": 0.376679691287459,
+          "AP_skill_over_prevalence": 0.04064388240053045,
+          "brier_uncalibrated": 0.2590295218196264
+        }
+      }
+    },
+    "hyena_chromatin_prior_ensemble_activity_effect": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5501302083333334,
+          "average_precision": 0.10893168390218334,
+          "AP_skill_over_prevalence": 0.02539402926801303,
+          "brier_uncalibrated": 0.09399757262171791
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5222530980339184,
+          "average_precision": 0.3765601560702613,
+          "AP_skill_over_prevalence": 0.0404599050131675,
+          "brier_uncalibrated": 0.2572184676128264
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_avi_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4861653645833333,
+          "average_precision": 0.09021835051360715,
+          "AP_skill_over_prevalence": 0.004926320874257815,
+          "brier_uncalibrated": 0.10726047063384779
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5202284810065515,
+          "average_precision": 0.37801680543601385,
+          "AP_skill_over_prevalence": 0.04270184300347383,
+          "brier_uncalibrated": 0.2637327575381394
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_avi_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.544921875,
+          "average_precision": 0.1066851838767251,
+          "AP_skill_over_prevalence": 0.022936919865168076,
+          "brier_uncalibrated": 0.10103776547907507
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5127796914348569,
+          "average_precision": 0.37077374854353984,
+          "AP_skill_over_prevalence": 0.0315540096298616,
+          "brier_uncalibrated": 0.2607833581370057
+        }
+      }
+    },
+    "hyena_chromatin_prior_activity_avi_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5721028645833333,
+          "average_precision": 0.1195461487261113,
+          "AP_skill_over_prevalence": 0.037003600169184234,
+          "brier_uncalibrated": 0.0985347295421827
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5258198975308999,
+          "average_precision": 0.3773772497626869,
+          "AP_skill_over_prevalence": 0.04171749893642591,
+          "brier_uncalibrated": 0.25906684106929195
+        }
+      }
+    },
+    "hyena_chromatin_prior_ensemble_activity_avi": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5450846354166666,
+          "average_precision": 0.10716280863508656,
+          "AP_skill_over_prevalence": 0.02345932194462593,
+          "brier_uncalibrated": 0.09837355087140703
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5199888718428678,
+          "average_precision": 0.3755584571810183,
+          "AP_skill_over_prevalence": 0.038918184097042174,
+          "brier_uncalibrated": 0.25949155423593534
+        }
+      }
+    },
+    "motif_prior_activity_effect_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.47021484375000006,
+          "average_precision": 0.1264094300565283,
+          "AP_skill_over_prevalence": 0.04451031412432783,
+          "brier_uncalibrated": 0.0953475201958237
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5617677045442119,
+          "average_precision": 0.416682299657964,
+          "AP_skill_over_prevalence": 0.10221214276965966,
+          "brier_uncalibrated": 0.25018927076654657
+        }
+      }
+    },
+    "motif_prior_activity_effect_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4892578125,
+          "average_precision": 0.10846931429220776,
+          "AP_skill_over_prevalence": 0.02488831250710223,
+          "brier_uncalibrated": 0.09363010126245866
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5539104537136205,
+          "average_precision": 0.40915522315380404,
+          "AP_skill_over_prevalence": 0.09062717306632967,
+          "brier_uncalibrated": 0.2542133002701958
+        }
+      }
+    },
+    "motif_prior_activity_effect_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5179036458333334,
+          "average_precision": 0.09984618880363873,
+          "AP_skill_over_prevalence": 0.015456769003979859,
+          "brier_uncalibrated": 0.09629483739384342
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5584180005982188,
+          "average_precision": 0.4208582906601283,
+          "AP_skill_over_prevalence": 0.1086394361836053,
+          "brier_uncalibrated": 0.24868197786625018
+        }
+      }
+    },
+    "motif_prior_ensemble_activity_effect": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4908854166666667,
+          "average_precision": 0.1248800875504123,
+          "AP_skill_over_prevalence": 0.04283759575826345,
+          "brier_uncalibrated": 0.09349478387420214
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5595726273064392,
+          "average_precision": 0.41715320138947354,
+          "AP_skill_over_prevalence": 0.10293691051843552,
+          "brier_uncalibrated": 0.24903718230121152
+        }
+      }
+    },
+    "motif_prior_activity_avi_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.45996093750000006,
+          "average_precision": 0.12479268626187118,
+          "AP_skill_over_prevalence": 0.0427420005989216,
+          "brier_uncalibrated": 0.097754359003449
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5594890053164289,
+          "average_precision": 0.4136145097414768,
+          "AP_skill_over_prevalence": 0.09749048845685393,
+          "brier_uncalibrated": 0.25273301963244843
+        }
+      }
+    },
+    "motif_prior_activity_avi_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4947916666666667,
+          "average_precision": 0.11103770113997785,
+          "AP_skill_over_prevalence": 0.027697485621850773,
+          "brier_uncalibrated": 0.09463855012196193
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5550232694268356,
+          "average_precision": 0.4074886614360733,
+          "AP_skill_over_prevalence": 0.08806215768512961,
+          "brier_uncalibrated": 0.2552610410359889
+        }
+      }
+    },
+    "motif_prior_activity_avi_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4866536458333333,
+          "average_precision": 0.10962436103326537,
+          "AP_skill_over_prevalence": 0.026151644880133995,
+          "brier_uncalibrated": 0.0943779860367905
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.562661816591246,
+          "average_precision": 0.4218745257323808,
+          "AP_skill_over_prevalence": 0.11020352982832914,
+          "brier_uncalibrated": 0.24829748862323728
+        }
+      }
+    },
+    "motif_prior_ensemble_activity_avi": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4778645833333333,
+          "average_precision": 0.1262546510644184,
+          "AP_skill_over_prevalence": 0.044341024601707635,
+          "brier_uncalibrated": 0.09398574350315607
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5607497676273546,
+          "average_precision": 0.41596332021667415,
+          "AP_skill_over_prevalence": 0.10110555709326105,
+          "brier_uncalibrated": 0.24967863735750032
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_effect_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.45784505208333337,
+          "average_precision": 0.1292504089536557,
+          "AP_skill_over_prevalence": 0.047617634793060915,
+          "brier_uncalibrated": 0.10421429393809899
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5608848493035253,
+          "average_precision": 0.4206603781064844,
+          "AP_skill_over_prevalence": 0.10833482775606953,
+          "brier_uncalibrated": 0.25184459449033714
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_effect_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5192057291666666,
+          "average_precision": 0.1067672938831129,
+          "AP_skill_over_prevalence": 0.023026727684654736,
+          "brier_uncalibrated": 0.10350212063956939
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5597672092447326,
+          "average_precision": 0.41679081830826825,
+          "AP_skill_over_prevalence": 0.10237916449121734,
+          "brier_uncalibrated": 0.252500254477801
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_effect_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.49690755208333337,
+          "average_precision": 0.10547796330812226,
+          "AP_skill_over_prevalence": 0.021616522368258718,
+          "brier_uncalibrated": 0.09800993637346556
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5649389077038367,
+          "average_precision": 0.43014419330463344,
+          "AP_skill_over_prevalence": 0.12293142600796933,
+          "brier_uncalibrated": 0.2467433302247538
+        }
+      }
+    },
+    "motif_chromatin_prior_ensemble_activity_effect": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4892578125,
+          "average_precision": 0.13010407779734043,
+          "AP_skill_over_prevalence": 0.04855133509084109,
+          "brier_uncalibrated": 0.09976942286790579
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5635720097902053,
+          "average_precision": 0.42402735516441953,
+          "AP_skill_over_prevalence": 0.11351696283685798,
+          "brier_uncalibrated": 0.248017650675056
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_avi_s42": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.47005208333333326,
+          "average_precision": 0.13255032697249297,
+          "AP_skill_over_prevalence": 0.051226920126164185,
+          "brier_uncalibrated": 0.10420545150678408
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.56700935601419,
+          "average_precision": 0.4317269712031504,
+          "AP_skill_over_prevalence": 0.1253674891981449,
+          "brier_uncalibrated": 0.24950919148567952
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_avi_s73": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5016276041666666,
+          "average_precision": 0.1017629477013387,
+          "AP_skill_over_prevalence": 0.017553224048339203,
+          "brier_uncalibrated": 0.10783196010275183
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5611775262685617,
+          "average_precision": 0.41764946419793253,
+          "AP_skill_over_prevalence": 0.10370071165659447,
+          "brier_uncalibrated": 0.2519589565784236
+        }
+      }
+    },
+    "motif_chromatin_prior_activity_avi_s101": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5047200520833333,
+          "average_precision": 0.10154922153902854,
+          "AP_skill_over_prevalence": 0.017319461058312464,
+          "brier_uncalibrated": 0.1026025679406059
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5646574875451478,
+          "average_precision": 0.42326537183203217,
+          "AP_skill_over_prevalence": 0.11234418960740146,
+          "brier_uncalibrated": 0.24792810315861788
+        }
+      }
+    },
+    "motif_chromatin_prior_ensemble_activity_avi": {
+      "Salomon_NGN2": {
+        "n": 280,
+        "detected_calls": 24,
+        "all_validation_detected_calls": 65,
+        "outside_active_detected_calls": 41,
+        "within_active_metrics": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.4913736979166667,
+          "average_precision": 0.10494989789973366,
+          "AP_skill_over_prevalence": 0.021038950827833695,
+          "brier_uncalibrated": 0.10291026612646825
+        }
+      },
+      "Siraj_OL42_SKNSH": {
+        "n": 1653,
+        "detected_calls": 579,
+        "all_validation_detected_calls": 579,
+        "outside_active_detected_calls": 0,
+        "within_active_metrics": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5661433859830247,
+          "average_precision": 0.42562476610500793,
+          "AP_skill_over_prevalence": 0.11597554783200942,
+          "brier_uncalibrated": 0.2475916647078204
+        }
+      }
+    }
+  },
+  "limitations": "Post-stage1 validation diagnostic specified before v3 test evaluation; conditional subsets are selected by laboratory measurements, not applicable to screening unmeasured variants without a predicted activity model."
+}

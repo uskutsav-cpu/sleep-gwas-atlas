@@ -1,0 +1,16 @@
+{
+  "original_source_sha256": "6b5768963aede60b3c4e5be9ba329f3901329c27e62dfc5e0c168f96d88685da",
+  "derived_source_sha256": "990217b6eefe12b924832bdeb6eadeef4f3926b84f181b67aad08b694d881f3c",
+  "explicit_replacements": {
+    "from measurement_common import *": "from direction_common import *",
+    "from finite_measurement_plan import get_plan": "from finite_direction_plan import get_plan",
+    "assert_prior_versions()": "assert_versions()",
+    "d,pairs,bank,x,extra=load_data();train=": "d,pairs,bank,x,extra=load_data();new_signed=load_signed_sidecar(d);train=",
+    "'new_Ulirsch_outcomes_used':False": "'new_original_signed_training_targets':int(new_signed[tr].sum()),'new_Ulirsch_outcomes_used':False",
+    "sha(DEST/'finite_measurement_plan.json')": "sha(DEST/'finite_direction_plan.json')",
+    "DEST/'folded_median_pretraining_audit.json'": "MEASUREMENT/'folded_median_pretraining_audit.json'",
+    "Path(__file__).with_name('folded_effect_network.py')": "MEASURE_WORK/'folded_effect_network.py'",
+    "Path(__file__).with_name('measurement_inputs.py')": "MEASURE_WORK/'measurement_inputs.py'"
+  },
+  "only_training_data_change": "New source-verified signed labels; measured magnitudes, partitions, input features and actual batches unchanged."
+}

@@ -1,0 +1,13 @@
+# Priority splice-prediction review
+
+We queried the Broad Institute's public [SpliceAI Lookup APIs](https://github.com/broadinstitute/SpliceAI-lookup) on 27 October 2026 for three reference-checked GRCh38 variants. Both SpliceAI and Pangolin used a 500-base search window when they returned scores. Their output is model prediction, not measured or tissue-specific validation; their underlying training data may overlap with other resources. The APIs return transcript-specific results, so a summary maximum must not be treated as an event-matched comparison.
+
+| Variant | SpliceAI result | Pangolin result | Interpretation |
+|---|---|---|---|
+| rs323509, chr5:104746478 A>C | Maximum displayed delta 0.010 across returned ENSG00000251574 transcripts | Maximum absolute displayed delta 0.008, ENSG00000251574 | Both models give small local scores. Existing testis sQTL associations for this gene concern specific intron clusters, not a directly matched predicted event or a sleep-relevant tissue. They cannot establish model agreement or disagreement here. |
+| FOXP2 insertion, chr7:114534306 T>TA | Maximum displayed delta 0.008 across returned FOXP2 transcripts | Maximum absolute displayed delta 0.003, FOXP2 | Both report small local scores for the normalized insertion. This does not exclude a regulatory or more distant splicing effect. No exact-variant measured QTL was recovered in the existing evidence table. |
+| rs7734045, chr5:136202653 A>C, SMAD5 region | All returned values display 0.000 for two TRPC7-AS1 transcripts | Service returned an error and no score | No SMAD5 transcript score was returned by these lookups. Existing SMAD5 eQTL and sQTL associations, including cerebellar sQTL events, do not provide an event-matched test of the returned TRPC7-AS1 predictions. Missing Pangolin is not zero. |
+
+These scores do not provide a causal sleep/frailty link, and low scores do not rule out effects outside the queried splice windows. A neighboring gene or sQTL association at the same allele does not by itself identify the target or establish colocalization. The requested separate AlphaGenome splice-site, splice-site-usage, and junction predictions remain outstanding, as do systematic tissue comparisons and independent experimental validation.
+
+The [transcript-level table](stage5_priority_splice_model_predictions.csv) preserves score and position fields, API source, window, and errors. The [raw API responses](stage5_priority_splice_model_raw_responses.zip) include additional REF/ALT and transcript details. The [updated atlas](stage5_functional_atlas_with_priority_splice.csv) adds summary columns for the three queries; `not queried` is missing information, not a negative result.

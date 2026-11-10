@@ -1,0 +1,42 @@
+{
+  "selected_record": {
+    "name": "motif_chromatin_full_val10-11-12-13-14-15_ensemble_activity_avi",
+    "family": "biological_seed_ensemble",
+    "features": "motif_chromatin",
+    "config": {
+      "members": [
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s42",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s73",
+        "motif_chromatin_full_val10-11-12-13-14-15_activity_avi_s101"
+      ],
+      "rule": "Arithmetic mean of three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 9322,
+          "detected_calls": 255,
+          "prevalence": 0.02735464492598155,
+          "auroc": 0.5811036358957391,
+          "average_precision": 0.04241067362301999,
+          "AP_skill_over_prevalence": 0.015479463936670603,
+          "brier_uncalibrated": 0.03878056881744119
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 21377,
+          "detected_calls": 1524,
+          "prevalence": 0.07129157505730457,
+          "auroc": 0.7688355541841458,
+          "average_precision": 0.2667091881619905,
+          "AP_skill_over_prevalence": 0.21041869316168194,
+          "brier_uncalibrated": 0.07362966286480074
+        }
+      },
+      "macro_AP_skill": 0.11294907854917627
+    },
+    "artifact": null
+  },
+  "candidate_count": 8,
+  "test_evaluated": false,
+  "stage": "Additional biological-feature validation search, final combined selection pending"
+}

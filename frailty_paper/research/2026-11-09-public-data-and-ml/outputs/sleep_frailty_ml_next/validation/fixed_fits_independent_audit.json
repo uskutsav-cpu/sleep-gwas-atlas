@@ -1,0 +1,216 @@
+{
+  "passed": true,
+  "all_24_matched_arm_comparisons": [
+    {
+      "source": "none",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "none",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "none",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "Salomon",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "Salomon",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "Salomon",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "Kosicki2025",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "Kosicki2025",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "Kosicki2025",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "Siraj",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "Siraj",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "Siraj",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "IGVF240K",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "IGVF240K",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "IGVF240K",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "Koesterich2023",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "Koesterich2023",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "Koesterich2023",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "McAfee2023",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "McAfee2023",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "McAfee2023",
+      "seed": 2026,
+      "matched": true
+    },
+    {
+      "source": "Retallick2026",
+      "seed": 42,
+      "matched": true
+    },
+    {
+      "source": "Retallick2026",
+      "seed": 7,
+      "matched": true
+    },
+    {
+      "source": "Retallick2026",
+      "seed": 2026,
+      "matched": true
+    }
+  ],
+  "fitted_math": {
+    "sequence": {
+      "NumPy_forward_maximum_errors": {
+        "magnitude": 2.7755575615628914e-17,
+        "signed_effect": 0.0,
+        "activity_reference": 0.0,
+        "activity_alternate": 0.0
+      },
+      "NumPy_loss_error": 0.0,
+      "fitted_gradient_checks": [
+        {
+          "parameter": "cell_activity_weight",
+          "relative_gradient_error": 4.2636802185106795e-10
+        },
+        {
+          "parameter": "line_activity_weight",
+          "relative_gradient_error": 4.2636802185106795e-10
+        },
+        {
+          "parameter": "hidden.weight",
+          "relative_gradient_error": 8.243736082342764e-09
+        },
+        {
+          "parameter": "hidden2.weight",
+          "relative_gradient_error": 1.2215944653436091e-08
+        },
+        {
+          "parameter": "output.weight",
+          "relative_gradient_error": 1.625753457788076e-10
+        },
+        {
+          "parameter": "cell_bias",
+          "relative_gradient_error": 5.866736728797034e-10
+        },
+        {
+          "parameter": "line_offset",
+          "relative_gradient_error": 5.866736728797034e-10
+        }
+      ],
+      "checkpoint_sha256": "02e5ca53072976819610f5c8990d549cc9497be105ba72369937cadb239bd183"
+    },
+    "AVI": {
+      "NumPy_forward_maximum_errors": {
+        "magnitude": 2.7755575615628914e-17,
+        "signed_effect": 0.0,
+        "activity_reference": 0.0,
+        "activity_alternate": 0.0
+      },
+      "NumPy_loss_error": 1.1102230246251565e-16,
+      "fitted_gradient_checks": [
+        {
+          "parameter": "cell_activity_weight",
+          "relative_gradient_error": 2.084121003929819e-10
+        },
+        {
+          "parameter": "line_activity_weight",
+          "relative_gradient_error": 2.084121003929819e-10
+        },
+        {
+          "parameter": "hidden.weight",
+          "relative_gradient_error": 3.5636618836985865e-09
+        },
+        {
+          "parameter": "hidden2.weight",
+          "relative_gradient_error": 5.734134005518841e-09
+        },
+        {
+          "parameter": "output.weight",
+          "relative_gradient_error": 2.912025024213732e-11
+        },
+        {
+          "parameter": "cell_bias",
+          "relative_gradient_error": 3.463772663469811e-10
+        },
+        {
+          "parameter": "line_offset",
+          "relative_gradient_error": 3.463772663469811e-10
+        },
+        {
+          "parameter": "AVI_added_input_columns",
+          "relative_gradient_error": 2.852821181309342e-09
+        }
+      ],
+      "checkpoint_sha256": "6920ff35973c1a0dc0cf3c2b439d94f06157d0aadbb80519297a9a9b88fa2cf7"
+    }
+  },
+  "settings_lock_sha256": "c77ba2128ba3e68f8a2471e911550c5fa025e45bf7db69c1fcde5c9d28ce1010",
+  "all_prediction_and_other_calibration_ids_reconstructed": true,
+  "code_sha256": "cc338e9aa4fdebd38c678410c65ac41cc8d054e94ffc7929644b2f5612ecbfbe",
+  "scope": "Numerical, matching, partition and source-omission correctness. No assertion of useful prediction or causal disease biology.",
+  "elapsed_seconds": 1.6690450409987534
+}

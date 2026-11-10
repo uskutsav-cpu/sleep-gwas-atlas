@@ -1,0 +1,19 @@
+# Stage 5 live AlphaGenome results
+
+## Coverage
+
+The official API returned nonempty, checksum-verified results for all 488 queued GRCh38 alleles, including all 23 exploratory markers, 23 matched comparison SNVs and 28 indels. RNA-seq, ATAC, DNase, histone ChIP, TF ChIP, CAGE and PRO-cap score rows appeared for all 488; each of the three requested splice modalities appeared for 267 variants and was absent from the returned rows for 221. Absence is not a zero prediction. A response with one modality does not establish coverage of every gene, cell type or event.
+
+The keyword-screened tissue view has 1,844,585 score rows; categories can overlap and are not unique samples. RNA-seq rows with screened brain/neural, pituitary, muscle and immune labels occurred for all variants. The same broad brain, muscle and immune screens matched ATAC and DNase rows for all variants; no ATAC or DNase row matched the word pituitary for any variant. This is a transparent label screen, not an exhaustive ontology audit or proof of global absence. Splice-site-usage and junction rows with each of the four broad category labels appeared for 267 variants. See `stage5_live_tissue_coverage.csv` and the full metadata for exact labels and caveats.
+
+## Priority interpretation
+
+- **rs323509:** the tested variant and the alternative rs60271 returned no splice rows from the recommended scorers. Testis RNA-expression predictions are not predictions of the measured testis intron-usage event. Neither tissue nor association demonstrates a sleep or frailty mechanism.
+- **FOXP2:** both the original marker and the formerly missing insertion were scored. At the insertion, the pituitary FOXP2 RNA score is +0.0045135, whereas the selected pituitary eQTL ALT effect is -0.535275. For the marker, the corresponding model score is -0.0007002 versus a GTEx v10 eQTL effect +0.2479. These are opposite-sign screens with very different scales, not conclusive model failures or disease effects. The earlier colocalization sensitivity favored distinct rather than shared signals under its baseline single-signal assumptions. The marker overlaps a candidate regulatory element, but available reporter and contact assays do not test the specific allele or prove independent prediction validation.
+- **SMAD5:** the naïve CD4 eQTL ALT effect is +0.672672. The matched-label total RNA prediction is +0.0004586, while polyA RNA is -0.0014015. These small predictions differ by assay; the samples are not necessarily the same. Earlier FI colocalization favored distinct signals, while the physical-frailty and insomnia tests were mostly QTL-only under the selected baseline model. These results do not establish shared causality.
+
+## Validation limits
+
+The exact-allele, gene and tissue-label RNA–eQTL screen contains 827 rows across 418 variants, including repeated related QTL records and multiple tracks. It is not an independent replication count or a measure of model accuracy. The event-coordinate screen did not find any candidate splice-junction matches under its deliberately narrow criteria; it does not exclude effects or matches outside those criteria. The available regulatory-element assays are useful context but have not been established as independent allele-specific validation. QTL data can overlap training datasets, and disease cohorts can overlap. No clinical or individual-risk conclusions follow.
+
+The raw results and track metadata are in `stage5_live_raw_scores.zip`. The linked tissue view, coverage and direction screens are documented in `stage5_live_analysis_readme.md`. Full precision is available in the raw tables. The most defensible next step is event- and tissue-matched validation using an independent allele-specific assay or independent molecular dataset, alongside colocalization with matched LD where available.

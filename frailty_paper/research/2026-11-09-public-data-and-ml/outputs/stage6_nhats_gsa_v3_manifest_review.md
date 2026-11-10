@@ -1,0 +1,13 @@
+# NHATS genotype feasibility: representative GSA v3 array
+
+[NHATS NG00134](https://dss.niagads.org/datasets/ng00134/) describes 4,006 QC-passing participants genotyped on an Illumina Global Screening Array v3.0 and provides TOPMed-imputed genotypes through approved access. It reports 700,009 variants, whereas the public [Illumina GSA-24v3-0_A1 GRCh37 manifest](https://support.illumina.com/downloads/infinium-global-screening-array-v3-0-product-files.html) contains 654,027 assay rows. The source of this discrepancy and the exact NHATS revision/custom content are not established; this manifest is a **representative array**, not a confirmed copy of the NHATS manifest.
+
+Scanning the 654,027 manifest rows found no exact GRCh37 coordinate matches for any of the 15 weighted-prototype or 22 shared-count markers, including markers under different probe names. These are design-file checks, not actual NHATS genotype calls. A different/custom array revision, updated rsIDs, uncertain project coordinates, post-QC exclusions, or imputation could change coverage. Do not use this result to assert that NHATS lacks the markers or cannot validate the scores. TOPMed-imputed calls may provide relevant variants, but their existence and quality in this cohort are unverified.
+
+The no-fee NHATS genetic route remains promising, subject to approved access and successful linkage to sleep and physical-frailty outcomes. The study team should check the actual NHATS per-variant imputed file, build/allele pair, INFO or equivalent imputation metric, allele frequency and effective call availability for each candidate before freezing a validation analysis. This scan also cannot measure participant and relative overlap or establish predictive performance. See the broader [NHATS validation feasibility](stage6_nhats_genetic_validation_feasibility.md).
+
+[Per-marker results](stage6_nhats_gsa_v3_coverage.csv), [receipt and local SHA-256](stage6_nhats_gsa_v3_coverage.json), and [script](../work/nhats_gsa_v3_manifest_check.py). The downloaded manufacturer file was locally hashed; no separate publisher checksum was verified. No NHATS individual data were accessed.
+
+### Scan verification
+
+A follow-up reran the full manifest scan while also normalizing the `GSA-` prefix on rsID probe names. It recovered the positive-control rs7412 at GRCh37 chromosome 19 position 45,412,079 and still found no score-marker coordinate matches. The control checks that the parsing and coordinate lookup can recover a known manifest record; it does not authenticate NHATS's array, verify every candidate coordinate or determine imputation coverage. The [receipt](stage6_nhats_gsa_v3_coverage.json) records the control and rerun.

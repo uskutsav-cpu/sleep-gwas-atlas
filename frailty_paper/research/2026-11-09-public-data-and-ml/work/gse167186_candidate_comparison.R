@@ -1,0 +1,30 @@
+# Exploratory same-sex muscle expression comparison; no genetic-score validation.
+meta <- readLines(gzfile('work/GSE167186_GPL20301_series_matrix.txt.gz'))
+parse_row <- function(line) as.character(read.delim(text=line, header=FALSE, quote='"', check.names=FALSE, stringsAsFactors=FALSE)[1,-1])
+titles <- parse_row(meta[grep('^!Sample_title\t',meta)])
+char_lines <- meta[grep('^!Sample_characteristics_ch1\t',meta)]
+chars <- lapply(char_lines,parse_row)
+groups <- Filter(function(x) all(startsWith(x,'group: ')),chars)
+ages <- Filter(function(x) all(startsWith(x,'age: ')),chars)
+stopifnot(length(groups)==1,length(ages)==1,length(titles)==76,!anyDuplicated(titles))
+group <- sub('^group: ','',groups[[1]])
+age <- as.numeric(sub('^age: ','',ages[[1]]))
+counts <- read.csv(gzfile('work/GSE167186_counts.csv.gz'),check.names=FALSE)
+stopifnot(identical(names(counts)[-1],titles),all(is.finite(age)),!anyNA(counts[,-1]),all(as.matrix(counts[,-1])>=0))
+keep <- group %in% c('Old Healthy','Sarcopenia')
+stopifnot(sum(keep)==53,sum(group=='Old Healthy')==29,sum(group=='Sarcopenia')==24)
+lib <- colSums(counts[,-1]); stopifnot(all(lib>0))
+genes <- c('FOXP2','SMAD5','RBM6','MEIS1')
+results <- list()
+for (gene in genes) {
+ ind <- which(counts$Symbol==gene);stopifnot(length(ind)==1)
+ y <- log2(1e6*as.numeric(counts[ind,-1])/lib+0.5)
+ d <- data.frame(y=y[keep],sarc=as.numeric(group[keep]=='Sarcopenia'),age=age[keep])
+ fit <- lm(y ~ sarc + age,data=d); cf<-coef(summary(fit))['sarc',];ci<-confint(fit)['sarc',]
+ loo <- vapply(seq_len(nrow(d)),function(i) coef(lm(y~sarc+age,data=d[-i,]))['sarc'],numeric(1))
+ results[[gene]] <- data.frame(gene=gene,n=nrow(d),coefficient=unname(cf[1]),se=unname(cf[2]),p=unname(cf[4]),ci_low=unname(ci[1]),ci_high=unname(ci[2]),leave_one_out_min=min(loo),leave_one_out_max=max(loo),check.names=FALSE)
+}
+out<-do.call(rbind,results);out$bh_p_4<-p.adjust(out$p,method='BH')
+write.csv(out,'outputs/stage6_gse167186_candidate_age_adjusted.csv',row.names=FALSE)
+cat('Group age distributions (min, median, max):\n');print(tapply(age[keep],group[keep],function(x) c(min=min(x),median=median(x),max=max(x))))
+cat('Library-size range:',range(lib[keep]),'\n'); print(out,row.names=FALSE)

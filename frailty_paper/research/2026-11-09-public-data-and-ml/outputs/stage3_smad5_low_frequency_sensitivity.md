@@ -1,0 +1,14 @@
+# SMAD5 splice credible-set coverage: lower-frequency sensitivity
+
+All 18 unique variants in the SMAD5 L2 molecular credible set were present in the FinnGen insomnia file at matching GRCh38 position, reference and alternate alleles. Their FinnGen minor-allele frequencies were approximately **0.91%–0.95%**, just below the earlier analysis's 1% cutoff. Thus, the previous zero-of-18 coverage was not evidence that these variants were absent from the full source. The [variant-by-variant audit](stage3_smad5_L2_finngen_coverage_audit.csv) records frequency, source matches and overlapping exclusion flags.
+
+I repeated the exploratory single-signal splicing–insomnia ABF calculation after lowering the **FinnGen** MAF cutoff to 0.5%, retaining the original QTL MAF cutoff and exact allele/position, unique-ID and nonpalindromic SNP filters. The shared-SNP set increased from 2,212 to 2,340. It includes **14 of the 18** L2 variants; three remaining variants are indels and one is a palindromic SNP, excluded by the existing rules. This is a post hoc sensitivity analysis, not a replacement for a prespecified QC protocol. It does not verify per-variant imputation quality, study-specific LD, or causal-variant completeness.
+
+| Model and MAF filter | H1: splice association only | H3: distinct signals | H4: shared signal | H3 + H4 |
+|---|---:|---:|---:|---:|
+| Original FinnGen MAF ≥1% | 0.8674 | 0.0431 | 0.0895 | 0.1326 |
+| Sensitivity FinnGen MAF ≥0.5% | 0.8628 | 0.0482 | 0.0890 | 0.1372 |
+
+Both rows use p1 = p2 = 10⁻⁴, p12 = 10⁻⁵, splice prior SD 0.15 and insomnia log-odds prior SD 0.20. The default-prior H4 changed little in this specific rerun, but this is **not** proof of robust inference: the splice phenotype has two molecular credible sets, the model permits only one signal per trait, four set variants remain excluded, and most posterior mass is on an eQTL/sQTL-only hypothesis. The source GWAS and QTL populations differ; exact sample overlap, allele-level representation and signal-specific LD remain unresolved. Low H4 is not proof of no shared signal. Full prior sensitivity is in [the sensitivity table](stage3_smad5_splice_finngen_maf005_sensitivity.csv) and [receipt](stage3_smad5_splice_finngen_maf005_receipt.json).
+
+The underlying QTL source is the eQTL Catalogue r7 QTD000285 filtered `.cc` splice dataset. The analysis is post-selected and unadjusted for other tested loci, events or tissue choices. A credible follow-up should examine the excluded variants' imputation and allele representations, use appropriately matched dense LD and multi-signal colocalization, and verify the quantitative and case-control association models. The original [fine-mapping review](stage3_skeletal_molecular_finemapping_review.md) and [splicing report](stage3_smad5_splice_coloc.md) retain their limitations.

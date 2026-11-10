@@ -1,0 +1,28 @@
+# Sleep duration, systemic disease and ageing: public evidence follow-up
+
+Checked 29 October 2026. [The MULTI Consortium et al. (2026)](https://www.nature.com/articles/s41586-026-10524-5) provide an additional source for the project's background and hypothesis generation. The paper states that its short- and long-sleep GWAS summary statistics are publicly available through [SleepChart](https://labs-laboratory.com/sleepchart/); the companion [MEDICINE portal](https://labs-laboratory.com/medicine/) lists organ-specific biological-ageing biomarker GWAS summaries. The paper also points to Synapse. An anonymous download attempt for the linked sleep GWAS archive was denied; see the file-access check below. We have not analyzed the full GWAS files. These resources are aggregate results, not linked individual genotypes and frailty outcomes.
+
+The source contrasts self-reported short and long sleep duration with a normal-duration reference. This is **not an insomnia GWAS**: short sleep and insomnia are distinct phenotypes. Its genetic analysis uses UK Biobank European-ancestry participants, and some project discovery inputs also use UK Biobank; do not treat this as an independent replication. The author-reported disease genetic correlations use FinnGen and PGC results. Overlap, trait definitions and any reuse of participants must be examined for each prospective comparison. Neither organ-ageing biomarkers nor disease endpoints are FI or FFS.
+
+## Public author-reported LDSC results
+
+We extracted every row from columns A–G of sheet SF5 of the paper's supplementary workbook, representing the authors' genetic correlations for their own sleep GWAS against 527 endpoints in each of two sleep contrasts: [1,054 rows](sleepchart_2026_author_ldsc.csv). This copies the authors' results; it is **not a new LDSC run**. Source URL and workbook SHA-256 are in the [receipt](sleepchart_2026_ldsc_receipt.json); reproduce with `python3 work/sleepchart_extract_ldsc.py` after obtaining the workbook from that URL. Rows identify endpoints by the source code, not by independently validated case definitions.
+
+Illustrative reported estimates for endpoints relevant to a sleep–frailty discussion are below. These were selected after inspecting the results and are context, not prespecified tests of our candidates. The article used P < 0.05/527 for the disease correlation scan.
+
+| Endpoint code | Short versus normal: rg (SE), P | Long versus normal: rg (SE), P |
+|---|---:|---:|
+| PAIN | 0.414 (0.0474), 2.35e-18 | 0.2048 (0.0399), 2.94e-7 |
+| M13_ARTHROPATHIES | 0.2882 (0.0457), 2.96e-10 | -0.056 (0.0445), 0.209 |
+| F5_DEPRESSION_DYSTHYMIA | 0.368 (0.0419), 1.57e-18 | 0.2587 (0.0396), 6.45e-11 |
+| I9_HEARTFAIL | 0.3124 (0.0689), 5.80e-6 | 0.0107 (0.0625), 0.864 |
+
+The two sleep estimates should not be compared by declaring one significant and the other nonsignificant: a direct difference test would need their covariance. Genetic correlation is a genome-wide association of genetic effects; it does not establish causality, shared causal variants, a cell type or the predictive performance of either of our scores. Disease and sleep definitions, selection, ascertainment, age and ancestry also limit transportability. The table does not resolve whether the FI genetic association persists after removing sleep and fatigue deficits.
+
+The full table offers a transparent way to choose disease phenotypes for a later *prespecified* comparison with the project's sleep/frailty findings, with separate ancestry and overlap checks and appropriate correction for the new question. The biological-ageing data could support AI-related hypothesis generation, but a prediction model or evaluation would require additional design and cannot be inferred from these aggregate correlations.
+
+## File access and published lead-SNP check
+
+On 29 October 2026 the actual short- and long-sleep portal download buttons both led to [Synapse entity syn70524096](https://www.synapse.org/Synapse:syn70524096), identified in the public entity metadata as `2-SleepChart.zip`. Its public permissions response reported `canView: true`, `canPublicRead: true`, `canDownload: false`, and `isCertificationRequired: true` for the anonymous request; an attempted anonymous file request returned HTTP 403 with “Anonymous users have only READ access permission.” This is an anonymous-access observation, not proof of which account, certifications, conditions, or fees would apply to a particular authenticated researcher. We did not obtain the archive or assess its contents, size, variant-level coverage or download terms. The article's separate supplemental workbooks *are* downloadable anonymously. The source page and permission test should be rechecked because access conditions can change.
+
+As a limited fallback, the [figure source workbook](https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-10524-5/MediaObjects/41586_2026_10524_MOESM5_ESM.xlsx) lists eight reported lead IDs in sheet SD2: one for short sleep and seven for long sleep. An exact identifier comparison found **0/15** and **0/22** project score rsIDs among those eight leads. These are selected, genome-wide-significant leads—not the full GWAS. A nonmatch says nothing about each candidate's association, nearby correlated signals, shared causal variants or score prediction. One source lead is encoded as a coordinate/indel rather than an rsID; the comparison does not harmonize coordinate builds or alleles. The exact-match check and workbook SHA-256 are in the [machine-readable receipt](sleepchart_2026_lead_variant_check.json); reproduce with `python3 work/sleepchart_lead_variants_check.py` using the linked workbook.

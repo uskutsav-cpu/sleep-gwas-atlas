@@ -1,0 +1,15 @@
+# Variant–gene–tissue evidence atlas
+
+The [long-format atlas](stage5_variant_gene_tissue_evidence_atlas.csv) joins all 488 exact GRCh38 queue alleles to 525 deduplicated credible-set QTL records and 800 targeted QTL records. It also retains one placeholder for each of 26 variants with no exact record in either inventory, yielding 1,351 rows. This is the current evidence inventory, not a completed Stage 5 analysis. The [audit](stage5_variant_gene_tissue_evidence_atlas_audit.json) records coverage and the file hash.
+
+Each QTL row has the source, dataset, candidate gene, tissue or cell, molecular outcome, event and ALT-oriented effect when available. A variant or gene can have many rows; these are not independent observations. Four exact associations appear in both source collections and their eight rows are flagged as possible cross-collection duplicates. The flag is conservative and does not identify all overlap among related studies or releases. Missing QTL records mean only that these two selected inventories did not contain one, not that no QTL exists.
+
+The direct disease association field is filled only for original exploratory markers where recorded in the existing atlas. It does not imply colocalization of the molecular and disease signals; other variants can still have GWAS data elsewhere. Molecular PIPs are from molecular rather than disease fine-mapping. AVI is a broad, non-tissue-specific variant-impact score, not phenotype risk. ENCODE cCRE overlap is element-level context, not proof of an allelic effect or a link to the listed QTL gene. Functional-review links refer to selected marker follow-ups and do not apply automatically to all QTL rows.
+
+The full-precision AlphaGenome expression, splicing and chromatin fields are explicitly marked unavailable. For that reason, prediction–QTL concordance is not assessable. Required future work includes live scoring for all variants, including the 28 indels; tissue and assay coverage checks; allele-, gene- and event-matched comparisons; and independent functional validation with model-training overlap assessed. A generic high-impact score, a neighboring gene, a nonsignificant assay, or a QTL alone cannot prove a shared causal insomnia–frailty mechanism.
+
+A later exact-allele join added links to [regional GWAS evidence](stage5_credible_variants_gwas_aligned_evidence.csv) for 227 queued variants; see its [methods note](stage5_credible_variants_gwas_evidence_readme.md). The direct-marker field retains its original scope. Repeated regional exports are not independent tests.
+
+An exact REF/ALT join to the FinnGen R13 insomnia regional cache adds results for 474 of 488 queue variants, including 24 indels; see the [source table and limitations](stage5_finngen_insomnia_exact_queue_readme.md). Repeated values across molecular rows represent the same GWAS association, not separate tests.
+
+Reciprocal-build, allele-pair matching adds five GRCh37-source GWAS lookups for eligible non-palindromic SNVs; the [methods and exclusions](stage5_grch37_gwas_exact_queue_readme.md) distinguish these from the GRCh38 FinnGen lookup.

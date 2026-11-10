@@ -1,0 +1,7 @@
+# Colocalization calculation: independent reference-formula check
+
+I checked the exploratory custom approximate-Bayes-factor calculations against the unmodified `approx.bf.estimates` and `combine.abf` functions from [coloc v5.2.3](https://github.com/chr1swallace/coloc/blob/v5.2.3/R/claudia.R). On the same aligned variant files and default illustrative priors, the maximum absolute difference among H0–H4 was below **3 × 10⁻¹⁵** in each of seven comparisons, including the lower-FinnGen-MAF SMAD5 sensitivity. [Full check](stage3_coloc_reference_formula_check.csv).
+
+The check used R to source that release's `claudia.R` file directly; it did **not** install or run the complete `coloc` package workflow, validate preprocessing, or independently validate input data. The source file SHA-256 is `cf6af3620cef7d2599757a2b04f7677ca8a4a5211de9367cab8e9961db72c0ee`; the executable check is `work/stage3_validate_abf_against_coloc.R`. The `sdY` values and prior SDs used for each comparison matched the project's calculations.
+
+Agreement confirms numerical implementation of these formulas on these specific inputs. It does not make the H3/H4 results reliable as biological conclusions: the [molecular fine-mapping review](stage3_skeletal_molecular_finemapping_review.md) found multiple SMAD5 signals and incomplete credible-set coverage, while phenotype scale, LD matching and donor overlap also require review. Multi-signal analysis remains needed.

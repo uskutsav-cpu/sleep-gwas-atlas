@@ -1,0 +1,9 @@
+# rs11636381: candidate regulatory element and reporter results
+
+The exploratory marker rs11636381 (GRCh38 chr15:73842542 T>C) overlaps the ENCODE distal-enhancer candidate EH38E3145438 (chr15:73842447–73842754, zero-based half-open coordinates). The published general AVI PHRED is 9.8207; it does not identify the target gene, tissue, causal effect or risk direction.
+
+[SCREEN's element page](https://screen.wenglab.org/GRCh38/ccre/EH38E3145438/genes) lists ENSG00000260624 and TBC1D21 as closest genes, approximately 30.9 kb to their annotated TSSs. Proximity alone is not a verified regulatory link. SCREEN also displays GTEx v8 eQTL associations for the exact T>C allele with ENSG00000260624 in testis, and LOXL1-AS1 in testis and cultured fibroblasts. This is context-specific association, not a causal sleep/frailty link or independent confirmation of the existing GTEx v10 records. A nearby INSYN1 eQTL on the page concerns a different variant (chr15:73842702 A>G) and must not be attributed to rs11636381.
+
+[SCREEN's functional-characterization page](https://screen.wenglab.org/GRCh38/ccre/EH38E3145438/functional-characterization) lists seven STARR-seq solo-fragment tests. None has a displayed nominal p-value below 0.05; in SH-SY5Y neuroblastoma cells the displayed log₂ fold change is -0.16, p = 0.74, FDR = 1.00. The [table](stage5_rs11636381_ccre_reporter_results.csv) preserves all seven results. They test the element in the specified cell lines, not a demonstrated T-versus-C contrast; negative results do not exclude activity in other contexts. The page reports no mouse transgenic enhancer assays, region-centric MPRA, or CRISPR perturbation data in its available catalog; this is not proof that none exists anywhere.
+
+A tissue- and allele-matched AlphaGenome prediction and an independent, allele-specific functional experiment remain necessary. The experimental data's independence from AlphaGenome training is unverified.

@@ -1,0 +1,29 @@
+# Stage 5 live AlphaGenome analysis: interpretation and reproduction
+
+The files produced by the live run contain model-generated molecular predictions, not estimates of individual disease risk. Inputs are the 488 reference-checked GRCh38 REF/ALT alleles in `stage5_score_queue.csv`: 23 exploratory markers, fine-mapped molecular alternatives and 23 matched comparison SNVs (including 28 indels overall). The complete raw score tables, per-variant receipts, run configuration and model track metadata are archived separately as `stage5_live_raw_scores.zip`. The API uses the official v1 client and recommended 1 Mb scorers for RNA expression, three splicing modalities, ATAC, DNase, histone and TF ChIP, CAGE and PRO-cap, with ALL_FOLDS. The score files retain raw values, output type, scorer description, gene and track metadata, and quantile scores when returned.
+
+`stage5_live_tissue_evidence_atlas.csv.gz` is a linked view of score rows whose track metadata contains screened brain/neural, pituitary, muscle or immune labels, plus splice-site scores without a screened tissue. It also carries the six exact-allele GWAS associations, cCRE overlaps, candidate gene context and a count of source QTL rows for the exact same variant and gene. Those QTL counts include potentially duplicated or overlapping sources and are not counts of independent replications. They do not imply that a QTL's measured tissue or event matches the prediction. For individual measured records and flags, join on the exact variant and gene to `stage5_variant_gene_tissue_phenotype_integrated.csv`. Rows for a local regulatory score without a gene label do not assert a target gene. ENCODE cCRE overlap is element-level evidence, not proof of an allele-specific effect or linkage to a gene.
+
+The tissue view uses a transparent keyword screen over biosample, GTEx tissue and track names. Labels can overlap, include related or in vitro cell types, and are not an exhaustive ontology classification; verify the actual track metadata before interpreting a cell type. `stage5_live_tissue_coverage.csv` counts screened score rows by queued allele, category and modality; it does not count independent samples. A zero means that no returned row matched this screen, not that the modality or tissue has a zero effect or is unavailable globally. `stage5_live_score_coverage_audit.csv` checks files and reports output types actually returned. Missing splice outputs may reflect scorer-specific gene/variant restrictions or other causes; do not assume a reason without checking. Full raw files should be used for other tissues and detailed track review.
+
+`stage5_live_rna_eqtl_direction_screen.csv` is an exploratory sign screen only, restricted to exact variant and Ensembl gene plus normalized measured tissue labels matched to the model GTEx tissue metadata, or the named naïve CD4 mapping. It retains assay, source, tissue, raw model score, QTL effect and duplicate flag. Model RNA scores and QTL effects have different scales; even when signs match, this is not a statistical validation test. Small scores can change sign with assay or modeling choices. GTEx and other data may overlap model training, labels do not guarantee matched samples, and related source rows are not independent. QTL and disease associations do not establish colocalization or mediation.
+
+`stage5_candidate_splice_junction_matches.csv` is a coordinate-proximity screen only: predicted and measured start/end positions must be within one base, with exact allele, gene and mapped tissue labels. Any returned row requires independent verification of chromosome/build, coordinate conventions, strand, junction identity, tissue and assay. LeafCutter usage effects and predicted junction counts use different measures, and recommended aggregate splice scores may be unsigned: no direction-concordance conclusion is assigned. An empty file means no candidate passed this limited screen, not no biological effect. Raw score outputs allow broader investigation.
+
+Initial rs323509, FOXP2 and SMAD5 examples and limitations are in `stage5_live_priority_initial_findings.md`. The separate FOXP2 and SMAD5 colocalization reviews describe their coverage, assumptions and contrary results. The postselected controls do not establish a calibrated null or predictive performance.
+
+Reproduction after obtaining authorized API access: see `stage5_reproducible_scoring_bundle.zip`. With the raw directory restored and the repository root as the working directory, run:
+
+```sh
+python3 outputs/stage5_extract_live_tissue_atlas.py --store PATH_TO_RAW_DIRECTORY
+python3 outputs/stage5_live_tissue_coverage.py --store PATH_TO_RAW_DIRECTORY
+python3 outputs/stage5_compare_live_rna_eqtl.py --store PATH_TO_RAW_DIRECTORY
+python3 outputs/stage5_match_candidate_splice_junctions.py --store PATH_TO_RAW_DIRECTORY
+python3 outputs/stage5_reproducible_scoring/audit_scores.py --queue outputs/stage5_score_queue.csv --store PATH_TO_RAW_DIRECTORY --output outputs/stage5_live_score_coverage_audit.csv
+```
+
+These scripts screen only checksum-verified results. They do not independently prove the API's biological accuracy or the correctness of the source datasets. AlphaGenome outputs are subject to the provider's non-commercial research terms and are not for clinical decisions. Scorer definitions: https://google-deepmind-alphagenome.readthedocs-hosted.com/variant_scoring.html.
+
+### CD4 CAGE provenance flag
+
+The API's two `LQhCAGE CL:0000895` strands carry a naïve CD4 ontology label, but their corresponding published paper metadata identifies a FANTOM source file described as memory conventional CD4 cells. Model-version equivalence still needs confirmation. Do not treat these rows as verified naïve-cell predictions; see `stage5_alphagenome_track_independence_audit.md` for source accessions and `stage5_alphagenome_priority_track_provenance.csv` for the extracted metadata. Original score files retain their original model labels.

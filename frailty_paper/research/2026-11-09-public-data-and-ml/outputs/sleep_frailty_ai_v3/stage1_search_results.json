@@ -1,0 +1,1196 @@
+[
+  {
+    "name": "pattern_logistic_none_C0.1",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 0.1,
+      "weighting": "none"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5180233371575678,
+          "average_precision": 0.025692311537875587,
+          "AP_skill_over_prevalence": 0.0026548434585601673,
+          "brier_uncalibrated": 0.022713741251766183
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6730445042893412,
+          "average_precision": 0.12947811545818044,
+          "AP_skill_over_prevalence": 0.06461745773720327,
+          "brier_uncalibrated": 0.06307408474991283
+        }
+      },
+      "macro_AP_skill": 0.03363615059788172
+    },
+    "artifact": "models/pattern_logistic_none_C0.1.pkl"
+  },
+  {
+    "name": "pattern_logistic_none_C1",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 1.0,
+      "weighting": "none"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.517975767411926,
+          "average_precision": 0.025650964000604598,
+          "AP_skill_over_prevalence": 0.0026125182603497048,
+          "brier_uncalibrated": 0.022725376263013967
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6718343453551344,
+          "average_precision": 0.1288970860248323,
+          "AP_skill_over_prevalence": 0.06399313708754982,
+          "brier_uncalibrated": 0.06310364475248528
+        }
+      },
+      "macro_AP_skill": 0.033302827673949764
+    },
+    "artifact": "models/pattern_logistic_none_C1.pkl"
+  },
+  {
+    "name": "pattern_logistic_none_C10",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 10.0,
+      "weighting": "none"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5171922657190028,
+          "average_precision": 0.02559704987565955,
+          "AP_skill_over_prevalence": 0.0025573293379796175,
+          "brier_uncalibrated": 0.022734583368385415
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6709074458445542,
+          "average_precision": 0.12921865036895974,
+          "AP_skill_over_prevalence": 0.0643386604788076,
+          "brier_uncalibrated": 0.06313772286039414
+        }
+      },
+      "macro_AP_skill": 0.033447994908393605
+    },
+    "artifact": "models/pattern_logistic_none_C10.pkl"
+  },
+  {
+    "name": "pattern_boost_none_depth3",
+    "family": "study_hist_boosting",
+    "features": "dna_pattern",
+    "config": {
+      "depth": 3,
+      "weighting": "none",
+      "learning_rate": 0.05,
+      "trees": 300,
+      "l2": 1.0,
+      "min_leaf": 40,
+      "max_bins": 64
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5296247586534963,
+          "average_precision": 0.028342474384353868,
+          "AP_skill_over_prevalence": 0.005367669304318583,
+          "brier_uncalibrated": 0.022675071714345473
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6971357793879152,
+          "average_precision": 0.1521496152606163,
+          "AP_skill_over_prevalence": 0.08897816078061331,
+          "brier_uncalibrated": 0.06221388841256631
+        }
+      },
+      "macro_AP_skill": 0.04717291504246594
+    },
+    "artifact": "models/pattern_boost_none_depth3.pkl"
+  },
+  {
+    "name": "pattern_boost_none_depth5",
+    "family": "study_hist_boosting",
+    "features": "dna_pattern",
+    "config": {
+      "depth": 5,
+      "weighting": "none",
+      "learning_rate": 0.05,
+      "trees": 300,
+      "l2": 1.0,
+      "min_leaf": 40,
+      "max_bins": 64
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5321823320368245,
+          "average_precision": 0.024510924966110716,
+          "AP_skill_over_prevalence": 0.0014455230464298118,
+          "brier_uncalibrated": 0.022830062835339907
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6910367561606424,
+          "average_precision": 0.15078430508787052,
+          "AP_skill_over_prevalence": 0.0875111243705725,
+          "brier_uncalibrated": 0.06230252906429586
+        }
+      },
+      "macro_AP_skill": 0.044478323708501154
+    },
+    "artifact": "models/pattern_boost_none_depth5.pkl"
+  },
+  {
+    "name": "pattern_logistic_sqrt_C0.1",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 0.1,
+      "weighting": "sqrt"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5188432157148054,
+          "average_precision": 0.025395537317737207,
+          "AP_skill_over_prevalence": 0.0023510520233221174,
+          "brier_uncalibrated": 0.03964366072175869
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6729128203281809,
+          "average_precision": 0.1280524248718703,
+          "AP_skill_over_prevalence": 0.06308554210270453,
+          "brier_uncalibrated": 0.08049029068763677
+        }
+      },
+      "macro_AP_skill": 0.032718297063013324
+    },
+    "artifact": "models/pattern_logistic_sqrt_C0.1.pkl"
+  },
+  {
+    "name": "pattern_logistic_sqrt_C1",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 1.0,
+      "weighting": "sqrt"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.516226879704508,
+          "average_precision": 0.02506870544768923,
+          "AP_skill_over_prevalence": 0.0020164922261904296,
+          "brier_uncalibrated": 0.039954597281464076
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6723787501869689,
+          "average_precision": 0.12747805115234537,
+          "AP_skill_over_prevalence": 0.062468373069371225,
+          "brier_uncalibrated": 0.08058006615943189
+        }
+      },
+      "macro_AP_skill": 0.03224243264778083
+    },
+    "artifact": "models/pattern_logistic_sqrt_C1.pkl"
+  },
+  {
+    "name": "pattern_logistic_sqrt_C10",
+    "family": "study_logistic",
+    "features": "dna_pattern",
+    "config": {
+      "C": 10.0,
+      "weighting": "sqrt"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5160393989422727,
+          "average_precision": 0.024850390579490747,
+          "AP_skill_over_prevalence": 0.0017930153112720847,
+          "brier_uncalibrated": 0.04005253688917082
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6723471904865728,
+          "average_precision": 0.1275702837560974,
+          "AP_skill_over_prevalence": 0.06256747772016644,
+          "brier_uncalibrated": 0.08057141312889998
+        }
+      },
+      "macro_AP_skill": 0.03218024651571926
+    },
+    "artifact": "models/pattern_logistic_sqrt_C10.pkl"
+  },
+  {
+    "name": "pattern_boost_sqrt_depth3",
+    "family": "study_hist_boosting",
+    "features": "dna_pattern",
+    "config": {
+      "depth": 3,
+      "weighting": "sqrt",
+      "learning_rate": 0.05,
+      "trees": 300,
+      "l2": 1.0,
+      "min_leaf": 40,
+      "max_bins": 64
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.547631306489073,
+          "average_precision": 0.026057197555462857,
+          "AP_skill_over_prevalence": 0.003028357192096209,
+          "brier_uncalibrated": 0.03655346465390647
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6964468000130684,
+          "average_precision": 0.15096664991549544,
+          "AP_skill_over_prevalence": 0.08770705530747483,
+          "brier_uncalibrated": 0.0768612751348161
+        }
+      },
+      "macro_AP_skill": 0.04536770624978552
+    },
+    "artifact": "models/pattern_boost_sqrt_depth3.pkl"
+  },
+  {
+    "name": "pattern_boost_sqrt_depth5",
+    "family": "study_hist_boosting",
+    "features": "dna_pattern",
+    "config": {
+      "depth": 5,
+      "weighting": "sqrt",
+      "learning_rate": 0.05,
+      "trees": 300,
+      "l2": 1.0,
+      "min_leaf": 40,
+      "max_bins": 64
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.552497411646193,
+          "average_precision": 0.0273852794581237,
+          "AP_skill_over_prevalence": 0.004387841540618441,
+          "brier_uncalibrated": 0.033369385615209406
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.690556693112362,
+          "average_precision": 0.152470583510767,
+          "AP_skill_over_prevalence": 0.08932304366425228,
+          "brier_uncalibrated": 0.07558894966268682
+        }
+      },
+      "macro_AP_skill": 0.04685544260243536
+    },
+    "artifact": "models/pattern_boost_sqrt_depth5.pkl"
+  },
+  {
+    "name": "multitask_assay_only_s42",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "assay_only",
+      "task_weights": [
+        0,
+        0,
+        0
+      ],
+      "seed": 42,
+      "best_epoch": 18,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5350421132159947,
+          "average_precision": 0.03146949992980946,
+          "AP_skill_over_prevalence": 0.008568633249357516,
+          "brier_uncalibrated": 0.03615224028922144
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.667432767281214,
+          "average_precision": 0.15012252841215185,
+          "AP_skill_over_prevalence": 0.08680004018034589,
+          "brier_uncalibrated": 0.07824378528095131
+        }
+      },
+      "macro_AP_skill": 0.0476843367148517
+    },
+    "artifact": "models/multitask_assay_only_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 10.262212753295898,
+      "shared.b1": 0.5949966311454773,
+      "shared.w2": 3.510023593902588,
+      "shared.b2": 0.4891485571861267,
+      "class.w": 0.9206463098526001,
+      "class.b": 0.26182350516319275,
+      "activity.w": 0.000538642518222332,
+      "activity.b": 0.0,
+      "effect.w": 0.0006850662175565958,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_assay_only_s73",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "assay_only",
+      "task_weights": [
+        0,
+        0,
+        0
+      ],
+      "seed": 73,
+      "best_epoch": 5,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5543330441838991,
+          "average_precision": 0.037385798288208635,
+          "AP_skill_over_prevalence": 0.014624822256463842,
+          "brier_uncalibrated": 0.037541476310965494
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6627021459929516,
+          "average_precision": 0.14543590059864564,
+          "AP_skill_over_prevalence": 0.08176422210766839,
+          "brier_uncalibrated": 0.07592031827929802
+        }
+      },
+      "macro_AP_skill": 0.048194522182066116
+    },
+    "artifact": "models/multitask_assay_only_s73.npz",
+    "parameter_change_norms": {
+      "shared.w1": 7.0725226402282715,
+      "shared.b1": 0.8715278506278992,
+      "shared.w2": 1.8820490837097168,
+      "shared.b2": 0.4494583010673523,
+      "class.w": 0.40487563610076904,
+      "class.b": 0.17147958278656006,
+      "activity.w": 0.0001983451220439747,
+      "activity.b": 0.0,
+      "effect.w": 0.00019698432879522443,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_assay_only_s101",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "assay_only",
+      "task_weights": [
+        0,
+        0,
+        0
+      ],
+      "seed": 101,
+      "best_epoch": 2,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5434199848896103,
+          "average_precision": 0.04553029544038609,
+          "AP_skill_over_prevalence": 0.022961895732719697,
+          "brier_uncalibrated": 0.04216600422501972
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6473152362899216,
+          "average_precision": 0.12500282913296218,
+          "AP_skill_over_prevalence": 0.05980872773905986,
+          "brier_uncalibrated": 0.07714283661833163
+        }
+      },
+      "macro_AP_skill": 0.04138531173588978
+    },
+    "artifact": "models/multitask_assay_only_s101.npz",
+    "parameter_change_norms": {
+      "shared.w1": 5.575619220733643,
+      "shared.b1": 0.7450087070465088,
+      "shared.w2": 1.489089012145996,
+      "shared.b2": 0.3979416787624359,
+      "class.w": 0.25100046396255493,
+      "class.b": 0.12949244678020477,
+      "activity.w": 8.465120481560007e-05,
+      "activity.b": 0.0,
+      "effect.w": 8.108661859296262e-05,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "ensemble_assay_only",
+    "family": "seed_ensemble",
+    "features": "hyena_original",
+    "config": {
+      "members": [
+        "multitask_assay_only_s42",
+        "multitask_assay_only_s73",
+        "multitask_assay_only_s101"
+      ],
+      "rule": "Arithmetic mean of the three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5512438089375158,
+          "average_precision": 0.03590448566680805,
+          "AP_skill_over_prevalence": 0.013108484054710027,
+          "brier_uncalibrated": 0.035660035495997465
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6689551894482141,
+          "average_precision": 0.14881988126152076,
+          "AP_skill_over_prevalence": 0.08540033567542123,
+          "brier_uncalibrated": 0.0757929023060212
+        }
+      },
+      "macro_AP_skill": 0.04925440986506563
+    },
+    "artifact": null
+  },
+  {
+    "name": "multitask_activity_s42",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity",
+      "task_weights": [
+        0.2,
+        0,
+        0
+      ],
+      "seed": 42,
+      "best_epoch": 24,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5247782410386994,
+          "average_precision": 0.04108012188140055,
+          "AP_skill_over_prevalence": 0.01840649798990947,
+          "brier_uncalibrated": 0.04964107359779846
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6741550945913118,
+          "average_precision": 0.1467034271878696,
+          "AP_skill_over_prevalence": 0.08312618929593504,
+          "brier_uncalibrated": 0.0851261038541873
+        }
+      },
+      "macro_AP_skill": 0.050766343642922256
+    },
+    "artifact": "models/multitask_activity_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 11.257433891296387,
+      "shared.b1": 0.5776758790016174,
+      "shared.w2": 4.375985622406006,
+      "shared.b2": 0.4869060814380646,
+      "class.w": 1.2801536321640015,
+      "class.b": 0.2753666043281555,
+      "activity.w": 0.2050023376941681,
+      "activity.b": 0.3489719033241272,
+      "effect.w": 0.0009120930335484445,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_s73",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity",
+      "task_weights": [
+        0.2,
+        0,
+        0
+      ],
+      "seed": 73,
+      "best_epoch": 12,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5332792344069173,
+          "average_precision": 0.030791758646304568,
+          "AP_skill_over_prevalence": 0.007874866799090961,
+          "brier_uncalibrated": 0.04566034738693797
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6624189976950305,
+          "average_precision": 0.15087077696438028,
+          "AP_skill_over_prevalence": 0.08760403907509655,
+          "brier_uncalibrated": 0.07956465077542235
+        }
+      },
+      "macro_AP_skill": 0.04773945293709375
+    },
+    "artifact": "models/multitask_activity_s73.npz",
+    "parameter_change_norms": {
+      "shared.w1": 9.017338752746582,
+      "shared.b1": 0.8176508545875549,
+      "shared.w2": 2.898221731185913,
+      "shared.b2": 0.5182679891586304,
+      "class.w": 0.6977700591087341,
+      "class.b": 0.23158416152000427,
+      "activity.w": 0.2760375738143921,
+      "activity.b": 0.2579701244831085,
+      "effect.w": 0.0004714393871836364,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_s101",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity",
+      "task_weights": [
+        0.2,
+        0,
+        0
+      ],
+      "seed": 101,
+      "best_epoch": 2,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.538192909309679,
+          "average_precision": 0.045507219096075774,
+          "AP_skill_over_prevalence": 0.022938273749129583,
+          "brier_uncalibrated": 0.041814005500324214
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6484502742471289,
+          "average_precision": 0.1282653899192195,
+          "AP_skill_over_prevalence": 0.06331437470408993,
+          "brier_uncalibrated": 0.07735225936431515
+        }
+      },
+      "macro_AP_skill": 0.04312632422660976
+    },
+    "artifact": "models/multitask_activity_s101.npz",
+    "parameter_change_norms": {
+      "shared.w1": 5.725213527679443,
+      "shared.b1": 0.7247747182846069,
+      "shared.w2": 1.5245264768600464,
+      "shared.b2": 0.38253411650657654,
+      "class.w": 0.2553425431251526,
+      "class.b": 0.13037198781967163,
+      "activity.w": 0.18430671095848083,
+      "activity.b": 0.11477261036634445,
+      "effect.w": 8.108661859296262e-05,
+      "effect.b": 0.0,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "ensemble_activity",
+    "family": "seed_ensemble",
+    "features": "hyena_original",
+    "config": {
+      "members": [
+        "multitask_activity_s42",
+        "multitask_activity_s73",
+        "multitask_activity_s101"
+      ],
+      "rule": "Arithmetic mean of the three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5384895206648572,
+          "average_precision": 0.031774975187756654,
+          "AP_skill_over_prevalence": 0.008881331458111031,
+          "brier_uncalibrated": 0.04135518271536239
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6729052637801987,
+          "average_precision": 0.15066180771820353,
+          "AP_skill_over_prevalence": 0.0873794999931797,
+          "brier_uncalibrated": 0.07868018999145604
+        }
+      },
+      "macro_AP_skill": 0.048130415725645366
+    },
+    "artifact": null
+  },
+  {
+    "name": "multitask_activity_effect_s42",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_effect",
+      "task_weights": [
+        0.2,
+        0.1,
+        0
+      ],
+      "seed": 42,
+      "best_epoch": 18,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5372583037188349,
+          "average_precision": 0.03646773097401635,
+          "AP_skill_over_prevalence": 0.013685047275693711,
+          "brier_uncalibrated": 0.036570394268048104
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6707256441901592,
+          "average_precision": 0.1499965407700301,
+          "AP_skill_over_prevalence": 0.08666466547802745,
+          "brier_uncalibrated": 0.07813636531329914
+        }
+      },
+      "macro_AP_skill": 0.05017485637686058
+    },
+    "artifact": "models/multitask_activity_effect_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 10.266135215759277,
+      "shared.b1": 0.5932381749153137,
+      "shared.w2": 3.6468558311462402,
+      "shared.b2": 0.49795806407928467,
+      "class.w": 0.9568097591400146,
+      "class.b": 0.27113744616508484,
+      "activity.w": 0.19907990097999573,
+      "activity.b": 0.3151112496852875,
+      "effect.w": 0.1783243864774704,
+      "effect.b": 0.24777212738990784,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_effect_s73",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_effect",
+      "task_weights": [
+        0.2,
+        0.1,
+        0
+      ],
+      "seed": 73,
+      "best_epoch": 12,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.513898760388393,
+          "average_precision": 0.027536431856629993,
+          "AP_skill_over_prevalence": 0.004542567931814041,
+          "brier_uncalibrated": 0.04510302303942733
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6641108865631018,
+          "average_precision": 0.15157261067966504,
+          "AP_skill_over_prevalence": 0.08835816486619523,
+          "brier_uncalibrated": 0.07967911180955113
+        }
+      },
+      "macro_AP_skill": 0.046450366399004635
+    },
+    "artifact": "models/multitask_activity_effect_s73.npz",
+    "parameter_change_norms": {
+      "shared.w1": 8.982866287231445,
+      "shared.b1": 0.7737960815429688,
+      "shared.w2": 2.750918388366699,
+      "shared.b2": 0.5309688448905945,
+      "class.w": 0.739861249923706,
+      "class.b": 0.23465688526630402,
+      "activity.w": 0.275026798248291,
+      "activity.b": 0.24738292396068573,
+      "effect.w": 0.22753849625587463,
+      "effect.b": 0.19925394654273987,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_effect_s101",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_effect",
+      "task_weights": [
+        0.2,
+        0.1,
+        0
+      ],
+      "seed": 101,
+      "best_epoch": 2,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5538629431681451,
+          "average_precision": 0.04561997429704295,
+          "AP_skill_over_prevalence": 0.023053695042516868,
+          "brier_uncalibrated": 0.04222067512202651
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6507334629948066,
+          "average_precision": 0.12803466224870996,
+          "AP_skill_over_prevalence": 0.06306645602583041,
+          "brier_uncalibrated": 0.07692255509321969
+        }
+      },
+      "macro_AP_skill": 0.04306007553417364
+    },
+    "artifact": "models/multitask_activity_effect_s101.npz",
+    "parameter_change_norms": {
+      "shared.w1": 5.646238327026367,
+      "shared.b1": 0.7315962314605713,
+      "shared.w2": 1.5306932926177979,
+      "shared.b2": 0.3933927118778229,
+      "class.w": 0.234207883477211,
+      "class.b": 0.13144415616989136,
+      "activity.w": 0.19570353627204895,
+      "activity.b": 0.11304721236228943,
+      "effect.w": 0.13098540902137756,
+      "effect.b": 0.09348843991756439,
+      "avi.w": 0.0,
+      "avi.b": 0.0
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "ensemble_activity_effect",
+    "family": "seed_ensemble",
+    "features": "hyena_original",
+    "config": {
+      "members": [
+        "multitask_activity_effect_s42",
+        "multitask_activity_effect_s73",
+        "multitask_activity_effect_s101"
+      ],
+      "rule": "Arithmetic mean of the three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.532876290679128,
+          "average_precision": 0.03147572425940473,
+          "AP_skill_over_prevalence": 0.008575004752988327,
+          "brier_uncalibrated": 0.038147863525420454
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6723587475599573,
+          "average_precision": 0.15328942333868484,
+          "AP_skill_over_prevalence": 0.0902028934343094,
+          "brier_uncalibrated": 0.07665942018298184
+        }
+      },
+      "macro_AP_skill": 0.04938894909364886
+    },
+    "artifact": null
+  },
+  {
+    "name": "multitask_activity_avi_s42",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_avi",
+      "task_weights": [
+        0.2,
+        0,
+        0.05
+      ],
+      "seed": 42,
+      "best_epoch": 18,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5392002686291518,
+          "average_precision": 0.0426096096463543,
+          "AP_skill_over_prevalence": 0.019972150434645692,
+          "brier_uncalibrated": 0.0360687100841826
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6710283506122693,
+          "average_precision": 0.14736822680093653,
+          "AP_skill_over_prevalence": 0.08384052165587698,
+          "brier_uncalibrated": 0.07854841800782317
+        }
+      },
+      "macro_AP_skill": 0.051906336045261334
+    },
+    "artifact": "models/multitask_activity_avi_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 10.288776397705078,
+      "shared.b1": 0.5956555008888245,
+      "shared.w2": 3.5692250728607178,
+      "shared.b2": 0.5086951851844788,
+      "class.w": 1.000465750694275,
+      "class.b": 0.2630579471588135,
+      "activity.w": 0.1731346994638443,
+      "activity.b": 0.3187800943851471,
+      "effect.w": 0.0006850662175565958,
+      "effect.b": 0.0,
+      "avi.w": 0.13452990353107452,
+      "avi.b": 0.07272183895111084
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_avi_s73",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_avi",
+      "task_weights": [
+        0.2,
+        0,
+        0.05
+      ],
+      "seed": 73,
+      "best_epoch": 12,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5306433108542967,
+          "average_precision": 0.03096738899840179,
+          "AP_skill_over_prevalence": 0.008054649924155197,
+          "brier_uncalibrated": 0.04474426192682639
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6647052979624657,
+          "average_precision": 0.1537102393281215,
+          "AP_skill_over_prevalence": 0.0906550634911613,
+          "brier_uncalibrated": 0.07975209024873765
+        }
+      },
+      "macro_AP_skill": 0.04935485670765825
+    },
+    "artifact": "models/multitask_activity_avi_s73.npz",
+    "parameter_change_norms": {
+      "shared.w1": 9.036906242370605,
+      "shared.b1": 0.8041019439697266,
+      "shared.w2": 2.8484835624694824,
+      "shared.b2": 0.5246848464012146,
+      "class.w": 0.7396373152732849,
+      "class.b": 0.22677673399448395,
+      "activity.w": 0.2964000403881073,
+      "activity.b": 0.255679726600647,
+      "effect.w": 0.0004714393871836364,
+      "effect.b": 0.0,
+      "avi.w": 0.15395693480968475,
+      "avi.b": 0.07930056005716324
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "multitask_activity_avi_s101",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_avi",
+      "task_weights": [
+        0.2,
+        0,
+        0.05
+      ],
+      "seed": 101,
+      "best_epoch": 2,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5456809469177604,
+          "average_precision": 0.04558929052236859,
+          "AP_skill_over_prevalence": 0.02302228575116232,
+          "brier_uncalibrated": 0.041377081587464934
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6483260357082452,
+          "average_precision": 0.12795402809098932,
+          "AP_skill_over_prevalence": 0.06297981399559398,
+          "brier_uncalibrated": 0.07707294883348491
+        }
+      },
+      "macro_AP_skill": 0.04300104987337815
+    },
+    "artifact": "models/multitask_activity_avi_s101.npz",
+    "parameter_change_norms": {
+      "shared.w1": 5.707711696624756,
+      "shared.b1": 0.7211236953735352,
+      "shared.w2": 1.5158722400665283,
+      "shared.b2": 0.3874165117740631,
+      "class.w": 0.24973325431346893,
+      "class.b": 0.129944309592247,
+      "activity.w": 0.19285066425800323,
+      "activity.b": 0.11269528418779373,
+      "effect.w": 8.108661859296262e-05,
+      "effect.b": 0.0,
+      "avi.w": 0.10039984434843063,
+      "avi.b": 0.03639572486281395
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  {
+    "name": "ensemble_activity_avi",
+    "family": "seed_ensemble",
+    "features": "hyena_original",
+    "config": {
+      "members": [
+        "multitask_activity_avi_s42",
+        "multitask_activity_avi_s73",
+        "multitask_activity_avi_s101"
+      ],
+      "rule": "Arithmetic mean of the three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.538472731342866,
+          "average_precision": 0.03306238795511576,
+          "AP_skill_over_prevalence": 0.010199185051180705,
+          "brier_uncalibrated": 0.03757580103788317
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.67162309538875,
+          "average_precision": 0.15067512164131336,
+          "AP_skill_over_prevalence": 0.08739380590721484,
+          "brier_uncalibrated": 0.07686646145014309
+        }
+      },
+      "macro_AP_skill": 0.048796495479197774
+    },
+    "artifact": null
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "family_id": "conditional_avi_only",
+  "records": [
+    {
+      "name": "final_conditional_avi_only",
+      "family": "conditional_avi_stacker",
+      "features": "conditional_expert_avi",
+      "config": {
+        "base_model": "final_baseline_full_avi_direct",
+        "include_DNA_expert": false,
+        "training": "All measured-active development rows using held-fold base predictions; no reserved rows",
+        "calibration_qualification": "Prediction-time base ensemble is refitted; output is an uncalibrated research ranking, not a clinical probability"
+      },
+      "artifact": "models/final_conditional_avi_only.pkl",
+      "checkpoint_sha256": "e4c28749f661d2770b13d0dfb66331411b91c82918547ba4b9f6401efba738ba",
+      "nonzero_trained_coefficient_counts": {
+        "Salomon_NGN2": 2,
+        "Siraj_OL42_SKNSH": 2
+      },
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5"
+    }
+  ],
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "blind_test_evaluated": false
+}

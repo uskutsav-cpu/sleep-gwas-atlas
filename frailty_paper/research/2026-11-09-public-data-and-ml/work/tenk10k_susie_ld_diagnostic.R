@@ -1,0 +1,10 @@
+.libPaths(c('work/stage5_Rlib', .libPaths()))
+library(susieR)
+d<-read.csv('work/stage6_tenk10k_susie_diagnostic/aligned.csv');n<-nrow(d)
+b<-readBin('work/stage6_tenk10k_susie_diagnostic/ld_f64.bin','double',n=n*n,size=8,endian='little');stopifnot(length(b)==n*n); R<-matrix(b,n,n);rm(b)
+stopifnot(max(abs(R-t(R)))<1e-6,max(abs(diag(R)-1))<1e-6)
+e<-eigen(R,symmetric=TRUE);attr(R,'eigen')<-e
+q<-estimate_s_rss(d$qtl_beta_alt/d$qtl_se,R,n=921)
+g<-estimate_s_rss(d$gwas_beta_alt/d$gwas_se,R,n=403041)
+o<-data.frame(trait=c('TenK10K_peak','Mak_FI'),assumed_n=c(921,403041),n_variants=n,estimated_lambda=c(q,g),reference_n=503,min_eigenvalue=min(e$values),reference_rank_bound=502,package_version=as.character(packageVersion('susieR')))
+write.csv(o,'outputs/stage6_tenk10k_susie_ld_diagnostics.csv',row.names=FALSE);print(o)

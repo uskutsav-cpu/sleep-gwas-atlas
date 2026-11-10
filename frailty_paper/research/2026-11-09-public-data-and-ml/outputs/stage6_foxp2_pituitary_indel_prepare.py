@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import pandas as pd,numpy as np,json,math
+from scipy.stats import norm
+root=Path(__file__).resolve().parents[1];o=root/'outputs';w=root/'work';base=pd.read_csv(o/'stage6_foxp2_gnomad_narrow_variants.csv');a=pd.read_csv(o/'stage6_foxp2_pituitary_gnomad_aligned.csv');assert a.rs.is_unique;ix=base.set_index('rs');sel=np.array([ix.index.get_loc(r) for r in a.rs]);source_q=pd.read_csv(w/'stage3_QTD000301_FOXP2_2mb.tsv',sep='\t');q=source_q[source_q.variant=='chr7_114534306_T_TA'];assert len(q)==2 and q[['beta','se','pvalue']].drop_duplicates().shape[0]==1;q=q.iloc[0]
+m=pd.read_csv(w/'stage6_foxp2_MVP_insomnia_region.tsv.gz',sep='\t');m=m[(m.base_pair_location==114534306)&(m.effect_allele=='T')&(m.other_allele=='TA')];assert len(m)==1;m=m.iloc[0]
+h=pd.read_csv(w/'stage6_foxp2_FinnGen_HFRS_region.tsv.gz',sep='\t');h=h[(h.base_pair_location==114534306)&(h.effect_allele=='TA')&(h.other_allele=='T')];assert len(h)==1;h=h.iloc[0]; assert m.odds_ratio<1 and .01<m.effect_allele_frequency<.99 and .01<h.effect_allele_frequency<.99
+row={'rs':'rs66823671','qtl_z_anchor':-q.beta/q.se,'mvp_z_anchor':-norm.isf(m.p_value/2),'hfrs_z_anchor':-h.beta/h.standard_error};data=a[['rs','qtl_z_anchor','mvp_z_anchor','hfrs_z_anchor']].copy();data=pd.concat([data,pd.DataFrame([row])],ignore_index=True);data.to_csv(o/'stage6_foxp2_pituitary_indel_analysis_input.csv',index=False)
+qc=[]
+for pop in ['nfe','fin']:
+ n=len(base);R=np.fromfile(w/f'stage6_foxp2_gnomad_{pop}_narrow_ld.bin',dtype='<f8').reshape(n,n);R=R[np.ix_(sel,sel)];v=pd.read_csv(o/f'stage6_foxp2_gnomad_{pop}_indel_ld.csv').set_index('rs').loc[a.rs].indel_anchor_r.to_numpy();R=np.pad(R,((0,1),(0,1)));R[:-1,-1]=v;R[-1,:-1]=v;R[-1,-1]=1;ev=np.linalg.eigvalsh(R);assert ev.min()>-1e-8,(pop,ev.min());R.astype('<f8').tofile(w/f'stage6_foxp2_pituitary_{pop}_indel_ld.bin');qc.append({'pop':pop,'n':len(data),'min_eigenvalue':float(ev.min()),'indel_z_lead':float(v[list(a.rs).index('rs35624276')])})
+receipt={'variant':'chr7:114534306:T>TA','anchor':'T','qtl_z':row['qtl_z_anchor'],'mvp_z_from_p':row['mvp_z_anchor'],'hfrs_z_beta_se':row['hfrs_z_anchor'],'pituitary_credible_variants_present':4,'source_credible_pip_covered':0.6607091727541797+0.311585130331866,'matrix_checks':qc,'note':'genome-build conversion previously reference checked; MVP p-to-z and source allele assumptions persist'};(o/'stage6_foxp2_pituitary_indel_prepare_receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt,indent=2))

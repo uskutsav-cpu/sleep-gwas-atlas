@@ -1,0 +1,53 @@
+{
+  "prepared_sha256": "f8417d037bbd11d96d440cf7714e711e1672f4b225b630dae05c662db1b1462f",
+  "manifest_sha256": "bb156b4305b6f01a324c5ff326dbf2f5066da199ce52b9f5513fb60193b258d0",
+  "base_weights_sha256": "5ce2146c21e9c4baa6bddc4998fd3d029903ae84a563bf80218644082194a12d",
+  "features_sha256": "b007e4bcaaa8c483963e94d3e19d749bf4c9481086b1c3964358c25b1dd8dbbc",
+  "feature_definition": "168 strand-averaged 1-3mer mean/context and absolute allele-difference counts; original pretrained 512-dimensional paired features",
+  "rows": 37349,
+  "feature_cache_replay": [
+    {
+      "cache": "pretrained_train_features.npy",
+      "sha256": "2ab4ebe5f2b38956b5ac9cacfde103314d980bbf5761ff02e1174aba4af04fd0",
+      "sampled_rows": [
+        1686,
+        24593,
+        34499,
+        6904,
+        483,
+        27393
+      ],
+      "maximum_absolute_replay_error": 0.0,
+      "qualification": "Sampled replay, not full row-by-row regeneration"
+    },
+    {
+      "cache": "pretrained_validation_features.npy",
+      "sha256": "7c48a7936580fda90760e97ee0bd088f0db152c7b0874a3c0f1b0259220277d2",
+      "sampled_rows": [
+        18544,
+        17377,
+        18268,
+        17374,
+        18214,
+        16946
+      ],
+      "maximum_absolute_replay_error": 0.0,
+      "qualification": "Sampled replay, not full row-by-row regeneration"
+    },
+    {
+      "cache": "pretrained_final_test_features.npy",
+      "sha256": "e8b856a9b4e1e01b5d28907ae817ff77cd155ad2c389b5a59890ba6c0a48e8dd",
+      "sampled_rows": [
+        19494,
+        23557,
+        21619,
+        21701,
+        23670,
+        21606
+      ],
+      "maximum_absolute_replay_error": 0.0,
+      "qualification": "Sampled replay, not full row-by-row regeneration"
+    }
+  ],
+  "test_note": "19-22 are a previously observed v1 benchmark, not a new independent holdout"
+}

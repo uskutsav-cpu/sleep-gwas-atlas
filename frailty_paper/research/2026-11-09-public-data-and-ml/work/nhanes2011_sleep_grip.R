@@ -1,0 +1,23 @@
+#!/usr/bin/env Rscript
+# Exploratory 2011-12 NHANES cross-sectional association; not a genetic test.
+.libPaths(c(file.path('work','Rlibs'),.libPaths()))
+stopifnot(requireNamespace('survey',quietly=TRUE),requireNamespace('foreign',quietly=TRUE))
+options(survey.lonely.psu='fail')
+library(survey)
+readx <- function(name) foreign::read.xport(file.path('work','nhanes2011',paste0(name,'_G.XPT')))
+d <- readx('DEMO'); s <- readx('SLQ'); g <- readx('MGX')
+stopifnot(!anyDuplicated(d$SEQN),!anyDuplicated(s$SEQN),!anyDuplicated(g$SEQN))
+a <- merge(d,s[,c('SEQN','SLQ050')],by='SEQN',all.x=TRUE)
+a <- merge(a,g[,c('SEQN','MGDCGSZ')],by='SEQN',all.x=TRUE)
+a <- a[!is.na(a$WTMEC2YR) & a$WTMEC2YR>0 & !is.na(a$SDMVSTRA) & !is.na(a$SDMVPSU),]
+a$domain <- !is.na(a$RIDAGEYR) & a$RIDAGEYR>=60 & a$SLQ050 %in% c(1,2) & !is.na(a$MGDCGSZ) & a$RIAGENDR %in% c(1,2)
+a$sleep_told <- as.numeric(a$SLQ050==1)
+a$female <- as.numeric(a$RIAGENDR==2)
+des <- svydesign(ids=~SDMVPSU,strata=~SDMVSTRA,weights=~WTMEC2YR,nest=TRUE,data=a)
+sub <- subset(des,domain)
+fit <- svyglm(MGDCGSZ~sleep_told+RIDAGEYR+female,design=sub)
+estimate <- coef(fit)['sleep_told'];se <- sqrt(diag(vcov(fit)))['sleep_told'];ci <- confint(fit,parm='sleep_told')
+result <- data.frame(n_domain=sum(a$domain),n_told=sum(a$domain & a$sleep_told==1,na.rm=TRUE),n_not_told=sum(a$domain & a$sleep_told==0,na.rm=TRUE),design_df=degf(sub),residual_df=fit$df.residual,estimate_kg=unname(estimate),standard_error=unname(se),ci_low=ci[1,1],ci_high=ci[1,2],p_value=summary(fit)$coefficients['sleep_told','Pr(>|t|)'])
+write.csv(result,'outputs/stage6_nhanes_2011_sleep_grip_results.csv',row.names=FALSE)
+print(result)
+cat('Survey package:',as.character(packageVersion('survey')),'\n')

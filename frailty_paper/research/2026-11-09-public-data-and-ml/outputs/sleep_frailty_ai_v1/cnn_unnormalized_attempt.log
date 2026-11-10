@@ -1,0 +1,7 @@
+CNN 1 {'epoch': 1, 'train_weighted_bce': 0.4637066049539313, 'validation_average_precision': 0.03152789005658852, 'validation_auroc': 0.5, 'seconds': 114.96254086494446}
+CNN 2 {'epoch': 2, 'train_weighted_bce': 0.46006985534818806, 'validation_average_precision': 0.03152789005658852, 'validation_auroc': 0.5, 'seconds': 91.42250490188599}
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml/train_cnn.py", line 29, in <module>
+    ii=order[a:a+128];ll,g=vg(p,mx.array(ref[ii]),mx.array(alt[ii]),mx.array(y[ii]));norm=mx.sqrt(sum(mx.sum(x*x) for x in g.values()));g={k:v*mx.minimum(1,1/(norm+1e-8)) for k,v in g.items()};p=optimizer.apply_gradients(g,p);mx.eval(p,optimizer.state);losses.append(float(ll))
+                                                                                                                                                                                                                                  ~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

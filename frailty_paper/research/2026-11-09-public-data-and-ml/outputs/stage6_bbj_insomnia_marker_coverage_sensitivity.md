@@ -1,0 +1,17 @@
+# BBJ insomnia: postselected marker-coverage sensitivity
+
+The positive approximate Japanese insomnia statistic is similar across three **overlapping** subsets of the 22-marker count. These are exploratory summary-statistic sensitivities, not independent validations, measured per-person score effects, or evidence that increasing the marker count improves prediction.
+
+| Marker subset | JPT reference Z | Nominal p | EAS reference Z |
+|---|---:|---:|---:|
+| 14 markers shared with prior Taiwan and knee screens | 2.887 | 0.00389 | 2.868 |
+| 15 markers with at least 10 expected minor-allele dosage copies in cases under a null approximation | 2.870 | 0.00410 | 2.867 |
+| 17 available markers after excluding one with fewer than 20 total minor-allele dosage copies | 3.034 | 0.00241 | 3.031 |
+
+All 18 available exact-pair matches start from the same outcome results; four of the 22 have no exact pair in the BBJ autosomal file. The 17-marker set excludes rs12524473, whose total minor dosage count is approximately 15 and whose estimated beta is highly unstable. This exclusion and the threshold were chosen after source inspection. The 15-marker set further excludes rs2815764 and rs817509, for which a rough null expectation is 8.27 and 4.02 minor-allele dosage copies, respectively, among 389 cases. The 15-marker set contains the earlier 14 plus rs4886140. The expected counts are **not observed case counts**: they are `2 × 389 × min(p, 1−p)` using the pooled BBJ allele frequency and a no-association approximation. Imputation, missingness, real association and sample-specific ascertainment can alter actual counts. The threshold 10 is an illustrative sensitivity, not a validated QC cutoff or a basis for excluding variants from the user's score.
+
+The 17-marker set includes both low-expected-count variants, making its statistic particularly tentative. For these 17 marginal inputs, the largest absolute log10 ratio of reported saddlepoint to normal-approximation p-values is 0.00236. This check does not make the combined statistic a saddlepoint score test or prove calibration for 389 cases against 177,864 controls. None of these results corrects for prior selection and multiple analyses; neither a p-value difference nor the larger 17-marker Z shows that one score is superior.
+
+The calculation uses the [same conditional approach and caveats](stage6_bbj_insomnia_matched14_z_review.md): beta/SE oriented to the counted allele assuming standard SAIGE Allele2 coding; dosage scaling from the source frequency; JPT n=104 or pooled EAS n=504 reference within-chromosome LD; cross-chromosome correlations set to zero. The two reference groups overlap and are not independent replications. Source cohort allele direction and participant/relative overlap remain unverified, the target LD is not known, and the indexed remote reference VCF was not full-file checksum verified. The test is not a regression on a score or a joint sleep–frailty outcome, and neither FI nor FFS is measured in this insomnia GWAS.
+
+Reproduce using `python3 outputs/stage6_bbj_insomnia_marker_coverage_sensitivity.py`; the [receipt](stage6_bbj_insomnia_marker_coverage_sensitivity.json) records input hashes and exact marker sets, and the [component table](stage6_bbj_insomnia_marker_coverage_components.csv) lists frequencies and expected counts. Participant-level external validation and a sleep-excluded FI comparison remain outstanding.

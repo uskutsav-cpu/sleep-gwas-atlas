@@ -1,0 +1,29 @@
+{
+  "features": {
+    "avi": 3,
+    "dna_avi": 171,
+    "chromatin": 36,
+    "dna_chromatin": 204,
+    "dna_chromatin_avi": 207
+  },
+  "logistic_C": 1.0,
+  "positive_weighting": [
+    "none",
+    "sqrt_negative_over_positive"
+  ],
+  "boost_depths": [
+    3,
+    5
+  ],
+  "boost_trees": 300,
+  "boost_lr": 0.05,
+  "boost_l2": 1.0,
+  "boost_min_leaf": 40,
+  "boost_max_bins": 64,
+  "preprocessing": "training-only median imputation, including explicit availability; training-only scaling for logistic",
+  "selection": "validation macro normalized AP skill",
+  "AVI_only": "One logistic comparator and direct raw-score ranking, not an unrestricted hyperparameter search",
+  "test_evaluated": false,
+  "avi_sha256": "47ea172b2a0185a5e55afbbf33f361da829291c91ca85a3847197fba878945e7",
+  "reference_chromatin_sha256": "6810e638c3127e411ed756f85d59b3f7509e2591424fd689581943831e88e2a1"
+}

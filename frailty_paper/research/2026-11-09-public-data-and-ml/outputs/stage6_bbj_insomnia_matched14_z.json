@@ -1,0 +1,64 @@
+{
+  "markers": [
+    "rs12536335",
+    "rs28528997",
+    "rs2155292",
+    "rs1909650",
+    "rs2838788",
+    "rs12671330",
+    "rs6452792",
+    "rs7691487",
+    "rs2604551",
+    "rs7734045",
+    "rs6058750",
+    "rs6938026",
+    "rs7731706",
+    "rs11636381"
+  ],
+  "results": {
+    "JPT_n104_beta_over_se": {
+      "z": 2.8873469319082488,
+      "nominal_p": 0.003885055884828516,
+      "leave_one_out_z_min": 2.4559753416695917,
+      "leave_one_out_z_max": 3.3023796463662554
+    },
+    "JPT_n104_normal_p_z": {
+      "z": 2.8870188294834223,
+      "nominal_p": 0.003889109552290055,
+      "leave_one_out_z_min": 2.4556349097694747,
+      "leave_one_out_z_max": 3.302038735974494
+    },
+    "JPT_n104_spa_p_z": {
+      "z": 2.887346931908249,
+      "nominal_p": 0.0038850558848285087,
+      "leave_one_out_z_min": 2.455975341669594,
+      "leave_one_out_z_max": 3.3023796463662554
+    },
+    "EAS_n504_beta_over_se": {
+      "z": 2.8683928704124093,
+      "nominal_p": 0.004125628885312597,
+      "leave_one_out_z_min": 2.438631617261133,
+      "leave_one_out_z_max": 3.2789938355412898
+    },
+    "EAS_n504_normal_p_z": {
+      "z": 2.868066921824196,
+      "nominal_p": 0.004129881682698743,
+      "leave_one_out_z_min": 2.4382935894393283,
+      "leave_one_out_z_max": 3.2786553393074334
+    },
+    "EAS_n504_spa_p_z": {
+      "z": 2.8683928704124098,
+      "nominal_p": 0.004125628885312588,
+      "leave_one_out_z_min": 2.438631617261135,
+      "leave_one_out_z_max": 3.2789938355412898
+    }
+  },
+  "inputs_sha256": {
+    "unvalidated_22_shared_direction_score.csv": "c419c1617dc7bf496f5213a4b2a8fae2de7a36b44984ba6d0ea0564dc3e40b16",
+    "stage6_bbj_insomnia_oriented_candidates.csv": "7fb3a581aec4ae343340b9eaaf1e6a9f95095acbc1ee1b60105f1171b1f08141",
+    "stage6_cross_population_matched14.json": "0228db27b540992f329fa35577685a8e75570f4e94ca48f481a3d389ea16172f"
+  },
+  "reference": "1000 Genomes phase 3; cross-chromosome correlations set to zero; JPT n=104 and EAS n=504, overlapping panels, remote VCF not full-file checksum verified",
+  "method": "a_i=sqrt(2p_i(1-p_i)) with source frequency, equal marker weights; a.T z/sqrt(a.T R a). Three conditional choices of marginal z; not genotype-score regression.",
+  "limits": "Postselected matched 14 subset, BBJ Ncase=389, unverified sample overlap, source allele convention, external LD, no target data. SPA p-derived z is a sensitivity, not a score-level SPA or proof of calibration."
+}

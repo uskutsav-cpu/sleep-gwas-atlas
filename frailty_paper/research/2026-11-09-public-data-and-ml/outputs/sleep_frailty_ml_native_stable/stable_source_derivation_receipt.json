@@ -1,0 +1,27 @@
+{
+  "original_code_sha256": {
+    "audit_native_runtime.py": "3b92968908a8d765bc6dc499d20b172355542baac396b961d9eeb139e6b4fcdc",
+    "run_native_comparison.py": "b33af6f08459701deb0722f199b391c359d3ecd40ace03f5595517fc0c96450f",
+    "train_native_development.py": "d72987f9cc09216b12a0c574c735d4fd75cc105c4a0951d4a26cdc0c64e3699d",
+    "audit_fitted_native.py": "06ff2e096761898134ac0b4a3e1a342f5c169bf2eeb5410fd0fd6bb30f34604f",
+    "native_data.py": "1b74468a1266e3336db69e78edc3ec32eba8089994d856966404c32924f9fcce",
+    "native_common.py": "b2451c85138135c16d795df5871620f8d2d9ed918ae9876bf028ce22434acf8f",
+    "update_running_progress.py": "c796974cbd63be23eceb12853cb54e990a883fd110c9ae9cd90586a962125029",
+    "native_network.py": "4898e0b1a6630fc2ab4531b7200b6c0029714cd08454cb323683d7a1120df942"
+  },
+  "derived_code_sha256": {
+    "stable_batches.py": "b1a9468d5a35d81bce2ef58577801a4d431a58f05d85a018feaeb43934159a78",
+    "stable_common.py": "e7bc02c92df543859f33cf3993a793e16d08504e73d65f085687bfd3b4e93516",
+    "stable_network.py": "83ad2ab79105bd3f53620c1b305d462da6ae89e07aaad2edcf6d120b2868b5c9",
+    "stable_loss.py": "4937f692df9c4f7a088e1b26b0b539770622886995e04d8180c0f7c67647d1bb",
+    "generate_stable_sources.py": "76ed32781f47692b3fa2804c7bae71883db5ea38d27af4b96c7facec0b1c93dd",
+    "run_stable_comparison.py": "ec71e6bcfec59bc54d5913c1e547cd1fe83adf35dc800372ef50e4e040dcfe09",
+    "train_stable_development.py": "1cfcc552b261fc84a6eee23c649abac696df68a2e395d3930c70ff9f960c8036"
+  },
+  "changes": {
+    "stable_network.py": "Identical network and features; evaluate actual repeated constructs separately so true-length batches retain fixed shapes.",
+    "train_stable_development.py": "True-length grouped shuffled batches and same-length pairs; complete-row coverage verified; fixed-shape masked objective; true-length prediction restored to original order; bounded MPS cache policy.",
+    "run_stable_comparison.py": "Same neural gate, phase roles, three epochs, seeds and protected new test, in a new version with fresh original initialization."
+  },
+  "old_partial_run_and_first_checkpoint_preserved": true
+}

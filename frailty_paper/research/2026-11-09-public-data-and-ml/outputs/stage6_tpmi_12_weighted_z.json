@@ -1,0 +1,50 @@
+{
+  "method": "a.T z / sqrt(a.T R a), a=score weight times EAS reference dosage SD; cross-chromosome correlations zero",
+  "assumption": "browser effect is ALT; conditional for these variants",
+  "score_sha256": "7d50558d87955cb2788c7d30bd1eed87a35662557af0c125e413480d43e603a9",
+  "inventory_sha256": "b2781d44ae87dc5a781b7f2c1b444bfe73af5f4ec0387641aeb0057dc9dfda2f",
+  "n_markers": 12,
+  "n_reference": 504,
+  "results": {
+    "FI_beta_weight": {
+      "reference_full_vs_subset_correlation": 0.9697181960593654,
+      "reference_full_score_sd": 0.026507612229437413,
+      "reference_subset_score_sd": 0.025300606994412493,
+      "insomnia": {
+        "weighted_z": 2.7916170326912466,
+        "nominal_two_sided_p": 0.005244538784900646
+      },
+      "persistent": {
+        "weighted_z": 1.041403678754963,
+        "nominal_two_sided_p": 0.297688235909512
+      }
+    },
+    "FFS_beta_weight_inferred": {
+      "reference_full_vs_subset_correlation": 0.936221430150122,
+      "reference_full_score_sd": 0.012719175976750147,
+      "reference_subset_score_sd": 0.011676389887237399,
+      "insomnia": {
+        "weighted_z": 2.1814866051082817,
+        "nominal_two_sided_p": 0.029147444137591436
+      },
+      "persistent": {
+        "weighted_z": 1.309402016032567,
+        "nominal_two_sided_p": 0.19039820893588597
+      }
+    },
+    "insomnia_beta_weight": {
+      "reference_full_vs_subset_correlation": 0.980406597737691,
+      "reference_full_score_sd": 0.062138275440613254,
+      "reference_subset_score_sd": 0.060068223424895754,
+      "insomnia": {
+        "weighted_z": 2.9222094934332214,
+        "nominal_two_sided_p": 0.0034755768038465472
+      },
+      "persistent": {
+        "weighted_z": 1.2886179754032159,
+        "nominal_two_sided_p": 0.1975309310884913
+      }
+    }
+  },
+  "limitations": "Postselected subset, rounded browser values and external LD; incomplete and not target score regression or individual validation. FFS weight direction inferred."
+}

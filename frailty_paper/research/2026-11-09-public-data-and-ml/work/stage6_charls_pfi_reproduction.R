@@ -1,0 +1,11 @@
+load('work/sleep_pfi_charls/CHARLS_2011_2018_PFI_Sleep_Data.rda')
+for (v in c('age','BMI','score','Glucose','Creatinine','Urea','TG','HDL','LDL')) g[[v]] <- as.numeric(as.character(g[[v]]))
+basevars <- c('PFI','Qnight','age','sex','residence','BMI','education','smoke','drink','diabetes','dyslipidemia','hypertension','score','Glucose','Creatinine','Urea','TG','HDL','LDL')
+d <- g[complete.cases(g[,basevars]),basevars]
+stopifnot(identical(levels(d$Qnight),c('Q2','Q1','Q3')))
+f1 <- glm(PFI~Qnight+age+sex+residence+BMI+education+smoke+drink+diabetes+dyslipidemia+hypertension+score+Glucose+Creatinine+Urea+TG+HDL+LDL, data=d,family=binomial())
+f2 <- update(f1,.~.-score)
+rows <- do.call(rbind,lapply(list(with_cesd=f1,without_cesd=f2),function(m){s<-summary(m)$coefficients; t<-s[grep('^Qnight',rownames(s)),,drop=FALSE];data.frame(contrast=rownames(t),n=nobs(m),events=sum(m$y),beta=t[,1],se=t[,2],odds_ratio=exp(t[,1]),lower95=exp(t[,1]-1.96*t[,2]),upper95=exp(t[,1]+1.96*t[,2]),p=t[,4],row.names=NULL)}))
+rows$model<-rep(c('with_cesd','without_cesd'),each=2)
+write.csv(rows,'outputs/stage6_charls_pfi_reproduction_results.csv',row.names=FALSE)
+print(rows)

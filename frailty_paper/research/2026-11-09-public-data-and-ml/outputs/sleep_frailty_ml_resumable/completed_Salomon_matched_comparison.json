@@ -1,0 +1,87 @@
+{
+  "time_UTC": "2026-11-09T01:01:55.838702+00:00",
+  "source": "Salomon",
+  "whole_source_and_its_region_groups_excluded_from_training": true,
+  "matched_training_rows_schedule_initialization_targets_updates_and_epochs_verified": true,
+  "matched_keys": [
+    "training_index_sha256",
+    "prediction_index_sha256",
+    "initial_parameter_sha256",
+    "normalization",
+    "context_transformations",
+    "actual_batch_schedule_sha256",
+    "actual_backprop_updates",
+    "completed_epochs",
+    "new_original_Siraj_signed_training_rows",
+    "new_original_neuronal_signed_training_rows"
+  ],
+  "training_rows": 361671,
+  "prediction_rows": 29485,
+  "all_three_epochs_independently_replayed": [
+    {
+      "epoch": 1,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": -0.0036139059940329954,
+        "adapt_last_stage": -0.004648631347886845
+      },
+      "adapted_minus_frozen_skill": -0.0010347253538538492
+    },
+    {
+      "epoch": 2,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": -0.0005009624857867934,
+        "adapt_last_stage": 0.0002594790092885768
+      },
+      "adapted_minus_frozen_skill": 0.0007604414950753702
+    },
+    {
+      "epoch": 3,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": -0.011927079467551227,
+        "adapt_last_stage": -0.010400486861539715
+      },
+      "adapted_minus_frozen_skill": 0.001526592606011512
+    }
+  ],
+  "last_pass_relative_error_reduction_adapted_vs_frozen": 0.0015085994208344777,
+  "last_pass_both_models_worse_than_training_line_baseline": true,
+  "last_pass_independent_pair_diagnostics": {
+    "frozen_reader": {
+      "local": {
+        "pairs": 9106,
+        "difference_MAE": 0.09901354204722015,
+        "zero_difference_MAE": 0.0990840657248408,
+        "skill_vs_zero_difference": 0.0007117559933046413,
+        "difference_Spearman": 0.04822689158575499,
+        "ordering_accuracy_nonzero_measured_differences": 0.513946848231935
+      },
+      "cross": {
+        "pairs": 0
+      }
+    },
+    "adapt_last_stage": {
+      "local": {
+        "pairs": 9106,
+        "difference_MAE": 0.09904610710020902,
+        "zero_difference_MAE": 0.0990840657248408,
+        "skill_vs_zero_difference": 0.00038309514606715833,
+        "difference_Spearman": 0.04716846488277944,
+        "ordering_accuracy_nonzero_measured_differences": 0.51229958269273
+      },
+      "cross": {
+        "pairs": 0
+      }
+    }
+  },
+  "common_epoch_not_yet_selected": true,
+  "entire_three_source_neural_gate_not_yet_applied": true,
+  "new_external_study_outcomes_read": false,
+  "candidate_promoted": false,
+  "confidence_success_established": false,
+  "scientific_goal_complete": false,
+  "interpretation": "The completed source-omission comparison remains weak. At the last prespecified pass, updating the reader slightly reduces magnitude error relative to the frozen model, but both are worse than a train-only typical-effect baseline. Nearby ordering remains close to chance, and this source has no measured cross-cell pairs. Report all epochs; do not select this source best epoch or call it fresh external validation.",
+  "record_sha256": {
+    "frozen_reader": "23139724ca54982bcf34d917425204700290a8cd8429e8f406aac4445cf94416",
+    "adapt_last_stage": "490f69d7949e472e558d390811989dcd167294fa72344f09757a55cb670249ed"
+  }
+}

@@ -1,0 +1,39 @@
+Corrected permitted AlphaGenome-related inputs: prepared and independently checked
+
+The file covers 269,217 physical DNA-pair contexts used by the current molecular model,
+representing 266,582 distinct canonical genome variants and 654,612 experimental observations.
+Repeated cells or constructs are not counted as independent genetic discoveries.
+
+We corrected the genomic score direction for 601 source DNA pairs.
+Complete constructs verified the mapping: 443 against GRCh38 and 158 against GRCh37
+at uniquely reciprocal mapped positions. The original experimental DNA and signed effects
+were kept in their original assay direction; only the auxiliary genomic score key changed.
+One genuine raw score of zero, previously stored as missing, was restored.
+All ten valid zero scores are retained as known scores.
+Exactly 602 used input records changed. Every earlier analysis and input file remains preserved.
+
+An independent audit checked every cached score and matrix row, all 601 full-construct
+reference resolutions, zero values, and consistent region/split identities.
+A separate audit verified training-only scaling for all eight planned fitting roles.
+Both future comparison arms receive the same availability information; only the score values differ.
+
+Only designated downloadable composite AVI SNV scores are included. Ordinary AlphaGenome
+API/Atlas track predictions, embeddings and attributions are excluded from model training.
+AVI incorporates other annotations too; any benefit cannot be assigned solely to AlphaGenome.
+The public mirror was queried by exact allele; the entire official remote archive was not byte-verified.
+
+These repaired inputs have NOT yet been used to train or select a new model.
+They do not establish improved prediction, target-gene causality, patient risk or genetic-score validation.
+The final untouched-study benefit comparison remains to be done after the model and
+comparison rules are fixed. The original failure audit and interrupted query state are preserved.
+
+Update: the score connection is now implemented and numerically checked.
+Both comparison heads have the same size, preserve all common weights, and begin
+with identical predictions. New score weights can receive correct gradients.
+Full native-runtime checks used 10 actual historical DNA pairs at all four true
+lengths, including repaired-reference and valid-zero examples. Independent NumPy
+checks and finite-difference gradients passed. These were discarded diagnostics,
+not scientific training fits or evidence of predictive improvement.
+A separate lower-memory reader returned exactly the same features and training
+normalization over every used physical pair; it was not inserted into the
+interrupted scientific comparison. Matched scientific training remains to be done.

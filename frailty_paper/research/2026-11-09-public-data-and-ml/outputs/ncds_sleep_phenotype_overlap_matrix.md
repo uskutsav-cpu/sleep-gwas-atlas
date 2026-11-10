@@ -1,0 +1,22 @@
+# NCDS sleep questions: overlap across candidate ageing outcomes
+
+Reviewed 29 October 2026. These are item-level comparisons from public study documentation, not participant-level analyses. The two FIs are different constructions; neither is a Fried physical-frailty score.
+
+| Age-50 sleep measure | 34-item FI | Separate 30-item FI | Interpretation |
+|---|---|---|---|
+| Time to fall asleep (`n8scq12`) | Explicit FI deficit | Not explicitly listed as a separate item in supplement | Direct inclusion in 34-item FI; absence from the 30-item list does not establish construct independence. |
+| Average sleep hours (`n8scq13`) | Not explicitly listed | Not explicitly listed | A potential sleep-duration analysis without exact item duplication in these published inventories; duration is not a clinical insomnia diagnosis. |
+| Awakening and trouble resuming sleep (`n8scq14`) | Not explicitly listed | Explicit FI item 9 | Direct inclusion in 30-item FI, with unresolved supplementary scoring labels. |
+| Enough sleep to feel rested (`n8scq15`) | Explicit FI deficit | Not explicitly listed as a separate item in supplement | Direct inclusion in 34-item FI; related fatigue and health concepts can still overlap in both measures. |
+
+The 34-item FI includes four fatigue symptoms. The 30-item FI includes a chronic-fatigue-syndrome diagnosis. An index with no identical sleep item is not necessarily sleep-free, independent, clinically validated, or free of common measurement and selection effects. Short or long sleep duration is a different phenotype from insomnia and should not be substituted for it without explicitly changing the scientific question. Counts of components, original derivation, threshold and missingness must be verified before computing either outcome. The 30-item FI supplement labels the awakening-frequency responses using pain-severity terms and needs clarification before reproducing its score. [34-item paper](https://academic.oup.com/aje/article/190/8/1550/6140871); [30-item supplement](https://mdpi-res.com/d_attachment/jcm/jcm-12-05568/article_deploy/jcm-12-05568-s001.zip); [age-50 questions](https://cls.ucl.ac.uk/wp-content/uploads/2017/07/NCDS-2008-Self-Completion-Questionnaire.pdf).
+
+## Later follow-up opportunity
+
+A [2026 NCDS intrinsic-capacity preprint](https://www.medrxiv.org/content/10.64898/2026.05.01.26352139v1.full), not yet peer reviewed in that version, uses age-50 and age-62 sweeps and describes repeated sleep and physical, cognitive, sensory and mental-health items. Its analytic sample is 7,804 people with at least one valid indicator at one or both sweeps, and 7,132 also completed the earlier sweep. These counts do not establish individual genotype availability, complete outcomes, linked sample size or score-validation power. Its constructed vitality domain explicitly includes four sleep indicators and energy; correlating a sleep question with the overall capacity score would therefore entail direct overlap. The capacity model is not FI or FFS, and removing its vitality domain would define a new, unvalidated outcome.
+
+The follow-up provides a possible way to study earlier sleep versus later function, but measurement timing alone does not establish causality: survival, attrition, changing interview modes, baseline function, shared risk factors, missingness, and technical/genetic selection all matter. Decide whether a defined later frailty measure can be reconstructed from permissible data before claiming a prospective genetic-score evaluation; check access to the age-62 variables and genotype linkage. [CLS access](https://cls-genetics.github.io/docs/access.html); [linked data process](https://cls.ucl.ac.uk/data-access-training/data-access/accessing-data-directly-from-cls/).
+
+## Decision for the project
+
+Prespecify the sleep phenotype and the ageing endpoint before analysis. For example, average duration versus each original FI avoids an **exact same sleep item** in the documented lists, but answers a duration question, and both indices still contain other sleep or fatigue items. For an insomnia-focused analysis, compare sleep initiation, maintenance or restedness with a separately defined endpoint that excludes that exact item and assess broader symptom overlap explicitly. If exclusions alter an index, name and assess the modified measure, rather than claiming it is the published FI. No inference about which score predicts better, and no participant-level validation, follows from this matrix.

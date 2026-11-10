@@ -1,0 +1,7 @@
+from pathlib import Path
+src=Path('outputs/stage6_gehas_asa_manifest_check.py').read_text()
+src=src.replace('import csv, hashlib, io, json, zipfile','import csv, hashlib, io, json, zipfile\nfrom pyliftover import LiftOver')
+src=src.replace("byname={x['rsid']:x for x in data.values()};total=0", "lo=LiftOver(str(root/'work/hg19ToHg38.over.chain.gz')); unmapped=[]; lifted={}\nfor k,v in data.items():\n m=lo.convert_coordinate('chr'+k[0],k[1]-1)\n if len(m)!=1 or m[0][2]!='+':unmapped.append(v['rsid']);continue\n key=(m[0][0].removeprefix('chr'),m[0][1]+1)\n if key in lifted:raise ValueError('duplicate lifted coordinate')\n lifted[key]=v\nbyname={x['rsid']:x for x in data.values()};total=0")
+src=src.replace("if key in data:data[key]['coordinate_hits'].append(info)","if key in lifted:lifted[key]['coordinate_hits'].append(info)")
+src=src.replace("work/asian_screening_e1_hg19.zip", "work/asian_screening_e2_hg38.zip").replace('stage6_gehas_asa_manifest_check.csv','stage6_gehas_asa_e2_manifest_check.csv').replace('stage6_gehas_asa_manifest_receipt.json','stage6_gehas_asa_e2_manifest_receipt.json').replace('ASA-24v1-0_E1 GRCh37','ASA-24v1-0_E2 GRCh38').replace('24v1-0_E1-manifest','24v1-0_E2-manifest').replace("'rows_scanned':total,'counts':counts", "'unmapped_or_nonforward':unmapped,'rows_scanned':total,'counts':counts")
+Path('outputs/stage6_gehas_asa_e2_manifest_check.py').write_text(src)

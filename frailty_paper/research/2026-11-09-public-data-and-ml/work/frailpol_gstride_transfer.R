@@ -1,0 +1,11 @@
+library(nnet)
+a<-read.csv('work/frailpol_gait_three_class.csv',check.names=FALSE)
+b<-read.csv2('work/gstride_register.csv',skip=3,header=FALSE,fileEncoding='CP1252',stringsAsFactors=FALSE,fill=TRUE)
+stopifnot(nrow(a)==668,nrow(b)==163,!anyDuplicated(a$participant_id),!anyDuplicated(b[[2]]))
+train<-data.frame(stride=(a[['temporal_left_stride time [s]']]+a[['temporal_right_stride time [s]']])/2,speed=(a[['spatial_left_gait velocity [m/s]']]+a[['spatial_right_gait velocity [m/s]']])/2,length=(a[['spatial_left_stride length [m]']]+a[['spatial_right_stride length [m]']])/2)
+num<-function(x){v<-suppressWarnings(as.numeric(gsub(',','.',as.character(x),fixed=TRUE)));if(anyNA(v))stop('Non-numeric test data');v}
+test<-data.frame(stride=num(b[[35]]),speed=num(b[[51]]),length=num(b[[53]]));raw<-num(b[[25]]);stopifnot(all(raw %in% 0:5),all(is.finite(as.matrix(train))),all(is.finite(as.matrix(test))))
+y<-ifelse(raw==0,0,ifelse(raw<=2,1,2));mu<-colMeans(train);sd<-apply(train,2,sd);stopifnot(all(sd>0));tr<-as.data.frame(sweep(sweep(as.matrix(train),2,mu,'-'),2,sd,'/'));te<-as.data.frame(sweep(sweep(as.matrix(test),2,mu,'-'),2,sd,'/'));tr$label<-factor(a$Targets,levels=0:2)
+set.seed(20261029);model<-multinom(label~.,data=tr,decay=.1,maxit=1000,trace=FALSE);stopifnot(model$convergence==0)
+pred<-as.integer(as.character(predict(model,te)));cm<-table(observed=factor(y,levels=0:2),predicted=factor(pred,levels=0:2));rec<-diag(cm)/rowSums(cm);result<-data.frame(metric=c('N','accuracy','balanced_accuracy','test_majority_accuracy','recall_robust','recall_prefrail','recall_frail'),value=c(length(y),sum(diag(cm))/sum(cm),mean(rec),max(table(y))/length(y),rec))
+write.csv(result,'outputs/stage6_gstride_transfer_metrics.csv',row.names=FALSE);write.csv(as.data.frame.matrix(cm),'outputs/stage6_gstride_transfer_confusion.csv');print(result);print(cm)

@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-11-07T18:30:28.008905+00:00",
+  "motivation": "A development-only diagnostic found simple rank averaging improved conditional AP over either source alone in both studies and all3folds. Rank averaging within a test batch is not deployable, so test a tiny learned combiner with fixed training-fitted transforms.",
+  "families": {
+    "stacked_contrast_no_avi": "No-teacher DNA active expert plus permissibleAVIraw",
+    "stacked_contrast_avi_teacher": "AVI-teacher DNA active expert plus permissibleAVIraw",
+    "conditional_avi_only": "AVIraw-only conditional classifier as matched reference"
+  },
+  "fixed_estimator": "Per-study training-median imputation + training-fitted normal QuantileTransformer(max256knots,subsample=None) + LogisticRegression(C1,max_iter2000,seed42), plus untransformed AVI-availability flag. No hyperparameter search.",
+  "development_evaluation": "For each broad fold, fit combination on measured-active rows of the other2folds using their saved held-fold base predictions; predict every row in the target fold; report measured-active performance by study. Actual activity status is not an inference input.",
+  "important_limitation": "This is development/model selection, NOT unbiased nested CV: base checkpoints used their folds for stopping, and base models supplying meta-training scores can have been fitted on current meta-validation rows. The still-unseen reserved test is necessary.",
+  "final_fit": "Fit combination coefficients/transforms on all measured-active development4\u201322 rows using saved held-fold base predictions. Deploy with the separately refitted fixed-epoch base ensemble. This can shift score calibration; report ranking only and assess once on reserved data.",
+  "batch_independent": "A new row is transformed using stored training references; other prediction rows cannot alter its score.",
+  "model_selection": "Add these3finite candidates to the same existing per-study/three-fold selection table. Primary role selection still uses development performance only. Preserve all original9families and matched controls.",
+  "clinical_scope": "Laboratory conditional DNA-effect ranking; not patient insomnia/frailty prediction or causal gene/risk direction.",
+  "reserved_test_evaluated": false
+}

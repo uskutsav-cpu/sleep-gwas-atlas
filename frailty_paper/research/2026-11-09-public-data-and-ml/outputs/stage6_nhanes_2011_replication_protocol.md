@@ -1,0 +1,3 @@
+# NHANES 2011–2012 sleep–grip follow-up: fixed analysis
+
+Before loading the 2011–2012 outcome data, use the existing 2013–2014 analysis code and the same variable definitions: examined adults aged at least 60, SLQ050 yes/no, combined grip MGDCGSZ, age, sex, WTMEC2YR, design strata and PSUs. Fit the same survey-weighted linear regression and report coefficient, t-based confidence interval, design degrees of freedom, counts and missingness. This is an independent survey-cycle follow-up of a previously explored phenotype association, not a blinded or formally preregistered replication; it does not test genetic scores, full frailty or diagnosed insomnia. Investigate source documentation and limitations regardless of the result.

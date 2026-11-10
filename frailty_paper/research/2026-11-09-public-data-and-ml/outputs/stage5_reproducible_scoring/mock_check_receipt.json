@@ -1,0 +1,12 @@
+{
+  "date_utc": "2026-10-27",
+  "test_type": "local simulated client responses; not a real AlphaGenome prediction",
+  "checks": {
+    "nonempty_simulated_result_written_with_receipt_and_matching_sha256": "pass",
+    "repeated_run_reuses_matching_verified_output_without_calling_model": "pass",
+    "empty_simulated_result_recorded_as_failed_without_score_file": "pass",
+    "mismatched_variant_response_rejected_before_output": "pass",
+    "missing_output_types_recorded_in_receipt": "implemented; requires live-response verification"
+  },
+  "limitations": "The test mocked model output and tidying. It does not verify API authentication, actual response schema, modality completeness, model outputs, tissue metadata, indel handling, clinical validity, or agreement with measured QTL. A live single-variant pilot and subsequent coverage audit remain required."
+}

@@ -1,0 +1,49 @@
+{
+  "cpu_gpu_max_errors": {
+    "overall": 7.450580596923828e-09,
+    "gate_logits": 0.0,
+    "predicted_active": 0.0,
+    "raw_conditional_logits": 0.0,
+    "conditional_scores": 2.9802322387695312e-08,
+    "variant_evidence_logits": 1.0477378964424133e-09,
+    "activity": 2.7939677238464355e-09,
+    "absolute_effect": 1.979060471057892e-09,
+    "avi": 0.0,
+    "variant_latent": 4.172325134277344e-07
+  },
+  "zero_contrast_creates_no_variant_evidence_or_effect_magnitude": true,
+  "measured_activity_not_an_inference_argument": true,
+  "Siraj_inactive_branch_zero_by_label_definition": true,
+  "finite_difference_checks": [
+    {
+      "parameter": "conditional.b",
+      "index": [
+        1
+      ],
+      "autodiff": -0.4872080385684967,
+      "finite_difference": -0.48720836639404297,
+      "absolute_difference": 3.2782554626464844e-07
+    },
+    {
+      "parameter": "variant.w2",
+      "index": [
+        3,
+        5
+      ],
+      "autodiff": -0.00035482191015034914,
+      "finite_difference": -0.00035762786865234375,
+      "absolute_difference": 2.80595850199461e-06
+    },
+    {
+      "parameter": "context.w2",
+      "index": [
+        2,
+        4
+      ],
+      "autodiff": 3.449502764851786e-05,
+      "finite_difference": 2.9802322387695312e-05,
+      "absolute_difference": 4.6927052608225495e-06
+    }
+  ],
+  "scope": "Implementation/structural checks, not biological or clinical validation"
+}

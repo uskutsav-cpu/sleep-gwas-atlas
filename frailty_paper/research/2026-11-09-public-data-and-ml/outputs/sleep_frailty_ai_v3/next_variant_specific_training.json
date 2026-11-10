@@ -1,0 +1,12 @@
+{
+  "reason": "Address actual variant-specific predictive weakness, not only assay-region detectability",
+  "hypothesis": "Separate a DNA/context activity gate from a variant-contrast expert. Learn activity using all measured pairs; learn variant effects with active/inactive strata, never measured activity as an inference input.",
+  "important_Salomon_detail": "41 of65 validation detected calls lie outside source significant-active region strata. Do not impose P(effect)=P(active)*P(effect|active) universally. A mixture needs an inactive expert for NGN2. Siraj predefined call rule requires activity, so its inactive expert can be fixed at0.",
+  "proposed_features": {
+    "context": "HOCOMOCO mean global/local affinities, original Hyena contextmean128, physical reference chromatin36",
+    "variant": "HOCOMOCO absolute local difference1611 plus original Hyena paired difference features384; scale-only normalization to preserve a zero contrast as zero"
+  },
+  "proposed_structure": "Context trunk predicts activity. Bias-free variant trunk is multiplicatively modulated by context; conditional class heads get no additive context-only route. Study-specific active/inactive conditional heads and a predicted activity gate form the all-call score. Auxiliary real activity/effect and permitted AVI losses can teach the shared model.",
+  "selection_and_validation": "Specify finite configs before fitting. Report all-call and within-active validation separately; never claim background activity recognition alone proves variant-effect strength. Keep new test unopened until all choices. Consider robust chromosome cross-validation of top families.",
+  "source_state": "The full-AVI runner is waiting on actual retrieval. Do not restart due an observation timeout. Existing biological searches are terminal success; no need rerun them."
+}

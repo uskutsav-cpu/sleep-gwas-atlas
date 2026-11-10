@@ -1,0 +1,120 @@
+{
+  "family_id": "contrast_avi_teacher",
+  "records": [
+    {
+      "name": "final_contrast_avi_teacher_s42",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 42,
+        "fixed_epochs": 1,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s42.npz",
+      "checkpoint_sha256": "553c4c297c9e7964378d627c62424cb5629829fb72d82835929f4ffb9381535a",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_contrast_avi_teacher_s73",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s73.npz",
+      "checkpoint_sha256": "63afc88df58a20d23211a51bf82653a735c6669dfa73af1cf838cf587d4d1c27",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_contrast_avi_teacher_s101",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 101,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s101.npz",
+      "checkpoint_sha256": "6b5794b129a678148706b73a231be494511494f9552bef4531a932cfe0959685",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_contrast_avi_teacher_ensemble",
+      "family": "context_variant_ensemble",
+      "features": "context_variant_biological",
+      "config": {
+        "members": [
+          "final_contrast_avi_teacher_s42",
+          "final_contrast_avi_teacher_s73",
+          "final_contrast_avi_teacher_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    }
+  ],
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "blind_test_evaluated": false
+}

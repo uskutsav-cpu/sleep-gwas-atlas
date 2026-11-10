@@ -1,0 +1,8 @@
+{
+  "time_UTC": "2026-11-09T01:58:32.322173+00:00",
+  "audit_completed": false,
+  "failed_before_prediction_or_gradient_checks": true,
+  "reason": "The checker required unchanged batch-normalization running-statistic buffers in a weights-only learned-parameter override. Those buffers are correctly restored from the pinned original reader. The existing native checkpoint auditor already distinguishes parameter names from buffers. Fix the checker; do not change the model, weights, numeric bounds or scientific data.",
+  "preserved_auditor_sha256": "79717e7d2d4fa3841cd98244b18161f18d0b0b5810cbf40b33350048b52d70a4",
+  "scientific_training_performed": false
+}

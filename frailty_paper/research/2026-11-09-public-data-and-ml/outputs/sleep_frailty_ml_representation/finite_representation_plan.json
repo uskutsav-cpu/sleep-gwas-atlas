@@ -1,0 +1,29 @@
+{
+  "purpose": "Determine whether fixed DNA features contain a useful simple effect-size signal before another neural architecture experiment.",
+  "data_sha256": "2912b381b5e5640d69e9983735ab09ccad3f592f236dc70b2eea4839519b745c",
+  "signed_sidecar_sha256": "32c18607022da63979ff18e2c7c60dc67d93b32a97827a92c17e447f25d3d3a5",
+  "roles": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "magnitude_features": "96 absolute projected channel differences; 42 symmetric scalar reader summaries; actual length and changed position. Add six scalar readout-by-supported-line interactions and line offsets.",
+  "signed_features": "96 signed channel differences plus three signed readout differences; three readout-by-supported-line interactions. No intercept or centered differences, preserving allele-swap antisymmetry.",
+  "normalization": "Unique physical training banks only; training mean and SD for magnitude features, RMS without centering for signed features. Clip normalized features at 12.",
+  "magnitude_objective": "Weighted mean sqrt((predicted actual magnitude - observed magnitude)^2 + 0.01^2), plus 0.1/2 times squared standardized slope norm. Line offsets are unpenalized. No SE weighting of primary magnitude error.",
+  "signed_objective": "Weighted mean squared original signed-effect residual plus 0.1 times squared slope norm; documented source signed labels only; same training-derived context and precision weights as previous signed auxiliary.",
+  "optimization": "Magnitude: one L-BFGS-B fit per role, maximum 80 iterations and 120 function evaluations. Signed: one closed-form ridge solve per role. Fixed penalties; no grid or model/epoch search.",
+  "endpoint": "Actual magnitude MAE versus training-only typical line/cell effect, macro across supported cells within each held source. Report nearby and fixed-study/cell-pair differences separately.",
+  "signed_output_scope": "Separate diagnostic of direction learnability; abs(signed prediction) is not substituted for the primary observed magnitude prediction.",
+  "safety": "Clip negative magnitude predictions to zero; no effect-size, significance or SE-based test-row filtering. No new outside study, calibrated confidence, project ranks or patient-risk claim.",
+  "stopping_rule": "Finish exactly these two simple readout diagnostics. A negative result does not prove the representation contains no nonlinear signal. Do not tune more penalties or open Ulirsch to find a favorable result.",
+  "AlphaGenome_training_inputs": false,
+  "pretrained_weights_updated": false,
+  "reserved_study_used": false,
+  "scientific_success_assumed": false
+}

@@ -1,0 +1,689 @@
+{
+  "selection": "six exploratory matrices; all cell-type variables per trait and gene model in one BH family; model sensitivity and matrix choices not prespecified before analysis",
+  "runs": [
+    {
+      "trait": "mak_fi",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "26103630d3f24ca0d6752b58b67b4d4df8ca91ed8ec4ef328ec1a91f57b3cb0a"
+    },
+    {
+      "trait": "mak_fi",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "2f2374e3d7f15990837172f8b6c6afeb75e9c4de355d4e85c8488b6abdd9d5c2"
+    },
+    {
+      "trait": "mak_fi",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "063294d3f8ea480acd42289fe935d5b82d3927bef8e0c9a770ad647093d96ab6"
+    },
+    {
+      "trait": "mak_fi",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "e538307d70007b1745cd8a586f88a341df1ce16bca5a42dad3c8c239b78bfa79"
+    },
+    {
+      "trait": "mak_fi",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "8965ccdb090a970e447e8f770afa0d85cfb525684aa217ebd6837d9e814d0f7f"
+    },
+    {
+      "trait": "mak_fi",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "5c727d4a9d3d8e057a0261ac1e5fdab005c7120c8576623713a75e6d1dca7206"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "16b3ad38b6e8eeb760a3f0de4f1ed3614249cc910b6b672591f0f51089a0ae5e"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "67e366599abb049d7e46ea43be344ba759822644ceb7df4a2858b440ac19d958"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "f127b2f95719854c991d2fb308352f678dcf9296892bf2236f0134ff29a1aa5c"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "5fff950e52b17f2bc36a8aeffc50f14af189fd07bfb760d3ff54479f33942772"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "925f187d5831e7c401b85ae3b6237d05a4e839b4b45c8baabaf8371b8b30a51c"
+    },
+    {
+      "trait": "ye_ffs",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "b6ddc5848799f6e7f390e204d6c16df3a5ca0b233d96e551f3648249d5fef4c0"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "d3831744c4c7c3a3fab82ab28fcfbce077e0c470a81db3930ac59afc6a2b2ffa"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "65b1c3a128d0853ae1efc095faf8b1ae8a833f8f541c23522606604a1a696257"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "60f241ed3c4a846346812d1e87e1ca992553414a84d83e6224909304db547c51"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "6686280e4b1d320602b273ca4c8fdb49c23fd596a549cfe9c744cbb0c16c749a"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "0bdb874a8dc7fce700caed698f5f13dcb40b7df9851159326c511763f094194a"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "32dc7cf3c5a48758e54a7631183f673e87f07dbf81a3fa32665a96f99f048e0f"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "9e48558c24721b494db90fdcad64b7bac5f27542551c3c03cfcdb08d63609ea9"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "51cf51ead31ba49da094d31c5c6881eca3b63bea4624271a1e5b0e2efcd68c47"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "343a53e29575e6f260b4d238225f849c46e17830522430c0d34fcb1fa6814b9f"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "f4ed5cc5610225f2507e5f3f7042c432f8a23787b4821087debe3bca8a4d1d61"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "d76ecce3a4a7559baa635f0eecd1e1a7183c7facd5ba06f8b61ac90cb3d9e4de"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "d3d5e1b661900fe64708af7ce169009af81839abb6cdbc344647c54c296e2f99"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "be49df0c0df792e6b9233b53c6afec660e76826fbfb359362412f2381ec0c280"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "48700f7fc7bd03816fc79a8c08f65dfa4e802ec7955373c0a8e16948a8ccfa8c"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "ca6f0521efee31e970abbd692021239ba11b2a348cf28e376fbd630b68472944"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "aec42875726c5f2370075a72a0f872913ca7e7260c51df19212b7f6e068aca56"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "47dcfe295f405e607630dc72214df6f17f3c5ba39aa51daf0d7f5689a8ea0370"
+    },
+    {
+      "trait": "jansen_insomnia_brown",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "5f715b245228d41a9e0ce1c4b7bfbba416e95bab6c76d5eda657218a88e468f6"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE67835_Human_Cortex_woFetal.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_GSE67835_Human_Cortex_woFetal"
+      ],
+      "gsa_sha256": "fcd4b27222db13e6a5a60ad84f29a6dba41c36e27c6afc7cf7f6c4fe4fc55cf6"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE87544_Mouse_Hypothalamus.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_GSE87544_Mouse_Hypothalamus"
+      ],
+      "gsa_sha256": "f5bb020a50845ad7f69c6c04f4c04b108ac3d2bf829e70952133d896158c4d2b"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "PBMC_10x_68k",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/PBMC_10x_68k.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_PBMC_10x_68k"
+      ],
+      "gsa_sha256": "3804a87585119e76d961e9be71681f1b1c51037422e1e4131d9b4c761ae55be1"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE98816_Mouse_Brain_Vascular.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_GSE98816_Mouse_Brain_Vascular"
+      ],
+      "gsa_sha256": "95366c662df8a06ef0817235dd9da2b645fa9743f9235e947dcec7949c5ab92a"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "MouseCellAtlas_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/MouseCellAtlas_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_MouseCellAtlas_Muscle"
+      ],
+      "gsa_sha256": "dcd24c66ef3417888ff3b70be01f9c3e342da5cfb415010141a53cb53ee8a5e7"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/TabulaMuris_FACS_Limb_Muscle.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_TabulaMuris_FACS_Limb_Muscle"
+      ],
+      "gsa_sha256": "2ec0ef7fa79ded802db4720b11d331675f15d3adaccdf207b5aeeee75e48c3d8"
+    }
+  ]
+}

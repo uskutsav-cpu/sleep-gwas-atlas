@@ -1,0 +1,25 @@
+{
+  "time_UTC": "2026-11-09T05:08:05.330390+00:00",
+  "scientific_training_ready": false,
+  "blockers": [
+    "The system volume has less than the recorded 768 MiB launch reserve; preserve partial work and recover storage before admission.",
+    "The new matched trainer still needs its execution and full-state continuation audit; head-only numerical checks do not substitute for that."
+  ],
+  "free_system_volume_bytes": 539856896,
+  "launch_reserve_bytes": 805306368,
+  "resource_admission_revision_sha256": "d85abccf3b595b137de8e8f77e5ac8335efb34ce4b43a4b16541c89a6ad2aad5",
+  "current_numerical_audits": {
+    "corrected_permitted_AVI_independent_audit.json": "3b46ca6bd44b5de807ca56c3496e25fd01df0285cee837486eb75f5e20f818af",
+    "permitted_AVI_train_only_scaling_audit.json": "cb4774c4657de1d97b197e7d16a19fe5c377ffb45de7428b2ea6128a52ec182e",
+    "permitted_AVI_expanded_head_audit.json": "1b4f172984635be29a04eb4fefbc8139a33aa24f0cc0be5ac553968b38dd53e0",
+    "permitted_AVI_native_runtime_audit.json": "30269cbda75ffbf7b8477de5efe84cf3c8edaa1ead815f7099470040fe612cb7",
+    "readonly_native_input_equivalence_audit.json": "13855d15d221bd15f72997a204edaca721ae0fc7883e1e6f5a1c27ed90a9c9d5"
+  },
+  "external_benefit_protocol_sha256": "57b8245560803ab9018636097bdf6bf98ed847b8d23166bd0164748762c1e54d",
+  "external_statistics_source_sha256": "d6c79f1243dce90ad2ce58cc7d937028d210691abce329d6dc06bee329c981b6",
+  "external_statistics_synthetic_check_sha256": "27d2b99391195207ca7053e7512225f542d445b53395671c9264fff6e202125e",
+  "seven_source_candidate_gate_synthetic_check_sha256": "2d70caa851151e25ea4385a653a4b34baaeea552fd4a64b7b1692a2a009bb0ce",
+  "candidate_rule": "If the original native gate passes, use its declared adapted candidate and common epoch. Otherwise use the original frozen reader at exactly three epochs for a separate input-benefit question. Do not extend or rescue the failed adaptation comparison.",
+  "reserved_outcomes_read": false,
+  "scientific_training_launched": false
+}

@@ -1,0 +1,8 @@
+.libPaths(c('work/stage5_Rlib', .libPaths()));library(susieR)
+d<-read.csv('work/stage6_tenk10k_susie_expanded/aligned.csv');n<-nrow(d);b<-readBin('work/stage6_tenk10k_susie_expanded/ld_f64.bin','double',n=n*n,size=8,endian='little');R<-matrix(b,n,n);rm(b)
+cat('Fitting QTL\n');flush.console()
+q<-susie_rss(z=d$qtl_beta_alt/d$qtl_se,R=R,n=921,L=10,max_iter=200,estimate_residual_variance=FALSE,verbose=FALSE)
+cat('Fitting FI\n');flush.console()
+g<-susie_rss(z=d$gwas_beta_alt/d$gwas_se,R=R,n=403041,L=10,max_iter=200,estimate_residual_variance=FALSE,verbose=FALSE)
+o<-data.frame(trait=c('TenK10K_peak','Mak_FI'),converged=c(q$converged,g$converged),niter=c(q$niter,g$niter),n_credible_sets=c(if(is.null(q$sets$cs)) 0 else length(q$sets$cs),if(is.null(g$sets$cs)) 0 else length(g$sets$cs)),min_abs_corr=c(if(is.null(q$sets$purity)) NA else min(q$sets$purity$min.abs.corr),if(is.null(g$sets$purity)) NA else min(g$sets$purity$min.abs.corr)))
+saveRDS(list(qtl=q,fi=g),'work/stage6_tenk10k_susie_expanded/fits.rds');write.csv(o,'outputs/stage6_tenk10k_expanded_susie_fit.csv',row.names=FALSE);print(o)

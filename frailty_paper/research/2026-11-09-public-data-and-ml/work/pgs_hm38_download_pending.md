@@ -1,0 +1,1 @@
+Completed: both downloads exited successfully after resumption, matched official MD5s, and were scanned in work/audit_harmonized_foote_scores.py; results in outputs/stage6_foote_hm38_allele_audit.json. Files stored on external work disk.

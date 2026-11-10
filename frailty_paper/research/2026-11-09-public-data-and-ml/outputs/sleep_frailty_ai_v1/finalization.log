@@ -1,0 +1,227 @@
+RUN merge_cnn_results.py
+Merged CNN comparison on identical final-test row identifiers
+RUN select_model.py
+{
+  "rule": "Largest validation average precision; test results not read by this selector",
+  "selected_model": "kmer_logistic",
+  "validation_average_precision": {
+    "kmer_logistic": 0.04978881284601873,
+    "frozen_hyenadna": 0.03683170337463851,
+    "finetuned_hyenadna": 0.03661172390516082,
+    "small_dna_cnn": 0.036484334464610205
+  },
+  "scope": "Recommendation for selected neuronal reporter detected-call ranking only, not clinical sleep/frailty prediction"
+}
+RUN evaluate_uncertainty.py
+{
+  "seed": 26061106,
+  "requested_draws": 2000,
+  "skipped": 0,
+  "groups": [
+    19,
+    20,
+    21,
+    22
+  ],
+  "model_ranges": {
+    "constant": {
+      "auroc_percentile_range": [
+        0.5,
+        0.5
+      ],
+      "average_precision_percentile_range": [
+        0.02425763278962777,
+        0.036490008688097306
+      ]
+    },
+    "kmer_logistic": {
+      "auroc_percentile_range": [
+        0.537015911197775,
+        0.6669790701713756
+      ],
+      "average_precision_percentile_range": [
+        0.03834916356539133,
+        0.10518876836186078
+      ]
+    },
+    "frozen_hyenadna": {
+      "auroc_percentile_range": [
+        0.49735813795446826,
+        0.5366312006093498
+      ],
+      "average_precision_percentile_range": [
+        0.02502234224843216,
+        0.047351206430914915
+      ]
+    },
+    "finetuned_hyenadna": {
+      "auroc_percentile_range": [
+        0.501973188287982,
+        0.59163512938556
+      ],
+      "average_precision_percentile_range": [
+        0.023363488846977185,
+        0.0834691725547063
+      ]
+    },
+    "small_dna_cnn": {
+      "auroc_percentile_range": [
+        0.46597145219793645,
+        0.532817677429298
+      ],
+      "average_precision_percentile_range": [
+        0.026351643679301685,
+        0.03825742452552817
+      ]
+    }
+  },
+  "paired_finetuned_minus_comparator_ranges": {
+    "kmer_logistic": {
+      "auroc_percentile_range": [
+        -0.08913719038479118,
+        -0.018598068184639827
+      ],
+      "average_precision_percentile_range": [
+        -0.0666407178058745,
+        0.018944556033588113
+      ]
+    },
+    "frozen_hyenadna": {
+      "auroc_percentile_range": [
+        -0.008727847820624635,
+        0.09394325518178726
+      ],
+      "average_precision_percentile_range": [
+        -0.003409449061984725,
+        0.03786779592289127
+      ]
+    },
+    "small_dna_cnn": {
+      "auroc_percentile_range": [
+        -0.021424093064832506,
+        0.11042030144053294
+      ],
+      "average_precision_percentile_range": [
+        -0.004481284749634495,
+        0.04531917132003867
+      ]
+    }
+  },
+  "limitations": "Only four chromosome clusters. Exchangeable independent chromosomes are a rough assumption, not established. Percentile ranges are a descriptive sensitivity, not precise guarantees; training, architecture/split selection, assay-study and pretraining uncertainty are excluded."
+}
+RUN check_inference.py
+{
+  "models": {
+    "frozen_hyenadna.npz": {
+      "cpu_gpu_prediction_max_error": 4.470348358154297e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "ce15382689567854724a508a4ab85b03b03ffe17e9131274ce0a0774a3028c6d"
+    },
+    "finetuned_hyenadna.npz": {
+      "cpu_gpu_prediction_max_error": 5.21540641784668e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "c165368557528ab5df6ed164ac1b31b72238d79cb8270dc5322f39a5681ba4b6"
+    },
+    "cnn.npz": {
+      "cpu_gpu_prediction_max_error": 4.470348358154297e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "4590cb298713fad9f06bfc5aee88c7a13e9386169534c93274b21631f4eedecd"
+    }
+  },
+  "native_pretrained_arrays_changed": [
+    "layers.1.mixer.filter_fn.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.0.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.0.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.1.freq",
+    "layers.1.mixer.filter_fn.implicit_filter.2.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.2.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.4.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.4.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.6.weight",
+    "layers.1.mixer.in_proj.bias",
+    "layers.1.mixer.in_proj.weight",
+    "layers.1.mixer.out_proj.bias",
+    "layers.1.mixer.out_proj.weight",
+    "layers.1.mixer.short_filter.bias",
+    "layers.1.mixer.short_filter.weight",
+    "layers.1.mlp.fc1.bias",
+    "layers.1.mlp.fc1.weight",
+    "layers.1.mlp.fc2.bias",
+    "layers.1.mlp.fc2.weight",
+    "layers.1.norm1.bias",
+    "layers.1.norm1.weight",
+    "layers.1.norm2.bias",
+    "layers.1.norm2.weight",
+    "ln_f.bias",
+    "ln_f.weight"
+  ],
+  "first_block_and_nucleotide_embedding_preserved": true,
+  "frozen_encoder_matches_original": true,
+  "scope": "Numerical reload, invariance, input rejection and parameter-update checks; not biological or clinical validation",
+  "validation_checkpoint_replay": {
+    "frozen_hyenadna.npz": {
+      "recorded_validation_average_precision": 0.03683170337463851,
+      "reloaded_validation_average_precision": 0.03683187748607106,
+      "difference": 1.741114325493065e-07
+    },
+    "finetuned_hyenadna.npz": {
+      "recorded_validation_average_precision": 0.03661172390516082,
+      "reloaded_validation_average_precision": 0.03661172346595599,
+      "difference": 4.3920483222548157e-10
+    },
+    "cnn.npz": {
+      "recorded_validation_average_precision": 0.036484334464610205,
+      "reloaded_validation_average_precision": 0.036484334486267145,
+      "difference": 2.1656940130121427e-11
+    }
+  }
+}
+Verified existing predictions project_candidate_predictions.csv
+Verified existing predictions project_cnn_predictions.csv
+Verified existing predictions project_recommended_model_predictions.csv
+RUN export_embeddings.py
+{
+  "variants": 33,
+  "representations": {
+    "pair_features": 512,
+    "learned_task_embedding": 32
+  },
+  "checkpoint_sha256": "c165368557528ab5df6ed164ac1b31b72238d79cb8270dc5322f39a5681ba4b6",
+  "max_absolute_training_standardized_feature": 16.126781463623047,
+  "training_task": "Detected allelic effects in selected human excitatory-neuron reporter constructs",
+  "caveats": "No exact project variants were tested in the source assay. Embedding proximity is not a gene interaction, shared disease mechanism, or individual risk. These are exploratory outputs from the fine-tuned model, regardless of which model is recommended by validation. Standardized-feature/clipping diagnostics flag numerical extrapolation only; they do not establish biological in-distribution status."
+}
+              model    n detected     auroc average_precision
+           constant 3542      100 0.5000000        0.02823264
+      kmer_logistic 3542      100 0.5833977        0.04873835
+    frozen_hyenadna 3542      100 0.5147589        0.02961478
+ finetuned_hyenadna 3542      100 0.5323446        0.03385640
+      small_dna_cnn 3542      100 0.4904503        0.02879620
+RUN build_report.py
+Wrote model report and comparison table
+RUN figures.py
+Wrote model comparison and training figures
+RUN package.py
+Verified model package /Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v1/sleep_frailty_ai_v1.zip 6158466 bytes
+FINALIZATION COMPLETE

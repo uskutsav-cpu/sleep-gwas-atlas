@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "full_native_forward_runtime_replay_complete": true,
+  "actual_historical_observations_checked": 10,
+  "actual_DNA_lengths": [
+    150,
+    199,
+    200,
+    270
+  ],
+  "full_actual_REF_and_ALT_sequences_used": true,
+  "invented_or_padded_bases": false,
+  "original_fitted_head_checkpoint_sha256": "0464f3fdee517506d532a70626dff874e850608b87d5b3f8c48c5850bd309324",
+  "expanded_models_vs_original_max_errors": {
+    "scoreless": 0.0,
+    "scores": 0.0
+  },
+  "independent_NumPy_head_errors_on_actual_DNA_inputs": {
+    "scoreless": {
+      "magnitude": 0.0,
+      "signed_effect": 0.0,
+      "activity_reference": 0.0,
+      "activity_alternate": 0.0
+    },
+    "scores": {
+      "magnitude": 0.0,
+      "signed_effect": 0.0,
+      "activity_reference": 0.0,
+      "activity_alternate": 0.0
+    }
+  },
+  "CPU_float64_vs_saved_MPS_float32_max_errors": {
+    "magnitude": 1.2042821828650574e-07,
+    "signed_effect": 2.6312433343278485e-07,
+    "activity_reference": 4.824972791028781e-07,
+    "activity_alternate": 5.970913975750225e-07
+  },
+  "saved_prediction_absolute_tolerance": 0.0001,
+  "new_input_finite_gradient_checks_on_real_DNA_and_historical_effects": [
+    {
+      "parameter": "head.hidden.weight",
+      "row": 44,
+      "column": 237,
+      "relative_gradient_error": 1.6883891291208593e-09
+    }
+  ],
+  "fixed_discarded_score_weight_perturbation_changes_prediction": 9.696068842585115e-05,
+  "nonzero_score_connection_keeps_allele_swap_size_invariance_and_signed_antisymmetry": true,
+  "actual_zero_score_and_reversed_reference_role_cases_included": true,
+  "no_optimizer_steps_or_scientific_model_selection": true,
+  "original_saved_weights_and_scientific_results_unchanged": true,
+  "reserved_new_study_outcomes_read": false,
+  "predictive_benefit_established": false,
+  "peak_RSS_bytes_on_macOS": 706117632,
+  "case_receipt_sha256": "a9cb5d48b6dbcc4bfa83396eecbe8b79a2a5913b40f01ab0abf9a20639427123",
+  "code_sha256": {
+    "audit_permitted_AVI_native_runtime.py": "0e67afa0ee95eb999d4b9a56b07014eedafb3a09da3462c2255043f9df8c9a9c",
+    "permitted_AVI_network.py": "f6d4cf45f08977b6c7abadb816225634a01cf2d1730ce2fbdcd1d991efee93ed",
+    "permitted_AVI_head.py": "93b84ebb2334200263d8b710eb1ab56a5b2960bbab75c78129b4aed051d9e3b4"
+  },
+  "remaining": "Fix the candidate and the matched scientific training/selection protocol; fit both arms, then freeze final-study predictions before outcome evaluation. Numerical checks do not prove a prediction improvement."
+}

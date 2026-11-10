@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T02:16:12.099277+00:00",
+  "scope": "Four actual full-batch MPS updates with original model and all losses; not sustained-resource proof or biological validation.",
+  "continuation_checked": true,
+  "matched_metadata_fields": [
+    "training_index_sha256",
+    "prediction_index_sha256",
+    "initial_parameter_sha256",
+    "normalization",
+    "context_transformations",
+    "new_original_Siraj_signed_training_rows",
+    "new_original_neuronal_signed_training_rows"
+  ],
+  "comparisons": {
+    "readonly_vs_original": {
+      "reference_sha256": "2e56f599be89e0973b802b2360867821018a0401264aa5631a21eb8cf3a96eda",
+      "compared_sha256": "56f5347e518a73dd1dc7d1b35163a3a46039a5341f7c45030acf96015849943f",
+      "parameter_scalars": 310237,
+      "optimizer_scalars": 620502,
+      "CPU_and_MPS_RNG_exact": true,
+      "NumPy_and_batch_schedule_exact": true,
+      "numeric_bound": "Existing eight-float32-ULP four-update bound; initial restore is checked exactly.",
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "maximum_absolute_difference": 1.1641532182693481e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 3.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "maximum_absolute_difference": 5.684341886080802e-14,
+          "maximum_float32_ULP": 5.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "maximum_absolute_difference": 2.842170943040401e-14,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 7.0
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "maximum_absolute_difference": 5.684341886080802e-14,
+          "maximum_float32_ULP": 2.0
+        }
+      ]
+    },
+    "original_repeat_background_variation": {
+      "reference_sha256": "2e56f599be89e0973b802b2360867821018a0401264aa5631a21eb8cf3a96eda",
+      "compared_sha256": "79688ee3d5021e981949e06758b62359750302df915281a35ab883cdbbb17c08",
+      "parameter_scalars": 310237,
+      "optimizer_scalars": 620502,
+      "CPU_and_MPS_RNG_exact": true,
+      "NumPy_and_batch_schedule_exact": true,
+      "numeric_bound": "Existing eight-float32-ULP four-update bound; initial restore is checked exactly.",
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "maximum_absolute_difference": 1.1641532182693481e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "maximum_absolute_difference": 8.526512829121202e-14,
+          "maximum_float32_ULP": 4.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "maximum_absolute_difference": 2.842170943040401e-14,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "maximum_absolute_difference": 2.6645352591003757e-15,
+          "maximum_float32_ULP": 3.0
+        }
+      ]
+    },
+    "resumed_vs_direct": {
+      "reference_sha256": "56f5347e518a73dd1dc7d1b35163a3a46039a5341f7c45030acf96015849943f",
+      "compared_sha256": "9008d441f85d85919377e353fd72955b840cbf4a07ee41be8f274463379a6c94",
+      "parameter_scalars": 310237,
+      "optimizer_scalars": 620502,
+      "CPU_and_MPS_RNG_exact": true,
+      "NumPy_and_batch_schedule_exact": true,
+      "numeric_bound": "Existing eight-float32-ULP four-update bound; initial restore is checked exactly.",
+      "differences": [
+        {
+          "tensor": "parameters/head.cell_activity_weight",
+          "maximum_absolute_difference": 5.820766091346741e-11,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "parameters/head.cell_activity_bias",
+          "maximum_absolute_difference": 1.1641532182693481e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg",
+          "maximum_absolute_difference": 4.656612873077393e-10,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/0/exp_avg_sq",
+          "maximum_absolute_difference": 4.263256414560601e-14,
+          "maximum_float32_ULP": 7.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 1.0
+        },
+        {
+          "tensor": "optimizer/state/2/exp_avg_sq",
+          "maximum_absolute_difference": 2.842170943040401e-14,
+          "maximum_float32_ULP": 2.0
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg",
+          "maximum_absolute_difference": 2.3283064365386963e-10,
+          "maximum_float32_ULP": 8.0
+        },
+        {
+          "tensor": "optimizer/state/4/exp_avg_sq",
+          "maximum_absolute_difference": 5.684341886080802e-14,
+          "maximum_float32_ULP": 2.0
+        }
+      ]
+    },
+    "exact_initial_restoration": {
+      "passed": true,
+      "history_sha256": "9aa7ee2dc20277df680d96f81fedc35eb70cea0f4b81f44ddbaa06cc28c22037"
+    }
+  },
+  "scientific_weights_changed": false,
+  "code_sha256": {
+    "audit_readonly_native_training.py": "8178ef351f6dca55008083d0c25fcaedd9bc605b08763e17d541d2fa9f71ddc1",
+    "audit_recovery_state.py": "1decf54e827bc059e54546c7d488908484a2a1037ffe0af058d6655c2919d2aa"
+  },
+  "runtime_composition_sha256": "4e5430e81f7a731a55a7fe52d8050ee676abbda2fee43cfce69925e6b28fc3ad"
+}

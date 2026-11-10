@@ -1,0 +1,9 @@
+{
+  "purpose": "Descriptive lookup of all published Song Table S4 candidate rsIDs in three existing datasets; no candidate selection based on results",
+  "candidate_set": "outputs/published_insomnia_fi_124_cross_trait_candidates.csv (all 124 source rows)",
+  "traits": ["Jansen UKB-only insomnia harmonized", "Atkins FI meta GWAS harmonized", "Ye FFS source"],
+  "selection": "Exact rsID only, retain absent and duplicate matches, then require chromosome and position agreement before recording alignment",
+  "alignment": "Only direct A1/A2 equality or swapped equality; no complement/strand imputation; exclude ambiguous A/T and C/G from interpreted directional comparisons; FFS effect column is source-inferred",
+  "filtering": "No additional p-value, FDR, effect-size, direction, or result-dependent selection; dataset p values are source descriptive, no fresh inferential or scoring claim",
+  "limitation": "Post-publication lookup, not a pre-registered study, independent replication, fine-mapping, causal colocalization, or validated risk score; FI and sleep samples share or may share UKB. Existing locus QC failure remains in force."
+}

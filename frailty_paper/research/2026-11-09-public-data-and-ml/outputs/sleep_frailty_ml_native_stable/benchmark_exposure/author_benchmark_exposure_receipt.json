@@ -1,0 +1,87 @@
+{
+  "passed_identity_and_component_screen": true,
+  "original_reader_repository_commit": "a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d",
+  "source_profile_sha256": "5029e98033f17de39ddfb30b4a7a4b9bd9c2f003bedb778632fe64d64b3f2d0d",
+  "source_designs_screened_before_candidate_filter": 7248,
+  "benchmark_sources": [
+    {
+      "path": "datasets/asb/HepG2__hepatoblastoma_.asb.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/asb/HepG2__hepatoblastoma_.asb.tsv",
+      "rows": 286296,
+      "bytes": 29194322,
+      "verified_Git_blob_SHA1": "460ead596917111c509dc953b3936a0da4286287",
+      "sha256": "f5451b92ddc39aa23303d4b03f79c08a13389a8b8fef1e9673ec6a7f08519fa2",
+      "position_conversion": "1-based pos",
+      "source_components_near_benchmark": 369
+    },
+    {
+      "path": "datasets/asb/K562__myelogenous_leukemia_.asb.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/asb/K562__myelogenous_leukemia_.asb.tsv",
+      "rows": 327939,
+      "bytes": 26055028,
+      "verified_Git_blob_SHA1": "ba68aebdc00cf37531b49eb430bb05781452d922",
+      "sha256": "f0dd50e86ca01dadb6dc89501f293a18547e5d00414e6990d2bc7ba0bbc5f158",
+      "position_conversion": "1-based pos",
+      "source_components_near_benchmark": 432
+    },
+    {
+      "path": "datasets/coverage/HepG2__hepatoblastoma_.atac.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/coverage/HepG2__hepatoblastoma_.atac.tsv",
+      "rows": 16868,
+      "bytes": 3808746,
+      "verified_Git_blob_SHA1": "fe1a69e83dad82880d9e92cf25e05046941ab70c",
+      "sha256": "c6b18eee94563c6fbbfde88a7ee6d9ca5cdda94a169c2c3fe4d04e994d564805",
+      "position_conversion": "0-based start + 1",
+      "source_components_near_benchmark": 88
+    },
+    {
+      "path": "datasets/coverage/HepG2__hepatoblastoma_.dnase.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/coverage/HepG2__hepatoblastoma_.dnase.tsv",
+      "rows": 15047,
+      "bytes": 3391645,
+      "verified_Git_blob_SHA1": "bec5cb2f76fc0519a98e93423bdd1785b4b11f89",
+      "sha256": "c37d03c2c0e046a4ae2549acd17810ce589f850a947fc8ef3ac5d93902c19e55",
+      "position_conversion": "0-based start + 1",
+      "source_components_near_benchmark": 70
+    },
+    {
+      "path": "datasets/coverage/K562__myelogenous_leukemia_.atac.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/coverage/K562__myelogenous_leukemia_.atac.tsv",
+      "rows": 9293,
+      "bytes": 2138034,
+      "verified_Git_blob_SHA1": "12ed62c32db69226afd092222ccd719794e132e5",
+      "sha256": "7778890cdf37e839f540cd1cc236e30e2a3942d8d6ee805a30ca42186787a736",
+      "position_conversion": "0-based start + 1",
+      "source_components_near_benchmark": 54
+    },
+    {
+      "path": "datasets/coverage/K562__myelogenous_leukemia_.dnase.tsv",
+      "url": "https://raw.githubusercontent.com/autosome-ru/human_legnet/a20dbc7d0b08daae3af1aebcfb8a71d9f198ab5d/datasets/coverage/K562__myelogenous_leukemia_.dnase.tsv",
+      "rows": 33688,
+      "bytes": 7683928,
+      "verified_Git_blob_SHA1": "ed05d116b0f5eb41c1b3adbb6640ea3048af74e1",
+      "sha256": "96f1a0c8b6dbefcf721430fa94eacd7e932971e501420264a518aa0b33e648c9",
+      "position_conversion": "0-based start + 1",
+      "source_components_near_benchmark": 151
+    }
+  ],
+  "candidate_designs_before": 1317,
+  "candidate_designs_after": 391,
+  "candidate_components_before": 261,
+  "candidate_components_after": 87,
+  "candidate_variants_after": 134,
+  "exclusion_scope": "Entire connected component excluded if any full-source member is within 2kb plus a symmetric 145bp source-envelope of any published author benchmark position; all benchmark rows included regardless of association strength.",
+  "build_policy": "ADASTRA and UDACHA publications use hg38. Conservatively screen both verified candidate hg38 and original hg19 positions; the extra hg19 screen does not assert benchmark data are hg19.",
+  "primary_build_sources": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC9252736/",
+    "https://www.nature.com/articles/s41467-024-55513-2"
+  ],
+  "outcome_files_read": false,
+  "model_performance_calculated": false,
+  "outside_validation_ready": false,
+  "remaining": "Complete the four Kircher saturation-locus benchmark inventory and supplementary-methods exposure review, and freeze a justified model and confidence rules before any new-study comparison.",
+  "candidate_file_sha256": "bda965347f06982a9d51ee28e3d14b2882f682d5d63e31e24c4ffcbbfc90a64c",
+  "hits_sha256": "495ebbf2833b361cc57f06fd41745ceb6a0d65aa56dc53e11deb11a58769eaaf",
+  "code_sha256": "b37e4a67df8758117bbe155e7a3c9ef330f1c789e8a8b5336e8ef7d2b5c0f3e0",
+  "elapsed_seconds": 6.019839540997054
+}

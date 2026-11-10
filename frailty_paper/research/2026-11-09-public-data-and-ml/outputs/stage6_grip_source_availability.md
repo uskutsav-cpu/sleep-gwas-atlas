@@ -1,0 +1,11 @@
+# Low grip strength: source availability and completed exploratory comparison
+
+The [Jones et al. low-grip-strength GWAS](https://pmc.ncbi.nlm.nih.gov/articles/PMC7844411/) concerns 256,523 older individuals from 22 cohorts and includes UK Biobank; it measures physical muscle weakness, not the complete Fried frailty score or the deficit-accumulation FI. It has no direct sleep question in the target outcome, but sample overlap means it is not an independent validation target for the project's UK Biobank-derived candidates.
+
+The public [GWAS Catalog source GCST90007526](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90007001-GCST90008000/GCST90007526/) is being streamed for an exact-allele candidate lookup with a full-source MD5 check. The original file is GRCh37 and approximately 378 MB compressed; extraction and checksum verification have not completed, so no candidate association is reported here. Scripts `stage6_grip_gwas_candidate_extract.py` and `stage6_grip_gwas_candidate_align.py` implement the pending source and allele checks. No partial data should be treated as a verified result.
+
+An [OpenGWAS mirror](https://opengwas.io/datasets/ebi-a-GCST90007526) displays VCF and index download links through its website. The site states that automated queries require a generated API token. No token was created or used; the original public-source extraction continues. A downloaded VCF or index would also need provenance and allele checks and would not resolve the study's discovery-sample overlap.
+
+A separate first-64-KB byte-range check confirmed that the original file uses CRLF records and exposes `variant_id`, allele, effect-size, frequency, and heterogeneity columns. The alignment script strips header whitespace to handle the trailing carriage return. The ranged check does not verify the full file; the existing complete-source stream remains the authoritative checksum test.
+
+The complete stream subsequently finished and the publisher MD5 matched. All candidate allele-pair/position checks and the exploratory 15-marker comparison are reported in [the grip review](stage6_grip_sparse_score_review.md). Earlier pending statements above describe the state during transfer.

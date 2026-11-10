@@ -2,6 +2,8 @@
 
 An auditable pipeline for a locked 45-trait Sleep/Circadian Genetic Atlas.
 
+The [9 November Sleep–Frailty evidence snapshot](frailty_paper/research/2026-11-09-public-data-and-ml/README.md) adds the public-data research, observational sensitivity materials, and completed eight-fit molecular-model comparison with independently replayed negative accuracy results. Its separate permitted AlphaGenome-related input experiment remains untrained.
+
 The [Brain6 sleep–frailty research snapshot](brain6/research_bundle/shared-genetics-atlas/START_HERE.md) adds the November 2026 exploratory report, genetic physical-function analyses, gene/cell evidence review, AlphaGenome pilot and ML prototype. It preserves the production atlas and reports unresolved data and validation requirements explicitly.
 
 - **Scope:** 12 sleep/circadian traits and 33 non-sleep traits.

@@ -1,0 +1,693 @@
+{
+  "records": {
+    "final_baseline_full_avi_direct": {
+      "name": "final_baseline_full_avi_direct",
+      "family": "direct_avi",
+      "features": "avi",
+      "config": {
+        "imputation_raw_training_median": 0.012430000118911266,
+        "scope": "Monotonic ranking, not calibrated probability"
+      },
+      "artifact": null,
+      "development_source_name": "full_avi_direct"
+    },
+    "final_baseline_full_chromatin_boost_sqrt_d3": {
+      "name": "final_baseline_full_chromatin_boost_sqrt_d3",
+      "family": "study_hist_boosting",
+      "features": "chromatin",
+      "config": {
+        "depth": 3,
+        "weighting": "sqrt",
+        "trees": 300,
+        "learning_rate": 0.05,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "artifact": "models/final_baseline_full_chromatin_boost_sqrt_d3.pkl",
+      "development_source_name": "full_chromatin_boost_sqrt_d3",
+      "checkpoint_sha256": "a86e8bec288841284b4409b4363d2511caefbdaecab28beb0f395c44c241e89b"
+    },
+    "final_baseline_full_dna_chromatin_avi_boost_sqrt_d5": {
+      "name": "final_baseline_full_dna_chromatin_avi_boost_sqrt_d5",
+      "family": "study_hist_boosting",
+      "features": "dna_chromatin_avi",
+      "config": {
+        "depth": 5,
+        "weighting": "sqrt",
+        "trees": 300,
+        "learning_rate": 0.05,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "artifact": "models/final_baseline_full_dna_chromatin_avi_boost_sqrt_d5.pkl",
+      "development_source_name": "full_dna_chromatin_avi_boost_sqrt_d5",
+      "checkpoint_sha256": "f91c35140a4006a85f42a7b1a47392395642e7469b8545c81f60da93576e206d"
+    },
+    "final_baseline_pattern_boost_none_depth3": {
+      "name": "final_baseline_pattern_boost_none_depth3",
+      "family": "study_hist_boosting",
+      "features": "dna_pattern",
+      "config": {
+        "depth": 3,
+        "weighting": "none",
+        "learning_rate": 0.05,
+        "trees": 300,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "artifact": "models/final_baseline_pattern_boost_none_depth3.pkl",
+      "development_source_name": "pattern_boost_none_depth3",
+      "checkpoint_sha256": "e3b623a2d23986c540e97e2ca5b8df90fea220055914d59d36ad453ecb87f535"
+    },
+    "final_biological_avi_input_s42": {
+      "name": "final_biological_avi_input_s42",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 42,
+        "fixed_epochs": 3,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s42.npz",
+      "checkpoint_sha256": "7bc352046510d31112a5fb167240291ad8a0f07290b18870c5b615339e2f3bb8",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_biological_avi_input_s73": {
+      "name": "final_biological_avi_input_s73",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s73.npz",
+      "checkpoint_sha256": "b8f4a185252036a55367daf4453153e27509e7630abe45a75318d4961af2dd79",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_biological_avi_input_s101": {
+      "name": "final_biological_avi_input_s101",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 101,
+        "fixed_epochs": 3,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s101.npz",
+      "checkpoint_sha256": "74621174c36c57694926d2d45e77a804a2cda5f5e3a7e7e7b58ba1ff071a3f34",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_biological_avi_input_ensemble": {
+      "name": "final_biological_avi_input_ensemble",
+      "family": "biological_seed_ensemble",
+      "features": "motif_chromatin",
+      "config": {
+        "members": [
+          "final_biological_avi_input_s42",
+          "final_biological_avi_input_s73",
+          "final_biological_avi_input_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    },
+    "final_conditional_avi_only": {
+      "name": "final_conditional_avi_only",
+      "family": "conditional_avi_stacker",
+      "features": "conditional_expert_avi",
+      "config": {
+        "base_model": "final_baseline_full_avi_direct",
+        "include_DNA_expert": false,
+        "training": "All measured-active development rows using held-fold base predictions; no reserved rows",
+        "calibration_qualification": "Prediction-time base ensemble is refitted; output is an uncalibrated research ranking, not a clinical probability"
+      },
+      "artifact": "models/final_conditional_avi_only.pkl",
+      "checkpoint_sha256": "e4c28749f661d2770b13d0dfb66331411b91c82918547ba4b9f6401efba738ba",
+      "nonzero_trained_coefficient_counts": {
+        "Salomon_NGN2": 2,
+        "Siraj_OL42_SKNSH": 2
+      },
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5"
+    },
+    "final_contrast_avi_teacher_s42": {
+      "name": "final_contrast_avi_teacher_s42",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 42,
+        "fixed_epochs": 1,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s42.npz",
+      "checkpoint_sha256": "553c4c297c9e7964378d627c62424cb5629829fb72d82835929f4ffb9381535a",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_avi_teacher_s73": {
+      "name": "final_contrast_avi_teacher_s73",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s73.npz",
+      "checkpoint_sha256": "63afc88df58a20d23211a51bf82653a735c6669dfa73af1cf838cf587d4d1c27",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_avi_teacher_s101": {
+      "name": "final_contrast_avi_teacher_s101",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect_avi",
+        "seed": 101,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_contrast_avi_teacher_s101.npz",
+      "checkpoint_sha256": "6b5794b129a678148706b73a231be494511494f9552bef4531a932cfe0959685",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_avi_teacher_ensemble": {
+      "name": "final_contrast_avi_teacher_ensemble",
+      "family": "context_variant_ensemble",
+      "features": "context_variant_biological",
+      "config": {
+        "members": [
+          "final_contrast_avi_teacher_s42",
+          "final_contrast_avi_teacher_s73",
+          "final_contrast_avi_teacher_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    },
+    "final_contrast_no_avi_s42": {
+      "name": "final_contrast_no_avi_s42",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect",
+        "seed": 42,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_contrast_no_avi_s42.npz",
+      "checkpoint_sha256": "5c5d8854a1f24b2852a43845a197098ca7226334af7874313e95de42061e9d8e",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_no_avi_s73": {
+      "name": "final_contrast_no_avi_s73",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_contrast_no_avi_s73.npz",
+      "checkpoint_sha256": "85801539811d871d8bbee060eadbbd1033a1639fa2592c798e336d89c7238415",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_no_avi_s101": {
+      "name": "final_contrast_no_avi_s101",
+      "family": "context_variant_mixture",
+      "features": "context_variant_biological",
+      "config": {
+        "task": "effect",
+        "seed": 101,
+        "fixed_epochs": 2,
+        "locked_config": "final_contrast_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_contrast_no_avi_s101.npz",
+      "checkpoint_sha256": "3784e42c21be24b27aaa22011fab58e0fd67b9370535d7784e8f6a7d35596457",
+      "changed_scalar_counts": {
+        "context.w1": 433408,
+        "context.b1": 128,
+        "context.w2": 4096,
+        "context.b2": 32,
+        "variant.w1": 255360,
+        "variant.w2": 4096,
+        "modulation.w": 1024,
+        "modulation.b": 32,
+        "gate.w": 64,
+        "gate.b": 2,
+        "conditional.w": 128,
+        "conditional.b": 4,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_contrast_no_avi_ensemble": {
+      "name": "final_contrast_no_avi_ensemble",
+      "family": "context_variant_ensemble",
+      "features": "context_variant_biological",
+      "config": {
+        "members": [
+          "final_contrast_no_avi_s42",
+          "final_contrast_no_avi_s73",
+          "final_contrast_no_avi_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    },
+    "final_motif_chromatin_avi_teacher_s42": {
+      "name": "final_motif_chromatin_avi_teacher_s42",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 42,
+        "fixed_epochs": 3,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s42.npz",
+      "checkpoint_sha256": "195ea3d9212168ba883a76c6f84198cbeaf5364e1fbf33abbcff912baf2b63b9",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_avi_teacher_s73": {
+      "name": "final_motif_chromatin_avi_teacher_s73",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s73.npz",
+      "checkpoint_sha256": "2b2eaaeec1970444dc054b5d0826fe6222ec10fa9483ee6d6a47e52cf9853b2f",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_avi_teacher_s101": {
+      "name": "final_motif_chromatin_avi_teacher_s101",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 101,
+        "fixed_epochs": 2,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s101.npz",
+      "checkpoint_sha256": "c3a29098bf5d4770be2b5341b6442f6391b18ca74bf26b056d128892ce7c2fa6",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_avi_teacher_ensemble": {
+      "name": "final_motif_chromatin_avi_teacher_ensemble",
+      "family": "biological_seed_ensemble",
+      "features": "motif_chromatin",
+      "config": {
+        "members": [
+          "final_motif_chromatin_avi_teacher_s42",
+          "final_motif_chromatin_avi_teacher_s73",
+          "final_motif_chromatin_avi_teacher_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    },
+    "final_motif_chromatin_no_avi_s42": {
+      "name": "final_motif_chromatin_no_avi_s42",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 42,
+        "fixed_epochs": 3,
+        "locked_config": "final_motif_chromatin_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_no_avi_s42.npz",
+      "checkpoint_sha256": "c4146fa6de8f3093301e420ca49b98c6e508a2e4125c8335e29dabac6233a717",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_no_avi_s73": {
+      "name": "final_motif_chromatin_no_avi_s73",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_motif_chromatin_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_no_avi_s73.npz",
+      "checkpoint_sha256": "22edc8cebf82ba36e521b063d10f854657d13cfecc42bbc21f8169908e3bf11f",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_no_avi_s101": {
+      "name": "final_motif_chromatin_no_avi_s101",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 101,
+        "fixed_epochs": 3,
+        "locked_config": "final_motif_chromatin_no_avi_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_no_avi_s101.npz",
+      "checkpoint_sha256": "d633437080d3dd69a3cc4887fa6f2888e28b3349a7616e4ce27a994f6688c767",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    "final_motif_chromatin_no_avi_ensemble": {
+      "name": "final_motif_chromatin_no_avi_ensemble",
+      "family": "biological_seed_ensemble",
+      "features": "motif_chromatin",
+      "config": {
+        "members": [
+          "final_motif_chromatin_no_avi_s42",
+          "final_motif_chromatin_no_avi_s73",
+          "final_motif_chromatin_no_avi_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    },
+    "final_stacked_contrast_avi_teacher": {
+      "name": "final_stacked_contrast_avi_teacher",
+      "family": "conditional_avi_stacker",
+      "features": "conditional_expert_avi",
+      "config": {
+        "base_model": "final_contrast_avi_teacher_ensemble",
+        "include_DNA_expert": true,
+        "training": "All measured-active development rows using held-fold base predictions; no reserved rows",
+        "calibration_qualification": "Prediction-time base ensemble is refitted; output is an uncalibrated research ranking, not a clinical probability"
+      },
+      "artifact": "models/final_stacked_contrast_avi_teacher.pkl",
+      "checkpoint_sha256": "49c3f827e5b24ba79e81544bc4cd09bf2bc8a86e27468eb63198acb1bcb36da6",
+      "nonzero_trained_coefficient_counts": {
+        "Salomon_NGN2": 3,
+        "Siraj_OL42_SKNSH": 3
+      },
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5"
+    },
+    "final_stacked_contrast_no_avi": {
+      "name": "final_stacked_contrast_no_avi",
+      "family": "conditional_avi_stacker",
+      "features": "conditional_expert_avi",
+      "config": {
+        "base_model": "final_contrast_no_avi_ensemble",
+        "include_DNA_expert": true,
+        "training": "All measured-active development rows using held-fold base predictions; no reserved rows",
+        "calibration_qualification": "Prediction-time base ensemble is refitted; output is an uncalibrated research ranking, not a clinical probability"
+      },
+      "artifact": "models/final_stacked_contrast_no_avi.pkl",
+      "checkpoint_sha256": "99b60df0a4e8a5706f814e7006e6b3fdc88cc510ce17d8dbe0d6378e5ed9560e",
+      "nonzero_trained_coefficient_counts": {
+        "Salomon_NGN2": 3,
+        "Siraj_OL42_SKNSH": 3
+      },
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5"
+    }
+  },
+  "role_model_names": {
+    "overall_assay_call_detector": "final_biological_avi_input_ensemble",
+    "within_active_variant_ranker": "final_stacked_contrast_no_avi",
+    "full_avi_direct": "final_baseline_full_avi_direct",
+    "pattern_boost_none_depth3": "final_baseline_pattern_boost_none_depth3",
+    "full_chromatin_boost_sqrt_d3": "final_baseline_full_chromatin_boost_sqrt_d3",
+    "full_dna_chromatin_avi_boost_sqrt_d5": "final_baseline_full_dna_chromatin_avi_boost_sqrt_d5",
+    "ablation_contrast_no_avi": "final_contrast_no_avi_ensemble",
+    "ablation_contrast_avi_teacher": "final_contrast_avi_teacher_ensemble",
+    "ablation_motif_chromatin_no_avi": "final_motif_chromatin_no_avi_ensemble",
+    "ablation_motif_chromatin_avi_teacher": "final_motif_chromatin_avi_teacher_ensemble",
+    "ablation_biological_avi_input": "final_biological_avi_input_ensemble",
+    "combination_stacked_contrast_no_avi": "final_stacked_contrast_no_avi",
+    "combination_stacked_contrast_avi_teacher": "final_stacked_contrast_avi_teacher",
+    "combination_conditional_avi_only": "final_conditional_avi_only"
+  },
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "training_chromosomes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "training_rows": 96486,
+  "training_indices_sha256": "f12bcf1ab0eb24c4b00d9dee141a623d179aa6569d9cd405e70badd12979d7eb",
+  "training_counts": {
+    "Salomon_NGN2": {
+      "n": 28173,
+      "calls": 764
+    },
+    "Siraj_OL42_SKNSH": {
+      "n": 68313,
+      "calls": 4922
+    }
+  },
+  "source_code_sha256": "fc44ac5eeea176899c2b373fac2a83d9400c4902625fa8d4e1f813a420601af0",
+  "blind_test_evaluated": false,
+  "scope": "Final fixed-epoch research fits. Scores are uncalibrated laboratory readout rankings, not disease probabilities."
+}

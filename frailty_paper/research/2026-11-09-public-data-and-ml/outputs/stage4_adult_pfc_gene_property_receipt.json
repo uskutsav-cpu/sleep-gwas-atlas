@@ -1,0 +1,78 @@
+{
+  "source": "https://github.com/vufuma/FUMA_scRNA_data/tree/dd526163ea80af1a80a6cdc80db167144500694b",
+  "selection": "post hoc adult PFC sensitivity after first six matrices; 15 group tests across four trait models; BH family 60 planned tests; missing are retained in denominator",
+  "runs": [
+    {
+      "trait": "jansen_insomnia_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE168408_Human_Prefrontal_Cortex_level2_Adult.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_GSE168408_Human_Prefrontal_Cortex_level2_Adult"
+      ],
+      "result_sha256": "182e2f8fde609f9c0f85b58bcac81d59954813746e31db13fcbaaf8932232d4f"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE168408_Human_Prefrontal_Cortex_level2_Adult.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_GSE168408_Human_Prefrontal_Cortex_level2_Adult"
+      ],
+      "result_sha256": "5289cad7b13d38d65931746174a3c17115b45b42671f901d927e93f9a45c87d0"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE168408_Human_Prefrontal_Cortex_level2_Adult.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_GSE168408_Human_Prefrontal_Cortex_level2_Adult"
+      ],
+      "result_sha256": "b4ac7e2ae721b3d500746f914adcf47335f86953aeeedebf95a42fb5dfbfce02"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/GSE168408_Human_Prefrontal_Cortex_level2_Adult.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_GSE168408_Human_Prefrontal_Cortex_level2_Adult"
+      ],
+      "result_sha256": "e9e8ec945a10a7ab4c6ef8d41c7ad561647523f47d6587e67bb06a47ea6922bf"
+    }
+  ]
+}

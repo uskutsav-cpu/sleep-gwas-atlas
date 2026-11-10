@@ -1,0 +1,105 @@
+{
+  "family_id": "biological_avi_input",
+  "records": [
+    {
+      "name": "final_biological_avi_input_s42",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 42,
+        "fixed_epochs": 3,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s42.npz",
+      "checkpoint_sha256": "7bc352046510d31112a5fb167240291ad8a0f07290b18870c5b615339e2f3bb8",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_biological_avi_input_s73",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s73.npz",
+      "checkpoint_sha256": "b8f4a185252036a55367daf4453153e27509e7630abe45a75318d4961af2dd79",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_biological_avi_input_s101",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_effect",
+        "seed": 101,
+        "fixed_epochs": 3,
+        "locked_config": "final_biological_avi_input_inference_config.json"
+      },
+      "artifact": "models/final_biological_avi_input_s101.npz",
+      "checkpoint_sha256": "74621174c36c57694926d2d45e77a804a2cda5f5e3a7e7e7b58ba1ff071a3f34",
+      "changed_scalar_counts": {
+        "shared.w1": 623616,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 2,
+        "avi.w": 0,
+        "avi.b": 0
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_biological_avi_input_ensemble",
+      "family": "biological_seed_ensemble",
+      "features": "motif_chromatin",
+      "config": {
+        "members": [
+          "final_biological_avi_input_s42",
+          "final_biological_avi_input_s73",
+          "final_biological_avi_input_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    }
+  ],
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "blind_test_evaluated": false
+}

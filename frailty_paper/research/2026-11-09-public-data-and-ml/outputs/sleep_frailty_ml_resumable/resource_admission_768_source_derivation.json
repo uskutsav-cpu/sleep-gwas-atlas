@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T03:29:29.464211+00:00",
+  "scope": "Mechanical source derivation for a resource-only admission change. Not a new neural numerical or prediction audit.",
+  "old_launch_reserve_bytes": 1073741824,
+  "new_launch_reserve_bytes": 805306368,
+  "committed_checkpoint_live_reserve_bytes_unchanged": 314572800,
+  "source_derivations": [
+    {
+      "original": "work/sleep_frailty_ml_resumable/readonly_native_runtime.py",
+      "original_sha256": "33faef8a49474e4c8cb2792eda8734d324c03cfc470fe8713577e7ba368e600c",
+      "derived": "work/sleep_frailty_ml_resumable/readonly_native_runtime_768.py",
+      "derived_sha256": "401c98173828545ab14b6a32752a67e22f22cb37bfabd19865c959170d41517e",
+      "declared_exact_replacements": [
+        [
+          "path = DEST/'readonly_native_execution_revision.json'",
+          "path = DEST/'readonly_native_execution_revision_768.json'"
+        ],
+        [
+          "assert shutil.disk_usage(ROOT).free >= 1024**3, 'Need 1 GiB headroom for this execution revision.'",
+          "assert shutil.disk_usage(ROOT).free >= 768*1024**2, 'Need 768 MiB headroom for the admitted resource-only execution revision.'"
+        ],
+        [
+          "DEST/'readonly_runtime_recovery_audit.json'",
+          "DEST/'readonly_runtime_768_admission_audit.json'"
+        ],
+        [
+          "Path(__file__).parent/'readonly/run_resumable_comparison.py'",
+          "Path(__file__).parent/'readonly_768/run_resumable_comparison.py'"
+        ],
+        [
+          "DEST/'readonly_native_recovery_audit.json', DEST/'readonly_native_sustained_resource_audit.json']",
+          "DEST/'readonly_native_recovery_audit.json', DEST/'readonly_native_sustained_resource_audit.json',\n              DEST/'resource_admission_768_source_derivation.json']"
+        ],
+        [
+          "receipt_path = directory/(name+'_effective_runtime.json')",
+          "receipt_path = directory/(name+'_effective_runtime_768.json')"
+        ],
+        [
+          "names = {'train_resumable_development.py', 'readonly_native_runtime.py',",
+          "names = {'train_resumable_development.py', 'readonly_native_runtime.py', 'readonly_native_runtime_768.py',"
+        ]
+      ],
+      "entire_original_source_recovered_by_reversal": true
+    },
+    {
+      "original": "work/sleep_frailty_ml_resumable/readonly/run_resumable_comparison.py",
+      "original_sha256": "fe81ad0d3f8a1810b20cd46f6ff30f00f273cebcc2ec74351a185dc50ee72d45",
+      "derived": "work/sleep_frailty_ml_resumable/readonly_768/run_resumable_comparison.py",
+      "derived_sha256": "397cc45aeeff703a9adfebcec252685f5dc4c0861855e9e15d56a998ed3675ae",
+      "declared_exact_replacements": [
+        [
+          "from readonly_native_runtime import execution_revision",
+          "from readonly_native_runtime_768 import execution_revision"
+        ],
+        [
+          "script = str(PARENT/'readonly_native_runtime.py')",
+          "script = str(PARENT/'readonly_native_runtime_768.py')"
+        ],
+        [
+          "DEST/'readonly_runtime_recovery_audit.json'",
+          "DEST/'readonly_runtime_768_admission_audit.json'"
+        ],
+        [
+          "DEST/'readonly_finite_driver_execution.json'",
+          "DEST/'readonly_768_finite_driver_execution.json'"
+        ]
+      ],
+      "entire_original_source_recovered_by_reversal": true
+    }
+  ],
+  "original_native_trainer_sha256": "7af8528ef4dc00d86c12baf3ec25a663ff400ac4eccfb7314fedd7db36933318",
+  "model_loss_labels_sampler_optimizer_seed_epochs_or_scientific_gates_changed": false,
+  "current_V1_execution_or_completed_files_changed": false,
+  "new_scientific_training_admitted": false,
+  "builder_sha256": "8f81e1b58124ffdae41e88e83e2436fadfd84bc994d5f72d0fd428e96758b0ad"
+}

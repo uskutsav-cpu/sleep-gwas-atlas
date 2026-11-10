@@ -1,0 +1,109 @@
+{
+  "time_UTC": "2026-11-09T03:36:03.555665+00:00",
+  "source": "Kosicki2025",
+  "whole_source_and_its_region_groups_excluded_from_training": true,
+  "matched_training_rows_schedule_initialization_targets_updates_and_epochs_verified": true,
+  "matched_keys": [
+    "training_index_sha256",
+    "prediction_index_sha256",
+    "initial_parameter_sha256",
+    "normalization",
+    "cell_medians",
+    "line_medians",
+    "line_parent",
+    "supported_cells",
+    "supported_lines",
+    "context_transformations",
+    "actual_batch_schedule_sha256",
+    "actual_backprop_updates",
+    "completed_epochs",
+    "new_original_Siraj_signed_training_rows",
+    "new_original_neuronal_signed_training_rows"
+  ],
+  "training_rows": 377766,
+  "prediction_rows": 16540,
+  "all_three_epochs_independently_replayed": [
+    {
+      "epoch": 1,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": 0.00018450770087763413,
+        "adapt_last_stage": -0.0005295784186163388
+      },
+      "adapted_minus_frozen_skill": -0.0007140861194939729
+    },
+    {
+      "epoch": 2,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": 0.00032389200782867444,
+        "adapt_last_stage": 0.0034317540733747043
+      },
+      "adapted_minus_frozen_skill": 0.00310786206554603
+    },
+    {
+      "epoch": 3,
+      "magnitude_MAE_skill_vs_training_line_baseline": {
+        "frozen_reader": -0.002271011436697279,
+        "adapt_last_stage": -0.002292001317694803
+      },
+      "adapted_minus_frozen_skill": -2.098988099752397e-05
+    }
+  ],
+  "last_pass_relative_error_reduction_adapted_vs_frozen": -2.0942320747563414e-05,
+  "last_pass_both_models_worse_than_training_line_baseline": true,
+  "last_pass_independent_pair_diagnostics": {
+    "frozen_reader": {
+      "local": {
+        "pairs": 16329,
+        "difference_MAE": 0.07842578638830199,
+        "zero_difference_MAE": 0.07819413914740792,
+        "skill_vs_zero_difference": -0.0029624629597542196,
+        "difference_Spearman": 0.0014891086447567728,
+        "ordering_accuracy_nonzero_measured_differences": 0.5002143425806846
+      },
+      "cross": {
+        "pairs": 0
+      }
+    },
+    "adapt_last_stage": {
+      "local": {
+        "pairs": 16329,
+        "difference_MAE": 0.07845653050438012,
+        "zero_difference_MAE": 0.07819413914740792,
+        "skill_vs_zero_difference": -0.0033556396915830344,
+        "difference_Spearman": -9.820499446712212e-05,
+        "ordering_accuracy_nonzero_measured_differences": 0.4962949353910221
+      },
+      "cross": {
+        "pairs": 0
+      }
+    }
+  },
+  "actual_changed_reader_parameters": {
+    "frozen_reader": 0,
+    "adapt_last_stage": 290896
+  },
+  "completed_recovery_states_match_final_saved_parameters_exactly": true,
+  "common_epoch_not_yet_selected": true,
+  "entire_three_source_neural_gate_not_yet_applied": true,
+  "new_external_study_outcomes_read": false,
+  "candidate_promoted": false,
+  "confidence_success_established": false,
+  "scientific_goal_complete": false,
+  "interpretation": "Updating the DNA reader did not establish useful final-pass generalization on this source. At the last fixed pass, frozen/adapted error is about 0.227%/0.229% worse than the typical-effect baseline; nearby ordering is about 50.02%/49.63%. Both nearby-difference errors are worse than predicting no difference. The second-pass adapted result improves baseline error by only about 0.343%; do not choose this source best pass. Retallick remains before selecting one common epoch and applying the neural gate.",
+  "evidence_sha256": {
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch1_independent_saved_metric_audit.json": "99ff5c9ed588b0b08ea0fe33cf5656bb5583b54d47df50837fb7705020ff460a",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Kosicki2025_42_epoch1_independent_saved_metric_audit.json": "f5ce9b1b91ae2592f293767e2166d9987fb3bddbe8c17aa51ca08031b09a1005",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch2_independent_saved_metric_audit.json": "c3b205f44a0a39e8c0ca1a50628f8b392aeb1c7e80fe1696802116ef98737b02",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Kosicki2025_42_epoch2_independent_saved_metric_audit.json": "384d9e5518ee2f9b2060dee24497a68f2605be6e242bfc9a4e74d6b559879302",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch3_independent_saved_metric_audit.json": "df8dbf6d869051b9fe8bec4c139ab10742356a0dd5a20fdd76e656755315a6af",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Kosicki2025_42_epoch3_independent_saved_metric_audit.json": "03d7a8a097151b10731d710b3b85d24bffe0896e85c0ce16649dbf404f4eb925",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch3_independent_pair_audit.json": "fd7550421b48798dbb9fee4b016f63f3208073650e02590eeb8cdfaed52a72d2",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_completed_recovery_audit.json": "917d122887c881549c935fdd357a976c7ee402c0cf2bfa359cb8347f0985a4b9",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Kosicki2025_42_epoch3_independent_pair_audit.json": "bc7897be9ee8e8c15f348f8b5ea90535fb30992ca156e4848a4adace805fb49a",
+    "outputs/sleep_frailty_ml_resumable/adapt_last_stage_Kosicki2025_42_completed_recovery_audit.json": "97f43b5f31fccd798396bb0e9063d247e2a6f9dee057a424a740b6b4c4b14093"
+  },
+  "record_sha256": {
+    "frozen_reader": "43ea9da2a62f17cc834ce3ac397342d9603a740a7807573bb283027bd8f745bb",
+    "adapt_last_stage": "e6d07d6fea5d4f1f444a9888b3782cd78750cbe8b428cfe2126e4307b65d9351"
+  }
+}

@@ -1,0 +1,46 @@
+START NATIVE COMPARISON FIT frozen_reader_none_42
+DONE NATIVE COMPARISON FIT frozen_reader_none_42
+START NATIVE COMPARISON FIT adapt_last_stage_none_42
+DONE NATIVE COMPARISON FIT adapt_last_stage_none_42
+START NATIVE COMPARISON FIT frozen_reader_Salomon_42
+DONE NATIVE COMPARISON FIT frozen_reader_Salomon_42
+START NATIVE COMPARISON FIT adapt_last_stage_Salomon_42
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 83, in <module>
+    with driver_lock(DEST/'driver_lock.json'):main()
+                                              ~~~~^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 63, in main
+    for recipe in plan['recipes']:fit(recipe,source,plan)
+                                  ~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 20, in fit
+    subprocess.run([sys.executable,'-u',str(Path(__file__).with_name('train_resumable_development.py')),
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       '--recipe',recipe,'--held-study',source]+(['--resume'] if started else []),stdout=handle,stderr=subprocess.STDOUT,check=True,
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','OMP_NUM_THREADS':'2','OPENBLAS_NUM_THREADS':'2','VECLIB_MAXIMUM_THREADS':'2','PYTORCH_MPS_HIGH_WATERMARK_RATIO':'0.4','PYTORCH_MPS_LOW_WATERMARK_RATIO':'0.3'})
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/miniconda3/bin/python', '-u', '/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/train_resumable_development.py', '--recipe', 'adapt_last_stage', '--held-study', 'Salomon']' returned non-zero exit status 1.
+START NATIVE COMPARISON FIT adapt_last_stage_Salomon_42
+DONE NATIVE COMPARISON FIT adapt_last_stage_Salomon_42
+START NATIVE COMPARISON FIT frozen_reader_Kosicki2025_42
+Traceback (most recent call last):
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 83, in <module>
+    with driver_lock(DEST/'driver_lock.json'):main()
+                                              ~~~~^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 63, in main
+    for recipe in plan['recipes']:fit(recipe,source,plan)
+                                  ~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/run_resumable_comparison.py", line 20, in fit
+    subprocess.run([sys.executable,'-u',str(Path(__file__).with_name('train_resumable_development.py')),
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       '--recipe',recipe,'--held-study',source]+(['--resume'] if started else []),stdout=handle,stderr=subprocess.STDOUT,check=True,
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','OMP_NUM_THREADS':'2','OPENBLAS_NUM_THREADS':'2','VECLIB_MAXIMUM_THREADS':'2','PYTORCH_MPS_HIGH_WATERMARK_RATIO':'0.4','PYTORCH_MPS_LOW_WATERMARK_RATIO':'0.3'})
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/miniconda3/bin/python', '-u', '/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/train_resumable_development.py', '--recipe', 'frozen_reader', '--held-study', 'Kosicki2025']' returned non-zero exit status 1.

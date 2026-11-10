@@ -1,0 +1,135 @@
+{
+  "families": {
+    "stacked_contrast_no_avi": {
+      "artifact": "models/conditional_stacking_development_full_stacked_contrast_no_avi.pkl",
+      "sha256": "99b60df0a4e8a5706f814e7006e6b3fdc88cc510ce17d8dbe0d6378e5ed9560e",
+      "base_family": "contrast_no_avi",
+      "include_DNA_expert": true,
+      "training_rows": 17260,
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+      "base_validation_records": {
+        "0": "contrast_full_val4-5-6-7-8-9_ensemble_effect",
+        "1": "contrast_full_val10-11-12-13-14-15_ensemble_effect",
+        "2": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect"
+      },
+      "study_fits": {
+        "Salomon_NGN2": {
+          "n": 2507,
+          "calls": 259,
+          "coefficients": [
+            [
+              0.2649276082832122,
+              0.33551018641774877,
+              0.019239950256348077
+            ]
+          ],
+          "intercept": [
+            -2.2667154434586823
+          ]
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 14753,
+          "calls": 4922,
+          "coefficients": [
+            [
+              0.359436100815737,
+              0.2896794578437178,
+              -0.0011054485144221297
+            ]
+          ],
+          "intercept": [
+            -0.726878469042105
+          ]
+        }
+      }
+    },
+    "stacked_contrast_avi_teacher": {
+      "artifact": "models/conditional_stacking_development_full_stacked_contrast_avi_teacher.pkl",
+      "sha256": "49c3f827e5b24ba79e81544bc4cd09bf2bc8a86e27468eb63198acb1bcb36da6",
+      "base_family": "contrast_avi_teacher",
+      "include_DNA_expert": true,
+      "training_rows": 17260,
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+      "base_validation_records": {
+        "0": "contrast_full_val4-5-6-7-8-9_ensemble_effect_avi",
+        "1": "contrast_full_val10-11-12-13-14-15_ensemble_effect_avi",
+        "2": "contrast_full_val16-17-18-19-20-21-22_ensemble_effect_avi"
+      },
+      "study_fits": {
+        "Salomon_NGN2": {
+          "n": 2507,
+          "calls": 259,
+          "coefficients": [
+            [
+              0.26935150761540355,
+              0.32527116030588293,
+              0.025757961988627776
+            ]
+          ],
+          "intercept": [
+            -2.2739319376419256
+          ]
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 14753,
+          "calls": 4922,
+          "coefficients": [
+            [
+              0.3534382232783417,
+              0.27963189169935,
+              0.010498586093763215
+            ]
+          ],
+          "intercept": [
+            -0.737265610575207
+          ]
+        }
+      }
+    },
+    "conditional_avi_only": {
+      "artifact": "models/conditional_stacking_development_full_conditional_avi_only.pkl",
+      "sha256": "e4c28749f661d2770b13d0dfb66331411b91c82918547ba4b9f6401efba738ba",
+      "base_family": "baseline_full_avi_direct",
+      "include_DNA_expert": false,
+      "training_rows": 17260,
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5",
+      "base_validation_records": {
+        "0": "development_baselines_val4-5-6-7-8-9_full_avi_direct",
+        "1": "development_baselines_val10-11-12-13-14-15_full_avi_direct",
+        "2": "development_baselines_val16-17-18-19-20-21-22_full_avi_direct"
+      },
+      "study_fits": {
+        "Salomon_NGN2": {
+          "n": 2507,
+          "calls": 259,
+          "coefficients": [
+            [
+              0.38806601302042754,
+              0.007050162494066817
+            ]
+          ],
+          "intercept": [
+            -2.2271818276771844
+          ]
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 14753,
+          "calls": 4922,
+          "coefficients": [
+            [
+              0.3192407955537421,
+              -0.02659306859950859
+            ]
+          ],
+          "intercept": [
+            -0.6819860019658529
+          ]
+        }
+      }
+    }
+  },
+  "specification_sha256": "bd1930ffbf44240c54d0e88efb6d27c1ffb5497bc04680f40ce6faf867c07082",
+  "development_comparison_sha256": "6a145af8fedf30a24749d41679d4d347a5a9a55380af8644c4db1903b082903b",
+  "training_code_sha256": "50fa0e1ef507aec93521fb9e8b35b079cffc82a0295dca1a0f52cc8eb6059c8c",
+  "reserved_test_evaluated": false
+}

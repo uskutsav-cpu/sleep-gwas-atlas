@@ -1,0 +1,45 @@
+{
+  "interval_GRCh38": "2:66500000-66820000",
+  "sources": {
+    "akcimen": "https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90435001-GCST90436000/GCST90435387/harmonised/GCST90435387.h.tsv.gz",
+    "finngen": "https://storage.googleapis.com/finngen-public-data-r13/summary_stats/finngen_R13_G6_RLS.gz"
+  },
+  "raw_rows": {
+    "akcimen": 953,
+    "finngen": 2380
+  },
+  "filters": "unique exact chrom/pos/ref/alt non-palindromic SNVs; recognized harmonization codes; finite beta/se/p; excludes indels and duplicate exact records; does not rule out other alleles at a locus",
+  "subsets": [
+    {
+      "subset": "all_matched",
+      "variants": 746,
+      "same_sign": 405,
+      "opposite_sign": 341,
+      "beta_correlation": 0.2571452142428601
+    },
+    {
+      "subset": "both_p_below_5e-8",
+      "variants": 42,
+      "same_sign": 30,
+      "opposite_sign": 12,
+      "beta_correlation": 0.5527295415096019
+    },
+    {
+      "subset": "within_25kb_rs113851554",
+      "variants": 30,
+      "same_sign": 21,
+      "opposite_sign": 9,
+      "beta_correlation": 0.4463476134048347
+    },
+    {
+      "subset": "within_25kb_rs78206187",
+      "variants": 0,
+      "same_sign": 0,
+      "opposite_sign": 0,
+      "beta_correlation": null
+    }
+  ],
+  "output_sha256": "068de5c6c5d797e93d45a68c3ecbf1ec5984eec2a1c27d83850eee10e030d3b3",
+  "full_source_checksums_verified": false,
+  "limitation": "Selected, LD-correlated region and two source p-values, not independent variants or a formal heterogeneity test; unknown study/relative overlap, imputation, phenotype and allele semantics."
+}

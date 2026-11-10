@@ -1,0 +1,60 @@
+{
+  "traits": {
+    "UKBFI": {
+      "rg": 0.6421125911500841,
+      "rg_se": 0.024435718830220946,
+      "n_snps": 1134953,
+      "row_order_SNP_sha256": "348f13ade2eebf414f73df232b406905816652227adfcf3bf7ae2979c3b5a66e"
+    },
+    "FI": {
+      "rg": 0.6398741479190978,
+      "rg_se": 0.025699019423288783,
+      "n_snps": 1134953,
+      "row_order_SNP_sha256": "348f13ade2eebf414f73df232b406905816652227adfcf3bf7ae2979c3b5a66e"
+    },
+    "FFS": {
+      "rg": 0.5492426985734359,
+      "rg_se": 0.02300030775467403,
+      "n_snps": 1134953,
+      "row_order_SNP_sha256": "348f13ade2eebf414f73df232b406905816652227adfcf3bf7ae2979c3b5a66e"
+    }
+  },
+  "contrast_ukbfi_minus_metafi": {
+    "delta": 0.00223844323098632,
+    "se": 0.005372763751930211,
+    "ci95": [
+      -0.008292173722796893,
+      0.012769060184769533
+    ],
+    "p_two_sided": 0.676950605360945
+  },
+  "contrast_ffs_minus_ukbfi": {
+    "delta": -0.09286989257664824,
+    "se": 0.026159571736242834,
+    "ci95": [
+      -0.1441426531796842,
+      -0.041597131973612284
+    ],
+    "p_two_sided": 0.0003850402820181467
+  },
+  "hfrs_h2": 0.05404653207861716,
+  "hfrs_intercept": 1.1877236534364288,
+  "hfrs_intercept_se": 0.014433140026653881,
+  "same_hfrs_delete_values_and_blocks": true,
+  "input_receipt": {
+    "common_snps": 1134953,
+    "source_rows": 16557800,
+    "source_cohort": "Atkins UKB1, effect on reported EA, N=164610; actual per variant N unverified",
+    "matching": "rsID, GRCh37 chromosome and BP with LD reference, matching allele pair after complement/swap; duplicate source rsIDs excluded",
+    "raw_source_file": "/Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/v9-public-data/atkins-2021/Atkins_2021_FrailtyIndex_GWAS_EuropeansAged60to70years_GRCh37_UKBiobank_TwinGene_associations.txt.gz",
+    "n_coord_mismatches": 0,
+    "n_allele_mismatches": 5961,
+    "n_duplicates": 2974,
+    "output_sha256": {
+      "FI": "fa2a57f255244940b295851b0a7d44b82790c27b38d24c5580df8d70ecce8ac4",
+      "FFS": "83c50538840c9fb66195750e4df0fc30491db9958b3410a7f1755cd47e81bb47",
+      "HFRS": "27a339789081cd10b8e96cb038fce9d4a6298528c18e6611a308c87ba7105992",
+      "UKBFI": "d914774288dedc289a65a9bc37abc9f0d1d846df3a9eefa4951b964da07a0380"
+    }
+  }
+}

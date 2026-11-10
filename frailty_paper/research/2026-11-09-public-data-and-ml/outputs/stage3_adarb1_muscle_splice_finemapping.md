@@ -1,0 +1,9 @@
+# rs2838788 and ADARB1 muscle splicing
+
+GTEx portal `gtex_v10` reports rs2838788 (`chr21:45122459 T/C`, GRCh38) as a skeletal-muscle sQTL for an ADARB1 junction at chr21:45181972–45182585, p = 4.45 × 10⁻¹⁴. eQTL Catalogue r7 QTD000285 reprocesses GTEx v8 muscle data and reports the matching junction under cluster ID `21:45181972:45182585:clu_11546_+`; its rs2838788 nominal p is 2.79 × 10⁻⁷. These datasets share GTEx source material and are not independent replications. Matching a junction across releases does not by itself establish trait colocalization or disease mediation.
+
+The Catalogue's selected molecular fine mapping reports one 15-variant credible set for this splice event, with minimum within-set r² 0.650. rs2838788 is not in the reported set. The highest reported molecular PIP is 0.440 for rs365791 (`chr21:45167622 A/G`). These PIPs describe a molecular model, not individual disease risks; a candidate outside a listed set is not necessarily unrelated to the signal. The [15 source rows](stage3_adarb1_muscle_splice_credible_set.csv) preserve variant and PIP details. The source fine-mapping window is 2 Mb; the [regional QTL extraction](stage3_catalogue_adarb1_splicing_extract_receipt.json) covers a 1-Mb candidate-centered region containing the listed set, and a [matched trait comparison](stage3_adarb1_muscle_splice_colocalization.md) has since been completed.
+
+QTD000285 is a filtered `cc` file for selected molecular events, not a comprehensive negative screen of other ADARB1 splice junctions. The remote source and index hashes were not independently checked against a provider hash. Independent ancestry-matched LD, multiple signals, GWAS variant coverage and cell/tissue specificity require review.
+
+A subsequent [comparison using the original Atkins FI and Jansen insomnia GWAS](stage3_original_gwas_coloc_review.md) reports separate pairwise results and explains phenotype overlap, prior sensitivity and credible-set coverage.

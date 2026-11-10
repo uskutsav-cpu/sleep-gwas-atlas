@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import pandas as pd,numpy as np,json
+root=Path(__file__).resolve().parents[1];o=root/'outputs';w=root/'work';idx=pd.read_csv(o/'stage6_foxp2_gnomad_narrow_variants.csv');g=pd.read_csv(w/'stage6_foxp2_susie_aligned.csv');d=idx.drop(columns=['anchor_effect_allele','anchor_other_allele']).merge(g,on='rs',validate='one_to_one');d['pair']=d.apply(lambda r:''.join(sorted([r.anchor_effect_allele,r.anchor_other_allele])),axis=1)
+q=pd.read_csv(o/'stage6_singlebrain_ext_foxp2_full_regional.tsv.gz',sep='\t');q=q[(q.fixed_sd>0)&q.Allele.notna()&(q.Allele.eq(q.ref)|q.Allele.eq(q.alt))].copy();q['pair']=q.apply(lambda r:''.join(sorted([str(r.ref),str(r.alt)])),axis=1);q['anchor_by_alt']=np.where(q.Allele==q.alt,q.fixed_beta,-q.fixed_beta);x=d.merge(q,left_on=['pos','pair'],right_on=['pos','pair'],how='inner',validate='one_to_many');x['brain_beta_anchor']=np.where(x.alt==x.anchor_effect_allele,x.anchor_by_alt,-x.anchor_by_alt);dups=x.duplicated(['rs','pos','pair'],keep=False);conf=[]
+for k,gx in x[dups].groupby(['rs','pos','pair']):
+ if len(gx[['brain_beta_anchor','fixed_sd','Fixed_P']].drop_duplicates())>1:conf.append(k)
+if conf:raise ValueError('conflicting source rows')
+x=x.drop_duplicates(['rs','pos','pair']).copy();x['brain_z_anchor']=x.brain_beta_anchor/x.fixed_sd;assert x.rs.is_unique;x.to_csv(o/'stage6_foxp2_singlebrain_gnomad_aligned.csv',index=False);receipt={'source_positive_se_allele_resolved':len(q),'n_gwas_reference_variants':len(d),'n_joined':len(x),'identical_duplicate_rows':int(dups.sum()),'original_marker_present':bool((x.rs=='rs12536335').any()),'fixed_vs_random':'Fixed_beta and fixed_sd used together; random-effect portal p not used.'};(o/'stage6_foxp2_singlebrain_gnomad_harmonization.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt,indent=2))

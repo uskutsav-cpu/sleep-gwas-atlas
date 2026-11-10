@@ -1,0 +1,84 @@
+{
+  "posthoc_now_revealed_data_only": true,
+  "not_an_additional_independent_validation": true,
+  "by_cell_line": {
+    "HepG2": {
+      "measurements": 13241,
+      "observed_mean": 0.24649698775944903,
+      "observed_median": 0.154316224802452,
+      "training_only_typical_effect": 0.16625411808490753,
+      "prediction_mean": 0.16252649706972572,
+      "prediction_median": 0.16054439544677734,
+      "observed_IQR": 0.2205298406595267,
+      "prediction_IQR": 0.011236682534217834,
+      "scope": "Observed spread includes measurement noise; compressed prediction spread alone does not prove biological underfitting."
+    },
+    "K562": {
+      "measurements": 13241,
+      "observed_mean": 0.22468916731625255,
+      "observed_median": 0.139734803044728,
+      "training_only_typical_effect": 0.215641587972641,
+      "prediction_mean": 0.20962597915916661,
+      "prediction_median": 0.20672661066055298,
+      "observed_IQR": 0.20483235761661117,
+      "prediction_IQR": 0.016496121883392334,
+      "scope": "Observed spread includes measurement noise; compressed prediction spread alone does not prove biological underfitting."
+    },
+    "SK-N-SH": {
+      "measurements": 13241,
+      "observed_mean": 0.17950294461204538,
+      "observed_median": 0.11314802035133,
+      "training_only_typical_effect": 0.2574205994606018,
+      "prediction_mean": 0.2439493292223947,
+      "prediction_median": 0.24092139303684235,
+      "observed_IQR": 0.15863240915631022,
+      "prediction_IQR": 0.01786920428276062,
+      "scope": "Observed spread includes measurement noise; compressed prediction spread alone does not prove biological underfitting."
+    }
+  },
+  "fixed_cell_pair_diagnostics": {
+    "HepG2|K562": {
+      "designs": 13241,
+      "observed_mean_difference": 0.021807820443196492,
+      "observed_median_difference": 0.011270228611341901,
+      "predicted_mean_difference": -0.04709948208944088,
+      "training_typical_effect_difference": -0.04938746988773346,
+      "model_difference_MAE": 0.2004897956099721,
+      "zero_difference_MAE": 0.19163712092687404,
+      "training_typical_difference_MAE": 0.2012664681512081,
+      "within_fixed_pair_Spearman": 0.0006568880268185389
+    },
+    "HepG2|SK-N-SH": {
+      "designs": 13241,
+      "observed_mean_difference": 0.06699404314740363,
+      "observed_median_difference": 0.031862814673348866,
+      "predicted_mean_difference": -0.081422832152669,
+      "training_typical_effect_difference": -0.09116648137569427,
+      "model_difference_MAE": 0.2106562592586008,
+      "zero_difference_MAE": 0.1773319173822382,
+      "training_typical_difference_MAE": 0.2166297505179458,
+      "within_fixed_pair_Spearman": -0.030144164193464704
+    },
+    "K562|SK-N-SH": {
+      "designs": 13241,
+      "observed_mean_difference": 0.045186222704207135,
+      "observed_median_difference": 0.022061825840580397,
+      "predicted_mean_difference": -0.03432335006322811,
+      "training_typical_effect_difference": -0.041779011487960815,
+      "model_difference_MAE": 0.1659682420869219,
+      "zero_difference_MAE": 0.15707227685351796,
+      "training_typical_difference_MAE": 0.1688073397255878,
+      "within_fixed_pair_Spearman": -0.016383611036538553
+    }
+  },
+  "verified_failure": "The fresh independent-publication error does not improve on a simple baseline; nearby order is close to chance, and aggregate cross-cell order is below chance. Added AVI failed its locked retention rules. Both arms withheld every case.",
+  "next_research_questions": [
+    "Separate publication/protocol offsets from variant-dependent errors using revealed data only.",
+    "Test whether retaining the pretrained readers individual channels, rather than scalar summaries, improves cell-specific learning in a finite development comparison. This is an untested hypothesis, not an explanation established by these results.",
+    "Audit experiment repeat/noise limits before interpreting observed variance as learnable biological signal.",
+    "Require new untouched suitable experimental data for any changed model; do not rescue the current model by retuning against these tests."
+  ],
+  "existing_models_or_acceptance_rules_changed": false,
+  "prior_outcome_result_sha256": "7af39bab2ed9c10d0d07f5a7101dfd9a5bd138f45b771c9142e4d8d63b96bdb1",
+  "code_sha256": "b0932bbbc5722ec23625182ef72e7b71ca6d734254d9f7c5ea320dde805b004b"
+}

@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "source_design_rows": 634,
+  "full_reference_verified_one_substitution_rows": 577,
+  "physical_or_build_exclusions": {
+    "actual_substitution_count_2": 26,
+    "actual_substitution_count_0": 20,
+    "not_equal_actual_148bp": 10,
+    "source_changed_position_annotation_disagrees_with_actual_DNA": 1
+  },
+  "historical_exclusion_counts": {
+    "whole_component_within_2kb_of_revealed_history": 173,
+    "whole_component_within_2kb_of_revealed_history|whole_component_shares_actual_148bp_sequence_with_history": 50
+  },
+  "accepted_tile_comparisons": 354,
+  "accepted_distinct_physical_pairs": 354,
+  "accepted_distinct_GRCh38_variants": 74,
+  "accepted_connected_2kb_regions": 70,
+  "accepted_1Mb_windows": 60,
+  "duplicate_physical_pair_aliases": 0,
+  "shared_historical_sequence_matches": {
+    "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v6/sequence_bank.csv.gz": 31,
+    "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v7/sequence_bank.csv.gz": 51
+  },
+  "historical_scans": [
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v6/sequence_bank.csv.gz",
+      "sha256": "f9b3dfad5d906cec7bc421b042242e720bda71f5a30e89505d6cfb55885912cd",
+      "physical_rows": 145193,
+      "all_variant_containing_148bp_windows_examined": 19516090
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v7/sequence_bank.csv.gz",
+      "sha256": "e9aa5e6cb59b2b35481a3d6013e15988fcb44a9aee4627234514519ccaf2df8b",
+      "physical_rows": 271904,
+      "all_variant_containing_148bp_windows_examined": 33528266
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v9/extra_sequence_bank.csv.gz",
+      "sha256": "e5198e5f3526dd67089ff878937d58c9cc4f6bbaa9e809b3cb4849a1f2709bfb",
+      "physical_rows": 5836,
+      "all_variant_containing_148bp_windows_examined": 134584
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v8/matoba_full_verified_physical_design.csv",
+      "sha256": "9b293a00e6c05174930603cef0f9250032b3fe1aad9f51f4846b3ba033e2d1fb",
+      "physical_rows": 9043,
+      "all_variant_containing_148bp_windows_examined": 54258
+    }
+  ],
+  "source_start_end_convention": "1-based inclusive, reconciled to labeled original SNP and actual changed position; no guessed coordinate offset.",
+  "source_build": "GRCh37 to GRCh38 with unique reciprocal conversion and full 148bp physical-reference match.",
+  "target_outcomes_or_significance_values_used": false,
+  "new_model_fitted_or_performance_calculated": false,
+  "pretraining_overlap_excluded_for_future_model": false,
+  "remaining": [
+    "Reconcile original source model coefficients/comparators and raw assay QC",
+    "Audit any future pretrained-model sequence exposure",
+    "Freeze next-model and validation/calibration roles before using outcomes"
+  ],
+  "scope": "Candidate laboratory validation resource, not independent human genetic-score validation. Historical near/shared-region exclusion is conservative and does not prove donor or experimental independence.",
+  "elapsed_seconds": 9.41417595799976
+}

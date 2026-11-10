@@ -1,0 +1,47 @@
+# FI and FFS source definitions: sleep and fatigue crosswalk
+
+## Source populations and scale
+
+The project's FI summary statistics come from the [Atkins et al. meta-GWAS](https://onlinelibrary.wiley.com/doi/full/10.1111/acel.13459): UK Biobank (164,610, age 60–70) and TwinGene (10,616, age 41–87). Its UK Biobank FI used **49 self-reported baseline items**, retained complete cases, and quantile-normalized the resulting fraction before GWAS; TwinGene used 44 items and was also quantile-normalized. Only 29 of the 49 UK Biobank items had approximate matches in TwinGene. The original article's reported r²=0.85 is the phenotypic squared correlation between the UK Biobank 29-item subset and its full 49-item FI, not the genetic correlation between the two cohort FIs and not FI versus FFS.
+
+The project's [Ye et al. FFS GWAS](https://pmc.ncbi.nlm.nih.gov/articles/PMC10651618/) included 386,565 European-ancestry UK Biobank participants, mean age 57, and analyzed the number of five Fried criteria met on a 0–5 ordinal score. It excluded participants missing any of the five criteria. It used BOLT-LMM; the study's use of 'ordinal' for the score does not imply a particular ordinal-link model. A clinical threshold of ≥3 on the Fried phenotype is a separate binary classification, not what the discovery summary statistics directly estimate.
+
+These sources differ in population, selection, age, item composition, normalization and genetic-analysis covariates, besides sample overlap. No observed difference in genetic correlation can be assigned to any one of these differences without a designed sensitivity analysis.
+
+The original UK Biobank item table uses an asterisk for **medically diagnosed conditions**, not for the subset of 29 approximately corresponding items. Sleep and fatigue are unstarred, but the asterisks cannot be used to reconstruct the 29-item subset. The explicit 44-item TwinGene list independently supports the narrower statement that it has no named sleep or fatigue question.
+
+## Specific sleep and tiredness content
+
+| Evidence | Item / coding | Strength and limit of the match |
+|---|---|---|
+| UK Biobank 49-item FI | Sleep/insomnia field 1200: never/rarely, sometimes, usually mapped to 0, 0.5, 1 in the [public FI derivation script](https://github.com/dylwil/ukbfrailty2/blob/main/Stata%20script%20for%20FI%20derivation%20in%20UKB%20data%20v3.do). | Direct sleep content in the UKB FI. The project's Jansen UKB-only insomnia source is a related UKB symptom exposure; exact data-instance and sample overlap need verification. TwinGene uses a different 44-item index. |
+| UK Biobank 49-item FI | Tiredness/lethargy field 2080, assessed over the preceding two weeks. | Atkins’s [original Table S11](https://pmc-oa-opendata.s3.amazonaws.com/PMC8441299.1/ACEL-20-e13459-s002.xlsx) states 0, 0.25, **0.5**, 1. A separately published derivation script uses 0, 0.25, **0.75**, 1. The original table documents the paper’s stated coding, while its actual analysis code has not been independently verified. |
+| Ye FFS | One of the five domains is exhaustion. | Ye cites the [Hanlon UKB physical phenotype](https://pmc.ncbi.nlm.nih.gov/articles/PMC6028743/), for which a separately reproduced [Hanlon-based definition](https://eprints.gla.ac.uk/272011/1/272011.pdf) uses the same tiredness/low-energy question, counting more than half the days or nearly every day as exhaustion. Ye's complete original field/cutoff implementation was not verified, so exact identity with the Ye FFS input remains a hypothesis, not a confirmed crosswalk. |
+
+The FI and FFS may therefore share a source item or concept related to tiredness while FI additionally includes insomnia. However, we cannot infer how much either item contributes to the genetic correlations, and accounting for fatigue can remove meaningful frailty-related biology as well as overlapping content.
+
+The [Ye code-request draft](ye_ffs_phenotype_code_request_draft.md) specifies the missing source-specific fields, thresholds and sample handling. The draft has not been sent.
+
+## The Swedish component of the FI meta-GWAS
+
+Atkins’s original supplementary Table S12 lists 44 TwinGene questions and contains no explicit sleep, insomnia, fatigue, tiredness, or energy question. This confirms the paper’s stated item list, subject to the limitation that the actual analysis code has not been independently audited. Other questions can still reflect sleep-related health. The Atkins paper says its TwinGene FI was constructed from SALT data using a previously described method and cites [Li et al. 2019](https://link.springer.com/article/10.1186/s12916-019-1331-8). I examined Li's original supplementary Table S2: its 44 listed questions contain **no explicit insomnia, sleep, fatigue, tiredness or energy item**. A separate 2021 SALT paper's [Table S1](https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fs12916-021-02104-3/MediaObjects/12916_2021_2104_MOESM1_ESM.pdf) presents the same pattern. Both contain other health or mood questions, so this does not mean that the Swedish index is biologically unrelated to sleep.
+
+Atkins Table S12 directly supports the absence of explicitly named sleep and fatigue items in the published TwinGene definition. It does not prove that the index is biologically independent of sleep or establish that the published code was executed as documented. Comparing a TwinGene-only FI GWAS with the UKB-only FI GWAS would also differ in sample, age, ascertainment and power; it would be a sensitivity comparison, not a clean causal test of the sleep item.
+
+### Existing cohort-specific analysis and its limit
+
+The public [Atkins cohort-association archive](https://figshare.com/articles/dataset/Genome-Wide_Association_Study_of_the_Frailty_Index_-_Atkins_et_al_2021/9204998) contains separate UK Biobank and TwinGene effects; a copy is already present in the project. The existing project also performed the intended TwinGene eligibility check: the saved LDSC SNP-heritability estimate was 0.0803 (SE 0.0478), Z=1.68, failing its prespecified Z≥4 precision gate. An existing audit recomputed the 200-block jackknife SE. The project therefore did not estimate its four planned clinical sleep correlations. This is **insufficient precision**, not a null insomnia–frailty association. TwinGene is one constituent of the original meta-GWAS, not an independent replication of that meta-analysis, and its differing index is not a same-person sleep-item deletion. Do not relax the gate to generate a headline result.
+
+For reproducibility, Li 2019's original 44-item table was inspected in the publisher's [supplementary DOCX](https://media.springernature.com/original/springer-static/esm/art%3A10.1186%2Fs12916-019-1331-8/MediaObjects/12916_2019_1331_MOESM1_ESM.docx), SHA-256 `d815aa2b3789dfc748712f10b7d11a3114f2d472dcc68f63d28e91e72521b16f`. The subsequently published SALT table PDF has SHA-256 `daf73ca8cf4a7ab3da34fd403d89bdbf8de8d4472d978fa161bb9ff94f84afd5`. The original Atkins S11/S12 workbook is now available from the [PMC public archive](https://pmc-oa-opendata.s3.amazonaws.com/PMC8441299.1/ACEL-20-e13459-s002.xlsx); its local SHA-256 is `9763db076710ff71d58a0a98fb85df1e6bc82d0468e1b2b5096c362694dc1ea3`. This identifies the inspected copy, not an independent publisher checksum.
+
+## What one item can do to the raw score
+
+For a complete 49-item FI defined as the simple mean of item scores, changing the sleep item from 0 to 1 while holding all other deficits fixed changes the **raw FI** by 1/49 ≈ 0.0204. This is a mathematical illustration of direct score overlap, not an effect estimate, clinical threshold, or estimate of the genetic correlation attributable to insomnia.
+
+Let `S` be the raw sum of all 49 FI items, `s` the insomnia item, and `t` the tiredness item. For complete cases the raw fractions are `S/49`, `(S-s)/48`, and `(S-s-t)/47`. Different distributions and case ascertainment result after removing items. If reproducing the genetic analysis, each new phenotype must be constructed and transformed afresh before a new GWAS; these algebraic expressions cannot be applied to quantile-normalized published GWAS beta coefficients or to LDSC results.
+
+The discrepancy between the published Atkins table and the separate derivation script would change the raw full FI by 0.25/49 ≈ 0.00510 for a person with the disputed tiredness response, before transformation. The effect on a GWAS or genetic correlation is unknown. Verify the exact original study code and version and record missing-data and imputation handling before describing a new phenotype as a replication.
+
+## Recommended paired design
+
+In the same eligible participants, construct a verified source-authentic FI and FFS, then derive the FI with insomnia removed and with both insomnia and tiredness removed. Record the response recoding, denominator, missingness, scale, age range, covariates and number of people for every variant. Use the same participants for the main comparison, prespecify additional analyses that retain a larger sample, and measure continuous score correlations and differences with paired uncertainty. Separately investigate FFS with exhaustion removed as a sensitivity phenotype, recognizing that it is no longer the validated five-domain FFS. For genetic comparisons, run separate GWAS for each phenotype, document participant overlap and use matched SNP support and covariance-aware uncertainty; compare against the published summary results rather than claiming they are rederived.

@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Standardize existing prototype files; no allele inference. Pass original directory as argument."""
+from pathlib import Path
+import argparse,hashlib,json
+import pandas as pd
+ap=argparse.ArgumentParser();ap.add_argument('source_directory',type=Path);args=ap.parse_args();P=Path(__file__).resolve().parent
+files=[]
+for n in (15,22):
+ p=args.source_directory/f'unvalidated_{n}_variant_score_prototype.csv';a=args.source_directory/f'score{n}_ffs_alignment_audit.csv';df=pd.read_csv(p);audit=pd.read_csv(a);assert len(df)==n and df.variant.nunique()==n and audit.variant.nunique()==n
+ m=df.merge(audit,on='variant',validate='one_to_one',suffixes=('','_audit'));assert (m.counted_allele==m.score_counted).all() and (m.other_allele==m.score_other).all();assert (m.FFS_beta_weight_inferred-m.score_beta).abs().max()<1e-12
+ pcol='position_GRCh37_inferred' if n==15 else 'position_GRCh37_assumed';icol='insomnia_beta_weight' if n==15 else 'UKB_insomnia_beta_weight'
+ out=pd.DataFrame({'rsid':m.variant,'chromosome':m.chr,'position':m[pcol],'genome_build_reported':'GRCh37/hg19','build_certainty':'inferred' if n==15 else 'assumed','effect_counted_allele':m.counted_allele,'other_allele':m.other_allele,'FI_beta_weight':m.FI_beta_weight,'FFS_beta_weight_inferred':m.FFS_beta_weight_inferred,'insomnia_beta_weight':m[icol],'FFS_source_A1':m.source_A1,'FFS_source_A2':m.source_A2,'FFS_source_beta':m.source_beta,'FFS_source_alignment':m.alignment,'reference_alleles':m.reference_alleles,'reference_multiallelic':m.reference_multiallelic,'weight_source_path':str(p),'ffs_audit_path':str(a),'scoring_method':'Three separate unstandardized sums: sum(counted-allele dosage * corresponding trait beta).','NHANES_2011_2012_coverage':'unknown; 2011–2012 not in CDC variant search and described as forthcoming','verification_limits':'Build assumption/inference; FFS effect allele convention inferred; source/target multiallelic contrasts not verified'})
+ evidence_path=args.source_directory/('integrated_15_candidate_review.csv' if n==15 else 'expanded_22_candidate_risk_gene_table.csv');ev=pd.read_csv(evidence_path);evfields=['FI_beta_on_counted_allele','FFS_beta_inferred_on_counted_allele','UKB_insomnia_beta_on_counted_allele'] if n==15 else ['FI_beta_aligned','FFS_beta_aligned','UKB_insomnia_beta_aligned'];cross=out.merge(ev,left_on='rsid',right_on='variant',validate='one_to_one',suffixes=('','_evidence'));assert len(cross)==n and (cross.effect_counted_allele==cross.counted_allele).all() and (cross.other_allele==cross.other_allele_evidence).all();assert all((cross[a]-cross[b]).abs().max()<1e-12 for a,b in zip(['FI_beta_weight','FFS_beta_weight_inferred','insomnia_beta_weight'],evfields));out['evidence_table_path']=str(evidence_path);files.append({'score':n,'path':str(evidence_path),'sha256':hashlib.sha256(evidence_path.read_bytes()).hexdigest()})
+ if n==15:
+  refpath=args.source_directory/'ncds_15_grch38_reference_audit.csv';ref=pd.read_csv(refpath);ref=ref.rename(columns={'variant':'rsid','chr38':'ref_chr38','pos38':'ref_position38','same_position_unique':'ref_unique','both_score_alleles_listed':'ref_both_alleles','source_url':'ref_source_url','saved_response_sha256':'ref_response_sha256'});ref=ref[['rsid','ref_chr38','ref_position38','ref_unique','ref_both_alleles','ref_source_url','ref_response_sha256']];ref['ref_source']='Ensembl saved audit'
+ else:
+  refpath=args.source_directory/'ncds_ucsc_dbsnp155_all22.json';ref=pd.DataFrame(json.loads(refpath.read_text()));ref=ref.rename(columns={'variant':'rsid','chrom':'ref_chr38','pos38':'ref_position38','exact_records':'ref_exact_records','both_requested_alleles_listed':'ref_both_alleles','url':'ref_source_url','response_sha256':'ref_response_sha256'});ref['ref_unique']=ref.ref_exact_records.eq(1);ref['ref_source']='UCSC dbSNP155 saved audit';ref=ref[['rsid','ref_chr38','ref_position38','ref_unique','ref_both_alleles','ref_source_url','ref_response_sha256','ref_source']]
+ out=out.merge(ref,on='rsid',validate='one_to_one');assert out.ref_unique.all() and out.ref_both_alleles.all();out.to_csv(P/f'score_{n}_variants_standardized.csv',index=False)
+ files.append({'score':n,'path':str(refpath),'sha256':hashlib.sha256(refpath.read_bytes()).hexdigest()})
+ for f in [p,a,args.source_directory/f'score_{n}_research.py',args.source_directory/f'score_{n}_research_readme.md']:
+  files.append({'score':n,'path':str(f),'sha256':hashlib.sha256(f.read_bytes()).hexdigest()})
+(P/'score_source_checksums.json').write_text(json.dumps(files,indent=2)+'\n')
