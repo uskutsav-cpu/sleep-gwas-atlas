@@ -1,0 +1,24 @@
+# Expanded screen of 124 published insomnia–FI candidates
+
+Of the 124 variants listed in Song et al.'s insomnia–FI cross-trait supplement, **109** passed the position-and-allele checks for a descriptive comparison of MVP insomnia and FinnGen hospital frailty (HFRS). Six of the 109 have an intersection–union screen value below 0.05 after multiplying by the full original 124-candidate list size. Four of those six were **not in the earlier 15-marker prototype**. All six have the same estimated effect direction across the two follow-up outcomes after allele alignment.
+
+| Variant | Nearest gene body in GRCh37 search | MVP insomnia p | Finnish HFRS p | max(p) × 124 | Original FFS p |
+|---|---|---:|---:|---:|---:|
+| rs12536335 | FOXP2 | 4.57 × 10⁻⁸ | 7.85 × 10⁻⁹ | 5.67 × 10⁻⁶ | 0.0017 |
+| rs28528997 | MAD1L1 | 3.24 × 10⁻⁷ | 2.16 × 10⁻⁶ | 0.000268 | 2.3 × 10⁻¹² |
+| rs2815764 | NEGR1, 5,706 bp away | 1.13 × 10⁻⁷ | 2.30 × 10⁻⁶ | 0.000285 | 1.2 × 10⁻⁵ |
+| rs2155292 | NCAM1 | 3.89 × 10⁻⁶ | 1.10 × 10⁻⁹ | 0.000482 | 0.54 |
+| rs817509 | RP11-384F7.1 (long noncoding RNA) | 2.86 × 10⁻⁵ | 1.21 × 10⁻⁷ | 0.00354 | 0.0099 |
+| rs1909650 | PCDH8P1, 15,348 bp away | 1.58 × 10⁻⁵ | 0.000386 | 0.0478 | 0.097 |
+
+The nearest gene-body labels are positional and do not establish the gene that mediates either trait. The exact comparison is specific to the recorded allele pair. **Five of six** IDs have more than two alleles in the queried Ensembl GRCh37 reference; source-specific multiallelic representations and normalization require further checks. For rs12536335, FI cohort signs remain inconsistent under the project’s inferred TwinGene adapter. rs2155292 and rs1909650 have weak marginal FFS evidence, so the table must not be described as six confirmed shared FFS–insomnia variants. A nonsignificant FFS result is not proof of no effect.
+
+This screen is **post-selected and exploratory**. Song's original 124 candidates were selected using UK Biobank insomnia and FI data; full independence of follow-up samples and their relatives has not been established. The multiplication by 124 is a conservative numerical benchmark for this displayed candidate family, but does not automatically control the conditional error rate after selection or multiple rounds of analysis. `max(p_MVP, p_HFRS)` tests the intersection–union null that at least one of the two traits lacks a marginal association, assuming valid input p-values; it does not establish the same causal variant, causal gene, effect direction, clinical prediction or a specific shared mechanism. Direction concordance was checked separately and is descriptive. Variants can tag different causal signals in LD. HFRS is a hospital-code score, not FI or FFS, and includes broad diagnostic categories potentially reflecting drowsiness or vital exhaustion.
+
+## Coverage and processing
+
+We scanned the complete checksum-matched FinnGen HFRS file (21,294,560 rows) and MVP insomnia file (19,703,815 rows). The files contained 111 and 117 of the 124 exact rsIDs, respectively; 109 had unique position and allele-pair matches in **both** files under a positive-strand GRCh37-to-GRCh38 mapping and non-palindromic allele checks. Source IDs alone were not treated as sufficient. Eight of those 109 are within the approximate MHC interval; none is among the six above. The earlier 15-candidate screen's joint p-values were reproduced for all 15 matching variants. Fifteen rows did not meet the present eligibility rules, including 13 MHC variants; missing or excluded markers are not negative findings.
+
+The reported build of the Song supplement was not independently authenticated, so the liftover **assumes GRCh37**. Its position agrees with existing source files for the 99 previously checked non-MHC rows, but that does not authenticate every row or its allele semantics. The 109 include 22 rows with max(p)<0.05 without multiplicity correction. Their significance and signs are not independent replications because of post-selection and unresolved overlap. They are not a validated 22-marker score; the selection was not LD-pruned and no participant outcomes were used.
+
+`song124_mvp_hfrs_joint_screen.csv` contains one row for each of the 124 candidates, all source-match counts, allele strings, effects, p-values and eligibility. `song124_six_hit_positional_genes.csv` gives six Ensembl gene lookups and reference-allele strings, including response hashes and URLs. The JSON receipt records source hashes, row counts, liftover chain hash and output hash. The source Song data are the published [supplement](https://doi.org/10.3389/fnagi.2024.1358996); the GWAS inputs are [HFRS GCST90707291](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90707001-GCST90708000/GCST90707291/) and MVP insomnia GCST90475826. SNP-level analyses do not replace an independently defined GWAS, appropriate LD-aware fine-mapping, colocalization, or an independently tested risk score.

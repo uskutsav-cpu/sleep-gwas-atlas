@@ -1,0 +1,14 @@
+# Current public All of Us RLS direction check
+
+The earlier [cross-study comparison](stage6_rls_cross_study_direction_discrepancy.md) found a negative rs78206187 G-allele RLS beta in the Akçimen meta-analysis and positive G-allele betas in EU-RLS-GENE and INTERVAL. We now queried the current [All by All public association browser](https://allbyall.researchallofus.org/) for its RLS PhecodeX phenotype `NS_333.64`, EUR genetic-similarity group, whole-genome data, using the two exact GRCh38 allele contrasts. Browser metadata lists 5,478 cases and 168,666 controls for this phenotype/group; those counts are not automatically the per-variant effective sample size.
+
+| Candidate | Exact browser variant | beta | SE | p | ALT frequency |
+|---|---|---:|---:|---:|---:|
+| rs113851554 | chr2-66523432-G-T | +0.979879 | 0.0479104 | 5.73 × 10⁻⁹³ | 0.05469 |
+| rs78206187 | chr2-66795102-A-G | +0.311503 | 0.0445473 | 2.70 × 10⁻¹² | 0.05309 |
+
+The project's [source-code trace](stage6_hunt_aou_allele_direction_review.md) supports the conditional interpretation of browser beta as the ALT effect; independent authentication of every deployed table and multiallelic representation remains necessary. We used G/T at rs113851554 and excluded its separate G/A row. The [browser walkthrough](https://allbyall.researchallofus.org/walkthrough) cautions that beta magnitude is not readily interpretable given the association-testing weights. Do not interpret these values as directly comparable odds ratios or combine them numerically with the other studies.
+
+Under the ALT-effect assumption, the current All of Us RLS association for rs78206187 G has the **same positive direction** as EU-RLS-GENE and INTERVAL and the opposite sign to the Akçimen meta-analysis. Akçimen included an earlier All of Us component, but the older analysis and the current browser use different data releases, case definitions and counts. Their exact participant/relative and phenotype overlap is unknown; the browser value does not reproduce an identical component and is not an independent replication. Nor does it identify which underlying source, if any, is wrong. A cohort-level audit of original analysis files and effect-allele handling, including earlier CLSA and CARTaGENE components, remains needed before drawing a biological conclusion from the discordance.
+
+This was a focused, postselected two-variant check after observing the discrepancy. RLS is not insomnia, FI or FFS, and no individual score or predictive performance was evaluated. [Query results](stage6_aou_rls_two_candidate_followup.csv), [metadata and hashes](stage6_aou_rls_two_candidate_followup_receipt.json), and raw source responses in `work/rls2024/`; reproduce with `python3 work/rls2024/aou_rls_two_query.py` using the previously saved public metadata. Browser data are live and may change.

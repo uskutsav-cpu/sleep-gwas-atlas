@@ -1,0 +1,4 @@
+import csv,json,re,hashlib,openpyxl
+from pathlib import Path
+p=Path('work/croatian_longevity/s1.xlsx');w=openpyxl.load_workbook(p,read_only=True,data_only=True);rows=list(w.active.iter_rows(values_only=True));source={str(r[0]).lower() for r in rows if r[0] and re.fullmatch(r'rs\d+',str(r[0]),re.I)}
+score={label:{r['variant'].lower() for r in csv.DictReader(open(path))} for label,path in [('15','outputs/unvalidated_15_variant_score_prototype.csv'),('22','outputs/unvalidated_22_shared_direction_score.csv')]};out={'source_unique_ids':len(source),'score_overlap':{k:sorted(source & v) for k,v in score.items()},'workbook_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'scope':'Exact rsID intersection only; proxies not assessed; no frailty phenotype established.'};Path('outputs/stage6_croatian_longevity_marker_audit.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))

@@ -1,0 +1,117 @@
+{
+  "official_model": "InstaDeepAI/nucleotide-transformer-v2-50m-multi-species",
+  "revision": "81b29e5786726d891dbf929404ef20adca5b36f1",
+  "license": "cc-by-nc-sa-4.0",
+  "config": {
+    "add_bias_fnn": false,
+    "architectures": [
+      "EsmForMaskedLM",
+      "EsmForTokenClassification",
+      "EsmForSequenceClassification"
+    ],
+    "attention_probs_dropout_prob": 0.0,
+    "auto_map": {
+      "AutoConfig": "esm_config.EsmConfig",
+      "AutoModelForMaskedLM": "modeling_esm.EsmForMaskedLM",
+      "AutoModelForTokenClassification": "modeling_esm.EsmForTokenClassification",
+      "AutoModelForSequenceClassification": "modeling_esm.EsmForSequenceClassification"
+    },
+    "emb_layer_norm_before": false,
+    "esmfold_config": null,
+    "hidden_dropout_prob": 0.0,
+    "hidden_size": 512,
+    "initializer_range": 0.02,
+    "intermediate_size": 2048,
+    "is_folding_model": false,
+    "layer_norm_eps": 1e-12,
+    "mask_token_id": 2,
+    "max_position_embeddings": 2050,
+    "num_attention_heads": 16,
+    "num_hidden_layers": 12,
+    "pad_token_id": 1,
+    "position_embedding_type": "rotary",
+    "tie_word_embeddings": false,
+    "token_dropout": false,
+    "torch_dtype": "float32",
+    "transformers_version": "4.32.0.dev0",
+    "use_cache": false,
+    "vocab_list": null,
+    "vocab_size": 4107
+  },
+  "official_weight_inventory": [
+    {
+      "rfilename": "model.safetensors",
+      "blobId": "961e436751f145442c5ec0963376579accc6e3d5",
+      "size": 223642688,
+      "lfs": {
+        "sha256": "17e75af297556ea56828716d8aa539e8f12b8b625547204b74171ab91aa33569",
+        "size": 223642688,
+        "pointerSize": 134
+      }
+    }
+  ],
+  "small_files": [
+    {
+      "name": "README.md",
+      "bytes": 6339,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/README.md",
+      "sha256": "e526d7b98f106bc2ca9ba73fa166ff5fd62853812e9757a6692eeedf25e42923",
+      "Git_blob_SHA1": "e0cc85d7eba814825aba9ddd9d5b79541fd2a394"
+    },
+    {
+      "name": "config.json",
+      "bytes": 1064,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/config.json",
+      "sha256": "e20f497248c7cb264c7cd4582dbcfd52dc4cbf74a97fc711559b8c8f71c635db",
+      "Git_blob_SHA1": "c08c750038a7e12d1229b46dc2e15b2d3c2d41c7"
+    },
+    {
+      "name": "modeling_esm.py",
+      "bytes": 58205,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/modeling_esm.py",
+      "sha256": "f2b003f45d2fa4f94e92d8bbef927b719dfdd7ab7c7a95743daa2b10ab140cb3",
+      "Git_blob_SHA1": "4e8b8058d56beffb840fc85690a4840f7144722f"
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 101,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/special_tokens_map.json",
+      "sha256": "d6dc30bf018166daab248b0abf7efda6fd1b1e0a2d1bee5b31b23db2ebdaee77",
+      "Git_blob_SHA1": "ac47d8ff84d2793441964824395dba33d5146227"
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 129,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/tokenizer_config.json",
+      "sha256": "253d338919eba938e50b776f3243cc739462c207fe64e3d2e81cc5e681bee45b",
+      "Git_blob_SHA1": "329c0d1008755f3b4a13c5c731c919a4968da554"
+    },
+    {
+      "name": "vocab.txt",
+      "bytes": 28718,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/vocab.txt",
+      "sha256": "c00e0ad166d6ab3f7540ebc92270392e581bb3106763412f29034b49323e1052",
+      "Git_blob_SHA1": "07d69f8c7001350597818d8853d85ef0c203bda2"
+    },
+    {
+      "name": "esm_config.py",
+      "bytes": 14876,
+      "url": "https://huggingface.co/InstaDeepAI/nucleotide-transformer-v2-50m-multi-species/resolve/81b29e5786726d891dbf929404ef20adca5b36f1/esm_config.py",
+      "sha256": "a44e859baa08465ecdcd76b0a73f6e4fe011245a212931c403de1149ae9613ec",
+      "Git_blob_SHA1": "23313afb28fe512badf134e9d1ce08e405e3656c"
+    }
+  ],
+  "installed_versions": {
+    "torch": "2.14.0",
+    "transformers": "5.17.0",
+    "peft": "0.21.0",
+    "huggingface_hub": "1.32.0",
+    "safetensors": "0.8.0"
+  },
+  "model_weights_downloaded": false,
+  "remote_python_executed": false,
+  "new_models_fitted": false,
+  "existing_native_comparison_changed": false,
+  "scope": "Candidate source/configuration inventory only. License, architecture and weights must be audited before any future loading or fine-tuning. No claim this model improves measured variant-effect magnitude.",
+  "time_UTC": "2026-11-08T19:29:03.903699+00:00"
+}

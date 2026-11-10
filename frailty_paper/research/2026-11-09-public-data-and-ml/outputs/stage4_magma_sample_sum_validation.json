@@ -1,0 +1,67 @@
+{
+  "source_issue": "mean_sampsize uses 32-bit int total; signed overflow when summing constant N over many genes; affects printed MEAN_SAMPLE_SIZE metadata; code inspection found only output calls, not regression calls",
+  "actual_input_gene_N": 386565,
+  "patch": "change accumulator total from int to long long; leave count and missing code int",
+  "patched_source_sha256": "e4e4eaaeda5476bbcffab5d3da28ddbe47572a06ac474e627c7d352db3d8a037",
+  "patched_binary_sha256": "bc6b962f51c2fdf1a3e2d6a6109af9753642b666c616a57d64dde58c67891379",
+  "results": [
+    {
+      "dataset": "GSE67835_Human_Cortex_woFetal",
+      "variables": 7,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "8a90a40a28d3b682bb370ff906f3ca8cc8324e31d7d00caaa737a932f566c2fb"
+    },
+    {
+      "dataset": "GSE87544_Mouse_Hypothalamus",
+      "variables": 46,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "de4e67e8840f8ad41f9b6d9a02302d385dce603476011aba1d3217a3c0341771"
+    },
+    {
+      "dataset": "PBMC_10x_68k",
+      "variables": 11,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "98e97456790455442b3c70bd8f158f322ece0488d040df19256ac8b1e3afc6d8"
+    },
+    {
+      "dataset": "GSE98816_Mouse_Brain_Vascular",
+      "variables": 15,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "5534bde8a336bbcdadbb40898287a3bbdee8de2b133bc1b38613da0eb670f0e9"
+    },
+    {
+      "dataset": "MouseCellAtlas_Muscle",
+      "variables": 17,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "a353a39b919ec9920d5804737ad2d15d62eac919b121b3ab8cf15e711136c59e"
+    },
+    {
+      "dataset": "TabulaMuris_FACS_Limb_Muscle",
+      "variables": 6,
+      "max_absolute_p_difference": 0.0,
+      "corrected_output_mean_sample_size_header": [
+        "# MEAN_SAMPLE_SIZE = 386565"
+      ],
+      "output_sha256": "f9d59ed318bef5c9834a20fad787db71e4721ee2e33ee955aeb6c70e05bbe2a4"
+    }
+  ],
+  "relinked_unmodified_representative_max_absolute_p_difference": 0.0,
+  "caveat": "This checks the six observed results and this source-level fix, not all numerical correctness, data provenance or ancestry and model assumptions",
+  "all_noncomment_regression_rows_identical_on_six_matrices": true,
+  "check_note": "Compared complete non-comment table rows, including variables, NGENES, BETA, BETA_STD, SE and P, between original and wide-accumulator binaries."
+}

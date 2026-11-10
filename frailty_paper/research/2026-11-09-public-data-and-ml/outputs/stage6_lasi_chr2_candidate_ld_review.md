@@ -1,0 +1,18 @@
+# LASI-DAD public LD lookup: chromosome 2 candidate pairs
+
+The complete [LASI-DAD LD lookup](https://github.com/zhengli09/LASI_DAD-LD-Reference-Panel) for chromosome 2 was checked for two pairs in the exploratory 15-marker score. Each of the four candidate coordinate/allele representations occurs elsewhere in the table. Neither pair itself appeared in the full file:
+
+| Candidate pair | Distance | Pair record |
+|---|---:|---|
+| rs113851554 G/T – rs78206187 A/G | 271,670 bp | Not returned |
+| rs35881094 T/G – rs17550821 G/A | 55,602 bp | Not returned |
+
+The source says it reports variant pairs within 1 Mb only when haplotype r² ≥0.2. Given those rules, the absent pair records are **consistent with r² below 0.2**, assuming complete source coverage and correct build and variant representation; the exact values are unknown. Each marker appearing with other partners strengthens the coverage check, but does not prove an omitted pair had zero LD. The lookup uses provisional GRCh38 coordinates and exact biallelic allele labels from the project crosswalk; multiallelic identity and target-cohort handling still require confirmation. The reference is WGS-derived and includes participants from India, not an individual-level sleep or frailty outcome dataset. It cannot validate the scores or prove independent causal signals.
+
+For context, [1000 Genomes European rsID-level estimates](selected_variant_pair_ld_reference.csv) gave r² 0.0949 and 0.1369 for the two pairs. A [South Asian rsID-level lookup](stage6_ensembl_sas_chr2_ld_review.md) gave 0.0577 for the second pair and no result for the first. The missing thresholded LASI-DAD records do not quantify population differences; these sources use different samples and may use different allele or LD conventions. In particular, the Ensembl pair entries do not establish a score-counted allele direction. The previously observed cross-study direction discrepancy for rs78206187 remains unresolved and cannot be explained by this lookup.
+
+## Consequence for a small validation sample
+
+The public LD table reports alternate-allele frequencies of 0.0343 for rs113851554 T and 0.0282 for rs78206187 G, the alleles counted in the 15-marker prototype. Separately, the LASI-DAD B.1 documentation reports 932 unrelated people after QC in its older array-score sample; that is **not** a confirmed sleep–frailty complete-case or WGS sample. As a purely illustrative calculation, if 932 unrelated diploid people had those exact frequencies, there would be approximately 64 and 53 counted allele copies respectively. Under an additional Hardy–Weinberg assumption, the corresponding expected homozygote counts would be approximately 1.10 and 0.74. Neither is an observed count, and the WGS reference, array subset and eventual analytic sample are not interchangeable; ancestry structure, relatedness, missing data, dosage uncertainty and selection could change the results. The calculation reinforces the need to check actual call or imputation quality and effective sample size, rather than assuming this small cohort can precisely validate the score or each marker's effect. It does not estimate statistical power or justify dropping either marker.
+
+The downloaded file is 1,397,139,462 bytes, SHA-256 `6f938dc36fd82a32b87a9a087b89de193dd7c4d6f5c50d3c369df7837852ea9e`. Reproduce with `python3 work/lasi/check_chr2_markers.py`; the [receipt](stage6_lasi_chr2_ld_receipt.json) records matched representations, frequencies and source rows. The `r²` source reports rounded values and the script's optional signed-r reconstruction would require the documented source sign and biallelic flip; neither pair returned a row, so no signed correlation was calculated.

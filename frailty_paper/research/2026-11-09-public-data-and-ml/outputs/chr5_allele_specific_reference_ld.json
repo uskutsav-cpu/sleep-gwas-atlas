@@ -1,0 +1,89 @@
+{
+  "vcf_url": "https://hgdownload.soe.ucsc.edu/gbdb/hg19/1000Genomes/phase3/ALL.chr5.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
+  "panel_url": "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20130502.ALL.panel",
+  "panel_sha256": "b4023dc6ee2d62ee89c8d4d347db4d348e65518d66d346574cdae7a4bbd76858",
+  "sample_population": "EUR",
+  "variants": {
+    "rs1592757": {
+      "pos": 103889998,
+      "alleles": [
+        "G",
+        "C"
+      ],
+      "counted": "C",
+      "other": "G",
+      "counted_freq": 0.35685884691848907
+    },
+    "rs7703746": {
+      "pos": 103907337,
+      "alleles": [
+        "G",
+        "A"
+      ],
+      "counted": "G",
+      "other": "A",
+      "counted_freq": 0.4602385685884692
+    },
+    "rs323509": {
+      "pos": 104082179,
+      "alleles": [
+        "A",
+        "C"
+      ],
+      "counted": "A",
+      "other": "C",
+      "counted_freq": 0.31312127236580517
+    }
+  },
+  "pairs": [
+    {
+      "variant_1": "rs323509",
+      "counted_allele_1": "A",
+      "variant_2": "rs7703746",
+      "counted_allele_2": "G",
+      "sample_count": 503,
+      "complete_haplotypes": 1006,
+      "r": 0.6924783110524055,
+      "r_squared": 0.4795262112779921,
+      "counts": {
+        "00": 534,
+        "01": 157,
+        "10": 9,
+        "11": 306
+      }
+    },
+    {
+      "variant_1": "rs323509",
+      "counted_allele_1": "A",
+      "variant_2": "rs1592757",
+      "counted_allele_2": "C",
+      "sample_count": 503,
+      "complete_haplotypes": 1006,
+      "r": 0.8437654533445961,
+      "r_squared": 0.7119401402578117,
+      "counts": {
+        "00": 633,
+        "01": 58,
+        "10": 14,
+        "11": 301
+      }
+    },
+    {
+      "variant_1": "rs7703746",
+      "counted_allele_1": "G",
+      "variant_2": "rs1592757",
+      "counted_allele_2": "C",
+      "sample_count": 503,
+      "complete_haplotypes": 1006,
+      "r": 0.8025229519486294,
+      "r_squared": 0.6440430884043422,
+      "counts": {
+        "00": 542,
+        "01": 1,
+        "10": 105,
+        "11": 358
+      }
+    }
+  ],
+  "warning": "Reference haplotypes only; no study-specific phase or causal colocalization established"
+}

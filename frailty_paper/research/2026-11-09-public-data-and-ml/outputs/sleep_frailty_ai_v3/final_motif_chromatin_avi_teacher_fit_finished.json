@@ -1,0 +1,105 @@
+{
+  "family_id": "motif_chromatin_avi_teacher",
+  "records": [
+    {
+      "name": "final_motif_chromatin_avi_teacher_s42",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 42,
+        "fixed_epochs": 3,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s42.npz",
+      "checkpoint_sha256": "195ea3d9212168ba883a76c6f84198cbeaf5364e1fbf33abbcff912baf2b63b9",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_motif_chromatin_avi_teacher_s73",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 73,
+        "fixed_epochs": 2,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s73.npz",
+      "checkpoint_sha256": "2b2eaaeec1970444dc054b5d0826fe6222ec10fa9483ee6d6a47e52cf9853b2f",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_motif_chromatin_avi_teacher_s101",
+      "family": "biological_feature_head",
+      "features": "motif_chromatin",
+      "config": {
+        "task": "activity_avi",
+        "seed": 101,
+        "fixed_epochs": 2,
+        "locked_config": "final_motif_chromatin_avi_teacher_inference_config.json"
+      },
+      "artifact": "models/final_motif_chromatin_avi_teacher_s101.npz",
+      "checkpoint_sha256": "c3a29098bf5d4770be2b5341b6442f6391b18ca74bf26b056d128892ce7c2fa6",
+      "changed_scalar_counts": {
+        "shared.w1": 623232,
+        "shared.b1": 128,
+        "shared.w2": 4096,
+        "shared.b2": 32,
+        "class.w": 64,
+        "class.b": 2,
+        "activity.w": 64,
+        "activity.b": 2,
+        "effect.w": 64,
+        "effect.b": 0,
+        "avi.w": 32,
+        "avi.b": 1
+      },
+      "native_source_encoders_frozen": true
+    },
+    {
+      "name": "final_motif_chromatin_avi_teacher_ensemble",
+      "family": "biological_seed_ensemble",
+      "features": "motif_chromatin",
+      "config": {
+        "members": [
+          "final_motif_chromatin_avi_teacher_s42",
+          "final_motif_chromatin_avi_teacher_s73",
+          "final_motif_chromatin_avi_teacher_s101"
+        ],
+        "rule": "Fixed three-seed arithmetic mean"
+      },
+      "artifact": null
+    }
+  ],
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "blind_test_evaluated": false
+}

@@ -1,0 +1,64 @@
+{
+  "selected_record": {
+    "name": "multitask_activity_avi_s42",
+    "family": "frozen_multi_study_head",
+    "features": "hyena_original",
+    "config": {
+      "task": "activity_avi",
+      "task_weights": [
+        0.2,
+        0,
+        0.05
+      ],
+      "seed": 42,
+      "best_epoch": 18,
+      "native_encoder_frozen": true
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5392002686291518,
+          "average_precision": 0.0426096096463543,
+          "AP_skill_over_prevalence": 0.019972150434645692,
+          "brier_uncalibrated": 0.0360687100841826
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6710283506122693,
+          "average_precision": 0.14736822680093653,
+          "AP_skill_over_prevalence": 0.08384052165587698,
+          "brier_uncalibrated": 0.07854841800782317
+        }
+      },
+      "macro_AP_skill": 0.051906336045261334
+    },
+    "artifact": "models/multitask_activity_avi_s42.npz",
+    "parameter_change_norms": {
+      "shared.w1": 10.288776397705078,
+      "shared.b1": 0.5956555008888245,
+      "shared.w2": 3.5692250728607178,
+      "shared.b2": 0.5086951851844788,
+      "class.w": 1.000465750694275,
+      "class.b": 0.2630579471588135,
+      "activity.w": 0.1731346994638443,
+      "activity.b": 0.3187800943851471,
+      "effect.w": 0.0006850662175565958,
+      "effect.b": 0.0,
+      "avi.w": 0.13452990353107452,
+      "avi.b": 0.07272183895111084
+    },
+    "teacher_available_training": {
+      "Salomon_NGN2": 25359,
+      "Siraj_OL42_SKNSH": 176
+    }
+  },
+  "candidate_count": 26,
+  "rule": "Mean per-study normalized validation AP skill; no test evaluation",
+  "stage": "DNA/dense-target/prior-AVI-auxiliary search complete; broad-AVI comparisons and final selection still pending",
+  "test_evaluated": false
+}

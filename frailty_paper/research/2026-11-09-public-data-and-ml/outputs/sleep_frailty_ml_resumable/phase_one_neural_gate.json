@@ -1,0 +1,122 @@
+{
+  "passed": false,
+  "criteria": {
+    "mean_actual_magnitude_skill_at_least_one_percent": false,
+    "improvement_vs_matched_frozen_at_least_half_percentage_point": false,
+    "no_neural_source_error_worsens_over_five_percent": true,
+    "nearby_ordering_drop_at_most_point_zero_one": true,
+    "within_fixed_cell_pair_rho_drop_at_most_point_zero_one": true,
+    "nearby_difference_error_beats_zero_difference": true
+  },
+  "selected": {
+    "common_epoch": 2,
+    "adapted_mean_neural_source_skill": -0.0005948100782335134,
+    "frozen_mean_neural_source_skill": -0.0017233406463207739,
+    "adapted_per_source": {
+      "Salomon": 0.0002594992140573238,
+      "Kosicki2025": 0.0034318018030391473,
+      "Retallick2026": -0.005475731251797011
+    },
+    "frozen_per_source": {
+      "Salomon": -0.0005010586276268381,
+      "Kosicki2025": 0.0003240003289011195,
+      "Retallick2026": -0.004992963640236603
+    }
+  },
+  "all_prespecified_epochs": [
+    {
+      "common_epoch": 1,
+      "adapted_mean_neural_source_skill": -0.002512890774437615,
+      "frozen_mean_neural_source_skill": -0.002175040132733804,
+      "adapted_per_source": {
+        "Salomon": -0.004648650801424736,
+        "Kosicki2025": -0.0005295333106523081,
+        "Retallick2026": -0.0023604882112358005
+      },
+      "frozen_per_source": {
+        "Salomon": -0.0036139728082855704,
+        "Kosicki2025": 0.00018459850671848077,
+        "Retallick2026": -0.003095746096634322
+      }
+    },
+    {
+      "common_epoch": 2,
+      "adapted_mean_neural_source_skill": -0.0005948100782335134,
+      "frozen_mean_neural_source_skill": -0.0017233406463207739,
+      "adapted_per_source": {
+        "Salomon": 0.0002594992140573238,
+        "Kosicki2025": 0.0034318018030391473,
+        "Retallick2026": -0.005475731251797011
+      },
+      "frozen_per_source": {
+        "Salomon": -0.0005010586276268381,
+        "Kosicki2025": 0.0003240003289011195,
+        "Retallick2026": -0.004992963640236603
+      }
+    },
+    {
+      "common_epoch": 3,
+      "adapted_mean_neural_source_skill": -0.005416192798995005,
+      "frozen_mean_neural_source_skill": -0.006270941898504967,
+      "adapted_per_source": {
+        "Salomon": -0.010400509633852195,
+        "Kosicki2025": -0.002291961990495972,
+        "Retallick2026": -0.0035561067726368467
+      },
+      "frozen_per_source": {
+        "Salomon": -0.011927096956369398,
+        "Kosicki2025": -0.00227096701120022,
+        "Retallick2026": -0.004614761727945282
+      }
+    }
+  ],
+  "held_region_pair_diagnostics": {
+    "adapted": {
+      "local": {
+        "pairs": 27787,
+        "difference_MAE": 0.14455725252628326,
+        "zero_difference_MAE": 0.1476021558046341,
+        "skill_vs_zero_difference": 0.020629124701817103,
+        "difference_Spearman": 0.17030611176648155,
+        "ordering_accuracy_nonzero_measured_differences": 0.5422246220302376
+      },
+      "cross": {
+        "pairs": 133882,
+        "difference_MAE": 0.2611277997493744,
+        "zero_difference_MAE": 0.26599690318107605,
+        "skill_vs_zero_difference": 0.01830511323053652,
+        "difference_Spearman": 0.20786629492743572,
+        "ordering_accuracy_nonzero_measured_differences": 0.5779373095081576,
+        "training_cell_median_difference_MAE": 0.26166367530822754,
+        "skill_vs_training_cell_median_difference": 0.0020479554841608127,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.04673823790998107,
+        "fixed_cell_pair_strata": 8
+      }
+    },
+    "frozen": {
+      "local": {
+        "pairs": 27787,
+        "difference_MAE": 0.14444905519485474,
+        "zero_difference_MAE": 0.1476021558046341,
+        "skill_vs_zero_difference": 0.021362158246203355,
+        "difference_Spearman": 0.17095571561704578,
+        "ordering_accuracy_nonzero_measured_differences": 0.5425125989920806
+      },
+      "cross": {
+        "pairs": 133882,
+        "difference_MAE": 0.26108619570732117,
+        "zero_difference_MAE": 0.26599690318107605,
+        "skill_vs_zero_difference": 0.01846152122459843,
+        "difference_Spearman": 0.20935915052349244,
+        "ordering_accuracy_nonzero_measured_differences": 0.5779447797764896,
+        "training_cell_median_difference_MAE": 0.26166367530822754,
+        "skill_vs_training_cell_median_difference": 0.002206953640875531,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.04615293391137094,
+        "fixed_cell_pair_strata": 8
+      }
+    }
+  },
+  "new_outside_test_used": false,
+  "phase_two_permitted": false,
+  "scientific_goal_complete": false
+}

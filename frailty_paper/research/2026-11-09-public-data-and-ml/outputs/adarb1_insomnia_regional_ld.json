@@ -1,0 +1,54 @@
+{
+  "reference": "https://hgdownload.soe.ucsc.edu/gbdb/hg19/1000Genomes/phase3/ALL.chr21.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
+  "chain_sha256": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1",
+  "records": [
+    {
+      "variant": "rs2838788",
+      "GRCh38_pos": 45122459,
+      "GRCh37_pos_lifted": 46542374,
+      "counted": "T",
+      "other": "C",
+      "reference_exact_matches": 1,
+      "n_called": 503,
+      "counted_allele_frequency": 0.6133200795228628,
+      "other_allele_haplotypes": 389
+    },
+    {
+      "variant": "rs188632112",
+      "GRCh38_pos": 45103160,
+      "GRCh37_pos_lifted": 46523075,
+      "counted": "A",
+      "other": "G",
+      "reference_exact_matches": 1,
+      "n_called": 503,
+      "counted_allele_frequency": 0.9980119284294234,
+      "other_allele_haplotypes": 2
+    },
+    {
+      "variant": "rs1320256433",
+      "GRCh38_pos": 45022799,
+      "GRCh37_pos_lifted": 46442714,
+      "counted": "A",
+      "other": "G",
+      "reference_exact_matches": 0
+    }
+  ],
+  "pairs": [
+    {
+      "variant": "rs188632112",
+      "n_individuals": 503,
+      "status": "matched phased EUR",
+      "r": -0.035438910352141445,
+      "r2": 0.001255916366947118
+    },
+    {
+      "variant": "rs1320256433",
+      "status": "reference exact match missing or ambiguous"
+    }
+  ],
+  "source_rows": {
+    "MVP": "21 45103160 A G OR 1.507 EAF 0.9988 p 0.0001799 rs188632112 imputation_r2 0.652",
+    "FinnGen": "21 45022799 ref G alt A rs1320256433 p 1.15854e-6 beta_alt 0.320041 se 0.0658169 af_alt 0.00210788"
+  },
+  "caveat": "Reference rare-allele sampling and source imputation limit LD estimation; no identity or causal inference. MVP OR rounded, EAF near 1."
+}

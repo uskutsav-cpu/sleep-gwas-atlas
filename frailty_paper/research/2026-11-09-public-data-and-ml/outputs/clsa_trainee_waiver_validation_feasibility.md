@@ -1,0 +1,26 @@
+# CLSA: conditional no-fee route to score validation
+
+Checked 29 October 2026. The Canadian Longitudinal Study on Aging (CLSA) is a potentially strong **controlled-access** validation cohort, not an open individual-level dataset. Its fee waiver makes it potentially free only for eligible trainees and eligible data; this team's eligibility and the total cost of the requested genomic files have not been established.
+
+## Data relevant to the project
+
+- The [genetic release documentation](https://www.clsa-elcv.ca/wp-content/uploads/2023/06/clsa_gwas_v3.pdf) describes 26,622 genotyped participants, 794,409 array markers and approximately 308 million TOPMed-imputed variants. The array coordinates are GRCh37 and the imputed data GRCh38. Imputed data are BGEN dosages with quality metrics, and sample information links to project-specific questionnaire and physical-assessment identifiers. The BGEN dosage release does not retain the original full genotype probabilities. These counts do not establish that the 33 distinct project variants pass quality control, or how many individuals have all necessary outcomes.
+- A [published CLSA study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12068708/) reports insomnia symptoms in the Comprehensive Cohort at first follow-up; its analytic sample of 21,422 is not a genotype-and-frailty intersection. That paper says sleep questions were introduced at follow-up, but the official [baseline Comprehensive in-home questionnaire](https://www.clsa-elcv.ca/wp-content/uploads/2023/06/clsa_baseline_comp_in-home_v4.0_2018_jun08.pdf), pages 88–90, also documents sleep-onset and maintenance questions. This resolves whether those questions appear in the documented baseline instrument; it does not establish response completeness for any individual or explain the paper's statement. See the [wave-specific crosswalk](clsa_sleep_frailty_wave_crosswalk.md).
+- [Borhan et al.](https://doi.org/10.1038/s41514-026-00363-z) published a Fried-type frailty GWAS in 23,105 CLSA participants; it uses an ordinal phenotype distinct from the project's continuous FFS. A [same-cohort study](fi_ffs_same_cohort_comparison.md) describes both FI and Fried-based assessments, enabling a potentially valuable comparison. These separate publications do not establish a joint genotype–sleep–FI–Fried analytic sample or its event counts.
+
+## Cost and access
+
+The official [trainee page](https://www.clsa-elcv.ca/trainees/) says approved trainees can access alphanumeric data including genomics, questionnaires and physical assessments. Waivers are for qualifying graduate thesis or fellow projects, with conditions including enrollment at a recognized Canadian institution, or Canadian trainees outside Canada funded by a Canadian agency. The waiver is not available simply because a trainee joins a project. Eligibility has not been established for this team. Imaging and raw data can incur additional fees; it is **not verified** whether the particular PLINK/BGEN and imputation-quality files needed here fall entirely within a waiver or whether customization incurs charges.
+
+For others, the [current fee schedule](https://www.clsa-elcv.ca/data-access/) lists CAD $4,000 for researchers based in Canada and USD $10,000 for those outside Canada, with additional possible charges. Supervisor is the primary applicant; to be considered for the trainee waiver the trainee must initiate the application in Magnolia. Institutional ethics approval and an access agreement are needed before data release. CLSA estimates roughly six months from the application deadline to release. Its current listed next deadline is January 13, 2027; check for changes.
+
+The [early-career researcher award](https://www.clsa-elcv.ca/susan-kirkland-ecr-award/) was another one-time fee waiver, but its listed 2026 deadline has passed, and it is limited to eligible Canadian applicants at Canadian institutions. Future availability is unverified.
+
+## Before relying on this route
+
+1. Verify trainee eligibility and confirm whether the standard imputed BGEN dosage, sample mapping, variant quality, PCs and requested phenotypes are covered without any fee. No request has been sent.
+2. Check the official data dictionary for sleep onset and maintenance by wave, the FI items and physical-frailty components, and whether validated derived scores or raw input variables are included in the requested release. A sleep-free FI sensitivity analysis and appropriate denominator need prespecification.
+3. Establish the genotype–sleep–FI–physical-frailty intersection, missingness, frailty categories and longitudinal timing; separate study sample sizes cannot be combined as if they are the intersection. Ask CLSA about availability of feasible cross-tabulations if needed.
+4. Check exact alleles, multi-allelic representation and imputation quality for the frozen score variants; resolve the project's inferred FFS allele direction and assess discovery, selection and relative overlap. Specify the primary score, endpoint and comparison before inspecting target outcomes.
+
+No score has been calculated in CLSA and none of these leads validates predictive performance. The public PheWeb lead is tracked separately in the [Canadian public GWAS review](stage6_canadian_public_gwas_feasibility.md).

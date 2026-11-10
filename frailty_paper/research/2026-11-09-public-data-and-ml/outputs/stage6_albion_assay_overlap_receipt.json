@@ -1,0 +1,24 @@
+{
+  "source": "https://albionstudy.github.io/ALBION_Biomarkers_JUL2026.xlsx",
+  "sha256": "af265bda9f037322eaedaa150338fa0ae39a05c7e676d3984215518603233575",
+  "sheet": "Biomarkers",
+  "flag_rule": "numeric 1 in both named columns in same row; missing and 0 not counted",
+  "statistics": {
+    "inventory_rows_with_identifier": 436,
+    "distinct_identifiers": 435,
+    "identifiers_appearing_multiple_times": 1,
+    "flag_1_rows": {
+      "PAT administration": 132,
+      "7 day Actigraphy": 232,
+      "Imputed GWAS": 297,
+      "Whole Genome Sequencing": 63
+    },
+    "rowwise_flag_1_overlap": {
+      "Imputed GWAS & PAT administration": 128,
+      "Imputed GWAS & 7 day Actigraphy": 189,
+      "Whole Genome Sequencing & PAT administration": 0,
+      "Whole Genome Sequencing & 7 day Actigraphy": 15
+    }
+  },
+  "limitations": "One identifier is duplicated; rows are assay availability flags rather than verified unique participants or usable observations. Unknown linkage, quality, access, consent, temporal alignment and score coverage."
+}

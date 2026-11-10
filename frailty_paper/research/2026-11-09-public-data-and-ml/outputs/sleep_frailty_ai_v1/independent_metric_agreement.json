@@ -1,0 +1,26 @@
+{
+  "absolute_differences": {
+    "constant": {
+      "auroc": 0.0,
+      "average_precision": 3.469446951953614e-18
+    },
+    "kmer_logistic": {
+      "auroc": 1.825759876616928e-09,
+      "average_precision": 1.0666818817117729e-10
+    },
+    "frozen_hyenadna": {
+      "auroc": 8.612979218725059e-10,
+      "average_precision": 1.14461079503414e-11
+    },
+    "finetuned_hyenadna": {
+      "auroc": 2.5973112549593225e-10,
+      "average_precision": 2.2762812468268834e-11
+    },
+    "small_dna_cnn": {
+      "auroc": 9.90882154106032e-10,
+      "average_precision": 2.185400124754544e-11
+    }
+  },
+  "tolerance": 1e-07,
+  "reason": "Float32 training metric integration versus independent double-precision R rank arithmetic"
+}

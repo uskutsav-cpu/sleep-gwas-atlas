@@ -1,0 +1,15 @@
+# MESA independence screen for project score development
+
+29 October 2026. This is a source-level screen, not a participant- or relative-level identity audit. No access to MESA individuals has been obtained.
+
+The original [Song cross-trait study](https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2024.1358996/full) describes its FI inputs as UK Biobank and TwinGene and its insomnia input as UK Biobank. The [Ye FFS discovery](https://pmc.ncbi.nlm.nih.gov/articles/PMC10651618/) describes 386,565 UK Biobank participants. These named sources do not list MESA, making MESA a plausible candidate for evaluation independent of these particular input cohorts. This is not proof that there is no overlap of persons, relatives, other releases, or any other analysis involved in development or postselection.
+
+The [22-marker count definition](shared22_score_research_guide.md) also used Million Veteran Program insomnia and FinnGen hospital-frailty associations for postselection. Confirm whether any MESA participants or close relatives are in those specific source releases; do not infer independence just from consortium names. Also check every source used for the 15-marker selection, all subsequent tuning and the comparison weights, including UKB/MVP and any meta-analysis membership. Explicitly distinguish potential overlap with genetic development from reuse of MESA target phenotypes for selection or repeated model tuning.
+
+A published [MESA sleep-PRS analysis](https://pmc.ncbi.nlm.nih.gov/articles/PMC13652048/) evaluated other UKB- and MVP-based sleep scores in MESA and other cohorts; it does not evaluate our 15- or 22-marker scores or establish independence for them. If its PGS or MESA outcome results influence our score construction or choice of test, record that use and do not present the same association as untouched independent confirmation. Compare a frozen score with prespecified published-score and clinical baselines only after checking their underlying discovery sources and appropriate data permissions.
+
+No score has been validated; the full target overlap, genotype availability, variable linkage and costs remain unresolved.
+
+## Published variant-level MESA-inclusive follow-up
+
+The project's [MEIS1 evidence review](stage6_meis1_independent_sleep_phenotype_review.md) already records an [Edelson et al. periodic limb movement study](https://academic.oup.com/sleep/article/46/4/zsac121/6603639) in which MESA and HypnoLaus formed a pooled replication sample. For rs113851554 T/G, Table 2 reports pooled replication OR 1.74, p=9.94e-9 for PLMS at least 15/hour. This pooled association includes MESA but is **not a MESA-only estimate**, an insomnia or frailty outcome, a full-score test, or a new result from this project. The paper has text/table p-value discrepancies, and participant overlap with other published sleep findings is not fully established; see the linked project review before using the figure. It supports further exploration of movement-related sleep phenotypes at this locus, not score validation.

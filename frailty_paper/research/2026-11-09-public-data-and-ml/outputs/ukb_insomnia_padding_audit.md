@@ -1,0 +1,9 @@
+# UK Biobank insomnia: why some matched IDs have blank fields
+
+The 30,259 excluded IDs previously described as having blank allele fields are **rows without any usable association statistics**, not simply variants with missing allele labels. In the existing munged insomnia file, their A1, A2, Z and N fields are all blank. They cannot be recovered for LDSC merely by supplying reference alleles.
+
+The existing [LDSC munge workflow](https://github.com/bulik/ldsc/wiki/Heritability-and-Genetic-Correlation) used a reference allele-merge list. Its local log explicitly reports writing **1,217,311** SNP rows, of which **1,133,335** had nonmissing beta. An independent scan of the written file found exactly 1,133,335 rows with all four fields present and **83,976** rows with all four fields blank. This pattern is consistent with reference-list padding in the munged output; it does not demonstrate that the original raw GWAS itself has missing alleles or defective records.
+
+Within the 1,129,146 variants in the four-frailty common set, **30,259** are such blank rows and **1,098,887** have all four fields present. The latter were aligned and used in the [UKB insomnia comparison](mak2023_ukb_insomnia_fi_fp_comparison.md). This corrects the earlier shorthand “missing allele fields”; excluding them remains appropriate because no Z score or sample size is present either. We did not determine all reasons why those SNPs lacked association results in the earlier harmonization/merge, and no missing variant is interpreted as a null effect.
+
+[Aggregate counts and examples](ukb_insomnia_padding_audit.json); scripts `work/ukb_insomnia_padding_audit.py` and `work/ukb_insomnia_allele_qc.py`. The source munged file and its log were not changed. This check does not validate a clinical score or establish a biological result.

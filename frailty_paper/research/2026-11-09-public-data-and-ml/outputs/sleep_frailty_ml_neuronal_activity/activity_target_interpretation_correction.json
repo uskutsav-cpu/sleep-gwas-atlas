@@ -1,0 +1,28 @@
+{
+  "corrected": true,
+  "old_ambiguous_description": "Original construct-level logFC from BCalm topTreat versus scrambled controls; not an allelic contrast or phenotype risk.",
+  "correct_description": "Original unshifted BCalm fitted construct log2 RNA/DNA activity coefficient. The scrambled-control choice determines TREAT statistics; the released logFC is not the difference from the scrambled-control mean. Not an allelic contrast or phenotype risk.",
+  "why": "BCalm fits element intercepts on the log2 RNA/DNA scale. mpra_treat centers a local coefficient copy to calculate control-based statistics, while returning unshifted coefficients. The source CLI writes topTreat logFC values.",
+  "primary_methods": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11827149/",
+    "local_HTML_sha256": "43b95ff921c2f6f5ca419547a08716a0e66796d99677fabc96e1104bc48f6050",
+    "section": "Materials and methods, Algorithm"
+  },
+  "historical_source": {
+    "url": "https://github.com/kircherlab/BCalm/blob/cf94eedd5d3a96a2e8794b75aeaeeaaf034a47a8/R/analyze.R",
+    "tag": "v0.99.0",
+    "sha256": "eb47aebe868a42c3b1105045b58d5019bd5767a8363092769961659356fc2de4",
+    "exact_software_checkout_used_by_neuron_authors_established": false
+  },
+  "current_source": {
+    "url": "https://github.com/kircherlab/BCalm/blob/55fecd0e99c1a2eb633165dd90be23277138aa95/R/analyze.R",
+    "sha256": "a025ff42a942cd9707ad8438848f7622d802f907d0d6154e2c09da797ffce608"
+  },
+  "original_neuron_CLI_sha256": "54eaed81a74520c59a60d22eb8066224db993b238a8e2c4774854b48fc4e0f87",
+  "archived_original_receipt_sha256": "f2734b319b035ee32754e57e375884ef9634ab2ca087c83d98b112851d8296a0",
+  "source_metadata_or_original_coefficients_changed": false,
+  "training_arrays_or_running_comparison_changed": false,
+  "statistical_significance_or_t_statistics_used_to_select_new_training_examples": false,
+  "raw_counts_or_historical_BCalm_runtime_refitted": false,
+  "code_sha256": "800b57227a58b0ded5fdaa620fd7bdf24b4deeae8b3cffff9732f43c45db7c1c"
+}

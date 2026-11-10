@@ -1,0 +1,65 @@
+{
+  "purpose": "Full PGS005228 counted-allele consistency check against filtered harmonized Atkins FI GWAS; no PGS modification, no prediction or independent validation",
+  "score_rows": 2379429,
+  "FI_rows": 6291635,
+  "score_md5": "584c4839ba4d8caa299ff558ed161259",
+  "FI_sha256": "241ed294ccc367b22787a0c051f8d377c020e16089e82920a555286f3148e6de",
+  "status_counts": {
+    "not_found_by_rsid_in_filtered_FI": 2389,
+    "coordinate_match_effect_allele_matches_FI_A1": 0,
+    "coordinate_match_effect_allele_matches_FI_A2": 2377040,
+    "coordinate_match_effect_allele_not_in_FI_pair": 0,
+    "rsid_match_coordinate_mismatch": 0,
+    "score_duplicate_rsid_unresolved": 0,
+    "invalid_or_non_autosomal_score_record": 0
+  },
+  "score_chr6_MHC_rows": 2359,
+  "unmatched_chr6_MHC": 2359,
+  "independent_previous_sample_rows_agree": 2323,
+  "limitations": "Match uses rsID, hg19 position and allele strings only; FFS not evaluated; genomic variant representation, effect weights, all sources, target genotypes and predictive utility remain unresolved. Unmatched is not a failed risk or zero effect.",
+  "weight_orientation_audit": {
+    "strata": {
+      "all_matched": {
+        "rows": 2377040,
+        "finite_pairs": 2377040,
+        "zero_score_weights": 23005,
+        "zero_source_betas": 15437,
+        "same_sign_nonzero": 2139292,
+        "opposite_sign_nonzero": 199961,
+        "pearson_weight_vs_aligned_marginal_beta": 0.8977875307556836
+      },
+      "source_p_below_5e-8": {
+        "rows": 43,
+        "finite_pairs": 43,
+        "zero_score_weights": 0,
+        "zero_source_betas": 0,
+        "same_sign_nonzero": 43,
+        "opposite_sign_nonzero": 0,
+        "pearson_weight_vs_aligned_marginal_beta": 0.887802742508712
+      },
+      "source_p_5e-8_to_0.05": {
+        "rows": 189576,
+        "finite_pairs": 189576,
+        "zero_score_weights": 0,
+        "zero_source_betas": 0,
+        "same_sign_nonzero": 189575,
+        "opposite_sign_nonzero": 1,
+        "pearson_weight_vs_aligned_marginal_beta": 0.9191285400414458
+      },
+      "source_p_at_least_0.05": {
+        "rows": 2187421,
+        "finite_pairs": 2187421,
+        "zero_score_weights": 23005,
+        "zero_source_betas": 15437,
+        "same_sign_nonzero": 1949674,
+        "opposite_sign_nonzero": 199960,
+        "pearson_weight_vs_aligned_marginal_beta": 0.9422514211101961
+      }
+    },
+    "sample_check": {
+      "nonzero_pairs_p_lt_1": 2286,
+      "same_sign": 2104
+    },
+    "interpretation": "Descriptive within same underlying FI source; LD and SBayesR shrinkage can change signs and magnitudes; no independent predictive validation or accuracy claim."
+  }
+}

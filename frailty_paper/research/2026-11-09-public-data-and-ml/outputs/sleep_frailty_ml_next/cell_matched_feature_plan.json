@@ -1,0 +1,51 @@
+{
+  "purpose": "Additional real blood/liver/stem-cell pretrained features for development. No claim of stronger prediction.",
+  "primary_source_data_sha256": "a2ca537f9194d545e644308fa98f0ebaecca07a8f0eca0125800660b70ae8c52",
+  "actual_physical_pairs": 255400,
+  "reader_order": [
+    "K562",
+    "HepG2",
+    "WTC11"
+  ],
+  "features_per_reader": [
+    "reference_activity_readout",
+    "alternate_activity_readout",
+    "signed_readout_difference",
+    "absolute_readout_difference",
+    "global_difference_mean_absolute",
+    "global_difference_RMS",
+    "global_cosine_distance",
+    "variant_local_difference_mean_absolute",
+    "variant_local_difference_RMS",
+    "variant_local_cosine_distance",
+    "global_context_mean",
+    "global_context_sd",
+    "variant_local_context_mean",
+    "variant_local_context_sd",
+    "global_difference_maximum_absolute",
+    "variant_local_difference_maximum_absolute"
+  ],
+  "sequence_policy": "Use the entire actual source reference/alternate DNA pair in its recorded assay orientation. Group by true length; no padding, invented flanks, length equalization, new outcome labels or source-activity input.",
+  "length_counts": {
+    "270": 57584,
+    "200": 191985,
+    "150": 4820,
+    "199": 1011
+  },
+  "physical_fields": [
+    "actual_DNA_length",
+    "actual_changed_index",
+    "reference_base_AGCT",
+    "alternate_base_AGCT"
+  ],
+  "readers_frozen_during_feature_construction": true,
+  "future_public_blood_or_other_library_inputs_used": false,
+  "author_readout_unit": "Original reader activity feature, not a measured current-study activity or a disease-effect prediction.",
+  "runtime": {
+    "python": "3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:14:06) [Clang 20.1.8 ]",
+    "numpy": "2.4.3",
+    "torch": "2.14.0",
+    "device": "mps"
+  },
+  "PID": 29441
+}

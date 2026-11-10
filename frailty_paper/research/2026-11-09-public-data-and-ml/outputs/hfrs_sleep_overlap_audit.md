@@ -1,0 +1,12 @@
+# Sleep-related content in the hospital frailty risk score
+
+The published [HFRS study supplement, Table 18](https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs43587-025-00925-y/MediaObjects/43587_2025_925_MOESM1_ESM.xlsx), lists 109 weighted ICD-10 categories. I checked all 109 categories and recorded them in `hfrs_sleep_overlap_code_audit.csv`. The list does not include the three-character insomnia categories F51 or G47, or the R53 category. That is a limited category check, not a guarantee that the HFRS is free of related symptoms.
+
+Two included categories deserve particular attention:
+
+- **R40, weight 2.5:** “somnolence, stupor and coma.” The [NHS ICD-10 classification](https://classbrowser.nhs.uk/ICD-10-5TH-Edition/vol1/block-r40-r46.htm) includes drowsiness under R40.0. Somnolence is not equivalent to insomnia, and the R40 grouping also includes stupor and coma. The supplement reports the broader R40 category in 1,680 of 519,200 listed FinnGen individuals and 1,840 of 407,643 listed UK Biobank individuals; these counts do not isolate drowsiness. Its descriptive denominators differ from the GWAS sample counts and should not be substituted for them.
+- **Z73, weight 0.6:** problems related to life-management difficulty. [NHS ICD-10 definitions](https://classbrowser.nhs.uk/ICD-10-5TH-Edition/vol1/block-z70-z76.htm) include burnout or “state of vital exhaustion” under Z73.0, alongside several other conditions under Z73. Table 18 reports the broad Z73 group, not the count with exhaustion. The exact use of subcodes and Finnish historical-code mapping in the GWAS require confirmation.
+
+Consequently, the HFRS result for rs12536335 provides an informative, differently constructed frailty phenotype, but it cannot be called a fully sleep- or exhaustion-free sensitivity test. Removing dementia from the published score does not remove these listed categories. A more direct sensitivity analysis would require suitable individual-level access, recomputing the score after a prespecified review of relevant codes, and rerunning the GWAS; no such analysis was performed here.
+
+The supplement used for this audit has SHA-256 `123c340cf063e2ef618b8ef543dedea6b7c8ef69008488f01027eedbffc04625`. The [paper](https://www.nature.com/articles/s43587-025-00925-y) describes HFRS construction and the separate GWAS analysis populations. This item audit does not change the limits on sample overlap, the FI cohort discrepancy, or the need for a shared-signal test in `rs12536335_finngen_hfrs_followup.md`.

@@ -1,0 +1,102 @@
+{
+  "rows": 124586,
+  "feature_count": 36,
+  "columns": [
+    "ENCFF752OZB__coordinate_available",
+    "ENCFF752OZB__point_called_region",
+    "ENCFF752OZB__point_log1p_peak_signal",
+    "ENCFF752OZB__log1p_nearest_region_distance",
+    "ENCFF752OZB__called_region_fraction_201bp",
+    "ENCFF752OZB__window_log1p_max_peak_signal",
+    "ENCFF647ODP__coordinate_available",
+    "ENCFF647ODP__point_called_region",
+    "ENCFF647ODP__point_log1p_peak_signal",
+    "ENCFF647ODP__log1p_nearest_region_distance",
+    "ENCFF647ODP__called_region_fraction_201bp",
+    "ENCFF647ODP__window_log1p_max_peak_signal",
+    "cortical__coordinate_available",
+    "cortical__point_called_region",
+    "cortical__point_log1p_peak_signal",
+    "cortical__log1p_nearest_region_distance",
+    "cortical__called_region_fraction_201bp",
+    "cortical__window_log1p_max_peak_signal",
+    "hippocampal__coordinate_available",
+    "hippocampal__point_called_region",
+    "hippocampal__point_log1p_peak_signal",
+    "hippocampal__log1p_nearest_region_distance",
+    "hippocampal__called_region_fraction_201bp",
+    "hippocampal__window_log1p_max_peak_signal",
+    "motor__coordinate_available",
+    "motor__point_called_region",
+    "motor__point_log1p_peak_signal",
+    "motor__log1p_nearest_region_distance",
+    "motor__called_region_fraction_201bp",
+    "motor__window_log1p_max_peak_signal",
+    "astrocyte__coordinate_available",
+    "astrocyte__point_called_region",
+    "astrocyte__point_log1p_peak_signal",
+    "astrocyte__log1p_nearest_region_distance",
+    "astrocyte__called_region_fraction_201bp",
+    "astrocyte__window_log1p_max_peak_signal"
+  ],
+  "profiles": [
+    {
+      "profile": "ENCFF752OZB",
+      "assembly": "hg38",
+      "source_sha256": "e6c2c4e1cd71055812508199c6f6b8fbd39e2e4c8312329a5429673cfd39a91e",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 5047
+    },
+    {
+      "profile": "ENCFF647ODP",
+      "assembly": "hg38",
+      "source_sha256": "654c01dc21b2f8978a7902e0104a9b3385d0acdc1d1793b0572308d732008633",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 576
+    },
+    {
+      "profile": "cortical",
+      "assembly": "hg19",
+      "source_sha256": "50348e97d255ed24749990dcbd4f0786b6ddbe32262d666c65e522f85850fb45",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 6328
+    },
+    {
+      "profile": "hippocampal",
+      "assembly": "hg19",
+      "source_sha256": "69dffc63b0aad7c694e8b31fca6da60628f65965ca79bf19a41ed853780259cf",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 5707
+    },
+    {
+      "profile": "motor",
+      "assembly": "hg19",
+      "source_sha256": "3ab70152d3fa973f166025810682c9708f138fc339996a598dc6d0264e89de79",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 5696
+    },
+    {
+      "profile": "astrocyte",
+      "assembly": "hg19",
+      "source_sha256": "944b6c8571dd948f92a1ce23838e92fa6a79c1cbb0abf23d3965cf4fe225a5c7",
+      "real_point_membership_checks": 20,
+      "point_called_regions": 8576
+    }
+  ],
+  "hg38_to_hg19_unresolved_Salomon": 60,
+  "feature_sha256": "6810e638c3127e411ed756f85d59b3f7509e2591424fd689581943831e88e2a1",
+  "manifest_sha256": {
+    "salomon": "be901ff8ba6fd7c4c151aba7bb455c8e9713540df4bfe0fa8ab7f9c97e6297f6",
+    "siraj": "b52f0602d033d4755eae9e46eb667fdb42f3f6f523c9ca4449bef852b4b0db98"
+  },
+  "coordinate_convention": "Sources 0-based half-open; SNP input positions 1-based converted to 0-based. GSE hg19 queries use source Siraj coordinates or unique reciprocal Salomon liftover.",
+  "missingness": "Unavailable mapping is NaN plus coordinate_available=0. No called peak is a separate indicator; peak signal encoding zero outside called peaks does not mean measured zero accessibility. Footprint signal columns are unavailable, not interpreted as a quantitative measurement.",
+  "limitations": [
+    "Public bulk reference profiles; not single-cell evidence or the original Salomon donors",
+    "SK-N-SH is a neuroblastoma cell line; GSE profiles are induced/derived neural cells and fetal astrocytes, not aging patient measurements",
+    "ENCODE peaks and footprints derive from the same biological replicate; they are different covariates, not independent observations",
+    "These public experimental profiles can overlap foundation-model training resources; independence of AlphaGenome is not established",
+    "No reporter outcome-derived quantities or clinical traits enter these features"
+  ],
+  "test_labels_used": false
+}

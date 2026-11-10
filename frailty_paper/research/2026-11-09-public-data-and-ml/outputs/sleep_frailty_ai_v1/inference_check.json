@@ -1,0 +1,87 @@
+{
+  "models": {
+    "frozen_hyenadna.npz": {
+      "cpu_gpu_prediction_max_error": 4.470348358154297e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "ce15382689567854724a508a4ab85b03b03ffe17e9131274ce0a0774a3028c6d"
+    },
+    "finetuned_hyenadna.npz": {
+      "cpu_gpu_prediction_max_error": 5.21540641784668e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "c165368557528ab5df6ed164ac1b31b72238d79cb8270dc5322f39a5681ba4b6"
+    },
+    "cnn.npz": {
+      "cpu_gpu_prediction_max_error": 4.470348358154297e-08,
+      "allele_swap_score_max_error": 0.0,
+      "reverse_complement_score_max_error": 0.0,
+      "invalid_inputs_rejected": [
+        "duplicate",
+        "ambiguous_base",
+        "unchanged_pair",
+        "wrong_length"
+      ],
+      "checkpoint_sha256": "4590cb298713fad9f06bfc5aee88c7a13e9386169534c93274b21631f4eedecd"
+    }
+  },
+  "native_pretrained_arrays_changed": [
+    "layers.1.mixer.filter_fn.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.0.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.0.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.1.freq",
+    "layers.1.mixer.filter_fn.implicit_filter.2.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.2.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.4.bias",
+    "layers.1.mixer.filter_fn.implicit_filter.4.weight",
+    "layers.1.mixer.filter_fn.implicit_filter.6.weight",
+    "layers.1.mixer.in_proj.bias",
+    "layers.1.mixer.in_proj.weight",
+    "layers.1.mixer.out_proj.bias",
+    "layers.1.mixer.out_proj.weight",
+    "layers.1.mixer.short_filter.bias",
+    "layers.1.mixer.short_filter.weight",
+    "layers.1.mlp.fc1.bias",
+    "layers.1.mlp.fc1.weight",
+    "layers.1.mlp.fc2.bias",
+    "layers.1.mlp.fc2.weight",
+    "layers.1.norm1.bias",
+    "layers.1.norm1.weight",
+    "layers.1.norm2.bias",
+    "layers.1.norm2.weight",
+    "ln_f.bias",
+    "ln_f.weight"
+  ],
+  "first_block_and_nucleotide_embedding_preserved": true,
+  "frozen_encoder_matches_original": true,
+  "scope": "Numerical reload, invariance, input rejection and parameter-update checks; not biological or clinical validation",
+  "validation_checkpoint_replay": {
+    "frozen_hyenadna.npz": {
+      "recorded_validation_average_precision": 0.03683170337463851,
+      "reloaded_validation_average_precision": 0.03683187748607106,
+      "difference": 1.741114325493065e-07
+    },
+    "finetuned_hyenadna.npz": {
+      "recorded_validation_average_precision": 0.03661172390516082,
+      "reloaded_validation_average_precision": 0.03661172346595599,
+      "difference": 4.3920483222548157e-10
+    },
+    "cnn.npz": {
+      "recorded_validation_average_precision": 0.036484334464610205,
+      "reloaded_validation_average_precision": 0.036484334486267145,
+      "difference": 2.1656940130121427e-11
+    }
+  }
+}

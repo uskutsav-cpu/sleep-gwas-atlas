@@ -1,0 +1,100 @@
+{
+  "time_UTC": "2026-11-09T00:54:06.419835+00:00",
+  "source": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/train_resumable_development.py",
+  "source_sha256": "7af8528ef4dc00d86c12baf3ec25a663ff400ac4eccfb7314fedd7db36933318",
+  "derived": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_resumable/train_permitted_AVI_development.py",
+  "derived_sha256": "9abff10417656694b929f276b64f71243c6889edc4c042253c5957b7ad9ba035",
+  "entire_original_source_reconstructed_exactly_by_reversing_declared_changes": true,
+  "original_source_changed": false,
+  "declared_changes": [
+    {
+      "original": "\"\"\"Matched native-DNA effect-size fitting, with actual last-stage adaptation.\"\"\"",
+      "replacement": "\"\"\"Separately gated, matched permissible-score input training; not yet executed.\"\"\"",
+      "occurrences": 1
+    },
+    {
+      "original": "from native_data import load_data,PackedDNA,normalization",
+      "replacement": "from native_data import PackedDNA,normalization\nfrom readonly_native_inputs import load_readonly_inputs\nfrom permitted_AVI_features import fit_scaling\nfrom permitted_AVI_experiment import get_AVI_plan,PLAN_PATH",
+      "occurrences": 1
+    },
+    {
+      "original": "from bounded_network import NativeAdaptationModel,torch",
+      "replacement": "from permitted_AVI_network import PermittedAVIModel,torch",
+      "occurrences": 1
+    },
+    {
+      "original": "parser.add_argument('--resume',action='store_true')",
+      "replacement": "parser.add_argument('--resume',action='store_true');parser.add_argument('--arm',choices=['scoreless','scores'],required=True)",
+      "occurrences": 1
+    },
+    {
+      "original": "if args.audit_tag:assert args.audit_tag.replace('_','').isalnum() and len(args.audit_tag)<80",
+      "replacement": "if args.audit_tag:assert args.audit_tag.replace('_','').isalnum() and len(args.audit_tag)<80 and args.audit_stop_after_updates is not None",
+      "occurrences": 1
+    },
+    {
+      "original": "plan=get_stable_plan()",
+      "replacement": "plan=get_AVI_plan(for_execution_audit=bool(args.audit_tag))",
+      "occurrences": 1
+    },
+    {
+      "original": "assert shutil.disk_usage(ROOT).free>128*1024**2,'Disk reserve below 128 MiB; scientific fit not started.'",
+      "replacement": "assert shutil.disk_usage(ROOT).free>=plan['launch_system_reserve_bytes'],'System storage below the separate AVI launch reserve; scientific fit not started.'",
+      "occurrences": 1
+    },
+    {
+      "original": "d,pairs,bank,x,extra=load_data();added_siraj",
+      "replacement": "d,pairs,bank,x,extra,input_receipt=load_readonly_inputs();added_siraj",
+      "occurrences": 1
+    },
+    {
+      "original": "seed=plan['seed'];torch.manual_seed(seed);device=plan['resource_revision']['device']",
+      "replacement": "avi_path=DEST/'AVI_preparation/corrected_permitted_AVI_physical_bank.npy';assert sha(avi_path)==plan['permitted_score_bank_sha256'];avi_bank=np.load(avi_path,mmap_mode='r')\n    avi_scaling=fit_scaling(avi_bank,d['bank_index'][tr]);scaling_proof=json.loads((DEST/'AVI_preparation/permitted_AVI_train_only_scaling_audit.json').read_text());assert avi_scaling==scaling_proof['roles'][args.held_study]['scaling']\n    seed=plan['seed'];torch.manual_seed(seed);device=plan['resource_revision']['device']",
+      "occurrences": 1
+    },
+    {
+      "original": "model=NativeAdaptationModel(med,lm,parent,norm,args.recipe,seed).to(device)",
+      "replacement": "model=PermittedAVIModel(med,lm,parent,norm,args.recipe,avi_scaling,args.arm=='scores',seed).to(device)",
+      "occurrences": 1
+    },
+    {
+      "original": "directory=(DEST/'recovery_audit_runs'/args.audit_tag/'development') if args.audit_tag else DEST/'development'",
+      "replacement": "directory=(DEST/'AVI_recovery_audit_runs'/args.audit_tag/'development') if args.audit_tag else DEST/'AVI_development'",
+      "occurrences": 1
+    },
+    {
+      "original": "name=f'{args.recipe}_{args.held_study}_{seed}'",
+      "replacement": "name=f'{args.recipe}_{args.held_study}_{args.arm}_{seed}'",
+      "occurrences": 1
+    },
+    {
+      "original": "meta={'recipe':args.recipe,'held_study':args.held_study",
+      "replacement": "meta={'recipe':args.recipe,'arm':args.arm,'AVI_scaling':avi_scaling,'AVI_bank_sha256':sha(avi_path),'readonly_input_receipt':input_receipt,'held_study':args.held_study",
+      "occurrences": 1
+    },
+    {
+      "original": "'plan_sha256':sha(DEST/'finite_stable_native_plan.json')",
+      "replacement": "'plan_sha256':sha(PLAN_PATH)",
+      "occurrences": 1
+    },
+    {
+      "original": "[Path(__file__),ROOT/'work/sleep_frailty_ml_bounded/bounded_network.py',ROOT/'work/sleep_frailty_ml_native/native_data.py']",
+      "replacement": "[Path(__file__),Path(__file__).with_name('permitted_AVI_network.py'),Path(__file__).with_name('permitted_AVI_head.py'),Path(__file__).with_name('permitted_AVI_features.py'),Path(__file__).with_name('readonly_native_inputs.py'),Path(__file__).with_name('permitted_AVI_experiment.py'),ROOT/'work/sleep_frailty_ml_bounded/bounded_network.py',ROOT/'work/sleep_frailty_ml_native/native_data.py']",
+      "occurrences": 1
+    },
+    {
+      "original": "['recipe','held_study','seed','epochs','training_index_sha256','prediction_index_sha256','initial_parameter_sha256','plan_sha256','code_sha256']",
+      "replacement": "['recipe','arm','AVI_scaling','AVI_bank_sha256','readonly_input_receipt','held_study','seed','epochs','training_index_sha256','prediction_index_sha256','initial_parameter_sha256','plan_sha256','code_sha256']",
+      "occurrences": 1
+    },
+    {
+      "original": "extra,support,ls)",
+      "replacement": "extra,support,ls,avi_bank)",
+      "occurrences": 3
+    }
+  ],
+  "scientific_training_executed": false,
+  "runtime_and_full_state_continuation_audit_complete": false,
+  "score_data_or_reserved_outcomes_used_for_model_selection": false,
+  "execution_blockers": "Original native comparison decision, system storage reserve, and actual new-trainer execution/continuation/resource audit are required. This derivation check is not that execution audit."
+}

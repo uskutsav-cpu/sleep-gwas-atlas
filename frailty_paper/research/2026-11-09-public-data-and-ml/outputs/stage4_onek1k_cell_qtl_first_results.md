@@ -1,0 +1,20 @@
+# Initial immune-cell QTL evidence for candidate variants
+
+The eQTL Catalogue release-7 OneK1K reanalysis provides molecular eQTL credible sets from pseudobulk expression within single-cell-defined immune populations. I checked exact GRCh38 coordinate and allele-pair matches for all 22 exploratory markers plus rs323509 in three available credible-set files: naïve B cells (QTD000608; 876 samples in release metadata), CD14 monocytes (QTD000609; 560), and naïve CD4 T cells (QTD000612; 949). These are molecular QTL fine-mapping outputs, **not a test of GWAS enrichment or trait colocalization**.
+
+Two exact candidate–gene matches were returned, both in the naïve CD4 T-cell file:
+
+| Candidate | Gene or stable gene ID | Molecular credible-set size | Candidate molecular PIP | Nominal eQTL p |
+|---|---|---:|---:|---:|
+| rs7734045, chr5:136202653 A/C | **SMAD5** (`ENSG00000113658`) | 70 | 0.0952 | 1.55 × 10⁻⁴⁴ |
+| rs6058750, chr20:32590184 T/C | `ENSG00000277301` | 88 | 0.00143 | 1.36 × 10⁻⁹ |
+
+For rs7734045, the 0.0952 PIP is the **molecular-model** posterior inclusion probability reported for that variant, not a 9.5% probability of insomnia or frailty. The credible set has 70 variants. An exploratory [GWAS–CD4 SMAD5 colocalization](stage4_cd4_smad5_colocalization_review.md) was subsequently performed, with incomplete credible-set coverage and substantial model limitations. The muscle SMAD5 splicing result is a different molecular phenotype and tissue; these observations do not demonstrate the same causal variant or a common mechanism across tissues. Ensembl release 116 maps the second stable gene ID to a long noncoding transcript antisense to NOL4L but did not supply a display symbol; its stable ID is retained to avoid inventing a gene name. [Ensembl record](https://rest.ensembl.org/lookup/id/ENSG00000277301?content-type=application/json).
+
+No candidate matched a listed credible-set variant in the two other checked files. This is **not** evidence of absent expression, no association, or no relevance in B cells or monocytes: only reported fine-mapped credible sets were searched, and their sample sizes, power and variant coverage differ. The candidate-marker cohort and allele/build matching remain provisional; other proxies may be involved. No comparison was made to show that an association is statistically stronger in CD4 cells than elsewhere. Twenty-one candidates had no exact credible-set match in these three selected datasets; they remain unevaluated for other cell types, molecular traits, or unlisted variants.
+
+## Provenance and checks
+
+The [match table](stage4_onek1k_candidate_credible_set_matches.csv) and [receipt](stage4_onek1k_candidate_credible_set_receipt.json) record all rows, dataset IDs, URLs, complete-file local SHA-256 hashes and counts. Each gzip file was read to completion; no provider checksum was independently verified. Matches required chromosome, position and unordered allele pair, avoiding rsID-only matching, but the underlying candidate build and multiallelic source representation need independent authentication. An exact match is not conditional analysis. OneK1K donor counts and cell definitions are from the release-7 metadata, and the [Catalogue release notes](https://www.ebi.ac.uk/eqtl/Release_notes/) describe pseudobulk processing of its single-cell studies.
+
+The [network scaffold](stage4_variant_gene_phenotype_network_scaffold.csv) now contains two explicitly labeled cell-type molecular-QTL edges; these are separate from GWAS and bulk-tissue edges. They do not establish an edge from a gene to a disease or statistical enrichment. Further planned work includes properly controlled cell-type enrichment using genome-wide gene statistics, better-covered multi-signal cell-type molecular colocalization, and analysis of muscle, brain and vascular datasets. An [exploratory mouse-brain scDRS insomnia analysis](stage4_mouse_brain_insomnia_scdrs.md) has since been run; no frailty or shared-trait scDRS, stratified LDSC or scATAC enrichment has yet been completed. A separate [FFS MAGMA cell-type analysis](stage4_ye_ffs_magma_cell_type_review.md) is available.

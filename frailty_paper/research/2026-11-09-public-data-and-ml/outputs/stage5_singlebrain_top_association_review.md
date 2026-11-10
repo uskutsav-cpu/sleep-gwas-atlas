@@ -1,0 +1,11 @@
+# SingleBrain brain-cell eQTL follow-up
+
+SingleBrain's public GRCh38 top-association files were matched against the project's previously nominated molecular-QTL genes and 488 reference-checked alleles. All seven major-cell-type downloads were checksum-verified against the public Zenodo record. The resulting `stage5_singlebrain_gene_top_associations.csv` contains 335 gene–cell-type rows, including nonsignificant rows and seven exact queue-allele matches. The source's `qval` is adjusted at the gene level using the random-effects analysis; its fixed-effect beta and P value are different statistics.
+
+Four exact allele matches are the source's top SMAD5 association for a cell type: chr5:136159634:A>G in excitatory neurons (q=2.13e-18), chr5:136163522:T>A in inhibitory neurons (q=3.62e-9), chr5:136164132:G>T in oligodendrocytes (q=2.04e-19), and chr5:136147332:G>T in oligodendrocyte precursor cells (q=0.00304). These alleles were in the project's molecular credible-set queue; they are not necessarily lead insomnia or frailty variants. Three other matches are top TMEM161B-DT associations. Full allele details and effect estimates are in the CSV.
+
+The meta-analysis is a separately generated human brain expression dataset, but cohort overlap with disease GWAS and AlphaGenome training data has not been established. Different top alleles across cells are correlated candidates and have different reference/alternate orientations; their signs must not be compared as evidence for opposite cell effects. These results do not demonstrate cell-type specificity, shared disease causality, or a shared insomnia–frailty causal variant. They are not an independent phenotype replication or a model-performance test.
+
+Only the top variant per gene in each cell type is represented; failure to match other queue variants is not evidence of no association. Assess shared causal signals with full regional statistics, ancestry-matched LD and appropriate multi-signal colocalization, then replicate using an independent disease GWAS where available. The top-file analysis does not itself carry out these steps.
+
+Sources: [SingleBrain study](https://www.nature.com/articles/s41588-026-02541-x); [public download record and data dictionary](https://zenodo.org/records/14908182); [download portal](https://singlebrain.nygenome.org/downloads/).

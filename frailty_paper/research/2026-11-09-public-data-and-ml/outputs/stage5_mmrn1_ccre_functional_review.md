@@ -1,0 +1,9 @@
+# MMRN1-region marker rs7691487: element and tissue evidence
+
+The exploratory variant rs7691487 (chr4:89910850 T>C, GRCh38) overlaps ENCODE cCRE EH38E3594798, classified in the combined registry as CA-H3K4me3. SCREEN places MMRN1 8,736 bp from an annotated TSS and also lists nearby SNCA and SNCA-AS1; proximity is not proof of a target gene.
+
+[SCREEN's element-level data](https://screen.wenglab.org/GRCh38/ccre/EH38E3594798) show a DNase standardized score of 1.70 for an adult cerebellar-cortex tissue sample in its partial collection, labeled CA. This is a tissue-level measurement for the element, not an allelic contrast or evidence of insomnia/frailty mediation. SCREEN also lists seven solo-fragment reporter tests; none has a displayed nominal p below 0.05. The results are retained in the [reporter table](stage5_mmrn1_ccre_reporter_results.csv); a nonsignificant test does not exclude an effect in other contexts. SCREEN reports no region-centric MPRA or CRISPR perturbation data in its catalog for this element.
+
+[SCREEN's gene view](https://screen.wenglab.org/GRCh38/ccre/EH38E3594798/genes) reports GTEx v8 exact-allele eQTL associations for SNCA-AS1 in cerebellum (slope -0.505, p = 1.33 × 10⁻¹⁴) and pituitary (slope -0.375, p = 1.67 × 10⁻¹³), and MMRN1 in spleen (slope -0.354, p = 1.20 × 10⁻⁶). The existing v10 project records also show negative ALT-oriented effects in those tissue/gene contexts, but v8 and v10 share data and do not constitute independent replication. These associations nominate multiple possible targets, not a causal assignment; cross-trait colocalization and exact prediction–QTL event matching remain necessary.
+
+The element-level data are not demonstrated independent of AlphaGenome training, and they do not test the T-versus-C effect. No claim of variant-level validation is warranted from these results.

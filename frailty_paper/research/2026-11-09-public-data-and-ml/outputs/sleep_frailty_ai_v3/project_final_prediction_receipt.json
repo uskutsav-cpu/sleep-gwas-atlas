@@ -1,0 +1,43 @@
+{
+  "variants": 33,
+  "assay_contexts": [
+    "Salomon_NGN2",
+    "Siraj_OL42_SKNSH"
+  ],
+  "rows": 924,
+  "roles": {
+    "overall_assay_call_detector": "final_biological_avi_input_ensemble",
+    "within_active_variant_ranker": "final_stacked_contrast_no_avi",
+    "full_avi_direct": "final_baseline_full_avi_direct",
+    "pattern_boost_none_depth3": "final_baseline_pattern_boost_none_depth3",
+    "full_chromatin_boost_sqrt_d3": "final_baseline_full_chromatin_boost_sqrt_d3",
+    "full_dna_chromatin_avi_boost_sqrt_d5": "final_baseline_full_dna_chromatin_avi_boost_sqrt_d5",
+    "ablation_contrast_no_avi": "final_contrast_no_avi_ensemble",
+    "ablation_contrast_avi_teacher": "final_contrast_avi_teacher_ensemble",
+    "ablation_motif_chromatin_no_avi": "final_motif_chromatin_no_avi_ensemble",
+    "ablation_motif_chromatin_avi_teacher": "final_motif_chromatin_avi_teacher_ensemble",
+    "ablation_biological_avi_input": "final_biological_avi_input_ensemble",
+    "combination_stacked_contrast_no_avi": "final_stacked_contrast_no_avi",
+    "combination_stacked_contrast_avi_teacher": "final_stacked_contrast_avi_teacher",
+    "combination_conditional_avi_only": "final_conditional_avi_only"
+  },
+  "registry_sha256": "793d6b5b0a477fa13f56cef1357ad0df9fc67838b008b1c035bd907a21d4f9f1",
+  "input_sha256": "91f61d17d0b4ba1c1034e091a3c6467cf9f41415c17477c9b41322255c22637b",
+  "output_sha256": "0d2d676b90e6bbb901b832eb182c4ef34f8ef1c25dd558454183601a376021ff",
+  "AVI_exact_allele_available_context_rows": 66,
+  "AVI_source_receipts": [
+    {
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v3/avi_exact_allele_scores.csv",
+      "sha256": "47ea172b2a0185a5e55afbbf33f361da829291c91ca85a3847197fba878945e7"
+    },
+    {
+      "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v2/avi_exact_allele_scores.csv",
+      "sha256": "57222b2d8bd181058d3b52476689d5ca33de79cfd2c90c4f83c4976f4ce2e17e"
+    }
+  ],
+  "measured_accuracy_independently_established_for_candidates": false,
+  "training_overlap_caution": "Rows explicitly flag exact-substitution and nearby training exposure. None are independent genetic-score validation.",
+  "scores_can_be_compared": "Within a fixed role/model and assay context; prevalence/detection differs between studies, so do not rank cell-type relevance from raw between-context values.",
+  "gene_assignment": "No causal gene assignment or directional disease-risk inference is made by this score.",
+  "source_provenance": "Original UCSC payload and exact target alleles verified in project_input_receipt.json"
+}

@@ -1,0 +1,19 @@
+# FFS effect-allele direction: source-table check
+
+The available evidence supports the project's convention that **A1 is the effect allele for BETA** in the Ye FFS source file. This is now stronger than a convention inferred solely from typical file formats, though it is not direct author confirmation for every record.
+
+The study's published COJO independent-locus table uses fields `refA` and `b`. The [GCTA documentation](https://yanglab.westlake.edu.cn/software/gcta) defines the COJO `refA` field as the effect allele and `b` as the original GWAS effect size. We compared the published 37-row locus inventory transcribed from the [Ye et al. supplement](https://media.springernature.com/original/springer-static/esm/art%3A10.1007%2Fs11357-023-00771-z/MediaObjects/11357_2023_771_MOESM2_ESM.xlsx) with the project’s article-linked FFS summary-statistics file:
+
+The [original paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC10651618/) says it ran BOLT-LMM v2.3.2 for its GWAS. The [BOLT-LMM manual](https://alkesgroup.broadinstitute.org/BOLT-LMM/BOLT-LMM_manual.html) states that its standard association output uses `ALLELE1` as the effect allele. This independently documents the generating software's convention, but the distributed file uses `A1`/`A2` rather than the standard `ALLELE1`/`ALLELE0` labels. The exact transformation from BOLT output to the shared file was not found; therefore the name correspondence is supported by, but not independently established from, the 37 COJO matches and published score comparison below.
+
+- All **37 of 37** published lead variants matched one source record by identifier, chromosome and position.
+- In every match, published `refA` equaled source **A1**, and published marginal `b` equaled source **BETA** within 0.000001.
+- Treating source A2 as the effect allele would require negating source BETA; none of the 37 negated values matched published `b` to that tolerance.
+
+This cross-check assumes the published table preserves standard GCTA-COJO field meanings and the source file is the same study release. It verifies the convention at these 37 selected lead loci, not every individual record or every representation of multiallelic rsIDs. Published table and source are not independent studies. Agreement does not validate an FFS score or establish shared causal variants. The separate full-score audit also found that published FFS score counted alleles match the source A1 at 2,373,832 coordinate-matched records; that is consistent with the convention but does not by itself prove individual marginal-effect orientation or score accuracy.
+
+Our [22-candidate directional table](22_candidate_risk_direction_review.md) and its separate FFS-weighted prototype continue to use A1 as effect allele. The source consistency above increases confidence in that **file-wide assumption**, but candidate-specific allele pairs, genome build, multiallelic representation and downstream model validation remain necessary. It does not address the separate TwinGene FI sign convention.
+
+## Traceability
+
+We scanned all 8,883,488 rows of the existing FFS source; original source SHA-256 recorded by the earlier audit: `912e290b2064999c7147cbe3597f87cbcb14b25d387a8b6db2f25862e7274e55`. The published locus inventory was programmatically transcribed from the paper's supplementary workbook; the 37 original labels, positions, reference alleles and effects are retained in [the inventory](published_ffs_37_locus_inventory.csv). [The comparison table](ffs_cojo_effect_allele_audit.csv) and [receipt](ffs_cojo_effect_allele_audit.json) preserve match counts and effect differences. The inventory column name describing `refA` as not yet author-confirmed reflects its earlier audit; the GCTA documentation now supplies a software-format definition. Script: `work/ffs_cojo_effect_allele_audit.py`.

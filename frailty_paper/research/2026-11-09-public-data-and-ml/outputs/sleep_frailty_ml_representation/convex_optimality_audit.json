@@ -1,0 +1,83 @@
+{
+  "fixed_objective_only": true,
+  "completed_roles": {
+    "none": {
+      "primal": 0.1492722067501434,
+      "dual_lower_bound": 0.1492692952522787,
+      "certified_training_objective_gap_upper_bound": 2.911497864716006e-06,
+      "fraction_of_primal": 1.9504621309641148e-05,
+      "maximum_dual_line_constraint_error": 8.565197162635485e-18,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "Salomon": {
+      "primal": 0.15682763953528897,
+      "dual_lower_bound": 0.15682481736327045,
+      "certified_training_objective_gap_upper_bound": 2.822172018523972e-06,
+      "fraction_of_primal": 1.7995373946114477e-05,
+      "maximum_dual_line_constraint_error": 6.80336863234654e-18,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "Kosicki2025": {
+      "primal": 0.1597215144561628,
+      "dual_lower_bound": 0.15971711822799164,
+      "certified_training_objective_gap_upper_bound": 4.39622817116625e-06,
+      "fraction_of_primal": 2.7524333125283752e-05,
+      "maximum_dual_line_constraint_error": 1.4880674817363548e-17,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "Siraj": {
+      "primal": 0.08986786736230398,
+      "dual_lower_bound": 0.08986669073589681,
+      "certified_training_objective_gap_upper_bound": 1.176626407167758e-06,
+      "fraction_of_primal": 1.3092848886957189e-05,
+      "maximum_dual_line_constraint_error": 1.8892222855559915e-17,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "IGVF240K": {
+      "primal": 0.1499130274040978,
+      "dual_lower_bound": 0.1498981877758421,
+      "certified_training_objective_gap_upper_bound": 1.4839628255686188e-05,
+      "fraction_of_primal": 9.89882501384303e-05,
+      "maximum_dual_line_constraint_error": 1.0232158002831948e-17,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "Koesterich2023": {
+      "primal": 0.15510042344210212,
+      "dual_lower_bound": 0.15509836198705668,
+      "certified_training_objective_gap_upper_bound": 2.0614550454434166e-06,
+      "fraction_of_primal": 1.329109875843081e-05,
+      "maximum_dual_line_constraint_error": 1.6046192152785466e-17,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "McAfee2023": {
+      "primal": 0.16437692998823272,
+      "dual_lower_bound": 0.16435472836753612,
+      "certified_training_objective_gap_upper_bound": 2.2201620696604696e-05,
+      "fraction_of_primal": 0.00013506530811953994,
+      "maximum_dual_line_constraint_error": 3.577867169202165e-18,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    },
+    "Retallick2026": {
+      "primal": 0.15278672726008558,
+      "dual_lower_bound": 0.15278292686700679,
+      "certified_training_objective_gap_upper_bound": 3.8003930787899876e-06,
+      "fraction_of_primal": 2.4873843081412822e-05,
+      "maximum_dual_line_constraint_error": 1.5937771935536915e-17,
+      "optimizer_reported_success": false,
+      "predictive_validity_established": false
+    }
+  },
+  "derivation": "For f(r)=sqrt(r^2+epsilon^2), f*(u)=-epsilon*sqrt(1-u^2), |u|<=1. Enforce weighted zero dual mean in each unpenalized line-offset column. Minimize the penalized slope term analytically to obtain the lower bound.",
+  "regularization_lambda": 0.1,
+  "smoothing_epsilon": 0.01,
+  "bounds_do_not_establish_minimum_true_MAE_or_external_accuracy": true,
+  "new_reserved_outcomes_read": false,
+  "additional_model_fitting_or_penalty_search": false
+}

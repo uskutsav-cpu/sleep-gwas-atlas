@@ -1,0 +1,62 @@
+{
+  "audit_utc": "2026-10-27T23:38:50.597683+00:00",
+  "atlas_sha256": "9adb0292ed0ef81f0b68c8e5deddf5d08ec9807c676fb8f59ad9dc296ceed7c5",
+  "checks": [
+    {
+      "check": "queue and atlas identical unique allele keys",
+      "passed": true,
+      "detail": "488 unique reference-checked alleles"
+    },
+    {
+      "check": "SNV AVI coverage matches SNV-only table",
+      "passed": true,
+      "detail": "460 SNVs; 28 indels have no AVI"
+    },
+    {
+      "check": "statuses match score availability",
+      "passed": true,
+      "detail": "Legacy website-only status separately retained"
+    },
+    {
+      "check": "measured QTL counts agree with evidence table",
+      "passed": true,
+      "detail": "1176 measured-QTL rows"
+    },
+    {
+      "check": "all functional followup links resolve",
+      "passed": true,
+      "detail": "Seven marker-linked reviews"
+    },
+    {
+      "check": "all tissue observation links resolve",
+      "passed": true,
+      "detail": "Additional per-variant tissue observation files"
+    },
+    {
+      "check": "ENCODE registry queried for every variant",
+      "passed": true,
+      "detail": "488 variants; non-overlap is not functional absence"
+    },
+    {
+      "check": "all required original marker and matched control classes exist",
+      "passed": true,
+      "detail": "23 markers and 23 controls"
+    },
+    {
+      "check": "frozen credible-set QTL effects cover all credible-set variants",
+      "passed": true,
+      "detail": "651 source rows; 444 distinct alleles; orientation still requires source-specific verification"
+    }
+  ],
+  "coverage": {
+    "variants": 488,
+    "avi_scored_snvs": 460,
+    "indels_without_avi": 28,
+    "variants_with_measured_qtl_records": 23,
+    "variants_with_ccre_overlap": 134,
+    "variants_with_selected_reporter_followup": 7,
+    "live_full_precision_model_results": 0,
+    "variants_with_frozen_credible_qtl_effects": 444
+  },
+  "scope": "Structural integrity only. Does not establish biological correctness, full prediction coverage, independent validation or completion of Stage 5."
+}

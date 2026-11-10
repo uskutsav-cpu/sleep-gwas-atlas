@@ -1,0 +1,55 @@
+{
+  "purpose": "Current handles require live ps/session verification on continuation; not completion evidence",
+  "jobs": {
+    "AVI_retrieval_pid": 14070,
+    "full_AVI_training_runner_pid": 14328
+  },
+  "sessions": {
+    "AVI_retrieval": 58539,
+    "full_AVI_runner": 17285
+  },
+  "completed": {
+    "v2_auxiliary_native": "Trained three native epochs; 217152 native scalar entries selected, 217151 entries differ in the selected epoch1 checkpoint across25 parameter arrays. Did not beat simpler validation-selected model. Checkpoint/R checks passed.",
+    "v3_training_examples": 85322,
+    "v3_validation_examples": 11164,
+    "v3_reserved_test_examples": {
+      "new_Siraj_held_chromosomes": 18924,
+      "previously_developed_Salomon_study_subset": 9176
+    },
+    "v3_stage1_candidates": 26,
+    "v3_biological_candidates": 24,
+    "motif_encoder": "1611 fixed HOCOMOCO models,1109 mapped human TFs; NumPy/GPU, strand/swap/edge checks passed; raw feature matrices on research SSD",
+    "reference_chromatin": "36 features from public ENCODE SK-N-SH and four GSE113480 bulk neural profiles; correct hg38/hg19 reciprocal mappings and point/interval checks",
+    "test_predictions_evaluated": false
+  },
+  "current_scientific_gap": "Leading motif+chromatin ensemble validates at AUC0.6065 NGN2 and0.7578 SKNSH on all calls. Within experimentally active regions it is only0.4893 and0.5636. Do not call it a strong variant-effect predictor on the basis of the all-call score.",
+  "remaining": [
+    "Complete full AVI retrieval and the scheduled full AVI classical/neural comparisons",
+    "Train a variant-focused/conditional architecture that separates predicted activity from individual allele effects, using activity as a training target/mask only",
+    "Consider native biological-encoder fine-tuning for the improved task if validation supports it",
+    "Robust model-family selection/repeated chromosome validation and numerical reload checks",
+    "Unlock the new held-chromosome Siraj test only after final model decisions; retain active-region diagnostics",
+    "Complete reproducible model/inference package and scientific readiness report"
+  ],
+  "goal_complete": false,
+  "updated_utc": "2026-11-07T09:44:03.364408+00:00",
+  "active_verified_handles": {
+    "development_robustness_runner": 15492
+  },
+  "terminal_replaced_handles": {
+    "original_avi_reader": 14070,
+    "original_full_avi_runner": 14649,
+    "original_full_contrast": 14726
+  },
+  "recovery_note": "OriginalAVI C reads stalled; recovered7missing chunks using timeout-bounded child queries; full scores verified123743/124345. Classical runner hit all-unavailable-column library failure; corrected omitted prespecified imputation, retained5valid direct/logistic results and archived exploratory incomplete tree fits. Restarted only terminal affected jobs.",
+  "last_verified_utc": "2026-11-07T18:16:54.369926+00:00",
+  "verified_current_commands": [
+    "15492 python3 -u work/sleep_frailty_ml_v3/run_development_robustness.py --wait-for-full-contrast 15458",
+    "17821 /opt/miniconda3/bin/python3 -u /Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/work/sleep_frailty_ml_v3/train_contrast.py --teacher full --validation-chromosomes 16,17,18,19,20,21,22 --tasks effect,effect_avi",
+    "18460 python3 -u work/sleep_frailty_ml_v3/finish_development.py --wait-for-cv 15492"
+  ],
+  "annotation_complete": true,
+  "raw_inference_checked": true,
+  "strict_reserved_Siraj_n": 18569,
+  "blind_evaluation_started": false
+}

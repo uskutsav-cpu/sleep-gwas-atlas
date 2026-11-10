@@ -1,0 +1,22 @@
+CELL-MATCHED MODEL DEVELOPMENT: CURRENT STATUS
+
+What changed
+Three real author-trained DNA readers (blood, liver and stem cells) now process the full actual source DNA, preserving its length and assay orientation. No DNA was padded or extended. A small 8,461-parameter response head was trained by backpropagation. The pretrained readers themselves stayed fixed. The matched control masked the blood and liver features; training rows, initial head weights and update schedules were identical.
+
+What was tested
+Sixteen development fits: two input versions, eight epochs and seven whole-source omissions plus held loci. The source dataset remains the earlier revealed V9 measurements. No newly reserved blood or unused-library effect has been used to train or select these models. Computation and fitted gradients were checked independently.
+
+Actual results
+The best three-reader setup improved development error over the cell/culture median by 0.511% on average across seven omitted sources, at one common epoch (1). The best stem-cell-only control improved it by 0.355% at its one common epoch (8). These are selected development figures, not new independent validation. Further epochs did not consistently improve transfer.
+On held development loci, nearby ordering accuracy was 54.26%. Within a fixed study/cell contrast, the average between-cell correlation was only 0.013. Useful variant-specific cell differences remain unproven.
+
+New free data verified
+The independent-publication blood source has 354 verified paired designs after historical overlap checks, measured in four cell models. A conservative screen against the complete published pretraining libraries leaves 236 designs (49 distinct variants in 46 regions), potentially 944 measurements. All actual author pretraining sequences were found in the published libraries; unmapped/noncanonical genomic annotations still limit neighborhood claims. Original allele comparators and source filtered-count tables were checked; raw barcode processing and original GLM fitting have not been independently rebuilt.
+Unused Siraj2026 libraries provide 13,817 OL27 candidate development designs and 18,219 OL33 candidate held-library designs after physical-reference, spatial-history and exact shared-DNA guards. Every design is measured in HepG2, K562 and SK-N-SH. Pretraining exposure and assay/target-availability checks remain. These are libraries from the same paper and lab, not independent publications or donors.
+
+Bounded follow-up
+Finish those source checks, make at most one declared coverage expansion with the eligible OL27 development regions, then freeze the model, confidence rules, both matched AVI arms and all predictions before evaluating the new blood study and held OL33 library. Do not make another architecture/source change before that evaluation. A weak result must be retained as a weak result.
+
+Still unresolved
+The prior V9 model failed its untouched accuracy and confidence tests. Its frozen results and AVI rejection remain unchanged. The new models have not passed an external test or solved confidence across experiments. No project biological ranking is authorized. This is laboratory molecular research, not a predictor of insomnia/frailty in people, independent genetic-score validation, causal-gene evidence or a publication-readiness claim.
+

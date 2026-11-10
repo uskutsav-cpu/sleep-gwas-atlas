@@ -1,0 +1,160 @@
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:92: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  fried=['fried_shrinking','fried_exhaustion_proxy','fried_weakness_proxy','fried_mobility_proxy','fried_low_activity_proxy'];d['fried_adapted_count']=d[fried].sum(axis=1,min_count=5);d['fried_adapted_3plus']=np.where(d.fried_adapted_count.notna(),(d.fried_adapted_count>=3).astype(float),np.nan)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:93: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  phys=[x for x in fried if x!='fried_exhaustion_proxy'];d['fried_physical4']=d[phys].mean(axis=1).where(d[phys].notna().all(axis=1))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:96: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  d['prior_physical4']=pd.DataFrame({'w':oldweak,'m':d.fi_walk,'a':oldactivity,'l':oldloss}).mean(axis=1).where(pd.DataFrame({'w':oldweak,'m':d.fi_walk,'a':oldactivity,'l':oldloss}).notna().all(axis=1))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:97: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  d['sleep_told_doctor']=binary_yes(d.SLQ050);d['ever_smoked']=binary_yes(d.SMQ020);d['education_clean']=numeric_valid(d.DMDEDUC2,[1,2,3,4,5]);d['wtmec4yr']=d.WTMEC2YR/2
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:97: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  d['sleep_told_doctor']=binary_yes(d.SLQ050);d['ever_smoked']=binary_yes(d.SMQ020);d['education_clean']=numeric_valid(d.DMDEDUC2,[1,2,3,4,5]);d['wtmec4yr']=d.WTMEC2YR/2
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/baseline_analysis.py:97: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  d['sleep_told_doctor']=binary_yes(d.SLQ050);d['ever_smoked']=binary_yes(d.SMQ020);d['education_clean']=numeric_valid(d.DMDEDUC2,[1,2,3,4,5]);d['wtmec4yr']=d.WTMEC2YR/2
+strict missingness items 28 ['fi_memory', 'fi_stoop', 'fi_lift', 'fi_chair', 'fi_bed', 'fi_eat', 'fi_dress', 'fi_stand', 'fi_grasp', 'fi_walk', 'fi_steps', 'fi_arthritis', 'fi_thyroid', 'fi_bronchitis', 'fi_cancer', 'fi_heart_failure', 'fi_coronary', 'fi_angina', 'fi_heart_attack', 'fi_stroke', 'fi_hypertension', 'fi_kidney', 'fi_diabetes', 'fi_general_health', 'fi_health_worse', 'fi_hospital', 'fi_medicines', 'fi_bmi']
+design df 32 n elder 3472 common FI 3336 common comparison 2699
+                                outcome     cycle    n  estimate    ci_low  ci_high      p_value  p_holm_within_family
+                                 fi_all    pooled 3336  0.073634  0.056564 0.090703 4.855659e-10          2.913396e-09
+                            fi_no_sleep    pooled 3336  0.071311  0.054299 0.088322 9.309300e-10          3.887006e-09
+                          fi_no_fatigue    pooled 3336  0.072219  0.055128 0.089310 7.774011e-10          3.887006e-09
+                             fi_neither    pooled 3336  0.069815  0.052779 0.086851 1.544922e-09          3.887006e-09
+        paired_fi_all_minus_fi_no_sleep    pooled 3336  0.002323  0.001824 0.002822 8.105209e-11          5.673647e-10
+      paired_fi_all_minus_fi_no_fatigue    pooled 3336  0.001415  0.000738 0.002091 1.674155e-04          1.674155e-04
+         paired_fi_all_minus_fi_neither    pooled 3336  0.003818  0.002900 0.004737 1.119262e-09          3.887006e-09
+                      comparison_fi_all    pooled 2699  0.069807  0.054285 0.085328 1.849750e-10          1.109850e-09
+                  comparison_fi_neither    pooled 2699  0.065862  0.050579 0.081146 4.971671e-10          2.485836e-09
+             comparison_prior_physical4    pooled 2699  0.048544  0.022481 0.074608 6.226857e-04          2.490743e-03
+             comparison_fried_physical4    pooled 2699  0.042220  0.017776 0.066665 1.325951e-03          3.977852e-03
+paired_fi_neither_minus_prior_physical4    pooled 2699  0.017318 -0.002530 0.037167 8.503374e-02          8.503374e-02
+paired_fi_neither_minus_fried_physical4    pooled 2699  0.023642  0.004402 0.042882 1.761282e-02          3.522565e-02
+                           age65_fi_all    pooled 2326  0.063653  0.046983 0.080323 7.179247e-09          7.897172e-08
+                 strict_complete_fi_all    pooled 1779  0.061894  0.043468 0.080321 9.714974e-08          7.771979e-07
+                                 fi_all 2011-2012 1609  0.066122  0.044772 0.087471 5.100543e-06          3.060326e-05
+                                 fi_all 2013-2014 1727  0.079900  0.052722 0.107077 1.511315e-05          5.726878e-05
+                       age65_fi_neither    pooled 2326  0.059541  0.042871 0.076210 2.871691e-08          2.584522e-07
+             strict_complete_fi_neither    pooled 1779  0.057674  0.039230 0.076118 3.742082e-07          2.619457e-06
+                             fi_neither 2011-2012 1609  0.062287  0.041116 0.083458 9.559624e-06          4.779812e-05
+                             fi_neither 2013-2014 1727  0.076086  0.048885 0.103287 2.605840e-05          5.726878e-05
+                             fi_no_mood    pooled 3332  0.070661  0.052478 0.088844 4.931180e-09          5.917416e-08
+                     fi_neither_no_care    pooled 3336  0.069574  0.052530 0.086618 1.685711e-09          2.302640e-08
+                     fi_missing5_subset    pooled 3467  0.078025  0.057422 0.098627 8.545816e-09          8.545816e-08
+                    fried_adapted_count    pooled 2619  0.292226  0.175802 0.408650 1.431719e-05          5.726878e-05
+                        fried_physical4    pooled 2754  0.044294  0.017951 0.070638 1.705068e-03          1.705068e-03
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:11: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  n=x[cols].notna().sum(axis=1);x[name+'_n']=n;x[name]=(x[cols].sum(axis=1,min_count=1)/n).where(n>=np.ceil(.8*len(cols)))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:11: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  n=x[cols].notna().sum(axis=1);x[name+'_n']=n;x[name]=(x[cols].sum(axis=1,min_count=1)/n).where(n>=np.ceil(.8*len(cols)))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:11: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  n=x[cols].notna().sum(axis=1);x[name+'_n']=n;x[name]=(x[cols].sum(axis=1,min_count=1)/n).where(n>=np.ceil(.8*len(cols)))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:11: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  n=x[cols].notna().sum(axis=1);x[name+'_n']=n;x[name]=(x[cols].sum(axis=1,min_count=1)/n).where(n>=np.ceil(.8*len(cols)))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:11: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  n=x[cols].notna().sum(axis=1);x[name+'_n']=n;x[name]=(x[cols].sum(axis=1,min_count=1)/n).where(n>=np.ceil(.8*len(cols)))
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:13: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['sleep_recent_halfdays']=np.where(x.DPQ030.isin([0,1,2,3]),np.where(x.DPQ030>=2,1,0),np.nan)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:14: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['sleep_recent_any']=np.where(x.DPQ030.isin([0,1,2,3]),np.where(x.DPQ030>=1,1,0),np.nan)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:15: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['FI_eligible']=x.fi_neither.notna().astype(int);x['common_scores']=x[['fi_all','fi_no_sleep','fi_no_fatigue','fi_neither','sleep_told_doctor']].notna().all(axis=1).astype(int)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:15: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['FI_eligible']=x.fi_neither.notna().astype(int);x['common_scores']=x[['fi_all','fi_no_sleep','fi_no_fatigue','fi_neither','sleep_told_doctor']].notna().all(axis=1).astype(int)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:16: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['fi_difference']=x.fi_all-x.fi_neither;x['fi_high']=np.where(x.fi_neither.notna(),(x.fi_neither>.21).astype(int),np.nan)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:16: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  x['fi_difference']=x.fi_all-x.fi_neither;x['fi_high']=np.where(x.fi_neither.notna(),(x.fi_neither>.21).astype(int),np.nan)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:26: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D=pd.concat(full,ignore_index=True);D=D[(D.WTMEC2YR>0)&D.SDMVSTRA.notna()&D.SDMVPSU.notna()].copy(); cols=[v for v in x if v not in ['RIDAGEYR','WTMEC2YR','SDMVSTRA','SDMVPSU']];D=D.merge(x[cols],on=['cycle','SEQN'],how='left',validate='one_to_one');D['wt4']=D.WTMEC2YR/2;D['stratum']=D.cycle+':'+D.SDMVSTRA.astype(int).astype(str);D.to_csv(P/'survey_full_design_frame.csv',index=False)
+/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/nhanes_fresh_reanalysis/study/prepare_data.py:26: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D=pd.concat(full,ignore_index=True);D=D[(D.WTMEC2YR>0)&D.SDMVSTRA.notna()&D.SDMVPSU.notna()].copy(); cols=[v for v in x if v not in ['RIDAGEYR','WTMEC2YR','SDMVSTRA','SDMVPSU']];D=D.merge(x[cols],on=['cycle','SEQN'],how='left',validate='one_to_one');D['wt4']=D.WTMEC2YR/2;D['stratum']=D.cycle+':'+D.SDMVSTRA.astype(int).astype(str);D.to_csv(P/'survey_full_design_frame.csv',index=False)
+older 3632 MEC 3472 FI common 3336 linked 3466
+audit checks 249 mismatches 0
+mortality n 3389 events 765 
+R survey version 4.5 
+                                analysis     group    n     estimate
+                                  fi_all    pooled 3336  0.073633504
+                             fi_no_sleep    pooled 3336  0.071310737
+                           fi_no_fatigue    pooled 3336  0.072218690
+                              fi_neither    pooled 3336  0.069815106
+                           fi_difference    pooled 3336  0.003818398
+                         fi_diff_nosleep    pooled 3336  0.002322767
+                       fi_diff_nofatigue    pooled 3336  0.001414814
+               fi_neither_fullcase_basic    pooled 3035  0.072533452
+            fi_neither_fullcase_adjusted    pooled 3035  0.067726156
+                        fi_neither_cycle 2011-2012 1609  0.062286860
+                        fi_neither_cycle 2013-2014 1727  0.076086072
+              sleep_by_cycle_interaction    pooled 3336  0.012727565
+                sleep_by_sex_interaction    pooled 3336 -0.027078723
+                              fi_no_mood    pooled 3332  0.070660887
+                      fi_no_mood_no_care    pooled 3315  0.067037109
+                      fi_neither_no_care    pooled 3336  0.069574339
+                      fi_neither_no_labs    pooled 3336  0.076445926
+                       fi_neither_no_bmi    pooled 3336  0.070810513
+             fi_neither_no_function_walk    pooled 3336  0.066820994
+                      fi_missing5_subset    pooled 3336  0.078361487
+               fi_neither_complete_cases    pooled 1779  0.057674003
+                        fi_neither_age65    pooled 2326  0.059540674
+       recent_sleep_symptoms_ge_halfdays    pooled 3198  0.103513691
+               recent_sleep_symptoms_any    pooled 3198  0.069898806
+                        FI_above_0.21_OR    pooled 3336  2.587946849
+                        FI_above_0.21_PR    pooled 3336  1.597518567
+                   comparison_fi_neither    pooled 2699  0.065862453
+              comparison_prior_physical4    pooled 2699  0.048544127
+              comparison_fried_physical4    pooled 2699  0.042220049
+                   paired_fi_minus_prior    pooled 2699  0.017318326
+                 mortality_OR_per_0.1_FI    pooled 3389  1.739484553
+             mortality_OR_per_0.1_all_FI    pooled 3333  1.744926797
+       mortality_OR_per_0.1_no_mood_care    pooled 3368  1.667429884
+                 mortality_PR_per_0.1_FI    pooled 3389  1.362807151
+                     missing_FI_OR_sleep    pooled 3141  0.954323191
+                  missing_FI_OR_per_year    pooled 3141  1.034587554
+                    missing_FI_OR_female    pooled 3141  0.715730502
+                       fi_neither_by_sex      male 1618  0.085872031
+                       fi_neither_by_sex    female 1718  0.059436486
+ fi_neither_response_IPW_reestimated_JKn    pooled 3035  0.067857513
+        ci_low       ci_high      p_value df
+  0.0565643306  0.0907026771 4.855659e-10 32
+  0.0542993294  0.0883221437 9.309300e-10 32
+  0.0551276955  0.0893096839 7.774011e-10 32
+  0.0527790522  0.0868511604 1.544922e-09 32
+  0.0029000055  0.0047367896 1.119262e-09 32
+  0.0018240168  0.0028215178 8.105209e-11 32
+  0.0007384464  0.0020911818 1.674155e-04 32
+  0.0557396232  0.0893272802 4.722915e-10 32
+  0.0511531651  0.0842991478 1.644743e-09 32
+  0.0411157660  0.0834579550 9.559624e-06 17
+  0.0488847783  0.1032873661 2.605840e-05 15
+ -0.0190225504  0.0444776809 4.202294e-01 32
+ -0.0532631653 -0.0008942808 4.309287e-02 32
+  0.0524781616  0.0888436124 4.931180e-09 32
+  0.0490912929  0.0849829250 1.140687e-08 32
+  0.0525301844  0.0866184932 1.685711e-09 32
+  0.0576857191  0.0952061334 1.752071e-09 32
+  0.0534274912  0.0881935347 1.765003e-09 32
+  0.0506308073  0.0830111809 1.319204e-09 32
+  0.0580596203  0.0986633537 5.705404e-09 32
+  0.0392296679  0.0761183380 3.742082e-07 32
+  0.0428714885  0.0762098605 2.871691e-08 32
+  0.0791676876  0.1278596946 6.756543e-10 32
+  0.0507013055  0.0890963067 1.941176e-08 32
+  2.0447424020  3.2754585052 2.164723e-09 32
+  1.4236429412  1.7926303686 1.846187e-09 32
+  0.0505789483  0.0811459580 4.971671e-10 32
+  0.0224805847  0.0746076697 6.226857e-04 32
+  0.0177755364  0.0666645612 1.325951e-03 32
+ -0.0025304513  0.0371671033 8.503374e-02 32
+  1.5985990104  1.8927864271 1.254296e-14 32
+  1.6111483097  1.8898133136 2.226336e-15 32
+  1.5353726583  1.8108453365 5.722046e-14 32
+  1.3024662899  1.4259434931 3.966896e-15 32
+  0.3873982483  2.3508953821 9.165337e-01 32
+  0.9571396349  1.1183022497 3.800291e-01 32
+  0.4255221835  1.2038623878 1.994754e-01 32
+  0.0588528011  0.1128912602 2.773881e-07 32
+  0.0428865998  0.0759863729 2.571523e-08 32
+  0.0513394256  0.0843755997 1.463479e-09 32
+49-item audit and missingness tables complete
+score rows 37 requests ok 37 coordinate matches 37 pairs present 37 failed 0
+Empty DataFrame
+Columns: [score, rsid, request_status]
+Index: []
+Wrote vector PDF/SVG and 400 dpi PNG figures
+PASS: independent 49-item and original-source audit; all 7 R/Python survey models; unperturbed mortality record linkage; 37 reference/111 summary-weight checks; source hashes; figure formats

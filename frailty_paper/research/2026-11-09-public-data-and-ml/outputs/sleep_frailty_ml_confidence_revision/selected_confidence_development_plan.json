@@ -1,0 +1,49 @@
+{
+  "purpose": "One finite development experiment isolating interval calibration/answer selection. No change to the point predictor.",
+  "archived_base_model": "outputs/sleep_frailty_ml_next/validation/final_settings_lock.json",
+  "base_model_settings_sha256": "c77ba2128ba3e68f8a2471e911550c5fa025e45bf7db69c1fcde5c9d28ce1010",
+  "control_confidence_policy_sha256": "420795dd658207e9c00847ae7fca54d0f9e1ef4d73772f3bda61c016529387c9",
+  "outer_studies": [
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "shared_error_critics": {
+    "max_iter": 80,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 100,
+    "l2_regularization": 10.0,
+    "early_stopping": false,
+    "random_state": 42
+  },
+  "matched_error_inputs_and_fit_scale_partition": "Unchanged original outer-source-omitted base predictions. Other sources original calibration groups only; hash even error fit, odd scale. Outer source absent from all fitting stages.",
+  "candidate_selection": "Known exact cell and line, original support/OOD and estimated 5% plus 0.005 error-gain criteria. Compare raw learned 90th-error radius with the original max(0.2, typical effect) cap BEFORE looking at scale outcomes.",
+  "candidate_scale": "Calibrate selected residual/raw-radius ratios within the same cell; max pooled and adequately represented source 90th region-balanced quantile. No unconditional absolute-error floor. Require original 100 rows/20 regions; sparse cell yields no answer rather than different-cell fallback.",
+  "after_calibration": "Do not filter by the resulting interval width. Report oversized ranges as failure of usefulness; do not silently change the calibrated selected population.",
+  "control": "Exactly reproduce the archived policy and nested outer-source summaries using the same newly fitted critics before interpreting candidate results.",
+  "scope": "Previously revealed development sources. This is not new independent validation and does not make the point predictor stronger.",
+  "readiness_only": {
+    "minimum_qualifying_sources": 2,
+    "minimum_accepted_rows": 30,
+    "minimum_accepted_regions": 20,
+    "minimum_accepted_fraction": 0.01,
+    "minimum_row_and_region_balanced_coverage": 0.9,
+    "minimum_selected_MAE_skill": 0.05,
+    "minimum_fraction_accepted_intervals_within_original_cap": 0.9
+  },
+  "coverage_theory": "Empirical only. Selected/group-dependent observations and changing laboratories are not asserted exchangeable; no general conformal guarantee.",
+  "stopping": "Exactly these two policies. No threshold, critic, source, epoch or quantile search after outcomes.",
+  "references": [
+    "https://academic.oup.com/jrsssb/article/87/4/1239/8113856",
+    "https://academic.oup.com/jrsssb/article/87/4/1100/8058684"
+  ],
+  "new_Ulirsch_outcomes_read": false,
+  "code_sha256": {
+    "run_selected_confidence_development.py": "e78ce0de0523704ebfbb38d8e31dccb99afae358a035dc65ced125aa5294174c",
+    "selected_calibration.py": "e0aad85cd9d0059bc785d47cf8f13cc1ea5b9ce7433cff8e969666d69ab7b3bf"
+  }
+}

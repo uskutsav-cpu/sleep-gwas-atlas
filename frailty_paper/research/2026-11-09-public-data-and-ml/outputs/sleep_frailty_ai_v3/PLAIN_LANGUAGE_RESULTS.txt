@@ -1,0 +1,17 @@
+The AI model is trained and tested.
+
+It uses DNA patterns, public laboratory measurements and AlphaGenome scores to rank DNA changes for follow-up experiments. We trained the small models themselves and a model that learns how to combine their predictions. We did not change AlphaGenome's own weights.
+
+We compared 12 approaches, chose the strongest versions using development data, then fixed those choices before the final test.
+
+The larger final laboratory test included 18,569 DNA changes. For the harder question—distinguishing individual changes inside already-active DNA—we tested 3,728 changes. Combining the trained DNA model with AlphaGenome ranked these effects better than either source alone. The result also held when we changed how nearby DNA changes were grouped for the uncertainty check.
+
+Results in the other laboratory study were more mixed. That study had already been used in earlier project work, so we do not present it as new independent replication.
+
+We also scored the project's 33 DNA changes in both laboratory cell settings. The tables flag changes already represented in training or close to training examples.
+
+These scores can help choose which DNA changes to test next. They do not tell us who will develop insomnia or frailty, prove which gene is affected, establish causation, or validate a person's genetic risk score.
+
+The saved models, scoring command, exact data/source checks, full results and local inference package are included. The package can score DNA and reproduce the saved result calculations in the tested Mac environment. A complete fresh retraining setup on another computer has not been tested.
+
+MODEL_REPORT.txt contains the numerical results and uncertainty. project_final_model_predictions.csv contains the 33-variant scores and qualifications.

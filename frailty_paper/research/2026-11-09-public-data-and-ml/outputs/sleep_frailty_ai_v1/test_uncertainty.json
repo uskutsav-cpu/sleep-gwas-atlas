@@ -1,0 +1,96 @@
+{
+  "seed": 26061106,
+  "requested_draws": 2000,
+  "skipped": 0,
+  "groups": [
+    19,
+    20,
+    21,
+    22
+  ],
+  "model_ranges": {
+    "constant": {
+      "auroc_percentile_range": [
+        0.5,
+        0.5
+      ],
+      "average_precision_percentile_range": [
+        0.02425763278962777,
+        0.036490008688097306
+      ]
+    },
+    "kmer_logistic": {
+      "auroc_percentile_range": [
+        0.537015911197775,
+        0.6669790701713756
+      ],
+      "average_precision_percentile_range": [
+        0.03834916356539133,
+        0.10518876836186078
+      ]
+    },
+    "frozen_hyenadna": {
+      "auroc_percentile_range": [
+        0.49735813795446826,
+        0.5366312006093498
+      ],
+      "average_precision_percentile_range": [
+        0.02502234224843216,
+        0.047351206430914915
+      ]
+    },
+    "finetuned_hyenadna": {
+      "auroc_percentile_range": [
+        0.501973188287982,
+        0.59163512938556
+      ],
+      "average_precision_percentile_range": [
+        0.023363488846977185,
+        0.0834691725547063
+      ]
+    },
+    "small_dna_cnn": {
+      "auroc_percentile_range": [
+        0.46597145219793645,
+        0.532817677429298
+      ],
+      "average_precision_percentile_range": [
+        0.026351643679301685,
+        0.03825742452552817
+      ]
+    }
+  },
+  "paired_finetuned_minus_comparator_ranges": {
+    "kmer_logistic": {
+      "auroc_percentile_range": [
+        -0.08913719038479118,
+        -0.018598068184639827
+      ],
+      "average_precision_percentile_range": [
+        -0.0666407178058745,
+        0.018944556033588113
+      ]
+    },
+    "frozen_hyenadna": {
+      "auroc_percentile_range": [
+        -0.008727847820624635,
+        0.09394325518178726
+      ],
+      "average_precision_percentile_range": [
+        -0.003409449061984725,
+        0.03786779592289127
+      ]
+    },
+    "small_dna_cnn": {
+      "auroc_percentile_range": [
+        -0.021424093064832506,
+        0.11042030144053294
+      ],
+      "average_precision_percentile_range": [
+        -0.004481284749634495,
+        0.04531917132003867
+      ]
+    }
+  },
+  "limitations": "Only four chromosome clusters. Exchangeable independent chromosomes are a rough assumption, not established. Percentile ranges are a descriptive sensitivity, not precise guarantees; training, architecture/split selection, assay-study and pretraining uncertainty are excluded."
+}

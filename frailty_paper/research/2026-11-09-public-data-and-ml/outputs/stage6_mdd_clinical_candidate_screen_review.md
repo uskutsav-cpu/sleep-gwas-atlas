@@ -1,0 +1,16 @@
+# Case-enriched depression-symptom GWAS: public marker screen
+
+[Adams et al.](https://doi.org/10.1017/S0033291724001880) provide a [public summary-statistics release](https://doi.org/10.6084/m9.figshare.22745573) with separate clinical/case-enriched meta-analyses of major-depression symptoms. We screened the nearly-every-day insomnia-symptom file and the fatigue/loss-of-energy file for our 33 distinct project marker contrasts using exact GRCh37 coordinates and unordered alleles. Each file matched all 33, with one row per contrast. The insomnia file reports 18,917 symptom-present and 6,573 symptom-absent participants; the fatigue file reports 23,941 and 2,497. These are reported file-level counts; per-variant effective sample sizes and cohort contributions vary.
+
+| Case-enriched symptom | Matched markers | Nominal p < 0.05 | p < 0.05/66 |
+|---|---:|---:|---:|
+| Insomnia symptom | 33 | 1 | 0 |
+| Fatigue symptom | 33 | 2 | 0 |
+
+The 66-test threshold is a **post hoc descriptive** correction for 33 variants and two outcomes, not a correction for the wider project. Absence of statistically clear hits does not prove the effects are zero; confidence intervals and power differ by marker. These results are from depression-enriched or case-only cohorts, not a general-population clinical insomnia diagnosis, FI or Fried frailty. Sleep and fatigue share participants and their association tests are not independent. Candidate selection was not frozen before these follow-ups, and person/relative overlap with project discovery sources has not been established. This is a marker-level comparison, not a score-level test, causal analysis, or validation of individual prediction.
+
+We selected only the case-enriched files; the separate community meta-analyses include UK Biobank and Estonian participants and would not be equivalent to an independent test. The preheaders explicitly describe PGC, AGDS and Generation Scotland contributors, but cohort names alone do not prove non-overlap with every prior source. C/T, A/T and multiallelic contexts require additional allele frequency and strand review before individual effect-direction claims. No such directional claim is made here.
+
+The compressed files were processed via streaming because local disk space was low. Their MD5s matched the current Figshare API metadata: insomnia `b7158a866f186395e5b82f4da7208f1d`; fatigue `e14c0d802d70c5b15458827b63e81315`. The author's README lists different MD5 strings for the same file names; their basis or version is unresolved, so the API check identifies the current compressed objects rather than resolving that discrepancy. The source [PGC terms](https://pgc.unc.edu/for-researchers/download-results/) restrict use to scientific research and secondary distribution; the locally stored candidate lookup should not be redistributed as a replacement for the source. No full GWAS files were saved.
+
+Reproduction: `work/stage6_mdd_clinical_stream.py` and `work/stage6_mdd_clinical_aggregate.py`; [aggregate receipt](stage6_mdd_clinical_candidate_summary.json); file preheaders `work/mdd_symptoms/insomnia_metadata.json` and `work/mdd_symptoms/fatigue_metadata.json`. The exact matched values are retained only in the local work directory under the source conditions.

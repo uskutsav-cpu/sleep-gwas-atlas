@@ -1,0 +1,126 @@
+{
+  "passed": true,
+  "models": [
+    {
+      "recipe": "observation_only",
+      "checkpoint_sha256": "b9c7b39f9dec1000cebf6d935562ca0a0efd2c1a6db4c17ab2497ee78d645656",
+      "NumPy_forward_errors": {
+        "magnitude": 1.2224776746450061e-11,
+        "signed_effect": 4.163336342344337e-17,
+        "activity_reference": 2.220446049250313e-16,
+        "activity_alternate": 2.498001805406602e-16,
+        "assay_SD_component": 2.7755575615628914e-17,
+        "latent_absolute_component": 4.163336342344337e-17
+      },
+      "NumPy_loss_error": 5.933031843596837e-13,
+      "fitted_gradient_checks": [
+        {
+          "parameter": "delta_hidden.weight",
+          "analytic": -0.012422677762082016,
+          "independent_finite_difference": -0.012422677747592203,
+          "relative_error": 1.166400063290253e-09
+        },
+        {
+          "parameter": "delta_hidden2.weight",
+          "analytic": -0.016036290888233665,
+          "independent_finite_difference": -0.016036290934051678,
+          "relative_error": 2.857145256770253e-09
+        },
+        {
+          "parameter": "delta_output.weight",
+          "analytic": 0.42694848796629353,
+          "independent_finite_difference": 0.426948488008172,
+          "relative_error": 9.808781699053073e-11
+        },
+        {
+          "parameter": "noise_hidden.weight",
+          "analytic": 0.04853232581657509,
+          "independent_finite_difference": 0.04853232579704603,
+          "relative_error": 4.023929522407813e-10
+        },
+        {
+          "parameter": "noise_output.weight",
+          "analytic": 0.47477421147252835,
+          "independent_finite_difference": 0.4747742114730169,
+          "relative_error": 1.0290231233717006e-12
+        },
+        {
+          "parameter": "cell_noise_bias",
+          "analytic": 0.39607812619718613,
+          "independent_finite_difference": 0.39607812618580596,
+          "relative_error": 2.873214607867765e-11
+        },
+        {
+          "parameter": "line_noise_offset",
+          "analytic": 0.39822943214612166,
+          "independent_finite_difference": 0.39822943215250817,
+          "relative_error": 1.6037243665001564e-11
+        }
+      ]
+    },
+    {
+      "recipe": "measurement_consistency",
+      "checkpoint_sha256": "e4ee00e32f1cf95a58c72d4fc42f992592c1e2c55f221904393a84a021194df8",
+      "NumPy_forward_errors": {
+        "magnitude": 7.794098699775986e-12,
+        "signed_effect": 2.7755575615628914e-17,
+        "activity_reference": 2.220446049250313e-16,
+        "activity_alternate": 2.220446049250313e-16,
+        "assay_SD_component": 2.7755575615628914e-17,
+        "latent_absolute_component": 2.7755575615628914e-17
+      },
+      "NumPy_loss_error": 1.432409746371377e-12,
+      "fitted_gradient_checks": [
+        {
+          "parameter": "delta_hidden.weight",
+          "analytic": -0.016056353655371447,
+          "independent_finite_difference": -0.016056353691062952,
+          "relative_error": 2.2228898287577483e-09
+        },
+        {
+          "parameter": "delta_hidden2.weight",
+          "analytic": -0.018295682430767006,
+          "independent_finite_difference": -0.018295682441271666,
+          "relative_error": 5.74160580008998e-10
+        },
+        {
+          "parameter": "delta_output.weight",
+          "analytic": -0.2442431856686981,
+          "independent_finite_difference": -0.24424318564864045,
+          "relative_error": 8.212163598524356e-11
+        },
+        {
+          "parameter": "noise_hidden.weight",
+          "analytic": 0.07403952295533768,
+          "independent_finite_difference": 0.07403952295703675,
+          "relative_error": 2.2948168373322173e-11
+        },
+        {
+          "parameter": "noise_output.weight",
+          "analytic": 0.6932402493640343,
+          "independent_finite_difference": 0.6932402493720069,
+          "relative_error": 1.1500518859598759e-11
+        },
+        {
+          "parameter": "cell_noise_bias",
+          "analytic": 0.42878979225612734,
+          "independent_finite_difference": 0.428789792228379,
+          "relative_error": 6.471319902455614e-11
+        },
+        {
+          "parameter": "line_noise_offset",
+          "analytic": 0.3738605869716478,
+          "independent_finite_difference": 0.37386058701627256,
+          "relative_error": 1.193620025505686e-10
+        }
+      ]
+    }
+  ],
+  "checked_actual_measured_development_rows": 12,
+  "fitted_allele_swap_and_identical_DNA_invariants": true,
+  "reserved_outcomes_read": false,
+  "saved_weights_changed": false,
+  "detached_activity_conditioner_declared": true,
+  "gradient_scope": "Signed-effect and noise branches; activity conditioner is intentionally detached.",
+  "scientific_predictive_validity_established": false
+}

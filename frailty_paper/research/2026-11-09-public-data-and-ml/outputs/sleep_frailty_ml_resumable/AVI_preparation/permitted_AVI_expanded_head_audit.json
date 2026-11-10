@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "native_forward_unchanged_except_two_score_concatenation_statements": true,
+  "original_head_checkpoint_sha256": "0464f3fdee517506d532a70626dff874e850608b87d5b3f8c48c5850bd309324",
+  "identical_between_arm_initial_states_and_CPU_RNG_preserved": true,
+  "all_original_parameters_preserved": true,
+  "same_dropout_mask_preserves_initial_predictions": true,
+  "initial_prediction_max_error": 0.0,
+  "common_initial_gradient_max_error": 0.0,
+  "new_score_weight_finite_gradient_relative_error": 3.1085963796298154e-09,
+  "score_weights_receive_gradients_and_change_on_diagnostic_step": true,
+  "scoreless_raw_and_PHRED_weight_columns_remain_zero": true,
+  "score_input_prediction_response_after_diagnostic_step": 9.54866799893761e-05,
+  "independent_NumPy_forward_max_errors": {
+    "scoreless": {
+      "magnitude": 5.551115123125783e-17,
+      "signed_effect": 2.220446049250313e-16,
+      "activity_reference": 1.1102230246251565e-16,
+      "activity_alternate": 2.220446049250313e-16
+    },
+    "scored": {
+      "magnitude": 5.551115123125783e-17,
+      "signed_effect": 2.220446049250313e-16,
+      "activity_reference": 1.1102230246251565e-16,
+      "activity_alternate": 2.220446049250313e-16
+    }
+  },
+  "allele_swap_magnitude_invariance_and_signed_antisymmetry": true,
+  "head_parameters_per_arm": 19533,
+  "added_parameter_scalars_per_arm": 192,
+  "known_zero_score_examples_checked": 10,
+  "availability_inputs_identical_between_arms_including_unknown_case": true,
+  "diagnostic_examples_not_actual_experimental_training_examples": true,
+  "scientific_models_trained_or_selected": false,
+  "reserved_outcomes_read": false,
+  "full_native_forward_runtime_replay_complete": false,
+  "scope": "Actual expanded fitted-head forward/backward and one discarded diagnostic optimizer step; AST proof that the native forward differs only by the stated score-feature concatenation. No predictive-benefit evidence.",
+  "remaining": "Full native runtime replay, fixed candidate/training/selection protocol, matched scientific fits, and frozen untouched-study benefit evaluation.",
+  "code_sha256": {
+    "audit_permitted_AVI_head.py": "2e45f61627ffed7ba22b4be636d76fa9f43aee27f961fb2f06cb124cf2bf9c4a",
+    "permitted_AVI_head.py": "93b84ebb2334200263d8b710eb1ab56a5b2960bbab75c78129b4aed051d9e3b4",
+    "permitted_AVI_network.py": "f6d4cf45f08977b6c7abadb816225634a01cf2d1730ce2fbdcd1d991efee93ed",
+    "permitted_AVI_features.py": "22b4372b8feba90ebab3b6629b70c83fb94c9374b380e2a4abcc0c3b1a8a6bc7",
+    "cell_matched_effect_network.py": "220205ff5e68e4ae69460bee42810db98dfdc31492dfd70a5eac05321318765e"
+  }
+}

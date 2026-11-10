@@ -1,0 +1,25 @@
+{
+  "family_id": "stacked_contrast_no_avi",
+  "records": [
+    {
+      "name": "final_stacked_contrast_no_avi",
+      "family": "conditional_avi_stacker",
+      "features": "conditional_expert_avi",
+      "config": {
+        "base_model": "final_contrast_no_avi_ensemble",
+        "include_DNA_expert": true,
+        "training": "All measured-active development rows using held-fold base predictions; no reserved rows",
+        "calibration_qualification": "Prediction-time base ensemble is refitted; output is an uncalibrated research ranking, not a clinical probability"
+      },
+      "artifact": "models/final_stacked_contrast_no_avi.pkl",
+      "checkpoint_sha256": "99b60df0a4e8a5706f814e7006e6b3fdc88cc510ce17d8dbe0d6378e5ed9560e",
+      "nonzero_trained_coefficient_counts": {
+        "Salomon_NGN2": 3,
+        "Siraj_OL42_SKNSH": 3
+      },
+      "training_indices_sha256": "93188b542e0db45ce6b0adf81e9aa1974e93597e15d38405033f85fb393c14e5"
+    }
+  ],
+  "plan_sha256": "4123485e1d8b75f3ca5b8484e91e79084578e9930e562b4b379a47c15e79fc16",
+  "blind_test_evaluated": false
+}

@@ -1,0 +1,127 @@
+{
+  "objective": "Train and strengthen the model using available public data and permissible AlphaGenome results",
+  "audit_utc": "2026-11-07T18:54:15.463016+00:00",
+  "checks": [
+    {
+      "requirement": "Final selected weights, roles, plans and training code match pre-evaluation lock",
+      "verified": true,
+      "evidence": [
+        "final_artifact_lock.json",
+        "final_fit_verification.json",
+        "reserved_evaluation_started.json"
+      ],
+      "qualification": null
+    },
+    {
+      "requirement": "Actual final gradient training completed, with changed weights and exact fixed epoch histories",
+      "verified": true,
+      "evidence": [
+        "34actual final epoch records",
+        "15neural checkpoints with changed scalar entries",
+        "27checked final checkpoint/ensemble records"
+      ],
+      "qualification": "Source HyenaDNA/PWM encoders remain fixed in final versions; AlphaGenome itself was not fine-tuned."
+    },
+    {
+      "requirement": "Training rows and held chromosomes are disjoint",
+      "verified": true,
+      "evidence": [
+        "96486development rows on chromosomes4\u201322",
+        "28100original reserved rows on chromosomes1\u20133"
+      ],
+      "qualification": "Only strict Siraj subset is the new primary molecular check; Salomon study was previously used."
+    },
+    {
+      "requirement": "Strict prior-region exclusion was set before reserved evaluation",
+      "verified": true,
+      "evidence": [
+        "reserved_exposure_audit.json",
+        "reserved_evaluation_started.json"
+      ],
+      "qualification": "No guarantee of absence from foundation-model resources/public papers."
+    },
+    {
+      "requirement": "Permissible AVI supervision/input collection completed with explicit missingness",
+      "verified": true,
+      "evidence": [
+        "avi_retrieval_audit.json",
+        "ALPHAGENOME_OUTPUT_TERMS_NOTICE.md"
+      ],
+      "qualification": "No detailed API outputs/AVI breakdowns used. Whole88GBpublisher table was not independently downloaded/hashed."
+    },
+    {
+      "requirement": "Finite model comparison and independent development statistics completed",
+      "verified": true,
+      "evidence": [
+        "development_comparison.json",
+        "conditional_stacking_prespecification.json"
+      ],
+      "qualification": "Development/early-stopping/combination comparisons are not unbiased nested CV; reserved test required."
+    },
+    {
+      "requirement": "Reserved evaluation and independent metric checks completed",
+      "verified": true,
+      "evidence": [
+        "reserved_evaluation_report.json",
+        "reserved_test_prediction_receipt.json",
+        "48independent R metric checks"
+      ],
+      "qualification": "Same assay/library held chromosomes, not independent patients/donors or clinical genetic-score validation."
+    },
+    {
+      "requirement": "Selected AlphaGenome-assisted models improve primary strict-assay rankings with matched comparisons",
+      "verified": true,
+      "evidence": [
+        "alphagenome_matched_comparisons.csv",
+        "1Mb/5Mb paired intervals both positive in strict Siraj comparisons"
+      ],
+      "qualification": "NGN2 results are mixed; nominal intervals do not establish global optimality or clinical benefit."
+    },
+    {
+      "requirement": "All33project substitutions scored with explicit assay, allele and training-overlap qualifications",
+      "verified": true,
+      "evidence": [
+        "project_input_receipt.json",
+        "project_final_prediction_receipt.json"
+      ],
+      "qualification": "Genome-reference-to-other-allele molecular scores do not establish original discovery risk direction, causal genes or genetic-score validity."
+    },
+    {
+      "requirement": "Human-readable report, numerical card and visually reviewed figure complete",
+      "verified": true,
+      "evidence": [
+        "PLAIN_LANGUAGE_RESULTS.txt",
+        "MODEL_REPORT.txt",
+        "model_card.json",
+        "final_figure_receipt.json"
+      ],
+      "qualification": "Original GWAS/NHANES scientific claims remain separate."
+    },
+    {
+      "requirement": "Local inference bundle relocated successfully and frozen metrics reconstruct exactly",
+      "verified": true,
+      "evidence": [
+        "local_bundle_receipt.json",
+        "relocation_check.json",
+        "48frozen metric reproduction rows"
+      ],
+      "qualification": "Tested existing Mac ARM environment. Fresh installation, another OS and full retraining from this bundle alone are not verified; large training inputs remain in original worktree/SSD."
+    }
+  ],
+  "all_required_training_evaluation_delivery_evidence_verified": true,
+  "selected_models": {
+    "overall_assay_call_detector": "final_biological_avi_input_ensemble",
+    "within_active_variant_ranker": "final_stacked_contrast_no_avi"
+  },
+  "registry_sha256": "793d6b5b0a477fa13f56cef1357ad0df9fc67838b008b1c035bd907a21d4f9f1",
+  "delivery_archive": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ai_v3_delivery/sleep_frailty_ai_v3_local_bundle_v2.zip",
+  "scope": "Completed molecular-assay AI development/evaluation deliverable; not completion of broader Sleep\u2013Frailty genetics/manuscript project or a patient disease-risk model.",
+  "strength_limit": "Best selected by completed finite comparisons, with a real strict-assay benefit. No claim of global optimality or clinical strength.",
+  "unresolved_scientific_limits": [
+    "Independent cohort/participant genetic-score validation",
+    "Causal variant-to-gene/cell/disease evidence",
+    "Foundation-model resource exposure",
+    "Cross-study mixed performance, clinical calibration and population transfer"
+  ],
+  "nonblocking_reproduction_limit": "Local inference and frozen statistics verified; fresh platform/full retraining elsewhere not verified."
+}

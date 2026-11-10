@@ -1,0 +1,113 @@
+analysis_id: frailty_fi_sleep_lava_sensitivity_v1
+status: LOCKED_BEFORE_FRAILTY_LAVA_RESULT_ACCESS
+locked_date: 2026-09-24
+base_analysis_plan: frailty_paper/config/analysis_plan_v1.yaml
+base_plan_id: frailty_sleep_genetics_v1
+decision_record: frailty_paper/config/analysis_plan_decisions.tsv#D13
+
+purpose: >-
+  Estimate local genetic sharing between the central Frailty Index and every
+  trait in the fixed 12-trait sleep panel as an overlap-adjusted sensitivity
+  analysis. This is not independent replication, not a Tier 1 confirmatory
+  local analysis, and cannot upgrade global association claims.
+
+traits:
+  frailty: Frailty Index, GCST90020053; UK Biobank + Swedish TwinGene
+  sleep_panel_lock: config/analysis_panel.lock.json
+  sleep_panel: config/analysis_panel.tsv
+  sleep_trait_count: 12
+  pair_count: 12
+  pair_selection: every locked sleep trait crossed with the frozen primary FI
+  locus_file: ref/lava/blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile
+  expected_loci: 2495
+  candidate_pair_locus_slots: 29940
+
+inputs:
+  dense_harmonized_root: /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/harmonized
+  source: >-
+    The 13 full dense GRCh37 harmonized sleep and FI files documented in
+    frailty_paper/analysis/local_sharing_readiness_audit_2026-09-24.md.
+    Each file must be revalidated against its locked checksum, row count,
+    exact SNP/CHR/BP/A1/A2/FRQ/BETA/SE/P/N schema, and completion to gzip EOF
+    before execution.
+  association_stats: Z=BETA/SE and per-variant N from the locked dense
+    harmonized inputs; no HapMap3-only summary statistics are eligible.
+  qc: >-
+    Preserve the source QC set. No new variant exclusion, allele flipping,
+    threshold change, or row repair is allowed. Use the pinned GRCh37 EUR
+    reference and exact allele matching/order required by LAVA.
+  binary_trait_metadata: >-
+    Use the frozen analysis-panel case, control, and population-prevalence
+    metadata for binary sleep traits. Do not infer prevalence from the FI.
+
+overlap:
+  status: ESTIMATED_FROM_LDSC_CROSS_TRAIT_INTERCEPTS; exact participant intersections remain UNKNOWN
+  method: >-
+    For each sleep-FI pair, rho is the LDSC genetic-covariance intercept
+    divided by the square root of the two univariate LDSC intercepts.
+    Form a separate 2-by-2 sample-overlap matrix for each pair; do not fill
+    unknown sleep-sleep overlap entries with zero.
+  source: frailty_paper/results/frailty_v1/global_rg_sleep_frailty.tsv
+  rationale: >-
+    This uses available overlap estimates and does not assert zero overlap.
+    LDSC intercept-derived rho can also reflect residual population
+    structure or related bias, so estimates are sensitivity-only and exact
+    participant overlap remains unresolved. Sleep apnea remains UNKNOWN
+    even though no shared cohort was identified in source metadata.
+
+runtime:
+  r_version: 4.3.3
+  lava_version: 0.1.5
+  lava_commit: e729a245f7b6923967a96804fbf5246eadf2d6c6
+  runtime_validator: scripts/133_validate_track_b_lava_runtime.R
+  reference: LAVA UK Biobank LD v1.1; 100,000 unrelated EUR UK Biobank participants
+  reference_root: /Volumes/Extreme SSD/brain6-work/lava-ukb-v1.1
+  genome_build: GRCh37_hg19
+  min_K: 2
+  prune_threshold: 99
+  max_prop_K: 0.75
+  max_block_size: 3000
+  cap_estimates: true
+
+multiplicity:
+  local_univariate:
+    tested_traits: 13
+    candidate_tests: 32435
+    threshold: 4.45335114673792e-7
+    denominator: 112275
+    denominator_rationale: >-
+      Retain the original locked atlas threshold 0.05/(45*2495), even though
+      this sensitivity family includes fewer traits. This is stricter than
+      a new 13-trait denominator and avoids threshold weakening.
+  local_bivariate:
+    candidate_slots: 29940
+    eligibility: Both FI and sleep local-univariate p-values pass the fixed threshold in the same locus
+    correction: Benjamini-Hochberg over all 29,940 fixed pair-locus slots
+    ineligible_slot_p_value: 1
+    failed_eligible_test_p_value: 1
+    significance: q <= 0.05
+  family_completeness:
+    maximum_univariate_untested_fraction: 0.05
+    maximum_locus_failure_fraction: 0.01
+    maximum_bivariate_failure_fraction_among_eligible: 0.05
+    retain_all_statuses: true
+
+reporting:
+  minimum_claim: >-
+    Report as an overlap-adjusted sensitivity analysis of local sharing under
+    a European GRCh37 reference. Do not call a result replicated, causal,
+    mechanistic, or independently validated. No detected local signal is not
+    evidence of no sharing if power/QC gates fail.
+  preserve_global_rg_results: true
+  no_result_driven_pair_filtering: true
+  no_downstream_placo_finemapping_coloc_without_separate_gates: true
+
+outputs:
+  external_run_root: /Volumes/Extreme SSD/sleep-gwas-atlas-frailty-v1/analysis-workspace/frailty_v1/lava_sensitivity_v1
+  per_pair_checkpoints: one immutable checkpoint per locked sleep-FI pair, with locus-level receipts/results
+  required_tables:
+    - local_univariate.tsv
+    - local_bivariate.tsv
+    - pair_locus_status.tsv
+    - family_qc.tsv
+    - run_manifest.json

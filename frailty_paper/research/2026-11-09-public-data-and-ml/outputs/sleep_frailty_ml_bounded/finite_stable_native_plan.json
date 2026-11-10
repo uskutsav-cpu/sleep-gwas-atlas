@@ -1,0 +1,69 @@
+{
+  "recipes": [
+    "frozen_reader",
+    "adapt_last_stage"
+  ],
+  "seed": 42,
+  "epochs": 3,
+  "phase_one_roles": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Retallick2026"
+  ],
+  "phase_two_roles_if_gate_passes": [
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023"
+  ],
+  "data_sha256": "2912b381b5e5640d69e9983735ab09ccad3f592f236dc70b2eea4839519b745c",
+  "documented_Siraj_signed_sidecar_sha256": "32c18607022da63979ff18e2c7c60dc67d93b32a97827a92c17e447f25d3d3a5",
+  "documented_neuronal_signed_sidecar_sha256": "cb23d597a0229ff5a9d3a79d183630f3fa3dc98a90dfee2b2be3a1e9d264a0ae",
+  "pretrained_reader": "Original WTC11 author test1/validation2 checkpoint with audited published pretraining exposure; fixed K562/HepG2 features retained.",
+  "reader_sha256": "3f297fc40c0ff146589e0158db556988a51c1d779eb7ae11c3773269c18aa62a",
+  "sequence_policy": "Complete actual source DNA at its real length and assay orientation. Native AGCT tokens, no invented flanks or padding. Only one documented changed base reconstructs the exact source ALT.",
+  "magnitude_features": "42 symmetric scalar summaries plus actual length and changed position; 192 fixed projected global/local means and absolute allele differences. Native WTC11 summaries replace its original bank entries. Magnitude is invariant to exchanging alleles.",
+  "model": "Same small CellMatchedEffectHead in both arms, 236 features; the original reader mapper/head and BN running statistics stay fixed.",
+  "only_between_arm_difference": "Adaptation permits gradients/updates in reader main.3, with relative squared-distance anchor 0.01 to original stage weights. Frozen reader permits none. Every other reader parameter stays fixed.",
+  "supervision": "Both arms use the same original magnitude, documented Kosicki/Siraj/Salomon signed coefficients, original allele activities and nearby/cross-cell pair targets. Calibration rows excluded.",
+  "objective": "Existing activity_loss: measured magnitude absolute error remains primary and unmodified by SE; same signed/RNA and paired auxiliaries. No detection labels, generated targets or AlphaGenome training features.",
+  "optimization": {
+    "head_lr": 0.0003,
+    "reader_lr": 1e-05,
+    "weight_decay": 0.001,
+    "main_batch": 256,
+    "local_pairs": 16,
+    "cross_pairs": 16,
+    "gradient_clip": 1.0
+  },
+  "phase_one_gate": "Choose one common epoch by mean effect-size error skill across the three omitted neuronal sources. Adapted mean skill >=0.01, exceeds frozen control by >=0.005, no individual neuronal source error >1.05 times control, held-region nearby ordering and fixed-study/cell-pair rho each drop <=0.01, and nearby difference MAE beats zero-difference baseline. Otherwise stop this finite comparison.",
+  "if_gate_passes": "Finish the other four whole-source roles at the same fixed three epochs, retaining the selected common epoch. Further model promotion needs all-source and outside-study evidence, useful confidence, and a separately frozen added-input test.",
+  "stopping_rule": "Exactly this matched adaptation comparison; no epoch extension, learning-rate/loss-weight/architecture search, or new-test inspection to rescue failure.",
+  "prior_work": "V8 already tried two epochs adapting the last convolutional stage on 150bp crops with older labels and an unidentified-fold checkpoint. This is not the first-ever core adaptation.",
+  "new_test": "Ulirsch remains unused for model selection. Earlier blood/OL33/Matoba results remain revealed and immutable.",
+  "scientific_goal_complete": false,
+  "resource_revision": {
+    "original_plan_sha256": "2d856328a83ef29ea7762675456d5b1866aa4b607e005be89347d77734e43f9e",
+    "failure_manifest_sha256": "73022c5627ce6001e9ccba61297c3f6a94bf6abe89ecf8ffa1206e4cb990033d",
+    "reason": "Confirmed memory growth to 5.8G and disk exhaustion while full swap expanded; varying-shape MPS graph-cache growth is a supported hypothesis, not a proven sole cause.",
+    "batching": "Shuffle actual rows within each true-length bucket, split into main batches, then shuffle the batch list. Each main training row appears exactly once per epoch. Pair samples use the same true length. No padding or invented bases.",
+    "no_within_batch_construct_deduplication": "Native reader evaluates repeated actual constructs separately to keep shapes fixed; frozen BN/eval makes outputs independent of duplicate batch membership.",
+    "loss": "Algebraically identical masked means using fixed-size operations; missing labels retain zero loss weight and are never assigned an observed zero effect.",
+    "validation": "Predict in true-length buckets and restore the exact original observation order.",
+    "memory_policy": "CPU execution with two threads after the bounded-shape MPS preflight exhausted its 2.13 GiB allocation limit. Preserve that failed preflight and original resource plan. Run the full 1000-step bounded-shape CPU audit before scientific fits; enforce physical footprint and disk reserve limits.",
+    "original_partial_run_retained": true,
+    "hyperparameters_epochs_targets_and_model_architecture_unchanged": true,
+    "comparison_restarts_from_same_original_author_weights": true,
+    "device": "mps"
+  },
+  "bounded_native_reader_execution": {
+    "prior_CPU_plan_sha256": "ca8340daa5a9c1e439dc78b3fcf36dce29cfb64c803a0385d71fcda69a0c3575",
+    "CPU_stop_receipt_sha256": "bc1af39068cd290200302f96ad02f51d2d7a7d151dd41d93b5e3c8b2345d10ab",
+    "native_microbatch": 32,
+    "unused_rows": "Fill a short native-reader microbatch only with exact copies of its last real source construct. Remove those extra outputs before feature construction, head evaluation and losses. No DNA bases, flanks, measured targets or supervised observations are invented.",
+    "equivalence": "Reader BN stays in eval mode and has no dropout; no operation mixes observations. Head is called once on the original complete actual observation batch. Discarded copies contribute no gradient.",
+    "resource_policy": "MPS high/low watermark 0.4/0.3; real native reader input always 64 allele sequences by 4 bases by actual DNA length. Full 1000-update sustained preflight, all real length/tail/pair shapes, final complete validation pass.",
+    "scientific_hyperparameters_loss_data_and_epochs_unchanged": true
+  }
+}

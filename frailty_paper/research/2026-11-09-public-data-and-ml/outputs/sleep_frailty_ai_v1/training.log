@@ -1,0 +1,169 @@
+Locked configuration {"seed": 42, "batch_size": 32, "head_width": 32, "feature_dim": 512, "positive_loss_weight": 6.142518043518066, "head_warmup_lr": 0.001, "head_warmup_max_epochs": 80, "head_warmup_patience": 10, "finetune_head_lr": 0.0003, "finetune_encoder_lr": 1e-05, "finetune_max_epochs": 8, "finetune_patience": 2, "fine_tuned_parameters": "Last encoder block and final layer normalization; first block and embedding frozen", "checkpoint_selection": "validation average precision only", "test_chromosomes": [19, 20, 21, 22], "checkpoint_sha256": "5ce2146c21e9c4baa6bddc4998fd3d029903ae84a563bf80218644082194a12d", "source_sha256": "fce979affffcc276c3e2c03bb4d4cb9307af7dbb5b6807be68af91a90bb15f48", "model_revision": "e8c1effa8673814e257e627d2e1eda9ea5a373f6", "backend": "MLX 0.22.1 GPU with complex FFT; NumPy/Autograd numerical reference"}
+pretrained train 0 31333 elapsed 6.9
+pretrained train 3200 31333 elapsed 32.6
+pretrained train 6400 31333 elapsed 58.7
+pretrained train 9600 31333 elapsed 84.5
+pretrained train 12800 31333 elapsed 110.1
+pretrained train 16000 31333 elapsed 135.7
+pretrained train 19200 31333 elapsed 161.3
+pretrained train 22400 31333 elapsed 187.5
+pretrained train 25600 31333 elapsed 213.1
+pretrained train 28800 31333 elapsed 238.6
+pretrained validation 0 2474 elapsed 0.5
+Kmer baseline validation 0.04978881284601873
+Frozen head 5 validation AP 0.0334 best 0.0368
+Frozen head 10 validation AP 0.0326 best 0.0368
+Frozen checkpoint selected 1 0.03683170337463851
+Finetune 1 0 31333 loss 0.0998 elapsed 4.0
+Finetune 1 3200 31333 loss 1.0961 elapsed 55.4
+Finetune 1 6400 31333 loss 0.5381 elapsed 106.8
+Finetune 1 9600 31333 loss 0.9139 elapsed 158.0
+Finetune 1 12800 31333 loss 0.8691 elapsed 210.1
+Finetune 1 16000 31333 loss 0.0432 elapsed 264.1
+Finetune 1 19200 31333 loss 0.5824 elapsed 354.2
+Finetune 1 22400 31333 loss 0.6399 elapsed 434.9
+Finetune 1 25600 31333 loss 0.0303 elapsed 492.2
+Finetune 1 28800 31333 loss 1.2147 elapsed 568.9
+Finetune validation 1 {'n': 2474, 'detected_calls': 78, 'prevalence': 0.03152789005658852, 'auroc': 0.49417298299591605, 'average_precision': 0.030980647085049384, 'brier_uncalibrated': 0.030637964606285095}
+Finetune 2 0 31333 loss 0.0413 elapsed 0.8
+Finetune 2 3200 31333 loss 0.6622 elapsed 75.5
+Finetune 2 6400 31333 loss 1.1139 elapsed 149.7
+Finetune 2 9600 31333 loss 1.0865 elapsed 223.5
+Finetune 2 12800 31333 loss 1.0864 elapsed 282.7
+Finetune 2 16000 31333 loss 0.5636 elapsed 324.0
+Finetune 2 19200 31333 loss 0.548 elapsed 366.3
+Finetune 2 22400 31333 loss 0.5406 elapsed 408.5
+Finetune 2 25600 31333 loss 0.5349 elapsed 450.3
+Finetune 2 28800 31333 loss 0.1262 elapsed 492.6
+Finetune validation 2 {'n': 2474, 'detected_calls': 78, 'prevalence': 0.03152789005658852, 'auroc': 0.4763387730691072, 'average_precision': 0.030289695742620505, 'brier_uncalibrated': 0.037403494119644165}
+Finetune 3 0 31333 loss 0.947 elapsed 0.4
+Finetune 3 3200 31333 loss 0.1362 elapsed 42.1
+Finetune 3 6400 31333 loss 0.531 elapsed 83.5
+Finetune 3 9600 31333 loss 0.5327 elapsed 125.0
+Finetune 3 12800 31333 loss 0.1316 elapsed 166.5
+Finetune 3 16000 31333 loss 0.1108 elapsed 208.1
+Finetune 3 19200 31333 loss 0.5416 elapsed 249.6
+Finetune 3 22400 31333 loss 0.1116 elapsed 291.2
+Finetune 3 25600 31333 loss 0.9513 elapsed 332.8
+Finetune 3 28800 31333 loss 0.5305 elapsed 374.4
+Finetune validation 3 {'n': 2474, 'detected_calls': 78, 'prevalence': 0.03152789005658852, 'auroc': 0.5199798571784672, 'average_precision': 0.03661172390516082, 'brier_uncalibrated': 0.037376340478658676}
+Finetune 4 0 31333 loss 0.534 elapsed 0.4
+Finetune 4 3200 31333 loss 0.9225 elapsed 42.1
+Finetune 4 6400 31333 loss 0.1229 elapsed 83.8
+Finetune 4 9600 31333 loss 0.5325 elapsed 125.4
+Finetune 4 12800 31333 loss 0.1185 elapsed 167.4
+Finetune 4 16000 31333 loss 0.12 elapsed 209.4
+Finetune 4 19200 31333 loss 0.917 elapsed 251.2
+Finetune 4 22400 31333 loss 0.5301 elapsed 293.2
+Finetune 4 25600 31333 loss 0.1273 elapsed 335.3
+Finetune 4 28800 31333 loss 0.5297 elapsed 377.2
+Finetune validation 4 {'n': 2474, 'detected_calls': 78, 'prevalence': 0.03152789005658852, 'auroc': 0.4846004040317862, 'average_precision': 0.030739248372061753, 'brier_uncalibrated': 0.03903621435165405}
+Finetune 5 0 31333 loss 0.9261 elapsed 0.4
+Finetune 5 3200 31333 loss 0.1232 elapsed 42.0
+Finetune 5 6400 31333 loss 0.5324 elapsed 83.8
+Finetune 5 9600 31333 loss 0.1355 elapsed 125.4
+Finetune 5 12800 31333 loss 0.1439 elapsed 167.5
+Finetune 5 16000 31333 loss 0.9409 elapsed 209.1
+Finetune 5 19200 31333 loss 0.125 elapsed 250.6
+Finetune 5 22400 31333 loss 0.1219 elapsed 292.3
+Finetune 5 25600 31333 loss 0.1333 elapsed 334.1
+Finetune 5 28800 31333 loss 0.1303 elapsed 375.8
+Finetune validation 5 {'n': 2474, 'detected_calls': 78, 'prevalence': 0.03152789005658852, 'auroc': 0.4865748505908779, 'average_precision': 0.030851853456060726, 'brier_uncalibrated': 0.04018625244498253}
+FINAL TEST STAGE: no subsequent training or model redesign
+pretrained final test 0 3542 elapsed 0.4
+pretrained final test 3200 3542 elapsed 21.6
+{
+  "models": {
+    "constant": {
+      "n": 3542,
+      "detected_calls": 100,
+      "prevalence": 0.028232636928289104,
+      "auroc": 0.5,
+      "average_precision": 0.028232636928289104,
+      "brier_uncalibrated": 0.027441374957561493,
+      "validation_selected_threshold": 0.02581942453980446,
+      "test_precision": 0.028232636928289104,
+      "test_recall": 1.0,
+      "test_true_positives": 100,
+      "test_false_positives": 3442
+    },
+    "kmer_logistic": {
+      "n": 3542,
+      "detected_calls": 100,
+      "prevalence": 0.028232636928289104,
+      "auroc": 0.5833977357014138,
+      "average_precision": 0.04873834985379069,
+      "brier_uncalibrated": 0.03293078765273094,
+      "validation_selected_threshold": 0.07937993109226227,
+      "test_precision": 0.042735042735042736,
+      "test_recall": 0.35,
+      "test_true_positives": 35,
+      "test_false_positives": 784
+    },
+    "frozen_hyenadna": {
+      "n": 3542,
+      "detected_calls": 100,
+      "prevalence": 0.028232636928289104,
+      "auroc": 0.5147588602659541,
+      "average_precision": 0.02961477919882391,
+      "brier_uncalibrated": 0.03448230400681496,
+      "validation_selected_threshold": 0.14406757056713104,
+      "test_precision": 0.02650602409638554,
+      "test_recall": 0.11,
+      "test_true_positives": 11,
+      "test_false_positives": 404
+    },
+    "finetuned_hyenadna": {
+      "n": 3542,
+      "detected_calls": 100,
+      "prevalence": 0.028232636928289104,
+      "auroc": 0.5323445668524128,
+      "average_precision": 0.033856397543293684,
+      "brier_uncalibrated": 0.03482918441295624,
+      "validation_selected_threshold": 0.11420535296201706,
+      "test_precision": 0.025210084033613446,
+      "test_recall": 0.06,
+      "test_true_positives": 6,
+      "test_false_positives": 232
+    }
+  },
+  "frozen_epoch": 1,
+  "finetuned_epoch": 3,
+  "fine_tuned_scalar_count": 217152,
+  "head_scalar_count": 16449,
+  "native_pretrained_parameter_change_norms": {
+    "layers.1.mixer.filter_fn.bias": 0.010698677971959114,
+    "layers.1.mixer.filter_fn.implicit_filter.0.bias": 0.01842007227241993,
+    "layers.1.mixer.filter_fn.implicit_filter.0.weight": 0.04732472077012062,
+    "layers.1.mixer.filter_fn.implicit_filter.1.freq": 0.010772441513836384,
+    "layers.1.mixer.filter_fn.implicit_filter.2.bias": 0.012137576937675476,
+    "layers.1.mixer.filter_fn.implicit_filter.2.weight": 0.09528261423110962,
+    "layers.1.mixer.filter_fn.implicit_filter.4.bias": 0.008734905160963535,
+    "layers.1.mixer.filter_fn.implicit_filter.4.weight": 0.07559443265199661,
+    "layers.1.mixer.filter_fn.implicit_filter.6.weight": 0.08971017599105835,
+    "layers.1.mixer.in_proj.bias": 0.015701256692409515,
+    "layers.1.mixer.in_proj.weight": 0.1738981008529663,
+    "layers.1.mixer.out_proj.bias": 0.00975439790636301,
+    "layers.1.mixer.out_proj.weight": 0.09634505957365036,
+    "layers.1.mixer.short_filter.bias": 0.015801748260855675,
+    "layers.1.mixer.short_filter.weight": 0.033460430800914764,
+    "layers.1.mlp.fc1.bias": 0.02190847508609295,
+    "layers.1.mlp.fc1.weight": 0.22832660377025604,
+    "layers.1.mlp.fc2.bias": 0.009510375559329987,
+    "layers.1.mlp.fc2.weight": 0.2082871049642563,
+    "layers.1.norm1.bias": 0.005725488997995853,
+    "layers.1.norm1.weight": 0.010373479686677456,
+    "layers.1.norm2.bias": 0.010513149201869965,
+    "layers.1.norm2.weight": 0.010237385518848896,
+    "ln_f.bias": 0.007777550723403692,
+    "ln_f.weight": 0.009595277719199657
+  },
+  "test_evaluated_after_selection": true,
+  "limitations": [
+    "One selected reporter study, four supervised holdout chromosomes, no separate disease outcome cohort",
+    "Nonsignificant calls are imperfect labels; probabilities uncalibrated due class-weighted loss",
+    "Reference genome may be seen in unsupervised pretraining; assay sampling used prior sequence predictors",
+    "Custom numerical port verified against source-formula reference and gradients, not official PyTorch executable",
+    "No independent performance proof for sleep/frailty clinical outcomes or the project variants"
+  ]
+}

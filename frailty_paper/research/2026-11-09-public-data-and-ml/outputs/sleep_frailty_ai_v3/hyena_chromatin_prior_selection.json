@@ -1,0 +1,54 @@
+{
+  "selected_record": {
+    "name": "hyena_chromatin_prior_activity_avi_s101",
+    "family": "biological_feature_head",
+    "features": "hyena_chromatin",
+    "config": {
+      "task": "activity_avi",
+      "seed": 101,
+      "best_epoch": 17,
+      "locked_config": "hyena_chromatin_prior_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.5330217981363853,
+          "average_precision": 0.04366215497099396,
+          "AP_skill_over_prevalence": 0.021049583153283744,
+          "brier_uncalibrated": 0.0482464928446228
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.6860969962944022,
+          "average_precision": 0.1595732702318194,
+          "AP_skill_over_prevalence": 0.0969549358429664,
+          "brier_uncalibrated": 0.079704808171686
+        }
+      },
+      "macro_AP_skill": 0.05900225949812507
+    },
+    "artifact": "models/hyena_chromatin_prior_activity_avi_s101.npz",
+    "parameter_change_norms": {
+      "shared.w1": 10.334193229675293,
+      "shared.b1": 0.5621030926704407,
+      "shared.w2": 3.4546549320220947,
+      "shared.b2": 0.5309060215950012,
+      "class.w": 0.8554022312164307,
+      "class.b": 0.2299250215291977,
+      "activity.w": 0.2966140806674957,
+      "activity.b": 0.2865546941757202,
+      "effect.w": 0.0006180636119097471,
+      "effect.b": 0.0,
+      "avi.w": 0.15854893624782562,
+      "avi.b": 0.06090369448065758
+    }
+  },
+  "candidate_count": 8,
+  "test_evaluated": false,
+  "stage": "Additional biological-feature validation search, final combined selection pending"
+}

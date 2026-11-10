@@ -1,0 +1,37 @@
+{
+  "static_only": true,
+  "original_model_code_hash_verified": true,
+  "original_custom_code_imports": {
+    "modeling_esm.py": [
+      "import math",
+      "from typing import List, Optional, Tuple, Union",
+      "import torch",
+      "import torch.utils.checkpoint",
+      "from torch import nn",
+      "from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss, SiLU",
+      "from transformers.file_utils import add_code_sample_docstrings, add_start_docstrings, add_start_docstrings_to_model_forward",
+      "from transformers.modeling_outputs import BaseModelOutputWithPastAndCrossAttentions, BaseModelOutputWithPoolingAndCrossAttentions, MaskedLMOutput, SequenceClassifierOutput, TokenClassifierOutput",
+      "from transformers.modeling_utils import PreTrainedModel",
+      "from transformers.pytorch_utils import find_pruneable_heads_and_indices, prune_linear_layer",
+      "from transformers.utils import logging",
+      "from .esm_config import EsmConfig"
+    ],
+    "esm_config.py": [
+      "from dataclasses import asdict, dataclass",
+      "from typing import Optional",
+      "from transformers import PretrainedConfig, logging"
+    ]
+  },
+  "original_config_transformers_version": "4.32.0.dev0",
+  "installed_transformers_version": "5.17.0",
+  "installed_file_utils_contains_legacy_decorator_names": {
+    "add_code_sample_docstrings": true,
+    "add_start_docstrings": true,
+    "add_start_docstrings_to_model_forward": true
+  },
+  "installed_file_utils_sha256": "c09daff2364df06d1d384740fef5bc78afa343f22e616b7a3cb244b6736b96c3",
+  "model_execution_or_compatibility_established": false,
+  "weights_downloaded": false,
+  "candidate_selected_for_training": false,
+  "next": "If scientifically justified after the current finite comparison, audit compatibility in an isolated environment and verify the official safetensors weight hash before loading. Do not change the active model or base environment."
+}

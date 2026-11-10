@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "recipes": {
+    "scalar_mask": {
+      "forward_maximum_errors": {
+        "magnitude": 1.3877787807814457e-17,
+        "signed_effect": 0.0,
+        "activity_reference": 0.0,
+        "activity_alternate": 0.0
+      },
+      "independent_loss_error": 5.551115123125783e-17,
+      "gradient_checks": [
+        {
+          "parameter": "hidden.weight",
+          "relative_gradient_error": 1.1545304348233557e-09
+        },
+        {
+          "parameter": "hidden2.weight",
+          "relative_gradient_error": 6.182646258952648e-09
+        },
+        {
+          "parameter": "output.weight",
+          "relative_gradient_error": 1.2922956204024944e-10
+        },
+        {
+          "parameter": "cell_bias",
+          "relative_gradient_error": 3.3874555342890215e-10
+        },
+        {
+          "parameter": "line_offset",
+          "relative_gradient_error": 3.3874555342890215e-10
+        }
+      ],
+      "additional_channel_nonzero_gradient_entries": 0,
+      "checkpoint_sha256": "321e586c5a76316e5beac42027b050f1319cb9a590879a6bfb10f6566837a876"
+    },
+    "channel_preserving": {
+      "forward_maximum_errors": {
+        "magnitude": 2.7755575615628914e-17,
+        "signed_effect": 0.0,
+        "activity_reference": 0.0,
+        "activity_alternate": 0.0
+      },
+      "independent_loss_error": 0.0,
+      "gradient_checks": [
+        {
+          "parameter": "hidden.weight",
+          "relative_gradient_error": 7.726626964781123e-09
+        },
+        {
+          "parameter": "hidden2.weight",
+          "relative_gradient_error": 1.6054317573856736e-09
+        },
+        {
+          "parameter": "output.weight",
+          "relative_gradient_error": 1.2886587292589693e-10
+        },
+        {
+          "parameter": "cell_bias",
+          "relative_gradient_error": 3.846087182929715e-11
+        },
+        {
+          "parameter": "line_offset",
+          "relative_gradient_error": 3.846087182929715e-11
+        },
+        {
+          "parameter": "added_channel_columns",
+          "relative_gradient_error": 2.1297634702539683e-09
+        }
+      ],
+      "additional_channel_nonzero_gradient_entries": 12288,
+      "checkpoint_sha256": "4dbf9a959b1d85ba0fb448cdaae43d4ea13af3606213f8614e9719bfbd1efadd"
+    }
+  },
+  "prior_frozen_files_unchanged": true,
+  "scientific_usefulness_or_new_validation_established": false,
+  "code_sha256": "8eb959d003ab11e66212bf40b0c52de4e9ef001ae6bea674f361fe3528c9b485"
+}

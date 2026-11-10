@@ -1,0 +1,118 @@
+{
+  "region": "GRCh38 chr3:49008613-51008613",
+  "filters": {
+    "FinnGen_insomnia": {
+      "not_biallelic_snp": 1022,
+      "palindromic": 1466,
+      "invalid_or_multi_rsid": 42,
+      "valid_before_duplicates": 8437,
+      "duplicate_rows_removed": 0
+    },
+    "FinnGen_HFRS": {
+      "not_biallelic_snp": 1022,
+      "palindromic": 1466,
+      "invalid_or_multi_rsid": 375,
+      "valid_before_duplicates": 8104,
+      "duplicate_rows_removed": 0
+    },
+    "Jansen_insomnia": {
+      "valid_before_duplicates": 2338,
+      "duplicate_rows_removed": 0
+    },
+    "Mak_FI": {
+      "not_biallelic_snp": 381,
+      "palindromic": 407,
+      "valid_before_duplicates": 2496,
+      "duplicate_rows_removed": 0
+    },
+    "Ye_FFS": {
+      "not_biallelic_snp": 408,
+      "palindromic": 409,
+      "valid_before_duplicates": 2522,
+      "duplicate_rows_removed": 0
+    }
+  },
+  "all_five_shared_snps": 2256,
+  "comparisons": {
+    "Jansen_insomnia_vs_FinnGen_HFRS": {
+      "n": 2256,
+      "signed_z_pearson_descriptive": 0.6976893615808218,
+      "sleep_best_shared_variant": {
+        "rsid": "rs10865954",
+        "pos": 49174556,
+        "ref": "T",
+        "alt": "C",
+        "sleep_p": 2.647e-06,
+        "frail_p": 0.216764
+      },
+      "frailty_best_shared_variant": {
+        "rsid": "rs2282749",
+        "pos": 50213404,
+        "ref": "T",
+        "alt": "C",
+        "sleep_p": 0.006642,
+        "frail_p": 3.84822e-05
+      }
+    },
+    "Jansen_insomnia_vs_Mak_FI": {
+      "n": 2256,
+      "signed_z_pearson_descriptive": 0.8633913445519402,
+      "sleep_best_shared_variant": {
+        "rsid": "rs10865954",
+        "pos": 49174556,
+        "ref": "T",
+        "alt": "C",
+        "sleep_p": 2.647e-06,
+        "frail_p": 5.51569e-11
+      },
+      "frailty_best_shared_variant": {
+        "rsid": "rs7428430",
+        "pos": 50136751,
+        "ref": "C",
+        "alt": "T",
+        "sleep_p": 5.873e-05,
+        "frail_p": 3.73131e-19
+      }
+    },
+    "FinnGen_insomnia_vs_FinnGen_HFRS": {
+      "n": 2256,
+      "signed_z_pearson_descriptive": 0.7486502889374538,
+      "sleep_best_shared_variant": {
+        "rsid": "rs113465792",
+        "pos": 49578696,
+        "ref": "G",
+        "alt": "A",
+        "sleep_p": 0.000171419,
+        "frail_p": 0.647846
+      },
+      "frailty_best_shared_variant": {
+        "rsid": "rs2282749",
+        "pos": 50213404,
+        "ref": "T",
+        "alt": "C",
+        "sleep_p": 0.119274,
+        "frail_p": 3.84822e-05
+      }
+    },
+    "FinnGen_insomnia_vs_Ye_FFS": {
+      "n": 2256,
+      "signed_z_pearson_descriptive": 0.44901359627327747,
+      "sleep_best_shared_variant": {
+        "rsid": "rs113465792",
+        "pos": 49578696,
+        "ref": "G",
+        "alt": "A",
+        "sleep_p": 0.000171419,
+        "frail_p": 0.53
+      },
+      "frailty_best_shared_variant": {
+        "rsid": "rs6797299",
+        "pos": 49572361,
+        "ref": "G",
+        "alt": "T",
+        "sleep_p": 0.197708,
+        "frail_p": 5.7e-10
+      }
+    }
+  }
+}

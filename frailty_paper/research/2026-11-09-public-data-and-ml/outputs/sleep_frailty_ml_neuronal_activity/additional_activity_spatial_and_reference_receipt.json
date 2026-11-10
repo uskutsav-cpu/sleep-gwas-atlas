@@ -1,0 +1,88 @@
+{
+  "passed_identity_and_reference_screen": true,
+  "source_rows_before_measurement_filter": 80215,
+  "all_source_spatial_and_full_DNA_components": 13756,
+  "component_policy": "Transitive intervals within 2kb plus exact whole construct DNA in either orientation, across the entire source before coefficient availability. All historical regions, including training, are protected conservatively. Shorter shared-core joins remain pending.",
+  "metadata_sha256": "502a54f07d766a9d2be65be3780dfd745fa29cc05e79ec11bfb222c898e3d340",
+  "source_inventory_sha256": "4f0d2cb7315ea5cc8fd6179f8c252e7fa1b072321e50fb51e21d79af59514641",
+  "mapping": {
+    "declared_GRCh38_interval": 79848,
+    "reciprocal_length_preserving_GRCh37_conversion": 338,
+    "nonunique_or_inconsistent_GRCh37_conversion": 22,
+    "nonreciprocal_or_length_changed_GRCh37_conversion": 1,
+    "missing_or_invalid_declared_interval": 6
+  },
+  "historical_sources": [
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v6/sequence_bank.csv.gz",
+      "sha256": "f9b3dfad5d906cec7bc421b042242e720bda71f5a30e89505d6cfb55885912cd",
+      "rows": 145193
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v7/sequence_bank.csv.gz",
+      "sha256": "e9aa5e6cb59b2b35481a3d6013e15988fcb44a9aee4627234514519ccaf2df8b",
+      "rows": 271904
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v9/extra_sequence_bank.csv.gz",
+      "sha256": "e5198e5f3526dd67089ff878937d58c9cc4f6bbaa9e809b3cb4849a1f2709bfb",
+      "rows": 5836
+    },
+    {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/sleep_frailty_ml_v8/matoba_full_verified_physical_design.csv",
+      "sha256": "9b293a00e6c05174930603cef0f9250032b3fe1aad9f51f4846b3ba033e2d1fb",
+      "rows": 9043
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v9_validation/next_source_screen/Tardaguila_full_reference_verified_design.csv",
+      "sha256": "20f1e076f617f758db1e9f21cd3ffbd82f10aaa00606cf70113f3d3ea3884533",
+      "rows": 577
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v9_validation/next_source_screen/Siraj_unused_libraries/full_reference_and_shared_core_roles.csv",
+      "sha256": "d6f6d2b5fe1da3d78ff93de7e7d693ad74639bc8f30b39fdd8a1641f3cac19e9",
+      "rows": 49434
+    },
+    {
+      "path": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ml_next/OL27_development_sequence_bank.csv.gz",
+      "sha256": "3375415cf75bc58b84b053910f2ecaf2983e64ad81288449afb49b39522ed682",
+      "rows": 13817
+    }
+  ],
+  "reserved_entire_source_variants": 2759,
+  "reserved_variants_without_GRCh38_mapping": 3,
+  "reserved_original_design_sha256": "141eafcb023c9555dc129b11e5cf45985930d8cce2acb5193f511795a2750114",
+  "reserved_genomic_guard": "Whole-source exclusion if any member is within 2146bp of any mapped original reserved-study variant; includes 145bp construct envelope and a one-base boundary allowance.",
+  "new_literal_construct_rows": 18062,
+  "overlapping_exclusion_counts": {
+    "whole_source_component_near_any_historical_region": 11435,
+    "passes_this_spatial_and_reference_screen": 3345,
+    "whole_source_component_near_entire_reserved_study": 34,
+    "full_actual_construct_does_not_match_declared_GRCh38_interval": 594,
+    "outside_reference_genomic_element_auxiliary_candidate_scope": 7557,
+    "not_originally_declared_GRCh38": 326,
+    "no_usable_declared_or_mapped_interval": 22
+  },
+  "potential_reference_element_distinct_physical_sequences": 3329,
+  "potential_reference_element_components": 2535,
+  "coefficient_size_or_P_used_for_screening": false,
+  "reserved_measurement_files_read": false,
+  "genome_sha256": "1f67aaa17a77b327738fe750ab37430a85dddf73c7d9189385ad1839259acec0",
+  "reference_reader_sha256": "1f233cceec6f79ea05cc2edaac56c19e361b58cfcbea222d8cb861378f24bd16",
+  "chain_sha256": {
+    "hg19ToHg38.over.chain.gz": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+    "hg38ToHg19.over.chain.gz": "14a712e8e147d9fc8e9d87d51977b46f6f8ddb93efbe5d0843d86b6205f587b1"
+  },
+  "screen_table_sha256": "8b3532387bcab996c41ed7ebce07b0d0edefb78266f942adf2a83aa5956ce8f0",
+  "training_authorized_by_this_screen": false,
+  "independent_validation_or_new_model_success_established": false,
+  "current_comparison_changed": false,
+  "remaining": [
+    "Shorter shared-DNA core/component joins against all source constructs, every historical DNA source and the whole reserved study",
+    "Duplicated constructs with conflicting fitted activity coefficients",
+    "Independent guard replay",
+    "Prespecified additional-activity experiment after current finite comparison, if scientifically justified"
+  ],
+  "code_sha256": "c58b2128d68645b8122fe1e9a3250d68fdc334232b9bb910a3887da2905495d6",
+  "elapsed_seconds": 14.163277624997136
+}

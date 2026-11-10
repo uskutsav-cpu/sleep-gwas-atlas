@@ -1,0 +1,9 @@
+# MEIS1-region candidate: exact-variant GTEx v10 check
+
+On 29 October 2026, the public GTEx v10 variant endpoint returned exactly one record for `chr2_66523432_G_T_b38`: rs113851554, G reference and T alternate, mapping to `2_66750564_G_T_b37`. This independently corroborates the two coordinates and allele letters already used in the project for that contrast; it does not resolve multiallelic dosage conventions in every source dataset.
+
+The GTEx v10 single-tissue eQTL and sQTL endpoint queries for that exact variant each returned zero rows. The eQTL endpoint is described as returning precomputed significant single-tissue associations; no gene, tissue, effect size or direction is supplied by these responses. The sQTL endpoint similarly returned no row, but we have not independently established the full testing and filtering rules for that response. The GTEx variant record alone does **not** prove that this variant was adequately tested for every gene, tissue, cell type or splicing event. No returned row is not proof of no molecular effect, no gene regulation, or no frailty mechanism. A nearby variant or a different cellular state could carry a signal missed by this exact-variant search.
+
+Thus this check does not establish MEIS1 as the effector gene, demonstrate shared insomnia–frailty causality, or validate a genetic score. Assessing mechanisms would require credible-set coverage and appropriately matched, independent tissue/cell QTL or experimental data, ideally followed by colocalization with adequate overlap and ancestry-matched LD. Those analyses have not been performed here.
+
+[GTEx portal](https://gtexportal.org/home/); [query URLs, counts and response hashes](stage6_meis1_gtex_v10_receipt.json); exact raw responses in `work/meis1_gtex/`. Reproduce with `python3 work/meis1_gtex/query.py`. The query is a live endpoint and may change.

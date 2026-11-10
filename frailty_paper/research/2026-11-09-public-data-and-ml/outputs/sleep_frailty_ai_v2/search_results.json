@@ -1,0 +1,1041 @@
+[
+  {
+    "name": "v1_simple_baseline",
+    "family": "v1_logistic",
+    "features": "v1_kmer",
+    "config": {},
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6408784940713155,
+      "average_precision": 0.0497888127850372,
+      "brier_uncalibrated": 0.036004178519385054
+    },
+    "artifact": "../sleep_frailty_ai_v1/models/kmer_baseline.npz"
+  },
+  {
+    "name": "avi_direct_rank",
+    "family": "direct_avi",
+    "features": "avi",
+    "config": {
+      "missing_imputation": "training median",
+      "score_transform": "monotone sigmoid of raw AVI, not probability"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5654616668806987,
+      "average_precision": 0.0371698748888748,
+      "brier_uncalibrated": 0.2943292709649538
+    },
+    "artifact": null
+  },
+  {
+    "name": "logistic_avi_C0.01",
+    "family": "logistic",
+    "features": "avi",
+    "config": {
+      "C": 0.01,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5654616668806987,
+      "average_precision": 0.0371698748888748,
+      "brier_uncalibrated": 0.03055123086709471
+    },
+    "artifact": "models/logistic_avi_C0.01.pkl"
+  },
+  {
+    "name": "logistic_avi_C0.1",
+    "family": "logistic",
+    "features": "avi",
+    "config": {
+      "C": 0.1,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5654616668806987,
+      "average_precision": 0.0371698748888748,
+      "brier_uncalibrated": 0.03054179437140043
+    },
+    "artifact": "models/logistic_avi_C0.1.pkl"
+  },
+  {
+    "name": "logistic_avi_C1",
+    "family": "logistic",
+    "features": "avi",
+    "config": {
+      "C": 1.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.565386755703951,
+      "average_precision": 0.03716755766603327,
+      "brier_uncalibrated": 0.03053899607561048
+    },
+    "artifact": "models/logistic_avi_C1.pkl"
+  },
+  {
+    "name": "logistic_avi_C10",
+    "family": "logistic",
+    "features": "avi",
+    "config": {
+      "C": 10.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5654884208723941,
+      "average_precision": 0.03717070889692064,
+      "brier_uncalibrated": 0.030538633589929153
+    },
+    "artifact": "models/logistic_avi_C10.pkl"
+  },
+  {
+    "name": "logistic_kmer_C0.01",
+    "family": "logistic",
+    "features": "kmer",
+    "config": {
+      "C": 0.01,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6027808098968366,
+      "average_precision": 0.04697892121126017,
+      "brier_uncalibrated": 0.03045956882248102
+    },
+    "artifact": "models/logistic_kmer_C0.01.pkl"
+  },
+  {
+    "name": "logistic_kmer_C0.1",
+    "family": "logistic",
+    "features": "kmer",
+    "config": {
+      "C": 0.1,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6023607722272163,
+      "average_precision": 0.04782585820731858,
+      "brier_uncalibrated": 0.030453163483359715
+    },
+    "artifact": "models/logistic_kmer_C0.1.pkl"
+  },
+  {
+    "name": "logistic_kmer_C1",
+    "family": "logistic",
+    "features": "kmer",
+    "config": {
+      "C": 1.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6011595180000857,
+      "average_precision": 0.053220956291505576,
+      "brier_uncalibrated": 0.03044390944603792
+    },
+    "artifact": "models/logistic_kmer_C1.pkl"
+  },
+  {
+    "name": "logistic_kmer_C10",
+    "family": "logistic",
+    "features": "kmer",
+    "config": {
+      "C": 10.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5988988057018108,
+      "average_precision": 0.05358667610520716,
+      "brier_uncalibrated": 0.03044203492483669
+    },
+    "artifact": "models/logistic_kmer_C10.pkl"
+  },
+  {
+    "name": "logistic_kmer_avi_C0.01",
+    "family": "logistic",
+    "features": "kmer_avi",
+    "config": {
+      "C": 0.01,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6126236034416336,
+      "average_precision": 0.04669110208086459,
+      "brier_uncalibrated": 0.030452200336893942
+    },
+    "artifact": "models/logistic_kmer_avi_C0.01.pkl"
+  },
+  {
+    "name": "logistic_kmer_avi_C0.1",
+    "family": "logistic",
+    "features": "kmer_avi",
+    "config": {
+      "C": 0.1,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6140308634048199,
+      "average_precision": 0.04772821562838489,
+      "brier_uncalibrated": 0.03043818725224018
+    },
+    "artifact": "models/logistic_kmer_avi_C0.1.pkl"
+  },
+  {
+    "name": "logistic_kmer_avi_C1",
+    "family": "logistic",
+    "features": "kmer_avi",
+    "config": {
+      "C": 1.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6097716279268868,
+      "average_precision": 0.048859006656994,
+      "brier_uncalibrated": 0.030437475934525435
+    },
+    "artifact": "models/logistic_kmer_avi_C1.pkl"
+  },
+  {
+    "name": "logistic_kmer_avi_C10",
+    "family": "logistic",
+    "features": "kmer_avi",
+    "config": {
+      "C": 10.0,
+      "class_weight": null
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.6080005136766407,
+      "average_precision": 0.04970637037657582,
+      "brier_uncalibrated": 0.030439672944763442
+    },
+    "artifact": "models/logistic_kmer_avi_C10.pkl"
+  },
+  {
+    "name": "boost_kmer_d2_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 2,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.559070138264629,
+      "average_precision": 0.03690831370647822,
+      "brier_uncalibrated": 0.030552839818056562
+    },
+    "artifact": "models/boost_kmer_d2_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_d2_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 2,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5529515003638543,
+      "average_precision": 0.03561442683501101,
+      "brier_uncalibrated": 0.03058318540171984
+    },
+    "artifact": "models/boost_kmer_d2_lr0.08.pkl"
+  },
+  {
+    "name": "boost_kmer_d3_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 3,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5547894995933393,
+      "average_precision": 0.035641666937952454,
+      "brier_uncalibrated": 0.030572326016937143
+    },
+    "artifact": "models/boost_kmer_d3_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_d3_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 3,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5306012157013826,
+      "average_precision": 0.03391890480708046,
+      "brier_uncalibrated": 0.030651183088048196
+    },
+    "artifact": "models/boost_kmer_d3_lr0.08.pkl"
+  },
+  {
+    "name": "boost_kmer_d5_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 5,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5510599931509781,
+      "average_precision": 0.034676778253122716,
+      "brier_uncalibrated": 0.030621411425514968
+    },
+    "artifact": "models/boost_kmer_d5_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_d5_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer",
+    "config": {
+      "max_depth": 5,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5304594195453962,
+      "average_precision": 0.032305554417346595,
+      "brier_uncalibrated": 0.030803548268792898
+    },
+    "artifact": "models/boost_kmer_d5_lr0.08.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d2_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 2,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5636397200462309,
+      "average_precision": 0.03641379004404226,
+      "brier_uncalibrated": 0.0305558529907443
+    },
+    "artifact": "models/boost_kmer_avi_d2_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d2_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 2,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5540617910192202,
+      "average_precision": 0.034733004222104034,
+      "brier_uncalibrated": 0.03061788161871369
+    },
+    "artifact": "models/boost_kmer_avi_d2_lr0.08.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d3_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 3,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5560121570138266,
+      "average_precision": 0.03537923301169789,
+      "brier_uncalibrated": 0.030589237880871218
+    },
+    "artifact": "models/boost_kmer_avi_d3_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d3_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 3,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5541902101793588,
+      "average_precision": 0.03566086152843685,
+      "brier_uncalibrated": 0.030663182780352745
+    },
+    "artifact": "models/boost_kmer_avi_d3_lr0.08.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d5_lr0.03",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 5,
+      "learning_rate": 0.03,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5521355036171397,
+      "average_precision": 0.03725444942273608,
+      "brier_uncalibrated": 0.030614555180704692
+    },
+    "artifact": "models/boost_kmer_avi_d5_lr0.03.pkl"
+  },
+  {
+    "name": "boost_kmer_avi_d5_lr0.08",
+    "family": "hist_gradient_boosting",
+    "features": "kmer_avi",
+    "config": {
+      "max_depth": 5,
+      "learning_rate": 0.08,
+      "max_iter": 200,
+      "min_samples_leaf": 40,
+      "l2_regularization": 10.0,
+      "max_bins": 64,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5263740850134839,
+      "average_precision": 0.03388191067608864,
+      "brier_uncalibrated": 0.030877428403332373
+    },
+    "artifact": "models/boost_kmer_avi_d5_lr0.08.pkl"
+  },
+  {
+    "name": "neural_hyena_w32_s42",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 32,
+      "seed": 42,
+      "best_epoch": 9,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 4.75120735168457,
+        "b1": 1.221232295036316,
+        "w2": 0.5265434980392456,
+        "b2": 0.21792960166931152
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.49925356363169393,
+      "average_precision": 0.037031148267730886,
+      "brier_uncalibrated": 0.041002310518059325
+    },
+    "artifact": "models/neural_hyena_w32_s42.npz"
+  },
+  {
+    "name": "neural_hyena_w32_s73",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 32,
+      "seed": 73,
+      "best_epoch": 2,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 3.6408236026763916,
+        "b1": 0.765184223651886,
+        "w2": 0.39325690269470215,
+        "b2": 0.13036322593688965
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5084489105774582,
+      "average_precision": 0.0381556916938628,
+      "brier_uncalibrated": 0.03628948891330492
+    },
+    "artifact": "models/neural_hyena_w32_s73.npz"
+  },
+  {
+    "name": "neural_hyena_w32_s101",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 32,
+      "seed": 101,
+      "best_epoch": 6,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 4.451080799102783,
+        "b1": 1.1671888828277588,
+        "w2": 0.43623894453048706,
+        "b2": 0.18743109703063965
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5242605196695347,
+      "average_precision": 0.03958418649747157,
+      "brier_uncalibrated": 0.04003253509472667
+    },
+    "artifact": "models/neural_hyena_w32_s101.npz"
+  },
+  {
+    "name": "ensemble_hyena_w32",
+    "family": "neural_seed_ensemble",
+    "features": "hyena",
+    "config": {
+      "members": [
+        "neural_hyena_w32_s42",
+        "neural_hyena_w32_s73",
+        "neural_hyena_w32_s101"
+      ],
+      "combination": "arithmetic_mean"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5167479988014212,
+      "average_precision": 0.03645735809243503,
+      "brier_uncalibrated": 0.03860327559550484
+    },
+    "artifact": null
+  },
+  {
+    "name": "neural_hyena_w128_s42",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 128,
+      "seed": 42,
+      "best_epoch": 1,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 4.612708568572998,
+        "b1": 0.8278899788856506,
+        "w2": 0.28522244095802307,
+        "b2": 0.08551335334777832
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.518214117546338,
+      "average_precision": 0.039200899741400466,
+      "brier_uncalibrated": 0.03611954269069147
+    },
+    "artifact": "models/neural_hyena_w128_s42.npz"
+  },
+  {
+    "name": "neural_hyena_w128_s73",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 128,
+      "seed": 73,
+      "best_epoch": 4,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 6.447330474853516,
+        "b1": 1.5203752517700195,
+        "w2": 0.3869817852973938,
+        "b2": 0.14495229721069336
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5181873635546425,
+      "average_precision": 0.03968876315301465,
+      "brier_uncalibrated": 0.03794048499014361
+    },
+    "artifact": "models/neural_hyena_w128_s73.npz"
+  },
+  {
+    "name": "neural_hyena_w128_s101",
+    "family": "neural_head",
+    "features": "hyena",
+    "config": {
+      "width": 128,
+      "seed": 101,
+      "best_epoch": 4,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 6.320732116699219,
+        "b1": 1.6859309673309326,
+        "w2": 0.4117123782634735,
+        "b2": 0.153212308883667
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.519551817131116,
+      "average_precision": 0.04036672941865085,
+      "brier_uncalibrated": 0.0399829591425854
+    },
+    "artifact": "models/neural_hyena_w128_s101.npz"
+  },
+  {
+    "name": "ensemble_hyena_w128",
+    "family": "neural_seed_ensemble",
+    "features": "hyena",
+    "config": {
+      "members": [
+        "neural_hyena_w128_s42",
+        "neural_hyena_w128_s73",
+        "neural_hyena_w128_s101"
+      ],
+      "combination": "arithmetic_mean"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5301838534309319,
+      "average_precision": 0.03938032977039691,
+      "brier_uncalibrated": 0.03708030596333836
+    },
+    "artifact": null
+  },
+  {
+    "name": "neural_hyena_avi_w32_s42",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 32,
+      "seed": 42,
+      "best_epoch": 14,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 5.067998886108398,
+        "b1": 1.4333833456039429,
+        "w2": 0.6354540586471558,
+        "b2": 0.26706361770629883
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.51060795770729,
+      "average_precision": 0.0375370512737718,
+      "brier_uncalibrated": 0.042416857754860426
+    },
+    "artifact": "models/neural_hyena_avi_w32_s42.npz"
+  },
+  {
+    "name": "neural_hyena_avi_w32_s73",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 32,
+      "seed": 73,
+      "best_epoch": 2,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 3.8801329135894775,
+        "b1": 0.8272116780281067,
+        "w2": 0.37296828627586365,
+        "b2": 0.12369275093078613
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5344591413038825,
+      "average_precision": 0.036574376702377454,
+      "brier_uncalibrated": 0.03704392524066806
+    },
+    "artifact": "models/neural_hyena_avi_w32_s73.npz"
+  },
+  {
+    "name": "neural_hyena_avi_w32_s101",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 32,
+      "seed": 101,
+      "best_epoch": 12,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 4.877225399017334,
+        "b1": 1.4221299886703491,
+        "w2": 0.5446342825889587,
+        "b2": 0.2500128746032715
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5122640297932451,
+      "average_precision": 0.040595733069098555,
+      "brier_uncalibrated": 0.0417436764557675
+    },
+    "artifact": "models/neural_hyena_avi_w32_s101.npz"
+  },
+  {
+    "name": "ensemble_hyena_avi_w32",
+    "family": "neural_seed_ensemble",
+    "features": "hyena_avi",
+    "config": {
+      "members": [
+        "neural_hyena_avi_w32_s42",
+        "neural_hyena_avi_w32_s73",
+        "neural_hyena_avi_w32_s101"
+      ],
+      "combination": "arithmetic_mean"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5229067676897393,
+      "average_precision": 0.038781586508439964,
+      "brier_uncalibrated": 0.03954331703119502
+    },
+    "artifact": null
+  },
+  {
+    "name": "neural_hyena_avi_w128_s42",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 128,
+      "seed": 42,
+      "best_epoch": 5,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 6.255214691162109,
+        "b1": 1.7941921949386597,
+        "w2": 0.49877089262008667,
+        "b2": 0.16634106636047363
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5201136509567228,
+      "average_precision": 0.04076452807442453,
+      "brier_uncalibrated": 0.043027485659424033
+    },
+    "artifact": "models/neural_hyena_avi_w128_s42.npz"
+  },
+  {
+    "name": "neural_hyena_avi_w128_s73",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 128,
+      "seed": 73,
+      "best_epoch": 7,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 7.107882022857666,
+        "b1": 1.9741747379302979,
+        "w2": 0.5773802995681763,
+        "b2": 0.18218469619750977
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5174436025855057,
+      "average_precision": 0.04116834202279432,
+      "brier_uncalibrated": 0.04340436021029315
+    },
+    "artifact": "models/neural_hyena_avi_w128_s73.npz"
+  },
+  {
+    "name": "neural_hyena_avi_w128_s101",
+    "family": "neural_head",
+    "features": "hyena_avi",
+    "config": {
+      "width": 128,
+      "seed": 101,
+      "best_epoch": 10,
+      "maximum_epochs": 50,
+      "patience": 7,
+      "lr": 0.0003,
+      "weight_decay": 0.01,
+      "positive_weight": 6.142518043518066,
+      "parameter_change_norms": {
+        "w1": 7.939485549926758,
+        "b1": 1.966373324394226,
+        "w2": 0.7959725856781006,
+        "b2": 0.19659733772277832
+      },
+      "frozen_encoder": true
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5018139206369591,
+      "average_precision": 0.0425655289880275,
+      "brier_uncalibrated": 0.045676537504878816
+    },
+    "artifact": "models/neural_hyena_avi_w128_s101.npz"
+  },
+  {
+    "name": "ensemble_hyena_avi_w128",
+    "family": "neural_seed_ensemble",
+    "features": "hyena_avi",
+    "config": {
+      "members": [
+        "neural_hyena_avi_w128_s42",
+        "neural_hyena_avi_w128_s73",
+        "neural_hyena_avi_w128_s101"
+      ],
+      "combination": "arithmetic_mean"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5148217113993407,
+      "average_precision": 0.04207819786156894,
+      "brier_uncalibrated": 0.04325451594992001
+    },
+    "artifact": null
+  },
+  {
+    "name": "avi_auxiliary_student",
+    "family": "distilled_hyenadna",
+    "features": "dna_with_avi_auxiliary_training",
+    "config": {
+      "seed": 1207,
+      "trigger": "Exploratory additional experiment after round1 failed to show AVI-input benefit",
+      "best_avi_validation_AP": 0.04970637037657582,
+      "best_dna_validation_AP": 0.05358667610520716,
+      "target": "Measured NGN2 call plus auxiliary standardized/clipped raw AVI",
+      "auxiliary_loss_weight": 0.05,
+      "avi_input_to_assay_head": false,
+      "teacher_mean_training": 0.16847793757915497,
+      "teacher_sd_training": 0.2366621196269989,
+      "teacher_clip": [
+        -5,
+        5
+      ],
+      "warmup_max_epochs": 20,
+      "warmup_patience": 5,
+      "finetune_max_epochs": 4,
+      "finetune_patience": 2,
+      "batch_size": 32,
+      "head_lr": 0.0003,
+      "encoder_lr": 1e-05,
+      "fine_tune": "last native block and final normalization; original first block and nucleotide embedding fixed",
+      "checkpoint_selection": "validation assay average precision only",
+      "independence": "Learning to approximate AVI is auxiliary supervision, not experimental or disease validation",
+      "post_round1_extension": true,
+      "evaluation_status": "Reused benchmark and the first external study have now been observed; subsequent checks on them are development comparisons, not fresh independent validation",
+      "architecture_and_loss": "Same auxiliary architecture, loss and learning rates specified before round1 performance; the decision to execute despite the failed trigger is new and exploratory"
+    },
+    "validation": {
+      "n": 2474,
+      "detected_calls": 78,
+      "prevalence": 0.03152789005658852,
+      "auroc": 0.5162717777492402,
+      "average_precision": 0.035884214244970326,
+      "brier_uncalibrated": 0.03056299101635616
+    },
+    "artifact": "models/avi_auxiliary_student.npz"
+  }
+]

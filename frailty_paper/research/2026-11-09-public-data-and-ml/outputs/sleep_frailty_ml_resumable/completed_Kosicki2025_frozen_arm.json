@@ -1,0 +1,53 @@
+{
+  "time_UTC": "2026-11-09T02:52:25.584928+00:00",
+  "source": "Kosicki2025",
+  "recipe": "frozen_reader",
+  "one_arm_complete_not_full_matched_comparison": true,
+  "training_rows": 377766,
+  "test_observations": 16540,
+  "completed_epochs": 3,
+  "actual_backprop_updates": 4434,
+  "all_three_saved_magnitude_metric_replays_passed": true,
+  "per_epoch_independent_MAE_skill": [
+    0.00018450770087763413,
+    0.00032389200782867444,
+    -0.002271011436697279
+  ],
+  "final_per_cell_magnitude_errors": {
+    "induced_excitatory_neuron": {
+      "rows": 16540,
+      "raw_observed_effect_MAE": 0.061710532452159184,
+      "training_typical_effect_MAE": 0.06157070467767068,
+      "skill": -0.002271011436697279,
+      "supported": true
+    }
+  },
+  "final_independent_pair_results": {
+    "local": {
+      "pairs": 16329,
+      "difference_MAE": 0.07842578638830199,
+      "zero_difference_MAE": 0.07819413914740792,
+      "skill_vs_zero_difference": -0.0029624629597542196,
+      "difference_Spearman": 0.0014891086447567728,
+      "ordering_accuracy_nonzero_measured_differences": 0.5002143425806846
+    },
+    "cross": {
+      "pairs": 0
+    }
+  },
+  "completed_execution_bound_recovery_and_final_model_state_match_exactly": true,
+  "frozen_reader_parameter_changes": 0,
+  "interpretation": "At the final fixed pass, magnitude error is about 0.227% worse than the training-only typical-effect baseline. Nearby ordering is about 50.02%, and predicting nearby differences is about 0.296% worse than predicting zero differences. This source has no cross-cell pairs. Preserve all passes; the common epoch and adapted-vs-frozen decision remain pending.",
+  "adapted_counterpart_complete": false,
+  "native_three_source_gate_applied": false,
+  "new_external_outcomes_joined": false,
+  "candidate_promoted": false,
+  "evidence_sha256": {
+    "outputs/sleep_frailty_ml_resumable/development/frozen_reader_Kosicki2025_42_record.json": "43ea9da2a62f17cc834ce3ac397342d9603a740a7807573bb283027bd8f745bb",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch3_independent_pair_audit.json": "fd7550421b48798dbb9fee4b016f63f3208073650e02590eeb8cdfaed52a72d2",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_completed_recovery_audit.json": "917d122887c881549c935fdd357a976c7ee402c0cf2bfa359cb8347f0985a4b9",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch1_independent_saved_metric_audit.json": "99ff5c9ed588b0b08ea0fe33cf5656bb5583b54d47df50837fb7705020ff460a",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch2_independent_saved_metric_audit.json": "c3b205f44a0a39e8c0ca1a50628f8b392aeb1c7e80fe1696802116ef98737b02",
+    "outputs/sleep_frailty_ml_resumable/frozen_reader_Kosicki2025_42_epoch3_independent_saved_metric_audit.json": "df8dbf6d869051b9fe8bec4c139ab10742356a0dd5a20fdd76e656755315a6af"
+  }
+}

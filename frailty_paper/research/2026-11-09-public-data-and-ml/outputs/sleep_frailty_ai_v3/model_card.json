@@ -1,0 +1,154 @@
+{
+  "status": "Training, locked evaluation and project molecular predictions complete; see measured performance and limitations",
+  "updated_utc": "2026-11-07T18:44:35.882090+00:00",
+  "plain_language_purpose": "Prioritize DNA changes for laboratory follow-up by predicting whether they change activity in two tested neural cell settings.",
+  "not_established": [
+    "A patient insomnia/frailty prediction model",
+    "Genetic-score validation in independent participants",
+    "Causal DNA changes, causal genes or treatment targets",
+    "A model of older-adult cells or single-cell disease mechanisms",
+    "A significant genetic correlation or clinical effect"
+  ],
+  "two_distinct_outputs": {
+    "overall_assay_call": "Ranks the chance that a source-specific laboratory screen detected an effect; surrounding DNA activity strongly influences detection. Scores are uncalibrated.",
+    "active_region_variant_ranking": "Ranks effects among source-defined active constructs. A contrast model can expose its conditional expert; other models expose their overall score. This is a harder task and must be evaluated separately."
+  },
+  "data_audit_file": "data_audit.json",
+  "studies": {
+    "Siraj_OL42_SKNSH": {
+      "train": {
+        "n": 59963,
+        "detected_calls": 4343
+      },
+      "validation": {
+        "n": 8350,
+        "detected_calls": 579
+      },
+      "test": {
+        "n": 18924,
+        "detected_calls": 1289
+      }
+    },
+    "Salomon_NGN2": {
+      "train": {
+        "n": 25359,
+        "detected_calls": 699
+      },
+      "validation": {
+        "n": 2814,
+        "detected_calls": 65
+      },
+      "test": {
+        "n": 9176,
+        "detected_calls": 223
+      }
+    }
+  },
+  "label_qualification": "Siraj is a fixed original source-row activity/skew screen, not the authors final selected best-library list. Nonsignificance is not biological neutrality. Different assays/cells/constructs are not interchangeable.",
+  "source_neural_contexts": [
+    "Salomon_NGN2",
+    "Siraj_OL42_SKNSH"
+  ],
+  "model_components": [
+    "Original frozen tiny HyenaDNA sequence representation, previously port-checked; official-runtime executable parity not established",
+    "HOCOMOCO human protein DNA-binding models initially fixed; trained heads/contrast trunks learn which patterns predict the laboratory readouts",
+    "Physical public bulk DNase/ATAC/footprint profiles in neural cell proxies; missing coordinate mapping differs from absent called peak",
+    "AlphaGenome AVI score supplied as an auxiliary target or direct input in explicit paired comparisons"
+  ],
+  "AlphaGenome_usage": {
+    "kind": "Only designated permissive downloadable AVI SNV raw/PHRED artifacts; not detailed API outputs or AVI component breakdowns",
+    "requested": 124345,
+    "exact_matches": 123743,
+    "unavailable": 602,
+    "score_sha256": "47ea172b2a0185a5e55afbbf33f361da829291c91ca85a3847197fba878945e7",
+    "terms_observed": "2026-11-06",
+    "terms_notice_file": "../ALPHAGENOME_OUTPUT_TERMS_NOTICE.md",
+    "not_fine_tuned": "AlphaGenome itself was not altered. Our own much smaller models were trained.",
+    "reference_context": "AVI describes native GRCh38 context; the experimentally tested constructs can have different native/engineered flanks."
+  },
+  "leakage_controls": [
+    "Source effects/activity and source activity flags are training targets/strata, never prediction inputs",
+    "All new supervised fits exclude chromosomes1\u20133",
+    "Extra development folds have exact canonical mutation-containing200bp window leakage audits and hash-verified inputs",
+    "Source/reverse-complement equivalence checked for allele contrasts; original genome/foundation training exposures are not independently excluded",
+    "Previously queried project-locus neighborhoods removed from the fresh Siraj reserved set",
+    "Pre-evaluation refinement excludes355additional Siraj reserved rows within1000bp of either previously analyzed Salomon or Retallick regions, leaving18569strict reserved rows. Original full reserved metrics remain a labelled comparison; no model choices or development fits changed."
+  ],
+  "evaluation_interpretation": [
+    "Original chromosomes4\u20135 and broad development folds are used for optimization/selection, not unbiased nested-CV evidence",
+    "Salomon study has previously been used in project development; its chromosome result is not a new independent study",
+    "Siraj reserved chromosomes provide an unseen model-performance check within a fixed assay/library; they do not substitute for independent cohorts/donors",
+    "AUROC is a ranking measure, not percent-correct accuracy. Average precision must be shown against the positive-call base rate.",
+    "Planned genomic-block uncertainty measures within-assay sampling, not all biological/technical uncertainty."
+  ],
+  "input_requirements": [
+    "200- or270-base ACGT reference/alternate DNA strings differing at exactly one position",
+    "Caller-verified GRCh38 substitution coordinates and strand, with an explicit studied assay/cell context",
+    "Exact audited local AVI row for full model information; unknown rows retain missingness and are imputed using training statistics",
+    "Public reference files, fixed encoder, motif files and checkpoint hashes must remain available for the raw-input CLI"
+  ],
+  "implementation_checks": [
+    "Final27checkpoint/ensemble records checked on development raw-input examples with file hashes, independent CPU/GPU neural arithmetic and conditional-combiner batch/serialization/coefficient checks",
+    "126independent R AUROC/AP development replays passed",
+    "48independent R AUROC/AP reserved-evaluation replays passed",
+    "Weighted/tied metric and paired genomic-block bootstrap arithmetic checked against scikit-learn"
+  ],
+  "intended_project_use": "Hypothesis ranking for insomnia/frailty associated variants. A high molecular score alone does not establish association with either disease.",
+  "original_analyses_preserved": true,
+  "blind_test_evaluated": true,
+  "strict_reserved_exposure_audit_sha256": "93dbe7f9b41dd89c40bd4adf167d5c13b77554c97630370518b839ee30e3b24a",
+  "selected_role_names": {
+    "overall_assay_call_detector": "final_biological_avi_input_ensemble",
+    "within_active_variant_ranker": "final_stacked_contrast_no_avi"
+  },
+  "final_registry_sha256": "793d6b5b0a477fa13f56cef1357ad0df9fc67838b008b1c035bd907a21d4f9f1",
+  "reserved_report_sha256": "dab21307f898d7977e90a18cb6b88c05d0be1d0d55978d77ea5e92c0dd7d047e",
+  "project_prediction_receipt": {
+    "variants": 33,
+    "assay_contexts": [
+      "Salomon_NGN2",
+      "Siraj_OL42_SKNSH"
+    ],
+    "rows": 924,
+    "roles": {
+      "overall_assay_call_detector": "final_biological_avi_input_ensemble",
+      "within_active_variant_ranker": "final_stacked_contrast_no_avi",
+      "full_avi_direct": "final_baseline_full_avi_direct",
+      "pattern_boost_none_depth3": "final_baseline_pattern_boost_none_depth3",
+      "full_chromatin_boost_sqrt_d3": "final_baseline_full_chromatin_boost_sqrt_d3",
+      "full_dna_chromatin_avi_boost_sqrt_d5": "final_baseline_full_dna_chromatin_avi_boost_sqrt_d5",
+      "ablation_contrast_no_avi": "final_contrast_no_avi_ensemble",
+      "ablation_contrast_avi_teacher": "final_contrast_avi_teacher_ensemble",
+      "ablation_motif_chromatin_no_avi": "final_motif_chromatin_no_avi_ensemble",
+      "ablation_motif_chromatin_avi_teacher": "final_motif_chromatin_avi_teacher_ensemble",
+      "ablation_biological_avi_input": "final_biological_avi_input_ensemble",
+      "combination_stacked_contrast_no_avi": "final_stacked_contrast_no_avi",
+      "combination_stacked_contrast_avi_teacher": "final_stacked_contrast_avi_teacher",
+      "combination_conditional_avi_only": "final_conditional_avi_only"
+    },
+    "registry_sha256": "793d6b5b0a477fa13f56cef1357ad0df9fc67838b008b1c035bd907a21d4f9f1",
+    "input_sha256": "91f61d17d0b4ba1c1034e091a3c6467cf9f41415c17477c9b41322255c22637b",
+    "output_sha256": "0d2d676b90e6bbb901b832eb182c4ef34f8ef1c25dd558454183601a376021ff",
+    "AVI_exact_allele_available_context_rows": 66,
+    "AVI_source_receipts": [
+      {
+        "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v3/avi_exact_allele_scores.csv",
+        "sha256": "47ea172b2a0185a5e55afbbf33f361da829291c91ca85a3847197fba878945e7"
+      },
+      {
+        "file": "/Users/swethasunilkumar/Documents/Codex/2026-10-27/loo/outputs/sleep_frailty_ai_v2/avi_exact_allele_scores.csv",
+        "sha256": "57222b2d8bd181058d3b52476689d5ca33de79cfd2c90c4f83c4976f4ce2e17e"
+      }
+    ],
+    "measured_accuracy_independently_established_for_candidates": false,
+    "training_overlap_caution": "Rows explicitly flag exact-substitution and nearby training exposure. None are independent genetic-score validation.",
+    "scores_can_be_compared": "Within a fixed role/model and assay context; prevalence/detection differs between studies, so do not rank cell-type relevance from raw between-context values.",
+    "gene_assignment": "No causal gene assignment or directional disease-risk inference is made by this score.",
+    "source_provenance": "Original UCSC payload and exact target alleles verified in project_input_receipt.json"
+  },
+  "model_family_count_compared": 12,
+  "development_R_metric_replays": 126,
+  "reserved_R_metric_replays": 48,
+  "statistical_caution": "Block intervals are descriptive within-assay uncertainty and not adjusted for all comparisons. No independent participant/donor, clinical, causal or original-risk-direction validation.",
+  "conditional_stacking_qualification": "Finite development-only combination experiment, no reserved inference.\n\nThese are selection-stage development comparisons, not unbiased nested CV:\nbase checkpoints used their folds for stopping, and other-fold base fits can\nhave seen the current meta-validation fold. The untouched reserved test is\ntherefore essential. This limitation must not be hidden by the term OOF.\n"
+}

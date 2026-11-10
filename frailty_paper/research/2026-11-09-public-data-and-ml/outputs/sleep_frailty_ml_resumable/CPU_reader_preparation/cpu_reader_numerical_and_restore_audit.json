@@ -1,0 +1,183 @@
+{
+  "passed": true,
+  "original_forward_and_train_methods_inherited_unchanged": true,
+  "initial_and_fitted_parameter_state_bytes_identical": true,
+  "actual_DNA_examples": 10,
+  "actual_DNA_lengths": [
+    150,
+    199,
+    200,
+    270
+  ],
+  "reader_and_feature_devices": [
+    "cpu"
+  ],
+  "head_parameter_devices": [
+    "mps:0"
+  ],
+  "CPU_reference_vs_CPU_reader_MPS_head_prediction_errors": {
+    "magnitude": 5.960464477539063e-08,
+    "signed_effect": 0.0,
+    "activity_reference": 0.0,
+    "activity_alternate": 0.0
+  },
+  "full_primary_plus_anchor_gradient_checks": [
+    {
+      "parameter": "reader.main.3.0.fn.block.0.weight",
+      "maximum_absolute_error": 4.0745362639427185e-10,
+      "relative_L2_error": 6.705876881129449e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.1.weight",
+      "maximum_absolute_error": 1.280568540096283e-09,
+      "relative_L2_error": 5.857112142101025e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.1.bias",
+      "maximum_absolute_error": 4.656612873077393e-10,
+      "relative_L2_error": 6.73927847550052e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.3.weight",
+      "maximum_absolute_error": 9.022187441587448e-10,
+      "relative_L2_error": 5.566377022414676e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.4.weight",
+      "maximum_absolute_error": 4.0745362639427185e-10,
+      "relative_L2_error": 5.745883609141515e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.4.bias",
+      "maximum_absolute_error": 1.1641532182693481e-10,
+      "relative_L2_error": 6.562557135293254e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.6.fc.0.weight",
+      "maximum_absolute_error": 4.1382008930668235e-11,
+      "relative_L2_error": 6.515742618164833e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.6.fc.0.bias",
+      "maximum_absolute_error": 4.9112713895738125e-11,
+      "relative_L2_error": 6.925565549692062e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.6.fc.2.weight",
+      "maximum_absolute_error": 6.548361852765083e-11,
+      "relative_L2_error": 4.810368278300895e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.6.fc.2.bias",
+      "maximum_absolute_error": 2.000888343900442e-11,
+      "relative_L2_error": 5.602459781489501e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.7.weight",
+      "maximum_absolute_error": 8.731149137020111e-11,
+      "relative_L2_error": 5.929920943884368e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.8.weight",
+      "maximum_absolute_error": 7.275957614183426e-11,
+      "relative_L2_error": 3.746837752049135e-07
+    },
+    {
+      "parameter": "reader.main.3.0.fn.block.8.bias",
+      "maximum_absolute_error": 1.0186340659856796e-10,
+      "relative_L2_error": 7.537072925898276e-07
+    },
+    {
+      "parameter": "reader.main.3.1.block.0.weight",
+      "maximum_absolute_error": 1.5643308870494366e-10,
+      "relative_L2_error": 5.252514165478464e-07
+    },
+    {
+      "parameter": "reader.main.3.1.block.1.weight",
+      "maximum_absolute_error": 2.9103830456733704e-10,
+      "relative_L2_error": 4.7306331803542747e-07
+    },
+    {
+      "parameter": "reader.main.3.1.block.1.bias",
+      "maximum_absolute_error": 3.4924596548080444e-10,
+      "relative_L2_error": 6.64044833012775e-07
+    },
+    {
+      "parameter": "head.cell_activity_weight",
+      "maximum_absolute_error": 8.731149137020111e-11,
+      "relative_L2_error": 3.9101820351598463e-07
+    },
+    {
+      "parameter": "head.line_activity_weight",
+      "maximum_absolute_error": 1.0186340659856796e-10,
+      "relative_L2_error": 4.5698342276394487e-07
+    },
+    {
+      "parameter": "head.cell_activity_bias",
+      "maximum_absolute_error": 5.820766091346741e-11,
+      "relative_L2_error": 3.966035637541264e-07
+    },
+    {
+      "parameter": "head.line_activity_bias",
+      "maximum_absolute_error": 5.820766091346741e-11,
+      "relative_L2_error": 5.025350538720652e-07
+    },
+    {
+      "parameter": "head.cell_bias",
+      "maximum_absolute_error": 3.725290298461914e-09,
+      "relative_L2_error": 1.1640055896715033e-07
+    },
+    {
+      "parameter": "head.line_offset",
+      "maximum_absolute_error": 3.725290298461914e-09,
+      "relative_L2_error": 1.0279760827877157e-07
+    },
+    {
+      "parameter": "head.hidden.weight",
+      "maximum_absolute_error": 4.0745362639427185e-10,
+      "relative_L2_error": 2.6666937186157135e-07
+    },
+    {
+      "parameter": "head.hidden.bias",
+      "maximum_absolute_error": 2.0372681319713593e-10,
+      "relative_L2_error": 3.578321190341637e-07
+    },
+    {
+      "parameter": "head.hidden2.weight",
+      "maximum_absolute_error": 8.149072527885437e-10,
+      "relative_L2_error": 3.78978730281613e-07
+    },
+    {
+      "parameter": "head.hidden2.bias",
+      "maximum_absolute_error": 1.8917489796876907e-10,
+      "relative_L2_error": 2.9033233541631064e-07
+    },
+    {
+      "parameter": "head.output.weight",
+      "maximum_absolute_error": 1.30385160446167e-08,
+      "relative_L2_error": 1.9433957057575128e-07
+    },
+    {
+      "parameter": "head.output.bias",
+      "maximum_absolute_error": 1.1175870895385742e-08,
+      "relative_L2_error": 6.501050244667026e-07
+    }
+  ],
+  "head_dropout_random_state_consumption_preserved_exactly": true,
+  "standalone_head_vs_routed_head_dropout_prediction_max_error": 0.0,
+  "actual_old_checkpoint_parameters_Adam_CPU_and_MPS_rng_restored_exactly": true,
+  "old_checkpoint_update": 2600,
+  "old_checkpoint_file_changed": false,
+  "training_updates_or_scientific_fits_performed": false,
+  "full_batch_training_resource_or_continuation_preflight_complete": false,
+  "macOS_peak_RSS_bytes": 542310400,
+  "MPS_allocated_bytes_after_small_audit": 487936,
+  "MPS_driver_allocated_bytes_after_small_audit": 17432576,
+  "scope": "Small actual-model arithmetic, gradients, dropout-stream and existing-state restoration only. Rounding across devices is tolerated at stated bounds, not claimed bitwise identical. A pinned execution adapter and full-batch sustained preflight are still required before scientific continuation.",
+  "reserved_new_study_outcomes_read": false,
+  "model_promoted": false,
+  "code_sha256": {
+    "audit_cpu_reader_mps_head.py": "ee552535f70ce8621d5589d73a2769166a633d540055be9dc66c8939199e7d3a",
+    "cpu_reader_mps_head.py": "519340d3c76ef4d68241baccfff548d058a13edb09d3ed8461fe56f49f778c22"
+  }
+}

@@ -1,0 +1,8 @@
+args<-commandArgs(trailingOnly=TRUE)
+stopifnot(length(args)==3L,file.exists(args[3]))
+x<-readRDS(args[1])
+cols<-c('name','rep','zscore_neg','log2.ratio','BC_count')
+stopifnot(all(cols %in% names(x)))
+options(digits=17)
+write.csv(as.data.frame(x[cols]),args[2],row.names=FALSE,na='NA')
+cat('Published replicate readouts exported:',nrow(x),'rows\n')

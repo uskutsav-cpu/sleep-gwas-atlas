@@ -1,0 +1,254 @@
+{
+  "recipe": "frozen",
+  "epochs": 5,
+  "seed": 101,
+  "held_study": "Koesterich2023",
+  "arm": "AVI",
+  "training_rows": 474802,
+  "prediction_rows": 3087,
+  "cell_medians": [
+    0.17100000381469727,
+    0.16885541379451752,
+    0.17100000381469727,
+    0.229559525847435,
+    0.16910000145435333,
+    0.08561361581087112,
+    0.15369999408721924,
+    0.17100000381469727,
+    0.08914995938539505,
+    0.2834867835044861,
+    0.17100000381469727,
+    0.17100000381469727
+  ],
+  "line_medians": [
+    0.08914995938539505,
+    0.16885541379451752,
+    0.15780000388622284,
+    0.17100000381469727,
+    0.17100000381469727,
+    0.17100000381469727,
+    0.16910000145435333,
+    0.229559525847435,
+    0.17100000381469727,
+    0.17100000381469727,
+    0.17100000381469727,
+    0.2834867835044861,
+    0.0857275053858757,
+    0.08914995938539505,
+    0.09363672137260437,
+    0.08090046048164368
+  ],
+  "line_parent_cell": [
+    8,
+    1,
+    6,
+    0,
+    0,
+    0,
+    4,
+    3,
+    0,
+    0,
+    0,
+    9,
+    5,
+    8,
+    6,
+    5
+  ],
+  "supported_cells": [
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false
+  ],
+  "supported_lines": [
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "cell_names": [
+    "cervical",
+    "colon_tumor",
+    "glioma",
+    "hematopoietic",
+    "hepatocyte_tumor",
+    "induced_excitatory_neuron",
+    "kidney_derived",
+    "melanoma",
+    "neural_progenitor",
+    "neuronal_tumor",
+    "prostate",
+    "skin"
+  ],
+  "cell_line_names": [
+    "H1_N2_NPC",
+    "HCT116",
+    "HEK293T",
+    "HEL92.1.7",
+    "HaCaT",
+    "HeLa",
+    "HepG2",
+    "K562",
+    "LNCaP",
+    "SF7996",
+    "SK-MEL-28",
+    "SK-N-SH",
+    "WTC11_NGN2",
+    "HNP_primary",
+    "HEK293",
+    "Retallick_NGN2_two_donors"
+  ],
+  "training_cell_source_counts": [
+    0,
+    1,
+    0,
+    1,
+    2,
+    3,
+    2,
+    0,
+    1,
+    1,
+    0,
+    0
+  ],
+  "training_line_source_counts": [
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0,
+    0,
+    1,
+    2,
+    1,
+    1,
+    1
+  ],
+  "activity_and_precision_transformations": {
+    "IGVF240K|hepatocyte_tumor|absolute_log2_effect": {
+      "training_rows": 78809,
+      "activity_center": 0.0,
+      "activity_training_rows": 0,
+      "SE_training_rows": 0
+    },
+    "IGVF240K|kidney_derived|absolute_log2_effect": {
+      "training_rows": 72055,
+      "activity_center": 0.0,
+      "activity_training_rows": 0,
+      "SE_training_rows": 0
+    },
+    "Kosicki2025|induced_excitatory_neuron|absolute_log2_effect": {
+      "training_rows": 16402,
+      "activity_center": 0.10730838030576706,
+      "activity_training_rows": 16402,
+      "SE_training_rows": 16402,
+      "SE_scale": 0.04414699226617813,
+      "precision_normalization": 0.5150713920593262
+    },
+    "Salomon|induced_excitatory_neuron|absolute_log2_effect": {
+      "training_rows": 28887,
+      "activity_center": -0.031272754073143005,
+      "activity_training_rows": 28887,
+      "SE_training_rows": 0
+    },
+    "Siraj|colon_tumor|absolute_log2_effect": {
+      "training_rows": 67575,
+      "activity_center": 0.12111572176218033,
+      "activity_training_rows": 67575,
+      "SE_training_rows": 67575,
+      "SE_scale": 0.18122956156730652,
+      "precision_normalization": 0.4801984429359436
+    },
+    "Siraj|hematopoietic|absolute_log2_effect": {
+      "training_rows": 67504,
+      "activity_center": 0.1933692991733551,
+      "activity_training_rows": 67504,
+      "SE_training_rows": 67504,
+      "SE_scale": 0.22630517184734344,
+      "precision_normalization": 0.48324209451675415
+    },
+    "Siraj|hepatocyte_tumor|absolute_log2_effect": {
+      "training_rows": 67576,
+      "activity_center": 0.23819610476493835,
+      "activity_training_rows": 67576,
+      "SE_training_rows": 67576,
+      "SE_scale": 0.1744994968175888,
+      "precision_normalization": 0.4802761375904083
+    },
+    "Siraj|neuronal_tumor|absolute_log2_effect": {
+      "training_rows": 67577,
+      "activity_center": 0.20233146846294403,
+      "activity_training_rows": 67577,
+      "SE_training_rows": 67577,
+      "SE_scale": 0.2793762981891632,
+      "precision_normalization": 0.4820542633533478
+    },
+    "McAfee2023|neural_progenitor|absolute_log2_effect": {
+      "training_rows": 3810,
+      "activity_center": 0.0,
+      "activity_training_rows": 0,
+      "SE_training_rows": 0
+    },
+    "McAfee2023|kidney_derived|absolute_log2_effect": {
+      "training_rows": 3785,
+      "activity_center": 0.0,
+      "activity_training_rows": 0,
+      "SE_training_rows": 0
+    },
+    "Retallick2026|induced_excitatory_neuron|absolute_log2_effect": {
+      "training_rows": 822,
+      "activity_center": -0.01910414546728134,
+      "activity_training_rows": 822,
+      "SE_training_rows": 0
+    }
+  },
+  "AVI_transform": {
+    "median": [
+      0.1096000000834465,
+      8.49884033203125
+    ],
+    "mean": [
+      0.2077736258506775,
+      9.77283000946045
+    ],
+    "sd": [
+      0.30869126319885254,
+      7.675290584564209
+    ]
+  },
+  "shared_initial_parameter_sha256": "5dd55dc1a59a3a886bda832931c693f13b4b0a3ab62f3af7508712913366e9e2",
+  "training_index_sha256": "a0700f99f870a0485932e9c4034eca715204bc14a677ab7b2273b31cf2accafc",
+  "prediction_index_sha256": "e73e95e20283f2fcd4315c2f480580245cb6bc8b851dc4d029f01a4e6f844962",
+  "settings_lock_sha256": "35cd0f71b61674ae5d269f842c6311d9db1af8b9509f1c8100703ed80c6cbffb",
+  "code_sha256": "0d4e195f30436174413b7d2ed2dc14a6c9459ed262546bf2fababeb29bfed9d6",
+  "PID": 24668,
+  "fresh_model_performance_read": false
+}

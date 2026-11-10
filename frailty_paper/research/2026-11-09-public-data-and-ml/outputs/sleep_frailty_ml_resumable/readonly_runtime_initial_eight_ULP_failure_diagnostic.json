@@ -1,0 +1,248 @@
+{
+  "time_UTC": "2026-11-09T02:27:16.508488+00:00",
+  "strict_eight_ULP_wrapper_admission_failed": true,
+  "scientific_continuation_authorized": false,
+  "comparison_diagnostics": {
+    "original_vs_wrapper": {
+      "differences": [
+        {
+          "path": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 2.0,
+          "relative_L2": 7.92923667185687e-11
+        },
+        {
+          "path": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 1.1641532182693481e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 4.744600035704408e-08
+        },
+        {
+          "path": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 6.984919309616089e-10,
+          "max_ULP": 3.0,
+          "relative_L2": 1.269585298728033e-07
+        },
+        {
+          "path": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 1.7053025658242404e-13,
+          "max_ULP": 6.0,
+          "relative_L2": 2.9917879129174453e-07
+        },
+        {
+          "path": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 5.377035731665197e-08
+        },
+        {
+          "path": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.842170943040401e-14,
+          "max_ULP": 2.0,
+          "relative_L2": 9.635270463296178e-08
+        },
+        {
+          "path": "optimizer/state/4/exp_avg",
+          "scalars": 12,
+          "over_eight_ULP": 1,
+          "max_abs": 4.3655745685100555e-11,
+          "max_ULP": 12.0,
+          "relative_L2": 1.6069246229558593e-08
+        },
+        {
+          "path": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 1.7763568394002505e-15,
+          "max_ULP": 2.0,
+          "relative_L2": 4.830607057254005e-09
+        }
+      ],
+      "summary": {
+        "over_eight_ULP_scalars": 1,
+        "max_absolute_difference": 6.984919309616089e-10,
+        "max_relative_tensor_L2": 2.9917879129174453e-07
+      },
+      "CPU_MPS_and_NumPy_RNG_and_schedule_exact": true,
+      "objectives": {
+        "left": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ],
+        "right": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ]
+      }
+    },
+    "wrapper_vs_continued": {
+      "differences": [
+        {
+          "path": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 1.1641532182693481e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 5.042984437342118e-11
+        },
+        {
+          "path": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 1.1641532182693481e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 4.744600144879499e-08
+        },
+        {
+          "path": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 2.0,
+          "relative_L2": 6.000779000475223e-08
+        },
+        {
+          "path": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 8.526512829121202e-14,
+          "max_ULP": 4.0,
+          "relative_L2": 1.4258788240310168e-07
+        },
+        {
+          "path": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 5.377035871464204e-08
+        },
+        {
+          "path": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.842170943040401e-14,
+          "max_ULP": 2.0,
+          "relative_L2": 1.0554909130689592e-07
+        }
+      ],
+      "summary": {
+        "over_eight_ULP_scalars": 0,
+        "max_absolute_difference": 2.3283064365386963e-10,
+        "max_relative_tensor_L2": 1.4258788240310168e-07
+      },
+      "CPU_MPS_and_NumPy_RNG_and_schedule_exact": true,
+      "objectives": {
+        "left": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ],
+        "right": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ]
+      }
+    },
+    "original_vs_old_repeat": {
+      "differences": [
+        {
+          "path": "parameters/head.cell_activity_weight",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 1.1641532182693481e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 7.92923667185687e-11
+        },
+        {
+          "path": "parameters/head.cell_activity_bias",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 2.0,
+          "relative_L2": 9.489200071408816e-08
+        },
+        {
+          "path": "optimizer/state/0/exp_avg",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 2.0,
+          "relative_L2": 7.231824552703886e-08
+        },
+        {
+          "path": "optimizer/state/0/exp_avg_sq",
+          "scalars": 36,
+          "over_eight_ULP": 0,
+          "max_abs": 8.526512829121202e-14,
+          "max_ULP": 4.0,
+          "relative_L2": 1.5766314412227711e-07
+        },
+        {
+          "path": "optimizer/state/2/exp_avg",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.3283064365386963e-10,
+          "max_ULP": 1.0,
+          "relative_L2": 5.377035731665197e-08
+        },
+        {
+          "path": "optimizer/state/2/exp_avg_sq",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.842170943040401e-14,
+          "max_ULP": 2.0,
+          "relative_L2": 1.2927071842515686e-07
+        },
+        {
+          "path": "optimizer/state/4/exp_avg_sq",
+          "scalars": 12,
+          "over_eight_ULP": 0,
+          "max_abs": 2.6645352591003757e-15,
+          "max_ULP": 3.0,
+          "relative_L2": 7.245910585881008e-09
+        }
+      ],
+      "summary": {
+        "over_eight_ULP_scalars": 0,
+        "max_absolute_difference": 2.3283064365386963e-10,
+        "max_relative_tensor_L2": 1.5766314412227711e-07
+      },
+      "CPU_MPS_and_NumPy_RNG_and_schedule_exact": true,
+      "objectives": {
+        "left": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ],
+        "right": [
+          0.2727402448654175,
+          0.2837400436401367,
+          0.27572160959243774,
+          0.30491724610328674
+        ]
+      }
+    }
+  },
+  "scope": "Numerical failure diagnosis; no bound changed and no successful scientific validation claimed."
+}

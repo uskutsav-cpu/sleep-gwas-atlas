@@ -1,0 +1,10 @@
+"""Independent150bp source-input arithmetic and DNA symmetries, no effect outcomes."""
+from common import *
+from sequence_features import Encoder,tokenize,model,motif_model,patterns
+def main():
+    rows=list(csv.DictReader((DATA/'reserved_physical_design.csv').open()));receipt=json.loads((OUT/'reserved_feature_receipt.json').read_text());assert sha(DATA/'reserved_feature_bank.npy')==receipt['sha256'];x=np.load(DATA/'reserved_feature_bank.npy',mmap_mode='r');encoder=Encoder();rc=lambda s:s.translate(str.maketrans('ACGT','TGCA'))[::-1];checks=[]
+    for i in [0,1000,len(rows)-1]:
+        r=rows[i];a,b=r['reference'],r['alternate'];p=int(r['changed_position']);assert len(a)==len(b)==150;start=p-25;aa=tokenize(a)[None,:].astype('int32');bb=tokenize(b)[None,:].astype('int32');pp=np.array([p],dtype='int32');context=np.array(model.strand_features(aa,bb,pp,encoder.numpy_weights))[:,:128];a51=aa[:,start:start+51];b51=bb[:,start:start+51];p51=np.array([25],dtype='int32');local=np.array(model.strand_features(a51,b51,p51,encoder.numpy_weights))[:,128:];motifs=motif_model.scan_numpy(a51,b51,p51,encoder.numpy_motifs);expected=np.c_[context,local,patterns(a51,b51),motifs];error=float(np.max(abs(x[i:i+1]-expected)));assert error<5e-5,(i,error)
+        swapped=encoder.features([b],[a],[p]);reverse=encoder.features([rc(a)],[rc(b)],[149-p]);se=float(np.max(abs(swapped-x[i:i+1])));re=float(np.max(abs(reverse-x[i:i+1])));assert se<5e-5 and re<5e-5,(i,se,re);checks.append({'design_index':i,'native_length':150,'independent_NumPy_max_error':error,'allele_swap_max_error':se,'reverse_complement_max_error':re})
+    write_json(OUT/'reserved_input_arithmetic_audit.json',{'passed':True,'examples':checks,'source_receipt_sha256':sha(OUT/'reserved_feature_receipt.json'),'effect_values_or_model_performance_read':False,'scope':'Native150bp sequence numerical reconstruction and molecular-magnitude symmetry; not biological prediction validation.'});print('INDEPENDENT150BP INPUT AND SYMMETRY AUDIT PASSED',flush=True)
+if __name__=='__main__':main()

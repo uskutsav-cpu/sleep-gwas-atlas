@@ -1,0 +1,12 @@
+# Candidate allele-frequency orientation: subgroup sensitivity
+
+The previous comparison used all 503 European-labeled 1000 Genomes reference individuals. When repeated in the small Finnish (FIN, n=99) and British (GBR, n=91) subgroups, **21 of 22** and **22 of 22** candidate frequencies, respectively, are closer to the complemented TwinGene frequency than to the reported TwinGene frequency under the shared-EA assumption. These reference subgroups are not the TwinGene cohort; FIN is Finnish, whereas TwinGene is Swedish. This check is descriptive, and those 22 candidate comparisons are neither independent nor confirmatory.
+
+The noteworthy exceptions illustrate why frequency alone cannot settle the allele convention:
+
+- **rs2155292:** FIN counted-allele frequency is 0.611, compared with a reported TwinGene value of 0.555 and its complement 0.445. The reported value is closer in FIN, while the complement is closer to GBR frequency 0.401 and pooled EUR frequency 0.436. Its UKB frequency is 0.386. This can reflect subgroup sampling or population differences and does not prove an allele mismatch.
+- **rs6452792:** The reported TwinGene frequency and its complement are 0.513 and 0.487. They are close to each other, so even a close reference frequency carries little information about orientation. The reference frequencies are 0.470 in FIN and 0.495 in GBR. The pooled EUR frequency was 0.531, making the reported TwinGene frequency slightly closer in the pooled analysis.
+
+The orientation evidence is strongest as a broad pattern across variants plus the separate meta-beta reconstruction, not as a definitive statement at any one SNP. Frequencies do not prove that the beta and frequency columns use the same allele. Small subgroups, population differences, relatedness, assay or imputation discrepancies and variants with multiple possible alleles all limit inference; no uncertainty intervals or formal tests were calculated. Exact source-coding confirmation is still needed.
+
+[All 22 subgroup results](22_candidate_frequency_reference_subgroups.csv); [summary](22_candidate_frequency_reference_subgroups.json); [genome-wide frequency audit](twingene_frequency_orientation_review.md). The reference frequencies were computed from the named biallelic reference records and matched to the candidate counted allele. The comparison follows the same biallelic-complement assumptions as the preceding audit. No individual genotypes were saved. Script: `work/candidate_frequency_orientation_subgroups.py`.

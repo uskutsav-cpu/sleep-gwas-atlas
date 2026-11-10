@@ -1,0 +1,31 @@
+{
+  "dataset": "Retallick-Townsley 2026 Supplementary Data 2 baseline and library",
+  "source_url": "https://doi.org/10.1038/s41467-026-77114-x",
+  "source_workbook_sha256": "6a11d273e8cdaef65624bc80b0430495fd425d51165601fc6d0995730bfa4063",
+  "pair_group_count": 2370,
+  "excluded_reasons": {
+    "not_unique_pair": 1357,
+    "excluded_label": 51
+  },
+  "train_n": 801,
+  "train_detected": 110,
+  "holdout_chromosomes": [
+    1,
+    2
+  ],
+  "test_n": 161,
+  "test_detected": 32,
+  "test_prevalence": 0.19875776397515527,
+  "test_auroc": 0.516593992248062,
+  "test_average_precision": 0.2983317591843021,
+  "features": "absolute allele-pair differences in ACGT 1-3-mer counts; train-only standardization",
+  "model": "L2 logistic regression, lambda 0.1, 4000 fixed iterations, learning rate 0.05",
+  "target": "author FDR <=0.05 versus nonsignificant assay call; not a functional vs nonfunctional truth label",
+  "caveats": [
+    "Exploratory same-study holdout, no external donor or study validation.",
+    "Selected variants and binary statistical detection depend on assay power and selection; nonsignificant is not a biological negative.",
+    "This task is not disease prediction and cannot validate insomnia-frailty scores.",
+    "No AlphaGenome outputs or derivatives used.",
+    "Article CC BY-NC-ND: review reuse and redistribution terms."
+  ]
+}

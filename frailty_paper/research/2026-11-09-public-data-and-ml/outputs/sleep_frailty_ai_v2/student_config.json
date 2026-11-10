@@ -1,0 +1,28 @@
+{
+  "seed": 1207,
+  "trigger": "Exploratory additional experiment after round1 failed to show AVI-input benefit",
+  "best_avi_validation_AP": 0.04970637037657582,
+  "best_dna_validation_AP": 0.05358667610520716,
+  "target": "Measured NGN2 call plus auxiliary standardized/clipped raw AVI",
+  "auxiliary_loss_weight": 0.05,
+  "avi_input_to_assay_head": false,
+  "teacher_mean_training": 0.16847793757915497,
+  "teacher_sd_training": 0.2366621196269989,
+  "teacher_clip": [
+    -5,
+    5
+  ],
+  "warmup_max_epochs": 20,
+  "warmup_patience": 5,
+  "finetune_max_epochs": 4,
+  "finetune_patience": 2,
+  "batch_size": 32,
+  "head_lr": 0.0003,
+  "encoder_lr": 1e-05,
+  "fine_tune": "last native block and final normalization; original first block and nucleotide embedding fixed",
+  "checkpoint_selection": "validation assay average precision only",
+  "independence": "Learning to approximate AVI is auxiliary supervision, not experimental or disease validation",
+  "post_round1_extension": true,
+  "evaluation_status": "Reused benchmark and the first external study have now been observed; subsequent checks on them are development comparisons, not fresh independent validation",
+  "architecture_and_loss": "Same auxiliary architecture, loss and learning rates specified before round1 performance; the decision to execute despite the failed trigger is new and exploratory"
+}

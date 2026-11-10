@@ -1,0 +1,20 @@
+{
+  "time_UTC": "2026-11-09T02:28:35.366783+00:00",
+  "known_failure_preserved": "readonly_runtime_initial_eight_ULP_failure_diagnostic.json",
+  "initial_strict_auditor_sha256": "d8bc0c500da98c176aa8b49724a3ef6de1fe12f6ea7e03cf2b7c08dae994a2cf",
+  "fixed_new_controls": [
+    "readonly_wrapper_original_control1",
+    "readonly_wrapper_original_control2"
+  ],
+  "control_design": "Two fresh unchanged original-MPS trainer processes; adapt_last_stage, none, seed42, actual four full-batch updates. Report every control and every prior comparison; no cherry-picking or scientific fit initialization.",
+  "legacy_eight_ULP_check": "Retain and report it. The old-reference wrapper comparison has already failed by one optimizer scalar, at twelve ULP and absolute difference 4.3655745685100555e-11.",
+  "additional_float32_comparison": {
+    "absolute_tolerance": 1e-09,
+    "relative_tolerance": 1e-06,
+    "all_float_parameter_and_optimizer_scalars_checked": true,
+    "non_float_state_RNG_schedule_and_initial_restoration": "Exact"
+  },
+  "rationale": "A per-value ULP-only bound treats tiny optimizer moments as large errors. Add an explicit absolute floor and small relative float32 tolerance, uniformly for all values and all original/native/wrapper comparisons. This remains a numerical engineering criterion, not a biological success threshold. No model, label, epoch, source or predictive gate is changed.",
+  "controls_not_yet_run": true,
+  "scientific_continuation_authorized": false
+}

@@ -1,0 +1,51 @@
+SLEEP–FRAILTY MOLECULAR AI MODEL
+
+What was built
+A trained research model that ranks DNA changes for laboratory follow-up. It predicts source-specific DNA activity/effect readouts in two neural lab settings. It does not predict whether a person develops insomnia or frailty.
+
+What was actually trained
+The final neural heads and context/variant networks were trained by backpropagation. The source tiny HyenaDNA encoder and HOCOMOCO DNA-binding patterns stay fixed in these final versions. Small conditional combination models learn coefficients and training-only score references. AlphaGenome itself was not fine-tuned. Only the designated permissible downloadable AVI scores were used.
+
+How the model was chosen
+12 finite model families were compared over three development chromosome splits, with separate results for both studies. Neural candidates use fixed three-seed means. The strongest detector and strongest within-active variant ranker were chosen by the written development criteria. Final neural epochs were fixed from the development folds before refitting on all development chromosomes 4–22.
+These folds were used for optimization, early stopping and selection. The conditional combination layer also has cross-fold base-fitting dependencies. These are not unbiased nested-CV estimates. The separate reserved evaluation is the performance check.
+
+Selected roles
+overall_assay_call_detector: final_biological_avi_input_ensemble
+within_active_variant_ranker: final_stacked_contrast_no_avi
+
+Reserved evaluation
+Siraj: the fixed original library on chromosomes 1–3, with 355 additional rows close to previously analyzed Salomon/Retallick regions excluded before prediction. The strict set has 18,569 DNA changes. Original full-set results remain in the machine-readable report.
+Salomon: previously used project study data; its chromosome1–3 result is not a new independent-study replication.
+No reserved result was used to refit or reselect these models.
+
+Salomon_NGN2
+  all_calls: n=9,176; detected calls=223; call rate=0.0243; AUROC=0.5992 (95% CI 0.5656–0.6344); average precision=0.0354 (95% CI 0.0282–0.0516).
+  measured_active_regions: n=798; detected calls=87; call rate=0.1090; AUROC=0.6670 (95% CI 0.6011–0.7283); average precision=0.2015 (95% CI 0.1471–0.2918).
+
+Siraj_OL42_SKNSH
+  all_calls: n=18,569; detected calls=1,265; call rate=0.0681; AUROC=0.7794 (95% CI 0.7662–0.7927); average precision=0.2579 (95% CI 0.2357–0.2831).
+  measured_active_regions: n=3,728; detected calls=1,265; call rate=0.3393; AUROC=0.6437 (95% CI 0.6249–0.6626); average precision=0.4879 (95% CI 0.4597–0.5199).
+
+Observed matched comparisons (average precision; see CSV for paired intervals)
+  Salomon_NGN2 / all_calls: selected=0.0354, comparator=0.0363; difference=-0.0009,95% interval -0.0092to+0.0023. AP difference uncertain at this nominal interval. Comparator: final_motif_chromatin_no_avi_ensemble
+  Salomon_NGN2 / measured_active_regions: selected=0.2015, comparator=0.1725; difference=+0.0290,95% interval -0.0162to+0.0807. AP difference uncertain at this nominal interval. Comparator: final_contrast_no_avi_ensemble
+  Salomon_NGN2 / measured_active_regions: selected=0.2015, comparator=0.1685; difference=+0.0329,95% interval +0.0005to+0.0765. Positive nominal paired AP interval. Comparator: final_conditional_avi_only
+  Siraj_OL42_SKNSH / all_calls: selected=0.2579, comparator=0.2362; difference=+0.0217,95% interval +0.0149to+0.0286. Positive nominal paired AP interval. Comparator: final_motif_chromatin_no_avi_ensemble
+  Siraj_OL42_SKNSH / measured_active_regions: selected=0.4879, comparator=0.4553; difference=+0.0327,95% interval +0.0189to+0.0462. Positive nominal paired AP interval. Comparator: final_contrast_no_avi_ensemble
+  Siraj_OL42_SKNSH / measured_active_regions: selected=0.4879, comparator=0.4428; difference=+0.0452,95% interval +0.0229to+0.0685. Positive nominal paired AP interval. Comparator: final_conditional_avi_only
+
+Did AlphaGenome help?
+Compare matched models and the AVI-only references in final_evaluation_metrics.csv and the paired differences in reserved_evaluation_report.json. A higher score in one selected result alone does not establish that AlphaGenome caused an improvement. The main detector compares with its matching no-AVI model; the conditional ranker compares with its DNA-only expert and the conditional AVI-only classifier. All tested versions and disagreements are retained.
+The motif activity+AVI auxiliary family also drops the absolute-effect auxiliary target, so its contrast with activity+effect does not isolate AVI alone. The contrast-network teacher/no-teacher and detector input/no-input comparisons preserve the other targets and provide the cleaner ablations.
+AUROC is a ranking measure, not percentage-correct accuracy. Average precision should be compared with the call rate. The genomic-block confidence intervals describe within-assay sampling uncertainty and are not adjusted for every reported comparison. A 5 Mb-block sensitivity is provided alongside the primary 1 Mb analysis.
+
+Project predictions
+33 verified reference-to-alternate substitutions were scored in both study contexts. Every candidate has an exact audited AVI score. 924 rows report model roles and flag exact or nearby training overlap. These are experiment-prioritization hypotheses. Candidate disease accuracy, causal genes and original risk-allele direction are not established. Do not compare raw scores between study contexts as a measure of cell-type relevance.
+
+What this does not establish
+Patient insomnia/frailty prediction; independent participant genetic-score validation; genetic correlation; causation; causal-variant-to-gene mapping; age-related or single-cell mechanisms. The physical chromatin inputs are bulk neural proxies, including a neuroblastoma cell line and induced/fetal cell profiles. Nonsignificant assay rows are not proven biologically neutral. Foundation-genome training exposure has not been independently excluded. AVI scores refer to native GRCh38 contexts, which can differ from engineered reporter constructs.
+
+Reproduction and outputs
+predict.py scores raw paired DNA plus caller-verified GRCh38 coordinates and an explicit studied assay context. It uses stored training transformations and does not require an AlphaGenome API key. It requires the hash-verified source model, motif and public-reference files and exact runtime versions. runtime_metadata.json describes the tested macOS ARM environment; a fresh installation or a different operating system is not yet validated.
+The source/exclusion audits, locked plans, trained checkpoints, numerical/raw-input checks, independent R metric checks, full held-out predictions, model comparisons and project predictions remain available. The original GWAS and NHANES analyses were not used as target evidence for this model.

@@ -1,0 +1,26 @@
+# Project markers in the SJLIFE portal: preliminary screen
+
+On 29 October 2026, the free [St. Jude Survivorship Portal](https://viz.stjude.cloud/cancer-survivorship/visualization/st-jude-survivorship-portal~18) was queried with SJLIFE selected and no cohort-wide filter. Its SNP Genotype tool returned the following aggregate charts:
+
+| Query | Displayed genotypes | Total |
+|---|---|---:|
+| rs12536335 | A/A 1,695; A/G 2,081; G/G 705 | 4,481 |
+| rs4886140 | A/A 484; A/G 1,872; G/G 2,125 | 4,481 |
+
+Both rsIDs occur in each project prototype, and both displayed allele pairs correspond to A/G. This is stronger than merely knowing that the portal contains WGS: it shows that the browser reports these two variants in the selected cohort. The equal totals alone do not prove the same participants were called at both variants, or that any have complete phenotypes and other score markers. The portal chart does not by itself verify genome build, strand, allele-specific representation, genotype quality, sample overlap, or whether third alleles were excluded or recoded; `rs4886140` has a multiallelic reference annotation in the project. Its A/G output should not be assumed to establish a biallelic dataset. The 15- and 22-marker prototypes count opposite alleles at both these rsIDs; see [crosswalk](score_15_22_shared_marker_crosswalk.md).
+
+This lookup is not an association analysis and does not compute or validate either score. The remaining score markers, per-sample intersection, exact alleles, and relevant frailty or sleep outcomes still need to be checked. Portal documentation describes interactive analysis as free and individual-level download as controlled access. A full weighted score needs an explicitly supported calculation in the portal or properly authorized genotypes; marginal genotype totals cannot reconstruct individual sums. The result is not evidence that the two variants cause or predict insomnia or frailty.
+
+## Attempted rs12536335–grip regression
+
+In the existing SJLIFE adult-baseline-age ≥18 grip model, the portal's **list of variants** workflow accepted `rs12536335 A` under the European-ancestry restriction and identified A as the reference and G as the alternative. It reported 2,909 genotyped samples within that selected subset and allele frequencies A 55.48%, G 44.52%; genotypes A/A 30.35%, A/G 50.26%, G/G 19.39% (rounded). These are subset frequencies, not independent replication. The prospective model was additive with A as the specified effect allele, dropping missing genotypes, with sex, baseline age, and SJLIFE PC1 and PC2. The portal reports that entered variants are treated as separate covariates; this is not a custom weighted score.
+
+After submission the genotype term displayed a server-side **cannot read file** error and the Run analysis control was disabled. No rs12536335 association estimate was produced. The genotype frequency display therefore establishes only the portal's reported lookup for that subset, not a successful model, full score coverage, source GWAS harmonization, or validated biological interpretation. The prior insomnia PGS regression was a different model; it must not be attributed to this marker. This portal session remains available for troubleshooting or further tests.
+
+### Alternative locus route (29 October 2026)
+
+The regression dictionary search returned no match for `rs12536335`. The **Variants in a locus** route resolved the rsID to portal hg38 interval `chr7:114403103-114403104`, selected one variant and reported 2,909 European-ancestry samples with valid genotypes. The setup specified an additive model, minor effect allele, and automatic adjustment for the top 10 ancestry PCs; the existing age, sex, and PC1/PC2 terms remained in the model. The user-facing portal then returned a server-side `cannot read file` error for its SNP genotype cache when Run analysis was pressed. The coefficients still displayed below the error were from the previous covariate-only model, not the variant model. No marker association was obtained. This is a separate failed route to the same project marker, not evidence of an association or score validation. The alternative route cannot establish a weighted score; the portal states locus variants are analyzed in separate models.
+
+## Fresh-session retry
+
+On 29 October 2026, a new unauthenticated portal session again accepted `rs12536335 A` in the European-ancestry variant-list workflow. It displayed 3,554 valid genotypes and 3,203 participants with both grip and genotype information before model fitting; the setup specified an additive effect, dropping missing genotypes and automatic adjustment for 10 genetic PCs. These counts refer to the unfiltered fresh session and differ from the earlier adult-age-restricted setup. On running the model, the portal again returned a server-side `cannot read file` error for its genotype cache. No regression coefficient was produced; this was a service check rather than a prespecified association model and did not include age or sex covariates. The UI states that variants in a list are separate regression covariates, so it does not establish a facility for submitting the custom weighted scores. The earlier source and target allele, overlap and outcome limitations remain. No individual data were accessed.

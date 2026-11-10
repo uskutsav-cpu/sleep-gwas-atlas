@@ -1,0 +1,9 @@
+# rs6938026: additional candidate genes in the CUL9-labeled region
+
+The exploratory marker rs6938026 (chr6:43217995 A>G, GRCh38) overlaps candidate distal enhancer EH38E3708893 (chr6:43217889–43218082, zero-based half-open). Although the project's original candidate context includes CUL9, [SCREEN](https://screen.wenglab.org/GRCh38/ccre/EH38E3708893/genes) lists ENSG00000245261, DNPH1 and TTBK1 as the closest annotated genes. Proximity alone is not a causal assignment.
+
+SCREEN lists five CTCF ChIA-PET contacts from the element to DNPH1, including records in activated naïve and memory CD4 T-cell contexts, and exact-variant GTEx v8 eQTL associations with DNPH1 in skeletal muscle and CUL7 in whole blood. CUL7 and CUL9 are different genes. The [contact table](stage5_cul9_region_ccre_contact_results.csv) records the experiments and biosamples. Contact and eQTL associations do not show that this allele causes a contact change or mediates a sleep/frailty effect; GTEx data and ENCODE assays may overlap model training.
+
+The [seven element-level STARR-seq tests](stage5_cul9_region_ccre_reporter_results.csv) shown by SCREEN all have displayed nominal p-values above 0.05; the SH-SY5Y neuroblastoma result is log₂ fold change 0.14, p = 0.79, FDR = 1.00. These are not allele-specific tests, and the cell lines do not cover all relevant tissues. SCREEN reports no region-centric MPRA or CRISPR perturbation data for this element in its catalog. Lack of a listed test is not evidence that an effect is absent.
+
+These findings nominate DNPH1 and CUL7 for follow-up alongside the existing CUL9 context, but do not resolve which gene or cell type connects the locus to either trait. Full-precision AlphaGenome predictions, disease–QTL colocalization and independent allele-specific experiments remain needed.

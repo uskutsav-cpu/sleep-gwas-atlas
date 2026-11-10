@@ -1,0 +1,35 @@
+{
+  "data_sha256": "2912b381b5e5640d69e9983735ab09ccad3f592f236dc70b2eea4839519b745c",
+  "pairs_sha256": "53f948a93c8bb7e7d50791080d08eeb750e0d73fb97ca127da43066b941050f1",
+  "channel_receipt_sha256": "a982823a27f350b278d575d7518143e363de99d81cea0a597465436bd975c977",
+  "primary_endpoint": "Original measured absolute log2 effect magnitude. Same context-balanced MAE as prior versions, unmodified by SE; detection is not a training target. No denoised component replaces this endpoint.",
+  "architecture": "Shared cell/line-conditioned odd signed-effect branch over fixed per-reader global/local mean and difference projections, symmetric mean-activity branch and positive assay-noise branch. Observed magnitude is the median of abs(N(predicted signed effect,predicted assay SD)).",
+  "structural_invariants": "Allele swapping negates the signed effect and preserves magnitude; identical allele inputs have zero signed component. The observed-magnitude component can remain positive due to assay variability.",
+  "recipes": [
+    "observation_only",
+    "measurement_consistency"
+  ],
+  "held_studies": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "epochs": 8,
+  "seed": 42,
+  "comparison": "Identical architecture, initial parameters, rows, normalization, batches, primary/RNA/paired objectives and update count. Only measurement_consistency adds the two declared measurement auxiliaries.",
+  "extra_auxiliaries": "0.05 robust folded-Gaussian consistency with original measured SE, and 0.05 smooth-L1 agreement of log predicted assay SD with log source SE. Apply context/precision weights as other auxiliaries; original main magnitude MAE remains unchanged. Missing SE stays absent.",
+  "auxiliary_assumptions": "Reported SE approximates coefficient sampling variation; Gaussian folded observation is a working approximation, with square-root robust deviance for large residuals. Source SE floor 0.001 is numerical regularization. Neither component is validated biological truth or a calibrated confidence interval.",
+  "normalization": "Mean-channel location and SD estimated from unique training physical banks only; signed-difference channels use training RMS without centering to preserve allele antisymmetry. Physical length/position normalization uses training banks only.",
+  "source_transforms": "Same earlier training-only source/cell activity centers and SE precision scaling. No current measured RNA, SE, p value, study ID, experiment ID or new-study label is supplied at inference.",
+  "selection": "One common recipe/epoch maximizing mean seven whole-source-omission measured-magnitude MAE improvement over training-only cell/culture median. Report local and within-fixed-cell-pair diagnostics separately; no favorable per-source epochs.",
+  "stopping_rule": "Complete exactly this comparison; no epoch, source or architecture expansion inside it. Do not promote from a better auxiliary, latent, detection or within-source score alone.",
+  "new_test_policy": "Ulirsch outcome coefficients are sealed and may be joined only after a justified candidate, confidence rules and predictions are fixed. Previous blood/OL33/Matoba tests are already revealed for any changed model.",
+  "prior_AVI_rejection": "Preserved; no AVI or restricted AlphaGenome teacher values are used in this development comparison.",
+  "pretrained_reader_weights_updated": false,
+  "scientific_objective_complete": false
+}

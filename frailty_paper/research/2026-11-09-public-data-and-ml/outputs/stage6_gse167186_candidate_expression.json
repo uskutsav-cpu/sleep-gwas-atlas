@@ -1,0 +1,44 @@
+{
+  "n_sarcopenia": 24,
+  "n_healthy_older": 29,
+  "results": [
+    {
+      "gene": "FOXP2",
+      "adjusted_difference": 0.4031129820565522,
+      "hc3_se": 0.1604503042256503,
+      "p_unadjusted": 0.015263902316135707,
+      "median_count": 14.0,
+      "zero_count": 0,
+      "bh_q_four_genes": 0.06105560926454283
+    },
+    {
+      "gene": "SMAD5",
+      "adjusted_difference": -0.013395716445895989,
+      "hc3_se": 0.0693229630946381,
+      "p_unadjusted": 0.8475567037359087,
+      "median_count": 113.0,
+      "zero_count": 0,
+      "bh_q_four_genes": 0.8475567037359087
+    },
+    {
+      "gene": "RBM6",
+      "adjusted_difference": 0.19701124482547283,
+      "hc3_se": 0.09733168475140862,
+      "p_unadjusted": 0.04831683916308198,
+      "median_count": 39.0,
+      "zero_count": 0,
+      "bh_q_four_genes": 0.09663367832616396
+    },
+    {
+      "gene": "MEIS1",
+      "adjusted_difference": 0.36633932556845195,
+      "hc3_se": 0.20820759730750527,
+      "p_unadjusted": 0.08461173846660298,
+      "median_count": 6.0,
+      "zero_count": 1,
+      "bh_q_four_genes": 0.11281565128880398
+    }
+  ],
+  "method": "exploratory OLS log2 CPM on group and age, HC3 robust SE and BH across four selected genes",
+  "limitations": "Sex unavailable in sample metadata, batch and cell composition unadjusted, small postselected, raw count model; sarcopenia not equivalent to FI/FFS; no insomnia or score validation"
+}

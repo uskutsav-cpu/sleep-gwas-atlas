@@ -1,0 +1,10 @@
+import csv,pathlib,hashlib,json
+fi={'LRPPRC':{'utmost_p':3.32e-5,'utmost_fdr':1.03e-2,'fusion_z':-5.20,'fusion_p':1.96e-7,'fusion_fdr':1.32e-4,'lead':'rs4953032'},'HTT':{'utmost_p':1.51e-8,'utmost_fdr':5.63e-5,'fusion_z':4.30,'fusion_p':1.68e-5,'fusion_fdr':4.04e-3,'lead':'rs362273'},'SNU13':{'utmost_p':1.15e-4,'utmost_fdr':2.40e-2,'fusion_z':-4.03,'fusion_p':5.57e-5,'fusion_fdr':1.04e-2,'lead':'rs1052717'},'CCDC134':{'utmost_p':1.94e-4,'utmost_fdr':3.15e-2,'fusion_z':3.97,'fusion_p':7.25e-5,'fusion_fdr':1.22e-2,'lead':'rs1052717'}}
+sleep={'LRPPRC':{'utmost_p':1.46e-4,'utmost_fdr':.01,'fusion_z':-3.70,'fusion_p':.000214,'fusion_fdr':.02,'lead':'rs7568481'},'CCDC134':{'utmost_p':4.62e-5,'utmost_fdr':4.80e-5,'fusion_z':3.08,'fusion_p':.00206,'fusion_fdr':.07,'lead':'rs7285782'},'VRK2':{},'MMRN1':{},'C2orf69':{},'MEI1':{},'CPEB2':{},'RP5-821D11.7':{},'ACAA2':{},'LL22NC03-86G7.1':{},'TEF':{},'XRCC6':{},'AC074286.1':{},'PPM1F':{},'ATP5A1':{}}
+assert len(fi)==4 and len(sleep)==15 and set(fi)&set(sleep)=={'LRPPRC','CCDC134'}
+rows=[]
+for gene in sorted(set(fi)&set(sleep)):
+ a,b=fi[gene],sleep[gene];rows.append({'gene':gene,'fi_utmost_p':a['utmost_p'],'fi_utmost_fdr':a['utmost_fdr'],'fi_fusion_z':a['fusion_z'],'fi_fusion_p':a['fusion_p'],'fi_fusion_fdr':a['fusion_fdr'],'fi_top_gwas_marker':a['lead'],'insomnia_utmost_p':b['utmost_p'],'insomnia_utmost_fdr':b['utmost_fdr'],'insomnia_fusion_z':b['fusion_z'],'insomnia_fusion_p':b['fusion_p'],'insomnia_fusion_fdr':b['fusion_fdr'],'insomnia_top_gwas_marker':b['lead'],'fi_source':'https://doi.org/10.3389/fgene.2024.1404456','insomnia_source':'https://doi.org/10.1152/jn.00490.2024','status':'Intersection of 4 and 15 published reported genes; same gene symbol does not establish same causal signal or independent evidence; no new TWAS run'})
+p=pathlib.Path('outputs/stage3_published_fi_insomnia_twas_intersection.csv')
+with p.open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=rows[0].keys());w.writeheader();w.writerows(rows)
+print('intersection',len(rows),[x['gene'] for x in rows],'file sha256',hashlib.sha256(p.read_bytes()).hexdigest())

@@ -1,0 +1,127 @@
+{
+  "selected_record": {
+    "name": "contrast_full_val4-5_effect_avi_s42",
+    "family": "context_variant_mixture",
+    "features": "context_variant_biological",
+    "config": {
+      "task": "effect_avi",
+      "seed": 42,
+      "best_epoch": 3,
+      "locked_config": "contrast_full_val4-5_locked_config.json"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.6061784704927667,
+          "average_precision": 0.056136953203810874,
+          "AP_skill_over_prevalence": 0.033819347513831866,
+          "brier_uncalibrated": 0.02243313345727653
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.7608514807166897,
+          "average_precision": 0.2471301671599552,
+          "AP_skill_over_prevalence": 0.19103550325384455,
+          "brier_uncalibrated": 0.058918268392644184
+        }
+      },
+      "macro_AP_skill": 0.11242742538383821
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.6061784704927667,
+            "average_precision": 0.056136953203810874,
+            "AP_skill_over_prevalence": 0.033819347513831866,
+            "brier_uncalibrated": 0.02243313345727653
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.7608514807166897,
+            "average_precision": 0.2471301671599552,
+            "AP_skill_over_prevalence": 0.19103550325384455,
+            "brier_uncalibrated": 0.058918268392644184
+          }
+        },
+        "macro_AP_skill": 0.11242742538383821
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5867513020833333,
+          "average_precision": 0.1256603820600256,
+          "AP_skill_over_prevalence": 0.043691042878153015,
+          "brier_uncalibrated": 0.08726827375209954
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.592014743200085,
+          "average_precision": 0.45717890965561814,
+          "AP_skill_over_prevalence": 0.1645407240788983,
+          "brier_uncalibrated": 0.2236639710176045
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.6123046875,
+          "average_precision": 0.1480734867357009,
+          "AP_skill_over_prevalence": 0.06820537611717285,
+          "brier_uncalibrated": 0.0809634950014808
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5492308385034237,
+          "average_precision": 0.4127218118330666,
+          "AP_skill_over_prevalence": 0.09611653162016676,
+          "brier_uncalibrated": 0.26932509875998145
+        }
+      },
+      "macro_conditional_AP_skill": 0.10411588347852566,
+      "joint_selection_skill": 0.10827165443118193
+    },
+    "artifact": "models/contrast_full_val4-5_effect_avi_s42.npz",
+    "parameter_change_norms": {
+      "context.w1": 17.60773468017578,
+      "context.b1": 0.46756479144096375,
+      "context.w2": 1.7737970352172852,
+      "context.b2": 0.2284388244152069,
+      "variant.w1": 5.881937503814697,
+      "variant.w2": 0.7413524389266968,
+      "modulation.w": 0.7661426663398743,
+      "modulation.b": 0.11670324206352234,
+      "gate.w": 0.2299300581216812,
+      "gate.b": 0.04473935067653656,
+      "conditional.w": 0.1439417004585266,
+      "conditional.b": 0.02106381393969059,
+      "activity.w": 0.11996427178382874,
+      "activity.b": 0.12663766741752625,
+      "effect.w": 0.1700732260942459,
+      "avi.w": 0.07701024413108826,
+      "avi.b": 0.003852549009025097
+    }
+  },
+  "candidate_count": 4,
+  "selection_rule": "Mean of macro all-call normalized AP skill and macro conditional-active normalized AP skill; all components retained",
+  "test_evaluated": false,
+  "scope": "Variant-focused validation search; final model-family selection and blind evaluation pending"
+}

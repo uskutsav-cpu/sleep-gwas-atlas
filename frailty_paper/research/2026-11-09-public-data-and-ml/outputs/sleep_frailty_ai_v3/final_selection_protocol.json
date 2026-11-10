@@ -1,0 +1,48 @@
+{
+  "created_utc": "2026-11-07T18:02:53.633378+00:00",
+  "development_adaptation_disclosure": "The exact final selection/refit rule was formalized after the first broad fold and contrast results from the second fold had been inspected, before the remaining broad-fold fits and before any reserved Siraj chromosome prediction. It is a development decision, not a fully preregistered analysis.",
+  "candidate_set": "All nine fixed families in the three-fold development plan. Neural candidates use the fixed three-seed mean; no individual-seed cherry-picking. Classical settings selected by earlier4\u20135 screening are retained.",
+  "selection_rule": {
+    "overall_assay_call_detector": "Highest unweighted mean of three fold macro(two studies)normalized APskill",
+    "within_active_variant_ranker": "Highest unweighted mean of three fold macro(two studies)conditional-active normalized APskill; contrast uses active expert, other models use overall score within active evaluation rows",
+    "tie_rule": "Only exact floating-point ties use lexical family name; no performance threshold is silently introduced"
+  },
+  "refit_rule": {
+    "data": "All eligible development chromosomes4\u201322; no reserved1\u20133 fitting or early stopping",
+    "neural_seeds": [
+      42,
+      73,
+      101
+    ],
+    "epochs": "For each selected family and seed, round the median of its three development-fold best epochs to nearest positive integer (half rounded upward). Keep the original optimizer, transforms, targets and loss weights. No new stopping decision on reserved data.",
+    "classical": "Clone the prespecified screening-selected estimator, fit all imputation/scaling/weights on development4\u201322, with training class weights recomputed",
+    "ensemble": "Arithmetic mean over fixed neural seeds; retain both task models if selected families differ"
+  },
+  "final_evaluation": "After checkpoint replay and raw-input validation, write selection/artifact SHA256 manifest and explicitly gated once-only evaluation. Show both selected roles, fullAVI-only, sequence-pattern and physical-chromatin comparators. Prior Salomon study performance is reused study evidence; Siraj fixed-library chromosomes are the reserved study result. No test-driven reselection or redesign.",
+  "uncertainty": "Report per-study AUROC/AP and base rates, conditional-active scores separately; paired1Mb genomic block bootstrap with fixed1000replicates, plus5Mb500-replicate sensitivity. These express within-assay sampling uncertainty, not independent donors or clinical generalization.",
+  "evaluation_scope": "Molecular assay effect/detection calls, not sleep/frailty disease prediction, causal genes, PRS validation or genetic correlation.",
+  "test_evaluated": false,
+  "matched_neural_ablation_refits": {
+    "added_utc": "2026-11-07T18:23:58.015073+00:00",
+    "purpose": "Paired final comparison of AlphaGenome inputs/auxiliary targets against matching no-AVI neural families. These comparisons are scientifically necessary for attribution; model role selection remains based only on completed development folds.",
+    "families": [
+      "contrast_no_avi",
+      "contrast_avi_teacher",
+      "motif_chromatin_no_avi",
+      "motif_chromatin_avi_teacher",
+      "biological_avi_input"
+    ],
+    "fit_rule": "Refit all five already-prespecified development families with the same median-per-seed fixed epoch rule and all development data. No new architecture, task, target, hyperparameter search or reserved-test selection.",
+    "post_evaluation_constraint": "Report matched differences without changing the preselected primary model on test performance.",
+    "disclosure": "Added after most development results were available and before any final recipe lock, refit or reserved evaluation. This is not a fully preregistered study."
+  },
+  "conditional_combination_extension": {
+    "added_utc": "2026-11-07T18:31:52.167228+00:00",
+    "specification": "conditional_stacking_prespecification.json",
+    "reason": "Development evidence shows complementary DNA-expert andAVI errors in all6study/fold checks. Test3fixed conditional combination candidates before role selection.",
+    "candidate_total": 12,
+    "selection_rule": "Same mean across3folds/two studies. Add all3combination candidates as final controls; no reserved-test selection.",
+    "nested_CV_qualification": "Explicitly a development comparison. Base-fold stopping and overlapping other-fold fitting mean combination cross-validation is not an unbiased nested-CV estimate. The untouched reserved evaluation remains necessary.",
+    "final_coefficients": "Learn from all measured-active development rows with saved held-fold base scores and training-fitted quantile references. Deployment uses the refitted base ensemble; evaluate possible distribution/calibration shift honestly."
+  }
+}

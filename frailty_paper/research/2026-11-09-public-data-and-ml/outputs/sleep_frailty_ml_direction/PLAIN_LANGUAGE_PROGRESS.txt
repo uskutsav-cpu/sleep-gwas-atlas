@@ -1,0 +1,35 @@
+We recovered more real laboratory information, but the new model is still not strong enough.
+
+The published laboratory software defines the effect as ALT-versus-REF RNA
+enrichment after accounting for the corresponding DNA difference. We checked
+that direction independently with base R and matched 1,799 sampled original
+coefficients across all seven input files exactly. This is a direction and
+source-identity audit, not an independent refit of the original GLM.
+
+A separate file now adds 311,006 original signed development measurements,
+including 232,285 training examples and 78,721 validation examples. No
+calibration or new reserved-study targets were added. These are extra labels
+for existing observations, not that many new DNA variants or people. Sixty-six
+ambiguous source-to-construct allele mappings were excluded.
+
+Seven additional matched training runs finished. The best common setting made
+about 1.45% more absolute error than a typical-effect guess, averaged across
+seven held-out studies. Its matched control at that setting was about 0.97%
+worse than the guess. Nearby ordering was about 53.9%; the small improvement
+there does not override failure on effect size. Cell-difference prediction
+remains weak. The candidate will not generate project predictions.
+
+Independent numerical and gradient checks passed. Those checks establish
+correct calculation and actual learning, not useful scientific prediction.
+
+We found a public cell-matched AlphaGenome-derived resource, but its ordinary
+API-derived features are outside the designated permissive AVI-score training
+exception. It was not used for training. The previous permissible AVI tests
+and their adverse results remain unchanged.
+
+The next diagnostic should establish whether the fixed DNA representations
+contain learnable effect information before another full training exercise.
+The new public blood-cell test remains out of model selection. Useful effect
+prediction, real cell differences, reliable confidence and independent human
+genetic-score validation are still unfinished. Original manuscript, genetic
+and NHANES analyses are preserved.

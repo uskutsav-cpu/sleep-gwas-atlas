@@ -1,0 +1,26 @@
+# A second FI–physical-frailty genetic-correlation analysis
+
+Using independently released FI and modified Fried physical-frailty phenotype (FP) GWAS from [Mak et al.](https://doi.org/10.1111/acel.13868), I estimated their genetic correlation by LD score regression. On 1,158,140 matched SNPs the estimate was **r_g = 0.7958, SE 0.0116**, approximately 95% CI **0.7731–0.8185**. This supports substantial genome-wide overlap between these study-defined constructs. The FP is a 0–5 Fried-style count; it is not necessarily constructed identically to the Ye FFS used in the project's initial comparison.
+
+The [released dataset](https://doi.org/10.6084/m9.figshare.24591573.v1) describes the full FI and FP GWAS as each having 403,041 UK Biobank participants. Identical reported counts do not establish that the individual sets were exactly identical; per-variant N varies. The paper describes a 49-item self-reported FI and an FP with self-reported weight loss, exhaustion, slowness and activity, plus measured grip strength. The FI still includes sleep-related content, while the FP contains exhaustion. Thus this does **not** test removal of sleep or fatigue.
+
+## Same-SNP comparison to the project's original results
+
+The two estimates below are fitted on the same 1,129,146 SNPs, aligned to the same alleles and using the same LD reference and 200 matched jackknife blocks. This support was additionally restricted by the earlier availability of HFRS and FinnGen insomnia statistics.
+
+| Frailty GWAS pair | Genetic correlation r_g (SE) | Approximate 95% CI |
+|---|---:|---:|
+| Original Atkins FI and Ye FFS | 0.7569 (0.0209) | 0.7160–0.7979 |
+| Mak FI and modified FP | 0.7980 (0.0119) | 0.7747–0.8214 |
+
+The post hoc difference (Mak minus original) is **0.0411**, with paired block-jackknife SE 0.0174, approximate 95% CI **0.0070–0.0752**, and unadjusted p = 0.018. This comparison incorporates covariance between estimates through matched genome blocks; it does not correct for the broader exploration of multiple analyses. The pairs share or may share UK Biobank participants, use different source definitions and analysis pipelines, and are not independent replications. It is not possible to attribute the difference to phenotype definitions, inclusion of TwinGene, ascertainment, age, random error or other factors using these data. Both correlations are genetic correlations, not clinical score correlations, risk probabilities, percentages of people affected or evidence of causality.
+
+For the Mak pair on this matched support, FI h² = 0.1371 (SE 0.0043) and FP h² = 0.0663 (SE 0.0027); univariate intercepts were 1.064 and 1.042. The freely estimated cross-trait intercept was 0.4675 (SE about 0.010), which can reflect overlap and other sources of correlated errors. It is not itself phenotypic correlation or an overlap count. Higher h² in one constructed trait does not show it is intrinsically more genetic, and precision does not establish unbiased estimates. The earlier R13-support and Finnish HFRS comparisons retain their own LD and sample-size caveats.
+
+## Source and methods
+
+The Figshare files `fi.fastGWA` and `fp.fastGWA` were downloaded to the project's external working disk; their MD5 values matched the published API metadata (`5cd10928bde27e48b82d38f097696473` and `3ec3de20038f3022eaa9163347b0e194`). Each had 8,983,921 ordered source rows; the row identifiers and positions agreed between the two files. We required unique nonpalindromic SNPs with matching rsID, chromosome, assumed GRCh37 position and allele pair in the project's HapMap3 reference map; finite beta, positive SE and N at least two thirds of 403,041. Z = beta / SE, and each variant's reported N was retained. This recovered 1,158,140 SNPs. Exact position matching strongly supports but does not independently authenticate source build or all allele representations. [GCTA documentation](https://yanglab.westlake.edu.cn/software/gcta) describes fastGWA A1 as the effect allele.
+
+For the four-source comparison, the earlier FI and FFS inputs were intersected with both Mak files and aligned on nonpalindromic allele pairs. All 1,129,146 resulting SNPs matched; the prior source Z scores were already rounded. LDSC used the project's existing European reference scores and unconstrained intercepts. We verified identical native ordered-SNP hashes and block boundaries and recomputed the individual and paired SEs from the 200 delete-block estimates. The small point-estimate change from 0.7958 to 0.7980 reflects the altered SNP support and is not an independent study.
+
+[Preprocessing receipt](mak2023_same_cohort_preparation.json); [paired calculation](mak2023_fi_fp_paired_comparison.json); [original-pair exact LDSC](mak2023_fourway_old.exact.json); [Mak-pair exact LDSC](mak2023_fourway_mak.exact.json); [full-Mak-support exact LDSC](mak2023_fi_fp_ldsc.exact.json). The individual logs accompany these files. Scripts in `work/` are `mak2023_common_ldsc_prepare.py`, `mak_original_fi_fp_common.py`, and `mak2023_paired_contrast.py`. No individual-level phenotypes or genotypes were analyzed, and this result does not validate either sparse candidate score.

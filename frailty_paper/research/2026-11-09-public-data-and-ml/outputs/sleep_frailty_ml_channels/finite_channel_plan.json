@@ -1,0 +1,35 @@
+{
+  "data": "Unchanged 654,612 observations in prior coverage_training_arrays.npz; no blood or OL33 outcomes added.",
+  "source_data_sha256": "2912b381b5e5640d69e9983735ab09ccad3f592f236dc70b2eea4839519b745c",
+  "source_pairs_sha256": "53f948a93c8bb7e7d50791080d08eeb750e0d73fb97ca127da43066b941050f1",
+  "features": "Same 66 scalar/physical inputs plus 16 fixed orthogonal projections of each reader global/local mean and signed allele difference. 192 additional coordinates from three frozen 128-channel readers.",
+  "projection_dimension": 16,
+  "projection_seed": 20261108,
+  "difference_storage_multiplier": 1000.0,
+  "storage_dtype": "float16; cast to float32 and normalize using training-only physical banks.",
+  "recipes": [
+    "scalar_mask",
+    "channel_preserving"
+  ],
+  "held_studies": [
+    "none",
+    "Salomon",
+    "Kosicki2025",
+    "Siraj",
+    "IGVF240K",
+    "Koesterich2023",
+    "McAfee2023",
+    "Retallick2026"
+  ],
+  "epochs": 8,
+  "seed": 42,
+  "architecture": "Same CellMatchedEffectHead with 258 inputs in both arms. Scalar control masks 192 added columns; identical head initialization, data, loss, batches, dropout schedule and updates.",
+  "objective": "Primary actual magnitude MAE unchanged and unmodified by SE; same auxiliary activity and signed targets and paired nearby/cell-difference losses. No detected/not-detected target.",
+  "selection": "One common recipe/epoch by mean seven-whole-source-omission MAE skill over training-only cell/culture medians; held-region pairs reported separately; no per-source selected epoch presented as independent validation.",
+  "stopping_rule": "Complete this one finite information-preservation comparison. Do not expand epochs, projection dimensions or sources within it. No final ensemble/confidence refit or fresh-study test without evidence justifying the selected candidate and a newly specified validation plan.",
+  "prior_tests": "Blood, OL33, Matoba, McAfee and Retallick previously observed results remain at their original frozen versions; none is untouched for a changed model.",
+  "new_untouched_test": "Not yet established. Independently audit original constructs, coefficients, source history and pretrained exposure before claiming new-study validation.",
+  "AVI": "Previously rejected. Not used in this development comparison; no claim to have fine-tuned AlphaGenome.",
+  "pretrained_reader_weights_updated": false,
+  "hypothesis": "Scalar summaries may discard useful channel identity. A successful implementation is not evidence that this hypothesis or scientific objective is true."
+}

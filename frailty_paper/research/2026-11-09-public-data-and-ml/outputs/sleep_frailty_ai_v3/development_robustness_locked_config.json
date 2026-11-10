@@ -1,0 +1,238 @@
+{
+  "created_utc": "2026-11-07T08:36:37.129318+00:00",
+  "folds": [
+    [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ]
+  ],
+  "fixed_neural_families": [
+    "Context/variant contrast with activity and effect targets, no AVI",
+    "Same contrast with full permitted AVI auxiliary target0.05",
+    "Fixed motif+chromatin head with activity and effect targets",
+    "Same motif+chromatin head with activity and full AVI auxiliary targets",
+    "Best full-AVI-input biological ensemble representation from original4\u20135 screening, picked by macro AP skill, then refit activity/effect task"
+  ],
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "classical_selection_rule": "Direct AVI plus highest default4\u20135 macroAPskill DNA-pattern baseline, chromatin-only baseline, and DNA+chromatin+AVI baseline; refit all preprocessing and weights within each fold",
+  "neural_budget": "45 fits: five fixed families x three seeds x three development folds; original stopping rules and architectures retained",
+  "scope": "Robustness and model selection after initial development screening, not unbiased nested CV. Each checkpoint uses its development fold for stopping. All reserved chromosomes1\u20133 remain excluded from supervised fitting and model-performance inspection.",
+  "selection_outputs": "Compare separate all-call and conditional-active variant-ranking performance by study, retain every seed and ensemble. Do not cherry-pick individual seeds. Report ABI/no-AVI paired differences and chance baselines. No numerical threshold guarantees a strong model.",
+  "additional_sequence_check": "Exclude training rows with any exact canonical mutation-containing200bp reference or alternate window shared with that fold validation; source hash and indices checked before fitting",
+  "final_test_requirement": "Lock family, weights/ensemble, score definition and report before one reserved Siraj chromosome evaluation; Salomon test is previously used study data and must be labelled separately",
+  "blind_test_evaluated": false,
+  "screening_selected_AVI_input_ensemble": {
+    "name": "motif_chromatin_full_avi_input_ensemble_activity_effect",
+    "family": "biological_seed_ensemble",
+    "features": "motif_chromatin",
+    "config": {
+      "members": [
+        "motif_chromatin_full_avi_input_activity_effect_s42",
+        "motif_chromatin_full_avi_input_activity_effect_s73",
+        "motif_chromatin_full_avi_input_activity_effect_s101"
+      ],
+      "rule": "Arithmetic mean of three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.6117469289531858,
+          "average_precision": 0.05777378768181568,
+          "AP_skill_over_prevalence": 0.03549488488054904,
+          "brier_uncalibrated": 0.04048261362663903
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.7654025228646697,
+          "average_precision": 0.26009462550574675,
+          "AP_skill_over_prevalence": 0.20496591467931866,
+          "brier_uncalibrated": 0.06891551862693247
+        }
+      },
+      "macro_AP_skill": 0.12023039977993386
+    },
+    "artifact": null
+  },
+  "screening_selected_AVI_input_representation": "motif_chromatin",
+  "classical_records": [
+    {
+      "name": "full_avi_direct",
+      "family": "direct_avi",
+      "features": "avi",
+      "config": {
+        "imputation_raw_training_median": 0.01310999970883131,
+        "scope": "Monotonic ranking, not calibrated probability"
+      },
+      "validation": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.5917704340039734,
+            "average_precision": 0.029114230521098922,
+            "AP_skill_over_prevalence": 0.006157673585439202,
+            "brier_uncalibrated": 0.28837613322072386
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.6317394128873369,
+            "average_precision": 0.14272412198084636,
+            "AP_skill_over_prevalence": 0.07885039487068164,
+            "brier_uncalibrated": 0.25166795090280986
+          }
+        },
+        "macro_AP_skill": 0.04250403422806042
+      },
+      "artifact": null
+    },
+    {
+      "name": "pattern_boost_none_depth3",
+      "family": "study_hist_boosting",
+      "features": "dna_pattern",
+      "config": {
+        "depth": 3,
+        "weighting": "none",
+        "learning_rate": 0.05,
+        "trees": 300,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "validation": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.5296247586534963,
+            "average_precision": 0.028342474384353868,
+            "AP_skill_over_prevalence": 0.005367669304318583,
+            "brier_uncalibrated": 0.022675071714345473
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.6971357793879152,
+            "average_precision": 0.1521496152606163,
+            "AP_skill_over_prevalence": 0.08897816078061331,
+            "brier_uncalibrated": 0.06221388841256631
+          }
+        },
+        "macro_AP_skill": 0.04717291504246594
+      },
+      "artifact": "models/pattern_boost_none_depth3.pkl"
+    },
+    {
+      "name": "full_chromatin_boost_sqrt_d3",
+      "family": "study_hist_boosting",
+      "features": "chromatin",
+      "config": {
+        "depth": 3,
+        "weighting": "sqrt",
+        "trees": 300,
+        "learning_rate": 0.05,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "validation": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.49311637798360247,
+            "average_precision": 0.024149222985459698,
+            "AP_skill_over_prevalence": 0.0010752686362617639,
+            "brier_uncalibrated": 0.03896755990806004
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.5926230533832333,
+            "average_precision": 0.13191839937718586,
+            "AP_skill_over_prevalence": 0.06723956180665318,
+            "brier_uncalibrated": 0.08285518590572835
+          }
+        },
+        "macro_AP_skill": 0.034157415221457474
+      },
+      "artifact": "models/full_chromatin_boost_sqrt_d3.pkl"
+    },
+    {
+      "name": "full_dna_chromatin_avi_boost_sqrt_d5",
+      "family": "study_hist_boosting",
+      "features": "dna_chromatin_avi",
+      "config": {
+        "depth": 5,
+        "weighting": "sqrt",
+        "trees": 300,
+        "learning_rate": 0.05,
+        "l2": 1.0,
+        "min_leaf": 40,
+        "max_bins": 64
+      },
+      "validation": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.60059881915102,
+            "average_precision": 0.03161066147155721,
+            "AP_skill_over_prevalence": 0.008713132550368128,
+            "brier_uncalibrated": 0.0315661089155686
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.7314822902296724,
+            "average_precision": 0.2307672041512984,
+            "AP_skill_over_prevalence": 0.17345337210955367,
+            "brier_uncalibrated": 0.07149650713826222
+          }
+        },
+        "macro_AP_skill": 0.0910832523299609
+      },
+      "artifact": "models/full_dna_chromatin_avi_boost_sqrt_d5.pkl"
+    }
+  ],
+  "data_sequence_audit_sha256": "ac9b74cfb1ad1cc857825988ecd2641ea81f0446a986fbd4288a57bb4f48342e",
+  "status": "Locked before any three-fold comparison fitting"
+}

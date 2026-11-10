@@ -1,0 +1,15 @@
+V9 frozen molecular prediction benchmark
+
+Read PLAIN_LANGUAGE_RESULTS.txt first. The fresh study failed the accuracy and confidence gates. AVI was rejected. There are no authorized project predictions. Scientific goal completion remains false.
+
+Run the independent source/metric/bootstrap/withholding audit from the repository root:
+PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python work/sleep_frailty_ml_v9/independent_result_audit.py
+
+Run the independent fitted-weight numerical and AVI-gradient audit:
+PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python work/sleep_frailty_ml_v9/audit_final_fits.py
+
+These commands use the current external scientific workspace on /Volumes/Extreme SSD and the internal V9-validation outputs. They do not retrain models or change their weights. Python 3.13, NumPy, SciPy, PyTorch, safetensors, scikit-learn and joblib are used; recorded versions accompany the confidence receipt. This is a reproducible research workspace, not a fresh-platform installation or portable complete-retraining package. Original V7 local inference ZIP remains preserved.
+
+Original fit order and settings: select_and_lock.py; run_fixed_refits.py; audit_final_fits.py; prepare_confidence_and_blind_predictions.py; evaluate_fresh_study.py; report_calibration_pair_results.py; publish_project_diagnostics.py; independent_result_audit.py; report_final_results.py. Existing-output guards prevent replacing the frozen experiment or appending the manuscript twice. Retaining an already revealed experiment as a confirmatory test after changing the model is prohibited.
+
+All underlying original genetic analyses, NHANES reconstruction and V7 adverse results remain unchanged. The manuscript receives only a separate appended V9 section; manuscript_integration_receipt.json verifies its entire previous prefix.

@@ -1,0 +1,23 @@
+{
+  "inputs": {
+    "Mak_FI": {
+      "n": 2404,
+      "estimated_gwas_sdY": 7.336130485576222,
+      "estimated_qtl_sdY": 0.7975545552628346,
+      "n_min": 364611,
+      "n_max": 403041,
+      "input_sha256": "4e8c9b948dcab8c02508bb209b9cc684259e119e553a698731ecb44653d0087e"
+    },
+    "Mak_FP": {
+      "n": 2404,
+      "estimated_gwas_sdY": 0.8216409060508033,
+      "estimated_qtl_sdY": 0.7975545552628346,
+      "n_min": 364611,
+      "n_max": 403041,
+      "input_sha256": "8e0fc00cb8e20f8c2035dd52e7ee32b25e0dbe32ed1fdcae8d1c4583cc6268f0"
+    }
+  },
+  "output_sha256": "2ff0713c75d408b186c4e437cbd515c4ab57641e267c82d6f1c4b6e264e317df",
+  "sdY_estimator": "square root of slope of no-intercept regression 2*N*af*(1-af) on 1/varbeta",
+  "limitations": "Estimate residual scale from common variants and sample sizes; beta phenotype transformation not author-confirmed; inferred sample sizes and allele mappings; custom single-signal ABF not validated against coloc; QTL-GWAS overlap unknown; 1Mb restricted coverage; not causal or independent replication"
+}

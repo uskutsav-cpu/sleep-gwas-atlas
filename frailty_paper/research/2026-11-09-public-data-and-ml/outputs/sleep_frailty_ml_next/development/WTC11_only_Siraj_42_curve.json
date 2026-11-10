@@ -1,0 +1,674 @@
+[
+  {
+    "epoch": 1,
+    "mean_objective": 0.2402785184392094,
+    "elapsed_seconds": 0.8132102499985194,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19765178859233856,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": 0.0003007948792969062,
+        "magnitude_Spearman": 0.04922267396921742,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": 0.0003007948792969062
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.28740179538726807,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0003467748435441731,
+        "magnitude_Spearman": 0.05522823877213471,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0003467748435441731
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20398063957691193,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": 0.00010730163915118052,
+        "magnitude_Spearman": 0.05612043903720187,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": 0.00010730163915118052
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.3674774467945099,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.0007200348979943261,
+        "magnitude_Spearman": 0.0369980147247222,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.0007200348979943261
+      }
+    },
+    "macro_MAE_skill_supported_cells": 0.00010730163915118052,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.32189521193504333,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.0005154266645481798,
+        "difference_Spearman": 0.03712244762350323,
+        "ordering_accuracy_nonzero_measured_differences": 0.508599068434253
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.2952543795108795,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.00891661276052158,
+        "difference_Spearman": -0.18649291075629085,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.0010302188799180545,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.003531539626975656,
+        "fixed_cell_pair_strata": 3
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.3190308213233948,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.3215234875679016,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": 0.00010730163915118052
+  },
+  {
+    "epoch": 2,
+    "mean_objective": 0.22782720027178743,
+    "elapsed_seconds": 2.002272166999319,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19779670238494873,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0004321618235751945,
+        "magnitude_Spearman": 0.04591038616763868,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0004321618235751945
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.28771063685417175,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0014217457390417465,
+        "magnitude_Spearman": 0.05166529468683131,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0014217457390417465
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20402345061302185,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.00010255377901180474,
+        "magnitude_Spearman": 0.053090719100491304,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.00010255377901180474
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.3678887188434601,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.0018400170432064655,
+        "magnitude_Spearman": 0.038870059320039015,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.0018400170432064655
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.00010255377901180474,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.3218987286090851,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.0005045073923010124,
+        "difference_Spearman": 0.031963789634931884,
+        "ordering_accuracy_nonzero_measured_differences": 0.5046578287352204
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.29527193307876587,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.008976595228124884,
+        "difference_Spearman": -0.18659546116591744,
+        "ordering_accuracy_nonzero_measured_differences": 0.21263405268634014,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.000970827774870453,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.0017919813379005758,
+        "fixed_cell_pair_strata": 5
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.319489449262619,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.32198697328567505,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.00010255377901180474
+  },
+  {
+    "epoch": 3,
+    "mean_objective": 0.22062039690731217,
+    "elapsed_seconds": 2.8539048339989677,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19806648790836334,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0017967048678424469,
+        "magnitude_Spearman": 0.042230213041192476,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0017967048678424469
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.28825148940086365,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0033042673844618786,
+        "magnitude_Spearman": 0.0496839201014976,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0033042673844618786
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20432235300540924,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.0015677434180414451,
+        "magnitude_Spearman": 0.05015690788936304,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.0015677434180414451
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.36858266592025757,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.003729784017936,
+        "magnitude_Spearman": 0.04059748022722421,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.003729784017936
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.0015677434180414451,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.3219262659549713,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.00041900393843341543,
+        "difference_Spearman": 0.02481866631995595,
+        "ordering_accuracy_nonzero_measured_differences": 0.5016123253314224
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.29506754875183105,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.00827819155609788,
+        "difference_Spearman": -0.186512060803403,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.0016623459385659567,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.00189284718962612,
+        "fixed_cell_pair_strata": 3
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.3197300434112549,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.32222995162010193,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.0015677434180414451
+  },
+  {
+    "epoch": 4,
+    "mean_objective": 0.212062775979947,
+    "elapsed_seconds": 3.685282417001872,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19789615273475647,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0009351698477364501,
+        "magnitude_Spearman": 0.04168510873873297,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0009351698477364501
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.287913978099823,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0021295066596225265,
+        "magnitude_Spearman": 0.047431225511431474,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0021295066596225265
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20432540774345398,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.0015827174384812626,
+        "magnitude_Spearman": 0.04976087681546755,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.0015827174384812626
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.3681422472000122,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.0025304292250414306,
+        "magnitude_Spearman": 0.0421609030133455,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.0025304292250414306
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.0015827174384812626,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.3219430148601532,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.00036699859095123966,
+        "difference_Spearman": 0.02277404380462079,
+        "ordering_accuracy_nonzero_measured_differences": 0.5005374417771408
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.2949458956718445,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.007862489632911362,
+        "difference_Spearman": -0.18630232798444504,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.00207394948831896,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.004446312391177758,
+        "fixed_cell_pair_strata": 3
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.31950533390045166,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.3220020830631256,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.0015827174384812626
+  },
+  {
+    "epoch": 5,
+    "mean_objective": 0.20709020954414006,
+    "elapsed_seconds": 4.5300684590001765,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19791796803474426,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0010455090367342823,
+        "magnitude_Spearman": 0.042501504109468596,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0010455090367342823
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.2879803776741028,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.002360620734231267,
+        "magnitude_Spearman": 0.046473810135256845,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.002360620734231267
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20413587987422943,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.0006536707751969573,
+        "magnitude_Spearman": 0.048987774230207164,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.0006536707751969573
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.36821386218070984,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.002725452202935852,
+        "magnitude_Spearman": 0.04100901640311449,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.002725452202935852
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.0006536707751969573,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.3219563066959381,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.00032572744330516823,
+        "difference_Spearman": 0.02215046210158188,
+        "ordering_accuracy_nonzero_measured_differences": 0.49928341096381224
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.2951876223087311,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.008688496075578422,
+        "difference_Spearman": -0.1863706498868804,
+        "ordering_accuracy_nonzero_measured_differences": 0.21263405268634014,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.001256086579929483,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.0028210143318379683,
+        "fixed_cell_pair_strata": 5
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.3195107877254486,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.32200759649276733,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.0006536707751969573
+  },
+  {
+    "epoch": 6,
+    "mean_objective": 0.20343694808709362,
+    "elapsed_seconds": 5.377782542000205,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19790031015872955,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0009561976030167951,
+        "magnitude_Spearman": 0.04140310285558026,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0009561976030167951
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.2879383862018585,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0022144628656837195,
+        "magnitude_Spearman": 0.044039106455484846,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0022144628656837195
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20443685352802277,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.0021290135305249702,
+        "magnitude_Spearman": 0.04591867499886749,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.0021290135305249702
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.36813926696777344,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.0025223134123948387,
+        "magnitude_Spearman": 0.03954891770239905,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.0025223134123948387
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.0021290135305249702,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.32198455929756165,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.0002380031205059252,
+        "difference_Spearman": 0.021118792873324948,
+        "ordering_accuracy_nonzero_measured_differences": 0.49874596918667147
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.29487356543540955,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.007615329278287675,
+        "difference_Spearman": -0.18685071688983415,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.0023186731079294365,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.0020913402324594208,
+        "fixed_cell_pair_strata": 3
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.3192427158355713,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.3217369318008423,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.0021290135305249702
+  },
+  {
+    "epoch": 7,
+    "mean_objective": 0.20198337092016735,
+    "elapsed_seconds": 6.23070433400062,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19791942834854126,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0010528951299868528,
+        "magnitude_Spearman": 0.04243664813245344,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0010528951299868528
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.2879942059516907,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0024087522111693183,
+        "magnitude_Spearman": 0.045207795856764675,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0024087522111693183
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20442970097064972,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.00209395240949517,
+        "magnitude_Spearman": 0.04649270119812231,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.00209395240949517
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.3682260513305664,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.002758645876659971,
+        "magnitude_Spearman": 0.03881690469749434,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.002758645876659971
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.00209395240949517,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.32198581099510193,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.00023411659987560007,
+        "difference_Spearman": 0.021214455483639687,
+        "ordering_accuracy_nonzero_measured_differences": 0.49498387674668576
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.2948774993419647,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.007628771868650519,
+        "difference_Spearman": -0.18690455457265867,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.002305363047035991,
+        "macro_within_fixed_study_cell_pair_Spearman": 0.001557052593000742,
+        "fixed_cell_pair_strata": 3
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.31923919916152954,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.32173311710357666,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.00209395240949517
+  },
+  {
+    "epoch": 8,
+    "mean_objective": 0.19934255276283208,
+    "elapsed_seconds": 7.113132750000659,
+    "cells": {
+      "colon_tumor": {
+        "n": 69405,
+        "MAE": 0.19792062044143677,
+        "training_cell_median_MAE": 0.1977112591266632,
+        "MAE_skill": -0.0010589245938665837,
+        "magnitude_Spearman": 0.040925054552478794,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.1977112591266632,
+        "MAE_skill_vs_line_baseline": -0.0010589245938665837
+      },
+      "hematopoietic": {
+        "n": 69332,
+        "MAE": 0.2879762351512909,
+        "training_cell_median_MAE": 0.287302166223526,
+        "MAE_skill": -0.0023462020374760417,
+        "magnitude_Spearman": 0.044580838943025905,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.287302166223526,
+        "MAE_skill_vs_line_baseline": -0.0023462020374760417
+      },
+      "hepatocyte_tumor": {
+        "n": 69406,
+        "MAE": 0.20436544716358185,
+        "training_cell_median_MAE": 0.2040025293827057,
+        "MAE_skill": -0.0017789866722452974,
+        "magnitude_Spearman": 0.045508274351540125,
+        "cell_supported_by_current_fit": true,
+        "line_baseline_MAE": 0.2040025293827057,
+        "MAE_skill_vs_line_baseline": -0.0017789866722452974
+      },
+      "neuronal_tumor": {
+        "n": 69407,
+        "MAE": 0.36822494864463806,
+        "training_cell_median_MAE": 0.36721304059028625,
+        "MAE_skill": -0.0027556430259807474,
+        "magnitude_Spearman": 0.039245786544162296,
+        "cell_supported_by_current_fit": false,
+        "line_baseline_MAE": 0.36721304059028625,
+        "MAE_skill_vs_line_baseline": -0.0027556430259807474
+      }
+    },
+    "macro_MAE_skill_supported_cells": -0.0017789866722452974,
+    "comparisons": {
+      "local": {
+        "pairs": 5582,
+        "difference_MAE": 0.3220053017139435,
+        "zero_difference_MAE": 0.3220612108707428,
+        "skill_vs_zero_difference": 0.00017359792148874398,
+        "difference_Spearman": 0.01968712929409442,
+        "ordering_accuracy_nonzero_measured_differences": 0.4957004657828735
+      },
+      "cross": {
+        "pairs": 416212,
+        "difference_MAE": 0.29490727186203003,
+        "zero_difference_MAE": 0.2926449775695801,
+        "skill_vs_zero_difference": -0.007730507836622769,
+        "difference_Spearman": -0.18704109300219238,
+        "ordering_accuracy_nonzero_measured_differences": 0.212629246853982,
+        "training_cell_median_difference_MAE": 0.2955588698387146,
+        "skill_vs_training_cell_median_difference": 0.0022046300861826573,
+        "macro_within_fixed_study_cell_pair_Spearman": -0.0018359405977349768,
+        "fixed_cell_pair_strata": 5
+      }
+    },
+    "all_raw_predictions_are_development_diagnostics": true,
+    "activity_auxiliary": {
+      "activity_reference": {
+        "n": 277550,
+        "Pearson": 0.3191145062446594,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      },
+      "activity_alternate": {
+        "n": 277550,
+        "Pearson": 0.32160690426826477,
+        "scope": "Original measured allele activity; correlation is separate from allelic-effect or magnitude prediction."
+      }
+    },
+    "macro_MAE_skill_vs_line_baseline_supported_cells": -0.0017789866722452974
+  }
+]

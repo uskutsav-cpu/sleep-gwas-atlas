@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "time_UTC": "2026-11-09T04:26:02.982544+00:00",
+  "previous_derivation_receipt_sha256": "ff0603107192922e67379271316aab32245b289ea1a292134a27fdf4d46d5dbc",
+  "previous_trainer_source_sha256": "9abff10417656694b929f276b64f71243c6889edc4c042253c5957b7ad9ba035",
+  "current_trainer_source_sha256": "8f5f5a5b416937778d41dfee55b797a63df5616114582039d209cd756e55ab0f",
+  "declared_resource_only_changes": [
+    {
+      "original": "           'objectives':objectives,'anchors':anchors,'curve':curve,'elapsed_seconds':elapsed_before+time.monotonic()-start})\n    if not restored:",
+      "replacement": "           'objectives':objectives,'anchors':anchors,'curve':curve,'elapsed_seconds':elapsed_before+time.monotonic()-start})\n        assert shutil.disk_usage(ROOT).free>300*1024**2,'Stop with committed recovery state before exhausting disk reserve.'\n    if not restored:",
+      "occurrences": 1
+    },
+    {
+      "original": "assert shutil.disk_usage(ROOT).free>128*1024**2,'Disk reserve exhausted during fit; preserve partial results and inspect before restarting.'",
+      "replacement": "assert shutil.disk_usage(ROOT).free>300*1024**2,'Disk reserve exhausted during fit; preserve partial results and inspect before restarting.'",
+      "occurrences": 1
+    },
+    {
+      "original": "p=predict();assert shutil.disk_usage(ROOT).free>128*1024**2,'Insufficient disk reserve for epoch artifacts.'",
+      "replacement": "p=predict();assert shutil.disk_usage(ROOT).free>300*1024**2,'Insufficient disk reserve for epoch artifacts.'",
+      "occurrences": 1
+    }
+  ],
+  "original_native_trainer_reconstructed_exactly_reversing_both_receipts": true,
+  "AST_valid": true,
+  "native_training_code_or_running_model_changed": false,
+  "architecture_targets_loss_sampling_or_scientific_success_rules_changed": false,
+  "launch_reserve_changed": false,
+  "live_disk_reserve_bytes": 314572800,
+  "checkpoint_guard_runs_after_atomic_full_state_save": true,
+  "actual_AVI_training_or_execution_audit_done": false,
+  "qualification": "Source derivation only. The actual matched trainer continuation and sustained full-validation resource audit is still required before scientific use."
+}

@@ -1,0 +1,49 @@
+{
+  "created_utc": "2026-11-07T08:36:37.129318+00:00",
+  "folds": [
+    [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ]
+  ],
+  "fixed_neural_families": [
+    "Context/variant contrast with activity and effect targets, no AVI",
+    "Same contrast with full permitted AVI auxiliary target0.05",
+    "Fixed motif+chromatin head with activity and effect targets",
+    "Same motif+chromatin head with activity and full AVI auxiliary targets",
+    "Best full-AVI-input biological ensemble representation from original4\u20135 screening, picked by macro AP skill, then refit activity/effect task"
+  ],
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "classical_selection_rule": "Direct AVI plus highest default4\u20135 macroAPskill DNA-pattern baseline, chromatin-only baseline, and DNA+chromatin+AVI baseline; refit all preprocessing and weights within each fold",
+  "neural_budget": "45 fits: five fixed families x three seeds x three development folds; original stopping rules and architectures retained",
+  "scope": "Robustness and model selection after initial development screening, not unbiased nested CV. Each checkpoint uses its development fold for stopping. All reserved chromosomes1\u20133 remain excluded from supervised fitting and model-performance inspection.",
+  "selection_outputs": "Compare separate all-call and conditional-active variant-ranking performance by study, retain every seed and ensemble. Do not cherry-pick individual seeds. Report ABI/no-AVI paired differences and chance baselines. No numerical threshold guarantees a strong model.",
+  "additional_sequence_check": "Exclude training rows with any exact canonical mutation-containing200bp reference or alternate window shared with that fold validation; source hash and indices checked before fitting",
+  "final_test_requirement": "Lock family, weights/ensemble, score definition and report before one reserved Siraj chromosome evaluation; Salomon test is previously used study data and must be labelled separately",
+  "blind_test_evaluated": false
+}

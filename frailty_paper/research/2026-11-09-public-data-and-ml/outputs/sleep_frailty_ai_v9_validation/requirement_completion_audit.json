@@ -1,0 +1,43 @@
+{
+  "requirements": {
+    "1_predict_actual_effect_size": {
+      "implementation": "completed",
+      "useful_independent_prediction_established": false,
+      "evidence": "fresh_outcome_evaluation.json: arms.sequence.all_cases and full_model_quality_gate_passed"
+    },
+    "2_learn_cell_and_nearby_differences": {
+      "implementation": "paired losses and direct paired-difference interval calibration completed",
+      "independent_cross_cell_validation_established": false,
+      "fresh_nearby_evidence": {
+        "pairs": 12,
+        "nonzero_measured_difference_pairs": 12,
+        "difference_MAE": 0.33860554824702227,
+        "zero_difference_MAE": 0.34031203357311374,
+        "ordering_accuracy": 0.6666666666666666,
+        "difference_Spearman": 0.5944055944055945,
+        "direct_pair_interval_coverage": 0.6666666666666666,
+        "direct_pair_calibration_factor": 0.5936955276707107,
+        "pretest_answerable_pairs": 0,
+        "authorized_pairs": 0,
+        "individual_intervals_used_to_claim_paired_guarantee": false
+      },
+      "evidence": "calibration_pair_comparisons.json and fresh_outcome_evaluation.json"
+    },
+    "3_fix_confidence_across_experiments": {
+      "implementation": "whole-source-omitted error models, region-balanced calibration, unfamiliar-input withholding completed",
+      "useful_independent_confident_prediction_established": false,
+      "evidence": "sequence_confidence_calibration.json and fresh_outcome_evaluation.json"
+    },
+    "4_test_AlphaGenome_as_added_input": {
+      "matched_composite_test_completed": true,
+      "retain_composite": false,
+      "AlphaGenome_specific_benefit_established": false,
+      "evidence": "fixed_refit_execution_receipt.json and fresh_outcome_evaluation.json: AVI_comparison"
+    }
+  },
+  "scientific_objective_complete": false,
+  "reason": "Training and validation are implemented, but useful cross-cell molecular prediction and independent relevant-cell validation remain unproven. Implementation completion is not the requested scientific success.",
+  "Nature_Communications_genetic_manuscript_ready": false,
+  "human_disease_prediction_or_genetic_score_validation": false,
+  "prior_scientific_analyses_preserved": true
+}

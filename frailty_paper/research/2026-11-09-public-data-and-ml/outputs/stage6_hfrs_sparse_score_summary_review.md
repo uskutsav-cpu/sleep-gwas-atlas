@@ -1,0 +1,37 @@
+# Fifteen-marker weighted association with hospital frailty: exploratory summary-data check
+
+## Finding
+
+All three existing 15-marker research weight sets yield positive weighted association statistics with the FinnGen R12 hospital frailty risk score (HFRS). This is a **post hoc summary-statistics check, not an independent validation of a genetic score**. The candidates and their associations had already been examined, the weights are correlated and were derived from related UK Biobank traits, some candidate selection used FinnGen data, and exact overlap and relatedness have not been established. These conditions invalidate treating the displayed p-values as prespecified replication tests. HFRS is a different frailty construct from FI and FFS and includes broad codes that can capture drowsiness or exhaustion.
+
+| Existing weights | All 15 markers: approximate Z | Approximate two-sided p | Z after removing rs12536335 |
+|---|---:|---:|---:|
+| Frailty index (FI) | 6.95 | 3.7e-12 | 5.25 |
+| Fried frailty score (FFS; inferred orientation) | 5.48 | 4.3e-8 | 4.09 |
+| UK Biobank insomnia | 4.97 | 6.8e-7 | 3.84 |
+
+These positive signs mean that the fixed weight directions collectively align with higher HFRS in this approximation. They do **not** show that any of these sums predicts an individual's outcome, that one performs better than another, that sleep causes frailty, or that a shared variant has a causal molecular target. The association remains positive after removing the FOXP2-region marker, but this unplanned sensitivity does not establish independent signals, and other candidate markers contribute. FOXP2 accounts for about 29%, 28%, and 25% of the respective signed numerators; those ratios depend on the weights and can exceed intuitive proportions when terms cancel. Across all 15 single-marker omissions, the FI, FFS and insomnia statistics ranged 5.25–7.39, 4.09–5.90 and 3.84–5.88 respectively. These are sensitivity ranges, not confidence intervals.
+
+## Method and assumptions
+
+For the 15 exact position-and-allele HFRS matches documented in `candidate_hfrs_full_gwas_review.md`, let `z` be each HFRS beta divided by its standard error, aligned to the counted allele, and `w` be one existing per-allele weight. Let `p` be the HFRS counted-allele frequency and `a = w * sqrt(2*p*(1-p))`. The descriptive test is `a' z / sqrt(a' R a)` with R estimated from the 99 Finnish 1000 Genomes Phase 3 reference individuals. We set correlations between different chromosomes to zero and retain reference dosage correlations within chromosomes. All 15 source coordinates, rsIDs and biallelic contrasts matched the reference and had complete Finnish calls. Cross-chromosome correlations are an approximation; within-chromosome LD is noisy in 99 people. The target-frequency genotype standard deviations assume Hardy–Weinberg equilibrium. The approximation further assumes the marginal Z covariance resembles reference LD, sufficiently compatible target samples across variants, and suitable effect and error behavior. Sample missingness, imputation quality, covariate adjustment, relatedness and target LD can all make this approximation differ from a participant-level model. The reported p-values are model-based and not calibrated against the actual target sample.
+
+The score sums are correlated and have different training traits and weight scales; Z magnitudes cannot rank predictive performance. The FI discovery phenotype includes insomnia, the FFS directions in this prototype were inferred, and nine rsIDs are multiallelic in broader reference data despite the biallelic matches used here. The source phenotype lookup was already examined before this test and selection bias cannot be corrected here. The preexisting HFRS LDSC intercept also merits attention; these 15-marker results do not resolve it. 
+
+The general use of weighted marginal Z statistics with reference LD for summary-level association testing is described in [this methods review](https://pmc.ncbi.nlm.nih.gov/articles/PMC5449190/) and [this statistical methods paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC6159229/). No method citation establishes calibration for this particular analysis.
+
+## Reproducibility
+
+`stage6_hfrs_sparse_score_summary_test.py` reads the previously constructed `unvalidated_15_variant_score_prototype.csv` and `candidate_finngen_hfrs_full_gwas_lookup.csv`; it queries the public UCSC-hosted 1000 Genomes Phase 3 VCF by GRCh37 coordinate. `stage6_hfrs_sparse_score_summary_test.csv` contains the statistics and all single-marker omissions; `stage6_hfrs_sparse_score_summary_components.csv` contains per-marker inputs; `stage6_hfrs_sparse_score_FIN99_ld.csv` contains the signed reference LD matrix; and `stage6_hfrs_sparse_score_summary_receipt.json` records provenance. The full HFRS GWAS was previously checksum-verified against [GWAS Catalog GCST90707291](https://ftp.ebi.ac.uk/pub/databases/gwas/summary_statistics/GCST90707001-GCST90708000/GCST90707291/). No individual-level target genotypes or outcomes were used.
+
+A real score evaluation still requires a frozen score and an independent target sample with individual-level genotype and phenotype data, or an external study that has applied this exact score and reported its results. Published scores, different marker sets and summary-statistic tests do not establish calibration, discrimination, incremental value or clinical utility of these sums.
+
+## Reference-LD sensitivity and common-precision check
+
+Using the 503-person 1000 Genomes European panel (including the same 99 FIN individuals, so the panels are not independent) instead of FIN99 gave Z=7.02, 5.48 and 5.03 for FI, FFS and insomnia weights, respectively. This pooled panel contains five European populations and is less specifically matched to the Finnish HFRS source. Similar results under these two correlated references do not prove that the target LD or the Z covariance is correct.
+
+To describe sampling variability in FIN99 LD, 5,000 bootstrap resamples of the 99 reference individuals were drawn with replacement, holding every HFRS association and score weight fixed. Twenty-nine draws with a zero-variance marker were excluded, leaving 4,971 valid draws. The central 95% ranges of the resulting weighted Z statistics were 6.76–7.17 for FI, 5.36–5.62 for FFS and 4.82–5.15 for insomnia. These are **not confidence intervals for an effect, prediction, or replication**: they omit uncertainty in target GWAS results, external-LD mismatch, marker selection and sample overlap. The bootstrap treats reference individuals as exchangeable and cannot correct all relatedness or ascertainment concerns. 
+
+For each marker, `HFRS standard error × sqrt(2 p (1-p))` ranged from 0.008858 to 0.008928, with median 0.008894. Its near constancy is consistent with a key working approximation behind the genotype-variance weighting, although it cannot establish the true covariance of the adjusted target statistics, per-variant sample identity or valid p-value calibration.
+
+The broader-panel sensitivity is generated by `stage6_hfrs_sparse_score_EUR503_sensitivity.py` and saved in `stage6_hfrs_sparse_score_summary_test_EUR503.csv`. Reference-only bootstrap code, full samples and quantiles are in `stage6_hfrs_sparse_score_ld_bootstrap.py`, `stage6_hfrs_sparse_score_FIN99_ld_bootstrap.csv.gz` and `stage6_hfrs_sparse_score_FIN99_ld_bootstrap_summary.csv`; the receipt records the seed and exclusions. Both panels derive from 1000 Genomes; they are not new outcome cohorts.

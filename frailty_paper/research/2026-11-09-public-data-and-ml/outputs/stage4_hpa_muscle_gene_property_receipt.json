@@ -1,0 +1,78 @@
+{
+  "source": "https://www.proteinatlas.org/humanproteome/single+cell/single+cell+type/data",
+  "selection": "post hoc human skeletal muscle sensitivity after first six matrices; 25 cluster tests across four trait models; BH family 100 planned tests; missing are retained in denominator",
+  "runs": [
+    {
+      "trait": "jansen_insomnia_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/jansen_insomnia_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/HPA_human_skeletal_muscle_GSE233882.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/jansen_insomnia_brown_HPA_human_skeletal_muscle_GSE233882"
+      ],
+      "result_sha256": "963b1e6efaaf3054cb06f963f1f563cbd167f1cd0df6a4f3cc27facb110425f2"
+    },
+    {
+      "trait": "atkins_fi_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/atkins_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/HPA_human_skeletal_muscle_GSE233882.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/atkins_fi_brown_HPA_human_skeletal_muscle_GSE233882"
+      ],
+      "result_sha256": "4243afce06cb4a556b5c4e3cb85f5f09c1e44a48635e73e1eccf517c85dc47d9"
+    },
+    {
+      "trait": "mak_fi_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/mak_fi_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/HPA_human_skeletal_muscle_GSE233882.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/mak_fi_brown_HPA_human_skeletal_muscle_GSE233882"
+      ],
+      "result_sha256": "17afdee6d054d50ab37d0fd775ba3878db6d1b725e189aa9a0d2b272b24519ec"
+    },
+    {
+      "trait": "ye_ffs_brown",
+      "command": [
+        "work/magma_wide_sample_sum",
+        "--gene-results",
+        "work/stage4_magma/ye_ffs_brown.genes.raw",
+        "--gene-covar",
+        "work/stage4_magma/matrices/HPA_human_skeletal_muscle_GSE233882.txt",
+        "--model",
+        "condition-hide=Average",
+        "direction=greater",
+        "--settings",
+        "abbreviate=0",
+        "--out",
+        "work/stage4_magma/ye_ffs_brown_HPA_human_skeletal_muscle_GSE233882"
+      ],
+      "result_sha256": "64397e20023d73d68c0fbb0f2586b88552f38dbaeda61ca6baf1759b6b4d3dab"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "source": "Ulirsch et al. 2016, original GEO GSE87711 raw processed counts; new analysis, not original published fitted effects.",
+  "physical_and_exposure_source_sha256": "9f34f3e6244b3cd564c1e1a251e3bd5ed9d61a9b97ac062e953ecc74ba5b9ba2",
+  "primary_condition": "Basal K562 only: six CTRL RNA preparations and two DNA preparations. GATA1 overexpression is excluded from this primary reconstruction, not relabeled ordinary K562.",
+  "aggregation": "Sum the 14 source count rows within each exact source allele construct, preserving every RNA and DNA sample. Match chr,pos,ref,alt,type,bot,top,clean and actual design ID; never join on the ambiguous byallele field alone.",
+  "primary_log2_contrast": "Mean of six log2((ALT_RNA+0.5)/(REF_RNA+0.5)) minus mean of two log2((ALT_DNA+0.5)/(REF_DNA+0.5)). Map source Ref/Mut to the full-verified genomic REF/ALT; magnitude is absolute contrast.",
+  "pseudocount": 0.5,
+  "count_availability": "Both allele constructs must have all 14 original rows, and each allele must have >=10 total DNA counts in each of two DNA samples. At least one RNA count across both alleles/six RNA samples. No significance, activity, measured effect, estimated SE or model-prediction cutoff.",
+  "zero_RNA_allele": "Retain a single completely unobserved RNA allele as a regularized, flagged estimate, not a precise finite biological effect. Both RNA alleles absent means contrast unavailable, not zero effect.",
+  "empirical_variance": "Sample variance of six RNA log2 allelic ratios divided by six plus sample variance of two DNA log2 allelic ratios divided by two; independent-preparation working assumption.",
+  "count_variance_floor": "Sum of trigamma(count+0.5) for both alleles over all RNA samples / (6^2*ln(2)^2), plus corresponding DNA sum / (2^2*ln(2)^2). A Jeffreys count-model log-ratio reference, not a source GLM SE or guaranteed coverage.",
+  "reported_SE": "sqrt(max(empirical_variance,count_variance_floor)); all components exported separately. No p value, discovery hit label or original GLM sign assigned.",
+  "interpretation": "Observed, regularized RNA/DNA count contrast with transparent uncertainty diagnostics. It is not denoised biological ground truth and cannot validate clinical scores or causal genes.",
+  "outcome_policy": "Save coefficient file sealed from model-selection scripts; disclose only availability and reconstruction agreement. Any future test needs frozen candidate, confidence and predictions before joining these values.",
+  "new_model_predictions_or_performance_used": false,
+  "code_sha256": "00b459c72a07f4f0cc0b4f15c7b61f3977adff02a28635711937df971e5b6c8a"
+}

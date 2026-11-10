@@ -1,0 +1,123 @@
+{
+  "source": "https://hgdownload.soe.ucsc.edu/gbdb/hg19/1000Genomes/phase3/ALL.chr2.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz",
+  "population": "1000 Genomes phase 3 EUR; phased haplotypes",
+  "variants": {
+    "rs13033745": {
+      "GRCh37_pos": 66660403,
+      "records": 1,
+      "required_contrast": [
+        "T",
+        "G"
+      ],
+      "vcf_alleles": [
+        "G",
+        "T"
+      ]
+    },
+    "rs1519102": {
+      "GRCh37_pos": 66677816,
+      "records": 1,
+      "required_contrast": [
+        "C",
+        "G"
+      ],
+      "vcf_alleles": [
+        "G",
+        "C"
+      ]
+    },
+    "rs113851554": {
+      "GRCh37_pos": 66750564,
+      "records": 1,
+      "required_contrast": [
+        "T",
+        "G"
+      ],
+      "vcf_alleles": [
+        "G",
+        "T"
+      ]
+    },
+    "rs78206187": {
+      "GRCh37_pos": 67022234,
+      "records": 1,
+      "required_contrast": [
+        "G",
+        "A"
+      ],
+      "vcf_alleles": [
+        "A",
+        "G"
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "variants": [
+        "rs13033745",
+        "rs1519102"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": 0.9169613031965134,
+      "r2": 0.8408180315598481
+    },
+    {
+      "variants": [
+        "rs13033745",
+        "rs113851554"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": -0.020815415440100803,
+      "r2": 0.00043328151994398694
+    },
+    {
+      "variants": [
+        "rs1519102",
+        "rs113851554"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": -0.021347730231928732,
+      "r2": 0.00045572558605520396
+    },
+    {
+      "variants": [
+        "rs13033745",
+        "rs78206187"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": -0.017223506209170687,
+      "r2": 0.0002966491661373412
+    },
+    {
+      "variants": [
+        "rs1519102",
+        "rs78206187"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": -0.017742100497621895,
+      "r2": 0.0003147821300677151
+    },
+    {
+      "variants": [
+        "rs113851554",
+        "rs78206187"
+      ],
+      "status": "available",
+      "n_individuals": 503,
+      "n_haplotypes": 1006,
+      "r": 0.27002670058474004,
+      "r2": 0.07291441902868084
+    }
+  ],
+  "limitations": "LD in a reference is not target-study LD, causality, score validation, or proof of source multiallelic contrast."
+}

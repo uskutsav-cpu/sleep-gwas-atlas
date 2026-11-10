@@ -1,0 +1,42 @@
+{
+  "selected_record": {
+    "name": "motif_prior_ensemble_activity_avi",
+    "family": "biological_seed_ensemble",
+    "features": "motif",
+    "config": {
+      "members": [
+        "motif_prior_activity_avi_s42",
+        "motif_prior_activity_avi_s73",
+        "motif_prior_activity_avi_s101"
+      ],
+      "rule": "Arithmetic mean of three fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.6052998293085597,
+          "average_precision": 0.05431877260359981,
+          "AP_skill_over_prevalence": 0.03195817610277551,
+          "brier_uncalibrated": 0.04068585100561962
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.7546568893825835,
+          "average_precision": 0.2385626411377642,
+          "AP_skill_over_prevalence": 0.18182962984176182,
+          "brier_uncalibrated": 0.0707481149813108
+        }
+      },
+      "macro_AP_skill": 0.10689390297226867
+    },
+    "artifact": null
+  },
+  "candidate_count": 8,
+  "test_evaluated": false,
+  "stage": "Additional biological-feature validation search, final combined selection pending"
+}

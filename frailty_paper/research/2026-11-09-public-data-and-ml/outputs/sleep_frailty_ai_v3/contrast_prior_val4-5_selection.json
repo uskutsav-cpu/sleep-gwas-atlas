@@ -1,0 +1,110 @@
+{
+  "selected_record": {
+    "name": "contrast_prior_val4-5_ensemble_effect",
+    "family": "context_variant_ensemble",
+    "features": "context_variant_biological",
+    "config": {
+      "members": [
+        "contrast_prior_val4-5_effect_s42",
+        "contrast_prior_val4-5_effect_s73",
+        "contrast_prior_val4-5_effect_s101"
+      ],
+      "rule": "Mean outputs across the fixed seeds"
+    },
+    "validation": {
+      "studies": {
+        "Salomon_NGN2": {
+          "n": 2814,
+          "detected_calls": 65,
+          "prevalence": 0.023098791755508174,
+          "auroc": 0.6197834177463133,
+          "average_precision": 0.0542477925533838,
+          "AP_skill_over_prevalence": 0.031885517731983275,
+          "brier_uncalibrated": 0.02258926542115934
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 8350,
+          "detected_calls": 579,
+          "prevalence": 0.06934131736526947,
+          "auroc": 0.7619540699678559,
+          "average_precision": 0.24343587612600537,
+          "AP_skill_over_prevalence": 0.1870659587764953,
+          "brier_uncalibrated": 0.058596814145120184
+        }
+      },
+      "macro_AP_skill": 0.10947573825423929
+    },
+    "variant_validation": {
+      "all_calls": {
+        "studies": {
+          "Salomon_NGN2": {
+            "n": 2814,
+            "detected_calls": 65,
+            "prevalence": 0.023098791755508174,
+            "auroc": 0.6197834177463133,
+            "average_precision": 0.0542477925533838,
+            "AP_skill_over_prevalence": 0.031885517731983275,
+            "brier_uncalibrated": 0.02258926542115934
+          },
+          "Siraj_OL42_SKNSH": {
+            "n": 8350,
+            "detected_calls": 579,
+            "prevalence": 0.06934131736526947,
+            "auroc": 0.7619540699678559,
+            "average_precision": 0.24343587612600537,
+            "AP_skill_over_prevalence": 0.1870659587764953,
+            "brier_uncalibrated": 0.058596814145120184
+          }
+        },
+        "macro_AP_skill": 0.10947573825423929
+      },
+      "conditional_active": {
+        "Salomon_NGN2": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5821940104166666,
+          "average_precision": 0.1471014776590937,
+          "AP_skill_over_prevalence": 0.06714224118963374,
+          "brier_uncalibrated": 0.08965795259604291
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.60386976839925,
+          "average_precision": 0.4590603686920857,
+          "AP_skill_over_prevalence": 0.16743648924396431,
+          "brier_uncalibrated": 0.22083690430857653
+        }
+      },
+      "mixture_within_active": {
+        "Salomon_NGN2": {
+          "n": 280,
+          "detected_calls": 24,
+          "prevalence": 0.08571428571428572,
+          "auroc": 0.5831705729166666,
+          "average_precision": 0.1451580383771754,
+          "AP_skill_over_prevalence": 0.06501660447503559,
+          "brier_uncalibrated": 0.08099166481015163
+        },
+        "Siraj_OL42_SKNSH": {
+          "n": 1653,
+          "detected_calls": 579,
+          "prevalence": 0.3502722323049002,
+          "auroc": 0.5512731447979081,
+          "average_precision": 0.4125051484742107,
+          "AP_skill_over_prevalence": 0.09578306371310084,
+          "brier_uncalibrated": 0.27433010907679817
+        }
+      },
+      "macro_conditional_AP_skill": 0.11728936521679903,
+      "joint_selection_skill": 0.11338255173551916
+    },
+    "artifact": null
+  },
+  "candidate_count": 8,
+  "selection_rule": "Mean of macro all-call normalized AP skill and macro conditional-active normalized AP skill; all components retained",
+  "test_evaluated": false,
+  "scope": "Variant-focused validation search; final model-family selection and blind evaluation pending"
+}

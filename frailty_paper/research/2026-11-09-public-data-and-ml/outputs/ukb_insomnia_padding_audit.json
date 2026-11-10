@@ -1,0 +1,21 @@
+{
+  "all_munged": {
+    "rows": 1217311,
+    "all_four_fields_present": 1133335,
+    "all_four_fields_blank": 83976
+  },
+  "fourway_overlap": {
+    "common": 1129146,
+    "all_four_fields_present": 1098887,
+    "all_four_fields_blank": 30259
+  },
+  "example_blank_ids": [
+    "rs2519031",
+    "rs28576697",
+    "rs17160698",
+    "rs28415373",
+    "rs28391282"
+  ],
+  "origin": "Existing munge log reports writing the full allele-merge list, including rows without beta. Fully blank statistic rows are consistent with such padding, not demonstrated raw-data allele defects.",
+  "note": "Do not fill rows with inferred or reference alleles: the beta, Z and N are also missing. This check does not independently reconstruct the harmonized data or count reasons for absence."
+}

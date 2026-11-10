@@ -1,0 +1,24 @@
+{
+  "critic_parameters": {
+    "max_iter": 80,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 100,
+    "l2_regularization": 10.0,
+    "early_stopping": false,
+    "random_state": 42
+  },
+  "minimum_scale_rows": 100,
+  "minimum_scale_regions": 20,
+  "minimum_training_studies_same_cell": 1,
+  "maximum_standardized_input": 10.0,
+  "minimum_estimated_relative_gain": 0.05,
+  "minimum_estimated_absolute_gain": 0.005,
+  "maximum_halfwidth_absolute_floor": 0.2,
+  "scale_method": "For each supported cell, take max of pooled and each adequately represented source 90th region-balanced residual/scale quantile; also max absolute residual 90th quantile as width floor. Sparse cells use global fallback.",
+  "acceptance": "Known exact cell line and cell, within standardized input bounds, estimated error gain >=5% and >=0.005 log2 units, interval halfwidth <=max(0.2 log2 units, training-only typical magnitude). These estimates never authorize release without fresh accuracy/coverage tests.",
+  "nested_split": "Other-source calibration groups from outer-source-omitted base model: SHA256 error-partition-20261108|group even error fit, odd interval scale. Outer source absent from base fitting, error fitting, and interval scaling.",
+  "final_split": "Whole-source-omission predictions; original noncalibration regions fit critics, original calibration regions scale intervals. No reserved outcomes.",
+  "coverage_claim": "Nominal 90% target. No universal source transfer guarantee; report actual new-study coverage and interval size.",
+  "required_fresh_observed_coverage": 0.9,
+  "all_withheld_or_excessively_broad_intervals_are_not_useful_success": true
+}

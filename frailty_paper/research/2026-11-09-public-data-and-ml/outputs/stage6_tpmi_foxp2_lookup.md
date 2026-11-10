@@ -1,0 +1,9 @@
+# TPMI sleep-disorder lookup: FOXP2-region rs12536335
+
+The [TPMI PheWeb variant page](https://pheweb.ibms.sinica.edu.tw/variant/7:114403104-A-G) lists rs12536335 at GRCh38 chr7:114403104 A/G. The project has the same allele pair in both prototypes, but the 15-marker score counts G while the 22-marker count counts A. TPMI's displayed allele frequency and effect-allele convention have not been independently confirmed from its own documentation, so the sign must not be assigned to either project allele yet.
+
+For the broad [sleep disorders phenotype](https://pheweb.ibms.sinica.edu.tw/pheno/327), the browser reports effect size 0.00029, SE 0.0079, p = 0.97 (45,836 cases and 287,785 controls). These are rounded values. The result does not show a statistically clear association with this broad diagnostic grouping; it does not rule out a smaller effect or an effect on insomnia specifically. The locus and phenotype were selected after prior analyses and the study overlaps with the discovery/selection sources have not been fully checked. No multiple-testing adjustment or independent replication of the whole score is claimed. FOXP2 is the site's nearest-gene label, not proof of mediation.
+
+An exact GRCh38 A/C browser URL for rs323509 returned a 404; this does not establish the marker's absence in all representations or a null association. Full variant coverage, effect coding, source precision, ancestry-matched LD, and any applicable discovery overlap must be checked before using this dataset for an aggregate score test. Individual-level outcome prediction cannot be evaluated from this browser.
+
+TPMI requests acknowledgement and citation of [Chen et al. (2025)](https://doi.org/10.1038/s41586-025-09350-y) and [Yang et al. (2025)](https://doi.org/10.1038/s41586-025-09680-x). A companion [rs8067974 lookup](stage6_tpmi_rs8067974_lookup.md) records the other available manual screen.

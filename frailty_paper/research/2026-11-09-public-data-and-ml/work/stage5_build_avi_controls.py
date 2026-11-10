@@ -1,0 +1,8 @@
+import json,csv,urllib.parse,statistics
+scores=json.load(open('work/stage5_atlas_ui_control_avi_values.json'));markers={x['marker']:x for x in csv.DictReader(open('outputs/stage5_23_markers_atlas_avi.csv'))};c=list(csv.DictReader(open('outputs/stage5_matched_controls.csv')));assert len(c)==len(scores)==len(markers)==23
+r=[]
+for x in c:
+ v=f"{x['chr_GRCh38']}:{x['pos_GRCh38']}:{x['ref_GRCh38']}>{x['alt_GRCh38']}";assert v in scores and x['candidate'] in markers;score,top=scores[v];m=markers[x['candidate']];r.append({'candidate':x['candidate'],'candidate_variant':m['variant_GRCh38_ref_alt'],'candidate_avi_phred_displayed':m['avi_phred_displayed_rounded'],'control_rsid':x['control_rsid'],'control_variant':v,'control_avi_phred_displayed':score,'control_top_genomewide_percent_displayed':top,'reference_ld_r2':x['r2_to_candidate'],'reference_maf_difference':x['maf_diff'],'distance_bp':x['distance_bp'],'source_url':'https://deepmind.google.com/science/alphagenome/atlas?q='+urllib.parse.quote(v,safe=''),'caveat':'postselected local frequency-matched low-LD comparison, not a proven neutral negative or independent dataset; rounded scores'})
+assert len({x['control_variant'] for x in r})==23
+with open('outputs/stage5_avi_matched_control_comparison.csv','w',newline='') as f:w=csv.DictWriter(f,fieldnames=r[0]);w.writeheader();w.writerows(r)
+print('pairs',len(r),'candidate median',statistics.median(float(x['candidate_avi_phred_displayed']) for x in r),'control median',statistics.median(float(x['control_avi_phred_displayed']) for x in r),'candidate>control',sum(float(x['candidate_avi_phred_displayed'])>float(x['control_avi_phred_displayed']) for x in r))

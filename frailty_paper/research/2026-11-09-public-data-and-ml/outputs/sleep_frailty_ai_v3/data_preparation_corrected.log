@@ -1,0 +1,67 @@
+Siraj paired/mapping eligibility passed 87237 exclusions {'not_autosomal_SNV': 8016, 'nonreciprocal_mapping': 43, 'unresolved_or_cross_chromosome_liftover': 22, 'source_duplicate_flag': 6, 'unassessable_activity_or_effect': 5, 'test_within_1kb_previously_inspected_project_queue': 6, 'missing_or_duplicate_sequence_record': 31}
+Verified mapped pairs and exact 200-base windows 87237 37349
+{
+  "source_files": {
+    "Siraj_fixed_library": {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/siraj2026_neural/OL42_SKNSH_emVAR_glm_paired_20221220.out.gz",
+      "sha256": "cdb42e4b7169dea14ca3db543a83764a0b849ad2acdd8aee8734af63caf5d282"
+    },
+    "Siraj_sequences_archive": {
+      "path": "/Volumes/Extreme SSD/codex-sleep-frailty-work/siraj2026_tables.zip",
+      "sha256": "2f1c17512c3a9593a6c4e5d2c18815a9b0911b27bbc16ef54c2f349714eb177a"
+    },
+    "Salomon_readout_sha256": "fce979affffcc276c3e2c03bb4d4cb9307af7dbb5b6807be68af91a90bb15f48"
+  },
+  "source_license": "Siraj Zenodo record cc-by-nc-4.0; research use and attribution; do not imply clinical use",
+  "raw_fixed_library_center_rows": 95366,
+  "excluded": {
+    "not_autosomal_SNV": 8016,
+    "nonreciprocal_mapping": 43,
+    "unresolved_or_cross_chromosome_liftover": 22,
+    "source_duplicate_flag": 6,
+    "unassessable_activity_or_effect": 5,
+    "test_within_1kb_previously_inspected_project_queue": 6,
+    "missing_or_duplicate_sequence_record": 31
+  },
+  "studies": {
+    "Siraj_OL42_SKNSH": {
+      "train": {
+        "n": 59963,
+        "detected_calls": 4343
+      },
+      "validation": {
+        "n": 8350,
+        "detected_calls": 579
+      },
+      "test": {
+        "n": 18924,
+        "detected_calls": 1289
+      }
+    },
+    "Salomon_NGN2": {
+      "train": {
+        "n": 25359,
+        "detected_calls": 699
+      },
+      "validation": {
+        "n": 2814,
+        "detected_calls": 65
+      },
+      "test": {
+        "n": 9176,
+        "detected_calls": 223
+      }
+    }
+  },
+  "AVI_unique_allele_queries": 124345,
+  "split_rule": "Chromosomes 1-3 test, 4-5 validation, 6-22 train across both studies",
+  "test_status": "No v3 model predictions evaluated. Salomon study previously developed; Siraj held-chromosome model results not yet inspected. Previously inspected project queue neighborhoods excluded from Siraj test.",
+  "auxiliary_targets": "Measured activity mean and absolute allelic effect are training targets only; never inference inputs",
+  "canonical_core_leakage_check": "Exact canonical 200-base reference/alternate windows containing the tested substitution, including all valid windows in 270-base Salomon fragments. Remove earlier-split matches to later split. No empty/short windows.",
+  "limitations": [
+    "Fixed source-row screen, not authors final best-library hit list",
+    "Different neuron states, construct lengths, statistical detection and study selection",
+    "Source sequence and original genome pretraining/model benchmark exposure not independently excluded",
+    "No participant-level sleep/frailty prediction or genetic-score validation"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "source": "https://allbyall.researchallofus.org/",
+  "endpoint": "/api/variants/associations/variant/{variant_id}?analysis_id={phenotype}",
+  "browser_version_observed": "0.1.0-317fe0c-202609021906",
+  "server_source_version": "https://github.com/broadinstitute/all-by-all-aou-browser/blob/317fe0c/axaou-server/src/variants/annotations.rs",
+  "inputs_sha256": {
+    "unvalidated_22_shared_direction_score.csv": "c419c1617dc7bf496f5213a4b2a8fae2de7a36b44984ba6d0ea0564dc3e40b16",
+    "stage6_tpmi_shared22_insomnia_inventory.csv": "5ae6b885f9a3cba8bf22c24be719de32c38bb0c46ed371d7f665c0fee615a64c",
+    "stage5_functional_atlas_with_priority_splice.csv": "9adb0292ed0ef81f0b68c8e5deddf5d08ec9807c676fb8f59ad9dc296ceed7c5"
+  },
+  "positive_controls": [
+    {
+      "variant_id": "chr3-53494203-G-GA",
+      "locus": {
+        "contig": "chr3",
+        "position": 53494203
+      },
+      "ref": "G",
+      "alt": "GA",
+      "pvalue": 1.6446010867596492e-09,
+      "beta": -0.08895403762776159,
+      "se": 0.014753118388898851,
+      "af": 0.8721538153872526,
+      "phenotype": "NS_333.2",
+      "ancestry": "meta",
+      "sequencing_type": "genome"
+    },
+    {
+      "variant_id": "chr8-40846505-CT-C",
+      "locus": {
+        "contig": "chr8",
+        "position": 40846505
+      },
+      "ref": "CT",
+      "alt": "C",
+      "pvalue": 3.7290801226393425e-09,
+      "beta": 0.7488030575262017,
+      "se": 0.12700654251614593,
+      "af": 0.005533310990774875,
+      "phenotype": "SS_807.21",
+      "ancestry": "meta",
+      "sequencing_type": "genome"
+    }
+  ],
+  "rows": 44,
+  "hits": 0,
+  "limits": "Selected-association endpoint only, response absence is not a null or p-value; server implementation uses significant_variants table and LIMIT 1 without ancestry/sequencing filtering, so assess reported source carefully. Manual prior mapping and allele build not independently reverified by this screen. Participant and relative overlap unverified; not score validation."
+}

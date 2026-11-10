@@ -1,0 +1,13 @@
+# Paired evaluation of fixed binary-outcome predictions
+
+`evaluate_fixed_binary_predictions.py` is a research utility prepared for a future approved, independent target cohort. It does **not** score genotypes, fit a risk model, create predictions or validate the current prototypes. It expects a CSV with one row per evaluated person and three columns: `outcome` (0/1), `baseline_probability`, and `augmented_probability` (each strictly between 0 and 1). Both probabilities must be generated for the same individuals from models fitted and frozen without using target outcomes. The augmented model should add the prespecified score to the same baseline. Resolve score allele coding, participant and relative overlap, phenotype definition, missingness and timing before evaluation. Construct the probabilities in the approved environment; raw genetic scores are not probabilities.
+
+For complete, independent and equally sampled records with a binary outcome observed for everyone, the script returns AUROC, Brier score, paired differences, paired iid bootstrap percentile intervals, and descriptive logistic calibration intercept and slope. Positive AUROC difference favors the augmented model; **negative Brier difference** favors it. It does not handle censoring, survey weights, kinship or clustered sampling, nor does it incorporate uncertainty from model development. The calibration intercept with slope fixed to one is separate from the intercept jointly estimated with slope. Sparse outcomes or separation can make calibration unreliable; the tool reports numerical failure but cannot detect all unstable fits. This is not suitable for NHATS's survey design without a design-appropriate analysis; a later cohort-specific implementation is needed. It cannot establish causality, transportability or lack of discovery overlap. Neither models nor evaluation choices should be tuned on the target data and then presented as independent validation.
+
+Example in an approved environment, using its installed numpy, scipy and scikit-learn:
+
+```sh
+python evaluate_fixed_binary_predictions.py --input fixed_predictions.csv --output aggregate_report.json --confirm-independent-fixed-predictions
+```
+
+The flag records an analyst assertion; it does not verify independence. The script fails on missing values, invalid probabilities, a one-class outcome, sparse bootstrap samples or an existing output. It outputs aggregate statistics only, but disclosure and upload rules for each dataset still apply. Do not upload restricted participant data to AI services or transfer them out of their approved environment. No participant data were used to develop or test this utility.

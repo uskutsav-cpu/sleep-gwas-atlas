@@ -1,0 +1,188 @@
+{
+  "individual": {
+    "target_coverage": 0.9,
+    "global_factor": 1.0813834334236851,
+    "by_cell": {
+      "cervical": 1.0911657550832043,
+      "colon_tumor": 1.0911657550832043,
+      "glioma": 1.0295120377962577,
+      "hematopoietic": 1.0813834334236851,
+      "hepatocyte_tumor": 1.087129722949026,
+      "induced_excitatory_neuron": 1.0637966356774773,
+      "kidney_derived": 1.0294958623155297,
+      "melanoma": 1.0911657550832043,
+      "neural_progenitor": 0.991269700301267,
+      "neuronal_tumor": 1.0295120377962577,
+      "prostate": 1.0911657550832043,
+      "skin": 1.0911657550832043
+    },
+    "details": {
+      "cervical": {
+        "factor": 1.0911657550832043,
+        "scope": "family",
+        "observations": 57866,
+        "regions": 15490
+      },
+      "colon_tumor": {
+        "factor": 1.0911657550832043,
+        "scope": "family",
+        "observations": 57866,
+        "regions": 15490
+      },
+      "glioma": {
+        "factor": 1.0295120377962577,
+        "scope": "family",
+        "observations": 13360,
+        "regions": 2905
+      },
+      "hematopoietic": {
+        "factor": 1.0813834334236851,
+        "scope": "global",
+        "observations": 71226,
+        "regions": 17436
+      },
+      "hepatocyte_tumor": {
+        "factor": 1.087129722949026,
+        "scope": "cell",
+        "observations": 37914,
+        "regions": 15096
+      },
+      "induced_excitatory_neuron": {
+        "factor": 1.0637966356774773,
+        "scope": "cell",
+        "observations": 11732,
+        "regions": 1977
+      },
+      "kidney_derived": {
+        "factor": 1.0294958623155297,
+        "scope": "cell",
+        "observations": 19952,
+        "regions": 5965
+      },
+      "melanoma": {
+        "factor": 1.0911657550832043,
+        "scope": "family",
+        "observations": 57866,
+        "regions": 15490
+      },
+      "neural_progenitor": {
+        "factor": 0.991269700301267,
+        "scope": "cell",
+        "observations": 1628,
+        "regions": 965
+      },
+      "neuronal_tumor": {
+        "factor": 1.0295120377962577,
+        "scope": "family",
+        "observations": 13360,
+        "regions": 2905
+      },
+      "prostate": {
+        "factor": 1.0911657550832043,
+        "scope": "family",
+        "observations": 57866,
+        "regions": 15490
+      },
+      "skin": {
+        "factor": 1.0911657550832043,
+        "scope": "family",
+        "observations": 57866,
+        "regions": 15490
+      }
+    },
+    "claim": "Empirical region-balanced source-omission calibration; no universal cross-study coverage guarantee."
+  },
+  "paired": {
+    "local": {
+      "global_factor": 0.5936955276707107,
+      "by_cell_pair": {
+        "hepatocyte_tumor|hepatocyte_tumor": {
+          "factor": 0.6236489914204428,
+          "scope": "exact_cell_pair",
+          "pairs": 10647,
+          "regions": 3326
+        },
+        "induced_excitatory_neuron|induced_excitatory_neuron": {
+          "factor": 0.5976254344071553,
+          "scope": "exact_cell_pair",
+          "pairs": 6329,
+          "regions": 686
+        },
+        "kidney_derived|kidney_derived": {
+          "factor": 0.5112612860792335,
+          "scope": "exact_cell_pair",
+          "pairs": 9337,
+          "regions": 2852
+        },
+        "neural_progenitor|neural_progenitor": {
+          "factor": 0.5936955276707107,
+          "scope": "global_pair_type",
+          "pairs": 30,
+          "regions": 25
+        }
+      },
+      "pairs": 26343,
+      "regions": 4012,
+      "method": "Direct paired-difference residual calibration, not a guarantee derived from individual intervals."
+    },
+    "cross": {
+      "global_factor": 0.6864552793449835,
+      "by_cell_pair": {
+        "hepatocyte_tumor|kidney_derived": {
+          "factor": 0.6850360721288382,
+          "scope": "exact_cell_pair",
+          "pairs": 18952,
+          "regions": 5571
+        },
+        "kidney_derived|neural_progenitor": {
+          "factor": 0.694758910765761,
+          "scope": "exact_cell_pair",
+          "pairs": 1000,
+          "regions": 394
+        }
+      },
+      "pairs": 19952,
+      "regions": 5965,
+      "method": "Direct paired-difference residual calibration, not a guarantee derived from individual intervals."
+    }
+  },
+  "training_rows": 210038,
+  "calibration_rows": 71226,
+  "feature_names": [
+    "predicted_magnitude",
+    "ensemble_sd",
+    "absolute_predicted_allele_activity_difference",
+    "predicted_mean_allele_activity",
+    "training_cell_median",
+    "training_line_or_cell_median",
+    "same_cell_training_studies",
+    "same_line_training_studies",
+    "known_cell",
+    "known_line",
+    "global_reference_mean",
+    "global_alternate_mean",
+    "global_reference_sd",
+    "global_alternate_sd",
+    "global_absolute_difference_mean",
+    "global_absolute_difference_max",
+    "local_absolute_difference_mean",
+    "local_absolute_difference_max",
+    "local_reference_mean",
+    "local_alternate_mean",
+    "local_reference_sd",
+    "local_alternate_sd",
+    "cell_cervical",
+    "cell_colon_tumor",
+    "cell_glioma",
+    "cell_hematopoietic",
+    "cell_hepatocyte_tumor",
+    "cell_induced_excitatory_neuron",
+    "cell_kidney_derived",
+    "cell_melanoma",
+    "cell_neural_progenitor",
+    "cell_neuronal_tumor",
+    "cell_prostate",
+    "cell_skin"
+  ],
+  "training_weighting": "Equal total weight per revealed study/cell stratum. No fresh outcomes."
+}
